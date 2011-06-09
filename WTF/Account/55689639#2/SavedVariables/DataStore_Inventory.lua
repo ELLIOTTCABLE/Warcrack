@@ -23,12 +23,11 @@ DataStore_InventoryDB = {
 					37560, -- [14]
 					"|cff0070dd|Hitem:38223:3728:0:0:0:0:0:1014915136:77:0|h[Cloak of Azure Lights]|h|r", -- [15]
 					41821, -- [16]
-					nil, -- [17]
-					38206, -- [18]
-					5976, -- [19]
+					[18] = 38206,
+					[19] = 5976,
 				},
 				["averageItemLvl"] = 134.8125,
-				["lastUpdate"] = 1307614683,
+				["lastUpdate"] = 1307629553,
 			},
 		},
 		["Guilds"] = {

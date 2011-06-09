@@ -13,11 +13,11 @@ Examiner_Config = {
 	["combineAdditiveStats"] = true,
 	["autoInspect"] = true,
 	["percentRatings"] = false,
-	["statsViewType"] = 1,
+	["featsSort"] = "none",
 	["caching"] = {
 	},
 	["showBackground"] = true,
-	["featsSort"] = "none",
+	["statsViewType"] = 1,
 	["featsFilter"] = "",
 }
 Examiner_Cache = {

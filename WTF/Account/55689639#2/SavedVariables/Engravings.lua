@@ -1,4 +1,5 @@
 
 EngravingsDB = {
 }
-EngravingsDB2 = nil
+EngravingsDB2 = {
+}

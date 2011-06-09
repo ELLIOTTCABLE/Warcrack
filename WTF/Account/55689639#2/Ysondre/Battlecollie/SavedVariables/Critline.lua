@@ -9,7 +9,6 @@ CritlinePerCharDB = {
 	},
 	["profiles"] = {
 		["Battlecollie - Ysondre"] = {
-			["pet"] = true,
 			["spells"] = {
 				["heal"] = {
 					[55503] = {
@@ -24,6 +23,7 @@ CritlinePerCharDB = {
 					},
 				},
 			},
+			["pet"] = true,
 		},
 	},
 }

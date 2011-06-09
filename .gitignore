@@ -22,3 +22,5 @@
 /WTF/Account/*/SavedVariables/Blizzard_CombatLog.lua
 /WTF/Account/*/*cache.*
 /WTF/Account/*/*/*/*cache.*
+
+*.bak

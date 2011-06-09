@@ -9,6 +9,7 @@ CritlinePerCharDB = {
 	},
 	["profiles"] = {
 		["Battlecollie - Ysondre"] = {
+			["pet"] = true,
 		},
 	},
 }

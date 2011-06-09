@@ -1,0 +1,21 @@
+## Interface: 40000
+## Title: HideBlizzard
+## Version: 1.0
+## Notes: Hides blizzard frames
+## Author: Gendr
+## SavedVariables: HideBlizzardDB
+## OptionalDeps: Ace3
+
+## X-Credits: Mapster, Dominos, QuestHelper
+## X-Category: Miscellaneous
+## X-Email: hideblizzard@gmail.com
+## X-WoWI-ID: 8988
+## X-Curse-Packaged-Version: 1.0.65
+## X-Curse-Project-Name: HideBlizzard
+## X-Curse-Project-ID: hideblizzard
+## X-Curse-Repository-ID: wow/hideblizzard/mainline
+
+Libs\embeds.xml
+HideBlizzard.lua
+HideBlizzard_Options.lua
+Modules\modules.xml

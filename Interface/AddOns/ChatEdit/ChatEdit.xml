@@ -1,0 +1,148 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	
+	<Script file="ChatEdit.lua"/>
+	
+	<ScrollFrame name="ChatEditScrollFrame" inherits="UIPanelScrollFrameTemplate" hidden="true" toplayer="true">
+		<ScrollChild>
+			<EditBox name="$parentEditBox" multiLine="true" autoFocus="true" nonspacewrap="true" spacewrap="true">
+				<Size>
+					<AbsDimension x="430" y="128"/>
+				</Size>
+				<Scripts>
+					<OnTextChanged>
+						ChatEdit:RefuseUpdate()
+					</OnTextChanged>
+					<OnEscapePressed>
+						ChatEdit:Hide()
+					</OnEscapePressed>
+					<OnMouseDown>
+						ChatEdit:OnMouseDown(self)
+					</OnMouseDown>
+					<OnMouseUp>
+						ChatEdit:OnMouseUp(self)
+					</OnMouseUp>
+					<OnHide>
+						ChatEdit:OnHide(self)
+					</OnHide>
+				</Scripts>
+				<FontString inherits="GameFontHighlightSmall"/>
+			</EditBox>
+		</ScrollChild>
+		<Frames>
+			<!-- Used for hidden scroll offset measurement -->
+			<MessageFrame name="$parentMessageFrame" setAllPoints="true" enableMouse="false" hidden="true"/>
+			<Frame name="$parentScrollUp">
+				<Size>
+					<AbsDimension y="10"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-2" y="3"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="2" y="3"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<!--
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBackground" urgency="5" file="Interface\ChatFrame\ChatFrameBackground">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+				-->
+			</Frame>
+			<Frame name="$parentScrollDown">
+				<Size>
+					<AbsDimension y="10"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="-2" y="-4"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="2" y="-4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<!--
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentBackground" urgency="5" file="Interface\ChatFrame\ChatFrameBackground">
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="TOPRIGHT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="BOTTOMLEFT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+				-->
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				ChatEdit:OnLoad(self)
+			</OnLoad>
+			<!--
+			<OnEvent>
+				ChatEdit:OnEvent(self, event)
+			</OnEvent>
+			-->
+			<OnSizeChanged>
+				ChatEdit:OnSizeChanged(self)
+			</OnSizeChanged>
+			<OnScrollRangeChanged>
+				ChatEdit:OnScrollRangeChanged(self)
+			</OnScrollRangeChanged>
+		</Scripts>
+	</ScrollFrame>
+
+</Ui>

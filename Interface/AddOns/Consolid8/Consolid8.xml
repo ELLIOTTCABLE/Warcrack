@@ -1,0 +1,101 @@
+<!--Consolid8, a World of Warcraft chat frame addon
+	Copyright 2011 Harry Cutts
+
+	This work by Harry Cutts is licensed under a
+	Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+	To read this license, please see http://creativecommons.org/licenses/by-nc-sa/3.0/.
+-->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<!-- Templates -->
+	<Font name="Consolid8TextStyle" inherits="GameFontNormal" virtual="true">
+		<Color r="1.0" g="1.0" b="1.0"/>
+	</Font>
+	<Font name="Consolid8NameStyle" inherits="Consolid8TextStyle" justifyH="LEFT" virtual="true"></Font>
+	<Font name="Consolid8ValueStyle" inherits="Consolid8TextStyle" justifyH="RIGHT" virtual="true"></Font>
+
+	<CheckButton name="Consolid8_CBTemplate" virtual="true">
+		<!-- Used as the automatic report setting check box in report dialogs -->
+		<Size x="13" y="13" />
+		<HitRectInsets>	<AbsInset left="0" right="-100" top="0" bottom="0"/> </HitRectInsets>
+		<Scripts>
+			<OnLoad> -- Change the SetText and GetText functions to those of the FontString
+				self.SetText = function(self, ...)
+					return self.text:SetText(...)
+				end
+				self.GetText = function(self, ...)
+					return self.text:GetText(...)
+				end
+			</OnLoad>
+		</Scripts>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString parentKey="text" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="0" y="1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		
+		<!-- Textures -->
+		<NormalTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+		<PushedTexture file="Interface\Buttons\UI-CheckBox-Down"/>
+	 	<HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD"/>
+		<CheckedTexture file="Interface\Buttons\UI-CheckBox-Check"/>
+		<DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled"/>
+	</CheckButton>
+
+	<!-- Frames -->
+
+	<Button name="Consolid8_Frame" parent="UIParent" enableMouse="true" movable="true">
+		<Size x="32" y="32" />
+		<Anchors>
+			<Anchor point="BOTTOM" relativeTo="FriendsMicroButton" relativePoint="TOP" />
+		</Anchors>
+		<Scripts>
+			<OnLoad> return Consolid8.OnLoad()	</OnLoad>
+			<OnEvent>return Consolid8.OnEvent(event, ...)	</OnEvent>
+			
+			<!-- Button Scripts -->
+			<OnEnter>return Consolid8.ShowTooltip()	</OnEnter>
+			<OnClick>return Consolid8.ShowMenu()	</OnClick>
+			<OnLeave>return Consolid8.HideTooltip()	</OnLeave>
+			
+			<!-- Movable/Sizable frame scripts -->
+			<OnMouseDown>
+				if IsShiftKeyDown() then
+					self:StartMoving()
+				end
+			</OnMouseDown>
+			<OnMouseWheel>
+				if IsShiftKeyDown() then
+					local scale = self:GetScale() + (arg1 * 0.05)
+					self:SetScale(scale)
+					Consolid8_Settings.scale = scale
+				end
+			</OnMouseWheel>
+			<OnMouseUp>
+				return self:StopMovingOrSizing()
+			</OnMouseUp>
+		</Scripts>
+		
+		<NormalTexture file="Interface\AddOns\Consolid8\Button-Up"/>
+		<PushedTexture file="Interface\AddOns\Consolid8\Button-Down"/>
+		<!--<DisabledTexture file="Interface\AddOns\Consolid8\Button-Disabled"/>-->
+		<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+	</Button>
+	
+	<Frame name="Consolid8_Menu" inherits="UIDropDownMenuTemplate" frameStrata="DIALOG_FULLSCREEN">
+		<Scripts>
+			<OnLoad>
+				return UIDropDownMenu_Initialize(self, Consolid8.MenuFunction, "MENU")
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

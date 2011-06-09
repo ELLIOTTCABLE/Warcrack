@@ -1,0 +1,21 @@
+## Interface: 30300
+
+## Title: GreedBeacon
+## Notes: Track down those needy and greedy party members.
+## Author: Tekkub Stoutwrithe
+## Version: 3.3.0.8
+## X-Website: http://www.tekkub.net/
+## X-Email: tekkub-wow@googlegroups.com
+## X-Category: Inventory
+
+## SavedVariables: GreedBeaconDB
+
+## OptionalDeps: tekErr, tekDebug
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Group: true
+
+tekKonfig\tekKonfig.xml
+
+GreedBeacon.lua
+Config.lua

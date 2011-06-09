@@ -1,0 +1,29 @@
+﻿## Interface: 40000
+## Title: BulkMail Inbox |cff7fff7f -Ace2-|r
+## Notes: Bulk mail reception made really easy
+## Notes-ruRU: BulkMail - получение почты делает на много легче
+## Version: 3.0.3
+## Author: hyperactiveChipmunk
+## X-Category: Mail
+## X-eMail: hyperactiveChipmunk@gmail.com
+## X-Website: http://wowace.com/wiki/BulkMail2Inbox
+## SavedVariables: BulkMail2InboxDB
+## OptionalDeps: Ace2, TabletLib, DewdropLib, AbacusLib, FuBar, FuBarPlugin-2.0, BulkMail2
+## X-Embeds: Ace2, TabletLib, DewdropLib, AbacusLib, FuBarPlugin-2.0
+## LoadManagers: SupplyAndDemand, ForkliftGnome, AddonLoader
+## X-S&D-AtMail: true
+## X-LoadOn-Mailbox: true
+## X-LoadOn-Slash: /bulkmailinbox, /bmi
+## X-Curse-Packaged-Version: r93
+## X-Curse-Project-Name: BulkMail2Inbox
+## X-Curse-Project-ID: bulk-mail2inbox
+## X-Curse-Repository-ID: wow/bulk-mail2inbox/mainline
+
+embeds.xml
+
+BulkMailInbox-enUS.lua
+BulkMailInbox-ruRU.lua
+BulkMailInbox-deDE.lua
+BulkMailInbox-zhTW.lua
+BulkMailInbox.lua
+BulkMailFu.lua

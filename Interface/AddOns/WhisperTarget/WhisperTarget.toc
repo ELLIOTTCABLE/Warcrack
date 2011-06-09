@@ -1,0 +1,7 @@
+## Interface: 30103
+## Title: WhisperTarget
+## Notes: Whispers target with a slash command (Yay!)
+## Author: Nafe
+## Version: 2.0
+## Dependencies:
+WhisperTarget.xml

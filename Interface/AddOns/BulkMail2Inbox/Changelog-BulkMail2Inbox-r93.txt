@@ -1,0 +1,38 @@
+------------------------------------------------------------------------
+r93 | Shamino | 2010-10-16 11:52:53 +0000 (Sat, 16 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/BulkMailInbox.lua
+
+BulkMail2Inbox: fixed opening mail directly from the inbox
+------------------------------------------------------------------------
+r92 | morsker | 2010-10-16 07:57:13 +0000 (Sat, 16 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/BulkMailInbox.lua
+
+fixed leaked globals
+------------------------------------------------------------------------
+r91 | Shamino | 2010-10-16 00:31:49 +0000 (Sat, 16 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/BulkMailInbox.lua
+
+BulkMail2Inbox: fixed shift click for money.
+------------------------------------------------------------------------
+r90 | Shamino | 2010-10-15 23:58:27 +0000 (Fri, 15 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/BulkMail2Inbox.toc
+
+BulkMail2Inbox: updated toc version
+------------------------------------------------------------------------
+r89 | Shamino | 2010-10-15 20:52:40 +0000 (Fri, 15 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/BulkMailInbox.lua
+
+BulkMail2Inbox: updated for patch 4.0.1
+------------------------------------------------------------------------
+r88 | profalbert | 2010-05-13 16:10:29 +0000 (Thu, 13 May 2010) | 2 lines
+Changed paths:
+   M /trunk/BulkMailInbox.lua
+
+dirty fix for issue with LoD after first login
+
+------------------------------------------------------------------------

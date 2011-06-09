@@ -1,0 +1,81 @@
+## Interface: 40000
+
+## Title: Engravings
+## Notes: Adds notes to item tooltips.
+## Author: Tekkub Stoutwrithe
+## Version: 4.0.0.20
+## X-Website: http://code.google.com/p/tekkub-wow/
+## X-Email: tekkub-wow@googlegroups.com
+## X-Category: Inventory
+
+## SavedVariables: EngravingsDB, EngravingsDB2
+## SavedVariablesPerCharacter: EngravingsDBPC
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
+## X-LoadOn-Slash: /engrave
+
+LibStub.lua
+tekKonfigScroll.lua
+tekKonfigAboutPanel.lua
+CallbackHandler-1.0.lua
+LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+Engravings.lua
+Config.lua
+
+CustomEngravings.lua
+Data\Currency.lua
+Data\WeightediLevel.lua
+Data\ItemID.lua
+Data\ItemType.lua
+Data\Recipes.lua
+Data\RawFood.lua
+Data\RepTokens.lua
+Data\Stacksize.lua
+Data\SpiritShard.lua
+Data\HeadOnAPike.lua
+Data\InSets.lua
+Data\InBags.lua
+
+Data_mined\ArmorTokenDropLocations.lua
+Data_mined\ArmorTokenDropNPCs.lua
+Data_mined\ChampionsSeal.lua
+Data_mined\Cooking.lua
+Data_mined\DalaranCookingAward.lua
+Data_mined\DalaranJewelcraftersToken.lua
+Data_mined\DropLocations.lua
+Data_mined\DropNPCs.lua
+Data_mined\ItemSetNames.lua
+Data_mined\PvPCosts.lua
+Data_mined\WowheadDeath_knightBlood.lua
+Data_mined\WowheadDeath_knightFrost_dps.lua
+Data_mined\WowheadDeath_knightUnholy.lua
+Data_mined\WowheadDruidBalance.lua
+Data_mined\WowheadDruidFeral_combat_dps.lua
+Data_mined\WowheadDruidFeral_combat_tank.lua
+Data_mined\WowheadDruidRestoration.lua
+Data_mined\WowheadHunterBeast_mastery.lua
+Data_mined\WowheadHunterMarksmanship.lua
+Data_mined\WowheadHunterSurvival.lua
+Data_mined\WowheadMageArcane.lua
+Data_mined\WowheadMageFire.lua
+Data_mined\WowheadMageFrost.lua
+Data_mined\WowheadPaladinHoly.lua
+Data_mined\WowheadPaladinProtection.lua
+Data_mined\WowheadPaladinRetribution.lua
+Data_mined\WowheadPriestDiscipline.lua
+Data_mined\WowheadPriestHoly.lua
+Data_mined\WowheadPriestShadow_magic.lua
+Data_mined\WowheadRogueAssassination.lua
+Data_mined\WowheadRogueCombat.lua
+Data_mined\WowheadRogueSubtlety.lua
+Data_mined\WowheadShamanElemental_combat.lua
+Data_mined\WowheadShamanEnhancement.lua
+Data_mined\WowheadShamanRestoration.lua
+Data_mined\WowheadWarlockAffliction.lua
+Data_mined\WowheadWarlockDemonology.lua
+Data_mined\WowheadWarlockDestruction.lua
+Data_mined\WowheadWarriorArms.lua
+Data_mined\WowheadWarriorFury.lua
+Data_mined\WowheadWarriorProtection.lua

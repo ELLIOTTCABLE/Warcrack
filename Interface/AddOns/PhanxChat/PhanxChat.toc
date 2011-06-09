@@ -1,0 +1,54 @@
+## Interface: 40100
+## Version: 4.1.0.133
+
+## Title: PhanxChat
+## Notes: Removes chat frame clutter and adds some functionality.
+## Notes-esES: Eliminar desorden de la ventana de chat, y añadir algunas funciones.
+## Notes-esMX: Eliminar desorden de la ventana de chat, y añadir algunas funciones.
+## Notes-ruRU: Удаляет беспорядок в окне чата и добавляет новые возможности.
+## Author: Phanx, Akkorian
+## X-Email: akkorian@hotmail.com
+## X-Copyright: Copyright © 2006–2011 Phanx.
+## X-License: Some rights reserved. See LICENSE.txt for details.
+## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, ruRU, koKR, zhCN, zhTW
+## X-Localizations: enUS, deDE, esES, esMX, frFR, ruRU, koKR, zhCN
+## X-Website: http://www.wowinterface.com/downloads/info6323-PhanxChat.html
+## X-Curse-Project-ID: phanxchat
+## X-WoWI-ID: 6323
+
+## OptionalDependencies: LibAboutPanel, PhanxConfigWidgets
+## SavedVariables: PhanxChatDB
+
+Libs\LibStub\LibStub.lua
+Libs\LibAboutPanel\LibAboutPanel.lua
+Libs\PhanxConfig-Checkbox\PhanxConfig-Checkbox.lua
+Libs\PhanxConfig-Dropdown\PhanxConfig-Dropdown.lua
+Libs\PhanxConfig-Header\PhanxConfig-Header.lua
+Libs\PhanxConfig-OptionsPanel\PhanxConfig-OptionsPanel.lua
+Libs\PhanxConfig-Slider\PhanxConfig-Slider.lua
+
+Locales\Locale-deDE.lua
+Locales\Locale-esES.lua
+Locales\Locale-frFR.lua
+Locales\Locale-koKR.lua
+Locales\Locale-ruRU.lua
+Locales\Locale-zhCN.lua
+Locales\Locale-zhTW.lua
+
+Core.lua
+Options.lua
+
+Modules\EnableArrows.lua
+Modules\EnableResizeEdges.lua
+Modules\EnableSticky.lua
+Modules\FadeTime.lua
+Modules\HideButtons.lua
+Modules\HideFlash.lua
+Modules\HideNotices.lua
+Modules\HideRepeats.lua
+Modules\HideTextures.lua
+Modules\LinkURLs.lua
+Modules\LockTabs.lua
+Modules\MoveEditBox.lua
+Modules\ReplaceRealNames.lua
+Modules\ShortenChannelNames.lua

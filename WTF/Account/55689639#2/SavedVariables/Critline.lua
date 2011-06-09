@@ -42,10 +42,10 @@ CritlineDB = {
 	["profiles"] = {
 		["Battlecollie - Ysondre"] = {
 			["oldRecord"] = true,
-			["chatOutput"] = true,
-			["detailedTooltip"] = true,
-			["spellTooltips"] = true,
 			["playSound"] = false,
+			["detailedTooltip"] = true,
+			["chatOutput"] = true,
+			["spellTooltips"] = true,
 		},
 	},
 }

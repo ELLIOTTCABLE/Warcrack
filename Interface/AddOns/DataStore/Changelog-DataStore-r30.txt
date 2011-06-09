@@ -1,0 +1,16 @@
+------------------------------------------------------------------------
+r30 | thaoky | 2011-04-30 17:52:03 +0000 (Sat, 30 Apr 2011) | 2 lines
+Changed paths:
+   M /trunk/DataStore.lua
+   M /trunk/DataStore.toc
+   M /trunk/Options.lua
+
+TOC Update
+Added support for DataStore_Agenda
+------------------------------------------------------------------------
+r29 | thaoky | 2011-02-15 13:12:30 +0000 (Tue, 15 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore.lua
+
+Modified an assertion into a plain test.
+------------------------------------------------------------------------

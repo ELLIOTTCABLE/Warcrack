@@ -1,0 +1,28 @@
+------------------------------------------------------------------------
+r14 | thaoky | 2011-04-30 17:53:03 +0000 (Sat, 30 Apr 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Characters.toc
+
+TOC Update
+------------------------------------------------------------------------
+r13 | thaoky | 2011-03-02 13:19:52 +0000 (Wed, 02 Mar 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Characters.lua
+   M /trunk/DataStore_Characters.toc
+   A /trunk/Locales
+   A /trunk/Locales/deDE.lua
+   A /trunk/Locales/enUS.lua
+   A /trunk/Locales/esES.lua
+   A /trunk/Locales/esMX.lua
+   A /trunk/Locales/frFR.lua
+   A /trunk/Locales/koKR.lua
+   A /trunk/Locales/repoenUS.lua
+   A /trunk/Locales/ruRU.lua
+   A /trunk/Locales/zhCN.lua
+   A /trunk/Locales/zhTW.lua
+   A /trunk/Options.lua
+   A /trunk/Options.xml
+   A /trunk/locale.xml
+
+Added support for 2 /played related options.
+------------------------------------------------------------------------

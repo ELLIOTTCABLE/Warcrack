@@ -1,0 +1,121 @@
+﻿<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Glyphs.lua"></Script>
+
+	<Button name="AltoGlyphTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="72" y="72"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentGlyph" parentKey="glyph">
+					<Size x="57" y="57"/>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset x="0" y="0"/>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER">
+				<Texture name="$parentHighlight" file="Interface\Spellbook\UI-GlyphFrame" alphaMode="ADD" parentKey="highlight">
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset x="0" y="0"/>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture name="$parentRing" file="Interface\Spellbook\UI-GlyphFrame" parentKey="ring">
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset x="0" y="0"/>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		
+		<Scripts>
+			<OnLoad>
+				Altoholic.Glyphs:Button_OnLoad(self)
+			</OnLoad>
+			<OnEnter>
+				Altoholic.Glyphs:Button_OnEnter(self)
+			</OnEnter>
+			<OnLeave>
+				AltoTooltip:Hide();
+			</OnLeave>
+			<OnClick>
+				Altoholic.Glyphs:Button_OnClick(self, button);
+			</OnClick>
+		</Scripts>
+	</Button>
+	
+	<Frame name="AltoholicFrameGlyphs" parent="AltoholicTabCharacters" hidden="true">
+		<Size>
+			<AbsDimension x="615" y="306"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="39" y="-105"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<!-- Minor Glyphs -->
+			<Button name="$parentGlyph2" inherits="AltoGlyphTemplate" id="2">
+				<Anchors>
+					<Anchor point="CENTER" x="-131" y="43"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentGlyph3" inherits="AltoGlyphTemplate" id="3">
+				<Anchors>
+					<Anchor point="CENTER" x="-177" y="-40"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentGlyph5" inherits="AltoGlyphTemplate" id="5">
+				<Anchors>
+					<Anchor point="CENTER" x="-83" y="-40"/>
+				</Anchors>
+			</Button>
+			
+			<!-- Major Glyphs -->
+			<Button name="$parentGlyph1" inherits="AltoGlyphTemplate" id="1">
+				<Anchors>
+					<Anchor point="CENTER" x="-31" y="52"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentGlyph4" inherits="AltoGlyphTemplate" id="4">
+				<Anchors>
+					<Anchor point="CENTER" x="-231" y="52"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentGlyph6" inherits="AltoGlyphTemplate" id="6">
+				<Anchors>
+					<Anchor point="CENTER" x="-131" y="-111"/>
+				</Anchors>
+			</Button>	
+			
+			<!-- Prime Glyphs -->
+			<Button name="$parentGlyph7" inherits="AltoGlyphTemplate" id="7">
+				<Anchors>
+					<Anchor point="CENTER" x="-131" y="120"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentGlyph8" inherits="AltoGlyphTemplate" id="8">
+				<Anchors>
+					<Anchor point="CENTER" x="-256" y="-79"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentGlyph9" inherits="AltoGlyphTemplate" id="9">
+				<Anchors>
+					<Anchor point="CENTER" x="-9" y="-80"/>
+				</Anchors>
+			</Button>
+			
+		</Frames>
+	</Frame>
+	
+</Ui>

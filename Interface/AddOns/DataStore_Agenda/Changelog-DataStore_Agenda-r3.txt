@@ -1,0 +1,24 @@
+------------------------------------------------------------------------
+r3 | thaoky | 2011-05-01 15:08:29 +0000 (Sun, 01 May 2011) | 2 lines
+Changed paths:
+   M /trunk/DataStore_Agenda.lua
+
+Fixed a typo in _HasSavedInstanceExpired()
+Set a few more functions as 'character based' (as they should have been in the first place).
+------------------------------------------------------------------------
+r2 | thaoky | 2011-04-30 17:31:28 +0000 (Sat, 30 Apr 2011) | 1 line
+Changed paths:
+   A /trunk/.pkgmeta
+   A /trunk/DataStore_Agenda.lua
+   A /trunk/DataStore_Agenda.toc
+
+Initial commit
+------------------------------------------------------------------------
+r1 | root | 2011-04-30 10:46:30 +0000 (Sat, 30 Apr 2011) | 1 line
+Changed paths:
+   A /branches
+   A /tags
+   A /trunk
+
+"datastore_agenda/mainline: Initial Import"
+------------------------------------------------------------------------

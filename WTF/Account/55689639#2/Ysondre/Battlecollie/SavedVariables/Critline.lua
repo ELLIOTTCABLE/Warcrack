@@ -10,6 +10,20 @@ CritlinePerCharDB = {
 	["profiles"] = {
 		["Battlecollie - Ysondre"] = {
 			["pet"] = true,
+			["spells"] = {
+				["heal"] = {
+					[55503] = {
+						{
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 697,
+							},
+						}, -- [1]
+					},
+				},
+			},
 		},
 	},
 }

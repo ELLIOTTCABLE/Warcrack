@@ -1,0 +1,20 @@
+------------------------------------------------------------------------
+r15 | thaoky | 2011-04-30 19:02:10 +0000 (Sat, 30 Apr 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Achievements.lua
+
+Fixed player being disconnected when releasing after death.
+------------------------------------------------------------------------
+r14 | thaoky | 2011-04-30 17:52:28 +0000 (Sat, 30 Apr 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Achievements.toc
+
+TOC Update
+------------------------------------------------------------------------
+r13 | thaoky | 2010-10-15 13:19:33 +0000 (Fri, 15 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/DataStore_Achievements.lua
+   M /trunk/DataStore_Achievements.toc
+
+4.0.1 Update
+------------------------------------------------------------------------

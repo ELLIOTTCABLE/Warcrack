@@ -1,0 +1,13 @@
+------------------------------------------------------------------------
+r19 | thaoky | 2011-04-30 17:53:56 +0000 (Sat, 30 Apr 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Mails.toc
+
+TOC Update
+------------------------------------------------------------------------
+r18 | thaoky | 2010-10-15 17:25:29 +0000 (Fri, 15 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/DataStore_Mails.lua
+
+Added a check to prevent errors caused by other mail addons.
+------------------------------------------------------------------------

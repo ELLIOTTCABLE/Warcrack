@@ -6,21 +6,23 @@ MBFDB = {
 	["profiles"] = {
 		["Default"] = {
 			["MBFHideMiniMapWorldMapButton"] = true,
+			["columns_or_rows"] = 2,
 			["locked"] = true,
-			["sortOrder"] = "Blizzard First",
-			["sort_by_rows"] = true,
+			["GrowUp"] = false,
 			["minimapButton"] = {
 				["hide"] = false,
 			},
+			["disabledMail"] = false,
 			["MBFHideMinimapZoomIn"] = true,
 			["MBF_FrameLocation"] = {
 				nil, -- [1]
 				nil, -- [2]
-				nil, -- [3]
-				-232.7586975097656, -- [4]
+				7.62939453125e-06, -- [3]
+				-224.1380004882812, -- [4]
 			},
 			["colorLocked"] = "All",
-			["GrowUp"] = false,
+			["sortOrder"] = "Blizzard First",
+			["currentTexture"] = "Serenity Square",
 			["customChildren"] = {
 				"MinimapButtonFrameDragButton", -- [1]
 				"MiniMapMailFrameDisabled", -- [2]
@@ -31,9 +33,10 @@ MBFDB = {
 				"MinimapZoomIn", -- [7]
 				"MinimapZoomOut", -- [8]
 				"LibDBIcon10_MBF", -- [9]
+				"AltoholicMinimapButton", -- [10]
 			},
 			["grabMBFButton"] = true,
-			["disabledMail"] = false,
+			["padding"] = 3.5,
 			["grabBlizzButtons"] = true,
 		},
 	},

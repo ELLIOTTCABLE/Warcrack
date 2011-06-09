@@ -26,6 +26,8 @@ DataStore_TalentsDB = {
 					5940688879, -- [17]
 					2191969295, -- [18]
 				},
+				["ActiveTalents"] = 1,
+				["lastUpdate"] = 1307636887,
 				["GlyphList"] = {
 					11, -- [1]
 					11338, -- [2]
@@ -64,15 +66,13 @@ DataStore_TalentsDB = {
 					7406, -- [35]
 					7422, -- [36]
 				},
-				["lastUpdate"] = 1307629553,
-				["Class"] = "PRIEST",
 				["TalentTrees"] = {
 					["Discipline|2"] = 28,
-					["Shadow|2"] = 1951698807691,
-					["Holy|1"] = 48,
 					["Discipline|1"] = 1687431982514,
+					["Holy|1"] = 48,
+					["Shadow|2"] = 1951698807691,
 				},
-				["ActiveTalents"] = 1,
+				["Class"] = "PRIEST",
 			},
 		},
 		["Reference"] = {
@@ -104,12 +104,12 @@ DataStore_TalentsDB = {
 				[461] = "Shackle Undead",
 				[462] = "Shadow Protection",
 				[463] = "Shadowfiend",
-				[709] = "Guardian Spirit",
-				[711] = "Spirit Tap",
-				[713] = "Desperation",
-				[458] = "Fading",
-				[271] = "Prayer of Mending",
 				[459] = "Levitate",
+				[271] = "Prayer of Mending",
+				[458] = "Fading",
+				[713] = "Desperation",
+				[711] = "Spirit Tap",
+				[709] = "Guardian Spirit",
 			},
 		},
 	},
@@ -123,6 +123,7 @@ DataStore_TalentsRefDB = {
 			["Locale"] = "enUS",
 			["Trees"] = {
 				["Discipline"] = {
+					["background"] = "PriestDiscipline",
 					["talents"] = {
 						"10736|Improved Power Word: Shield|Spell_Holy_PowerWordShield|1|1|2", -- [1]
 						"8577|Twin Disciplines|Spell_Holy_SealOfVengeance|1|2|3", -- [2]
@@ -146,48 +147,15 @@ DataStore_TalentsRefDB = {
 						"8625|Grace|Spell_Holy_HopeAndGrace|6|3|2", -- [20]
 						"8603|Power Word: Barrier|spell_holy_powerwordbarrier|7|2|1", -- [21]
 					},
+					["icon"] = "Spell_Holy_PowerWordShield",
 					["prereqs"] = {
 						[5] = "2|1",
 						[15] = "3|1",
 						[21] = "5|2",
 					},
-					["icon"] = "Spell_Holy_PowerWordShield",
-					["background"] = "PriestDiscipline",
-				},
-				["Shadow"] = {
-					["talents"] = {
-						"9032|Darkness|ability_priest_darkness|1|1|3", -- [1]
-						"9036|Improved Shadow Word: Pain|Spell_Shadow_ShadowWordPain|1|2|2", -- [2]
-						"9046|Veiled Shadows|Spell_Magic_LesserInvisibilty|1|3|2", -- [3]
-						"9040|Improved Psychic Scream|Spell_Shadow_PsychicScream|2|1|2", -- [4]
-						"9042|Improved Mind Blast|Spell_Shadow_UnholyFrenzy|2|2|3", -- [5]
-						"9062|Improved Devouring Plague|Spell_Shadow_DevouringPlague.|2|3|2", -- [6]
-						"11673|Twisted Faith|Spell_Shadow_MindTwisting|2|4|2", -- [7]
-						"9064|Shadowform|Spell_Shadow_Shadowform|3|2|1", -- [8]
-						"9068|Phantasm|Spell_Shadow_TwistedFaith|3|3|2", -- [9]
-						"11606|Harnessed Shadows|INV_Misc_Orb_04|3|4|2", -- [10]
-						"9052|Silence|ability_priest_silence|4|1|1", -- [11]
-						"9054|Vampiric Embrace|Spell_Shadow_UnsummonBuilding|4|2|1", -- [12]
-						"11778|Masochism|Spell_Shadow_Misery|4|3|2", -- [13]
-						"9060|Mind Melt|Spell_Shadow_Skull|4|4|2", -- [14]
-						"9076|Pain and Suffering|Spell_Shadow_PainAndSuffering|5|1|2", -- [15]
-						"9074|Vampiric Touch|Spell_Holy_Stoicism|5|2|1", -- [16]
-						"11663|Paralysis|Ability_Rogue_MasterOfSubtlety|5|3|2", -- [17]
-						"9072|Psychic Horror|Spell_Shadow_PsychicHorrors|6|1|1", -- [18]
-						"11605|Sin and Punishment|Spell_Holy_PrayerofShadowProtection|6|2|2", -- [19]
-						"9070|Shadowy Apparition|ability_priest_shadowyapparition|6|3|3", -- [20]
-						"9080|Dispersion|Spell_Shadow_Dispersion|7|2|1", -- [21]
-					},
-					["prereqs"] = {
-						[11] = "2|1",
-						[13] = "4|2",
-						[19] = "5|2",
-						[16] = "4|2",
-					},
-					["icon"] = "Spell_Shadow_ShadowWordPain",
-					["background"] = "PriestShadow",
 				},
 				["Holy"] = {
+					["background"] = "PriestHoly",
 					["talents"] = {
 						"10746|Improved Renew|Spell_Holy_Renew|1|1|2", -- [1]
 						"9553|Empowered Healing|Spell_Holy_GreaterHeal|1|2|3", -- [2]
@@ -211,6 +179,7 @@ DataStore_TalentsRefDB = {
 						"9595|Circle of Healing|Spell_Holy_CircleOfRenewal|6|3|1", -- [20]
 						"9601|Guardian Spirit|Spell_Holy_GuardianSpirit|7|2|1", -- [21]
 					},
+					["icon"] = "Spell_Holy_GuardianSpirit",
 					["prereqs"] = {
 						[11] = "3|1",
 						[7] = "1|1",
@@ -218,8 +187,39 @@ DataStore_TalentsRefDB = {
 						[19] = "5|2",
 						[16] = "5|2",
 					},
-					["icon"] = "Spell_Holy_GuardianSpirit",
-					["background"] = "PriestHoly",
+				},
+				["Shadow"] = {
+					["background"] = "PriestShadow",
+					["talents"] = {
+						"9032|Darkness|ability_priest_darkness|1|1|3", -- [1]
+						"9036|Improved Shadow Word: Pain|Spell_Shadow_ShadowWordPain|1|2|2", -- [2]
+						"9046|Veiled Shadows|Spell_Magic_LesserInvisibilty|1|3|2", -- [3]
+						"9040|Improved Psychic Scream|Spell_Shadow_PsychicScream|2|1|2", -- [4]
+						"9042|Improved Mind Blast|Spell_Shadow_UnholyFrenzy|2|2|3", -- [5]
+						"9062|Improved Devouring Plague|Spell_Shadow_DevouringPlague.|2|3|2", -- [6]
+						"11673|Twisted Faith|Spell_Shadow_MindTwisting|2|4|2", -- [7]
+						"9064|Shadowform|Spell_Shadow_Shadowform|3|2|1", -- [8]
+						"9068|Phantasm|Spell_Shadow_TwistedFaith|3|3|2", -- [9]
+						"11606|Harnessed Shadows|INV_Misc_Orb_04|3|4|2", -- [10]
+						"9052|Silence|ability_priest_silence|4|1|1", -- [11]
+						"9054|Vampiric Embrace|Spell_Shadow_UnsummonBuilding|4|2|1", -- [12]
+						"11778|Masochism|Spell_Shadow_Misery|4|3|2", -- [13]
+						"9060|Mind Melt|Spell_Shadow_Skull|4|4|2", -- [14]
+						"9076|Pain and Suffering|Spell_Shadow_PainAndSuffering|5|1|2", -- [15]
+						"9074|Vampiric Touch|Spell_Holy_Stoicism|5|2|1", -- [16]
+						"11663|Paralysis|Ability_Rogue_MasterOfSubtlety|5|3|2", -- [17]
+						"9072|Psychic Horror|Spell_Shadow_PsychicHorrors|6|1|1", -- [18]
+						"11605|Sin and Punishment|Spell_Holy_PrayerofShadowProtection|6|2|2", -- [19]
+						"9070|Shadowy Apparition|ability_priest_shadowyapparition|6|3|3", -- [20]
+						"9080|Dispersion|Spell_Shadow_Dispersion|7|2|1", -- [21]
+					},
+					["icon"] = "Spell_Shadow_ShadowWordPain",
+					["prereqs"] = {
+						[11] = "2|1",
+						[13] = "4|2",
+						[16] = "4|2",
+						[19] = "5|2",
+					},
 				},
 			},
 			["Version"] = 14007,

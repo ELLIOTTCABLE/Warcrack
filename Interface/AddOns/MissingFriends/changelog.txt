@@ -1,0 +1,28 @@
+MissingFriends Changes | 2010 Nov 13
+------------------------------------
+- Changed the TOC version to 40000 for the 4.0.1 pre Cataclysm patch.
+- Very minor code changes.
+
+MissingFriends Changes | 2010 May 04
+------------------------------------
+- Fixed the "missing table" error that could sometimes happen during login, thanks to Dridzt. The fix was to change "VARIABLES_LOADED" with "ADDON_LOADED".
+
+MissingFriends Changes | 2010 Feb 27
+------------------------------------
+- Changed the TOC version to 30300 for the 3.3 patch.
+- Does an extra check when adding friends to the backup table, making sure it doesn't add invalid entries. I guess this could happen during login on rare occasions.
+
+MissingFriends Changes | 2009 Apr 13
+------------------------------------
+- Changed the TOC version to 30100 for the 3.1 patch.
+- Removed a bug that incorrectly reported a friend missing if removed from the friendlist manually or through an addon.
+
+MissingFriends Changes | 2009 Apr 11
+------------------------------------
+- Changed the warning sound for when a missing friend is found.
+- Fixed a nil error that could happen under unknown circumstances.
+- The list of missing friends are now saved with the time they were found missing.
+
+MissingFriends Changes | 2009 Mar 10
+------------------------------------
+- First release.

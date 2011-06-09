@@ -8,7 +8,7 @@ MBFDB = {
 			["MBFHideMiniMapWorldMapButton"] = true,
 			["columns_or_rows"] = 2,
 			["locked"] = true,
-			["GrowUp"] = false,
+			["sortOrder"] = "Blizzard First",
 			["minimapButton"] = {
 				["hide"] = false,
 			},
@@ -21,7 +21,7 @@ MBFDB = {
 				-224.1380004882812, -- [4]
 			},
 			["colorLocked"] = "All",
-			["padding"] = 3.5,
+			["GrowUp"] = false,
 			["currentTexture"] = "Serenity Square",
 			["customChildren"] = {
 				"MinimapButtonFrameDragButton", -- [1]
@@ -35,10 +35,11 @@ MBFDB = {
 				"LibDBIcon10_MBF", -- [9]
 				"AltoholicMinimapButton", -- [10]
 				"Gatherer_MinimapOptionsButton", -- [11]
+				"LibDBIcon10_Skada", -- [12]
 			},
 			["grabMBFButton"] = true,
 			["grabBlizzButtons"] = true,
-			["sortOrder"] = "Blizzard First",
+			["padding"] = 3.5,
 		},
 	},
 }

@@ -25,14 +25,14 @@ DataStore_QuestsDB = {
 					"|cff40c040|Hquest:12257:74|h[A Show of Strength]|h|r", -- [16]
 					[20] = "|cff40c040|Hquest:10704:70|h[How to Break Into the Arcatraz]|h|r",
 					[24] = "|cffffff00|Hquest:12844:79|h[Equipment Recovery]|h|r",
-					[25] = "|cffffff00|Hquest:12843:79|h[They Took Our Men!]|h|r",
-					[18] = "|cff40c040|Hquest:9832:70|h[The Second and Third Fragments]|h|r",
 					[29] = "|cffffff00|Hquest:12789:75|h[Into the Breach!]|h|r",
+					[18] = "|cff40c040|Hquest:9832:70|h[The Second and Third Fragments]|h|r",
+					[22] = "|cffffff00|Hquest:12820:78|h[A Delicate Touch]|h|r",
 					[27] = "|cff808080|Hquest:13906:53|h[They Grow Up So Fast]|h|r",
 					[23] = "|cffffff00|Hquest:12828:78|h[Ample Inspiration]|h|r",
-					[22] = "|cffffff00|Hquest:12820:78|h[A Delicate Touch]|h|r",
+					[25] = "|cffffff00|Hquest:12843:79|h[They Took Our Men!]|h|r",
 				},
-				["lastUpdate"] = 1307636887,
+				["lastUpdate"] = 1307639051,
 				["Quests"] = {
 					"0|Ahn'kahet: The Old Kingdom", -- [1]
 					"1|Dungeon|0|248000|0", -- [2]

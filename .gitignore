@@ -1,0 +1,24 @@
+# Here we go! This is gonna get a bit wild.
+# First off, some obvious crap.
+
+.DS_Store
+# (fuck right off.)
+
+/*.app/
+
+/Cache/
+/Data/
+/Logs/
+/Updates/
+
+/patch.html
+/*.*fil
+
+# Now, to get a little more intricate.
+
+/Interface/AddOns/Blizzard_*/
+
+/WTF/*.wtf
+/WTF/Account/*/SavedVariables/Blizzard_CombatLog.lua
+/WTF/Account/*/*cache.*
+/WTF/Account/*/*/*/*cache.*

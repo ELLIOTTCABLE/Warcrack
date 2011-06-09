@@ -1,0 +1,18 @@
+## Interface: 30200
+
+## Title: Friends With Benefits
+## Notes: Syncs your friend list
+## Author: Tekkub Stoutwrithe
+## Version: 3.2.0.4
+## X-Website: http://www.tekkub.net/
+## X-Email: tekkub-wow@googlegroups.com
+## X-Category: Chat/Communication
+
+## SavedVariables: FriendsWithBenefitsDB
+
+## OptionalDeps: tekDebug, tekErr
+
+LibStub.lua
+tekKonfigAboutPanel.lua
+
+FriendsWithBenefits.lua

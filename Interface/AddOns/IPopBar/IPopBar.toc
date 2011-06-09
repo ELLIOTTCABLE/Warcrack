@@ -1,0 +1,25 @@
+## Interface: 40100
+## Title: Integrated PopBar (v3.12)
+## Notes: An extra set of 11x3 buttons, integrated into the default action bar.
+## Author: Xinhuan
+## OptionalDeps: Ace3
+## SavedVariablesPerCharacter: IPopBar_Config
+## X-eMail: xinhuan @ gmail DOT com
+## X-Category: Action Bars
+## X-License: GPL v2
+## Version: 3.12
+## X-Curse-Packaged-Version: v3.12
+## X-Curse-Project-Name: IPopBar
+## X-Curse-Project-ID: ipop-bar
+## X-Curse-Repository-ID: wow/ipop-bar/mainline
+
+Locales\Locale-enUS.lua
+Locales\Locale-deDE.lua
+Locales\Locale-esES.lua
+Locales\Locale-frFR.lua
+Locales\Locale-koKR.lua
+Locales\Locale-ruRU.lua
+Locales\Locale-zhCN.lua
+Locales\Locale-zhTW.lua
+
+IPopBar.lua

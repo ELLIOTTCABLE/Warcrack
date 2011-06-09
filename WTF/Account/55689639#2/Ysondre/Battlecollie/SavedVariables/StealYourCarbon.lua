@@ -1,9 +1,9 @@
 
 StealYourCarbonDB = {
-	["chatter"] = true,
+	["stocklist"] = {
+	},
 	["upgradewater"] = true,
 	["tradestocklist"] = {
 	},
-	["stocklist"] = {
-	},
+	["chatter"] = true,
 }

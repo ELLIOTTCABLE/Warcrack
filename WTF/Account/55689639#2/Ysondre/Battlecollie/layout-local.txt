@@ -1,4 +1,11 @@
 Version: 1
+Frame: Consolid8_Frame
+FrameLevel: 1
+Anchor: BOTTOMLEFT
+X: 175
+Y: 124
+W: 32
+H: 32
 Frame: _NPCScanButton
 FrameLevel: 1
 Anchor: BOTTOM

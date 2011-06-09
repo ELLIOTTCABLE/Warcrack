@@ -1,0 +1,17 @@
+## Interface: 40100
+
+## Title: Quel'evel
+## Notes: Adds quest level tags to log and watcher.
+## Author: Tekkub Stoutwrithe
+## X-Credits: QuestLevel by Elkano
+## Version: 4.1.0.10
+## X-Website: http://code.google.com/p/tekkub-wow/
+## X-Email: tekkub-wow@googlegroups.com
+## X-Category: Inventory
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
+## X-LoadOn-Events: GOSSIP_SHOW
+## X-LoadOn-GOSSIP_SHOW: LoadAddOn('Quelevel')
+
+Quelevel.lua

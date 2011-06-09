@@ -10,10 +10,10 @@ CritlineDB = {
 		},
 		["LibDualSpec-1.0"] = {
 		},
-		["minimap"] = {
+		["filters"] = {
 			["profiles"] = {
 				["Battlecollie - Ysondre"] = {
-					["show"] = false,
+					["levelFilter"] = 6,
 				},
 			},
 		},
@@ -28,10 +28,10 @@ CritlineDB = {
 				},
 			},
 		},
-		["filters"] = {
+		["minimap"] = {
 			["profiles"] = {
 				["Battlecollie - Ysondre"] = {
-					["levelFilter"] = 6,
+					["show"] = false,
 				},
 			},
 		},

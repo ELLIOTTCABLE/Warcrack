@@ -1,6 +1,6 @@
 
 Consolid8_Settings = {
-	["visible"] = true,
+	["visible"] = false,
 	["loot"] = true,
 	["version"] = "1.6",
 	["skill"] = true,

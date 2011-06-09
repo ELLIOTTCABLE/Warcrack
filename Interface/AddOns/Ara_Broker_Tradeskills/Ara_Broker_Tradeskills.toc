@@ -1,0 +1,19 @@
+## Interface: 40000
+## Title: |cFFFFB366Ara|r - Broker - Tradeskills
+## Version: r43
+## Author: Ara
+## Notes: Provides easy access to tradeskills and tracked tradeskill CDs. Can also display combat skills and shortcuts.
+## OptionalDeps: 
+## SavedVariables: AraTradeskillsDB
+## X-WoWI-ID: 12108
+
+## LoadManagers: AddonLoader, SupplyAndDemand, ForkliftGnome
+## X-LoadOn-Always: delayed
+## X-S&D-Always: true
+
+libs\LibStub.lua
+libs\CallbackHandler-1.0.lua
+libs\LibDataBroker-1.1.lua
+
+Translations.lua
+Ara_Broker_Tradeskills.lua

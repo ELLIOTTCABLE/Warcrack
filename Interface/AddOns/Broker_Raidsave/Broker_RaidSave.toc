@@ -1,0 +1,34 @@
+## Interface: 40100
+##
+## Title: Broker [RaidSave]
+## Version:  2.1.1-beta
+## Notes: Minimalistic LDB plugin that allows tracking of raid IDs across characters.
+## Author: zhinjio
+## X-Email: zhinjio@gmail.com
+## X-Category: Raid
+##
+## X-Date: 2011-05-29T08:43:18Z
+## X-WoWI-ID: 11237
+##
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: Delayed
+##
+## SavedVariables: Broker_RaidSaveConfig
+##
+## OptionalDeps: Ace3, LibAbacus-3.0, LibQTip-1.0
+## X-Curse-Packaged-Version: 2.1.1-beta
+## X-Curse-Project-Name: Broker_RaidSave
+## X-Curse-Project-ID: broker_raidsave
+## X-Curse-Repository-ID: wow/broker_raidsave/mainline
+
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+# Localizations...
+Locales\enUS.lua
+Locales\deDE.lua
+Locales\zhTW.lua
+Locales\koKR.lua
+
+Broker_RaidSave.lua

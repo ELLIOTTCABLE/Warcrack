@@ -1,0 +1,116 @@
+------------------------------------------------------------------------
+r19 | zhinjio | 2011-05-15 00:10:04 +0000 (Sun, 15 May 2011) | 1 line
+Changed paths:
+   A /tags/3.2.5-release (from /trunk:18)
+
+Tagging as 3.2.5-release
+------------------------------------------------------------------------
+r18 | zhinjio | 2011-05-15 00:07:02 +0000 (Sun, 15 May 2011) | 3 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+BFactions :
+ - fixed no text ticket
+ - release candidate
+------------------------------------------------------------------------
+r17 | zhinjio | 2011-05-13 05:46:05 +0000 (Fri, 13 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+BFactions :
+ - still not ready. no peeking.
+------------------------------------------------------------------------
+r16 | zhinjio | 2011-05-12 02:20:08 +0000 (Thu, 12 May 2011) | 3 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+BFactions : 
+ - decidedly alpha, not ready for use
+ - text display stuff
+------------------------------------------------------------------------
+r15 | zhinjio | 2011-05-11 04:05:12 +0000 (Wed, 11 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+BFactions :
+ - Fixed tooltip hide on expand/contract
+------------------------------------------------------------------------
+r13 | zhinjio | 2011-05-10 00:47:16 +0000 (Tue, 10 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+BFactions :
+ - fix for ticket 3 (db options errors, thanks Torhal)
+------------------------------------------------------------------------
+r11 | zhinjio | 2011-05-09 06:27:56 +0000 (Mon, 09 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+Broker_Factions :
+ - fixed config problem
+------------------------------------------------------------------------
+r9 | zhinjio | 2011-05-08 05:05:13 +0000 (Sun, 08 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+Broker_Factions
+ - expand/contract functions now working
+------------------------------------------------------------------------
+r7 | zhinjio | 2011-05-06 07:16:54 +0000 (Fri, 06 May 2011) | 1 line
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+- usable.
+------------------------------------------------------------------------
+r6 | zhinjio | 2011-05-05 06:55:22 +0000 (Thu, 05 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+ - functional, but still very alpha
+ - getting alot closer though
+------------------------------------------------------------------------
+r5 | zhinjio | 2011-05-05 04:30:29 +0000 (Thu, 05 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+
+ - still alpha. don't use
+ - pull in localization updates
+------------------------------------------------------------------------
+r4 | zhinjio | 2011-05-03 03:52:14 +0000 (Tue, 03 May 2011) | 1 line
+Changed paths:
+   M /trunk/Locales/deDE.lua
+   M /trunk/Locales/enUS.lua
+   M /trunk/Locales/frFR.lua
+   M /trunk/Locales/koKR.lua
+   M /trunk/Locales/zhCN.lua
+   M /trunk/Locales/zhTW.lua
+
+ - locale typos
+------------------------------------------------------------------------
+r3 | zhinjio | 2011-05-03 03:42:53 +0000 (Tue, 03 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Broker_Factions.lua
+   M /trunk/Broker_Factions.toc
+
+ - first commits
+ - DO NOT USE
+------------------------------------------------------------------------
+r2 | zhinjio | 2011-04-06 02:40:16 +0000 (Wed, 06 Apr 2011) | 1 line
+Changed paths:
+   A /trunk/.docmeta
+   A /trunk/.pkgmeta
+   A /trunk/Broker_Factions.lua
+   A /trunk/Broker_Factions.toc
+   A /trunk/Docs
+   A /trunk/Docs/Main.txt
+   A /trunk/Locales
+   A /trunk/Locales/deDE.lua
+   A /trunk/Locales/enUS.lua
+   A /trunk/Locales/frFR.lua
+   A /trunk/Locales/koKR.lua
+   A /trunk/Locales/zhCN.lua
+   A /trunk/Locales/zhTW.lua
+   A /trunk/embeds.xml
+
+- initial conversion
+------------------------------------------------------------------------

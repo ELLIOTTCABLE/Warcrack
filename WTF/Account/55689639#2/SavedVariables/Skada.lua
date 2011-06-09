@@ -23,6 +23,7 @@ SkadaDB = {
 					},
 					["returnaftercombat"] = true,
 					["barfont"] = "Friz Quadrata TT",
+					["modeincombat"] = "Threat",
 					["background"] = {
 						["borderthickness"] = 18.5,
 						["height"] = 119,
@@ -30,7 +31,6 @@ SkadaDB = {
 						["margin"] = 7,
 						["texture"] = "Blizzard Dialog Background",
 					},
-					["modeincombat"] = "Threat",
 					["barfontsize"] = 12,
 					["set"] = "total",
 					["barwidth"] = 325,

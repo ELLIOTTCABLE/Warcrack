@@ -27,7 +27,7 @@ DataStore_TalentsDB = {
 					2191969295, -- [18]
 				},
 				["ActiveTalents"] = 1,
-				["lastUpdate"] = 1307639116,
+				["lastUpdate"] = 1307640995,
 				["GlyphList"] = {
 					11, -- [1]
 					11338, -- [2]
@@ -123,13 +123,6 @@ DataStore_TalentsRefDB = {
 			["Locale"] = "enUS",
 			["Trees"] = {
 				["Discipline"] = {
-					["prereqs"] = {
-						[5] = "2|1",
-						[15] = "3|1",
-						[21] = "5|2",
-					},
-					["background"] = "PriestDiscipline",
-					["icon"] = "Spell_Holy_PowerWordShield",
 					["talents"] = {
 						"10736|Improved Power Word: Shield|Spell_Holy_PowerWordShield|1|1|2", -- [1]
 						"8577|Twin Disciplines|Spell_Holy_SealOfVengeance|1|2|3", -- [2]
@@ -153,17 +146,15 @@ DataStore_TalentsRefDB = {
 						"8625|Grace|Spell_Holy_HopeAndGrace|6|3|2", -- [20]
 						"8603|Power Word: Barrier|spell_holy_powerwordbarrier|7|2|1", -- [21]
 					},
+					["prereqs"] = {
+						[5] = "2|1",
+						[15] = "3|1",
+						[21] = "5|2",
+					},
+					["icon"] = "Spell_Holy_PowerWordShield",
+					["background"] = "PriestDiscipline",
 				},
 				["Holy"] = {
-					["prereqs"] = {
-						[11] = "3|1",
-						[7] = "1|1",
-						[15] = "3|2",
-						[19] = "5|2",
-						[16] = "5|2",
-					},
-					["background"] = "PriestHoly",
-					["icon"] = "Spell_Holy_GuardianSpirit",
 					["talents"] = {
 						"10746|Improved Renew|Spell_Holy_Renew|1|1|2", -- [1]
 						"9553|Empowered Healing|Spell_Holy_GreaterHeal|1|2|3", -- [2]
@@ -187,16 +178,17 @@ DataStore_TalentsRefDB = {
 						"9595|Circle of Healing|Spell_Holy_CircleOfRenewal|6|3|1", -- [20]
 						"9601|Guardian Spirit|Spell_Holy_GuardianSpirit|7|2|1", -- [21]
 					},
+					["prereqs"] = {
+						[11] = "3|1",
+						[7] = "1|1",
+						[15] = "3|2",
+						[19] = "5|2",
+						[16] = "5|2",
+					},
+					["icon"] = "Spell_Holy_GuardianSpirit",
+					["background"] = "PriestHoly",
 				},
 				["Shadow"] = {
-					["prereqs"] = {
-						[11] = "2|1",
-						[13] = "4|2",
-						[16] = "4|2",
-						[19] = "5|2",
-					},
-					["background"] = "PriestShadow",
-					["icon"] = "Spell_Shadow_ShadowWordPain",
 					["talents"] = {
 						"9032|Darkness|ability_priest_darkness|1|1|3", -- [1]
 						"9036|Improved Shadow Word: Pain|Spell_Shadow_ShadowWordPain|1|2|2", -- [2]
@@ -220,6 +212,14 @@ DataStore_TalentsRefDB = {
 						"9070|Shadowy Apparition|ability_priest_shadowyapparition|6|3|3", -- [20]
 						"9080|Dispersion|Spell_Shadow_Dispersion|7|2|1", -- [21]
 					},
+					["prereqs"] = {
+						[11] = "2|1",
+						[13] = "4|2",
+						[16] = "4|2",
+						[19] = "5|2",
+					},
+					["icon"] = "Spell_Shadow_ShadowWordPain",
+					["background"] = "PriestShadow",
 				},
 			},
 			["Version"] = 14007,

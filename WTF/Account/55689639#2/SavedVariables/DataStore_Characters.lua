@@ -7,10 +7,10 @@ DataStore_CharactersDB = {
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
 				["XPMax"] = 1310000,
-				["played"] = 2100419,
+				["played"] = 2101580,
 				["guildRankName"] = "so cute :3",
 				["isResting"] = 1,
-				["lastUpdate"] = 1307639435,
+				["lastUpdate"] = 1307643519,
 				["class"] = "Priest",
 				["race"] = "Troll",
 				["level"] = 77,
@@ -25,7 +25,7 @@ DataStore_CharactersDB = {
 				["guildName"] = "LEAFEA",
 				["englishRace"] = "Troll",
 				["guildRankIndex"] = 8,
-				["lastLogoutTimestamp"] = 1307639435,
+				["lastLogoutTimestamp"] = 1307643519,
 				["zone"] = "Dalaran",
 			},
 		},

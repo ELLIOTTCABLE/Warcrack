@@ -1,0 +1,4 @@
+
+AraSpecSwitcherDB = {
+	["scale"] = 1,
+}

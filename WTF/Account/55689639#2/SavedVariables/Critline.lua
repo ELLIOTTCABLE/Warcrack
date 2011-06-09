@@ -20,9 +20,10 @@ CritlineDB = {
 		["display"] = {
 			["profiles"] = {
 				["Battlecollie - Ysondre"] = {
+					["show"] = false,
 					["pos"] = {
-						["y"] = 3.172183036804199,
-						["x"] = -3.259390592575073,
+						["y"] = 104.8962326049805,
+						["x"] = -408.541259765625,
 						["point"] = "BOTTOMRIGHT",
 					},
 				},

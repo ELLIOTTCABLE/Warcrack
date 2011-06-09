@@ -1,0 +1,9 @@
+## Interface: 40000
+## Title: Arcana_ExperienceBroker
+## Version: 40000.3
+## Notes: Displays your current Experience and Rates of Experience gain in a DataBroker.
+## Author: Arcana
+## SavedVariables: ArcanaExperience_Options
+## SavedVariablesPerCharacter: ArcanaExperience_DisplayOptions
+embeds.xml
+Arcana_ExperienceBroker.lua

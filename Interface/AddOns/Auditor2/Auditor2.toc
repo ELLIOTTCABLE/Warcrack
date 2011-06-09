@@ -1,0 +1,18 @@
+﻿## Interface: 40000
+## Title: Auditor |cffffffffData Engine|r
+## Author: Alarisha
+## Version: 4.4.2
+## Notes: Cash auditing fun! Auditor's data engine.
+## OptionalDeps: Dongle
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: Auditor2DB
+## X-WoWI-ID: 5429
+## X-Curse-Packaged-Version: v4.4.3
+## X-Curse-Project-Name: Auditor
+## X-Curse-Project-ID: auditor
+## X-Curse-Repository-ID: wow/auditor/mainline
+
+Libs\Dongle.lua
+Locals\Locals.lua
+Core.lua

@@ -1,0 +1,43 @@
+------------------------------------------------------------------------
+r12 | funkydude | 2009-04-15 04:00:10 +0000 (Wed, 15 Apr 2009) | 1 line
+Changed paths:
+   A /tags/v2.1.2 (from /trunk:11)
+
+Tagging as v2.1.2
+------------------------------------------------------------------------
+r11 | funkydude | 2009-04-15 03:59:22 +0000 (Wed, 15 Apr 2009) | 1 line
+Changed paths:
+   M /trunk
+   M /trunk/StatBlock_Durability.lua
+   M /trunk/StatBlock_Durability.toc
+
+fix .type & bump toc
+------------------------------------------------------------------------
+r9 | funkydude | 2008-10-15 00:34:53 +0000 (Wed, 15 Oct 2008) | 1 line
+Changed paths:
+   M /trunk
+   M /trunk/StatBlock_Durability.toc
+
+StatBlock_Durability: toc update > v2.0.1
+------------------------------------------------------------------------
+r8 | root | 2008-09-30 23:04:39 +0000 (Tue, 30 Sep 2008) | 1 line
+Changed paths:
+   A /trunk/.pkgmeta
+
+Facilitate WowAce-on-CurseForge transition
+------------------------------------------------------------------------
+r6 | root | 2008-09-30 22:35:21 +0000 (Tue, 30 Sep 2008) | 1 line
+Changed paths:
+   D /tmp/trunk/StatBlock_Durability
+   A /trunk (from /tmp/trunk/StatBlock_Durability:5)
+
+Importing oldrepo data under /trunk
+------------------------------------------------------------------------
+r5 | funkydude | 2008-08-10 23:48:05 +0000 (Sun, 10 Aug 2008) | 1 line
+Changed paths:
+   A /tmp/trunk/StatBlock_Durability
+   A /tmp/trunk/StatBlock_Durability/StatBlock_Durability.lua
+   A /tmp/trunk/StatBlock_Durability/StatBlock_Durability.toc
+
+StatBlock_Durability: Import
+------------------------------------------------------------------------

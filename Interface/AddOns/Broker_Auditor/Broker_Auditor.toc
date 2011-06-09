@@ -1,0 +1,34 @@
+﻿## Interface: 40000
+## Author: Alarisha
+## Title: Auditor |cffffffffBroker|r
+## Notes: Broker display plugin for Auditor.
+## Version: 4.4.2
+## X-Category:
+## X-eMail: alarisha@gmail.com
+## X-Website:
+## Dependencies: Auditor2
+## SavedVariables: BrokerAuditorDB
+## OptionalDeps: Ace3, LibQTip-1.0, LibDBIcon-1.0
+## X-WoWI-ID: 5429
+## X-Child-Of: Auditor2
+## X-Curse-Packaged-Version: v4.4.3
+## X-Curse-Project-Name: Auditor
+## X-Curse-Project-ID: auditor
+## X-Curse-Repository-ID: wow/auditor/mainline
+
+#@no-lib-strip@
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
+Libs\LibQTip-1.0\lib.xml
+#@end-no-lib-strip@
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+#@no-lib-strip@
+Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+#@end-no-lib-strip@
+Locals\Locals.lua
+Core.lua

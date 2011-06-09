@@ -37,6 +37,7 @@ MBFDB = {
 				"Gatherer_MinimapOptionsButton", -- [11]
 				"LibDBIcon10_Skada", -- [12]
 				"SmartBuff_MiniMapButton", -- [13]
+				"LibDBIcon10_Broker_Auditor", -- [14]
 			},
 			["grabMBFButton"] = true,
 			["grabBlizzButtons"] = true,

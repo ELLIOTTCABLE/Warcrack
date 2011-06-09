@@ -1,0 +1,17 @@
+## Interface: 40100
+## X-Compatible-With: 40100
+## Title: Broker_Wallet
+## Author: Krevlorn
+## Co-Authors: Torhal, Arkayenro
+## Version: 3.4
+## X-eMail: krevlorn@gmail.com
+## Notes: Simple Currency display for LDB.
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: Delayed
+
+LibStub.lua
+CallbackHandler-1.0.lua
+LibDataBroker-1.1.lua
+
+Broker_Wallet.lua

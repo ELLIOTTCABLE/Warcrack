@@ -1,0 +1,18 @@
+## Interface: 40100
+## Title: |cFFFFB366Ara|r - Broker - Spec Switcher
+## Version: r10
+## Notes: A data broker plugin that simply swap your talent spec when clicked.
+## SavedVariables: AraSpecSwitcherDB
+## SavedVariablesPerCharacter: AraSpecSwitcherDBPC
+## X-Credits: Jeffrey0 (DualSpeccer)
+
+## X-WoWI-ID: 13246
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
+
+libs\LibStub.lua
+libs\CallbackHandler-1.0.lua
+libs\LibDataBroker-1.1.lua
+
+Ara_Broker_SpecSwitcher.lua

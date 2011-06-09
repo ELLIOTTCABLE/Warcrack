@@ -1,0 +1,17 @@
+## Interface: 40100
+## Title: |cFFFFB366Ara|r - Broker - Guild & Friends
+## Version: r42
+## Author: Ara
+## Notes: Provides guildmates & friends informations and interactions.
+## SavedVariables: AraBrokerGuildFriendsDB
+## X-Credits: Tekkub (picoGuild), Vrul (DockingStation)
+## X-WoWI-ID: 11205
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
+
+libs\LibStub.lua
+libs\CallbackHandler-1.0.lua
+libs\LibDataBroker-1.1.lua
+
+Ara_Broker_Guild_Friends.lua

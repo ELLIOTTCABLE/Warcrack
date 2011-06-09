@@ -1,0 +1,13 @@
+tag v4.0.1-release
+79d7f0621d0f2a5b004e7fbeafff72b34be00903
+PProvost <peter@provost.org>
+2010-10-16 21:53:45 -0600
+
+Tagging v4.0.1-release
+
+
+--------------------
+
+PProvost:
+	- Updated for patch 4.0.1
+	- Removed unused tektip library

@@ -1,0 +1,78 @@
+------------------------------------------------------------------------
+r32 | funkydude | 2009-04-15 03:34:19 +0000 (Wed, 15 Apr 2009) | 1 line
+Changed paths:
+   A /tags/v2.1.2 (from /trunk:31)
+
+Tagging as v2.1.2
+------------------------------------------------------------------------
+r31 | funkydude | 2009-04-15 03:27:16 +0000 (Wed, 15 Apr 2009) | 1 line
+Changed paths:
+   M /trunk
+   M /trunk/Libs
+   M /trunk/StatBlock_Latency.lua
+   M /trunk/StatBlock_Latency.toc
+
+fix .type & bump toc
+------------------------------------------------------------------------
+r29 | funkydude | 2008-10-14 23:40:47 +0000 (Tue, 14 Oct 2008) | 1 line
+Changed paths:
+   M /trunk/StatBlock_Latency.toc
+
+StatBlock_Latency: toc update > v2.1.1
+------------------------------------------------------------------------
+r28 | root | 2008-09-30 16:12:06 +0000 (Tue, 30 Sep 2008) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+
+Hopefully fix .pkgmeta
+------------------------------------------------------------------------
+r27 | root | 2008-09-29 22:14:29 +0000 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   A /trunk/.pkgmeta
+   M /trunk/Libs
+
+Facilitate WowAce-on-CurseForge transition
+------------------------------------------------------------------------
+r25 | root | 2008-09-29 20:58:42 +0000 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   D /tmp/trunk/StatBlock_Latency
+   A /trunk (from /tmp/trunk/StatBlock_Latency:24)
+
+Importing old repo data under /trunk
+------------------------------------------------------------------------
+r22 | funkydude | 2008-07-24 19:41:10 +0000 (Thu, 24 Jul 2008) | 1 line
+Changed paths:
+   M /tmp/trunk/StatBlock_Latency/StatBlock_Latency.lua
+   M /tmp/trunk/StatBlock_Latency/StatBlock_Latency.toc
+
+StatBlock_Latency: tweak text
+------------------------------------------------------------------------
+r21 | funkydude | 2008-07-24 18:53:48 +0000 (Thu, 24 Jul 2008) | 1 line
+Changed paths:
+   M /tmp/trunk/StatBlock_Latency
+   A /tmp/trunk/StatBlock_Latency/Libs
+   M /tmp/trunk/StatBlock_Latency/StatBlock_Latency.lua
+   M /tmp/trunk/StatBlock_Latency/StatBlock_Latency.toc
+
+StatBlock_Latency: cleanups
+------------------------------------------------------------------------
+r20 | mfg | 2008-07-23 09:26:55 +0000 (Wed, 23 Jul 2008) | 2 lines
+Changed paths:
+   M /tmp/trunk/StatBlock_Latency
+
+StatBlock_Latency:
+- fixed externals
+------------------------------------------------------------------------
+r19 | mfg | 2008-07-23 09:25:44 +0000 (Wed, 23 Jul 2008) | 2 lines
+Changed paths:
+   A /tmp/trunk/StatBlock_Latency
+   A /tmp/trunk/StatBlock_Latency/CallbackHandler-1.0.lua
+   A /tmp/trunk/StatBlock_Latency/LibDataBroker-1.1.lua
+   A /tmp/trunk/StatBlock_Latency/LibStub.lua
+   A /tmp/trunk/StatBlock_Latency/StatBlock_Latency.lua
+   A /tmp/trunk/StatBlock_Latency/StatBlock_Latency.toc
+   A /tmp/trunk/StatBlock_Latency/embeds.xml
+
+StatBlock_Latency: initial commit
+- StatBlockCore for showing your latency
+------------------------------------------------------------------------

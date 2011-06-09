@@ -1,0 +1,23 @@
+## Interface: 40000
+## Title: Broker Bags
+## Notes: Bags information plugin for LibDataBroker displays
+## Author: Quaiche of Dragonblight
+## Version: v4.0.1-release
+## SavedVariables: Broker_BagsDB
+## X-Curse-Packaged-Version: v4.0.1-release
+## X-Curse-Project-Name: Broker_Bags
+## X-Curse-Project-ID: broker_bags
+## X-Curse-Repository-ID: wow/broker_bags/mainline
+
+## X-License: Apache 2.0
+## X-Category: Miscellaneous
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
+
+libs\LibStub.lua
+libs\CallbackHandler-1.0.lua
+libs\LibDataBroker-1.1.lua
+libs\tekKonfigAboutPanel.lua
+
+Broker_Bags.lua

@@ -32,7 +32,7 @@ DataStore_QuestsDB = {
 					[23] = "|cffffff00|Hquest:12828:78|h[Ample Inspiration]|h|r",
 					[22] = "|cffffff00|Hquest:12820:78|h[A Delicate Touch]|h|r",
 				},
-				["lastUpdate"] = 1307639116,
+				["lastUpdate"] = 1307640995,
 				["Quests"] = {
 					"0|Ahn'kahet: The Old Kingdom", -- [1]
 					"1|Dungeon|0|248000|0", -- [2]

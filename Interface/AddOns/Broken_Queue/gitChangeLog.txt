@@ -1,0 +1,332 @@
+commit 01b9d347a77060deec6c916dbd0b2d6d852fab35
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Apr 10 11:42:07 2010 -0700
+
+    completely remove use of  enterQueTime var, as the LFD system gives that to us now
+
+commit c9a0fbc5caee7c894ae968e3824d3e7922c9b8a8
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Apr 10 11:35:05 2010 -0700
+
+    update localizations
+
+commit 7125f11839fceb711d753209201d71c8eda41af5
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Apr 10 00:54:30 2010 -0700
+
+    use blizzard localization for LFG_STATISTIC_AVERAGE_WAIT
+
+commit 033be26e204b5dc96255d47117909336a9145de2
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Apr 10 00:52:07 2010 -0700
+
+    use blizzard localization for TIME_IN_QUEUE
+
+commit bd5002ea8c4877d9ba6647358c7e1461a89019e7
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Apr 10 00:40:55 2010 -0700
+
+    add toc file again
+
+commit e7ebc2782045efbc3d984abcf6f99f9227e26c6b
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Apr 10 00:40:17 2010 -0700
+
+    add toc ?
+
+commit 6ae6199f214c3daf8431dd2fa54d26406e5ff03a
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Apr 10 00:39:10 2010 -0700
+
+    fix typo when queue pops for pvp.
+    fix tooltip times for pvp queues to not subtract from GetTime()
+
+commit e88b0095a862e476f6af3f078723680416a1903c
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Apr 10 00:26:18 2010 -0700
+
+    use 3.3.3's new addition of the time when we queued at. start accounting for bg queue times in tooltip
+
+commit 6a3ad8a83508f61907e9a4972291d468df936b39
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Apr 10 00:19:02 2010 -0700
+
+    fix pvp frame pop
+
+commit 1b07a316c21a7ef940a18c86d3e592ff9c4fc1a3
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 31 03:09:08 2010 -0700
+
+    add new locale
+
+commit 5567235336be265d81b4d32442f325b14726f101
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 31 03:08:59 2010 -0700
+
+    make the pvp queue stuff work properly, shows longest queue for bg in ldb text.
+    fix functions dependent on GetBFStatus() to check both slots.
+    make clicks open to bg frame properly.
+    remove special handling for random bg, as it's exclusive to specific bg queuing
+
+commit 2830a115aaeb30c74fb592e88d870d4963434c0d
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 31 02:58:20 2010 -0700
+
+    handle pvp queues too, because the LFD side handles non-random queing too.. that and PvP stuff only had 2 slots.
+
+commit d7279b81474eeb9458c4b0fa571b9cd53f17c6bd
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 31 02:26:42 2010 -0700
+
+    toggle to BG Queue frame not just honor frame.
+
+commit 9df43856a4876bbbde7d6579f15af83281126525
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 24 01:59:13 2010 -0700
+
+    locale stuff
+
+commit 4e47b99f819a4baeb3a6e42ca35233b9dee5ea43
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 24 01:59:03 2010 -0700
+
+    update locales
+
+commit c84363dbcaa36ef6710c28b88e6fefca030bed69
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 24 01:56:57 2010 -0700
+
+    fix tooltip to look right. fix ldb click.
+    NotQueued = Left Click for LFD / Right Click for PvP
+    Queued = Left Click for Queue Frame / Right Click for Drop Down menu Options
+
+commit 66b3951fe8dd793abe576663c032de076296902d
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 24 01:33:28 2010 -0700
+
+    make tooltip / ldb work wtih BG queues.
+
+commit 0dab4aa2a9a49dcbe32821d056f0dfc81d03503a
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 24 01:15:14 2010 -0700
+
+    adjust methods so that when not queued at all it works right
+
+commit 718184b09b8cbdf8009fcf6e5188f0c5fa6c3c62
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Mar 24 01:07:12 2010 -0700
+
+    add elements in event handler for random BG.
+    LFG and Battlegrounds are mutually exclusive, so no need to worry about steping on toes
+
+commit b736055448cb85c89928db3b8654c3172a78cac4
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Feb 20 02:59:07 2010 -0700
+
+    update locales again
+
+commit b2ecec48397bff8f5c116de86ef7399aad1e0ff3
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Feb 20 02:58:58 2010 -0700
+
+    need = red / don't need = green
+
+commit 52a07861a1753e91d2a2446c28c0d02e0185c23b
+Author: OrionShock <orionshock@gmail.com>
+Date:   Fri Feb 19 02:15:42 2010 -0700
+
+    fix hide mechanic
+
+commit fd822091735fd8afd16378e9781416c95b72ee44
+Author: OrionShock <orionshock@gmail.com>
+Date:   Thu Feb 18 22:34:22 2010 -0700
+
+    fix slash comman
+
+commit 0ef94402feb9ce6f039ff161b01342500ef7f20b
+Author: OrionShock <orionshock@gmail.com>
+Date:   Thu Feb 18 22:28:57 2010 -0700
+
+    accomidate lfg status and option
+
+commit 3c2590ae2be513c1d18492549c9f787e5a5e0e56
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Feb 17 00:00:35 2010 -0700
+
+    add comments and fix map icon on load
+
+commit 86c2edc01d8fc5d3866b55df991587a448a0ba3a
+Author: OrionShock <orionshock@gmail.com>
+Date:   Tue Feb 16 23:54:35 2010 -0700
+
+    update localizations
+
+commit 590072c69b0fdd589394666a6b6b20d3835c1936
+Author: OrionShock <orionshock@gmail.com>
+Date:   Tue Feb 16 23:54:26 2010 -0700
+
+    add print msges
+
+commit 4774265185dfc8b7394e834529b7be701a51f97b
+Author: OrionShock <orionshock@gmail.com>
+Date:   Tue Feb 16 23:51:52 2010 -0700
+
+    add option to toggle minimap icon
+
+commit 6159bf36a85d2cc941850e4a5736df6bb6949f2e
+Author: OrionShock <orionshock@gmail.com>
+Date:   Sat Feb 13 23:31:22 2010 -0700
+
+    add addon name as label to ldb object
+
+commit 682e2b8771b8b07b887cc37f014d71a3a58a777d
+Author: OrionShock <orionshock@gmail.com>
+Date:   Thu Feb 11 02:11:01 2010 -0700
+
+    logic fix for showing / hiding seconds
+
+commit b5ff13d7b217e63adc5b54d656a675c78a52725a
+Author: OrionShock <orionshock@gmail.com>
+Date:   Thu Feb 11 02:10:30 2010 -0700
+
+    fix typos in settings set and chat text
+
+commit b20efffd07890a249ef0f45ab9184f5f20c66a2f
+Author: OrionShock <orionshock@gmail.com>
+Date:   Thu Feb 11 02:10:10 2010 -0700
+
+    update localizations
+
+commit a53d0024c68180d3c6ef609700c6385a3bb805a4
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Feb 10 00:36:26 2010 -0700
+
+    fix typo in help text, account for <1 min when removing seconds
+
+commit b938fd8e6447e19e630dc754ccaadf2011385213
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Feb 10 00:25:26 2010 -0700
+
+    make slash command look better with help texts
+
+commit 7d63aeed0cf3faeb5979e6c5149f77bc41a01f30
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Feb 10 00:19:58 2010 -0700
+
+    add slash command to toggle options
+
+commit 21a5532ef18b10a64c9efcfe4bc9dad441f35741
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Feb 10 00:07:29 2010 -0700
+
+    fix hiding tooltip count not ldbtext count
+
+commit acc500025685f15a97b50602f045cef1236a3773
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Feb 10 00:01:45 2010 -0700
+
+    allow status to be optional via db
+    allow for hiding seconds (as SecondsToTime allows for this)
+    add magic for OnEvent handler
+
+commit cba4bc25ab571ccb81552032b38cb24235f0199a
+Author: OrionShock <orionshock@gmail.com>
+Date:   Wed Feb 10 00:01:01 2010 -0700
+
+    add sv to toc
+
+commit e1f5c9506936e7be10774b6a28d89716277f6ef3
+Author: OrionShock <orionshock@gmail.com>
+Date:   Tue Feb 9 23:45:04 2010 -0700
+
+    add not queued to status table
+
+commit 49c439c581e5216d525a0ea3725f0abb71d5972b
+Author: OrionShock <orionshock@gmail.com>
+Date:   Tue Feb 9 23:43:06 2010 -0700
+
+    fix typo in toc
+
+commit 64c141c595ad6ae4e71fecd80dfe3576bae78066
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 01:52:38 2010 -0700
+
+    import locale and add templet for later
+
+commit 17fdebd7b613ee31aa68436dcddbed13676f1c64
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 01:44:27 2010 -0700
+
+    set MiniMapLFGFrame to never show again
+
+commit 048f14f16b7d4c3492c693a0b34b7d7dbe1d8368
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 01:42:23 2010 -0700
+
+    fix onClick to also grab the button as the right click menu stoped working for some reason
+
+commit 063c52b64e0e9d95c3076fbcb28b853106570912
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 01:31:14 2010 -0700
+
+    chnage LDB Text to be more informative
+
+commit 76595b28b1857c2f50f78aff2eaac51a87e8ef9a
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 01:15:59 2010 -0700
+
+    change tooltip method to a format instead of concat, as it happens alot
+
+commit 90f984553f6e0943428563380b71022a5ba2c118
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 01:07:10 2010 -0700
+
+    fix locale file to work in default mode
+
+commit 1819af541744f9045edfbb6a5f9a6277eff4d20b
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 01:06:59 2010 -0700
+
+    add locale file
+
+commit a3ac1c4dae039801aea53cf28c1b2ca4d508f2ce
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 01:06:51 2010 -0700
+
+    adjust for localizations, change tooltip to cache time and display unknown when it is
+
+commit 4c749fe825755297da8a433f542eaa191fffb2fb
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 00:43:51 2010 -0700
+
+    load libs from libFolder
+
+commit 99f1b6b03dc3219e93fd4f5c4fd4ca455b28ade5
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 00:42:18 2010 -0700
+
+    Remove Root LDB Lib
+
+commit 83273cd9d5ff3104c81b5764a6cabe6ae71c1016
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 00:41:42 2010 -0700
+
+    add Libs Folder and libs +AceLocale
+
+commit e272803aa5daf5162467a806cc1baddd5afe6f64
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 00:39:47 2010 -0700
+
+    Remove Root file Libs
+
+commit f2b62313d97bf19850add2743ddc635280e5a636
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 00:38:22 2010 -0700
+
+    Inital Import part 2
+
+commit 07e5b4f89ce67009d56e942123a772580f150d8c
+Author: OrionShock <orionshock@gmail.com>
+Date:   Mon Feb 8 00:36:33 2010 -0700
+
+    Inital Import

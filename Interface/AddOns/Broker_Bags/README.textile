@@ -1,0 +1,6 @@
+Broker_Bags is a very simple LibDataBroker (aka LDB) plugin that shows your bag information. It will not display anything by itself and requires an LDB display like NinjaPanel or Fortress to display anything.
+
+It provides a simple text display like this: "25/64" that shows used/total. Clicking on the panel toggles your default bags. On mouse rollover, a tooltip is displayed that shows the same display for all of your toons on that realm.
+
+Broker_Bags excludes ammo/shard bags since that is well covered by other LDB plugins like StatBlock_Ammo.
+

@@ -6,7 +6,7 @@ DataStore_SpellsDB = {
 	["global"] = {
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307639116,
+				["lastUpdate"] = 1307640995,
 				["Spells"] = {
 					["Holy"] = {
 						8331776, -- [1]
@@ -61,9 +61,10 @@ DataStore_SpellsDB = {
 					},
 					["All - Guild Perks"] = {
 						21488640, -- [1]
-						20129792, -- [2]
-						20130048, -- [3]
-						20130304, -- [4]
+						20129536, -- [2]
+						20129792, -- [3]
+						20130048, -- [4]
+						20130304, -- [5]
 					},
 					["Discipline"] = {
 						22310656, -- [1]

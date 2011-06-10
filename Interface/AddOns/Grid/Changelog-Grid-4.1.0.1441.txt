@@ -1,0 +1,38 @@
+------------------------------------------------------------------------
+r1441 | phanx | 2011-05-14 05:58:20 +0000 (Sat, 14 May 2011) | 6 lines
+Changed paths:
+   A /tags/4.1.0.1441 (from /trunk:1440)
+
+* When typing in the "Add new buff/debuff" option fields, an auto-complete dropdown will appear with matching spell names.
+* Range checking has been simplified, and now uses the standard Blizzard range functions. If you preferred the old range checking based on spell ranges, use the GridStatusMultiRange plugin.
+* Fixed several issues with frame positioning.
+* Fixed the layout border color option.
+* (Plugin API) Added support for texture coordinates for status textures.
+* (Plugin API) Improved support for dynamic status colors.
+------------------------------------------------------------------------
+r1440 | Phanx | 2011-05-07 07:25:23 +0000 (Sat, 07 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Grid.toc
+   M /trunk/Statuses/GridStatusName.lua
+
+- Update TOC for 4.1
+- Slightly more elegant fix for GridStatusName
+------------------------------------------------------------------------
+r1439 | stanzilla | 2011-04-27 16:18:39 +0000 (Wed, 27 Apr 2011) | 1 line
+Changed paths:
+   M /trunk/Statuses/GridStatusName.lua
+
+silence that error till someone comes up with a real fix
+------------------------------------------------------------------------
+r1438 | mikk | 2011-04-23 20:32:31 +0000 (Sat, 23 Apr 2011) | 1 line
+Changed paths:
+   M /trunk/Statuses/GridStatusAuras.lua
+
+dialogControl was being set to false if the "Aura_EditBox" widget was missing. Fixed.
+------------------------------------------------------------------------
+r1437 | Phanx | 2011-04-12 05:00:50 +0000 (Tue, 12 Apr 2011) | 1 line
+Changed paths:
+   M /trunk/GridLayout.lua
+
+- Don't open the options from the tab in combat either.
+------------------------------------------------------------------------

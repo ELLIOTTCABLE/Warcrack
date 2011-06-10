@@ -112,11 +112,6 @@ ThreatPlatesDB = {
 			["threatWidget"] = {
 				["ON"] = true,
 			},
-			["threat"] = {
-				["art"] = {
-					["theme"] = "bar",
-				},
-			},
 			["cache"] = {
 			},
 			["settings"] = {
@@ -137,10 +132,15 @@ ThreatPlatesDB = {
 			["targetWidget"] = {
 				["theme"] = "arrows",
 			},
-			["friendlyClass"] = true,
 			["cacheClass"] = true,
 			["classWidget"] = {
 				["theme"] = "transparent",
+			},
+			["friendlyClass"] = true,
+			["threat"] = {
+				["art"] = {
+					["theme"] = "bar",
+				},
 			},
 		},
 	},

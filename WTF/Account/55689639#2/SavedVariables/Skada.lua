@@ -16,13 +16,13 @@ SkadaDB = {
 				{
 					["point"] = "BOTTOMLEFT",
 					["scale"] = 1,
+					["reversegrowth"] = true,
+					["barfontsize"] = 12,
 					["barcolor"] = {
-						["b"] = 0.4235294117647059,
-						["g"] = 0.4235294117647059,
 						["r"] = 0.4235294117647059,
+						["g"] = 0.4235294117647059,
+						["b"] = 0.4235294117647059,
 					},
-					["returnaftercombat"] = true,
-					["barfont"] = "Friz Quadrata TT",
 					["background"] = {
 						["borderthickness"] = 18.5,
 						["height"] = 119,
@@ -30,9 +30,9 @@ SkadaDB = {
 						["margin"] = 7,
 						["texture"] = "Blizzard Dialog Background",
 					},
-					["barfontsize"] = 12,
+					["bartexture"] = "Minimalist",
 					["barwidth"] = 325,
-					["reversegrowth"] = true,
+					["mode"] = "Threat",
 					["y"] = 164.1379699707031,
 					["x"] = 0,
 					["title"] = {
@@ -45,20 +45,20 @@ SkadaDB = {
 						["texture"] = "Armory",
 					},
 					["baraltcolor"] = {
-						["b"] = 0.07450980392156863,
-						["g"] = 0,
 						["r"] = 0.7529411764705882,
+						["g"] = 0,
+						["b"] = 0.07450980392156863,
 					},
 					["barheight"] = 16,
-					["bartexture"] = "Minimalist",
-					["mode"] = "Threat",
+					["returnaftercombat"] = true,
+					["barfont"] = "Friz Quadrata TT",
 				}, -- [1]
 			},
 			["feed"] = "Damage: Raid DPS",
 			["total"] = {
-				["absorbTotal"] = 0,
+				["absorbTotal"] = 1392,
 				["dispells"] = 0,
-				["absorbs"] = 0,
+				["absorbs"] = 1392,
 				["ccbreaks"] = 0,
 				["time"] = 0,
 				["interrupts"] = 0,
@@ -66,26 +66,54 @@ SkadaDB = {
 				["players"] = {
 					{
 						["class"] = "PRIEST",
-						["absorbTotal"] = 0,
+						["absorbTotal"] = 1392,
 						["dispells"] = 0,
 						["absorbs"] = {
+							["Battlecollie"] = 1392,
 						},
 						["healingspells"] = {
 						},
 						["overhealing"] = 0,
 						["interrupts"] = 0,
-						["power"] = {
-						},
 						["damaged"] = {
 						},
-						["auras"] = {
-						},
+						["id"] = "0x05000000043503AF",
+						["maxhp"] = 13150,
 						["damage"] = 0,
 						["damagespells"] = {
 						},
 						["deaths"] = {
 						},
 						["damagetaken"] = 5366,
+						["power"] = {
+						},
+						["totalabsorbs"] = 1392,
+						["healing"] = 0,
+						["time"] = 3,
+						["damagetakenspells"] = {
+							["Attack"] = {
+								["id"] = 6603,
+								["name"] = "Attack",
+								["damage"] = 5366,
+							},
+						},
+						["healed"] = {
+						},
+						["name"] = "Battlecollie",
+						["uptime"] = 0,
+						["absorbSpells"] = {
+							["Power Word: Shield"] = {
+								["min"] = 0,
+								["max"] = 763,
+								["name"] = "Power Word: Shield",
+								["critical"] = 0,
+								["id"] = 17,
+								["healing"] = 1392,
+								["overhealing"] = 0,
+								["hits"] = 2,
+							},
+						},
+						["ccbreaks"] = 0,
 						["deathlog"] = {
 							{
 								["ts"] = 1307707882.048,
@@ -144,26 +172,13 @@ SkadaDB = {
 								["hp"] = 13150,
 							}, -- [8]
 						},
-						["id"] = "0x05000000043503AF",
-						["healing"] = 0,
-						["ccbreaks"] = 0,
-						["damagetakenspells"] = {
-							["Attack"] = {
-								["id"] = 6603,
-								["name"] = "Attack",
-								["damage"] = 5366,
-							},
+						["auras"] = {
 						},
-						["time"] = 0,
-						["healed"] = {
-						},
-						["uptime"] = 0,
-						["absorbSpells"] = {
-						},
-						["totalabsorbs"] = 0,
-						["maxhp"] = 13150,
-						["name"] = "Battlecollie",
 						["absorbed"] = {
+							["Battlecollie"] = {
+								["amount"] = 1392,
+								["class"] = "PRIEST",
+							},
 						},
 					}, -- [1]
 				},
@@ -176,8 +191,8 @@ SkadaDB = {
 				},
 				["name"] = "Total",
 				["overhealing"] = 0,
-				["starttime"] = 1307706507,
 				["damagetaken"] = 5366,
+				["starttime"] = 1307706507,
 				["last_action"] = 1307706507,
 				["mobdone"] = 0,
 			},

@@ -1,0 +1,50 @@
+------------------------------------------------------------------------
+r28 | julith | 2010-11-07 21:09:47 +0000 (Sun, 07 Nov 2010) | 1 line
+Changed paths:
+   A /tags/v0.72 (from /trunk:27)
+
+Tagging as v0.72
+------------------------------------------------------------------------
+r27 | julith | 2010-11-07 20:55:29 +0000 (Sun, 07 Nov 2010) | 1 line
+Changed paths:
+   M /trunk/GridStatusAurasExt.lua
+
+GridStatusAurasExt: now really added check against invalid spell ids - think before commit!
+------------------------------------------------------------------------
+r26 | julith | 2010-11-07 20:51:49 +0000 (Sun, 07 Nov 2010) | 1 line
+Changed paths:
+   M /trunk/GridStatusAurasExt.lua
+   M /trunk/GridStatusAurasExt.toc
+
+GridStatusAurasExt: added check against invalid spell ids
+------------------------------------------------------------------------
+r24 | julith | 2010-10-19 17:07:05 +0000 (Tue, 19 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/GridStatusAurasExt.lua
+   M /trunk/GridStatusAurasExt.toc
+   M /trunk/enUS.lua
+
+GridStatusAurasExt: added "ignore pets" option
+------------------------------------------------------------------------
+r22 | julith | 2010-10-15 17:31:12 +0000 (Fri, 15 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/GridStatusAurasExt.lua
+
+GridStatusAurasExt: - fixed RegisterEvent to RegisterMessage for grid-events
+------------------------------------------------------------------------
+r20 | julith | 2010-10-13 18:45:36 +0000 (Wed, 13 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/GridStatusAurasExt.toc
+
+GridStatusAurasExt: updated toc
+------------------------------------------------------------------------
+r19 | julith | 2010-09-29 15:40:19 +0000 (Wed, 29 Sep 2010) | 1 line
+Changed paths:
+   M /trunk/GridStatusAurasExt.lua
+   M /trunk/GridStatusAurasExt.toc
+   A /trunk/enUS.lua (from /trunk/local-enUS.lua:14)
+   D /trunk/local-enUS.lua
+
+GridStatusAurasExt: first version Ace3
+------------------------------------------------------------------------

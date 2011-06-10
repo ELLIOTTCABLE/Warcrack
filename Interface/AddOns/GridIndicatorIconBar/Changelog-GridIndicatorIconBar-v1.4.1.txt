@@ -1,0 +1,12 @@
+tag v1.4.1
+5edbe65b6b90377cd0df6bcb873fc26a7c5e7316
+Adirelle <adirelle@tagada-team.net>
+2010-11-17 12:52:42 +0100
+
+Tagging as 'v1.4.1'.
+
+
+--------------------
+
+Adirelle:
+	- More fix to be compatible with latest release (instead of latest alpha).

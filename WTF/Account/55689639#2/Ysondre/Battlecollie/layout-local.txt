@@ -6,6 +6,13 @@ X: 175
 Y: 124
 W: 32
 H: 32
+Frame: GridLayoutFrame
+FrameLevel: 0
+Anchor: TOPLEFT
+X: 0
+Y: 0
+W: 202
+H: 38
 Frame: SkadaBarWindowSkada
 FrameLevel: 1
 Anchor: BOTTOMLEFT

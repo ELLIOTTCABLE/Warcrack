@@ -1,0 +1,19 @@
+﻿## Interface: 40000
+## Title: GridStatusAurasExt
+## Notes: Provides extended aura status settings.
+## Author: Julith
+## Version: 0.72
+## X-Category: UnitFrame
+## Dependencies: Grid
+## OptionalDeps: Ace3
+## X-Curse-Packaged-Version: v0.72
+## X-Curse-Project-Name: GridStatusAurasExt
+## X-Curse-Project-ID: gridstatusaurasext
+## X-Curse-Repository-ID: wow/gridstatusaurasext/mainline
+
+#@no-lib-strip@
+Libs\AceLocale-3.0\AceLocale-3.0.lua
+#@end-no-lib-strip@
+
+enUS.lua
+GridStatusAurasExt.lua

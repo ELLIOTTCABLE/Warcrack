@@ -1,0 +1,16 @@
+<Bindings>
+    <Binding name="guard_key_1" description="Binding for pipe guard key 1" runOnUp="true" header="PIPE_GUARDS">
+        if ( keystate == "down" ) then
+            KeyGuardClass:GuardKeyDown(1);
+        else
+            KeyGuardClass:GuardKeyUp(1);
+        end
+    </Binding>
+    <Binding name="guard_key_2" description="Binding for pipe guard key 2" runOnUp="true" header="PIPE_GUARDS">
+        if ( keystate == "down" ) then
+            KeyGuardClass:GuardKeyDown(2);
+        else
+            KeyGuardClass:GuardKeyUp(2);
+        end
+    </Binding>
+</Bindings>

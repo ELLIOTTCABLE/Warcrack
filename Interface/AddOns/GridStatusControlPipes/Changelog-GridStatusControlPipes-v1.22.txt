@@ -1,0 +1,39 @@
+------------------------------------------------------------------------
+r66 | julith | 2010-10-16 19:43:19 +0000 (Sat, 16 Oct 2010) | 1 line
+Changed paths:
+   A /tags/v1.22 (from /trunk:65)
+
+Tagging as v1.22
+------------------------------------------------------------------------
+r65 | julith | 2010-10-16 19:42:18 +0000 (Sat, 16 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/GridStatusControlPipes.toc
+   A /trunk/OO.lua
+
+GridStatusControlPipes: forgot to add the oo library...
+------------------------------------------------------------------------
+r63 | julith | 2010-10-16 11:45:31 +0000 (Sat, 16 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/GridStatusControlPipes.toc
+
+GridStatusControlPipes: updated version
+------------------------------------------------------------------------
+r61 | julith | 2010-10-13 19:41:50 +0000 (Wed, 13 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/GridPipe.lua
+   M /trunk/GridStatusControlPipes.lua
+   M /trunk/GridStatusControlPipes.toc
+   M /trunk/PipeFilters.lua
+   M /trunk/PipeGuards.lua
+   M /trunk/local-enUS.lua
+
+GridStatusControlPipes: first working version for 4.0 and Ace3
+------------------------------------------------------------------------
+r60 | julith | 2010-09-29 15:41:17 +0000 (Wed, 29 Sep 2010) | 1 line
+Changed paths:
+   M /trunk/GridPipe.lua
+   M /trunk/PipeFilters.lua
+   M /trunk/PipeGuards.lua
+
+GridStatusControlPipes: first version for Ace3
+------------------------------------------------------------------------

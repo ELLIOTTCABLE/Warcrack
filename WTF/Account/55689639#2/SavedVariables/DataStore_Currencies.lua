@@ -14,10 +14,10 @@ DataStore_CurrenciesDB = {
 			},
 			["CurrencyTextRev"] = {
 				["Justice Points"] = 2,
-				["Dungeon and Raid"] = 1,
+				["Conquest Points"] = 4,
 				["Honor Points"] = 5,
 				["Player vs. Player"] = 3,
-				["Conquest Points"] = 4,
+				["Dungeon and Raid"] = 1,
 			},
 		},
 		["Characters"] = {
@@ -29,7 +29,7 @@ DataStore_CurrenciesDB = {
 					8, -- [4]
 					17162, -- [5]
 				},
-				["lastUpdate"] = 1307706105,
+				["lastUpdate"] = 1307709621,
 			},
 		},
 	},

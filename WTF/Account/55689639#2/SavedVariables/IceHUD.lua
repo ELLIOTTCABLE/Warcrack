@@ -4,11 +4,11 @@ IceCoreDB = {
 		["LibDualSpec-1.0"] = {
 		},
 	},
-	["profileKeys"] = {
-		["Battlecollie - Ysondre"] = "Default",
-	},
 	["global"] = {
 		["lastRunVersion"] = 851,
+	},
+	["profileKeys"] = {
+		["Battlecollie - Ysondre"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -47,11 +47,10 @@ IceCoreDB = {
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 				},
-				["FocusCast"] = {
-					["enabled"] = true,
+				["TargetMana"] = {
+					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
-					["updatedReverseInverse"] = true,
 				},
 				["PlayerInvuln"] = {
 					["updatedReverseInverse"] = true,
@@ -94,12 +93,11 @@ IceCoreDB = {
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 				},
-				["PlayerInfo"] = {
-					["myTagVersion"] = 3,
+				["Threat"] = {
 					["enabled"] = true,
-					["debuffSizeFixup"] = true,
-					["vpos"] = 273,
-					["updateAurasIntoTable"] = true,
+					["myTagVersion"] = 3,
+					["updatedInverseExpand"] = true,
+					["updatedReverseInverse"] = true,
 				},
 				["PetMana"] = {
 					["updatedReverseInverse"] = true,
@@ -113,8 +111,7 @@ IceCoreDB = {
 				},
 				["LacerateCount"] = {
 				},
-				["FocusMana"] = {
-					["enabled"] = true,
+				["FocusCC"] = {
 					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
@@ -133,23 +130,26 @@ IceCoreDB = {
 				},
 				["MaelstromCount"] = {
 				},
-				["Threat"] = {
+				["FocusThreat"] = {
 					["enabled"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 					["updatedReverseInverse"] = true,
 				},
-				["FocusCC"] = {
+				["PlayerInfo"] = {
+					["myTagVersion"] = 3,
+					["enabled"] = true,
+					["debuffSizeFixup"] = true,
+					["vpos"] = 273,
+					["updateAurasIntoTable"] = true,
+				},
+				["FocusMana"] = {
+					["enabled"] = true,
 					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 				},
-				["TargetMana"] = {
-					["updatedReverseInverse"] = true,
-					["myTagVersion"] = 3,
-					["updatedInverseExpand"] = true,
-				},
-				["FocusThreat"] = {
+				["FocusCast"] = {
 					["enabled"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
@@ -159,7 +159,11 @@ IceCoreDB = {
 			["barProportion"] = 0.13,
 			["colors"] = {
 				["ScaledManaColor"] = {
-					["r"] = 0.8660373173210352,
+					["r"] = 1,
+				},
+				["ScaledHealthColor"] = {
+					["g"] = 0,
+					["r"] = 1,
 				},
 			},
 			["alphaic"] = 0.8,

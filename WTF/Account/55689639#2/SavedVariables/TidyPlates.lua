@@ -1,8 +1,8 @@
 
 TidyPlatesData = {
-	["CachedAuraDurations"] = {
-	},
 	["UnitDescriptions"] = {
+	},
+	["CachedAuraDurations"] = {
 	},
 	["UnitClass"] = {
 	},

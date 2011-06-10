@@ -1,0 +1,11 @@
+﻿## Interface: 40000
+## Title: GridBuffIcons |cff7fff7f -Ace2-|r
+## Notes: Adds Buff/Debuff icons to the grid frame.
+## Author: Warbaby
+## Grid Author: Pastamancer & Maia
+## Dependencies: Grid
+## X-Curse-Packaged-Version: r13
+## X-Curse-Project-Name: GridBuffIcons
+## X-Curse-Project-ID: gridbufficons
+## X-Curse-Repository-ID: wow/gridbufficons/mainline
+embeds.xml

@@ -21,7 +21,7 @@ MBFDB = {
 				-224.1380004882812, -- [4]
 			},
 			["colorLocked"] = "All",
-			["padding"] = 3.5,
+			["sortOrder"] = "Blizzard First",
 			["currentTexture"] = "Serenity Square",
 			["customChildren"] = {
 				"MinimapButtonFrameDragButton", -- [1]
@@ -43,8 +43,8 @@ MBFDB = {
 				"LibDBIcon10_AutoBar", -- [17]
 			},
 			["grabMBFButton"] = true,
+			["padding"] = 3.5,
 			["grabBlizzButtons"] = true,
-			["sortOrder"] = "Blizzard First",
 		},
 	},
 }

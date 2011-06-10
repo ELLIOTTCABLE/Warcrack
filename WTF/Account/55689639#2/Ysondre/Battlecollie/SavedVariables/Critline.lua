@@ -101,13 +101,23 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[55503] = {
+					[17] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 697,
+								["amount"] = 9396,
+							},
+						}, -- [1]
+					},
+					[47753] = {
+						{
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 3210,
 							},
 						}, -- [1]
 					},
@@ -127,23 +137,13 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[47753] = {
+					[55503] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 3210,
-							},
-						}, -- [1]
-					},
-					[17] = {
-						{
-							["normal"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 9396,
+								["amount"] = 697,
 							},
 						}, -- [1]
 					},

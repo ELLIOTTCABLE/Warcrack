@@ -33,7 +33,7 @@ ThreatPlatesDB = {
 					["Totem"] = true,
 				},
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -136,7 +136,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["theme"] = "transparent",
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["threat"] = {
 				["art"] = {
 					["theme"] = "bar",

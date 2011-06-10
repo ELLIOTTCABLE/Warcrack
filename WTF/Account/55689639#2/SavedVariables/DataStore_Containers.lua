@@ -6,18 +6,17 @@ DataStore_ContainersDB = {
 	["global"] = {
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307721227,
-				["numFreeBagSlots"] = 98,
+				["lastUpdate"] = 1307725371,
 				["Containers"] = {
 					["Bag4"] = {
-						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:77:0|h[Portable Hole]|h|r",
 						["ids"] = {
 							46362, -- [1]
 							[5] = 47196,
 						},
-						["freeslots"] = 22,
-						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
+						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:77:0|h[Portable Hole]|h|r",
+						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
+						["freeslots"] = 22,
 					},
 					["Bag0"] = {
 						["ids"] = {
@@ -33,8 +32,12 @@ DataStore_ContainersDB = {
 							45853, -- [10]
 							43824, -- [11]
 							6948, -- [12]
+							36905, -- [13]
+							36908, -- [14]
+							37704, -- [15]
 						},
-						["freeslots"] = 4,
+						["size"] = 16,
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
 						["counts"] = {
 							nil, -- [1]
 							2, -- [2]
@@ -43,27 +46,28 @@ DataStore_ContainersDB = {
 							3, -- [5]
 							4, -- [6]
 							2, -- [7]
+							[13] = 5,
+							[15] = 2,
 						},
-						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
-						["size"] = 16,
+						["freeslots"] = 1,
 					},
 					["Bag1"] = {
 						["link"] = "|cffffffff|Hitem:51809:0:0:0:0:0:0:0:77:0|h[]|h|r",
-						["freeslots"] = 24,
-						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
+						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
+						["freeslots"] = 24,
 					},
 					["Bag2"] = {
 						["link"] = "|cffffffff|Hitem:51809:0:0:0:0:0:0:0:77:0|h[]|h|r",
-						["freeslots"] = 24,
-						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
+						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
+						["freeslots"] = 24,
 					},
 					["Bag3"] = {
 						["link"] = "|cffffffff|Hitem:51809:0:0:0:0:0:0:0:77:0|h[]|h|r",
-						["freeslots"] = 24,
-						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
+						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
+						["freeslots"] = 24,
 					},
 					["Bag-2"] = {
 						["ids"] = {
@@ -74,13 +78,14 @@ DataStore_ContainersDB = {
 							[8] = 11078,
 							[9] = 30633,
 						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
 						["counts"] = {
 							[8] = 15,
 						},
-						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
 						["size"] = 32,
 					},
 				},
+				["numFreeBagSlots"] = 95,
 				["numBagSlots"] = 112,
 			},
 		},

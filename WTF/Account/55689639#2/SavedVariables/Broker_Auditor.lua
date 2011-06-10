@@ -1,12 +1,12 @@
 
 BrokerAuditorDB = {
+	["profileKeys"] = {
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+	},
 	["global"] = {
 		["LibDBIcon"] = {
 			["hide"] = true,
 		},
-	},
-	["profileKeys"] = {
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 	},
 	["profiles"] = {
 		["Battlecollie - Ysondre"] = {

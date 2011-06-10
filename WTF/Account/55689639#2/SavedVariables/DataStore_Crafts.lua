@@ -15,21 +15,21 @@ DataStore_CraftsDB = {
 						["MaxRank"] = 450,
 						["Rank"] = 450,
 					},
-					["Fishing"] = {
+					["Cooking"] = {
 						["MaxRank"] = 75,
-						["Rank"] = 6,
+						["Rank"] = 53,
 					},
 					["First Aid"] = {
 						["MaxRank"] = 75,
 						["Rank"] = 1,
 					},
-					["Cooking"] = {
+					["Fishing"] = {
 						["MaxRank"] = 75,
-						["Rank"] = 53,
+						["Rank"] = 6,
 					},
 				},
 				["Prof2"] = "Tailoring",
-				["lastUpdate"] = 1307716912,
+				["lastUpdate"] = 1307721226,
 				["Prof1"] = "Herbalism",
 			},
 		},

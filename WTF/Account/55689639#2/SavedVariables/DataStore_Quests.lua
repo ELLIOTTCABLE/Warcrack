@@ -23,16 +23,20 @@ DataStore_QuestsDB = {
 					"|cff40c040|Hquest:12089:74|h[Wanted: Magister Keldonus]|h|r", -- [14]
 					nil, -- [15]
 					"|cff40c040|Hquest:12257:74|h[A Show of Strength]|h|r", -- [16]
-					[20] = "|cff40c040|Hquest:10704:70|h[How to Break Into the Arcatraz]|h|r",
-					[24] = "|cffffff00|Hquest:12844:79|h[Equipment Recovery]|h|r",
-					[29] = "|cffffff00|Hquest:12789:75|h[Into the Breach!]|h|r",
-					[18] = "|cff40c040|Hquest:9832:70|h[The Second and Third Fragments]|h|r",
-					[22] = "|cffffff00|Hquest:12820:78|h[A Delicate Touch]|h|r",
-					[27] = "|cff808080|Hquest:13906:53|h[They Grow Up So Fast]|h|r",
-					[23] = "|cffffff00|Hquest:12828:78|h[Ample Inspiration]|h|r",
-					[25] = "|cffffff00|Hquest:12843:79|h[They Took Our Men!]|h|r",
+					nil, -- [17]
+					"|cff40c040|Hquest:9832:70|h[The Second and Third Fragments]|h|r", -- [18]
+					nil, -- [19]
+					"|cff40c040|Hquest:10704:70|h[How to Break Into the Arcatraz]|h|r", -- [20]
+					nil, -- [21]
+					"|cffffff00|Hquest:12820:78|h[A Delicate Touch]|h|r", -- [22]
+					"|cffffff00|Hquest:12828:78|h[Ample Inspiration]|h|r", -- [23]
+					"|cffffff00|Hquest:12844:79|h[Equipment Recovery]|h|r", -- [24]
+					"|cffffff00|Hquest:12843:79|h[They Took Our Men!]|h|r", -- [25]
+					[27] = "|cffffff00|Hquest:13159:77|h[Containment]|h|r",
+					[29] = "|cff808080|Hquest:13906:53|h[They Grow Up So Fast]|h|r",
+					[31] = "|cffffff00|Hquest:12789:75|h[Into the Breach!]|h|r",
 				},
-				["lastUpdate"] = 1307716912,
+				["lastUpdate"] = 1307721226,
 				["Quests"] = {
 					"0|Ahn'kahet: The Old Kingdom", -- [1]
 					"1|Dungeon|0|248000|0", -- [2]
@@ -59,10 +63,12 @@ DataStore_QuestsDB = {
 					"1||0|68000|0", -- [23]
 					"1||0|71000|0", -- [24]
 					"1||0|0|0", -- [25]
-					"0|Un'Goro Crater", -- [26]
-					"1||0|0|0", -- [27]
-					"0|Zul'Drak", -- [28]
-					"1||0|6000|0", -- [29]
+					"0|The Violet Hold", -- [26]
+					"1|Dungeon|0|260000|0", -- [27]
+					"0|Un'Goro Crater", -- [28]
+					"1||0|0|0", -- [29]
+					"0|Zul'Drak", -- [30]
+					"1||0|6000|0", -- [31]
 				},
 			},
 		},

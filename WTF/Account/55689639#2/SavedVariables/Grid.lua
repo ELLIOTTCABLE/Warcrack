@@ -27,10 +27,10 @@ GridDB = {
 			["profiles"] = {
 				["Default"] = {
 					["spell_name"] = {
-						[6788] = "Weakened Soul",
-						[56038] = "Plaguebolt",
-						[54345] = "Withering Strike",
 						[50047] = "Broken Bone",
+						[6788] = "Weakened Soul",
+						[54345] = "Withering Strike",
+						[56038] = "Plaguebolt",
 					},
 					["debuff_type"] = {
 						[54345] = "M",
@@ -47,10 +47,10 @@ GridDB = {
 						},
 					},
 					["aura_desc"] = {
-						[6788] = "Cannot be affected by Power Word: Shield.",
-						[56038] = "Inflicts 250 Shadow damage every 1 sec.",
-						[54345] = "Time between attacks increased by 30%.",
 						[50047] = "Reduces chance to hit by 10%.",
+						[6788] = "Cannot be affected by Power Word: Shield.",
+						[54345] = "Time between attacks increased by 30%.",
+						[56038] = "Inflicts 250 Shadow damage every 1 sec.",
 					},
 				},
 			},
@@ -61,55 +61,55 @@ GridDB = {
 			["profiles"] = {
 				["Default"] = {
 					["colors"] = {
-						["PALADIN"] = {
-							["b"] = 0.73,
-							["g"] = 0.55,
-							["r"] = 0.96,
-						},
-						["MAGE"] = {
-							["b"] = 0.9399999999999999,
-							["g"] = 0.8,
-							["r"] = 0.41,
-						},
-						["DRUID"] = {
-							["b"] = 0.04,
-							["g"] = 0.49,
-							["r"] = 1,
-						},
-						["DEATHKNIGHT"] = {
-							["b"] = 0.23,
-							["g"] = 0.12,
-							["r"] = 0.77,
-						},
-						["PRIEST"] = {
-							["b"] = 1,
-							["g"] = 1,
-							["r"] = 1,
-						},
-						["WARLOCK"] = {
-							["b"] = 0.79,
-							["g"] = 0.51,
-							["r"] = 0.58,
-						},
 						["HUNTER"] = {
-							["b"] = 0.45,
-							["g"] = 0.83,
 							["r"] = 0.67,
-						},
-						["WARRIOR"] = {
-							["b"] = 0.43,
-							["g"] = 0.61,
-							["r"] = 0.78,
+							["g"] = 0.83,
+							["b"] = 0.45,
 						},
 						["SHAMAN"] = {
-							["b"] = 0.87,
-							["g"] = 0.44,
 							["r"] = 0,
+							["g"] = 0.44,
+							["b"] = 0.87,
+						},
+						["MAGE"] = {
+							["r"] = 0.41,
+							["g"] = 0.8,
+							["b"] = 0.9399999999999999,
+						},
+						["DRUID"] = {
+							["r"] = 1,
+							["g"] = 0.49,
+							["b"] = 0.04,
+						},
+						["DEATHKNIGHT"] = {
+							["r"] = 0.77,
+							["g"] = 0.12,
+							["b"] = 0.23,
+						},
+						["PRIEST"] = {
+							["r"] = 1,
+							["g"] = 1,
+							["b"] = 1,
+						},
+						["WARLOCK"] = {
+							["r"] = 0.58,
+							["g"] = 0.51,
+							["b"] = 0.79,
+						},
+						["WARRIOR"] = {
+							["r"] = 0.78,
+							["g"] = 0.61,
+							["b"] = 0.43,
+						},
+						["PALADIN"] = {
+							["r"] = 0.96,
+							["g"] = 0.55,
+							["b"] = 0.73,
 						},
 						["ROGUE"] = {
-							["b"] = 0.41,
-							["g"] = 0.96,
 							["r"] = 1,
+							["g"] = 0.96,
+							["b"] = 0.41,
 						},
 					},
 				},
@@ -131,10 +131,10 @@ GridDB = {
 						["solo"] = "By Group 5 w/Pets",
 					},
 					["FrameLock"] = true,
-					["Spacing"] = 0,
+					["borderTexture"] = "None",
 					["PosY"] = 0,
 					["layout"] = "By Group 5 w/Pets",
-					["borderTexture"] = "None",
+					["Spacing"] = 0,
 					["PosX"] = 0,
 				},
 			},
@@ -145,13 +145,21 @@ GridDB = {
 			["profiles"] = {
 				["Default"] = {
 					["fontSize"] = 12,
+					["cornerSize"] = 5,
+					["showTooltip"] = "Always",
+					["enableBarColor"] = true,
+					["textlength"] = 13,
+					["texture"] = "Armory",
+					["frameHeight"] = 38,
+					["enableText2"] = true,
+					["invertBarColor"] = true,
+					["orientation"] = "HORIZONTAL",
 					["statusmap"] = {
 						["cornerPlusBLtopleft"] = {
 						},
 						["sidetexttop"] = {
 						},
-						["sidePlusRbottom"] = {
-							["alert_weakenedsoul"] = true,
+						["sidetextbottom"] = {
 						},
 						["iconleft"] = {
 							["ready_check"] = true,
@@ -190,12 +198,11 @@ GridDB = {
 						},
 						["iconTLcornerright"] = {
 						},
-						["icontop"] = {
+						["baricon5"] = {
 						},
 						["cornerPlusBLtopright"] = {
 						},
-						["barcolor"] = {
-							["unitShieldLeft"] = false,
+						["text3"] = {
 						},
 						["sidePlusTright"] = {
 						},
@@ -263,14 +270,16 @@ GridDB = {
 						},
 						["sidePlusTcenter"] = {
 						},
-						["sidetextbottom"] = {
+						["sidePlusRbottom"] = {
+							["alert_weakenedsoul"] = true,
 						},
-						["corner2"] = {
-							["debuff_magic"] = true,
+						["cornerPlusTLtopright"] = {
 						},
-						["baricon5"] = {
+						["barcolor"] = {
+							["unitShieldLeft"] = false,
 						},
-						["text3"] = {
+						["sidePlusRtop"] = {
+							["alert_pws"] = true,
 						},
 						["iconBRcornerright"] = {
 						},
@@ -285,38 +294,29 @@ GridDB = {
 						},
 						["sidePlusLbottom"] = {
 						},
-						["sidePlusTleft"] = {
+						["sidePlusBleft"] = {
 						},
 						["cornerPlusBLbottomright"] = {
 						},
-						["sidePlusBleft"] = {
+						["sidePlusTleft"] = {
 						},
 						["cornerPlusBRtopright"] = {
 							["debuff_disease"] = true,
 						},
-						["sidePlusRtop"] = {
-							["alert_pws"] = true,
+						["icontop"] = {
 						},
 						["corner3"] = {
 							["debuff_curse"] = false,
 							["debuff_poison"] = false,
 							["debuff_disease"] = false,
-							["buff_Renew"] = false,
-							["alert_renew"] = true,
 							["debuff_magic"] = false,
+							["alert_renew"] = true,
+							["buff_Renew"] = false,
 						},
-						["cornerPlusTLtopright"] = {
+						["corner2"] = {
+							["debuff_magic"] = true,
 						},
 					},
-					["showTooltip"] = "Always",
-					["enableBarColor"] = true,
-					["textlength"] = 13,
-					["texture"] = "Armory",
-					["frameHeight"] = 38,
-					["enableText2"] = true,
-					["invertBarColor"] = true,
-					["orientation"] = "HORIZONTAL",
-					["cornerSize"] = 5,
 					["frameWidth"] = 100,
 				},
 			},
@@ -350,7 +350,14 @@ GridDB = {
 		},
 		["GridIndicatorCornerIcons"] = {
 		},
-		["GridStatusRaidIcons"] = {
+		["GridStatusHealth"] = {
+			["profiles"] = {
+				["Default"] = {
+					["unit_healthDeficit"] = {
+						["threshold"] = 99,
+					},
+				},
+			},
 		},
 		["DungeonRole"] = {
 			["profiles"] = {
@@ -367,9 +374,19 @@ GridDB = {
 		},
 		["GridIndicatorSideText"] = {
 		},
-		["GridIndicatorIconBar"] = {
+		["GridStatusName"] = {
 		},
 		["GridStatusVehicle"] = {
+		},
+		["GridStatusVoiceComm"] = {
+		},
+		["GridMBFrame"] = {
+			["profiles"] = {
+				["Default"] = {
+					["side"] = "Bottom",
+					["size"] = 0.15,
+				},
+			},
 		},
 		["GridStatusHots"] = {
 			["profiles"] = {
@@ -388,19 +405,19 @@ GridDB = {
 					["alert_weakenedsoul"] = {
 						["threshold2"] = 1,
 						["color"] = {
-							["r"] = 0.4941176470588236,
-							["g"] = 0.2980392156862745,
 							["b"] = 0.1568627450980392,
+							["g"] = 0.2980392156862745,
+							["r"] = 0.4941176470588236,
 						},
 						["color2"] = {
-							["r"] = 0.04705882352941176,
-							["g"] = 0,
 							["b"] = 1,
+							["g"] = 0,
+							["r"] = 0.04705882352941176,
 						},
 						["color3"] = {
-							["r"] = 0.803921568627451,
-							["g"] = 0.5137254901960784,
 							["b"] = 0.1215686274509804,
+							["g"] = 0.5137254901960784,
+							["r"] = 0.803921568627451,
 						},
 						["threshold3"] = 2.5,
 					},
@@ -412,19 +429,9 @@ GridDB = {
 				},
 			},
 		},
-		["GridMBFrame"] = {
-			["profiles"] = {
-				["Default"] = {
-					["side"] = "Bottom",
-					["size"] = 0.15,
-				},
-			},
-		},
-		["GridStatusVoiceComm"] = {
-		},
 		["GridStatusReadyCheck"] = {
 		},
-		["GridStatusName"] = {
+		["GridIndicatorIconBar"] = {
 		},
 		["GridIndicatorSideIcons"] = {
 			["profiles"] = {
@@ -438,39 +445,39 @@ GridDB = {
 		["GridStatusAurasExt"] = {
 			["profiles"] = {
 				["Default"] = {
+					["updateInterval"] = 0.25,
 					["magicColors"] = {
 						["Disease"] = {
 							["a"] = 1,
-							["b"] = 0,
-							["g"] = 0.4,
 							["r"] = 0.6,
-						},
-						["Curse"] = {
-							["a"] = 1,
-							["b"] = 1,
-							["g"] = 0,
-							["r"] = 0.8,
+							["g"] = 0.4,
+							["b"] = 0,
 						},
 						["Poison"] = {
 							["a"] = 1,
-							["b"] = 0,
-							["g"] = 0.6,
 							["r"] = 0,
+							["g"] = 0.6,
+							["b"] = 0,
+						},
+						["Curse"] = {
+							["a"] = 1,
+							["r"] = 0.8,
+							["g"] = 0,
+							["b"] = 1,
 						},
 						["Magic"] = {
 							["a"] = 1,
-							["b"] = 1,
-							["g"] = 0.4,
 							["r"] = 0.2,
+							["g"] = 0.4,
+							["b"] = 1,
 						},
 						["none"] = {
 							["a"] = 1,
-							["b"] = 0.5,
-							["g"] = 0.5,
 							["r"] = 0.5,
+							["g"] = 0.5,
+							["b"] = 0.5,
 						},
 					},
-					["updateInterval"] = 0.25,
 				},
 			},
 		},
@@ -490,14 +497,7 @@ GridDB = {
 				},
 			},
 		},
-		["GridStatusHealth"] = {
-			["profiles"] = {
-				["Default"] = {
-					["unit_healthDeficit"] = {
-						["threshold"] = 99,
-					},
-				},
-			},
+		["GridStatusRaidIcons"] = {
 		},
 		["GridBuffIconStatus"] = {
 		},

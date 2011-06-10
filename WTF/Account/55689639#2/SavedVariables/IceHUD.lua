@@ -4,11 +4,11 @@ IceCoreDB = {
 		["LibDualSpec-1.0"] = {
 		},
 	},
-	["global"] = {
-		["lastRunVersion"] = 851,
-	},
 	["profileKeys"] = {
 		["Battlecollie - Ysondre"] = "Default",
+	},
+	["global"] = {
+		["lastRunVersion"] = 851,
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -71,9 +71,9 @@ IceCoreDB = {
 				["SunderCount"] = {
 				},
 				["RangeCheck"] = {
-					["enabled"] = true,
-					["rangeString"] = "[HostileColor Range]",
 					["vpos"] = 0,
+					["rangeString"] = "[HostileColor Range]",
+					["enabled"] = true,
 				},
 				["PetInfo"] = {
 					["myTagVersion"] = 3,
@@ -96,11 +96,20 @@ IceCoreDB = {
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 				},
-				["Threat"] = {
-					["enabled"] = true,
+				["PlayerInfo"] = {
 					["myTagVersion"] = 3,
-					["updatedInverseExpand"] = true,
-					["updatedReverseInverse"] = true,
+					["enabled"] = true,
+					["debuffSizeFixup"] = true,
+					["auras"] = {
+						["buff"] = {
+							["show"] = false,
+						},
+						["debuff"] = {
+							["show"] = false,
+						},
+					},
+					["vpos"] = 273,
+					["updateAurasIntoTable"] = true,
 				},
 				["PetMana"] = {
 					["updatedReverseInverse"] = true,
@@ -114,7 +123,8 @@ IceCoreDB = {
 				},
 				["LacerateCount"] = {
 				},
-				["FocusCC"] = {
+				["FocusMana"] = {
+					["enabled"] = true,
 					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
@@ -125,7 +135,7 @@ IceCoreDB = {
 					["updatedInverseExpand"] = true,
 					["updatedReverseInverse"] = true,
 				},
-				["FocusThreat"] = {
+				["FocusHealth"] = {
 					["enabled"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
@@ -133,37 +143,27 @@ IceCoreDB = {
 				},
 				["MaelstromCount"] = {
 				},
-				["FocusHealth"] = {
-					["enabled"] = true,
-					["myTagVersion"] = 3,
-					["updatedInverseExpand"] = true,
-					["updatedReverseInverse"] = true,
-				},
-				["PlayerInfo"] = {
-					["myTagVersion"] = 3,
-					["enabled"] = true,
-					["debuffSizeFixup"] = true,
-					["auras"] = {
-						["debuff"] = {
-							["show"] = false,
-						},
-						["buff"] = {
-							["show"] = false,
-						},
-					},
-					["vpos"] = 273,
-					["updateAurasIntoTable"] = true,
-				},
-				["FocusMana"] = {
-					["enabled"] = true,
-					["updatedReverseInverse"] = true,
-					["myTagVersion"] = 3,
-					["updatedInverseExpand"] = true,
-				},
 				["TargetMana"] = {
 					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
+				},
+				["Threat"] = {
+					["enabled"] = true,
+					["myTagVersion"] = 3,
+					["updatedInverseExpand"] = true,
+					["updatedReverseInverse"] = true,
+				},
+				["FocusCC"] = {
+					["updatedReverseInverse"] = true,
+					["myTagVersion"] = 3,
+					["updatedInverseExpand"] = true,
+				},
+				["FocusThreat"] = {
+					["enabled"] = true,
+					["myTagVersion"] = 3,
+					["updatedInverseExpand"] = true,
+					["updatedReverseInverse"] = true,
 				},
 			},
 			["barProportion"] = 0.13,

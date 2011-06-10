@@ -21,7 +21,7 @@ MBFDB = {
 				-224.1380004882812, -- [4]
 			},
 			["colorLocked"] = "All",
-			["grabBlizzButtons"] = true,
+			["GrowUp"] = false,
 			["currentTexture"] = "Serenity Square",
 			["customChildren"] = {
 				"MinimapButtonFrameDragButton", -- [1]
@@ -40,10 +40,11 @@ MBFDB = {
 				"LibDBIcon10_Broker_Auditor", -- [14]
 				"LibDBIcon10_IceHUD", -- [15]
 				"LibDBIcon10_Grid", -- [16]
+				"LibDBIcon10_AutoBar", -- [17]
 			},
 			["grabMBFButton"] = true,
+			["grabBlizzButtons"] = true,
 			["padding"] = 3.5,
-			["GrowUp"] = false,
 		},
 	},
 }

@@ -26,15 +26,6 @@ DataStore_TalentsDB = {
 					5940688879, -- [17]
 					2191969295, -- [18]
 				},
-				["ActiveTalents"] = 1,
-				["lastUpdate"] = 1307711891,
-				["Class"] = "PRIEST",
-				["TalentTrees"] = {
-					["Discipline|2"] = 28,
-					["Discipline|1"] = 1687431982514,
-					["Holy|1"] = 48,
-					["Shadow|2"] = 1951698807691,
-				},
 				["GlyphList"] = {
 					11, -- [1]
 					11338, -- [2]
@@ -73,6 +64,15 @@ DataStore_TalentsDB = {
 					7406, -- [35]
 					7422, -- [36]
 				},
+				["lastUpdate"] = 1307716912,
+				["Class"] = "PRIEST",
+				["TalentTrees"] = {
+					["Discipline|2"] = 28,
+					["Shadow|2"] = 1951698807691,
+					["Holy|1"] = 48,
+					["Discipline|1"] = 1687431982514,
+				},
+				["ActiveTalents"] = 1,
 			},
 		},
 		["Reference"] = {
@@ -104,12 +104,12 @@ DataStore_TalentsDB = {
 				[461] = "Shackle Undead",
 				[462] = "Shadow Protection",
 				[463] = "Shadowfiend",
-				[459] = "Levitate",
-				[271] = "Prayer of Mending",
-				[458] = "Fading",
-				[713] = "Desperation",
-				[711] = "Spirit Tap",
 				[709] = "Guardian Spirit",
+				[711] = "Spirit Tap",
+				[713] = "Desperation",
+				[458] = "Fading",
+				[271] = "Prayer of Mending",
+				[459] = "Levitate",
 			},
 		},
 	},
@@ -123,7 +123,13 @@ DataStore_TalentsRefDB = {
 			["Locale"] = "enUS",
 			["Trees"] = {
 				["Discipline"] = {
+					["prereqs"] = {
+						[5] = "2|1",
+						[15] = "3|1",
+						[21] = "5|2",
+					},
 					["background"] = "PriestDiscipline",
+					["icon"] = "Spell_Holy_PowerWordShield",
 					["talents"] = {
 						"10736|Improved Power Word: Shield|Spell_Holy_PowerWordShield|1|1|2", -- [1]
 						"8577|Twin Disciplines|Spell_Holy_SealOfVengeance|1|2|3", -- [2]
@@ -147,49 +153,16 @@ DataStore_TalentsRefDB = {
 						"8625|Grace|Spell_Holy_HopeAndGrace|6|3|2", -- [20]
 						"8603|Power Word: Barrier|spell_holy_powerwordbarrier|7|2|1", -- [21]
 					},
-					["icon"] = "Spell_Holy_PowerWordShield",
-					["prereqs"] = {
-						[5] = "2|1",
-						[15] = "3|1",
-						[21] = "5|2",
-					},
-				},
-				["Holy"] = {
-					["background"] = "PriestHoly",
-					["talents"] = {
-						"10746|Improved Renew|Spell_Holy_Renew|1|1|2", -- [1]
-						"9553|Empowered Healing|Spell_Holy_GreaterHeal|1|2|3", -- [2]
-						"9549|Divine Fury|Spell_Holy_SealOfWrath|1|3|3", -- [3]
-						"11669|Desperate Prayer|Spell_Holy_Restoration|2|2|1", -- [4]
-						"11765|Surge of Light|Spell_Holy_SurgeOfLight|2|3|2", -- [5]
-						"9561|Inspiration|Spell_Holy_LayOnHands|2|4|2", -- [6]
-						"9593|Divine Touch|Ability_Paladin_InfusionofLight|3|1|2", -- [7]
-						"9577|Holy Concentration|Spell_Holy_Fanaticism|3|2|2", -- [8]
-						"11666|Lightwell|Spell_Holy_SummonLightwell|3|3|1", -- [9]
-						"12184|Tome of Light|INV_Misc_Book_07|3|4|2", -- [10]
-						"14738|Rapid Renewal|Ability_Paladin_BlessedMending|4|1|1", -- [11]
-						"11670|Spirit of Redemption|INV_Enchant_EssenceEternalLarge|4|3|1", -- [12]
-						"9573|Serendipity|Spell_Holy_Serendipity|4|4|2", -- [13]
-						"9587|Body and Soul|Spell_Holy_SymbolOfHope|5|1|2", -- [14]
-						"11667|Chakra|priest_icon_chakra|5|2|1", -- [15]
-						"11755|Revelations|ability_priest_bindingprayers|5|3|1", -- [16]
-						"11672|Blessed Resilience|Spell_Holy_BlessedResillience|5|4|2", -- [17]
-						"9597|Test of Faith|Spell_Holy_TestOfFaith|6|1|3", -- [18]
-						"11668|State of Mind|Spell_Arcane_MindMastery|6|2|2", -- [19]
-						"9595|Circle of Healing|Spell_Holy_CircleOfRenewal|6|3|1", -- [20]
-						"9601|Guardian Spirit|Spell_Holy_GuardianSpirit|7|2|1", -- [21]
-					},
-					["icon"] = "Spell_Holy_GuardianSpirit",
-					["prereqs"] = {
-						[11] = "3|1",
-						[7] = "1|1",
-						[15] = "3|2",
-						[19] = "5|2",
-						[16] = "5|2",
-					},
 				},
 				["Shadow"] = {
+					["prereqs"] = {
+						[11] = "2|1",
+						[13] = "4|2",
+						[19] = "5|2",
+						[16] = "4|2",
+					},
 					["background"] = "PriestShadow",
+					["icon"] = "Spell_Shadow_ShadowWordPain",
 					["talents"] = {
 						"9032|Darkness|ability_priest_darkness|1|1|3", -- [1]
 						"9036|Improved Shadow Word: Pain|Spell_Shadow_ShadowWordPain|1|2|2", -- [2]
@@ -213,12 +186,39 @@ DataStore_TalentsRefDB = {
 						"9070|Shadowy Apparition|ability_priest_shadowyapparition|6|3|3", -- [20]
 						"9080|Dispersion|Spell_Shadow_Dispersion|7|2|1", -- [21]
 					},
-					["icon"] = "Spell_Shadow_ShadowWordPain",
+				},
+				["Holy"] = {
 					["prereqs"] = {
-						[11] = "2|1",
-						[13] = "4|2",
-						[16] = "4|2",
+						[11] = "3|1",
+						[7] = "1|1",
+						[15] = "3|2",
 						[19] = "5|2",
+						[16] = "5|2",
+					},
+					["background"] = "PriestHoly",
+					["icon"] = "Spell_Holy_GuardianSpirit",
+					["talents"] = {
+						"10746|Improved Renew|Spell_Holy_Renew|1|1|2", -- [1]
+						"9553|Empowered Healing|Spell_Holy_GreaterHeal|1|2|3", -- [2]
+						"9549|Divine Fury|Spell_Holy_SealOfWrath|1|3|3", -- [3]
+						"11669|Desperate Prayer|Spell_Holy_Restoration|2|2|1", -- [4]
+						"11765|Surge of Light|Spell_Holy_SurgeOfLight|2|3|2", -- [5]
+						"9561|Inspiration|Spell_Holy_LayOnHands|2|4|2", -- [6]
+						"9593|Divine Touch|Ability_Paladin_InfusionofLight|3|1|2", -- [7]
+						"9577|Holy Concentration|Spell_Holy_Fanaticism|3|2|2", -- [8]
+						"11666|Lightwell|Spell_Holy_SummonLightwell|3|3|1", -- [9]
+						"12184|Tome of Light|INV_Misc_Book_07|3|4|2", -- [10]
+						"14738|Rapid Renewal|Ability_Paladin_BlessedMending|4|1|1", -- [11]
+						"11670|Spirit of Redemption|INV_Enchant_EssenceEternalLarge|4|3|1", -- [12]
+						"9573|Serendipity|Spell_Holy_Serendipity|4|4|2", -- [13]
+						"9587|Body and Soul|Spell_Holy_SymbolOfHope|5|1|2", -- [14]
+						"11667|Chakra|priest_icon_chakra|5|2|1", -- [15]
+						"11755|Revelations|ability_priest_bindingprayers|5|3|1", -- [16]
+						"11672|Blessed Resilience|Spell_Holy_BlessedResillience|5|4|2", -- [17]
+						"9597|Test of Faith|Spell_Holy_TestOfFaith|6|1|3", -- [18]
+						"11668|State of Mind|Spell_Arcane_MindMastery|6|2|2", -- [19]
+						"9595|Circle of Healing|Spell_Holy_CircleOfRenewal|6|3|1", -- [20]
+						"9601|Guardian Spirit|Spell_Holy_GuardianSpirit|7|2|1", -- [21]
 					},
 				},
 			},

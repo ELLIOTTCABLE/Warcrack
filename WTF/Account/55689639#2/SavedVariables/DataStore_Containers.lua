@@ -6,14 +6,13 @@ DataStore_ContainersDB = {
 	["global"] = {
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307714160,
-				["numFreeBagSlots"] = 107,
+				["lastUpdate"] = 1307716913,
 				["Containers"] = {
 					["Bag4"] = {
 						["link"] = "|cffffffff|Hitem:51809:0:0:0:0:0:0:0:77:0|h[]|h|r",
-						["freeslots"] = 24,
-						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
+						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
+						["freeslots"] = 24,
 					},
 					["Bag0"] = {
 						["ids"] = {
@@ -23,30 +22,30 @@ DataStore_ContainersDB = {
 							38551, -- [4]
 							43851, -- [5]
 						},
-						["freeslots"] = 11,
+						["size"] = 16,
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
 						["counts"] = {
 							[2] = 2,
 						},
-						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
-						["size"] = 16,
+						["freeslots"] = 11,
 					},
 					["Bag1"] = {
 						["link"] = "|cffffffff|Hitem:51809:0:0:0:0:0:0:0:77:0|h[]|h|r",
-						["freeslots"] = 24,
-						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
+						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
+						["freeslots"] = 24,
 					},
 					["Bag2"] = {
 						["link"] = "|cffffffff|Hitem:51809:0:0:0:0:0:0:0:77:0|h[]|h|r",
-						["freeslots"] = 24,
-						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
+						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
+						["freeslots"] = 24,
 					},
 					["Bag3"] = {
 						["link"] = "|cffffffff|Hitem:51809:0:0:0:0:0:0:0:77:0|h[]|h|r",
-						["freeslots"] = 24,
-						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
+						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
+						["freeslots"] = 24,
 					},
 					["Bag-2"] = {
 						["ids"] = {
@@ -55,13 +54,14 @@ DataStore_ContainersDB = {
 							[4] = 11140,
 							[9] = 30633,
 						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
 						["counts"] = {
 							[8] = 15,
 						},
-						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
 						["size"] = 32,
 					},
 				},
+				["numFreeBagSlots"] = 107,
 				["numBagSlots"] = 112,
 			},
 		},

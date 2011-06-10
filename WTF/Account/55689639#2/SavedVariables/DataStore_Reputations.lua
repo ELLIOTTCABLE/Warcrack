@@ -6,7 +6,9 @@ DataStore_ReputationsDB = {
 	["global"] = {
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307711891,
+				["lastUpdate"] = 1307716911,
+				["guildName"] = "LEAFEA",
+				["guildRep"] = 51,
 				["Factions"] = {
 					[27] = 300,
 					[38] = 10366,
@@ -33,17 +35,15 @@ DataStore_ReputationsDB = {
 					[71] = 15651,
 					[52] = 6081,
 					[72] = 20770,
-					[36] = 2350,
-					[39] = 6563,
+					[20] = 6165,
+					[59] = 8554,
 					[9] = 10812,
 					[53] = 20629,
 					[18] = 4022,
 					[19] = 5075,
-					[59] = 8554,
-					[20] = 6165,
+					[39] = 6563,
+					[36] = 2350,
 				},
-				["guildRep"] = 51,
-				["guildName"] = "LEAFEA",
 			},
 		},
 	},

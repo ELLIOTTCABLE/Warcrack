@@ -6,7 +6,7 @@ DataStore_SpellsDB = {
 	["global"] = {
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307711891,
+				["lastUpdate"] = 1307716912,
 				["Spells"] = {
 					["Holy"] = {
 						8331776, -- [1]

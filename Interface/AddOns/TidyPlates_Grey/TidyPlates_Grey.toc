@@ -1,0 +1,8 @@
+## Interface: 40100
+## Title: Tidy Plates: Grey Theme
+## Notes: Use apostrophes wisely. 
+## Author: A very very foolish man
+## Dependencies: TidyPlates, TidyPlatesHub
+## SavedVariablesPerCharacter: TidyPlatesGreyTankSavedVariables,TidyPlatesGreyDPSSavedVariables
+
+Grey.lua

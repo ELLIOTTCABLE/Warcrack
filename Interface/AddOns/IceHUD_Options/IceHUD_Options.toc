@@ -1,0 +1,14 @@
+## Interface: 40100
+## Title: IceHUD |cff7fff7f-Options-|r
+## Author: Parnic
+## Version: 1.7.5.1
+## Notes: Configuration options for IceHUD
+## OptionalDeps: AceGUI-3.0-SharedMediaWidgets
+## Dependencies: IceHUD
+## LoadOnDemand: 1
+## X-Curse-Packaged-Version: 1.7.5.1
+## X-Curse-Project-Name: IceHUD
+## X-Curse-Project-ID: ice-hud
+## X-Curse-Repository-ID: wow/ice-hud/mainline
+
+Options.lua

@@ -1,0 +1,185 @@
+
+Create solutions, not bulk
+---------------------------------------------------------------------
+
+6.2
+* Spell Cast Monitor name search will now strip the "-" from the combat log name, which should fix PvP cast association issues.
+* Debuff Widget will now strip the "-" from combat log events, which should fix pvp association issues
+* fixed a 'nil' error during pet/tank association
+* "Avoid Overlap" has been updated for the new CVar types
+* TextPlates
+* Style Mode, By Player, By Marked, By Elite
+
+6.2.1:
+- Neon and Grey were not meant to show guild names (yet), so that's been removed.  (It will come back, but only when I have a UI option)
+- added "marked" condition to the "By Active" style mode
+- "No Overlap" removed from Panel.  Please see "Interface > Names> Nameplate Motion" from now on.
+- Changed text in a few spots
+- SetCustomText can now accept RGBA colors (but it's not required)...  return string, r, g, b, a
+- Text Plate for Quatre will show the supplemental text with 70% opacity
+- Fixed Damage Hub Vertical position sensitivity
+- Removed force-enable of aggro detection.  First-runs and resets will still enable aggro detect.
+
+6.2.x:
+- Integrate TidyPlatesIcon into core
+- Graphite into Hub
+- 4.2 Changes
+- Friendly and Enemy Automation; In Combat, Out of Combat, Always
+- move auto-enable warnings to "first time run" block
+.... Future...
+
+6.3
+Name Text, Reaction Color; Greyish red for very low level, medium red for tough, Bright red for skull
+Make sure Debuff Widget is clearing itself
+Debuff Widget should cache debuff data on the Icon table/frames
+Reduce Double Calls / reduce context update load
+Check for table leaks from Core to Hub, and Core internal
+Polish Slider Ranges in Hub (Some don't need to have quite so much range)
+Enhance Opacity Range accuracy (Opacity seems to be on a logarythmic scale, where getting closer to 0% does less)
+	- ex. Opactiy = (1-OpacitySlider)
+Debuff Priority (based on height in list)
+? Graphite integrated into Hub 
+
+6.4+
+Tidy Plates Hub: Heal
+Tidy Plates Hub: Gladiator
+Text Entry box for Slider Widgets
+UnitCache; Class Colors for "Everyone" (Event Handling in World, not BG or Instance; Those colors are provided by group and PvP color)
+UnitCache; Friend List/Guild Feed
+UnitCache; /who for classes?
+Name Text, Class Color Mode; Un-id'd friendly and hostile are greyish versions of the 'normal' colors
+Watermark/Highlight for "CC" prefix (Clamp, Claws, Bars, Lock, Key, ETc)
+"By Low Health" Modes, General Health Warning (greater than, less than)
+Spell Icon Border
+Texture Coordinates for Textures and Statusbar
+Revise "Core" comments
+Revise Friendly Group Member Aggro Color/Graphics
+Widget Testmodes
+Event Handling Callback Functions: Fire an Event when a nameplate is shown, hidden or created
+New Scale Modes: ScaleByActiveDebuffs, ScaleByActiveCC, ScaleByMyActiveDebuffs
+Hub Option: Spell Casting Colors (int/non-int)
+Hub Option: Threat Widget Colors, ShowText Option for Threat Line Widget (Allow text for either side of the tugging)
+
+-------------------------------------------------------------------------------------
+Tidy Plates Blog
+Design Notes
+Design Diary
+Video Content
+	- How to set up Tidy Plates for Tanking
+	- How to set up Tidy Plates for single target and multi-target DPS.
+	- How to set up Tidy Plates for PvP
+Tidy Plates Theme Hacker, Addon
+-------------------------------------------------------------------------------------
+
+
+* Allow unit.guid to be fed from another source:
+	- if unit.guid then GUID[unit.guid] = plate end
+	This should go in the OnUpdateNameplate function, I think:
+	- if not GUID[unit.guid] then GUID[unit.guid] = plate; ContextUpdate end
+* Platelevels for plates(1-100), targets(127), casters(101-120), other?(121-125) 
+
+NOTES
+---------------------
+Tank Hex Color: 3782D1
+Damage Hex Color: FF4400
+
+
+6.1 Revisions
+................................................................................................................................
+
+6.1.3	- Welcome 
+6.1.4	- Colors reset, Welcome fix
+6.1.5	- Raid Tank Coloring for "By Threat" Modes
+		- Alphabetized List
+		- Better handling when previous theme selection does not exist
+		- Debuffs of the same spell-id are now handled more securely
+		
+6.1.6
+		- Added Events for UNIT_SPELLCAST_NOT_INTERRUPTIBLE, UNIT_SPELLCAST_INTERRUPTIBLE
+		- Added Threat Wheel to Hub
+		- Reverted to original health % mode (does not show % when full health)
+		- WoW 4.1 Compatibility (works on 4.0.x and 4.1)
+	
+
+6.1.7
+	- Changed from thousand/million suffix for health text to using a thousands seperator
+	- Restored PTR support (last time I checked)
+	- Moved Quatre Raid Icon to similar position as Neon (to left side of health bar)
+	
+6.1.8
+	- PTR bug fixes (Neon Threat Glow was turning green)
+	- Debuff widget will clear aurainstance tables when combat ends (regen returns)
+	- Added Health Text option: Approximate Health (will show 2 decimal places for thousands (k) and millions (M), with suffix)
+	- Added Text option, "Use Default Blizzard Font"; This will use the font defined by the global variable, 'NAMEPLATE_FONT'.  This should improve the situation for non-latin charcter sets (this is for you, Chinese, Russians, Taiwanese, and Koreans.. xoxo)
+
+6.1.11
+	NEW! Keyword filtering for the Debuff Widget
+	- See Demo on Youtube: http://www.youtube.com/watch?v=2KjGFd0TgvM
+	- By Prefix.. Mode for Debuff Widget
+		- ALL, MY, NO, OTHER, CC
+		- Using CC will eventually highlight the debuff on the widget, but for now it just acts as "ALL"
+		
+	- Fixed UnitChannelInfo interruptable spell argument bug
+	- Found a bug; The Editboxes contained in my ScrollFrames seem to invisibly extend past the bottom of the scrollframe, which can block underlying UI controls.  I've dropped the editboxes to a lower frame level, which is a hack method of preventing problems with it interferring with controls anchored to the bottom of the scrollframe.  Will attempt to figure out a better solution.
+	- Name text coloring modes
+	- By Raid Icon modes for Opacity and Scale
+
+6.1.12
+	- Fixed Hub/Tank NameTextColor errors
+	- Updated description of "Vertical Position of Frame" to "Vertical Position of Artwork"
+
+6.1.13
+	- tweaked name color function
+	- Debug widget should clear its cache more often
+	
+6.2 Beta
+	- New Section in Hub: Style
+		- 
+		
+................................................................................................................................
+
+Tidy Plates 7
+TidyPlatesStyleList, TidyPlatesThemeList
+
+
+Menu Design
+-Each Frame has a bounding box and an access function.
+
+
+Style Full Editing Suite
+Theme/Function Suite
+
+	
+
+
+Slacker Bear
+
+
+Raid accessibility...
+
+5-man regulars should help prep for end game raiding
+5-man herics should be end game content, somewhat on par with raids.
+5-mans to 10-man regular
+5-man heric = 10-man regular
+
+archaeology
+
+
+
+
+Videos
+
+Configuring a tanking setup for Tidy Plates
+- DPS
+- AoE
+- PvP
+- Leveling
+- CC
+
+
+/run SAF = SpellActivationOverlayFrame FOS = "TEXTURES
+SPELLACTIVATIONOVERLAYS
+FURY_OF_STORMRAGE.BLP" SAS = SpellActivationOverlay_ShowOverlay SAH = SpellActivationOverlay_HideOverlays PSF=CreateFrame("FRAME")
+
+/run PSF:RegisterEvent("UNIT_AURA");PSF:SetScript('OnEvent',function() o=0 for i=1,40 do _,_,_,_,_,_,_,_,_,_,id=UnitAura("Player",i) if id==69369 then SAS(SAF,69369,FOS,"TOP",1,255,255,255,false,false) o=1 end end if o==0 then SAH(SAF,69369) end end)
+

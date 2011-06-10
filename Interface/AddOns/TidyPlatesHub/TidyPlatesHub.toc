@@ -1,0 +1,12 @@
+## Interface: 40100
+## Title: Tidy Plates Hub
+## Notes: Provides a common configuration panel for supported themes.
+## Author: Daniel/Binbwen
+## Dependencies: TidyPlates
+## SavedVariables: TidyPlatesHubTankCache, TidyPlatesHubDamageCache
+## SavedVariablesPerCharacter: TidyPlatesHubTankSavedVariables, TidyPlatesHubDamageSavedVariables
+
+DamagePanel.lua
+TankPanel.lua
+
+Functions.lua

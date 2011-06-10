@@ -101,7 +101,7 @@ DataStore_PetsDB = {
 		},
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307640995,
+				["lastUpdate"] = 1307706106,
 				["MOUNT"] = {
 					61230, -- [1]
 					60116, -- [2]

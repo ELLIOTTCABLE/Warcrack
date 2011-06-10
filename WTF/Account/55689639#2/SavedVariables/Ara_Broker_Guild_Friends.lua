@@ -17,16 +17,16 @@ AraBrokerGuildFriendsDB = {
 	["alignName"] = "LEFT",
 	["hbToggleNotes"] = true,
 	["hNote"] = true,
-	["hbAddFriend"] = true,
+	["statusMode"] = "icon",
 	["showOwnBroadcast"] = true,
 	["highlightOrder"] = true,
-	["hRemoveFriend"] = true,
-	["useTipTacSkin"] = true,
-	["hOrderB"] = true,
-	["showGuildName"] = false,
 	["hOrderC"] = true,
-	["hQuery"] = true,
+	["useTipTacSkin"] = true,
+	["hbAddFriend"] = true,
+	["showGuildName"] = false,
 	["alignNote"] = "CENTER",
+	["hQuery"] = true,
+	["hONote"] = true,
 	["sortASC"] = {
 		[false] = {
 			true, -- [1]
@@ -39,7 +39,7 @@ AraBrokerGuildFriendsDB = {
 			true, -- [3]
 		},
 	},
-	["hONote"] = true,
+	["hRemoveFriend"] = true,
 	["hWhisp"] = true,
 	["hideHints"] = true,
 	["alignZone"] = "CENTER",
@@ -54,27 +54,22 @@ AraBrokerGuildFriendsDB = {
 			0, -- [2]
 			0, -- [3]
 		},
-		["friendlyZone"] = {
-			0, -- [1]
-			1, -- [2]
-			0, -- [3]
-		},
 		["contestedZone"] = {
 			1, -- [1]
 			1, -- [2]
 			0, -- [3]
-		},
-		["border"] = {
-			0.3, -- [1]
-			0.3, -- [2]
-			0.3, -- [3]
-			0.9, -- [4]
 		},
 		["orderA"] = {
 			1, -- [1]
 			1, -- [2]
 			1, -- [3]
 			0.1, -- [4]
+		},
+		["border"] = {
+			0.3, -- [1]
+			0.3, -- [2]
+			0.3, -- [3]
+			0.9, -- [4]
 		},
 		["status"] = {
 			0.7, -- [1]
@@ -84,6 +79,11 @@ AraBrokerGuildFriendsDB = {
 		["realm"] = {
 			1, -- [1]
 			0.8, -- [2]
+			0, -- [3]
+		},
+		["friendlyZone"] = {
+			0, -- [1]
+			1, -- [2]
 			0, -- [3]
 		},
 		["title"] = {
@@ -119,7 +119,7 @@ AraBrokerGuildFriendsDB = {
 		},
 	},
 	["hOrderA"] = true,
-	["statusMode"] = "icon",
+	["hOrderB"] = true,
 	["showFriendNotes"] = true,
 	["sortCols"] = {
 		[false] = {

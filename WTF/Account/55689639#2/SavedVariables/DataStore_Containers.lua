@@ -6,8 +6,8 @@ DataStore_ContainersDB = {
 	["global"] = {
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307640996,
-				["numFreeBagSlots"] = 112,
+				["lastUpdate"] = 1307707768,
+				["numFreeBagSlots"] = 111,
 				["Containers"] = {
 					["Bag4"] = {
 						["link"] = "|cffffffff|Hitem:51809:0:0:0:0:0:0:0:77:0|h[]|h|r",
@@ -16,7 +16,10 @@ DataStore_ContainersDB = {
 						["size"] = 24,
 					},
 					["Bag0"] = {
-						["freeslots"] = 16,
+						["ids"] = {
+							40726, -- [1]
+						},
+						["freeslots"] = 15,
 						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
 						["size"] = 16,
 					},

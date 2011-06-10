@@ -29,7 +29,7 @@ DataStore_CurrenciesDB = {
 					8, -- [4]
 					17162, -- [5]
 				},
-				["lastUpdate"] = 1307640995,
+				["lastUpdate"] = 1307706105,
 			},
 		},
 	},

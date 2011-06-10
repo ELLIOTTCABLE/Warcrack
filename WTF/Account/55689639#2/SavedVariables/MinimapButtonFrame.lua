@@ -38,6 +38,7 @@ MBFDB = {
 				"LibDBIcon10_Skada", -- [12]
 				"SmartBuff_MiniMapButton", -- [13]
 				"LibDBIcon10_Broker_Auditor", -- [14]
+				"LibDBIcon10_IceHUD", -- [15]
 			},
 			["grabMBFButton"] = true,
 			["grabBlizzButtons"] = true,

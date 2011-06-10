@@ -10,11 +10,11 @@ AraTradeskillsDB = {
 				["Fishing"] = false,
 			},
 			["trackedSkill"] = "AUTO",
-			["track"] = false,
-			["shortcuts"] = {
-			},
 			["links"] = {
 			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
 			["curSkills"] = {
 				["Cooking"] = 53,
 				["Herbalism"] = 450,

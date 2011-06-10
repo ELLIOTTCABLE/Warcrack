@@ -1,0 +1,9 @@
+
+TidyPlatesData = {
+	["CachedAuraDurations"] = {
+	},
+	["UnitDescriptions"] = {
+	},
+	["UnitClass"] = {
+	},
+}

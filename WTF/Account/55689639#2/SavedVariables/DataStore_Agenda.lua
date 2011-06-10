@@ -6,7 +6,7 @@ DataStore_AgendaDB = {
 	["global"] = {
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307711819,
+				["lastUpdate"] = 1307716854,
 				["Contacts"] = {
 					"Adrales", -- [1]
 					"Anatou", -- [2]

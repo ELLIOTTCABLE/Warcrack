@@ -6,8 +6,8 @@ DataStoreDB = {
 	["global"] = {
 		["Characters"] = {
 			["Default.Ysondre.Battlecollie"] = {
-				["guildName"] = "LEAFEA",
 				["faction"] = "Horde",
+				["guildName"] = "LEAFEA",
 			},
 		},
 		["Guilds"] = {

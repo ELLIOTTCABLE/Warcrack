@@ -1,6 +1,35 @@
 
 AraTradeskillsDB = {
-	["names"] = {
+	["Ysondre"] = {
+		["Battlecollie"] = {
+			["show"] = {
+				["Cooking"] = true,
+				["Herbalism"] = false,
+				["Tailoring"] = true,
+				["First Aid"] = true,
+				["Fishing"] = false,
+			},
+			["trackedSkill"] = "AUTO",
+			["links"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+				["Cooking"] = 53,
+				["Herbalism"] = 450,
+				["Tailoring"] = 449,
+				["First Aid"] = 1,
+				["Fishing"] = 6,
+			},
+			["maxSkills"] = {
+				["Cooking"] = 75,
+				["Herbalism"] = 450,
+				["Tailoring"] = 450,
+				["First Aid"] = 75,
+				["Fishing"] = 75,
+			},
+		},
 	},
 	["colors"] = {
 		["foreignCD"] = {
@@ -18,9 +47,9 @@ AraTradeskillsDB = {
 			0.82, -- [2]
 			0, -- [3]
 		},
-		["activeName"] = {
+		["highlight"] = {
 			1, -- [1]
-			0.82, -- [2]
+			0.8, -- [2]
 			0, -- [3]
 		},
 		["selected"] = {
@@ -33,47 +62,18 @@ AraTradeskillsDB = {
 			0.5, -- [2]
 			0, -- [3]
 		},
-		["highlight"] = {
+		["activeName"] = {
 			1, -- [1]
-			0.8, -- [2]
+			0.82, -- [2]
 			0, -- [3]
 		},
 	},
-	["scale"] = 1,
 	["breakMode"] = "auto",
+	["scale"] = 1,
 	["aliases"] = {
 	},
 	["icons"] = {
 	},
-	["Ysondre"] = {
-		["Battlecollie"] = {
-			["show"] = {
-				["Cooking"] = true,
-				["Herbalism"] = false,
-				["Fishing"] = false,
-				["First Aid"] = true,
-				["Tailoring"] = true,
-			},
-			["trackedSkill"] = "AUTO",
-			["maxSkills"] = {
-				["Cooking"] = 75,
-				["Herbalism"] = 450,
-				["Fishing"] = 75,
-				["First Aid"] = 75,
-				["Tailoring"] = 450,
-			},
-			["shortcuts"] = {
-			},
-			["track"] = false,
-			["curSkills"] = {
-				["Cooking"] = 53,
-				["Herbalism"] = 450,
-				["Fishing"] = 6,
-				["First Aid"] = 1,
-				["Tailoring"] = 449,
-			},
-			["links"] = {
-			},
-		},
+	["names"] = {
 	},
 }

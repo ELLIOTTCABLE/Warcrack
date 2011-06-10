@@ -1,7 +1,7 @@
 
 TidyPlatesOptions = {
-	["WelcomeShown"] = true,
-	["primary"] = "Threat Plates",
 	["EnableCastWatcher"] = 1,
+	["primary"] = "Threat Plates",
+	["WelcomeShown"] = true,
 	["secondary"] = "Threat Plates",
 }

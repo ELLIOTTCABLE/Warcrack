@@ -4,8 +4,8 @@ HideBlizzardDB = {
 		["SpecialFrames"] = {
 			["profiles"] = {
 				["Battlecollie - Ysondre"] = {
-					["party"] = true,
 					["mirrorbar"] = false,
+					["party"] = true,
 				},
 			},
 		},

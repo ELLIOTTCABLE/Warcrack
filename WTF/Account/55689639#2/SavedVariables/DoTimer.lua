@@ -23,10 +23,10 @@ AsheylaLib_Settings = {
 				["thorns"] = 1,
 				["blessing of"] = 1,
 				["fortitude"] = 1,
-				["arcane"] = 1,
+				["^elixir"] = 1,
 				["shout"] = 1,
 				["of the wild"] = 1,
-				["^elixir"] = 1,
+				["arcane"] = 1,
 				["^potion"] = 1,
 			},
 		},
@@ -88,8 +88,8 @@ AsheylaLib_Settings = {
 					["defaultTimerSetting"] = "Cooldowns Timer",
 					["scale"] = 1,
 					["timerSpacing"] = 5,
-					["groupDirection"] = "right",
 					["positionY"] = 152.2435684204101,
+					["groupDirection"] = "right",
 					["anchorPoint"] = "BOTTOMLEFT",
 					["displayNames"] = false,
 					["positionX"] = 559.8895874023438,
@@ -109,9 +109,9 @@ AsheylaLib_Settings = {
 					["anchorPoint"] = "TOPLEFT",
 					["mouseoverAlpha"] = 1,
 					["combatAlpha"] = 0.800000011920929,
-					["groupSpacing"] = 5,
-					["expectedScale"] = 0.6399999856948853,
 					["relativePoint"] = "BOTTOMLEFT",
+					["expectedScale"] = 0.6399999856948853,
+					["groupSpacing"] = 5,
 					["overflowDirection"] = "right",
 					["moveName"] = true,
 				},
@@ -150,10 +150,10 @@ AsheylaLib_Settings = {
 					["timerDirection"] = "up",
 					["defaultTimerSetting"] = "Debuff Timer",
 					["groupSortMethod"] = "Time Added (A)",
-					["displayNames"] = false,
 					["mouseoverAlpha"] = 0.6000000238418579,
-					["anchorPoint"] = "BOTTOMLEFT",
 					["groupDirection"] = "up",
+					["anchorPoint"] = "BOTTOMLEFT",
+					["displayNames"] = false,
 					["positionX"] = 1158.309875488281,
 					["positionY"] = 692.5502624511719,
 					["locked"] = true,
@@ -173,12 +173,12 @@ AsheylaLib_Settings = {
 			},
 			["userAnchors"] = {
 				["Cooldowns Anchor"] = {
-					["externalLoc"] = false,
-					["timers"] = {
-					},
-					["default"] = true,
 					["timerSettings"] = {
 					},
+					["timers"] = {
+					},
+					["externalLoc"] = false,
+					["default"] = true,
 				},
 			},
 			["updatedSettings4.3"] = true,
@@ -223,7 +223,15 @@ AsheylaLib_Settings = {
 					},
 				},
 			},
-			["updatedSettings4.3.3"] = true,
+			["userAnchors-Debuffs-pet"] = {
+				["PetAuras Anchor"] = {
+					["timers"] = {
+					},
+					["default"] = true,
+					["timerSettings"] = {
+					},
+				},
+			},
 			["userAnchors-Debuffs"] = {
 				["PlayerAuras Anchor"] = {
 					["timerSettings"] = {
@@ -261,17 +269,9 @@ AsheylaLib_Settings = {
 					},
 				},
 			},
-			["updatedSettings4.3"] = true,
 			["blizzBuffs"] = true,
-			["userAnchors-Debuffs-pet"] = {
-				["PetAuras Anchor"] = {
-					["timers"] = {
-					},
-					["default"] = true,
-					["timerSettings"] = {
-					},
-				},
-			},
+			["updatedSettings4.3"] = true,
+			["updatedSettings4.3.3"] = true,
 		},
 	},
 	["simpleMode"] = false,

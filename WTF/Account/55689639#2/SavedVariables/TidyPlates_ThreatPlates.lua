@@ -1,7 +1,94 @@
 
 ThreatPlatesDB = {
 	["char"] = {
+		["Fraycollie - Smolderthorn"] = {
+			["specInfo"] = {
+				{
+					3, -- [1]
+					3, -- [2]
+					31, -- [3]
+				}, -- [1]
+				{
+					nil, -- [1]
+					31, -- [2]
+				}, -- [2]
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Arms", -- [1]
+				"Fury", -- [2]
+				"Protection", -- [3]
+			},
+		},
+		["Melancollie - Smolderthorn"] = {
+			["welcome"] = true,
+			["spec"] = {
+				["primary"] = false,
+			},
+			["specInfo"] = {
+				{
+					nil, -- [1]
+					7, -- [2]
+				}, -- [1]
+			},
+			["specName"] = {
+				"Arcane", -- [1]
+				"Fire", -- [2]
+				"Frost", -- [3]
+			},
+		},
+		["Fraycollie - The Underbog"] = {
+			["specInfo"] = {
+				{
+					3, -- [1]
+					3, -- [2]
+					31, -- [3]
+				}, -- [1]
+				{
+					nil, -- [1]
+					31, -- [2]
+				}, -- [2]
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Arms", -- [1]
+				"Fury", -- [2]
+				"Protection", -- [3]
+			},
+		},
 		["Battlecollie - Ysondre"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
+			["specInfo"] = {
+				{
+					32, -- [1]
+					3, -- [2]
+				}, -- [1]
+				{
+					4, -- [1]
+					[3] = 31,
+				}, -- [2]
+			},
+			["specName"] = {
+				"Discipline", -- [1]
+				"Holy", -- [2]
+				"Shadow", -- [3]
+			},
+		},
+		["Combatcollie - The Underbog"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Holy", -- [1]
+				"Protection", -- [2]
+				"Retribution", -- [3]
+			},
+		},
+		["Battlecollie - Smolderthorn"] = {
 			["welcome"] = true,
 			["spec"] = {
 				["primary"] = false,
@@ -24,13 +111,20 @@ ThreatPlatesDB = {
 		},
 	},
 	["profileKeys"] = {
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
 				["toggle"] = {
+					["Normal"] = false,
 					["Totem"] = true,
+					["Neutral"] = false,
 				},
 			},
 			["allowClass"] = true,

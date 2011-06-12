@@ -1,15 +1,69 @@
 
 FriendsWithBenefitsDB = {
-	["Horde - Ysondre"] = {
+	["Alliance - Ysondre"] = {
 		["removed"] = {
 		},
 		["notes"] = {
-			["diplo"] = "Cheap gems via points",
-			["qoljyr"] = "is afraid of ",
+		},
+		["friends"] = {
+			["battlecollie"] = true,
+		},
+	},
+	["Alliance - Smolderthorn"] = {
+		["removed"] = {
+		},
+		["notes"] = {
+		},
+		["friends"] = {
+			["fraycollie"] = true,
+			["xarleas"] = true,
+			["melancollie"] = true,
+			["halfevil"] = true,
+			["battlecollie"] = true,
+			["raethen"] = true,
+		},
+	},
+	["Horde - The Underbog"] = {
+		["removed"] = {
+		},
+		["notes"] = {
+			["hersheyõ"] = "Wants to rejoin later when he’s higher (5)",
+		},
+		["friends"] = {
+			["drunkelf"] = true,
+			["fraycollie"] = true,
+			["millianna"] = true,
+			["integration"] = true,
+			["combatcollie"] = true,
+			["nessirea"] = true,
+			["cassidyjayee"] = true,
+			["fenrirfoxx"] = true,
+			["hersheyõ"] = true,
+			["frostbunny"] = true,
+			["twooter"] = true,
+			["iwannadoyou"] = true,
+		},
+	},
+	["Horde - Smolderthorn"] = {
+		["removed"] = {
+		},
+		["notes"] = {
+		},
+		["friends"] = {
+			["fraycollie"] = true,
+		},
+	},
+	["Horde - Ysondre"] = {
+		["removed"] = {
+			["confident"] = true,
+		},
+		["notes"] = {
 			["anderthal"] = "Jewelcrafter",
+			["qoljyr"] = "is afraid of ",
 			["ikilledpeter"] = "Wanted to raid but we weren’t yet",
 			["machtkampf"] = "Honor -> Gems",
 			["rakrurn"] = "Not looking to get too involved in this game",
+			["diplo"] = "Cheap gems via points",
 			["vermane"] = "Content with waiting for its comeback",
 		},
 		["friends"] = {
@@ -20,9 +74,8 @@ FriendsWithBenefitsDB = {
 			["rivalyn"] = true,
 			["sug"] = true,
 			["machtkampf"] = true,
-			["daulbus"] = true,
 			["ohum"] = true,
-			["kathyayini"] = true,
+			["daulbus"] = true,
 			["cyrandia"] = true,
 			["manbeer"] = true,
 			["soulshallcry"] = true,
@@ -31,28 +84,28 @@ FriendsWithBenefitsDB = {
 			["lynnea"] = true,
 			["zenas"] = true,
 			["raziell"] = true,
+			["kathyayini"] = true,
 			["sweetmilk"] = true,
 			["rakrurn"] = true,
-			["celestine"] = true,
 			["chastity"] = true,
 			["attendant"] = true,
-			["ikkitakeda"] = true,
+			["celestine"] = true,
 			["undeadsummon"] = true,
 			["vermane"] = true,
+			["ikkitakeda"] = true,
 			["scientific"] = true,
-			["adrales"] = true,
 			["superfreek"] = true,
 			["egönömic"] = true,
 			["zedatojaks"] = true,
-			["faptor"] = true,
+			["adrales"] = true,
 			["warmongrel"] = true,
 			["anderthal"] = true,
-			["diplo"] = true,
+			["faptor"] = true,
 			["bottledwater"] = true,
 			["anatou"] = true,
 			["harem"] = true,
 			["fulgent"] = true,
-			["confident"] = true,
+			["czariana"] = true,
 			["meepps"] = true,
 			["qoljyr"] = true,
 			["greenbloodx"] = true,
@@ -61,7 +114,7 @@ FriendsWithBenefitsDB = {
 			["lionspleen"] = true,
 			["battlecollie"] = true,
 			["ohgeez"] = true,
-			["czariana"] = true,
+			["diplo"] = true,
 			["gessa"] = true,
 			["rashnu"] = true,
 			["ikilledpeter"] = true,

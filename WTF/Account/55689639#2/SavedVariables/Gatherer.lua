@@ -75935,6 +75935,16 @@ GatherItems = {
 						1307708520, -- [2]
 					},
 				}, -- [305]
+				{
+					0.4037519097328186, -- [1]
+					0.7755579948425293, -- [2]
+					1307726325, -- [3]
+					false, -- [4]
+					[190171] = {
+						1, -- [1]
+						1307726325, -- [2]
+					},
+				}, -- [306]
 			},
 			["OPEN"] = {
 				{
@@ -82509,6 +82519,10 @@ Gatherer_DropRates = {
 				[36906] = 2,
 				["total"] = 1,
 			},
+			[190171] = {
+				[36905] = 3,
+				["total"] = 1,
+			},
 		},
 	},
 	["dbVersion"] = 2,
@@ -82702,36 +82716,36 @@ LibSwagData = {
 		["HERB"] = {
 			["Briarthorn"] = 2450,
 			["Grave Moss"] = 3369,
-			["Goldthorn"] = 3821,
+			["Sorrowmoss"] = 13466,
 			["Wild Steelbloom"] = 3355,
 			["Gromsblood"] = 8846,
 			["Khadgar's Whisker"] = 3358,
-			["Golden Sansam"] = 13464,
+			["Swiftthistle"] = 2452,
 			["Dragon's Teeth"] = 3819,
 			["Black Lotus"] = 13468,
 			["Earthroot"] = 2449,
 			["Sungrass"] = 8838,
 			["Mountain Silversage"] = 13465,
-			["Sorrowmoss"] = 13466,
+			["Goldthorn"] = 3821,
 			["Mageroyal"] = 785,
 			["Icecap"] = 13467,
-			["Wintersbite"] = 3819,
 			["Silverleaf"] = 765,
+			["Wintersbite"] = 3819,
 			["Wildvine"] = 8153,
 			["Bruiseweed"] = 2453,
 			["Kingsblood"] = 3356,
-			["Blindweed"] = 8839,
-			["Firebloom"] = 4625,
+			["Liferoot"] = 3357,
+			["Fadeleaf"] = 3818,
 			["Dreamfoil"] = 13463,
 			["Arthas' Tears"] = 8836,
 			["Plaguebloom"] = 13466,
 			["Ghost Mushroom"] = 8845,
 			["Stranglekelp"] = 3820,
-			["Fadeleaf"] = 3818,
-			["Liferoot"] = 3357,
+			["Firebloom"] = 4625,
+			["Blindweed"] = 8839,
 			["Peacebloom"] = 2447,
 			["Purple Lotus"] = 8831,
-			["Swiftthistle"] = 2452,
+			["Golden Sansam"] = 13464,
 		},
 	},
 	["HERB"] = {

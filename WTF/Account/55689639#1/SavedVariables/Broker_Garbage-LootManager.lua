@@ -1,0 +1,21 @@
+
+BGLM_GlobalDB = {
+	["restackInventory"] = true,
+	["warnInvFull"] = false,
+	["printLocked"] = true,
+	["autoConfirmBoP"] = false,
+	["tooFewSlots"] = 0,
+	["autoLootFishing"] = true,
+	["useInCombat"] = false,
+	["printSpace"] = true,
+	["autoLootSkinning"] = true,
+	["printJunk"] = true,
+	["autoLootPickpocket"] = true,
+	["printCompareValue"] = true,
+	["autoLoot"] = false,
+	["privateLootTimer"] = 4,
+	["warnLM"] = true,
+	["forceClear"] = false,
+	["closeLootWindow"] = true,
+	["printValue"] = true,
+}

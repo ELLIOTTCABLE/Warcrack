@@ -26,18 +26,238 @@ GridDB = {
 		["GridStatusCasterBuffs"] = {
 			["profiles"] = {
 				["Default"] = {
-					["spell_name"] = {
-						[56038] = "Plaguebolt",
-						[50047] = "Broken Bone",
-						[54345] = "Withering Strike",
-						[6788] = "Weakened Soul",
-					},
-					["debuff_type"] = {
-						[54345] = "M",
-					},
 					["enemy_npc_debuffs_others"] = {
+						["Lord Serpentis"] = {
+							[1604] = "Movement speed reduced by 50%.",
+							[8040] = "",
+						},
+						["Earthborer"] = {
+							[18070] = "Reduced armor.",
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Lord Overheat"] = {
+							[86633] = "50 Fire damage inflicted every 3 sec.",
+						},
+						["Peacekeeper Security Suit"] = {
+							[6533] = "",
+						},
+						["Aku'mai"] = {
+							[3815] = "",
+						},
+						["Twilight Loreseeker"] = {
+							[25603] = "",
+						},
+						["Defias Pirate"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Commander Springvale"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Deviate Adder"] = {
+							[744] = "Nature damage inflicted every 3 sec.",
+						},
+						["Barbed Crustacean"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Aqua Guardian"] = {
+							[9672] = "",
+						},
+						["Deviate Dreadfang"] = {
+							[7399] = "",
+						},
+						["Defias Watcher"] = {
+							[90099] = "",
+						},
+						["Unstable Ravager"] = {
+							[1604] = "Movement speed reduced by 50%.",
+							[3242] = "",
+						},
+						["Fallenroot Shadowstalker"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Insane Ghoul"] = {
+							[83586] = "",
+							[85236] = "",
+						},
+						["Stonesplinter Worker"] = {
+							[6016] = "Armor reduced by 50%.",
+						},
+						["Searing Blade Cultist"] = {
+							[18266] = "Shadow damage inflicted every 3 sec.",
+						},
+						["Deviate Crocolisk"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Blindlight Murloc"] = {
+							[11971] = "Reduced armor.",
+						},
+						["Baron Silverlaine"] = {
+							[23224] = "",
+						},
+						["Nightbane Worgen"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Glubtok"] = {
+							[87901] = "",
+							[88177] = "",
+						},
+						["Twilight Elementalist"] = {
+							[13281] = "",
+						},
+						["Searing Blade Enforcer"] = {
+							[8242] = "Stunned.",
+						},
+						["Jergosh the Invoker"] = {
+							[20800] = "Fire damage inflicted every 3 sec.",
+							[11980] = "Physical damage dealt is reduced by 10%.",
+						},
+						["Deviate Ravager"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Dread Scryer"] = {
+							[12611] = "",
+						},
+						["Defias Blood Wizard"] = {
+							[90938] = "",
+							[90932] = "",
+						},
+						["Leprous Assistant"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Mindless Horror"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Shifty Thief"] = {
+							[3583] = "",
+						},
+						["Viscous Fallout"] = {
+							[21687] = "Deals nature damage every 3 seconds.",
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Druid of the Fang"] = {
+							[8040] = "",
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Goblin Overseer"] = {
+							[91036] = "",
+						},
+						["Deviate Moccasin"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Pustulant Monstrosity"] = {
+							[91677] = "",
+						},
+						["Corpse Eater"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Defias Shadowguard"] = {
+							[1604] = "Movement speed reduced by 50%.",
+							[90960] = "",
+						},
+						["Irradiated Slime"] = {
+							[81039] = "Dealing Nature damage every 3 sec.",
+						},
+						["Sifreldar Runekeeper"] = {
+							[20792] = "Reduced movement speed.",
+						},
+						["Mechanized Guardian"] = {
+							[11820] = "Immobilized.",
+						},
+						["Deviate Guardian"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Frantic Geist"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Vapor"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Mechanized Sentry"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Dark Iron Agent"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Vicious Thug"] = {
+							[86738] = "",
+							[9080] = "",
+						},
+						["Baron Ashbury"] = {
+							[93581] = "",
+							[93423] = "",
+						},
+						["Corrosive Lurker"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Lord Godfrey"] = {
+							[93675] = "",
+							[93629] = "",
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Aku'mai Snapjaw"] = {
+							[1604] = "Movement speed reduced by 50%.",
+							[8391] = "",
+						},
+						["Hogger"] = {
+							[86620] = "Melee attack, ranged attack, and casting speeds all reduced by 60%.",
+							[86604] = "5% of maximum health dealt every 2 sec.",
+						},
+						["Mine Bunny"] = {
+							[91032] = "",
+						},
+						["Verdan the Everliving"] = {
+							[8142] = "",
+						},
+						["Ogre Bodyguard"] = {
+							[91050] = "",
+						},
+						["Riverpaw Poacher"] = {
+							[31290] = "",
+						},
+						["Monstrous Parrot"] = {
+							[90920] = "",
+						},
+						["Ogre Henchman"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Lumbering Oaf"] = {
+							[88288] = "",
+						},
+						["Searing Destroyer"] = {
+							[15744] = "Reduced movement speed.",
+						},
+						["Admiral Ripsnarl"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
 						["Withered Troll"] = {
 							[54345] = "Time between attacks increased by 30%.",
+						},
+						["Defias Squallshaper"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Mutanus the Devourer"] = {
+							[7399] = "",
+							[8150] = "",
+							[7967] = "",
+						},
+						["Blindlight Muckdweller"] = {
+							[8382] = "",
+						},
+						["Lord Cobrahn"] = {
+							[8040] = "",
+							[744] = "Nature damage inflicted every 3 sec.",
+						},
+						["Sorcerous Skeleton"] = {
+							[15497] = "",
+						},
+						["Lord Pythas"] = {
+							[8147] = "",
+						},
+						["Murkshallow Snapclaw"] = {
+							[6713] = "Not wielding a weapon.",
+						},
+						["Nightmare Ectoplasm"] = {
+							[1604] = "Movement speed reduced by 50%.",
 						},
 						["Vargul Deathwaker"] = {
 							[56038] = "Inflicts 250 Shadow damage every 1 sec.",
@@ -45,12 +265,449 @@ GridDB = {
 						["Vargul Blighthound"] = {
 							[50047] = "Reduces chance to hit by 10%.",
 						},
+						["Fel Steed"] = {
+							[7139] = "",
+						},
+						["Oaf Lackey"] = {
+							[90098] = "",
+						},
+						["Ghostly Cook"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Twilight Aquamancer"] = {
+							[9672] = "",
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Mekgineer Thermaplugg"] = {
+							[52778] = "Nature damage inflicted over 5 sec.",
+							[74720] = "Disoriented.",
+						},
+						["Defias Envoker"] = {
+							[91004] = "",
+						},
+						["Nightbane Vile Fang"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Tormented Officer"] = {
+							[7054] = "",
+						},
+						["Deviate Viper"] = {
+							[7947] = "",
+						},
+						["Lady Anacondra"] = {
+							[8040] = "",
+						},
+						["Deviate Lasher"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Wailing Guardsman"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Foreman Sharpsneer"] = {
+							[81767] = "Deals Fire damage every 1 sec.",
+							[80146] = "Reduced chance to Dodge or Parry by 20%.",
+						},
+						["Stone Sleeper"] = {
+							[30615] = "",
+						},
+						["Rotting Horror"] = {
+							[85236] = "",
+						},
+						["Blackfathom Sea Witch"] = {
+							[6136] = "",
+							[15532] = "",
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Nightbane Stalker"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Watcher Eva"] = {
+							[81767] = "Deals Fire damage every 1 sec.",
+						},
+						["Loch Crocolisk"] = {
+							[48287] = "Armor reduced by 20%.",
+						},
+						["Haunting Spirit"] = {
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Rowdy Troublemaker"] = {
+							[86740] = "",
+						},
+						["Haunted Servitor"] = {
+							[7057] = "",
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Lord Walden"] = {
+							[93697] = "",
+						},
+						["Aku'mai Servant"] = {
+							[1604] = "Movement speed reduced by 50%.",
+							[8398] = "",
+						},
+						["Bazzalan"] = {
+							[744] = "Nature damage inflicted every 3 sec.",
+						},
+						["Gelihast"] = {
+							[6533] = "",
+							[1604] = "Movement speed reduced by 50%.",
+						},
+						["Twilight Lord Kelris"] = {
+							[8399] = "",
+						},
+						["Riverpaw Basher"] = {
+							[86814] = "",
+							[1604] = "Movement speed reduced by 50%.",
+						},
+					},
+					["boss_groups"] = {
+						["Foe Reaper 5000"] = {
+							["Foe Reaper 5000"] = 1,
+						},
+						["\"Captain\" Cookie"] = {
+							["\"Captain\" Cookie"] = 1,
+						},
+						["Glubtok"] = {
+							["Glubtok"] = 1,
+						},
+						["Lumbering Oaf"] = {
+							["Lumbering Oaf"] = 1,
+							["Helix Gearbreaker"] = 1,
+						},
+						["Admiral Ripsnarl"] = {
+							["Admiral Ripsnarl"] = 1,
+						},
+						["Lord Walden"] = {
+							["Lord Walden"] = 1,
+						},
+						["Commander Springvale"] = {
+							["Commander Springvale"] = 1,
+						},
+						["Baron Ashbury"] = {
+							["Baron Ashbury"] = 1,
+						},
+						["Lord Godfrey"] = {
+							["Lord Godfrey"] = 1,
+						},
+						["Baron Silverlaine"] = {
+							["Baron Silverlaine"] = 1,
+							["Odo the Blindwatcher"] = 1,
+							["Wolf Master Nandos"] = 1,
+							["Rethilgore"] = 1,
+						},
+					},
+					["debuff_type"] = {
+						[9459] = "M",
+						[21687] = "P",
+						[11980] = "C",
+						[88177] = "M",
+						[83586] = "M",
+						[8150] = "M",
+						[93863] = "M",
+						[25603] = "M",
+						[90099] = "M",
+						[7947] = "P",
+						[6136] = "M",
+						[90938] = "M",
+						[8398] = "M",
+						[8399] = "M",
+						[744] = "P",
+						[23224] = "C",
+						[7399] = "M",
+						[7967] = "M",
+						[93581] = "M",
+						[7054] = "C",
+						[3583] = "P",
+						[8142] = "M",
+						[7040] = "C",
+						[54345] = "M",
+						[15497] = "M",
+						[7041] = "C",
+						[18266] = "C",
+						[30615] = "M",
+						[81039] = "P",
+						[9672] = "M",
+						[86633] = "M",
+						[15532] = "M",
+						[20792] = "M",
+						[12611] = "M",
+						[91004] = "M",
+						[7057] = "C",
+						[93629] = "C",
+						[93952] = "M",
+						[8040] = "M",
+						[8147] = "M",
+						[20800] = "M",
+						[91677] = "P",
+						[93697] = "P",
+						[8382] = "P",
+						[3815] = "P",
+					},
+					["npc_spells"] = {
+						["0x0000000000000000"] = {
+							[1297] = ", , , , ",
+							[1298] = ", , , , ",
+						},
+					},
+					["spell_name"] = {
+						[88177] = "Frost Blossom",
+						[90098] = "Axe to the Head",
+						[88836] = "Go For the Throat",
+						[54584] = "Unstable Explosive",
+						[25771] = "Forbearance",
+						[93686] = "Unholy Power",
+						[9459] = "Corrosive Ooze",
+						[9080] = "Hamstring",
+						[3604] = "Tendon Rip",
+						[90932] = "Ragezone",
+						[1604] = "Dazed",
+						[30615] = "Fear",
+						[8326] = "Ghost",
+						[90099] = "Watch",
+						[13281] = "Earth Shock",
+						[91004] = "Holy Fire",
+						[15571] = "Dazed",
+						[87861] = "Fists of Frost",
+						[7057] = "Haunting Spirits",
+						[18070] = "Earthborer Acid",
+						[87901] = "Fists of Frost",
+						[31290] = "Net",
+						[86814] = "Bash Head",
+						[744] = "Poison",
+						[88481] = "Overdrive",
+						[8733] = "Blessing of Blackfathom",
+						[93863] = "Soul Drain",
+						[71041] = "Dungeon Deserter",
+						[8147] = "Thunderclap",
+						[25603] = "Slow",
+						[48287] = "Powerful Bite",
+						[56038] = "Plaguebolt",
+						[3583] = "Deadly Poison",
+						[8399] = "Sleep",
+						[8150] = "Thundercrack",
+						[88736] = "Thirst for Blood",
+						[93697] = "Conjure Poisonous Mixture",
+						[81767] = "Lantern Blaze",
+						[11820] = "Electrified Net",
+						[81039] = "Toxic Nova",
+						[88522] = "Safety Restrictions Off-line",
+						[8242] = "Shield Slam",
+						[85236] = "Corpse Rot",
+						[21687] = "Toxic Volley",
+						[7139] = "Fel Stomp",
+						[11971] = "Sunder Armor",
+						[23224] = "Veil of Shadow",
+						[6713] = "Disarm",
+						[7947] = "Localized Toxin",
+						[7967] = "Naralex's Nightmare",
+						[15744] = "Blast Wave",
+						[88737] = "Thirst for Blood",
+						[93952] = "Blinding Shadows",
+						[86620] = "Maddening Call",
+						[90920] = "Eye Peck",
+						[86633] = "Overheat",
+						[7399] = "Terrify",
+						[15497] = "Frostbolt",
+						[83586] = "Insane Rambling",
+						[90960] = "Whirling Blades",
+						[11980] = "Curse of Weakness",
+						[74720] = "Pound",
+						[8040] = "Druid's Slumber",
+						[8391] = "Ravage",
+						[431] = "Drink",
+						[93675] = "Mortal Wound",
+						[6016] = "Pierce Armor",
+						[93691] = "Desecration",
+						[95223] = "Recently Mass Resurrected",
+						[6788] = "Weakened Soul",
+						[6136] = "Chilled",
+						[86738] = "Deep Bruise",
+						[8382] = "Leech Poison",
+						[3815] = "Poison Cloud",
+						[9672] = "Frostbolt",
+						[91050] = "Bonk",
+						[7041] = "Forsaken Ability: Healing",
+						[20792] = "Frostbolt",
+						[80146] = "Bonk",
+						[87859] = "Fists of Flame",
+						[93423] = "Asphyxiate",
+						[93930] = "Spectral Ravaging",
+						[89732] = "Nauseated",
+						[8142] = "Grasping Vines",
+						[54345] = "Withering Strike",
+						[93581] = "Pain and Suffering",
+						[86604] = "Vicious Slice",
+						[88009] = "Arcane Power",
+						[90938] = "Bloodbolt",
+						[50047] = "Broken Bone",
+						[91036] = "Motivate",
+						[93629] = "Cursed Bullets",
+						[15532] = "Frost Nova",
+						[12611] = "Cone of Cold",
+						[91032] = "Drunken Haze",
+						[8398] = "Frostbolt Volley",
+						[432] = "Drink",
+						[93931] = "Howling Rage",
+						[3242] = "Ravage",
+						[7054] = "Forsaken Ability",
+						[7040] = "Forsaken Ability: Health",
+						[91677] = "Pustulant Spit",
+						[6533] = "Net",
+						[86740] = "Dirty Blow",
+						[20800] = "Immolate",
+						[52778] = "Welding Beam",
+						[88288] = "Charge",
+						[18266] = "Curse of Agony",
+						[36032] = "Arcane Blast",
 					},
 					["aura_desc"] = {
+						[88177] = "",
+						[90098] = "",
+						[88836] = "",
+						[54584] = "",
+						[25771] = "",
+						[93686] = "",
+						[9459] = "Physical damage dealt is reduced by 5%.",
+						[9080] = "",
+						[3604] = "",
+						[90932] = "",
+						[1604] = "Movement speed reduced by 50%.",
+						[30615] = "",
+						[8326] = "",
+						[90099] = "",
+						[13281] = "",
+						[91004] = "",
+						[15571] = "",
+						[87861] = "",
+						[7057] = "",
+						[18070] = "Reduced armor.",
+						[87901] = "",
+						[31290] = "",
+						[86814] = "",
+						[744] = "Nature damage inflicted every 3 sec.",
+						[88481] = "",
+						[8733] = "",
+						[93863] = "",
+						[71041] = "You abandoned a dungeon and must wait before using the Dungeon Finder again.",
+						[8147] = "",
+						[25603] = "",
+						[48287] = "Armor reduced by 20%.",
 						[56038] = "Inflicts 250 Shadow damage every 1 sec.",
-						[50047] = "Reduces chance to hit by 10%.",
-						[54345] = "Time between attacks increased by 30%.",
+						[3583] = "",
+						[8399] = "",
+						[8150] = "",
+						[88736] = "",
+						[93697] = "",
+						[81767] = "Deals Fire damage every 1 sec.",
+						[11820] = "Immobilized.",
+						[81039] = "Dealing Nature damage every 3 sec.",
+						[88522] = "",
+						[8242] = "Stunned.",
+						[85236] = "",
+						[21687] = "Deals nature damage every 3 seconds.",
+						[7139] = "",
+						[11971] = "Reduced armor.",
+						[23224] = "",
+						[6713] = "Not wielding a weapon.",
+						[7947] = "",
+						[7967] = "",
+						[15744] = "Reduced movement speed.",
+						[88737] = "",
+						[93952] = "",
+						[86620] = "Melee attack, ranged attack, and casting speeds all reduced by 60%.",
+						[90920] = "",
+						[86633] = "50 Fire damage inflicted every 3 sec.",
+						[7399] = "",
+						[15497] = "",
+						[83586] = "",
+						[90960] = "",
+						[11980] = "Physical damage dealt is reduced by 10%.",
+						[74720] = "Disoriented.",
+						[8040] = "",
+						[8391] = "",
+						[431] = "Restores 21 mana per second.",
+						[93675] = "",
+						[6016] = "Armor reduced by 50%.",
+						[93691] = "",
+						[95223] = "Cannot be targeted by Mass Resurrection again.",
 						[6788] = "Cannot be affected by Power Word: Shield.",
+						[6136] = "",
+						[86738] = "",
+						[8382] = "",
+						[3815] = "",
+						[9672] = "",
+						[91050] = "",
+						[7041] = "",
+						[20792] = "Reduced movement speed.",
+						[80146] = "Reduced chance to Dodge or Parry by 20%.",
+						[87859] = "",
+						[93423] = "",
+						[93930] = "",
+						[89732] = "",
+						[8142] = "",
+						[54345] = "Time between attacks increased by 30%.",
+						[93581] = "",
+						[86604] = "5% of maximum health dealt every 2 sec.",
+						[88009] = "",
+						[90938] = "",
+						[50047] = "Reduces chance to hit by 10%.",
+						[91036] = "",
+						[93629] = "",
+						[15532] = "",
+						[12611] = "",
+						[91032] = "",
+						[8398] = "",
+						[432] = "",
+						[93931] = "",
+						[3242] = "",
+						[7054] = "",
+						[7040] = "",
+						[91677] = "",
+						[6533] = "",
+						[86740] = "",
+						[20800] = "Fire damage inflicted every 3 sec.",
+						[52778] = "Nature damage inflicted over 5 sec.",
+						[88288] = "",
+						[18266] = "Shadow damage inflicted every 3 sec.",
+						[36032] = "",
+					},
+					["boss_buffs_self"] = {
+						["Helix Gearbreaker"] = {
+						},
+						["Rethilgore"] = {
+						},
+						["\"Captain\" Cookie"] = {
+						},
+						["Glubtok"] = {
+							[87861] = "",
+							[87859] = "",
+							[88009] = "",
+						},
+						["Lumbering Oaf"] = {
+						},
+						["Foe Reaper 5000"] = {
+							[88481] = "",
+							[88522] = "",
+						},
+						["Admiral Ripsnarl"] = {
+							[88736] = "",
+							[88737] = "",
+						},
+						["Odo the Blindwatcher"] = {
+							[93931] = "",
+						},
+						["Wolf Master Nandos"] = {
+						},
+						["Baron Ashbury"] = {
+						},
+						["Commander Springvale"] = {
+							[93686] = "",
+						},
+						["Lord Godfrey"] = {
+						},
+						["Baron Silverlaine"] = {
+						},
+						["Lord Walden"] = {
+						},
 					},
 				},
 			},
@@ -190,7 +847,7 @@ GridDB = {
 						},
 						["iconTLcornerright"] = {
 						},
-						["baricon5"] = {
+						["icontop"] = {
 						},
 						["cornerPlusBLtopright"] = {
 						},
@@ -257,8 +914,7 @@ GridDB = {
 						},
 						["sidePlusRcenter"] = {
 						},
-						["sidePlusRtop"] = {
-							["alert_pws"] = true,
+						["baricon9"] = {
 						},
 						["sidetextleft"] = {
 						},
@@ -271,7 +927,7 @@ GridDB = {
 						},
 						["text3"] = {
 						},
-						["icontop"] = {
+						["baricon5"] = {
 						},
 						["iconBRcornerright"] = {
 						},
@@ -295,7 +951,8 @@ GridDB = {
 						["cornerPlusBRtopright"] = {
 							["debuff_disease"] = true,
 						},
-						["baricon9"] = {
+						["sidePlusRtop"] = {
+							["alert_pws"] = true,
 						},
 						["corner3"] = {
 							["debuff_curse"] = false,
@@ -328,8 +985,17 @@ GridDB = {
 		["GridStatusAuras"] = {
 			["profiles"] = {
 				["Default"] = {
+					["buff_Rejuvenation"] = {
+						["icon"] = "Interface\\Icons\\Spell_Nature_Rejuvenation",
+					},
 					["buff_Renew"] = {
 						["icon"] = "Interface\\Icons\\Spell_Holy_Renew",
+					},
+					["buff_EarthShield"] = {
+						["icon"] = "Interface\\Icons\\Spell_Nature_SkinofEarth",
+					},
+					["buff_Regrowth"] = {
+						["icon"] = "Interface\\Icons\\Spell_Nature_ResistNature",
 					},
 					["buff_PowerWord:Shield"] = {
 						["icon"] = "Interface\\Icons\\Spell_Holy_PowerWordShield",
@@ -503,6 +1169,11 @@ GridDB = {
 		},
 	},
 	["profileKeys"] = {
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
 	},
 	["profiles"] = {

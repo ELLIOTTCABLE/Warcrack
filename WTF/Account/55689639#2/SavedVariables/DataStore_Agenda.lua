@@ -1,70 +1,76 @@
 
 DataStore_AgendaDB = {
 	["profileKeys"] = {
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
-			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307725474,
+			["Default.The Underbog.Combatcollie"] = {
+				["lastUpdate"] = 1307756139,
 				["Contacts"] = {
-					"Adrales", -- [1]
-					"Anatou", -- [2]
-					"Anderthal", -- [3]
-					"Attendant", -- [4]
-					"Bearcowpig", -- [5]
-					"Bottledwater", -- [6]
-					"Butterslut", -- [7]
-					"Celestine", -- [8]
-					"Chastity", -- [9]
-					"Combatcollie", -- [10]
-					"Confident", -- [11]
-					"Cyrandia", -- [12]
-					"Czariana", -- [13]
-					"Daulbus", -- [14]
-					"Diplo", -- [15]
-					"Egönömic", -- [16]
-					"Faptor", -- [17]
-					"Fulgent", -- [18]
-					"Gessa", -- [19]
-					"Greenbloodx", -- [20]
-					"Harem", -- [21]
-					"Ikilledpeter", -- [22]
-					"Ikkitakeda", -- [23]
-					"Kathyayini", -- [24]
-					"Lionspleen", -- [25]
-					"Lynnea", -- [26]
-					"Machtkampf", -- [27]
-					"Mackluster", -- [28]
-					"Manbeer", -- [29]
-					"Meepps", -- [30]
-					"Nãrcissã", -- [31]
-					"Nightstep", -- [32]
-					"Ohgeez", -- [33]
-					"Ohum", -- [34]
-					"Pinkhowl", -- [35]
-					"Qoljyr", -- [36]
-					"Rakrurn", -- [37]
-					"Rashnu", -- [38]
-					"Raziell", -- [39]
-					"Rivalyn", -- [40]
-					"Scientific", -- [41]
-					"Soulshallcry", -- [42]
-					"Starberry", -- [43]
-					"ßeserk", -- [44]
-					"Sug", -- [45]
-					"Superfreek", -- [46]
-					"Sweetmilk", -- [47]
-					"Tsura", -- [48]
-					"Undeadsummon", -- [49]
-					"Vermane", -- [50]
-					"Votal", -- [51]
-					"Waltz", -- [52]
-					"Warmongrel", -- [53]
-					"Windsocks", -- [54]
-					"Zachaeus", -- [55]
-					"Zedatojaks", -- [56]
-					"Zenas", -- [57]
+					"Cassidyjayee", -- [1]
+					"Drunkelf", -- [2]
+					"Fenrirfoxx", -- [3]
+					"Fraycollie", -- [4]
+					"Frostbunny", -- [5]
+					"Hersheyõ", -- [6]
+					"Integration", -- [7]
+					"Iwannadoyou", -- [8]
+					"Millianna", -- [9]
+					"Nessirea", -- [10]
+					"Twooter", -- [11]
+				},
+			},
+			["Default.Smolderthorn.Fraycollie"] = {
+				["lastUpdate"] = 1307765207,
+				["Contacts"] = {
+					"Halfevil", -- [1]
+					"Xarleas", -- [2]
+					"Battlecollie", -- [3]
+					"Melancollie", -- [4]
+				},
+			},
+			["Default.The Underbog.Fraycollie"] = {
+				["lastUpdate"] = 1307756265,
+				["Contacts"] = {
+					"Cassidyjayee", -- [1]
+					"Combatcollie", -- [2]
+					"Drunkelf", -- [3]
+					"Fenrirfoxx", -- [4]
+					"Frostbunny", -- [5]
+					"Hersheyõ", -- [6]
+					"Integration", -- [7]
+					"Iwannadoyou", -- [8]
+					"Millianna", -- [9]
+					"Nessirea", -- [10]
+					"Twooter", -- [11]
+				},
+			},
+			["Default.Ysondre.Battlecollie"] = {
+				["lastUpdate"] = 1307762194,
+			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1307877482,
+				["Contacts"] = {
+					"Battlecollie", -- [1]
+					"Fraycollie", -- [2]
+					"Halfevil", -- [3]
+					"Raethen", -- [4]
+					"Xarleas", -- [5]
+				},
+			},
+			["Default.Smolderthorn.Battlecollie"] = {
+				["lastUpdate"] = 1307842893,
+				["Contacts"] = {
+					"Fraycollie", -- [1]
+					"Halfevil", -- [2]
+					"Melancollie", -- [3]
+					"Xarleas", -- [4]
 				},
 			},
 		},

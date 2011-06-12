@@ -17,27 +17,16 @@ AraBrokerGuildFriendsDB = {
 	["alignName"] = "LEFT",
 	["hbToggleNotes"] = true,
 	["hNote"] = true,
-	["showFriendsTotal"] = true,
+	["statusMode"] = "icon",
 	["showOwnBroadcast"] = true,
 	["highlightOrder"] = true,
-	["sortCols"] = {
-		[false] = {
-			"name", -- [1]
-			"name", -- [2]
-			"name", -- [3]
-		},
-		[true] = {
-			"class", -- [1]
-			"name", -- [2]
-			"name", -- [3]
-		},
-	},
+	["hOrderC"] = true,
 	["useTipTacSkin"] = true,
 	["hbAddFriend"] = true,
 	["showGuildName"] = false,
 	["alignNote"] = "CENTER",
 	["hQuery"] = true,
-	["hOrderB"] = true,
+	["hONote"] = true,
 	["sortASC"] = {
 		[false] = {
 			true, -- [1]
@@ -50,7 +39,7 @@ AraBrokerGuildFriendsDB = {
 			true, -- [3]
 		},
 	},
-	["hOrderA"] = true,
+	["hRemoveFriend"] = true,
 	["hWhisp"] = true,
 	["hideHints"] = true,
 	["alignZone"] = "CENTER",
@@ -60,57 +49,10 @@ AraBrokerGuildFriendsDB = {
 			0.76, -- [2]
 			0.15, -- [3]
 		},
-		["rank"] = {
-			0.1, -- [1]
-			0.9, -- [2]
-			1, -- [3]
-		},
-		["broadcast"] = {
+		["enemyZone"] = {
 			1, -- [1]
-			0.1, -- [2]
-			0.1, -- [3]
-		},
-		["background"] = {
-			0.1, -- [1]
-			0.1, -- [2]
-			0.1, -- [3]
-			0.85, -- [4]
-		},
-		["border"] = {
-			0.3, -- [1]
-			0.3, -- [2]
-			0.3, -- [3]
-			0.9, -- [4]
-		},
-		["officerNote"] = {
-			1, -- [1]
-			0.5600000000000001, -- [2]
-			0.25, -- [3]
-		},
-		["motd"] = {
-			1, -- [1]
-			0.8, -- [2]
+			0, -- [2]
 			0, -- [3]
-		},
-		["title"] = {
-			1, -- [1]
-			1, -- [2]
-			1, -- [3]
-		},
-		["friendlyZone"] = {
-			0, -- [1]
-			1, -- [2]
-			0, -- [3]
-		},
-		["realm"] = {
-			1, -- [1]
-			0.8, -- [2]
-			0, -- [3]
-		},
-		["status"] = {
-			0.7, -- [1]
-			0.7, -- [2]
-			0.7, -- [3]
 		},
 		["contestedZone"] = {
 			1, -- [1]
@@ -123,15 +65,73 @@ AraBrokerGuildFriendsDB = {
 			1, -- [3]
 			0.1, -- [4]
 		},
-		["enemyZone"] = {
+		["border"] = {
+			0.3, -- [1]
+			0.3, -- [2]
+			0.3, -- [3]
+			0.9, -- [4]
+		},
+		["status"] = {
+			0.7, -- [1]
+			0.7, -- [2]
+			0.7, -- [3]
+		},
+		["realm"] = {
 			1, -- [1]
-			0, -- [2]
+			0.8, -- [2]
 			0, -- [3]
 		},
+		["friendlyZone"] = {
+			0, -- [1]
+			1, -- [2]
+			0, -- [3]
+		},
+		["title"] = {
+			1, -- [1]
+			1, -- [2]
+			1, -- [3]
+		},
+		["motd"] = {
+			1, -- [1]
+			0.8, -- [2]
+			0, -- [3]
+		},
+		["officerNote"] = {
+			1, -- [1]
+			0.5600000000000001, -- [2]
+			0.25, -- [3]
+		},
+		["background"] = {
+			0.1, -- [1]
+			0.1, -- [2]
+			0.1, -- [3]
+			0.85, -- [4]
+		},
+		["broadcast"] = {
+			1, -- [1]
+			0.1, -- [2]
+			0.1, -- [3]
+		},
+		["rank"] = {
+			0.1, -- [1]
+			0.9, -- [2]
+			1, -- [3]
+		},
 	},
-	["hRemoveFriend"] = true,
-	["hONote"] = true,
+	["hOrderA"] = true,
+	["hOrderB"] = true,
 	["showFriendNotes"] = true,
-	["hOrderC"] = true,
-	["statusMode"] = "icon",
+	["sortCols"] = {
+		[false] = {
+			"name", -- [1]
+			"name", -- [2]
+			"name", -- [3]
+		},
+		[true] = {
+			"class", -- [1]
+			"name", -- [2]
+			"name", -- [3]
+		},
+	},
+	["showFriendsTotal"] = true,
 }

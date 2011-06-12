@@ -8,6 +8,11 @@ IceCoreDB = {
 		["lastRunVersion"] = 851,
 	},
 	["profileKeys"] = {
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
 	},
 	["profiles"] = {
@@ -47,10 +52,11 @@ IceCoreDB = {
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 				},
-				["TargetMana"] = {
-					["updatedReverseInverse"] = true,
+				["FocusCast"] = {
+					["enabled"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
+					["updatedReverseInverse"] = true,
 				},
 				["PlayerInvuln"] = {
 					["updatedReverseInverse"] = true,
@@ -67,7 +73,36 @@ IceCoreDB = {
 					["debuffSizeFixup"] = true,
 					["updateAurasIntoTable"] = true,
 				},
-				["SunderCount"] = {
+				["Sunders"] = {
+					["countFontSize"] = 20,
+					["scale"] = 1,
+					["maxCount"] = 3,
+					["onlyMine"] = true,
+					["hpos"] = 0,
+					["countGap"] = 0,
+					["enabled"] = true,
+					["auraTarget"] = "target",
+					["countColor"] = {
+						["a"] = 1,
+						["r"] = 1,
+						["g"] = 0,
+						["b"] = 0,
+					},
+					["usesDogTagStrings"] = false,
+					["auraType"] = "debuff",
+					["vpos"] = 0,
+					["alwaysFullAlpha"] = true,
+					["countMinColor"] = {
+						["a"] = 1,
+						["r"] = 1,
+						["g"] = 1,
+						["b"] = 0,
+					},
+					["auraName"] = "Sunder Armor",
+					["graphicalLayout"] = "Horizontal",
+					["gradient"] = false,
+					["countMode"] = "Numeric",
+					["customBarType"] = "Counter",
 				},
 				["RangeCheck"] = {
 					["enabled"] = true,
@@ -124,7 +159,7 @@ IceCoreDB = {
 					["updatedInverseExpand"] = true,
 					["updatedReverseInverse"] = true,
 				},
-				["FocusHealth"] = {
+				["FocusThreat"] = {
 					["enabled"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
@@ -132,7 +167,7 @@ IceCoreDB = {
 				},
 				["MaelstromCount"] = {
 				},
-				["FocusThreat"] = {
+				["FocusHealth"] = {
 					["enabled"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
@@ -159,17 +194,20 @@ IceCoreDB = {
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 				},
-				["FocusCast"] = {
-					["enabled"] = true,
+				["TargetMana"] = {
+					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
-					["updatedReverseInverse"] = true,
 				},
 			},
 			["barProportion"] = 0.13,
 			["colors"] = {
 				["ScaledManaColor"] = {
-					["r"] = 0.3256984209613049,
+					["r"] = 1,
+				},
+				["ScaledHealthColor"] = {
+					["g"] = 0,
+					["r"] = 1,
 				},
 			},
 			["alphaic"] = 0.8,

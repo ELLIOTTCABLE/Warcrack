@@ -1,6 +1,56 @@
 
 AraTradeskillsDB = {
-	["names"] = {
+	["Smolderthorn"] = {
+		["Melancollie"] = {
+			["show"] = {
+				["Archaeology"] = true,
+			},
+			["trackedSkill"] = "AUTO",
+			["links"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+				["Archaeology"] = 1,
+			},
+			["maxSkills"] = {
+				["Archaeology"] = 75,
+			},
+		},
+		["Fraycollie"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["maxSkills"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["links"] = {
+			},
+		},
+		["Battlecollie"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["links"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["maxSkills"] = {
+			},
+		},
+	},
+	["scale"] = 1,
+	["icons"] = {
+	},
+	["aliases"] = {
 	},
 	["colors"] = {
 		["foreignCD"] = {
@@ -18,9 +68,9 @@ AraTradeskillsDB = {
 			0.82, -- [2]
 			0, -- [3]
 		},
-		["activeName"] = {
+		["highlight"] = {
 			1, -- [1]
-			0.82, -- [2]
+			0.8, -- [2]
 			0, -- [3]
 		},
 		["selected"] = {
@@ -33,34 +83,56 @@ AraTradeskillsDB = {
 			0.5, -- [2]
 			0, -- [3]
 		},
-		["highlight"] = {
+		["activeName"] = {
 			1, -- [1]
-			0.8, -- [2]
+			0.82, -- [2]
 			0, -- [3]
 		},
 	},
-	["scale"] = 1,
+	["The Underbog"] = {
+		["Combatcollie"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["links"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["maxSkills"] = {
+			},
+		},
+		["Fraycollie"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["links"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["maxSkills"] = {
+			},
+		},
+	},
+	["names"] = {
+	},
 	["breakMode"] = "auto",
-	["aliases"] = {
-	},
-	["icons"] = {
-	},
 	["Ysondre"] = {
 		["Battlecollie"] = {
 			["show"] = {
 				["Cooking"] = true,
 				["Herbalism"] = false,
-				["Fishing"] = false,
-				["First Aid"] = true,
 				["Tailoring"] = true,
+				["First Aid"] = true,
+				["Fishing"] = false,
 			},
 			["trackedSkill"] = "AUTO",
-			["maxSkills"] = {
-				["Cooking"] = 75,
-				["Herbalism"] = 450,
-				["Fishing"] = 75,
-				["First Aid"] = 75,
-				["Tailoring"] = 450,
+			["links"] = {
 			},
 			["shortcuts"] = {
 			},
@@ -68,11 +140,16 @@ AraTradeskillsDB = {
 			["curSkills"] = {
 				["Cooking"] = 53,
 				["Herbalism"] = 450,
-				["Fishing"] = 6,
-				["First Aid"] = 1,
 				["Tailoring"] = 449,
+				["First Aid"] = 1,
+				["Fishing"] = 6,
 			},
-			["links"] = {
+			["maxSkills"] = {
+				["Cooking"] = 75,
+				["Herbalism"] = 450,
+				["Tailoring"] = 450,
+				["First Aid"] = 75,
+				["Fishing"] = 75,
 			},
 		},
 	},

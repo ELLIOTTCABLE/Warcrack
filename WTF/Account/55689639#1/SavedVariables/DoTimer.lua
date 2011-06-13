@@ -23,10 +23,10 @@ AsheylaLib_Settings = {
 				["thorns"] = 1,
 				["blessing of"] = 1,
 				["fortitude"] = 1,
-				["arcane"] = 1,
+				["^elixir"] = 1,
 				["shout"] = 1,
 				["of the wild"] = 1,
-				["^elixir"] = 1,
+				["arcane"] = 1,
 				["^potion"] = 1,
 			},
 		},
@@ -36,9 +36,9 @@ AsheylaLib_Settings = {
 				},
 				["Cooldowns Timer"] = {
 				},
-				["DoTimer Timer"] = {
-				},
 				["PlayerAuras Timer"] = {
+				},
+				["DoTimer Timer"] = {
 				},
 			},
 			["anchorSettings"] = {
@@ -54,11 +54,11 @@ AsheylaLib_Settings = {
 				["DoTimer Anchor"] = {
 					["defaultTimerSetting"] = "DoTimer Timer",
 				},
+				["Notifications Anchor"] = {
+				},
 				["PlayerAuras Anchor"] = {
 					["groupSortMethod"] = "Alphabetical (A)",
 					["defaultTimerSetting"] = "PlayerAuras Timer",
-				},
-				["Notifications Anchor"] = {
 				},
 			},
 		},
@@ -153,6 +153,7 @@ AsheylaLib_Settings = {
 					["Block"] = "s-2",
 				},
 			},
+			["updatedSettings4.3"] = true,
 			["userAnchors-Debuffs-focus"] = {
 				["FocusAuras Anchor"] = {
 					["timers"] = {
@@ -162,7 +163,6 @@ AsheylaLib_Settings = {
 					},
 				},
 			},
-			["updatedSettings4.3"] = true,
 			["updatedSettings4.3.3"] = true,
 		},
 	},

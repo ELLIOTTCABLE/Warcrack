@@ -1,42 +1,6 @@
 
 ThreatPlatesDB = {
 	["char"] = {
-		["Fraycollie - Smolderthorn"] = {
-			["specInfo"] = {
-				{
-					3, -- [1]
-					3, -- [2]
-					31, -- [3]
-				}, -- [1]
-				{
-					nil, -- [1]
-					31, -- [2]
-				}, -- [2]
-			},
-			["welcome"] = true,
-			["specName"] = {
-				"Arms", -- [1]
-				"Fury", -- [2]
-				"Protection", -- [3]
-			},
-		},
-		["Melancollie - Smolderthorn"] = {
-			["welcome"] = true,
-			["spec"] = {
-				["primary"] = false,
-			},
-			["specInfo"] = {
-				{
-					nil, -- [1]
-					7, -- [2]
-				}, -- [1]
-			},
-			["specName"] = {
-				"Arcane", -- [1]
-				"Fire", -- [2]
-				"Frost", -- [3]
-			},
-		},
 		["Fraycollie - The Underbog"] = {
 			["specInfo"] = {
 				{
@@ -55,6 +19,25 @@ ThreatPlatesDB = {
 				"Fury", -- [2]
 				"Protection", -- [3]
 			},
+		},
+		["Fraycollie - Smolderthorn"] = {
+			["specInfo"] = {
+				{
+					3, -- [1]
+					3, -- [2]
+					31, -- [3]
+				}, -- [1]
+				{
+					nil, -- [1]
+					31, -- [2]
+				}, -- [2]
+			},
+			["specName"] = {
+				"Arms", -- [1]
+				"Fury", -- [2]
+				"Protection", -- [3]
+			},
+			["welcome"] = true,
 		},
 		["Battlecollie - Ysondre"] = {
 			["spec"] = {
@@ -77,6 +60,34 @@ ThreatPlatesDB = {
 				"Shadow", -- [3]
 			},
 		},
+		["Melancollie - Smolderthorn"] = {
+			["welcome"] = true,
+			["spec"] = {
+				["primary"] = false,
+			},
+			["specInfo"] = {
+				{
+					nil, -- [1]
+					7, -- [2]
+				}, -- [1]
+			},
+			["specName"] = {
+				"Arcane", -- [1]
+				"Fire", -- [2]
+				"Frost", -- [3]
+			},
+		},
+		["Summoneer - Ysondre"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Affliction", -- [1]
+				"Demonology", -- [2]
+				"Destruction", -- [3]
+			},
+		},
 		["Combatcollie - The Underbog"] = {
 			["spec"] = {
 				["primary"] = false,
@@ -89,10 +100,10 @@ ThreatPlatesDB = {
 			},
 		},
 		["Battlecollie - Smolderthorn"] = {
-			["welcome"] = true,
 			["spec"] = {
 				["primary"] = false,
 			},
+			["welcome"] = true,
 			["specInfo"] = {
 				{
 					32, -- [1]
@@ -109,14 +120,27 @@ ThreatPlatesDB = {
 				"Shadow", -- [3]
 			},
 		},
+		["Summoneer - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Affliction", -- [1]
+				"Demonology", -- [2]
+				"Destruction", -- [3]
+			},
+		},
 	},
 	["profileKeys"] = {
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
 		["Fraycollie - The Underbog"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Summoneer - Ysondre"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
+		["Summoneer - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

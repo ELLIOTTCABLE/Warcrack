@@ -4,7 +4,8 @@ MissingFriends_List = {
 	"Fraycollie", -- [2]
 	"Halfevil", -- [3]
 	"Raethen", -- [4]
-	"Xarleas", -- [5]
+	"Saidix", -- [5]
+	"Xarleas", -- [6]
 }
 MissingFriends_OldFriends = {
 }

@@ -1,12 +1,14 @@
 
 DataStore_CurrenciesDB = {
 	["profileKeys"] = {
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 	},
 	["global"] = {
 		["Reference"] = {
@@ -26,6 +28,16 @@ DataStore_CurrenciesDB = {
 			},
 		},
 		["Characters"] = {
+			["Default.Smolderthorn.Battlecollie"] = {
+				["Currencies"] = {
+					3, -- [1]
+					21252, -- [2]
+					7, -- [3]
+					8, -- [4]
+					17290, -- [5]
+				},
+				["lastUpdate"] = 1307971272,
+			},
 			["Default.The Underbog.Combatcollie"] = {
 				["Currencies"] = {
 					7, -- [1]
@@ -36,12 +48,19 @@ DataStore_CurrenciesDB = {
 			["Default.Smolderthorn.Fraycollie"] = {
 				["Currencies"] = {
 					3, -- [1]
-					9220, -- [2]
+					27140, -- [2]
 					7, -- [3]
 					8, -- [4]
 					36490, -- [5]
 				},
-				["lastUpdate"] = 1307765205,
+				["lastUpdate"] = 1307995827,
+			},
+			["Default.Smolderthorn.Summoneer"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+				["lastUpdate"] = 1307968459,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["Currencies"] = {
@@ -69,17 +88,14 @@ DataStore_CurrenciesDB = {
 					8, -- [2]
 					138, -- [3]
 				},
-				["lastUpdate"] = 1307877076,
+				["lastUpdate"] = 1307971238,
 			},
-			["Default.Smolderthorn.Battlecollie"] = {
+			["Default.Ysondre.Summoneer"] = {
 				["Currencies"] = {
-					3, -- [1]
-					10500, -- [2]
-					7, -- [3]
-					8, -- [4]
-					17162, -- [5]
+					7, -- [1]
+					8, -- [2]
 				},
-				["lastUpdate"] = 1307842526,
+				["lastUpdate"] = 1307913962,
 			},
 		},
 	},

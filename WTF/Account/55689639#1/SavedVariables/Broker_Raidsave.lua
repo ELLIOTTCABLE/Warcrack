@@ -15,31 +15,56 @@ Broker_RaidSaveConfig = {
 				["Ililliliilil"] = {
 					["numsaved"] = 0,
 					["name"] = "Ililliliilil",
-					["class"] = "DEATHKNIGHT",
-					["numraid"] = 0,
 					["numactive"] = 0,
-					["numgroup"] = 0,
 					["instance"] = {
 					},
+					["class"] = "DEATHKNIGHT",
+					["numgroup"] = 0,
+					["numraid"] = 0,
 				},
 			},
 			["name"] = "The Underbog",
 		},
 		["Smolderthorn"] = {
 			["char"] = {
-				["Illiliililil"] = {
-					["numsaved"] = 0,
-					["name"] = "Illiliililil",
-					["instance"] = {
-					},
-					["numraid"] = 0,
-					["class"] = "ROGUE",
-					["numgroup"] = 0,
-					["numactive"] = 0,
-				},
 				["Illililiili"] = {
 					["numsaved"] = 0,
 					["name"] = "Illililiili",
+					["instance"] = {
+					},
+					["numraid"] = 0,
+					["class"] = "PRIEST",
+					["numgroup"] = 0,
+					["numactive"] = 0,
+				},
+				["Awihrtoawe"] = {
+					["numsaved"] = 0,
+					["name"] = "Awihrtoawe",
+					["numactive"] = 0,
+					["instance"] = {
+					},
+					["class"] = "MAGE",
+					["numgroup"] = 0,
+					["numraid"] = 0,
+				},
+				["Illiliililil"] = {
+					["numsaved"] = 0,
+					["name"] = "Illiliililil",
+					["numraid"] = 0,
+					["instance"] = {
+					},
+					["numactive"] = 0,
+					["numgroup"] = 0,
+					["class"] = "ROGUE",
+				},
+			},
+			["name"] = "Smolderthorn",
+		},
+		["Ysondre"] = {
+			["char"] = {
+				["Tempcollie"] = {
+					["numsaved"] = 0,
+					["name"] = "Tempcollie",
 					["numraid"] = 0,
 					["instance"] = {
 					},
@@ -48,7 +73,7 @@ Broker_RaidSaveConfig = {
 					["class"] = "PRIEST",
 				},
 			},
-			["name"] = "Smolderthorn",
+			["name"] = "Ysondre",
 		},
 	},
 	["hideexpiredbutton"] = false,

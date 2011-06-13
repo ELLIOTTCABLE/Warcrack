@@ -14,26 +14,26 @@ CritlinePerCharDB = {
 					[122] = {
 						{
 							["normal"] = {
-								["target"] = "Viscous Fallout",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 29,
-								["amount"] = 47,
-							},
-							["crit"] = {
 								["target"] = "Mechanized Sentry",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 28,
-								["amount"] = 94,
+								["amount"] = 59,
+							},
+							["crit"] = {
+								["target"] = "Scarlet Gallant",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 32,
+								["amount"] = 115,
 							},
 						}, -- [1]
 					},
 					[6603] = {
 						{
 							["normal"] = {
-								["target"] = "Serpentbloom Snake",
+								["target"] = "Scarlet Monk",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 1,
-								["amount"] = 64,
+								["targetLevel"] = 33,
+								["amount"] = 112,
 							},
 							["crit"] = {
 								["target"] = "Deviate Guardian",
@@ -46,152 +46,170 @@ CritlinePerCharDB = {
 					[1449] = {
 						{
 							["normal"] = {
-								["target"] = "Riverpaw Slayer",
+								["target"] = "Scarlet Gallant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 24,
-								["amount"] = 55,
+								["targetLevel"] = 32,
+								["amount"] = 74,
 							},
 							["crit"] = {
-								["target"] = "Riverpaw Poacher",
+								["target"] = "Rat",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 24,
-								["amount"] = 110,
+								["targetLevel"] = 1,
+								["amount"] = 137,
 							},
 						}, -- [1]
 					},
 					[133] = {
 						{
 							["normal"] = {
-								["target"] = "Leprous Assistant",
+								["target"] = "Scarlet Chaplain",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 28,
-								["amount"] = 214,
+								["targetLevel"] = 33,
+								["amount"] = 275,
 							},
 							["crit"] = {
-								["target"] = "Druid of the Fang",
+								["target"] = "Scarlet Monk",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 19,
-								["amount"] = 373,
+								["targetLevel"] = 33,
+								["amount"] = 550,
 							},
 						}, -- [1]
 					},
 					[7268] = {
 						{
 							["normal"] = {
-								["target"] = "Young Stranglethorn Tiger",
+								["target"] = "Mechanized Sentry",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 25,
-								["amount"] = 56,
+								["targetLevel"] = 28,
+								["amount"] = 69,
 							},
 							["crit"] = {
-								["target"] = "Viscous Fallout",
+								["target"] = "Mechanized Sentry",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 29,
-								["amount"] = 110,
+								["targetLevel"] = 27,
+								["amount"] = 137,
 							},
 						}, -- [1]
 					},
 					[120] = {
 						{
 							["normal"] = {
-								["target"] = "Corrosive Lurker",
+								["target"] = "Scarlet Gallant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 28,
-								["amount"] = 76,
+								["targetLevel"] = 33,
+								["amount"] = 92,
 							},
 							["crit"] = {
-								["target"] = "Riverpaw Slayer",
+								["target"] = "Scarlet Gallant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 24,
-								["amount"] = 150,
+								["targetLevel"] = 33,
+								["amount"] = 182,
 							},
 						}, -- [1]
 					},
 					[2136] = {
 						{
 							["crit"] = {
-								["target"] = "Mekgineer Thermaplugg",
+								["target"] = "Arcane Nullifier X-21",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 29,
-								["amount"] = 293,
+								["targetLevel"] = 28,
+								["amount"] = 355,
 							},
 							["normal"] = {
-								["target"] = "Caverndeep Burrower",
+								["target"] = "Scarlet Gallant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 27,
-								["amount"] = 150,
+								["targetLevel"] = 33,
+								["amount"] = 180,
 							},
 						}, -- [1]
+					},
+					[2120] = {
+						{
+							["crit"] = {
+								["target"] = "Tsul'Kalu",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 28,
+								["amount"] = 138,
+							},
+						}, -- [1]
+						{
+							["normal"] = {
+								["target"] = "Tsul'Kalu",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 28,
+								["amount"] = 16,
+							},
+						}, -- [2]
 					},
 					[12654] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Leprous Defender",
+								["target"] = "Mechanized Sentry",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 28,
-								["amount"] = 70,
+								["amount"] = 87,
 							},
 						},
 					},
 					[11366] = {
 						{
 							["normal"] = {
-								["target"] = "Irradiated Horror",
+								["target"] = "Dark Iron Agent",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 28,
-								["amount"] = 284,
+								["amount"] = 342,
 							},
 							["crit"] = {
-								["target"] = "Electrocutioner 6000",
+								["target"] = "Mechanized Sentry",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 29,
-								["amount"] = 536,
+								["targetLevel"] = 28,
+								["amount"] = 674,
 							},
 						}, -- [1]
 						{
 							["normal"] = {
-								["target"] = "Caverndeep Burrower",
+								["target"] = "Scarlet Beastmaster",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 27,
-								["amount"] = 29,
+								["targetLevel"] = 33,
+								["amount"] = 34,
 							},
 							["crit"] = {
-								["target"] = "Viscous Fallout",
+								["target"] = "Scarlet Gallant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 29,
-								["amount"] = 55,
+								["targetLevel"] = 33,
+								["amount"] = 67,
 							},
 						}, -- [2]
-					},
-					[116] = {
-						{
-							["normal"] = {
-								["target"] = "Aku'mai Snapjaw",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 24,
-								["amount"] = 139,
-							},
-							["crit"] = {
-								["target"] = "Deviate Viper",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 19,
-								["amount"] = 239,
-							},
-						}, -- [1]
 					},
 					[30451] = {
 						{
 							["normal"] = {
-								["target"] = "Riverpaw Slayer",
+								["target"] = "Anguished Dead",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 24,
-								["amount"] = 181,
+								["targetLevel"] = 30,
+								["amount"] = 260,
 							},
 							["crit"] = {
 								["target"] = "Riverpaw Slayer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 24,
 								["amount"] = 288,
+							},
+						}, -- [1]
+					},
+					[116] = {
+						{
+							["normal"] = {
+								["target"] = "Scarlet Gallant",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 32,
+								["amount"] = 183,
+							},
+							["crit"] = {
+								["target"] = "Scarlet Gallant",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 33,
+								["amount"] = 350,
 							},
 						}, -- [1]
 					},

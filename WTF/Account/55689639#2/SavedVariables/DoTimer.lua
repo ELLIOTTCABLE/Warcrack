@@ -84,15 +84,16 @@ AsheylaLib_Settings = {
 				},
 				["Cooldowns Anchor"] = {
 					["overflowPoint"] = 0,
+					["positionY"] = 756.5539474487305,
 					["expectedScale"] = 0.6399999856948853,
 					["defaultTimerSetting"] = "Cooldowns Timer",
 					["scale"] = 1,
 					["timerSpacing"] = 5,
-					["positionY"] = 152.2435684204101,
+					["centering"] = "horizontal",
 					["groupDirection"] = "right",
-					["anchorPoint"] = "BOTTOMLEFT",
+					["anchorPoint"] = "BOTTOM",
 					["displayNames"] = false,
-					["positionX"] = 559.8895874023438,
+					["positionX"] = 1063.472961425781,
 					["timerSortMethod"] = "Time Added (A)",
 					["locked"] = true,
 					["maxNumGroups"] = 1,
@@ -150,10 +151,10 @@ AsheylaLib_Settings = {
 					["timerDirection"] = "up",
 					["defaultTimerSetting"] = "Debuff Timer",
 					["groupSortMethod"] = "Time Added (A)",
-					["mouseoverAlpha"] = 0.6000000238418579,
 					["groupDirection"] = "up",
-					["anchorPoint"] = "BOTTOMLEFT",
 					["displayNames"] = false,
+					["anchorPoint"] = "BOTTOMLEFT",
+					["mouseoverAlpha"] = 0.6000000238418579,
 					["positionX"] = 1158.309875488281,
 					["positionY"] = 692.5502624511719,
 					["locked"] = true,
@@ -173,12 +174,12 @@ AsheylaLib_Settings = {
 			},
 			["userAnchors"] = {
 				["Cooldowns Anchor"] = {
-					["timerSettings"] = {
-					},
+					["default"] = true,
 					["timers"] = {
 					},
+					["timerSettings"] = {
+					},
 					["externalLoc"] = false,
-					["default"] = true,
 				},
 			},
 			["updatedSettings4.3"] = true,

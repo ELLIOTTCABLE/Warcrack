@@ -8,12 +8,14 @@ IceCoreDB = {
 		["lastRunVersion"] = 851,
 	},
 	["profileKeys"] = {
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
 		["Fraycollie - The Underbog"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Summoneer - Ysondre"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
+		["Summoneer - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

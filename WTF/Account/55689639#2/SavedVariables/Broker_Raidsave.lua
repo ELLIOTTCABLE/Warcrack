@@ -47,6 +47,16 @@ Broker_RaidSaveConfig = {
 					["numgroup"] = 0,
 					["numraid"] = 0,
 				},
+				["Summoneer"] = {
+					["numsaved"] = 0,
+					["name"] = "Summoneer",
+					["numactive"] = 0,
+					["instance"] = {
+					},
+					["class"] = "WARLOCK",
+					["numgroup"] = 0,
+					["numraid"] = 0,
+				},
 			},
 			["name"] = "Ysondre",
 		},
@@ -79,6 +89,16 @@ Broker_RaidSaveConfig = {
 					},
 					["numraid"] = 0,
 					["class"] = "PRIEST",
+					["numgroup"] = 0,
+					["numactive"] = 0,
+				},
+				["Summoneer"] = {
+					["numsaved"] = 0,
+					["name"] = "Summoneer",
+					["instance"] = {
+					},
+					["numraid"] = 0,
+					["class"] = "WARLOCK",
 					["numgroup"] = 0,
 					["numactive"] = 0,
 				},

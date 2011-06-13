@@ -7,6 +7,7 @@ Examiner_Config = {
 	["cacheSort"] = "class",
 	["featsStub"] = -1,
 	["clearInspectOnHide"] = false,
+	["activePage"] = 5,
 	["featsCat"] = 92,
 	["cacheFilter"] = "",
 	["alwaysShowItemLevel"] = true,

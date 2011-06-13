@@ -1,12 +1,31 @@
 
 DataStore_AchievementsDB = {
 	["profileKeys"] = {
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
+			["Default.Ysondre.Tempcollie"] = {
+				["Partial"] = {
+					[762] = "1:3100,2:4000,3:3100,4:400,5:3100,6:500",
+				},
+				["numAchievements"] = 1305,
+				["guid"] = "0500000004ED9A40",
+				["lastUpdate"] = 1307914182,
+			},
+			["Default.Smolderthorn.Awihrtoawe"] = {
+				["Partial"] = {
+					[860] = "1",
+					[948] = "1:3100,2:4000,4:3100,5:3100,6:3100",
+				},
+				["guid"] = "01000000048AB995",
+				["numAchievements"] = 1307,
+				["lastUpdate"] = 1307971123,
+			},
 			["Default.Smolderthorn.Illililiili"] = {
 				["Partial"] = {
 					[627] = "4",

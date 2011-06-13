@@ -20,30 +20,78 @@ AraTradeskillsDB = {
 		},
 		["Fraycollie"] = {
 			["show"] = {
+				["Cooking"] = true,
+				["Blacksmithing"] = true,
+				["Fishing"] = false,
+				["First Aid"] = true,
+				["Smelting"] = true,
 			},
 			["trackedSkill"] = "AUTO",
 			["maxSkills"] = {
+				["Cooking"] = 75,
+				["Blacksmithing"] = 450,
+				["Fishing"] = 75,
+				["First Aid"] = 75,
+				["Smelting"] = 525,
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
+				["Cooking"] = 1,
+				["Blacksmithing"] = 412,
+				["Fishing"] = 1,
+				["First Aid"] = 1,
+				["Smelting"] = 524,
 			},
 			["links"] = {
 			},
 		},
 		["Battlecollie"] = {
 			["show"] = {
+				["Cooking"] = true,
+				["Archaeology"] = true,
+				["Herbalism"] = false,
+				["Fishing"] = false,
+				["First Aid"] = true,
+				["Tailoring"] = true,
 			},
 			["trackedSkill"] = "AUTO",
 			["links"] = {
+				["Tailoring"] = "|cffffd000|Htrade:51309:449:450:10000000489EEA3:4////+677/vv+/v73/P59/rZ3//nNznLDEIAA4HR8vDqAAAAAoAwAAC9////T4xa+/v//DGAAAAAAAAAAAE|h[Tailoring]|h|r",
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+				["Cooking"] = 53,
+				["Archaeology"] = 1,
+				["Herbalism"] = 450,
+				["Fishing"] = 6,
+				["First Aid"] = 1,
+				["Tailoring"] = 449,
+			},
+			["maxSkills"] = {
+				["Cooking"] = 75,
+				["Archaeology"] = 75,
+				["Herbalism"] = 450,
+				["Fishing"] = 75,
+				["First Aid"] = 75,
+				["Tailoring"] = 450,
+			},
+		},
+		["Summoneer"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["maxSkills"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
 			},
-			["maxSkills"] = {
+			["links"] = {
 			},
 		},
 	},
@@ -150,6 +198,20 @@ AraTradeskillsDB = {
 				["Tailoring"] = 450,
 				["First Aid"] = 75,
 				["Fishing"] = 75,
+			},
+		},
+		["Summoneer"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["links"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["maxSkills"] = {
 			},
 		},
 	},

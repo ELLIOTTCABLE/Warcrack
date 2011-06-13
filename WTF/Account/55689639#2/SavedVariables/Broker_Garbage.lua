@@ -1,6 +1,6 @@
 
 BG_GlobalDB = {
-	["itemsSold"] = 72,
+	["itemsSold"] = 261,
 	["showClams"] = true,
 	["showSource"] = true,
 	["neverRepairGuildBank"] = false,
@@ -11,7 +11,7 @@ BG_GlobalDB = {
 		["Consumable.Water.Basic"] = true,
 	},
 	["sellNotWearable"] = true,
-	["moneyEarned"] = 9271,
+	["moneyEarned"] = 1116685,
 	["showContainers"] = true,
 	["useRealValues"] = false,
 	["LDBNoJunk"] = "Junk, be gone!",

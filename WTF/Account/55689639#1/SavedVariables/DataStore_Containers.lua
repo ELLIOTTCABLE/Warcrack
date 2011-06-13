@@ -1,12 +1,52 @@
 
 DataStore_ContainersDB = {
 	["profileKeys"] = {
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
+			["Default.Ysondre.Tempcollie"] = {
+				["lastUpdate"] = 1307914183,
+				["numFreeBagSlots"] = 15,
+				["Containers"] = {
+					["Bag0"] = {
+						["ids"] = {
+							6948, -- [1]
+						},
+						["freeslots"] = 15,
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["size"] = 16,
+					},
+					["Bag-2"] = {
+						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
+						["size"] = 32,
+					},
+				},
+				["numBagSlots"] = 16,
+			},
+			["Default.Smolderthorn.Awihrtoawe"] = {
+				["lastUpdate"] = 1307971123,
+				["Containers"] = {
+					["Bag0"] = {
+						["ids"] = {
+							6948, -- [1]
+						},
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["size"] = 16,
+						["freeslots"] = 15,
+					},
+					["Bag-2"] = {
+						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
+						["size"] = 32,
+					},
+				},
+				["numFreeBagSlots"] = 15,
+				["numBagSlots"] = 16,
+			},
 			["Default.Smolderthorn.Illililiili"] = {
 				["lastUpdate"] = 1307775469,
 				["numFreeBagSlots"] = 15,

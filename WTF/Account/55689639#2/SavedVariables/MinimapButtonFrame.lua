@@ -1,12 +1,14 @@
 
 MBFDB = {
 	["profileKeys"] = {
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
 		["Fraycollie - The Underbog"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Summoneer - Ysondre"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
+		["Summoneer - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

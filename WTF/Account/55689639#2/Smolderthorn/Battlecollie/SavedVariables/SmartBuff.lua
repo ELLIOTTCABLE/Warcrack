@@ -89,7 +89,7 @@ SMARTBUFF_Buffs = {
 				["WARRIOR"] = 1,
 				["PALADIN"] = 1,
 				["RBTime"] = 0,
-				["EnableS"] = true,
+				["EnableS"] = false,
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
@@ -97,13 +97,15 @@ SMARTBUFF_Buffs = {
 				["DRUID"] = 1,
 				["DEATHKNIGHT"] = 1,
 				["PRIEST"] = 1,
-				["WARLOCK"] = 1,
 				["ROGUE"] = 1,
-				["COut"] = 1,
-				["SHAMAN"] = 1,
-				["MAGE"] = 1,
+				["SelfNot"] = false,
+				["WARLOCK"] = 1,
 				["IgnoreList"] = {
 				},
+				["SHAMAN"] = 1,
+				["MAGE"] = 1,
+				["RH"] = false,
+				["COut"] = 1,
 			},
 			["Shadow Protection"] = {
 				["HUNTER"] = true,
@@ -271,12 +273,30 @@ SMARTBUFF_Buffs = {
 				["IgnoreList"] = {
 				},
 			},
+			["Scroll of Agility VII"] = {
+				["EnableG"] = false,
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["OH"] = false,
+			},
 			["Levitate"] = {
 				["HUNTER"] = 1,
 				["WARRIOR"] = 1,
 				["PALADIN"] = 1,
 				["RBTime"] = 0,
-				["EnableS"] = true,
+				["EnableS"] = false,
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
@@ -439,6 +459,7 @@ SMARTBUFF_Buffs = {
 			"Fear Ward", -- [5]
 			"Levitate", -- [6]
 			"Find Herbs", -- [7]
+			"Scroll of Agility VII", -- [8]
 		},
 		["Raid"] = {
 			["Inner Fire"] = {
@@ -464,7 +485,7 @@ SMARTBUFF_Buffs = {
 				["WARRIOR"] = 1,
 				["PALADIN"] = 1,
 				["RBTime"] = 0,
-				["EnableS"] = true,
+				["EnableS"] = false,
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
@@ -472,13 +493,15 @@ SMARTBUFF_Buffs = {
 				["DRUID"] = 1,
 				["DEATHKNIGHT"] = 1,
 				["PRIEST"] = 1,
-				["WARLOCK"] = 1,
 				["ROGUE"] = 1,
-				["COut"] = 1,
-				["SHAMAN"] = 1,
-				["MAGE"] = 1,
+				["SelfNot"] = false,
+				["WARLOCK"] = 1,
 				["IgnoreList"] = {
 				},
+				["SHAMAN"] = 1,
+				["MAGE"] = 1,
+				["RH"] = false,
+				["COut"] = 1,
 			},
 			["Shadow Protection"] = {
 				["HUNTER"] = true,
@@ -661,7 +684,7 @@ SMARTBUFF_Buffs = {
 				["WARRIOR"] = 1,
 				["PALADIN"] = 1,
 				["RBTime"] = 0,
-				["EnableS"] = true,
+				["EnableS"] = false,
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
@@ -669,13 +692,15 @@ SMARTBUFF_Buffs = {
 				["DRUID"] = 1,
 				["DEATHKNIGHT"] = 1,
 				["PRIEST"] = 1,
-				["WARLOCK"] = 1,
 				["ROGUE"] = 1,
-				["COut"] = 1,
-				["SHAMAN"] = 1,
-				["MAGE"] = 1,
+				["SelfNot"] = false,
+				["WARLOCK"] = 1,
 				["IgnoreList"] = {
 				},
+				["SHAMAN"] = 1,
+				["MAGE"] = 1,
+				["RH"] = false,
+				["COut"] = 1,
 			},
 			["Shadow Protection"] = {
 				["HUNTER"] = true,
@@ -858,7 +883,7 @@ SMARTBUFF_Buffs = {
 				["WARRIOR"] = 1,
 				["PALADIN"] = 1,
 				["RBTime"] = 0,
-				["EnableS"] = true,
+				["EnableS"] = false,
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
@@ -866,13 +891,15 @@ SMARTBUFF_Buffs = {
 				["DRUID"] = 1,
 				["DEATHKNIGHT"] = 1,
 				["PRIEST"] = 1,
-				["WARLOCK"] = 1,
 				["ROGUE"] = 1,
-				["COut"] = 1,
-				["SHAMAN"] = 1,
-				["MAGE"] = 1,
+				["SelfNot"] = false,
+				["WARLOCK"] = 1,
 				["IgnoreList"] = {
 				},
+				["SHAMAN"] = 1,
+				["MAGE"] = 1,
+				["RH"] = false,
+				["COut"] = 1,
 			},
 			["Shadow Protection"] = {
 				["HUNTER"] = true,
@@ -1285,6 +1312,24 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["IgnoreList"] = {
 				},
+			},
+			["Scroll of Agility VII"] = {
+				["EnableG"] = false,
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["OH"] = false,
 			},
 			["Vampiric Embrace"] = {
 				["OH"] = false,

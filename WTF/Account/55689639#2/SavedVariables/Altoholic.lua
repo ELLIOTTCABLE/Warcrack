@@ -1,12 +1,14 @@
 
 AltoholicDB = {
 	["profileKeys"] = {
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 	},
 	["global"] = {
 		["Sharing"] = {
@@ -15,13 +17,13 @@ AltoholicDB = {
 				["Default.Ysondre.Battlecollie.DataStore_Auctions"] = true,
 				["Default.Ysondre.Battlecollie.DataStore_Reputations"] = true,
 				["Default.Ysondre.Battlecollie.DataStore_Talents"] = true,
-				["Default.Ysondre.Battlecollie.DataStore_Inventory"] = true,
+				["Default.Ysondre.Battlecollie.DataStore_Currencies"] = true,
 				["Default.Ysondre.LEAFEA"] = true,
 				["Default.Ysondre.Battlecollie.DataStore_Containers"] = true,
-				["Default.Ysondre.Battlecollie.DataStore_Currencies"] = true,
+				["Default.Ysondre.Battlecollie.DataStore_Spells"] = true,
 				["Default.Ysondre.Battlecollie.DataStore_Pets"] = true,
 				["Default.Ysondre.Battlecollie.DataStore_Mails"] = true,
-				["Default.Ysondre.Battlecollie.DataStore_Spells"] = true,
+				["Default.Ysondre.Battlecollie.DataStore_Inventory"] = true,
 				["Default.Ysondre.Battlecollie"] = true,
 				["Default.Ysondre.Battlecollie.DataStore_Quests"] = true,
 				["Default.Ysondre.Battlecollie.DataStore_Achievements"] = true,
@@ -29,12 +31,17 @@ AltoholicDB = {
 		},
 		["options"] = {
 			["GuildBankAutoUpdate"] = 1,
+			["Tabs.Achievements.Default.Ysondre.Column2"] = "Default.Ysondre.Summoneer",
 			["AccSharingHandlerEnabled"] = 1,
-			["Lola"] = "J15QQFX18FVH12TGPJKQ",
+			["Lola"] = "Z27XIFA25LFU13QPIZKI",
 			["Tabs.Achievements.Default.Ysondre.Column1"] = "Default.Ysondre.Battlecollie",
+			["TabSummaryMode"] = 4,
 			["TooltipItemID"] = 1,
 			["TooltipGuildBankCountPerTab"] = 1,
+			["Tabs.Achievements.Default.Smolderthorn.Column2"] = "Default.Smolderthorn.Fraycollie",
+			["Tabs.Achievements.Default.Smolderthorn.Column1"] = "Default.Smolderthorn.Melancollie",
 			["SearchAutoQuery"] = 1,
+			["Tabs.Achievements.Default.Smolderthorn.Column3"] = "Default.Smolderthorn.Battlecollie",
 		},
 	},
 }

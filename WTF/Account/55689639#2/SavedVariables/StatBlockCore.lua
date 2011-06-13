@@ -1,12 +1,14 @@
 
 StatBlockCoreDB = {
 	["profileKeys"] = {
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Summoneer - Ysondre"] = "Default",
 		["Fraycollie - The Underbog"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
+		["Summoneer - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -82,7 +84,7 @@ StatBlockCoreDB = {
 				},
 				["Arcana_ExperienceBroker"] = {
 					["posx"] = 694.809593844795,
-					["width"] = 173.9963226318359,
+					["width"] = 174.9963226318359,
 					["posy"] = 753.633108154987,
 				},
 				["Swatter"] = {

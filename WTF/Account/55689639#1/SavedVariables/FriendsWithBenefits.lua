@@ -1,15 +1,5 @@
 
 FriendsWithBenefitsDB = {
-	["Alliance - Smolderthorn"] = {
-		["removed"] = {
-		},
-		["notes"] = {
-		},
-		["friends"] = {
-			["illiliililil"] = true,
-			["illililiili"] = true,
-		},
-	},
 	["Horde - The Underbog"] = {
 		["removed"] = {
 		},
@@ -17,6 +7,26 @@ FriendsWithBenefitsDB = {
 		},
 		["friends"] = {
 			["ililliliilil"] = true,
+		},
+	},
+	["Alliance - Smolderthorn"] = {
+		["removed"] = {
+			["illililiili"] = true,
+			["illiliililil"] = true,
+		},
+		["notes"] = {
+		},
+		["friends"] = {
+			["awihrtoawe"] = true,
+		},
+	},
+	["Horde - Ysondre"] = {
+		["removed"] = {
+		},
+		["notes"] = {
+		},
+		["friends"] = {
+			["tempcollie"] = true,
 		},
 	},
 }

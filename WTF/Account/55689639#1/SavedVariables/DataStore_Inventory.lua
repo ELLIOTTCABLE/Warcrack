@@ -1,12 +1,32 @@
 
 DataStore_InventoryDB = {
 	["profileKeys"] = {
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
+			["Default.Ysondre.Tempcollie"] = {
+				["Inventory"] = {
+					[5] = 52547,
+					[16] = 35,
+					[7] = 52680,
+				},
+				["averageItemLvl"] = 1,
+				["lastUpdate"] = 1307914183,
+			},
+			["Default.Smolderthorn.Awihrtoawe"] = {
+				["Inventory"] = {
+					[5] = 23479,
+					[16] = 3661,
+					[7] = 23478,
+				},
+				["averageItemLvl"] = 1,
+				["lastUpdate"] = 1307971123,
+			},
 			["Default.Smolderthorn.Illililiili"] = {
 				["Inventory"] = {
 					[5] = 6098,
@@ -22,8 +42,8 @@ DataStore_InventoryDB = {
 					[7] = 48,
 					[8] = 47,
 					[18] = 28979,
-					[16] = 25,
 					[5] = 58234,
+					[16] = 25,
 					[17] = 50055,
 				},
 				["averageItemLvl"] = 1,
@@ -65,8 +85,14 @@ DataStore_InventoryDB = {
 					["Illililiili"] = {
 						["averageItemLvl"] = 1,
 					},
+					["Fraycollie"] = {
+						["averageItemLvl"] = 237,
+					},
 					["Battlecollie"] = {
-						["averageItemLvl"] = 18,
+						["averageItemLvl"] = 136,
+					},
+					["Melancollie"] = {
+						["averageItemLvl"] = 26,
 					},
 				},
 			},

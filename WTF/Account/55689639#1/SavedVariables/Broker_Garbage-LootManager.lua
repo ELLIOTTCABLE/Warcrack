@@ -12,10 +12,10 @@ BGLM_GlobalDB = {
 	["printJunk"] = true,
 	["autoLootPickpocket"] = true,
 	["printCompareValue"] = true,
-	["autoLoot"] = false,
+	["closeLootWindow"] = true,
 	["privateLootTimer"] = 4,
 	["warnLM"] = true,
 	["forceClear"] = false,
-	["closeLootWindow"] = true,
+	["autoLoot"] = false,
 	["printValue"] = true,
 }

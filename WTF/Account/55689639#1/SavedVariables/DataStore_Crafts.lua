@@ -1,12 +1,20 @@
 
 DataStore_CraftsDB = {
 	["profileKeys"] = {
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
+			["Default.Ysondre.Tempcollie"] = {
+				["lastUpdate"] = 1307914182,
+			},
+			["Default.Smolderthorn.Awihrtoawe"] = {
+				["lastUpdate"] = 1307971123,
+			},
 			["Default.Smolderthorn.Illililiili"] = {
 				["lastUpdate"] = 1307775469,
 			},

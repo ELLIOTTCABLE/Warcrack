@@ -1,25 +1,53 @@
 
 AraTradeskillsDB = {
-	["names"] = {
-	},
-	["The Underbog"] = {
-		["Ililliliilil"] = {
+	["Smolderthorn"] = {
+		["Illililiili"] = {
 			["show"] = {
-				["First Aid"] = true,
 			},
 			["trackedSkill"] = "AUTO",
-			["links"] = {
+			["maxSkills"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
-				["First Aid"] = 270,
 			},
-			["maxSkills"] = {
-				["First Aid"] = 300,
+			["links"] = {
 			},
 		},
+		["Awihrtoawe"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["track"] = false,
+			["shortcuts"] = {
+			},
+			["links"] = {
+			},
+			["curSkills"] = {
+			},
+			["maxSkills"] = {
+			},
+		},
+		["Illiliililil"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["maxSkills"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["links"] = {
+			},
+		},
+	},
+	["scale"] = 1,
+	["icons"] = {
+	},
+	["names"] = {
 	},
 	["colors"] = {
 		["foreignCD"] = {
@@ -58,40 +86,42 @@ AraTradeskillsDB = {
 			0, -- [3]
 		},
 	},
-	["Smolderthorn"] = {
-		["Illiliililil"] = {
+	["The Underbog"] = {
+		["Ililliliilil"] = {
 			["show"] = {
+				["First Aid"] = true,
 			},
 			["trackedSkill"] = "AUTO",
-			["maxSkills"] = {
+			["links"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
+				["First Aid"] = 270,
 			},
-			["links"] = {
-			},
-		},
-		["Illililiili"] = {
-			["show"] = {
-			},
-			["trackedSkill"] = "AUTO",
 			["maxSkills"] = {
-			},
-			["shortcuts"] = {
-			},
-			["track"] = false,
-			["curSkills"] = {
-			},
-			["links"] = {
+				["First Aid"] = 300,
 			},
 		},
 	},
 	["breakMode"] = "auto",
-	["scale"] = 1,
-	["icons"] = {
-	},
 	["aliases"] = {
+	},
+	["Ysondre"] = {
+		["Tempcollie"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["maxSkills"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["links"] = {
+			},
+		},
 	},
 }

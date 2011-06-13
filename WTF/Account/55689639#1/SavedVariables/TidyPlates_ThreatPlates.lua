@@ -1,6 +1,39 @@
 
 ThreatPlatesDB = {
 	["char"] = {
+		["Awihrtoawe - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["specName"] = {
+				"Arcane", -- [1]
+				"Fire", -- [2]
+				"Frost", -- [3]
+			},
+			["welcome"] = true,
+		},
+		["Illililiili - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Discipline", -- [1]
+				"Holy", -- [2]
+				"Shadow", -- [3]
+			},
+		},
+		["Tempcollie - Ysondre"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Discipline", -- [1]
+				"Holy", -- [2]
+				"Shadow", -- [3]
+			},
+		},
 		["Illiliililil - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
@@ -20,22 +53,13 @@ ThreatPlatesDB = {
 			},
 			["welcome"] = true,
 		},
-		["Illililiili - Smolderthorn"] = {
-			["spec"] = {
-				["primary"] = false,
-			},
-			["specName"] = {
-				"Discipline", -- [1]
-				"Holy", -- [2]
-				"Shadow", -- [3]
-			},
-			["welcome"] = true,
-		},
 	},
 	["profileKeys"] = {
+		["Awihrtoawe - Smolderthorn"] = "Default",
+		["Illililiili - Smolderthorn"] = "Default",
+		["Tempcollie - Ysondre"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
 		["Ililliliilil - The Underbog"] = "Default",
-		["Illililiili - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

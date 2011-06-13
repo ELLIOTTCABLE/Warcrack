@@ -1,9 +1,11 @@
 
 SkadaDB = {
 	["profileKeys"] = {
+		["Awihrtoawe - Smolderthorn"] = "Default",
+		["Illililiili - Smolderthorn"] = "Default",
+		["Tempcollie - Ysondre"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
 		["Ililliliilil - The Underbog"] = "Default",
-		["Illililiili - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

@@ -1,6 +1,6 @@
 
 AraBrokerGuildFriendsDB = {
-	["showGuildXPTooltip"] = false,
+	["showGuildXPTooltip"] = true,
 	["showGuildTotal"] = true,
 	["hbConfig"] = true,
 	["showUngroupedClassIcon"] = true,
@@ -41,7 +41,7 @@ AraBrokerGuildFriendsDB = {
 	},
 	["hRemoveFriend"] = true,
 	["hWhisp"] = true,
-	["hideHints"] = true,
+	["hideHints"] = false,
 	["alignZone"] = "CENTER",
 	["colors"] = {
 		["note"] = {

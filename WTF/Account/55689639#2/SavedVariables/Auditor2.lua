@@ -1,34 +1,20 @@
 
 Auditor2DB = {
-	["profiles"] = {
-		["Fraycollie - Smolderthorn"] = {
-		},
-		["Battlecollie - Ysondre"] = {
-		},
-		["Melancollie - Smolderthorn"] = {
-		},
-	},
-	["profileKeys"] = {
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-	},
 	["realm"] = {
 		["The Underbog"] = {
 			["Combatcollie"] = {
 				["guildRepairsTally"] = 0,
+				["timeDate"] = {
+					["timeDate"] = 1307750400,
+					["niceDate"] = "10 Jun '11",
+				},
 				["data"] = {
 					["other"] = {
-						["week"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -36,17 +22,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["ah"] = {
-						["week"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -54,17 +40,35 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["taxi"] = {
 						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["reconciliation"] = {
-						["week"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 250092,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 250092,
 						},
@@ -72,35 +76,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 250092,
 						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 250092,
-						},
-					},
-					["lfg"] = {
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 						["total"] = {
 							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 250092,
 						},
 					},
 					["merch"] = {
-						["week"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -108,17 +94,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["guildbank"] = {
-						["week"] = {
+					["quest"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -126,17 +112,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["guildcontrib"] = {
-						["week"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -144,17 +130,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["reforge"] = {
-						["week"] = {
+					["repairs"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -162,17 +148,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["train"] = {
-						["week"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -180,25 +166,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["loot"] = {
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -208,12 +176,12 @@ Auditor2DB = {
 						["outgoings"] = 250030,
 						["actual"] = 62,
 					},
-					["trade"] = {
-						["week"] = {
+					["loot"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -221,17 +189,35 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["trade"] = {
 						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["mail"] = {
-						["week"] = {
+						["day"] = {
 							["outgoings"] = 250030,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 250030,
 							["incomings"] = 0,
 						},
@@ -239,17 +225,17 @@ Auditor2DB = {
 							["outgoings"] = 250030,
 							["incomings"] = 0,
 						},
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 250030,
 							["incomings"] = 0,
 						},
 					},
-					["repairs"] = {
-						["week"] = {
+					["reforge"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -257,17 +243,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["quest"] = {
-						["week"] = {
+					["guildbank"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -275,17 +261,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["taxi"] = {
-						["week"] = {
+					["lfg"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -293,15 +279,11 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-				},
-				["timeDate"] = {
-					["timeDate"] = 1307750400,
-					["niceDate"] = "10 Jun '11",
 				},
 				["historical"] = {
 					["6days"] = {
@@ -321,7 +303,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -329,7 +311,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -337,7 +319,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -353,15 +335,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -383,7 +365,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -391,7 +373,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -399,7 +381,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -415,15 +397,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -445,7 +427,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -453,7 +435,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -461,7 +443,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -477,15 +459,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -507,7 +489,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -515,7 +497,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -523,7 +505,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -539,15 +521,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -569,7 +551,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -577,7 +559,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -585,7 +567,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -601,15 +583,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -631,7 +613,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -639,7 +621,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -647,7 +629,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -663,15 +645,15 @@ Auditor2DB = {
 							["outgoings"] = 250030,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -693,7 +675,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -701,7 +683,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -709,7 +691,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -725,15 +707,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -742,13 +724,17 @@ Auditor2DB = {
 			},
 			["Fraycollie"] = {
 				["guildRepairsTally"] = 0,
+				["timeDate"] = {
+					["timeDate"] = 1307750400,
+					["niceDate"] = "10 Jun '11",
+				},
 				["data"] = {
 					["other"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -756,17 +742,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["ah"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -774,17 +760,35 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["merch"] = {
 						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["lfg"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -792,35 +796,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["reconciliation"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 10689475,
-						},
 						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 10689475,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 10689475,
-						},
-						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["taxi"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -828,17 +814,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["guildbank"] = {
-						["total"] = {
+					["quest"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -846,17 +832,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["guildcontrib"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -864,17 +850,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["reforge"] = {
-						["total"] = {
+					["repairs"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -882,17 +868,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["train"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -900,25 +886,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["loot"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -928,12 +896,12 @@ Auditor2DB = {
 						["outgoings"] = 0,
 						["actual"] = 10939475,
 					},
-					["trade"] = {
-						["total"] = {
+					["loot"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -941,17 +909,35 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["trade"] = {
 						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["mail"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 250000,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 250000,
 						},
@@ -959,17 +945,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 250000,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 250000,
 						},
 					},
-					["repairs"] = {
-						["total"] = {
+					["reforge"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -977,17 +963,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["quest"] = {
-						["total"] = {
+					["guildbank"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -995,33 +981,29 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["merch"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
+					},
+					["reconciliation"] = {
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 10689475,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 10689475,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 10689475,
+						},
 					},
-				},
-				["timeDate"] = {
-					["timeDate"] = 1307750400,
-					["niceDate"] = "10 Jun '11",
 				},
 				["historical"] = {
 					["6days"] = {
@@ -1041,7 +1023,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1049,7 +1031,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1057,7 +1039,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1073,15 +1055,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1103,7 +1085,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1111,7 +1093,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1119,7 +1101,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1135,15 +1117,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1165,7 +1147,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1173,7 +1155,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1181,7 +1163,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1197,15 +1179,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1227,7 +1209,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1235,7 +1217,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1243,7 +1225,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1259,15 +1241,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1289,7 +1271,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1297,7 +1279,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1305,7 +1287,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1321,15 +1303,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1351,7 +1333,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1359,7 +1341,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1367,7 +1349,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1383,15 +1365,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 250000,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1413,7 +1395,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1421,7 +1403,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1429,7 +1411,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1445,15 +1427,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -1465,1462 +1447,20 @@ Auditor2DB = {
 				["Fraycollie"] = 10939475,
 			},
 		},
-		["Ysondre"] = {
-			["Summoneer"] = {
-				["guildRepairsTally"] = 0,
-				["data"] = {
-					["other"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["ah"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["lfg"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["reconciliation"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 18,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 18,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 18,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 18,
-						},
-					},
-					["taxi"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["guildbank"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["guildcontrib"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["reforge"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["train"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["loot"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["totals"] = {
-						["incomings"] = 18,
-						["outgoings"] = 0,
-						["actual"] = 18,
-					},
-					["trade"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["mail"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["repairs"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["quest"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["merch"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-				},
-				["timeDate"] = {
-					["timeDate"] = 1307836800,
-					["niceDate"] = "12 Jun '11",
-				},
-				["historical"] = {
-					["6days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["4days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["5days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["2days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["3days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["0days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 18,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["1days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-				},
-			},
-			["Battlecollie"] = {
-				["guildRepairsTally"] = 0,
-				["data"] = {
-					["other"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["ah"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["lfg"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["reconciliation"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 16961,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 16961,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 13223,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["taxi"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["guildbank"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["guildcontrib"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 1945,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 1945,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 1945,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["reforge"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["train"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["loot"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 38906,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 38906,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 38906,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["totals"] = {
-						["incomings"] = 262867,
-						["outgoings"] = 0,
-						["actual"] = 262867,
-					},
-					["trade"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["mail"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["repairs"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["quest"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 207000,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 207000,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 207000,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["merch"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-				},
-				["timeDate"] = {
-					["timeDate"] = 1307678400,
-					["niceDate"] = "10 Jun '11",
-				},
-				["historical"] = {
-					["6days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["4days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["5days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["2days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["3days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["0days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 13223,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 1945,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 38906,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 207000,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["1days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 3738,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-				},
-			},
-			["chars"] = {
-				["Battlecollie"] = 262867,
-				["Summoneer"] = 18,
-			},
-		},
 		["Smolderthorn"] = {
 			["Battlecollie"] = {
 				["guildRepairsTally"] = 0,
+				["timeDate"] = {
+					["timeDate"] = 1308024000,
+					["niceDate"] = "14 Jun '11",
+				},
 				["data"] = {
 					["other"] = {
-						["total"] = {
-							["outgoings"] = 25346,
+						["session"] = {
+							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 25346,
 							["incomings"] = 0,
 						},
@@ -2928,17 +1468,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
-							["outgoings"] = 0,
+						["week"] = {
+							["outgoings"] = 25346,
 							["incomings"] = 0,
 						},
 					},
 					["ah"] = {
-						["total"] = {
-							["outgoings"] = 243553431,
+						["session"] = {
+							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 243553431,
 							["incomings"] = 0,
 						},
@@ -2946,17 +1486,35 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["week"] = {
+							["outgoings"] = 243553431,
+							["incomings"] = 0,
+						},
+					},
+					["merch"] = {
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 590587,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 590587,
 						},
 					},
 					["lfg"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
-							["incomings"] = 1110000,
+							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 1110000,
 						},
@@ -2964,35 +1522,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["reconciliation"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 288384,
-						},
 						["week"] = {
 							["outgoings"] = 0,
-							["incomings"] = 288384,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 1110000,
 						},
 					},
 					["taxi"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3000,35 +1540,35 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["guildbank"] = {
-						["total"] = {
+					["quest"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 780000,
 						},
 						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 780000,
 						},
 					},
 					["guildcontrib"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3036,17 +1576,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["reforge"] = {
-						["total"] = {
+					["repairs"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3054,17 +1594,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["train"] = {
-						["total"] = {
-							["outgoings"] = 950,
+						["session"] = {
+							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 950,
 							["incomings"] = 0,
 						},
@@ -3072,40 +1612,40 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["loot"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 267576,
-						},
 						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 267576,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
+							["outgoings"] = 950,
 							["incomings"] = 0,
 						},
 					},
 					["totals"] = {
 						["incomings"] = 383036547,
-						["outgoings"] = 377579907,
-						["actual"] = 5456640,
+						["outgoings"] = 377579967,
+						["actual"] = 5456580,
 					},
-					["trade"] = {
+					["loot"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["total"] = {
-							["outgoings"] = 34000000,
+							["outgoings"] = 0,
+							["incomings"] = 267576,
+						},
+						["day"] = {
+							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 267576,
+						},
+					},
+					["trade"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
 							["outgoings"] = 34000000,
 							["incomings"] = 0,
 						},
@@ -3113,31 +1653,39 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
-							["outgoings"] = 0,
+						["week"] = {
+							["outgoings"] = 34000000,
 							["incomings"] = 0,
 						},
 					},
 					["mail"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["total"] = {
-							["outgoings"] = 100000180,
+							["outgoings"] = 100000240,
 							["incomings"] = 380000000,
 						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["week"] = {
-							["outgoings"] = 100000180,
+							["outgoings"] = 100000240,
 							["incomings"] = 380000000,
 						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 5000000,
-						},
+					},
+					["reforge"] = {
 						["session"] = {
 							["outgoings"] = 0,
-							["incomings"] = 5000000,
+							["incomings"] = 0,
 						},
-					},
-					["repairs"] = {
 						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3145,55 +1693,43 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
+					},
+					["guildbank"] = {
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-					},
-					["quest"] = {
 						["total"] = {
 							["outgoings"] = 0,
-							["incomings"] = 780000,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
 						},
 						["week"] = {
 							["outgoings"] = 0,
-							["incomings"] = 780000,
-						},
-						["day"] = {
-							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+					},
+					["reconciliation"] = {
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-					},
-					["merch"] = {
 						["total"] = {
 							["outgoings"] = 0,
-							["incomings"] = 590587,
+							["incomings"] = 288384,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
 						},
 						["week"] = {
 							["outgoings"] = 0,
-							["incomings"] = 590587,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 288384,
 						},
 					},
-				},
-				["timeDate"] = {
-					["timeDate"] = 1307937600,
-					["niceDate"] = "13 Jun '11",
 				},
 				["historical"] = {
 					["6days"] = {
@@ -3213,7 +1749,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3221,7 +1757,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3229,7 +1765,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3245,15 +1781,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3275,7 +1811,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3283,7 +1819,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3291,7 +1827,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3307,15 +1843,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3337,7 +1873,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3345,7 +1881,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3353,7 +1889,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3369,206 +1905,20 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["2days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["3days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["0days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 5000000,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["quest"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["1days"] = {
 						["other"] = {
 							["outgoings"] = 25346,
 							["incomings"] = 0,
@@ -3585,23 +1935,23 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
-							["incomings"] = 1110000,
+							["incomings"] = 590587,
 						},
 						["guildcontrib"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 780000,
 						},
 						["train"] = {
 							["outgoings"] = 950,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3617,30 +1967,212 @@ Auditor2DB = {
 							["outgoings"] = 100000180,
 							["incomings"] = 375000000,
 						},
-						["repairs"] = {
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 1110000,
+						},
+					},
+					["3days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 						["quest"] = {
 							["outgoings"] = 0,
-							["incomings"] = 780000,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["0days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
 						},
 						["merch"] = {
 							["outgoings"] = 0,
-							["incomings"] = 590587,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["1days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 60,
+							["incomings"] = 5000000,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
 						},
 					},
 				},
 			},
 			["Summoneer"] = {
 				["guildRepairsTally"] = 0,
-				["timeDate"] = {
-					["timeDate"] = 1307937600,
-					["niceDate"] = "13 Jun '11",
-				},
 				["data"] = {
 					["other"] = {
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 260,
 						},
@@ -3648,17 +2180,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 260,
 						},
-						["session"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 260,
 						},
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 260,
 						},
 					},
 					["ah"] = {
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3666,17 +2198,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["taxi"] = {
-						["day"] = {
+					["lfg"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3684,35 +2216,35 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["reconciliation"] = {
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 18,
 						},
 						["week"] = {
 							["outgoings"] = 0,
 							["incomings"] = 18,
 						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 18,
-						},
 					},
-					["merch"] = {
-						["day"] = {
+					["taxi"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3720,17 +2252,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 					},
-					["quest"] = {
-						["day"] = {
+					["guildbank"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3738,17 +2270,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["guildcontrib"] = {
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3756,17 +2288,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
-					["repairs"] = {
-						["day"] = {
+					["reforge"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3774,17 +2306,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["train"] = {
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3792,11 +2324,29 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+					},
+					["loot"] = {
 						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3806,26 +2356,8 @@ Auditor2DB = {
 						["outgoings"] = 0,
 						["actual"] = 278,
 					},
-					["loot"] = {
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
 					["trade"] = {
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3833,17 +2365,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
+						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["mail"] = {
-						["day"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3851,17 +2383,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 					},
-					["reforge"] = {
-						["day"] = {
+					["repairs"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3869,17 +2401,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 					},
-					["guildbank"] = {
-						["day"] = {
+					["quest"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3887,17 +2419,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 					},
-					["lfg"] = {
-						["day"] = {
+					["merch"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3905,15 +2437,19 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 					},
+				},
+				["timeDate"] = {
+					["timeDate"] = 1307937600,
+					["niceDate"] = "13 Jun '11",
 				},
 				["historical"] = {
 					["6days"] = {
@@ -3933,7 +2469,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3941,7 +2477,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3949,7 +2485,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3965,15 +2501,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -3995,7 +2531,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4003,7 +2539,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4011,7 +2547,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4027,15 +2563,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4057,7 +2593,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4065,7 +2601,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4073,7 +2609,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4089,15 +2625,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4119,7 +2655,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4127,7 +2663,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4135,7 +2671,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4151,15 +2687,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4181,7 +2717,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4189,7 +2725,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4197,7 +2733,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4213,15 +2749,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4243,7 +2779,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4251,7 +2787,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4259,7 +2795,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4275,15 +2811,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4305,7 +2841,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4313,7 +2849,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4321,7 +2857,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4337,15 +2873,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4354,286 +2890,286 @@ Auditor2DB = {
 			},
 			["Fraycollie"] = {
 				["guildRepairsTally"] = 0,
-				["timeDate"] = {
-					["timeDate"] = 1307937600,
-					["niceDate"] = "13 Jun '11",
-				},
 				["data"] = {
 					["other"] = {
-						["session"] = {
-							["outgoings"] = 1878,
-							["incomings"] = 66453,
+						["week"] = {
+							["outgoings"] = 4768,
+							["incomings"] = 159916,
 						},
 						["total"] = {
-							["outgoings"] = 1878,
-							["incomings"] = 66453,
+							["outgoings"] = 4768,
+							["incomings"] = 159916,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
 						},
 						["day"] = {
-							["outgoings"] = 1878,
-							["incomings"] = 66453,
-						},
-						["week"] = {
-							["outgoings"] = 1878,
-							["incomings"] = 66453,
+							["outgoings"] = 2073,
+							["incomings"] = 93463,
 						},
 					},
 					["ah"] = {
-						["session"] = {
-							["outgoings"] = 3729800,
+						["week"] = {
+							["outgoings"] = 29625640,
 							["incomings"] = 0,
 						},
 						["total"] = {
-							["outgoings"] = 3729800,
+							["outgoings"] = 29625640,
 							["incomings"] = 0,
 						},
-						["day"] = {
-							["outgoings"] = 3729800,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 3729800,
-							["incomings"] = 0,
-						},
-					},
-					["merch"] = {
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 5219334,
-						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 5219334,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 5219334,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 5219334,
-						},
-					},
-					["lfg"] = {
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 188000,
-						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 188000,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 188000,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 188000,
-						},
-					},
-					["taxi"] = {
-						["session"] = {
-							["outgoings"] = 26000,
-							["incomings"] = 0,
-						},
-						["total"] = {
-							["outgoings"] = 26000,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 26000,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 26000,
-							["incomings"] = 0,
-						},
-					},
-					["quest"] = {
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 6426100,
-						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 6426100,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 6426100,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 6426100,
-						},
-					},
-					["guildcontrib"] = {
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
 						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["repairs"] = {
-						["session"] = {
-							["outgoings"] = 26108,
-							["incomings"] = 0,
-						},
-						["total"] = {
-							["outgoings"] = 26108,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 26108,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 26108,
-							["incomings"] = 0,
-						},
-					},
-					["train"] = {
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["total"] = {
-							["outgoings"] = 50000000,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 50000000,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 50000000,
-							["incomings"] = 0,
-						},
-					},
-					["totals"] = {
-						["incomings"] = 79278600,
-						["outgoings"] = 64714626,
-						["actual"] = 14563974,
-					},
-					["loot"] = {
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 439238,
-						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 439238,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 439238,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 439238,
-						},
-					},
-					["trade"] = {
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 1000000,
-						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 1000000,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 1000000,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 1000000,
-						},
-					},
-					["mail"] = {
-						["session"] = {
-							["outgoings"] = 810,
-							["incomings"] = 5000000,
-						},
-						["total"] = {
-							["outgoings"] = 810,
-							["incomings"] = 55000000,
-						},
-						["day"] = {
-							["outgoings"] = 810,
-							["incomings"] = 55000000,
-						},
-						["week"] = {
-							["outgoings"] = 810,
-							["incomings"] = 55000000,
-						},
-					},
-					["reforge"] = {
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["guildbank"] = {
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
+							["outgoings"] = 7990098,
 							["incomings"] = 0,
 						},
 					},
 					["reconciliation"] = {
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
+						["week"] = {
+							["outgoings"] = 10930030,
+							["incomings"] = 10939475,
 						},
 						["total"] = {
 							["outgoings"] = 10930030,
 							["incomings"] = 10939475,
 						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
 						["day"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+					},
+					["lfg"] = {
 						["week"] = {
-							["outgoings"] = 10930030,
-							["incomings"] = 10939475,
+							["outgoings"] = 0,
+							["incomings"] = 1316000,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 1316000,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 188000,
 						},
 					},
+					["merch"] = {
+						["week"] = {
+							["outgoings"] = 363354,
+							["incomings"] = 7607873,
+						},
+						["total"] = {
+							["outgoings"] = 363354,
+							["incomings"] = 7607873,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 663498,
+						},
+					},
+					["guildbank"] = {
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["guildcontrib"] = {
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["reforge"] = {
+						["week"] = {
+							["outgoings"] = 674576,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 674576,
+							["incomings"] = 0,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 246061,
+							["incomings"] = 0,
+						},
+					},
+					["train"] = {
+						["week"] = {
+							["outgoings"] = 50127500,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 50127500,
+							["incomings"] = 0,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["loot"] = {
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 1169630,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 1169630,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 224892,
+						},
+					},
+					["totals"] = {
+						["incomings"] = 113386994,
+						["outgoings"] = 95405529,
+						["actual"] = 17981465,
+					},
+					["trade"] = {
+						["week"] = {
+							["outgoings"] = 2650000,
+							["incomings"] = 1000000,
+						},
+						["total"] = {
+							["outgoings"] = 2650000,
+							["incomings"] = 1000000,
+						},
+						["session"] = {
+							["outgoings"] = 1000000,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 1000000,
+							["incomings"] = 0,
+						},
+					},
+					["mail"] = {
+						["week"] = {
+							["outgoings"] = 1740,
+							["incomings"] = 83000000,
+						},
+						["total"] = {
+							["outgoings"] = 1740,
+							["incomings"] = 83000000,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 240,
+							["incomings"] = 0,
+						},
+					},
+					["repairs"] = {
+						["week"] = {
+							["outgoings"] = 1001921,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 1001921,
+							["incomings"] = 0,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 410710,
+							["incomings"] = 0,
+						},
+					},
+					["quest"] = {
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 8194100,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 8194100,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 328000,
+						},
+					},
+					["taxi"] = {
+						["week"] = {
+							["outgoings"] = 26000,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 26000,
+							["incomings"] = 0,
+						},
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+				},
+				["timeDate"] = {
+					["timeDate"] = 1308024000,
+					["niceDate"] = "14 Jun '11",
 				},
 				["historical"] = {
 					["6days"] = {
@@ -4653,7 +3189,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4661,7 +3197,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4669,7 +3205,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4685,15 +3221,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4715,7 +3251,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4723,7 +3259,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4731,7 +3267,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4747,15 +3283,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4777,7 +3313,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4785,7 +3321,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4793,7 +3329,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4809,15 +3345,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4832,14 +3368,14 @@ Auditor2DB = {
 							["incomings"] = 0,
 						},
 						["reconciliation"] = {
-							["outgoings"] = 0,
-							["incomings"] = 10939475,
+							["outgoings"] = 10930030,
+							["incomings"] = 0,
 						},
 						["taxi"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4847,7 +3383,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4855,7 +3391,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4871,15 +3407,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4895,13 +3431,13 @@ Auditor2DB = {
 						},
 						["reconciliation"] = {
 							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 10939475,
 						},
 						["taxi"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4909,7 +3445,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4917,7 +3453,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4933,7 +3469,41 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["0days"] = {
+						["other"] = {
+							["outgoings"] = 2073,
+							["incomings"] = 93463,
+						},
+						["ah"] = {
+							["outgoings"] = 7990098,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 188000,
+						},
+						["guildcontrib"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -4941,18 +3511,46 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["train"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["reforge"] = {
+							["outgoings"] = 246061,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 224892,
+						},
+						["trade"] = {
+							["outgoings"] = 1000000,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 240,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 410710,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 328000,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 663498,
+						},
 					},
-					["0days"] = {
+					["1days"] = {
 						["other"] = {
-							["outgoings"] = 1878,
+							["outgoings"] = 2695,
 							["incomings"] = 66453,
 						},
 						["ah"] = {
-							["outgoings"] = 3729800,
+							["outgoings"] = 21635542,
 							["incomings"] = 0,
 						},
 						["reconciliation"] = {
@@ -4963,124 +3561,66 @@ Auditor2DB = {
 							["outgoings"] = 26000,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
-							["incomings"] = 5219334,
+							["incomings"] = 1128000,
 						},
 						["guildcontrib"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
-							["incomings"] = 6426100,
-						},
-						["train"] = {
-							["outgoings"] = 50000000,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
-							["outgoings"] = 26108,
+						["train"] = {
+							["outgoings"] = 50127500,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 428515,
 							["incomings"] = 0,
 						},
 						["loot"] = {
 							["outgoings"] = 0,
-							["incomings"] = 439238,
+							["incomings"] = 944738,
 						},
 						["trade"] = {
-							["outgoings"] = 0,
+							["outgoings"] = 1650000,
 							["incomings"] = 1000000,
 						},
 						["mail"] = {
-							["outgoings"] = 810,
-							["incomings"] = 55000000,
+							["outgoings"] = 1500,
+							["incomings"] = 83000000,
 						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 188000,
-						},
-					},
-					["1days"] = {
-						["other"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["ah"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reconciliation"] = {
-							["outgoings"] = 10930030,
-							["incomings"] = 0,
-						},
-						["taxi"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["merch"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildcontrib"] = {
-							["outgoings"] = 0,
+						["repairs"] = {
+							["outgoings"] = 591211,
 							["incomings"] = 0,
 						},
 						["quest"] = {
 							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 7866100,
 						},
-						["train"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["repairs"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["loot"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["trade"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["mail"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["reforge"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["guildbank"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
+						["merch"] = {
+							["outgoings"] = 363354,
+							["incomings"] = 6944375,
 						},
 					},
 				},
 			},
 			["Melancollie"] = {
 				["guildRepairsTally"] = 0,
+				["timeDate"] = {
+					["timeDate"] = 1307937600,
+					["niceDate"] = "13 Jun '11",
+				},
 				["data"] = {
 					["other"] = {
-						["total"] = {
-							["outgoings"] = 100124,
-							["incomings"] = 627,
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 100124,
 							["incomings"] = 627,
 						},
@@ -5088,17 +3628,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
+						["week"] = {
+							["outgoings"] = 100124,
+							["incomings"] = 627,
 						},
 					},
 					["ah"] = {
-						["total"] = {
+						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5106,238 +3646,17 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["lfg"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 45600,
-						},
 						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 45600,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["reconciliation"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 18994,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 18994,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["taxi"] = {
-						["total"] = {
-							["outgoings"] = 495,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 495,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["guildbank"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["guildcontrib"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["reforge"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["train"] = {
-						["total"] = {
-							["outgoings"] = 104815,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 104815,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["loot"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 32177,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 32177,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["totals"] = {
-						["incomings"] = 2600287644,
-						["outgoings"] = 625766708,
-						["actual"] = 1974520936,
-					},
-					["trade"] = {
-						["total"] = {
-							["outgoings"] = 500000,
-							["incomings"] = 2500000000,
-						},
-						["week"] = {
-							["outgoings"] = 500000,
-							["incomings"] = 2500000000,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["mail"] = {
-						["total"] = {
-							["outgoings"] = 435001860,
-							["incomings"] = 100000000,
-						},
-						["week"] = {
-							["outgoings"] = 435001860,
-							["incomings"] = 100000000,
-						},
-						["day"] = {
-							["outgoings"] = 60000090,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 10000060,
-							["incomings"] = 0,
-						},
-					},
-					["repairs"] = {
-						["total"] = {
-							["outgoings"] = 3206,
-							["incomings"] = 0,
-						},
-						["week"] = {
-							["outgoings"] = 3206,
-							["incomings"] = 0,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-					},
-					["quest"] = {
-						["total"] = {
-							["outgoings"] = 0,
-							["incomings"] = 134525,
-						},
-						["week"] = {
-							["outgoings"] = 0,
-							["incomings"] = 134525,
-						},
-						["day"] = {
-							["outgoings"] = 0,
-							["incomings"] = 0,
-						},
-						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
 					},
 					["merch"] = {
-						["total"] = {
-							["outgoings"] = 190056208,
-							["incomings"] = 55721,
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
 						},
-						["week"] = {
+						["total"] = {
 							["outgoings"] = 190056208,
 							["incomings"] = 55721,
 						},
@@ -5345,15 +3664,232 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["week"] = {
+							["outgoings"] = 190056208,
+							["incomings"] = 55721,
+						},
+					},
+					["lfg"] = {
 						["session"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 45600,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 45600,
+						},
 					},
-				},
-				["timeDate"] = {
-					["timeDate"] = 1307937600,
-					["niceDate"] = "13 Jun '11",
+					["taxi"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 495,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 495,
+							["incomings"] = 0,
+						},
+					},
+					["quest"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 134525,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 134525,
+						},
+					},
+					["guildcontrib"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["repairs"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 3206,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 3206,
+							["incomings"] = 0,
+						},
+					},
+					["train"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 104815,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 104815,
+							["incomings"] = 0,
+						},
+					},
+					["totals"] = {
+						["incomings"] = 2600287644,
+						["outgoings"] = 653766738,
+						["actual"] = 1946520906,
+					},
+					["loot"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 32177,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 32177,
+						},
+					},
+					["trade"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 500000,
+							["incomings"] = 2500000000,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 500000,
+							["incomings"] = 2500000000,
+						},
+					},
+					["mail"] = {
+						["session"] = {
+							["outgoings"] = 28000030,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 463001890,
+							["incomings"] = 100000000,
+						},
+						["day"] = {
+							["outgoings"] = 88000120,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 463001890,
+							["incomings"] = 100000000,
+						},
+					},
+					["reforge"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["guildbank"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["reconciliation"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 18994,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 18994,
+						},
+					},
 				},
 				["historical"] = {
 					["6days"] = {
@@ -5373,7 +3909,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5381,7 +3917,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5389,7 +3925,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5405,15 +3941,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5435,7 +3971,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5443,7 +3979,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5451,7 +3987,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5467,15 +4003,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5497,7 +4033,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5505,7 +4041,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5513,7 +4049,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5529,15 +4065,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5559,23 +4095,23 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 10500,
+						["merch"] = {
+							["outgoings"] = 226,
+							["incomings"] = 5583,
 						},
 						["guildcontrib"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 35200,
 						},
 						["train"] = {
 							["outgoings"] = 1854,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5591,17 +4127,17 @@ Auditor2DB = {
 							["outgoings"] = 780,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
-							["incomings"] = 35200,
+							["incomings"] = 0,
 						},
-						["merch"] = {
-							["outgoings"] = 226,
-							["incomings"] = 5583,
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 10500,
 						},
 					},
 					["3days"] = {
@@ -5621,7 +4157,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5629,7 +4165,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5637,7 +4173,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5653,15 +4189,15 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5683,7 +4219,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
+						["merch"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5691,7 +4227,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5699,7 +4235,7 @@ Auditor2DB = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
+						["repairs"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5712,18 +4248,18 @@ Auditor2DB = {
 							["incomings"] = 0,
 						},
 						["mail"] = {
-							["outgoings"] = 60000090,
+							["outgoings"] = 88000120,
 							["incomings"] = 0,
 						},
-						["repairs"] = {
+						["reforge"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["merch"] = {
+						["lfg"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
@@ -5745,24 +4281,24 @@ Auditor2DB = {
 							["outgoings"] = 495,
 							["incomings"] = 0,
 						},
-						["lfg"] = {
-							["outgoings"] = 0,
-							["incomings"] = 35100,
+						["merch"] = {
+							["outgoings"] = 190055982,
+							["incomings"] = 50138,
 						},
 						["guildcontrib"] = {
 							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["guildbank"] = {
+						["quest"] = {
 							["outgoings"] = 0,
-							["incomings"] = 0,
+							["incomings"] = 99325,
 						},
 						["train"] = {
 							["outgoings"] = 102961,
 							["incomings"] = 0,
 						},
-						["reforge"] = {
-							["outgoings"] = 0,
+						["repairs"] = {
+							["outgoings"] = 3206,
 							["incomings"] = 0,
 						},
 						["loot"] = {
@@ -5777,27 +4313,1491 @@ Auditor2DB = {
 							["outgoings"] = 375000990,
 							["incomings"] = 100000000,
 						},
-						["repairs"] = {
-							["outgoings"] = 3206,
+						["reforge"] = {
+							["outgoings"] = 0,
 							["incomings"] = 0,
 						},
-						["quest"] = {
+						["guildbank"] = {
 							["outgoings"] = 0,
-							["incomings"] = 99325,
+							["incomings"] = 0,
 						},
-						["merch"] = {
-							["outgoings"] = 190055982,
-							["incomings"] = 50138,
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 35100,
 						},
 					},
 				},
 			},
 			["chars"] = {
-				["Melancollie"] = 1974520936,
-				["Fraycollie"] = 14563974,
-				["Battlecollie"] = 5456640,
+				["Melancollie"] = 1946520906,
+				["Fraycollie"] = 17981465,
+				["Battlecollie"] = 5456580,
 				["Summoneer"] = 278,
 			},
+		},
+		["Ysondre"] = {
+			["chars"] = {
+				["Battlecollie"] = 262867,
+				["Summoneer"] = 18,
+			},
+			["Battlecollie"] = {
+				["guildRepairsTally"] = 0,
+				["timeDate"] = {
+					["timeDate"] = 1307678400,
+					["niceDate"] = "10 Jun '11",
+				},
+				["data"] = {
+					["other"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["ah"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["merch"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["lfg"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["taxi"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["quest"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 207000,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 207000,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 207000,
+						},
+					},
+					["guildcontrib"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 1945,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 1945,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 1945,
+						},
+					},
+					["repairs"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["train"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["totals"] = {
+						["incomings"] = 262867,
+						["outgoings"] = 0,
+						["actual"] = 262867,
+					},
+					["loot"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 38906,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 38906,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 38906,
+						},
+					},
+					["trade"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["mail"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["reforge"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["guildbank"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["reconciliation"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 16961,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 13223,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 16961,
+						},
+					},
+				},
+				["historical"] = {
+					["6days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["4days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["5days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["2days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["3days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["0days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 13223,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 1945,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 207000,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 38906,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["1days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 3738,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+				},
+			},
+			["Summoneer"] = {
+				["guildRepairsTally"] = 0,
+				["timeDate"] = {
+					["timeDate"] = 1307836800,
+					["niceDate"] = "12 Jun '11",
+				},
+				["data"] = {
+					["other"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["ah"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["merch"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["lfg"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["taxi"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["quest"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["guildcontrib"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["repairs"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["train"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["totals"] = {
+						["incomings"] = 18,
+						["outgoings"] = 0,
+						["actual"] = 18,
+					},
+					["loot"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["trade"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["mail"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["reforge"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["guildbank"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["reconciliation"] = {
+						["session"] = {
+							["outgoings"] = 0,
+							["incomings"] = 18,
+						},
+						["total"] = {
+							["outgoings"] = 0,
+							["incomings"] = 18,
+						},
+						["day"] = {
+							["outgoings"] = 0,
+							["incomings"] = 18,
+						},
+						["week"] = {
+							["outgoings"] = 0,
+							["incomings"] = 18,
+						},
+					},
+				},
+				["historical"] = {
+					["6days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["4days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["5days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["2days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["3days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["0days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 18,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+					["1days"] = {
+						["other"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["ah"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reconciliation"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["taxi"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["merch"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildcontrib"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["quest"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["train"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["repairs"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["loot"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["trade"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["mail"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["reforge"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["guildbank"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+						["lfg"] = {
+							["outgoings"] = 0,
+							["incomings"] = 0,
+						},
+					},
+				},
+			},
+		},
+	},
+	["profileKeys"] = {
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+	},
+	["profiles"] = {
+		["Fraycollie - Smolderthorn"] = {
+		},
+		["Battlecollie - Ysondre"] = {
+		},
+		["Melancollie - Smolderthorn"] = {
 		},
 	},
 }

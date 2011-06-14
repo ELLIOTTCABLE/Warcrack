@@ -1,28 +1,27 @@
 
 BrokerAuditorDB = {
+	["profileKeys"] = {
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+	},
 	["global"] = {
 		["LibDBIcon"] = {
 			["hide"] = true,
 		},
-	},
-	["profileKeys"] = {
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["styleIndex"] = 2,
 	},
 	["profiles"] = {
-		["Combatcollie - The Underbog"] = {
+		["Summoneer - Smolderthorn"] = {
 		},
 		["Fraycollie - Smolderthorn"] = {
 		},
-		["Battlecollie - Ysondre"] = {
-			["hideNetTotal"] = false,
-			["absurdDetail"] = true,
+		["Battlecollie - Smolderthorn"] = {
 		},
 		["Melancollie - Smolderthorn"] = {
 		},
@@ -30,9 +29,11 @@ BrokerAuditorDB = {
 		},
 		["Fraycollie - The Underbog"] = {
 		},
-		["Battlecollie - Smolderthorn"] = {
+		["Combatcollie - The Underbog"] = {
 		},
-		["Summoneer - Smolderthorn"] = {
+		["Battlecollie - Ysondre"] = {
+			["absurdDetail"] = true,
+			["hideNetTotal"] = false,
 		},
 	},
 }

@@ -1,40 +1,40 @@
 
 DataStore_InventoryDB = {
 	["profileKeys"] = {
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 	},
 	["global"] = {
 		["Characters"] = {
-			["Default.Smolderthorn.Battlecollie"] = {
+			["Default.Ysondre.Battlecollie"] = {
 				["Inventory"] = {
-					"|cff0070dd|Hitem:31104:0:3520:3520:3520:0:0:1009387968:78:0|h[Evoker's Helmet of Second Sight]|h|r", -- [1]
-					35631, -- [2]
-					44350, -- [3]
+					"|cff0070dd|Hitem:31104:0:3520:3520:3520:0:0:1009387968:77:0|h[Evoker's Helmet of Second Sight]|h|r", -- [1]
+					44403, -- [2]
+					43181, -- [3]
 					nil, -- [4]
-					"|cff0070dd|Hitem:28230:0:3520:3520:3520:0:0:364518856:78:0|h[Hallowed Garments]|h|r", -- [5]
+					"|cff0070dd|Hitem:28230:0:3520:3520:3520:0:0:364518856:77:0|h[Hallowed Garments]|h|r", -- [5]
 					35929, -- [6]
-					"|cff0070dd|Hitem:28185:3872:3520:3520:3520:0:0:1960409856:78:0|h[Khadgar's Kilt of Abjuration]|h|r", -- [7]
-					"|cff0070dd|Hitem:28179:0:3520:3520:0:0:0:228735088:78:0|h[Shattrath Jumpers]|h|r", -- [8]
-					"|cff0070dd|Hitem:28174:0:3520:0:0:0:0:421322592:78:0|h[Shattrath Wraps]|h|r", -- [9]
-					"|cff0070dd|Hitem:29317:0:3520:3520:0:0:0:12932892:78:0|h[Tempest's Touch]|h|r", -- [10]
+					"|cff0070dd|Hitem:28185:3872:3520:3520:3520:0:0:1960409856:77:0|h[Khadgar's Kilt of Abjuration]|h|r", -- [7]
+					"|cff0070dd|Hitem:28179:0:3520:3520:0:0:0:228735088:77:0|h[Shattrath Jumpers]|h|r", -- [8]
+					"|cff0070dd|Hitem:28174:0:3520:0:0:0:0:421322592:77:0|h[Shattrath Wraps]|h|r", -- [9]
+					"|cff0070dd|Hitem:29317:0:3520:3520:0:0:0:12932892:77:0|h[Tempest's Touch]|h|r", -- [10]
 					38220, -- [11]
-					"|cff1eff00|Hitem:36417:0:0:0:0:0:-39:2100101157:78:0|h[Oval Ring of the Invoker]|h|r", -- [12]
+					"|cff1eff00|Hitem:36417:0:0:0:0:0:-39:2100101157:77:0|h[Oval Ring of the Invoker]|h|r", -- [12]
 					38073, -- [13]
 					37560, -- [14]
-					"|cff0070dd|Hitem:38223:3728:0:0:0:0:0:1014915136:78:0|h[Cloak of Azure Lights]|h|r", -- [15]
+					"|cff0070dd|Hitem:38223:3728:0:0:0:0:0:1014915136:77:0|h[Cloak of Azure Lights]|h|r", -- [15]
 					41821, -- [16]
 					[18] = 38206,
 					[19] = 5976,
 				},
-				["averageItemLvl"] = 136.875,
-				["lastUpdate"] = 1307971273,
+				["averageItemLvl"] = 134.8125,
+				["lastUpdate"] = 1307762172,
 			},
 			["Default.The Underbog.Combatcollie"] = {
 				["Inventory"] = {
@@ -42,37 +42,37 @@ DataStore_InventoryDB = {
 					[7] = 53379,
 					[8] = 53362,
 					[10] = 53360,
+					[9] = 53373,
 					[16] = 2361,
 					[5] = 53396,
-					[9] = 53373,
 				},
 				["averageItemLvl"] = 3.285714285714286,
 				["lastUpdate"] = 1307756094,
 			},
 			["Default.Smolderthorn.Fraycollie"] = {
 				["Inventory"] = {
-					55229, -- [1]
-					57334, -- [2]
-					57360, -- [3]
+					"|cff1eff00|Hitem:55031:0:4048:0:0:0:0:1009197120:83:147|h[Redsteel Helm]|h|r", -- [1]
+					62376, -- [2]
+					66891, -- [3]
 					nil, -- [4]
-					57264, -- [5]
-					57268, -- [6]
-					57312, -- [7]
-					57260, -- [8]
+					55032, -- [5]
+					"|cff1eff00|Hitem:55027:0:4005:0:0:0:0:824072640:83:157|h[Redsteel Belt]|h|r", -- [6]
+					55030, -- [7]
+					"|cff0070dd|Hitem:55855:4062:0:0:0:0:0:615821216:83:0|h[Darksky Treads]|h|r", -- [8]
 					57303, -- [9]
 					57320, -- [10]
-					55776, -- [11]
-					"|cff1eff00|Hitem:55416:0:0:0:0:0:-123:594673825:82:0|h[Moonbrook Ring of the Earthbreaker]|h|r", -- [12]
-					57325, -- [13]
-					59792, -- [14]
-					57274, -- [15]
-					"|cff1eff00|Hitem:55283:0:0:0:0:0:-121:374669449:82:0|h[Angerfang Axe of the Landslide]|h|r", -- [16]
+					62375, -- [11]
+					55794, -- [12]
+					55814, -- [13]
+					55845, -- [14]
+					55847, -- [15]
+					"|cff0070dd|Hitem:52493:0:4005:0:0:0:0:1666065408:83:143|h[The Perforator]|h|r", -- [16]
 					57354, -- [17]
-					59771, -- [18]
+					59599, -- [18]
 					45574, -- [19]
 				},
-				["averageItemLvl"] = 280.6470588235294,
-				["lastUpdate"] = 1307996340,
+				["averageItemLvl"] = 314.7647058823529,
+				["lastUpdate"] = 1308067279,
 			},
 			["Default.Smolderthorn.Summoneer"] = {
 				["Inventory"] = {
@@ -108,29 +108,29 @@ DataStore_InventoryDB = {
 				["averageItemLvl"] = 235.6470588235294,
 				["lastUpdate"] = 1307756259,
 			},
-			["Default.Ysondre.Battlecollie"] = {
+			["Default.Smolderthorn.Battlecollie"] = {
 				["Inventory"] = {
-					"|cff0070dd|Hitem:31104:0:3520:3520:3520:0:0:1009387968:77:0|h[Evoker's Helmet of Second Sight]|h|r", -- [1]
-					44403, -- [2]
-					43181, -- [3]
+					"|cff0070dd|Hitem:31104:0:3520:3520:3520:0:0:1009387968:78:0|h[Evoker's Helmet of Second Sight]|h|r", -- [1]
+					35631, -- [2]
+					44350, -- [3]
 					nil, -- [4]
-					"|cff0070dd|Hitem:28230:0:3520:3520:3520:0:0:364518856:77:0|h[Hallowed Garments]|h|r", -- [5]
+					"|cff0070dd|Hitem:28230:0:3520:3520:3520:0:0:364518856:78:0|h[Hallowed Garments]|h|r", -- [5]
 					35929, -- [6]
-					"|cff0070dd|Hitem:28185:3872:3520:3520:3520:0:0:1960409856:77:0|h[Khadgar's Kilt of Abjuration]|h|r", -- [7]
-					"|cff0070dd|Hitem:28179:0:3520:3520:0:0:0:228735088:77:0|h[Shattrath Jumpers]|h|r", -- [8]
-					"|cff0070dd|Hitem:28174:0:3520:0:0:0:0:421322592:77:0|h[Shattrath Wraps]|h|r", -- [9]
-					"|cff0070dd|Hitem:29317:0:3520:3520:0:0:0:12932892:77:0|h[Tempest's Touch]|h|r", -- [10]
+					"|cff0070dd|Hitem:28185:3872:3520:3520:3520:0:0:1960409856:78:0|h[Khadgar's Kilt of Abjuration]|h|r", -- [7]
+					"|cff0070dd|Hitem:28179:0:3520:3520:0:0:0:228735088:78:0|h[Shattrath Jumpers]|h|r", -- [8]
+					"|cff0070dd|Hitem:28174:0:3520:0:0:0:0:421322592:78:0|h[Shattrath Wraps]|h|r", -- [9]
+					"|cff0070dd|Hitem:29317:0:3520:3520:0:0:0:12932892:78:0|h[Tempest's Touch]|h|r", -- [10]
 					38220, -- [11]
-					"|cff1eff00|Hitem:36417:0:0:0:0:0:-39:2100101157:77:0|h[Oval Ring of the Invoker]|h|r", -- [12]
+					"|cff1eff00|Hitem:36417:0:0:0:0:0:-39:2100101157:78:0|h[Oval Ring of the Invoker]|h|r", -- [12]
 					38073, -- [13]
 					37560, -- [14]
-					"|cff0070dd|Hitem:38223:3728:0:0:0:0:0:1014915136:77:0|h[Cloak of Azure Lights]|h|r", -- [15]
+					"|cff0070dd|Hitem:38223:3728:0:0:0:0:0:1014915136:78:0|h[Cloak of Azure Lights]|h|r", -- [15]
 					41821, -- [16]
 					[18] = 38206,
 					[19] = 5976,
 				},
-				["averageItemLvl"] = 134.8125,
-				["lastUpdate"] = 1307762172,
+				["averageItemLvl"] = 136.875,
+				["lastUpdate"] = 1308067023,
 			},
 			["Default.Smolderthorn.Melancollie"] = {
 				["Inventory"] = {
@@ -146,11 +146,11 @@ DataStore_InventoryDB = {
 					[10] = "|cff0070dd|Hitem:51973:0:0:0:0:0:-83:1848639503:30:0|h[Enumerated Handwraps of the Sun]|h|r",
 					[11] = 60895,
 					[6] = 5967,
-					[19] = 5976,
 					[18] = 65959,
+					[19] = 5976,
 				},
 				["averageItemLvl"] = 26.84615384615385,
-				["lastUpdate"] = 1307971238,
+				["lastUpdate"] = 1308000201,
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["Inventory"] = {
@@ -163,20 +163,10 @@ DataStore_InventoryDB = {
 			},
 		},
 		["Guilds"] = {
-			["Default.The Underbog.LEAFEA"] = {
-				["Members"] = {
-					["Combatcollie"] = {
-						["averageItemLvl"] = 3,
-					},
-					["Fraycollie"] = {
-						["averageItemLvl"] = 235,
-					},
-				},
-			},
 			["Default.Smolderthorn.LEAFEA"] = {
 				["Members"] = {
 					["Fraycollie"] = {
-						["averageItemLvl"] = 237,
+						["averageItemLvl"] = 314,
 					},
 					["Cathara"] = {
 						["averageItemLvl"] = 3,
@@ -185,10 +175,20 @@ DataStore_InventoryDB = {
 						["averageItemLvl"] = 26,
 					},
 					["Adlinor"] = {
-						["averageItemLvl"] = 20,
+						["averageItemLvl"] = 24,
 					},
 					["Battlecollie"] = {
 						["averageItemLvl"] = 136,
+					},
+				},
+			},
+			["Default.The Underbog.LEAFEA"] = {
+				["Members"] = {
+					["Combatcollie"] = {
+						["averageItemLvl"] = 3,
+					},
+					["Fraycollie"] = {
+						["averageItemLvl"] = 235,
 					},
 				},
 			},

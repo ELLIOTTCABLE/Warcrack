@@ -10,31 +10,17 @@ CritlineDB = {
 		},
 		["LibDualSpec-1.0"] = {
 		},
-		["minimap"] = {
+		["filters"] = {
 			["profiles"] = {
-				["Battlecollie - Smolderthorn"] = {
-					["show"] = false,
-				},
-				["Fraycollie - Smolderthorn"] = {
-					["show"] = false,
-				},
 				["Battlecollie - Ysondre"] = {
-					["show"] = false,
-				},
-				["Melancollie - Smolderthorn"] = {
-					["show"] = false,
+					["levelFilter"] = 6,
 				},
 			},
 		},
 		["display"] = {
 			["profiles"] = {
-				["Battlecollie - Ysondre"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["show"] = false,
-					["pos"] = {
-						["y"] = 104.8962326049805,
-						["x"] = -408.541259765625,
-						["point"] = "BOTTOMRIGHT",
-					},
 				},
 				["Fraycollie - Smolderthorn"] = {
 					["show"] = false,
@@ -44,6 +30,27 @@ CritlineDB = {
 						["point"] = "BOTTOMRIGHT",
 					},
 				},
+				["Battlecollie - Ysondre"] = {
+					["show"] = false,
+					["pos"] = {
+						["y"] = 104.8962326049805,
+						["x"] = -408.541259765625,
+						["point"] = "BOTTOMRIGHT",
+					},
+				},
+				["Melancollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+			},
+		},
+		["minimap"] = {
+			["profiles"] = {
+				["Battlecollie - Ysondre"] = {
+					["show"] = false,
+				},
+				["Fraycollie - Smolderthorn"] = {
+					["show"] = false,
+				},
 				["Battlecollie - Smolderthorn"] = {
 					["show"] = false,
 				},
@@ -52,35 +59,23 @@ CritlineDB = {
 				},
 			},
 		},
-		["filters"] = {
-			["profiles"] = {
-				["Battlecollie - Ysondre"] = {
-					["levelFilter"] = 6,
-				},
-			},
-		},
 	},
 	["profileKeys"] = {
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 	},
 	["profiles"] = {
-		["Battlecollie - Smolderthorn"] = {
+		["Summoneer - Smolderthorn"] = {
 		},
 		["Fraycollie - Smolderthorn"] = {
 		},
-		["Battlecollie - Ysondre"] = {
-			["oldRecord"] = true,
-			["detailedTooltip"] = true,
-			["chatOutput"] = true,
-			["spellTooltips"] = true,
-			["playSound"] = false,
+		["Combatcollie - The Underbog"] = {
 		},
 		["Melancollie - Smolderthorn"] = {
 		},
@@ -88,9 +83,14 @@ CritlineDB = {
 		},
 		["Fraycollie - The Underbog"] = {
 		},
-		["Combatcollie - The Underbog"] = {
+		["Battlecollie - Smolderthorn"] = {
 		},
-		["Summoneer - Smolderthorn"] = {
+		["Battlecollie - Ysondre"] = {
+			["oldRecord"] = true,
+			["detailedTooltip"] = true,
+			["chatOutput"] = true,
+			["spellTooltips"] = true,
+			["playSound"] = false,
 		},
 	},
 }

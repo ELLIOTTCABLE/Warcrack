@@ -14,16 +14,16 @@ CritlinePerCharDB = {
 					[6572] = {
 						{
 							["normal"] = {
-								["target"] = "Erunak Stonespeaker",
+								["target"] = "Cloud Prince",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 6507,
+								["targetLevel"] = 83,
+								["amount"] = 9610,
 							},
 							["crit"] = {
-								["target"] = "Naz'jar Invader",
+								["target"] = "Executor of the Caliph",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 11955,
+								["targetLevel"] = 82,
+								["amount"] = 19059,
 							},
 						}, -- [1]
 					},
@@ -36,26 +36,26 @@ CritlinePerCharDB = {
 								["amount"] = 18984,
 							},
 							["crit"] = {
-								["target"] = "Rom'ogg Bonecrusher",
+								["target"] = "Young Storm Dragon",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 4010,
+								["targetLevel"] = 83,
+								["amount"] = 6029,
 							},
 						}, -- [1]
 					},
 					[20243] = {
 						{
 							["normal"] = {
-								["target"] = "Erunak Stonespeaker",
+								["target"] = "Young Storm Dragon",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 5205,
+								["targetLevel"] = 83,
+								["amount"] = 6317,
 							},
 							["crit"] = {
-								["target"] = "Mindbender Ghur'sha",
+								["target"] = "Cloud Prince",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 9743,
+								["targetLevel"] = 83,
+								["amount"] = 12773,
 							},
 						}, -- [1]
 					},
@@ -68,42 +68,42 @@ CritlinePerCharDB = {
 								["amount"] = 62285,
 							},
 							["crit"] = {
-								["target"] = "Mad Prisoner",
+								["target"] = "Executor of the Caliph",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 12610,
+								["targetLevel"] = 82,
+								["amount"] = 19124,
 							},
 						}, -- [1]
 					},
 					[78] = {
 						{
 							["normal"] = {
-								["target"] = "Erunak Stonespeaker",
+								["target"] = "Cloud Prince",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 5018,
+								["targetLevel"] = 83,
+								["amount"] = 8430,
 							},
 							["crit"] = {
-								["target"] = "Erunak Stonespeaker",
+								["target"] = "Cloud Prince",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 9074,
+								["targetLevel"] = 83,
+								["amount"] = 14672,
 							},
 						}, -- [1]
 					},
 					[845] = {
 						{
 							["normal"] = {
-								["target"] = "Mad Prisoner",
+								["target"] = "Executor of the Caliph",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 3832,
+								["targetLevel"] = 82,
+								["amount"] = 6660,
 							},
 							["crit"] = {
-								["target"] = "Mad Prisoner",
+								["target"] = "Turbulent Squall",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 7611,
+								["targetLevel"] = 82,
+								["amount"] = 12221,
 							},
 						}, -- [1]
 					},
@@ -126,16 +126,16 @@ CritlinePerCharDB = {
 					[46968] = {
 						{
 							["normal"] = {
-								["target"] = "Erunak Stonespeaker",
+								["target"] = "Executor of the Caliph",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 6673,
+								["amount"] = 11510,
 							},
 							["crit"] = {
-								["target"] = "Mad Prisoner",
+								["target"] = "Turbulent Squall",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 11945,
+								["targetLevel"] = 82,
+								["amount"] = 22869,
 							},
 						}, -- [1]
 					},
@@ -152,16 +152,32 @@ CritlinePerCharDB = {
 					[12809] = {
 						{
 							["normal"] = {
-								["target"] = "Mad Prisoner",
+								["target"] = "Temple Adept",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 6016,
+								["targetLevel"] = 82,
+								["amount"] = 7469,
 							},
 							["crit"] = {
-								["target"] = "Twilight Scorchlord",
+								["target"] = "Stonecore Rift Conjurer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 81,
-								["amount"] = 4726,
+								["targetLevel"] = 82,
+								["amount"] = 18350,
+							},
+						}, -- [1]
+					},
+					[3018] = {
+						{
+							["normal"] = {
+								["target"] = "Grand Vizier Ertan",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 84,
+								["amount"] = 2229,
+							},
+							["crit"] = {
+								["target"] = "Grand Vizier Ertan",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 84,
+								["amount"] = 3735,
 							},
 						}, -- [1]
 					},
@@ -174,58 +190,52 @@ CritlinePerCharDB = {
 								["amount"] = 18800,
 							},
 							["crit"] = {
-								["target"] = "Mad Prisoner",
+								["target"] = "Turbulent Squall",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 4382,
+								["targetLevel"] = 82,
+								["amount"] = 6920,
 							},
 						}, -- [1]
 					},
 					[20253] = {
 						{
 							["normal"] = {
-								["target"] = "Gilgoblin Aquamage",
+								["target"] = "Stonecore Bruiser",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 726,
+								["targetLevel"] = 83,
+								["amount"] = 1167,
 							},
 							["crit"] = {
-								["target"] = "Horrorguard",
+								["target"] = "Stonecore Bruiser",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 81,
-								["amount"] = 503,
-							},
-						}, -- [1]
-					},
-					[3018] = {
-						{
-							["normal"] = {
-								["target"] = "Gilgoblin Hunter",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 868,
-							},
-							["crit"] = {
-								["target"] = "Hovel Brute",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 1580,
+								["targetLevel"] = 83,
+								["amount"] = 956,
 							},
 						}, -- [1]
 					},
 					[34428] = {
 						{
 							["normal"] = {
-								["target"] = "Rom'ogg Bonecrusher",
+								["target"] = "Cloud Prince",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 5299,
+								["targetLevel"] = 83,
+								["amount"] = 8213,
 							},
 							["crit"] = {
-								["target"] = "Naz'jar Invader",
+								["target"] = "Servant of Asaad",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 82,
+								["amount"] = 14248,
+							},
+						}, -- [1]
+					},
+					[76575] = {
+						{
+							["normal"] = {
+								["target"] = "Twilight Zealot",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 80,
-								["amount"] = 8070,
+								["amount"] = 4763,
 							},
 						}, -- [1]
 					},

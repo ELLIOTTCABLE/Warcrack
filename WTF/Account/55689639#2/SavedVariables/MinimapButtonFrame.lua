@@ -1,21 +1,21 @@
 
 MBFDB = {
 	["profileKeys"] = {
-		["Fraycollie - The Underbog"] = "Default",
+		["Summoneer - Smolderthorn"] = "Default",
 		["Fraycollie - Smolderthorn"] = "Default",
-		["Battlecollie - Ysondre"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
 		["Melancollie - Smolderthorn"] = "Default",
 		["Summoneer - Ysondre"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
-		["Combatcollie - The Underbog"] = "Default",
-		["Summoneer - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
+		["Battlecollie - Ysondre"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["MBFHideMiniMapWorldMapButton"] = true,
 			["columns_or_rows"] = 2,
 			["locked"] = true,
-			["sortOrder"] = "Blizzard First",
+			["GrowUp"] = false,
 			["minimapButton"] = {
 				["hide"] = false,
 			},
@@ -28,7 +28,7 @@ MBFDB = {
 				-224.1380004882812, -- [4]
 			},
 			["colorLocked"] = "All",
-			["GrowUp"] = false,
+			["padding"] = 3.5,
 			["currentTexture"] = "Serenity Square",
 			["customChildren"] = {
 				"MinimapButtonFrameDragButton", -- [1]
@@ -53,7 +53,7 @@ MBFDB = {
 			},
 			["grabMBFButton"] = true,
 			["grabBlizzButtons"] = true,
-			["padding"] = 3.5,
+			["sortOrder"] = "Blizzard First",
 		},
 	},
 }

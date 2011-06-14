@@ -1,54 +1,54 @@
 
 DataStoreDB = {
 	["profileKeys"] = {
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 	},
 	["global"] = {
 		["Characters"] = {
-			["Default.Smolderthorn.Battlecollie"] = {
+			["Default.Ysondre.Battlecollie"] = {
 				["faction"] = "Alliance",
-				["guildName"] = "LEAFEA",
 			},
 			["Default.The Underbog.Combatcollie"] = {
-				["faction"] = "Horde",
 				["guildName"] = "LEAFEA",
+				["faction"] = "Horde",
 			},
 			["Default.Smolderthorn.Fraycollie"] = {
-				["guildName"] = "LEAFEA",
 				["faction"] = "Alliance",
+				["guildName"] = "LEAFEA",
 			},
 			["Default.Smolderthorn.Summoneer"] = {
 				["faction"] = "Horde",
 			},
 			["Default.The Underbog.Fraycollie"] = {
-				["faction"] = "Horde",
 				["guildName"] = "LEAFEA",
+				["faction"] = "Horde",
 			},
-			["Default.Ysondre.Battlecollie"] = {
+			["Default.Smolderthorn.Battlecollie"] = {
+				["guildName"] = "LEAFEA",
 				["faction"] = "Alliance",
 			},
 			["Default.Smolderthorn.Melancollie"] = {
-				["guildName"] = "LEAFEA",
 				["faction"] = "Alliance",
+				["guildName"] = "LEAFEA",
 			},
 			["Default.Ysondre.Summoneer"] = {
-				["guildName"] = "LEAFEA",
 				["faction"] = "Horde",
+				["guildName"] = "LEAFEA",
 			},
 		},
 		["Guilds"] = {
-			["Default.The Underbog.LEAFEA"] = {
-				["faction"] = "Horde",
-			},
 			["Default.Smolderthorn.LEAFEA"] = {
 				["faction"] = "Alliance",
+			},
+			["Default.The Underbog.LEAFEA"] = {
+				["faction"] = "Horde",
 			},
 			["Default.Ysondre.LEAFEA"] = {
 				["faction"] = "Horde",

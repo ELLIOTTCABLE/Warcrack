@@ -34,15 +34,14 @@ SMARTBUFF_Options = {
 	["UpgradeToDualSpec"] = true,
 	["OldWheelDown"] = "CAMERAZOOMOUT",
 	["LastTemplate"] = "Solo",
-	["LinkSelfBuffCheck"] = true,
+	["BlacklistTimer"] = 5,
 	["UISync"] = true,
 	["ToggleAutoSound"] = false,
 	["ShowMiniGrp"] = false,
-	["BlacklistTimer"] = 5,
+	["LinkSelfBuffCheck"] = true,
 	["ToggleMsgWarning"] = false,
 	["MinCharges"] = 3,
-	["AddList"] = {
-	},
+	["Toggle"] = true,
 	["HideMmButton"] = true,
 	["OldWheelUp"] = "CAMERAZOOMIN",
 	["BuffInCities"] = true,
@@ -59,7 +58,8 @@ SMARTBUFF_Options = {
 	["HideSAButton"] = true,
 	["ScrollWheelDown"] = true,
 	["ToggleAutoChat"] = false,
-	["Toggle"] = true,
+	["AddList"] = {
+	},
 	["ScrollWheelUp"] = false,
 	["InCombat"] = false,
 }
@@ -67,44 +67,43 @@ SMARTBUFF_Buffs = {
 	{
 		["Solo"] = {
 			["Battle Shout"] = {
-				["SelfOnly"] = false,
 				["OH"] = false,
+				["SelfOnly"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 			},
 			["Find Minerals"] = {
-				["SelfOnly"] = false,
 				["OH"] = false,
+				["SelfOnly"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 			},
 			["Stoneform"] = {
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -112,50 +111,52 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["EnableG"] = false,
-				["OH"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["SelfOnly"] = false,
+				["OH"] = false,
 			},
 			["Defensive Stance"] = {
-				["SelfOnly"] = false,
 				["OH"] = false,
+				["SelfOnly"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 			},
 			["Berserker Rage"] = {
-				["SelfOnly"] = false,
 				["OH"] = false,
+				["SelfOnly"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 			},
+			["GrpBuffSize"] = 4,
 			["Vigilance"] = {
 				["HUNTER"] = false,
 				["WARRIOR"] = false,
@@ -165,8 +166,7 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -188,63 +188,63 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = false,
 				["RH"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 			},
-			["GrpBuffSize"] = 4,
 			["Commanding Shout"] = {
-				["SelfOnly"] = false,
 				["OH"] = false,
+				["SelfOnly"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 			},
-			["Berserker Stance"] = {
-				["SelfOnly"] = false,
+			["Battle Stance"] = {
 				["OH"] = false,
+				["SelfOnly"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 			},
 			["SelfFirst"] = false,
-			["Battle Stance"] = {
-				["SelfOnly"] = false,
+			["Berserker Stance"] = {
 				["OH"] = false,
+				["SelfOnly"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 			},
 		},
 		["Order"] = {

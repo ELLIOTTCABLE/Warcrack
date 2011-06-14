@@ -1,14 +1,14 @@
 
 BFactions_DB = {
 	["profileKeys"] = {
-		["Combatcollie - The Underbog"] = "Default",
+		["Summoneer - Smolderthorn"] = "Default",
 		["Fraycollie - Smolderthorn"] = "Default",
-		["Battlecollie - Ysondre"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
 		["Melancollie - Smolderthorn"] = "Default",
 		["Summoneer - Ysondre"] = "Default",
 		["Fraycollie - The Underbog"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
-		["Summoneer - Smolderthorn"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
+		["Battlecollie - Ysondre"] = "Default",
 	},
 	["factionrealm"] = {
 		["Alliance - Ysondre"] = {
@@ -89,12 +89,12 @@ BFactions_DB = {
 						["showRemainingRep"] = false,
 					},
 					["text"] = {
-						["showPercentage"] = false,
-						["showText"] = false,
+						["showPercentage"] = true,
+						["showText"] = true,
 						["showRawValues"] = true,
-						["watchedFaction"] = "LEAFEA",
-						["showSessionGains"] = false,
-						["showRemainingRep"] = false,
+						["watchedFaction"] = "Stormwind",
+						["showSessionGains"] = true,
+						["showRemainingRep"] = true,
 					},
 				},
 			},
@@ -186,7 +186,7 @@ BFactions_DB = {
 			},
 		},
 		["Horde - Smolderthorn"] = {
-			["Fraycollie"] = {
+			["Summoneer"] = {
 				["options"] = {
 					["display"] = {
 						["showPercentage"] = false,
@@ -214,7 +214,7 @@ BFactions_DB = {
 					},
 				},
 			},
-			["Summoneer"] = {
+			["Fraycollie"] = {
 				["options"] = {
 					["display"] = {
 						["showPercentage"] = false,

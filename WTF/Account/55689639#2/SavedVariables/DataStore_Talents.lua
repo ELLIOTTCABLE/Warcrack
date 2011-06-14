@@ -1,18 +1,18 @@
 
 DataStore_TalentsDB = {
 	["profileKeys"] = {
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 	},
 	["global"] = {
 		["Characters"] = {
-			["Default.Smolderthorn.Battlecollie"] = {
+			["Default.Ysondre.Battlecollie"] = {
 				["Glyphs"] = {
 					2147929115, -- [1]
 					3859223757, -- [2]
@@ -34,14 +34,7 @@ DataStore_TalentsDB = {
 					2191969295, -- [18]
 				},
 				["ActiveTalents"] = 2,
-				["lastUpdate"] = 1307971272,
-				["Class"] = "PRIEST",
-				["TalentTrees"] = {
-					["Discipline|2"] = 28,
-					["Discipline|1"] = 1687431982514,
-					["Holy|1"] = 48,
-					["Shadow|2"] = 1951698807691,
-				},
+				["lastUpdate"] = 1307762090,
 				["GlyphList"] = {
 					11, -- [1]
 					11338, -- [2]
@@ -80,6 +73,13 @@ DataStore_TalentsDB = {
 					7406, -- [35]
 					7422, -- [36]
 				},
+				["TalentTrees"] = {
+					["Discipline|2"] = 28,
+					["Discipline|1"] = 1687431982514,
+					["Holy|1"] = 48,
+					["Shadow|2"] = 1951698807691,
+				},
+				["Class"] = "PRIEST",
 			},
 			["Default.The Underbog.Combatcollie"] = {
 				["lastUpdate"] = 1307756093,
@@ -156,8 +156,15 @@ DataStore_TalentsDB = {
 					1048583, -- [17]
 					2097159, -- [18]
 				},
+				["ActiveTalents"] = 1,
+				["lastUpdate"] = 1308067128,
 				["Class"] = "WARRIOR",
-				["lastUpdate"] = 1307995827,
+				["TalentTrees"] = {
+					["Arms|1"] = 24,
+					["Fury|1"] = 3,
+					["Protection|1"] = 482807989231,
+					["Fury|2"] = 470387907244,
+				},
 				["GlyphList"] = {
 					11, -- [1]
 					7898, -- [2]
@@ -197,13 +204,6 @@ DataStore_TalentsDB = {
 					12230, -- [36]
 					12246, -- [37]
 				},
-				["TalentTrees"] = {
-					["Arms|1"] = 24,
-					["Fury|1"] = 3,
-					["Protection|1"] = 482807989231,
-					["Fury|2"] = 470387907244,
-				},
-				["ActiveTalents"] = 1,
 			},
 			["Default.Smolderthorn.Summoneer"] = {
 				["Glyphs"] = {
@@ -217,7 +217,7 @@ DataStore_TalentsDB = {
 					1048582, -- [8]
 					2097158, -- [9]
 				},
-				["ActiveTalents"] = 1,
+				["Class"] = "WARLOCK",
 				["lastUpdate"] = 1307968459,
 				["GlyphList"] = {
 					11, -- [1]
@@ -258,7 +258,7 @@ DataStore_TalentsDB = {
 					7718, -- [36]
 					7638, -- [37]
 				},
-				["Class"] = "WARLOCK",
+				["ActiveTalents"] = 1,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["Glyphs"] = {
@@ -281,7 +281,7 @@ DataStore_TalentsDB = {
 					1048583, -- [17]
 					2097159, -- [18]
 				},
-				["ActiveTalents"] = 1,
+				["Class"] = "WARRIOR",
 				["lastUpdate"] = 1307756258,
 				["GlyphList"] = {
 					11, -- [1]
@@ -328,9 +328,9 @@ DataStore_TalentsDB = {
 					["Protection|1"] = 482807989231,
 					["Fury|2"] = 470387907244,
 				},
-				["Class"] = "WARRIOR",
+				["ActiveTalents"] = 1,
 			},
-			["Default.Ysondre.Battlecollie"] = {
+			["Default.Smolderthorn.Battlecollie"] = {
 				["Glyphs"] = {
 					2147929115, -- [1]
 					3859223757, -- [2]
@@ -389,7 +389,7 @@ DataStore_TalentsDB = {
 					7406, -- [35]
 					7422, -- [36]
 				},
-				["lastUpdate"] = 1307762090,
+				["lastUpdate"] = 1308067022,
 				["Class"] = "PRIEST",
 				["TalentTrees"] = {
 					["Discipline|2"] = 28,
@@ -420,6 +420,8 @@ DataStore_TalentsDB = {
 					1048582, -- [17]
 					2097158, -- [18]
 				},
+				["ActiveTalents"] = 1,
+				["lastUpdate"] = 1308000200,
 				["GlyphList"] = {
 					11, -- [1]
 					11170, -- [2]
@@ -459,12 +461,10 @@ DataStore_TalentsDB = {
 					7206, -- [36]
 					7222, -- [37]
 				},
-				["lastUpdate"] = 1307971238,
-				["Class"] = "MAGE",
 				["TalentTrees"] = {
 					["Fire|1"] = 172,
 				},
-				["ActiveTalents"] = 1,
+				["Class"] = "MAGE",
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["Glyphs"] = {
@@ -478,8 +478,9 @@ DataStore_TalentsDB = {
 					1048582, -- [8]
 					2097158, -- [9]
 				},
-				["Class"] = "WARLOCK",
+				["ActiveTalents"] = 1,
 				["lastUpdate"] = 1307913962,
+				["Class"] = "WARLOCK",
 				["GlyphList"] = {
 					11, -- [1]
 					4402, -- [2]
@@ -519,7 +520,6 @@ DataStore_TalentsDB = {
 					7718, -- [36]
 					7638, -- [37]
 				},
-				["ActiveTalents"] = 1,
 			},
 		},
 		["Reference"] = {
@@ -640,80 +640,81 @@ DataStore_TalentsDB = {
 				[704] = "Shield of the Righteous",
 				[185] = "Hammer of Justice",
 				[193] = "Exorcism",
-				[477] = "Unending Breath",
-				[484] = "Berserker Rage",
-				[705] = "Divine Plea",
+				[256] = "Holy Nova",
+				[711] = "Spirit Tap",
+				[480] = "Curse of Exhaustion",
 				[928] = "Living Bomb",
-				[481] = "Enslave Demon",
+				[705] = "Divine Plea",
 				[497] = "Intervene",
 				[258] = "Lightwell",
 				[274] = "Corruption",
 				[290] = "Seduction",
 				[254] = "Fear Ward",
 				[322] = "Ice Lance",
-				[478] = "Drain Soul",
+				[454] = "Insight",
 				[706] = "Holy Shock",
-				[761] = "Soul Link",
-				[759] = "Shadowflame",
-				[760] = "Life Tap",
-				[482] = "Ritual of Souls",
+				[505] = "Sweeping Strikes",
+				[501] = "Revenge",
+				[485] = "Long Charge",
+				[281] = "Healthstone",
 				[611] = "Blast Wave",
 				[450] = "Penguin",
 				[930] = "Long Word",
-				[707] = "Hand of Salvation",
+				[482] = "Ritual of Souls",
 				[767] = "Shield Wall",
 				[259] = "Mass Dispel",
 				[275] = "Bane of Agony",
 				[291] = "Unstable Affliction",
-				[757] = "Chaos Bolt",
+				[192] = "Turn Evil",
 				[323] = "Icy Veins",
 				[931] = "Intercept",
 				[708] = "Dispersion",
 				[186] = "Divine Protection",
 				[194] = "Cleansing",
-				[255] = "Flash Heal",
-				[756] = "Metamorphosis",
-				[709] = "Guardian Spirit",
+				[479] = "Eye of Kilrogg",
+				[911] = "Lash of Pain",
+				[483] = "Battle",
 				[451] = "Slow Fall",
 				[932] = "Death Wish",
-				[483] = "Battle",
+				[709] = "Guardian Spirit",
 				[499] = "Overpower",
 				[260] = "Psychic Horror",
 				[276] = "Death Coil",
 				[292] = "Voidwalker",
-				[911] = "Lash of Pain",
-				[479] = "Eye of Kilrogg",
-				[192] = "Turn Evil",
+				[756] = "Metamorphosis",
+				[255] = "Flash Heal",
+				[757] = "Chaos Bolt",
 				[710] = "Penance",
-				[281] = "Healthstone",
-				[485] = "Long Charge",
-				[501] = "Revenge",
-				[505] = "Sweeping Strikes",
-				[454] = "Insight",
+				[707] = "Hand of Salvation",
+				[760] = "Life Tap",
+				[759] = "Shadowflame",
+				[761] = "Soul Link",
+				[478] = "Drain Soul",
 				[452] = "Blessing of Kings",
-				[480] = "Curse of Exhaustion",
-				[711] = "Spirit Tap",
-				[256] = "Holy Nova",
+				[481] = "Enslave Demon",
+				[484] = "Berserker Rage",
+				[477] = "Unending Breath",
 			},
 		},
 	},
 }
 DataStore_TalentsRefDB = {
 	["profileKeys"] = {
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 	},
 	["global"] = {
 		["WARRIOR"] = {
 			["Locale"] = "enUS",
 			["Trees"] = {
 				["Fury"] = {
+					["background"] = "WarriorFury",
 					["talents"] = {
 						"9610|Blood Craze|Spell_Shadow_SummonImp|1|1|3", -- [1]
 						"9606|Battle Trance|INV_Helmet_06|1|2|3", -- [2]
@@ -737,46 +738,15 @@ DataStore_TalentsRefDB = {
 						"9658|Titan's Grip|Ability_Warrior_TitansGrip|7|2|1", -- [20]
 						"9660|Single-Minded Fury|warrior_talent_icon_singlemindedfury|7|3|1", -- [21]
 					},
+					["icon"] = "Ability_Warrior_InnerRage",
 					["prereqs"] = {
 						[18] = "4|2",
 						[13] = "4|2",
 						[12] = "3|2",
 					},
-					["icon"] = "Ability_Warrior_InnerRage",
-					["background"] = "WarriorFury",
-				},
-				["Arms"] = {
-					["talents"] = {
-						"10134|War Academy|Ability_Warrior_UnrelentingAssault|1|1|3", -- [1]
-						"11163|Field Dressing|INV_Misc_Bandage_05|1|2|2", -- [2]
-						"9664|Blitz|warrior_talent_icon_blitz|1|3|2", -- [3]
-						"11416|Tactical Mastery|Spell_Nature_EnchantArmor|2|1|2", -- [4]
-						"8190|Second Wind|Ability_Hunter_Harass|2|2|2", -- [5]
-						"8176|Deep Wounds|Ability_BackStab|2|3|3", -- [6]
-						"8184|Drums of War|Achievement_BG_winWSG_3-0|2|4|2", -- [7]
-						"10138|Taste for Blood|Ability_Rogue_HungerforBlood|3|1|3", -- [8]
-						"8192|Sweeping Strikes|Ability_Rogue_SliceDice|3|2|1", -- [9]
-						"10741|Impale|Ability_SearingArrow|3|3|2", -- [10]
-						"11417|Improved Hamstring|Ability_ShockWave|3|4|2", -- [11]
-						"11418|Improved Slam|Ability_Warrior_DecisiveStrike|4|1|2", -- [12]
-						"11223|Deadly Calm|achievement_boss_kingymiron|4|2|1", -- [13]
-						"9662|Blood Frenzy|Ability_Warrior_BloodFrenzy|4|3|2", -- [14]
-						"10520|Lambs to the Slaughter|warrior_talent_icon_lambstotheslaughter|5|1|3", -- [15]
-						"8208|Juggernaut|Ability_Warrior_BullRush|5|2|1", -- [16]
-						"8214|Sudden Death|Ability_Warrior_ImprovedDisciplines|5|4|2", -- [17]
-						"8194|Wrecking Crew|Ability_Warrior_Trauma|6|1|2", -- [18]
-						"11167|Throwdown|inv_mace_62|6|3|1", -- [19]
-						"8222|Bladestorm|Ability_Warrior_Bladestorm|7|2|1", -- [20]
-					},
-					["prereqs"] = {
-						[19] = "5|2",
-						[20] = "5|2",
-						[10] = "2|3",
-					},
-					["icon"] = "Ability_Warrior_SavageBlow",
-					["background"] = "WarriorArms",
 				},
 				["Protection"] = {
+					["background"] = "WarriorProtection",
 					["talents"] = {
 						"10464|Incite|Ability_Warrior_Incite|1|1|3", -- [1]
 						"10474|Toughness|Spell_Holy_Devotion|1|2|3", -- [2]
@@ -799,13 +769,43 @@ DataStore_TalentsRefDB = {
 						"10496|Sword and Board|Ability_Warrior_SwordandBoard|6|3|3", -- [19]
 						"10498|Shockwave|Ability_Warrior_Shockwave|7|2|1", -- [20]
 					},
+					["icon"] = "Ability_Warrior_DefensiveStance",
 					["prereqs"] = {
 						[14] = "4|3",
 						[16] = "3|2",
 						[19] = "4|3",
 					},
-					["icon"] = "Ability_Warrior_DefensiveStance",
-					["background"] = "WarriorProtection",
+				},
+				["Arms"] = {
+					["background"] = "WarriorArms",
+					["talents"] = {
+						"10134|War Academy|Ability_Warrior_UnrelentingAssault|1|1|3", -- [1]
+						"11163|Field Dressing|INV_Misc_Bandage_05|1|2|2", -- [2]
+						"9664|Blitz|warrior_talent_icon_blitz|1|3|2", -- [3]
+						"11416|Tactical Mastery|Spell_Nature_EnchantArmor|2|1|2", -- [4]
+						"8190|Second Wind|Ability_Hunter_Harass|2|2|2", -- [5]
+						"8176|Deep Wounds|Ability_BackStab|2|3|3", -- [6]
+						"8184|Drums of War|Achievement_BG_winWSG_3-0|2|4|2", -- [7]
+						"10138|Taste for Blood|Ability_Rogue_HungerforBlood|3|1|3", -- [8]
+						"8192|Sweeping Strikes|Ability_Rogue_SliceDice|3|2|1", -- [9]
+						"10741|Impale|Ability_SearingArrow|3|3|2", -- [10]
+						"11417|Improved Hamstring|Ability_ShockWave|3|4|2", -- [11]
+						"11418|Improved Slam|Ability_Warrior_DecisiveStrike|4|1|2", -- [12]
+						"11223|Deadly Calm|achievement_boss_kingymiron|4|2|1", -- [13]
+						"9662|Blood Frenzy|Ability_Warrior_BloodFrenzy|4|3|2", -- [14]
+						"10520|Lambs to the Slaughter|warrior_talent_icon_lambstotheslaughter|5|1|3", -- [15]
+						"8208|Juggernaut|Ability_Warrior_BullRush|5|2|1", -- [16]
+						"8214|Sudden Death|Ability_Warrior_ImprovedDisciplines|5|4|2", -- [17]
+						"8194|Wrecking Crew|Ability_Warrior_Trauma|6|1|2", -- [18]
+						"11167|Throwdown|inv_mace_62|6|3|1", -- [19]
+						"8222|Bladestorm|Ability_Warrior_Bladestorm|7|2|1", -- [20]
+					},
+					["icon"] = "Ability_Warrior_SavageBlow",
+					["prereqs"] = {
+						[19] = "5|2",
+						[20] = "5|2",
+						[10] = "2|3",
+					},
 				},
 			},
 			["Version"] = 14007,
@@ -815,13 +815,6 @@ DataStore_TalentsRefDB = {
 			["Locale"] = "enUS",
 			["Trees"] = {
 				["Demonology"] = {
-					["prereqs"] = {
-						[13] = "4|2",
-						[15] = "4|2",
-						[17] = "5|2",
-					},
-					["background"] = "WarlockSummoning",
-					["icon"] = "Spell_Shadow_Metamorphosis",
 					["talents"] = {
 						"10994|Demonic Embrace|Spell_Shadow_Metamorphosis|1|1|3", -- [1]
 						"10992|Dark Arts|ability_warlock_darkarts|1|2|3", -- [2]
@@ -843,14 +836,15 @@ DataStore_TalentsRefDB = {
 						"11042|Demonic Pact|Spell_Shadow_DemonicPact|6|3|1", -- [18]
 						"11044|Metamorphosis|Spell_Shadow_DemonForm|7|2|1", -- [19]
 					},
+					["prereqs"] = {
+						[13] = "4|2",
+						[15] = "4|2",
+						[17] = "5|2",
+					},
+					["icon"] = "Spell_Shadow_Metamorphosis",
+					["background"] = "WarlockSummoning",
 				},
 				["Affliction"] = {
-					["prereqs"] = {
-						[6] = "2|2",
-						[11] = "2|2",
-					},
-					["background"] = "WarlockCurses",
-					["icon"] = "Spell_Shadow_DeathCoil",
 					["talents"] = {
 						"11100|Doom and Gloom|Spell_Shadow_CurseOfSargeras|1|1|2", -- [1]
 						"11110|Improved Life Tap|Spell_Shadow_BurningSpirit|1|2|2", -- [2]
@@ -871,15 +865,14 @@ DataStore_TalentsRefDB = {
 						"11200|Pandemic|spell_shadow_lastingaffliction|6|3|2", -- [17]
 						"11152|Haunt|Ability_Warlock_Haunt|7|2|1", -- [18]
 					},
+					["prereqs"] = {
+						[6] = "2|2",
+						[11] = "2|2",
+					},
+					["icon"] = "Spell_Shadow_DeathCoil",
+					["background"] = "WarlockCurses",
 				},
 				["Destruction"] = {
-					["prereqs"] = {
-						[16] = "4|4",
-						[17] = "4|1",
-						[19] = "5|2",
-					},
-					["background"] = "WarlockDestruction",
-					["icon"] = "Spell_Shadow_RainOfFire",
 					["talents"] = {
 						"10938|Bane|Spell_Shadow_DeathPact|1|1|3", -- [1]
 						"10936|Shadow and Flame|Spell_Shadow_ShadowandFlame|1|2|3", -- [2]
@@ -901,6 +894,13 @@ DataStore_TalentsRefDB = {
 						"10962|Bane of Havoc|ability_warlock_baneofhavoc|6|3|1", -- [18]
 						"10986|Chaos Bolt|Ability_Warlock_ChaosBolt|7|2|1", -- [19]
 					},
+					["prereqs"] = {
+						[16] = "4|4",
+						[17] = "4|1",
+						[19] = "5|2",
+					},
+					["icon"] = "Spell_Shadow_RainOfFire",
+					["background"] = "WarlockDestruction",
 				},
 			},
 			["Version"] = 14007,
@@ -914,7 +914,12 @@ DataStore_TalentsRefDB = {
 			["Locale"] = "enUS",
 			["Trees"] = {
 				["Fire"] = {
+					["prereqs"] = {
+						[14] = "3|3",
+						[21] = "5|2",
+					},
 					["background"] = "MageFire",
+					["icon"] = "Spell_Fire_FireBolt02",
 					["talents"] = {
 						"10545|Master of Elements|Spell_Fire_MasterOfElements|1|1|2", -- [1]
 						"10531|Burning Soul|spell_burningsoul|1|2|3", -- [2]
@@ -938,14 +943,16 @@ DataStore_TalentsRefDB = {
 						"10541|Critical Mass|Spell_Nature_WispHeal|6|3|3", -- [20]
 						"10577|Living Bomb|Ability_Mage_LivingBomb|7|2|1", -- [21]
 					},
-					["icon"] = "Spell_Fire_FireBolt02",
-					["prereqs"] = {
-						[14] = "3|3",
-						[21] = "5|2",
-					},
 				},
 				["Frost"] = {
+					["prereqs"] = {
+						[11] = "3|3",
+						[19] = "5|2",
+						[15] = "5|2",
+						[17] = "5|2",
+					},
 					["background"] = "MageFrost",
+					["icon"] = "Spell_Frost_FrostBolt02",
 					["talents"] = {
 						"9862|Early Frost|Spell_Frost_ChillingBolt|1|1|2", -- [1]
 						"11157|Piercing Ice|Spell_Frost_Frostbolt|1|2|3", -- [2]
@@ -967,16 +974,17 @@ DataStore_TalentsRefDB = {
 						"11169|Frostfire Orb|spell_firefrost orb|6|3|2", -- [18]
 						"9898|Deep Freeze|Ability_Mage_DeepFreeze|7|2|1", -- [19]
 					},
-					["icon"] = "Spell_Frost_FrostBolt02",
-					["prereqs"] = {
-						[11] = "3|3",
-						[19] = "5|2",
-						[15] = "5|2",
-						[17] = "5|2",
-					},
 				},
 				["Arcane"] = {
+					["prereqs"] = {
+						[13] = "3|2",
+						[8] = "3|2",
+						[10] = "2|3",
+						[22] = "5|2",
+						[19] = "5|2",
+					},
 					["background"] = "MageArcane",
+					["icon"] = "Spell_Holy_MagicalSentry",
 					["talents"] = {
 						"9154|Arcane Concentration|Spell_Shadow_ManaBurn|1|1|3", -- [1]
 						"9166|Improved Counterspell|Spell_Frost_IceShock|1|2|2", -- [2]
@@ -1001,14 +1009,6 @@ DataStore_TalentsRefDB = {
 						"9194|Improved Mana Gem|INV_Misc_Gem_Emerald_01|6|3|2", -- [21]
 						"9186|Arcane Power|Spell_Nature_Lightning|7|2|1", -- [22]
 					},
-					["icon"] = "Spell_Holy_MagicalSentry",
-					["prereqs"] = {
-						[13] = "3|2",
-						[8] = "3|2",
-						[10] = "2|3",
-						[22] = "5|2",
-						[19] = "5|2",
-					},
 				},
 			},
 			["Version"] = 14007,
@@ -1018,6 +1018,7 @@ DataStore_TalentsRefDB = {
 			["Locale"] = "enUS",
 			["Trees"] = {
 				["Discipline"] = {
+					["background"] = "PriestDiscipline",
 					["talents"] = {
 						"10736|Improved Power Word: Shield|Spell_Holy_PowerWordShield|1|1|2", -- [1]
 						"8577|Twin Disciplines|Spell_Holy_SealOfVengeance|1|2|3", -- [2]
@@ -1041,48 +1042,15 @@ DataStore_TalentsRefDB = {
 						"8625|Grace|Spell_Holy_HopeAndGrace|6|3|2", -- [20]
 						"8603|Power Word: Barrier|spell_holy_powerwordbarrier|7|2|1", -- [21]
 					},
+					["icon"] = "Spell_Holy_PowerWordShield",
 					["prereqs"] = {
 						[5] = "2|1",
 						[15] = "3|1",
 						[21] = "5|2",
 					},
-					["icon"] = "Spell_Holy_PowerWordShield",
-					["background"] = "PriestDiscipline",
-				},
-				["Shadow"] = {
-					["talents"] = {
-						"9032|Darkness|ability_priest_darkness|1|1|3", -- [1]
-						"9036|Improved Shadow Word: Pain|Spell_Shadow_ShadowWordPain|1|2|2", -- [2]
-						"9046|Veiled Shadows|Spell_Magic_LesserInvisibilty|1|3|2", -- [3]
-						"9040|Improved Psychic Scream|Spell_Shadow_PsychicScream|2|1|2", -- [4]
-						"9042|Improved Mind Blast|Spell_Shadow_UnholyFrenzy|2|2|3", -- [5]
-						"9062|Improved Devouring Plague|Spell_Shadow_DevouringPlague.|2|3|2", -- [6]
-						"11673|Twisted Faith|Spell_Shadow_MindTwisting|2|4|2", -- [7]
-						"9064|Shadowform|Spell_Shadow_Shadowform|3|2|1", -- [8]
-						"9068|Phantasm|Spell_Shadow_TwistedFaith|3|3|2", -- [9]
-						"11606|Harnessed Shadows|INV_Misc_Orb_04|3|4|2", -- [10]
-						"9052|Silence|ability_priest_silence|4|1|1", -- [11]
-						"9054|Vampiric Embrace|Spell_Shadow_UnsummonBuilding|4|2|1", -- [12]
-						"11778|Masochism|Spell_Shadow_Misery|4|3|2", -- [13]
-						"9060|Mind Melt|Spell_Shadow_Skull|4|4|2", -- [14]
-						"9076|Pain and Suffering|Spell_Shadow_PainAndSuffering|5|1|2", -- [15]
-						"9074|Vampiric Touch|Spell_Holy_Stoicism|5|2|1", -- [16]
-						"11663|Paralysis|Ability_Rogue_MasterOfSubtlety|5|3|2", -- [17]
-						"9072|Psychic Horror|Spell_Shadow_PsychicHorrors|6|1|1", -- [18]
-						"11605|Sin and Punishment|Spell_Holy_PrayerofShadowProtection|6|2|2", -- [19]
-						"9070|Shadowy Apparition|ability_priest_shadowyapparition|6|3|3", -- [20]
-						"9080|Dispersion|Spell_Shadow_Dispersion|7|2|1", -- [21]
-					},
-					["prereqs"] = {
-						[11] = "2|1",
-						[13] = "4|2",
-						[19] = "5|2",
-						[16] = "4|2",
-					},
-					["icon"] = "Spell_Shadow_ShadowWordPain",
-					["background"] = "PriestShadow",
 				},
 				["Holy"] = {
+					["background"] = "PriestHoly",
 					["talents"] = {
 						"10746|Improved Renew|Spell_Holy_Renew|1|1|2", -- [1]
 						"9553|Empowered Healing|Spell_Holy_GreaterHeal|1|2|3", -- [2]
@@ -1106,6 +1074,7 @@ DataStore_TalentsRefDB = {
 						"9595|Circle of Healing|Spell_Holy_CircleOfRenewal|6|3|1", -- [20]
 						"9601|Guardian Spirit|Spell_Holy_GuardianSpirit|7|2|1", -- [21]
 					},
+					["icon"] = "Spell_Holy_GuardianSpirit",
 					["prereqs"] = {
 						[11] = "3|1",
 						[7] = "1|1",
@@ -1113,8 +1082,39 @@ DataStore_TalentsRefDB = {
 						[19] = "5|2",
 						[16] = "5|2",
 					},
-					["icon"] = "Spell_Holy_GuardianSpirit",
-					["background"] = "PriestHoly",
+				},
+				["Shadow"] = {
+					["background"] = "PriestShadow",
+					["talents"] = {
+						"9032|Darkness|ability_priest_darkness|1|1|3", -- [1]
+						"9036|Improved Shadow Word: Pain|Spell_Shadow_ShadowWordPain|1|2|2", -- [2]
+						"9046|Veiled Shadows|Spell_Magic_LesserInvisibilty|1|3|2", -- [3]
+						"9040|Improved Psychic Scream|Spell_Shadow_PsychicScream|2|1|2", -- [4]
+						"9042|Improved Mind Blast|Spell_Shadow_UnholyFrenzy|2|2|3", -- [5]
+						"9062|Improved Devouring Plague|Spell_Shadow_DevouringPlague.|2|3|2", -- [6]
+						"11673|Twisted Faith|Spell_Shadow_MindTwisting|2|4|2", -- [7]
+						"9064|Shadowform|Spell_Shadow_Shadowform|3|2|1", -- [8]
+						"9068|Phantasm|Spell_Shadow_TwistedFaith|3|3|2", -- [9]
+						"11606|Harnessed Shadows|INV_Misc_Orb_04|3|4|2", -- [10]
+						"9052|Silence|ability_priest_silence|4|1|1", -- [11]
+						"9054|Vampiric Embrace|Spell_Shadow_UnsummonBuilding|4|2|1", -- [12]
+						"11778|Masochism|Spell_Shadow_Misery|4|3|2", -- [13]
+						"9060|Mind Melt|Spell_Shadow_Skull|4|4|2", -- [14]
+						"9076|Pain and Suffering|Spell_Shadow_PainAndSuffering|5|1|2", -- [15]
+						"9074|Vampiric Touch|Spell_Holy_Stoicism|5|2|1", -- [16]
+						"11663|Paralysis|Ability_Rogue_MasterOfSubtlety|5|3|2", -- [17]
+						"9072|Psychic Horror|Spell_Shadow_PsychicHorrors|6|1|1", -- [18]
+						"11605|Sin and Punishment|Spell_Holy_PrayerofShadowProtection|6|2|2", -- [19]
+						"9070|Shadowy Apparition|ability_priest_shadowyapparition|6|3|3", -- [20]
+						"9080|Dispersion|Spell_Shadow_Dispersion|7|2|1", -- [21]
+					},
+					["icon"] = "Spell_Shadow_ShadowWordPain",
+					["prereqs"] = {
+						[11] = "2|1",
+						[13] = "4|2",
+						[16] = "4|2",
+						[19] = "5|2",
+					},
 				},
 			},
 			["Version"] = 14007,

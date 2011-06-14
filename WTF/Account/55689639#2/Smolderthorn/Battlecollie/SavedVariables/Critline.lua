@@ -29,19 +29,19 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[34914] = {
+					[15407] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Sifreldar Runekeeper",
+								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 1043,
+								["targetLevel"] = 79,
+								["amount"] = 793,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 79,
-								["amount"] = 1895,
+								["amount"] = 1584,
 							},
 						},
 					},
@@ -61,19 +61,19 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[15407] = {
+					[34914] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Sifreldar Storm Maiden",
+								["target"] = "Sifreldar Runekeeper",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 79,
-								["amount"] = 793,
+								["targetLevel"] = 80,
+								["amount"] = 1043,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 79,
-								["amount"] = 1584,
+								["amount"] = 1895,
 							},
 						},
 					},
@@ -103,16 +103,6 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[2944] = {
-						[2] = {
-							["normal"] = {
-								["target"] = "Sifreldar Storm Maiden",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 78,
-								["amount"] = 613,
-							},
-						},
-					},
 					[8092] = {
 						{
 							["normal"] = {
@@ -128,6 +118,16 @@ CritlinePerCharDB = {
 								["amount"] = 7063,
 							},
 						}, -- [1]
+					},
+					[2944] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Sifreldar Storm Maiden",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 78,
+								["amount"] = 613,
+							},
+						},
 					},
 				},
 				["heal"] = {
@@ -197,15 +197,15 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[15290] = {
-						[2] = {
+					[2061] = {
+						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 224,
+								["amount"] = 7893,
 							},
-						},
+						}, -- [1]
 					},
 					[23455] = {
 						{
@@ -243,15 +243,15 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2061] = {
-						{
+					[15290] = {
+						[2] = {
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 7893,
+								["amount"] = 224,
 							},
-						}, -- [1]
+						},
 					},
 					[17] = {
 						{
@@ -315,6 +315,16 @@ CritlinePerCharDB = {
 							},
 						}, -- [2]
 					},
+					[50799] = {
+						{
+							["normal"] = {
+								["target"] = "The Prophet Tharon'ja ",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 76,
+								["amount"] = 219,
+							},
+						}, -- [1]
+					},
 					[34914] = {
 						[2] = {
 							["normal"] = {
@@ -330,16 +340,6 @@ CritlinePerCharDB = {
 								["amount"] = 2191,
 							},
 						},
-					},
-					[50799] = {
-						{
-							["normal"] = {
-								["target"] = "The Prophet Tharon'ja ",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 219,
-							},
-						}, -- [1]
 					},
 					[2944] = {
 						[2] = {

@@ -34,14 +34,15 @@ SMARTBUFF_Options = {
 	["UpgradeToDualSpec"] = true,
 	["OldWheelDown"] = "CAMERAZOOMOUT",
 	["LastTemplate"] = "Solo",
-	["BlacklistTimer"] = 5,
+	["LinkSelfBuffCheck"] = true,
 	["UISync"] = true,
 	["ToggleAutoSound"] = false,
 	["ShowMiniGrp"] = true,
-	["LinkSelfBuffCheck"] = true,
+	["BlacklistTimer"] = 5,
 	["ToggleMsgWarning"] = false,
 	["MinCharges"] = 2,
-	["Toggle"] = true,
+	["AddList"] = {
+	},
 	["HideMmButton"] = true,
 	["OldWheelUp"] = "CAMERAZOOMIN",
 	["BuffInCities"] = true,
@@ -58,8 +59,7 @@ SMARTBUFF_Options = {
 	["HideSAButton"] = true,
 	["ScrollWheelDown"] = true,
 	["ToggleAutoChat"] = true,
-	["AddList"] = {
-	},
+	["Toggle"] = true,
 	["ScrollWheelUp"] = true,
 	["InCombat"] = true,
 }
@@ -67,22 +67,22 @@ SMARTBUFF_Buffs = {
 	{
 		["Party"] = {
 			["Inner Fire"] = {
-				["OH"] = false,
 				["SelfOnly"] = false,
+				["OH"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["Levitate"] = {
 				["HUNTER"] = 1,
@@ -107,40 +107,7 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["COut"] = 1,
 			},
-			["Shadow Protection"] = {
-				["HUNTER"] = true,
-				["WARRIOR"] = true,
-				["PALADIN"] = true,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["EnableS"] = true,
-				["DAMAGER"] = false,
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["MAGE"] = true,
-				["DRUID"] = true,
-				["DEATHKNIGHT"] = true,
-				["TANK"] = false,
-				["ROGUE"] = true,
-				["OH"] = false,
-				["DKPET"] = false,
-				["COut"] = true,
-				["HEALER"] = false,
-				["PRIEST"] = true,
-				["HPET"] = false,
-				["SelfNot"] = false,
-				["WARLOCK"] = true,
-				["SelfOnly"] = false,
-				["WPET"] = false,
-				["SHAMAN"] = true,
-				["RH"] = false,
-				["IgnoreList"] = {
-				},
-			},
+			["SelfFirst"] = true,
 			["Power Word: Shield"] = {
 				["HUNTER"] = false,
 				["WARRIOR"] = false,
@@ -150,7 +117,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -172,11 +140,28 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = false,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["GrpBuffSize"] = 4,
-			["Power Word: Fortitude"] = {
+			["Find Herbs"] = {
+				["SelfOnly"] = false,
+				["OH"] = false,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["EnableG"] = false,
+			},
+			["Shadow Protection"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
 				["PALADIN"] = true,
@@ -185,7 +170,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = true,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -207,10 +193,8 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
-			["SelfFirst"] = true,
 			["Fear Ward"] = {
 				["HUNTER"] = 1,
 				["WARRIOR"] = 1,
@@ -235,46 +219,63 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["EnableG"] = false,
 			},
-			["Find Herbs"] = {
-				["OH"] = false,
-				["SelfOnly"] = false,
+			["Power Word: Fortitude"] = {
+				["HUNTER"] = true,
+				["WARRIOR"] = true,
+				["PALADIN"] = true,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
-				["EnableG"] = false,
+				["EnableS"] = true,
+				["DAMAGER"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
+				["MAGE"] = true,
+				["DRUID"] = true,
+				["DEATHKNIGHT"] = true,
+				["TANK"] = false,
+				["ROGUE"] = true,
+				["OH"] = false,
+				["DKPET"] = false,
+				["COut"] = true,
+				["HEALER"] = false,
+				["PRIEST"] = true,
+				["HPET"] = false,
+				["SelfNot"] = false,
+				["WARLOCK"] = true,
+				["SelfOnly"] = false,
+				["WPET"] = false,
+				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 		},
 		["Solo"] = {
 			["Inner Fire"] = {
-				["OH"] = false,
 				["SelfOnly"] = false,
+				["OH"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["Scroll of Agility VII"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -282,14 +283,13 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Levitate"] = {
 				["HUNTER"] = 1,
@@ -314,40 +314,7 @@ SMARTBUFF_Buffs = {
 				["IgnoreList"] = {
 				},
 			},
-			["Shadow Protection"] = {
-				["HUNTER"] = true,
-				["WARRIOR"] = true,
-				["PALADIN"] = true,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["EnableS"] = true,
-				["DAMAGER"] = false,
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["MAGE"] = true,
-				["DRUID"] = true,
-				["DEATHKNIGHT"] = true,
-				["TANK"] = false,
-				["ROGUE"] = true,
-				["OH"] = false,
-				["DKPET"] = false,
-				["COut"] = true,
-				["HEALER"] = false,
-				["PRIEST"] = true,
-				["HPET"] = false,
-				["SelfNot"] = false,
-				["WARLOCK"] = true,
-				["SelfOnly"] = false,
-				["WPET"] = false,
-				["SHAMAN"] = true,
-				["RH"] = false,
-				["IgnoreList"] = {
-				},
-			},
+			["SelfFirst"] = true,
 			["Power Word: Shield"] = {
 				["HUNTER"] = false,
 				["WARRIOR"] = false,
@@ -357,7 +324,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -379,10 +347,85 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = false,
 				["RH"] = false,
+				["EnableG"] = false,
+			},
+			["GrpBuffSize"] = 4,
+			["Find Herbs"] = {
+				["SelfOnly"] = false,
+				["OH"] = false,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["EnableG"] = false,
+			},
+			["Shadow Protection"] = {
+				["HUNTER"] = true,
+				["WARRIOR"] = true,
+				["PALADIN"] = true,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["EnableS"] = true,
+				["DAMAGER"] = false,
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["MAGE"] = true,
+				["DRUID"] = true,
+				["DEATHKNIGHT"] = true,
+				["TANK"] = false,
+				["ROGUE"] = true,
+				["OH"] = false,
+				["DKPET"] = false,
+				["COut"] = true,
+				["HEALER"] = false,
+				["PRIEST"] = true,
+				["HPET"] = false,
+				["SelfNot"] = false,
+				["WARLOCK"] = true,
+				["SelfOnly"] = false,
+				["WPET"] = false,
+				["SHAMAN"] = true,
+				["RH"] = false,
+				["EnableG"] = false,
+			},
+			["Fear Ward"] = {
+				["HUNTER"] = 1,
+				["WARRIOR"] = 1,
+				["ROGUE"] = 1,
+				["MAGE"] = 1,
+				["CIn"] = 1,
+				["EnableS"] = true,
+				["EnableG"] = false,
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["DRUID"] = 1,
+				["DEATHKNIGHT"] = 1,
+				["PRIEST"] = 1,
+				["SHAMAN"] = 1,
+				["SelfNot"] = false,
+				["WARLOCK"] = 1,
+				["SelfOnly"] = 1,
+				["PALADIN"] = 1,
+				["RBTime"] = 0,
+				["RH"] = false,
 				["IgnoreList"] = {
 				},
 			},
-			["GrpBuffSize"] = 4,
 			["Power Word: Fortitude"] = {
 				["HUNTER"] = 1,
 				["WARRIOR"] = 1,
@@ -407,49 +450,6 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["EnableG"] = false,
 			},
-			["SelfFirst"] = true,
-			["Fear Ward"] = {
-				["HUNTER"] = 1,
-				["WARRIOR"] = 1,
-				["ROGUE"] = 1,
-				["MAGE"] = 1,
-				["CIn"] = 1,
-				["EnableS"] = true,
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["AddList"] = {
-				},
-				["DRUID"] = 1,
-				["DEATHKNIGHT"] = 1,
-				["PRIEST"] = 1,
-				["SHAMAN"] = 1,
-				["SelfNot"] = false,
-				["WARLOCK"] = 1,
-				["SelfOnly"] = 1,
-				["PALADIN"] = 1,
-				["RBTime"] = 0,
-				["RH"] = false,
-				["IgnoreList"] = {
-				},
-			},
-			["Find Herbs"] = {
-				["OH"] = false,
-				["SelfOnly"] = false,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["IgnoreList"] = {
-				},
-			},
 		},
 		["Order"] = {
 			"Power Word: Fortitude", -- [1]
@@ -463,22 +463,22 @@ SMARTBUFF_Buffs = {
 		},
 		["Raid"] = {
 			["Inner Fire"] = {
-				["OH"] = false,
 				["SelfOnly"] = false,
+				["OH"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["Levitate"] = {
 				["HUNTER"] = 1,
@@ -503,40 +503,7 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["COut"] = 1,
 			},
-			["Shadow Protection"] = {
-				["HUNTER"] = true,
-				["WARRIOR"] = true,
-				["PALADIN"] = true,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["EnableS"] = true,
-				["DAMAGER"] = false,
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["MAGE"] = true,
-				["DRUID"] = true,
-				["DEATHKNIGHT"] = true,
-				["TANK"] = false,
-				["ROGUE"] = true,
-				["OH"] = false,
-				["DKPET"] = false,
-				["COut"] = true,
-				["HEALER"] = false,
-				["PRIEST"] = true,
-				["HPET"] = false,
-				["SelfNot"] = false,
-				["WARLOCK"] = true,
-				["SelfOnly"] = false,
-				["WPET"] = false,
-				["SHAMAN"] = true,
-				["RH"] = false,
-				["IgnoreList"] = {
-				},
-			},
+			["SelfFirst"] = true,
 			["Power Word: Shield"] = {
 				["HUNTER"] = false,
 				["WARRIOR"] = false,
@@ -546,7 +513,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -568,11 +536,28 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = false,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["GrpBuffSize"] = 4,
-			["Power Word: Fortitude"] = {
+			["Find Herbs"] = {
+				["SelfOnly"] = false,
+				["OH"] = false,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["EnableG"] = false,
+			},
+			["Shadow Protection"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
 				["PALADIN"] = true,
@@ -581,7 +566,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = true,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -603,10 +589,8 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
-			["SelfFirst"] = true,
 			["Fear Ward"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -616,7 +600,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -638,46 +623,61 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
-			["Find Herbs"] = {
-				["OH"] = false,
-				["SelfOnly"] = false,
+			["Power Word: Fortitude"] = {
+				["HUNTER"] = true,
+				["WARRIOR"] = true,
+				["PALADIN"] = true,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
-				["EnableG"] = false,
+				["EnableS"] = true,
+				["DAMAGER"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
+				["MAGE"] = true,
+				["DRUID"] = true,
+				["DEATHKNIGHT"] = true,
+				["TANK"] = false,
+				["ROGUE"] = true,
+				["OH"] = false,
+				["DKPET"] = false,
+				["COut"] = true,
+				["HEALER"] = false,
+				["PRIEST"] = true,
+				["HPET"] = false,
+				["SelfNot"] = false,
+				["WARLOCK"] = true,
+				["SelfOnly"] = false,
+				["WPET"] = false,
+				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 		},
 		["Arena"] = {
 			["Inner Fire"] = {
-				["OH"] = false,
 				["SelfOnly"] = false,
+				["OH"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["Levitate"] = {
 				["HUNTER"] = 1,
@@ -702,40 +702,7 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["COut"] = 1,
 			},
-			["Shadow Protection"] = {
-				["HUNTER"] = true,
-				["WARRIOR"] = true,
-				["PALADIN"] = true,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["EnableS"] = true,
-				["DAMAGER"] = false,
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["MAGE"] = true,
-				["DRUID"] = true,
-				["DEATHKNIGHT"] = true,
-				["TANK"] = false,
-				["ROGUE"] = true,
-				["OH"] = false,
-				["DKPET"] = false,
-				["COut"] = true,
-				["HEALER"] = false,
-				["PRIEST"] = true,
-				["HPET"] = false,
-				["SelfNot"] = false,
-				["WARLOCK"] = true,
-				["SelfOnly"] = false,
-				["WPET"] = false,
-				["SHAMAN"] = true,
-				["RH"] = false,
-				["IgnoreList"] = {
-				},
-			},
+			["SelfFirst"] = true,
 			["Power Word: Shield"] = {
 				["HUNTER"] = false,
 				["WARRIOR"] = false,
@@ -745,7 +712,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -767,11 +735,28 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = false,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["GrpBuffSize"] = 4,
-			["Power Word: Fortitude"] = {
+			["Find Herbs"] = {
+				["SelfOnly"] = false,
+				["OH"] = false,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["EnableG"] = false,
+			},
+			["Shadow Protection"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
 				["PALADIN"] = true,
@@ -780,7 +765,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = true,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -802,10 +788,8 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
-			["SelfFirst"] = true,
 			["Fear Ward"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -815,7 +799,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -837,46 +822,61 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
-			["Find Herbs"] = {
-				["OH"] = false,
-				["SelfOnly"] = false,
+			["Power Word: Fortitude"] = {
+				["HUNTER"] = true,
+				["WARRIOR"] = true,
+				["PALADIN"] = true,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
-				["EnableG"] = false,
+				["EnableS"] = true,
+				["DAMAGER"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
+				["MAGE"] = true,
+				["DRUID"] = true,
+				["DEATHKNIGHT"] = true,
+				["TANK"] = false,
+				["ROGUE"] = true,
+				["OH"] = false,
+				["DKPET"] = false,
+				["COut"] = true,
+				["HEALER"] = false,
+				["PRIEST"] = true,
+				["HPET"] = false,
+				["SelfNot"] = false,
+				["WARLOCK"] = true,
+				["SelfOnly"] = false,
+				["WPET"] = false,
+				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 		},
 		["Battleground"] = {
 			["Inner Fire"] = {
-				["OH"] = false,
 				["SelfOnly"] = false,
+				["OH"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["Levitate"] = {
 				["HUNTER"] = 1,
@@ -901,40 +901,7 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["COut"] = 1,
 			},
-			["Shadow Protection"] = {
-				["HUNTER"] = true,
-				["WARRIOR"] = true,
-				["PALADIN"] = true,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["EnableS"] = true,
-				["DAMAGER"] = false,
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["MAGE"] = true,
-				["DRUID"] = true,
-				["DEATHKNIGHT"] = true,
-				["TANK"] = false,
-				["ROGUE"] = true,
-				["OH"] = false,
-				["DKPET"] = false,
-				["COut"] = true,
-				["HEALER"] = false,
-				["PRIEST"] = true,
-				["HPET"] = false,
-				["SelfNot"] = false,
-				["WARLOCK"] = true,
-				["SelfOnly"] = false,
-				["WPET"] = false,
-				["SHAMAN"] = true,
-				["RH"] = false,
-				["IgnoreList"] = {
-				},
-			},
+			["SelfFirst"] = true,
 			["Power Word: Shield"] = {
 				["HUNTER"] = false,
 				["WARRIOR"] = false,
@@ -944,7 +911,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -966,11 +934,28 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = false,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["GrpBuffSize"] = 4,
-			["Power Word: Fortitude"] = {
+			["Find Herbs"] = {
+				["SelfOnly"] = false,
+				["OH"] = false,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["EnableG"] = false,
+			},
+			["Shadow Protection"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
 				["PALADIN"] = true,
@@ -979,7 +964,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = true,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1001,10 +987,8 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
-			["SelfFirst"] = true,
 			["Fear Ward"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -1014,7 +998,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1036,33 +1021,49 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
-			["Find Herbs"] = {
-				["OH"] = false,
-				["SelfOnly"] = false,
+			["Power Word: Fortitude"] = {
+				["HUNTER"] = true,
+				["WARRIOR"] = true,
+				["PALADIN"] = true,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
-				["EnableG"] = false,
+				["EnableS"] = true,
+				["DAMAGER"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
+				["MAGE"] = true,
+				["DRUID"] = true,
+				["DEATHKNIGHT"] = true,
+				["TANK"] = false,
+				["ROGUE"] = true,
+				["OH"] = false,
+				["DKPET"] = false,
+				["COut"] = true,
+				["HEALER"] = false,
+				["PRIEST"] = true,
+				["HPET"] = false,
+				["SelfNot"] = false,
+				["WARLOCK"] = true,
+				["SelfOnly"] = false,
+				["WPET"] = false,
+				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 		},
 	}, -- [1]
 	{
 		["Party"] = {
 			["Inner Fire"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -1070,17 +1071,17 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Vampiric Embrace"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -1088,14 +1089,13 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Levitate"] = {
 				["HUNTER"] = true,
@@ -1105,9 +1105,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = false,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1153,6 +1153,43 @@ SMARTBUFF_Buffs = {
 				["ROGUE"] = 1,
 				["MAGE"] = 1,
 			},
+			["Find Herbs"] = {
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["SelfOnly"] = false,
+			},
+			["Shadowform"] = {
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = true,
+				["SelfNot"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["SelfOnly"] = false,
+			},
+			["GrpBuffSize"] = 4,
 			["Power Word: Fortitude"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -1161,9 +1198,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = true,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1195,9 +1232,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = false,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1221,43 +1258,7 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["DAMAGER"] = false,
 			},
-			["GrpBuffSize"] = 4,
-			["Find Herbs"] = {
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["OH"] = false,
-			},
-			["Shadowform"] = {
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = true,
-				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["OH"] = false,
-			},
+			["SelfFirst"] = true,
 			["Shadow Protection"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -1266,9 +1267,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = true,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1292,29 +1293,29 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["DAMAGER"] = false,
 			},
-			["SelfFirst"] = true,
 		},
 		["Solo"] = {
 			["Inner Fire"] = {
-				["OH"] = false,
 				["SelfOnly"] = false,
+				["OH"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
 			["Scroll of Agility VII"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -1322,34 +1323,32 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Vampiric Embrace"] = {
-				["OH"] = false,
 				["SelfOnly"] = false,
+				["OH"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 			},
-			["SelfFirst"] = true,
 			["Shadow Protection"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -1359,7 +1358,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = true,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1381,27 +1381,9 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
-			},
-			["Shadowform"] = {
-				["OH"] = false,
-				["SelfOnly"] = false,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = true,
-				["SelfNot"] = false,
 				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["IgnoreList"] = {
-				},
 			},
+			["SelfFirst"] = true,
 			["Power Word: Shield"] = {
 				["HUNTER"] = false,
 				["WARRIOR"] = false,
@@ -1411,7 +1393,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = false,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1433,10 +1416,45 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = false,
 				["RH"] = false,
+				["EnableG"] = false,
+			},
+			["Shadowform"] = {
+				["SelfOnly"] = false,
+				["OH"] = false,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = true,
+				["SelfNot"] = false,
 				["IgnoreList"] = {
 				},
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["EnableG"] = false,
 			},
 			["GrpBuffSize"] = 4,
+			["Find Herbs"] = {
+				["SelfOnly"] = false,
+				["OH"] = false,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["EnableG"] = false,
+			},
 			["Power Word: Fortitude"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -1446,7 +1464,8 @@ SMARTBUFF_Buffs = {
 				["CIn"] = false,
 				["EnableS"] = true,
 				["DAMAGER"] = false,
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1468,26 +1487,7 @@ SMARTBUFF_Buffs = {
 				["WPET"] = false,
 				["SHAMAN"] = true,
 				["RH"] = false,
-				["IgnoreList"] = {
-				},
-			},
-			["Find Herbs"] = {
-				["OH"] = false,
-				["SelfOnly"] = false,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
 				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["IgnoreList"] = {
-				},
 			},
 			["Fear Ward"] = {
 				["HUNTER"] = 1,
@@ -1550,7 +1550,8 @@ SMARTBUFF_Buffs = {
 		},
 		["Raid"] = {
 			["Inner Fire"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -1558,17 +1559,17 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Vampiric Embrace"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -1576,14 +1577,13 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Levitate"] = {
 				["HUNTER"] = true,
@@ -1593,9 +1593,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = false,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1641,6 +1641,43 @@ SMARTBUFF_Buffs = {
 				["ROGUE"] = 1,
 				["MAGE"] = 1,
 			},
+			["Find Herbs"] = {
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["SelfOnly"] = false,
+			},
+			["Shadowform"] = {
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = true,
+				["SelfNot"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["SelfOnly"] = false,
+			},
+			["GrpBuffSize"] = 4,
 			["Power Word: Fortitude"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -1649,9 +1686,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = true,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1683,9 +1720,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = false,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1709,43 +1746,7 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["DAMAGER"] = false,
 			},
-			["GrpBuffSize"] = 4,
-			["Find Herbs"] = {
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["OH"] = false,
-			},
-			["Shadowform"] = {
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = true,
-				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["OH"] = false,
-			},
+			["SelfFirst"] = true,
 			["Shadow Protection"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -1754,9 +1755,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = true,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1780,11 +1781,11 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["DAMAGER"] = false,
 			},
-			["SelfFirst"] = true,
 		},
 		["Arena"] = {
 			["Inner Fire"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -1792,17 +1793,17 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Vampiric Embrace"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -1810,14 +1811,13 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Levitate"] = {
 				["HUNTER"] = true,
@@ -1827,9 +1827,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = false,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1875,6 +1875,43 @@ SMARTBUFF_Buffs = {
 				["ROGUE"] = 1,
 				["MAGE"] = 1,
 			},
+			["Find Herbs"] = {
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["SelfOnly"] = false,
+			},
+			["Shadowform"] = {
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = true,
+				["SelfNot"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["SelfOnly"] = false,
+			},
+			["GrpBuffSize"] = 4,
 			["Power Word: Fortitude"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -1883,9 +1920,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = true,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1917,9 +1954,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = false,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -1943,43 +1980,7 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["DAMAGER"] = false,
 			},
-			["GrpBuffSize"] = 4,
-			["Find Herbs"] = {
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["OH"] = false,
-			},
-			["Shadowform"] = {
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = true,
-				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["OH"] = false,
-			},
+			["SelfFirst"] = true,
 			["Shadow Protection"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -1988,9 +1989,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = true,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -2014,11 +2015,11 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["DAMAGER"] = false,
 			},
-			["SelfFirst"] = true,
 		},
 		["Battleground"] = {
 			["Inner Fire"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -2026,17 +2027,17 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Vampiric Embrace"] = {
-				["EnableG"] = false,
+				["IgnoreList"] = {
+				},
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -2044,14 +2045,13 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = true,
 				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["OH"] = false,
+				["SelfOnly"] = false,
 			},
 			["Levitate"] = {
 				["HUNTER"] = true,
@@ -2061,9 +2061,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = false,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -2109,6 +2109,43 @@ SMARTBUFF_Buffs = {
 				["ROGUE"] = 1,
 				["MAGE"] = 1,
 			},
+			["Find Herbs"] = {
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["SelfOnly"] = false,
+			},
+			["Shadowform"] = {
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = true,
+				["SelfNot"] = false,
+				["EnableG"] = false,
+				["OH"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["SelfOnly"] = false,
+			},
+			["GrpBuffSize"] = 4,
 			["Power Word: Fortitude"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -2117,9 +2154,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = true,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -2151,9 +2188,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = false,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -2177,43 +2214,7 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["DAMAGER"] = false,
 			},
-			["GrpBuffSize"] = 4,
-			["Find Herbs"] = {
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = false,
-				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["OH"] = false,
-			},
-			["Shadowform"] = {
-				["EnableG"] = false,
-				["ManaLimit"] = 0,
-				["RBTime"] = 0,
-				["MH"] = false,
-				["CIn"] = false,
-				["COut"] = true,
-				["EnableS"] = true,
-				["SelfNot"] = false,
-				["IgnoreList"] = {
-				},
-				["SelfOnly"] = false,
-				["AddList"] = {
-				},
-				["Reminder"] = true,
-				["RH"] = false,
-				["OH"] = false,
-			},
+			["SelfFirst"] = true,
 			["Shadow Protection"] = {
 				["HUNTER"] = true,
 				["WARRIOR"] = true,
@@ -2222,9 +2223,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = true,
-				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
@@ -2248,7 +2249,6 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["DAMAGER"] = false,
 			},
-			["SelfFirst"] = true,
 		},
 	}, -- [2]
 }

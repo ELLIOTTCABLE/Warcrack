@@ -1,11 +1,14 @@
 
 MissingFriends_List = {
-	"Fraycollie", -- [1]
-	"Halfevil", -- [2]
-	"Melancollie", -- [3]
-	"Raethen", -- [4]
-	"Saidix", -- [5]
-	"Xarleas", -- [6]
+	"Chobit", -- [1]
+	"Fraycollie", -- [2]
+	"Fylthious", -- [3]
+	"Halfevil", -- [4]
+	"Melancollie", -- [5]
+	"Modduece", -- [6]
+	"Raethen", -- [7]
+	"Saidix", -- [8]
+	"Xarleas", -- [9]
 }
 MissingFriends_OldFriends = {
 }

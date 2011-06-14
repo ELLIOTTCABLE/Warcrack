@@ -1,0 +1,35 @@
+## Title: Auc-Auctioneer |cff774422(core)
+## Notes: Auctioneer assists players to track item values; whether buying or selling. You must enable at least one statistics extension (like Auc:Stats:Simple) to begin.  Combines with other modules to form the powerful, fully configurable Auctioneer Suite.
+##
+## Interface: 40100
+## LoadOnDemand: 0
+## Dependencies: Stubby
+## OptionalDependencies: !nLog, SlideBar, Configator, Babylonian, DebugLib, TipHelper, LibExtraTip, LibDataBroker
+## SavedVariables: AucAdvancedConfig, AucAdvancedData
+## SavedVariablesPerCharacter: AucAdvancedLocal
+##
+## Version: 5.12.5165 (QuirkyKiwi)
+## Revision: $Id: Auc-Advanced.toc 5142 2011-05-04 04:31:59Z Nechckn $
+## Author: Norganna's AddOns
+## X-Part-Of: Auctioneer
+## X-Category: Auction House
+## X-Max-Interface: 40100
+## X-URL: http://auctioneeraddon.com/
+## X-Feedback: http://forums.norganna.org
+##
+Support\Load.xml
+CoreManifest.lua
+Libs\Load.xml
+CoreModule.lua
+CoreStrings.lua
+CoreConst.lua
+
+CoreMain.lua
+CoreUtil.lua
+CoreConfig.lua
+CorePost.lua
+CoreSettings.lua
+CoreBuy.lua
+CoreScan.lua
+CoreAPI.lua
+Modules\Active.xml

@@ -1,28 +1,31 @@
 
 DataStore_AuctionsDB = {
 	["profileKeys"] = {
+		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
-			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1307882220,
-				["lastVisitDate"] = "2011/06/12 08:37",
-			},
 			["Default.Smolderthorn.Battlecollie"] = {
-				["lastUpdate"] = 1307896695,
-				["lastVisitDate"] = "2011/06/12 12:38",
+				["lastUpdate"] = 1308069303,
+				["lastVisitDate"] = "2011/06/14 12:35",
 			},
 			["Default.Smolderthorn.Fraycollie"] = {
-				["lastUpdate"] = 1308067356,
-				["lastVisitDate"] = "2011/06/14 12:02",
+				["lastUpdate"] = 1308081851,
+				["lastVisitDate"] = "2011/06/14 16:04",
+			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1308069916,
+				["lastVisitDate"] = "2011/06/14 12:45",
 			},
 		},
 	},

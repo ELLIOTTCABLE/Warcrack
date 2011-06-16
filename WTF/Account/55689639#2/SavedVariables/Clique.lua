@@ -2,25 +2,69 @@
 CliqueDB = nil
 CliqueDB3 = {
 	["char"] = {
+		["Fraycollie - Smolderthorn"] = {
+			["alerthidden"] = true,
+		},
 		["Battlecollie - Smolderthorn"] = {
 			["alerthidden"] = true,
 		},
-		["Fraycollie - Smolderthorn"] = {
+		["Hoarcollie - Smolderthorn"] = {
 			["alerthidden"] = true,
 		},
 	},
 	["profileKeys"] = {
+		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 	},
 	["profiles"] = {
+		["Warcollie - Smolderthorn"] = {
+			["bindings"] = {
+				{
+					["type"] = "target",
+					["sets"] = {
+						["default"] = true,
+					},
+					["key"] = "BUTTON1",
+					["unit"] = "mouseover",
+				}, -- [1]
+				{
+					["type"] = "menu",
+					["key"] = "BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [2]
+			},
+		},
 		["Summoneer - Smolderthorn"] = {
+			["bindings"] = {
+				{
+					["type"] = "target",
+					["sets"] = {
+						["default"] = true,
+					},
+					["key"] = "BUTTON1",
+					["unit"] = "mouseover",
+				}, -- [1]
+				{
+					["type"] = "menu",
+					["key"] = "BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [2]
+			},
+		},
+		["Battlecollie - Ysondre"] = {
 			["bindings"] = {
 				{
 					["sets"] = {
@@ -37,6 +81,33 @@ CliqueDB3 = {
 						["default"] = true,
 					},
 				}, -- [2]
+			},
+		},
+		["Hoarcollie - Smolderthorn"] = {
+			["bindings"] = {
+				{
+					["spell"] = "Rejuvenation",
+					["key"] = "BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+					["icon"] = "Interface\\Icons\\Spell_Nature_Rejuvenation",
+					["type"] = "spell",
+				}, -- [1]
+				{
+					["type"] = "target",
+					["key"] = "CTRL-BUTTON1",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [2]
+				{
+					["type"] = "menu",
+					["key"] = "CTRL-BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [3]
 			},
 		},
 		["Fraycollie - Smolderthorn"] = {
@@ -75,7 +146,7 @@ CliqueDB3 = {
 				}, -- [4]
 			},
 		},
-		["Battlecollie - Ysondre"] = {
+		["Fraycollie - The Underbog"] = {
 			["bindings"] = {
 				{
 					["type"] = "target",
@@ -97,10 +168,10 @@ CliqueDB3 = {
 		["Melancollie - Smolderthorn"] = {
 			["bindings"] = {
 				{
+					["type"] = "target",
 					["sets"] = {
 						["default"] = true,
 					},
-					["type"] = "target",
 					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]
@@ -116,10 +187,10 @@ CliqueDB3 = {
 		["Summoneer - Ysondre"] = {
 			["bindings"] = {
 				{
-					["type"] = "target",
 					["sets"] = {
 						["default"] = true,
 					},
+					["type"] = "target",
 					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]
@@ -132,7 +203,7 @@ CliqueDB3 = {
 				}, -- [2]
 			},
 		},
-		["Combatcollie - The Underbog"] = {
+		["Warcollie - Darkspear"] = {
 			["bindings"] = {
 				{
 					["sets"] = {
@@ -161,6 +232,15 @@ CliqueDB3 = {
 					},
 				}, -- [1]
 				{
+					["spell"] = "Resurrection",
+					["key"] = "SHIFT-BUTTON5",
+					["sets"] = {
+						["default"] = true,
+					},
+					["icon"] = "Interface\\Icons\\Spell_Holy_Resurrection",
+					["type"] = "spell",
+				}, -- [2]
+				{
 					["spell"] = "Dispel Magic",
 					["key"] = "BUTTON4",
 					["sets"] = {
@@ -168,7 +248,7 @@ CliqueDB3 = {
 					},
 					["icon"] = "Interface\\Icons\\Spell_Holy_DispelMagic",
 					["type"] = "spell",
-				}, -- [2]
+				}, -- [3]
 				{
 					["spell"] = "Greater Heal",
 					["key"] = "SHIFT-BUTTON1",
@@ -177,7 +257,7 @@ CliqueDB3 = {
 					},
 					["icon"] = "Interface\\Icons\\Spell_Holy_GreaterHeal",
 					["type"] = "spell",
-				}, -- [3]
+				}, -- [4]
 				{
 					["spell"] = "Power Word: Shield",
 					["key"] = "BUTTON6",
@@ -185,15 +265,6 @@ CliqueDB3 = {
 						["default"] = true,
 					},
 					["icon"] = "Interface\\Icons\\Spell_Holy_PowerWordShield",
-					["type"] = "spell",
-				}, -- [4]
-				{
-					["spell"] = "Penance",
-					["key"] = "BUTTON1",
-					["sets"] = {
-						["default"] = true,
-					},
-					["icon"] = "Interface\\Icons\\Spell_Holy_Penance",
 					["type"] = "spell",
 				}, -- [5]
 				{
@@ -204,23 +275,14 @@ CliqueDB3 = {
 					},
 				}, -- [6]
 				{
-					["spell"] = "Resurrection",
-					["key"] = "SHIFT-BUTTON5",
+					["spell"] = "Penance",
+					["key"] = "BUTTON1",
 					["sets"] = {
 						["default"] = true,
 					},
-					["icon"] = "Interface\\Icons\\Spell_Holy_Resurrection",
+					["icon"] = "Interface\\Icons\\Spell_Holy_Penance",
 					["type"] = "spell",
 				}, -- [7]
-				{
-					["spell"] = "Renew",
-					["key"] = "BUTTON2",
-					["sets"] = {
-						["default"] = true,
-					},
-					["icon"] = "Interface\\Icons\\Spell_Holy_Renew",
-					["type"] = "spell",
-				}, -- [8]
 				{
 					["spell"] = "Hymn of Hope",
 					["key"] = "SHIFT-BUTTON9",
@@ -229,14 +291,23 @@ CliqueDB3 = {
 					},
 					["icon"] = "Interface\\Icons\\Spell_Holy_SymbolOfHope",
 					["type"] = "spell",
-				}, -- [9]
+				}, -- [8]
 				{
-					["spell"] = "Prayer of Mending",
-					["key"] = "SHIFT-BUTTON6",
+					["spell"] = "Cure Disease",
+					["key"] = "BUTTON5",
 					["sets"] = {
 						["default"] = true,
 					},
-					["icon"] = "Interface\\Icons\\Spell_Holy_PrayerOfMendingtga",
+					["icon"] = "Interface\\Icons\\Spell_Holy_NullifyDisease",
+					["type"] = "spell",
+				}, -- [9]
+				{
+					["spell"] = "Renew",
+					["key"] = "BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+					["icon"] = "Interface\\Icons\\Spell_Holy_Renew",
 					["type"] = "spell",
 				}, -- [10]
 				{
@@ -249,21 +320,21 @@ CliqueDB3 = {
 					["type"] = "spell",
 				}, -- [11]
 				{
+					["spell"] = "Prayer of Mending",
+					["key"] = "SHIFT-BUTTON6",
+					["sets"] = {
+						["default"] = true,
+					},
+					["icon"] = "Interface\\Icons\\Spell_Holy_PrayerOfMendingtga",
+					["type"] = "spell",
+				}, -- [12]
+				{
 					["spell"] = "Binding Heal",
 					["key"] = "CTRL-BUTTON1",
 					["sets"] = {
 						["default"] = true,
 					},
 					["icon"] = "Interface\\Icons\\Spell_Holy_BlindingHeal",
-					["type"] = "spell",
-				}, -- [12]
-				{
-					["spell"] = "Cure Disease",
-					["key"] = "BUTTON5",
-					["sets"] = {
-						["default"] = true,
-					},
-					["icon"] = "Interface\\Icons\\Spell_Holy_NullifyDisease",
 					["type"] = "spell",
 				}, -- [13]
 				{
@@ -277,13 +348,13 @@ CliqueDB3 = {
 				}, -- [14]
 			},
 		},
-		["Fraycollie - The Underbog"] = {
+		["Combatcollie - The Underbog"] = {
 			["bindings"] = {
 				{
+					["type"] = "target",
 					["sets"] = {
 						["default"] = true,
 					},
-					["type"] = "target",
 					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]

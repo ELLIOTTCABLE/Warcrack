@@ -1,23 +1,26 @@
 
 StatBlockCoreDB = {
 	["profileKeys"] = {
+		["Warcollie - Smolderthorn"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
-		["Summoneer - Ysondre"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
+		["Summoneer - Ysondre"] = "Default",
+		["Warcollie - Darkspear"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["globalBDC"] = {
-				["r"] = 0,
-				["g"] = 0,
 				["b"] = 0,
+				["g"] = 0,
+				["r"] = 0,
 			},
-			["globalAlpha"] = 0.45,
+			["globalScale"] = 0.7,
 			["iconPos"] = "RIGHT",
 			["globalLock"] = false,
 			["launchers"] = false,
@@ -35,18 +38,18 @@ StatBlockCoreDB = {
 					["lock"] = false,
 				},
 				["MinimapButtonFrame"] = {
-					["posx"] = 992.6953396041063,
+					["enabled"] = false,
 					["scale"] = 0.7,
 					["posy"] = 236.3608157909857,
 					["lock"] = false,
-					["enabled"] = false,
+					["posx"] = 992.6953396041063,
 				},
 				["Altoholic"] = {
-					["posx"] = 645.2551098050571,
+					["enabled"] = false,
 					["scale"] = 0.7,
 					["posy"] = 537.8853948834694,
 					["lock"] = false,
-					["enabled"] = false,
+					["posx"] = 645.2551098050571,
 				},
 				["|cFFFFB366Ara|r SpecSwitcher"] = {
 					["posx"] = 406.0121002999222,
@@ -58,25 +61,38 @@ StatBlockCoreDB = {
 					["lock"] = false,
 					["scale"] = 0.7,
 				},
-				["Broker_Wallet"] = {
-					["posx"] = 935.4477134661138,
-					["width"] = 132.9991760253906,
-					["posy"] = 753.633108154987,
+				["BFactions"] = {
+					["posx"] = 590.3318618050544,
+					["width"] = 201.0002593994141,
+					["posy"] = 768.2648265779426,
 				},
-				["Bags"] = {
-					["posx"] = 1307.28645515487,
-					["width"] = 69.99959564208984,
-					["posy"] = 28.31087339064015,
+				["|cFFFFB366Ara|r Friends"] = {
+					["posx"] = 891.2870894531807,
+					["posy"] = 767.7131078402745,
 				},
-				["Swatter"] = {
-					["posx"] = 990.7027459251549,
-					["posy"] = 271.4615215706726,
-					["lock"] = false,
-					["scale"] = 0.7,
+				["|cFFFFB366Ara|r Tradeskills"] = {
+					["posx"] = 533.3720193282061,
+					["width"] = 86.99964904785156,
+					["posy"] = 768.2648265779426,
 				},
 				["StealYourCarbon"] = {
 					["posx"] = 989.500824093011,
 					["posy"] = 307.6743796544542,
+					["lock"] = false,
+					["scale"] = 0.7,
+				},
+				["|cFFFFB366Ara|r Guild"] = {
+					["posx"] = 956.567087994059,
+					["posy"] = 767.7131078402745,
+				},
+				["Arcana_ExperienceBroker"] = {
+					["posx"] = 694.809593844795,
+					["width"] = 174.9963226318359,
+					["posy"] = 753.633108154987,
+				},
+				["Swatter"] = {
+					["posx"] = 990.7027459251549,
+					["posy"] = 271.4615215706726,
 					["lock"] = false,
 					["scale"] = 0.7,
 				},
@@ -87,25 +103,19 @@ StatBlockCoreDB = {
 					["posy"] = 14.23087126394648,
 					["lock"] = false,
 				},
-				["Gatherer"] = {
-					["posx"] = 991.2611052802458,
-					["posy"] = 255.4284322986041,
-					["lock"] = false,
-					["scale"] = 0.7,
-				},
-				["|cFFFFB366Ara|r Tradeskills"] = {
-					["posx"] = 533.3720193282061,
-					["width"] = 86.99964904785156,
+				["Broker_Garbage"] = {
+					["posx"] = 340.732140821543,
 					["posy"] = 768.2648265779426,
 				},
-				["|cFFFFB366Ara|r Guild"] = {
-					["posx"] = 956.567087994059,
+				["BRRaidSave"] = {
+					["posx"] = 742.1670146612742,
+					["width"] = 119.0000228881836,
 					["posy"] = 767.7131078402745,
 				},
-				["Consolid8"] = {
-					["posx"] = 340.732140821543,
-					["posy"] = 754.1848268926551,
-					["lock"] = false,
+				["Broker_Auditor"] = {
+					["posx"] = 807.4472475771472,
+					["width"] = 198.0007019042969,
+					["posy"] = 753.633108154987,
 				},
 				["Durability"] = {
 					["posx"] = 1259.926456213449,
@@ -114,24 +124,16 @@ StatBlockCoreDB = {
 					["posy"] = 28.31087339064015,
 					["lock"] = false,
 				},
-				["Broker_Auditor"] = {
-					["posx"] = 807.4472475771472,
-					["width"] = 198.0007019042969,
-					["posy"] = 753.633108154987,
-				},
-				["BRRaidSave"] = {
-					["posx"] = 742.1670146612742,
-					["width"] = 119.0000228881836,
-					["posy"] = 767.7131078402745,
-				},
-				["Broker_Garbage"] = {
+				["Consolid8"] = {
 					["posx"] = 340.732140821543,
-					["posy"] = 768.2648265779426,
+					["posy"] = 754.1848268926551,
+					["lock"] = false,
 				},
-				["Arcana_ExperienceBroker"] = {
-					["posx"] = 694.809593844795,
-					["width"] = 174.9963226318359,
-					["posy"] = 753.633108154987,
+				["Gatherer"] = {
+					["posx"] = 991.2611052802458,
+					["posy"] = 255.4284322986041,
+					["lock"] = false,
+					["scale"] = 0.7,
 				},
 				["Critline pet"] = {
 					["posx"] = 1260.566221824149,
@@ -147,14 +149,15 @@ StatBlockCoreDB = {
 					["posy"] = 14.23087004324339,
 					["lock"] = false,
 				},
-				["|cFFFFB366Ara|r Friends"] = {
-					["posx"] = 891.2870894531807,
-					["posy"] = 767.7131078402745,
+				["Bags"] = {
+					["posx"] = 1307.28645515487,
+					["width"] = 69.99959564208984,
+					["posy"] = 28.31087339064015,
 				},
-				["BFactions"] = {
-					["posx"] = 590.3318618050544,
-					["width"] = 201.0002593994141,
-					["posy"] = 768.2648265779426,
+				["Broker_Wallet"] = {
+					["posx"] = 935.4477134661138,
+					["width"] = 132.9991760253906,
+					["posy"] = 753.633108154987,
 				},
 				["Broker_Equipment"] = {
 					["posx"] = 471.2921379032996,
@@ -169,7 +172,7 @@ StatBlockCoreDB = {
 					["lock"] = false,
 				},
 			},
-			["globalScale"] = 0.7,
+			["globalAlpha"] = 0.45,
 			["globalSize"] = 10,
 		},
 	},

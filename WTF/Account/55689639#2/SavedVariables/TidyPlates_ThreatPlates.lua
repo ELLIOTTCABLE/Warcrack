@@ -1,75 +1,18 @@
 
 ThreatPlatesDB = {
 	["char"] = {
-		["Summoneer - Smolderthorn"] = {
+		["Warcollie - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
 			["welcome"] = true,
-			["specName"] = {
-				"Affliction", -- [1]
-				"Demonology", -- [2]
-				"Destruction", -- [3]
-			},
-		},
-		["Fraycollie - Smolderthorn"] = {
-			["specInfo"] = {
-				{
-					3, -- [1]
-					3, -- [2]
-					31, -- [3]
-				}, -- [1]
-				{
-					nil, -- [1]
-					31, -- [2]
-				}, -- [2]
-			},
 			["specName"] = {
 				"Arms", -- [1]
 				"Fury", -- [2]
 				"Protection", -- [3]
 			},
-			["welcome"] = true,
 		},
-		["Battlecollie - Smolderthorn"] = {
-			["spec"] = {
-				["primary"] = false,
-			},
-			["welcome"] = true,
-			["specInfo"] = {
-				{
-					32, -- [1]
-					3, -- [2]
-				}, -- [1]
-				{
-					4, -- [1]
-					[3] = 31,
-				}, -- [2]
-			},
-			["specName"] = {
-				"Discipline", -- [1]
-				"Holy", -- [2]
-				"Shadow", -- [3]
-			},
-		},
-		["Melancollie - Smolderthorn"] = {
-			["welcome"] = true,
-			["spec"] = {
-				["primary"] = false,
-			},
-			["specInfo"] = {
-				{
-					nil, -- [1]
-					7, -- [2]
-				}, -- [1]
-			},
-			["specName"] = {
-				"Arcane", -- [1]
-				"Fire", -- [2]
-				"Frost", -- [3]
-			},
-		},
-		["Summoneer - Ysondre"] = {
+		["Summoneer - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
@@ -91,10 +34,31 @@ ThreatPlatesDB = {
 				"Retribution", -- [3]
 			},
 		},
-		["Fraycollie - The Underbog"] = {
+		["Battlecollie - Ysondre"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
 			["specInfo"] = {
 				{
-					3, -- [1]
+					32, -- [1]
+					3, -- [2]
+				}, -- [1]
+				{
+					4, -- [1]
+					[3] = 31,
+				}, -- [2]
+			},
+			["specName"] = {
+				"Discipline", -- [1]
+				"Holy", -- [2]
+				"Shadow", -- [3]
+			},
+		},
+		["Fraycollie - Smolderthorn"] = {
+			["specInfo"] = {
+				{
+					5, -- [1]
 					3, -- [2]
 					31, -- [3]
 				}, -- [1]
@@ -110,7 +74,7 @@ ThreatPlatesDB = {
 				"Protection", -- [3]
 			},
 		},
-		["Battlecollie - Ysondre"] = {
+		["Battlecollie - Smolderthorn"] = {
 			["welcome"] = true,
 			["spec"] = {
 				["primary"] = false,
@@ -131,27 +95,94 @@ ThreatPlatesDB = {
 				"Shadow", -- [3]
 			},
 		},
+		["Hoarcollie - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["specName"] = {
+				"Balance", -- [1]
+				"Feral Combat", -- [2]
+				"Restoration", -- [3]
+			},
+			["welcome"] = true,
+		},
+		["Summoneer - Ysondre"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Affliction", -- [1]
+				"Demonology", -- [2]
+				"Destruction", -- [3]
+			},
+		},
+		["Warcollie - Darkspear"] = {
+			["welcome"] = true,
+			["specName"] = {
+				"Blood", -- [1]
+				"Frost", -- [2]
+				"Unholy", -- [3]
+			},
+		},
+		["Fraycollie - The Underbog"] = {
+			["specInfo"] = {
+				{
+					3, -- [1]
+					3, -- [2]
+					31, -- [3]
+				}, -- [1]
+				{
+					nil, -- [1]
+					31, -- [2]
+				}, -- [2]
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Arms", -- [1]
+				"Fury", -- [2]
+				"Protection", -- [3]
+			},
+		},
+		["Melancollie - Smolderthorn"] = {
+			["welcome"] = true,
+			["spec"] = {
+				["primary"] = false,
+			},
+			["specInfo"] = {
+				{
+					nil, -- [1]
+					7, -- [2]
+				}, -- [1]
+			},
+			["specName"] = {
+				"Arcane", -- [1]
+				"Fire", -- [2]
+				"Frost", -- [3]
+			},
+		},
 	},
 	["profileKeys"] = {
+		["Warcollie - Smolderthorn"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
 		["Melancollie - Smolderthorn"] = "Default",
 		["Summoneer - Ysondre"] = "Default",
-		["Combatcollie - The Underbog"] = "Default",
+		["Warcollie - Darkspear"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
 				["toggle"] = {
 					["Totem"] = true,
-					["Neutral"] = false,
-					["Normal"] = false,
 				},
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -254,7 +285,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["theme"] = "transparent",
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["threat"] = {
 				["art"] = {
 					["theme"] = "bar",

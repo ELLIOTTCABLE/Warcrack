@@ -1,8 +1,8 @@
 
 TidyPlatesOptions = {
 	["autohide"] = false,
-	["WelcomeShown"] = true,
-	["primary"] = "Neon/|cFFFF4400Damage",
 	["EnableCastWatcher"] = false,
+	["primary"] = "Neon/|cFFFF4400Damage",
+	["WelcomeShown"] = true,
 	["secondary"] = "Neon/|cFF3782D1Tank",
 }

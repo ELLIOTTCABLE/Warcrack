@@ -29,21 +29,21 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[15407] = {
-						[2] = {
+					[8092] = {
+						{
 							["normal"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 79,
-								["amount"] = 793,
+								["targetLevel"] = 78,
+								["amount"] = 4246,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 79,
-								["amount"] = 1584,
+								["targetLevel"] = 78,
+								["amount"] = 7063,
 							},
-						},
+						}, -- [1]
 					},
 					[63675] = {
 						{
@@ -103,22 +103,6 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[8092] = {
-						{
-							["normal"] = {
-								["target"] = "Sifreldar Storm Maiden",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 78,
-								["amount"] = 4246,
-							},
-							["crit"] = {
-								["target"] = "Sifreldar Storm Maiden",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 78,
-								["amount"] = 7063,
-							},
-						}, -- [1]
-					},
 					[2944] = {
 						[2] = {
 							["normal"] = {
@@ -126,6 +110,22 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = false,
 								["targetLevel"] = 78,
 								["amount"] = 613,
+							},
+						},
+					},
+					[15407] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Sifreldar Storm Maiden",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 79,
+								["amount"] = 793,
+							},
+							["crit"] = {
+								["target"] = "Sifreldar Storm Maiden",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 79,
+								["amount"] = 1584,
 							},
 						},
 					},
@@ -167,16 +167,6 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[55503] = {
-						{
-							["normal"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 697,
-							},
-						}, -- [1]
-					},
 					[2060] = {
 						{
 							["normal"] = {
@@ -187,13 +177,13 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[47753] = {
+					[17] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 3210,
+								["amount"] = 9396,
 							},
 						}, -- [1]
 					},
@@ -206,6 +196,16 @@ CritlinePerCharDB = {
 								["amount"] = 7893,
 							},
 						}, -- [1]
+					},
+					[15290] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 224,
+							},
+						},
 					},
 					[23455] = {
 						{
@@ -243,23 +243,23 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[15290] = {
-						[2] = {
-							["normal"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 224,
-							},
-						},
-					},
-					[17] = {
+					[47753] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 9396,
+								["amount"] = 3210,
+							},
+						}, -- [1]
+					},
+					[55503] = {
+						{
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 697,
 							},
 						}, -- [1]
 					},
@@ -315,13 +315,19 @@ CritlinePerCharDB = {
 							},
 						}, -- [2]
 					},
-					[50799] = {
+					[63675] = {
 						{
 							["normal"] = {
-								["target"] = "The Prophet Tharon'ja ",
+								["target"] = "Lavanthor",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 219,
+								["targetLevel"] = 77,
+								["amount"] = 1894,
+							},
+							["crit"] = {
+								["target"] = "Lavanthor",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 77,
+								["amount"] = 3445,
 							},
 						}, -- [1]
 					},
@@ -373,19 +379,19 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[15237] = {
+					[6603] = {
 						{
 							["normal"] = {
-								["target"] = "Azure Stalker",
+								["target"] = "Veteran Mage Hunter",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 75,
-								["amount"] = 620,
+								["amount"] = 193,
 							},
 							["crit"] = {
-								["target"] = "Azure Sorceror",
+								["target"] = "Portal Keeper",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 75,
-								["amount"] = 863,
+								["targetLevel"] = 76,
+								["amount"] = 327,
 							},
 						}, -- [1]
 					},
@@ -405,16 +411,6 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[49617] = {
-						{
-							["normal"] = {
-								["target"] = "The Prophet Tharon'ja ",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 3999,
-							},
-						}, -- [1]
-					},
 					[585] = {
 						{
 							["normal"] = {
@@ -428,6 +424,16 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = false,
 								["targetLevel"] = 76,
 								["amount"] = 4229,
+							},
+						}, -- [1]
+					},
+					[49617] = {
+						{
+							["normal"] = {
+								["target"] = "The Prophet Tharon'ja ",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 76,
+								["amount"] = 3999,
 							},
 						}, -- [1]
 					},
@@ -463,35 +469,29 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[6603] = {
+					[15237] = {
 						{
 							["normal"] = {
-								["target"] = "Veteran Mage Hunter",
+								["target"] = "Azure Stalker",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 75,
-								["amount"] = 193,
+								["amount"] = 620,
 							},
 							["crit"] = {
-								["target"] = "Portal Keeper",
+								["target"] = "Azure Sorceror",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 327,
+								["targetLevel"] = 75,
+								["amount"] = 863,
 							},
 						}, -- [1]
 					},
-					[63675] = {
+					[50799] = {
 						{
 							["normal"] = {
-								["target"] = "Lavanthor",
+								["target"] = "The Prophet Tharon'ja ",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 77,
-								["amount"] = 1894,
-							},
-							["crit"] = {
-								["target"] = "Lavanthor",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 77,
-								["amount"] = 3445,
+								["targetLevel"] = 76,
+								["amount"] = 219,
 							},
 						}, -- [1]
 					},
@@ -679,29 +679,13 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2061] = {
+					[75999] = {
 						{
 							["normal"] = {
-								["target"] = "Beerdo",
+								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 9016,
-							},
-							["crit"] = {
-								["target"] = "Zanfark-Draenor",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 73,
-								["amount"] = 14637,
-							},
-						}, -- [1]
-					},
-					[81751] = {
-						{
-							["normal"] = {
-								["target"] = "Flargg-Arathor",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 4367,
+								["targetLevel"] = 78,
+								["amount"] = 517,
 							},
 						}, -- [1]
 					},
@@ -721,13 +705,29 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[75999] = {
+					[81751] = {
 						{
 							["normal"] = {
-								["target"] = "Battlecollie",
+								["target"] = "Flargg-Arathor",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 78,
-								["amount"] = 517,
+								["targetLevel"] = 77,
+								["amount"] = 4367,
+							},
+						}, -- [1]
+					},
+					[2061] = {
+						{
+							["normal"] = {
+								["target"] = "Beerdo",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 9016,
+							},
+							["crit"] = {
+								["target"] = "Zanfark-Draenor",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 73,
+								["amount"] = 14637,
 							},
 						}, -- [1]
 					},

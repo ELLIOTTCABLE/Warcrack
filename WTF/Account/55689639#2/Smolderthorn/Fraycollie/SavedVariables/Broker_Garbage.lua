@@ -2,13 +2,13 @@
 BG_LocalDB = {
 	["include"] = {
 	},
-	["moneyEarned"] = 668794,
+	["moneyEarned"] = 794684,
 	["autoSellList"] = {
 		["Consumable.Water"] = true,
 	},
 	["exclude"] = {
 		["Misc.Reagent.Class.Warrior"] = true,
 	},
-	["moneyLostByDeleting"] = 0,
 	["neverRepairGuildBank"] = false,
+	["moneyLostByDeleting"] = 0,
 }

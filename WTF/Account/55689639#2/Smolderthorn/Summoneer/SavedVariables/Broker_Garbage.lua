@@ -8,6 +8,6 @@ BG_LocalDB = {
 	["exclude"] = {
 		["Misc.Reagent.Class.Warlock"] = true,
 	},
-	["neverRepairGuildBank"] = false,
 	["moneyLostByDeleting"] = 0,
+	["neverRepairGuildBank"] = false,
 }

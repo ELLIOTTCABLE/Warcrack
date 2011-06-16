@@ -36,26 +36,26 @@ CritlinePerCharDB = {
 								["amount"] = 18984,
 							},
 							["crit"] = {
-								["target"] = "Young Storm Dragon",
+								["target"] = "Stonecore Warbringer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 83,
-								["amount"] = 6029,
+								["targetLevel"] = 82,
+								["amount"] = 6571,
 							},
 						}, -- [1]
 					},
 					[20243] = {
 						{
 							["normal"] = {
-								["target"] = "Young Storm Dragon",
+								["target"] = "Deepstone Elemental",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 83,
-								["amount"] = 6317,
+								["targetLevel"] = 82,
+								["amount"] = 7102,
 							},
 							["crit"] = {
-								["target"] = "Cloud Prince",
+								["target"] = "Wild Vortex",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 83,
-								["amount"] = 12773,
+								["targetLevel"] = 82,
+								["amount"] = 13717,
 							},
 						}, -- [1]
 					},
@@ -126,42 +126,42 @@ CritlinePerCharDB = {
 					[46968] = {
 						{
 							["normal"] = {
-								["target"] = "Executor of the Caliph",
+								["target"] = "Millhouse Manastorm",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 11510,
+								["targetLevel"] = 83,
+								["amount"] = 12095,
 							},
 							["crit"] = {
-								["target"] = "Turbulent Squall",
+								["target"] = "Stonecore Warbringer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 22869,
+								["amount"] = 23106,
 							},
 						}, -- [1]
 					},
-					[75557] = {
+					[76575] = {
 						{
 							["normal"] = {
-								["target"] = "Garnoth, Fist of the Legion",
+								["target"] = "Twilight Zealot",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 81,
-								["amount"] = 55781,
+								["targetLevel"] = 80,
+								["amount"] = 4763,
 							},
 						}, -- [1]
 					},
-					[12809] = {
+					[34428] = {
 						{
 							["normal"] = {
-								["target"] = "Temple Adept",
+								["target"] = "Stonecore Warbringer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 7469,
+								["amount"] = 9165,
 							},
 							["crit"] = {
-								["target"] = "Stonecore Rift Conjurer",
+								["target"] = "Cloud Prince",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 18350,
+								["targetLevel"] = 83,
+								["amount"] = 15111,
 							},
 						}, -- [1]
 					},
@@ -171,7 +171,7 @@ CritlinePerCharDB = {
 								["target"] = "Grand Vizier Ertan",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 84,
-								["amount"] = 2229,
+								["amount"] = 2494,
 							},
 							["crit"] = {
 								["target"] = "Grand Vizier Ertan",
@@ -206,36 +206,36 @@ CritlinePerCharDB = {
 								["amount"] = 1167,
 							},
 							["crit"] = {
-								["target"] = "Stonecore Bruiser",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 83,
-								["amount"] = 956,
-							},
-						}, -- [1]
-					},
-					[34428] = {
-						{
-							["normal"] = {
-								["target"] = "Cloud Prince",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 83,
-								["amount"] = 8213,
-							},
-							["crit"] = {
-								["target"] = "Servant of Asaad",
+								["target"] = "Minister of Air",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 14248,
+								["amount"] = 1768,
 							},
 						}, -- [1]
 					},
-					[76575] = {
+					[12809] = {
 						{
 							["normal"] = {
-								["target"] = "Twilight Zealot",
+								["target"] = "Stonecore Rift Conjurer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 4763,
+								["targetLevel"] = 82,
+								["amount"] = 8333,
+							},
+							["crit"] = {
+								["target"] = "Stonecore Rift Conjurer",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 82,
+								["amount"] = 18350,
+							},
+						}, -- [1]
+					},
+					[75557] = {
+						{
+							["normal"] = {
+								["target"] = "Garnoth, Fist of the Legion",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 81,
+								["amount"] = 55781,
 							},
 						}, -- [1]
 					},

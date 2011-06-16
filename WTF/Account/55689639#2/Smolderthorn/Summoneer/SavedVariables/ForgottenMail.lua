@@ -1,2 +1,2 @@
 
-ForgottenMailNumInboxItems = 0
+ForgottenMailNumInboxItems = 1

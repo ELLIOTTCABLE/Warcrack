@@ -1,39 +1,48 @@
 
 BrokerAuditorDB = {
-	["profileKeys"] = {
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-	},
 	["global"] = {
 		["LibDBIcon"] = {
 			["hide"] = true,
 		},
 		["styleIndex"] = 2,
 	},
+	["profileKeys"] = {
+		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+	},
 	["profiles"] = {
+		["Warcollie - Smolderthorn"] = {
+		},
 		["Summoneer - Smolderthorn"] = {
+		},
+		["Combatcollie - The Underbog"] = {
+		},
+		["Battlecollie - Ysondre"] = {
+			["hideNetTotal"] = false,
+			["absurdDetail"] = true,
 		},
 		["Fraycollie - Smolderthorn"] = {
 		},
 		["Battlecollie - Smolderthorn"] = {
 		},
-		["Melancollie - Smolderthorn"] = {
+		["Hoarcollie - Smolderthorn"] = {
 		},
 		["Summoneer - Ysondre"] = {
 		},
+		["Warcollie - Darkspear"] = {
+		},
 		["Fraycollie - The Underbog"] = {
 		},
-		["Combatcollie - The Underbog"] = {
-		},
-		["Battlecollie - Ysondre"] = {
-			["absurdDetail"] = true,
-			["hideNetTotal"] = false,
+		["Melancollie - Smolderthorn"] = {
 		},
 	},
 }

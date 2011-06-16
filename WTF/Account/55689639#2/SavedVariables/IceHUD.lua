@@ -4,18 +4,21 @@ IceCoreDB = {
 		["LibDualSpec-1.0"] = {
 		},
 	},
-	["profileKeys"] = {
-		["Summoneer - Smolderthorn"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Battlecollie - Ysondre"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
-		["Summoneer - Ysondre"] = "Default",
-		["Combatcollie - The Underbog"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
-	},
 	["global"] = {
 		["lastRunVersion"] = 851,
+	},
+	["profileKeys"] = {
+		["Warcollie - Smolderthorn"] = "Default",
+		["Summoneer - Smolderthorn"] = "Default",
+		["Battlecollie - Ysondre"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Summoneer - Ysondre"] = "Default",
+		["Warcollie - Darkspear"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -36,6 +39,12 @@ IceCoreDB = {
 					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
+				},
+				["TargetTargetCast"] = {
+					["enabled"] = true,
+					["myTagVersion"] = 3,
+					["updatedInverseExpand"] = true,
+					["updatedReverseInverse"] = true,
 				},
 				["TargetTargetHealth"] = {
 					["updatedReverseInverse"] = true,
@@ -86,30 +95,30 @@ IceCoreDB = {
 					["auraTarget"] = "target",
 					["countColor"] = {
 						["a"] = 1,
-						["b"] = 0,
-						["g"] = 0,
 						["r"] = 1,
+						["g"] = 0,
+						["b"] = 0,
 					},
 					["usesDogTagStrings"] = false,
 					["auraType"] = "debuff",
 					["vpos"] = 0,
-					["countMode"] = "Numeric",
+					["alwaysFullAlpha"] = true,
 					["countMinColor"] = {
 						["a"] = 1,
-						["b"] = 0,
-						["g"] = 1,
 						["r"] = 1,
+						["g"] = 1,
+						["b"] = 0,
 					},
 					["auraName"] = "Sunder Armor",
 					["graphicalLayout"] = "Horizontal",
 					["gradient"] = false,
-					["alwaysFullAlpha"] = true,
+					["countMode"] = "Numeric",
 					["customBarType"] = "Counter",
 				},
 				["RangeCheck"] = {
-					["vpos"] = 0,
-					["rangeString"] = "[HostileColor Range]",
 					["enabled"] = true,
+					["rangeString"] = "[HostileColor Range]",
+					["vpos"] = 0,
 				},
 				["PetInfo"] = {
 					["myTagVersion"] = 3,
@@ -132,20 +141,16 @@ IceCoreDB = {
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 				},
-				["PlayerInfo"] = {
+				["DruidMana"] = {
+					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
+					["updatedInverseExpand"] = true,
+				},
+				["Threat"] = {
 					["enabled"] = true,
-					["debuffSizeFixup"] = true,
-					["auras"] = {
-						["buff"] = {
-							["show"] = false,
-						},
-						["debuff"] = {
-							["show"] = false,
-						},
-					},
-					["vpos"] = 273,
-					["updateAurasIntoTable"] = true,
+					["myTagVersion"] = 3,
+					["updatedInverseExpand"] = true,
+					["updatedReverseInverse"] = true,
 				},
 				["PetMana"] = {
 					["updatedReverseInverse"] = true,
@@ -157,19 +162,11 @@ IceCoreDB = {
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 				},
-				["LacerateCount"] = {
-				},
 				["FocusMana"] = {
 					["enabled"] = true,
 					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
-				},
-				["TargetTargetCast"] = {
-					["enabled"] = true,
-					["myTagVersion"] = 3,
-					["updatedInverseExpand"] = true,
-					["updatedReverseInverse"] = true,
 				},
 				["FocusHealth"] = {
 					["enabled"] = true,
@@ -177,29 +174,74 @@ IceCoreDB = {
 					["updatedInverseExpand"] = true,
 					["updatedReverseInverse"] = true,
 				},
-				["MaelstromCount"] = {
-				},
-				["TargetMana"] = {
-					["updatedReverseInverse"] = true,
-					["myTagVersion"] = 3,
-					["updatedInverseExpand"] = true,
-				},
-				["Threat"] = {
+				["Lacerates"] = {
+					["countFontSize"] = 20,
+					["scale"] = 1,
+					["maxCount"] = 3,
+					["onlyMine"] = true,
+					["hpos"] = 0,
+					["countGap"] = 0,
 					["enabled"] = true,
-					["myTagVersion"] = 3,
-					["updatedInverseExpand"] = true,
-					["updatedReverseInverse"] = true,
-				},
-				["FocusCC"] = {
-					["updatedReverseInverse"] = true,
-					["myTagVersion"] = 3,
-					["updatedInverseExpand"] = true,
+					["auraTarget"] = "target",
+					["countColor"] = {
+						["a"] = 1,
+						["b"] = 0,
+						["g"] = 0,
+						["r"] = 1,
+					},
+					["usesDogTagStrings"] = false,
+					["auraType"] = "debuff",
+					["vpos"] = 0,
+					["countMode"] = "Numeric",
+					["countMinColor"] = {
+						["a"] = 1,
+						["b"] = 0,
+						["g"] = 1,
+						["r"] = 1,
+					},
+					["auraName"] = "Lacerate",
+					["graphicalLayout"] = "Horizontal",
+					["gradient"] = false,
+					["alwaysFullAlpha"] = true,
+					["customBarType"] = "Counter",
 				},
 				["FocusThreat"] = {
 					["enabled"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 					["updatedReverseInverse"] = true,
+				},
+				["MaelstromCount"] = {
+				},
+				["PlayerInfo"] = {
+					["myTagVersion"] = 3,
+					["enabled"] = true,
+					["debuffSizeFixup"] = true,
+					["auras"] = {
+						["debuff"] = {
+							["show"] = false,
+						},
+						["buff"] = {
+							["show"] = false,
+						},
+					},
+					["vpos"] = 273,
+					["updateAurasIntoTable"] = true,
+				},
+				["EclipseBar"] = {
+					["myTagVersion"] = 3,
+					["updatedReverseInverse"] = true,
+					["updatedInverseExpand"] = true,
+				},
+				["FocusCC"] = {
+					["updatedReverseInverse"] = true,
+					["myTagVersion"] = 3,
+					["updatedInverseExpand"] = true,
+				},
+				["TargetMana"] = {
+					["updatedReverseInverse"] = true,
+					["myTagVersion"] = 3,
+					["updatedInverseExpand"] = true,
 				},
 			},
 			["barProportion"] = 0.13,

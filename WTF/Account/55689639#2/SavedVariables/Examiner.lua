@@ -7,19 +7,20 @@ Examiner_Config = {
 	["cacheSort"] = "class",
 	["featsStub"] = -1,
 	["clearInspectOnHide"] = false,
+	["activePage"] = 5,
 	["featsCat"] = 92,
 	["cacheFilter"] = "",
-	["prevPage"] = 5,
-	["alwaysShowItemLevel"] = true,
-	["featsFilter"] = "",
+	["combineAdditiveStats"] = true,
+	["prevPage"] = 4,
+	["percentRatings"] = false,
 	["autoInspect"] = true,
-	["statsViewType"] = 1,
 	["featsSort"] = "none",
+	["statsViewType"] = 1,
 	["caching"] = {
 	},
 	["showBackground"] = true,
-	["percentRatings"] = false,
-	["combineAdditiveStats"] = true,
+	["featsFilter"] = "",
+	["alwaysShowItemLevel"] = true,
 }
 Examiner_Cache = {
 }

@@ -1,20 +1,20 @@
 
 DataStore_AgendaDB = {
 	["profileKeys"] = {
+		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
-			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307762194,
-			},
 			["Default.The Underbog.Combatcollie"] = {
 				["lastUpdate"] = 1307756139,
 				["Contacts"] = {
@@ -32,21 +32,72 @@ DataStore_AgendaDB = {
 				},
 			},
 			["Default.Smolderthorn.Fraycollie"] = {
-				["lastUpdate"] = 1308067410,
+				["lastUpdate"] = 1308197685,
 				["Contacts"] = {
-					"Battlecollie", -- [1]
-					"Chobit", -- [2]
-					"Fylthious", -- [3]
-					"Halfevil", -- [4]
-					"Melancollie", -- [5]
-					"Modduece", -- [6]
-					"Raethen", -- [7]
-					"Saidix", -- [8]
-					"Xarleas", -- [9]
+					"Chobit", -- [1]
+					"Halfevil", -- [2]
+					"Jondus", -- [3]
+					"Battlecollie", -- [4]
+					"Fylthious", -- [5]
+					"Melancollie", -- [6]
+					"Modduece", -- [7]
+					"Raethen", -- [8]
+					"Saidix", -- [9]
+					"Xarleas", -- [10]
 				},
 			},
 			["Default.Smolderthorn.Summoneer"] = {
-				["lastUpdate"] = 1307968576,
+				["lastUpdate"] = 1308175047,
+			},
+			["Default.Smolderthorn.Battlecollie"] = {
+				["lastUpdate"] = 1308176167,
+				["Contacts"] = {
+					"Jondus", -- [1]
+					"Modduece", -- [2]
+					"Chobit", -- [3]
+					"Fraycollie", -- [4]
+					"Fylthious", -- [5]
+					"Halfevil", -- [6]
+					"Melancollie", -- [7]
+					"Raethen", -- [8]
+					"Saidix", -- [9]
+					"Xarleas", -- [10]
+				},
+			},
+			["Default.Smolderthorn.Warcollie"] = {
+				["lastUpdate"] = 1308197708,
+			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1308174602,
+				["Contacts"] = {
+					"Chobit", -- [1]
+					"Battlecollie", -- [2]
+					"Fraycollie", -- [3]
+					"Fylthious", -- [4]
+					"Halfevil", -- [5]
+					"Jondus", -- [6]
+					"Modduece", -- [7]
+					"Raethen", -- [8]
+					"Saidix", -- [9]
+					"Xarleas", -- [10]
+				},
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1308246807,
+				["Contacts"] = {
+					"Battlecollie", -- [1]
+					"Chobit", -- [2]
+					"Fraycollie", -- [3]
+					"Fylthious", -- [4]
+					"Halfevil", -- [5]
+					"Jondus", -- [6]
+					"Leahs", -- [7]
+					"Melancollie", -- [8]
+					"Modduece", -- [9]
+					"Raethen", -- [10]
+					"Saidix", -- [11]
+					"Xarleas", -- [12]
+				},
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["lastUpdate"] = 1307756265,
@@ -64,31 +115,11 @@ DataStore_AgendaDB = {
 					"Twooter", -- [11]
 				},
 			},
-			["Default.Smolderthorn.Battlecollie"] = {
-				["lastUpdate"] = 1308067104,
-				["Contacts"] = {
-					"Chobit", -- [1]
-					"Fraycollie", -- [2]
-					"Fylthious", -- [3]
-					"Halfevil", -- [4]
-					"Melancollie", -- [5]
-					"Modduece", -- [6]
-					"Raethen", -- [7]
-					"Saidix", -- [8]
-					"Xarleas", -- [9]
-				},
+			["Default.Ysondre.Battlecollie"] = {
+				["lastUpdate"] = 1307762194,
 			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1308000207,
-				["Contacts"] = {
-					"Fylthious", -- [1]
-					"Battlecollie", -- [2]
-					"Fraycollie", -- [3]
-					"Halfevil", -- [4]
-					"Raethen", -- [5]
-					"Saidix", -- [6]
-					"Xarleas", -- [7]
-				},
+			["Default.Darkspear.Warcollie"] = {
+				["lastUpdate"] = 1308165924,
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["lastUpdate"] = 1307914195,

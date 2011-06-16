@@ -1,4 +1,11 @@
 Version: 1
+Frame: LootFrame
+FrameLevel: 1
+Anchor: TOP
+X: -332
+Y: -104
+W: 256
+H: 256
 Frame: _NPCScanButton
 FrameLevel: 1
 Anchor: BOTTOM

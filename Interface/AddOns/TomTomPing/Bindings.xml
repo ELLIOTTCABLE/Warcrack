@@ -1,0 +1,8 @@
+<Bindings>
+	<Binding name="TOMTOMPING_TARGET" header="TOM_TOM_PING">TomTomPing:TriggerAction("target")</Binding>
+	<Binding name="TOMTOMPING_STICK">TomTomPing:TriggerAction("stick")</Binding>
+	<Binding name="TOMTOMPING_CLEAR">TomTomPing:TriggerAction("clear")</Binding>
+	<Binding name="TOMTOMPING_PING" >TomTomPing:TriggerAction("ping")</Binding>
+	<Binding name="TOMTOMPING_SELF_WAYPOINT">TomTomPing:TriggerAction("waypointself")</Binding>
+	<Binding name="TOMTOMPING_CLEAR_WAYPOINT">TomTomPing:TriggerAction("waypointclear")</Binding>
+</Bindings>

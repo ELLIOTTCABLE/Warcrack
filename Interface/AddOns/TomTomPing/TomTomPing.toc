@@ -1,0 +1,21 @@
+## Interface: 40000
+## Title: TomTom|cffffffffPing|r
+## Notes: Directs TomTom to a Ping Location
+## Version: 1.1 r019
+## Author: tritium
+## X-Credits: Knapster alias Baaras (For the original TomTomPing)
+## X-Category: Interface Enhancements
+## Dependencies:
+## RequiredDeps: TomTom 
+## OptionalDeps: Ace3, DBM-Core
+## SavedVariables: TomTomPing_DB
+
+## X-Embeds: Ace3
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+Locales\locales.xml
+
+MapSizes.lua
+TomTomPing.lua

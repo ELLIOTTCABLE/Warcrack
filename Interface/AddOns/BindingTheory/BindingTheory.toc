@@ -1,0 +1,7 @@
+## Interface: 40100
+## Title: BindingTheory
+## Notes: Marks bind-on-equip items in your bags and bank.
+## Author: lordkarthas
+## Version: r4
+
+BindingTheory.lua

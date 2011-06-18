@@ -1,7 +1,7 @@
 
 MissingFriends_List = {
-	"Brandywine", -- [1]
-	"Battlecollie", -- [2]
+	"Battlecollie", -- [1]
+	"Brandywine", -- [2]
 	"Chobit", -- [3]
 	"Fraycollie", -- [4]
 	"Fylthious", -- [5]

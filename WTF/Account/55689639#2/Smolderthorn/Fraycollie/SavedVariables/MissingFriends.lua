@@ -10,9 +10,10 @@ MissingFriends_List = {
 	"Leahs", -- [8]
 	"Melancollie", -- [9]
 	"Modduece", -- [10]
-	"Raethen", -- [11]
-	"Saidix", -- [12]
-	"Xarleas", -- [13]
+	"Othercollie", -- [11]
+	"Raethen", -- [12]
+	"Saidix", -- [13]
+	"Xarleas", -- [14]
 }
 MissingFriends_OldFriends = {
 }

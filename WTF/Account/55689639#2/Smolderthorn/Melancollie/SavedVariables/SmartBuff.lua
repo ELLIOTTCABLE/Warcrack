@@ -34,12 +34,12 @@ SMARTBUFF_Options = {
 	["UpgradeToDualSpec"] = true,
 	["OldWheelDown"] = "CAMERAZOOMOUT",
 	["LastTemplate"] = "Solo",
-	["UISync"] = true,
 	["AddList"] = {
 	},
+	["UISync"] = true,
 	["OldWheelUp"] = "CAMERAZOOMIN",
 	["ShowMiniGrp"] = true,
-	["BlacklistTimer"] = 5,
+	["LinkSelfBuffCheck"] = true,
 	["ToggleMsgWarning"] = false,
 	["MinCharges"] = 3,
 	["Toggle"] = true,
@@ -59,7 +59,7 @@ SMARTBUFF_Options = {
 	["HideSAButton"] = true,
 	["ScrollWheelDown"] = true,
 	["ToggleAutoChat"] = true,
-	["LinkSelfBuffCheck"] = true,
+	["BlacklistTimer"] = 5,
 	["ScrollWheelUp"] = true,
 	["InCombat"] = true,
 }
@@ -67,8 +67,7 @@ SMARTBUFF_Buffs = {
 	{
 		["Solo"] = {
 			["Coarse Sharpening Stone"] = {
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -76,13 +75,14 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["EnableG"] = false,
-				["OH"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["SelfOnly"] = false,
+				["OH"] = false,
 			},
 			["SelfFirst"] = false,
 			["GrpBuffSize"] = 4,

@@ -3,17 +3,17 @@ MBFDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
+		["Battlecollie - Ysondre"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Warcollie - Darkspear"] = "Default",
-		["Hoarcollie - Smolderthorn"] = "Default",
-		["Summoneer - Ysondre"] = "Default",
-		["Othercollie - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
-		["Battlecollie - Ysondre"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Othercollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Summoneer - Ysondre"] = "Default",
+		["Warcollie - Darkspear"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -33,7 +33,7 @@ MBFDB = {
 				-224.1380004882812, -- [4]
 			},
 			["colorLocked"] = "All",
-			["grabBlizzButtons"] = true,
+			["GrowUp"] = false,
 			["currentTexture"] = "Serenity Square",
 			["customChildren"] = {
 				"MinimapButtonFrameDragButton", -- [1]
@@ -57,8 +57,8 @@ MBFDB = {
 				"MiniMapLFGFrame", -- [19]
 			},
 			["grabMBFButton"] = true,
+			["grabBlizzButtons"] = true,
 			["padding"] = 3.5,
-			["GrowUp"] = false,
 		},
 	},
 }

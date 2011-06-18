@@ -23,26 +23,26 @@ BG_GlobalDB = {
 	["showAutoSellIcon"] = true,
 	["dropQuality"] = 1,
 	["LDBformat"] = "[itemname]x[itemcount] ([itemvalue])",
-	["include"] = {
-		[46069] = true,
-		["Consumable.Water.Conjured"] = true,
-		["Consumable.Food.Edible.Basic.Conjured"] = true,
+	["disableKey"] = "SHIFT",
+	["autoSellIncludeItems"] = false,
+	["autoSellList"] = {
 	},
-	["showEarned"] = true,
-	["tooltipNumItems"] = 9,
-	["exclude"] = {
-		["Misc.StartsQuest"] = true,
-	},
+	["sellOldGear"] = false,
 	["itemsDropped"] = 34,
 	["showSellLog"] = false,
 	["autoRepairAtVendor"] = true,
 	["autoSellToVendor"] = true,
 	["showMoney"] = 2,
 	["hasEnchanter"] = true,
-	["sellOldGear"] = false,
-	["autoSellList"] = {
+	["exclude"] = {
+		["Misc.StartsQuest"] = true,
 	},
-	["autoSellIncludeItems"] = false,
-	["disableKey"] = "SHIFT",
+	["tooltipNumItems"] = 9,
+	["showEarned"] = true,
+	["include"] = {
+		[46069] = true,
+		["Consumable.Food.Edible.Basic.Conjured"] = true,
+		["Consumable.Water.Conjured"] = true,
+	},
 	["sellNWQualityTreshold"] = 4,
 }

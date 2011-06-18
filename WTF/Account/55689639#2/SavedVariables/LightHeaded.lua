@@ -4,15 +4,15 @@ LightHeadedDB = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
@@ -21,26 +21,26 @@ LightHeadedDB = {
 		},
 		["Battlecollie - Ysondre"] = {
 		},
-		["Melancollie - Smolderthorn"] = {
-			["lhopen"] = false,
+		["Combatcollie - The Underbog"] = {
 		},
-		["Battlecollie - Smolderthorn"] = {
+		["Fraycollie - The Underbog"] = {
 		},
 		["Fraycollie - Smolderthorn"] = {
 			["lhopen"] = false,
 		},
-		["Othercollie - Smolderthorn"] = {
+		["Warcollie - Darkspear"] = {
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Melancollie - Smolderthorn"] = {
 			["lhopen"] = false,
 		},
 		["Summoneer - Ysondre"] = {
 		},
-		["Warcollie - Darkspear"] = {
+		["Othercollie - Smolderthorn"] = {
 		},
-		["Fraycollie - The Underbog"] = {
+		["Battlecollie - Smolderthorn"] = {
 		},
-		["Combatcollie - The Underbog"] = {
+		["Hoarcollie - Smolderthorn"] = {
+			["lhopen"] = false,
 		},
 	},
 }

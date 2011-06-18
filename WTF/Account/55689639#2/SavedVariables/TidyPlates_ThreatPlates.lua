@@ -34,40 +34,46 @@ ThreatPlatesDB = {
 				"Retribution", -- [3]
 			},
 		},
-		["Melancollie - Smolderthorn"] = {
+		["Battlecollie - Ysondre"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
 			["welcome"] = true,
 			["specInfo"] = {
 				{
-					nil, -- [1]
-					7, -- [2]
-				}, -- [1]
-			},
-			["specName"] = {
-				"Arcane", -- [1]
-				"Fire", -- [2]
-				"Frost", -- [3]
-			},
-		},
-		["Fraycollie - The Underbog"] = {
-			["specInfo"] = {
-				{
-					3, -- [1]
+					32, -- [1]
 					3, -- [2]
-					31, -- [3]
 				}, -- [1]
 				{
-					nil, -- [1]
-					31, -- [2]
+					4, -- [1]
+					[3] = 31,
 				}, -- [2]
 			},
-			["welcome"] = true,
 			["specName"] = {
-				"Arms", -- [1]
-				"Fury", -- [2]
-				"Protection", -- [3]
+				"Discipline", -- [1]
+				"Holy", -- [2]
+				"Shadow", -- [3]
+			},
+		},
+		["Battlecollie - Smolderthorn"] = {
+			["welcome"] = true,
+			["spec"] = {
+				["primary"] = false,
+			},
+			["specInfo"] = {
+				{
+					32, -- [1]
+					4, -- [2]
+				}, -- [1]
+				{
+					4, -- [1]
+					[3] = 31,
+				}, -- [2]
+			},
+			["specName"] = {
+				"Discipline", -- [1]
+				"Holy", -- [2]
+				"Shadow", -- [3]
 			},
 		},
 		["Fraycollie - Smolderthorn"] = {
@@ -89,26 +95,29 @@ ThreatPlatesDB = {
 				"Protection", -- [3]
 			},
 		},
-		["Othercollie - Smolderthorn"] = {
-			["spec"] = {
-				["primary"] = false,
-			},
+		["Warcollie - Darkspear"] = {
 			["welcome"] = true,
 			["specName"] = {
-				"Assassination", -- [1]
-				"Combat", -- [2]
-				"Subtlety", -- [3]
+				"Blood", -- [1]
+				"Frost", -- [2]
+				"Unholy", -- [3]
 			},
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Melancollie - Smolderthorn"] = {
+			["welcome"] = true,
 			["spec"] = {
 				["primary"] = false,
 			},
-			["welcome"] = true,
+			["specInfo"] = {
+				{
+					nil, -- [1]
+					7, -- [2]
+				}, -- [1]
+			},
 			["specName"] = {
-				"Balance", -- [1]
-				"Feral Combat", -- [2]
-				"Restoration", -- [3]
+				"Arcane", -- [1]
+				"Fire", -- [2]
+				"Frost", -- [3]
 			},
 		},
 		["Summoneer - Ysondre"] = {
@@ -122,71 +131,62 @@ ThreatPlatesDB = {
 				"Destruction", -- [3]
 			},
 		},
-		["Warcollie - Darkspear"] = {
-			["specName"] = {
-				"Blood", -- [1]
-				"Frost", -- [2]
-				"Unholy", -- [3]
-			},
-			["welcome"] = true,
-		},
-		["Battlecollie - Smolderthorn"] = {
-			["welcome"] = true,
+		["Othercollie - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
-			["specInfo"] = {
-				{
-					32, -- [1]
-					3, -- [2]
-				}, -- [1]
-				{
-					4, -- [1]
-					[3] = 31,
-				}, -- [2]
-			},
+			["welcome"] = true,
 			["specName"] = {
-				"Discipline", -- [1]
-				"Holy", -- [2]
-				"Shadow", -- [3]
+				"Assassination", -- [1]
+				"Combat", -- [2]
+				"Subtlety", -- [3]
 			},
 		},
-		["Battlecollie - Ysondre"] = {
+		["Fraycollie - The Underbog"] = {
+			["specInfo"] = {
+				{
+					3, -- [1]
+					3, -- [2]
+					31, -- [3]
+				}, -- [1]
+				{
+					nil, -- [1]
+					31, -- [2]
+				}, -- [2]
+			},
 			["welcome"] = true,
+			["specName"] = {
+				"Arms", -- [1]
+				"Fury", -- [2]
+				"Protection", -- [3]
+			},
+		},
+		["Hoarcollie - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
-			["specInfo"] = {
-				{
-					32, -- [1]
-					3, -- [2]
-				}, -- [1]
-				{
-					4, -- [1]
-					[3] = 31,
-				}, -- [2]
-			},
+			["welcome"] = true,
 			["specName"] = {
-				"Discipline", -- [1]
-				"Holy", -- [2]
-				"Shadow", -- [3]
+				"Balance", -- [1]
+				"Feral Combat", -- [2]
+				"Restoration", -- [3]
 			},
 		},
 	},
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
-		["Battlecollie - Ysondre"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
 		["Fraycollie - Smolderthorn"] = "Default",
-		["Warcollie - Darkspear"] = "Default",
+		["Othercollie - Smolderthorn"] = "Default",
 		["Hoarcollie - Smolderthorn"] = "Default",
 		["Summoneer - Ysondre"] = "Default",
-		["Othercollie - Smolderthorn"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
+		["Warcollie - Darkspear"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
+		["Battlecollie - Ysondre"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -195,7 +195,7 @@ ThreatPlatesDB = {
 					["Totem"] = true,
 				},
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -298,7 +298,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["theme"] = "transparent",
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["threat"] = {
 				["art"] = {
 					["theme"] = "bar",

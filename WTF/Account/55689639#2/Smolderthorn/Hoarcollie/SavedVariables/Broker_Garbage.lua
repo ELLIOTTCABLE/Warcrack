@@ -2,7 +2,7 @@
 BG_LocalDB = {
 	["include"] = {
 	},
-	["moneyEarned"] = 184,
+	["moneyEarned"] = 6508,
 	["autoSellList"] = {
 		["Consumable.Water"] = true,
 	},
@@ -10,5 +10,5 @@ BG_LocalDB = {
 		["Misc.Reagent.Class.Rogue"] = true,
 	},
 	["neverRepairGuildBank"] = false,
-	["moneyLostByDeleting"] = 0,
+	["moneyLostByDeleting"] = 2,
 }

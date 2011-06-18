@@ -5,17 +5,18 @@ CritlineDB = {
 		},
 		["LibDualSpec-1.0"] = {
 		},
-		["filters"] = {
+		["minimap"] = {
 		},
 		["display"] = {
 		},
-		["minimap"] = {
+		["filters"] = {
 		},
 	},
 	["profileKeys"] = {
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
@@ -25,6 +26,8 @@ CritlineDB = {
 		["Illililiili - Smolderthorn"] = {
 		},
 		["Tempcollie - Ysondre"] = {
+		},
+		["Nocollie - Smolderthorn"] = {
 		},
 		["Illiliililil - Smolderthorn"] = {
 		},

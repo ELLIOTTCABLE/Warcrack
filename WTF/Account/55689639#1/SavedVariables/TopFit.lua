@@ -3,6 +3,7 @@ TopFitDB = {
 	["profileKeys"] = {
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 	},
 	["profiles"] = {
 		["Tempcollie - Ysondre"] = {
@@ -20,6 +21,20 @@ TopFitDB = {
 			},
 		},
 		["Awihrtoawe - Smolderthorn"] = {
+			["statSortOrder"] = "NameAsc",
+			["sets"] = {
+				["set_1"] = {
+					["caps"] = {
+					},
+					["weights"] = {
+					},
+					["name"] = "Default Set",
+					["forced"] = {
+					},
+				},
+			},
+		},
+		["Nocollie - Smolderthorn"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
 				["set_1"] = {

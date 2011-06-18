@@ -1,15 +1,18 @@
 
 MissingFriends_List = {
-	"Chobit", -- [1]
-	"Halfevil", -- [2]
-	"Jondus", -- [3]
-	"Battlecollie", -- [4]
+	"Jondus", -- [1]
+	"Battlecollie", -- [2]
+	"Brandywine", -- [3]
+	"Chobit", -- [4]
 	"Fylthious", -- [5]
-	"Melancollie", -- [6]
-	"Modduece", -- [7]
-	"Raethen", -- [8]
-	"Saidix", -- [9]
-	"Xarleas", -- [10]
+	"Halfevil", -- [6]
+	"Hoarcollie", -- [7]
+	"Leahs", -- [8]
+	"Melancollie", -- [9]
+	"Modduece", -- [10]
+	"Raethen", -- [11]
+	"Saidix", -- [12]
+	"Xarleas", -- [13]
 }
 MissingFriends_OldFriends = {
 }

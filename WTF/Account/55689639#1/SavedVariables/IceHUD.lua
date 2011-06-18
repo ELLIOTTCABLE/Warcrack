@@ -4,15 +4,16 @@ IceCoreDB = {
 		["LibDualSpec-1.0"] = {
 		},
 	},
-	["global"] = {
-		["lastRunVersion"] = 851,
-	},
 	["profileKeys"] = {
 		["Awihrtoawe - Smolderthorn"] = "Default",
 		["Illililiili - Smolderthorn"] = "Default",
 		["Tempcollie - Ysondre"] = "Default",
+		["Nocollie - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
 		["Ililliliilil - The Underbog"] = "Default",
+	},
+	["global"] = {
+		["lastRunVersion"] = 851,
 	},
 	["profiles"] = {
 		["Default"] = {

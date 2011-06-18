@@ -2,16 +2,46 @@
 TopFitDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
+			["statSortOrder"] = "NameAsc",
+			["sets"] = {
+				["set_1"] = {
+					["caps"] = {
+					},
+					["weights"] = {
+					},
+					["name"] = "Default Set",
+					["forced"] = {
+					},
+				},
+			},
+		},
+		["Summoneer - Smolderthorn"] = {
+			["statSortOrder"] = "NameAsc",
+			["sets"] = {
+				["set_1"] = {
+					["caps"] = {
+					},
+					["weights"] = {
+					},
+					["name"] = "Default Set",
+					["forced"] = {
+					},
+				},
+			},
+		},
+		["Nocollie - Smolderthorn"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
 				["set_1"] = {
@@ -81,7 +111,7 @@ TopFitDB = {
 				},
 			},
 		},
-		["Warcollie - Darkspear"] = {
+		["Othercollie - Smolderthorn"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
 				["set_1"] = {
@@ -109,7 +139,7 @@ TopFitDB = {
 				},
 			},
 		},
-		["Summoneer - Smolderthorn"] = {
+		["Warcollie - Darkspear"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
 				["set_1"] = {

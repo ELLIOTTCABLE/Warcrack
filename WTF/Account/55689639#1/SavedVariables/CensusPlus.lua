@@ -13,8 +13,8 @@ CensusPlus_Database = {
 		["Version"] = "5.0.2",
 		["LoginServer"] = "us.logon.worldofwarcraft.com",
 		["UseLogBars"] = 1,
-		["Locale"] = "US",
 		["MiniStart"] = 0,
+		["Locale"] = "US",
 	},
 	["Servers"] = {
 	},

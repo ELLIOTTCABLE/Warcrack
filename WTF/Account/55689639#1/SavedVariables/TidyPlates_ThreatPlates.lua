@@ -5,12 +5,12 @@ ThreatPlatesDB = {
 			["spec"] = {
 				["primary"] = false,
 			},
+			["welcome"] = true,
 			["specName"] = {
 				"Arcane", -- [1]
 				"Fire", -- [2]
 				"Frost", -- [3]
 			},
-			["welcome"] = true,
 		},
 		["Illililiili - Smolderthorn"] = {
 			["spec"] = {
@@ -34,6 +34,17 @@ ThreatPlatesDB = {
 				"Shadow", -- [3]
 			},
 		},
+		["Nocollie - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["specName"] = {
+				"Assassination", -- [1]
+				"Combat", -- [2]
+				"Subtlety", -- [3]
+			},
+			["welcome"] = true,
+		},
 		["Illiliililil - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
@@ -46,18 +57,19 @@ ThreatPlatesDB = {
 			},
 		},
 		["Ililliliilil - The Underbog"] = {
+			["welcome"] = true,
 			["specName"] = {
 				"Blood", -- [1]
 				"Frost", -- [2]
 				"Unholy", -- [3]
 			},
-			["welcome"] = true,
 		},
 	},
 	["profileKeys"] = {
 		["Awihrtoawe - Smolderthorn"] = "Default",
 		["Illililiili - Smolderthorn"] = "Default",
 		["Tempcollie - Ysondre"] = "Default",
+		["Nocollie - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
 		["Ililliliilil - The Underbog"] = "Default",
 	},

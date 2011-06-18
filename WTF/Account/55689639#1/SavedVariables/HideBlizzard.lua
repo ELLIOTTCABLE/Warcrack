@@ -18,6 +18,7 @@ HideBlizzardDB = {
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
@@ -29,6 +30,9 @@ HideBlizzardDB = {
 			["Version"] = "1.0.65",
 		},
 		["Tempcollie - Ysondre"] = {
+			["Version"] = "1.0.65",
+		},
+		["Nocollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 		},
 		["Illiliililil - Smolderthorn"] = {

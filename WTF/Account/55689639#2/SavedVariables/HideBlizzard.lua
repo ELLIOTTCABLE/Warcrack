@@ -9,18 +9,19 @@ HideBlizzardDB = {
 				["Melancollie - Smolderthorn"] = {
 					["party"] = true,
 				},
-				["Hoarcollie - Smolderthorn"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["party"] = true,
 				},
 				["Warcollie - Darkspear"] = {
 					["party"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
+					["mirrorbar"] = false,
 					["party"] = true,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Hoarcollie - Smolderthorn"] = {
+					["boss"] = true,
 					["party"] = true,
-					["mirrorbar"] = false,
 				},
 			},
 		},
@@ -32,16 +33,16 @@ HideBlizzardDB = {
 				["Melancollie - Smolderthorn"] = {
 					["playerunitframe"] = true,
 				},
-				["Hoarcollie - Smolderthorn"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["playerunitframe"] = true,
 				},
 				["Warcollie - Darkspear"] = {
 					["playerunitframe"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
 					["playerunitframe"] = true,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Hoarcollie - Smolderthorn"] = {
 					["playerunitframe"] = true,
 				},
 			},
@@ -58,7 +59,7 @@ HideBlizzardDB = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
-				["Hoarcollie - Smolderthorn"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
@@ -66,11 +67,11 @@ HideBlizzardDB = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Hoarcollie - Smolderthorn"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
@@ -84,19 +85,19 @@ HideBlizzardDB = {
 				["Melancollie - Smolderthorn"] = {
 					["petunitframe"] = true,
 				},
-				["Hoarcollie - Smolderthorn"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["petunitframe"] = true,
 				},
 				["Warcollie - Darkspear"] = {
-					["petunitframe"] = true,
-				},
-				["Battlecollie - Smolderthorn"] = {
 					["petunitframe"] = true,
 				},
 				["Battlecollie - Ysondre"] = {
 					["petunitframe"] = true,
 					["petactionbar"] = true,
 					["petcastbar"] = false,
+				},
+				["Hoarcollie - Smolderthorn"] = {
+					["petunitframe"] = true,
 				},
 			},
 		},
@@ -110,19 +111,19 @@ HideBlizzardDB = {
 					["gryphons"] = true,
 					["stancebar"] = false,
 				},
-				["Hoarcollie - Smolderthorn"] = {
-					["gryphons"] = true,
+				["Battlecollie - Smolderthorn"] = {
 					["stancebar"] = true,
+					["gryphons"] = true,
 				},
 				["Warcollie - Darkspear"] = {
 					["gryphons"] = true,
 					["stancebar"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
-					["stancebar"] = true,
-					["gryphons"] = true,
-				},
 				["Battlecollie - Ysondre"] = {
+					["gryphons"] = true,
+					["stancebar"] = true,
+				},
+				["Hoarcollie - Smolderthorn"] = {
 					["gryphons"] = true,
 					["stancebar"] = true,
 				},
@@ -132,21 +133,26 @@ HideBlizzardDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 		},
 		["Summoneer - Smolderthorn"] = {
+			["Version"] = "1.0.65",
+		},
+		["Combatcollie - The Underbog"] = {
 			["Version"] = "1.0.65",
 		},
 		["Battlecollie - Ysondre"] = {
@@ -159,7 +165,9 @@ HideBlizzardDB = {
 				["ActionBar"] = true,
 			},
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Nocollie - Smolderthorn"] = {
+		},
+		["Battlecollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 			["modules"] = {
 				["SpecialFrames"] = true,
@@ -179,10 +187,17 @@ HideBlizzardDB = {
 				["ActionBar"] = true,
 			},
 		},
-		["Fraycollie - The Underbog"] = {
+		["Warcollie - Darkspear"] = {
 			["Version"] = "1.0.65",
+			["modules"] = {
+				["SpecialFrames"] = true,
+				["Player"] = true,
+				["Target"] = true,
+				["Pet"] = true,
+				["ActionBar"] = true,
+			},
 		},
-		["Melancollie - Smolderthorn"] = {
+		["Hoarcollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 			["modules"] = {
 				["SpecialFrames"] = true,
@@ -195,7 +210,13 @@ HideBlizzardDB = {
 		["Summoneer - Ysondre"] = {
 			["Version"] = "1.0.65",
 		},
-		["Warcollie - Darkspear"] = {
+		["Othercollie - Smolderthorn"] = {
+			["Version"] = "1.0.65",
+		},
+		["Fraycollie - The Underbog"] = {
+			["Version"] = "1.0.65",
+		},
+		["Melancollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 			["modules"] = {
 				["SpecialFrames"] = true,
@@ -204,19 +225,6 @@ HideBlizzardDB = {
 				["Pet"] = true,
 				["ActionBar"] = true,
 			},
-		},
-		["Battlecollie - Smolderthorn"] = {
-			["Version"] = "1.0.65",
-			["modules"] = {
-				["SpecialFrames"] = true,
-				["Player"] = true,
-				["Target"] = true,
-				["Pet"] = true,
-				["ActionBar"] = true,
-			},
-		},
-		["Combatcollie - The Underbog"] = {
-			["Version"] = "1.0.65",
 		},
 	},
 }

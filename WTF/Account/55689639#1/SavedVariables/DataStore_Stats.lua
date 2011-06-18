@@ -4,6 +4,7 @@ DataStore_StatsDB = {
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
@@ -49,6 +50,20 @@ DataStore_StatsDB = {
 					["Resistances"] = "0|0|0|0|0|1",
 					["Base"] = "15|22|20|25|23|33",
 					["Defense"] = "33|1|5.1816997528076|0|0|0",
+				},
+			},
+			["Default.Smolderthorn.Nocollie"] = {
+				["lastUpdate"] = 1308331756,
+				["Stats"] = {
+					["Ranged"] = "2-4|1.6000000238419|14|0|10.00000667572",
+					["Spell"] = "10|10|0|0|0|0",
+					["Melee"] = "6-8|1.8999999761581|39|0|10.00000667572|3",
+					["MaxPower"] = "3|100",
+					["PVP"] = "0|0",
+					["HealthMax"] = 55,
+					["Resistances"] = "0|0|0|0|0|0",
+					["Base"] = "21|23|21|20|20|33",
+					["Defense"] = "33|1|19.999990463257|0|0|0",
 				},
 			},
 			["Default.Smolderthorn.Illiliililil"] = {

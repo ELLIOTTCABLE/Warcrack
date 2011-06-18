@@ -20,10 +20,10 @@ CritlinePerCharDB = {
 								["amount"] = 183,
 							},
 							["crit"] = {
-								["target"] = "Forsaken Infantry",
+								["target"] = "Anaya Dawnrunner",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 10,
-								["amount"] = 77,
+								["targetLevel"] = 12,
+								["amount"] = 103,
 							},
 						}, -- [1]
 					},
@@ -46,26 +46,26 @@ CritlinePerCharDB = {
 					[6603] = {
 						{
 							["normal"] = {
-								["target"] = "Vile Spray",
+								["target"] = "Evolving Ectoplasm",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 10,
-								["amount"] = 32,
+								["targetLevel"] = 17,
+								["amount"] = 73,
 							},
 							["crit"] = {
-								["target"] = "Baron Ashbury",
+								["target"] = "Evolving Ectoplasm",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 10,
-								["amount"] = 21,
+								["targetLevel"] = 17,
+								["amount"] = 140,
 							},
 						}, -- [1]
 					},
 					[22568] = {
 						{
 							["normal"] = {
-								["target"] = "Baron Ashbury",
+								["target"] = "Deviate Ravager",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 10,
-								["amount"] = 60,
+								["targetLevel"] = 18,
+								["amount"] = 90,
 							},
 						}, -- [1]
 					},
@@ -88,42 +88,18 @@ CritlinePerCharDB = {
 					[1082] = {
 						{
 							["normal"] = {
-								["target"] = "Vilebrood Skitterer",
+								["target"] = "Deviate Ravager",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 7,
-								["amount"] = 20,
-							},
-						}, -- [1]
-					},
-					[1822] = {
-						{
-							["normal"] = {
-								["target"] = "Lord Walden",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 10,
-								["amount"] = 11,
+								["targetLevel"] = 18,
+								["amount"] = 39,
 							},
 							["crit"] = {
-								["target"] = "Vilebrood Skitterer",
+								["target"] = "Ogre Bodyguard",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 7,
-								["amount"] = 19,
+								["targetLevel"] = 15,
+								["amount"] = 65,
 							},
 						}, -- [1]
-						{
-							["normal"] = {
-								["target"] = "Lord Walden",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 10,
-								["amount"] = 30,
-							},
-							["crit"] = {
-								["target"] = "Vilebrood Skitterer",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 7,
-								["amount"] = 56,
-							},
-						}, -- [2]
 					},
 					[78674] = {
 						{
@@ -138,6 +114,68 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = false,
 								["targetLevel"] = 10,
 								["amount"] = 162,
+							},
+						}, -- [1]
+					},
+					[1822] = {
+						{
+							["normal"] = {
+								["target"] = "Deviate Ravager",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 18,
+								["amount"] = 16,
+							},
+							["crit"] = {
+								["target"] = "Vilebrood Skitterer",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 7,
+								["amount"] = 19,
+							},
+						}, -- [1]
+						{
+							["normal"] = {
+								["target"] = "Deviate Ravager",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 18,
+								["amount"] = 56,
+							},
+							["crit"] = {
+								["target"] = "Deviate Ravager",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 18,
+								["amount"] = 114,
+							},
+						}, -- [2]
+					},
+					[6807] = {
+						{
+							["normal"] = {
+								["target"] = "Mutanus the Devourer",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 20,
+								["amount"] = 95,
+							},
+							["crit"] = {
+								["target"] = "Evolving Ectoplasm",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 17,
+								["amount"] = 196,
+							},
+						}, -- [1]
+					},
+					[2912] = {
+						{
+							["normal"] = {
+								["target"] = "Forsaken Crossbowman",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 13,
+								["amount"] = 312,
+							},
+							["crit"] = {
+								["target"] = "Lady Sylvanas Windrunner",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 127,
 							},
 						}, -- [1]
 					},
@@ -171,22 +209,6 @@ CritlinePerCharDB = {
 							},
 						}, -- [2]
 					},
-					[2912] = {
-						{
-							["normal"] = {
-								["target"] = "Forsaken Crossbowman",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 13,
-								["amount"] = 312,
-							},
-							["crit"] = {
-								["target"] = "Lady Sylvanas Windrunner",
-								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 127,
-							},
-						}, -- [1]
-					},
 					[72247] = {
 						{
 							["normal"] = {
@@ -203,24 +225,24 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-				},
-				["heal"] = {
-					[774] = {
-						[2] = {
+					[33878] = {
+						{
 							["normal"] = {
-								["target"] = "Hoarcollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 13,
-								["amount"] = 45,
+								["target"] = "Evolving Ectoplasm",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 17,
+								["amount"] = 75,
 							},
 							["crit"] = {
-								["target"] = "Hoarcollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 13,
-								["amount"] = 66,
+								["target"] = "Verdan the Everliving",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 20,
+								["amount"] = 138,
 							},
-						},
+						}, -- [1]
 					},
+				},
+				["heal"] = {
 					[71388] = {
 						[2] = {
 							["normal"] = {
@@ -230,6 +252,62 @@ CritlinePerCharDB = {
 								["amount"] = 335,
 							},
 						},
+					},
+					[8936] = {
+						{
+							["normal"] = {
+								["target"] = "Dëmonica-Spirestone",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 13,
+								["amount"] = 146,
+							},
+						}, -- [1]
+						{
+							["normal"] = {
+								["target"] = "Dëmonica-Spirestone",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 13,
+								["amount"] = 16,
+							},
+							["crit"] = {
+								["target"] = "Dëmonica-Spirestone",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 13,
+								["amount"] = 23,
+							},
+						}, -- [2]
+					},
+					[774] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Dëmonica-Spirestone",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 13,
+								["amount"] = 57,
+							},
+							["crit"] = {
+								["target"] = "Hoarcollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 16,
+								["amount"] = 78,
+							},
+						},
+					},
+					[50464] = {
+						{
+							["normal"] = {
+								["target"] = "Hoarcollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 14,
+								["amount"] = 114,
+							},
+							["crit"] = {
+								["target"] = "Hoarcollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 14,
+								["amount"] = 161,
+							},
+						}, -- [1]
 					},
 				},
 			},

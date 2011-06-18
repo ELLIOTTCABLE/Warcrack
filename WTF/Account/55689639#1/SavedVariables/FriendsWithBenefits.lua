@@ -11,13 +11,14 @@ FriendsWithBenefitsDB = {
 	},
 	["Alliance - Smolderthorn"] = {
 		["removed"] = {
-			["illililiili"] = true,
 			["illiliililil"] = true,
+			["awihrtoawe"] = true,
+			["illililiili"] = true,
 		},
 		["notes"] = {
 		},
 		["friends"] = {
-			["awihrtoawe"] = true,
+			["nocollie"] = true,
 		},
 	},
 	["Horde - Ysondre"] = {

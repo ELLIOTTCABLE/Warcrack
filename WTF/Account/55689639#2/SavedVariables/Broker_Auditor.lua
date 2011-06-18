@@ -1,23 +1,25 @@
 
 BrokerAuditorDB = {
+	["profileKeys"] = {
+		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+	},
 	["global"] = {
 		["LibDBIcon"] = {
 			["hide"] = true,
 		},
 		["styleIndex"] = 2,
-	},
-	["profileKeys"] = {
-		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
@@ -26,13 +28,13 @@ BrokerAuditorDB = {
 		},
 		["Combatcollie - The Underbog"] = {
 		},
-		["Battlecollie - Ysondre"] = {
-			["hideNetTotal"] = false,
-			["absurdDetail"] = true,
+		["Melancollie - Smolderthorn"] = {
+		},
+		["Fraycollie - The Underbog"] = {
 		},
 		["Fraycollie - Smolderthorn"] = {
 		},
-		["Battlecollie - Smolderthorn"] = {
+		["Othercollie - Smolderthorn"] = {
 		},
 		["Hoarcollie - Smolderthorn"] = {
 		},
@@ -40,9 +42,11 @@ BrokerAuditorDB = {
 		},
 		["Warcollie - Darkspear"] = {
 		},
-		["Fraycollie - The Underbog"] = {
+		["Battlecollie - Smolderthorn"] = {
 		},
-		["Melancollie - Smolderthorn"] = {
+		["Battlecollie - Ysondre"] = {
+			["absurdDetail"] = true,
+			["hideNetTotal"] = false,
 		},
 	},
 }

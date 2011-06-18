@@ -31,55 +31,55 @@ GridDB = {
 			["profiles"] = {
 				["Default"] = {
 					["colors"] = {
-						["HUNTER"] = {
-							["r"] = 0.67,
-							["g"] = 0.83,
-							["b"] = 0.45,
-						},
-						["SHAMAN"] = {
-							["r"] = 0,
-							["g"] = 0.44,
-							["b"] = 0.87,
+						["PALADIN"] = {
+							["b"] = 0.73,
+							["g"] = 0.55,
+							["r"] = 0.96,
 						},
 						["MAGE"] = {
-							["r"] = 0.41,
-							["g"] = 0.8,
 							["b"] = 0.9399999999999999,
+							["g"] = 0.8,
+							["r"] = 0.41,
 						},
 						["DRUID"] = {
-							["r"] = 1,
-							["g"] = 0.49,
 							["b"] = 0.04,
+							["g"] = 0.49,
+							["r"] = 1,
 						},
 						["DEATHKNIGHT"] = {
-							["r"] = 0.77,
-							["g"] = 0.12,
 							["b"] = 0.23,
+							["g"] = 0.12,
+							["r"] = 0.77,
 						},
 						["PRIEST"] = {
-							["r"] = 1,
-							["g"] = 1,
 							["b"] = 1,
+							["g"] = 1,
+							["r"] = 1,
 						},
 						["WARLOCK"] = {
-							["r"] = 0.58,
-							["g"] = 0.51,
 							["b"] = 0.79,
+							["g"] = 0.51,
+							["r"] = 0.58,
+						},
+						["HUNTER"] = {
+							["b"] = 0.45,
+							["g"] = 0.83,
+							["r"] = 0.67,
 						},
 						["WARRIOR"] = {
-							["r"] = 0.78,
-							["g"] = 0.61,
 							["b"] = 0.43,
+							["g"] = 0.61,
+							["r"] = 0.78,
 						},
-						["PALADIN"] = {
-							["r"] = 0.96,
-							["g"] = 0.55,
-							["b"] = 0.73,
+						["SHAMAN"] = {
+							["b"] = 0.87,
+							["g"] = 0.44,
+							["r"] = 0,
 						},
 						["ROGUE"] = {
-							["r"] = 1,
-							["g"] = 0.96,
 							["b"] = 0.41,
+							["g"] = 0.96,
+							["r"] = 1,
 						},
 					},
 				},
@@ -111,7 +111,7 @@ GridDB = {
 						},
 						["sidetexttop"] = {
 						},
-						["sidetextbottom"] = {
+						["sidePlusRbottom"] = {
 						},
 						["iconleft"] = {
 						},
@@ -191,9 +191,9 @@ GridDB = {
 						},
 						["sidePlusTcenter"] = {
 						},
-						["cornerPlusBLbottomright"] = {
+						["baricon9"] = {
 						},
-						["sidePlusRbottom"] = {
+						["sidetextbottom"] = {
 						},
 						["iconBRcornerright"] = {
 						},
@@ -206,17 +206,17 @@ GridDB = {
 						},
 						["sidePlusLbottom"] = {
 						},
-						["cornerPlusTLtopright"] = {
+						["cornerPlusBLbottomright"] = {
 						},
-						["baricon9"] = {
-						},
-						["icontop"] = {
-						},
-						["cornerPlusBRtopright"] = {
+						["cornertexttopright"] = {
 						},
 						["sidePlusBleft"] = {
 						},
-						["cornertexttopright"] = {
+						["cornerPlusBRtopright"] = {
+						},
+						["icontop"] = {
+						},
+						["cornerPlusTLtopright"] = {
 						},
 					},
 				},
@@ -236,7 +236,7 @@ GridDB = {
 		},
 		["GridIndicatorCornerIcons"] = {
 		},
-		["GridStatusHealth"] = {
+		["GridStatusRaidIcons"] = {
 		},
 		["DungeonRole"] = {
 		},
@@ -244,19 +244,19 @@ GridDB = {
 		},
 		["GridIndicatorSideText"] = {
 		},
-		["GridStatusName"] = {
+		["GridIndicatorIconBar"] = {
 		},
 		["GridStatusVehicle"] = {
 		},
-		["GridStatusVoiceComm"] = {
+		["GridStatusHots"] = {
 		},
 		["GridMBFrame"] = {
 		},
-		["GridStatusHots"] = {
+		["GridStatusVoiceComm"] = {
 		},
 		["GridStatusReadyCheck"] = {
 		},
-		["GridIndicatorIconBar"] = {
+		["GridStatusName"] = {
 		},
 		["GridIndicatorSideIcons"] = {
 		},
@@ -266,33 +266,33 @@ GridDB = {
 					["magicColors"] = {
 						["Disease"] = {
 							["a"] = 1,
-							["r"] = 0.6,
+							["b"] = 0,
 							["g"] = 0.4,
-							["b"] = 0,
-						},
-						["Poison"] = {
-							["a"] = 1,
-							["r"] = 0,
-							["g"] = 0.6,
-							["b"] = 0,
+							["r"] = 0.6,
 						},
 						["Curse"] = {
 							["a"] = 1,
-							["r"] = 0.8,
-							["g"] = 0,
 							["b"] = 1,
+							["g"] = 0,
+							["r"] = 0.8,
+						},
+						["Poison"] = {
+							["a"] = 1,
+							["b"] = 0,
+							["g"] = 0.6,
+							["r"] = 0,
 						},
 						["Magic"] = {
 							["a"] = 1,
-							["r"] = 0.2,
-							["g"] = 0.4,
 							["b"] = 1,
+							["g"] = 0.4,
+							["r"] = 0.2,
 						},
 						["none"] = {
 							["a"] = 1,
-							["r"] = 0.5,
-							["g"] = 0.5,
 							["b"] = 0.5,
+							["g"] = 0.5,
+							["r"] = 0.5,
 						},
 					},
 				},
@@ -300,7 +300,7 @@ GridDB = {
 		},
 		["GridStatusShield"] = {
 		},
-		["GridStatusRaidIcons"] = {
+		["GridStatusHealth"] = {
 		},
 		["GridBuffIconStatus"] = {
 		},
@@ -309,6 +309,7 @@ GridDB = {
 		["Awihrtoawe - Smolderthorn"] = "Default",
 		["Illililiili - Smolderthorn"] = "Default",
 		["Tempcollie - Ysondre"] = "Default",
+		["Nocollie - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
 		["Ililliliilil - The Underbog"] = "Default",
 	},

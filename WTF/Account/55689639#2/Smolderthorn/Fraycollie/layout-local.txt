@@ -6,6 +6,13 @@ X: 0
 Y: -104
 W: 256
 H: 256
+Frame: ChannelPulloutTab
+FrameLevel: 1
+Anchor: RIGHT
+X: -425
+Y: 66
+W: 115
+H: 32
 Frame: SkadaBarWindowSkada
 FrameLevel: 1
 Anchor: BOTTOMLEFT
@@ -13,6 +20,13 @@ X: 29
 Y: 161
 W: 325
 H: 16
+Frame: TomTomPing_MinimapButton
+FrameLevel: 3
+Anchor: TOPRIGHT
+X: -148
+Y: -96
+W: 32
+H: 32
 Frame: _NPCScanButton
 FrameLevel: 1
 Anchor: BOTTOM

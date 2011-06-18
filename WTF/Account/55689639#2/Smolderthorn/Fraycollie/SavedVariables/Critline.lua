@@ -14,16 +14,16 @@ CritlinePerCharDB = {
 					[6572] = {
 						{
 							["normal"] = {
-								["target"] = "Cloud Prince",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 83,
-								["amount"] = 9610,
-							},
-							["crit"] = {
-								["target"] = "Executor of the Caliph",
+								["target"] = "Empyrean Assassin",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 19059,
+								["amount"] = 9743,
+							},
+							["crit"] = {
+								["target"] = "Stonecore Warbringer",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 82,
+								["amount"] = 19100,
 							},
 						}, -- [1]
 					},
@@ -39,23 +39,23 @@ CritlinePerCharDB = {
 								["target"] = "Stonecore Warbringer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 6571,
+								["amount"] = 6790,
 							},
 						}, -- [1]
 					},
 					[20243] = {
 						{
 							["normal"] = {
-								["target"] = "Deepstone Elemental",
+								["target"] = "Stonecore Rift Conjurer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 7102,
+								["amount"] = 7557,
 							},
 							["crit"] = {
-								["target"] = "Wild Vortex",
+								["target"] = "Stonecore Warbringer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 13717,
+								["amount"] = 14076,
 							},
 						}, -- [1]
 					},
@@ -84,10 +84,10 @@ CritlinePerCharDB = {
 								["amount"] = 8430,
 							},
 							["crit"] = {
-								["target"] = "Cloud Prince",
+								["target"] = "Millhouse Manastorm",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 83,
-								["amount"] = 14672,
+								["amount"] = 15485,
 							},
 						}, -- [1]
 					},
@@ -100,10 +100,10 @@ CritlinePerCharDB = {
 								["amount"] = 6660,
 							},
 							["crit"] = {
-								["target"] = "Turbulent Squall",
+								["target"] = "Stonecore Flayer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 12221,
+								["amount"] = 12703,
 							},
 						}, -- [1]
 					},
@@ -126,42 +126,42 @@ CritlinePerCharDB = {
 					[46968] = {
 						{
 							["normal"] = {
-								["target"] = "Millhouse Manastorm",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 83,
-								["amount"] = 12095,
-							},
-							["crit"] = {
-								["target"] = "Stonecore Warbringer",
+								["target"] = "Turbulent Squall",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 23106,
+								["amount"] = 13030,
+							},
+							["crit"] = {
+								["target"] = "Stonecore Magmalord",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 82,
+								["amount"] = 26159,
 							},
 						}, -- [1]
 					},
-					[76575] = {
+					[75557] = {
 						{
 							["normal"] = {
-								["target"] = "Twilight Zealot",
+								["target"] = "Garnoth, Fist of the Legion",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 4763,
+								["targetLevel"] = 81,
+								["amount"] = 55781,
 							},
 						}, -- [1]
 					},
-					[34428] = {
+					[12809] = {
 						{
 							["normal"] = {
-								["target"] = "Stonecore Warbringer",
+								["target"] = "Temple Adept",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 9165,
+								["amount"] = 9364,
 							},
 							["crit"] = {
-								["target"] = "Cloud Prince",
+								["target"] = "Stonecore Rift Conjurer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 83,
-								["amount"] = 15111,
+								["targetLevel"] = 82,
+								["amount"] = 18350,
 							},
 						}, -- [1]
 					},
@@ -171,13 +171,13 @@ CritlinePerCharDB = {
 								["target"] = "Grand Vizier Ertan",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 84,
-								["amount"] = 2494,
+								["amount"] = 2518,
 							},
 							["crit"] = {
 								["target"] = "Grand Vizier Ertan",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 84,
-								["amount"] = 3735,
+								["amount"] = 4039,
 							},
 						}, -- [1]
 					},
@@ -213,29 +213,29 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[12809] = {
+					[34428] = {
 						{
 							["normal"] = {
-								["target"] = "Stonecore Rift Conjurer",
+								["target"] = "Stonecore Warbringer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 8333,
+								["amount"] = 9165,
 							},
 							["crit"] = {
-								["target"] = "Stonecore Rift Conjurer",
+								["target"] = "Imp",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 18350,
+								["amount"] = 17566,
 							},
 						}, -- [1]
 					},
-					[75557] = {
+					[76575] = {
 						{
 							["normal"] = {
-								["target"] = "Garnoth, Fist of the Legion",
+								["target"] = "Twilight Zealot",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 81,
-								["amount"] = 55781,
+								["targetLevel"] = 80,
+								["amount"] = 4763,
 							},
 						}, -- [1]
 					},

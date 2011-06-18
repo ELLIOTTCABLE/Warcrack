@@ -4,6 +4,7 @@ DataStore_AgendaDB = {
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
@@ -20,6 +21,9 @@ DataStore_AgendaDB = {
 				["Contacts"] = {
 					"Illiliililil", -- [1]
 				},
+			},
+			["Default.Smolderthorn.Nocollie"] = {
+				["lastUpdate"] = 1308331787,
 			},
 			["Default.Smolderthorn.Illiliililil"] = {
 				["lastUpdate"] = 1307755946,

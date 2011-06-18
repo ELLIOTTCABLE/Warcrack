@@ -34,15 +34,14 @@ SMARTBUFF_Options = {
 	["UpgradeToDualSpec"] = true,
 	["OldWheelDown"] = "CAMERAZOOMOUT",
 	["LastTemplate"] = "Solo",
-	["BlacklistTimer"] = 5,
+	["LinkSelfBuffCheck"] = true,
 	["Toggle"] = true,
 	["ToggleAutoSound"] = false,
 	["ShowMiniGrp"] = false,
-	["LinkSelfBuffCheck"] = true,
+	["BlacklistTimer"] = 5,
 	["Debug"] = false,
 	["MinCharges"] = 3,
-	["AddList"] = {
-	},
+	["UISync"] = true,
 	["HideMmButton"] = true,
 	["OldWheelUp"] = "CAMERAZOOMIN",
 	["BuffInCities"] = true,
@@ -59,7 +58,8 @@ SMARTBUFF_Options = {
 	["HideSAButton"] = true,
 	["ScrollWheelDown"] = true,
 	["ToggleAutoChat"] = false,
-	["UISync"] = true,
+	["AddList"] = {
+	},
 	["ScrollWheelUp"] = false,
 	["InCombat"] = false,
 }
@@ -67,8 +67,7 @@ SMARTBUFF_Buffs = {
 	{
 		["Solo"] = {
 			["Crippling Poison"] = {
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -76,17 +75,17 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["EnableG"] = false,
-				["OH"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["SelfOnly"] = false,
+				["OH"] = false,
 			},
 			["Deadly Poison"] = {
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -94,17 +93,17 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["EnableG"] = false,
-				["OH"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["SelfOnly"] = false,
+				["OH"] = false,
 			},
 			["Instant Poison"] = {
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -112,17 +111,17 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["EnableG"] = false,
-				["OH"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["SelfOnly"] = false,
+				["OH"] = false,
 			},
 			["Anesthetic Poison"] = {
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -130,17 +129,17 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["EnableG"] = false,
-				["OH"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["SelfOnly"] = false,
+				["OH"] = false,
 			},
 			["Mind-Numbing Poison"] = {
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -148,17 +147,17 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["EnableG"] = false,
-				["OH"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["SelfOnly"] = false,
+				["OH"] = false,
 			},
 			["Wound Poison"] = {
-				["IgnoreList"] = {
-				},
+				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["RBTime"] = 0,
 				["MH"] = false,
@@ -166,13 +165,14 @@ SMARTBUFF_Buffs = {
 				["COut"] = true,
 				["EnableS"] = false,
 				["SelfNot"] = false,
-				["EnableG"] = false,
-				["OH"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
 				["RH"] = false,
-				["SelfOnly"] = false,
+				["OH"] = false,
 			},
 			["GrpBuffSize"] = 4,
 			["SelfFirst"] = false,
@@ -184,9 +184,9 @@ SMARTBUFF_Buffs = {
 				["MH"] = false,
 				["CIn"] = false,
 				["EnableS"] = false,
+				["EnableG"] = false,
 				["IgnoreList"] = {
 				},
-				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},

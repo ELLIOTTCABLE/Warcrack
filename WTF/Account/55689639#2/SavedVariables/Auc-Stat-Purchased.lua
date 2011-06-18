@@ -6,14 +6,14 @@ AucAdvancedStatPurchasedData = {
 			["means"] = {
 			},
 			["daily"] = {
-				["created"] = 1308240144,
+				["created"] = 1308325234,
 			},
 		},
 		["Darkspear-Alliance"] = {
 			["means"] = {
 			},
 			["daily"] = {
-				["created"] = 1308240144,
+				["created"] = 1308325234,
 			},
 		},
 		["Smolderthorn-Alliance"] = {
@@ -21,7 +21,7 @@ AucAdvancedStatPurchasedData = {
 				[52719] = "0:1;3;380332.3;380332.3;380332.3",
 			},
 			["daily"] = {
-				["created"] = 1308240144,
+				["created"] = 1308325234,
 			},
 		},
 	},

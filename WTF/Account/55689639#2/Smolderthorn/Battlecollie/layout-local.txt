@@ -27,6 +27,13 @@ X: -20
 Y: -3
 W: 500
 H: 520
+Frame: TomTomPing_MinimapButton
+FrameLevel: 3
+Anchor: TOPRIGHT
+X: -148
+Y: -96
+W: 32
+H: 32
 Frame: _NPCScanButton
 FrameLevel: 1
 Anchor: BOTTOM

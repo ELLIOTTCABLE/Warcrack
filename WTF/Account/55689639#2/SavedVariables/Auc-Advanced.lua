@@ -1,6 +1,5 @@
 
 AucAdvancedConfig = {
-	["version"] = 1,
 	["profile.Default"] = {
 		["configator.left"] = 666.6668090820312,
 		["scandata"] = {
@@ -14,6 +13,50 @@ AucAdvancedConfig = {
 					"BeanCount", -- [1]
 					"Undercut", -- [2]
 				},
+			},
+		},
+		["stat"] = {
+			["simple"] = {
+				["avg7"] = true,
+				["avg14"] = true,
+				["avg3"] = true,
+				["tooltip"] = true,
+				["reportsafe"] = true,
+			},
+			["histogram"] = {
+				["median"] = true,
+				["tooltip"] = true,
+				["precision"] = true,
+			},
+			["wowecon"] = {
+				["enable"] = true,
+				["sanitize"] = false,
+			},
+			["ilevel"] = {
+				["normal"] = true,
+				["tooltip"] = true,
+				["mean"] = true,
+			},
+			["sales"] = {
+				["avg7"] = true,
+				["stdev"] = true,
+				["confid"] = true,
+				["avg3"] = true,
+				["tooltip"] = true,
+				["ignoredsigs"] = {
+				},
+			},
+			["stddev"] = {
+				["normal"] = true,
+				["tooltip"] = true,
+				["mean"] = true,
+			},
+			["purchased"] = {
+				["avg7"] = true,
+				["avg3"] = true,
+				["tooltip"] = true,
+				["avg14"] = true,
+				["reportsafe"] = true,
 			},
 		},
 		["util"] = {
@@ -32,8 +75,8 @@ AucAdvancedConfig = {
 					"TOPLEFT", -- [1]
 					nil, -- [2]
 					"TOPLEFT", -- [3]
-					1.724598407745361, -- [4]
-					-104.862190246582, -- [5]
+					0, -- [4]
+					-104.0001068115234, -- [5]
 				},
 			},
 			["scanbutton"] = {
@@ -53,71 +96,28 @@ AucAdvancedConfig = {
 			["pricelevel"] = {
 			},
 		},
-		["stat"] = {
-			["simple"] = {
-				["avg7"] = true,
-				["reportsafe"] = true,
-				["avg3"] = true,
-				["tooltip"] = true,
-				["avg14"] = true,
-			},
-			["histogram"] = {
-				["median"] = true,
-				["tooltip"] = true,
-				["precision"] = true,
-			},
-			["wowecon"] = {
-				["enable"] = true,
-				["sanitize"] = false,
-			},
-			["purchased"] = {
-				["avg7"] = true,
-				["reportsafe"] = true,
-				["tooltip"] = true,
-				["avg14"] = true,
-				["avg3"] = true,
-			},
-			["sales"] = {
-				["avg7"] = true,
-				["stdev"] = true,
-				["confid"] = true,
-				["avg3"] = true,
-				["tooltip"] = true,
-				["ignoredsigs"] = {
-				},
-			},
-			["stddev"] = {
-				["normal"] = true,
-				["tooltip"] = true,
-				["mean"] = true,
-			},
-			["ilevel"] = {
-				["normal"] = true,
-				["tooltip"] = true,
-				["mean"] = true,
-			},
-		},
 		["configator.top"] = 825.0001220703125,
 	},
+	["version"] = 1,
 	["users.Smolderthorn.Battlecollie"] = "Default",
 }
 AucAdvancedData = {
 	["AserArbitrageRealms"] = {
-		["Darkspear"] = "Warcollie",
 		["Smolderthorn"] = "Battlecollie",
+		["Darkspear"] = "Warcollie",
 	},
 	["Stats"] = {
 	},
 	["UtilSearchUiData"] = {
-		["Global"] = {
-			["configator.left"] = 616.6666259765625,
-			["configator.top"] = 849.9998168945312,
-		},
+		["Version"] = 1,
 		["Current"] = {
 			["snatch.itemsList"] = {
 			},
 		},
-		["Version"] = 1,
+		["Global"] = {
+			["configator.left"] = 616.6666259765625,
+			["configator.top"] = 849.9998168945312,
+		},
 		["SavedSearches"] = {
 		},
 	},

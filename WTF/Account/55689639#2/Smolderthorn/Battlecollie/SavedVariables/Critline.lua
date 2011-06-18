@@ -29,21 +29,15 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[8092] = {
-						{
+					[2944] = {
+						[2] = {
 							["normal"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 78,
-								["amount"] = 4246,
+								["amount"] = 613,
 							},
-							["crit"] = {
-								["target"] = "Sifreldar Storm Maiden",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 78,
-								["amount"] = 7063,
-							},
-						}, -- [1]
+						},
 					},
 					[63675] = {
 						{
@@ -61,19 +55,19 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[34914] = {
+					[15407] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Sifreldar Runekeeper",
+								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 1043,
+								["targetLevel"] = 79,
+								["amount"] = 793,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 79,
-								["amount"] = 1895,
+								["amount"] = 1584,
 							},
 						},
 					},
@@ -103,29 +97,35 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[2944] = {
-						[2] = {
+					[8092] = {
+						{
 							["normal"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 78,
-								["amount"] = 613,
+								["amount"] = 4246,
 							},
-						},
-					},
-					[15407] = {
-						[2] = {
-							["normal"] = {
+							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 79,
-								["amount"] = 793,
+								["targetLevel"] = 78,
+								["amount"] = 7063,
+							},
+						}, -- [1]
+					},
+					[34914] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Sifreldar Runekeeper",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 80,
+								["amount"] = 1043,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 79,
-								["amount"] = 1584,
+								["amount"] = 1895,
 							},
 						},
 					},
@@ -167,16 +167,6 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2060] = {
-						{
-							["normal"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 8170,
-							},
-						}, -- [1]
-					},
 					[17] = {
 						{
 							["normal"] = {
@@ -187,13 +177,13 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2061] = {
+					[55503] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 7893,
+								["amount"] = 697,
 							},
 						}, -- [1]
 					},
@@ -206,6 +196,16 @@ CritlinePerCharDB = {
 								["amount"] = 224,
 							},
 						},
+					},
+					[2061] = {
+						{
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 7893,
+							},
+						}, -- [1]
 					},
 					[23455] = {
 						{
@@ -253,13 +253,13 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[55503] = {
+					[2060] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 697,
+								["amount"] = 8170,
 							},
 						}, -- [1]
 					},
@@ -331,29 +331,23 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[34914] = {
-						[2] = {
+					[50799] = {
+						{
 							["normal"] = {
-								["target"] = "Lavanthor",
+								["target"] = "The Prophet Tharon'ja ",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 77,
-								["amount"] = 1205,
+								["targetLevel"] = 76,
+								["amount"] = 219,
 							},
-							["crit"] = {
-								["target"] = "Azure Stalker",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 75,
-								["amount"] = 2191,
-							},
-						},
+						}, -- [1]
 					},
 					[2944] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Azure Stalker",
+								["target"] = "Sjonnir The Ironshaper",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 75,
-								["amount"] = 637,
+								["targetLevel"] = 79,
+								["amount"] = 653,
 							},
 							["crit"] = {
 								["target"] = "Lavanthor",
@@ -462,10 +456,10 @@ CritlinePerCharDB = {
 								["amount"] = 900,
 							},
 							["crit"] = {
-								["target"] = "Anub'ar Webspinner",
+								["target"] = "Sjonnir The Ironshaper",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 72,
-								["amount"] = 1651,
+								["targetLevel"] = 79,
+								["amount"] = 1691,
 							},
 						},
 					},
@@ -485,15 +479,21 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[50799] = {
-						{
+					[34914] = {
+						[2] = {
 							["normal"] = {
-								["target"] = "The Prophet Tharon'ja ",
+								["target"] = "Lavanthor",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 219,
+								["targetLevel"] = 77,
+								["amount"] = 1205,
 							},
-						}, -- [1]
+							["crit"] = {
+								["target"] = "Azure Stalker",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 75,
+								["amount"] = 2191,
+							},
+						},
 					},
 				},
 				["heal"] = {
@@ -630,10 +630,10 @@ CritlinePerCharDB = {
 					[596] = {
 						{
 							["normal"] = {
-								["target"] = "Sukkmytotem-Garithos",
+								["target"] = "Thorber-Spirestone",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 76,
-								["amount"] = 4134,
+								["targetLevel"] = 77,
+								["amount"] = 4176,
 							},
 							["crit"] = {
 								["target"] = "Beerdo",

@@ -4,6 +4,7 @@ DataStore_TalentsDB = {
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
@@ -166,6 +167,61 @@ DataStore_TalentsDB = {
 					2097158, -- [9]
 				},
 			},
+			["Default.Smolderthorn.Nocollie"] = {
+				["lastUpdate"] = 1308331756,
+				["GlyphList"] = {
+					11, -- [1]
+					6258, -- [2]
+					6290, -- [3]
+					6370, -- [4]
+					6466, -- [5]
+					11442, -- [6]
+					11730, -- [7]
+					6434, -- [8]
+					6498, -- [9]
+					11458, -- [10]
+					6546, -- [11]
+					6562, -- [12]
+					11426, -- [13]
+					13, -- [14]
+					6276, -- [15]
+					6308, -- [16]
+					14868, -- [17]
+					11748, -- [18]
+					6324, -- [19]
+					6340, -- [20]
+					6356, -- [21]
+					6388, -- [22]
+					11700, -- [23]
+					6404, -- [24]
+					6420, -- [25]
+					6452, -- [26]
+					14820, -- [27]
+					6484, -- [28]
+					6516, -- [29]
+					6580, -- [30]
+					11716, -- [31]
+					14788, -- [32]
+					15, -- [33]
+					7494, -- [34]
+					7430, -- [35]
+					7446, -- [36]
+					7462, -- [37]
+					7510, -- [38]
+					7478, -- [39]
+				},
+				["Glyphs"] = {
+					2, -- [1]
+					4, -- [2]
+					1048580, -- [3]
+					1048578, -- [4]
+					2097156, -- [5]
+					2097154, -- [6]
+					6, -- [7]
+					1048582, -- [8]
+					2097158, -- [9]
+				},
+			},
 			["Default.Smolderthorn.Illiliililil"] = {
 				["lastUpdate"] = 1307755866,
 				["GlyphList"] = {
@@ -233,8 +289,9 @@ DataStore_TalentsDB = {
 					1048583, -- [8]
 					2097158, -- [9]
 				},
-				["Class"] = "DEATHKNIGHT",
+				["ActiveTalents"] = 1,
 				["lastUpdate"] = 1307756004,
+				["Class"] = "DEATHKNIGHT",
 				["GlyphList"] = {
 					11, -- [1]
 					8322, -- [2]
@@ -270,7 +327,6 @@ DataStore_TalentsDB = {
 					8870, -- [32]
 					8854, -- [33]
 				},
-				["ActiveTalents"] = 1,
 			},
 		},
 		["Reference"] = {
@@ -363,51 +419,51 @@ DataStore_TalentsDB = {
 				[401] = "Garrote",
 				[465] = "Pick Lock",
 				[258] = "Lightwell",
-				[522] = "Horn of Winter",
+				[392] = "Ambush",
 				[322] = "Ice Lance",
 				[929] = "Blind",
 				[520] = "Death and Decay",
 				[264] = "Prayer of Healing",
 				[515] = "Bone Shield",
 				[402] = "Revealing Strike",
-				[512] = "Anti-Magic Shell",
+				[528] = "Rune Strike",
 				[611] = "Blast Wave",
 				[450] = "Penguin",
 				[466] = "Pick Pocket",
-				[393] = "Backstab",
-				[405] = "Preparation",
+				[463] = "Shadowfiend",
+				[524] = "Icy Touch",
 				[771] = "Death Coil",
-				[518] = "Death's Embrace",
 				[513] = "Heart Strike",
 				[259] = "Mass Dispel",
+				[260] = "Psychic Horror",
 				[323] = "Icy Veins",
-				[926] = "Kick",
-				[708] = "Dispersion",
 				[407] = "Sap",
-				[530] = "Strangulate",
+				[708] = "Dispersion",
+				[516] = "Chains of Ice",
+				[391] = "Adrenaline Rush",
 				[403] = "Gouge",
-				[532] = "Vampiric Blood",
-				[514] = "Blood Tap",
+				[769] = "Hungering Cold",
+				[928] = "Living Bomb",
 				[451] = "Slow Fall",
 				[467] = "Safe Fall",
 				[709] = "Guardian Spirit",
-				[394] = "Blade Flurry",
-				[773] = "Howling Blast",
 				[406] = "Rupture",
-				[928] = "Living Bomb",
-				[769] = "Hungering Cold",
-				[391] = "Adrenaline Rush",
-				[516] = "Chains of Ice",
+				[518] = "Death's Embrace",
+				[773] = "Howling Blast",
+				[394] = "Blade Flurry",
+				[514] = "Blood Tap",
+				[532] = "Vampiric Blood",
+				[530] = "Strangulate",
 				[710] = "Penance",
-				[260] = "Psychic Horror",
+				[926] = "Kick",
 				[519] = "Death Grip",
 				[404] = "Hemorrhage",
-				[524] = "Icy Touch",
-				[463] = "Shadowfiend",
-				[528] = "Rune Strike",
+				[405] = "Preparation",
+				[393] = "Backstab",
+				[512] = "Anti-Magic Shell",
 				[468] = "Blurred Speed",
 				[711] = "Spirit Tap",
-				[392] = "Ambush",
+				[522] = "Horn of Winter",
 			},
 		},
 	},
@@ -417,6 +473,7 @@ DataStore_TalentsRefDB = {
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
@@ -425,13 +482,6 @@ DataStore_TalentsRefDB = {
 			["Locale"] = "enUS",
 			["Trees"] = {
 				["Unholy"] = {
-					["prereqs"] = {
-						[9] = "1|3",
-						[17] = "3|4",
-						[15] = "4|2",
-					},
-					["background"] = "DeathKnightUnholy",
-					["icon"] = "Spell_Deathknight_UnholyPresence",
 					["talents"] = {
 						"2025|Unholy Command|Spell_DeathKnight_Strangulate|1|1|2", -- [1]
 						"1932|Virulence|Spell_Shadow_BurningSpirit|1|2|3", -- [2]
@@ -454,13 +504,15 @@ DataStore_TalentsRefDB = {
 						"7575|Sudden Doom|Spell_Shadow_PainSpike|6|3|3", -- [19]
 						"2000|Summon Gargoyle|ability_deathknight_summongargoyle|7|2|1", -- [20]
 					},
+					["prereqs"] = {
+						[15] = "4|2",
+						[9] = "1|3",
+						[17] = "3|4",
+					},
+					["icon"] = "Spell_Deathknight_UnholyPresence",
+					["background"] = "DeathKnightUnholy",
 				},
 				["Frost"] = {
-					["prereqs"] = {
-						[20] = "5|2",
-					},
-					["background"] = "DeathKnightFrost",
-					["icon"] = "Spell_Deathknight_FrostPresence",
 					["talents"] = {
 						"2031|Runic Power Mastery|Spell_Arcane_Arcane01|1|1|3", -- [1]
 						"2035|Icy Reach|Spell_Frost_ManaRecharge|1|2|2", -- [2]
@@ -483,13 +535,13 @@ DataStore_TalentsRefDB = {
 						"7571|Might of the Frozen Wastes|inv_sword_120|6|3|3", -- [19]
 						"1989|Howling Blast|Spell_Frost_ArcticWinds|7|2|1", -- [20]
 					},
+					["prereqs"] = {
+						[20] = "5|2",
+					},
+					["icon"] = "Spell_Deathknight_FrostPresence",
+					["background"] = "DeathKnightFrost",
 				},
 				["Blood"] = {
-					["prereqs"] = {
-						[15] = "5|2",
-					},
-					["background"] = "DeathKnightBlood",
-					["icon"] = "Spell_Deathknight_BloodPresence",
 					["talents"] = {
 						"1939|Butchery|INV_Axe_68|1|1|2", -- [1]
 						"2017|Blade Barrier|Ability_UpgradeMoonGlaive|1|2|3", -- [2]
@@ -512,20 +564,25 @@ DataStore_TalentsRefDB = {
 						"7463|Crimson Scourge|Spell_DeathKnight_BloodBoil|6|3|2", -- [19]
 						"1961|Dancing Rune Weapon|INV_Sword_07|7|2|1", -- [20]
 					},
+					["prereqs"] = {
+						[15] = "5|2",
+					},
+					["icon"] = "Spell_Deathknight_BloodPresence",
+					["background"] = "DeathKnightBlood",
 				},
 			},
 			["Version"] = 14007,
 			["Order"] = "Blood,Frost,Unholy",
+		},
+		["PRIEST"] = {
+			["Locale"] = "enUS",
+			["Version"] = 14007,
 		},
 		["MAGE"] = {
 			["Locale"] = "enUS",
 			["Version"] = 14007,
 		},
 		["ROGUE"] = {
-			["Locale"] = "enUS",
-			["Version"] = 14007,
-		},
-		["PRIEST"] = {
 			["Locale"] = "enUS",
 			["Version"] = 14007,
 		},

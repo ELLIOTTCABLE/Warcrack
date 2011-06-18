@@ -4,6 +4,7 @@ DataStore_QuestsDB = {
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
@@ -17,6 +18,9 @@ DataStore_QuestsDB = {
 			},
 			["Default.Smolderthorn.Illililiili"] = {
 				["lastUpdate"] = 1307775469,
+			},
+			["Default.Smolderthorn.Nocollie"] = {
+				["lastUpdate"] = 1308331756,
 			},
 			["Default.Smolderthorn.Illiliililil"] = {
 				["lastUpdate"] = 1307755866,

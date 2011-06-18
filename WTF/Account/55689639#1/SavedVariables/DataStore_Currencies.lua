@@ -4,6 +4,7 @@ DataStore_CurrenciesDB = {
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
@@ -39,6 +40,13 @@ DataStore_CurrenciesDB = {
 					4, -- [2]
 				},
 				["lastUpdate"] = 1307775469,
+			},
+			["Default.Smolderthorn.Nocollie"] = {
+				["Currencies"] = {
+					3, -- [1]
+					4, -- [2]
+				},
+				["lastUpdate"] = 1308331756,
 			},
 			["Default.Smolderthorn.Illiliililil"] = {
 				["Currencies"] = {

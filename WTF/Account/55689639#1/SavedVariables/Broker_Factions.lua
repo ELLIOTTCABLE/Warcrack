@@ -1,11 +1,13 @@
 
 BFactions_DB = {
 	["profileKeys"] = {
-		["Awihrtoawe - Smolderthorn"] = "Default",
-		["Illililiili - Smolderthorn"] = "Default",
-		["Tempcollie - Ysondre"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
+		["Awihrtoawe - Smolderthorn"] = "Default",
+		["Snorecollie - Smolderthorn"] = "Default",
+		["Illililiili - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
+		["Tempcollie - Ysondre"] = "Default",
+		["Awdawdawd - Smolderthorn"] = "Default",
 		["Ililliliilil - The Underbog"] = "Default",
 	},
 	["factionrealm"] = {
@@ -39,8 +41,38 @@ BFactions_DB = {
 				},
 			},
 		},
+		["Horde - Smolderthorn"] = {
+			["Snorecollie"] = {
+				["options"] = {
+					["display"] = {
+						["showPercentage"] = false,
+						["debug"] = false,
+						["showCollapsedHeaders"] = true,
+						["showRawValues"] = true,
+						["hideExalted"] = false,
+						["tipscale"] = 1,
+						["minimap_icon"] = {
+							["hide"] = true,
+						},
+						["autoHideDelay"] = 0.1,
+						["showSessionGains"] = false,
+						["dbVersion"] = "1.5",
+						["showHintLines"] = true,
+						["showRemainingRep"] = false,
+					},
+					["text"] = {
+						["showPercentage"] = false,
+						["showText"] = false,
+						["showRawValues"] = true,
+						["watchedFaction"] = "",
+						["showSessionGains"] = false,
+						["showRemainingRep"] = false,
+					},
+				},
+			},
+		},
 		["Alliance - Smolderthorn"] = {
-			["Illililiili"] = {
+			["Illiliililil"] = {
 				["options"] = {
 					["display"] = {
 						["showPercentage"] = false,
@@ -96,6 +128,34 @@ BFactions_DB = {
 					},
 				},
 			},
+			["Illililiili"] = {
+				["options"] = {
+					["display"] = {
+						["showPercentage"] = false,
+						["debug"] = false,
+						["showCollapsedHeaders"] = true,
+						["showRawValues"] = true,
+						["hideExalted"] = false,
+						["tipscale"] = 1,
+						["minimap_icon"] = {
+							["hide"] = true,
+						},
+						["autoHideDelay"] = 0.1,
+						["showSessionGains"] = false,
+						["dbVersion"] = "1.5",
+						["showHintLines"] = true,
+						["showRemainingRep"] = false,
+					},
+					["text"] = {
+						["showPercentage"] = false,
+						["showText"] = false,
+						["showRawValues"] = true,
+						["watchedFaction"] = "",
+						["showSessionGains"] = false,
+						["showRemainingRep"] = false,
+					},
+				},
+			},
 			["Awihrtoawe"] = {
 				["options"] = {
 					["display"] = {
@@ -124,7 +184,7 @@ BFactions_DB = {
 					},
 				},
 			},
-			["Illiliililil"] = {
+			["Awdawdawd"] = {
 				["options"] = {
 					["display"] = {
 						["showPercentage"] = false,

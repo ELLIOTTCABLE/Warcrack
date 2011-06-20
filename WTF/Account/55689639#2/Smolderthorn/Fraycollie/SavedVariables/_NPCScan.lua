@@ -26,9 +26,9 @@ _NPCScanOptionsCharacter = {
 		[50009] = "Mobus",
 		[18684] = "Bro'Gaz the Clanless",
 		[51071] = "Captain Florence",
-		[49822] = "Jadefang",
-		[50050] = "Shok'sharak",
 		[49913] = "Lady LaLa",
+		[50050] = "Shok'sharak",
+		[49822] = "Jadefang",
 	},
 	["Version"] = "4.1.0.2",
 	["NPCWorldIDs"] = {
@@ -53,8 +53,8 @@ _NPCScanOptionsCharacter = {
 		[50009] = 2,
 		[18684] = 3,
 		[51071] = 2,
-		[49822] = "Deepholm",
-		[50050] = 2,
 		[49913] = 2,
+		[50050] = 2,
+		[49822] = "Deepholm",
 	},
 }

@@ -1,11 +1,27 @@
 
 TopFitDB = {
 	["profileKeys"] = {
-		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 	},
 	["profiles"] = {
+		["Awihrtoawe - Smolderthorn"] = {
+			["statSortOrder"] = "NameAsc",
+			["sets"] = {
+				["set_1"] = {
+					["caps"] = {
+					},
+					["weights"] = {
+					},
+					["name"] = "Default Set",
+					["forced"] = {
+					},
+				},
+			},
+		},
 		["Tempcollie - Ysondre"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
@@ -20,7 +36,21 @@ TopFitDB = {
 				},
 			},
 		},
-		["Awihrtoawe - Smolderthorn"] = {
+		["Snorecollie - Smolderthorn"] = {
+			["statSortOrder"] = "NameAsc",
+			["sets"] = {
+				["set_1"] = {
+					["caps"] = {
+					},
+					["weights"] = {
+					},
+					["name"] = "Default Set",
+					["forced"] = {
+					},
+				},
+			},
+		},
+		["Awdawdawd - Smolderthorn"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
 				["set_1"] = {

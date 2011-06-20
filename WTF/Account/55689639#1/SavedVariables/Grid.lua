@@ -24,6 +24,16 @@ GridDB = {
 		["GridIndicatorCornerText"] = {
 		},
 		["GridStatusCasterBuffs"] = {
+			["profiles"] = {
+				["Default"] = {
+					["spell_name"] = {
+						[11196] = "Recently Bandaged",
+					},
+					["aura_desc"] = {
+						[11196] = "Cannot be bandaged again.",
+					},
+				},
+			},
 		},
 		["GridStatusRange"] = {
 		},
@@ -183,7 +193,7 @@ GridDB = {
 						},
 						["cornertextbottomright"] = {
 						},
-						["sidePlusRcenter"] = {
+						["cornerPlusBLbottomright"] = {
 						},
 						["sidePlusRtop"] = {
 						},
@@ -206,7 +216,7 @@ GridDB = {
 						},
 						["sidePlusLbottom"] = {
 						},
-						["cornerPlusBLbottomright"] = {
+						["sidePlusRcenter"] = {
 						},
 						["cornertexttopright"] = {
 						},
@@ -306,11 +316,13 @@ GridDB = {
 		},
 	},
 	["profileKeys"] = {
-		["Awihrtoawe - Smolderthorn"] = "Default",
-		["Illililiili - Smolderthorn"] = "Default",
-		["Tempcollie - Ysondre"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
+		["Awihrtoawe - Smolderthorn"] = "Default",
+		["Snorecollie - Smolderthorn"] = "Default",
+		["Illililiili - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
+		["Tempcollie - Ysondre"] = "Default",
+		["Awdawdawd - Smolderthorn"] = "Default",
 		["Ililliliilil - The Underbog"] = "Default",
 	},
 	["profiles"] = {

@@ -3,17 +3,17 @@ DataStore_ContainersDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -102,7 +102,7 @@ DataStore_ContainersDB = {
 			["Default.Smolderthorn.Fraycollie"] = {
 				["numFreeBankSlots"] = 89,
 				["numBankSlots"] = 192,
-				["lastUpdate"] = 1308430676,
+				["lastUpdate"] = 1308531035,
 				["Containers"] = {
 					["Bag10"] = {
 						["link"] = "|cff0070dd|Hitem:38347:0:0:0:0:0:0:1761089152:84:0|h[Mammoth Mining Bag]|h|r",
@@ -118,12 +118,12 @@ DataStore_ContainersDB = {
 						},
 						["ids"] = {
 							61478, -- [1]
-							68198, -- [2]
+							60486, -- [2]
 							52325, -- [3]
 							53038, -- [4]
 							55366, -- [5]
-							62101, -- [6]
-							60485, -- [7]
+							23425, -- [6]
+							nil, -- [7]
 							52182, -- [8]
 							52179, -- [9]
 							52185, -- [10]
@@ -136,14 +136,15 @@ DataStore_ContainersDB = {
 						["size"] = 16,
 						["counts"] = {
 							nil, -- [1]
-							2, -- [2]
+							nil, -- [2]
 							4, -- [3]
 							18, -- [4]
 							[11] = 3,
-							[10] = 7,
+							[6] = 6,
 							[12] = 3,
+							[10] = 7,
 						},
-						["freeslots"] = 1,
+						["freeslots"] = 2,
 					},
 					["Bag8"] = {
 						["ids"] = {
@@ -207,7 +208,7 @@ DataStore_ContainersDB = {
 						["size"] = 32,
 					},
 					["Bag3"] = {
-						["link"] = "|cffffffff|Hitem:41599:0:0:0:0:0:0:1919305088:84:0|h[]|h|r",
+						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:1919305088:84:0|h[Frostweave Bag]|h|r",
 						["size"] = 20,
 						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
 						["freeslots"] = 20,
@@ -273,6 +274,11 @@ DataStore_ContainersDB = {
 					},
 					["Bag4"] = {
 						["link"] = "|cff0070dd|Hitem:54444:0:0:0:0:0:0:1985048832:84:0|h[Illusionary Bag]|h|r",
+						["icon"] = "Interface\\Icons\\inv_misc_bag_37",
+						["freeslots"] = 12,
+						["cooldowns"] = {
+							[26] = "475076.357|1800|1",
+						},
 						["ids"] = {
 							52974, -- [1]
 							22829, -- [2]
@@ -285,16 +291,16 @@ DataStore_ContainersDB = {
 							25539, -- [9]
 							23559, -- [10]
 							6367, -- [11]
-							40772, -- [12]
-							6948, -- [13]
+							[25] = 40772,
+							[26] = 6948,
+							[22] = 58488,
 						},
-						["freeslots"] = 13,
-						["icon"] = "Interface\\Icons\\inv_misc_bag_37",
 						["counts"] = {
 							10, -- [1]
 							19, -- [2]
-							[6] = 10,
 							[10] = 5,
+							[6] = 10,
+							[22] = 5,
 						},
 						["size"] = 26,
 					},
@@ -361,8 +367,8 @@ DataStore_ContainersDB = {
 						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:4335119:84:0|h[Frostweave Bag]|h|r",
 						["counts"] = {
 							[5] = 4,
-							[19] = 2,
-							[20] = 4,
+							[19] = 3,
+							[20] = 6,
 							[15] = 2,
 						},
 						["size"] = 20,
@@ -673,12 +679,12 @@ DataStore_ContainersDB = {
 				["numBagSlots"] = 96,
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
-				["numFreeBankSlots"] = 139,
+				["numFreeBankSlots"] = 142,
 				["numBankSlots"] = 178,
-				["lastUpdate"] = 1308434430,
+				["lastUpdate"] = 1308539631,
 				["Containers"] = {
 					["Bag10"] = {
-						["link"] = "|cff0070dd|Hitem:44446:0:0:0:0:0:0:1627690112:79:0|h[Pack of Endless Pockets]|h|r",
+						["link"] = "|cff0070dd|Hitem:44446:0:0:0:0:0:0:1627690112:80:0|h[Pack of Endless Pockets]|h|r",
 						["freeslots"] = 32,
 						["bagtype"] = 16,
 						["icon"] = "Interface\\Icons\\INV_Misc_Bag_13",
@@ -700,7 +706,7 @@ DataStore_ContainersDB = {
 						["size"] = 32,
 					},
 					["Bag8"] = {
-						["link"] = "|cff0070dd|Hitem:11742:0:0:0:0:0:0:1909580928:79:0|h[Wayfarer's Knapsack]|h|r",
+						["link"] = "|cff0070dd|Hitem:11742:0:0:0:0:0:0:1909580928:80:0|h[Wayfarer's Knapsack]|h|r",
 						["freeslots"] = 11,
 						["ids"] = {
 							nil, -- [1]
@@ -754,80 +760,102 @@ DataStore_ContainersDB = {
 						["size"] = 28,
 					},
 					["Bag3"] = {
-						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:79:0|h[Portable Hole]|h|r",
-						["freeslots"] = 24,
+						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:80:0|h[Portable Hole]|h|r",
+						["ids"] = {
+							nil, -- [1]
+							3371, -- [2]
+							3371, -- [3]
+							3371, -- [4]
+							[8] = 53010,
+							[6] = 38426,
+							[7] = 53010,
+						},
+						["freeslots"] = 18,
+						["counts"] = {
+							nil, -- [1]
+							20, -- [2]
+							20, -- [3]
+							20, -- [4]
+							nil, -- [5]
+							6, -- [6]
+							8, -- [7]
+							20, -- [8]
+						},
 						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
 					},
 					["Bag1"] = {
-						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:79:0|h[Portable Hole]|h|r",
-						["counts"] = {
-							7, -- [1]
-						},
+						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:80:0|h[Portable Hole]|h|r",
 						["ids"] = {
-							33470, -- [1]
-							43012, -- [2]
+							[24] = 41821,
 						},
-						["freeslots"] = 22,
+						["freeslots"] = 23,
 						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
 					},
 					["Bag5"] = {
-						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:316416128:79:0|h[Frostweave Bag]|h|r",
-						["freeslots"] = 16,
+						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:316416128:80:0|h[Frostweave Bag]|h|r",
+						["freeslots"] = 19,
 						["ids"] = {
-							nil, -- [1]
-							nil, -- [2]
-							nil, -- [3]
-							nil, -- [4]
-							nil, -- [5]
-							52207, -- [6]
-							43824, -- [7]
-							45853, -- [8]
-							43348, -- [9]
+							[6] = 52207,
 						},
 						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
 						["size"] = 20,
 					},
 					["Bag4"] = {
-						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:79:0|h[Portable Hole]|h|r",
-						["freeslots"] = 24,
+						["ids"] = {
+							[24] = 6948,
+							[13] = 45998,
+							[14] = 5976,
+							[15] = 10035,
+							[8] = 58274,
+							[16] = 10036,
+							[23] = 64670,
+							[19] = 43824,
+							[20] = 45853,
+							[21] = 33448,
+							[22] = 33445,
+							[12] = 40211,
+							[11] = 33447,
+						},
 						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
+						["freeslots"] = 11,
+						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:80:0|h[Portable Hole]|h|r",
+						["counts"] = {
+							[11] = 5,
+							[8] = 13,
+							[12] = 5,
+							[21] = 10,
+							[23] = 3,
+							[22] = 14,
+						},
 						["size"] = 24,
 					},
 					["Bag0"] = {
 						["ids"] = {
-							36905, -- [1]
-							35681, -- [2]
-							6948, -- [3]
-							33445, -- [4]
-							33454, -- [5]
-							33470, -- [6]
-							42780, -- [7]
-							[9] = 37704,
-							[10] = 41265,
-							[11] = 33448,
-							[15] = 43828,
-						},
-						["freeslots"] = 5,
-						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
-						["counts"] = {
-							10, -- [1]
-							nil, -- [2]
+							29317, -- [1]
+							17058, -- [2]
 							nil, -- [3]
-							20, -- [4]
-							2, -- [5]
-							17, -- [6]
-							4, -- [7]
-							[11] = 5,
+							17057, -- [4]
 						},
+						["links"] = {
+							"|cff0070dd|Hitem:29317:0:3520:3520:0:0:0:12932892:80:0|h[Tempest's Touch]|h|r", -- [1]
+						},
+						["freeslots"] = 13,
+						["counts"] = {
+							nil, -- [1]
+							7, -- [2]
+							nil, -- [3]
+							5, -- [4]
+						},
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
 						["size"] = 16,
 					},
 					["Bag7"] = {
-						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:1827001472:79:0|h[Frostweave Bag]|h|r",
+						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:1827001472:80:0|h[Frostweave Bag]|h|r",
 						["links"] = {
-							"|cff1eff00|Hitem:9878:0:0:0:0:0:868:1212478688:79:0|h[Sorcerer Hat of the Eagle]|h|r", -- [1]
-							[4] = "|cff1eff00|Hitem:14246:0:0:0:0:0:1041:1632840960:79:0|h[Darkmist Wizard Hat of the Whale]|h|r",
+							"|cff1eff00|Hitem:9878:0:0:0:0:0:868:1212478688:80:0|h[Sorcerer Hat of the Eagle]|h|r", -- [1]
+							[4] = "|cff1eff00|Hitem:14246:0:0:0:0:0:1041:1632840960:80:0|h[Darkmist Wizard Hat of the Whale]|h|r",
 						},
 						["size"] = 20,
 						["ids"] = {
@@ -838,23 +866,38 @@ DataStore_ContainersDB = {
 							44648, -- [5]
 							23909, -- [6]
 							8252, -- [7]
-							45998, -- [8]
+							nil, -- [8]
 							45998, -- [9]
 							6125, -- [10]
 							2955, -- [11]
 							[14] = 10035,
 						},
 						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
-						["freeslots"] = 8,
+						["freeslots"] = 9,
 					},
 					["Bag2"] = {
-						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:79:0|h[Portable Hole]|h|r",
-						["freeslots"] = 24,
+						["link"] = "|cffa335ee|Hitem:51809:0:0:0:0:0:0:0:80:0|h[Portable Hole]|h|r",
+						["links"] = {
+							[24] = "|cff1eff00|Hitem:55543:0:0:0:0:0:-121:1399390435:80:0|h[Rethban Pauldrons of the Landslide]|h|r",
+						},
+						["counts"] = {
+							[22] = 14,
+							[23] = 8,
+						},
+						["ids"] = {
+							[20] = 62780,
+							[24] = 55543,
+							[21] = 53069,
+							[22] = 62791,
+							[19] = 53072,
+							[23] = 62779,
+						},
+						["freeslots"] = 18,
 						["icon"] = "Interface\\Icons\\inv_misc_shadowegg",
 						["size"] = 24,
 					},
 					["Bag9"] = {
-						["link"] = "|cffffffff|Hitem:918:0:0:0:0:0:0:195991104:79:0|h[Deviate Hide Pack]|h|r",
+						["link"] = "|cffffffff|Hitem:918:0:0:0:0:0:0:195991104:80:0|h[Deviate Hide Pack]|h|r",
 						["ids"] = {
 							47196, -- [1]
 							[8] = 44820,
@@ -872,14 +915,14 @@ DataStore_ContainersDB = {
 						["size"] = 10,
 					},
 					["Bag11"] = {
-						["link"] = "|cff0070dd|Hitem:44446:0:0:0:0:0:0:1146971392:79:0|h[Pack of Endless Pockets]|h|r",
+						["link"] = "|cff0070dd|Hitem:44446:0:0:0:0:0:0:1146971392:80:0|h[Pack of Endless Pockets]|h|r",
 						["freeslots"] = 32,
 						["bagtype"] = 16,
 						["icon"] = "Interface\\Icons\\INV_Misc_Bag_13",
 						["size"] = 32,
 					},
 					["Bag6"] = {
-						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:587176320:79:0|h[Frostweave Bag]|h|r",
+						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:587176320:80:0|h[Frostweave Bag]|h|r",
 						["freeslots"] = 19,
 						["ids"] = {
 							[20] = 6134,
@@ -889,7 +932,7 @@ DataStore_ContainersDB = {
 					},
 				},
 				["numBagSlots"] = 112,
-				["numFreeBagSlots"] = 99,
+				["numFreeBagSlots"] = 83,
 			},
 			["Default.Smolderthorn.Othercollie"] = {
 				["numFreeBankSlots"] = 25,
@@ -940,7 +983,7 @@ DataStore_ContainersDB = {
 			["Default.Smolderthorn.Melancollie"] = {
 				["numFreeBankSlots"] = 24,
 				["numBankSlots"] = 28,
-				["lastUpdate"] = 1308430840,
+				["lastUpdate"] = 1308531154,
 				["numBagSlots"] = 80,
 				["numFreeBagSlots"] = 39,
 				["Containers"] = {
@@ -1095,6 +1138,60 @@ DataStore_ContainersDB = {
 						["size"] = 16,
 					},
 				},
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["numFreeBankSlots"] = 26,
+				["numBankSlots"] = 28,
+				["lastUpdate"] = 1308271942,
+				["Containers"] = {
+					["Bag100"] = {
+						["size"] = 28,
+						["ids"] = {
+							54811, -- [1]
+							69846, -- [2]
+						},
+						["freeslots"] = 26,
+					},
+					["Bag1"] = {
+						["link"] = "|cffffffff|Hitem:52040:0:0:0:0:0:0:1117956608:19:0|h[Salvager's Bag]|h|r",
+						["size"] = 6,
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_09_Red",
+						["freeslots"] = 6,
+					},
+					["Bag2"] = {
+						["link"] = "|cffffffff|Hitem:5572:0:0:0:0:0:0:-1999791488:19:0|h[Small Green Pouch]|h|r",
+						["size"] = 6,
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_09_Green",
+						["freeslots"] = 6,
+					},
+					["Bag0"] = {
+						["size"] = 16,
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["freeslots"] = 16,
+					},
+					["Bag3"] = {
+						["link"] = "|cffffffff|Hitem:52039:0:0:0:0:0:0:1772521344:19:0|h[Shipwright's Bag]|h|r",
+						["size"] = 8,
+						["ids"] = {
+							nil, -- [1]
+							nil, -- [2]
+							45911, -- [3]
+							5382, -- [4]
+							nil, -- [5]
+							nil, -- [6]
+							nil, -- [7]
+							6948, -- [8]
+						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_04",
+						["freeslots"] = 5,
+					},
+					["Bag-2"] = {
+						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
+						["size"] = 32,
+					},
+				},
+				["numFreeBagSlots"] = 33,
+				["numBagSlots"] = 36,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["lastUpdate"] = 1307756259,
@@ -1291,60 +1388,6 @@ DataStore_ContainersDB = {
 					},
 				},
 				["numBagSlots"] = 96,
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["numFreeBankSlots"] = 26,
-				["numBankSlots"] = 28,
-				["lastUpdate"] = 1308271942,
-				["Containers"] = {
-					["Bag100"] = {
-						["size"] = 28,
-						["ids"] = {
-							54811, -- [1]
-							69846, -- [2]
-						},
-						["freeslots"] = 26,
-					},
-					["Bag1"] = {
-						["link"] = "|cffffffff|Hitem:52040:0:0:0:0:0:0:1117956608:19:0|h[Salvager's Bag]|h|r",
-						["size"] = 6,
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_09_Red",
-						["freeslots"] = 6,
-					},
-					["Bag2"] = {
-						["link"] = "|cffffffff|Hitem:5572:0:0:0:0:0:0:-1999791488:19:0|h[Small Green Pouch]|h|r",
-						["size"] = 6,
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_09_Green",
-						["freeslots"] = 6,
-					},
-					["Bag0"] = {
-						["size"] = 16,
-						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
-						["freeslots"] = 16,
-					},
-					["Bag3"] = {
-						["link"] = "|cffffffff|Hitem:52039:0:0:0:0:0:0:1772521344:19:0|h[Shipwright's Bag]|h|r",
-						["size"] = 8,
-						["ids"] = {
-							nil, -- [1]
-							nil, -- [2]
-							45911, -- [3]
-							5382, -- [4]
-							nil, -- [5]
-							nil, -- [6]
-							nil, -- [7]
-							6948, -- [8]
-						},
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_04",
-						["freeslots"] = 5,
-					},
-					["Bag-2"] = {
-						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
-						["size"] = 32,
-					},
-				},
-				["numFreeBagSlots"] = 33,
-				["numBagSlots"] = 36,
 			},
 			["Default.Ysondre.Battlecollie"] = {
 				["lastUpdate"] = 1307762173,
@@ -1726,10 +1769,10 @@ DataStore_ContainersDB = {
 		},
 		["Guilds"] = {
 			["Default.Smolderthorn.LEAFEA"] = {
-				["money"] = 0,
+				["money"] = 2021,
 				["Tabs"] = {
 					{
-						["ClientDate"] = "06/15/2011",
+						["ClientDate"] = "06/19/2011",
 						["ids"] = {
 							10036, -- [1]
 							5976, -- [2]
@@ -1789,28 +1832,34 @@ DataStore_ContainersDB = {
 							41427, -- [56]
 							5740, -- [57]
 							5740, -- [58]
+							35681, -- [59]
+							21228, -- [60]
+							10036, -- [61]
+							41427, -- [62]
+							37745, -- [63]
 						},
-						["ClientTime"] = 1308176169,
-						["ClientHour"] = 18,
+						["ClientTime"] = 1308531511,
+						["ClientHour"] = 20,
 						["visitedBy"] = "Battlecollie",
-						["ClientMinute"] = 16,
-						["ServerMinute"] = 16,
+						["ClientMinute"] = 58,
+						["ServerMinute"] = 58,
 						["counts"] = {
 							[57] = 5,
 							[7] = 5,
+							[58] = 5,
 							[53] = 2,
 							[54] = 2,
-							[55] = 7,
+							[62] = 5,
 							[56] = 5,
-							[58] = 5,
+							[55] = 7,
 						},
-						["ServerHour"] = 18,
+						["ServerHour"] = 20,
 						["name"] = "Tab 1",
 						["icon"] = "Interface\\Icons\\INV_Misc_QuestionMark",
 						["size"] = 98,
 					}, -- [1]
 					{
-						["ClientDate"] = "06/15/2011",
+						["ClientDate"] = "06/19/2011",
 						["ids"] = {
 							36317, -- [1]
 							36124, -- [2]
@@ -1825,34 +1874,37 @@ DataStore_ContainersDB = {
 							55417, -- [11]
 							55769, -- [12]
 							55418, -- [13]
+							54473, -- [14]
+							54473, -- [15]
+							54471, -- [16]
 						},
-						["ClientTime"] = 1308176163,
-						["ClientHour"] = 18,
+						["ClientTime"] = 1308531500,
+						["ClientHour"] = 20,
 						["links"] = {
-							"|cff1eff00|Hitem:36317:0:0:0:0:0:-10:1273036875:78:0|h[Wyrmskull Breastplate of the Gorilla]|h|r", -- [1]
-							"|cff1eff00|Hitem:36124:0:0:0:0:0:-20:1823604800:78:0|h[Muradin Boots of Power]|h|r", -- [2]
-							"|cff1eff00|Hitem:36033:0:0:0:0:0:-36:1815478341:78:0|h[Oracle Mantle of the Sorcerer]|h|r", -- [3]
-							"|cff1eff00|Hitem:36385:0:0:0:0:0:-37:1528102987:78:0|h[Golem Pauldrons of the Seer]|h|r", -- [4]
-							"|cff1eff00|Hitem:36577:0:0:0:0:0:-40:2089353252:78:0|h[Disk Axe of the Bandit]|h|r", -- [5]
-							"|cff1eff00|Hitem:55652:0:0:0:0:0:-135:1919090925:78:0|h[Yojamba Boots of the Windflurry]|h|r", -- [6]
-							"|cff1eff00|Hitem:55724:0:0:0:0:0:-37:1242693869:78:0|h[Baradin Sandals of the Seer]|h|r", -- [7]
-							"|cff1eff00|Hitem:55617:0:0:0:0:0:-40:-1963851525:78:0|h[Bramblescar Spaulders of the Bandit]|h|r", -- [8]
-							"|cff1eff00|Hitem:55312:0:0:0:0:0:-37:2040135879:78:0|h[Nethander Cloak of the Seer]|h|r", -- [9]
-							"|cff1eff00|Hitem:55417:0:0:0:0:0:-139:-2062286678:78:0|h[Swamplight Ring of the Mercenary]|h|r", -- [10]
-							"|cff1eff00|Hitem:55417:0:0:0:0:0:-37:378929322:78:0|h[Swamplight Ring of the Seer]|h|r", -- [11]
-							"|cff1eff00|Hitem:55769:0:0:0:0:0:-8:-1905065747:78:0|h[Baradin Cord of the Whale]|h|r", -- [12]
-							"|cff1eff00|Hitem:55418:0:0:0:0:0:-37:792330418:78:0|h[Sishir Ring of the Seer]|h|r", -- [13]
+							"|cff1eff00|Hitem:36317:0:0:0:0:0:-10:1273036875:80:0|h[Wyrmskull Breastplate of the Gorilla]|h|r", -- [1]
+							"|cff1eff00|Hitem:36124:0:0:0:0:0:-20:1823604800:80:0|h[Muradin Boots of Power]|h|r", -- [2]
+							"|cff1eff00|Hitem:36033:0:0:0:0:0:-36:1815478341:80:0|h[Oracle Mantle of the Sorcerer]|h|r", -- [3]
+							"|cff1eff00|Hitem:36385:0:0:0:0:0:-37:1528102987:80:0|h[Golem Pauldrons of the Seer]|h|r", -- [4]
+							"|cff1eff00|Hitem:36577:0:0:0:0:0:-40:2089353252:80:0|h[Disk Axe of the Bandit]|h|r", -- [5]
+							"|cff1eff00|Hitem:55652:0:0:0:0:0:-135:1919090925:80:0|h[Yojamba Boots of the Windflurry]|h|r", -- [6]
+							"|cff1eff00|Hitem:55724:0:0:0:0:0:-37:1242693869:80:0|h[Baradin Sandals of the Seer]|h|r", -- [7]
+							"|cff1eff00|Hitem:55617:0:0:0:0:0:-40:-1963851525:80:0|h[Bramblescar Spaulders of the Bandit]|h|r", -- [8]
+							"|cff1eff00|Hitem:55312:0:0:0:0:0:-37:2040135879:80:0|h[Nethander Cloak of the Seer]|h|r", -- [9]
+							"|cff1eff00|Hitem:55417:0:0:0:0:0:-139:-2062286678:80:0|h[Swamplight Ring of the Mercenary]|h|r", -- [10]
+							"|cff1eff00|Hitem:55417:0:0:0:0:0:-37:378929322:80:0|h[Swamplight Ring of the Seer]|h|r", -- [11]
+							"|cff1eff00|Hitem:55769:0:0:0:0:0:-8:-1905065747:80:0|h[Baradin Cord of the Whale]|h|r", -- [12]
+							"|cff1eff00|Hitem:55418:0:0:0:0:0:-37:792330418:80:0|h[Sishir Ring of the Seer]|h|r", -- [13]
 						},
-						["ServerHour"] = 18,
-						["ServerMinute"] = 16,
+						["ServerHour"] = 20,
+						["ServerMinute"] = 58,
 						["visitedBy"] = "Battlecollie",
 						["name"] = "Tab 2",
-						["ClientMinute"] = 16,
+						["ClientMinute"] = 58,
 						["icon"] = "Interface\\Icons\\INV_Misc_QuestionMark",
 						["size"] = 98,
 					}, -- [2]
 					{
-						["ClientDate"] = "06/15/2011",
+						["ClientDate"] = "06/19/2011",
 						["ids"] = {
 							9781, -- [1]
 							15230, -- [2]
@@ -1861,48 +1913,59 @@ DataStore_ContainersDB = {
 							3651, -- [5]
 							6545, -- [6]
 							14724, -- [7]
-							22832, -- [8]
+							[11] = 6547,
+							[13] = 3196,
+							[10] = 21932,
+							[12] = 15507,
+							[14] = 15222,
+							[9] = 25439,
+							[98] = 22832,
 						},
-						["ClientTime"] = 1308176157,
-						["ClientHour"] = 18,
+						["ClientTime"] = 1308531455,
+						["ClientHour"] = 20,
 						["links"] = {
-							"|cff1eff00|Hitem:9781:0:0:0:0:0:511:976729152:78:0|h[Bandit Pants of the Wolf]|h|r", -- [1]
+							"|cff1eff00|Hitem:9781:0:0:0:0:0:511:976729152:80:0|h[Bandit Pants of the Wolf]|h|r", -- [1]
 							nil, -- [2]
-							"|cff1eff00|Hitem:6556:0:0:0:0:0:2027:1147098176:78:0|h[Bard's Bracers of Healing]|h|r", -- [3]
-							"|cff1eff00|Hitem:9763:0:0:0:0:0:1182:271393479:78:0|h[Cadet Leggings of the Bear]|h|r", -- [4]
-							[6] = "|cff1eff00|Hitem:6545:0:0:0:0:0:1015:-1739019264:78:0|h[Soldier's Armor of the Whale]|h|r",
+							"|cff1eff00|Hitem:6556:0:0:0:0:0:2027:1147098176:80:0|h[Bard's Bracers of Healing]|h|r", -- [3]
+							"|cff1eff00|Hitem:9763:0:0:0:0:0:1182:271393479:80:0|h[Cadet Leggings of the Bear]|h|r", -- [4]
+							[6] = "|cff1eff00|Hitem:6545:0:0:0:0:0:1015:-1739019264:80:0|h[Soldier's Armor of the Whale]|h|r",
+							[13] = "|cff1eff00|Hitem:3196:0:0:0:0:0:590:800318576:80:0|h[Edged Bastard Sword of the Monkey]|h|r",
+							[12] = "|cff1eff00|Hitem:15507:0:0:0:0:0:1182:1660874048:80:0|h[Grunt's Bracers of the Bear]|h|r",
+							[14] = "|cff1eff00|Hitem:15222:0:0:0:0:0:2029:-1518628352:80:0|h[Barbed Club of Healing]|h|r",
+							[11] = "|cff1eff00|Hitem:6547:0:0:0:0:0:672:857198496:80:0|h[Soldier's Gauntlets of the Tiger]|h|r",
 						},
 						["visitedBy"] = "Battlecollie",
-						["ServerHour"] = 18,
+						["ServerHour"] = 20,
 						["name"] = "Tab 3",
 						["counts"] = {
-							[8] = 19,
+							[98] = 19,
 						},
-						["ClientMinute"] = 15,
-						["ServerMinute"] = 16,
+						["ClientMinute"] = 57,
+						["ServerMinute"] = 57,
 						["icon"] = "Interface\\Icons\\INV_Misc_QuestionMark",
 						["size"] = 98,
 					}, -- [3]
 					{
-						["ClientDate"] = "06/15/2011",
+						["ClientDate"] = "06/19/2011",
 						["ids"] = {
 							2701, -- [1]
 							52385, -- [2]
 							4292, -- [3]
 							3683, -- [4]
+							22307, -- [5]
 						},
-						["ClientTime"] = 1308176156,
-						["ClientHour"] = 18,
-						["ClientMinute"] = 15,
-						["ServerMinute"] = 15,
+						["ClientTime"] = 1308531458,
+						["ClientHour"] = 20,
+						["ClientMinute"] = 57,
+						["ServerMinute"] = 57,
 						["visitedBy"] = "Battlecollie",
-						["ServerHour"] = 18,
+						["ServerHour"] = 20,
 						["name"] = "Tab 4",
 						["icon"] = "Interface\\Icons\\INV_Misc_QuestionMark",
 						["size"] = 98,
 					}, -- [4]
 					{
-						["ClientDate"] = "06/15/2011",
+						["ClientDate"] = "06/19/2011",
 						["ids"] = {
 							2589, -- [1]
 							2589, -- [2]
@@ -1948,12 +2011,25 @@ DataStore_ContainersDB = {
 							21877, -- [42]
 							5075, -- [43]
 							5075, -- [44]
+							3173, -- [45]
+							2674, -- [46]
+							2589, -- [47]
+							2589, -- [48]
+							2589, -- [49]
+							2592, -- [50]
+							2675, -- [51]
+							67229, -- [52]
+							1206, -- [53]
+							2840, -- [54]
+							4339, -- [55]
+							4338, -- [56]
+							4339, -- [57]
 						},
-						["ClientTime"] = 1308176155,
-						["ClientHour"] = 18,
+						["ClientTime"] = 1308531471,
+						["ClientHour"] = 20,
 						["visitedBy"] = "Battlecollie",
-						["ClientMinute"] = 15,
-						["ServerMinute"] = 15,
+						["ClientMinute"] = 57,
+						["ServerMinute"] = 57,
 						["counts"] = {
 							20, -- [1]
 							20, -- [2]
@@ -1961,19 +2037,24 @@ DataStore_ContainersDB = {
 							20, -- [4]
 							20, -- [5]
 							20, -- [6]
-							12, -- [7]
+							17, -- [7]
 							19, -- [8]
 							13, -- [9]
 							7, -- [10]
 							9, -- [11]
-							[15] = 2,
+							2, -- [12]
+							4, -- [13]
+							2, -- [14]
+							2, -- [15]
 							[31] = 7,
+							[57] = 20,
+							[45] = 2,
 							[17] = 10,
 							[34] = 10,
 							[35] = 2,
-							[36] = 14,
+							[36] = 16,
 							[37] = 13,
-							[38] = 19,
+							[38] = 20,
 							[39] = 5,
 							[40] = 4,
 							[21] = 5,
@@ -1981,22 +2062,27 @@ DataStore_ContainersDB = {
 							[43] = 10,
 							[44] = 2,
 							[23] = 15,
+							[46] = 4,
 							[24] = 20,
-							[25] = 5,
-							[13] = 2,
-							[26] = 7,
-							[14] = 2,
-							[33] = 3,
-							[29] = 3,
+							[48] = 20,
+							[25] = 7,
+							[50] = 17,
+							[26] = 12,
+							[47] = 20,
+							[49] = 17,
+							[54] = 20,
+							[55] = 10,
 							[41] = 7,
+							[29] = 3,
+							[33] = 3,
 						},
 						["name"] = "Tab 5",
-						["ServerHour"] = 18,
+						["ServerHour"] = 20,
 						["icon"] = "Interface\\Icons\\INV_Misc_QuestionMark",
 						["size"] = 98,
 					}, -- [5]
 					{
-						["ClientDate"] = "06/15/2011",
+						["ClientDate"] = "06/19/2011",
 						["ids"] = {
 							36907, -- [1]
 							52328, -- [2]
@@ -2014,7 +2100,7 @@ DataStore_ContainersDB = {
 							52719, -- [14]
 							37701, -- [15]
 							4339, -- [16]
-							34054, -- [17]
+							33470, -- [17]
 							34052, -- [18]
 							36905, -- [19]
 							36908, -- [20]
@@ -2026,11 +2112,11 @@ DataStore_ContainersDB = {
 							53038, -- [26]
 							53038, -- [27]
 							62780, -- [28]
-							53010, -- [29]
-							53010, -- [30]
+							33470, -- [29]
+							33470, -- [30]
 							52186, -- [31]
 							52186, -- [32]
-							52325, -- [33]
+							33470, -- [33]
 							53039, -- [34]
 							52720, -- [35]
 							52555, -- [36]
@@ -2043,13 +2129,13 @@ DataStore_ContainersDB = {
 							53038, -- [43]
 							53038, -- [44]
 							53038, -- [45]
-							53010, -- [46]
+							33470, -- [46]
 							53038, -- [47]
 							53038, -- [48]
 							62782, -- [49]
 							52555, -- [50]
 							52555, -- [51]
-							53010, -- [52]
+							33470, -- [52]
 							52718, -- [53]
 							52979, -- [54]
 							52979, -- [55]
@@ -2080,28 +2166,32 @@ DataStore_ContainersDB = {
 							36913, -- [80]
 							36913, -- [81]
 							36913, -- [82]
-							53010, -- [83]
+							52326, -- [83]
 							42253, -- [84]
 							43013, -- [85]
 							34722, -- [86]
 							43501, -- [87]
-							33470, -- [88]
-							33470, -- [89]
-							33470, -- [90]
-							33470, -- [91]
-							53010, -- [92]
+							34054, -- [88]
+							34053, -- [89]
+							52984, -- [90]
+							52325, -- [91]
+							33470, -- [92]
+							33470, -- [93]
+							nil, -- [94]
+							nil, -- [95]
+							43012, -- [96]
 						},
-						["ClientTime"] = 1308176143,
+						["ClientTime"] = 1308531363,
 						["visitedBy"] = "Battlecollie",
 						["links"] = {
-							[58] = "|cff1eff00|Hitem:55771:0:0:0:0:0:-39:756547850:78:0|h[Brightwood Cord of the Invoker]|h|r",
+							[58] = "|cff1eff00|Hitem:55771:0:0:0:0:0:-39:756547850:80:0|h[Brightwood Cord of the Invoker]|h|r",
 						},
-						["ClientHour"] = 18,
-						["ClientMinute"] = 15,
-						["ServerMinute"] = 15,
-						["icon"] = "Interface\\Icons\\INV_Misc_QuestionMark",
-						["ServerHour"] = 18,
+						["ClientHour"] = 20,
+						["ServerHour"] = 20,
 						["name"] = "Tab 6",
+						["icon"] = "Interface\\Icons\\INV_Misc_QuestionMark",
+						["ServerMinute"] = 55,
+						["ClientMinute"] = 56,
 						["counts"] = {
 							2, -- [1]
 							2, -- [2]
@@ -2109,33 +2199,33 @@ DataStore_ContainersDB = {
 							20, -- [4]
 							20, -- [5]
 							20, -- [6]
-							16, -- [7]
-							3, -- [8]
+							22, -- [7]
+							4, -- [8]
 							8, -- [9]
 							16, -- [10]
-							18, -- [11]
-							6, -- [12]
+							20, -- [11]
+							8, -- [12]
 							4, -- [13]
 							5, -- [14]
 							2, -- [15]
 							13, -- [16]
-							7, -- [17]
-							nil, -- [18]
-							8, -- [19]
+							20, -- [17]
+							2, -- [18]
+							18, -- [19]
 							nil, -- [20]
-							3, -- [21]
+							4, -- [21]
 							2, -- [22]
 							2, -- [23]
-							13, -- [24]
+							15, -- [24]
 							7, -- [25]
 							20, -- [26]
 							18, -- [27]
 							2, -- [28]
 							20, -- [29]
-							16, -- [30]
+							20, -- [30]
 							3, -- [31]
 							20, -- [32]
-							8, -- [33]
+							20, -- [33]
 							nil, -- [34]
 							2, -- [35]
 							12, -- [36]
@@ -2148,13 +2238,13 @@ DataStore_ContainersDB = {
 							20, -- [43]
 							20, -- [44]
 							20, -- [45]
-							17, -- [46]
+							20, -- [46]
 							20, -- [47]
 							20, -- [48]
 							4, -- [49]
 							20, -- [50]
 							10, -- [51]
-							7, -- [52]
+							20, -- [52]
 							2, -- [53]
 							11, -- [54]
 							20, -- [55]
@@ -2185,16 +2275,17 @@ DataStore_ContainersDB = {
 							20, -- [80]
 							20, -- [81]
 							20, -- [82]
-							16, -- [83]
+							87, -- [83]
 							8, -- [84]
 							9, -- [85]
 							20, -- [86]
 							nil, -- [87]
-							20, -- [88]
-							20, -- [89]
-							20, -- [90]
-							19, -- [91]
-							14, -- [92]
+							7, -- [88]
+							nil, -- [89]
+							4, -- [90]
+							2, -- [91]
+							20, -- [92]
+							17, -- [93]
 						},
 						["size"] = 98,
 					}, -- [6]

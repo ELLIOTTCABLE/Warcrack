@@ -2,14 +2,35 @@
 CliqueDB = nil
 CliqueDB3 = {
 	["profileKeys"] = {
-		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
-		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["profiles"] = {
+		["Nocollie - Smolderthorn"] = {
+			["bindings"] = {
+				{
+					["sets"] = {
+						["default"] = true,
+					},
+					["type"] = "target",
+					["key"] = "BUTTON1",
+					["unit"] = "mouseover",
+				}, -- [1]
+				{
+					["type"] = "menu",
+					["key"] = "BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [2]
+			},
+		},
 		["Awihrtoawe - Smolderthorn"] = {
 			["bindings"] = {
 				{
@@ -29,7 +50,45 @@ CliqueDB3 = {
 				}, -- [2]
 			},
 		},
+		["Snorecollie - Smolderthorn"] = {
+			["bindings"] = {
+				{
+					["sets"] = {
+						["default"] = true,
+					},
+					["type"] = "target",
+					["key"] = "BUTTON1",
+					["unit"] = "mouseover",
+				}, -- [1]
+				{
+					["type"] = "menu",
+					["key"] = "BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [2]
+			},
+		},
 		["Illililiili - Smolderthorn"] = {
+			["bindings"] = {
+				{
+					["sets"] = {
+						["default"] = true,
+					},
+					["type"] = "target",
+					["key"] = "BUTTON1",
+					["unit"] = "mouseover",
+				}, -- [1]
+				{
+					["type"] = "menu",
+					["key"] = "BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [2]
+			},
+		},
+		["Illiliililil - Smolderthorn"] = {
 			["bindings"] = {
 				{
 					["sets"] = {
@@ -67,32 +126,13 @@ CliqueDB3 = {
 				}, -- [2]
 			},
 		},
-		["Nocollie - Smolderthorn"] = {
+		["Awdawdawd - Smolderthorn"] = {
 			["bindings"] = {
 				{
-					["sets"] = {
-						["default"] = true,
-					},
 					["type"] = "target",
-					["key"] = "BUTTON1",
-					["unit"] = "mouseover",
-				}, -- [1]
-				{
-					["type"] = "menu",
-					["key"] = "BUTTON2",
 					["sets"] = {
 						["default"] = true,
 					},
-				}, -- [2]
-			},
-		},
-		["Illiliililil - Smolderthorn"] = {
-			["bindings"] = {
-				{
-					["sets"] = {
-						["default"] = true,
-					},
-					["type"] = "target",
 					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]

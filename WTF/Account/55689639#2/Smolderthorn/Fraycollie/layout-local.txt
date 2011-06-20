@@ -9,7 +9,7 @@ H: 256
 Frame: ChannelPulloutTab
 FrameLevel: 1
 Anchor: RIGHT
-X: -374
+X: -221
 Y: 66
 W: 115
 H: 32

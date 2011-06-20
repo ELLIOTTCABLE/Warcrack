@@ -114,14 +114,15 @@ AraTradeskillsDB = {
 			["show"] = {
 				["Cooking"] = true,
 				["Archaeology"] = true,
-				["Herbalism"] = false,
 				["Fishing"] = false,
-				["First Aid"] = true,
+				["Alchemy"] = true,
 				["Tailoring"] = true,
+				["First Aid"] = true,
+				["Herbalism"] = false,
 			},
 			["trackedSkill"] = "AUTO",
 			["links"] = {
-				["Tailoring"] = "|cffffd000|Htrade:51309:449:450:10000000489EEA3:4////+677/vv+/v73/P59/rZ3//nNznLDEIAA4HR8vDqAAAAAoAwAAC9////T4xa+/v//DGAAAAAAAAAAAE|h[Tailoring]|h|r",
+				["Tailoring"] = "|cffffd000|Htrade:75156:462:525:10000000489EEA3:4////+677/vv+/v73/P59/rZ3//nNznLDEIAA4HR8vDqAAAAAoAwAACt////T4xa+/v//DGAIdLAAGABAAE|h[Tailoring]|h|r",
 			},
 			["shortcuts"] = {
 			},
@@ -129,18 +130,20 @@ AraTradeskillsDB = {
 			["curSkills"] = {
 				["Cooking"] = 53,
 				["Archaeology"] = 1,
-				["Herbalism"] = 450,
 				["Fishing"] = 6,
+				["Alchemy"] = 1,
+				["Tailoring"] = 462,
 				["First Aid"] = 1,
-				["Tailoring"] = 449,
+				["Herbalism"] = 450,
 			},
 			["maxSkills"] = {
 				["Cooking"] = 75,
 				["Archaeology"] = 75,
-				["Herbalism"] = 450,
 				["Fishing"] = 75,
+				["Alchemy"] = 75,
+				["Tailoring"] = 525,
 				["First Aid"] = 75,
-				["Tailoring"] = 450,
+				["Herbalism"] = 450,
 			},
 		},
 		["Warcollie"] = {

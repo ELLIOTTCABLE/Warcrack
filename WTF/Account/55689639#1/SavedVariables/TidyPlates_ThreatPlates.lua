@@ -1,6 +1,17 @@
 
 ThreatPlatesDB = {
 	["char"] = {
+		["Nocollie - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Assassination", -- [1]
+				"Combat", -- [2]
+				"Subtlety", -- [3]
+			},
+		},
 		["Awihrtoawe - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
@@ -12,6 +23,17 @@ ThreatPlatesDB = {
 				"Frost", -- [3]
 			},
 		},
+		["Snorecollie - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["specName"] = {
+				"Arms", -- [1]
+				"Fury", -- [2]
+				"Protection", -- [3]
+			},
+			["welcome"] = true,
+		},
 		["Illililiili - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
@@ -21,6 +43,17 @@ ThreatPlatesDB = {
 				"Discipline", -- [1]
 				"Holy", -- [2]
 				"Shadow", -- [3]
+			},
+		},
+		["Illiliililil - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
+			["welcome"] = true,
+			["specName"] = {
+				"Assassination", -- [1]
+				"Combat", -- [2]
+				"Subtlety", -- [3]
 			},
 		},
 		["Tempcollie - Ysondre"] = {
@@ -34,26 +67,15 @@ ThreatPlatesDB = {
 				"Shadow", -- [3]
 			},
 		},
-		["Nocollie - Smolderthorn"] = {
-			["spec"] = {
-				["primary"] = false,
-			},
-			["specName"] = {
-				"Assassination", -- [1]
-				"Combat", -- [2]
-				"Subtlety", -- [3]
-			},
-			["welcome"] = true,
-		},
-		["Illiliililil - Smolderthorn"] = {
+		["Awdawdawd - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
 			["welcome"] = true,
 			["specName"] = {
-				"Assassination", -- [1]
-				"Combat", -- [2]
-				"Subtlety", -- [3]
+				"Affliction", -- [1]
+				"Demonology", -- [2]
+				"Destruction", -- [3]
 			},
 		},
 		["Ililliliilil - The Underbog"] = {
@@ -66,11 +88,13 @@ ThreatPlatesDB = {
 		},
 	},
 	["profileKeys"] = {
-		["Awihrtoawe - Smolderthorn"] = "Default",
-		["Illililiili - Smolderthorn"] = "Default",
-		["Tempcollie - Ysondre"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
+		["Awihrtoawe - Smolderthorn"] = "Default",
+		["Snorecollie - Smolderthorn"] = "Default",
+		["Illililiili - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
+		["Tempcollie - Ysondre"] = "Default",
+		["Awdawdawd - Smolderthorn"] = "Default",
 		["Ililliliilil - The Underbog"] = "Default",
 	},
 	["profiles"] = {

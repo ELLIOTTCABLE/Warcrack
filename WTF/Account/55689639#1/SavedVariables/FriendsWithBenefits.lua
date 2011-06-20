@@ -9,16 +9,26 @@ FriendsWithBenefitsDB = {
 			["ililliliilil"] = true,
 		},
 	},
-	["Alliance - Smolderthorn"] = {
+	["Horde - Smolderthorn"] = {
 		["removed"] = {
-			["illiliililil"] = true,
-			["awihrtoawe"] = true,
-			["illililiili"] = true,
 		},
 		["notes"] = {
 		},
 		["friends"] = {
+			["snorecollie"] = true,
+		},
+	},
+	["Alliance - Smolderthorn"] = {
+		["removed"] = {
+			["illiliililil"] = true,
+			["illililiili"] = true,
+			["awihrtoawe"] = true,
 			["nocollie"] = true,
+		},
+		["notes"] = {
+		},
+		["friends"] = {
+			["awdawdawd"] = true,
 		},
 	},
 	["Horde - Ysondre"] = {

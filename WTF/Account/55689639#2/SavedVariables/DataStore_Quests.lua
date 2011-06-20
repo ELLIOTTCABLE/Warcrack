@@ -3,17 +3,17 @@ DataStore_QuestsDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -74,7 +74,10 @@ DataStore_QuestsDB = {
 					"|cff40c040|Hquest:28826:80|h[The Eye of the Storm]|h|r", -- [11]
 					"|cffffff00|Hquest:28716:84|h[Hero's Call: Twilight Highlands!]|h|r", -- [12]
 				},
-				["lastUpdate"] = 1308430675,
+				["lastUpdate"] = 1308531034,
+				["Rewards"] = {
+					[6] = "c|61447|1|1,c|61446|1|1,c|61445|1|1",
+				},
 				["Quests"] = {
 					"0|Deepholm", -- [1]
 					"1||0|82000|0", -- [2]
@@ -129,38 +132,45 @@ DataStore_QuestsDB = {
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["History"] = {
-					[413] = 8,
-					[414] = 1024,
+					[802] = 34078784,
+					[787] = 4096,
+					[866] = 268959744,
+					[789] = 96,
+					[867] = 4096,
+					[807] = 1048577,
+					[792] = 4194304,
 					[412] = 128,
+					[793] = 16384,
+					[809] = 939524097,
+					[794] = 20480,
+					[413] = 8,
+					[795] = 2048,
+					[796] = 2147483648,
+					[414] = 1024,
+					[453] = 262144,
+					[799] = 272632320,
 					[408] = 3244032,
+					[805] = 32784,
+					[764] = 65536,
+					[800] = 524288,
+					[901] = 67108864,
 				},
 				["QuestLinks"] = {
-					nil, -- [1]
-					"|cff40c040|Hquest:13204:76|h[Funky Fungi]|h|r", -- [2]
-					nil, -- [3]
-					"|cff40c040|Hquest:13167:74|h[Death to the Traitor King]|h|r", -- [4]
-					"|cff40c040|Hquest:13182:74|h[Don't Forget the Eggs!]|h|r", -- [5]
-					nil, -- [6]
-					"|cffffff00|Hquest:13070:78|h[A Cold Front Approaches]|h|r", -- [7]
-					"|cffffff00|Hquest:12887:80|h[It's All Fun and Games]|h|r", -- [8]
-					[10] = "|cffffff00|Hquest:13556:77|h[Eggs for Dubra'Jin]|h|r",
+					[2] = "|cffffff00|Hquest:25215:81|h[A Distracting Scent]|h|r",
+					[3] = "|cffffff00|Hquest:25219:81|h[Don't be Shellfish]|h|r",
+					[4] = "|cffffff00|Hquest:25220:81|h[Slippery Threat]|h|r",
+					[5] = "|cffffff00|Hquest:25216:81|h[The Great Sambino]|h|r",
 				},
-				["lastUpdate"] = 1308434430,
+				["lastUpdate"] = 1308539627,
 				["Rewards"] = {
-					[5] = "c|44362|1|0,c|44363|1|0,c|44364|1|0,c|44365|1|1",
-					[4] = "c|44358|1|1,c|44359|1|0,c|44360|1|0,c|44361|1|0",
+					[2] = "c|59764|1|0,c|59763|1|0,c|59762|1|0",
 				},
 				["Quests"] = {
-					"0|Ahn'kahet: The Old Kingdom", -- [1]
-					"1|Dungeon|0|0|0", -- [2]
-					"0|Azjol-Nerub", -- [3]
-					"1|Dungeon|0|224000|0", -- [4]
-					"1|Dungeon|0|224000|0", -- [5]
-					"0|Icecrown", -- [6]
-					"1||0|0|0", -- [7]
-					"1||0|74000|0", -- [8]
-					"0|Zul'Drak", -- [9]
-					"1||0|0|0", -- [10]
+					"0|Shimmering Expanse", -- [1]
+					"1||0|78000|0", -- [2]
+					"1||0|78000|0", -- [3]
+					"1||0|78000|0", -- [4]
+					"1||0|7800|0", -- [5]
 				},
 			},
 			["Default.Smolderthorn.Othercollie"] = {
@@ -205,13 +215,71 @@ DataStore_QuestsDB = {
 					"|cffff8040|Hquest:26993:33|h[Compendium of the Fallen]|h|r", -- [4]
 					"|cffff8040|Hquest:26973:33|h[The Only True Path]|h|r", -- [5]
 				},
-				["lastUpdate"] = 1308430838,
+				["lastUpdate"] = 1308531153,
+				["Rewards"] = {
+					[2] = "c|65963|1|0",
+					[5] = "c|65942|1|0",
+				},
 				["Quests"] = {
 					"0|Gnomeregan", -- [1]
 					"1|Dungeon|0|10000|1", -- [2]
 					"0|Scarlet Monastery", -- [3]
 					"1|Dungeon|0|13300|0", -- [4]
 					"1|Dungeon|0|13300|1", -- [5]
+				},
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["History"] = {
+					[440] = 1073741824,
+					[448] = 197121,
+					[772] = 980,
+					[441] = 542720,
+					[449] = 3221231617,
+					[902] = 262144,
+					[450] = 4161028099,
+					[869] = 16384,
+					[452] = 2147483648,
+					[443] = 33792,
+					[451] = 69714,
+					[840] = 20971520,
+					[825] = 131072,
+					[444] = 268435456,
+					[764] = 4194304,
+					[780] = 4,
+					[765] = 17825792,
+					[445] = 9296,
+					[453] = 6,
+					[770] = 1049344,
+					[771] = 1,
+					[779] = 16777664,
+					[423] = 59195392,
+					[766] = 2097152,
+					[769] = 67305476,
+					[447] = 2097408,
+					[424] = 302252032,
+					[817] = 131072,
+					[835] = 262144,
+				},
+				["QuestLinks"] = {
+					nil, -- [1]
+					"|cff808080|Hquest:13563:11|h[A Love Eternal]|h|r", -- [2]
+					"|cff808080|Hquest:13562:11|h[The Final Flame of Bashal'Aran]|h|r", -- [3]
+					"|cff808080|Hquest:13566:12|h[Ritual Materials]|h|r", -- [4]
+					"|cff808080|Hquest:13565:12|h[Twice Removed]|h|r", -- [5]
+					"|cff808080|Hquest:13598:12|h[Unsavory Remedies]|h|r", -- [6]
+				},
+				["lastUpdate"] = 1308271908,
+				["Rewards"] = {
+					[5] = "c|52629|1|0,c|52603|1|1",
+					[2] = "c|52654|1|0,c|52599|1|1",
+				},
+				["Quests"] = {
+					"0|Darkshore", -- [1]
+					"1||0|400|1", -- [2]
+					"1||0|400|1", -- [3]
+					"1||0|500|0", -- [4]
+					"1||0|500|0", -- [5]
+					"1||0|500|0", -- [6]
 				},
 			},
 			["Default.The Underbog.Fraycollie"] = {
@@ -264,60 +332,6 @@ DataStore_QuestsDB = {
 					"1||0|74000|0", -- [22]
 					"1||0|74000|0", -- [23]
 					"1||0|74000|0", -- [24]
-				},
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["History"] = {
-					[440] = 1073741824,
-					[448] = 197121,
-					[772] = 980,
-					[441] = 542720,
-					[449] = 3221231617,
-					[840] = 20971520,
-					[450] = 4161028099,
-					[869] = 16384,
-					[452] = 2147483648,
-					[443] = 33792,
-					[451] = 69714,
-					[902] = 262144,
-					[825] = 131072,
-					[444] = 268435456,
-					[764] = 4194304,
-					[780] = 4,
-					[765] = 17825792,
-					[445] = 9296,
-					[453] = 6,
-					[770] = 1049344,
-					[771] = 1,
-					[779] = 16777664,
-					[423] = 59195392,
-					[766] = 2097152,
-					[769] = 67305476,
-					[447] = 2097408,
-					[424] = 302252032,
-					[817] = 131072,
-					[835] = 262144,
-				},
-				["QuestLinks"] = {
-					nil, -- [1]
-					"|cff808080|Hquest:13563:11|h[A Love Eternal]|h|r", -- [2]
-					"|cff808080|Hquest:13562:11|h[The Final Flame of Bashal'Aran]|h|r", -- [3]
-					"|cff808080|Hquest:13566:12|h[Ritual Materials]|h|r", -- [4]
-					"|cff808080|Hquest:13565:12|h[Twice Removed]|h|r", -- [5]
-					"|cff808080|Hquest:13598:12|h[Unsavory Remedies]|h|r", -- [6]
-				},
-				["lastUpdate"] = 1308271908,
-				["Rewards"] = {
-					[5] = "c|52629|1|0,c|52603|1|1",
-					[2] = "c|52654|1|0,c|52599|1|1",
-				},
-				["Quests"] = {
-					"0|Darkshore", -- [1]
-					"1||0|400|1", -- [2]
-					"1||0|400|1", -- [3]
-					"1||0|500|0", -- [4]
-					"1||0|500|0", -- [5]
-					"1||0|500|0", -- [6]
 				},
 			},
 			["Default.Ysondre.Battlecollie"] = {

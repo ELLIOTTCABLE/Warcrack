@@ -10,17 +10,17 @@ IceCoreDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
-		["Combatcollie - The Underbog"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
+		["Battlecollie - Ysondre"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
 		["Fraycollie - The Underbog"] = "Default",
 		["Fraycollie - Smolderthorn"] = "Default",
 		["Othercollie - Smolderthorn"] = "Default",
-		["Hoarcollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
 		["Summoneer - Ysondre"] = "Default",
 		["Warcollie - Darkspear"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
-		["Battlecollie - Ysondre"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -189,7 +189,8 @@ IceCoreDB = {
 					["alwaysFullAlpha"] = true,
 					["customBarType"] = "Counter",
 				},
-				["FocusCC"] = {
+				["FocusMana"] = {
+					["enabled"] = true,
 					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
@@ -200,13 +201,13 @@ IceCoreDB = {
 					["updatedInverseExpand"] = true,
 					["updatedReverseInverse"] = true,
 				},
-				["FocusThreat"] = {
+				["FocusHealth"] = {
 					["enabled"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 					["updatedReverseInverse"] = true,
 				},
-				["FocusHealth"] = {
+				["FocusThreat"] = {
 					["enabled"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
@@ -234,8 +235,7 @@ IceCoreDB = {
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,
 				},
-				["FocusMana"] = {
-					["enabled"] = true,
+				["FocusCC"] = {
 					["updatedReverseInverse"] = true,
 					["myTagVersion"] = 3,
 					["updatedInverseExpand"] = true,

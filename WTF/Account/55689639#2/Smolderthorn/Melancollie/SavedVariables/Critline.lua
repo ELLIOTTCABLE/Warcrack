@@ -123,23 +123,21 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2120] = {
-						{
-							["crit"] = {
-								["target"] = "Tsul'Kalu",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 28,
-								["amount"] = 138,
-							},
-						}, -- [1]
+					[116] = {
 						{
 							["normal"] = {
-								["target"] = "Tsul'Kalu",
+								["target"] = "Scarlet Gallant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 28,
-								["amount"] = 16,
+								["targetLevel"] = 32,
+								["amount"] = 183,
 							},
-						}, -- [2]
+							["crit"] = {
+								["target"] = "Scarlet Gallant",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 33,
+								["amount"] = 350,
+							},
+						}, -- [1]
 					},
 					[12654] = {
 						[2] = {
@@ -197,21 +195,23 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[116] = {
+					[2120] = {
 						{
-							["normal"] = {
-								["target"] = "Scarlet Gallant",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 32,
-								["amount"] = 183,
-							},
 							["crit"] = {
-								["target"] = "Scarlet Gallant",
+								["target"] = "Tsul'Kalu",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 33,
-								["amount"] = 350,
+								["targetLevel"] = 28,
+								["amount"] = 138,
 							},
 						}, -- [1]
+						{
+							["normal"] = {
+								["target"] = "Tsul'Kalu",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 28,
+								["amount"] = 16,
+							},
+						}, -- [2]
 					},
 				},
 			},

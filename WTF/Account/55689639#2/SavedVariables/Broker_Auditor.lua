@@ -9,17 +9,17 @@ BrokerAuditorDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
@@ -38,7 +38,7 @@ BrokerAuditorDB = {
 		},
 		["Warcollie - Darkspear"] = {
 		},
-		["Melancollie - Smolderthorn"] = {
+		["Hoarcollie - Smolderthorn"] = {
 		},
 		["Summoneer - Ysondre"] = {
 		},
@@ -46,7 +46,7 @@ BrokerAuditorDB = {
 		},
 		["Fraycollie - The Underbog"] = {
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Melancollie - Smolderthorn"] = {
 		},
 	},
 }

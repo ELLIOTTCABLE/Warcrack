@@ -3,17 +3,17 @@ DataStoreDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -43,13 +43,13 @@ DataStoreDB = {
 				["guildName"] = "LEAFEA",
 				["faction"] = "Alliance",
 			},
-			["Default.The Underbog.Fraycollie"] = {
-				["faction"] = "Horde",
-				["guildName"] = "LEAFEA",
-			},
 			["Default.Smolderthorn.Hoarcollie"] = {
 				["guildName"] = "LEAFEA",
 				["faction"] = "Alliance",
+			},
+			["Default.The Underbog.Fraycollie"] = {
+				["faction"] = "Horde",
+				["guildName"] = "LEAFEA",
 			},
 			["Default.Ysondre.Battlecollie"] = {
 				["faction"] = "Alliance",

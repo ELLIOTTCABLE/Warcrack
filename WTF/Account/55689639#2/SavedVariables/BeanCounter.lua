@@ -317,6 +317,10 @@ BeanCounterDB = {
 			["vendorsell"] = {
 			},
 			["postedBids"] = {
+				["52326"] = {
+					["item:52326:0:0:0:0:0:0:1421473920:80:0"] = {
+					},
+				},
 				["52555"] = {
 					["item:52555:0:0:0:0:0:0:1120655499:80:0"] = {
 					},
@@ -325,10 +329,98 @@ BeanCounterDB = {
 					["item:52555:0:0:0:0:0:0:1124172361:80:0"] = {
 					},
 				},
+				["67282"] = {
+					["item:67282:0:0:0:0:0:0:815791360:80:0"] = {
+					},
+				},
+				["53010"] = {
+					["item:53010:0:0:0:0:0:0:2107642752:80:0"] = {
+					},
+				},
+				["4339"] = {
+					["item:4339:0:0:0:0:0:0:6409197:80:0"] = {
+					},
+				},
+				["60216"] = {
+					["item:60216:0:0:0:0:0:0:99956864:80:0"] = {
+					},
+				},
+				["22307"] = {
+					["item:22307:0:0:0:0:0:0:0:80:0"] = {
+					},
+				},
 				["52719"] = {
 					["item:52719:0:0:0:0:0:0:1759912704:80:0"] = {
 					},
 					["item:52719:0:0:0:0:0:0:121289656:80:0"] = {
+					},
+				},
+				["4338"] = {
+					["item:4338:0:0:0:0:0:0:450672448:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:-1714408320:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:940483904:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:-1902603136:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:915504672:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1492848448:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:471634352:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:837150144:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:-1843099008:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1977268352:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1517965440:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1281806400:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:837073920:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1705849216:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:-1928528768:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:732006336:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1252716736:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1052037440:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1942929920:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:0:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:-1994923520:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:378494136:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:2127797504:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1176023616:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:2076265216:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1975460480:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:861174976:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1728021504:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1709003392:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:1076191744:80:0"] = {
+					},
+					["item:4338:0:0:0:0:0:0:907270016:80:0"] = {
+					},
+				},
+				["44965"] = {
+					["item:44965:0:0:0:0:0:0:650771648:80:0"] = {
 					},
 				},
 			},
@@ -351,6 +443,11 @@ BeanCounterDB = {
 			["completedAuctionsNeutral"] = {
 			},
 			["completedBidsBuyouts"] = {
+				["52326"] = {
+					["item:52326:0:0:0:0:0:0:1421473920:80:0"] = {
+						"93;;;;8742000;8742000;Tayson;1308475837;;A", -- [1]
+					},
+				},
 				["52555"] = {
 					["item:52555:0:0:0:0:0:0:1120655499:80:0"] = {
 						"1;;;;15999;15999;Healalotmore;1308069220;;A", -- [1]
@@ -409,6 +506,31 @@ BeanCounterDB = {
 						"1;;;;15999;15999;Healalotmore;1308069233;;A", -- [19]
 					},
 				},
+				["67282"] = {
+					["item:67282:0:0:0:0:0:0:815791360:80:0"] = {
+						"1;;;;6990000;6990000;Tayson;1308474649;;A", -- [1]
+					},
+				},
+				["53010"] = {
+					["item:53010:0:0:0:0:0:0:2107642752:80:0"] = {
+						"20;;;;900000;900000;Namco;1308475491;;A", -- [1]
+					},
+				},
+				["22307"] = {
+					["item:22307:0:0:0:0:0:0:0:80:0"] = {
+						"1;;;;21364;21364;Hempmorphed;1308527175;;A", -- [1]
+					},
+				},
+				["60216"] = {
+					["item:60216:0:0:0:0:0:0:99956864:80:0"] = {
+						"1;;;;10000000;10000000;Shantra;1308474643;;A", -- [1]
+					},
+				},
+				["4339"] = {
+					["item:4339:0:0:0:0:0:0:6409197:80:0"] = {
+						"4;;;;119600;119600;Plagueknight;1308527179;;A", -- [1]
+					},
+				},
 				["52719"] = {
 					["item:52719:0:0:0:0:0:0:1759912704:80:0"] = {
 						"1;;;;379999;379999;Yukonjane;1308069299;;A", -- [1]
@@ -416,6 +538,112 @@ BeanCounterDB = {
 					},
 					["item:52719:0:0:0:0:0:0:121289656:80:0"] = {
 						"1;;;;380999;380999;Maylear;1308069303;;A", -- [1]
+					},
+				},
+				["4338"] = {
+					["item:4338:0:0:0:0:0:0:450672448:80:0"] = {
+						"20;;;;70000;70000;Heimdåll;1308476734;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:940483904:80:0"] = {
+						"17;;;;79475;79475;Bigae;1308527182;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:471634352:80:0"] = {
+						"20;;;;78000;78000;Rxbandit;1308527174;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:-1902603136:80:0"] = {
+						"20;;;;103000;103000;Mcduckerson;1308476744;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:915504672:80:0"] = {
+						"20;;;;70000;70000;Heimdåll;1308476734;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1492848448:80:0"] = {
+						"20;;;;93480;93480;Bigae;1308527181;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:-1714408320:80:0"] = {
+						"20;;;;70000;70000;Pretzelheim;1308527175;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:837150144:80:0"] = {
+						"20;;;;70000;70000;Heimdåll;1308476734;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1517965440:80:0"] = {
+						"20;;;;103000;103000;Mcduckerson;1308476748;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1977268352:80:0"] = {
+						"20;;;;70000;70000;Tribidian;1308527177;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:-1843099008:80:0"] = {
+						"11;;;;31900;31900;Rebeka;1308476742;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1281806400:80:0"] = {
+						"20;;;;70000;70000;Heimdåll;1308476733;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:378494136:80:0"] = {
+						"20;;;;70000;70000;Pretzelheim;1308527176;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1705849216:80:0"] = {
+						"20;;;;103000;103000;Mcduckerson;1308476737;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:-1928528768:80:0"] = {
+						"15;;;;44000;44000;Morbidknight;1308476742;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:732006336:80:0"] = {
+						"20;;;;70000;70000;Clemson;1308476734;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1252716736:80:0"] = {
+						"20;;;;93480;93480;Bigae;1308527182;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1052037440:80:0"] = {
+						"20;;;;70000;70000;Clemson;1308476735;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1942929920:80:0"] = {
+						"20;;;;67500;67500;Pokinyou;1308476730;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:0:80:0"] = {
+						"20;;;;93540;93540;Ondru;1308476736;;A", -- [1]
+						"20;;;;93540;93540;Ondru;1308476734;;A", -- [2]
+						"20;;;;93540;93540;Ondru;1308476739;;A", -- [3]
+						"20;;;;93540;93540;Ondru;1308476745;;A", -- [4]
+						"20;;;;93540;93540;Ondru;1308476740;;A", -- [5]
+						"20;;;;93540;93540;Ondru;1308476737;;A", -- [6]
+						"20;;;;93540;93540;Ondru;1308476745;;A", -- [7]
+					},
+					["item:4338:0:0:0:0:0:0:-1994923520:80:0"] = {
+						"20;;;;93540;93540;Ondru;1308476737;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:837073920:80:0"] = {
+						"20;;;;78000;78000;Rxbandit;1308527174;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:2127797504:80:0"] = {
+						"13;;;;60749;60749;Bigae;1308527180;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1176023616:80:0"] = {
+						"20;;;;103000;103000;Mcduckerson;1308476747;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:2076265216:80:0"] = {
+						"20;;;;103000;103000;Mcduckerson;1308476744;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1975460480:80:0"] = {
+						"20;;;;70000;70000;Clemson;1308476733;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:861174976:80:0"] = {
+						"20;;;;103000;103000;Mcduckerson;1308476744;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1728021504:80:0"] = {
+						"5;;;;16000;16000;Heimdåll;1308476740;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1709003392:80:0"] = {
+						"20;;;;67500;67500;Pokinyou;1308476735;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:1076191744:80:0"] = {
+						"20;;;;67500;67500;Pokinyou;1308476732;;A", -- [1]
+					},
+					["item:4338:0:0:0:0:0:0:907270016:80:0"] = {
+						"20;;;;70000;70000;Tribidian;1308527175;;A", -- [1]
+					},
+				},
+				["44965"] = {
+					["item:44965:0:0:0:0:0:0:650771648:80:0"] = {
+						"1;;;;39999999;39999999;Chobit;1308474635;;A", -- [1]
 					},
 				},
 			},
@@ -486,7 +714,7 @@ BeanCounterDBSettings = {
 		["Fraycollie"] = {
 			["version"] = 3.02,
 			["faction"] = "Alliance",
-			["wealth"] = 47800059,
+			["wealth"] = 45063326,
 			["maintenance"] = {
 				["compactDB"] = 1308268015,
 				["sortArray"] = 1308485651,
@@ -518,35 +746,35 @@ BeanCounterDBSettings = {
 			},
 			["mailbox"] = {
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99991989135742,
+					["read"] = 1,
 					["subject"] = "Auction won: The 1 Ring",
+					["time"] = 29.99991989135742,
 				}, -- [1]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99984931945801,
+					["read"] = 1,
 					["subject"] = "Auction won: The 1 Ring",
+					["time"] = 29.99984931945801,
 				}, -- [2]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99967575073242,
+					["read"] = 1,
 					["subject"] = "Auction won: Tigerseye Band",
+					["time"] = 29.99967575073242,
 				}, -- [3]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99960708618164,
+					["read"] = 1,
 					["subject"] = "Auction won: Heavy Copper Ring",
+					["time"] = 29.99960708618164,
 				}, -- [4]
 			},
 		},
 		["Melancollie"] = {
 			["version"] = 3.02,
 			["faction"] = "Alliance",
-			["wealth"] = 1753634666,
+			["wealth"] = 1436134576,
 			["maintenance"] = {
 				["compactDB"] = 1308345209,
 				["sortArray"] = 1308316258,
@@ -554,34 +782,34 @@ BeanCounterDBSettings = {
 			},
 			["mailbox"] = {
 				{
-					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["subject"] = "Auction won: Greater Celestial Essence (10)",
+					["sender"] = "Alliance Auction House",
 					["time"] = 29.99809074401855,
+					["subject"] = "Auction won: Greater Celestial Essence (10)",
 				}, -- [1]
 				{
-					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["subject"] = "Auction won: Greater Celestial Essence",
+					["sender"] = "Alliance Auction House",
 					["time"] = 29.99802017211914,
+					["subject"] = "Auction won: Greater Celestial Essence",
 				}, -- [2]
 				{
-					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["subject"] = "Auction won: Maelstrom Crystal (3)",
+					["sender"] = "Alliance Auction House",
 					["time"] = 29.997314453125,
+					["subject"] = "Auction won: Maelstrom Crystal (3)",
 				}, -- [3]
 				{
-					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["subject"] = "Auction won: Maelstrom Crystal",
+					["sender"] = "Alliance Auction House",
 					["time"] = 29.9973030090332,
+					["subject"] = "Auction won: Maelstrom Crystal",
 				}, -- [4]
 				{
-					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["subject"] = "Auction won: Maelstrom Crystal",
+					["sender"] = "Alliance Auction House",
 					["time"] = 29.99729156494141,
+					["subject"] = "Auction won: Maelstrom Crystal",
 				}, -- [5]
 			},
 		},
@@ -600,7 +828,7 @@ BeanCounterDBSettings = {
 		["Battlecollie"] = {
 			["version"] = 3.02,
 			["faction"] = "Alliance",
-			["wealth"] = 9053524,
+			["wealth"] = 39710613,
 			["maintenance"] = {
 				["compactDB"] = 1308262704,
 				["sortArray"] = 1308325207,
@@ -608,113 +836,77 @@ BeanCounterDBSettings = {
 			},
 			["mailbox"] = {
 				{
-					["read"] = 2,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.98881912231445,
-					["subject"] = "Auction won: Hypnotic Dust",
+					["read"] = 1,
+					["subject"] = "Auction won: Mageweave Cloth (17)",
+					["time"] = 29.99917793273926,
 				}, -- [1]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.98881912231445,
-					["subject"] = "Auction won: Hypnotic Dust",
+					["read"] = 1,
+					["subject"] = "Auction won: Mageweave Cloth (20)",
+					["time"] = 29.99917793273926,
 				}, -- [2]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.98879623413086,
-					["subject"] = "Auction won: Hypnotic Dust",
+					["read"] = 1,
+					["subject"] = "Auction won: Mageweave Cloth (20)",
+					["time"] = 29.99916648864746,
 				}, -- [3]
 				{
+					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["sender"] = "Fraycollie",
-					["time"] = 30.94783592224121,
-					["subject"] = "Swamplight Ring of the Seer",
+					["subject"] = "Auction won: Mageweave Cloth (13)",
+					["time"] = 29.99915504455566,
 				}, -- [4]
 				{
+					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["sender"] = "Fraycollie",
-					["time"] = 30.22904014587402,
-					["subject"] = "Hardened Elementium Bar",
+					["subject"] = "Auction won: Bolt of Mageweave (4)",
+					["time"] = 29.99913215637207,
 				}, -- [5]
 				{
+					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["sender"] = "Fraycollie",
-					["time"] = 30.19145774841309,
-					["subject"] = "Jasper",
+					["subject"] = "Auction won: Mageweave Cloth (20)",
+					["time"] = 29.99910926818848,
 				}, -- [6]
 				{
+					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["sender"] = "Fraycollie",
-					["time"] = 30.19134330749512,
-					["subject"] = "Volatile Earth (11)",
+					["subject"] = "Auction won: Mageweave Cloth (20)",
+					["time"] = 29.99909782409668,
 				}, -- [7]
 				{
+					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["sender"] = "Fraycollie",
-					["time"] = 29.93081092834473,
-					["subject"] = "Baradin Sandals of the Seer",
+					["subject"] = "Auction won: Pattern: Enchanted Mageweave Pouch",
+					["time"] = 29.99908638000488,
 				}, -- [8]
 				{
+					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["sender"] = "Fraycollie",
-					["time"] = 29.89087867736816,
-					["subject"] = "Obsidium Ore (20)",
+					["subject"] = "Auction won: Mageweave Cloth (20)",
+					["time"] = 29.99908638000488,
 				}, -- [9]
 				{
+					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["sender"] = "Fraycollie",
-					["time"] = 29.89046287536621,
-					["subject"] = "Embersilk Cloth (6)",
+					["subject"] = "Auction won: Mageweave Cloth (20)",
+					["time"] = 29.99908638000488,
 				}, -- [10]
 				{
+					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["sender"] = "Melancollie",
-					["time"] = 28.82411956787109,
-					["subject"] = "Ridge Cleaver of the Bear",
+					["subject"] = "Auction won: Mageweave Cloth (20)",
+					["time"] = 29.99907493591309,
 				}, -- [11]
 				{
+					["sender"] = "Alliance Auction House",
 					["read"] = 1,
-					["sender"] = "Melancollie",
-					["time"] = 28.70616912841797,
-					["subject"] = "Strange Dust (5)",
+					["subject"] = "Auction won: Mageweave Cloth (20)",
+					["time"] = 29.99907493591309,
 				}, -- [12]
-				{
-					["read"] = 1,
-					["sender"] = "Melancollie",
-					["time"] = 28.61715316772461,
-					["subject"] = "Tangy Clam Meat",
-				}, -- [13]
-				{
-					["read"] = 1,
-					["sender"] = "Melancollie",
-					["time"] = 28.59013938903809,
-					["subject"] = "Recipe: Seasoned Wolf Kabob",
-				}, -- [14]
-				{
-					["read"] = 1,
-					["sender"] = "Melancollie",
-					["time"] = 28.58889961242676,
-					["subject"] = "Briarthorn",
-				}, -- [15]
-				{
-					["read"] = 1,
-					["sender"] = "Melancollie",
-					["time"] = 28.4648494720459,
-					["subject"] = "Bard's Bracers of Healing",
-				}, -- [16]
-				{
-					["read"] = 1,
-					["sender"] = "Melancollie",
-					["time"] = 28.46466445922852,
-					["subject"] = "Tigerseye",
-				}, -- [17]
-				{
-					["read"] = 1,
-					["sender"] = "Melancollie",
-					["time"] = 28.40385437011719,
-					["subject"] = "Linen Cloth (20)",
-				}, -- [18]
 			},
 		},
 		["Warcollie"] = {
@@ -732,18 +924,26 @@ BeanCounterDBSettings = {
 	},
 }
 BeanCounterDBNames = {
-	["52555:0"] = "cffffffff;Hypnotic Dust",
+	["44965:0"] = "cff0070dd;Teldrassil Sproutling",
 	["15017:1017"] = "cff1eff00;Lupine Leggings of the Whale",
-	["4239:0"] = "cff1eff00;Embossed Leather Gloves",
 	["15110:588"] = "cff1eff00;Rigid Belt of the Monkey",
 	["52719:0"] = "cff1eff00;Greater Celestial Essence",
-	["8350:0"] = "cff1eff00;The 1 Ring",
-	["25439:0"] = "cff1eff00;Tigerseye Band",
 	["2315:0"] = "cff1eff00;Dark Leather Boots",
 	["6552:135"] = "cff1eff00;Bard's Tunic of Stamina",
-	["7281:0"] = "cff1eff00;Light Leather Bracers",
+	["52555:0"] = "cffffffff;Hypnotic Dust",
+	["60216:0"] = "cff0070dd;De-Weaponized Mechanical Companion",
 	["21932:0"] = "cff1eff00;Heavy Copper Ring",
+	["4239:0"] = "cff1eff00;Embossed Leather Gloves",
+	["52326:0"] = "cffffffff;Volatile Water",
+	["25439:0"] = "cff1eff00;Tigerseye Band",
+	["22307:0"] = "cffffffff;Pattern: Enchanted Mageweave Pouch",
+	["4339:0"] = "cffffffff;Bolt of Mageweave",
+	["4338:0"] = "cffffffff;Mageweave Cloth",
 	["52722:0"] = "cffa335ee;Maelstrom Crystal",
+	["67282:0"] = "cff0070dd;Elementium Geode",
+	["7281:0"] = "cff1eff00;Light Leather Bracers",
+	["8350:0"] = "cff1eff00;The 1 Ring",
+	["53010:0"] = "cffffffff;Embersilk Cloth",
 	["4777:0"] = "cff1eff00;Ironwood Maul",
 }
 BeanCounterAccountDB = nil

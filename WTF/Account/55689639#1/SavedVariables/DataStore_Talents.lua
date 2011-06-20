@@ -1,15 +1,72 @@
 
 DataStore_TalentsDB = {
 	["profileKeys"] = {
-		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
-		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
+			["Default.Smolderthorn.Nocollie"] = {
+				["lastUpdate"] = 1308331756,
+				["GlyphList"] = {
+					11, -- [1]
+					6258, -- [2]
+					6290, -- [3]
+					6370, -- [4]
+					6466, -- [5]
+					11442, -- [6]
+					11730, -- [7]
+					6434, -- [8]
+					6498, -- [9]
+					11458, -- [10]
+					6546, -- [11]
+					6562, -- [12]
+					11426, -- [13]
+					13, -- [14]
+					6276, -- [15]
+					6308, -- [16]
+					14868, -- [17]
+					11748, -- [18]
+					6324, -- [19]
+					6340, -- [20]
+					6356, -- [21]
+					6388, -- [22]
+					11700, -- [23]
+					6404, -- [24]
+					6420, -- [25]
+					6452, -- [26]
+					14820, -- [27]
+					6484, -- [28]
+					6516, -- [29]
+					6580, -- [30]
+					11716, -- [31]
+					14788, -- [32]
+					15, -- [33]
+					7494, -- [34]
+					7430, -- [35]
+					7446, -- [36]
+					7462, -- [37]
+					7510, -- [38]
+					7478, -- [39]
+				},
+				["Glyphs"] = {
+					2, -- [1]
+					4, -- [2]
+					1048580, -- [3]
+					1048578, -- [4]
+					2097156, -- [5]
+					2097154, -- [6]
+					6, -- [7]
+					1048582, -- [8]
+					2097158, -- [9]
+				},
+			},
 			["Default.Ysondre.Tempcollie"] = {
 				["lastUpdate"] = 1307914182,
 				["GlyphList"] = {
@@ -49,6 +106,59 @@ DataStore_TalentsDB = {
 					7382, -- [34]
 					7398, -- [35]
 					7414, -- [36]
+				},
+				["Glyphs"] = {
+					2, -- [1]
+					4, -- [2]
+					1048580, -- [3]
+					1048578, -- [4]
+					2097156, -- [5]
+					2097154, -- [6]
+					6, -- [7]
+					1048582, -- [8]
+					2097158, -- [9]
+				},
+			},
+			["Default.Smolderthorn.Snorecollie"] = {
+				["lastUpdate"] = 1308534246,
+				["GlyphList"] = {
+					11, -- [1]
+					12194, -- [2]
+					7906, -- [3]
+					7890, -- [4]
+					7826, -- [5]
+					7986, -- [6]
+					8146, -- [7]
+					8018, -- [8]
+					8034, -- [9]
+					8002, -- [10]
+					13, -- [11]
+					7876, -- [12]
+					14836, -- [13]
+					14916, -- [14]
+					7940, -- [15]
+					14900, -- [16]
+					7956, -- [17]
+					7764, -- [18]
+					7924, -- [19]
+					7860, -- [20]
+					8116, -- [21]
+					12276, -- [22]
+					12212, -- [23]
+					12260, -- [24]
+					8068, -- [25]
+					8084, -- [26]
+					7796, -- [27]
+					8132, -- [28]
+					15, -- [29]
+					7734, -- [30]
+					7750, -- [31]
+					7846, -- [32]
+					13622, -- [33]
+					7782, -- [34]
+					7814, -- [35]
+					12230, -- [36]
+					12246, -- [37]
 				},
 				["Glyphs"] = {
 					2, -- [1]
@@ -167,48 +277,46 @@ DataStore_TalentsDB = {
 					2097158, -- [9]
 				},
 			},
-			["Default.Smolderthorn.Nocollie"] = {
-				["lastUpdate"] = 1308331756,
+			["Default.Smolderthorn.Awdawdawd"] = {
+				["lastUpdate"] = 1308447199,
 				["GlyphList"] = {
 					11, -- [1]
-					6258, -- [2]
-					6290, -- [3]
-					6370, -- [4]
-					6466, -- [5]
-					11442, -- [6]
-					11730, -- [7]
-					6434, -- [8]
-					6498, -- [9]
-					11458, -- [10]
-					6546, -- [11]
-					6562, -- [12]
-					11426, -- [13]
-					13, -- [14]
-					6276, -- [15]
-					6308, -- [16]
-					14868, -- [17]
-					11748, -- [18]
-					6324, -- [19]
-					6340, -- [20]
-					6356, -- [21]
-					6388, -- [22]
-					11700, -- [23]
-					6404, -- [24]
-					6420, -- [25]
-					6452, -- [26]
-					14820, -- [27]
-					6484, -- [28]
-					6516, -- [29]
-					6580, -- [30]
-					11716, -- [31]
-					14788, -- [32]
-					15, -- [33]
-					7494, -- [34]
-					7430, -- [35]
-					7446, -- [36]
-					7462, -- [37]
-					7510, -- [38]
-					7478, -- [39]
+					4402, -- [2]
+					12114, -- [3]
+					4370, -- [4]
+					4386, -- [5]
+					4450, -- [6]
+					12082, -- [7]
+					4530, -- [8]
+					4546, -- [9]
+					4354, -- [10]
+					14578, -- [11]
+					12098, -- [12]
+					4594, -- [13]
+					4658, -- [14]
+					13, -- [15]
+					4420, -- [16]
+					12132, -- [17]
+					4436, -- [18]
+					4468, -- [19]
+					4500, -- [20]
+					4516, -- [21]
+					12164, -- [22]
+					4644, -- [23]
+					4580, -- [24]
+					12148, -- [25]
+					12180, -- [26]
+					4564, -- [27]
+					4628, -- [28]
+					4676, -- [29]
+					15, -- [30]
+					7686, -- [31]
+					7654, -- [32]
+					7702, -- [33]
+					7670, -- [34]
+					4486, -- [35]
+					7718, -- [36]
+					7638, -- [37]
 				},
 				["Glyphs"] = {
 					2, -- [1]
@@ -331,7 +439,9 @@ DataStore_TalentsDB = {
 		},
 		["Reference"] = {
 			["GlyphNames"] = {
+				[500] = "Slam",
 				[261] = "Shadow Word: Pain",
+				[277] = "Fear",
 				[871] = "Mana Shield",
 				[325] = "Invisibility",
 				[712] = "Divine Accuracy",
@@ -347,11 +457,13 @@ DataStore_TalentsDB = {
 				[555] = "Death Gate",
 				[651] = "Arcane Blast",
 				[715] = "Killing Spree",
+				[502] = "Shield Slam",
 				[263] = "Power Word: Shield",
 				[556] = "Rune Tap",
 				[716] = "Shadow Dance",
 				[525] = "Obliterate",
 				[557] = "Blood Boil",
+				[487] = "Thunder Clap",
 				[252] = "Dispel Magic",
 				[526] = "Pestilence",
 				[558] = "Death Strike",
@@ -359,122 +471,188 @@ DataStore_TalentsDB = {
 				[328] = "Molten Armor",
 				[527] = "Raise Dead",
 				[591] = "Frostfire Bolt",
+				[488] = "Enduring Victory",
+				[504] = "Sunder Armor",
 				[265] = "Psychic Scream",
+				[281] = "Healthstone",
 				[313] = "Arcane Power",
 				[329] = "Polymorph",
 				[529] = "Scourge Strike",
 				[409] = "Sinister Strike",
+				[489] = "Mortal Strike",
 				[253] = "Fade",
 				[266] = "Renew",
+				[282] = "Howl of Terror",
 				[314] = "Blink",
 				[330] = "Cone of Cold",
 				[945] = "Dark Succor",
 				[531] = "Pillar of Frost",
 				[410] = "Slice and Dice",
 				[458] = "Fading",
+				[490] = "Bloody Healing",
+				[755] = "Haunt",
 				[267] = "Scourge Imprisonment",
+				[283] = "Immolate",
+				[851] = "Command",
 				[315] = "Evocation",
 				[331] = "Dragon's Breath",
+				[756] = "Metamorphosis",
 				[395] = "Crippling Poison",
 				[411] = "Sprint",
 				[459] = "Levitate",
 				[948] = "Frost Armor",
+				[491] = "Rapid Charge",
 				[254] = "Fear Ward",
 				[268] = "Shadow Word: Death",
+				[284] = "Imp",
 				[316] = "Fireball",
+				[758] = "Demonic Circle",
 				[396] = "Deadly Throw",
+				[486] = "Demoralizing Shout",
 				[460] = "Fortitude",
+				[484] = "Berserker Rage",
+				[492] = "Cleaving",
+				[759] = "Shadowflame",
 				[269] = "Mind Flay",
+				[285] = "Soul Swap",
+				[278] = "Felguard",
+				[505] = "Sweeping Strikes",
+				[393] = "Backstab",
 				[696] = "Deep Freeze",
+				[507] = "Resonating Power",
+				[760] = "Life Tap",
 				[397] = "Evasion",
+				[255] = "Flash Heal",
+				[757] = "Chaos Bolt",
 				[445] = "Arcane Brilliance",
 				[461] = "Shackle Undead",
-				[697] = "Slow",
-				[255] = "Flash Heal",
+				[477] = "Unending Breath",
+				[493] = "Devastate",
+				[761] = "Soul Link",
 				[270] = "Smite",
+				[286] = "Shadow Bolt",
+				[501] = "Revenge",
 				[318] = "Frost Nova",
+				[520] = "Death and Decay",
 				[698] = "Arcane Barrage",
+				[733] = "Mutilate",
+				[762] = "Bladestorm",
 				[398] = "Eviscerate",
+				[256] = "Holy Nova",
+				[509] = "Raging Blow",
+				[280] = "Health Funnel",
 				[462] = "Shadow Protection",
-				[699] = "Mirror Image",
+				[478] = "Drain Soul",
 				[731] = "Fan of Knives",
+				[763] = "Shockwave",
 				[271] = "Prayer of Mending",
+				[287] = "Shadowburn",
+				[463] = "Shadowfiend",
 				[319] = "Frostbolt",
 				[923] = "Armors",
 				[700] = "Ice Barrier",
 				[732] = "Tricks of the Trade",
+				[764] = "Furious Sundering",
 				[399] = "Expose Armor",
+				[260] = "Psychic Horror",
+				[528] = "Rune Strike",
 				[447] = "Monkey",
 				[924] = "Vanish",
-				[733] = "Mutilate",
-				[256] = "Holy Nova",
+				[479] = "Eye of Kilrogg",
+				[495] = "Piercing Howl",
+				[765] = "Intimidating Shout",
+				[272] = "Incinerate",
+				[483] = "Battle",
+				[932] = "Death Wish",
 				[320] = "Pyroblast",
+				[530] = "Strangulate",
+				[257] = "Inner Fire",
 				[734] = "Cloak of Shadows",
+				[766] = "Spell Reflection",
 				[400] = "Feint",
+				[524] = "Icy Touch",
+				[394] = "Blade Flurry",
 				[448] = "Conjuring",
 				[464] = "Distract",
-				[257] = "Inner Fire",
+				[480] = "Curse of Exhaustion",
+				[496] = "Heroic Throw",
+				[767] = "Shield Wall",
+				[273] = "Conflagrate",
+				[289] = "Soulstone",
+				[407] = "Sap",
 				[321] = "Ice Block",
+				[927] = "Colossus Smash",
+				[911] = "Lash of Pain",
+				[258] = "Lightwell",
 				[768] = "Dancing Rune Weapon",
 				[401] = "Garrote",
+				[926] = "Kick",
+				[928] = "Living Bomb",
+				[264] = "Prayer of Healing",
 				[465] = "Pick Lock",
-				[258] = "Lightwell",
-				[392] = "Ambush",
+				[481] = "Enslave Demon",
+				[497] = "Intervene",
+				[514] = "Blood Tap",
+				[274] = "Corruption",
+				[290] = "Seduction",
+				[512] = "Anti-Magic Shell",
 				[322] = "Ice Lance",
 				[929] = "Blind",
-				[520] = "Death and Decay",
-				[264] = "Prayer of Healing",
+				[392] = "Ambush",
+				[516] = "Chains of Ice",
 				[515] = "Bone Shield",
 				[402] = "Revealing Strike",
-				[528] = "Rune Strike",
+				[773] = "Howling Blast",
 				[611] = "Blast Wave",
 				[450] = "Penguin",
 				[466] = "Pick Pocket",
-				[463] = "Shadowfiend",
-				[524] = "Icy Touch",
+				[482] = "Ritual of Souls",
 				[771] = "Death Coil",
-				[513] = "Heart Strike",
 				[259] = "Mass Dispel",
-				[260] = "Psychic Horror",
+				[275] = "Bane of Agony",
+				[291] = "Unstable Affliction",
+				[769] = "Hungering Cold",
 				[323] = "Icy Veins",
-				[407] = "Sap",
+				[931] = "Intercept",
 				[708] = "Dispersion",
-				[516] = "Chains of Ice",
+				[513] = "Heart Strike",
 				[391] = "Adrenaline Rush",
 				[403] = "Gouge",
-				[769] = "Hungering Cold",
-				[928] = "Living Bomb",
+				[279] = "Felhunter",
+				[532] = "Vampiric Blood",
 				[451] = "Slow Fall",
 				[467] = "Safe Fall",
 				[709] = "Guardian Spirit",
-				[406] = "Rupture",
+				[499] = "Overpower",
 				[518] = "Death's Embrace",
-				[773] = "Howling Blast",
-				[394] = "Blade Flurry",
-				[514] = "Blood Tap",
-				[532] = "Vampiric Blood",
-				[530] = "Strangulate",
+				[276] = "Death Coil",
+				[292] = "Voidwalker",
+				[494] = "Bloodthirst",
+				[699] = "Mirror Image",
+				[405] = "Preparation",
 				[710] = "Penance",
-				[926] = "Kick",
+				[522] = "Horn of Winter",
 				[519] = "Death Grip",
 				[404] = "Hemorrhage",
-				[405] = "Preparation",
-				[393] = "Backstab",
-				[512] = "Anti-Magic Shell",
+				[697] = "Slow",
+				[485] = "Long Charge",
+				[406] = "Rupture",
 				[468] = "Blurred Speed",
 				[711] = "Spirit Tap",
-				[522] = "Horn of Winter",
+				[508] = "Victory Rush",
 			},
 		},
 	},
 }
 DataStore_TalentsRefDB = {
 	["profileKeys"] = {
-		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
-		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["global"] = {
@@ -482,6 +660,7 @@ DataStore_TalentsRefDB = {
 			["Locale"] = "enUS",
 			["Trees"] = {
 				["Unholy"] = {
+					["background"] = "DeathKnightUnholy",
 					["talents"] = {
 						"2025|Unholy Command|Spell_DeathKnight_Strangulate|1|1|2", -- [1]
 						"1932|Virulence|Spell_Shadow_BurningSpirit|1|2|3", -- [2]
@@ -504,15 +683,15 @@ DataStore_TalentsRefDB = {
 						"7575|Sudden Doom|Spell_Shadow_PainSpike|6|3|3", -- [19]
 						"2000|Summon Gargoyle|ability_deathknight_summongargoyle|7|2|1", -- [20]
 					},
+					["icon"] = "Spell_Deathknight_UnholyPresence",
 					["prereqs"] = {
+						[17] = "3|4",
 						[15] = "4|2",
 						[9] = "1|3",
-						[17] = "3|4",
 					},
-					["icon"] = "Spell_Deathknight_UnholyPresence",
-					["background"] = "DeathKnightUnholy",
 				},
 				["Frost"] = {
+					["background"] = "DeathKnightFrost",
 					["talents"] = {
 						"2031|Runic Power Mastery|Spell_Arcane_Arcane01|1|1|3", -- [1]
 						"2035|Icy Reach|Spell_Frost_ManaRecharge|1|2|2", -- [2]
@@ -535,13 +714,13 @@ DataStore_TalentsRefDB = {
 						"7571|Might of the Frozen Wastes|inv_sword_120|6|3|3", -- [19]
 						"1989|Howling Blast|Spell_Frost_ArcticWinds|7|2|1", -- [20]
 					},
+					["icon"] = "Spell_Deathknight_FrostPresence",
 					["prereqs"] = {
 						[20] = "5|2",
 					},
-					["icon"] = "Spell_Deathknight_FrostPresence",
-					["background"] = "DeathKnightFrost",
 				},
 				["Blood"] = {
+					["background"] = "DeathKnightBlood",
 					["talents"] = {
 						"1939|Butchery|INV_Axe_68|1|1|2", -- [1]
 						"2017|Blade Barrier|Ability_UpgradeMoonGlaive|1|2|3", -- [2]
@@ -564,17 +743,24 @@ DataStore_TalentsRefDB = {
 						"7463|Crimson Scourge|Spell_DeathKnight_BloodBoil|6|3|2", -- [19]
 						"1961|Dancing Rune Weapon|INV_Sword_07|7|2|1", -- [20]
 					},
+					["icon"] = "Spell_Deathknight_BloodPresence",
 					["prereqs"] = {
 						[15] = "5|2",
 					},
-					["icon"] = "Spell_Deathknight_BloodPresence",
-					["background"] = "DeathKnightBlood",
 				},
 			},
 			["Version"] = 14007,
 			["Order"] = "Blood,Frost,Unholy",
 		},
-		["PRIEST"] = {
+		["WARRIOR"] = {
+			["Locale"] = "enUS",
+			["Version"] = 14007,
+		},
+		["WARLOCK"] = {
+			["Locale"] = "enUS",
+			["Version"] = 14007,
+		},
+		["ROGUE"] = {
 			["Locale"] = "enUS",
 			["Version"] = 14007,
 		},
@@ -582,7 +768,7 @@ DataStore_TalentsRefDB = {
 			["Locale"] = "enUS",
 			["Version"] = 14007,
 		},
-		["ROGUE"] = {
+		["PRIEST"] = {
 			["Locale"] = "enUS",
 			["Version"] = 14007,
 		},

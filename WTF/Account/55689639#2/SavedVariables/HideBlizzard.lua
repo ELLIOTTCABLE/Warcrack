@@ -16,12 +16,12 @@ HideBlizzardDB = {
 				["Warcollie - Darkspear"] = {
 					["party"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
-					["party"] = true,
-				},
 				["Battlecollie - Ysondre"] = {
 					["party"] = true,
 					["mirrorbar"] = false,
+				},
+				["Battlecollie - Smolderthorn"] = {
+					["party"] = true,
 				},
 			},
 		},
@@ -39,10 +39,10 @@ HideBlizzardDB = {
 				["Warcollie - Darkspear"] = {
 					["playerunitframe"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
 					["playerunitframe"] = true,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["playerunitframe"] = true,
 				},
 			},
@@ -67,11 +67,11 @@ HideBlizzardDB = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
@@ -91,13 +91,13 @@ HideBlizzardDB = {
 				["Warcollie - Darkspear"] = {
 					["petunitframe"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
-					["petunitframe"] = true,
-				},
 				["Battlecollie - Ysondre"] = {
 					["petunitframe"] = true,
 					["petactionbar"] = true,
 					["petcastbar"] = false,
+				},
+				["Battlecollie - Smolderthorn"] = {
+					["petunitframe"] = true,
 				},
 			},
 		},
@@ -119,13 +119,13 @@ HideBlizzardDB = {
 					["gryphons"] = true,
 					["stancebar"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
-					["stancebar"] = true,
-					["gryphons"] = true,
-				},
 				["Battlecollie - Ysondre"] = {
 					["gryphons"] = true,
 					["stancebar"] = true,
+				},
+				["Battlecollie - Smolderthorn"] = {
+					["stancebar"] = true,
+					["gryphons"] = true,
 				},
 			},
 		},
@@ -133,17 +133,17 @@ HideBlizzardDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
@@ -152,7 +152,7 @@ HideBlizzardDB = {
 		["Summoneer - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 		},
-		["Melancollie - Smolderthorn"] = {
+		["Hoarcollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 			["modules"] = {
 				["SpecialFrames"] = true,
@@ -162,8 +162,15 @@ HideBlizzardDB = {
 				["ActionBar"] = true,
 			},
 		},
-		["Combatcollie - The Underbog"] = {
+		["Battlecollie - Ysondre"] = {
 			["Version"] = "1.0.65",
+			["modules"] = {
+				["SpecialFrames"] = true,
+				["Player"] = true,
+				["Target"] = true,
+				["Pet"] = true,
+				["ActionBar"] = true,
+			},
 		},
 		["Nocollie - Smolderthorn"] = {
 		},
@@ -183,7 +190,7 @@ HideBlizzardDB = {
 		["Othercollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Melancollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 			["modules"] = {
 				["SpecialFrames"] = true,
@@ -216,15 +223,8 @@ HideBlizzardDB = {
 				["ActionBar"] = true,
 			},
 		},
-		["Battlecollie - Ysondre"] = {
+		["Combatcollie - The Underbog"] = {
 			["Version"] = "1.0.65",
-			["modules"] = {
-				["SpecialFrames"] = true,
-				["Player"] = true,
-				["Target"] = true,
-				["Pet"] = true,
-				["ActionBar"] = true,
-			},
 		},
 	},
 }

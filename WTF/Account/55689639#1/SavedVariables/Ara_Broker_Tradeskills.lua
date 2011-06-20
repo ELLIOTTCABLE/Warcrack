@@ -1,7 +1,21 @@
 
 AraTradeskillsDB = {
 	["Smolderthorn"] = {
-		["Illililiili"] = {
+		["Illiliililil"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["links"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["maxSkills"] = {
+			},
+		},
+		["Snorecollie"] = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
@@ -19,11 +33,25 @@ AraTradeskillsDB = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
-			["track"] = false,
-			["shortcuts"] = {
-			},
 			["links"] = {
 			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["maxSkills"] = {
+			},
+		},
+		["Illililiili"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["links"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
 			["curSkills"] = {
 			},
 			["maxSkills"] = {
@@ -43,18 +71,18 @@ AraTradeskillsDB = {
 			["links"] = {
 			},
 		},
-		["Illiliililil"] = {
+		["Awdawdawd"] = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
-			["links"] = {
+			["maxSkills"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
 			},
-			["maxSkills"] = {
+			["links"] = {
 			},
 		},
 	},

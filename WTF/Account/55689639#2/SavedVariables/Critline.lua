@@ -24,10 +24,10 @@ CritlineDB = {
 				["Warcollie - Darkspear"] = {
 					["show"] = false,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["show"] = false,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
 					["show"] = false,
 				},
 			},
@@ -51,9 +51,6 @@ CritlineDB = {
 				["Warcollie - Darkspear"] = {
 					["show"] = false,
 				},
-				["Battlecollie - Smolderthorn"] = {
-					["show"] = false,
-				},
 				["Battlecollie - Ysondre"] = {
 					["show"] = false,
 					["pos"] = {
@@ -61,6 +58,9 @@ CritlineDB = {
 						["x"] = -408.541259765625,
 						["point"] = "BOTTOMRIGHT",
 					},
+				},
+				["Battlecollie - Smolderthorn"] = {
+					["show"] = false,
 				},
 			},
 		},
@@ -75,22 +75,24 @@ CritlineDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
 		},
 		["Summoneer - Smolderthorn"] = {
+		},
+		["Combatcollie - The Underbog"] = {
 		},
 		["Battlecollie - Ysondre"] = {
 			["oldRecord"] = true,
@@ -98,8 +100,6 @@ CritlineDB = {
 			["chatOutput"] = true,
 			["spellTooltips"] = true,
 			["playSound"] = false,
-		},
-		["Combatcollie - The Underbog"] = {
 		},
 		["Nocollie - Smolderthorn"] = {
 		},
@@ -109,7 +109,7 @@ CritlineDB = {
 		},
 		["Othercollie - Smolderthorn"] = {
 		},
-		["Melancollie - Smolderthorn"] = {
+		["Hoarcollie - Smolderthorn"] = {
 		},
 		["Summoneer - Ysondre"] = {
 		},
@@ -117,7 +117,7 @@ CritlineDB = {
 		},
 		["Battlecollie - Smolderthorn"] = {
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Melancollie - Smolderthorn"] = {
 		},
 	},
 }

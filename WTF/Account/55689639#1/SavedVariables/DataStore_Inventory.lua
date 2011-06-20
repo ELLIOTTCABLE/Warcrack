@@ -1,15 +1,29 @@
 
 DataStore_InventoryDB = {
 	["profileKeys"] = {
-		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
-		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
+			["Default.Smolderthorn.Nocollie"] = {
+				["Inventory"] = {
+					[7] = 48,
+					[8] = 47,
+					[18] = 28979,
+					[17] = 50055,
+					[16] = 25,
+					[5] = 58234,
+				},
+				["averageItemLvl"] = 1,
+				["lastUpdate"] = 1308331756,
+			},
 			["Default.Ysondre.Tempcollie"] = {
 				["Inventory"] = {
 					[5] = 52547,
@@ -18,6 +32,16 @@ DataStore_InventoryDB = {
 				},
 				["averageItemLvl"] = 1,
 				["lastUpdate"] = 1307914183,
+			},
+			["Default.Smolderthorn.Snorecollie"] = {
+				["Inventory"] = {
+					[5] = 58245,
+					[16] = 12282,
+					[7] = 139,
+					[8] = 140,
+				},
+				["averageItemLvl"] = 1,
+				["lastUpdate"] = 1308534246,
 			},
 			["Default.Smolderthorn.Awihrtoawe"] = {
 				["Inventory"] = {
@@ -38,17 +62,15 @@ DataStore_InventoryDB = {
 				["averageItemLvl"] = 1,
 				["lastUpdate"] = 1307775469,
 			},
-			["Default.Smolderthorn.Nocollie"] = {
+			["Default.Smolderthorn.Awdawdawd"] = {
 				["Inventory"] = {
-					[7] = 48,
-					[8] = 47,
-					[18] = 28979,
-					[17] = 50055,
-					[16] = 25,
-					[5] = 58234,
+					[5] = 57,
+					[16] = 35,
+					[7] = 1396,
+					[8] = 59,
 				},
 				["averageItemLvl"] = 1,
-				["lastUpdate"] = 1308331756,
+				["lastUpdate"] = 1308447199,
 			},
 			["Default.Smolderthorn.Illiliililil"] = {
 				["Inventory"] = {

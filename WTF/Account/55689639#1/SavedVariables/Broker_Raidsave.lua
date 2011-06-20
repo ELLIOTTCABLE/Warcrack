@@ -42,15 +42,25 @@ Broker_RaidSaveConfig = {
 		},
 		["Smolderthorn"] = {
 			["char"] = {
-				["Illililiili"] = {
+				["Illiliililil"] = {
 					["numsaved"] = 0,
-					["name"] = "Illililiili",
+					["name"] = "Illiliililil",
+					["class"] = "ROGUE",
+					["numraid"] = 0,
 					["numactive"] = 0,
+					["numgroup"] = 0,
 					["instance"] = {
 					},
-					["class"] = "PRIEST",
-					["numgroup"] = 0,
+				},
+				["Snorecollie"] = {
+					["numsaved"] = 0,
+					["name"] = "Snorecollie",
+					["class"] = "WARRIOR",
 					["numraid"] = 0,
+					["numactive"] = 0,
+					["numgroup"] = 0,
+					["instance"] = {
+					},
 				},
 				["Nocollie"] = {
 					["numsaved"] = 0,
@@ -59,6 +69,16 @@ Broker_RaidSaveConfig = {
 					["instance"] = {
 					},
 					["class"] = "ROGUE",
+					["numgroup"] = 0,
+					["numraid"] = 0,
+				},
+				["Illililiili"] = {
+					["numsaved"] = 0,
+					["name"] = "Illililiili",
+					["numactive"] = 0,
+					["instance"] = {
+					},
+					["class"] = "PRIEST",
 					["numgroup"] = 0,
 					["numraid"] = 0,
 				},
@@ -72,15 +92,15 @@ Broker_RaidSaveConfig = {
 					["numgroup"] = 0,
 					["class"] = "MAGE",
 				},
-				["Illiliililil"] = {
+				["Awdawdawd"] = {
 					["numsaved"] = 0,
-					["name"] = "Illiliililil",
-					["class"] = "ROGUE",
-					["numraid"] = 0,
-					["numactive"] = 0,
-					["numgroup"] = 0,
+					["name"] = "Awdawdawd",
 					["instance"] = {
 					},
+					["numraid"] = 0,
+					["class"] = "WARLOCK",
+					["numgroup"] = 0,
+					["numactive"] = 0,
 				},
 			},
 			["name"] = "Smolderthorn",

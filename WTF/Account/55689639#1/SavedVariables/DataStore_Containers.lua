@@ -1,17 +1,57 @@
 
 DataStore_ContainersDB = {
 	["profileKeys"] = {
-		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
-		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
+			["Default.Smolderthorn.Nocollie"] = {
+				["lastUpdate"] = 1308331756,
+				["Containers"] = {
+					["Bag0"] = {
+						["ids"] = {
+							6948, -- [1]
+						},
+						["size"] = 16,
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["freeslots"] = 15,
+					},
+					["Bag-2"] = {
+						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
+						["size"] = 32,
+					},
+				},
+				["numFreeBagSlots"] = 15,
+				["numBagSlots"] = 16,
+			},
 			["Default.Ysondre.Tempcollie"] = {
 				["lastUpdate"] = 1307914183,
+				["Containers"] = {
+					["Bag0"] = {
+						["ids"] = {
+							6948, -- [1]
+						},
+						["size"] = 16,
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["freeslots"] = 15,
+					},
+					["Bag-2"] = {
+						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
+						["size"] = 32,
+					},
+				},
+				["numFreeBagSlots"] = 15,
+				["numBagSlots"] = 16,
+			},
+			["Default.Smolderthorn.Snorecollie"] = {
+				["lastUpdate"] = 1308534246,
 				["Containers"] = {
 					["Bag0"] = {
 						["ids"] = {
@@ -67,23 +107,23 @@ DataStore_ContainersDB = {
 				["numFreeBagSlots"] = 15,
 				["numBagSlots"] = 16,
 			},
-			["Default.Smolderthorn.Nocollie"] = {
-				["lastUpdate"] = 1308331756,
+			["Default.Smolderthorn.Awdawdawd"] = {
+				["lastUpdate"] = 1308447199,
+				["numFreeBagSlots"] = 15,
 				["Containers"] = {
 					["Bag0"] = {
 						["ids"] = {
 							6948, -- [1]
 						},
+						["freeslots"] = 15,
 						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
 						["size"] = 16,
-						["freeslots"] = 15,
 					},
 					["Bag-2"] = {
 						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
 						["size"] = 32,
 					},
 				},
-				["numFreeBagSlots"] = 15,
 				["numBagSlots"] = 16,
 			},
 			["Default.Smolderthorn.Illiliililil"] = {

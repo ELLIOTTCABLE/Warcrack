@@ -3,24 +3,24 @@ MBFDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
-		["Battlecollie - Ysondre"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
+		["Battlecollie - Ysondre"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
 		["Fraycollie - Smolderthorn"] = "Default",
 		["Othercollie - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
 		["Summoneer - Ysondre"] = "Default",
 		["Warcollie - Darkspear"] = "Default",
 		["Fraycollie - The Underbog"] = "Default",
-		["Hoarcollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["MBFHideMiniMapWorldMapButton"] = true,
 			["columns_or_rows"] = 2,
 			["locked"] = true,
-			["sortOrder"] = "Blizzard First",
+			["GrowUp"] = false,
 			["minimapButton"] = {
 				["hide"] = false,
 			},
@@ -33,7 +33,7 @@ MBFDB = {
 				-224.1380004882812, -- [4]
 			},
 			["colorLocked"] = "All",
-			["GrowUp"] = false,
+			["sortOrder"] = "Blizzard First",
 			["currentTexture"] = "Serenity Square",
 			["customChildren"] = {
 				"MinimapButtonFrameDragButton", -- [1]
@@ -57,8 +57,8 @@ MBFDB = {
 				"MiniMapLFGFrame", -- [19]
 			},
 			["grabMBFButton"] = true,
-			["grabBlizzButtons"] = true,
 			["padding"] = 3.5,
+			["grabBlizzButtons"] = true,
 		},
 	},
 }

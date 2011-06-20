@@ -1,17 +1,26 @@
 
 DataStoreDB = {
 	["profileKeys"] = {
-		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
-		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
+		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
+			["Default.Smolderthorn.Nocollie"] = {
+				["guildName"] = "LEAFEA",
+				["faction"] = "Alliance",
+			},
 			["Default.Ysondre.Tempcollie"] = {
 				["guildName"] = "LEAFEA",
+				["faction"] = "Horde",
+			},
+			["Default.Smolderthorn.Snorecollie"] = {
 				["faction"] = "Horde",
 			},
 			["Default.Smolderthorn.Awihrtoawe"] = {
@@ -22,8 +31,7 @@ DataStoreDB = {
 				["faction"] = "Alliance",
 				["guildName"] = "LEAFEA",
 			},
-			["Default.Smolderthorn.Nocollie"] = {
-				["guildName"] = "LEAFEA",
+			["Default.Smolderthorn.Awdawdawd"] = {
 				["faction"] = "Alliance",
 			},
 			["Default.Smolderthorn.Illiliililil"] = {

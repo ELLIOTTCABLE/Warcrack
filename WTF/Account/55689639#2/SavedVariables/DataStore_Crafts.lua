@@ -3,17 +3,17 @@ DataStore_CraftsDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -59,7 +59,7 @@ DataStore_CraftsDB = {
 					},
 				},
 				["Prof2"] = "Mining",
-				["lastUpdate"] = 1308430674,
+				["lastUpdate"] = 1308531034,
 				["Prof1"] = "Blacksmithing",
 			},
 			["Default.Smolderthorn.Summoneer"] = {
@@ -72,18 +72,14 @@ DataStore_CraftsDB = {
 						["MaxRank"] = 75,
 						["Rank"] = 53,
 					},
-					["Herbalism"] = {
-						["MaxRank"] = 450,
-						["Rank"] = 450,
-					},
 					["Archaeology"] = {
 						["MaxRank"] = 75,
 						["Rank"] = 1,
 					},
 					["Tailoring"] = {
-						["FullLink"] = "|cffffd000|Htrade:51309:449:450:10000000489EEA3:4////+677/vv+/v73/P59/rZ3//nNznLDEIAA4HR8vDqAAAAAoAwAAC9////T4xa+/v//DGAAAAAAAAAAAE|h[Tailoring]|h|r",
+						["FullLink"] = "|cffffd000|Htrade:75156:462:525:10000000489EEA3:4////+677/vv+/v73/P59/rZ3//nNznLDEIAA4HR8vDqAAAAAoAwAACt////T4xa+/v//DGAIdLAAGABAAE|h[Tailoring]|h|r",
 						["NumCrafts"] = 3,
-						["MaxRank"] = 450,
+						["MaxRank"] = 525,
 						["Crafts"] = {
 							"Cloth", -- [1]
 							48372, -- [2]
@@ -91,7 +87,12 @@ DataStore_CraftsDB = {
 							"Miscellaneous", -- [4]
 							48340, -- [5]
 						},
-						["Rank"] = 449,
+						["Rank"] = 462,
+					},
+					["Alchemy"] = {
+						["FullLink"] = "|cffffd000|Htrade:2259:1:75:10000000489EEA3:HAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|h[Alchemy]|h|r",
+						["MaxRank"] = 75,
+						["Rank"] = 1,
 					},
 					["Fishing"] = {
 						["MaxRank"] = 75,
@@ -102,10 +103,14 @@ DataStore_CraftsDB = {
 						["MaxRank"] = 75,
 						["Rank"] = 1,
 					},
+					["Herbalism"] = {
+						["MaxRank"] = 450,
+						["Rank"] = 450,
+					},
 				},
 				["Prof2"] = "Tailoring",
-				["lastUpdate"] = 1308434430,
-				["Prof1"] = "Herbalism",
+				["lastUpdate"] = 1308534256,
+				["Prof1"] = "Alchemy",
 			},
 			["Default.Smolderthorn.Othercollie"] = {
 				["lastUpdate"] = 1308332289,
@@ -114,13 +119,29 @@ DataStore_CraftsDB = {
 				["lastUpdate"] = 1308197707,
 			},
 			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1308531153,
 				["Professions"] = {
 					["Archaeology"] = {
 						["MaxRank"] = 75,
 						["Rank"] = 1,
 					},
 				},
-				["lastUpdate"] = 1308430838,
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["Professions"] = {
+					["Leatherworking"] = {
+						["FullLink"] = "|cffffd000|Htrade:2108:1:75:1000000048BA339:XAAAAAABADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|h[Leatherworking]|h|r",
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
+					["Skinning"] = {
+						["MaxRank"] = 90,
+						["Rank"] = 16,
+					},
+				},
+				["Prof2"] = "Skinning",
+				["lastUpdate"] = 1308271908,
+				["Prof1"] = "Leatherworking",
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["Professions"] = {
@@ -148,22 +169,6 @@ DataStore_CraftsDB = {
 				["Prof2"] = "Mining",
 				["lastUpdate"] = 1307756258,
 				["Prof1"] = "Blacksmithing",
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["Professions"] = {
-					["Skinning"] = {
-						["MaxRank"] = 90,
-						["Rank"] = 16,
-					},
-					["Leatherworking"] = {
-						["FullLink"] = "|cffffd000|Htrade:2108:1:75:1000000048BA339:XAAAAAABADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|h[Leatherworking]|h|r",
-						["MaxRank"] = 75,
-						["Rank"] = 1,
-					},
-				},
-				["Prof2"] = "Skinning",
-				["lastUpdate"] = 1308271908,
-				["Prof1"] = "Leatherworking",
 			},
 			["Default.Ysondre.Battlecollie"] = {
 				["Professions"] = {

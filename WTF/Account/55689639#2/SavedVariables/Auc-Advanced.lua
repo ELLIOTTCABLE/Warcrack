@@ -32,8 +32,8 @@ AucAdvancedConfig = {
 					"TOPLEFT", -- [1]
 					nil, -- [2]
 					"TOPLEFT", -- [3]
-					0, -- [4]
-					-104.0001068115234, -- [5]
+					6.036021709442139, -- [4]
+					-102.2760238647461, -- [5]
 				},
 			},
 			["scanbutton"] = {
@@ -73,9 +73,9 @@ AucAdvancedConfig = {
 			["purchased"] = {
 				["avg7"] = true,
 				["reportsafe"] = true,
-				["avg3"] = true,
-				["avg14"] = true,
 				["tooltip"] = true,
+				["avg14"] = true,
+				["avg3"] = true,
 			},
 			["sales"] = {
 				["avg7"] = true,

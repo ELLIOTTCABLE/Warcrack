@@ -62,12 +62,13 @@ ThreatPlatesDB = {
 			},
 			["specInfo"] = {
 				{
-					32, -- [1]
-					4, -- [2]
+					5, -- [1]
+					nil, -- [2]
+					31, -- [3]
 				}, -- [1]
 				{
-					4, -- [1]
-					[3] = 31,
+					3, -- [1]
+					33, -- [2]
 				}, -- [2]
 			},
 			["specName"] = {
@@ -103,21 +104,15 @@ ThreatPlatesDB = {
 				"Unholy", -- [3]
 			},
 		},
-		["Melancollie - Smolderthorn"] = {
-			["welcome"] = true,
+		["Hoarcollie - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
-			["specInfo"] = {
-				{
-					nil, -- [1]
-					7, -- [2]
-				}, -- [1]
-			},
+			["welcome"] = true,
 			["specName"] = {
-				"Arcane", -- [1]
-				"Fire", -- [2]
-				"Frost", -- [3]
+				"Balance", -- [1]
+				"Feral Combat", -- [2]
+				"Restoration", -- [3]
 			},
 		},
 		["Summoneer - Ysondre"] = {
@@ -161,32 +156,38 @@ ThreatPlatesDB = {
 				"Protection", -- [3]
 			},
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Melancollie - Smolderthorn"] = {
+			["welcome"] = true,
 			["spec"] = {
 				["primary"] = false,
 			},
-			["welcome"] = true,
+			["specInfo"] = {
+				{
+					nil, -- [1]
+					7, -- [2]
+				}, -- [1]
+			},
 			["specName"] = {
-				"Balance", -- [1]
-				"Feral Combat", -- [2]
-				"Restoration", -- [3]
+				"Arcane", -- [1]
+				"Fire", -- [2]
+				"Frost", -- [3]
 			},
 		},
 	},
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
-		["Combatcollie - The Underbog"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
+		["Battlecollie - Ysondre"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
 		["Fraycollie - The Underbog"] = "Default",
 		["Fraycollie - Smolderthorn"] = "Default",
 		["Othercollie - Smolderthorn"] = "Default",
-		["Hoarcollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
 		["Summoneer - Ysondre"] = "Default",
 		["Warcollie - Darkspear"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
-		["Battlecollie - Ysondre"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

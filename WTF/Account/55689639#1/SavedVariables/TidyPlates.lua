@@ -3,14 +3,20 @@ TidyPlatesData = {
 	["CachedAuraDurations"] = {
 	},
 	["UnitDescriptions"] = {
-		["S.A.F.E. Operative"] = "S.A.F.E.",
 		["Tempcollie"] = "LEAFEA",
+		["Joren Ironstock"] = "Local Mountaineer Captain",
 		["Nevin Twistwrench"] = "S.A.F.E. Commander",
+		["S.A.F.E. Operative"] = "S.A.F.E.",
+		["Seer Ravenfeather"] = "Priest Trainer",
+		["Harutt Thunderhorn"] = "Warrior Trainer",
+		["Sunwalker Helaku"] = "Paladin Trainer",
 	},
 	["UnitClass"] = {
-		["Moneyshotz"] = "HUNTER",
 		["Edg"] = "ROGUE",
-		["Battlecollie"] = "PRIEST",
+		["Awdawdawd"] = "WARLOCK",
+		["Moneyshotz"] = "HUNTER",
 		["Tempcollie"] = "PRIEST",
+		["Battlecollie"] = "PRIEST",
+		["Deadthos"] = "SHAMAN",
 	},
 }

@@ -23,7 +23,7 @@ H: 16
 Frame: SmartBuffOptionsFrame
 FrameLevel: 1
 Anchor: CENTER
-X: -20
+X: -23
 Y: -3
 W: 500
 H: 520

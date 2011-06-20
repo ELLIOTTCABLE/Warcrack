@@ -3,17 +3,17 @@ DataStore_InventoryDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -53,7 +53,7 @@ DataStore_InventoryDB = {
 					5976, -- [19]
 				},
 				["averageItemLvl"] = 319.4705882352941,
-				["lastUpdate"] = 1308430676,
+				["lastUpdate"] = 1308531035,
 			},
 			["Default.Smolderthorn.Summoneer"] = {
 				["Inventory"] = {
@@ -66,35 +66,35 @@ DataStore_InventoryDB = {
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["Inventory"] = {
-					"|cff0070dd|Hitem:31104:0:3520:3520:3520:0:0:1009387968:79:0|h[Evoker's Helmet of Second Sight]|h|r", -- [1]
-					35631, -- [2]
-					44370, -- [3]
+					59804, -- [1]
+					59793, -- [2]
+					54474, -- [3]
 					nil, -- [4]
-					"|cff0070dd|Hitem:28230:0:3520:3520:3520:0:0:364518856:79:0|h[Hallowed Garments]|h|r", -- [5]
-					35929, -- [6]
-					"|cff0070dd|Hitem:28185:3872:3520:3520:3520:0:0:1960409856:79:0|h[Khadgar's Kilt of Abjuration]|h|r", -- [7]
-					"|cff0070dd|Hitem:28179:0:3520:3520:0:0:0:228735088:79:0|h[Shattrath Jumpers]|h|r", -- [8]
-					"|cff0070dd|Hitem:28174:0:3520:0:0:0:0:421322592:79:0|h[Shattrath Wraps]|h|r", -- [9]
-					"|cff0070dd|Hitem:29317:0:3520:3520:0:0:0:12932892:79:0|h[Tempest's Touch]|h|r", -- [10]
+					"|cff0070dd|Hitem:28230:0:3520:3520:3520:0:0:364518856:80:0|h[Hallowed Garments]|h|r", -- [5]
+					54471, -- [6]
+					59784, -- [7]
+					54477, -- [8]
+					54473, -- [9]
+					59787, -- [10]
 					38220, -- [11]
-					"|cff1eff00|Hitem:36417:0:0:0:0:0:-39:2100101157:79:0|h[Oval Ring of the Invoker]|h|r", -- [12]
+					"|cff1eff00|Hitem:36417:0:0:0:0:0:-39:2100101157:80:0|h[Oval Ring of the Invoker]|h|r", -- [12]
 					38073, -- [13]
 					37560, -- [14]
 					43278, -- [15]
-					41821, -- [16]
+					59778, -- [16]
 					[18] = 38206,
-					[19] = 5976,
+					[19] = 43348,
 				},
-				["averageItemLvl"] = 138.125,
-				["lastUpdate"] = 1308434430,
+				["averageItemLvl"] = 221.5625,
+				["lastUpdate"] = 1308539382,
 			},
 			["Default.Smolderthorn.Othercollie"] = {
 				["Inventory"] = {
 					[7] = 48,
 					[8] = 47,
 					[18] = 28979,
-					[5] = 58234,
 					[16] = 25,
+					[5] = 58234,
 					[17] = 50055,
 				},
 				["averageItemLvl"] = 1,
@@ -128,7 +128,29 @@ DataStore_InventoryDB = {
 					[18] = 65959,
 				},
 				["averageItemLvl"] = 26.84615384615385,
-				["lastUpdate"] = 1308430840,
+				["lastUpdate"] = 1308531154,
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["Inventory"] = {
+					58255, -- [1]
+					nil, -- [2]
+					5404, -- [3]
+					nil, -- [4]
+					6473, -- [5]
+					"|cff0070dd|Hitem:51964:0:0:0:0:0:-80:1115029514:19:0|h[Vigorous Belt of the Wild]|h|r", -- [6]
+					"|cff1eff00|Hitem:15017:0:0:0:0:0:1017:982900864:19:0|h[Lupine Leggings of the Whale]|h|r", -- [7]
+					65961, -- [8]
+					7281, -- [9]
+					2976, -- [10]
+					8350, -- [11]
+					8350, -- [12]
+					nil, -- [13]
+					nil, -- [14]
+					5193, -- [15]
+					4777, -- [16]
+				},
+				["averageItemLvl"] = 17.08333333333333,
+				["lastUpdate"] = 1308271923,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["Inventory"] = {
@@ -154,28 +176,6 @@ DataStore_InventoryDB = {
 				},
 				["averageItemLvl"] = 235.6470588235294,
 				["lastUpdate"] = 1307756259,
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["Inventory"] = {
-					58255, -- [1]
-					nil, -- [2]
-					5404, -- [3]
-					nil, -- [4]
-					6473, -- [5]
-					"|cff0070dd|Hitem:51964:0:0:0:0:0:-80:1115029514:19:0|h[Vigorous Belt of the Wild]|h|r", -- [6]
-					"|cff1eff00|Hitem:15017:0:0:0:0:0:1017:982900864:19:0|h[Lupine Leggings of the Whale]|h|r", -- [7]
-					65961, -- [8]
-					7281, -- [9]
-					2976, -- [10]
-					8350, -- [11]
-					8350, -- [12]
-					nil, -- [13]
-					nil, -- [14]
-					5193, -- [15]
-					4777, -- [16]
-				},
-				["averageItemLvl"] = 17.08333333333333,
-				["lastUpdate"] = 1308271923,
 			},
 			["Default.Ysondre.Battlecollie"] = {
 				["Inventory"] = {
@@ -263,7 +263,7 @@ DataStore_InventoryDB = {
 						["averageItemLvl"] = 24,
 					},
 					["Battlecollie"] = {
-						["averageItemLvl"] = 138,
+						["averageItemLvl"] = 176,
 					},
 					["Hoarcollie"] = {
 						["averageItemLvl"] = 17,

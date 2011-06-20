@@ -27652,6 +27652,20 @@ GatherItems = {
 				}, -- [52]
 			},
 		},
+		["KELPTHAR_FOREST"] = {
+			["HERB"] = {
+				{
+					0.4762119650840759, -- [1]
+					0.212269127368927, -- [2]
+					1308459801, -- [3]
+					false, -- [4]
+					[202748] = {
+						1, -- [1]
+						1308459801, -- [2]
+					},
+				}, -- [1]
+			},
+		},
 		["HINTERLANDS"] = {
 			["HERB"] = {
 				{
@@ -31603,6 +31617,21 @@ GatherItems = {
 						"DB:Wowhead", -- [3]
 					},
 				}, -- [25]
+			},
+		},
+		["LOCH_MODAN"] = {
+			["MINE"] = {
+				{
+					0.78065133094788, -- [1]
+					0.77714645862579, -- [2]
+					0, -- [3]
+					false, -- [4]
+					[1731] = {
+						0, -- [1]
+						1308439103, -- [2]
+						"Tyronebiggin", -- [3]
+					},
+				}, -- [1]
 			},
 		},
 		["NORTHERN_STRANGLETHORN"] = {
@@ -69772,6 +69801,18 @@ GatherItems = {
 					},
 				}, -- [121]
 			},
+			["MINE"] = {
+				{
+					0.6659262776374817, -- [1]
+					0.6844198703765869, -- [2]
+					1308530896, -- [3]
+					false, -- [4]
+					[181569] = {
+						1, -- [1]
+						1308530896, -- [2]
+					},
+				}, -- [1]
+			},
 		},
 	}, -- [3]
 	{
@@ -83325,26 +83366,23 @@ Gatherer_DropRates = {
 			},
 		},
 	}, -- [1]
-	[5] = {
-		["DEEPHOLM"] = {
-			[202738] = {
-				["total"] = 3,
-				[52185] = 7,
-				[52326] = 3,
-			},
-			[202736] = {
-				["total"] = 2,
-				[53038] = 6,
-				[52327] = 2,
-			},
-			[202739] = {
-				[53038] = 11,
-				["total"] = 2,
+	{
+		["KELPTHAR_FOREST"] = {
+			[202748] = {
+				[52984] = 4,
+				["total"] = 1,
 			},
 		},
-	},
-	["dbVersion"] = 2,
-	[4] = {
+	}, -- [2]
+	{
+		["TEROKKAR_FOREST"] = {
+			[181569] = {
+				[23425] = 6,
+				["total"] = 1,
+			},
+		},
+	}, -- [3]
+	{
 		["STORM_PEAKS"] = {
 			[190172] = {
 				[36906] = 2,
@@ -83378,7 +83416,26 @@ Gatherer_DropRates = {
 				[37704] = 1,
 			},
 		},
-	},
+	}, -- [4]
+	{
+		["DEEPHOLM"] = {
+			[202738] = {
+				["total"] = 3,
+				[52185] = 7,
+				[52326] = 3,
+			},
+			[202736] = {
+				["total"] = 2,
+				[53038] = 6,
+				[52327] = 2,
+			},
+			[202739] = {
+				[53038] = 11,
+				["total"] = 2,
+			},
+		},
+	}, -- [5]
+	["dbVersion"] = 2,
 }
 Gatherer_SavedSettings_AccountWide = {
 	["profile.Default"] = {
@@ -83570,36 +83627,36 @@ LibSwagData = {
 		["HERB"] = {
 			["Briarthorn"] = 2450,
 			["Grave Moss"] = 3369,
-			["Sorrowmoss"] = 13466,
+			["Goldthorn"] = 3821,
 			["Wild Steelbloom"] = 3355,
 			["Gromsblood"] = 8846,
 			["Khadgar's Whisker"] = 3358,
-			["Swiftthistle"] = 2452,
+			["Golden Sansam"] = 13464,
 			["Dragon's Teeth"] = 3819,
 			["Black Lotus"] = 13468,
 			["Earthroot"] = 2449,
 			["Sungrass"] = 8838,
 			["Mountain Silversage"] = 13465,
-			["Goldthorn"] = 3821,
+			["Sorrowmoss"] = 13466,
 			["Mageroyal"] = 785,
 			["Icecap"] = 13467,
-			["Silverleaf"] = 765,
 			["Wintersbite"] = 3819,
+			["Silverleaf"] = 765,
 			["Wildvine"] = 8153,
 			["Bruiseweed"] = 2453,
 			["Kingsblood"] = 3356,
-			["Liferoot"] = 3357,
-			["Fadeleaf"] = 3818,
+			["Blindweed"] = 8839,
+			["Firebloom"] = 4625,
 			["Dreamfoil"] = 13463,
 			["Arthas' Tears"] = 8836,
 			["Plaguebloom"] = 13466,
 			["Ghost Mushroom"] = 8845,
 			["Stranglekelp"] = 3820,
-			["Firebloom"] = 4625,
-			["Blindweed"] = 8839,
+			["Fadeleaf"] = 3818,
+			["Liferoot"] = 3357,
 			["Peacebloom"] = 2447,
 			["Purple Lotus"] = 8831,
-			["Golden Sansam"] = 13464,
+			["Swiftthistle"] = 2452,
 		},
 	},
 	["HERB"] = {

@@ -3,17 +3,17 @@ DataStore_MailsDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -33,7 +33,33 @@ DataStore_MailsDB = {
 				["lastVisitDate"] = "2011/06/15 14:37",
 			},
 			["Default.Smolderthorn.Fraycollie"] = {
-				["lastUpdate"] = 1308284175,
+				["lastUpdate"] = 1308453993,
+				["Mails"] = {
+					{
+						["sender"] = "Battlecollie",
+						["count"] = 1,
+						["link"] = "|cff0070dd|Hitem:54444:0:0:0:0:0:0:1551144704:79:0|h[Illusionary Bag]|h|r",
+						["lastCheck"] = 1308453993,
+						["icon"] = "Interface\\Icons\\inv_misc_bag_37",
+						["daysLeft"] = 30,
+					}, -- [1]
+					{
+						["sender"] = "Battlecollie",
+						["count"] = 1,
+						["link"] = "|cff0070dd|Hitem:54444:0:0:0:0:0:0:1035152704:79:0|h[Illusionary Bag]|h|r",
+						["lastCheck"] = 1308453993,
+						["icon"] = "Interface\\Icons\\inv_misc_bag_37",
+						["daysLeft"] = 30,
+					}, -- [2]
+					{
+						["sender"] = "Battlecollie",
+						["count"] = 1,
+						["link"] = "|cff0070dd|Hitem:54444:0:0:0:0:0:0:136179872:79:0|h[Illusionary Bag]|h|r",
+						["lastCheck"] = 1308453993,
+						["icon"] = "Interface\\Icons\\inv_misc_bag_37",
+						["daysLeft"] = 30,
+					}, -- [3]
+				},
 				["lastVisitDate"] = "2011/06/17 00:16",
 			},
 			["Default.Smolderthorn.Summoneer"] = {
@@ -52,194 +78,16 @@ DataStore_MailsDB = {
 				["lastVisitDate"] = "2011/06/15 17:51",
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
-				["lastUpdate"] = 1308271473,
-				["Mails"] = {
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 2,
-						["link"] = "|cffffffff|Hitem:3173:0:0:0:0:0:0:-2130936960:15:0|h[Bear Meat]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Misc_Food_71",
-						["daysLeft"] = 30,
-					}, -- [1]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 17,
-						["link"] = "|cffffffff|Hitem:2589:0:0:0:0:0:0:-1995624960:18:0|h[Linen Cloth]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Fabric_Linen_01",
-						["lastCheck"] = 1308271473,
-						["daysLeft"] = 30,
-					}, -- [2]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 15,
-						["link"] = "|cffffffff|Hitem:2592:0:0:0:0:0:0:723453088:18:0|h[Wool Cloth]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Fabric_Wool_01",
-						["lastCheck"] = 1308271473,
-						["daysLeft"] = 30,
-					}, -- [3]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:21932:0:0:0:0:0:0:2018342272:15:0|h[Heavy Copper Ring]|h|r",
-						["lastCheck"] = 1308255577,
-						["icon"] = "Interface\\Icons\\INV_Jewelry_Ring_12",
-						["daysLeft"] = 30,
-					}, -- [4]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:1210:0:0:0:0:0:0:884140800:15:0|h[Shadowgem]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Misc_Gem_Amethyst_01",
-						["daysLeft"] = 30,
-					}, -- [5]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 5,
-						["link"] = "|cffffffff|Hitem:10940:0:0:0:0:0:0:677895520:18:0|h[Strange Dust]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Enchant_DustStrange",
-						["lastCheck"] = 1308271473,
-						["daysLeft"] = 30,
-					}, -- [6]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:1206:0:0:0:0:0:0:-1901636096:18:0|h[Moss Agate]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Misc_Gem_Emerald_02",
-						["lastCheck"] = 1308271473,
-						["daysLeft"] = 30,
-					}, -- [7]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:818:0:0:0:0:0:0:753431040:18:0|h[Tigerseye]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Misc_Gem_Opal_03",
-						["lastCheck"] = 1308271473,
-						["daysLeft"] = 30,
-					}, -- [8]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:15507:0:0:0:0:0:1182:1660874048:18:0|h[Grunt's Bracers of the Bear]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Bracer_09",
-						["lastCheck"] = 1308271473,
-						["daysLeft"] = 30,
-					}, -- [9]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:6547:0:0:0:0:0:672:857198496:18:0|h[Soldier's Gauntlets of the Tiger]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Gauntlets_12",
-						["lastCheck"] = 1308271473,
-						["daysLeft"] = 30,
-					}, -- [10]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:3196:0:0:0:0:0:590:800318576:18:0|h[Edged Bastard Sword of the Monkey]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Sword_23",
-						["lastCheck"] = 1308271473,
-						["daysLeft"] = 30,
-					}, -- [11]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 20,
-						["link"] = "|cffffffff|Hitem:2589:0:0:0:0:0:0:1951910656:15:0|h[Linen Cloth]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Fabric_Linen_01",
-						["daysLeft"] = 30,
-					}, -- [12]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 5,
-						["link"] = "|cffffffff|Hitem:2589:0:0:0:0:0:0:1220581504:15:0|h[Linen Cloth]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Fabric_Linen_01",
-						["daysLeft"] = 30,
-					}, -- [13]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 20,
-						["link"] = "|cffffffff|Hitem:2589:0:0:0:0:0:0:1699502976:15:0|h[Linen Cloth]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Fabric_Linen_01",
-						["daysLeft"] = 30,
-					}, -- [14]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 2,
-						["link"] = "|cffffffff|Hitem:5465:0:0:0:0:0:0:1630146432:15:0|h[Small Spider Leg]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Misc_MonsterSpiderCarapace_01",
-						["daysLeft"] = 30,
-					}, -- [15]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 4,
-						["link"] = "|cffffffff|Hitem:2674:0:0:0:0:0:0:1565532864:15:0|h[Crawler Meat]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Misc_Food_51",
-						["daysLeft"] = 30,
-					}, -- [16]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 2,
-						["link"] = "|cffffffff|Hitem:2592:0:0:0:0:0:0:949533056:15:0|h[Wool Cloth]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Fabric_Wool_01",
-						["daysLeft"] = 30,
-					}, -- [17]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 2,
-						["link"] = "|cffffffff|Hitem:2836:0:0:0:0:0:0:1629560576:15:0|h[Coarse Stone]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Stone_09",
-						["daysLeft"] = 30,
-					}, -- [18]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cffffffff|Hitem:2675:0:0:0:0:0:0:2137109632:15:0|h[Crawler Claw]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Misc_Birdbeck_02",
-						["daysLeft"] = 30,
-					}, -- [19]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:25439:0:0:0:0:0:0:1281878144:15:0|h[Tigerseye Band]|h|r",
-						["lastCheck"] = 1308255577,
-						["icon"] = "Interface\\Icons\\INV_Jewelry_Ring_21",
-						["daysLeft"] = 30,
-					}, -- [20]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:818:0:0:0:0:0:0:1683475200:15:0|h[Tigerseye]|h|r",
-						["lastCheck"] = 1308255340,
-						["icon"] = "Interface\\Icons\\INV_Misc_Gem_Opal_03",
-						["daysLeft"] = 30,
-					}, -- [21]
-					{
-						["sender"] = "Hoarcollie",
-						["count"] = 1,
-						["link"] = "|cff1eff00|Hitem:15222:0:0:0:0:0:2029:-1518628352:18:0|h[Barbed Club of Healing]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Hammer_08",
-						["lastCheck"] = 1308271473,
-						["daysLeft"] = 30,
-					}, -- [22]
-				},
-				["lastVisitDate"] = "2011/06/15 18:13",
+				["lastUpdate"] = 1308531191,
+				["lastVisitDate"] = "2011/06/19 20:53",
 			},
 			["Default.Smolderthorn.Othercollie"] = {
 				["lastUpdate"] = 1308332223,
 				["lastVisitDate"] = "2011/06/17 13:37",
 			},
 			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1308331881,
-				["lastVisitDate"] = "2011/06/17 13:31",
+				["lastUpdate"] = 1308531168,
+				["lastVisitDate"] = "2011/06/19 20:52",
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["lastUpdate"] = 1307756269,

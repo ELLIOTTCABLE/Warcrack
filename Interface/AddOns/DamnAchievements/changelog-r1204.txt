@@ -1,0 +1,96 @@
+------------------------------------------------------------------------
+r1204 | shadowed.wow | 2009-04-04 15:34:13 -0700 (Sat, 04 Apr 2009) | 1 line
+
+* TOC bump
+------------------------------------------------------------------------
+r1156 | shadowed.wow | 2009-03-20 13:14:18 -0700 (Fri, 20 Mar 2009) | 1 line
+
+* Updated to 3.1 (This is now a 3.1 only version)
+------------------------------------------------------------------------
+r1095 | shadowed.wow | 2009-01-23 13:32:56 -0800 (Fri, 23 Jan 2009) | 4 lines
+
+* Fixed objective positioning issues
+* Fixed single text objectives (Crashin' Trashin' Racers specifically) positioning issue
+* Fixed achievement point positioning issue for ones with over 100 points (3,000 quests)
+* Added hooks so we automatically modify newly created achievements (Works with things like Overachiever now)
+------------------------------------------------------------------------
+r1093 | shadowed.wow | 2009-01-21 07:27:05 -0800 (Wed, 21 Jan 2009) | 1 line
+
+* Added checks in so we only change buttons that are the original Blizzard achievement ones, instead trying to manage ones from other mods as well
+------------------------------------------------------------------------
+r1090 | shadowed.wow | 2009-01-20 18:23:36 -0800 (Tue, 20 Jan 2009) | 4 lines
+
+* Fixed a stack overflow when expanding an achievement then another one directly when scrolled to the bottom
+* Fixed positioning issues for criterias that are text based
+* Fixed positioning of achievement point text
+* Fixed positioning of the plus/minus and the track check box
+------------------------------------------------------------------------
+r1044 | shadowed.wow | 2008-12-16 15:54:25 -0800 (Tue, 16 Dec 2008) | 1 line
+
+* Pretty sure the last aesthetic issue is fixed, should look and work fine now
+------------------------------------------------------------------------
+r1029 | shadowed.wow | 2008-11-30 11:51:13 -0800 (Sun, 30 Nov 2008) | 2 lines
+
+* Improved the code for reducing the height of expanded achievements, shouldn't have any clipping issues now and just looks better in general
+* Fixed achievements being able to expand off screen and not be viewable until you scrolled up and back down
+------------------------------------------------------------------------
+r1028 | shadowed.wow | 2008-11-24 10:46:55 -0800 (Mon, 24 Nov 2008) | 3 lines
+
+* Cleaned up the scroll bar code, it should work correctly now and not look so weird or just not work in general
+* Redid the height reductions for expanded achievements, it should look cleaner and just work better in general.
+
+------------------------------------------------------------------------
+r1017 | shadowed.wow | 2008-11-17 17:26:42 -0800 (Mon, 17 Nov 2008) | 1 line
+
+* Quick fix to hopefully stop an error at line #133
+------------------------------------------------------------------------
+r1014 | shadowed.wow | 2008-11-12 17:07:43 -0800 (Wed, 12 Nov 2008) | 3 lines
+
+* Fixed a bunch of leaked globals through the original hooks (Oooops)
+* Fixed scroll bar not appearing if you open a really large achievement like Loremaster
+* Changed border handling slightly, mousing over a selected achievement will show the normal highlight color to make it obvious you mouse overed it
+------------------------------------------------------------------------
+r1012 | shadowed.wow | 2008-11-12 11:22:21 -0800 (Wed, 12 Nov 2008) | 7 lines
+
+* Changed achievement border if it's completed, just uses the grey border now instead of red
+* Changed the background for unexpandable (Is that a word?) so you have a visual queue that yes you clicked on this, no you won't see anything extra
+* Fixed sizing for meta achievements with a reward + a line of text
+* Fixed sizing for 3 lines of text + reward, will now "fake" an expand so you see 2 lines of text until it's expanded
+* Fixed scroll bar issues with achievements, it won't jump around and it'll actually look normal now (I am king of awesome!)
+* Fixed description resizing so it's more consistent and looks good
+* Fixed you being unable to uncheck a tracked quest after it's completed (If it's tracked and completed, the check box shows until it's untracked)
+------------------------------------------------------------------------
+r1009 | shadowed.wow | 2008-11-08 21:49:21 -0800 (Sat, 08 Nov 2008) | 1 line
+
+* Actually changed my mind, removed searching
+------------------------------------------------------------------------
+r1008 | shadowed.wow | 2008-11-08 21:39:48 -0800 (Sat, 08 Nov 2008) | 1 line
+
+* Added searching of achievements in, this isn't 100% exact, in that the scrolling is a tad messed up. I'll deal with it later, not a high priority thought.
+------------------------------------------------------------------------
+r1007 | shadowed.wow | 2008-11-08 15:27:54 -0800 (Sat, 08 Nov 2008) | 1 line
+
+* Added an extra achievement row to fix the scrolling looking weird
+------------------------------------------------------------------------
+r1006 | shadowed.wow | 2008-11-08 11:36:39 -0800 (Sat, 08 Nov 2008) | 11 lines
+
+* Fixed all of the height changes when expanding/collapsing/different types of achievements, etc
+* Fixed the slight clipping of text in the progress bar
+* Fixed old tooltips showing up for mini-achievements
+* Fixed text not aligning in the center correctly
+* Added shifting for the icon/shield depending on the achievement type
+* Added more room for the descriptions
+* Cleaned up the positioning for criteria
+* Changed the background of the name and reward to use less room
+* Changed font size for title, now 13 not 14 (Or was it 15?)
+* Changed the mini-achievements to show 7 per a row, not 6 since we can fit 7 easily
+
+------------------------------------------------------------------------
+r1005 | shadowed.wow | 2008-11-08 00:43:36 -0800 (Sat, 08 Nov 2008) | 5 lines
+
+* Initial Import: DamnAchievements/
+* Simple tweaking of the achievement panel to make it less of a pain in the ass/horrible space waste.
+* Removed the default track check box, moved it to a single larger one thats always visible without selecting an achievement (It's also hidden if you've completed it)
+* Slightly reduced the size of the icon/shield
+* Reduced the height of the container frame by about, 8-10 so far
+------------------------------------------------------------------------

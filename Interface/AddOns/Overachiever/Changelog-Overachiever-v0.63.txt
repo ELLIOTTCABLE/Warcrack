@@ -1,0 +1,47 @@
+------------------------------------------------------------------------
+r88 | tuhljin | 2011-05-06 00:28:54 +0000 (Fri, 06 May 2011) | 1 line
+Changed paths:
+   A /tags/v0.63 (from /trunk:86)
+
+Tagging as v0.63
+------------------------------------------------------------------------
+r86 | tuhljin | 2011-05-04 05:11:22 +0000 (Wed, 04 May 2011) | 1 line
+Changed paths:
+   M /trunk/GameTip.lua
+
+- Corrected an issue in r85 that caused errors when certain items' tooltips were shown if the consumed item lookup table was (re)built that session.
+------------------------------------------------------------------------
+r85 | tuhljin | 2011-05-03 06:13:46 +0000 (Tue, 03 May 2011) | 5 lines
+Changed paths:
+   M /trunk/AchieveID.lua
+   M /trunk/GameTip.lua
+   M /trunk/Options.lua
+   M /trunk/Overachiever.lua
+   M /trunk/Overachiever.toc
+   M /trunk/Overachiever_Tabs/Overachiever_Tabs.toc
+   M /trunk/Overachiever_Tabs/Suggestions.lua
+   M /trunk/Overachiever_Trade/Overachiever_Trade.toc
+   M /trunk/localization.lua
+   M /trunk/readme.txt
+
+- Updated for WoW patch 4.1.
+- "Cataclysmically Delicious" and "Drown Your Sorrows" added to the consumed item tracking system.
+- Suggestions Tab: Added suggestion for The Battle for Gilneas.
+- Minor update to options layout.
+- New slash command "/oa !!rebuild" added to force Overachiever to rebuild the consumed item lookup tables when it next loads. (This is for debugging purposes; use of this command should not be required for normal usage.)
+------------------------------------------------------------------------
+r83 | tuhljin | 2011-04-18 06:42:18 +0000 (Mon, 18 Apr 2011) | 1 line
+Changed paths:
+   M /trunk/GameTip.lua
+   M /trunk/Overachiever.lua
+   M /trunk/readme.txt
+
+- Reduced loading time by saving the full consumed item tracking data between sessions (instead of partial data). (Does not apply if addon version or game build has changed since the lookup table was last built for the character, or if no preexisting lookup table was available for the character.)
+------------------------------------------------------------------------
+r82 | tuhljin | 2011-03-31 06:18:17 +0000 (Thu, 31 Mar 2011) | 1 line
+Changed paths:
+   M /trunk/GameTip.lua
+   M /trunk/Overachiever.lua
+
+- Added debug messages to help determine how long it takes to build criteria lookup tables at startup. (To see them, remove the two hyphens from the line that reads "-- Overachiever_Debug = true" near the top of Overachiever.lua.)
+------------------------------------------------------------------------

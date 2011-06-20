@@ -1,0 +1,7 @@
+## Interface: 30000
+## Title: Enhanced Achievements
+## Author: Syzgyn
+## Notes: Improved Achievement Tooltips
+## Version 0.2
+
+Main.lua

@@ -1,0 +1,6 @@
+## Interface: 30000
+## Title: Improved Achievements
+## Notes: Improves the default achievement UI with new features
+## Author: Mayen
+
+ImprovedAchievements.lua

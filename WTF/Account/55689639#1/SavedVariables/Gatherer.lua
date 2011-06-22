@@ -141,13 +141,13 @@ LibSwagData = {
 			["cat"] = "HERB",
 			["name"] = "Liferoot",
 		},
-		[3819] = {
+		[3820] = {
 			["cat"] = "HERB",
-			["name"] = "Wintersbite",
+			["name"] = "Stranglekelp",
 		},
-		[2447] = {
+		[4625] = {
 			["cat"] = "HERB",
-			["name"] = "Peacebloom",
+			["name"] = "Firebloom",
 		},
 		[7911] = {
 			["cat"] = "MINE",
@@ -161,16 +161,20 @@ LibSwagData = {
 			["cat"] = "MINE",
 			["name"] = "Silver Ore",
 		},
-		[4625] = {
+		[2447] = {
 			["cat"] = "HERB",
-			["name"] = "Firebloom",
+			["name"] = "Peacebloom",
 		},
-		[3820] = {
+		[3819] = {
 			["cat"] = "HERB",
-			["name"] = "Stranglekelp",
+			["name"] = "Wintersbite",
 		},
 	},
-	["HERB"] = {
+	["ai"] = {
+	},
+	["MINE"] = {
+	},
+	["spells"] = {
 	},
 	["cats"] = {
 		["MINE"] = {
@@ -179,10 +183,10 @@ LibSwagData = {
 			["Tin Ore"] = 2771,
 			["Copper Ore"] = 2770,
 			["Thorium Ore"] = 10620,
-			["Mithril Ore"] = 3858,
+			["Iron Ore"] = 2772,
 			["Silver Ore"] = 2775,
 			["Gold Ore"] = 2776,
-			["Iron Ore"] = 2772,
+			["Mithril Ore"] = 3858,
 		},
 		["HERB"] = {
 			["Briarthorn"] = 2450,
@@ -191,16 +195,16 @@ LibSwagData = {
 			["Gromsblood"] = 8846,
 			["Khadgar's Whisker"] = 3358,
 			["Swiftthistle"] = 2452,
-			["Golden Sansam"] = 13464,
+			["Wildvine"] = 8153,
 			["Earthroot"] = 2449,
 			["Sungrass"] = 8838,
 			["Mountain Silversage"] = 13465,
 			["Goldthorn"] = 3821,
 			["Mageroyal"] = 785,
 			["Icecap"] = 13467,
-			["Wintersbite"] = 3819,
 			["Silverleaf"] = 765,
-			["Peacebloom"] = 2447,
+			["Wintersbite"] = 3819,
+			["Black Lotus"] = 13468,
 			["Bruiseweed"] = 2453,
 			["Kingsblood"] = 3356,
 			["Liferoot"] = 3357,
@@ -208,20 +212,16 @@ LibSwagData = {
 			["Dreamfoil"] = 13463,
 			["Arthas' Tears"] = 8836,
 			["Plaguebloom"] = 13466,
-			["Firebloom"] = 4625,
+			["Ghost Mushroom"] = 8845,
 			["Stranglekelp"] = 3820,
 			["Blindweed"] = 8839,
-			["Ghost Mushroom"] = 8845,
-			["Black Lotus"] = 13468,
+			["Firebloom"] = 4625,
+			["Peacebloom"] = 2447,
 			["Purple Lotus"] = 8831,
-			["Wildvine"] = 8153,
+			["Golden Sansam"] = 13464,
 		},
 	},
-	["spells"] = {
-	},
-	["MINE"] = {
-	},
-	["ai"] = {
+	["HERB"] = {
 	},
 }
 Gatherer_SharingBlacklist = {

@@ -2,18 +2,19 @@
 DataStore_QuestsDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -57,8 +58,8 @@ DataStore_QuestsDB = {
 					[806] = 26,
 					[808] = 256,
 					[810] = 272384,
-					[811] = 8,
 					[794] = 65601,
+					[811] = 8,
 				},
 				["QuestLinks"] = {
 					nil, -- [1]
@@ -108,12 +109,12 @@ DataStore_QuestsDB = {
 					nil, -- [11]
 					"|cff40c040|Hquest:9180:15|h[Journey to Undercity]|h|r", -- [12]
 				},
-				["lastUpdate"] = 1308174629,
+				["lastUpdate"] = 1308566353,
 				["Rewards"] = {
-					[4] = "r|22779|1|1",
-					[2] = "c|23400|1|1,c|23401|1|1,c|28160|1|0",
-					[7] = "r|22778|1|1",
 					[9] = "c|23406|1|0,c|23407|1|1,c|23408|1|0",
+					[2] = "c|23400|1|1,c|23401|1|1,c|28160|1|0",
+					[4] = "r|22779|1|1",
+					[7] = "r|22778|1|1",
 				},
 				["Quests"] = {
 					"0|Ghostlands", -- [1]
@@ -132,49 +133,74 @@ DataStore_QuestsDB = {
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["History"] = {
-					[802] = 34078784,
+					[899] = 54,
+					[901] = 67158016,
 					[787] = 4096,
+					[789] = 126,
+					[793] = 114688,
+					[795] = 2049,
+					[799] = 272632342,
+					[801] = 605552640,
 					[866] = 268959744,
-					[789] = 96,
-					[867] = 4096,
+					[805] = 196640785,
 					[807] = 1048577,
-					[792] = 4194304,
-					[412] = 128,
-					[793] = 16384,
-					[809] = 939524097,
-					[794] = 20480,
-					[413] = 8,
-					[795] = 2048,
-					[796] = 2147483648,
-					[414] = 1024,
-					[453] = 262144,
-					[799] = 272632320,
-					[408] = 3244032,
-					[805] = 32784,
+					[809] = 939524349,
+					[811] = 2147483654,
+					[813] = 3223322632,
+					[815] = 131329,
 					[764] = 65536,
-					[800] = 524288,
-					[901] = 67108864,
+					[453] = 262144,
+					[788] = 2147483649,
+					[792] = 4194304,
+					[794] = 20480,
+					[796] = 2147549188,
+					[798] = 2147483649,
+					[800] = 569344,
+					[802] = 235405376,
+					[867] = 4112,
+					[408] = 3244032,
+					[810] = 4038591925,
+					[812] = 2181038080,
+					[814] = 46,
+					[412] = 128,
+					[413] = 8,
+					[820] = 2048,
+					[816] = 75497472,
+					[414] = 1024,
 				},
 				["QuestLinks"] = {
-					[2] = "|cffffff00|Hquest:25215:81|h[A Distracting Scent]|h|r",
-					[3] = "|cffffff00|Hquest:25219:81|h[Don't be Shellfish]|h|r",
-					[4] = "|cffffff00|Hquest:25220:81|h[Slippery Threat]|h|r",
-					[5] = "|cffffff00|Hquest:25216:81|h[The Great Sambino]|h|r",
+					nil, -- [1]
+					"|cffffff00|Hquest:26070:82|h[Clearing the Defiled]|h|r", -- [2]
+					"|cffffff00|Hquest:26072:82|h[Into the Totem]|h|r", -- [3]
+					"|cffffff00|Hquest:26096:82|h[Scalding Shrooms]|h|r", -- [4]
 				},
-				["lastUpdate"] = 1308539627,
-				["Rewards"] = {
-					[2] = "c|59764|1|0,c|59763|1|0,c|59762|1|0",
-				},
+				["lastUpdate"] = 1308695998,
 				["Quests"] = {
-					"0|Shimmering Expanse", -- [1]
-					"1||0|78000|0", -- [2]
-					"1||0|78000|0", -- [3]
-					"1||0|78000|0", -- [4]
-					"1||0|7800|0", -- [5]
+					"0|Abyssal Depths", -- [1]
+					"1||0|82000|0", -- [2]
+					"1||0|82000|0", -- [3]
+					"1||0|82000|0", -- [4]
 				},
 			},
 			["Default.Smolderthorn.Othercollie"] = {
 				["lastUpdate"] = 1308332289,
+			},
+			["Default.Smolderthorn.Github"] = {
+				["History"] = {
+					[842] = 64,
+					[825] = 6291456,
+				},
+				["QuestLinks"] = {
+					[2] = "|cffffff00|Hquest:54:5|h[Report to Goldshire]|h|r",
+				},
+				["lastUpdate"] = 1308701057,
+				["Rewards"] = {
+					[2] = "c|6078|1|1,c|57391|1|1,c|57390|1|1,c|57389|1|1",
+				},
+				["Quests"] = {
+					"0|Elwynn Forest", -- [1]
+					"1||0|0|1", -- [2]
+				},
 			},
 			["Default.Smolderthorn.Warcollie"] = {
 				["lastUpdate"] = 1308197707,
@@ -194,7 +220,7 @@ DataStore_QuestsDB = {
 					[840] = 4231360,
 					[825] = 4096,
 					[811] = 135168,
-					[836] = 4096,
+					[837] = 2048,
 					[874] = 1,
 					[843] = 268435456,
 					[813] = 8192,
@@ -206,7 +232,7 @@ DataStore_QuestsDB = {
 					[816] = 4194304,
 					[832] = 67108864,
 					[817] = 64,
-					[837] = 2048,
+					[836] = 4096,
 				},
 				["QuestLinks"] = {
 					nil, -- [1]
@@ -228,58 +254,27 @@ DataStore_QuestsDB = {
 					"1|Dungeon|0|13300|1", -- [5]
 				},
 			},
-			["Default.Smolderthorn.Hoarcollie"] = {
+			["Default.Darkspear.Warcollie"] = {
 				["History"] = {
-					[440] = 1073741824,
-					[448] = 197121,
-					[772] = 980,
-					[441] = 542720,
-					[449] = 3221231617,
-					[902] = 262144,
-					[450] = 4161028099,
-					[869] = 16384,
-					[452] = 2147483648,
-					[443] = 33792,
-					[451] = 69714,
-					[840] = 20971520,
-					[825] = 131072,
-					[444] = 268435456,
-					[764] = 4194304,
-					[780] = 4,
-					[765] = 17825792,
-					[445] = 9296,
-					[453] = 6,
-					[770] = 1049344,
-					[771] = 1,
-					[779] = 16777664,
-					[423] = 59195392,
-					[766] = 2097152,
-					[769] = 67305476,
-					[447] = 2097408,
-					[424] = 302252032,
-					[817] = 131072,
-					[835] = 262144,
+					[396] = 1073741824,
+					[397] = 128,
 				},
 				["QuestLinks"] = {
 					nil, -- [1]
-					"|cff808080|Hquest:13563:11|h[A Love Eternal]|h|r", -- [2]
-					"|cff808080|Hquest:13562:11|h[The Final Flame of Bashal'Aran]|h|r", -- [3]
-					"|cff808080|Hquest:13566:12|h[Ritual Materials]|h|r", -- [4]
-					"|cff808080|Hquest:13565:12|h[Twice Removed]|h|r", -- [5]
-					"|cff808080|Hquest:13598:12|h[Unsavory Remedies]|h|r", -- [6]
+					"|cffffff00|Hquest:12722:55|h[Lambs To The Slaughter]|h|r", -- [2]
+					"|cffffff00|Hquest:12719:55|h[Nowhere To Run And Nowhere To Hide]|h|r", -- [3]
+					"|cffffff00|Hquest:12716:55|h[The Plaguebringer's Request]|h|r", -- [4]
 				},
-				["lastUpdate"] = 1308271908,
+				["lastUpdate"] = 1308165365,
 				["Rewards"] = {
-					[5] = "c|52629|1|0,c|52603|1|1",
-					[2] = "c|52654|1|0,c|52599|1|1",
+					[2] = "r|38670|1|1",
+					[4] = "r|38668|1|1",
 				},
 				["Quests"] = {
-					"0|Darkshore", -- [1]
-					"1||0|400|1", -- [2]
-					"1||0|400|1", -- [3]
-					"1||0|500|0", -- [4]
-					"1||0|500|0", -- [5]
-					"1||0|500|0", -- [6]
+					"0|Death Knight", -- [1]
+					"1||0|8500|0", -- [2]
+					"1||0|8500|0", -- [3]
+					"1||0|8500|1", -- [4]
 				},
 			},
 			["Default.The Underbog.Fraycollie"] = {
@@ -300,11 +295,11 @@ DataStore_QuestsDB = {
 					[20] = "|cffffff00|Hquest:12981:80|h[Hot and Cold]|h|r",
 					[17] = "|cffffff00|Hquest:25471:81|h[Across the Great Divide]|h|r",
 					[15] = "|cffffff00|Hquest:28805:80|h[The Eye of the Storm]|h|r",
-					[24] = "|cffffff00|Hquest:13050:80|h[Veranus]|h|r",
+					[21] = "|cffffff00|Hquest:12975:80|h[In Memoriam]|h|r",
 					[22] = "|cffffff00|Hquest:13011:80|h[Jormuttar is Soo Fat...]|h|r",
 					[19] = "|cffffff00|Hquest:12985:80|h[Forging a Head]|h|r",
 					[23] = "|cffffff00|Hquest:13001:80|h[Raising Hodir's Spear]|h|r",
-					[21] = "|cffffff00|Hquest:12975:80|h[In Memoriam]|h|r",
+					[24] = "|cffffff00|Hquest:13050:80|h[Veranus]|h|r",
 				},
 				["lastUpdate"] = 1307756258,
 				["Quests"] = {
@@ -341,27 +336,58 @@ DataStore_QuestsDB = {
 				},
 				["lastUpdate"] = 1307762091,
 			},
-			["Default.Darkspear.Warcollie"] = {
+			["Default.Smolderthorn.Hoarcollie"] = {
 				["History"] = {
-					[396] = 1073741824,
-					[397] = 128,
+					[440] = 1073741824,
+					[448] = 197121,
+					[772] = 980,
+					[441] = 542720,
+					[449] = 3221231617,
+					[835] = 262144,
+					[450] = 4161028099,
+					[869] = 16384,
+					[764] = 4194304,
+					[443] = 33792,
+					[451] = 69714,
+					[840] = 20971520,
+					[825] = 131072,
+					[444] = 268435456,
+					[452] = 2147483648,
+					[780] = 4,
+					[765] = 17825792,
+					[445] = 9296,
+					[453] = 6,
+					[424] = 302252032,
+					[771] = 1,
+					[779] = 16777664,
+					[423] = 59195392,
+					[766] = 2097152,
+					[769] = 67305476,
+					[447] = 2097408,
+					[770] = 1049344,
+					[817] = 131072,
+					[902] = 262144,
 				},
 				["QuestLinks"] = {
 					nil, -- [1]
-					"|cffffff00|Hquest:12722:55|h[Lambs To The Slaughter]|h|r", -- [2]
-					"|cffffff00|Hquest:12719:55|h[Nowhere To Run And Nowhere To Hide]|h|r", -- [3]
-					"|cffffff00|Hquest:12716:55|h[The Plaguebringer's Request]|h|r", -- [4]
+					"|cff808080|Hquest:13563:11|h[A Love Eternal]|h|r", -- [2]
+					"|cff808080|Hquest:13562:11|h[The Final Flame of Bashal'Aran]|h|r", -- [3]
+					"|cff808080|Hquest:13566:12|h[Ritual Materials]|h|r", -- [4]
+					"|cff808080|Hquest:13565:12|h[Twice Removed]|h|r", -- [5]
+					"|cff808080|Hquest:13598:12|h[Unsavory Remedies]|h|r", -- [6]
 				},
-				["lastUpdate"] = 1308165365,
+				["lastUpdate"] = 1308271908,
 				["Rewards"] = {
-					[2] = "r|38670|1|1",
-					[4] = "r|38668|1|1",
+					[5] = "c|52629|1|0,c|52603|1|1",
+					[2] = "c|52654|1|0,c|52599|1|1",
 				},
 				["Quests"] = {
-					"0|Death Knight", -- [1]
-					"1||0|8500|0", -- [2]
-					"1||0|8500|0", -- [3]
-					"1||0|8500|1", -- [4]
+					"0|Darkshore", -- [1]
+					"1||0|400|1", -- [2]
+					"1||0|400|1", -- [3]
+					"1||0|500|0", -- [4]
+					"1||0|500|0", -- [5]
+					"1||0|500|0", -- [6]
 				},
 			},
 			["Default.Ysondre.Summoneer"] = {

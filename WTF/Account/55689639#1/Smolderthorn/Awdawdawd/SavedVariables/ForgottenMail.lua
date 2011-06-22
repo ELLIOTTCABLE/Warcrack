@@ -1,0 +1,2 @@
+
+ForgottenMailNumInboxItems = 0

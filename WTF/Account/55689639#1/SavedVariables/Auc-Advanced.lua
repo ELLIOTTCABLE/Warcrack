@@ -22,11 +22,11 @@ AucAdvancedData = {
 	["Stats"] = {
 	},
 	["UtilSearchUiData"] = {
-		["Global"] = {
-		},
+		["Version"] = 1,
 		["Current"] = {
 		},
-		["Version"] = 1,
+		["Global"] = {
+		},
 		["SavedSearches"] = {
 		},
 	},

@@ -15,23 +15,23 @@ HideBlizzardDB = {
 		},
 	},
 	["profileKeys"] = {
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
-		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
-		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 	},
 	["profiles"] = {
-		["Nocollie - Smolderthorn"] = {
+		["Ililliliilil - The Underbog"] = {
 			["Version"] = "1.0.65",
 		},
 		["Awihrtoawe - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 		},
-		["Snorecollie - Smolderthorn"] = {
+		["Awdawdawd - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 		},
 		["Illililiili - Smolderthorn"] = {
@@ -43,10 +43,10 @@ HideBlizzardDB = {
 		["Tempcollie - Ysondre"] = {
 			["Version"] = "1.0.65",
 		},
-		["Awdawdawd - Smolderthorn"] = {
+		["Snorecollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 		},
-		["Ililliliilil - The Underbog"] = {
+		["Nocollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 		},
 	},

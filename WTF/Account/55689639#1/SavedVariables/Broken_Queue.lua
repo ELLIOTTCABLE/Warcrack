@@ -1,7 +1,7 @@
 
 BrokenLFDdb = {
-	["noSecondsTime"] = false,
 	["showToolTipTime"] = true,
+	["noSecondsTime"] = false,
 	["showMiniMap"] = false,
 	["showIdleText"] = true,
 }

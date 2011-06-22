@@ -10,17 +10,17 @@ Examiner_Config = {
 	["activePage"] = 5,
 	["featsCat"] = 92,
 	["cacheFilter"] = "",
-	["combineAdditiveStats"] = true,
 	["prevPage"] = 4,
-	["percentRatings"] = false,
+	["alwaysShowItemLevel"] = true,
+	["featsFilter"] = "",
 	["autoInspect"] = true,
-	["featsSort"] = "none",
 	["statsViewType"] = 1,
+	["featsSort"] = "none",
 	["caching"] = {
 	},
 	["showBackground"] = true,
-	["featsFilter"] = "",
-	["alwaysShowItemLevel"] = true,
+	["percentRatings"] = false,
+	["combineAdditiveStats"] = true,
 }
 Examiner_Cache = {
 }

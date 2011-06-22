@@ -4,18 +4,18 @@ IceCoreDB = {
 		["LibDualSpec-1.0"] = {
 		},
 	},
+	["global"] = {
+		["lastRunVersion"] = 851,
+	},
 	["profileKeys"] = {
-		["Nocollie - Smolderthorn"] = "Default",
+		["Ililliliilil - The Underbog"] = "Default",
 		["Awihrtoawe - Smolderthorn"] = "Default",
-		["Snorecollie - Smolderthorn"] = "Default",
+		["Awdawdawd - Smolderthorn"] = "Default",
 		["Illililiili - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
 		["Tempcollie - Ysondre"] = "Default",
-		["Awdawdawd - Smolderthorn"] = "Default",
-		["Ililliliilil - The Underbog"] = "Default",
-	},
-	["global"] = {
-		["lastRunVersion"] = 851,
+		["Snorecollie - Smolderthorn"] = "Default",
+		["Nocollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -66,24 +66,24 @@ IceCoreDB = {
 					["auraTarget"] = "target",
 					["countColor"] = {
 						["a"] = 1,
-						["b"] = 0,
-						["g"] = 0,
 						["r"] = 1,
+						["g"] = 0,
+						["b"] = 0,
 					},
 					["usesDogTagStrings"] = false,
 					["auraType"] = "debuff",
 					["vpos"] = 0,
-					["countMode"] = "Numeric",
+					["alwaysFullAlpha"] = true,
 					["countMinColor"] = {
 						["a"] = 1,
-						["b"] = 0,
-						["g"] = 1,
 						["r"] = 1,
+						["g"] = 1,
+						["b"] = 0,
 					},
 					["auraName"] = "Sunder Armor",
 					["graphicalLayout"] = "Horizontal",
 					["gradient"] = false,
-					["alwaysFullAlpha"] = true,
+					["countMode"] = "Numeric",
 					["customBarType"] = "Counter",
 				},
 				["CastBar"] = {

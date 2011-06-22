@@ -10,25 +10,10 @@ CritlineDB = {
 		},
 		["LibDualSpec-1.0"] = {
 		},
-		["minimap"] = {
+		["filters"] = {
 			["profiles"] = {
-				["Fraycollie - Smolderthorn"] = {
-					["show"] = false,
-				},
-				["Hoarcollie - Smolderthorn"] = {
-					["show"] = false,
-				},
-				["Melancollie - Smolderthorn"] = {
-					["show"] = false,
-				},
-				["Warcollie - Darkspear"] = {
-					["show"] = false,
-				},
-				["Battlecollie - Smolderthorn"] = {
-					["show"] = false,
-				},
 				["Battlecollie - Ysondre"] = {
-					["show"] = false,
+					["levelFilter"] = 6,
 				},
 			},
 		},
@@ -42,13 +27,10 @@ CritlineDB = {
 						["point"] = "BOTTOMRIGHT",
 					},
 				},
-				["Hoarcollie - Smolderthorn"] = {
+				["Github - Smolderthorn"] = {
 					["show"] = false,
 				},
 				["Melancollie - Smolderthorn"] = {
-					["show"] = false,
-				},
-				["Warcollie - Darkspear"] = {
 					["show"] = false,
 				},
 				["Battlecollie - Ysondre"] = {
@@ -59,40 +41,67 @@ CritlineDB = {
 						["point"] = "BOTTOMRIGHT",
 					},
 				},
+				["Warcollie - Darkspear"] = {
+					["show"] = false,
+				},
 				["Battlecollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Hoarcollie - Smolderthorn"] = {
 					["show"] = false,
 				},
 			},
 		},
-		["filters"] = {
+		["minimap"] = {
 			["profiles"] = {
+				["Fraycollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Github - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Melancollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Battlecollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Warcollie - Darkspear"] = {
+					["show"] = false,
+				},
 				["Battlecollie - Ysondre"] = {
-					["levelFilter"] = 6,
+					["show"] = false,
+				},
+				["Hoarcollie - Smolderthorn"] = {
+					["show"] = false,
 				},
 			},
 		},
 	},
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
 		},
+		["Github - Smolderthorn"] = {
+		},
 		["Summoneer - Smolderthorn"] = {
 		},
-		["Combatcollie - The Underbog"] = {
+		["Hoarcollie - Smolderthorn"] = {
 		},
 		["Battlecollie - Ysondre"] = {
 			["oldRecord"] = true,
@@ -103,21 +112,21 @@ CritlineDB = {
 		},
 		["Nocollie - Smolderthorn"] = {
 		},
-		["Fraycollie - The Underbog"] = {
+		["Battlecollie - Smolderthorn"] = {
 		},
 		["Fraycollie - Smolderthorn"] = {
 		},
-		["Othercollie - Smolderthorn"] = {
+		["Warcollie - Darkspear"] = {
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Melancollie - Smolderthorn"] = {
 		},
 		["Summoneer - Ysondre"] = {
 		},
-		["Warcollie - Darkspear"] = {
+		["Othercollie - Smolderthorn"] = {
 		},
-		["Battlecollie - Smolderthorn"] = {
+		["Fraycollie - The Underbog"] = {
 		},
-		["Melancollie - Smolderthorn"] = {
+		["Combatcollie - The Underbog"] = {
 		},
 	},
 }

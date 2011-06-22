@@ -15,6 +15,46 @@ Broker_RaidSaveConfig = {
 				["Combatcollie"] = {
 					["numsaved"] = 0,
 					["name"] = "Combatcollie",
+					["instance"] = {
+					},
+					["numraid"] = 0,
+					["class"] = "PALADIN",
+					["numgroup"] = 0,
+					["numactive"] = 0,
+				},
+				["Fraycollie"] = {
+					["numsaved"] = 0,
+					["name"] = "Fraycollie",
+					["numraid"] = 0,
+					["instance"] = {
+					},
+					["numactive"] = 0,
+					["numgroup"] = 0,
+					["class"] = "WARRIOR",
+				},
+			},
+			["name"] = "The Underbog",
+		},
+		["Darkspear"] = {
+			["char"] = {
+				["Warcollie"] = {
+					["numsaved"] = 0,
+					["name"] = "Warcollie",
+					["instance"] = {
+					},
+					["numraid"] = 0,
+					["class"] = "DEATHKNIGHT",
+					["numgroup"] = 0,
+					["numactive"] = 0,
+				},
+			},
+			["name"] = "Darkspear",
+		},
+		["Smolderthorn"] = {
+			["char"] = {
+				["Github"] = {
+					["numsaved"] = 0,
+					["name"] = "Github",
 					["numactive"] = 0,
 					["instance"] = {
 					},
@@ -32,101 +72,71 @@ Broker_RaidSaveConfig = {
 					["instance"] = {
 					},
 				},
-			},
-			["name"] = "The Underbog",
-		},
-		["Darkspear"] = {
-			["char"] = {
 				["Warcollie"] = {
 					["numsaved"] = 0,
 					["name"] = "Warcollie",
 					["numactive"] = 0,
 					["instance"] = {
 					},
-					["class"] = "DEATHKNIGHT",
+					["class"] = "WARRIOR",
 					["numgroup"] = 0,
 					["numraid"] = 0,
 				},
-			},
-			["name"] = "Darkspear",
-		},
-		["Ysondre"] = {
-			["char"] = {
 				["Battlecollie"] = {
 					["numsaved"] = 0,
 					["name"] = "Battlecollie",
+					["numactive"] = 0,
+					["instance"] = {
+					},
 					["class"] = "PRIEST",
-					["numraid"] = 0,
-					["numactive"] = 0,
-					["numgroup"] = 0,
-					["instance"] = {
-					},
-				},
-				["Summoneer"] = {
-					["numsaved"] = 0,
-					["name"] = "Summoneer",
-					["class"] = "WARLOCK",
-					["numraid"] = 0,
-					["numactive"] = 0,
-					["numgroup"] = 0,
-					["instance"] = {
-					},
-				},
-			},
-			["name"] = "Ysondre",
-		},
-		["Smolderthorn"] = {
-			["char"] = {
-				["Fraycollie"] = {
-					["numsaved"] = 0,
-					["name"] = "Fraycollie",
-					["instance"] = {
-					},
-					["numraid"] = 0,
-					["class"] = "WARRIOR",
-					["numgroup"] = 0,
-					["numactive"] = 0,
-				},
-				["Summoneer"] = {
-					["numsaved"] = 0,
-					["name"] = "Summoneer",
-					["numraid"] = 0,
-					["instance"] = {
-					},
-					["numactive"] = 0,
-					["numgroup"] = 0,
-					["class"] = "WARLOCK",
-				},
-				["Hoarcollie"] = {
-					["numsaved"] = 0,
-					["name"] = "Hoarcollie",
-					["numactive"] = 0,
-					["instance"] = {
-					},
-					["class"] = "DRUID",
 					["numgroup"] = 0,
 					["numraid"] = 0,
 				},
 				["Melancollie"] = {
 					["numsaved"] = 0,
 					["name"] = "Melancollie",
-					["numraid"] = 0,
+					["numactive"] = 0,
 					["instance"] = {
 					},
-					["numactive"] = 0,
-					["numgroup"] = 0,
 					["class"] = "MAGE",
+					["numgroup"] = 0,
+					["numraid"] = 0,
 				},
 				["Othercollie"] = {
 					["numsaved"] = 0,
 					["name"] = "Othercollie",
+					["class"] = "ROGUE",
+					["numraid"] = 0,
+					["numactive"] = 0,
+					["numgroup"] = 0,
+					["instance"] = {
+					},
+				},
+				["Hoarcollie"] = {
+					["numsaved"] = 0,
+					["name"] = "Hoarcollie",
 					["instance"] = {
 					},
 					["numraid"] = 0,
-					["class"] = "ROGUE",
+					["class"] = "DRUID",
 					["numgroup"] = 0,
 					["numactive"] = 0,
 				},
+				["Summoneer"] = {
+					["numsaved"] = 0,
+					["name"] = "Summoneer",
+					["numactive"] = 0,
+					["instance"] = {
+					},
+					["class"] = "WARLOCK",
+					["numgroup"] = 0,
+					["numraid"] = 0,
+				},
+			},
+			["name"] = "Smolderthorn",
+		},
+		["Ysondre"] = {
+			["char"] = {
 				["Battlecollie"] = {
 					["numsaved"] = 0,
 					["name"] = "Battlecollie",
@@ -137,23 +147,23 @@ Broker_RaidSaveConfig = {
 					["numgroup"] = 0,
 					["class"] = "PRIEST",
 				},
-				["Warcollie"] = {
+				["Summoneer"] = {
 					["numsaved"] = 0,
-					["name"] = "Warcollie",
+					["name"] = "Summoneer",
 					["numraid"] = 0,
 					["instance"] = {
 					},
 					["numactive"] = 0,
 					["numgroup"] = 0,
-					["class"] = "WARRIOR",
+					["class"] = "WARLOCK",
 				},
 			},
-			["name"] = "Smolderthorn",
+			["name"] = "Ysondre",
 		},
 	},
 	["hideexpiredbutton"] = false,
-	["HideHint"] = false,
 	["textwhenzero"] = false,
+	["HideHint"] = false,
 	["sortbyinstancename"] = false,
 	["showreset"] = true,
 	["showcooldown"] = true,

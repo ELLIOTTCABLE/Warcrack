@@ -15,100 +15,100 @@ Broker_RaidSaveConfig = {
 				["Ililliliilil"] = {
 					["numsaved"] = 0,
 					["name"] = "Ililliliilil",
+					["class"] = "DEATHKNIGHT",
 					["numraid"] = 0,
-					["instance"] = {
-					},
 					["numactive"] = 0,
 					["numgroup"] = 0,
-					["class"] = "DEATHKNIGHT",
+					["instance"] = {
+					},
 				},
 			},
 			["name"] = "The Underbog",
-		},
-		["Ysondre"] = {
-			["char"] = {
-				["Tempcollie"] = {
-					["numsaved"] = 0,
-					["name"] = "Tempcollie",
-					["class"] = "PRIEST",
-					["numraid"] = 0,
-					["numactive"] = 0,
-					["numgroup"] = 0,
-					["instance"] = {
-					},
-				},
-			},
-			["name"] = "Ysondre",
 		},
 		["Smolderthorn"] = {
 			["char"] = {
 				["Illiliililil"] = {
 					["numsaved"] = 0,
 					["name"] = "Illiliililil",
-					["class"] = "ROGUE",
-					["numraid"] = 0,
-					["numactive"] = 0,
-					["numgroup"] = 0,
 					["instance"] = {
 					},
+					["numraid"] = 0,
+					["class"] = "ROGUE",
+					["numgroup"] = 0,
+					["numactive"] = 0,
 				},
 				["Snorecollie"] = {
 					["numsaved"] = 0,
 					["name"] = "Snorecollie",
-					["class"] = "WARRIOR",
-					["numraid"] = 0,
-					["numactive"] = 0,
-					["numgroup"] = 0,
 					["instance"] = {
 					},
+					["numraid"] = 0,
+					["class"] = "WARRIOR",
+					["numgroup"] = 0,
+					["numactive"] = 0,
 				},
 				["Nocollie"] = {
 					["numsaved"] = 0,
 					["name"] = "Nocollie",
-					["numactive"] = 0,
+					["numraid"] = 0,
 					["instance"] = {
 					},
-					["class"] = "ROGUE",
+					["numactive"] = 0,
 					["numgroup"] = 0,
-					["numraid"] = 0,
+					["class"] = "ROGUE",
 				},
 				["Illililiili"] = {
 					["numsaved"] = 0,
 					["name"] = "Illililiili",
-					["numactive"] = 0,
+					["numraid"] = 0,
 					["instance"] = {
 					},
-					["class"] = "PRIEST",
+					["numactive"] = 0,
 					["numgroup"] = 0,
-					["numraid"] = 0,
+					["class"] = "PRIEST",
 				},
 				["Awihrtoawe"] = {
 					["numsaved"] = 0,
 					["name"] = "Awihrtoawe",
+					["class"] = "MAGE",
 					["numraid"] = 0,
-					["instance"] = {
-					},
 					["numactive"] = 0,
 					["numgroup"] = 0,
-					["class"] = "MAGE",
+					["instance"] = {
+					},
 				},
 				["Awdawdawd"] = {
 					["numsaved"] = 0,
 					["name"] = "Awdawdawd",
+					["numactive"] = 0,
 					["instance"] = {
 					},
-					["numraid"] = 0,
 					["class"] = "WARLOCK",
 					["numgroup"] = 0,
-					["numactive"] = 0,
+					["numraid"] = 0,
 				},
 			},
 			["name"] = "Smolderthorn",
 		},
+		["Ysondre"] = {
+			["char"] = {
+				["Tempcollie"] = {
+					["numsaved"] = 0,
+					["name"] = "Tempcollie",
+					["instance"] = {
+					},
+					["numraid"] = 0,
+					["class"] = "PRIEST",
+					["numgroup"] = 0,
+					["numactive"] = 0,
+				},
+			},
+			["name"] = "Ysondre",
+		},
 	},
 	["hideexpiredbutton"] = false,
-	["HideHint"] = false,
 	["textwhenzero"] = false,
+	["HideHint"] = false,
 	["sortbyinstancename"] = true,
 	["showreset"] = true,
 	["showcooldown"] = true,

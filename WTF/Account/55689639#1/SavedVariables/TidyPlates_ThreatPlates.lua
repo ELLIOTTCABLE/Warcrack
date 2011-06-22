@@ -1,16 +1,13 @@
 
 ThreatPlatesDB = {
 	["char"] = {
-		["Nocollie - Smolderthorn"] = {
-			["spec"] = {
-				["primary"] = false,
+		["Ililliliilil - The Underbog"] = {
+			["specName"] = {
+				"Blood", -- [1]
+				"Frost", -- [2]
+				"Unholy", -- [3]
 			},
 			["welcome"] = true,
-			["specName"] = {
-				"Assassination", -- [1]
-				"Combat", -- [2]
-				"Subtlety", -- [3]
-			},
 		},
 		["Awihrtoawe - Smolderthorn"] = {
 			["spec"] = {
@@ -23,14 +20,14 @@ ThreatPlatesDB = {
 				"Frost", -- [3]
 			},
 		},
-		["Snorecollie - Smolderthorn"] = {
+		["Awdawdawd - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
 			["specName"] = {
-				"Arms", -- [1]
-				"Fury", -- [2]
-				"Protection", -- [3]
+				"Affliction", -- [1]
+				"Demonology", -- [2]
+				"Destruction", -- [3]
 			},
 			["welcome"] = true,
 		},
@@ -67,35 +64,38 @@ ThreatPlatesDB = {
 				"Shadow", -- [3]
 			},
 		},
-		["Awdawdawd - Smolderthorn"] = {
+		["Snorecollie - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
 			["welcome"] = true,
 			["specName"] = {
-				"Affliction", -- [1]
-				"Demonology", -- [2]
-				"Destruction", -- [3]
+				"Arms", -- [1]
+				"Fury", -- [2]
+				"Protection", -- [3]
 			},
 		},
-		["Ililliliilil - The Underbog"] = {
+		["Nocollie - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
+			},
 			["welcome"] = true,
 			["specName"] = {
-				"Blood", -- [1]
-				"Frost", -- [2]
-				"Unholy", -- [3]
+				"Assassination", -- [1]
+				"Combat", -- [2]
+				"Subtlety", -- [3]
 			},
 		},
 	},
 	["profileKeys"] = {
-		["Nocollie - Smolderthorn"] = "Default",
+		["Ililliliilil - The Underbog"] = "Default",
 		["Awihrtoawe - Smolderthorn"] = "Default",
-		["Snorecollie - Smolderthorn"] = "Default",
+		["Awdawdawd - Smolderthorn"] = "Default",
 		["Illililiili - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
 		["Tempcollie - Ysondre"] = "Default",
-		["Awdawdawd - Smolderthorn"] = "Default",
-		["Ililliliilil - The Underbog"] = "Default",
+		["Snorecollie - Smolderthorn"] = "Default",
+		["Nocollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

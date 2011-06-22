@@ -5,84 +5,84 @@ AraTradeskillsDB = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
-			["links"] = {
+			["maxSkills"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
 			},
-			["maxSkills"] = {
+			["links"] = {
 			},
 		},
 		["Snorecollie"] = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
-			["links"] = {
+			["maxSkills"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
 			},
-			["maxSkills"] = {
+			["links"] = {
 			},
 		},
 		["Nocollie"] = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
-			["links"] = {
+			["maxSkills"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
 			},
-			["maxSkills"] = {
+			["links"] = {
 			},
 		},
 		["Illililiili"] = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
-			["links"] = {
+			["maxSkills"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
 			},
-			["maxSkills"] = {
+			["links"] = {
 			},
 		},
 		["Awihrtoawe"] = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
-			["maxSkills"] = {
+			["links"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
 			},
-			["links"] = {
+			["maxSkills"] = {
 			},
 		},
 		["Awdawdawd"] = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
-			["maxSkills"] = {
+			["links"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
 			},
-			["links"] = {
+			["maxSkills"] = {
 			},
 		},
 	},
@@ -107,9 +107,9 @@ AraTradeskillsDB = {
 			0.82, -- [2]
 			0, -- [3]
 		},
-		["highlight"] = {
+		["activeName"] = {
 			1, -- [1]
-			0.8, -- [2]
+			0.82, -- [2]
 			0, -- [3]
 		},
 		["selected"] = {
@@ -122,9 +122,9 @@ AraTradeskillsDB = {
 			0.5, -- [2]
 			0, -- [3]
 		},
-		["activeName"] = {
+		["highlight"] = {
 			1, -- [1]
-			0.82, -- [2]
+			0.8, -- [2]
 			0, -- [3]
 		},
 	},
@@ -134,8 +134,7 @@ AraTradeskillsDB = {
 				["First Aid"] = true,
 			},
 			["trackedSkill"] = "AUTO",
-			["maxSkills"] = {
-				["First Aid"] = 300,
+			["links"] = {
 			},
 			["shortcuts"] = {
 			},
@@ -143,7 +142,8 @@ AraTradeskillsDB = {
 			["curSkills"] = {
 				["First Aid"] = 270,
 			},
-			["links"] = {
+			["maxSkills"] = {
+				["First Aid"] = 300,
 			},
 		},
 	},
@@ -155,14 +155,14 @@ AraTradeskillsDB = {
 			["show"] = {
 			},
 			["trackedSkill"] = "AUTO",
-			["links"] = {
+			["maxSkills"] = {
 			},
 			["shortcuts"] = {
 			},
 			["track"] = false,
 			["curSkills"] = {
 			},
-			["maxSkills"] = {
+			["links"] = {
 			},
 		},
 	},

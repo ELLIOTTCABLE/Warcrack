@@ -29,21 +29,21 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[34914] = {
-						[2] = {
+					[8092] = {
+						{
 							["normal"] = {
-								["target"] = "Sifreldar Runekeeper",
+								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 1043,
+								["targetLevel"] = 78,
+								["amount"] = 4246,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 79,
-								["amount"] = 1895,
+								["targetLevel"] = 78,
+								["amount"] = 7063,
 							},
-						},
+						}, -- [1]
 					},
 					[63675] = {
 						{
@@ -61,19 +61,19 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[15407] = {
+					[34914] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Sifreldar Storm Maiden",
+								["target"] = "Sifreldar Runekeeper",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 79,
-								["amount"] = 793,
+								["targetLevel"] = 80,
+								["amount"] = 1043,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 79,
-								["amount"] = 1584,
+								["amount"] = 1895,
 							},
 						},
 					},
@@ -113,21 +113,21 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[8092] = {
-						{
+					[15407] = {
+						[2] = {
 							["normal"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 78,
-								["amount"] = 4246,
+								["targetLevel"] = 79,
+								["amount"] = 793,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 78,
-								["amount"] = 7063,
+								["targetLevel"] = 79,
+								["amount"] = 1584,
 							},
-						}, -- [1]
+						},
 					},
 				},
 				["heal"] = {
@@ -167,16 +167,6 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2060] = {
-						{
-							["normal"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 8170,
-							},
-						}, -- [1]
-					},
 					[17] = {
 						{
 							["normal"] = {
@@ -187,13 +177,23 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[47753] = {
+					[55503] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 3210,
+								["amount"] = 697,
+							},
+						}, -- [1]
+					},
+					[2061] = {
+						{
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 7893,
 							},
 						}, -- [1]
 					},
@@ -243,23 +243,23 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2061] = {
+					[47753] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 7893,
+								["amount"] = 3210,
 							},
 						}, -- [1]
 					},
-					[55503] = {
+					[2060] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 697,
+								["amount"] = 8170,
 							},
 						}, -- [1]
 					},
@@ -318,106 +318,106 @@ CritlinePerCharDB = {
 					[589] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Zin'jatar Guardian",
+								["target"] = "Sira'kess Sea Witch",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 1474,
+								["targetLevel"] = 82,
+								["amount"] = 2431,
 							},
 							["crit"] = {
-								["target"] = "Zin'jatar Guardian",
+								["target"] = "Twilight Sadist",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 80,
-								["amount"] = 2947,
+								["amount"] = 4861,
 							},
 						},
 					},
 					[6603] = {
 						{
 							["normal"] = {
-								["target"] = "Warden Azjakir",
+								["target"] = "Stonecore Earthshaper",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 306,
+								["targetLevel"] = 82,
+								["amount"] = 354,
 							},
 							["crit"] = {
-								["target"] = "Portal Keeper",
+								["target"] = "Twilight Torturer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 327,
+								["targetLevel"] = 80,
+								["amount"] = 554,
 							},
 						}, -- [1]
 					},
 					[32379] = {
 						{
 							["normal"] = {
-								["target"] = "Zin'jatar Guardian",
+								["target"] = "Twilight Flame Caller",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 80,
-								["amount"] = 5767,
+								["amount"] = 10806,
 							},
 							["crit"] = {
-								["target"] = "Zin'jatar Guardian",
+								["target"] = "Scourgut Remora",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 9444,
+								["targetLevel"] = 81,
+								["amount"] = 18664,
 							},
 						}, -- [1]
 					},
 					[88625] = {
 						{
 							["normal"] = {
-								["target"] = "Grand Magus Telestra",
+								["target"] = "Ozruk",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 72,
-								["amount"] = 1646,
+								["targetLevel"] = 84,
+								["amount"] = 4767,
 							},
 							["crit"] = {
-								["target"] = "Gilblin Scavenger",
+								["target"] = "Crystalspawn Giant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 2175,
+								["targetLevel"] = 83,
+								["amount"] = 7491,
 							},
 						}, -- [1]
 					},
 					[15237] = {
 						{
 							["normal"] = {
-								["target"] = "Azure Stalker",
+								["target"] = "Deep Murloc Drudge",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 75,
-								["amount"] = 620,
+								["targetLevel"] = 80,
+								["amount"] = 908,
 							},
 							["crit"] = {
-								["target"] = "Azure Sorceror",
+								["target"] = "Deep Murloc Drudge",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 75,
-								["amount"] = 863,
+								["targetLevel"] = 80,
+								["amount"] = 1337,
 							},
 						}, -- [1]
 					},
 					[63675] = {
 						{
 							["normal"] = {
-								["target"] = "Fathom-Lord Zin'jatar",
+								["target"] = "Sira'kess Guardian",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 3647,
+								["targetLevel"] = 82,
+								["amount"] = 5320,
 							},
 							["crit"] = {
-								["target"] = "Zin'jatar Guardian",
+								["target"] = "Twilight Sadist",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 80,
-								["amount"] = 7293,
+								["amount"] = 12375,
 							},
 						}, -- [1]
 					},
 					[49821] = {
 						{
 							["normal"] = {
-								["target"] = "Spitting Cobra",
+								["target"] = "Azsh'ir Infantry",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 77,
-								["amount"] = 628,
+								["targetLevel"] = 81,
+								["amount"] = 1652,
 							},
 							["crit"] = {
 								["target"] = "Fanged Pit Viper",
@@ -430,16 +430,16 @@ CritlinePerCharDB = {
 					[8092] = {
 						{
 							["normal"] = {
-								["target"] = "Zin'jatar Fathom-Stalker",
+								["target"] = "Twilight Sadist",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 80,
-								["amount"] = 10856,
+								["amount"] = 17596,
 							},
 							["crit"] = {
-								["target"] = "Brinescale Serpent",
+								["target"] = "Sira'kess Guardian",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 15932,
+								["targetLevel"] = 82,
+								["amount"] = 28335,
 							},
 						}, -- [1]
 					},
@@ -456,96 +456,106 @@ CritlinePerCharDB = {
 					[34914] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Zin'jatar Guardian",
+								["target"] = "Twilight Sadist",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 80,
-								["amount"] = 2250,
+								["amount"] = 3993,
 							},
 							["crit"] = {
-								["target"] = "Zin'jatar Pearlbinder",
+								["target"] = "Twilight Flame Caller",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 81,
-								["amount"] = 3492,
+								["targetLevel"] = 80,
+								["amount"] = 6912,
 							},
 						},
+					},
+					[77330] = {
+						{
+							["normal"] = {
+								["target"] = "Azsh'ir Soldier",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 81,
+								["amount"] = 115441,
+							},
+						}, -- [1]
 					},
 					[14914] = {
 						{
 							["normal"] = {
-								["target"] = "Trollgore",
+								["target"] = "Crystalspawn Giant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 3763,
+								["targetLevel"] = 83,
+								["amount"] = 9601,
 							},
 							["crit"] = {
-								["target"] = "Drakkari Shaman",
+								["target"] = "Slabhide",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 75,
-								["amount"] = 5891,
+								["targetLevel"] = 84,
+								["amount"] = 14456,
 							},
 						}, -- [1]
 						{
 							["normal"] = {
-								["target"] = "Trollgore",
+								["target"] = "Crystalspawn Giant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 134,
+								["targetLevel"] = 83,
+								["amount"] = 303,
 							},
 							["crit"] = {
-								["target"] = "Trollgore",
+								["target"] = "Crystalspawn Giant",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 200,
+								["targetLevel"] = 83,
+								["amount"] = 454,
 							},
 						}, -- [2]
 					},
 					[2944] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Fathom-Lord Zin'jatar",
+								["target"] = "Twilight Sadist",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 80,
-								["amount"] = 1216,
+								["amount"] = 2060,
 							},
 							["crit"] = {
-								["target"] = "Fathom-Lord Zin'jatar",
+								["target"] = "Sira'kess Guardian",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 2431,
-							},
-						},
-					},
-					[15407] = {
-						[2] = {
-							["normal"] = {
-								["target"] = "Fathom-Lord Zin'jatar",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 1609,
-							},
-							["crit"] = {
-								["target"] = "Zin'jatar Guardian",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 2570,
+								["targetLevel"] = 82,
+								["amount"] = 3542,
 							},
 						},
 					},
 					[585] = {
 						{
 							["normal"] = {
-								["target"] = "Trollgore",
+								["target"] = "Slabhide",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 2895,
+								["targetLevel"] = 84,
+								["amount"] = 7436,
 							},
 							["crit"] = {
-								["target"] = "Risen Drakkari Warrior",
+								["target"] = "Slabhide",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 76,
-								["amount"] = 4229,
+								["targetLevel"] = 84,
+								["amount"] = 11031,
 							},
 						}, -- [1]
+					},
+					[15407] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Merciless One",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 81,
+								["amount"] = 2636,
+							},
+							["crit"] = {
+								["target"] = "Twilight Sadist",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 80,
+								["amount"] = 4822,
+							},
+						},
 					},
 				},
 				["heal"] = {
@@ -562,36 +572,36 @@ CritlinePerCharDB = {
 					[56160] = {
 						{
 							["normal"] = {
-								["target"] = "Crittastic-Arathor",
+								["target"] = "Itzal-Saurfang",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 79,
-								["amount"] = 2970,
+								["targetLevel"] = 80,
+								["amount"] = 3121,
 							},
 							["crit"] = {
-								["target"] = "Vladik-Darkspear",
+								["target"] = "Fingercuff-Sen'jin",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 76,
-								["amount"] = 3673,
+								["targetLevel"] = 84,
+								["amount"] = 4408,
 							},
 						}, -- [1]
 					},
 					[56131] = {
 						{
 							["normal"] = {
-								["target"] = "Vladik-Darkspear",
+								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 76,
-								["amount"] = 415,
+								["targetLevel"] = 82,
+								["amount"] = 1703,
 							},
 						}, -- [1]
 					},
 					[32546] = {
 						{
 							["normal"] = {
-								["target"] = "Mãsterchief",
+								["target"] = "Deuszabulus-Terenas",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 74,
-								["amount"] = 8245,
+								["targetLevel"] = 82,
+								["amount"] = 9303,
 							},
 							["crit"] = {
 								["target"] = "Beerdo",
@@ -606,8 +616,8 @@ CritlinePerCharDB = {
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 80,
-								["amount"] = 10092,
+								["targetLevel"] = 82,
+								["amount"] = 14459,
 							},
 						}, -- [1]
 					},
@@ -624,10 +634,10 @@ CritlinePerCharDB = {
 					[63544] = {
 						{
 							["normal"] = {
-								["target"] = "Kjcasbekfla-Windrunner",
+								["target"] = "Ohlawdy-Dath'Remar",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 69,
-								["amount"] = 1157,
+								["targetLevel"] = 84,
+								["amount"] = 1777,
 							},
 						}, -- [1]
 					},
@@ -636,88 +646,124 @@ CritlinePerCharDB = {
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 80,
-								["amount"] = 497,
+								["targetLevel"] = 82,
+								["amount"] = 885,
 							},
 						},
+					},
+					[7001] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Ohlawdy-Dath'Remar",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 84,
+								["amount"] = 6151,
+							},
+							["crit"] = {
+								["target"] = "Smoit-Proudmoore",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 83,
+								["amount"] = 8237,
+							},
+						},
+					},
+					[6262] = {
+						{
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 82,
+								["amount"] = 6611,
+							},
+						}, -- [1]
 					},
 					[2050] = {
 						{
 							["normal"] = {
-								["target"] = "Crittastic-Arathor",
+								["target"] = "Ohlawdy-Dath'Remar",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 79,
-								["amount"] = 5886,
+								["targetLevel"] = 84,
+								["amount"] = 7165,
 							},
 							["crit"] = {
-								["target"] = "Cat",
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 82,
+								["amount"] = 10186,
+							},
+						}, -- [1]
+					},
+					[139] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Antikas-Caelestrasz",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 81,
+								["amount"] = 5177,
+							},
+							["crit"] = {
+								["target"] = "Itzal-Saurfang",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 80,
-								["amount"] = 8077,
+								["amount"] = 6802,
+							},
+						},
+					},
+					[81751] = {
+						{
+							["normal"] = {
+								["target"] = "Flargg-Arathor",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 4367,
 							},
 						}, -- [1]
 					},
-					[64844] = {
+					[88684] = {
 						{
 							["normal"] = {
-								["target"] = "Elfa",
+								["target"] = "Ohlawdy-Dath'Remar",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 71,
-								["amount"] = 6020,
+								["targetLevel"] = 84,
+								["amount"] = 13789,
 							},
 							["crit"] = {
-								["target"] = "Mãsterchief",
+								["target"] = "Itzal-Saurfang",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 74,
-								["amount"] = 8258,
-							},
-						}, -- [1]
-					},
-					[2061] = {
-						{
-							["normal"] = {
-								["target"] = "Mãsterchief",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 74,
-								["amount"] = 12132,
-							},
-							["crit"] = {
-								["target"] = "Kjcasbekfla-Windrunner",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 69,
-								["amount"] = 16915,
+								["targetLevel"] = 80,
+								["amount"] = 17008,
 							},
 						}, -- [1]
 					},
 					[33110] = {
 						{
 							["normal"] = {
-								["target"] = "Boomkinnz-Caelestrasz",
+								["target"] = "Murdahface-Crushridge",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 72,
-								["amount"] = 7476,
+								["targetLevel"] = 83,
+								["amount"] = 10473,
 							},
 							["crit"] = {
-								["target"] = "Mãsterchief",
+								["target"] = "Murdahface-Crushridge",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 74,
-								["amount"] = 11214,
+								["targetLevel"] = 83,
+								["amount"] = 15710,
 							},
 						}, -- [1]
 					},
 					[2060] = {
 						{
 							["normal"] = {
-								["target"] = "Rakenur-Azjol-Nerub",
+								["target"] = "Deuszabulus-Terenas",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 79,
-								["amount"] = 14731,
+								["targetLevel"] = 82,
+								["amount"] = 21672,
 							},
 							["crit"] = {
-								["target"] = "Vladik-Darkspear",
+								["target"] = "Ohlawdy-Dath'Remar",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 76,
-								["amount"] = 22600,
+								["targetLevel"] = 84,
+								["amount"] = 31760,
 							},
 						}, -- [1]
 					},
@@ -728,54 +774,6 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = true,
 								["targetLevel"] = 76,
 								["amount"] = 5522,
-							},
-						}, -- [1]
-					},
-					[596] = {
-						{
-							["normal"] = {
-								["target"] = "Chrissmart",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 80,
-								["amount"] = 4487,
-							},
-							["crit"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 79,
-								["amount"] = 6733,
-							},
-						}, -- [1]
-					},
-					[23455] = {
-						{
-							["crit"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 78,
-								["amount"] = 3039,
-							},
-							["normal"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 79,
-								["amount"] = 2216,
-							},
-						}, -- [1]
-					},
-					[88684] = {
-						{
-							["normal"] = {
-								["target"] = "Rakenur-Azjol-Nerub",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 79,
-								["amount"] = 9448,
-							},
-							["crit"] = {
-								["target"] = "Crittastic-Arathor",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 80,
-								["amount"] = 11249,
 							},
 						}, -- [1]
 					},
@@ -795,13 +793,75 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
+					[23455] = {
+						{
+							["crit"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 78,
+								["amount"] = 3039,
+							},
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 82,
+								["amount"] = 3012,
+							},
+						}, -- [1]
+					},
+					[77489] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Ohlawdy-Dath'Remar",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 84,
+								["amount"] = 1918,
+							},
+						},
+					},
+					[596] = {
+						{
+							["normal"] = {
+								["target"] = "Antikas-Caelestrasz",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 81,
+								["amount"] = 7274,
+							},
+							["crit"] = {
+								["target"] = "Murdahface-Crushridge",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 83,
+								["amount"] = 12521,
+							},
+						}, -- [1]
+					},
+					[48153] = {
+						{
+							["normal"] = {
+								["target"] = "Antikas-Caelestrasz",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 81,
+								["amount"] = 44505,
+							},
+						}, -- [1]
+					},
 					[75999] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 80,
-								["amount"] = 1094,
+								["targetLevel"] = 82,
+								["amount"] = 1857,
+							},
+						}, -- [1]
+					},
+					[2944] = {
+						{
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 82,
+								["amount"] = 531,
 							},
 						}, -- [1]
 					},
@@ -821,26 +881,6 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2944] = {
-						{
-							["normal"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 80,
-								["amount"] = 364,
-							},
-						}, -- [1]
-					},
-					[48153] = {
-						{
-							["normal"] = {
-								["target"] = "Kjcasbekfla-Windrunner",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 69,
-								["amount"] = 5567,
-							},
-						}, -- [1]
-					},
 					[55503] = {
 						{
 							["normal"] = {
@@ -854,60 +894,66 @@ CritlinePerCharDB = {
 					[88686] = {
 						{
 							["normal"] = {
-								["target"] = "Battlecollie",
+								["target"] = "Ohlawdy-Dath'Remar",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 79,
-								["amount"] = 421,
+								["targetLevel"] = 84,
+								["amount"] = 685,
 							},
 							["crit"] = {
-								["target"] = "Battlecollie",
+								["target"] = "Suifon-Windrunner",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 80,
-								["amount"] = 654,
+								["targetLevel"] = 83,
+								["amount"] = 923,
 							},
 						}, -- [1]
 					},
 					[34861] = {
 						{
 							["normal"] = {
-								["target"] = "Kjcasbekfla-Windrunner",
+								["target"] = "Itzal-Saurfang",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 69,
-								["amount"] = 4363,
+								["targetLevel"] = 80,
+								["amount"] = 6613,
+							},
+							["crit"] = {
+								["target"] = "Verrine-Darkspear",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 81,
+								["amount"] = 7996,
+							},
+						}, -- [1]
+					},
+					[2061] = {
+						{
+							["normal"] = {
+								["target"] = "Itzal-Saurfang",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 80,
+								["amount"] = 21854,
+							},
+							["crit"] = {
+								["target"] = "Murdahface-Crushridge",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 83,
+								["amount"] = 32460,
+							},
+						}, -- [1]
+					},
+					[64844] = {
+						{
+							["normal"] = {
+								["target"] = "Elfa",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 71,
+								["amount"] = 6020,
 							},
 							["crit"] = {
 								["target"] = "Mãsterchief",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 74,
-								["amount"] = 6935,
+								["amount"] = 8258,
 							},
 						}, -- [1]
-					},
-					[81751] = {
-						{
-							["normal"] = {
-								["target"] = "Flargg-Arathor",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 4367,
-							},
-						}, -- [1]
-					},
-					[139] = {
-						[2] = {
-							["normal"] = {
-								["target"] = "Dancinboy-Rexxar",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 78,
-								["amount"] = 2720,
-							},
-							["crit"] = {
-								["target"] = "Kjcasbekfla-Windrunner",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 69,
-								["amount"] = 3744,
-							},
-						},
 					},
 				},
 			},

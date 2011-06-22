@@ -1,6 +1,6 @@
 
 BG_GlobalDB = {
-	["itemsSold"] = 527,
+	["itemsSold"] = 588,
 	["showClams"] = true,
 	["showSource"] = true,
 	["neverRepairGuildBank"] = false,
@@ -11,7 +11,7 @@ BG_GlobalDB = {
 		["Consumable.Water.Basic"] = true,
 	},
 	["sellNotWearable"] = true,
-	["moneyEarned"] = 2431760,
+	["moneyEarned"] = 3480597,
 	["showContainers"] = true,
 	["useRealValues"] = false,
 	["LDBNoJunk"] = "Junk, be gone!",
@@ -23,26 +23,26 @@ BG_GlobalDB = {
 	["showAutoSellIcon"] = true,
 	["dropQuality"] = 1,
 	["LDBformat"] = "[itemname]x[itemcount] ([itemvalue])",
-	["disableKey"] = "SHIFT",
-	["autoSellIncludeItems"] = false,
-	["autoSellList"] = {
+	["include"] = {
+		[46069] = true,
+		["Consumable.Water.Conjured"] = true,
+		["Consumable.Food.Edible.Basic.Conjured"] = true,
 	},
-	["sellOldGear"] = false,
+	["showEarned"] = true,
+	["tooltipNumItems"] = 9,
+	["exclude"] = {
+		["Misc.StartsQuest"] = true,
+	},
 	["itemsDropped"] = 34,
 	["showSellLog"] = false,
 	["autoRepairAtVendor"] = true,
 	["autoSellToVendor"] = true,
 	["showMoney"] = 2,
 	["hasEnchanter"] = true,
-	["exclude"] = {
-		["Misc.StartsQuest"] = true,
+	["sellOldGear"] = false,
+	["autoSellList"] = {
 	},
-	["tooltipNumItems"] = 9,
-	["showEarned"] = true,
-	["include"] = {
-		[46069] = true,
-		["Consumable.Food.Edible.Basic.Conjured"] = true,
-		["Consumable.Water.Conjured"] = true,
-	},
+	["autoSellIncludeItems"] = false,
+	["disableKey"] = "SHIFT",
 	["sellNWQualityTreshold"] = 4,
 }

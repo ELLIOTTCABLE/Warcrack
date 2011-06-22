@@ -5,29 +5,29 @@ CritlineDB = {
 		},
 		["LibDualSpec-1.0"] = {
 		},
-		["minimap"] = {
+		["filters"] = {
 		},
 		["display"] = {
 		},
-		["filters"] = {
+		["minimap"] = {
 		},
 	},
 	["profileKeys"] = {
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
-		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
-		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 	},
 	["profiles"] = {
-		["Nocollie - Smolderthorn"] = {
+		["Ililliliilil - The Underbog"] = {
 		},
 		["Awihrtoawe - Smolderthorn"] = {
 		},
-		["Snorecollie - Smolderthorn"] = {
+		["Awdawdawd - Smolderthorn"] = {
 		},
 		["Illililiili - Smolderthorn"] = {
 		},
@@ -35,9 +35,9 @@ CritlineDB = {
 		},
 		["Tempcollie - Ysondre"] = {
 		},
-		["Awdawdawd - Smolderthorn"] = {
+		["Snorecollie - Smolderthorn"] = {
 		},
-		["Ililliliilil - The Underbog"] = {
+		["Nocollie - Smolderthorn"] = {
 		},
 	},
 }

@@ -1,14 +1,14 @@
 
 BFactions_DB = {
 	["profileKeys"] = {
-		["Nocollie - Smolderthorn"] = "Default",
+		["Ililliliilil - The Underbog"] = "Default",
 		["Awihrtoawe - Smolderthorn"] = "Default",
-		["Snorecollie - Smolderthorn"] = "Default",
+		["Awdawdawd - Smolderthorn"] = "Default",
 		["Illililiili - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
 		["Tempcollie - Ysondre"] = "Default",
-		["Awdawdawd - Smolderthorn"] = "Default",
-		["Ililliliilil - The Underbog"] = "Default",
+		["Snorecollie - Smolderthorn"] = "Default",
+		["Nocollie - Smolderthorn"] = "Default",
 	},
 	["factionrealm"] = {
 		["Horde - The Underbog"] = {

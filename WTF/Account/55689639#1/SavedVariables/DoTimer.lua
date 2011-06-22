@@ -9,19 +9,6 @@ AsheylaLib_Settings = {
 			},
 			["updatedSettingsMouseover5.0"] = true,
 			["updatedSettings4.3"] = true,
-			["partyBuffs"] = {
-				[" spirit"] = 1,
-				["soulstone"] = 1,
-				["shadow protection"] = 1,
-				["^potion"] = 1,
-				["arcane"] = 1,
-				["fortitude"] = 1,
-				["^elixir"] = 1,
-				["of the wild"] = 1,
-				["shout"] = 1,
-				["blessing of"] = 1,
-				["thorns"] = 1,
-			},
 			["keybindings"] = {
 				["Timer"] = {
 					["Remove"] = "2",
@@ -29,16 +16,29 @@ AsheylaLib_Settings = {
 					["Block"] = "s-2",
 				},
 			},
+			["partyBuffs"] = {
+				[" spirit"] = 1,
+				["soulstone"] = 1,
+				["shadow protection"] = 1,
+				["thorns"] = 1,
+				["blessing of"] = 1,
+				["fortitude"] = 1,
+				["arcane"] = 1,
+				["shout"] = 1,
+				["of the wild"] = 1,
+				["^elixir"] = 1,
+				["^potion"] = 1,
+			},
 		},
 		["TimerLib"] = {
 			["timerSettings"] = {
 				["Default Timer"] = {
 				},
+				["Cooldowns Timer"] = {
+				},
 				["DoTimer Timer"] = {
 				},
 				["PlayerAuras Timer"] = {
-				},
-				["Cooldowns Timer"] = {
 				},
 			},
 			["anchorSettings"] = {
@@ -48,17 +48,17 @@ AsheylaLib_Settings = {
 				},
 				["Default Anchor"] = {
 				},
-				["PlayerAuras Anchor"] = {
-					["defaultTimerSetting"] = "PlayerAuras Timer",
-					["groupSortMethod"] = "Alphabetical (A)",
+				["Cooldowns Anchor"] = {
+					["defaultTimerSetting"] = "Cooldowns Timer",
 				},
 				["DoTimer Anchor"] = {
 					["defaultTimerSetting"] = "DoTimer Timer",
 				},
-				["Notifications Anchor"] = {
+				["PlayerAuras Anchor"] = {
+					["groupSortMethod"] = "Alphabetical (A)",
+					["defaultTimerSetting"] = "PlayerAuras Timer",
 				},
-				["Cooldowns Anchor"] = {
-					["defaultTimerSetting"] = "Cooldowns Timer",
+				["Notifications Anchor"] = {
 				},
 			},
 		},
@@ -137,7 +137,22 @@ AsheylaLib_Settings = {
 					},
 				},
 			},
-			["updatedSettings4.3.3"] = true,
+			["userAnchors-Buffs"] = {
+				["PlayerAuras Anchor"] = {
+					["timers"] = {
+					},
+					["default"] = true,
+					["timerSettings"] = {
+					},
+				},
+			},
+			["keybindings"] = {
+				["Timer"] = {
+					["Remove"] = "2",
+					["Announce"] = "1",
+					["Block"] = "s-2",
+				},
+			},
 			["userAnchors-Debuffs-focus"] = {
 				["FocusAuras Anchor"] = {
 					["timers"] = {
@@ -148,22 +163,7 @@ AsheylaLib_Settings = {
 				},
 			},
 			["updatedSettings4.3"] = true,
-			["keybindings"] = {
-				["Timer"] = {
-					["Remove"] = "2",
-					["Announce"] = "1",
-					["Block"] = "s-2",
-				},
-			},
-			["userAnchors-Buffs"] = {
-				["PlayerAuras Anchor"] = {
-					["timers"] = {
-					},
-					["default"] = true,
-					["timerSettings"] = {
-					},
-				},
-			},
+			["updatedSettings4.3.3"] = true,
 		},
 	},
 	["simpleMode"] = true,

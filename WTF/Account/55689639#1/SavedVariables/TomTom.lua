@@ -1,8 +1,8 @@
 
 TomTomDB = {
 	["profileKeys"] = {
-		["Awdawdawd - Smolderthorn"] = "Default",
 		["Snorecollie - Smolderthorn"] = "Default",
+		["Awdawdawd - Smolderthorn"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
@@ -13,14 +13,14 @@ TomTomDB = {
 TomTomWaypoints = nil
 TomTomWaypointsMF = {
 	["profileKeys"] = {
-		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 	},
 	["profiles"] = {
-		["Awdawdawd - Smolderthorn"] = {
-		},
 		["Snorecollie - Smolderthorn"] = {
+		},
+		["Awdawdawd - Smolderthorn"] = {
 		},
 		["Nocollie - Smolderthorn"] = {
 		},

@@ -1,29 +1,29 @@
 
 DataStore_StatsDB = {
 	["profileKeys"] = {
-		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
-		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
-			["Default.Smolderthorn.Snorecollie"] = {
-				["lastUpdate"] = 1308534246,
+			["Default.Smolderthorn.Illililiili"] = {
+				["lastUpdate"] = 1307775469,
 				["Stats"] = {
-					["Ranged"] = "2-3|0|7|0|4",
-					["Spell"] = "6|6|0|0|0|0",
-					["Melee"] = "10-13|2.9000000953674|39|0|4|0",
-					["MaxPower"] = "1|100",
+					["Ranged"] = "0-0|0|0|0|5.1823496818542",
+					["Spell"] = "15|15|0|5.5130748748779|0|67",
+					["Melee"] = "4-7|2.9000000953674|10|0|5.1823496818542|0",
+					["MaxPower"] = "0|215",
 					["PVP"] = "0|0",
-					["HealthMax"] = 71,
-					["Resistances"] = "0|0|1|0|0|0",
-					["Base"] = "28|16|23|16|22|33",
-					["Defense"] = "33|1|7.1515998840332|0|5|0",
+					["HealthMax"] = 52,
+					["Resistances"] = "0|0|0|0|0|1",
+					["Base"] = "15|22|20|25|23|33",
+					["Defense"] = "33|1|5.1816997528076|0|0|0",
 				},
 			},
 			["Default.Ysondre.Tempcollie"] = {
@@ -40,18 +40,18 @@ DataStore_StatsDB = {
 					["Defense"] = "24|1|5.1816997528076|0|0|0",
 				},
 			},
-			["Default.Smolderthorn.Illililiili"] = {
-				["lastUpdate"] = 1307775469,
+			["Default.Smolderthorn.Nocollie"] = {
+				["lastUpdate"] = 1308331756,
 				["Stats"] = {
-					["Ranged"] = "0-0|0|0|0|5.1823496818542",
-					["Spell"] = "15|15|0|5.5130748748779|0|67",
-					["Melee"] = "4-7|2.9000000953674|10|0|5.1823496818542|0",
-					["MaxPower"] = "0|215",
+					["Ranged"] = "2-4|1.6000000238419|14|0|10.00000667572",
+					["Spell"] = "10|10|0|0|0|0",
+					["Melee"] = "6-8|1.8999999761581|39|0|10.00000667572|3",
+					["MaxPower"] = "3|100",
 					["PVP"] = "0|0",
-					["HealthMax"] = 52,
-					["Resistances"] = "0|0|0|0|0|1",
-					["Base"] = "15|22|20|25|23|33",
-					["Defense"] = "33|1|5.1816997528076|0|0|0",
+					["HealthMax"] = 55,
+					["Resistances"] = "0|0|0|0|0|0",
+					["Base"] = "21|23|21|20|20|33",
+					["Defense"] = "33|1|19.999990463257|0|0|0",
 				},
 			},
 			["Default.Smolderthorn.Awihrtoawe"] = {
@@ -68,18 +68,18 @@ DataStore_StatsDB = {
 					["Defense"] = "24|1|4.7686247825623|0|0|0",
 				},
 			},
-			["Default.Smolderthorn.Nocollie"] = {
-				["lastUpdate"] = 1308331756,
+			["Default.Smolderthorn.Snorecollie"] = {
+				["lastUpdate"] = 1308780774,
 				["Stats"] = {
-					["Ranged"] = "2-4|1.6000000238419|14|0|10.00000667572",
-					["Spell"] = "10|10|0|0|0|0",
-					["Melee"] = "6-8|1.8999999761581|39|0|10.00000667572|3",
-					["MaxPower"] = "3|100",
+					["Ranged"] = "2-3|0|7|0|4",
+					["Spell"] = "6|6|0|0|0|0",
+					["Melee"] = "10-13|2.9000000953674|39|0|4|0",
+					["MaxPower"] = "1|100",
 					["PVP"] = "0|0",
-					["HealthMax"] = 55,
-					["Resistances"] = "0|0|0|0|0|0",
-					["Base"] = "21|23|21|20|20|33",
-					["Defense"] = "33|1|19.999990463257|0|0|0",
+					["HealthMax"] = 71,
+					["Resistances"] = "0|0|1|0|0|0",
+					["Base"] = "28|16|23|16|22|33",
+					["Defense"] = "33|1|4.1516003608704|0|5|0",
 				},
 			},
 			["Default.Smolderthorn.Awdawdawd"] = {

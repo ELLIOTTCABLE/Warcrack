@@ -9,9 +9,9 @@ H: 256
 Frame: ChannelPulloutTab
 FrameLevel: 1
 Anchor: RIGHT
-X: -221
+X: -119
 Y: 66
-W: 115
+W: 64
 H: 32
 Frame: SkadaBarWindowSkada
 FrameLevel: 1

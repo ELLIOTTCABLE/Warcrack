@@ -1,36 +1,17 @@
 
 DataStore_InventoryDB = {
 	["profileKeys"] = {
-		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
-		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
-			["Default.Smolderthorn.Snorecollie"] = {
-				["Inventory"] = {
-					[5] = 58245,
-					[16] = 12282,
-					[7] = 139,
-					[8] = 140,
-				},
-				["averageItemLvl"] = 1,
-				["lastUpdate"] = 1308534246,
-			},
-			["Default.Ysondre.Tempcollie"] = {
-				["Inventory"] = {
-					[5] = 52547,
-					[16] = 35,
-					[7] = 52680,
-				},
-				["averageItemLvl"] = 1,
-				["lastUpdate"] = 1307914183,
-			},
 			["Default.Smolderthorn.Illililiili"] = {
 				["Inventory"] = {
 					[5] = 6098,
@@ -41,6 +22,27 @@ DataStore_InventoryDB = {
 				["averageItemLvl"] = 1,
 				["lastUpdate"] = 1307775469,
 			},
+			["Default.Ysondre.Tempcollie"] = {
+				["Inventory"] = {
+					[5] = 52547,
+					[16] = 35,
+					[7] = 52680,
+				},
+				["averageItemLvl"] = 1,
+				["lastUpdate"] = 1307914183,
+			},
+			["Default.Smolderthorn.Nocollie"] = {
+				["Inventory"] = {
+					[7] = 48,
+					[8] = 47,
+					[18] = 28979,
+					[17] = 50055,
+					[5] = 58234,
+					[16] = 25,
+				},
+				["averageItemLvl"] = 1,
+				["lastUpdate"] = 1308331756,
+			},
 			["Default.Smolderthorn.Awihrtoawe"] = {
 				["Inventory"] = {
 					[5] = 23479,
@@ -50,17 +52,15 @@ DataStore_InventoryDB = {
 				["averageItemLvl"] = 1,
 				["lastUpdate"] = 1307971123,
 			},
-			["Default.Smolderthorn.Nocollie"] = {
+			["Default.Smolderthorn.Snorecollie"] = {
 				["Inventory"] = {
-					[7] = 48,
-					[8] = 47,
-					[18] = 28979,
-					[5] = 58234,
-					[16] = 25,
-					[17] = 50055,
+					[5] = 58245,
+					[16] = 12282,
+					[7] = 139,
+					[8] = 140,
 				},
 				["averageItemLvl"] = 1,
-				["lastUpdate"] = 1308331756,
+				["lastUpdate"] = 1308780774,
 			},
 			["Default.Smolderthorn.Awdawdawd"] = {
 				["Inventory"] = {
@@ -77,9 +77,9 @@ DataStore_InventoryDB = {
 					[7] = 48,
 					[8] = 47,
 					[18] = 28979,
+					[17] = 50055,
 					[16] = 25,
 					[5] = 58234,
-					[17] = 50055,
 				},
 				["averageItemLvl"] = 1,
 				["lastUpdate"] = 1307755866,

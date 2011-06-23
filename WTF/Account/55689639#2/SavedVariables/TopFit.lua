@@ -2,19 +2,35 @@
 TopFitDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
+		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
+			["statSortOrder"] = "NameAsc",
+			["sets"] = {
+				["set_1"] = {
+					["caps"] = {
+					},
+					["weights"] = {
+					},
+					["name"] = "Default Set",
+					["forced"] = {
+					},
+				},
+			},
+		},
+		["Fraycollie - Nordrassil"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
 				["set_1"] = {
@@ -70,6 +86,20 @@ TopFitDB = {
 				},
 			},
 		},
+		["Hoarcollie - Smolderthorn"] = {
+			["statSortOrder"] = "NameAsc",
+			["sets"] = {
+				["set_1"] = {
+					["caps"] = {
+					},
+					["weights"] = {
+					},
+					["name"] = "Default Set",
+					["forced"] = {
+					},
+				},
+			},
+		},
 		["Fraycollie - Smolderthorn"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
@@ -84,7 +114,7 @@ TopFitDB = {
 				},
 			},
 		},
-		["Melancollie - Smolderthorn"] = {
+		["Othercollie - Smolderthorn"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
 				["set_1"] = {
@@ -98,7 +128,7 @@ TopFitDB = {
 				},
 			},
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Melancollie - Smolderthorn"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
 				["set_1"] = {
@@ -154,7 +184,7 @@ TopFitDB = {
 				},
 			},
 		},
-		["Othercollie - Smolderthorn"] = {
+		["Warmongrel - Ysondre"] = {
 			["statSortOrder"] = "NameAsc",
 			["sets"] = {
 				["set_1"] = {

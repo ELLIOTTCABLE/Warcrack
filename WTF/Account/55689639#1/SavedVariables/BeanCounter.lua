@@ -16,7 +16,7 @@ BeanCounterDB = {
 			},
 			["failedBidsNeutral"] = {
 			},
-			["failedBids"] = {
+			["completedBidsBuyouts"] = {
 			},
 			["completedAuctions"] = {
 			},
@@ -24,7 +24,7 @@ BeanCounterDB = {
 			},
 			["completedAuctionsNeutral"] = {
 			},
-			["completedBidsBuyouts"] = {
+			["failedBids"] = {
 			},
 		},
 		["Snorecollie"] = {
@@ -42,7 +42,7 @@ BeanCounterDB = {
 			},
 			["failedBidsNeutral"] = {
 			},
-			["completedBidsBuyouts"] = {
+			["failedBids"] = {
 			},
 			["completedAuctions"] = {
 			},
@@ -50,7 +50,7 @@ BeanCounterDB = {
 			},
 			["completedAuctionsNeutral"] = {
 			},
-			["failedBids"] = {
+			["completedBidsBuyouts"] = {
 			},
 		},
 		["Nocollie"] = {
@@ -68,7 +68,7 @@ BeanCounterDB = {
 			},
 			["failedBidsNeutral"] = {
 			},
-			["completedBidsBuyouts"] = {
+			["failedBids"] = {
 			},
 			["completedAuctions"] = {
 			},
@@ -76,7 +76,7 @@ BeanCounterDB = {
 			},
 			["completedAuctionsNeutral"] = {
 			},
-			["failedBids"] = {
+			["completedBidsBuyouts"] = {
 			},
 		},
 	},
@@ -84,8 +84,8 @@ BeanCounterDB = {
 BeanCounterDBSettings = {
 	["profile.Default"] = {
 		["configator.left"] = 666.6668090820312,
-		["util.beancounter.ButtonuseDateCheck"] = false,
 		["configator.top"] = 825.0001220703125,
+		["util.beancounter.ButtonuseDateCheck"] = false,
 	},
 	["Smolderthorn"] = {
 		["Awdawdawd"] = {

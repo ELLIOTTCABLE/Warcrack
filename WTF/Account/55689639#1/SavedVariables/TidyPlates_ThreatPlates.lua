@@ -1,13 +1,16 @@
 
 ThreatPlatesDB = {
 	["char"] = {
-		["Ililliliilil - The Underbog"] = {
-			["specName"] = {
-				"Blood", -- [1]
-				"Frost", -- [2]
-				"Unholy", -- [3]
+		["Nocollie - Smolderthorn"] = {
+			["spec"] = {
+				["primary"] = false,
 			},
 			["welcome"] = true,
+			["specName"] = {
+				"Assassination", -- [1]
+				"Combat", -- [2]
+				"Subtlety", -- [3]
+			},
 		},
 		["Awihrtoawe - Smolderthorn"] = {
 			["spec"] = {
@@ -20,14 +23,14 @@ ThreatPlatesDB = {
 				"Frost", -- [3]
 			},
 		},
-		["Awdawdawd - Smolderthorn"] = {
+		["Snorecollie - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
 			["specName"] = {
-				"Affliction", -- [1]
-				"Demonology", -- [2]
-				"Destruction", -- [3]
+				"Arms", -- [1]
+				"Fury", -- [2]
+				"Protection", -- [3]
 			},
 			["welcome"] = true,
 		},
@@ -64,38 +67,35 @@ ThreatPlatesDB = {
 				"Shadow", -- [3]
 			},
 		},
-		["Snorecollie - Smolderthorn"] = {
+		["Awdawdawd - Smolderthorn"] = {
 			["spec"] = {
 				["primary"] = false,
 			},
 			["welcome"] = true,
 			["specName"] = {
-				"Arms", -- [1]
-				"Fury", -- [2]
-				"Protection", -- [3]
+				"Affliction", -- [1]
+				"Demonology", -- [2]
+				"Destruction", -- [3]
 			},
 		},
-		["Nocollie - Smolderthorn"] = {
-			["spec"] = {
-				["primary"] = false,
-			},
+		["Ililliliilil - The Underbog"] = {
 			["welcome"] = true,
 			["specName"] = {
-				"Assassination", -- [1]
-				"Combat", -- [2]
-				"Subtlety", -- [3]
+				"Blood", -- [1]
+				"Frost", -- [2]
+				"Unholy", -- [3]
 			},
 		},
 	},
 	["profileKeys"] = {
-		["Ililliliilil - The Underbog"] = "Default",
+		["Nocollie - Smolderthorn"] = "Default",
 		["Awihrtoawe - Smolderthorn"] = "Default",
-		["Awdawdawd - Smolderthorn"] = "Default",
+		["Snorecollie - Smolderthorn"] = "Default",
 		["Illililiili - Smolderthorn"] = "Default",
 		["Illiliililil - Smolderthorn"] = "Default",
 		["Tempcollie - Ysondre"] = "Default",
-		["Snorecollie - Smolderthorn"] = "Default",
-		["Nocollie - Smolderthorn"] = "Default",
+		["Awdawdawd - Smolderthorn"] = "Default",
+		["Ililliliilil - The Underbog"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

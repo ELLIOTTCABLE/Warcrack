@@ -10,15 +10,15 @@ Examiner_Config = {
 	["featsCat"] = 92,
 	["cacheFilter"] = "",
 	["alwaysShowItemLevel"] = true,
-	["combineAdditiveStats"] = true,
+	["featsFilter"] = "",
 	["autoInspect"] = true,
-	["percentRatings"] = false,
+	["featsSort"] = "none",
 	["statsViewType"] = 1,
 	["caching"] = {
 	},
 	["showBackground"] = true,
-	["featsSort"] = "none",
-	["featsFilter"] = "",
+	["percentRatings"] = false,
+	["combineAdditiveStats"] = true,
 }
 Examiner_Cache = {
 }

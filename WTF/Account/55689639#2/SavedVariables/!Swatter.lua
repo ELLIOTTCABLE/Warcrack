@@ -4,7 +4,7 @@ SwatterData = {
 	["autoshow"] = true,
 	["errors"] = {
 		{
-			["message"] = "[string \"GuildMap3Main234:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
+			["message"] = "[string \"GuildMap3Main249:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
 			["count"] = 1,
 			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
 			["timestamp"] = "2011-06-09 12:28:03",
@@ -12,7 +12,7 @@ SwatterData = {
 			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
 		}, -- [1]
 		{
-			["message"] = "[string \"GuildMap3Main235:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
+			["message"] = "[string \"GuildMap3Main250:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
 			["count"] = 1,
 			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
 			["timestamp"] = "2011-06-09 12:28:03",
@@ -20,133 +20,13 @@ SwatterData = {
 			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
 		}, -- [2]
 		{
-			["message"] = "[string \"GuildMap3Main236:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [3]
-		{
-			["message"] = "[string \"GuildMap3Main237:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [4]
-		{
-			["message"] = "[string \"GuildMap3Main238:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [5]
-		{
-			["message"] = "[string \"GuildMap3Main239:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [6]
-		{
-			["message"] = "[string \"GuildMap3Main240:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [7]
-		{
-			["message"] = "[string \"GuildMap3Main241:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [8]
-		{
-			["message"] = "[string \"GuildMap3Main242:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [9]
-		{
-			["message"] = "[string \"GuildMap3Main243:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [10]
-		{
-			["message"] = "[string \"GuildMap3Main244:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [11]
-		{
-			["message"] = "[string \"GuildMap3Main245:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [12]
-		{
-			["message"] = "[string \"GuildMap3Main246:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [13]
-		{
-			["message"] = "[string \"GuildMap3Main247:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [14]
-		{
-			["message"] = "[string \"GuildMap3Main248:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [15]
-		{
-			["message"] = "[string \"GuildMap3Main249:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [16]
-		{
-			["message"] = "[string \"GuildMap3Main250:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
-			["timestamp"] = "2011-06-09 12:28:03",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [17]
-		{
 			["message"] = "Interface\\AddOns\\GuildMap3\\GuildMap3.lua:475: Babble-Zone-2.2: Reverse translation for \"Ahn'Qiraj: The Fallen Kingdom\" does not exist",
 			["count"] = 1,
 			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  Altoholic, v4.1.001b\n  Babylonian, v5.1.DEV.130\n  BulkMail2Inbox, v3.0.3\n  ChatEdit, v3.1\n  Cockpit, v\n  Configator, v5.1.DEV.286\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  Engravings, v4.0.0.20\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  GuildMap3, v$Revision: 3.3 $\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=398)\n",
 			["timestamp"] = "2011-06-09 12:28:03",
 			["context"] = "Global",
 			["stack"] = "...ulkMail2Inbox\\lib\\Ace2\\AceAddon-2.0\\AceAddon-2.0.lua:25: in function <...ulkMail2Inbox\\lib\\Ace2\\AceAddon-2.0\\AceAddon-2.0.lua:23>\n...ulkMail2Inbox\\lib\\Ace2\\AceAddon-2.0\\AceAddon-2.0.lua:666: in function `InitializeAddon'\n...ulkMail2Inbox\\lib\\Ace2\\AceAddon-2.0\\AceAddon-2.0.lua:541: in function <...ulkMail2Inbox\\lib\\Ace2\\AceAddon-2.0\\AceAddon-2.0.lua:518>\n[C]: ?\n...ulkMail2Inbox\\lib\\Ace2\\AceEvent-2.0\\AceEvent-2.0.lua:298: in function `TriggerEvent'\n...ulkMail2Inbox\\lib\\Ace2\\AceEvent-2.0\\AceEvent-2.0.lua:910: in function <...ulkMail2Inbox\\lib\\Ace2\\AceEvent-2.0\\AceEvent-2.0.lua:903>\n",
-		}, -- [18]
+		}, -- [3]
 		{
 			["message"] = "Interface\\AddOns\\GuildMap3\\GuildMap3.lua:511: attempt to index field '?' (a nil value)",
 			["count"] = 3,
@@ -154,7 +34,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 12:28:09",
 			["context"] = "Global",
 			["stack"] = "...ulkMail2Inbox\\lib\\Ace2\\AceEvent-2.0\\AceEvent-2.0.lua:369: in function <...ulkMail2Inbox\\lib\\Ace2\\AceEvent-2.0\\AceEvent-2.0.lua:345>\n",
-		}, -- [19]
+		}, -- [4]
 		{
 			["message"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:262: attempt to index global 'self' (a nil value)",
 			["count"] = 1,
@@ -162,7 +42,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 12:28:23",
 			["context"] = "Global",
 			["stack"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:174: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:171>\nInterface\\AddOns\\Cockpit\\Dongle.lua:289: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:280>\n",
-		}, -- [20]
+		}, -- [5]
 		{
 			["message"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:262: attempt to index global 'self' (a nil value)",
 			["count"] = 1,
@@ -170,7 +50,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 12:32:24",
 			["context"] = "Global",
 			["stack"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:174: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:171>\nInterface\\AddOns\\Cockpit\\Dongle.lua:289: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:280>\n",
-		}, -- [21]
+		}, -- [6]
 		{
 			["message"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:262: attempt to index global 'self' (a nil value)",
 			["count"] = 1,
@@ -178,7 +58,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:03:40",
 			["context"] = "Global",
 			["stack"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:174: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:171>\nInterface\\AddOns\\Cockpit\\Dongle.lua:289: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:280>\n",
-		}, -- [22]
+		}, -- [7]
 		{
 			["message"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:262: attempt to index global 'self' (a nil value)",
 			["count"] = 1,
@@ -186,7 +66,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:04:28",
 			["context"] = "Global",
 			["stack"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:174: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:171>\nInterface\\AddOns\\Cockpit\\Dongle.lua:289: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:280>\n",
-		}, -- [23]
+		}, -- [8]
 		{
 			["message"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:262: attempt to index global 'self' (a nil value)",
 			["count"] = 1,
@@ -194,7 +74,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:10:35",
 			["context"] = "Global",
 			["stack"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:174: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:171>\nInterface\\AddOns\\Cockpit\\Dongle.lua:289: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:280>\n",
-		}, -- [24]
+		}, -- [9]
 		{
 			["message"] = "Interface\\AddOns\\Wraith\\Core.lua:114: attempt to index field '?' (a nil value)",
 			["count"] = 1,
@@ -202,7 +82,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:14:30",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\nInterface\\AddOns\\Wraith\\Core.lua:114: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[5]\"]:4: in function <[string \"safecall Dispatcher[5]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[5]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:31: in function <...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:22>\nInterface\\AddOns\\!Swatter\\Swatter.lua:99: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:89>\nInterface\\AddOns\\!Swatter\\Swatter.lua:371: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:329>\n",
-		}, -- [25]
+		}, -- [10]
 		{
 			["message"] = "Interface\\AddOns\\Wraith\\Core.lua:125: attempt to index field '?' (a nil value)",
 			["count"] = 1,
@@ -210,7 +90,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:14:30",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\nInterface\\AddOns\\Wraith\\Core.lua:125: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[5]\"]:4: in function <[string \"safecall Dispatcher[5]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[5]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:31: in function <...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:22>\nInterface\\AddOns\\!Swatter\\Swatter.lua:104: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:89>\nInterface\\AddOns\\!Swatter\\Swatter.lua:371: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:329>\n",
-		}, -- [26]
+		}, -- [11]
 		{
 			["message"] = "Interface\\AddOns\\Wraith\\Core.lua:127: attempt to index field '?' (a nil value)",
 			["count"] = 1,
@@ -218,7 +98,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:14:30",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\nInterface\\AddOns\\Wraith\\Core.lua:127: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[5]\"]:4: in function <[string \"safecall Dispatcher[5]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[5]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:31: in function <...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:22>\nInterface\\AddOns\\!Swatter\\Swatter.lua:111: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:89>\nInterface\\AddOns\\!Swatter\\Swatter.lua:371: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:329>\n",
-		}, -- [27]
+		}, -- [12]
 		{
 			["message"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:262: attempt to index global 'self' (a nil value)",
 			["count"] = 1,
@@ -226,7 +106,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:14:52",
 			["context"] = "Global",
 			["stack"] = "Interface\\AddOns\\Cockpit\\Dongle.lua:174: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:171>\nInterface\\AddOns\\Cockpit\\Dongle.lua:289: in function <Interface\\AddOns\\Cockpit\\Dongle.lua:280>\n",
-		}, -- [28]
+		}, -- [13]
 		{
 			["message"] = "Interface\\AddOns\\Wraith\\Core.lua:114: attempt to index field '?' (a nil value)",
 			["count"] = 1,
@@ -234,7 +114,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:15:24",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\nInterface\\AddOns\\Wraith\\Core.lua:114: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[5]\"]:4: in function <[string \"safecall Dispatcher[5]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[5]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:31: in function <...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:22>\nInterface\\AddOns\\!Swatter\\Swatter.lua:99: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:89>\nInterface\\AddOns\\!Swatter\\Swatter.lua:371: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:329>\n",
-		}, -- [29]
+		}, -- [14]
 		{
 			["message"] = "Interface\\AddOns\\Wraith\\Core.lua:125: attempt to index field '?' (a nil value)",
 			["count"] = 1,
@@ -242,7 +122,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:15:24",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\nInterface\\AddOns\\Wraith\\Core.lua:125: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[5]\"]:4: in function <[string \"safecall Dispatcher[5]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[5]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:31: in function <...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:22>\nInterface\\AddOns\\!Swatter\\Swatter.lua:104: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:89>\nInterface\\AddOns\\!Swatter\\Swatter.lua:371: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:329>\n",
-		}, -- [30]
+		}, -- [15]
 		{
 			["message"] = "Interface\\AddOns\\Wraith\\Core.lua:127: attempt to index field '?' (a nil value)",
 			["count"] = 1,
@@ -250,7 +130,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-09 13:15:24",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\nInterface\\AddOns\\Wraith\\Core.lua:127: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[5]\"]:4: in function <[string \"safecall Dispatcher[5]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[5]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:31: in function <...toholic\\libs\\LibDataBroker-1.1\\LibDataBroker-1.1.lua:22>\nInterface\\AddOns\\!Swatter\\Swatter.lua:111: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:89>\nInterface\\AddOns\\!Swatter\\Swatter.lua:371: in function <Interface\\AddOns\\!Swatter\\Swatter.lua:329>\n",
-		}, -- [31]
+		}, -- [16]
 		{
 			["message"] = "Interface\\AddOns\\IceHUD\\IceCore.lua:736: attempt to index field '?' (a nil value)",
 			["count"] = 5,
@@ -258,7 +138,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-10 07:24:32",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\nInterface\\AddOns\\IceHUD\\IceCore.lua:736: in function `ChangePreset'\nInterface\\AddOns\\IceHUD\\IceCore.lua:732: in function `SetBarPreset'\nInterface\\AddOns\\IceHUD_Options\\Options.lua:386: in function <Interface\\AddOns\\IceHUD_Options\\Options.lua:385>\n(tail call): ?\n[C]: ?\n[string \"safecall Dispatcher[2]\"]:9: in function <[string \"safecall Dispatcher[2]\"]:5>\n(tail call): ?\n...nfig-3.0\\AceConfigDialog-3.0\\AceConfigDialog-3.0.lua:798: in function <...nfig-3.0\\AceConfigDialog-3.0\\AceConfigDialog-3.0.lua:613>\n(tail call): ?\n[C]: ?\n[string \"safecall Dispatcher[3]\"]:9: in function <[string \"safecall Dispatcher[3]\"]:5>\n(tail call): ?\n...face\\AddOns\\Altoholic\\libs\\AceGUI-3.0\\AceGUI-3.0.lua:314: in function `Fire'\n...ic\\libs\\AceGUI-3.0\\widgets\\AceGUIWidget-DropDown.lua:439: in function <...ic\\libs\\AceGUI-3.0\\widgets\\AceGUIWidget-DropDown.lua:430>\n(tail call): ?\n[C]: ?\n[string \"safecall Dispatcher[3]\"]:9: in function <[string \"safecall Dispatcher[3]\"]:5>\n(tail call): ?\n...face\\AddOns\\Altoholic\\libs\\AceGUI-3.0\\AceGUI-3.0.lua:314: in function `Fire'\n...s\\AceGUI-3.0\\widgets\\AceGUIWidget-DropDown-Items.lua:351: in function <...s\\AceGUI-3.0\\widgets\\AceGUIWidget-DropDown-Items.lua:341>\n",
-		}, -- [32]
+		}, -- [17]
 		{
 			["message"] = "Interface\\AddOns\\GridStatusGrace\\GridStatusGrace.lua:6: attempt to index global 'GridStatus' (a nil value)",
 			["count"] = 1,
@@ -266,7 +146,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-10 08:19:48",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\GridStatusGrace\\GridStatusGrace.lua:6: in main chunk\n",
-		}, -- [33]
+		}, -- [18]
 		{
 			["message"] = "...rface\\AddOns\\gridstatusmending\\GridStatusMending.lua:7: attempt to index global 'GridStatus' (a nil value)",
 			["count"] = 1,
@@ -274,7 +154,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-10 08:19:49",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n...rface\\AddOns\\gridstatusmending\\GridStatusMending.lua:7: in main chunk\n",
-		}, -- [34]
+		}, -- [19]
 		{
 			["message"] = "...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:195: Invalid spell ID in <unnamed>:SetSpellByID",
 			["count"] = 3,
@@ -282,7 +162,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-11 22:43:06",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\n[C]: in function `SetSpellByID'\n...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:195: in function `getToolTipSpell'\n...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:918: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[13]\"]:4: in function <[string \"safecall Dispatcher[13]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[13]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:120: in function <...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:119>\n",
-		}, -- [35]
+		}, -- [20]
 		{
 			["message"] = "Interface\\AddOns\\Broken_Queue\\core.lua:241: attempt to index global 'PVPParentFrame' (a nil value)",
 			["count"] = 2,
@@ -290,7 +170,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 03:37:34",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\Broken_Queue\\core.lua:241: in function `OnClick'\nInterface\\AddOns\\StatBlockCore\\StatBlockCore.lua:598: in function <Interface\\AddOns\\StatBlockCore\\StatBlockCore.lua:596>\n",
-		}, -- [36]
+		}, -- [21]
 		{
 			["message"] = "Interface\\AddOns\\Broken_Queue\\core.lua:241: attempt to index global 'PVPParentFrame' (a nil value)",
 			["count"] = 6,
@@ -298,7 +178,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 05:37:58",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\Broken_Queue\\core.lua:241: in function `OnClick'\nInterface\\AddOns\\StatBlockCore\\StatBlockCore.lua:598: in function <Interface\\AddOns\\StatBlockCore\\StatBlockCore.lua:596>\n",
-		}, -- [37]
+		}, -- [22]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -306,7 +186,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 07:36:25",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [38]
+		}, -- [23]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -314,7 +194,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 08:48:40",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [39]
+		}, -- [24]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -322,7 +202,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 09:43:52",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [40]
+		}, -- [25]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 34,
@@ -330,7 +210,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 09:49:33",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [41]
+		}, -- [26]
 		{
 			["message"] = "Interface\\AddOns\\BulkMail2Inbox\\BulkMailInbox.lua:296: attempt to index local 'parentself' (a nil value)",
 			["count"] = 1,
@@ -338,7 +218,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 12:38:59",
 			["context"] = "Global",
 			["stack"] = "...\\AddOns\\BulkMail2Inbox\\lib\\Tablet-2.0\\Tablet-2.0.lua:985: in function <...\\AddOns\\BulkMail2Inbox\\lib\\Tablet-2.0\\Tablet-2.0.lua:970>\n",
-		}, -- [42]
+		}, -- [27]
 		{
 			["message"] = "Interface\\AddOns\\SkadaDeaths\\Deaths.lua:39: attempt to index field '?' (a nil value)",
 			["count"] = 1,
@@ -346,7 +226,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 14:17:53",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\nInterface\\AddOns\\SkadaDeaths\\Deaths.lua:39: in function <Interface\\AddOns\\SkadaDeaths\\Deaths.lua:35>\nInterface\\AddOns\\SkadaDeaths\\Deaths.lua:53: in function `func'\nInterface\\AddOns\\Skada\\Skada.lua:1680: in function <Interface\\AddOns\\Skada\\Skada.lua:1580>\n[string \"safecall Dispatcher[13]\"]:4: in function <[string \"safecall Dispatcher[13]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[13]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:120: in function <...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:119>\n",
-		}, -- [43]
+		}, -- [28]
 		{
 			["message"] = "Interface\\AddOns\\Broken_Queue\\core.lua:241: attempt to index global 'PVPParentFrame' (a nil value)",
 			["count"] = 1,
@@ -354,7 +234,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 14:32:32",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\Broken_Queue\\core.lua:241: in function `OnClick'\nInterface\\AddOns\\StatBlockCore\\StatBlockCore.lua:598: in function <Interface\\AddOns\\StatBlockCore\\StatBlockCore.lua:596>\n",
-		}, -- [44]
+		}, -- [29]
 		{
 			["message"] = "...Ons\\TidyPlates_ThreatPlates\\Functions\\healthtext.lua:20: attempt to index field 'text' (a nil value)",
 			["count"] = 1,
@@ -362,7 +242,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 15:31:03",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n...Ons\\TidyPlates_ThreatPlates\\Functions\\healthtext.lua:20: in function `SetCustomText'\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:218: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:206>\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:661: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:656>\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:454: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:449>\n",
-		}, -- [45]
+		}, -- [30]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 5,
@@ -370,7 +250,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 16:21:15",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [46]
+		}, -- [31]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -378,7 +258,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 18:13:03",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER2\"]:1: in function <[string \"TOGGLECHARACTER2\"]:1>\n",
-		}, -- [47]
+		}, -- [32]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -386,7 +266,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 19:09:33",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [48]
+		}, -- [33]
 		{
 			["message"] = "Interface\\AddOns\\Broken_Queue\\core.lua:241: attempt to index global 'PVPParentFrame' (a nil value)",
 			["count"] = 1,
@@ -394,7 +274,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 19:17:20",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\Broken_Queue\\core.lua:241: in function `OnClick'\nInterface\\AddOns\\StatBlockCore\\StatBlockCore.lua:598: in function <Interface\\AddOns\\StatBlockCore\\StatBlockCore.lua:596>\n",
-		}, -- [49]
+		}, -- [34]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 3,
@@ -402,7 +282,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-12 19:18:26",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [50]
+		}, -- [35]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -410,7 +290,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-13 08:26:39",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [51]
+		}, -- [36]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 28,
@@ -418,7 +298,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-13 09:36:52",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [52]
+		}, -- [37]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 4,
@@ -426,7 +306,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-13 16:45:51",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [53]
+		}, -- [38]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -434,7 +314,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-13 17:34:16",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [54]
+		}, -- [39]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 8,
@@ -442,7 +322,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-13 17:43:52",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [55]
+		}, -- [40]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 26,
@@ -450,7 +330,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-13 18:19:47",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [56]
+		}, -- [41]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 22,
@@ -458,7 +338,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-14 10:01:08",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [57]
+		}, -- [42]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 3,
@@ -466,7 +346,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-14 12:00:43",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [58]
+		}, -- [43]
 		{
 			["message"] = "Interface\\AddOns\\Altoholic\\Altoholic.lua:226: Usage: GetAuctionItemLink(\"type\", index)",
 			["count"] = 1,
@@ -474,7 +354,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-14 12:25:42",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n[C]: in function `GetAuctionItemLink'\nInterface\\AddOns\\Altoholic\\Altoholic.lua:226: in function `AuctionFrameBrowse_Update'\n...ace\\AddOns\\Blizzard_AuctionUI\\Blizzard_AuctionUI.lua:418: in function `BrowseButton_OnClick'\n[string \"*:OnClick\"]:4: in function <[string \"*:OnClick\"]:1>\n[C]: ?\n",
-		}, -- [59]
+		}, -- [44]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -482,7 +362,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-14 12:52:35",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [60]
+		}, -- [45]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 23,
@@ -490,7 +370,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-14 13:15:54",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [61]
+		}, -- [46]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 12,
@@ -498,7 +378,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-15 12:02:59",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [62]
+		}, -- [47]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 5,
@@ -506,7 +386,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-15 14:27:09",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [63]
+		}, -- [48]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -514,7 +394,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-15 17:45:29",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n...terface\\AddOns\\Broker_Equipment\\Broker_Equipment.lua:92: in function `OnClick'\nInterface\\AddOns\\StatBlockCore\\StatBlockCore.lua:598: in function <Interface\\AddOns\\StatBlockCore\\StatBlockCore.lua:596>\n",
-		}, -- [64]
+		}, -- [49]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -522,7 +402,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-15 17:49:25",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [65]
+		}, -- [50]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -530,7 +410,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-15 18:59:01",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [66]
+		}, -- [51]
 		{
 			["message"] = "Interface\\AddOns\\Broken_Queue\\core.lua:241: attempt to index global 'PVPParentFrame' (a nil value)",
 			["count"] = 2,
@@ -538,7 +418,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-15 19:40:53",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\Broken_Queue\\core.lua:241: in function `OnClick'\nInterface\\AddOns\\StatBlockCore\\StatBlockCore.lua:598: in function <Interface\\AddOns\\StatBlockCore\\StatBlockCore.lua:596>\n",
-		}, -- [67]
+		}, -- [52]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -546,7 +426,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 00:24:23",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [68]
+		}, -- [53]
 		{
 			["message"] = "Interface\\FrameXML\\FriendsFrame.lua:1295: attempt to concatenate local 'name' (a nil value)",
 			["count"] = 2,
@@ -554,7 +434,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 00:25:36",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\FrameXML\\FriendsFrame.lua:1295: in function `FriendsFrame_UpdateFriends'\nInterface\\FrameXML\\FriendsFrame.lua:415: in function `FriendsList_Update'\nInterface\\FrameXML\\FriendsFrame.lua:859: in function `FriendsFrame_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [69]
+		}, -- [54]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -562,7 +442,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 02:33:22",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [70]
+		}, -- [55]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -570,7 +450,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 02:39:55",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [71]
+		}, -- [56]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 8,
@@ -578,7 +458,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 12:27:57",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [72]
+		}, -- [57]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -586,7 +466,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 14:24:59",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [73]
+		}, -- [58]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -594,7 +474,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 14:34:06",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [74]
+		}, -- [59]
 		{
 			["message"] = "...Ons\\TidyPlates_ThreatPlates\\Functions\\healthtext.lua:20: attempt to index field 'text' (a nil value)",
 			["count"] = 1,
@@ -602,7 +482,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 15:16:43",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n...Ons\\TidyPlates_ThreatPlates\\Functions\\healthtext.lua:20: in function `SetCustomText'\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:218: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:206>\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:661: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:656>\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:454: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:449>\n",
-		}, -- [75]
+		}, -- [60]
 		{
 			["message"] = "...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:195: Invalid spell ID in <unnamed>:SetSpellByID",
 			["count"] = 11,
@@ -610,7 +490,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 15:52:15",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\n[C]: in function `SetSpellByID'\n...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:195: in function `getToolTipSpell'\n...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:918: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[13]\"]:4: in function <[string \"safecall Dispatcher[13]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[13]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:120: in function <...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:119>\n",
-		}, -- [76]
+		}, -- [61]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 10,
@@ -618,7 +498,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 16:12:19",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [77]
+		}, -- [62]
 		{
 			["message"] = "...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:195: Invalid spell ID in <unnamed>:SetSpellByID",
 			["count"] = 7,
@@ -626,7 +506,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 16:29:35",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\n[C]: in function `SetSpellByID'\n...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:195: in function `getToolTipSpell'\n...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:918: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[13]\"]:4: in function <[string \"safecall Dispatcher[13]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[13]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:120: in function <...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:119>\n",
-		}, -- [78]
+		}, -- [63]
 		{
 			["message"] = "...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:195: Invalid spell ID in <unnamed>:SetSpellByID",
 			["count"] = 16,
@@ -634,7 +514,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 19:13:17",
 			["context"] = "Global",
 			["stack"] = "(tail call): ?\n[C]: in function `SetSpellByID'\n...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:195: in function `getToolTipSpell'\n...nterface\\AddOns\\GridCaster\\GridStatusCasterBuffs.lua:918: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147: in function <...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:147>\n[string \"safecall Dispatcher[13]\"]:4: in function <[string \"safecall Dispatcher[13]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[13]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:120: in function <...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:119>\n",
-		}, -- [79]
+		}, -- [64]
 		{
 			["message"] = "...rface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildNews.lua:133: attempt to concatenate local 'newsType' (a nil value)",
 			["count"] = 2,
@@ -642,7 +522,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 20:05:52",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n...rface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildNews.lua:133: in function `GuildNews_Update'\n...terface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildUI.lua:499: in function `GuildMainFrame_UpdateNewsEvents'\n...terface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildUI.lua:454: in function <...terface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildUI.lua:447>\n",
-		}, -- [80]
+		}, -- [65]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 14,
@@ -650,7 +530,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-16 21:16:15",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [81]
+		}, -- [66]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -658,7 +538,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-17 11:41:38",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [82]
+		}, -- [67]
 		{
 			["message"] = "...Ons\\TidyPlates_ThreatPlates\\Functions\\healthtext.lua:20: attempt to index field 'text' (a nil value)",
 			["count"] = 3,
@@ -666,7 +546,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-18 17:44:02",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n...Ons\\TidyPlates_ThreatPlates\\Functions\\healthtext.lua:20: in function `SetCustomText'\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:218: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:206>\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:661: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:656>\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:454: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:449>\n",
-		}, -- [83]
+		}, -- [68]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 4,
@@ -674,7 +554,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-18 17:54:27",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [84]
+		}, -- [69]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 14,
@@ -682,7 +562,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-18 18:40:43",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [85]
+		}, -- [70]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -690,7 +570,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-18 22:20:42",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [86]
+		}, -- [71]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -698,7 +578,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-18 23:10:19",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [87]
+		}, -- [72]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -706,7 +586,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-19 01:10:31",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [88]
+		}, -- [73]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 2,
@@ -714,7 +594,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-19 04:46:54",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [89]
+		}, -- [74]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 18,
@@ -722,7 +602,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-19 05:26:48",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [90]
+		}, -- [75]
 		{
 			["message"] = "Interface\\AddOns\\Consolid8\\Consolid8.lua:141: bad argument #2 to 'format' (string expected, got nil)",
 			["count"] = 3,
@@ -730,7 +610,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-19 05:53:06",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n[C]: in function `format'\nInterface\\AddOns\\Consolid8\\Consolid8.lua:141: in function <Interface\\AddOns\\Consolid8\\Consolid8.lua:137>\nInterface\\AddOns\\Consolid8\\Consolid8.lua:336: in function <Interface\\AddOns\\Consolid8\\Consolid8.lua:333>\n(tail call): ?\n(tail call): ?\n",
-		}, -- [91]
+		}, -- [76]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 5,
@@ -738,7 +618,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-19 19:34:58",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [92]
+		}, -- [77]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 1,
@@ -746,7 +626,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-19 20:56:11",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [93]
+		}, -- [78]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 5,
@@ -754,7 +634,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-19 21:29:28",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [94]
+		}, -- [79]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 39,
@@ -762,7 +642,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-19 23:27:30",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [95]
+		}, -- [80]
 		{
 			["message"] = "Interface\\AddOns\\Consolid8\\Consolid8.lua:141: bad argument #2 to 'format' (string expected, got nil)",
 			["count"] = 1,
@@ -770,7 +650,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-20 06:07:17",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n[C]: in function `format'\nInterface\\AddOns\\Consolid8\\Consolid8.lua:141: in function <Interface\\AddOns\\Consolid8\\Consolid8.lua:137>\nInterface\\AddOns\\Consolid8\\Consolid8.lua:321: in function <Interface\\AddOns\\Consolid8\\Consolid8.lua:315>\n(tail call): ?\n(tail call): ?\n",
-		}, -- [96]
+		}, -- [81]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 12,
@@ -778,7 +658,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-20 06:50:07",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [97]
+		}, -- [82]
 		{
 			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
 			["count"] = 10,
@@ -786,7 +666,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-20 21:12:41",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
-		}, -- [98]
+		}, -- [83]
 		{
 			["message"] = "...rface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildNews.lua:133: attempt to concatenate local 'newsType' (a nil value)",
 			["count"] = 2,
@@ -794,7 +674,7 @@ SwatterData = {
 			["timestamp"] = "2011-06-20 22:04:53",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n...rface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildNews.lua:133: in function `GuildNews_Update'\n...terface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildUI.lua:499: in function `GuildMainFrame_UpdateNewsEvents'\n...terface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildUI.lua:454: in function <...terface\\AddOns\\Blizzard_GuildUI\\Blizzard_GuildUI.lua:447>\n",
-		}, -- [99]
+		}, -- [84]
 		{
 			["message"] = "Interface\\AddOns\\Skada\\Skada.lua:549: attempt to index local 'report_set' (a nil value)",
 			["count"] = 1,
@@ -802,6 +682,126 @@ SwatterData = {
 			["timestamp"] = "2011-06-20 22:20:36",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\nInterface\\AddOns\\Skada\\Skada.lua:549: in function `Report'\nInterface\\AddOns\\Skada\\Skada.lua:1093: in function `func'\nInterface\\FrameXML\\UIDropDownMenu.lua:638: in function <Interface\\FrameXML\\UIDropDownMenu.lua:603>\n[C]: in function `UIDropDownMenuButton_OnClick'\n[string \"*:OnClick\"]:1: in function <[string \"*:OnClick\"]:1>\n",
+		}, -- [85]
+		{
+			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
+			["count"] = 1,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucScanData, v5.12.5165 (QuirkyKiwi)\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=1218)\n",
+			["timestamp"] = "2011-06-22 14:44:03",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
+		}, -- [86]
+		{
+			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
+			["count"] = 6,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucScanData, v5.12.5165 (QuirkyKiwi)\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  LightHeadedDataE, v337\n  LightHeadedDataQIDNames, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=1251)\n",
+			["timestamp"] = "2011-06-22 16:19:44",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
+		}, -- [87]
+		{
+			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
+			["count"] = 8,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucScanData, v5.12.5165 (QuirkyKiwi)\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=1218)\n",
+			["timestamp"] = "2011-06-22 18:22:09",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
+		}, -- [88]
+		{
+			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
+			["count"] = 4,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=11f1)\n",
+			["timestamp"] = "2011-06-22 21:32:04",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
+		}, -- [89]
+		{
+			["message"] = "Interface\\AddOns\\SkadaDeaths\\Deaths.lua:39: attempt to index field '?' (a nil value)",
+			["count"] = 1,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucScanData, v5.12.5165 (QuirkyKiwi)\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  LightHeadedDataD, v337\n  LightHeadedDataE, v337\n  LightHeadedDataQIDNames, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=126a)\n",
+			["timestamp"] = "2011-06-22 21:52:56",
+			["context"] = "Global",
+			["stack"] = "(tail call): ?\nInterface\\AddOns\\SkadaDeaths\\Deaths.lua:39: in function <Interface\\AddOns\\SkadaDeaths\\Deaths.lua:35>\nInterface\\AddOns\\SkadaDeaths\\Deaths.lua:53: in function `func'\nInterface\\AddOns\\Skada\\Skada.lua:1680: in function <Interface\\AddOns\\Skada\\Skada.lua:1580>\n[string \"safecall Dispatcher[13]\"]:4: in function <[string \"safecall Dispatcher[13]\"]:4>\n[C]: ?\n[string \"safecall Dispatcher[13]\"]:13: in function `?'\n...ore\\libs\\CallbackHandler-1.0\\CallbackHandler-1.0.lua:92: in function `Fire'\n...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:120: in function <...\\AddOns\\DataStore\\libs\\AceEvent-3.0\\AceEvent-3.0.lua:119>\n",
+		}, -- [90]
+		{
+			["message"] = "Interface\\FrameXML\\FriendsFrame.lua:1295: attempt to concatenate local 'name' (a nil value)",
+			["count"] = 17,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=11f1)\n",
+			["timestamp"] = "2011-06-22 23:23:21",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\FrameXML\\FriendsFrame.lua:1295: in function `FriendsFrame_UpdateFriends'\nInterface\\FrameXML\\FriendsFrame.lua:415: in function `FriendsList_Update'\nInterface\\FrameXML\\FriendsFrame.lua:859: in function `FriendsFrame_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
+		}, -- [91]
+		{
+			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
+			["count"] = 1,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucScanData, v5.12.5165 (QuirkyKiwi)\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=1218)\n",
+			["timestamp"] = "2011-06-22 23:40:24",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\nInterface\\AddOns\\Broker_Wallet\\Broker_Wallet.lua:21: in function `OnClick'\nInterface\\AddOns\\StatBlockCore\\StatBlockCore.lua:598: in function <Interface\\AddOns\\StatBlockCore\\StatBlockCore.lua:596>\n",
+		}, -- [92]
+		{
+			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
+			["count"] = 2,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  DoTimerOptions, v\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  OmniCCConfig, v\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=1217)\n",
+			["timestamp"] = "2011-06-23 00:00:43",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
+		}, -- [93]
+		{
+			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
+			["count"] = 2,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=11f1)\n",
+			["timestamp"] = "2011-06-23 00:22:02",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
+		}, -- [94]
+		{
+			["message"] = "Interface\\FrameXML\\FriendsFrame.lua:1295: attempt to concatenate local 'name' (a nil value)",
+			["count"] = 2,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  LightHeadedDataD, v337\n  LightHeadedDataQIDNames, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=122a)\n",
+			["timestamp"] = "2011-06-23 00:26:20",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\FrameXML\\FriendsFrame.lua:1295: in function `FriendsFrame_UpdateFriends'\nInterface\\FrameXML\\FriendsFrame.lua:415: in function `FriendsList_Update'\nInterface\\FrameXML\\FriendsFrame.lua:859: in function `FriendsFrame_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
+		}, -- [95]
+		{
+			["message"] = "Interface\\AddOns\\TopFit\\core.lua:496: attempt to index global 'GearManagerToggleButton' (a nil value)",
+			["count"] = 14,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucScanData, v5.12.5165 (QuirkyKiwi)\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  OverachieverTabs, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=1232)\n",
+			["timestamp"] = "2011-06-23 01:03:22",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\nInterface\\AddOns\\TopFit\\core.lua:496: in function <Interface\\AddOns\\TopFit\\core.lua:441>\n[C]: in function `ToggleCharacter'\n[string \"TOGGLECHARACTER0\"]:1: in function <[string \"TOGGLECHARACTER0\"]:1>\n",
+		}, -- [96]
+		{
+			["message"] = "Interface\\FrameXML\\ChatFrame.lua:861: Usage: CastSpellByName(name[, target])",
+			["count"] = 8,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucScanData, v5.12.5165 (QuirkyKiwi)\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  LightHeadedDataD, v337\n  LightHeadedDataQIDNames, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  OverachieverTabs, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=126b)\n",
+			["timestamp"] = "2011-06-23 01:41:05",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\n[C]: in function `CastSpellByName'\nInterface\\FrameXML\\ChatFrame.lua:861: in function <Interface\\FrameXML\\ChatFrame.lua:793>\nInterface\\FrameXML\\ChatFrame.lua:1064: in function `?'\nInterface\\FrameXML\\ChatFrame.lua:4203: in function <Interface\\FrameXML\\ChatFrame.lua:4169>\n[C]: in function `ChatEdit_ParseText'\nInterface\\FrameXML\\ChatFrame.lua:3832: in function `ChatEdit_SendText'\nInterface\\FrameXML\\ChatFrame.lua:2565: in function <Interface\\FrameXML\\ChatFrame.lua:2558>\n[C]: in function `UseAction'\nInterface\\FrameXML\\SecureTemplates.lua:275: in function `handler'\nInterface\\FrameXML\\SecureTemplates.lua:543: in function <Interface\\FrameXML\\SecureTemplates.lua:491>\n",
+		}, -- [97]
+		{
+			["message"] = "...Ons\\TidyPlates_ThreatPlates\\Functions\\healthtext.lua:20: attempt to index field 'text' (a nil value)",
+			["count"] = 6,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucScanData, v5.12.5165 (QuirkyKiwi)\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  Informant, v5.12.5165 (QuirkyKiwi)\n  IPopBar, v3.12\n  LightHeaded, v337\n  LightHeadedDataD, v337\n  LightHeadedDataQIDNames, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  OverachieverTabs, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=126b)\n",
+			["timestamp"] = "2011-06-23 02:43:55",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\n...Ons\\TidyPlates_ThreatPlates\\Functions\\healthtext.lua:20: in function `SetCustomText'\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:218: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:206>\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:661: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:656>\nInterface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:454: in function <Interface\\AddOns\\TidyPlates\\TidyPlatesCore.lua:449>\n",
+		}, -- [98]
+		{
+			["message"] = "Interface\\AddOns\\HideBlizzard\\Modules\\ActionBar.lua:188: attempt to index local 'hkv' (a nil value)",
+			["count"] = 1,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=11cc)\n",
+			["timestamp"] = "2011-06-23 03:06:02",
+			["context"] = "Global",
+			["stack"] = "(tail call): ?\nInterface\\AddOns\\HideBlizzard\\Modules\\ActionBar.lua:188: in function `UpdateView'\nInterface\\AddOns\\HideBlizzard\\Modules\\ActionBar.lua:139: in function <Interface\\AddOns\\HideBlizzard\\Modules\\ActionBar.lua:138>\n(tail call): ?\n[C]: ?\n[string \"safecall Dispatcher[1]\"]:9: in function <[string \"safecall Dispatcher[1]\"]:5>\n(tail call): ?\n...\\AddOns\\DataStore\\libs\\AceAddon-3.0\\AceAddon-3.0.lua:543: in function `EnableAddon'\n...\\AddOns\\DataStore\\libs\\AceAddon-3.0\\AceAddon-3.0.lua:556: in function `EnableAddon'\n...\\AddOns\\DataStore\\libs\\AceAddon-3.0\\AceAddon-3.0.lua:635: in function <...\\AddOns\\DataStore\\libs\\AceAddon-3.0\\AceAddon-3.0.lua:621>\n[C]: in function `LoadAddOn'\nInterface\\FrameXML\\UIParent.lua:256: in function `UIParentLoadAddOn'\nInterface\\FrameXML\\UIParent.lua:330: in function `TimeManager_LoadUI'\nInterface\\FrameXML\\UIParent.lua:544: in function <Interface\\FrameXML\\UIParent.lua:519>\n",
+		}, -- [99]
+		{
+			["message"] = "Interface\\AddOns\\HideBlizzard\\Modules\\Pet.lua:146: attempt to index global 'PetFrameHappiness' (a nil value)",
+			["count"] = 1,
+			["addons"] = "  Swatter, v3.2.3 (<%codename%>)\n  NPCScan, v4.1.0.2\n  NPCScanOverlay, v4.1.0.3\n  Altoholic, v4.1.001b\n  AraBrokerGuildFriends, vr42\n  AraBrokerSpecSwitcher, vr10\n  AraBrokerTradeskills, vr43\n  ArcanaExperienceBroker, v40000.3\n  AucAdvanced, v5.12.5165 (QuirkyKiwi)\n  AucFilterBasic, v5.12.5165 (QuirkyKiwi)\n  AucFilterOutlier, v5.12.5165.2531\n  AucMatchUndercut, v5.12.5165.2531\n  AucStatHistogram, v5.12.5165 (QuirkyKiwi)\n  AucStatiLevel, v5.12.5165 (QuirkyKiwi)\n  AucStatPurchased, v5.12.5165 (QuirkyKiwi)\n  AucStatSales, v5.12.5165.2842\n  AucStatSimple, v5.12.5165 (QuirkyKiwi)\n  AucStatStdDev, v5.12.5165 (QuirkyKiwi)\n  AucStatWOWEcon, v5.12.5165.2530\n  AucUtilAHWindowControl, v5.12.5165.3311\n  AucUtilAppraiser, v5.12.5165.2530\n  AucUtilAskPrice, v5.12.5165.3175\n  AucUtilAutoMagic, v5.12.5165.3142\n  AucUtilCompactUI, v5.12.5165.2530\n  AucUtilEasyBuyout, v5.12.5165.3583\n  AucUtilFixAH, v5.12.5165 (QuirkyKiwi)\n  AucUtilGlypher, v5.12.5165.5061\n  AucUtilGlypherPost, v5.12.5165.5069\n  AucUtilItemSuggest, v5.12.5165.3108\n  AucUtilPriceLevel, v5.12.5165.2545\n  AucUtilScanButton, v5.12.5165.2530\n  AucUtilScanFinish, v5.12.5165.2530\n  AucUtilScanProgress, v5.12.5165.2530\n  AucUtilScanStart, v5.12.5165.4784\n  AucUtilSearchUI, v5.12.5165.3655\n  AucUtilSimpleAuction, v5.12.5165.4546\n  AucUtilVendMarkup, v5.12.5165.2530\n  Auditor2, v4.4.2\n  AutoBar, vv4.1.0.00\n  Babylonian, v5.1.DEV.130\n  BeanCounter, v5.12.5165 (QuirkyKiwi)\n  BindingTheory, vr4\n  BindPad, v2.4.0\n  BrokenQueue, v@project-version@\n  BrokerAuditor, v4.4.2\n  BrokerBags, vv4.0.1-release\n  BrokerEquipment, v40100.16-Beta\n  BrokerFactions, v3.2.5-release\n  BrokerGarbage, v4.0v11\n  BrokerGarbageLootManager, v4.0v11\n  BrokerRaidsave, v2.1.1-beta\n  BrokerWallet, v3.4\n  BulkMail2Inbox, v3.0.3\n  CensusPlus, v5.0.2\n  ChatEdit, v3.1\n  Clique, vv40100-1.3.5b\n  Configator, v5.1.DEV.282\n  Consolid8, v1.6\n  Critline, v4.1.0\n  DamnAchievements, v\n  DataStore, v4.1.001\n  DataStoreAchievements, v4.1.001\n  DataStoreAgenda, v4.1.001\n  DataStoreAuctions, v4.1.001\n  DataStoreCharacters, v4.1.001\n  DataStoreContainers, v4.1.001\n  DataStoreCrafts, v4.1.001\n  DataStoreCurrencies, v4.1.001\n  DataStoreInventory, v4.1.001\n  DataStoreMails, v4.1.001\n  DataStorePets, v4.1.001\n  DataStoreQuests, v4.1.001\n  DataStoreReputations, v4.1.001\n  DataStoreSpells, v4.1.001\n  DataStoreStats, v4.1.001\n  DataStoreTalents, v4.1.001\n  DebugLib, v5.1.DEV.275\n  DoTimer, v4.5.1\n  Enchantrix, v5.12.5165 (QuirkyKiwi)\n  EnchantrixBarker, v5.12.5165 (QuirkyKiwi)\n  Engravings, v4.0.0.20\n  EnhancedAchievements, v\n  Examiner, v11.01.28\n  ForgottenMail, v1.2\n  FriendsWithBenefits, v3.2.0.4\n  Gatherer, v3.2.3\n  GathererDBWowhead, v1.0.2010-12-19\n  GreedBeacon, v3.3.0.8\n  Grid, v4.1.0.1441\n  GridBuffIcons, v\n  GridCaster, v0.20\n  GridIndicatorCornerIcons, v40000-3\n  GridIndicatorCornerPlus, v40000-3\n  GridIndicatorCornerText, v1.4.2\n  GridIndicatorIconBar, vv1.4.1\n  GridIndicatorSideIcons, v40000-3\n  GridIndicatorSidePlus, v40000-3\n  GridIndicatorSideText, v1.4.2\n  GridIndicatorText3, v40000-2\n  GridManaBars, v1.04\n  GridStatusAurasExt, v0.72\n  GridStatusControlPipes, v1.22\n  GridStatusDungeonRole, v1.2.0\n  GridStatusHots, v4.1.0.1b\n  GridStatusRaidIcons, v40000-2\n  GridStatusShield, v1.23\n  GridStatusThreat, v40000-1\n  GridUnitMenu, v30300.1\n  HideBlizzard, v1.0\n  IceHUD, v1.7.5.1 (Revision: 851)\n  idQuestAutomation, v\n  ImprovedAchievements, v\n  IPopBar, v3.12\n  LightHeaded, v337\n  MikScrollingBattleText, v5.5.100\n  MinimapButtonFrame, v3.1.5\n  MinimapButtonFrameSkinPack, v3.0\n  MissingFriends, v10.11.13\n  NinjaInvite, v2.86\n  OmniCC, v4.1.pancakes6\n  Overachiever, v0.63\n  PhanxChat, v4.1.0.133\n  PriorityMail, v2.3.0.735\n  Quelevel, v4.1.0.10\n  Skada, v1.2-33\n  SkadaAbsorbs, v1.0\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SmartBuff, v4.1b\n  StatBlockDurability, v2.1.2\n  StatBlockLatency, v2.1.2\n  StatBlockCore, v2.68\n  StealYourCarbon, v4.0.0.20\n  Stubby, v5.12.5165 (QuirkyKiwi)\n  tekJunkSeller, v2.3.2.1\n  tekKrush, v3.3.0.1\n  teksLoot, v3.3.0.9\n  TheLowDown, v2.0.3.346\n  TidyPlates, v6.2.1 Revision: 275\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.1.9\n  TidyPlatesHub, v\n  TomTom, vv40100-1.4.0-4574ef7\n  TomTomPing, v1.1 r019\n  TopFit, v4.0v2\n  VendorBait, v3.3.0.5\n  WhisperTarget, v2.0\n  BlizRuntimeLib_enUS v4.1.0.40100 <us>\n  (ck=11cc)\n",
+			["timestamp"] = "2011-06-23 03:06:02",
+			["context"] = "Global",
+			["stack"] = "(tail call): ?\nInterface\\AddOns\\HideBlizzard\\Modules\\Pet.lua:146: in function `UpdateView'\nInterface\\AddOns\\HideBlizzard\\Modules\\Pet.lua:94: in function <Interface\\AddOns\\HideBlizzard\\Modules\\Pet.lua:93>\n(tail call): ?\n[C]: ?\n[string \"safecall Dispatcher[1]\"]:9: in function <[string \"safecall Dispatcher[1]\"]:5>\n(tail call): ?\n...\\AddOns\\DataStore\\libs\\AceAddon-3.0\\AceAddon-3.0.lua:543: in function `EnableAddon'\n...\\AddOns\\DataStore\\libs\\AceAddon-3.0\\AceAddon-3.0.lua:556: in function `EnableAddon'\n...\\AddOns\\DataStore\\libs\\AceAddon-3.0\\AceAddon-3.0.lua:635: in function <...\\AddOns\\DataStore\\libs\\AceAddon-3.0\\AceAddon-3.0.lua:621>\n[C]: in function `LoadAddOn'\nInterface\\FrameXML\\UIParent.lua:256: in function `UIParentLoadAddOn'\nInterface\\FrameXML\\UIParent.lua:330: in function `TimeManager_LoadUI'\nInterface\\FrameXML\\UIParent.lua:544: in function <Interface\\FrameXML\\UIParent.lua:519>\n",
 		}, -- [100]
 	},
 }

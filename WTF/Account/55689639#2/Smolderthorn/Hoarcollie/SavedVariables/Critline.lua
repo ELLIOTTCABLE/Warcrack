@@ -11,6 +11,68 @@ CritlinePerCharDB = {
 		["Hoarcollie - Smolderthorn"] = {
 			["spells"] = {
 				["dmg"] = {
+					[6807] = {
+						{
+							["normal"] = {
+								["target"] = "Commander Springvale",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 21,
+								["amount"] = 126,
+							},
+							["crit"] = {
+								["target"] = "Lord Walden",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 21,
+								["amount"] = 249,
+							},
+						}, -- [1]
+					},
+					[34428] = {
+						{
+							["normal"] = {
+								["target"] = "Veteran Dark Ranger",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 11,
+								["amount"] = 52,
+							},
+							["crit"] = {
+								["target"] = "Brown Stag",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 10,
+								["amount"] = 102,
+							},
+						}, -- [1]
+					},
+					[1822] = {
+						{
+							["normal"] = {
+								["target"] = "Searing Destroyer",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 24,
+								["amount"] = 18,
+							},
+							["crit"] = {
+								["target"] = "Forsaken Herbalist",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 20,
+								["amount"] = 34,
+							},
+						}, -- [1]
+						{
+							["normal"] = {
+								["target"] = "Searing Destroyer",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 24,
+								["amount"] = 61,
+							},
+							["crit"] = {
+								["target"] = "Forsaken Herbalist",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 20,
+								["amount"] = 115,
+							},
+						}, -- [2]
+					},
 					[5176] = {
 						{
 							["normal"] = {
@@ -27,139 +89,35 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[67063] = {
-						[2] = {
-							["normal"] = {
-								["target"] = "Bloodfang Stalker",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 5,
-								["amount"] = 5,
-							},
-							["crit"] = {
-								["target"] = "Bloodfang Stalker",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 5,
-								["amount"] = 7,
-							},
-						},
-					},
-					[6603] = {
-						{
-							["normal"] = {
-								["target"] = "Evolving Ectoplasm",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 17,
-								["amount"] = 73,
-							},
-							["crit"] = {
-								["target"] = "Evolving Ectoplasm",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 17,
-								["amount"] = 140,
-							},
-						}, -- [1]
-					},
-					[22568] = {
-						{
-							["normal"] = {
-								["target"] = "Deviate Ravager",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 18,
-								["amount"] = 90,
-							},
-						}, -- [1]
-					},
-					[339] = {
-						[2] = {
-							["normal"] = {
-								["target"] = "Brown Stag",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 10,
-								["amount"] = 4,
-							},
-							["crit"] = {
-								["target"] = "Valnov the Mad",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 10,
-								["amount"] = 6,
-							},
-						},
-					},
 					[1082] = {
 						{
 							["normal"] = {
-								["target"] = "Deviate Ravager",
+								["target"] = "Vicious Thug",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 18,
-								["amount"] = 39,
+								["targetLevel"] = 24,
+								["amount"] = 43,
 							},
 							["crit"] = {
-								["target"] = "Ogre Bodyguard",
+								["target"] = "Vicious Thug",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 15,
-								["amount"] = 65,
+								["targetLevel"] = 24,
+								["amount"] = 82,
 							},
 						}, -- [1]
 					},
-					[78674] = {
+					[72247] = {
 						{
 							["normal"] = {
-								["target"] = "Gunship Grunt",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 12,
-								["amount"] = 338,
-							},
-							["crit"] = {
-								["target"] = "Vile Spray",
+								["target"] = "Forsaken Plaguesmith",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 10,
-								["amount"] = 162,
-							},
-						}, -- [1]
-					},
-					[1822] = {
-						{
-							["normal"] = {
-								["target"] = "Deviate Ravager",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 18,
-								["amount"] = 16,
+								["amount"] = 2504,
 							},
 							["crit"] = {
-								["target"] = "Vilebrood Skitterer",
+								["target"] = "Forsaken Invader",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 7,
-								["amount"] = 19,
-							},
-						}, -- [1]
-						{
-							["normal"] = {
-								["target"] = "Deviate Ravager",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 18,
-								["amount"] = 56,
-							},
-							["crit"] = {
-								["target"] = "Deviate Ravager",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 18,
-								["amount"] = 114,
-							},
-						}, -- [2]
-					},
-					[6807] = {
-						{
-							["normal"] = {
-								["target"] = "Mutanus the Devourer",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 20,
-								["amount"] = 95,
-							},
-							["crit"] = {
-								["target"] = "Evolving Ectoplasm",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 17,
-								["amount"] = 196,
+								["targetLevel"] = 11,
+								["amount"] = 4490,
 							},
 						}, -- [1]
 					},
@@ -176,6 +134,38 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = false,
 								["targetLevel"] = -1,
 								["amount"] = 127,
+							},
+						}, -- [1]
+					},
+					[6603] = {
+						{
+							["normal"] = {
+								["target"] = "Gunship Grunt",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 12,
+								["amount"] = 150,
+							},
+							["crit"] = {
+								["target"] = "Korm Bonegrind",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 12,
+								["amount"] = 300,
+							},
+						}, -- [1]
+					},
+					[78674] = {
+						{
+							["normal"] = {
+								["target"] = "Gunship Grunt",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 12,
+								["amount"] = 338,
+							},
+							["crit"] = {
+								["target"] = "Vile Spray",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 10,
+								["amount"] = 162,
 							},
 						}, -- [1]
 					},
@@ -209,35 +199,141 @@ CritlinePerCharDB = {
 							},
 						}, -- [2]
 					},
-					[72247] = {
+					[779] = {
 						{
 							["normal"] = {
-								["target"] = "Forsaken Invader",
+								["target"] = "Black Rat",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 11,
-								["amount"] = 2338,
+								["targetLevel"] = 1,
+								["amount"] = 82,
 							},
 							["crit"] = {
-								["target"] = "Forsaken Invader",
+								["target"] = "Mindless Horror",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 11,
-								["amount"] = 4490,
+								["targetLevel"] = 20,
+								["amount"] = 130,
 							},
 						}, -- [1]
+					},
+					[67063] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Bloodfang Stalker",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 5,
+								["amount"] = 5,
+							},
+							["crit"] = {
+								["target"] = "Bloodfang Stalker",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 5,
+								["amount"] = 7,
+							},
+						},
 					},
 					[33878] = {
 						{
 							["normal"] = {
-								["target"] = "Evolving Ectoplasm",
+								["target"] = "Lord Godfrey",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 17,
-								["amount"] = 75,
+								["targetLevel"] = 21,
+								["amount"] = 95,
 							},
 							["crit"] = {
-								["target"] = "Verdan the Everliving",
+								["target"] = "Dread Scryer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 20,
-								["amount"] = 138,
+								["amount"] = 194,
+							},
+						}, -- [1]
+					},
+					[6343] = {
+						{
+							["normal"] = {
+								["target"] = "Gunship Grunt",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 12,
+								["amount"] = 128,
+							},
+							["crit"] = {
+								["target"] = "Sheep",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 3,
+								["amount"] = 73,
+							},
+						}, -- [1]
+					},
+					[22568] = {
+						{
+							["normal"] = {
+								["target"] = "Forsaken Herbalist",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 20,
+								["amount"] = 166,
+							},
+						}, -- [1]
+					},
+					[94009] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Gunship Grunt",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 12,
+								["amount"] = 58,
+							},
+							["crit"] = {
+								["target"] = "Forsaken Infantry",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 11,
+								["amount"] = 28,
+							},
+						},
+					},
+					[88161] = {
+						{
+							["normal"] = {
+								["target"] = "Korm Bonegrind",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 12,
+								["amount"] = 74,
+							},
+							["crit"] = {
+								["target"] = "Captain Anson",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 7,
+								["amount"] = 39,
+							},
+						}, -- [1]
+					},
+					[339] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Brown Stag",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 10,
+								["amount"] = 4,
+							},
+							["crit"] = {
+								["target"] = "Valnov the Mad",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 10,
+								["amount"] = 6,
+							},
+						},
+					},
+					[78] = {
+						{
+							["normal"] = {
+								["target"] = "Forsaken Infantry",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 11,
+								["amount"] = 39,
+							},
+							["crit"] = {
+								["target"] = "Valnov the Mad",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 10,
+								["amount"] = 78,
 							},
 						}, -- [1]
 					},
@@ -256,18 +352,18 @@ CritlinePerCharDB = {
 					[8936] = {
 						{
 							["normal"] = {
-								["target"] = "Dëmonica-Spirestone",
+								["target"] = "Hoarcollie",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 13,
-								["amount"] = 146,
+								["targetLevel"] = 20,
+								["amount"] = 158,
 							},
 						}, -- [1]
 						{
 							["normal"] = {
-								["target"] = "Dëmonica-Spirestone",
+								["target"] = "Hoarcollie",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 13,
-								["amount"] = 16,
+								["targetLevel"] = 20,
+								["amount"] = 17,
 							},
 							["crit"] = {
 								["target"] = "Dëmonica-Spirestone",
@@ -288,8 +384,8 @@ CritlinePerCharDB = {
 							["crit"] = {
 								["target"] = "Hoarcollie",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 16,
-								["amount"] = 78,
+								["targetLevel"] = 20,
+								["amount"] = 86,
 							},
 						},
 					},

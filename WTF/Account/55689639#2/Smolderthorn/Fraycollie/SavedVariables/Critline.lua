@@ -139,29 +139,29 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[76575] = {
+					[75557] = {
 						{
 							["normal"] = {
-								["target"] = "Twilight Zealot",
+								["target"] = "Garnoth, Fist of the Legion",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 4763,
+								["targetLevel"] = 81,
+								["amount"] = 55781,
 							},
 						}, -- [1]
 					},
-					[34428] = {
+					[12809] = {
 						{
 							["normal"] = {
-								["target"] = "Stonecore Warbringer",
+								["target"] = "Temple Adept",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 9165,
+								["amount"] = 9364,
 							},
 							["crit"] = {
-								["target"] = "Imp",
+								["target"] = "Stonecore Rift Conjurer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 17566,
+								["amount"] = 18350,
 							},
 						}, -- [1]
 					},
@@ -213,29 +213,29 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[12809] = {
+					[34428] = {
 						{
 							["normal"] = {
-								["target"] = "Temple Adept",
+								["target"] = "Stonecore Warbringer",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 9364,
+								["amount"] = 9165,
 							},
 							["crit"] = {
-								["target"] = "Stonecore Rift Conjurer",
+								["target"] = "Imp",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 82,
-								["amount"] = 18350,
+								["amount"] = 17566,
 							},
 						}, -- [1]
 					},
-					[75557] = {
+					[76575] = {
 						{
 							["normal"] = {
-								["target"] = "Garnoth, Fist of the Legion",
+								["target"] = "Twilight Zealot",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 81,
-								["amount"] = 55781,
+								["targetLevel"] = 80,
+								["amount"] = 4763,
 							},
 						}, -- [1]
 					},

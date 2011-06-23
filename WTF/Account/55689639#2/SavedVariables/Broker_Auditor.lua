@@ -1,55 +1,61 @@
 
 BrokerAuditorDB = {
-	["profileKeys"] = {
-		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
-		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
-		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-	},
 	["global"] = {
 		["LibDBIcon"] = {
 			["hide"] = true,
 		},
 		["styleIndex"] = 2,
 	},
+	["profileKeys"] = {
+		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
+		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
 		},
-		["Summoneer - Smolderthorn"] = {
-		},
 		["Github - Smolderthorn"] = {
 		},
-		["Combatcollie - The Underbog"] = {
+		["Fraycollie - Nordrassil"] = {
 		},
-		["Hoarcollie - Smolderthorn"] = {
-		},
-		["Fraycollie - The Underbog"] = {
-		},
-		["Fraycollie - Smolderthorn"] = {
-		},
-		["Othercollie - Smolderthorn"] = {
-		},
-		["Melancollie - Smolderthorn"] = {
-		},
-		["Summoneer - Ysondre"] = {
-		},
-		["Warcollie - Darkspear"] = {
+		["Summoneer - Smolderthorn"] = {
 		},
 		["Battlecollie - Smolderthorn"] = {
 		},
+		["Combatcollie - The Underbog"] = {
+		},
+		["Warcollie - Darkspear"] = {
+		},
 		["Battlecollie - Ysondre"] = {
-			["absurdDetail"] = true,
 			["hideNetTotal"] = false,
+			["absurdDetail"] = true,
+		},
+		["Fraycollie - Smolderthorn"] = {
+		},
+		["Melancollie - Smolderthorn"] = {
+		},
+		["Hoarcollie - Smolderthorn"] = {
+		},
+		["Summoneer - Ysondre"] = {
+		},
+		["Othercollie - Smolderthorn"] = {
+		},
+		["Fraycollie - The Underbog"] = {
+		},
+		["Warmongrel - Ysondre"] = {
 		},
 	},
 }

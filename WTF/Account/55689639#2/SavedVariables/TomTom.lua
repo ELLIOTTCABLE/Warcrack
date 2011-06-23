@@ -1,14 +1,16 @@
 
 TomTomDB = {
 	["profileKeys"] = {
-		["Github - Smolderthorn"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Hoarcollie - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
+		["Warmongrel - Ysondre"] = "Default",
+		["Fraycollie - Nordrassil"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
+		["Github - Smolderthorn"] = "Default",
+		["Nocollie - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
 		["Othercollie - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
-		["Nocollie - Smolderthorn"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -24,31 +26,37 @@ TomTomDB = {
 TomTomWaypoints = nil
 TomTomWaypointsMF = {
 	["profileKeys"] = {
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 	},
 	["profiles"] = {
+		["Warmongrel - Ysondre"] = {
+		},
+		["Fraycollie - Nordrassil"] = {
+		},
+		["Summoneer - Smolderthorn"] = {
+		},
 		["Github - Smolderthorn"] = {
+		},
+		["Nocollie - Smolderthorn"] = {
 		},
 		["Fraycollie - Smolderthorn"] = {
 		},
-		["Hoarcollie - Smolderthorn"] = {
-		},
 		["Melancollie - Smolderthorn"] = {
-		},
-		["Summoneer - Smolderthorn"] = {
 		},
 		["Othercollie - Smolderthorn"] = {
 		},
 		["Battlecollie - Smolderthorn"] = {
 		},
-		["Nocollie - Smolderthorn"] = {
+		["Hoarcollie - Smolderthorn"] = {
 		},
 	},
 }

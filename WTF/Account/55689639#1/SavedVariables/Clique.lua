@@ -2,17 +2,17 @@
 CliqueDB = nil
 CliqueDB3 = {
 	["profileKeys"] = {
-		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
-		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["profiles"] = {
-		["Ililliliilil - The Underbog"] = {
+		["Nocollie - Smolderthorn"] = {
 			["bindings"] = {
 				{
 					["sets"] = {
@@ -34,10 +34,10 @@ CliqueDB3 = {
 		["Awihrtoawe - Smolderthorn"] = {
 			["bindings"] = {
 				{
+					["type"] = "target",
 					["sets"] = {
 						["default"] = true,
 					},
-					["type"] = "target",
 					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]
@@ -50,7 +50,7 @@ CliqueDB3 = {
 				}, -- [2]
 			},
 		},
-		["Awdawdawd - Smolderthorn"] = {
+		["Snorecollie - Smolderthorn"] = {
 			["bindings"] = {
 				{
 					["sets"] = {
@@ -72,10 +72,10 @@ CliqueDB3 = {
 		["Illililiili - Smolderthorn"] = {
 			["bindings"] = {
 				{
-					["type"] = "target",
 					["sets"] = {
 						["default"] = true,
 					},
+					["type"] = "target",
 					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]
@@ -91,10 +91,10 @@ CliqueDB3 = {
 		["Illiliililil - Smolderthorn"] = {
 			["bindings"] = {
 				{
-					["type"] = "target",
 					["sets"] = {
 						["default"] = true,
 					},
+					["type"] = "target",
 					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]
@@ -110,10 +110,10 @@ CliqueDB3 = {
 		["Tempcollie - Ysondre"] = {
 			["bindings"] = {
 				{
-					["type"] = "target",
 					["sets"] = {
 						["default"] = true,
 					},
+					["type"] = "target",
 					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]
@@ -126,7 +126,7 @@ CliqueDB3 = {
 				}, -- [2]
 			},
 		},
-		["Snorecollie - Smolderthorn"] = {
+		["Awdawdawd - Smolderthorn"] = {
 			["bindings"] = {
 				{
 					["type"] = "target",
@@ -145,7 +145,7 @@ CliqueDB3 = {
 				}, -- [2]
 			},
 		},
-		["Nocollie - Smolderthorn"] = {
+		["Ililliliilil - The Underbog"] = {
 			["bindings"] = {
 				{
 					["type"] = "target",

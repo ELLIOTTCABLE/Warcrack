@@ -2,19 +2,21 @@
 DataStore_CurrenciesDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
 	},
 	["global"] = {
 		["Reference"] = {
@@ -27,10 +29,10 @@ DataStore_CurrenciesDB = {
 			},
 			["CurrencyTextRev"] = {
 				["Justice Points"] = 2,
-				["Dungeon and Raid"] = 1,
+				["Conquest Points"] = 4,
 				["Honor Points"] = 5,
 				["Player vs. Player"] = 3,
-				["Conquest Points"] = 4,
+				["Dungeon and Raid"] = 1,
 			},
 		},
 		["Characters"] = {
@@ -49,7 +51,7 @@ DataStore_CurrenciesDB = {
 					8, -- [4]
 					36490, -- [5]
 				},
-				["lastUpdate"] = 1308531034,
+				["lastUpdate"] = 1308802058,
 			},
 			["Default.Smolderthorn.Summoneer"] = {
 				["Currencies"] = {
@@ -58,15 +60,25 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1308566353,
 			},
+			["Default.Nordrassil.Fraycollie"] = {
+				["Currencies"] = {
+					3, -- [1]
+					242180, -- [2]
+					7, -- [3]
+					8, -- [4]
+					36490, -- [5]
+				},
+				["lastUpdate"] = 1308814632,
+			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["Currencies"] = {
 					3, -- [1]
-					120068, -- [2]
+					155908, -- [2]
 					7, -- [3]
 					8, -- [4]
 					20362, -- [5]
 				},
-				["lastUpdate"] = 1308695997,
+				["lastUpdate"] = 1308783292,
 			},
 			["Default.Smolderthorn.Othercollie"] = {
 				["Currencies"] = {
@@ -75,12 +87,19 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1308332289,
 			},
-			["Default.Smolderthorn.Github"] = {
+			["Default.Ysondre.Warmongrel"] = {
 				["Currencies"] = {
 					7, -- [1]
 					8, -- [2]
 				},
-				["lastUpdate"] = 1308697100,
+				["lastUpdate"] = 1308801588,
+			},
+			["Default.Darkspear.Warcollie"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+				["lastUpdate"] = 1308162231,
 			},
 			["Default.Smolderthorn.Warcollie"] = {
 				["Currencies"] = {
@@ -95,14 +114,14 @@ DataStore_CurrenciesDB = {
 					8, -- [2]
 					138, -- [3]
 				},
-				["lastUpdate"] = 1308531152,
+				["lastUpdate"] = 1308801970,
 			},
-			["Default.Darkspear.Warcollie"] = {
+			["Default.Smolderthorn.Hoarcollie"] = {
 				["Currencies"] = {
 					7, -- [1]
 					8, -- [2]
 				},
-				["lastUpdate"] = 1308162231,
+				["lastUpdate"] = 1308813494,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["Currencies"] = {
@@ -124,13 +143,12 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1307762090,
 			},
-			["Default.Smolderthorn.Hoarcollie"] = {
+			["Default.Smolderthorn.Github"] = {
 				["Currencies"] = {
 					7, -- [1]
 					8, -- [2]
-					9738, -- [3]
 				},
-				["lastUpdate"] = 1308271908,
+				["lastUpdate"] = 1308697100,
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["Currencies"] = {

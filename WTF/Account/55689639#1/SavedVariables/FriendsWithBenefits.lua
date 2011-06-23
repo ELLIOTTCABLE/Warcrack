@@ -21,9 +21,9 @@ FriendsWithBenefitsDB = {
 	["Alliance - Smolderthorn"] = {
 		["removed"] = {
 			["illiliililil"] = true,
+			["illililiili"] = true,
 			["nocollie"] = true,
 			["awihrtoawe"] = true,
-			["illililiili"] = true,
 		},
 		["notes"] = {
 		},

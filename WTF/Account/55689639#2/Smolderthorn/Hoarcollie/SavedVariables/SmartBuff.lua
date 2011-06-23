@@ -102,6 +102,24 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["OH"] = false,
 			},
+			["Defensive Stance"] = {
+				["OH"] = false,
+				["SelfOnly"] = false,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["EnableG"] = false,
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["IgnoreList"] = {
+				},
+			},
 			["Instant Poison"] = {
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
@@ -138,6 +156,7 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["OH"] = false,
 			},
+			["GrpBuffSize"] = 4,
 			["Mind-Numbing Poison"] = {
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
@@ -174,7 +193,24 @@ SMARTBUFF_Buffs = {
 				["RH"] = false,
 				["OH"] = false,
 			},
-			["GrpBuffSize"] = 4,
+			["Battle Stance"] = {
+				["EnableG"] = false,
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["OH"] = false,
+			},
 			["SelfFirst"] = false,
 			["Thorns"] = {
 				["HUNTER"] = false,
@@ -212,7 +248,8 @@ SMARTBUFF_Buffs = {
 			},
 		},
 		["Order"] = {
-			"Thorns", -- [1]
+			"Battle Stance", -- [1]
+			"Defensive Stance", -- [2]
 		},
 	}, -- [1]
 }

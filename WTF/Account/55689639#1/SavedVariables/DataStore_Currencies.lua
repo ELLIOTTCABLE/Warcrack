@@ -1,14 +1,14 @@
 
 DataStore_CurrenciesDB = {
 	["profileKeys"] = {
-		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
-		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["global"] = {
 		["Reference"] = {
@@ -22,12 +22,12 @@ DataStore_CurrenciesDB = {
 			},
 		},
 		["Characters"] = {
-			["Default.Smolderthorn.Snorecollie"] = {
+			["Default.Smolderthorn.Illililiili"] = {
 				["Currencies"] = {
 					3, -- [1]
 					4, -- [2]
 				},
-				["lastUpdate"] = 1308534246,
+				["lastUpdate"] = 1307775469,
 			},
 			["Default.Ysondre.Tempcollie"] = {
 				["Currencies"] = {
@@ -36,12 +36,12 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1307914182,
 			},
-			["Default.Smolderthorn.Illililiili"] = {
+			["Default.Smolderthorn.Nocollie"] = {
 				["Currencies"] = {
 					3, -- [1]
 					4, -- [2]
 				},
-				["lastUpdate"] = 1307775469,
+				["lastUpdate"] = 1308331756,
 			},
 			["Default.Smolderthorn.Awihrtoawe"] = {
 				["Currencies"] = {
@@ -50,12 +50,12 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1307971123,
 			},
-			["Default.Smolderthorn.Nocollie"] = {
+			["Default.Smolderthorn.Snorecollie"] = {
 				["Currencies"] = {
 					3, -- [1]
 					4, -- [2]
 				},
-				["lastUpdate"] = 1308331756,
+				["lastUpdate"] = 1308780774,
 			},
 			["Default.Smolderthorn.Awdawdawd"] = {
 				["Currencies"] = {

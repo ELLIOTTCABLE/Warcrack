@@ -1,8 +1,8 @@
 
 TomTomPing_DB = {
 	["profileKeys"] = {
-		["Awdawdawd - Smolderthorn"] = "Default",
 		["Snorecollie - Smolderthorn"] = "Default",
+		["Awdawdawd - Smolderthorn"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {

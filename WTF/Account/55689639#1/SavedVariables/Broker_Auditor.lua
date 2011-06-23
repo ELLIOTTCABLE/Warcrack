@@ -1,21 +1,21 @@
 
 BrokerAuditorDB = {
 	["profileKeys"] = {
-		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Awihrtoawe - Smolderthorn"] = "Awihrtoawe - Smolderthorn",
-		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
 		["Illililiili - Smolderthorn"] = "Illililiili - Smolderthorn",
 		["Illiliililil - Smolderthorn"] = "Illiliililil - Smolderthorn",
 		["Tempcollie - Ysondre"] = "Tempcollie - Ysondre",
-		["Snorecollie - Smolderthorn"] = "Snorecollie - Smolderthorn",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Awdawdawd - Smolderthorn"] = "Awdawdawd - Smolderthorn",
+		["Ililliliilil - The Underbog"] = "Ililliliilil - The Underbog",
 	},
 	["profiles"] = {
-		["Ililliliilil - The Underbog"] = {
+		["Nocollie - Smolderthorn"] = {
 		},
 		["Awihrtoawe - Smolderthorn"] = {
 		},
-		["Awdawdawd - Smolderthorn"] = {
+		["Snorecollie - Smolderthorn"] = {
 		},
 		["Illililiili - Smolderthorn"] = {
 		},
@@ -23,9 +23,9 @@ BrokerAuditorDB = {
 		},
 		["Tempcollie - Ysondre"] = {
 		},
-		["Snorecollie - Smolderthorn"] = {
+		["Awdawdawd - Smolderthorn"] = {
 		},
-		["Nocollie - Smolderthorn"] = {
+		["Ililliliilil - The Underbog"] = {
 		},
 	},
 }

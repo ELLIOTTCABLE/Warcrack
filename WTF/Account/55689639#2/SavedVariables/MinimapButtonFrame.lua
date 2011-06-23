@@ -2,19 +2,21 @@
 MBFDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
 		["Github - Smolderthorn"] = "Default",
+		["Fraycollie - Nordrassil"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
-		["Hoarcollie - Smolderthorn"] = "Default",
+		["Othercollie - Smolderthorn"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Warcollie - Darkspear"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
-		["Summoneer - Ysondre"] = "Default",
-		["Othercollie - Smolderthorn"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
+		["Summoneer - Ysondre"] = "Default",
+		["Warcollie - Darkspear"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
+		["Warmongrel - Ysondre"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -34,7 +36,7 @@ MBFDB = {
 				-224.1380004882812, -- [4]
 			},
 			["colorLocked"] = "All",
-			["padding"] = 3.5,
+			["sortOrder"] = "Blizzard First",
 			["currentTexture"] = "Serenity Square",
 			["customChildren"] = {
 				"MinimapButtonFrameDragButton", -- [1]
@@ -58,8 +60,8 @@ MBFDB = {
 				"MiniMapLFGFrame", -- [19]
 			},
 			["grabMBFButton"] = true,
+			["padding"] = 3.5,
 			["grabBlizzButtons"] = true,
-			["sortOrder"] = "Blizzard First",
 		},
 	},
 }

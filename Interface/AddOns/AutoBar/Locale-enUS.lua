@@ -248,6 +248,7 @@ if (GetLocale() == "enUS") then
 		["AutoBarButtonPets"] = "Pets",
 		["AutoBarButtonQuest"] = "Quest",
 		["AutoBarButtonMiscFun"] = "Misc, Fun",
+		["AutoBarButtonGuildSpell"] = "Guild Spells",
 		["AutoBarButtonRecovery"] = "Mana / Rage / Energy",
 		["AutoBarButtonRotationDrums"] = "Rotation: Drums",
 		["AutoBarButtonShields"] = "Shields",
@@ -505,6 +506,8 @@ if (GetLocale() == "enUS") then
 
 		["Misc.Lockboxes"] = LOCKED;
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
+		
+		["Spell.Guild"] = "Guild Spells";
 
 		["Spell.Aura"] = "Aura / Aspect";
 		["Spell.Buff.Weapon"] = "Buff Spells: Weapon";

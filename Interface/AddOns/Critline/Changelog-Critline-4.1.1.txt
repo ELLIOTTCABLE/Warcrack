@@ -1,0 +1,43 @@
+------------------------------------------------------------------------
+r39 | lombra | 2011-06-29 05:40:15 +0000 (Wed, 29 Jun 2011) | 1 line
+Changed paths:
+   A /tags/4.1.1 (from /trunk:38)
+
+- Tagging as 4.1.1
+------------------------------------------------------------------------
+r38 | lombra | 2011-06-29 05:39:32 +0000 (Wed, 29 Jun 2011) | 4 lines
+Changed paths:
+   M /trunk/AuraTracker.lua
+   M /trunk/Critline.toc
+   M /trunk/changeLog.txt
+   M /trunk/core.lua
+   M /trunk/filters.lua
+
+- Add tooltip exception for Arcane Missiles.
+- Add Corruption:Absolute (Cho'gall) to aura filter.
+- Update combat log event code for patch 4.2.
+- ToC bump.
+------------------------------------------------------------------------
+r37 | lombra | 2011-05-29 16:03:19 +0000 (Sun, 29 May 2011) | 2 lines
+Changed paths:
+   M /trunk/Critline.toc
+   M /trunk/splash.lua
+
+- Register LibSharedMedia callbacks to notify us when new media is registered.
+- Remove LibSharedMedia optional dependency.
+------------------------------------------------------------------------
+r36 | lombra | 2011-05-24 17:37:59 +0000 (Tue, 24 May 2011) | 4 lines
+Changed paths:
+   D /trunk/.pkgmeta
+   M /trunk/Critline.toc
+   M /trunk/changeLog.txt
+   A /trunk/libs/AceDB-3.0.lua
+   A /trunk/libs/AceLocale-3.0.lua
+   A /trunk/libs/CallbackHandler-1.0.lua
+   A /trunk/libs/LibStub.lua
+
+- Revert .pkgmeta changes.
+- Update change log.
+- Remove Ace3 optional depedency.
+- Update ToC addon version.
+------------------------------------------------------------------------

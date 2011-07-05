@@ -5,7 +5,7 @@
 
 	AddOn: Gatherer
 	Revision: $Id: GatherStrings.lua 846 2009-04-15 22:07:52Z Esamynn $
-	Version: 3.2.3 (<%codename%>)
+	Version: 3.2.4 (<%codename%>)
 
 	License:
 		This program is free software; you can redistribute it and/or

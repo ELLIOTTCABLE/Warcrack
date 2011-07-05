@@ -1,0 +1,26 @@
+------------------------------------------------------------------------
+r856 | parnic | 2011-06-28 15:50:28 +0000 (Tue, 28 Jun 2011) | 1 line
+Changed paths:
+   A /tags/1.7.6 (from /trunk:855)
+
+Tagging as 1.7.6
+------------------------------------------------------------------------
+r855 | parnic | 2011-06-28 15:08:07 +0000 (Tue, 28 Jun 2011) | 1 line
+Changed paths:
+   M /trunk/IceHUD.toc
+   M /trunk/IceHUD_Options/IceHUD_Options.toc
+
+- 4.2 toc update
+------------------------------------------------------------------------
+r854 | parnic | 2011-06-11 05:11:18 +0000 (Sat, 11 Jun 2011) | 1 line
+Changed paths:
+   M /trunk/IceCore.lua
+
+- fixed bug with selecting the last 4 presets. they weren't actually defined.
+------------------------------------------------------------------------
+r853 | parnic | 2011-05-25 14:46:01 +0000 (Wed, 25 May 2011) | 1 line
+Changed paths:
+   M /trunk/modules/CustomBar.lua
+
+- drycoded possible fix for a reported error
+------------------------------------------------------------------------

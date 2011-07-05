@@ -1,6 +1,11 @@
 CHANGELOG (- done, = to test, + todo):
 ---------------------------------------
 
+3.2.4
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10522
+- GATH-160 (In Progress): Archaeology nodes will now be recorded.  Display is still under development.
+
 3.2.3
 ========
 Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10514
@@ -511,4 +516,4 @@ Deleted a rogue print2 statement.
 - Added giant clam treasure
 
 --------------
-Revision: $Id: ChangeLog.txt 921 2010-12-21 19:23:50Z Esamynn $
+Revision: $Id: ChangeLog.txt 925 2011-06-29 02:56:13Z Esamynn $

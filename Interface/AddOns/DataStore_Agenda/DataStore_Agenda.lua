@@ -37,11 +37,37 @@ end
 -- *** Scanning functions ***
 local function ScanContacts()
 	local contacts = addon.ThisCharacter.Contacts
+	
+	local oldValues = {}
+	
+	-- if a known contact disconnected, preserve the info we know about him
+	for name, info in pairs(contacts) do
+		if type(v) == "table" then		-- contacts were only saved as strings in earlier versions,  make sure they're not taken into account
+			if info.level then
+				oldValues[name] = {}
+				oldValues[name].level = info.level
+				oldValues[name].class = info.class
+			end
+		end
+	end
+	
 	wipe(contacts)
 	
-	for i = 1, GetNumFriends() do
-	   local name = GetFriendInfo(i);
-	   table.insert(contacts, name)
+	for i = 1, GetNumFriends() do	-- only friends, not real id, as they're always visible
+	   local name, level, class, zone, isOnline, note = GetFriendInfo(i);
+		
+		if name then
+			contacts[name] = contacts[name] or {}
+			contacts[name].note = note
+			
+			if isOnline then	-- level, class, zone will be ok
+				contacts[name].level = level
+				contacts[name].class = class
+			elseif oldValues[name] then	-- did we save information earlier about this contact ?
+				contacts[name].level = oldValues[name].level
+				contacts[name].class = oldValues[name].class				
+			end
+		end
 	end
 	
 	addon.ThisCharacter.lastUpdate = time()
@@ -188,14 +214,21 @@ local function _GetClientServerTimeGap()
 end
 
 -- * Contacts *
-local function _GetNumContacts(character)
-	return #character.Contacts
+local function _GetContacts(character)
+	return character.Contacts
+	
+	--[[	Typical usage:
+		
+		for name, _ in pairs(DataStore:GetContacts(character) do
+			myvar1, myvar2, .. = DataStore:GetContactInfo(character, name)
+		end
+	--]]
 end
 
-local function _GetContactInfo(character, index)
-	local contact = character.Contacts[index]
-	if contact then
-		return contact
+local function _GetContactInfo(character, key)
+	local contact = character.Contacts[key]
+	if type(contact) == "table" then
+		return contact.level, contact.class, contact.note
 	end
 end
 

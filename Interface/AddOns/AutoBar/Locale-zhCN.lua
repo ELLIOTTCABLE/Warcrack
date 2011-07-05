@@ -246,6 +246,7 @@ if (GetLocale() == "zhCN") then
 		["AutoBarButtonPets"] = "宠物",
 		["AutoBarButtonQuest"] = "任务物品",
 		["AutoBarButtonMiscFun"] = "Misc, Fun",
+		["AutoBarButtonGuildSpell"] = "Guild Spells",
 		["AutoBarButtonRecovery"] = "法力恢复",
 		["AutoBarButtonRotationDrums"] = "旋转：战鼓",
 		["AutoBarButtonShields"] = "护盾",

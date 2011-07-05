@@ -204,6 +204,10 @@ local function AlphaFunctionByRaidIcon(unit)
 	if unit.isMarked then return LocalVars.OpacitySpotlight end 
 end
 
+local function AlphaFunctionByActive(unit) 		
+	if (unit.health < unit.healthmax) or (unit.threatValue > 1) or unit.isInCombat or unit.isMarked then return LocalVars.OpacitySpotlight end 
+end
+
 local function AlphaFunctionByActiveDebuffs(unit) 
 	local widget = unit.frame.widgets.DebuffWidget
 	--local widget = TidyPlatesWidgets.GetAuraWidgetByGUID(unit.guid)
@@ -217,18 +221,25 @@ local function AlphaFilter(unit)
 	end
 end
 
-local AlphaFunctionsDamage = { DummyFunction, AlphaFunctionByThreatHigh, AlphaFunctionByMouseover, AlphaFunctionByActiveDebuffs, AlphaFunctionByEnemy, AlphaFunctionByNPC, AlphaFunctionByRaidIcon, }
-local AlphaFunctionsTank = { DummyFunction, AlphaFunctionByThreatLow, AlphaFunctionByMouseover, AlphaFunctionByActiveDebuffs, AlphaFunctionByEnemy, AlphaFunctionByNPC, AlphaFunctionByRaidIcon, }
+local AlphaFunctionsDamage = { DummyFunction, AlphaFunctionByThreatHigh, AlphaFunctionByMouseover, AlphaFunctionByActiveDebuffs, AlphaFunctionByEnemy, AlphaFunctionByNPC, AlphaFunctionByRaidIcon, AlphaFunctionByActive}
+local AlphaFunctionsTank = { DummyFunction, AlphaFunctionByThreatLow, AlphaFunctionByMouseover, AlphaFunctionByActiveDebuffs, AlphaFunctionByEnemy, AlphaFunctionByNPC, AlphaFunctionByRaidIcon, AlphaFunctionByActive}
 
 -- Alpha Functions Listed by Role order: Damage, Tank, Heal
 local AlphaFunctions = {AlphaFunctionsDamage, AlphaFunctionsTank}
+
+local function Diminish(num)
+	if num == 1 then return 1
+	elseif num < .3 then return num*.60
+	elseif num < .6 then return num*.70
+	else return num * .80 end
+end
 
 local function AlphaDelegate(...)
 	local unit = ...
 	local alpha
 	
-	if unit.isTarget then return LocalVars.OpacityTarget
-	elseif unit.isCasting and LocalVars.OpacityFullSpell then return LocalVars.OpacityTarget
+	if unit.isTarget then return Diminish(LocalVars.OpacityTarget)
+	elseif unit.isCasting and LocalVars.OpacityFullSpell then return Diminish(LocalVars.OpacityTarget)
 	else
 		-- Filter
 		if AlphaFilter(unit) then alpha = LocalVars.OpacityFiltered 
@@ -236,10 +247,10 @@ local function AlphaDelegate(...)
 		else alpha = AlphaFunctions[LocalRole][LocalVars.OpacitySpotlightMode](...) end
 	end
 	
-	if alpha then return alpha
+	if alpha then return Diminish(alpha)
 	else 
-		if (not UnitExists("target")) and LocalVars.OpacityFullNoTarget then return LocalVars.OpacityTarget
-		else return LocalVars.OpacityNonTarget end
+		if (not UnitExists("target")) and LocalVars.OpacityFullNoTarget then return Diminish(LocalVars.OpacityTarget)
+		else return Diminish(LocalVars.OpacityNonTarget) end
 	end
 end
 

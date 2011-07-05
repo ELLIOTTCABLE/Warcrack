@@ -1,3 +1,12 @@
+4.2.0.8-Release
+    Tagging stable version
+
+4.1.0.7-Beta
+    You didn't see that
+
+4.1.0.6-Beta
+    Fix for quest item data not loaded after login
+
 3.3.0.5-Release
     Make work with 3.3
 

@@ -12,48 +12,7 @@
 --]]
 
 local LIBRARY_VERSION_MAJOR = "LibRevision"
-local LIBRARY_VERSION_MINOR = 1
-
---[[-----------------------------------------------------------------
-
-LibStub is a simple versioning stub meant for use in Libraries.
-See <http://www.wowwiki.com/LibStub> for more info.
-LibStub is hereby placed in the Public Domain.
-Credits:
-    Kaelten, Cladhaire, ckknight, Mikk, Ammo, Nevcairiel, joshborke
-
---]]-----------------------------------------------------------------
-do
-	local LIBSTUB_MAJOR, LIBSTUB_MINOR = "LibStub", 2
-	local LibStub = _G[LIBSTUB_MAJOR]
-
-	if not LibStub or LibStub.minor < LIBSTUB_MINOR then
-		LibStub = LibStub or {libs = {}, minors = {} }
-		_G[LIBSTUB_MAJOR] = LibStub
-		LibStub.minor = LIBSTUB_MINOR
-
-		function LibStub:NewLibrary(major, minor)
-			assert(type(major) == "string", "Bad argument #2 to `NewLibrary' (string expected)")
-			minor = assert(tonumber(strmatch(minor, "%d+")), "Minor version must either be a number or contain a number.")
-
-			local oldminor = self.minors[major]
-			if oldminor and oldminor >= minor then return nil end
-			self.minors[major], self.libs[major] = minor, self.libs[major] or {}
-			return self.libs[major], oldminor
-		end
-
-		function LibStub:GetLibrary(major, silent)
-			if not self.libs[major] and not silent then
-				error(("Cannot find a library instance of %q."):format(tostring(major)), 2)
-			end
-			return self.libs[major], self.minors[major]
-		end
-
-		function LibStub:IterateLibraries() return pairs(self.libs) end
-		setmetatable(LibStub, { __call = LibStub.GetLibrary })
-	end
-end
---[End of LibStub]---------------------------------------------------
+local LIBRARY_VERSION_MINOR = 2
 
 local lib = LibStub:NewLibrary(LIBRARY_VERSION_MAJOR, LIBRARY_VERSION_MINOR)
 if not lib then return end
@@ -85,24 +44,29 @@ function lib:Set(url, revision, dev, ...)
 		end
 
 		if branch then
-			local embed, addit = false, branch
+			local embed, addition
 			local addon = name:lower()
 
-			if not lib.versions[addon] then
-				lib.versions[addon] = {}
+			local vaddon = lib.versions[addon]
+			if not vaddon then
+				vaddon = {}
+				lib.versions[addon] = vaddon
 			end
 
-			local vaddon = lib.versions[addon]
 			local vrev = max(vaddon['x-revision'] or 0, rev)
-			vaddon['x-revision'] = vrev
-			
-			if not IsAddOnLoaded(addon) then
-				embed = true
-				addit = addit.."/embedded"
-			end
 
 			local ver = GetAddOnMetadata(addon, "Version")
-			if not ver or ver:sub(0,2) == "<%" then ver = dev..rev end
+			if not ver or ver:sub(0,2) == "<%" then
+				ver = (dev or "DEV.")..vrev
+				if branch ~= "trunk" then -- if a DEV side branch, add to additional info
+					addition = branch
+				end
+			end
+
+			if not IsAddOnLoaded(addon) then
+				embed = true
+				addition = (addition or "").."/embedded"
+			end
 
 			if not vaddon["x-revisions"] then
 				vaddon["x-revisions"] = {}

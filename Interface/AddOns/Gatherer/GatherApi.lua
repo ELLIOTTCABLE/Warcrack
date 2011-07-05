@@ -1,6 +1,6 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
+	Version: 3.2.4 (<%codename%>)
 	Revision: $Id: GatherApi.lua 900 2010-12-04 23:45:25Z Esamynn $
 
 	License:

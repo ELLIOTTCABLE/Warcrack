@@ -1,6 +1,6 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
+	Version: 3.2.4 (<%codename%>)
 	Revision: $Id: GatherDropRates.lua 798 2009-02-03 23:48:25Z Esamynn $
 
 	License:

@@ -1,6 +1,15 @@
-TidyPlatesThemeList["Graphite"] = {}
-local theme = TidyPlatesThemeList["Graphite"]
-local path = "Interface\\Addons\\TidyPlates_Graphite" 
+-----------------------------------------------------
+-- Theme Definition
+-----------------------------------------------------
+local Theme = {}
+local ThemeName = "Graphite"
+local CopyTable = TidyPlatesUtility.copyTable
+
+local path = "Interface\\Addons\\TidyPlates_Graphite\\" 
+local font =					path.."Qlassik_TB.ttf"
+local blizzfont =				NAMEPLATE_FONT
+
+local castoffset = 1
 
 local artwidth = 128
 local borderheight = 16
@@ -8,81 +17,76 @@ local barheight = 16
 local widthfactor = .6
 local heightfactor = .8
 
+local StyleDefault = {}
 
-theme.healthborder = {
-	texture	= path.."\\HealthBorder",
-	glowtexture 			= path.."\\Mouseover",
-	elitetexture = path.."\\HealthBorder",
-	width = artwidth*widthfactor,
-	height = borderheight*heightfactor,
+StyleDefault.hitbox = {
+	width = 100,
+	height = 35,
+}
+
+StyleDefault.frame = {
+	--width = 100,
+	--height = 45,
 	x = 0,
-	y = 0,
-}
-
-theme.highlight = {
-	texture	= path.."\\Mouseover",
-	width = artwidth*widthfactor,
-	height = borderheight*heightfactor,
-	x = 0,
-	y = 0,
-}
-
-theme.healthbar = {
-	texture 				= path.."\\StatusBar",
-	width = 98*widthfactor,
-	--width = 96*widthfactor,
-	height = barheight*heightfactor,
-	x = 0,
-	y = 0,
-}
-
-theme.threatborder = {
-	texture = path.."\\Empty",
-	elitetexture = path.."\\Empty",
-}
-
-theme.castborder = {
-	texture	= path.."\\HealthBorder",
-	glowtexture 			= path.."\\HealthBorder",
-	elitetexture = path.."\\HealthBorder",
-	width = artwidth*widthfactor,
-	height = borderheight*heightfactor,
+	y = 0,		-- (-12) To put the bar near the middle
 	anchor = "CENTER",
-	x = 0,
-	y = -6,
 }
 
-theme.castbar = {
-	texture 				= path.."\\StatusBar",
+StyleDefault.healthborder = {
+	texture	= path.."HealthBorder",
+	width = artwidth*widthfactor,
+	height = borderheight*heightfactor,
+	x = 0,
+	y = 0,
+}
+
+StyleDefault.target = {
+	texture 			= path.."TextPlate_Target",
+	width = 128,
+	height = 36,
+	x = 0,
+	y = -4,
+	anchor = "CENTER",
+	show = true,
+}
+
+StyleDefault.highlight = {
+	texture 			= path.."Mouseover",
+}
+
+StyleDefault.threatborder = {
+	texture = path.."Empty",
+}
+
+StyleDefault.castbar = {
+	texture 				= path.."StatusBar",
 	width = 96*widthfactor,
 	height = barheight*heightfactor,
 	anchor = "CENTER",
 	x = 0,
-	y = -6,
+	y = -6+castoffset,
 }
 
---[[
-theme.spellicon = {
-	height = 12,
-	width = 12,
+StyleDefault.castborder = {
+	texture	= path.."HealthBorder",
+	width = artwidth*widthfactor,
+	height = borderheight*heightfactor,
+	anchor = "CENTER",
 	x = 0,
-	y = -7,
-	show = true,
-}
---]]
-
-theme.spellicon = {
-	height = 12,
-	width = 12,
-	x = -38,
-	y = -4,
-	show = true,
+	y = -6+castoffset,
 }
 
+StyleDefault.castnostop = {
+	texture	= path.."HealthBorder",
+	width = artwidth*widthfactor,
+	height = borderheight*heightfactor,
+	anchor = "CENTER",
+	x = 0,
+	y = -6+castoffset,
+}
 
-theme.name = {
-	typeface = "Interface\\Addons\\TidyPlates_Neon\\Media\\Qlassik_TB.ttf",
-	
+StyleDefault.name = {
+	typeface =					font,
 	size = 10,
 	width = 175,
 	height = 14,
@@ -97,19 +101,43 @@ theme.name = {
 	show = true,
 }
 
--- /run TidyPlatesThemeList["Graphite"].spellicon.x = 4
+StyleDefault.level = {
+	typeface =					font,
+	show = false,
+}
 
--- Test Cast Bar: 
---/run TestTidyPlatesCastBar("Boognish", 133)
+StyleDefault.healthbar = {
+	texture 				= path.."StatusBar",
+	width = 98*widthfactor,
+	--width = 96*widthfactor,
+	height = barheight*heightfactor,
+	x = 0,
+	y = 0,
+}
 
-theme.spelltext = {
-	typeface = "Interface\\Addons\\TidyPlates_Neon\\Media\\Qlassik_TB.ttf",
-	
+StyleDefault.customtext = {
+	typeface =					font,
 	size = 10,
 	width = 175,
 	height = 14,
 	x = 0,
-	y = -16,		-- For UNDER the bar
+	y = -1,	-- For OVER the bar
+	--y = -7,		-- For UNDER the bar
+	align = "CENTER",
+	anchor = "CENTER",
+	vertical = "CENTER",
+	--flags = "",
+	shadow = true,
+	show = true,
+}
+
+StyleDefault.spelltext = {
+	typeface =					font,
+	size = 10,
+	width = 175,
+	height = 14,
+	x = 0,
+	y = -16+castoffset,		-- For UNDER the bar
 	align = "CENTER",
 	anchor = "CENTER",
 	vertical = "CENTER",
@@ -118,183 +146,204 @@ theme.spelltext = {
 	show = true,
 }
 
-theme.level = {
+StyleDefault.spellicon = {
+	height = 12,
+	width = 12,
+	x = -38,
+	y = -4,
 	show = false,
 }
 
-theme.customtext = {
-	typeface = "Interface\\Addons\\TidyPlates_Neon\\Media\\Qlassik_TB.ttf",
-	
-	size = 10,
-	width = 175,
-	height = 14,
+StyleDefault.eliteicon = {
+	show = false,
+}
+
+StyleDefault.raidicon = {
+	width = 12,
+	height = 12,
 	x = 0,
-	y = 7,	-- For OVER the bar
-	--y = -7,		-- For UNDER the bar
-	align = "CENTER",
+	y = 12,
 	anchor = "CENTER",
-	vertical = "CENTER",
-	--flags = "",
-	shadow = true,
+}
+
+StyleDefault.skullicon = {
 	show = false,
 }
 
+StyleDefault.threatcolor = {
+	LOW = {r = .6, g = 1, b = 0, a = 0,},
+	MEDIUM = {r = .6, g = 1, b = 0, a = 1,},
+	HIGH = {r = 1, g = 0, b = 0, a= 1,},  }
 
-
-theme.raidicon = {
-	width = 18,
-	height = 18,
-	x = 0,
-	y = 0,
-	anchor = "LEFT",
-}
-
-theme.frame = {
-	x = 0,
-	y = 11,
-}
-
-theme.hitbox = {
-	width = 100,
-	height = 35,
-}
-
-theme.skullicon = {
-	show = false,
-}
-
-
-local function SpellText(unit)
-	local spellname
-	if unit.isCasting then 
-		spellname = UnitCastingInfo("target") or UnitChannelInfo("target")
-		return spellname
-	else return "" end
-end
-
--- Hex Colors
-local OrangeHexColor = "|cFFfc551b"
-local PaleBlueHexColor = "|cFF5cb8ff"
-
-local BlueHexColor = "|cFF3cA8ff"	-- 3c A8 ff		-- 60 168 255
---local GreenHexColor = "|cFF3cee35"
-local GreenHexColor = "|cFF60E025"	-- 60 E0 25		-- 96 224 37
---local RedHexColor = "|cFFFF0000"
-local RedHexColor = "|cFFFF3320"	-- FF 33 20		-- 255 51 32
-local GoldHexColor = "|cFFfcb41b"	-- fc b4 1b		-- 252 180 27
-
----------------------------------------
--- Name Text Color
----------------------------------------
-local NameReactionColors = {
-	["FRIENDLY"] = {
-		["PLAYER"] = {r = 60/255, g = 168/255, b = 255/255,},
-		["NPC"] = {r = 96/255, g = 224/255, b = 37/255,},
-	},
-	["HOSTILE"] = {
-		["PLAYER"] = {r = 255/255, g = 51/255, b = 32/255,},
-		["NPC"] = {r = 255/255, g = 51/255, b = 32/255,},
-	},
-	["NEUTRAL"] = {
-		["NPC"] = {r = 252/255, g = 180/255, b = 27/255,},
-	},
-}
-
-local function SetNameColorDelegate(unit)
-	local color = NameReactionColors[unit.reaction][unit.type]
-	if color then 
-		return color.r, color.g, color.b
-	else 
-		return unit.red, unit.green, unit.blue 
-	end
-end
-
-theme.SetNameColor = SetNameColorDelegate
-
-
-local dec2hex = {
-	["0"] = "0",
-	["1"] = "1",
-	["2"] = "2",
-	["3"] = "3",
-	["4"] = "4",
-	["5"] = "5",
-	["6"] = "6",
-	["7"] = "7",
-	["8"] = "8",
-	["9"] = "9",
-	["10"] = "A",
-	["11"] = "B",
-	["12"] = "C",
-	["13"] = "D",
-	["14"] = "E",
-	["15"] = "F"
-}
 	
-local function FracToHex(frac)
-	local val1, val2 = floor((frac*255)/16), floor(mod(frac*255, 16))
-	local str = dec2hex[tostring(val1)]..dec2hex[tostring(val2)]
-	return str
+-- No-Bar Style		(6.2)
+local StyleTextOnly = CopyTable(StyleDefault)
+StyleTextOnly.threatborder.texture = EmptyTexture
+StyleTextOnly.healthborder.texture = EmptyTexture
+StyleTextOnly.healthbar.texture = EmptyTexture
+StyleTextOnly.healthbar.backdrop = EmptyTexture
+StyleTextOnly.eliteicon.texture = EmptyTexture
+StyleTextOnly.customtext.align = "CENTER"
+StyleTextOnly.customtext.size = 9
+StyleTextOnly.customtext.y = -2
+StyleTextOnly.level.show = false
+StyleTextOnly.skullicon.show = false
+StyleTextOnly.eliteicon.show = false
+--StyleTextOnly.raidicon.x = 
+--StyleTextOnly.raidicon.y = 
+StyleTextOnly.highlight.texture = path.."TextPlate_Highlight"
+StyleTextOnly.target.texture = path.."TextPlate_Target"
+--StyleTextOnly.target.y = 21
+--StyleTextOnly.target.height = 46
+--StyleTextOnly.target.texture = EmptyTexture
+
+local WidgetConfig = {}
+WidgetConfig.ClassIcon = { anchor = "TOP" , x = 0,y = 26 }		-- Above Name
+WidgetConfig.TotemIcon = { anchor = "TOP" , x = 0 ,y = 26 }
+WidgetConfig.ThreatLineWidget = { anchor =  "TOP", x = 0 ,y = 0 }	-- y = 20
+--WidgetConfig.ThreatWheelWidget = { anchor =  "CENTER", x = 33 ,y = 12 } -- "CENTER", plate, 30, 18
+WidgetConfig.ThreatWheelWidget = { anchor =  "CENTER", x = 0 ,y = 16 } -- "CENTER", plate, 30, 18
+WidgetConfig.ComboWidget = { anchor = "CENTER" , x = 0 ,y = -1.5 }
+WidgetConfig.RangeWidget = { anchor = "CENTER" , x = 0 ,y = 12 }
+WidgetConfig.DebuffWidget = { anchor = "TOP" , x = 15 ,y = 15 }
+
+local DamageThemeName = ThemeName.."/|cFFFF4400Damage"
+local TankThemeName = ThemeName.."/|cFF3782D1Tank"
+
+---------------------------------------------
+-- Tidy Plates Hub Integration
+---------------------------------------------
+Theme["Default"] = StyleDefault
+Theme["NameOnly"] = StyleTextOnly			-- (6.2)
+
+TidyPlatesThemeList[DamageThemeName] = Theme
+local LocalVars = TidyPlatesHubDamageVariables
+
+-- (6.2)
+
+local function ApplyFontCustomization(style)
+	local currentFont = font
+	if LocalVars.TextUseBlizzardFont then currentFont = blizzfont end
+	style.name.typeface = currentFont
+	style.level.typeface = currentFont
+	style.customtext.typeface = currentFont
+	style.spelltext.typeface = currentFont
+	
+	style.frame.y = ((LocalVars.FrameVerticalPosition-.5)*50)-16
 end
 
-local function NameTextDelegate(unit)
-	if unit.reaction == "HOSTILE" then
-		return RedHexColor..unit.name
-	elseif unit.reaction == "FRIENDLY" then
-		if unit.type == "NPC" then	return GreenHexColor..unit.name
-		else return BlueHexColor..unit.name end
-	elseif unit.reaction == "NEUTRAL" then
-		return GoldHexColor..unit.name
-	else return unit.name end
-	--[[
-	if InCombatLockdown() then
-		if unit.reaction == "FRIENDLY" then
-			return GreenHexColor..unit.name
-		elseif unit.threatSituation == "HIGH" then
-			return OrangeHexColor..unit.name
-		elseif unit.threatSituation == "MEDIUM" then
-			return GoldHexColor..unit.name
-		else
-			return PaleBlueHexColor..unit.name
+local function OnApplyStyleCustomization(style)
+	style.level.show = (LocalVars.TextShowLevel == true)
+	style.target.show = (LocalVars.WidgetTargetHighlight == true)
+	style.eliteicon.show = (LocalVars.WidgetEliteIndicator == true)
+	ApplyFontCustomization(style)
+end
+
+local function OnApplyThemeCustomization(theme)
+	OnApplyStyleCustomization(theme["Default"])
+	ApplyFontCustomization(theme["NameOnly"])
+	TidyPlates:ForceUpdate()
+end
+
+local function OnApplyDamageCustomization()
+	OnApplyThemeCustomization(Theme)
+end
+
+local function OnInitialize(plate)
+	TidyPlatesHubFunctions.OnInitializeWidgets(plate, WidgetConfig)
+	if plate.widgets.DebuffWidget then plate.widgets.DebuffWidget:SetScale(.75) end
+	if plate.widgets.ThreatLineWidget then plate.widgets.ThreatLineWidget:SetScale(.75) end
+	if plate.widgets.ThreatWheelWidget then plate.widgets.ThreatWheelWidget:SetScale(.70) end
+	if plate.widgets.ComboWidget then plate.widgets.ComboWidget:SetScale(.70) end
+end
+
+local function OnActivateTheme(themeTable)
+		if Theme == themeTable then
+			LocalVars = TidyPlatesHubFunctions:UseDamageVariables()
+			OnApplyDamageCustomization()
 		end
-	else return unit.name end
-	--]]
 end
 
--- RGB Colors
-local BlueColor = {0, 123/256, 1}
-
-local function HealthColorDelegate(unit)
-	local r, g, b = unit.red, unit.green, unit.blue
-	r=(r*.5)+.5
-	g=(g*.5)+.5
-	b=(b*.5)+.5
-	--return unpack(BlueColor)
-	return r,g,b
+local function StyleDelegate(unit)
+	return "Default"
 end
 
-theme.SetCustomText = NameTextDelegate
+Theme.SetNameColor = TidyPlatesHubFunctions.SetNameColor
+Theme.SetScale = TidyPlatesHubFunctions.SetScale
+Theme.SetAlpha = TidyPlatesHubFunctions.SetAlpha
+Theme.SetHealthbarColor = TidyPlatesHubFunctions.SetHealthbarColor
+Theme.SetThreatColor = TidyPlatesHubFunctions.SetThreatColor
+Theme.SetCastbarColor = TidyPlatesHubFunctions.SetCastbarColor
+Theme.SetCustomText = TidyPlatesHubFunctions.SetCustomText
+Theme.OnUpdate = TidyPlatesHubFunctions.OnUpdate
+Theme.OnContextUpdate = TidyPlatesHubFunctions.OnContextUpdate
+Theme.ShowConfigPanel = ShowTidyPlatesHubDamagePanel
+Theme.SetStyle = StyleDelegate
 
+-- [[ (6.2)
+local function GetLevelDescription(unit)
+	local description
+	if unit.reaction ~= "FRIENDLY" then
+		description = "Level "..unit.level
+		if unit.isElite then description = description.." (Elite)" end
+		return description
+	end
+end
 
-local function HealthColorDelegate(unit)
-	local r, g, b = unit.red, unit.green, unit.blue
-	if unit.isTarget or (not UnitExists("target")) then
-		return r, g, b
-	else
-		r=(r*.5)
-		g=(g*.5)
-		b=(b*.5)
-		--return unpack(BlueColor)
-		return r,g,b
+local HubCustomText = TidyPlatesHubFunctions.SetCustomText
+local function CustomText(unit)
+	if unit.style == "NameOnly" then
+		local description, elite
+		if TidyPlatesData.UnitDescriptions and unit.type == "NPC" then
+			return (TidyPlatesData.UnitDescriptions[unit.name] or GetLevelDescription(unit) or "") , 1, 1, 1, .70
+		end
+	end
+	return HubCustomText(unit) 
+end
+Theme.SetCustomText = CustomText
+
+local StyleIndex = {"Default", "NameOnly"}
+local function SetStyleDelegate(unit)
+	return StyleIndex[TidyPlatesHubFunctions.SetMultistyle(unit)] or "Default"
+end
+
+Theme.SetStyle = SetStyleDelegate		-- (6.2)
+
+local GreyColor = { r = 98/255, g = 98/255, b = 98/255}
+local function NameColorDelegate(unit)
+	local class = TidyPlatesData.UnitClass[unit.name]
+	local color
+	if class then 
+		color = RAID_CLASS_COLORS[class]
+	end
+	if color then return color.r, color.g, color.b end
+	return TidyPlatesHubFunctions.SetNameColor(unit)
+end
+--Theme.SetNameColor = NameColorDelegate
+--]]
+
+Theme.OnInitialize = OnInitialize		-- Need to provide widget positions
+Theme.OnActivateTheme = OnActivateTheme -- called by Tidy Plates Core, Theme Loader
+Theme.OnApplyThemeCustomization = OnApplyDamageCustomization -- Called By Hub Panel
+
+do
+	local TankTheme = CopyTable(Theme)
+	TidyPlatesThemeList[TankThemeName] = TankTheme
+	
+	local function OnApplyTankCustomization()
+		OnApplyThemeCustomization(TankTheme)  -- OnApplyTankCustomization
+	end
+
+	local function OnActivateTheme(themeTable)
+		if TankTheme == themeTable then
+			LocalVars = TidyPlatesHubFunctions:UseTankVariables()
+			OnApplyTankCustomization()
+		end
 	end
 	
-
+	TankTheme.OnActivateTheme = OnActivateTheme -- called by Tidy Plates Core, Theme Loader
+	TankTheme.OnApplyThemeCustomization = OnApplyTankCustomization -- Called By Hub Panel
+	TankTheme.ShowConfigPanel = ShowTidyPlatesHubTankPanel
 end
 
---theme.SetHealthbarColor = HealthColorDelegate
 
-local function SetScaleDelegate(unit)
-	return 1.2
-end
-
-theme.SetScale = SetScaleDelegate

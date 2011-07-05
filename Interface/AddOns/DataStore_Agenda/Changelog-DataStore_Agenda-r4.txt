@@ -1,0 +1,16 @@
+------------------------------------------------------------------------
+r4 | thaoky | 2011-06-29 17:57:46 +0000 (Wed, 29 Jun 2011) | 2 lines
+Changed paths:
+   M /trunk/DataStore_Agenda.lua
+   M /trunk/DataStore_Agenda.toc
+
+TOC update
+Modified a few functions to manage contacts (unused/wip)
+------------------------------------------------------------------------
+r3 | thaoky | 2011-05-01 15:08:29 +0000 (Sun, 01 May 2011) | 2 lines
+Changed paths:
+   M /trunk/DataStore_Agenda.lua
+
+Fixed a typo in _HasSavedInstanceExpired()
+Set a few more functions as 'character based' (as they should have been in the first place).
+------------------------------------------------------------------------

@@ -2640,6 +2640,17 @@ function AutoBarButtonSeal.prototype:init(parentBar, buttonDB)
 	self:AddCategory("Spell.Seal")
 end
 
+
+local AutoBarButtonGuildSpell = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonGuildSpell"] = AutoBarButtonGuildSpell
+
+function AutoBarButtonGuildSpell.prototype:init(parentBar, buttonDB)
+	AutoBarButtonGuildSpell.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Spell.Guild")
+end
+
+
 --------------------------------------------------ADDING NEW FUNCTIONALITY HERE
 
 local totemAir = 4
@@ -2835,6 +2846,15 @@ function AutoBarButtonTrap.prototype:init(parentBar, buttonDB)
 	AutoBarButtonTrap.super.prototype.init(self, parentBar, buttonDB)
 
 	self:AddCategory("Spell.Trap")
+end
+
+local AutoBarButtonGuildSpell = AceOO.Class(AutoBarButton)
+AutoBar.Class["AutoBarButtonGuildSpell"] = AutoBarButtonGuildSpell
+
+function AutoBarButtonGuildSpell.prototype:init(parentBar, buttonDB)
+	AutoBarButtonGuildSpell.super.prototype.init(self, parentBar, buttonDB)
+
+	self:AddCategory("Spell.Guild")
 end
 
 

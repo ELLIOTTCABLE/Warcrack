@@ -1,6 +1,6 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
+	Version: 3.2.4 (<%codename%>)
 	Revision: $Id: GatherNotifications.lua 907 2010-12-05 23:54:28Z Esamynn $
 
 	License:

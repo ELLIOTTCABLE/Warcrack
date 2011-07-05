@@ -18,9 +18,7 @@ local L = MikSBT.translations
 -- Fonts
 ------------------------------
 
-L.FONT_FILES = {
- ["MSBT ZYKai_C"]		= "Fonts\\ZYKai_C.TTF",
-}
+L.FONT_FILES["MSBT ZYKai_C"] = "Fonts\\ZYKai_C.TTF"
 
 L.DEFAULT_FONT_NAME = "MSBT ZYKai_C"
 

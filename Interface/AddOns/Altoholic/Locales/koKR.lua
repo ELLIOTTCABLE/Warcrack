@@ -166,6 +166,10 @@ to share his entire Altoholic Database
 and add it to your own]=] ] = [=[사용자에게 그 사람의 Altoholic 데이터베이스
 전부를 공유하고 당신의 데이터베이스에 추가할
 것인지 물어보려면 이 버튼을 클릭]=] -- Needs review
+L[ [=[Clicking this button will update
+your local %s%s|r bank tab
+based on %s%s's|r data]=] ] = [=[이 버튼을 누르면 현재 %s%s|r 은행 탭을
+%s%s|r의 데이터로 업데이트할 것입니다.]=] -- Needs review
 L["Cloaks"] = "망토"
 L["Cloth Set"] = "천 세트"
 L["Compare with"] = "다음과 비교" -- Needs review
@@ -682,7 +686,7 @@ L[ [=[You have received an account sharing request
 from %s%s|r, accept it?]=] ] = "%s%s|r의 계정 공유 요청을 승인하겠습니까?"
 L[ [=[Your confirmation will still be required any time someone requests your information.
 
-]=] ] = "당신의 정보 요구하는 모든 요청에 대해 승인 절차를 거치게 될 것입니다."
+]=] ] = "당신의 정보를 요구하는 모든 요청에 대해 승인 절차를 거치게 될 것입니다." -- Needs review
 L["Zelemar the Wrathful"] = "진노의 젤레마르"
 L["Zone"] = "지역"
 L["and above"] = "이상"

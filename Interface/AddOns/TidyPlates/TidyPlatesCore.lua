@@ -35,7 +35,7 @@ local OnNewNameplate, OnShowNameplate, OnHideNameplate, OnUpdateNameplate, OnRes
 local OnUpdateHealth, OnUpdateLevel, OnUpdateThreatSituation, OnUpdateRaidIcon
 local OnMouseoverNameplate, OnLeaveNameplate, OnRequestWidgetUpdate, OnRequestDelegateUpdate
 -- Spell Casting
-local UpdateCastAnimation, StartCastAnimation, StopCastAnimation, OnUpdateTargetCastbar
+local UpdateCastAnimation, UpdateChannelAnimation, StartCastAnimation, StopCastAnimation, OnUpdateTargetCastbar
 -- Main Loop 
 local OnUpdate
 local ApplyPlateExtension
@@ -623,6 +623,13 @@ do
 		else castbar:SetValue(currentTime) end
 	end
 	
+	function UpdateChannelAnimation(castbar)
+		local currentTime = GetTime()
+		if currentTime > (castbar.endTime or 0) then
+			StopCastAnimation(castbar.parentPlate)
+		else castbar:SetValue(castbar.startTime + (castbar.endTime - currentTime)) end
+	end
+	
 	-- Shows the Cast Animation (requires references)
 	function StartCastAnimation(plate, spell, displayName, icon, startTime, endTime, notInterruptible, channel)
 		UpdateReferences(plate)
@@ -635,10 +642,9 @@ do
 			if activetheme.SetCastbarColor then  r, g, b, a = activetheme.SetCastbarColor(unit)  end	
 			
 			castbar.endTime = endTime
+			castbar.startTime = startTime
 			castbar:SetStatusBarColor( r, g, b, a or 1)
 			castbar:SetMinMaxValues(startTime, endTime)
-			castbar:SetValue(GetTime())
-			castbar:Show()	
 			visual.spelltext:SetText(displayName or spell)
 
 			visual.spellicon:SetTexture(icon)
@@ -646,7 +652,16 @@ do
 				visual.castnostop:Show(); visual.castborder:Hide()
 			else visual.castnostop:Hide(); visual.castborder:Show() end
 			
-			castbar:SetScript("OnUpdate", UpdateCastAnimation)	
+			castbar:Show()	
+			if channel then 
+				castbar:SetValue(endTime - GetTime())
+				castbar:SetScript("OnUpdate", UpdateChannelAnimation)	
+			else 
+				castbar:SetValue(GetTime())
+				castbar:SetScript("OnUpdate", UpdateCastAnimation)	
+			end
+			
+			
 			UpdateIndicator_CustomScaleText()	
 			UpdateIndicator_CustomAlpha()
 		end

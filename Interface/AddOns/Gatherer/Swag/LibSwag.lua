@@ -2,7 +2,7 @@
 
 	LibSwag - A library to help you keep track of all your swag.
 
-	Revision: $Id: LibSwag.lua 876 2010-09-18 23:41:23Z Esamynn $
+	Revision: $Id: LibSwag.lua 923 2010-12-23 08:54:58Z Esamynn $
 
 	License:
 		This library is free software; you can redistribute it and/or
@@ -47,7 +47,7 @@ They will both be called with the following parameters:
 
 -- Note, you should add this to your addon's SavedVariables
 LibSwagData = {}
-local myVersion = 0109
+local myVersion = 0110
 
 -- Check versioning to see if we need to upgrade the existing library
 local create = false
@@ -108,6 +108,7 @@ if (create or update) then
 			[GetSpellInfo(39264)] =  "OPEN", -- Opening()
 			[GetSpellInfo(45137)] =  "OPEN", -- Opening()
 			[GetSpellInfo(22810)] =  "OPEN", -- Opening - No Text()
+			[GetSpellInfo(73979)] =  "ARCH", -- Searching for Artifacts(Apprentice)
 		}
 		myLib.lootSpells[""] = nil -- clear out any useless entries
 	end

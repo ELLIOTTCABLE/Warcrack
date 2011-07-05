@@ -1,7 +1,7 @@
 --[[
 --	Gatherer Addon for World of Warcraft(tm).
 --	HUD Plugin Module
---	Version: 3.2.3 (<%codename%>)
+--	Version: 3.2.4 (<%codename%>)
 --	Revision: $Id: GatherHUD.lua 899 2010-12-04 23:44:52Z Esamynn $
 --
 --	License:

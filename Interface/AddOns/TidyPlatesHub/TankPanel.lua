@@ -204,11 +204,13 @@ local function ConvertPrefix(source, target, prefixList )
 	wipe(target)
 	for item in pairs(source) do
 		local _, _, prefix, suffix = string.find( item, "(%w+)[%s%p]*(.*)");
-		if prefixList[prefix] then
-			target[suffix] = prefixList[prefix]
-		else -- If no prefix is listed, assume 1
-			if suffix and suffix ~= "" then target[prefix.." "..suffix] = 1
-			else target[prefix] = 1 end
+		if prefix then
+			if prefixList[prefix] then
+				target[suffix] = prefixList[prefix]
+			else -- If no prefix is listed, assume 1
+				if suffix and suffix ~= "" then target[prefix.." "..suffix] = 1
+				else target[prefix] = 1 end
+			end
 		end
 	end		
 end
@@ -453,6 +455,7 @@ local function CreateInterfacePanel( panelName, panelTitle, heading, parentTitle
 						{ text = "By Enemy", notCheckable = 1 } ,
 						{ text = "By NPC", notCheckable = 1 } ,
 						{ text = "By Raid Icon", notCheckable = 1 } ,
+						{ text = "By Active/Damaged", notCheckable = 1 } ,
 						--{ text = "By Low Health (>30%)", notCheckable = 1 } ,
 
 						}

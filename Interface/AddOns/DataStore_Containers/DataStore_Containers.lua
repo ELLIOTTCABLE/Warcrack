@@ -387,15 +387,6 @@ local function ScanBag(bagID)
 	ScanBagSlotsInfo()
 end
 
-local function ScanKeyRing()
-	local char = addon.ThisCharacter
-	local bag = char.Containers["Bag" .. KEYRING_CONTAINER]
-
-	bag.icon = "Interface\\Icons\\INV_Misc_Key_14";
-	bag.link = nil
-	ScanContainer(KEYRING_CONTAINER, BAGS)
-end
-
 -- *** Event Handlers ***
 local function OnBagUpdate(event, bag)
 	if bag < 0 then
@@ -405,10 +396,7 @@ local function OnBagUpdate(event, bag)
 	if (bag >= 5) and (bag <= 11) and not addon.isBankOpen then
 		return
 	end
-	
-	if bag == 0 then					-- bag is 0 for both the keyring and the original backpack
-		ScanKeyRing()
-	end
+
 	ScanBag(bag)
 end
 
@@ -833,7 +821,6 @@ function addon:OnEnable()
 	for bagID = 0, NUM_BAG_SLOTS do
 		ScanBag(bagID)
 	end
-	ScanKeyRing()
 	
 	addon:RegisterEvent("BAG_UPDATE", OnBagUpdate)
 	addon:RegisterEvent("BANKFRAME_OPENED", OnBankFrameOpened)

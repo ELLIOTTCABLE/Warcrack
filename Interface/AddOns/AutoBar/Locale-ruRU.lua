@@ -246,6 +246,7 @@ if (GetLocale() == "ruRU") then
 		["AutoBarButtonPets"] = "Питомцы",
 		["AutoBarButtonQuest"] = "Задания",
 		["AutoBarButtonMiscFun"] = "Misc, Fun",
+		["AutoBarButtonGuildSpell"] = "Guild Spells",
 		["AutoBarButtonRecovery"] = "Мана / Ярость / Энергия",
 		["AutoBarButtonRotationDrums"] = "Вращение: Барабаны",
 		["AutoBarButtonShields"] = "Щиты",

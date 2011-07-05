@@ -246,6 +246,7 @@ if (GetLocale() == "koKR") then
 		["AutoBarButtonPets"] = "소환수들",
 		["AutoBarButtonQuest"] = "퀘스트",
 		["AutoBarButtonMiscFun"] = "Misc, Fun",
+		["AutoBarButtonGuildSpell"] = "Guild Spells",
 		["AutoBarButtonRecovery"] = "마나 / 분노 / 기력",
 		["AutoBarButtonRotationDrums"] = "회전: 북소리",
 		["AutoBarButtonShields"] = "보호막",

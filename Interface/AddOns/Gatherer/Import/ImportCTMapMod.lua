@@ -1,6 +1,6 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
+	Version: 3.2.4 (<%codename%>)
 	Revision: $Id: ImportCTMapMod.lua 754 2008-10-14 04:43:39Z Esamynn $
 
 	License:

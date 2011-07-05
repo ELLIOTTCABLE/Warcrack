@@ -1,7 +1,7 @@
-## Interface: 40100
+## Interface: 40200
 ## Title: TomTom
 ## Author: jnwhiteh
-## Version: v40100-1.4.0-4574ef7
+## Version: v40200-1.4.2-313327e
 ## License: All Rights Reserved
 ## Notes: Acts as your portable navigation assistant
 ## Notes-zhCN:一个简单的导航助手。

@@ -58,6 +58,7 @@ local classPets = {
 
 -- spells that are essentially the same, but has different IDs, we'll register them under the same ID
 local similarSpells = {
+--	[spellID] = registerAsID,
 	[26654] = 12723, -- Sweeping Strikes (Whirlwind)
 	[27285] = 27243, -- Seed of Corruption (direct)
 	[33778] = 33763, -- Lifebloom (direct)
@@ -72,17 +73,21 @@ local similarSpells = {
 
 -- spells whose actual effect is the result of a different spell, eg seals, damage shields, used for displaying relevant records in spell tooltips
 local indirectSpells = {
-	[324] = 26364, -- Lightning Shield
-	[724] = 7001, -- Lightwell
-	[740] = 44203, -- Tranquility
-	[772] = 94009, -- Rend
-	[974] = 379, -- Earth Shield
-	[1329] = 5374, -- Mutilate
-	[1535] = 8349, -- Fire Nova
-	[1949] = 5857, -- Hellfire
-	[5938] = 5940, -- Shiv
+--	[tooltipID] = spellEffectID,
+	[324] = 26364,  -- Lightning Shield
+	[724] = 7001,   -- Lightwell
+	[740] = 44203,  -- Tranquility
+	[772] = 94009,  -- Rend
+	[974] = 379,    -- Earth Shield
+	[1329] = 5374,  -- Mutilate
+	[1464] = 50782, -- Slam
+	[1535] = 8349,  -- Fire Nova
+	[1949] = 5857,  -- Hellfire
+	[5143] = 7268,  -- Arcane Missiles
+	[5938] = 5940,  -- Shiv
+	[6991] = 1539,  -- Feed Pet
 	[8024] = 10444, -- Flametongue Weapon
-	[8033] = 8034, -- Frostbrand Weapon
+	[8033] = 8034,  -- Frostbrand Weapon
 	[8232] = 25504, -- Windfury Weapon
 	[12328] = 12723, -- Sweeping Strikes
 	[13795] = 13797, -- Immolation Trap
@@ -90,9 +95,11 @@ local indirectSpells = {
 	[16857] = 60089, -- Faerie Fire (Feral)
 	[16914] = 42231, -- Hurricane
 	[17364] = 32175, -- Stormstrike
+	[19386] = 24131, -- Wyvern Sting
 	[20154] = 25742, -- Seal of Righteousness
 	[20164] = 20170, -- Seal of Justice
 	[20165] = 20167, -- Seal of Insight
+	[20252] = 20253, -- Intercept
 	[20473] = 25912, -- Holy Shock
 	[22842] = 22845, -- Frenzied Regeneration
 	[26573] = 81297, -- Consecration
@@ -119,9 +126,11 @@ local indirectSpells = {
 local indirectHeals = {
 	[15237] = 23455, -- Holy Nova
 	[20473] = 25914, -- Holy Shock
+	[23881] = 23880, -- Bloodthirst
 	[47540] = 47750, -- Penance
 	[47541] = 47633, -- Death Coil (death knight)
 	[49998] = 45470, -- Death Strike
+	[53209] = 53353, -- Chimera Shot
 	[53385] = 54172, -- Divine Storm
 }
 
@@ -606,7 +615,7 @@ function Critline:PLAYER_TALENT_UPDATE()
 end
 
 
-function Critline:COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, ...)
+function Critline:COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceFlags2, destGUID, destName, destFlags, destFlags2, ...)
 	-- we seem to get events with standard arguments equal to nil, so they need to be ignored
 	if not (timestamp and eventType) then
 		self:Debug("nil errors on start")

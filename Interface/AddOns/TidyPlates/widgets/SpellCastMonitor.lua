@@ -4,18 +4,34 @@ Tasks:
 - Filter out Spell events for the current target  *done*
 --]]
 
-local RaidTargetReference = {
-	["STAR"] = 0x00100000,
-	["CIRCLE"] = 0x00200000,
-	["DIAMOND"] = 0x00400000,
-	["TRIANGLE"] = 0x00800000,
-	["MOON"] = 0x01000000,
-	["SQUARE"] = 0x02000000,
-	["CROSS"] = 0x04000000,
-	["SKULL"] = 0x08000000,
-}
-										
 
+local RaidTargetReference
+
+if (tonumber((select(2, GetBuildInfo()))) >= 14299) then
+	-- 4.2
+	RaidTargetReference = {
+		["STAR"] = 0x00000001,
+		["CIRCLE"] = 0x00000002,
+		["DIAMOND"] = 0x00000004,
+		["TRIANGLE"] = 0x00000008,
+		["MOON"] = 0x00000010,
+		["SQUARE"] = 0x00000020,
+		["CROSS"] = 0x00000040,
+		["SKULL"] = 0x00000080,
+	}
+else
+	 -- 4.1
+	 RaidTargetReference = {
+		["STAR"] = 0x00100000,
+		["CIRCLE"] = 0x00200000,
+		["DIAMOND"] = 0x00400000,
+		["TRIANGLE"] = 0x00800000,
+		["MOON"] = 0x01000000,
+		["SQUARE"] = 0x02000000,
+		["CROSS"] = 0x04000000,
+		["SKULL"] = 0x08000000,
+	}
+end
 
 -------------------------------------------------------------------------
 -- Spell Cast Event Watcher.
@@ -65,7 +81,8 @@ end
 -- OnSpellCast
 -- Sends cast event to an available nameplate
 --------------------------------------
-local function OnSpellCast(sourceGUID, sourceName, sourceFlags, spellid, spellname, channeled)
+local function OnSpellCast(...)
+	local sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname = ...
 	local FoundPlate = nil
 	
 	-- Gather Spell Info
@@ -80,7 +97,7 @@ local function OnSpellCast(sourceGUID, sourceName, sourceFlags, spellid, spellna
 		elseif bit.band(sourceFlags, COMBATLOG_OBJECT_CONTROL_NPC) > 0 then 
 			--	destination plate, by GUID
 			FoundPlate = SearchNameplateByGUID(sourceGUID)
-			if not FoundPlate then FoundPlate = SearchNameplateByIcon(sourceFlags) end
+			if not FoundPlate then FoundPlate = SearchNameplateByIcon(sourceRaidFlags) end
 		else return	end
 	else return end
 
@@ -91,39 +108,48 @@ local function OnSpellCast(sourceGUID, sourceName, sourceFlags, spellid, spellna
 		if FoundPlateUnit.isTarget then return end
 		
 		castTime = (castTime / 1000)	-- Convert to seconds
-		StartCastAnimationOnNameplate(FoundPlate, spell, spell, icon, currentTime, currentTime+castTime, false, channeled)
+		StartCastAnimationOnNameplate(FoundPlate, spell, spell, icon, currentTime, currentTime+castTime, false, false)
 	end
 end
 
 -- SPELL_CAST_START -- Non-channeled spells
 function CombatEventHandlers.SPELL_CAST_START(...)
-	local timestamp, combatevent, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellid, spellname = ...
-	OnSpellCast(sourceGUID, sourceName, sourceFlags, spellid, spellname, false)
+	OnSpellCast(...)
 end
 
+--[[
 -- SPELL_CAST_SUCCESS -- Channeled and Instant spells
 function CombatEventHandlers.SPELL_CAST_SUCCESS(...)
-	local timestamp, combatevent, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellid, spellname = ...
-	OnSpellCast(sourceGUID, sourceName, sourceFlags, spellid, spellname, true)
+	OnSpellCast(..., true)
 end
+--]]
 
 --------------------------------------
 -- Watch Combat Log Events
 --------------------------------------
-local _, _, _, tocVersion = GetBuildInfo()
 
-local OnCombatEvent
--- if (tocVersion > 40000) then
-if (tonumber((select(2, GetBuildInfo()))) >= 13682) then
-	-- WoW 4.1
-	function OnCombatEvent(self, event, timestamp, combatevent, hidecaster, ...)
-		if CombatEventHandlers[combatevent] then CombatEventHandlers[combatevent](timestamp, combatevent, ...) end		
+local GetCombatEventResults
+
+if (tonumber((select(2, GetBuildInfo()))) >= 14299) then
+	-- 4.2
+	function GetCombatEventResults(...)
+		local timestamp, combatevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlag, spellid, spellname = ...	
+		return combatevent, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname	
 	end
+
 else
-	-- WoW 4.0.6
-	function OnCombatEvent(self, event, timestamp, combatevent, ...)
-		if CombatEventHandlers[combatevent] then CombatEventHandlers[combatevent]( timestamp, combatevent, ...) end		
+	 -- 4.1
+	function GetCombatEventResults(...)
+		local timestamp, combatevent, hideCaster, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellid, spellname = ...		
+		return combatevent, sourceGUID, sourceName, sourceFlags, sourceFlags, spellid, spellname
 	end
+
+end
+
+-- 4.2
+local function OnCombatEvent(self, event, ...)
+	local combatevent, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname = GetCombatEventResults(...)
+	if CombatEventHandlers[combatevent] then CombatEventHandlers[combatevent](sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname) end		
 end
 
 -----------------------------------
@@ -150,10 +176,11 @@ TidyPlates.StartSpellCastWatcher = StartSpellCastWatcher
 TidyPlates.StopSpellCastWatcher = StopSpellCastWatcher
 
 -- To test spell cast: /run TestTidyPlatesCastBar("Boognish", 133, true)		-- The spell ID number of Fireball is 133
-function TestTidyPlatesCastBar(SearchFor, SpellID, Shielded)
+function TestTidyPlatesCastBar(SearchFor, SpellID, Shielded, ForceChanneled)
 	local VisiblePlate, FoundPlate
 	local currentTime = GetTime()
 	local spell, displayName, icon, _, _, _, castTime, _, _ = GetSpellInfo(SpellID)
+	local channel
 	
 	print("Testing Spell Cast on", SearchFor)
 	-- Search for the nameplate, by name (you could also search by GUID)
@@ -163,6 +190,11 @@ function TestTidyPlatesCastBar(SearchFor, SpellID, Shielded)
 	   end
 	end
 
+	if ForceChanneled ~= nil then 
+		channel = ForceChanneled
+		if ForceChanneled then castTime = castTime + 2412 end
+	else channel = false end
+		
 	-- If found, display the cast bar
-	if FoundPlate then StartCastAnimationOnNameplate(FoundPlate, spell, spell, icon, currentTime, currentTime+(castTime/1000), Shielded, false) end
+	if FoundPlate then StartCastAnimationOnNameplate(FoundPlate, spell, spell, icon, currentTime, currentTime+(castTime/1000), Shielded, channel) end
 end

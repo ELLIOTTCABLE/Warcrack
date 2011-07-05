@@ -1,7 +1,7 @@
 --[[
 	ScrollSheet
-	Version: 3.2.3 (<%codename%>)
-	Revision: $Id: ScrollSheet.lua 286 2010-11-02 21:44:55Z kandoko $
+	Version: 3.2.4 (<%codename%>)
+	Revision: $Id: ScrollSheet.lua 312 2011-06-14 07:33:25Z brykrys $
 	URL: http://auctioneeraddon.com/dl/
 
 	License:
@@ -26,53 +26,11 @@
 --]]
 
 local LIBRARY_VERSION_MAJOR = "ScrollSheet"
-local LIBRARY_VERSION_MINOR = 18
-
---[[-----------------------------------------------------------------
-
-LibStub is a simple versioning stub meant for use in Libraries.
-See <http://www.wowwiki.com/LibStub> for more info.
-LibStub is hereby placed in the Public Domain.
-Credits:
-    Kaelten, Cladhaire, ckknight, Mikk, Ammo, Nevcairiel, joshborke
-
---]]-----------------------------------------------------------------
-do
-	local LIBSTUB_MAJOR, LIBSTUB_MINOR = "LibStub", 2
-	local LibStub = _G[LIBSTUB_MAJOR]
-
-	if not LibStub or LibStub.minor < LIBSTUB_MINOR then
-		LibStub = LibStub or {libs = {}, minors = {} }
-		_G[LIBSTUB_MAJOR] = LibStub
-		LibStub.minor = LIBSTUB_MINOR
-
-		function LibStub:NewLibrary(major, minor)
-			assert(type(major) == "string", "Bad argument #2 to `NewLibrary' (string expected)")
-			minor = assert(tonumber(strmatch(minor, "%d+")), "Minor version must either be a number or contain a number.")
-
-			local oldminor = self.minors[major]
-			if oldminor and oldminor >= minor then return nil end
-			self.minors[major], self.libs[major] = minor, self.libs[major] or {}
-			return self.libs[major], oldminor
-		end
-
-		function LibStub:GetLibrary(major, silent)
-			if not self.libs[major] and not silent then
-				error(("Cannot find a library instance of %q."):format(tostring(major)), 2)
-			end
-			return self.libs[major], self.minors[major]
-		end
-
-		function LibStub:IterateLibraries() return pairs(self.libs) end
-		setmetatable(LibStub, { __call = LibStub.GetLibrary })
-	end
-end
---[End of LibStub]---------------------------------------------------
-
+local LIBRARY_VERSION_MINOR = 19
 local lib = LibStub:NewLibrary(LIBRARY_VERSION_MAJOR, LIBRARY_VERSION_MINOR)
 if not lib then return end
 
-LibStub("LibRevision"):Set("$URL: http://svn.norganna.org/libs/trunk/Configator/ScrollSheet.lua $","$Rev: 286 $","5.1.DEV.", 'auctioneer', 'libs')
+LibStub("LibRevision"):Set("$URL: http://svn.norganna.org/libs/trunk/Configator/ScrollSheet.lua $","$Rev: 312 $","5.1.DEV.", 'auctioneer', 'libs')
 
 local GSC_GOLD="ffd100"
 local GSC_SILVER="e6e6e6"
@@ -230,7 +188,7 @@ function kit:SetData(input, instyle)
 	if self.vScrollReset then
 		self.panel.vScroll:SetValue(0)--always reset scroll to vertical home position when new data is set.
 	end
-	
+
 	self.panel.vSize = nRows
 	self:PerformSort()
 end
@@ -243,25 +201,32 @@ function kit:EnableSelect(enable)
 		self.enableselect = false
 	end
 end
-
-function kit:GetSelection()
+--Generic function for getting data from any row. Will always return values in default column order
+function kit:GetRowData(row)
 	local selection = {}
-	if self.selected then
-		if not self.order then
-			for i = 1, self.hSize do
-				local pos = i + ((self.selected-1)*self.hSize)
-				selection[i] = self.data[pos]
-			end
-		else--reorginize data so the calling module gets them back in expected order
-			for i = 1, self.hSize do
-				local pos = i + ((self.selected-1)*self.hSize)
-				local name = self.order[i]
-				local index = self.order[name][3]
-				selection[index] = self.data[pos]
-			end
+	if not self.order then
+		for i = 1, self.hSize do
+			local pos = i + ((row-1)*self.hSize)
+			selection[i] = self.data[pos]
+		end
+	else--reorginize data so the calling module gets them back in expected order
+		for i = 1, self.hSize do
+			local pos = i + ((row-1)*self.hSize)
+			local name = self.order[i]
+			local index = self.order[name][3]
+			selection[index] = self.data[pos]
 		end
 	end
 	return selection
+end
+
+--Used to get the user selected row. Use GetRowData for generic querys
+function kit:GetSelection()
+	local selection
+	if self.selected then
+		selection = self:GetRowData(self.selected)
+	end
+	return selection or {}
 end
 
 function kit:RowSelect(row, mouseButton)
@@ -362,7 +327,7 @@ function kit:PerformSort()
 		self.labels[self.curSort].sortTexture:Show()
 	end
 
-	-- Allow modules to use their own custom sorter 
+	-- Allow modules to use their own custom sorter
 	-- The module can create a self.CustomSort() function that will provide any special needs. ie proper itemlink sorting
 	if self.CustomSort then
 		self.CustomSort(self.data, self.sort, self.hSize, self.curSort, self.curDir)
@@ -370,7 +335,7 @@ function kit:PerformSort()
 		sortDataSet(self.data, self.sort, self.hSize, self.curSort, self.curDir)
 	end
 	lib.Processor("ColumnSort", self, nil, self.curSort, nil, nil, self.curDir )
-	
+
 	self.panel:Update()
 end
 -- if a scroll frame flags this as false we will not reset scroll position to 0,0 on new data renders
@@ -426,7 +391,7 @@ function kit:SetOrder(saved)
 			local layout = self.rows[1][i].layout
 			local justify = self.rows[1][i]:GetJustifyH()
 			local name = v:GetText()
-			if not name or name == "" then name = ("null "..i) v:SetText(name) end--Need to create a useful name for unnamed buttons used for "hidden" data			
+			if not name or name == "" then name = ("null "..i) v:SetText(name) end--Need to create a useful name for unnamed buttons used for "hidden" data
 			self.order[name] = {layout, justify, v.button:GetID(), v.button:GetWidth() or 80}
 			self.order[i] = name --used as a list of names to allow a column to smoothly be inserted
 			self.lastOrder[name] = i  --Stores the "current" self.data changes so we know where to remap from after initial changes until a new data table is sent
@@ -438,7 +403,7 @@ function kit:ChangeOrder()
 	for i, name in ipairs(self.order) do
 		self.labels[i]:SetText(name)
 		self.labels[i].button:SetWidth(self.order[name][4])
-					
+
 		for index, cell in pairs(self.rows) do
 			cell[i].layout = self.order[name][1]
 			cell[i]:SetJustifyH(self.order[name][2])
@@ -488,7 +453,7 @@ function kit:Render()
 				if cell.layout == "COIN" then
 					text = coins(data[pos])
 				end
-				
+
 				if settings["textColor"] then
 					red, green, blue = unpack(settings['textColor'])
 				elseif settings["date"] then
@@ -514,7 +479,7 @@ local PanelScroller = LibStub:GetLibrary("PanelScroller")
 function lib:Create(frame, layout, onEnter, onLeave, onClick, onResize, onSelect)
 	local sheet
 	local name = (frame:GetName() or "").."ScrollSheet"
-	
+
 	local id = 1
 	while (_G[name..id]) do
 		id = id + 1
@@ -555,7 +520,7 @@ function lib:Create(frame, layout, onEnter, onLeave, onClick, onResize, onSelect
 		button:SetResizable(true)
 		button:SetMaxResize(400, 16)
 		button:SetMinResize(13, 16) --Makes the nice ... elipsies line up
-		
+
 		button:SetID(i)
 		button:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight")
 		button:SetScript("OnMouseDown", function(self, ...) sheet:ButtonClick(self:GetID(), ...) end)
@@ -581,7 +546,7 @@ function lib:Create(frame, layout, onEnter, onLeave, onClick, onResize, onSelect
 		background:SetPoint("TOPRIGHT", button, "BOTTOMRIGHT", 0,0)
 		background:SetPoint("BOTTOM", content, "BOTTOM", 0,0)
 		background:SetAlpha(0.2)
-		
+
 		--small button in the gap between lables allows resizing the button its anchored too
 		--we use very small columns to store extra data thats not used in rendering. We dont want the player to be able to resize em
 		local nub
@@ -635,7 +600,7 @@ function lib:Create(frame, layout, onEnter, onLeave, onClick, onResize, onSelect
 				button:SetScript("OnClick", function(self, ...) lib.Processor("OnClickCell", sheet, self, index, row, nil, ...) end)
 				button:SetScript("OnEnter", function(self, ...) lib.Processor("OnEnterCell", sheet, self, index, row, nil, ...) end)
 				button:SetScript("OnLeave", function(self, ...) lib.Processor("OnLeaveCell", sheet, self, index, row, nil, ...) end)
-			
+
 				if (layout[i][2] == "TOOLTIP") then
 					button:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight")
 				end
@@ -652,13 +617,13 @@ function lib:Create(frame, layout, onEnter, onLeave, onClick, onResize, onSelect
 				button:SetScript("OnClick", function(self, ...) lib.Processor("OnClickCell", sheet, self, index, row, nil, ...) end)
 				button:SetScript("OnEnter", function(self, ...) lib.Processor("OnEnterCell", sheet, self, index, row, nil, ...) end)
 				button:SetScript("OnLeave", function(self, ...) lib.Processor("OnLeaveCell", sheet, self, index, row, nil, ...) end)
-				
+
 				if (layout[i][2] == "TOOLTIP") then
 					button:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight")
 				end
 				cell.button = button
 			end
-		
+
 			cell:SetHeight(14)
 			cell:SetJustifyV("TOP")
 			if (layout[i][2] == "TEXT") then
@@ -696,7 +661,7 @@ function lib:Create(frame, layout, onEnter, onLeave, onClick, onResize, onSelect
 	content:SetWidth(totalWidth)
 	panel:UpdateScrollChildRect()
 	panel:Update()
-	
+
 	--Used for compatible with older versions that lacked the General Processor callback
 	local compatibility = nil
 	if onEnter or onLeave or onClick or onResize or onSelect then
@@ -743,7 +708,7 @@ function lib.Processor(type, self, button, column, row, order, curDir, ...)
 		end
 		return
 	end
-	
+
 	if not self.Processor then return end
 	self.Processor( type, self, button, column, row, order, curDir, ...)
 end
@@ -784,13 +749,13 @@ function lib.changeColumns(self, column, button)
 	if not IsMouseButtonDown() and self.moving and GetMouseFocus():GetID() > 0 then
 		local movingTo = GetMouseFocus():GetID()
 		local movingFrom = self.moving["movingFrom"]
-		
+
 		--switch buttons text: used to rearrange the (data, style)  tables to new column order
 		local movingToText = self.labels[movingTo]:GetText()
 		local movingFromText = self.labels[movingFrom]:GetText()
 		table.remove(self.order, movingFrom)
 		table.insert(self.order, movingTo, movingFromText)
-		
+
 		--Apply column specific data to rearrangement
 		self:ChangeOrder()
 	end
@@ -882,4 +847,4 @@ fakeButton.Text:SetJustifyV("CENTER")
 fakeButton.Text:SetTextColor(0.8,0.8,0.8)
 fakeButton.Text:SetText("")
 
-lib.fakeButton = fakeButton 
+lib.fakeButton = fakeButton

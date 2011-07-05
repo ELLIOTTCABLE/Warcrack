@@ -1,16 +1,17 @@
-﻿## Interface: 40100
+﻿## Interface: 40200
 ## Title: Altoholic_Agenda
 ## Notes: Altoholic's Agenda UI
 ## Author: Thaoky (EU-Marécages de Zangar)
-## Version: 4.1.001
+## Version: 4.2.001
 ## Dependencies: Altoholic, DataStore, DataStore_Agenda, DataStore_Characters
 ## LoadOnDemand: 1
 ## X-Category: Interface Enhancements
-## X-Curse-Packaged-Version: r113
-## X-Curse-Project-Name: Altoholic
-## X-Curse-Project-ID: altoholic
-## X-Curse-Repository-ID: wow/altoholic/mainline
 
 TabAgenda.xml
 
 Frames\Calendar.xml
+Frames\Contacts.xml
+-- X-Curse-Packaged-Version: r114
+-- X-Curse-Project-Name: Altoholic
+-- X-Curse-Project-ID: altoholic
+-- X-Curse-Repository-ID: wow/altoholic/mainline

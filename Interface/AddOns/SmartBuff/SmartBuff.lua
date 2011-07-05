@@ -40,7 +40,7 @@ GameTooltip:SetUnitDebuff("unit", [index] or ["name", "rank"][, "filter"]);
 * The untilCanceled return value is true if the buff doesn't have its own duration (e.g. stealth)
 ]]--
 
-SMARTBUFF_VERSION       = "v4.1b";
+SMARTBUFF_VERSION       = "v4.2a";
 SMARTBUFF_TITLE         = "SmartBuff";
 SMARTBUFF_SUBTITLE      = "Supports you in cast buffs";
 SMARTBUFF_DESC          = "Cast the most important buffs on you or party/raid members/pets";
@@ -1444,10 +1444,12 @@ function SMARTBUFF_SyncBuffTimers()
             --end
             
             if (buffS and B[CS()][ct][buffS].EnableS and cBuffs[i].IDS ~= nil and cBuffs[i].DurationS > 0) then
-              --and uc and B[CS()][ct][buffS][uc]) then
-              --SMARTBUFF_AddMsgD("Buff timer sync check: " .. buffS);
-              --SMARTBUFF_SyncBuffTimer(unit, unit, buffS, cBuffs[i].DurationS);
-              SMARTBUFF_SyncBuffTimer(unit, unit, cBuffs[i]);
+              if (cBuffs[i].Type ~= SMARTBUFF_CONST_SELF or (cBuffs[i].Type == SMARTBUFF_CONST_SELF and SMARTBUFF_IsPlayer(unit))) then
+                --and uc and B[CS()][ct][buffS][uc]) then
+                --SMARTBUFF_AddMsgD("Buff timer sync check: " .. buffS);
+                --SMARTBUFF_SyncBuffTimer(unit, unit, buffS, cBuffs[i].DurationS);
+                SMARTBUFF_SyncBuffTimer(unit, unit, cBuffs[i]);
+              end
             end
             
             i = i + 1;
@@ -1687,6 +1689,8 @@ function SMARTBUFF_BuffUnit(unit, subgroup, mode, spell)
         --SMARTBUFF_AddMsgD("Exclusive check on " .. spell .. ", current spell = " .. buffnS);
       end
       
+      if (bUsable and cBuff.Type == SMARTBUFF_CONST_SELF and not SMARTBUFF_IsPlayer(unit)) then bUsable = false end
+      if (bUsable and not SMARTBUFF_IsItem(cBuff.Type) and not IsUsableSpell(buffnS)) then bUsable = false end
       if (bUsable and bs.SelfNot and SMARTBUFF_IsPlayer(unit)) then bUsable = false end
       
       -- Check for power threshold
@@ -2220,34 +2224,51 @@ end
 
 
 function SMARTBUFF_SetMissingBuffMessage(target, buff, icon, bCanCharge, nCharges, tBuffTimeLeft, bExpire)
+  local f = SmartBuffSplashFrame;
   -- show splash buff message
-  if (O.ToggleAutoSplash and not SmartBuffOptionsFrame:IsVisible()) then
+  if (f and O.ToggleAutoSplash and not SmartBuffOptionsFrame:IsVisible()) then
+    local s;
     local sd = O.SplashDuration;
-    local si = string.format("\124T"..icon..":%d:%d:1:0\124t ", 12, 12) or " ";
+    local si = "";
+    if (OG.SplashIcon) then si = string.format("\124T"..icon..":%d:%d:1:0\124t ", 12, 12) or "" end
+    if (OG.SplashMsgShort and si == "") then si = buff end
     if (O.AutoTimer < 4) then
       sd = 1;
-      SmartBuffSplashFrame:Clear();
+      f:Clear();
     end
     
-    SmartBuffSplashFrame:SetTimeVisible(sd);
+    f:SetTimeVisible(sd);
     if (not nCharges) then nCharges = 0; end
     if (O.CheckCharges and bCanCharge and nCharges > 0 and nCharges <= O.MinCharges and bExpire) then
-      SmartBuffSplashFrame:AddMessage(target.."\n"..SMARTBUFF_MSG_REBUFF.." "..si..buff..": "..nCharges.." "..SMARTBUFF_MSG_CHARGES.." "..SMARTBUFF_MSG_LEFT, O.ColSplashFont.r, O.ColSplashFont.g, O.ColSplashFont.b, 1.0);
+      if (OG.SplashMsgShort) then
+        s = target.." > "..si.." < "..format(SMARTBUFF_ABBR_CHARGES_OL, nCharges);
+      else
+        s = target.."\n"..SMARTBUFF_MSG_REBUFF.." "..si..buff..": "..format(ITEM_SPELL_CHARGES, nCharges).." "..SMARTBUFF_MSG_LEFT;
+      end
     elseif (bExpire) then
-      SmartBuffSplashFrame:AddMessage(target.."\n"..SMARTBUFF_MSG_REBUFF.." "..si..buff..": "..format(SECONDS_ABBR, tBuffTimeLeft).." "..SMARTBUFF_MSG_LEFT, O.ColSplashFont.r, O.ColSplashFont.g, O.ColSplashFont.b, 1.0);
+      if (OG.SplashMsgShort) then
+        s = target.." > "..si.." < "..format(SECOND_ONELETTER_ABBR, tBuffTimeLeft);
+      else
+        s = target.."\n"..SMARTBUFF_MSG_REBUFF.." "..si..buff..": "..format(SECONDS_ABBR, tBuffTimeLeft).." "..SMARTBUFF_MSG_LEFT;
+      end
     else
-      SmartBuffSplashFrame:AddMessage(target.." "..SMARTBUFF_MSG_NEEDS.." "..si..buff, O.ColSplashFont.r, O.ColSplashFont.g, O.ColSplashFont.b, 1.0);
+      if (OG.SplashMsgShort) then
+        s = target.." > "..si;
+      else
+        s = target.." "..SMARTBUFF_MSG_NEEDS.." "..si..buff;
+      end
     end
+    f:AddMessage(s, O.ColSplashFont.r, O.ColSplashFont.g, O.ColSplashFont.b, 1.0);
   end
   
   -- show chat buff message
   if (O.ToggleAutoChat) then
     if (O.CheckCharges and bCanCharge and nCharges > 0 and nCharges <= O.MinCharges and bExpire) then
-      SMARTBUFF_AddMsgWarn(target .. ": " .. SMARTBUFF_MSG_REBUFF .. " " .. buff .. ", " .. nCharges .. " " .. SMARTBUFF_MSG_CHARGES .. " " .. SMARTBUFF_MSG_LEFT, true);
+      SMARTBUFF_AddMsgWarn(target..": "..SMARTBUFF_MSG_REBUFF.." "..buff..", "..format(ITEM_SPELL_CHARGES, nCharges).." ".. SMARTBUFF_MSG_LEFT, true);
     elseif (bExpire) then
-      SMARTBUFF_AddMsgWarn(target .. ": " .. SMARTBUFF_MSG_REBUFF .. " " .. buff .. string.format(", %.0f", tBuffTimeLeft) .. " sec " .. SMARTBUFF_MSG_LEFT, true);
+      SMARTBUFF_AddMsgWarn(target..": "..SMARTBUFF_MSG_REBUFF.." "..buff..format(SECONDS_ABBR, tBuffTimeLeft).." "..SMARTBUFF_MSG_LEFT, true);
     else
-      SMARTBUFF_AddMsgWarn(target .. " " .. SMARTBUFF_MSG_NEEDS .. " " .. buff, true);
+      SMARTBUFF_AddMsgWarn(target.." "..SMARTBUFF_MSG_NEEDS.." "..buff, true);
     end
   end
   
@@ -2805,18 +2826,18 @@ function SMARTBUFF_Options_Init(self)
   if (not SMARTBUFF_Options) then SMARTBUFF_Options = { }; end
   O = SMARTBUFF_Options;
   
-  if (O.Toggle == nil) then  O.Toggle = true; end  
-  if (O.ToggleAuto == nil) then  O.ToggleAuto = true; end
-  if (O.AutoTimer == nil) then  O.AutoTimer = 5; end
-  if (O.BlacklistTimer == nil) then  O.BlacklistTimer = 5; end
-  if (O.ToggleAutoCombat == nil) then  O.ToggleAutoCombat = false; end
-  if (O.ToggleAutoChat == nil) then  O.ToggleAutoChat = false; end
-  if (O.ToggleAutoSplash == nil) then  O.ToggleAutoSplash = true; end
-  if (O.ToggleAutoSound == nil) then  O.ToggleAutoSound = false; end
-  if (O.CheckCharges == nil) then  O.CheckCharges = true; end
+  if (O.Toggle == nil) then O.Toggle = true; end  
+  if (O.ToggleAuto == nil) then O.ToggleAuto = true; end
+  if (O.AutoTimer == nil) then O.AutoTimer = 5; end
+  if (O.BlacklistTimer == nil) then O.BlacklistTimer = 5; end
+  if (O.ToggleAutoCombat == nil) then O.ToggleAutoCombat = false; end
+  if (O.ToggleAutoChat == nil) then O.ToggleAutoChat = false; end
+  if (O.ToggleAutoSplash == nil) then O.ToggleAutoSplash = true; end
+  if (O.ToggleAutoSound == nil) then O.ToggleAutoSound = false; end
+  if (O.CheckCharges == nil) then O.CheckCharges = true; end
   --if (O.ToggleAutoRest == nil) then  O.ToggleAutoRest = true; end
-   if (O.RebuffTimer == nil) then  O.RebuffTimer = 20; end
-   if (O.SplashDuration == nil) then  O.SplashDuration = 2; end
+  if (O.RebuffTimer == nil) then O.RebuffTimer = 20; end
+  if (O.SplashDuration == nil) then O.SplashDuration = 2; end
   
   if (O.BuffTarget == nil) then O.BuffTarget = false; end
   if (O.BuffPvP == nil) then O.BuffPvP = false; end
@@ -2973,6 +2994,8 @@ function SMARTBUFF_Options_Init(self)
   
   if (SMARTBUFF_OptionsGlobal == nil) then SMARTBUFF_OptionsGlobal = { }; end
   OG = SMARTBUFF_OptionsGlobal;
+  if (OG.SplashIcon == nil) then OG.SplashIcon = true; end
+  if (OG.SplashMsgShort == nil) then OG.SplashMsgShort = false; end
   if (OG.FirstStart == nil) then OG.FirstStart = "V0";  end
   if (OG.FirstStart ~= SMARTBUFF_VERSION) then
     OG.FirstStart = SMARTBUFF_VERSION;
@@ -3799,6 +3822,10 @@ function SMARTBUFF_Splash_Show()
   SmartBuffSplashFrame:Show();
   SmartBuffSplashFrame:SetTimeVisible(60);
   SmartBuffSplashFrame_csFont:Show();
+  SmartBuffSplashFrame_cbIcon:Show();
+  SmartBuffSplashFrame_cbIcon:SetChecked(OG.SplashIcon);
+  SmartBuffSplashFrame_cbMsgShort:Show();
+  SmartBuffSplashFrame_cbMsgShort:SetChecked(OG.SplashMsgShort);
 end
 
 function SMARTBUFF_Splash_Hide()
@@ -3806,6 +3833,8 @@ function SMARTBUFF_Splash_Hide()
   SMARTBUFF_Splash_Clear();
   SMARTBUFF_Splash_ChangePos();
   SmartBuffSplashFrame_csFont:Hide();
+  SmartBuffSplashFrame_cbIcon:Hide();
+  SmartBuffSplashFrame_cbMsgShort:Hide();
   SmartBuffSplashFrame:SetBackdrop(nil);
   SmartBuffSplashFrame:EnableMouse(false);
   SmartBuffSplashFrame:SetFadeDuration(O.SplashDuration);

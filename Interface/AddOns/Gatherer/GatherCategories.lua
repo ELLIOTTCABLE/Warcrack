@@ -1,8 +1,8 @@
 ﻿--[[
 	Gatherable Nodes, type groupings definitions
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
-	Revision: $Id: GatherCategories.lua 912 2010-12-07 07:15:15Z Esamynn $
+	Version: 3.2.4 (<%codename%>)
+	Revision: $Id: GatherCategories.lua 923 2010-12-23 08:54:58Z Esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -198,6 +198,17 @@ ObjectCategories = {
 	[184930] = "TREASURE_CHEST", -- Solid Fel Iron Chest
 	[185915] = "TREASURE_EGG", -- Netherwing Egg
 	[193997] = "TREASURE_EVERFROSTCHIP", -- Everfrost Chip
+
+	-- Archaeology
+	[202655] = "ARCH_TROLL", -- Troll Archaeology Find
+	[203071] = "ARCH_NIGHTELF", -- Night Elf Archaeology Find
+	[203078] = "ARCH_NERUBIAN", -- Nerubian Archaeology Find
+	[204282] = "ARCH_DWARF", -- Dwarf Archaeology Find
+	[206836] = "ARCH_FOSSIL", -- Fossil Archaeology Find
+	[207187] = "ARCH_ORC", -- Orc Archaeology Find
+	[207188] = "ARCH_DRAENEI", -- Draenei Archaeology Find
+	[207189] = "ARCH_VRYKUL", -- Vrykul Archaeology Find
+	[207190] = "ARCH_TOLVIR", -- Tol'vir Archaeology Find
 }
 
 

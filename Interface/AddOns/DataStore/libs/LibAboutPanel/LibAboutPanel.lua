@@ -4,7 +4,7 @@
 LibAboutPanel
 
 File date: 2010-12-01T19:31:23Z
-Project version: v1.51
+Project version: v1.51-1-g52d6efe
 
 Author: Tekkub, Ackis
 

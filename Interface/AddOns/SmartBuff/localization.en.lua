@@ -4,12 +4,9 @@
 
 -- Whats new info
 SMARTBUFF_WHATSNEW = "|cffffffffWhats new:|r\n\n"
-  .."- Added spells: Priest (Lightwell), Warlock (Soul Harvest)\n\n"
-  .."- Added spell icon to the splash message\n\n"
-  .."- Updated buffs: Deathknight (Pet check for Raise Dead), Paladin (Inquisition holy power check)\n\n"
-  .."- Updated power threshold check\n\n"
-  .."- Updated chained and linked buff behavior\n\n"
-  .."- Updated buff detection\n\n"
+  .."- Added options: Splash frame 'Show Icon' and 'Short Message'\n\n"
+  .."- Added buff: Warrior (Shield Block)\n\n"
+  .."- Updated TOC\n\n"
   ;
 
 
@@ -37,6 +34,9 @@ SMARTBUFF_INSTANCES = {"Icecrown Citadel", "Trial of the Crusader", "Ulduar", "M
 
 -- Mount
 SMARTBUFF_MOUNT = "Increases speed by (%d+)%%.";
+
+-- Abbreviations
+SMARTBUFF_ABBR_CHARGES_OL = "%d c";
 
 -- Bindings
 BINDING_NAME_SMARTBUFF_BIND_TRIGGER = "Trigger";
@@ -98,7 +98,8 @@ SMARTBUFF_OFT_RESETLIST      = "Reset List";
 SMARTBUFF_OFT_YES            = "Yes";
 SMARTBUFF_OFT_NO             = "No";
 SMARTBUFF_OFT_PURGE_DATA     = "Are you sure you want to reset ALL SmartBuff data?\nThis action will force a reload of the UI!";
-
+SMARTBUFF_OFT_SPLASHICON     = "Show Icon";
+SMARTBUFF_OFT_SPLASHMSGSHORT = "Short Message";
 
 -- Options Frame Tooltip Text
 SMARTBUFF_OFTT               = "Toggles SmartBuff On/Off";
@@ -133,7 +134,7 @@ SMARTBUFF_OFTT_MINIGRP       = "Show raid subgoup settings in an\nown movable mi
 SMARTBUFF_OFTT_ANTIDAZE      = "Automatically cancels the\naspect of the cheetah/pack\nif someone gets dazed\n(self or group).";
 SMARTBUFF_OFTT_SPLASHSTYLE   = "Changes the fontstyle of\nthe buff messages.";
 SMARTBUFF_OFTT_HIDESABUTTON  = "Hides the SmartBuff action button.";
-SMARTBUFF_OFTT_INCOMBAT      = "At the moment it only works on yourself.\nThe first buff you mark as in combat,\nwill set on the button before combat\nand you can use it in combat.\nWarning! All logic is disabled in combat!";
+SMARTBUFF_OFTT_INCOMBAT      = "At the moment it only works on yourself.\nThe first buff you mark as in combat,\nwill set on the button before combat\nand you can use it in combat.\n!!! Warning !!!\nAll logic is disabled in combat!";
 SMARTBUFF_OFTT_SMARTDEBUFF   = "Shows the SmartDebuff frame.";
 SMARTBUFF_OFTT_SPLASHDURATION= "How many seconds the splash\nmessage will displayed,\nbefore it fades.";
 SMARTBUFF_OFTT_INSHAPESHIFT  = "Cast buffs also if you\nare shapeshifted.";

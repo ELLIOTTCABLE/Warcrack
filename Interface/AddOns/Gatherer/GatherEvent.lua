@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
-	Revision: $Id: GatherEvent.lua 894 2010-12-02 22:46:33Z Esamynn $
+	Version: 3.2.4 (<%codename%>)
+	Revision: $Id: GatherEvent.lua 924 2011-04-27 02:37:42Z Esamynn $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Event handling routines
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherEvent.lua $", "$Rev: 894 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherEvent.lua $", "$Rev: 924 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
@@ -100,6 +100,7 @@ function Gatherer.Event.OnEvent( event, ... )
 		local addon = select(1, ...)
 		if (addon and string.lower(addon) == "gatherer") then
 			Gatherer.Event.OnLoad()
+			Gatherer.Comm.OnLoad()
 		end
 	
 	elseif ( event == "PLAYER_LOGIN" ) then

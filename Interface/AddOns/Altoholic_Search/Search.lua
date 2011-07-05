@@ -75,6 +75,7 @@ local function Realm_UpdateEx(self, offset, entry, desc)
 						itemButton.border:SetVertexColor(r, g, b, 0.5)
 						itemButton.border:Show()
 					end
+					hex = "|c" .. hex
 				end
 			end
 			
@@ -271,7 +272,7 @@ function ns:Loots_Update()
 			_G[ entry..i.."ItemIconTexture" ]:SetTexture(GetItemIcon(itemID));
 
 			_G[ entry..i.."Stat2" ]:SetText(YELLOW .. itemLevel)
-			_G[ entry..i.."Name" ]:SetText(hex .. itemName)
+			_G[ entry..i.."Name" ]:SetText("|c" .. hex .. itemName)
 			_G[ entry..i.."Source" ]:SetText(TEAL .. result.dropLocation)
 			_G[ entry..i.."Source" ]:SetID(0)
 			
@@ -342,7 +343,7 @@ function ns:Upgrade_Update()
 			
 			_G[ entry..i.."ItemIconTexture" ]:SetTexture(GetItemIcon(itemID));
 
-			_G[ entry..i.."Name" ]:SetText(hex .. itemName)
+			_G[ entry..i.."Name" ]:SetText("|c" .. hex .. itemName)
 			_G[ entry..i.."Source" ]:SetText(TEAL .. result.dropLocation)
 			_G[ entry..i.."Source" ]:SetID(0)
 		

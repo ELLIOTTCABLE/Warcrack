@@ -1,11 +1,14 @@
-## Interface: 40100
+## Interface: 40200
 ## Title: Critline
-## Version: 4.1.0
+## Version: 4.1.1
 ## Notes: Saves your normal and critical records and flashes a message if you break the record.
 ## Author: L'ombra
 ## SavedVariables: CritlineDB
 ## SavedVariablesPerCharacter: CritlinePerCharDB
-## OptionalDeps: Ace3, LibSharedMedia-3.0
+## X-Curse-Packaged-Version: 4.1.1
+## X-Curse-Project-Name: Critline
+## X-Curse-Project-ID: critline
+## X-Curse-Repository-ID: wow/critline/mainline
 
 libs\LibStub.lua
 libs\CallbackHandler-1.0.lua

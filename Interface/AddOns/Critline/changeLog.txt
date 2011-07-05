@@ -1,3 +1,10 @@
+4.1.1
+- Add tooltip exceptions for Arcane Missiles, Slam, Feed Pet, Wyvern Sting, Intercept, Bloodthirst and Chimera Shot.
+- All custom fonts should now work properly for the splash messages.
+- Add Corruption:Absolute (Cho'gall) to aura filter.
+- Update combat log event code for patch 4.2.
+- ToC bump.
+
 4.1.0
 - Remove water elemental from class pets as it's now treated as a permanent pet.
 - Add Kill Command tooltip exception.

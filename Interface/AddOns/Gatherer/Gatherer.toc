@@ -1,4 +1,4 @@
-## Interface: 40000
+## Interface: 40200
 ## 
 ## Title: Gatherer
 ## Title-frFR: Gatherer
@@ -8,7 +8,7 @@
 ## Notes-frFR: Gatherer, affiche les objets recoltes dans la minicarte et la carte du monde
 ## Notes-deDE: Gatherer, zeigt gesammelte Krauter und Erze auf der Minikarte und Weltkarte an
 ## 
-## Version: 3.2.3
+## Version: 3.2.4
 ## Author: Norganna
 ##
 # myAddOns Support Metadata
@@ -20,7 +20,7 @@
 ## 
 ## SavedVariables: GatherItems, GatherDrops, Gatherer_DropRates, Gatherer_SavedSettings_AccountWide, LibSwagData, Gatherer_SharingBlacklist
 ## SavedVariablesPerCharacter: Gatherer_SavedSettings_PerCharacter
-## Revision: $Id: Gatherer.toc 885 2010-10-12 19:46:23Z Esamynn $
+## Revision: $Id: Gatherer.toc 926 2011-06-29 02:57:55Z Esamynn $
 ## OptionalDeps: myAddOns, Configator, SlideBar, Babylonian, LibDataBroker
 
 # Manifest list

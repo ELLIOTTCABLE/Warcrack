@@ -1,11 +1,11 @@
 ## Title: Swatter |cff224477(lib)
 ## Notes: Debugging tool for handling and displaying of error messages in a useful way.
 ##
-## Interface: 40000
+## Interface: 40200
 ## SavedVariables: SwatterData
 ##
-## Version: 3.2.3 (<%codename%>)
-## Revision: $Id: !Swatter.toc 284 2010-11-01 04:11:43Z dinesh $
+## Version: 3.2.4 (<%codename%>)
+## Revision: $Id: !Swatter.toc 313 2011-06-29 03:17:11Z Esamynn $
 ## Author: Norganna's AddOns
 ## X-Part-Of: Libraries
 ## X-Category: Library

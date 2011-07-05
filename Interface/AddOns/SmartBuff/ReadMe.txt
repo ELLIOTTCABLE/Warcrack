@@ -163,6 +163,10 @@ aeldra@sonnenkinder.org
 Changes: 
 Rev     Date        Description
 ------  ----------  -----------------------
+4.2a    2011-06-29  Added options: Splash frame 'Show Icon' and 'Short Message'
+                    Added buffs: Warrior (Shield Block)
+                    Updated TOC
+                    
 4.1b    2011-06-05  Added spells: Priest (Lightwell), Warlock (Soul Harvest)
                     Added spell icon to the splash message
                     Updated buffs: Deathknight (Pet check for Raise Dead), Paladin (Inquisition holy power check)

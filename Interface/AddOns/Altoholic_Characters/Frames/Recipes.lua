@@ -12,6 +12,9 @@ local RECIPE_GREY		= "|cFF808080"
 local RECIPE_GREEN	= "|cFF40C040"
 local RECIPE_ORANGE	= "|cFFFF8040"
 
+local ICON_PLUS = "Interface\\Buttons\\UI-PlusButton-Up"
+local ICON_MINUS = "Interface\\Buttons\\UI-MinusButton-Up"
+
 local SKILL_GREY = 0
 local SKILL_GREEN = 1
 local SKILL_YELLOW = 2
@@ -135,6 +138,8 @@ local function BuildView()
 	if type(view[#view]) == "table" then
 		table.remove(view)
 	end
+	
+	isViewValid = true
 end
 
 function ns:Update()
@@ -185,10 +190,10 @@ function ns:Update()
 		else		-- line will be displayed
 			if isHeader then
 				if isCollapsed == false then
-					_G[ entry..i.."Collapse" ]:SetNormalTexture("Interface\\Buttons\\UI-MinusButton-Up"); 
+					_G[ entry..i.."Collapse" ]:SetNormalTexture(ICON_MINUS)
 					DrawGroup = true
 				else
-					_G[ entry..i.."Collapse" ]:SetNormalTexture("Interface\\Buttons\\UI-PlusButton-Up");
+					_G[ entry..i.."Collapse" ]:SetNormalTexture(ICON_PLUS)
 					DrawGroup = false
 				end
 				_G[entry..i.."Collapse"]:Show()
@@ -331,12 +336,12 @@ function ns:ToggleAll(frame)
 	-- expand or collapse all sections of the currently displayed alt /tradeskill
 	if not frame.isCollapsed then
 		frame.isCollapsed = true
-		frame:SetNormalTexture("Interface\\Buttons\\UI-PlusButton-Up");
+		frame:SetNormalTexture(ICON_PLUS);
 	else
 		frame.isCollapsed = nil
-		frame:SetNormalTexture("Interface\\Buttons\\UI-MinusButton-Up"); 
+		frame:SetNormalTexture(ICON_MINUS); 
 	end
-
+	
 	for _, s in pairs(view) do
 		if type(s) == "table" then		-- it's a header
 			s.isCollapsed = (frame.isCollapsed) or false

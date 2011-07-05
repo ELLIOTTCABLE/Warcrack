@@ -18,11 +18,9 @@ local L = MikSBT.translations
 -- Fonts
 ------------------------------
 
-L.FONT_FILES = {
- ["MSBT bLEI00D"]		= "Fonts\\bLEI00D.TTF",
-}
+L.FONT_FILES["MSBT bKAI00M"] = "Fonts\\bKAI00M.TTF"
 
-L.DEFAULT_FONT_NAME = "MSBT bLEI00D"
+L.DEFAULT_FONT_NAME = "MSBT bKAI00M"
 
 
 ------------------------------

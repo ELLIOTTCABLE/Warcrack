@@ -246,6 +246,7 @@ if (GetLocale() == "deDE") then
 		["AutoBarButtonPets"] = "Begleiter",
 		["AutoBarButtonQuest"] = "Quest",
 		["AutoBarButtonMiscFun"] = "Misc, Fun",
+		["AutoBarButtonGuildSpell"] = "Guild Spells",
 		["AutoBarButtonRecovery"] = "Recovery",
 		["AutoBarButtonRotationDrums"] = "Rotation: Drums",
 		["AutoBarButtonShields"] = "Shields",

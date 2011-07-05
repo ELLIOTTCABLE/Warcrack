@@ -11,8 +11,8 @@ L["A custom cooldown bar has been created and can be configured through Module S
 L["A custom counter has been created and can be configured through Module Settings => MyCustomCounter. It is highly recommended that you change the bar name of this module so that it's easier to identify."] = "Ein neue persönliche Zählerleiste wurde erstellt und kann unter Modul einstellungen => MeineZählerleiste konfiguriert werden. Es ist empfohlen den Namen der Leiste dieses Moduls zu ändern, damit es später leichter wieder zu finden ist."
 L["A custom health bar has been created and can be configured through Module Settings => MyCustomHealth. It is highly recommended that you change the bar name of this module so that it's easier to identify."] = "Eine neue persönliche Lebensleiste wurde erstellt und kann unter Modul einstellungen => MeineLebensleiste konfiguriert werden. Es ist empfohlen den Namen der Leiste dieses Moduls zu ändern, damit es später leichter wieder zu finden ist."
 L["A custom mana bar has been created and can be configured through Module Settings => MyCustomMana. It is highly recommended that you change the bar name of this module so that it's easier to identify."] = "Eine neue persönliche Manaleiste wurde erstellt und kann unter Modul einstellungen => MeineManaleiste konfiguriert werden. Es ist empfohlen den Namen der Leiste dieses Moduls zu ändern, damit es später leichter wieder zu finden ist."
-L["Abbreviate estimated health"] = "Gekürztes geschätztes Leben" -- Needs review
-L["Abbreviate health"] = "Gekürztes Leben" -- Needs review
+L["Abbreviate estimated health"] = "Gekürztes geschätztes Leben"
+L["Abbreviate health"] = "Gekürztes Leben"
 L["Adjust the horizontal position of the aura icon"] = "Anpassen der horizontalen Position der Aura Symbole"
 L["Adjust the vertical placement of this bar"] = "Anpassen der vertikalen Platzierung dieser Leiste"
 L["Adjust the vertical position of the aura icon"] = "Anpassen der vertikalen Position der Aura Symbole"
@@ -104,13 +104,13 @@ This option only applies to health and mana bars.]=] ] = [=[Ändert die Farbe di
 Diese Option wirkt nur auf die Lebensanzeige und Manaanzeige.]=]
 L["Checking this means that only buffs or debuffs that the player applied will trigger this bar"] = "Aktivierung läßt nur noch buffs, oder Debuffs des Spielers auf der Leiste anzeigen"
 L["Choose a marker to edit. This will place the marker's settings in the fields above here."] = "Wähle eine Makierung um sie zu editieren. Dies wird die Einstellung der Markierung in den Flächen hierdrüber ersetzen."
-L["Choose whether the runes use a cooldown-style wipe, simply an alpha fade to show availability or both."] = "Wähle ob die Runen einen Abklinzeit effeckt haben, simpel gesagt eine alpha Überblendung um zu zeigen das sie Bereit sind." -- Needs review
-L["Choose whether the totems use a cooldown-style wipe or simply an alpha fade to show availability."] = "Wähle ob die Totems einen Abklinzeit effeckt haben, simpel gesagt eine alpha Überblendung um zu zeigen das sie Bereit sind." -- Needs review
+L["Choose whether the runes use a cooldown-style wipe, simply an alpha fade to show availability or both."] = "Wähle ob die Runen einen Abklinzeit effeckt haben, simpel gesagt eine alpha Überblendung um zu zeigen das sie Bereit sind."
+L["Choose whether the totems use a cooldown-style wipe or simply an alpha fade to show availability."] = "Wähle ob die Totems einen Abklinzeit effeckt haben, simpel gesagt eine alpha Überblendung um zu zeigen das sie Bereit sind."
 L[ [=[Choose whether you'd like a graphical or numeric representation of the runes.
 
 NOTE: The color of 'Numeric' mode can be controlled by the HolyPowerNumeric color.]=] ] = [=[Wähle ob du eine grafische oder numerische Anzeige der Runen haben möchtest
 
-BEACHTE: Die Farbe der 'numerischen' Anzeige kann über die HeiligeMachtNumerisch Farbe umgestellt werden]=] -- Needs review
+BEACHTE: Die Farbe der 'numerischen' Anzeige kann über die HeiligeMachtNumerisch Farbe umgestellt werden]=]
 L[ [=[Choose whether you'd like a graphical or numeric representation of the runes.
 
 NOTE: The color of 'Numeric' mode can be controlled by the ShardCounterNumeric color.]=] ] = [=[Wähle zwischen grafischer oder numerischer Anzeige der Runen.
@@ -127,9 +127,9 @@ Also notice that some modules have a + next to them. This will open up additiona
 Beachte ebenfalls, das einige Module ein + neben sich haben. Dies öffnet weitere Einstellungen, so wie Text optimierungen und Symbol optimierungen zu dem Modul.]=]
 L["Click to open IceHUD options."] = "Klick um die IceHUD Einstellungen zu öffnen"
 L["Color"] = "Farbe"
-L["Color NPC by hostility"] = "Farbe nach NPC Reaktion" -- Needs review
-L["Color bar by health %"] = "Leistenfarbe nach Leben in %" -- Needs review
-L["Color bar by mana %"] = "Leistenfarbe nach Mana in %" -- Needs review
+L["Color NPC by hostility"] = "Farbe nach NPC Reaktion"
+L["Color bar by health %"] = "Leistenfarbe nach Leben in %"
+L["Color bar by mana %"] = "Leistenfarbe nach Mana in %"
 L["Colors"] = "Farben"
 L["Colors the health bar from MaxHealthColor to MinHealthColor based on current health %"] = "Färbt die Lebensanzeige von MaxHealthColor zu MinHealthColor nach aktuellem Leben %"
 L[ [=[Colors the health bar from MaxHealthColor to MinHealthColor based on current health %
@@ -137,16 +137,16 @@ L[ [=[Colors the health bar from MaxHealthColor to MinHealthColor based on curre
 (Note: This overrides the 'class color bar' setting. Disable this to use class coloring)]=] ] = [=[Färbt die Lebensanzeige von MaxHealthColor zu MinHealthColor nach aktuellem Leben %
 
 (BEACHTE: Dies überschreibt die 'class color bar' einstellungen. Deaktivieren um die Klassenfarben zu benutzen)]=]
-L["Colors the mana bar from MaxManaColor to MinManaColor based on current mana %"] = "Färbt die Manaanzeige von MaxManaColor zu MinManaColor, basieren auf dem aktuellen Mana %" -- Needs review
+L["Colors the mana bar from MaxManaColor to MinManaColor based on current mana %"] = "Färbt die Manaanzeige von MaxManaColor zu MinManaColor, basieren auf dem aktuellen Mana %"
 L["Combo Points Font Size"] = "Combo Punkte Schrift größe"
 L["Combo gap"] = "Combo spalt"
 L["Configuration Mode"] = "Konfigurations Modus"
 L["Contextual Background"] = "Kontextabhängig Hintergrund"
-L["Controls what it means for the bar to be filled. A normal bar will grow larger as the value grows from 0% to 100%. A reversed bar will shrink as the value grows from 0% to 100%."] = "Stellt den Wert ein, womit die Leiste als gefüllt gilt. Eine Normal Leiste wird steigen wenn der Wert von 0% bis 100% anwächst. Eine umgekehrte Leiste wird schrumpfen, wenn der Wert von 0% auf 100% wächst." -- Needs review
-L["Controls which direction the bar fills up. With this checked, the bar will fill opposite from normal (e.g. for health: 0% at the top, 100% at the bottom)."] = "Kontrolliert die Richtung in der eine Leiste sich auffüllt. Wenn die aktiviert wird, wird die Leiste sich umgekehrt auffüllen. (bsp. für Leben: 0% ist oben, 100% ist unten)" -- Needs review
+L["Controls what it means for the bar to be filled. A normal bar will grow larger as the value grows from 0% to 100%. A reversed bar will shrink as the value grows from 0% to 100%."] = "Stellt den Wert ein, womit die Leiste als gefüllt gilt. Eine Normal Leiste wird steigen wenn der Wert von 0% bis 100% anwächst. Eine umgekehrte Leiste wird schrumpfen, wenn der Wert von 0% auf 100% wächst."
+L["Controls which direction the bar fills up. With this checked, the bar will fill opposite from normal (e.g. for health: 0% at the top, 100% at the bottom)."] = "Kontrolliert die Richtung in der eine Leiste sich auffüllt. Wenn die aktiviert wird, wird die Leiste sich umgekehrt auffüllen. (bsp. für Leben: 0% ist oben, 100% ist unten)"
 L["Cooldown"] = "Abklingzeit"
 L["Cooldown timer display"] = "Abklingzeit anzeige"
-L["Count color"] = "Zählfarbe" -- Needs review
+L["Count color"] = "Zählfarbe"
 L["Count minimum color"] = "Minimalzählfarbe"
 L["Counter"] = "Zähler"
 L["Counter look and feel"] = "Anmutung des Zählers"
@@ -183,7 +183,7 @@ L["Display target details"] = "Zeige Ziel details"
 L["Display target guild"] = "Zeige Ziel Gilde"
 L["Display target name"] = "Zeige Ziel Name"
 L["Display when empty"] = "Zeige wenn leer"
-L["Display when targeting"] = "Zeige an, wenn etwas anvisiert wird" -- Needs review
+L["Display when targeting"] = "Zeige an, wenn etwas anvisiert wird"
 L["Distance between the left and right bars"] = "Abstand zwichen der linken und rechten Leiste"
 L[ [=[DogTag-formatted string to use for the bottom text line (leave blank to revert to old behavior)
 
@@ -316,7 +316,7 @@ L["How far to push the raid icon up or down"] = "Wie weit soll das Raidsymbol na
 L["How far vertically the buff frame should be offset from the anchor"] = "Wie weit soll vertikal der Buffrahmen vom anker verschoben werden"
 L["How far vertically the debuff frame should be offset from the anchor"] = "Wie weit soll vertikal der Debuffrahmen vom anker verschoben werden"
 L["How long the animation should take to play"] = "Wie lang soll die Animation abspielen"
-L["How many buffs/debuffs is shown on each row"] = "Wie viele Buffs/Debuffs sollen pro Reihe gezeigt werden" -- Needs review
+L["How many buffs/debuffs is shown on each row"] = "Wie viele Buffs/Debuffs sollen pro Reihe gezeigt werden"
 L[ [=[How many total applications of this buff/debuff can be applied. For example, only 5 sunders can ever be on a target, so this would be set to 5 for tracking Sunder.
 
 Remember to press ENTER after filling out this box with the name you want or it will not save.]=] ] = [=[Wie viel mal kann der Buff/Debuff gestapelt werden. Beispiel: Rüstung zerreißen kann maximal 5x auf einem Ziel sein, also sollte der Wert auf 5 sein um Rüstungs zerreißen zu verfolgen.
@@ -354,7 +354,7 @@ L["Icon gap"] = "Symbol Lücken"
 L["Icon set"] = "Symbol Set"
 L["Icon size"] = "Symbol größe"
 L["Icon size for auras that were applied by you, the player"] = "Symbol größe für Auren die bei dir gewirkt wurden"
-L["If the selected ability has a max range or only works on friendly units, this will ignore that check. Meaning you can use a CD bar for buff spells and it will display when you have an enemy targeted."] = "Wenn die gewählte Fähigkeit eine maximal Reichweite hat, oder nur auf freundlichen Zielen wirkt, dann wird dies ignoriert, bei Auswahl. Bedeutet, das du eine Abklingzeitleiste für Stärkungszauber benutzen kannst und es wird angezeit, wenn du einen Gegner ausgewählt hast." -- Needs review
+L["If the selected ability has a max range or only works on friendly units, this will ignore that check. Meaning you can use a CD bar for buff spells and it will display when you have an enemy targeted."] = "Wenn die gewählte Fähigkeit eine maximal Reichweite hat, oder nur auf freundlichen Zielen wirkt, dann wird dies ignoriert, bei Auswahl. Bedeutet, das du eine Abklingzeitleiste für Stärkungszauber benutzen kannst und es wird angezeit, wenn du einen Gegner ausgewählt hast."
 L["If this is checked, then a health value of 1100 will display as 1.1k, otherwise it shows the number"] = "Wenn die gewählt ist, dann werden Lebensangaben von 1100 als 1.1k angezeigt, andernfalls zeigt es den Zahlenwert"
 L[ [=[If this is checked, then a health value of 1100 will display as 1.1k, otherwise it shows the number
 
@@ -365,11 +365,11 @@ L["If this is checked, then the SnD buff time shows as a percent of the maximum 
 L["If this is checked, then the buff name must be entered exactly as the full buff name. Otherwise, you can use only a portion of the name such as 'Sting' to track all stings."] = "Ist diese Option aktiviert, dann muss der Buff Name exakt dem vollen Buff Name gleichen. Andernfalls kann auch nur ein Teil des Buffs eingegeben werden. Beispielsweise 'Stich' um alle Stiche auf zu spüren"
 L["If this is checked, then the counter will use your 'out of target' alpha when targeting someone who is friendly."] = "Wenn dies ausgewählt ist, dann wird dieser Zähler deine 'nicht im Kampf' alpha verwenden, wenn ein Freundliches Ziel ausgewählt ist."
 L["If this is checked, then whenever the counter is maxed out it will gently pulsate to let you know it's ready to be used."] = "Wenn dies ausgewählt ist, dann wird dieser Zähler, wenn er max erreicht hat, leicht pulsieren, um an zu zeigen das er bereit ist"
-L["If this is disabled, then targeting a friendly will use the 'Alpha out of combat' setting instead of 'Alpha OOC and Target'."] = "If this is disabled, then targeting a friendly will use the 'Alpha out of combat' setting instead of 'Alpha OOC and Target'." -- Requires localization
+L["If this is disabled, then targeting a friendly will use the 'Alpha out of combat' setting instead of 'Alpha OOC and Target'."] = "Wenn dies deaktiviert ist und dann ein freundliches Ziel anvisiert, wird die Alpha out of combat einstellung benutzt anstatt die Alpha OOC und Ziel"
 L["If you are using the 'class color bar' setting above, then enabling this will color NPC's by their hostility toward you since NPC class isn't very helpful or applicable information."] = "Wenn du 'Klasse nach Farbe' in den Einstellungen oberhalb benutzt, dann wird diese Einstellung NPC´s in ihre jeweilige Reaktions Farbe dir gegenüber anzeigen."
 L["If you have game default font selected, this option has no effect"] = "Wenn du standard Spiel Schrift ausgewählt hast, dann hat diese Option kein Effeckt"
 L["If your class power is not full (or not empty in the case of Holy Power) then the module will always be displayed on your screen using the In Combat alpha setting. Otherwise it will fade to the OOC alpha when you leave combat."] = "Wenn deine Klassen Power nicht voll ist (oder nicht leer wie im falle der Heiligen Macht), dann wird das Modul immer angezeigt unter der Verwendung der Im Kampf alpha einstellung. Andernfalls wird es ausgeblendet zur OOC alpha, wenn der Kampf verlassen wird."
-L["Ignore range"] = "Ignoriere Reichweite" -- Needs review
+L["Ignore range"] = "Ignoriere Reichweite"
 L["Import profile"] = "Importiere Profil"
 L["Imports a profile as exported from another user's IceHUD."] = "Importiert ein Profil als Exportiert von einem anderem IceHUD Benutzer"
 L["Inactive mode"] = "Inaktiv Modus"
@@ -508,12 +508,12 @@ L["Show leader icon"] = "Zeige Anfüherer Symbol"
 L["Show loot master icon"] = "Zeige Loot Meister Symbol"
 L["Show resting status"] = "Zeige Erholen Status"
 L["Show rogue/cat energy ticker"] = "Zeige Schurken/Katzen Energie Ticker"
-L["Show scaled threat"] = "Zeige maßstabgerechte Bedrohung" -- Needs review
+L["Show scaled threat"] = "Zeige maßstabgerechte Bedrohung"
 L["Show second highest threat"] = "Zeige zweithöchste Bedrohung"
 L["Show spell cast time"] = "Zeige Zauberzeit"
 L["Show spell rank"] = "Zeige Zauber Rang"
 L["Show stacking debuffs"] = "Zeige Stapelnde Debuffs"
-L["Show stacking debuffs in ToT info"] = "Zeige Stapelnde Debuffs in ToT Info" -- Needs review
+L["Show stacking debuffs in ToT info"] = "Zeige Stapelnde Debuffs in ToT Info"
 L["Show status icon"] = "Zeige Status Symbol"
 L["Shows a flash behind each holy rune when it becomes available."] = "Lässt jede Heilige rune aufleuchten, wenn sie bereit ist"
 L["Shows a flash behind each shard when it becomes available."] = "Zeigt einen Blitz hinter jedem Splitter, wenn er wieder verfügbar ist"
@@ -522,7 +522,7 @@ L["Side of the HUD where the bar appears"] = "Seitlich der HUD wo die Leisten er
 L["Since the last time you updated IceHUD, many significant CPU and memory optimizations have been made. If bar animation looks jumpy to you, open the /icehud configuration page and raise the 'Update Period' slider. This will cause higher CPU usage but will look nicer. Enjoy IceHUD!"] = "Seit deinem letzten Update von IceHud wurden einige signifikante CPU und Speicher optimierungen gemacht. Wenn Leisten animationen springend wirken, dann öffne die IceHud Konfikuration und erhöhe die 'Update periode'. Dies wird mehr CPU leistung fordern, aber wird angenehmer aussehen. Viel Spaß mit IceHUD!"
 L["Size and Placement"] = "Größe und Position"
 L["Size to gap"] = "Größe bis zur Spalte"
-L["Sort by expiration"] = "Sortiere nach Auslaufzeit" -- Needs review
+L["Sort by expiration"] = "Sortiere nach Ablaufzeit"
 L["Space between bars on the same side"] = "Lücke zwischen Leisten auf der selben Seite"
 L["Space between buffs"] = "Abstand zwischen den Buffs"
 L["Spacing between each combo point (only works for graphical mode)"] = "Lücke zwischen jedem Kombo Punkt (funktioniert nur im Grafik Modus)"
@@ -579,7 +579,7 @@ L[ [=[The name of this counter (must be unique!).
 Remember to press ENTER after filling out this box with the name you want or it will not save.]=] ] = [=[Der Name dieses Zählers (muss einzigartig sein)
 
 Denk daran ENTER zu drücken, sonst werden die gemachten Einstellungen nicht übernommen.]=]
-L["The point on the TargetInfo frame that the buff frame gets connected to"] = "Punkt an dem der Ziel Info Rahmen sich mit dem Buff Rahmen verbindet" -- Needs review
+L["The point on the TargetInfo frame that the buff frame gets connected to"] = "Punkt an dem der Ziel Info Rahmen sich mit dem Buff Rahmen verbindet"
 L["The point on the TargetInfo frame that the debuff frame gets connected to"] = "Punkt an dem der Ziel Info Rahmen sich mit dem Debuff Rahmen verbindet"
 L[ [=[The upper text to display under this bar (accepts LibDogTag formatting)
 
@@ -631,10 +631,10 @@ ACHTUNG: Dies Option ist neu und noch sehr grob an den Rändern. Extreme Anpassu
 
 Und ich meine Extrem.]=]
 L["This will update the marker selected in the 'edit marker' box with the values specified."] = "Dies wird die gewählte Makierung mit den gewählten spezifikation aktuallisieren."
-L["ToT frame texture"] = "ToT Rahmen texture" -- Needs review
+L["ToT frame texture"] = "ToT Rahmen texture"
 L["Toggle bar background visibility"] = "Zeige Leisten hintergrund Sichtbarkeit"
 L["Toggle bar visibility"] = "Zeige Leisten Sichtbarkeit"
-L["Toggle lower text visibility"] = "Zeige unteren Text Sichtbarkeit" -- Needs review
+L["Toggle lower text visibility"] = "Zeige unteren Text Sichtbarkeit"
 L["Toggle mouseover on/off"] = "Zeige Mouseover an/aus"
 L["Toggle mouseover on/off for buffs/debuffs"] = "Zeige Mouseove an/aus für Buffs/Debuffs"
 L["Toggle mouseover on/off for target"] = "Zeige Mouseover an/aus für Ziel"
@@ -644,7 +644,7 @@ L["Toggles contextual background coloring"] = "Zeige kontextabhängige hintergun
 L["Toggles whether or not buffs are displayed at all"] = "Sollen Buffs überhaupt angezeigt werden?"
 L["Toggles whether or not debuffs are displayed at all"] = "Sollen Debuffs überhaupt angezeigt werden?"
 L["Toggles whether or not to show the CastNonInterruptible color for this bar when a cast is non-interruptible"] = "Zeigt ob, oder ob nicht die ZauberNichtUnterbrechbar Farbe für diese Leiste angezeigt werden soll, wenn der Zauber nicht unterbrechbar ist"
-L["Toggles whether or not to sort by expiration time (otherwise they're sorted how the game sorts them - by application time)"] = "Toggles whether or not to sort by expiration time (otherwise they're sorted how the game sorts them - by application time)" -- Requires localization
+L["Toggles whether or not to sort by expiration time (otherwise they're sorted how the game sorts them - by application time)"] = "Schaltet um auf Anordnung nach Ablaufzeit (sonst wird es so angeordnet wie das Spiel sie anordnet - nach ausgeführter Reihenfolge)"
 L["Totem cooldown mode"] = "Totem Abklingzeit Modus"
 L["Totem gap"] = "Totem Spalt"
 L["Totem orientation"] = "Totem orientierung"
@@ -657,7 +657,7 @@ L["Update Period"] = "Aktualisierungs Zeit"
 L["Upper Text"] = "Oberer Text"
 L["Upper Text Color"] = "Obere Textfarbe"
 L["Upper text visible"] = "Oberer Text sichtbarkeit"
-L["Use 'Target' alpha for friendlies"] = "Use 'Target' alpha for friendlies" -- Requires localization
+L["Use 'Target' alpha for friendlies"] = "Benutze Ziel Alpha für freundliche Ziele"
 L["Use Dog Tags"] = "Benutze Dog Tags"
 L["Use class color as the bar color instead of default color"] = "Benutze Klassen Farben für die Leiste anstatt der standard Farbe"
 L["Use class color as the bar color instead of reaction color"] = "Benutze Klassen Farbe für die Leiste anstatt der Reaktions Farbe"
@@ -666,7 +666,7 @@ L[ [=[Use class color as the bar color instead of reaction color
 (Note: The 'color bar by health %' setting overrides this)]=] ] = [=[Benutze Klassen Farbe für die Leiste anstatt der Reaktions Farbe
 
 (Bachte: Die 'Färbe Lebens Leiste in %' überschreibt dies)]=]
-L["Use normal alpha"] = "Benutze normalen Alphawert" -- Needs review
+L["Use normal alpha"] = "Benutze normalen Alphawert"
 L["Usually CD bars will always display if they're set to 'When Ready' or 'Always' mode regardless of your other transparency settings. If you'd rather this bar show/hide as per normal transparency rules, then check this box."] = "Usually CD bars will always display if they're set to 'When Ready' or 'Always' mode regardless of your other transparency settings. If you'd rather this bar show/hide as per normal transparency rules, then check this box." -- Requires localization
 L["Vertical Position"] = "Vertikal Position"
 L["Vertical position"] = "Vertikal Position"
@@ -722,7 +722,7 @@ L["Whether the runes should draw side-by-side or on top of one another"] = "Ob R
 L["Whether the totems should draw side-by-side or on top of one another"] = "Ob Totems nebeneinaner oder übereinander gezeigt werden sollen"
 L["Whether this bar should hide when the player has 0 combo points or stay visible"] = "Ob diese Leiste verschwinden soll, wenn der Spieler 0 Kombopunkte hat oder sichtbar bleiben soll"
 L["Whether to always show this module at 100% alpha or not"] = "Soll dieses Modul immer bei 100% alpha angezeigt werden"
-L["Whether to display this bar when you target a unit, even if the buff/debuff specified is not present."] = "Ob die Leiste angezeigt werden soll, oder nich, wenn ein Ziel anvisiert ist, auch wenn der specifizierte Buff/Debuff nicht vorhanden ist." -- Needs review
+L["Whether to display this bar when you target a unit, even if the buff/debuff specified is not present."] = "Ob die Leiste angezeigt werden soll, oder nich, wenn ein Ziel anvisiert ist, auch wenn der specifizierte Buff/Debuff nicht vorhanden ist."
 L["Whether to draw the PvP icon in front of or behind this bar"] = "Ob das PvP Symbol vor oder hinter dieser Leiste angezeigt werden soll"
 L["Whether to draw the elite icon in front of or behind this bar"] = "Elite Symbol vor oder hinter dieser Leiste anzeigen"
 L["Whether to draw the raid icon in front of or behind this bar"] = "Raid Symbol vor oder hinter dieser Leiste anzeigen"

@@ -1524,6 +1524,23 @@ function AutoBarCategory:Initialize2()
 			"SHAMAN", spellStrengthOfEarthTotem,
 			"SHAMAN", spellTremorTotem,
 			})
+			
+			
+	local spellMobileBanking = GetSpellInfo(83958)
+	local spellMassRessurection = GetSpellInfo(83968)
+	local spellWillTravel = GetSpellInfo(83967)
+	AutoBarCategoryList["Spell.Guild"] = AutoBarSpells:new(
+			"Spell.Guild", spellEarthElementalTotemIcon, {
+			"*", spellMobileBanking,
+			"*", spellMassRessurection,
+			"*", spellWillTravel,
+	})
+
+
+
+
+
+
 
 	spellNameList["Grounding Totem"], _, spellIconList["Grounding Totem"] = GetSpellInfo(8177)
 	local spellElementalResistanceTotem = GetSpellInfo(8184)

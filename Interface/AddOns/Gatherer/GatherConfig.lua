@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
-	Revision: $Id: GatherConfig.lua 902 2010-12-05 02:01:57Z Esamynn $
+	Version: 3.2.4 (<%codename%>)
+	Revision: $Id: GatherConfig.lua 923 2010-12-23 08:54:58Z Esamynn $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Saved Variables Configuration and management code
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherConfig.lua $", "$Rev: 902 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherConfig.lua $", "$Rev: 923 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
@@ -52,6 +52,7 @@ local function getDefault(setting)
 	if (setting == "inspect.enable")    then return false   end
 	local a,b,c,d = strsplit(".", setting)
 	if (a == "show") then 
+		if (c == "arch") then return false end
 		if (c == "all" or d == "all") then return false end
 		if (d == "onlyiftracked") then return false end
 		return true
@@ -421,7 +422,10 @@ function GetSetting(setting, default)
 	end
 end
 
-function DisplayFilter_MainMap( nodeId )
+function DisplayFilter_MainMap( nodeId, gType )
+	if ( gType and not nodeId ) then
+		return getter("show.mainmap."..tostring(gType):lower())
+	end
 	local nodeType = Gatherer.Nodes.Objects[nodeId]
 	if not ( nodeType ) then
 		return false
@@ -442,7 +446,10 @@ function DisplayFilter_MainMap( nodeId )
 	)
 end
 
-function DisplayFilter_MiniMap( nodeId )
+function DisplayFilter_MiniMap( nodeId, gType )
+	if ( gType and not nodeId ) then
+		return getter("show.minimap."..tostring(gType):lower())
+	end
 	local nodeType = Gatherer.Nodes.Objects[nodeId]
 	if not ( nodeType ) then
 		return false

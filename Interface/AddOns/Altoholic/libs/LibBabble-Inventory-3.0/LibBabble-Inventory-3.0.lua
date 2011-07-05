@@ -1,6 +1,6 @@
 --[[
 Name: LibBabble-Inventory-3.0
-Revision: $Rev: 129 $
+Revision: $Rev: 135 $
 Maintainers: ckknight, nevcairiel, Ackis
 Website: http://www.wowace.com/projects/libbabble-inventory-3-0/
 Dependencies: None
@@ -8,7 +8,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibBabble-Inventory-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 129 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 135 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub.") end
 local lib = LibStub("LibBabble-3.0"):New(MAJOR_VERSION, MINOR_VERSION)
@@ -326,7 +326,7 @@ elseif GAME_LOCALE == "deDE" then
 	Sword = "Schwert",
 	Tabard = "Wappenrock",
 	Tabards = "Wappenröcke",
-	["Tackle Box"] = "Kasten", -- Needs review
+	["Tackle Box"] = "Werkzeugkasten", -- Needs review
 	Tailoring = "Schneiderei",
 	Thrown = "Wurfwaffe",
 	Totem = "Totem",
@@ -514,10 +514,10 @@ elseif GAME_LOCALE == "frFR" then
 elseif GAME_LOCALE == "koKR" then
 	lib:SetCurrentTranslations {
 	Alchemy = "연금술",
-	["Ammo Pouch"] = "탄환 주머니", -- Needs review
+	["Ammo Pouch"] = "탄환 주머니",
 	Archaeology = "고고학",
 	Armor = "방어구",
-	["Armor Enchantment"] = "방어구 마부",
+	["Armor Enchantment"] = "방어구 마법부여",
 	Arrow = "화살",
 	Axe = "도끼",
 	Back = "등",
@@ -534,25 +534,25 @@ elseif GAME_LOCALE == "koKR" then
 	Cogwheel = "Cogwheel", -- Needs review
 	Companion = "친구",
 	Companions = "친구",
-	Consumable = "소비 용품", -- Needs review
-	Container = "가방", -- Needs review
+	Consumable = "소비용품",
+	Container = "가방",
 	Cooking = "요리",
 	Crossbow = "석궁",
 	Crossbows = "석궁류",
 	Dagger = "단검",
 	Daggers = "단검류",
 	["Death Knight"] = "죽음의 기사",
-	Devices = "장치", -- Needs review
+	Devices = "기계 장치",
 	Drink = "음료",
 	Druid = "드루이드",
 	Elemental = "원소",
-	Elixir = "영약", -- Needs review
+	Elixir = "비약",
 	Enchant = "마법부여",
 	Enchanting = "마법부여",
 	["Enchanting Bag"] = "마법부여 가방",
 	Engineering = "기계공학",
 	["Engineering Bag"] = "기계공학 가방",
-	Explosives = "폭탄", -- Needs review
+	Explosives = "폭발물",
 	Feet = "발",
 	["First Aid"] = "응급치료",
 	Fish = "물고기",
@@ -562,14 +562,14 @@ elseif GAME_LOCALE == "koKR" then
 	["Fishing Poles"] = "낚싯대",
 	["Fist Weapon"] = "장착 무기",
 	["Fist Weapons"] = "장착 무기류",
-	Flask = "비약", -- Needs review
+	Flask = "영약",
 	["Flying Mount"] = "나는 탈것",
 	Food = "음식",
 	["Food & Drink"] = "음식과 음료",
 	Gem = "보석",
 	["Gem Bag"] = "보석 가방",
 	Glyph = "문양",
-	Green = "녹색",
+	Green = "녹색 (노란+푸른)",
 	["Ground Mount"] = "지상 탈것",
 	Gun = "총기",
 	Guns = "총기류",
@@ -585,8 +585,8 @@ elseif GAME_LOCALE == "koKR" then
 	Idol = "우상",
 	Idols = "우상",
 	Inscription = "주문각인",
-	["Inscription Bag"] = "주문각인 가방", -- Needs review
-	["Item Enchantment"] = "Item Enchantment", -- Needs review
+	["Inscription Bag"] = "주문각인 가방",
+	["Item Enchantment"] = "아이템 강화",
 	["Item Enhancement"] = "아이템 강화",
 	Jewelcrafting = "보석세공",
 	Junk = "잡동사니",
@@ -616,7 +616,7 @@ elseif GAME_LOCALE == "koKR" then
 	["One-Handed Axes"] = "한손 도끼류",
 	["One-Handed Maces"] = "한손 둔기류",
 	["One-Handed Swords"] = "한손 도검류",
-	Orange = "주황색",
+	Orange = "주황색 (노란+붉은)",
 	Other = "기타",
 	Paladin = "성기사",
 	Parts = "부품",
@@ -628,7 +628,7 @@ elseif GAME_LOCALE == "koKR" then
 	Priest = "사제",
 	Prismatic = "다색",
 	Projectile = "투사체",
-	Purple = "보라색",
+	Purple = "보라색 (붉은+푸른)",
 	Quest = "퀘스트",
 	Quiver = "화살통",
 	Ranged = "원거리 장비",
@@ -636,7 +636,7 @@ elseif GAME_LOCALE == "koKR" then
 	Recipe = "제조법",
 	Red = "붉은색",
 	Relic = "유물",
-	Riding = "탈것 숙련",
+	Riding = "탈것 타기",
 	Ring = "손가락",
 	Rogue = "도적",
 	Scroll = "두루마리",
@@ -654,12 +654,12 @@ elseif GAME_LOCALE == "koKR" then
 	Sword = "도검",
 	Tabard = "휘장",
 	Tabards = "휘장",
-	["Tackle Box"] = "Tackle Box", -- Needs review
+	["Tackle Box"] = "낚시상자",
 	Tailoring = "재봉술",
 	Thrown = "투척 무기",
 	Totem = "토템",
 	Totems = "토템",
-	["Trade Goods"] = "직업 용품", -- Needs review
+	["Trade Goods"] = "직업용품",
 	Trinket = "장신구",
 	["Two-Hand"] = "양손",
 	["Two-Handed Axes"] = "양손 도끼류",
@@ -671,9 +671,9 @@ elseif GAME_LOCALE == "koKR" then
 	Warlock = "흑마법사",
 	Warrior = "전사",
 	Weapon = "무기",
-	["Weapon Enchantment"] = "무기 마부",
+	["Weapon Enchantment"] = "무기 마법부여",
 	Wrist = "손목",
-	Yellow = "노란색",
+	Yellow = "노란색 (노란+푸른)",
 }
 elseif GAME_LOCALE == "esES" then
 	lib:SetCurrentTranslations {

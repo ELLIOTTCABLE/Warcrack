@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
-	Revision: $Id: GatherComm.lua 903 2010-12-05 04:35:40Z Esamynn $
+	Version: 3.2.4 (<%codename%>)
+	Revision: $Id: GatherComm.lua 924 2011-04-27 02:37:42Z Esamynn $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -27,13 +27,19 @@
 
 	
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherComm.lua $", "$Rev: 903 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherComm.lua $", "$Rev: 924 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
 local _trL = Gatherer.Locale.TrLocale
 
 local lib = Gatherer.Comm
+
+function Gatherer.Comm.OnLoad()
+	-- register prefixes
+	RegisterAddonMessagePrefix("GathX")
+	RegisterAddonMessagePrefix("Gatherer")
+end
 
 local sendOfferer
 local acceptFrom = {}

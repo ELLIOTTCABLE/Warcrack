@@ -1,4 +1,4 @@
-## Interface: 40100
+## Interface: 40200
 ## Title: Skada
 ## Notes: Modular damage meter.
 ## Notes-koKR: 데미지 미터 모듈입니다.
@@ -7,9 +7,9 @@
 ## Notes-frFR: Un damage meter.
 ## Notes-zhCN: 伤害统计
 ## Author: Zarnivoop
-## Version: 1.2-33
+## Version: 1.2-34
 ## SavedVariables: SkadaDB
-## X-Curse-Packaged-Version: 1.2-33
+## X-Curse-Packaged-Version: 1.2-34
 ## X-Curse-Project-Name: Skada Damage Meter
 ## X-Curse-Project-ID: skada
 ## X-Curse-Repository-ID: wow/skada/mainline

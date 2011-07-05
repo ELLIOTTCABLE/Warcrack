@@ -341,7 +341,7 @@ end
 -- ****************************************************************************
 -- Parses the parameter style events going to the combat log.
 -- ****************************************************************************
-local function ParseLogMessage(timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, recipientGUID, recipientName, recipientFlags, ...)
+local function ParseLogMessage(timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, recipientGUID, recipientName, recipientFlags, recipientRaidFlags, ...)
  -- Make sure the capture function for the event exists.
  local captureFunc = captureFuncs[event]
  if (not captureFunc) then return end
@@ -935,15 +935,6 @@ ValidateRareWords()
 
 -- Convert the supported global strings into lua search patterns.
 ConvertGlobalStrings()
-
--- XXX: Temporary workaround for new arguments coming in Patch 4.2.  The main handler should be
--- updated appropriately for Patch 4.2 to remove the extra indirection.
-if MikSBT.CLIENT_VERSION >= 40200 then
- local ParsePatch41LogMessage = ParseLogMessage
- ParseLogMessage = function(timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, recipientGUID, recipientName, recipientFlags, recipientRaidFlags, ...)
-  ParsePatch41LogMessage(timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, recipientGUID, recipientName, recipientFlags, ...)
- end
-end
 
 
 

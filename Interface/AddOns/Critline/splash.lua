@@ -255,9 +255,10 @@ function splash:LoadSettings()
 		btn.color = color
 	end
 	
+	LSM.RegisterCallback(self, "LibSharedMedia_Registered", "UpdateFont")
+	LSM.RegisterCallback(self, "LibSharedMedia_SetGlobal", "UpdateFont")
+	self:UpdateFont()
 	local font = self.profile.font
-	self:SetFont(LSM:Fetch("font", font.name), font.size, font.flags)
-	
 	options.font:SetSelectedValue(font.name)
 	options.fontFlags:SetSelectedValue(font.flags)
 	options.fontSize:SetValue(font.size)
@@ -333,4 +334,10 @@ function splash:NewRecord(event, tree, spellID, periodic, amount, crit, prevReco
 		self:AddMessage(spell, spellColor)
 		self:AddMessage(amount, amountColor)
 	end
+end
+
+
+function splash:UpdateFont()
+	local font = self.profile.font
+	self:SetFont(LSM:Fetch("font", font.name), font.size, font.flags)
 end

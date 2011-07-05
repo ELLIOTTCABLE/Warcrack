@@ -244,6 +244,7 @@ if (GetLocale() == "esES") then
 		["AutoBarButtonPets"] = "Mascotas",
 		["AutoBarButtonQuest"] = "Misión",
 		["AutoBarButtonMiscFun"] = "Misc, Fun",
+		["AutoBarButtonGuildSpell"] = "Guild Spells",
 		["AutoBarButtonRecovery"] = "Maná / Ira / Energía",
 		["AutoBarButtonRotationDrums"] = "Rotación: Tambores",
 		["AutoBarButtonShields"] = "Shields",

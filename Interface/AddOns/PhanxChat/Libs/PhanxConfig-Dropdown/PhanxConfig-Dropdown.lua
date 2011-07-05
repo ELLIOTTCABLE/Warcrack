@@ -9,7 +9,7 @@
 	its internals may change at any time without notice.
 ----------------------------------------------------------------------]]
 
-local MINOR_VERSION = tonumber(("$Revision: 69 $"):match("%d+"))
+local MINOR_VERSION = tonumber(("$Revision: 79 $"):match("%d+"))
 
 local lib, oldminor = LibStub:NewLibrary("PhanxConfig-Dropdown", MINOR_VERSION)
 if not lib then return end
@@ -73,6 +73,7 @@ function lib.CreateDropdown(parent, name, init, desc)
 	dropdown:SetPoint("BOTTOMLEFT", -16, -4)
 	dropdown:SetPoint("BOTTOMRIGHT", 15, -4)
 	dropdown:SetHeight(32)
+	frame.dropdown = dropdown
 
 	local ltex = dropdown:CreateTexture(dropdown:GetName() .. "Left", "ARTWORK")
 	ltex:SetTexture("Interface\\Glues\\CharacterCreate\\CharacterCreate-LabelFrame")
@@ -95,17 +96,22 @@ function lib.CreateDropdown(parent, name, init, desc)
 	mtex:SetPoint("RIGHT", rtex, "LEFT")
 	mtex:SetHeight(64)
 
+	local icon = dropdown:CreateTexture(dropdown:GetName() .. "Icon", "OVERLAY")
+	frame.icon = icon
+
 	local label = dropdown:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 	label:SetPoint("TOPLEFT", frame, 5, 0)
 	label:SetPoint("TOPRIGHT", frame, -5, 0)
 	label:SetJustifyH("LEFT")
 	label:SetText(name)
+	frame.labelText = label
 
 	local value = dropdown:CreateFontString(dropdown:GetName() .. "Text", "OVERLAY", "GameFontHighlightSmall")
 	value:SetPoint("LEFT", ltex, 26, 0)
 	value:SetPoint("RIGHT", rtex, -43, 0)
 	value:SetJustifyH("LEFT")
 	value:SetHeight(10)
+	frame.valueText = value
 
 	local button = CreateFrame("Button", nil, dropdown)
 	button:SetPoint("TOPRIGHT", rtex, -16, -18)
@@ -114,17 +120,13 @@ function lib.CreateDropdown(parent, name, init, desc)
 	button:SetScript("OnEnter", Button_OnEnter)
 	button:SetScript("OnLeave", OnLeave)
 	button:SetScript("OnClick", OnClick)
+	frame.button = button
 
 	button:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
 	button:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down")
 	button:SetDisabledTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled")
 	button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
 	button:GetHighlightTexture():SetBlendMode("ADD")
-
-	frame.button = button
-	frame.dropdown = dropdown
-	frame.labelText = label
-	frame.valueText = value
 
 	frame.GetValue = GetValue
 	frame.SetValue = SetValue

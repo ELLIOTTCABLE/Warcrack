@@ -127,7 +127,7 @@ StaticPopupDialogs["ICEHUD_UPDATE_PERIOD_MATTERS"] =
 function IceCore.prototype:CheckDisplayUpdateMessage()
 	local thisVersion
 --@non-debug@
-	thisVersion = 851
+	thisVersion = 855
 --@end-non-debug@
 --[===[@debug@
 	thisVersion = 9999
@@ -1003,6 +1003,46 @@ function IceCore.prototype:LoadPresets()
 		barWidth = 128,
 		barHeight = 256,
 		barProportion = 0.14,
+		barSpace = 1,
+		barBlendMode = "BLEND",
+		barBgBlendMode = "BLEND",
+	}
+
+	self.presets["CleanCurvesOut"] = {
+		barTexture = "CleanCurvesOut",
+		barWidth = 155,
+		barHeight = 220,
+		barProportion = 0.14,
+		barSpace = 1,
+		barBlendMode = "BLEND",
+		barBgBlendMode = "BLEND",
+	}
+
+	self.presets["CleanTank"] = {
+		barTexture = "CleanTank",
+		barWidth = 155,
+		barHeight = 220,
+		barProportion = 0.5,
+		barSpace = 1,
+		barBlendMode = "BLEND",
+		barBgBlendMode = "BLEND",
+	}
+
+	self.presets["PillTank"] = {
+		barTexture = "PillTank",
+		barWidth = 155,
+		barHeight = 220,
+		barProportion = 0.14,
+		barSpace = 1,
+		barBlendMode = "BLEND",
+		barBgBlendMode = "BLEND",
+	}
+
+	self.presets["GemTank"] = {
+		barTexture = "GemTank",
+		barWidth = 155,
+		barHeight = 220,
+		barProportion = 0.19,
 		barSpace = 1,
 		barBlendMode = "BLEND",
 		barBgBlendMode = "BLEND",

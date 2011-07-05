@@ -1,9 +1,9 @@
-## Interface: 30300
+## Interface: 40200
 
 ## Title: VendorBait
 ## Notes: Highlight the best quest reward choice for selling to vendor
 ## Author: Tekkub Stoutwrithe
-## Version: 3.3.0.5
+## Version: 4.2.0.8
 ## X-Website: http://code.google.com/p/tekkub-wow/
 ## X-Email: tekkub-wow@googlegroups.com
 ## X-Category: Quest

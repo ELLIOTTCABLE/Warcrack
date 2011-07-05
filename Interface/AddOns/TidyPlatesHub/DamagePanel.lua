@@ -198,11 +198,13 @@ local function ConvertPrefix(source, target, prefixList )
 	wipe(target)
 	for item in pairs(source) do
 		local _, _, prefix, suffix = string.find( item, "(%w+)[%s%p]*(.*)");
-		if prefixList[prefix] then
-			target[suffix] = prefixList[prefix]
-		else -- If no prefix is listed, assume 1
-			if suffix and suffix ~= "" then target[prefix.." "..suffix] = 1
-			else target[prefix] = 1 end
+		if prefix then
+			if prefixList[prefix] then
+				target[suffix] = prefixList[prefix]
+			else -- If no prefix is listed, assume 1
+				if suffix and suffix ~= "" then target[prefix.." "..suffix] = 1
+				else target[prefix] = 1 end
+			end
 		end
 	end		
 end
@@ -231,6 +233,7 @@ end
 local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, yOffset)
 		local columnFrame = ...
 		local frame = PanelHelpers:CreateSliderFrame(name, columnFrame, label, .5, 0, 1, .1)	
+		frame:SetWidth(170)	
 		-- Margins	-- Bottom/Left are negative
 		frame.Margins = { Left = 12, Right = 8, Top = 20, Bottom = 13,}		
 		QuickSetPoints(frame, ...)
@@ -446,7 +449,7 @@ local function CreateInterfacePanel( panelName, panelTitle, heading, parentTitle
 						{ text = "By Enemy", notCheckable = 1 } ,
 						{ text = "By NPC", notCheckable = 1 } ,
 						{ text = "By Raid Icon", notCheckable = 1 } ,
-						--{ text = "By Aggro Lost, Attacking Others", notCheckable = 1 } ,
+						{ text = "By Active/Damaged", notCheckable = 1 } ,
 						}
 						
 	local ScaleModes = {

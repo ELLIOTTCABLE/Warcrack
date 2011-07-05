@@ -1,4 +1,4 @@
-## Interface: 40100
+## Interface: 40200
 ## Title: StatBlockCore
 ## Notes: A core for your informational plugins to plug into.
 ## Notes-frFR: Un noyau central pour vos blocs de statistiques.
@@ -10,11 +10,11 @@
 ## Author: Funkydude
 ## X-Category: Interface Enhancements
 ## X-License: All Rights Reserved
-## Version: 2.68
+## Version: 2.69
 ## SavedVariables: StatBlockCoreDB
 ## OptionalDeps: Ace3, LibSharedMedia-3.0, SharedMedia
 ## X-Embeds: Ace3, LibSharedMedia-3.0
-## X-Curse-Packaged-Version: v2.68
+## X-Curse-Packaged-Version: v2.69
 ## X-Curse-Project-Name: StatBlockCore
 ## X-Curse-Project-ID: stat-block-core
 ## X-Curse-Repository-ID: wow/stat-block-core/mainline

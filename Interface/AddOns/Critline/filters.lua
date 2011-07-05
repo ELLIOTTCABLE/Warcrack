@@ -75,6 +75,7 @@ local specialAuras = {
 	[79624] = true, -- Power Generator (Arcanotron) ?
 	[79629] = true, -- Power Generator (Arcanotron 10)
 	[81096] = true, -- Red Mist (Red Mist)
+	[82170] = true, -- Corruption: Absolute (Cho'gall)
 	[86622] = true, -- Engulfing Magic (Theralion) ?
 	[86872] = true, -- Frothing Rage (Thundermar Ale)
 	[89879] = true, -- Blessing of the Sun (Rajh heroic)
@@ -713,7 +714,7 @@ end
 addon.RegisterCallback(filters, "AddonLoaded")
 
 
-function filters:COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellID, spellName)
+function filters:COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceFlags2, destGUID, destName, destFlags, destFlags2, spellID, spellName)
 	if eventType == "SPELL_AURA_APPLIED" or eventType == "SPELL_AURA_REFRESH" then
 		-- if this is one of the damage-taken-increased auras, we flag this target - along with the aura in question - as rotten
 		if targetAuras[spellID] then

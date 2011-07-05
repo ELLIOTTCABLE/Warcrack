@@ -243,7 +243,7 @@ end
 -- ****************************************************************************
 -- Combat log event for detecting pet casts.
 -- ****************************************************************************
-function eventFrame:COMBAT_LOG_EVENT_UNFILTERED(timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, recipientGUID, recipientName, recipientFlags, skillID)
+function eventFrame:COMBAT_LOG_EVENT_UNFILTERED(timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, recipientGUID, recipientName, recipientFlags, recipientRaidFlags, skillID)
   if (event ~= "SPELL_CAST_SUCCESS") then return end
   if (sourceGUID == UnitGUID("pet")) then OnSpellCast("pet", skillID) end
 end
@@ -326,15 +326,6 @@ resetAbilities[SPELLID_READINESS] = true
  
 -- Set the death knight abilities that are the same as the rune cooldown.
 runeCooldownAbilities[SPELLID_MIND_FREEZE] = true
-
--- XXX: Temporary workaround for new arguments coming in Patch 4.2.  The main handler should be
--- updated appropriately for Patch 4.2 to remove the extra indirection.
-if MikSBT.CLIENT_VERSION >= 40200 then
- local Patch41CLEU = eventFrame.COMBAT_LOG_EVENT_UNFILTERED
- function eventFrame:COMBAT_LOG_EVENT_UNFILTERED(timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, recipientGUID, recipientName, recipientFlags, recipientRaidFlags, skillID)
-  Patch41CLEU(self, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, recipientGUID, recipientName, recipientFlags, skillID)
- end
-end
 
 
 

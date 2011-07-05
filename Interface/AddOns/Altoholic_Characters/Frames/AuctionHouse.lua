@@ -161,7 +161,7 @@ function ns:UpdateAuctions()
 			local itemName, _, itemRarity = GetItemInfo(itemID)
 			itemName = itemName or L["N/A"]
 			itemRarity = itemRarity or 1
-			_G[ entry..i.."Name" ]:SetText(select(4, GetItemQualityColor(itemRarity)) .. itemName)
+			_G[ entry..i.."Name" ]:SetText("|c" .. select(4, GetItemQualityColor(itemRarity)) .. itemName)
 			
 			if not timeLeft then	-- secure this in case it is nil (may happen when other auction monitoring addons are present)
 				timeLeft = 1
@@ -227,7 +227,7 @@ function ns:UpdateBids()
 			local itemName, _, itemRarity = GetItemInfo(itemID)
 			itemName = itemName or L["N/A"]
 			itemRarity = itemRarity or 1
-			_G[ entry..i.."Name" ]:SetText(select(4, GetItemQualityColor(itemRarity)) .. itemName)
+			_G[ entry..i.."Name" ]:SetText("|c" .. select(4, GetItemQualityColor(itemRarity)) .. itemName)
 			
 			_G[ entry..i.."TimeLeft" ]:SetText( TEAL .. _G["AUCTION_TIME_LEFT"..timeLeft] 
 								.. " (" .. _G["AUCTION_TIME_LEFT"..timeLeft .. "_DETAIL"] .. ")")

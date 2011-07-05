@@ -1,14 +1,16 @@
-
-6.2.1: (r275)
+6.3
 -----------------
-- Neon and Grey were not meant to show guild names (yet), so that's been removed.  (It will come back, but only when I have a UI option)
-- added "marked" condition to the "By Active" style mode
-- "No Overlap" removed from Panel.  Please see "Interface > Names> Nameplate Motion" from now on.
-- Changed text in a few spots
-- SetCustomText can now accept RGBA colors (but it's not required)...  return string, r, g, b, a
-- Text Plate for Quatre will show the supplemental text with 70% opacity
-- Fixed Damage Hub Vertical position sensitivity
-- Removed force-enable of aggro detection.  First-runs and resets will re-enable aggro detect if it was turned off
+6.3.1 (r289) 
+- Fixed debuff update stalling
+- Added nil value error protection to debuff prefix sorter
+
+6.3.0 (r284) 
+	* Updated functions for 4.2
+	* Increased width of sliders in Hub
+	* Opacity functions now use a transfer function to correct the opacity (currently, .5 does not translate to 50% opaque; it's more like 65%)
+	* Channeled spells now move the cast bar in reverse.
+	* Friendly/Enemy "V-key" Automation; In Combat, Out of Combat, Always
+	* Debuff widget now Caches texture of debuffs (to fix sunfire phenomenon, and similar)
 
 6.2 (r269) 
 -----------------

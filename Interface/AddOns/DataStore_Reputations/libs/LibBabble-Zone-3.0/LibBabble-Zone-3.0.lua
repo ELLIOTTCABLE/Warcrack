@@ -1,6 +1,6 @@
 --[[
 Name: LibBabble-Zone-3.0
-Revision: $Rev: 317 $
+Revision: $Rev: 322 $
 Maintainers: ckknight, nevcairiel, Ackis
 Website: http://www.wowace.com/projects/libbabble-zone-3-0/
 Dependencies: None
@@ -8,7 +8,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibBabble-Zone-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 317 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 322 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub.") end
 local lib = LibStub("LibBabble-3.0"):New(MAJOR_VERSION, MINOR_VERSION)
@@ -93,6 +93,7 @@ lib:SetBaseTranslations {
 	["Eye of the Storm"] = "Eye of the Storm",
 	Felwood = "Felwood",
 	Feralas = "Feralas",
+	Firelands = "Firelands",
 	["Forge Camp: Terror"] = "Forge Camp: Terror",
 	["Forge Camp: Wrath"] = "Forge Camp: Wrath",
 	["Frostwyrm Lair"] = "Frostwyrm Lair",
@@ -389,6 +390,7 @@ elseif GAME_LOCALE == "deDE" then
 	["Eye of the Storm"] = "Auge des Sturms",
 	Felwood = "Teufelswald",
 	Feralas = "Feralas",
+	Firelands = "Feuerlande", -- Needs review
 	["Forge Camp: Terror"] = "Konstruktionslager: Terror",
 	["Forge Camp: Wrath"] = "Konstruktionslager: Wut",
 	["Frostwyrm Lair"] = "Frostwyrmbau",
@@ -681,6 +683,7 @@ elseif GAME_LOCALE == "frFR" then
 	["Eye of the Storm"] = "L'Œil du cyclone",
 	Felwood = "Gangrebois",
 	Feralas = "Féralas",
+	Firelands = "Terres de Feu", -- Needs review
 	["Forge Camp: Terror"] = "Camp de forge : Terreur",
 	["Forge Camp: Wrath"] = "Camp de forge : Courroux",
 	["Frostwyrm Lair"] = "Repaire du wyrm de givre",
@@ -973,6 +976,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Eye of the Storm"] = "폭풍의 눈",
 	Felwood = "악령의 숲",
 	Feralas = "페랄라스",
+	-- Firelands = "",
 	["Forge Camp: Terror"] = "공포의 괴철로 기지",
 	["Forge Camp: Wrath"] = "격노의 괴철로 기지",
 	["Frostwyrm Lair"] = "서리고룡의 방",
@@ -1265,6 +1269,7 @@ elseif GAME_LOCALE == "esES" then
 	["Eye of the Storm"] = "Ojo de la Tormenta",
 	Felwood = "Frondavil",
 	Feralas = "Feralas",
+	Firelands = "Tierras de Fuego", -- Needs review
 	["Forge Camp: Terror"] = "Campamento forja: Terror",
 	["Forge Camp: Wrath"] = "Campamento forja: Cólera",
 	["Frostwyrm Lair"] = "Guarida de Vermis de Escarcha",
@@ -1557,6 +1562,7 @@ elseif GAME_LOCALE == "esMX" then
 	["Eye of the Storm"] = "Ojo de la Tormenta",
 	Felwood = "Frondavil",
 	Feralas = "Feralas",
+	-- Firelands = "",
 	["Forge Camp: Terror"] = "Campamento forja: Terror",
 	["Forge Camp: Wrath"] = "Campamento forja: Cólera",
 	["Frostwyrm Lair"] = "Guarida de Vermis de Escarcha",
@@ -1826,7 +1832,7 @@ elseif GAME_LOCALE == "ruRU" then
 	["Darkmoon Faire"] = "Ярмарка Новолуния",
 	Darkshore = "Темные берега",
 	Darnassus = "Дарнас",
-	Deadmines = "Deadmines", -- Needs review
+	Deadmines = "Мертвые копи",
 	["Deadwind Pass"] = "Перевал Мертвого Ветра",
 	Deepholm = "Подземье",
 	["Deeprun Tram"] = "Подземный поезд",
@@ -1849,6 +1855,7 @@ elseif GAME_LOCALE == "ruRU" then
 	["Eye of the Storm"] = "Око Бури",
 	Felwood = "Оскверненный лес",
 	Feralas = "Фералас",
+	-- Firelands = "",
 	["Forge Camp: Terror"] = "Лагерь Легиона: Ужас",
 	["Forge Camp: Wrath"] = "Лагерь Легиона: Гнев",
 	["Frostwyrm Lair"] = "Логово Ледяного змея",
@@ -2065,9 +2072,9 @@ elseif GAME_LOCALE == "ruRU" then
 }
 elseif GAME_LOCALE == "zhCN" then
 	lib:SetCurrentTranslations {
-	["Abyssal Depths"] = "Abyssal Depths", -- Needs review
+	["Abyssal Depths"] = "无底海渊",
 	["Ahn'Qiraj"] = "安其拉",
-	["Ahn'Qiraj: The Fallen Kingdom"] = "Ahn'Qiraj: The Fallen Kingdom", -- Needs review
+	["Ahn'Qiraj: The Fallen Kingdom"] = "安其拉：堕落王国",
 	["Ahn'kahet: The Old Kingdom"] = "安卡赫特：古代王国",
 	["Alliance Base"] = "联盟基地",
 	["Alterac Mountains"] = "奥特兰克山脉",
@@ -2141,6 +2148,7 @@ elseif GAME_LOCALE == "zhCN" then
 	["Eye of the Storm"] = "风暴之眼",
 	Felwood = "费伍德森林",
 	Feralas = "菲拉斯",
+	Firelands = "火焰之地",
 	["Forge Camp: Terror"] = "铸魔营地：恐怖",
 	["Forge Camp: Wrath"] = "铸魔营地：天罚",
 	["Frostwyrm Lair"] = "冰霜巨龙的巢穴",
@@ -2149,7 +2157,7 @@ elseif GAME_LOCALE == "zhCN" then
 	["Gates of Ahn'Qiraj"] = "安其拉之门",
 	Ghostlands = "幽魂之地",
 	Gilneas = "吉尔尼斯",
-	["Gilneas City"] = "Gilneas City", -- Needs review
+	["Gilneas City"] = "吉尔尼斯城",
 	Gnomeregan = "诺莫瑞根",
 	Graveyard = "墓地",
 	["Grim Batol"] = "格瑞姆巴托",
@@ -2180,8 +2188,8 @@ elseif GAME_LOCALE == "zhCN" then
 	["Isle of Quel'Danas"] = "奎尔丹纳斯岛",
 	Kalimdor = "卡利姆多",
 	Karazhan = "卡拉赞",
-	["Kelp'thar Forest"] = "Kelp Forest", -- Needs review
-	Kezan = "Kezan", -- Needs review
+	["Kelp'thar Forest"] = "柯尔普萨之森",
+	Kezan = "科赞",
 	["Krasus' Landing"] = "克拉苏斯平台",
 	Library = "图书馆",
 	["Loch Modan"] = "洛克莫丹",
@@ -2224,8 +2232,8 @@ elseif GAME_LOCALE == "zhCN" then
 	["Ring of Observance"] = "仪式广场",
 	["Rivendark's Perch"] = "雷文达克栖木",
 	["Ruins of Ahn'Qiraj"] = "安其拉废墟",
-	["Ruins of Gilneas"] = "Ruins of Gilneas", -- Needs review
-	["Ruins of Gilneas City"] = "吉尔尼斯城废墟", -- Needs review
+	["Ruins of Gilneas"] = "吉尔尼斯废墟",
+	["Ruins of Gilneas City"] = "吉尔尼斯城废墟",
 	["Ruins of Lordaeron"] = "洛丹伦废墟",
 	["Scalebeard's Cave"] = "鳞须海龟洞穴",
 	["Scarlet Monastery"] = "血色修道院",
@@ -2240,7 +2248,7 @@ elseif GAME_LOCALE == "zhCN" then
 	["Shartuul's Transporter"] = "沙图尔的传送器",
 	Shattrath = "沙塔斯",
 	["Shattrath City"] = "沙塔斯城",
-	["Shimmering Expanse"] = "Shimmering Expanse", -- Needs review
+	["Shimmering Expanse"] = "烁光海床",
 	["Sholazar Basin"] = "索拉查盆地",
 	Silithus = "希利苏斯",
 	["Silvermoon City"] = "银月城",
@@ -2291,8 +2299,8 @@ elseif GAME_LOCALE == "zhCN" then
 	["The Great Sea"] = "无尽之海",
 	["The Halls of Winter"] = "寒冬之厅",
 	["The Hinterlands"] = "辛特兰",
-	["The Lost Isles"] = "The Lost Isles", -- Needs review
-	["The Maelstrom"] = "The Maelstrom", -- Needs review
+	["The Lost Isles"] = "失落群岛",
+	["The Maelstrom"] = "大漩涡",
 	["The Mechanar"] = "能源舰",
 	["The Military Quarter"] = "军事区",
 	["The Nexus"] = "魔枢",
@@ -2324,7 +2332,7 @@ elseif GAME_LOCALE == "zhCN" then
 	Tirisfal = "提里斯法林地",
 	["Tirisfal Glades"] = "提瑞斯法林地",
 	["Tol Barad"] = "托尔巴拉德",
-	["Tol Barad Peninsula"] = "托尔巴拉德半岛", -- Needs review
+	["Tol Barad Peninsula"] = "托尔巴拉德半岛",
 	["Trial of the Champion"] = "冠军的试炼",
 	["Trial of the Crusader"] = "十字军的试炼",
 	["Twilight Highlands"] = "暮光高地",
@@ -2433,6 +2441,7 @@ elseif GAME_LOCALE == "zhTW" then
 	["Eye of the Storm"] = "暴風之眼",
 	Felwood = "費伍德森林",
 	Feralas = "菲拉斯",
+	Firelands = "火源之界",
 	["Forge Camp: Terror"] = "煉冶場:驚駭",
 	["Forge Camp: Wrath"] = "煉冶場:憤怒",
 	["Frostwyrm Lair"] = "冰霜巨龍的巢穴",

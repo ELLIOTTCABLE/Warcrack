@@ -512,7 +512,7 @@ end
 local function SetToastData( index, inGroup )
 	local toast, bc, color = toasts[index]
 	local presenceID, givenName, surname, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, broadcast, notes = BNGetFriendInfo(index)
-	local _, _, game, realm, faction, race, class, guild, zone, level, gameText = BNGetToonInfo(toonID or 0)
+	local _, _, game, realm, realmID, faction, race, class, guild, zone, level, gameText = BNGetToonInfo(toonID or 0)
 	local statusText = config.statusMode ~= "icon" and (isAFK or isDND) and (preformatedStatusText):format(isAFK and CHAT_FLAG_AFK or isDND and CHAT_FLAG_DND) or ""
 
 	if broadcast and broadcast ~= "" then

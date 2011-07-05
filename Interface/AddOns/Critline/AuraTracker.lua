@@ -377,7 +377,7 @@ for i = 1, NUM_BUTTONS do
 end
 
 
-function auraTracker:COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellID, spellName, spellSchool, auraType)
+function auraTracker:COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceFlags2, destGUID, destName, destFlags, destFlags2, spellID, spellName, spellSchool, auraType)
 	if eventType == "SPELL_AURA_APPLIED" or eventType == "SPELL_AURA_REFRESH" then
 		local auraTable
 		if CombatLog_Object_IsA(destFlags, COMBATLOG_FILTER_ME) or addon:IsMyPet(destFlags, destGUID) then

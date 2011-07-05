@@ -46,6 +46,59 @@
 		</Anchors>
 		<FontString inherits="NumberFontNormalHuge" justifyH="CENTER" justifyV="MIDDLE"/>
 		<Frames>
+		
+			<CheckButton name="$parent_cbIcon" inherits="OptionsCheckButtonTemplate" hidden="false">
+				<HitRectInsets>
+					<AbsInset left="0" right="0" top="0" bottom="0"/>
+				</HitRectInsets>
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>			
+				<Anchors>
+				  <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="2" y="-2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(self:GetName().."Text"):SetText(SMARTBUFF_OFT_SPLASHICON);
+            getglobal(self:GetName().."Text"):SetFontObject(GameFontNormalSmall);
+					</OnLoad>				
+					<OnClick>
+					  local o = SMARTBUFF_OptionsGlobal;
+					  if (o) then o.SplashIcon = not o.SplashIcon end
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			
+			<CheckButton name="$parent_cbMsgShort" inherits="OptionsCheckButtonTemplate" hidden="false">
+				<HitRectInsets>
+					<AbsInset left="0" right="0" top="0" bottom="0"/>
+				</HitRectInsets>
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>			
+				<Anchors>
+				  <Anchor point="BOTTOM" relativePoint="BOTTOM" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="0" y="-2"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(self:GetName().."Text"):SetText(SMARTBUFF_OFT_SPLASHMSGSHORT);
+            getglobal(self:GetName().."Text"):SetFontObject(GameFontNormalSmall);
+					</OnLoad>				
+					<OnClick>
+					  local o = SMARTBUFF_OptionsGlobal;
+					  if (o) then o.SplashMsgShort = not o.SplashMsgShort end
+					</OnClick>
+				</Scripts>
+			</CheckButton>			
+		
       <ColorSelect name="$parent_csFont" enableMouse="true" hidden="true">
         <Size><AbsDimension x="32" y="32" /></Size>
         <Anchors>

@@ -921,6 +921,17 @@ AutoBar.db.account.barList["AutoBarClassBarExtras"].DEATHKNIGHT = true
 			arrangeOnUse = true,
 		}
 	end
+	
+	if (not AutoBar.db.account.buttonList["AutoBarButtonGuildSpell"]) then
+		AutoBar.db.account.buttonList["AutoBarButtonGuildSpell"] = {
+			buttonKey = "AutoBarButtonGuildSpell",
+			buttonClass = "AutoBarButtonGuildSpell",
+			barKey = "AutoBarClassBarExtras",
+			defaultButtonIndex = 9,
+			enabled = true,
+			arrangeOnUse = true,
+		}
+	end
 
 	if (AutoBar.CLASS ~= "ROGUE" and AutoBar.CLASS ~= "WARRIOR") then
 		if (not AutoBar.db.account.buttonList["AutoBarButtonWater"]) then

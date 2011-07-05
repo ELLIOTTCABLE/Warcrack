@@ -3,14 +3,6 @@
 -------------------------------------------------------------------------------
 if (GetLocale() == "zhTW") then
 
--- Whats new info
-SMARTBUFF_WHATSNEW = "|cffffffff更新說明:|r\n\n"
-  .."- 新增支援Parrot插件, 警告訊息將轉由Parrot提供\n\n"
-  .."- 新增buffs: 法師 (達拉然智力/光輝), 牧師 (漂浮術)\n\n"
-  .."- 更新施法材料清單\n\n"
-  ;
-
-
 -- Mage
 SMARTBUFF_MAGE_PATTERN = {"%a+甲術$"};
 

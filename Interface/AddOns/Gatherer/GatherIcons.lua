@@ -1,7 +1,7 @@
 ﻿--[[
 	Icon set definitions
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
+	Version: 3.2.4 (<%codename%>)
 	Revision: $Id: GatherIcons.lua 852 2009-04-16 06:00:18Z Esamynn $
 
 	License:

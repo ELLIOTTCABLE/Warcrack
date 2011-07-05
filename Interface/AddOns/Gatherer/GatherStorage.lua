@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
-	Revision: $Id: GatherStorage.lua 907 2010-12-05 23:54:28Z Esamynn $
+	Version: 3.2.4 (<%codename%>)
+	Revision: $Id: GatherStorage.lua 923 2010-12-23 08:54:58Z Esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Library for accessing and updating the database
 --]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherStorage.lua $", "$Rev: 907 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherStorage.lua $", "$Rev: 923 $")
 
 --------------------------------------------------------------------------
 -- Constants
@@ -99,6 +99,7 @@ local validGatherTypes = {
 	MINE = "MINE",
 	HERB = "HERB",
 	OPEN = "OPEN",
+	ARCH = "ARCH",
 }
 function lib.AddNode(nodeName, gatherType, continent, zone, gatherX, gatherY, source, incrementCount, indoorNode)
 	if not (continent and zone and gatherX and gatherY) then return end
@@ -127,18 +128,14 @@ function lib.AddNode(nodeName, gatherType, continent, zone, gatherX, gatherY, so
 	if not (data[continent][zoneToken][gatherType]) then data[continent][zoneToken][gatherType] = { }; end
 	local gtypeTable = data[continent][zoneToken][gatherType]
 	
-	local matchDist = 10
+	-- standard interact distance for objects is 5 yards
+	local matchDist = 10 -- radius of 5 yards
 	local isImport = false
 	if source and source:sub(1,3) == "DB:" then
 		-- DB sources have a tendancy to be more "fuzzy" than
 		-- actual harvested nodes, so look farther for a match
 		matchDist = 25
 		isImport = true
-	elseif source == "REQUIRE" then
-		-- REQUIRE nodes can be harvested a little farther away
-		-- than a directly harvested node, so search a little
-		-- bit more for a match
-		matchDist = 12
 	end
 	
 	local index, node
@@ -834,13 +831,16 @@ do --create a new block
 				function( nodeName, gatherType )
 					if not ( filterTable[gatherType] ) then
 						return false
-
+					
 					elseif ( filterTable[gatherType] == true ) then
 						return true
-
+					
+					elseif ( gatherType and not nodeName ) then
+						return filterTable[gatherType] and true or false
+					
 					else
 						return filterTable[gatherType][nodeName]
-
+					
 					end
 				end
 			)
@@ -865,45 +865,47 @@ do --create a new block
 		xPos = xPos
 		yPos = yPos
 		for gType, nodesList in pairs(zoneData) do
-			for index, nodeData in ipairs(nodesList) do
-				local returnNode = filter;
-				if ( type(filter) == "function" ) then
-					for gatherName, gather in pairs(nodeData) do
-						if ( type(gather) == "table" ) then
-							returnNode = filter(gatherName, gType)
-							if ( returnNode ) then
-								break
+			if ( (filter == true ) or filter(nil, gType) ) then
+				for index, nodeData in ipairs(nodesList) do
+					local returnNode = filter;
+					if ( type(filter) == "function" ) then
+						for gatherName, gather in pairs(nodeData) do
+							if ( type(gather) == "table" ) then
+								returnNode = filter(gatherName, gType)
+								if ( returnNode ) then
+									break
+								end
 							end
 						end
 					end
-				end
-				if ( returnNode ) then
-					local nodeX, nodeY = nodeData[POS_X], nodeData[POS_Y]
-					if ( (nodeX ~= 0) and (nodeY ~= 0) ) then
-						local dist = Astrolabe:ComputeDistance(mapID, mapFloor, xPos, yPos, mapID, mapFloor, nodeX, nodeY)
+					if ( returnNode ) then
+						local nodeX, nodeY = nodeData[POS_X], nodeData[POS_Y]
+						if ( (nodeX ~= 0) and (nodeY ~= 0) ) then
+							local dist = Astrolabe:ComputeDistance(mapID, mapFloor, xPos, yPos, mapID, mapFloor, nodeX, nodeY)
 
-						if ( (maxDist == 0) or (dist < maxDist) ) then
-							local insertPoint = 1
+							if ( (maxDist == 0) or (dist < maxDist) ) then
+								local insertPoint = 1
 
-							for i, nodeName in ipairs(gTypes) do
-								if not ( distances[i+1] ) then
-									insertPoint = i + 1
-									break
+								for i, nodeName in ipairs(gTypes) do
+									if not ( distances[i+1] ) then
+										insertPoint = i + 1
+										break
 
-								elseif ( distances[i] > dist ) then
-									insertPoint = i
-									break
+									elseif ( distances[i] > dist ) then
+										insertPoint = i
+										break
 
+									end
 								end
-							end
-							if ( insertPoint <= num) then
-								tinsert(gTypes, insertPoint, gType)
-								tinsert(nodeIndex, insertPoint, index)
-								tinsert(distances, insertPoint, dist)
-								local limit = num + 1
-								gTypes[limit] = nil
-								nodeIndex[limit] = nil
-								distances[limit] = nil
+								if ( insertPoint <= num) then
+									tinsert(gTypes, insertPoint, gType)
+									tinsert(nodeIndex, insertPoint, index)
+									tinsert(distances, insertPoint, dist)
+									local limit = num + 1
+									gTypes[limit] = nil
+									nodeIndex[limit] = nil
+									distances[limit] = nil
+								end
 							end
 						end
 					end

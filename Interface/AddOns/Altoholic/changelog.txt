@@ -8,6 +8,14 @@ IMPORTANT NOTE: If you're upgrading from 3.x :
 - Make sure you delete the addon's databases in SavedVariables. ie: Altoholic.lua and all DataStore*.lua.
 - Make sure to delete the old addon directories (Altoholic & all DataStore modules) as many files have changed/moved. A patch like this one is always a good opportunity for a fresh install.
 
+4.2.001 (29/06/2011)
+
+- Fixed the expand/collapse buttons not working in the profession recipes pane.
+- Added missing achievment: "The Oceanographer".
+- Fixed item name not displayed with the right color code in several places (4.2).
+- Removed keyring support (4.2).
+- Achievements, Pets & Mounts have been updated.
+
 4.1.001b (01/05/2011)
 
 - DataStore_Agenda: Fixed a typo & a few function flags not correctly initialized.

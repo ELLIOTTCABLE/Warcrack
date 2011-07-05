@@ -1,7 +1,7 @@
 ﻿--[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.3 (<%codename%>)
-	Revision: $Id: GatherNodes.lua 920 2010-12-21 08:33:30Z Esamynn $
+	Version: 3.2.4 (<%codename%>)
+	Revision: $Id: GatherNodes.lua 923 2010-12-23 08:54:58Z Esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -184,6 +184,15 @@ if (region == "deDE") then -- German
 		["Beschlagene Adamantittruhe"] = 184936, -- Bound Adamantite Chest
 		["Ei der Netherschwingen"] = 185915, -- Netherwing Egg
 		["Immerfrostsplitter"] = 193997, -- Everfrost Chip
+		["Archäologischer trollischer Fund"] = 202655, -- Troll Archaeology Find
+		["Archäologischer nachtelfischer Fund"] = 203071, -- Night Elf Archaeology Find
+		["Archäologischer nerubischer Fund"] = 203078, -- Nerubian Archaeology Find
+		["Archäologischer zwergischer Fund"] = 204282, -- Dwarf Archaeology Find
+		["Archäologischer fossiler Fund"] = 206836, -- Fossil Archaeology Find
+		["Archäologischer orcischer Fund"] = 207187, -- Orc Archaeology Find
+		["Archäologischer draeneiischer Fund"] = 207188, -- Draenei Archaeology Find
+		["Archäologischer Fund der Vrykul"] = 207189, -- Vrykul Archaeology Find
+		["Archäologischer Fund der Tol'vir"] = 207190, -- Tol'vir Archaeology Find
 	}
 elseif (region == "enUS") then -- Engligh
 	Gatherer.Nodes.Names = {
@@ -330,6 +339,15 @@ elseif (region == "enUS") then -- Engligh
 		["Bound Adamantite Chest"] = 184936,
 		["Netherwing Egg"] = 185915,
 		["Everfrost Chip"] = 193997,
+		["Troll Archaeology Find"] = 202655,
+		["Night Elf Archaeology Find"] = 203071,
+		["Nerubian Archaeology Find"] = 203078,
+		["Dwarf Archaeology Find"] = 204282,
+		["Fossil Archaeology Find"] = 206836,
+		["Orc Archaeology Find"] = 207187,
+		["Draenei Archaeology Find"] = 207188,
+		["Vrykul Archaeology Find"] = 207189,
+		["Tol'vir Archaeology Find"] = 207190,
 	}
 elseif (region == "esES") then -- Spanish
 	Gatherer.Nodes.Names = {
@@ -479,6 +497,15 @@ elseif (region == "esES") then -- Spanish
 		["Cofre de hierro vil vinculado"] = 184931, -- Bound Fel Iron Chest
 		["Huevo de Ala Abisal"] = 185915, -- Netherwing Egg
 		["Esquirla de siemprescarcha"] = 193997, -- Everfrost Chip
+		["Hallazgo arqueológico de los trols"] = 202655, -- Troll Archaeology Find
+		["Hallazgo arqueológico de los elfos de la noche"] = 203071, -- Night Elf Archaeology Find
+		["Hallazgo arqueológico nerubiano"] = 203078, -- Nerubian Archaeology Find
+		["Hallazgo arqueológico de los enanos"] = 204282, -- Dwarf Archaeology Find
+		["Hallazgo arqueológico fósil"] = 206836, -- Fossil Archaeology Find
+		["Hallazgo arqueológico de los orcos"] = 207187, -- Orc Archaeology Find
+		["Hallazgo arqueológico de los draenei"] = 207188, -- Draenei Archaeology Find
+		["Vrykul Archaeology Chest 01"] = 207189, -- Vrykul Archaeology Find
+		["Hallazgo arqueológico de los Tol'vir"] = 207190, -- Tol'vir Archaeology Find
 	}
 elseif (region == "esMX") then -- Latin American Spanish (Mapped from esES)
 	Gatherer.Nodes.Names = {
@@ -628,6 +655,15 @@ elseif (region == "esMX") then -- Latin American Spanish (Mapped from esES)
 		["Cofre de hierro vil vinculado"] = 184931, -- Bound Fel Iron Chest
 		["Huevo de Ala Abisal"] = 185915, -- Netherwing Egg
 		["Esquirla de siemprescarcha"] = 193997, -- Everfrost Chip
+		["Hallazgo arqueológico de los trols"] = 202655, -- Troll Archaeology Find
+		["Hallazgo arqueológico de los elfos de la noche"] = 203071, -- Night Elf Archaeology Find
+		["Hallazgo arqueológico nerubiano"] = 203078, -- Nerubian Archaeology Find
+		["Hallazgo arqueológico de los enanos"] = 204282, -- Dwarf Archaeology Find
+		["Hallazgo arqueológico fósil"] = 206836, -- Fossil Archaeology Find
+		["Hallazgo arqueológico de los orcos"] = 207187, -- Orc Archaeology Find
+		["Hallazgo arqueológico de los draenei"] = 207188, -- Draenei Archaeology Find
+		["Vrykul Archaeology Chest 01"] = 207189, -- Vrykul Archaeology Find
+		["Hallazgo arqueológico de los Tol'vir"] = 207190, -- Tol'vir Archaeology Find
 	}
 elseif (region == "frFR") then -- French
 	Gatherer.Nodes.Names = {
@@ -664,7 +700,6 @@ elseif (region == "frFR") then -- French
 		["Morceau d'obsidium"] = 202736, -- Obsidium Deposit
 		["Gisement de pyrite"] = 202737, -- Pyrite Deposit
 		["Filon d'élémentium"] = 202738, -- Elementium Vein
-		["Enorme bloc d'obsidienne"] = 202739, -- Rich Obsidium Deposit
 		["Enorme bloc d'obsidium"] = 202739, -- Rich Obsidium Deposit
 		["Riche gisement de pyrite"] = 202740, -- Rich Pyrite Deposit
 		["Riche filon d'élémentium"] = 202741, -- Rich Elementium Vein
@@ -773,9 +808,17 @@ elseif (region == "frFR") then -- French
 		["Coffre primitif"] = 184793, -- Primitive Chest
 		["Coffre solide en gangrefer"] = 184930, -- Solid Fel Iron Chest
 		["Coffre cerclé de gangrefer"] = 184931, -- Bound Fel Iron Chest
-		["Oeuf de l'Aile-du-Néant"] = 185915, -- Netherwing Egg
 		["Œuf de l'Aile-du-Néant"] = 185915, -- Netherwing Egg
 		["Morceau de permagivre"] = 193997, -- Everfrost Chip
+		["Trouvaille archéologique trolle"] = 202655, -- Troll Archaeology Find
+		["Trouvaille archéologique elfe de la nuit"] = 203071, -- Night Elf Archaeology Find
+		["Objet aqir perdu"] = 203078, -- Nerubian Archaeology Find
+		["Trouvaille archéologique naine"] = 204282, -- Dwarf Archaeology Find
+		["Trouvaille archéologique fossile"] = 206836, -- Fossil Archaeology Find
+		["Trouvaille archéologique orque"] = 207187, -- Orc Archaeology Find
+		["Trouvaille archéologique draeneï"] = 207188, -- Draenei Archaeology Find
+		["Coffre d'archéologie vrykul 01"] = 207189, -- Vrykul Archaeology Find
+		["Trouvaille archéologique tol'vir"] = 207190, -- Tol'vir Archaeology Find
 	}
 elseif (region == "ruRU") then -- Russian
 	Gatherer.Nodes.Names = {
@@ -929,6 +972,15 @@ elseif (region == "ruRU") then -- Russian
 		["Яйцо дракона из стаи Крыльев Пустоты"] = 185915, -- Netherwing Egg
 		["Обломок вечной мерзлоты"] = 193997, -- Everfrost Chip
 		["Частичка Вечного льда"] = 193997, -- Everfrost Chip
+		["Тролльская археологическая находка"] = 202655, -- Troll Archaeology Find
+		["Эльфийская археологическая находка"] = 203071, -- Night Elf Archaeology Find
+		["Нерубская археологическая находка"] = 203078, -- Nerubian Archaeology Find
+		["Дворфийская археологическая находка"] = 204282, -- Dwarf Archaeology Find
+		["Находка-окаменелость"] = 206836, -- Fossil Archaeology Find
+		["Оркская археологическая находка"] = 207187, -- Orc Archaeology Find
+		["Дренейская археологическая находка"] = 207188, -- Draenei Archaeology Find
+		["Врайкульская археологическая находка"] = 207189, -- Vrykul Archaeology Find
+		["Тол'вирская археологическая находка"] = 207190, -- Tol'vir Archaeology Find
 	}
 elseif (region == "zhCN") then -- Chinese
 	Gatherer.Nodes.Names = {
@@ -1336,6 +1388,15 @@ Gatherer.Nodes.Objects = {
 	[184936] = "OPEN", -- Bound Adamantite Chest
 	[185915] = "OPEN", -- Netherwing Egg
 	[193997] = "OPEN", -- Everfrost Chip
+	[202655] = "ARCH", -- Troll Archaeology Find
+	[203071] = "ARCH", -- Night Elf Archaeology Find
+	[203078] = "ARCH", -- Nerubian Archaeology Find
+	[204282] = "ARCH", -- Dwarf Archaeology Find
+	[206836] = "ARCH", -- Fossil Archaeology Find
+	[207187] = "ARCH", -- Orc Archaeology Find
+	[207188] = "ARCH", -- Draenei Archaeology Find
+	[207189] = "ARCH", -- Vrykul Archaeology Find
+	[207190] = "ARCH", -- Tol'vir Archaeology Find
 }
 
 Gatherer.Nodes.PrimaryItems = {

@@ -79,10 +79,7 @@ local function UpdateSpread()
 				itemButton:SetScript("OnEnter", function(self)
 					local id = self:GetID()
 					GameTooltip:SetOwner(self, "ANCHOR_LEFT");
-					if id == -2 then
-						GameTooltip:AddLine(KEYRING,1,1,1);
-						GameTooltip:AddLine(L["32 Keys Max"],1,1,1);
-					elseif id == 0 then
+					if id == 0 then
 						GameTooltip:AddLine(BACKPACK_TOOLTIP,1,1,1);
 						GameTooltip:AddLine(format(CONTAINER_SLOTS, 16, BAGSLOT),1,1,1);
 						
@@ -208,7 +205,6 @@ local function UpdateAllInOne()
 	local containerList = {}
 	
 	if not bankOnly then		-- if it's not a bank only view, add the normal bags
-		table.insert(containerList, -2)
 		for i = 0, 4 do
 			table.insert(containerList, i)
 		end
@@ -333,7 +329,7 @@ function ns:UpdateCache()
 	local bagMin = 0
 	local bagMax = 11
 	
-	-- bags : -2 (keyring) and 0 to 4
+	-- bags : 0 to 4
 	-- bank: 5 to 11 and 100
 	if bagsOnly then
 		bagMax = 4			-- 0 to 4
@@ -347,10 +343,6 @@ function ns:UpdateCache()
 			local _, _, size = DataStore:GetContainerInfo(character, bagID)
 			UpdateBagIndices(bagID, size)
 		end
-	end
-	
-	if not bankOnly then
-		UpdateBagIndices(-2, 32)		-- KeyRing
 	end
 	
 	if not bagsOnly then

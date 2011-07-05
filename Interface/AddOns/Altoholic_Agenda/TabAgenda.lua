@@ -11,6 +11,7 @@ local currentMode
 
 local childrenFrames = {
 	"Calendar",
+	"Contacts",
 }
 
 local childrenObjects = {}		-- these are the tables that actually contain the BuildView & Update methods. Not really OOP, but enough for our needs
@@ -20,8 +21,11 @@ addon.Tabs.Agenda = {}
 local ns = addon.Tabs.Agenda		-- ns = namespace
 
 function ns:MenuItem_OnClick(id)
+
 	for _, v in pairs(childrenFrames) do			-- hide all frames
-		_G[ "AltoholicFrame" .. v]:Hide()
+		if _G[ "AltoholicFrame" .. v] then
+			_G[ "AltoholicFrame" .. v]:Hide()
+		end
 	end
 
 	ns:SetMode(id)
@@ -62,8 +66,8 @@ end
 function ns:Refresh()
 	if AltoholicFrameCalendar:IsVisible() then
 		addon.Calendar:Update()
-	-- elseif frame:IsVisible() then
-		-- addon.frame:Update()
+	elseif AltoholicFrameContacts:IsVisible() then
+		addon.Contacts:Update()
 	end
 end
 

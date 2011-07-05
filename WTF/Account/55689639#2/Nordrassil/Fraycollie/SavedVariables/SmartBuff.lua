@@ -138,6 +138,24 @@ SMARTBUFF_Buffs = {
 				["IgnoreList"] = {
 				},
 			},
+			["Elixir of the Master"] = {
+				["EnableG"] = false,
+				["ManaLimit"] = 0,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["SelfOnly"] = false,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["OH"] = false,
+			},
 			["Berserker Rage"] = {
 				["OH"] = false,
 				["SelfOnly"] = false,
@@ -156,41 +174,25 @@ SMARTBUFF_Buffs = {
 				["IgnoreList"] = {
 				},
 			},
-			["GrpBuffSize"] = 4,
-			["Vigilance"] = {
-				["HUNTER"] = false,
-				["WARRIOR"] = false,
-				["PALADIN"] = false,
+			["Berserker Stance"] = {
+				["OH"] = false,
+				["SelfOnly"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
+				["COut"] = true,
 				["EnableS"] = false,
-				["DAMAGER"] = false,
+				["SelfNot"] = false,
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
-				["MAGE"] = false,
-				["DRUID"] = false,
-				["DEATHKNIGHT"] = false,
-				["TANK"] = false,
-				["ROGUE"] = false,
-				["OH"] = false,
-				["DKPET"] = false,
-				["COut"] = true,
-				["HEALER"] = false,
-				["PRIEST"] = false,
-				["HPET"] = false,
-				["SelfNot"] = false,
-				["WARLOCK"] = false,
-				["SelfOnly"] = false,
-				["WPET"] = false,
-				["SHAMAN"] = false,
 				["RH"] = false,
 				["IgnoreList"] = {
 				},
 			},
+			["GrpBuffSize"] = 4,
 			["Commanding Shout"] = {
 				["OH"] = false,
 				["SelfOnly"] = false,
@@ -228,20 +230,36 @@ SMARTBUFF_Buffs = {
 				},
 			},
 			["SelfFirst"] = false,
-			["Berserker Stance"] = {
-				["OH"] = false,
-				["SelfOnly"] = false,
+			["Vigilance"] = {
+				["HUNTER"] = false,
+				["WARRIOR"] = false,
+				["PALADIN"] = false,
 				["RBTime"] = 0,
 				["MH"] = false,
 				["CIn"] = false,
-				["COut"] = true,
 				["EnableS"] = false,
-				["SelfNot"] = false,
+				["DAMAGER"] = false,
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
 				["AddList"] = {
 				},
 				["Reminder"] = true,
+				["MAGE"] = false,
+				["DRUID"] = false,
+				["DEATHKNIGHT"] = false,
+				["TANK"] = false,
+				["ROGUE"] = false,
+				["OH"] = false,
+				["DKPET"] = false,
+				["COut"] = true,
+				["HEALER"] = false,
+				["PRIEST"] = false,
+				["HPET"] = false,
+				["SelfNot"] = false,
+				["WARLOCK"] = false,
+				["SelfOnly"] = false,
+				["WPET"] = false,
+				["SHAMAN"] = false,
 				["RH"] = false,
 				["IgnoreList"] = {
 				},
@@ -256,7 +274,7 @@ SMARTBUFF_Buffs = {
 			"Defensive Stance", -- [6]
 			"Berserker Stance", -- [7]
 			"Find Minerals", -- [8]
-			"Stoneform", -- [9]
+			"Elixir of the Master", -- [9]
 		},
 	}, -- [1]
 	{

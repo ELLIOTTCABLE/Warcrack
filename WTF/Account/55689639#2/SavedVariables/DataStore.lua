@@ -2,8 +2,8 @@
 DataStoreDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
@@ -32,7 +32,8 @@ DataStoreDB = {
 				["faction"] = "Horde",
 			},
 			["Default.Nordrassil.Fraycollie"] = {
-				["faction"] = "Alliance",
+				["guildName"] = "Jitter",
+				["faction"] = "Horde",
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["faction"] = "Alliance",
@@ -49,15 +50,15 @@ DataStoreDB = {
 			["Default.Darkspear.Warcollie"] = {
 				["faction"] = "Alliance",
 			},
-			["Default.Smolderthorn.Warcollie"] = {
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["guildName"] = "LEAFEA",
 				["faction"] = "Alliance",
 			},
 			["Default.Smolderthorn.Melancollie"] = {
 				["guildName"] = "LEAFEA",
 				["faction"] = "Alliance",
 			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["guildName"] = "LEAFEA",
+			["Default.Smolderthorn.Warcollie"] = {
 				["faction"] = "Alliance",
 			},
 			["Default.The Underbog.Fraycollie"] = {
@@ -76,14 +77,17 @@ DataStoreDB = {
 			},
 		},
 		["Guilds"] = {
-			["Default.The Underbog.LEAFEA"] = {
+			["Default.Smolderthorn.LEAFEA"] = {
+				["faction"] = "Alliance",
+			},
+			["Default.Nordrassil.Jitter"] = {
 				["faction"] = "Horde",
 			},
 			["Default.Smolderthorn.Clan of the Skulls"] = {
 				["faction"] = "Alliance",
 			},
-			["Default.Smolderthorn.LEAFEA"] = {
-				["faction"] = "Alliance",
+			["Default.The Underbog.LEAFEA"] = {
+				["faction"] = "Horde",
 			},
 			["Default.Ysondre.LEAFEA"] = {
 				["faction"] = "Horde",

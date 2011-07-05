@@ -2,8 +2,8 @@
 DataStore_CurrenciesDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
@@ -26,10 +26,12 @@ DataStore_CurrenciesDB = {
 				"Player vs. Player|", -- [3]
 				"Conquest Points|Interface\\Icons\\PVPCurrency-Conquest-Horde", -- [4]
 				"Honor Points|Interface\\Icons\\PVPCurrency-Honor-Horde", -- [5]
+				"Valor Points|Interface\\Icons\\pvecurrency-valor", -- [6]
 			},
 			["CurrencyTextRev"] = {
 				["Justice Points"] = 2,
 				["Conquest Points"] = 4,
+				["Valor Points"] = 6,
 				["Honor Points"] = 5,
 				["Player vs. Player"] = 3,
 				["Dungeon and Raid"] = 1,
@@ -63,12 +65,13 @@ DataStore_CurrenciesDB = {
 			["Default.Nordrassil.Fraycollie"] = {
 				["Currencies"] = {
 					3, -- [1]
-					242180, -- [2]
-					7, -- [3]
-					8, -- [4]
-					36490, -- [5]
+					126340, -- [2]
+					12, -- [3]
+					7, -- [4]
+					8, -- [5]
+					36490, -- [6]
 				},
-				["lastUpdate"] = 1308814632,
+				["lastUpdate"] = 1309891675,
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["Currencies"] = {
@@ -78,7 +81,7 @@ DataStore_CurrenciesDB = {
 					8, -- [4]
 					20362, -- [5]
 				},
-				["lastUpdate"] = 1308783292,
+				["lastUpdate"] = 1308881102,
 			},
 			["Default.Smolderthorn.Othercollie"] = {
 				["Currencies"] = {
@@ -101,12 +104,12 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1308162231,
 			},
-			["Default.Smolderthorn.Warcollie"] = {
+			["Default.Smolderthorn.Hoarcollie"] = {
 				["Currencies"] = {
 					7, -- [1]
 					8, -- [2]
 				},
-				["lastUpdate"] = 1308197707,
+				["lastUpdate"] = 1308959477,
 			},
 			["Default.Smolderthorn.Melancollie"] = {
 				["Currencies"] = {
@@ -114,14 +117,14 @@ DataStore_CurrenciesDB = {
 					8, -- [2]
 					138, -- [3]
 				},
-				["lastUpdate"] = 1308801970,
+				["lastUpdate"] = 1308956540,
 			},
-			["Default.Smolderthorn.Hoarcollie"] = {
+			["Default.Smolderthorn.Warcollie"] = {
 				["Currencies"] = {
 					7, -- [1]
 					8, -- [2]
 				},
-				["lastUpdate"] = 1308813494,
+				["lastUpdate"] = 1308197707,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["Currencies"] = {

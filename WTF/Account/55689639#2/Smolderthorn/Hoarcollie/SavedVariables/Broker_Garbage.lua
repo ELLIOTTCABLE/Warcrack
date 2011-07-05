@@ -10,5 +10,5 @@ BG_LocalDB = {
 		["Misc.Reagent.Class.Rogue"] = true,
 	},
 	["neverRepairGuildBank"] = false,
-	["moneyLostByDeleting"] = 2,
+	["moneyLostByDeleting"] = 40,
 }

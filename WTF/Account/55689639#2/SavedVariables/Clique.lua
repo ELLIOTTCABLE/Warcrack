@@ -2,20 +2,23 @@
 CliqueDB = nil
 CliqueDB3 = {
 	["char"] = {
+		["Hoarcollie - Smolderthorn"] = {
+			["alerthidden"] = true,
+		},
 		["Fraycollie - Smolderthorn"] = {
 			["alerthidden"] = true,
 		},
 		["Battlecollie - Smolderthorn"] = {
 			["alerthidden"] = true,
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Fraycollie - Nordrassil"] = {
 			["alerthidden"] = true,
 		},
 	},
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
@@ -32,25 +35,6 @@ CliqueDB3 = {
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
-			["bindings"] = {
-				{
-					["type"] = "target",
-					["sets"] = {
-						["default"] = true,
-					},
-					["key"] = "BUTTON1",
-					["unit"] = "mouseover",
-				}, -- [1]
-				{
-					["type"] = "menu",
-					["key"] = "BUTTON2",
-					["sets"] = {
-						["default"] = true,
-					},
-				}, -- [2]
-			},
-		},
-		["Fraycollie - The Underbog"] = {
 			["bindings"] = {
 				{
 					["type"] = "target",
@@ -88,13 +72,13 @@ CliqueDB3 = {
 				}, -- [2]
 			},
 		},
-		["Fraycollie - Nordrassil"] = {
+		["Fraycollie - The Underbog"] = {
 			["bindings"] = {
 				{
+					["type"] = "target",
 					["sets"] = {
 						["default"] = true,
 					},
-					["type"] = "target",
 					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]
@@ -105,6 +89,43 @@ CliqueDB3 = {
 						["default"] = true,
 					},
 				}, -- [2]
+			},
+		},
+		["Fraycollie - Nordrassil"] = {
+			["bindings"] = {
+				{
+					["sets"] = {
+						["default"] = true,
+					},
+					["type"] = "target",
+					["key"] = "CTRL-BUTTON1",
+					["unit"] = "mouseover",
+				}, -- [1]
+				{
+					["type"] = "menu",
+					["key"] = "CTRL-BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [2]
+				{
+					["spell"] = "Vigilance",
+					["key"] = "BUTTON6",
+					["sets"] = {
+						["default"] = true,
+					},
+					["icon"] = "Interface\\Icons\\Ability_Warrior_Vigilance",
+					["type"] = "spell",
+				}, -- [3]
+				{
+					["spell"] = "Intervene",
+					["key"] = "BUTTON1",
+					["sets"] = {
+						["default"] = true,
+					},
+					["icon"] = "Interface\\Icons\\Ability_Warrior_VictoryRush",
+					["type"] = "spell",
+				}, -- [4]
 			},
 		},
 		["Summoneer - Smolderthorn"] = {

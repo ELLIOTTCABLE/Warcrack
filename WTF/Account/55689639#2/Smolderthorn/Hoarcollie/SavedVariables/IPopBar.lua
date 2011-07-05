@@ -1,6 +1,6 @@
 
 IPopBar_Config = {
-	["Enabled"] = 1,
+	["Enabled"] = 0,
 	["Version"] = 3.1,
 	["NumRows"] = 1,
 }

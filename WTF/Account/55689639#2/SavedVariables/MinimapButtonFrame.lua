@@ -2,8 +2,8 @@
 MBFDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
 		["Github - Smolderthorn"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
 		["Fraycollie - Nordrassil"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
 		["Othercollie - Smolderthorn"] = "Default",

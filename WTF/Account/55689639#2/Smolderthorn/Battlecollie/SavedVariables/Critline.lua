@@ -29,19 +29,19 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[34914] = {
+					[15407] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Sifreldar Runekeeper",
+								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 1043,
+								["targetLevel"] = 79,
+								["amount"] = 793,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 79,
-								["amount"] = 1895,
+								["amount"] = 1584,
 							},
 						},
 					},
@@ -61,19 +61,19 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[15407] = {
+					[34914] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Sifreldar Storm Maiden",
+								["target"] = "Sifreldar Runekeeper",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 79,
-								["amount"] = 793,
+								["targetLevel"] = 80,
+								["amount"] = 1043,
 							},
 							["crit"] = {
 								["target"] = "Sifreldar Storm Maiden",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 79,
-								["amount"] = 1584,
+								["amount"] = 1895,
 							},
 						},
 					},
@@ -103,16 +103,6 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[2944] = {
-						[2] = {
-							["normal"] = {
-								["target"] = "Sifreldar Storm Maiden",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 78,
-								["amount"] = 613,
-							},
-						},
-					},
 					[8092] = {
 						{
 							["normal"] = {
@@ -128,6 +118,16 @@ CritlinePerCharDB = {
 								["amount"] = 7063,
 							},
 						}, -- [1]
+					},
+					[2944] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Sifreldar Storm Maiden",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 78,
+								["amount"] = 613,
+							},
+						},
 					},
 				},
 				["heal"] = {
@@ -167,16 +167,6 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[17] = {
-						{
-							["normal"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 9396,
-							},
-						}, -- [1]
-					},
 					[55503] = {
 						{
 							["normal"] = {
@@ -184,6 +174,16 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
 								["amount"] = 697,
+							},
+						}, -- [1]
+					},
+					[2060] = {
+						{
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 8170,
 							},
 						}, -- [1]
 					},
@@ -197,15 +197,15 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[15290] = {
-						[2] = {
+					[2061] = {
+						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 224,
+								["amount"] = 7893,
 							},
-						},
+						}, -- [1]
 					},
 					[23455] = {
 						{
@@ -243,23 +243,23 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2061] = {
-						{
+					[15290] = {
+						[2] = {
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 7893,
+								["amount"] = 224,
 							},
-						}, -- [1]
+						},
 					},
-					[2060] = {
+					[17] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 77,
-								["amount"] = 8170,
+								["amount"] = 9396,
 							},
 						}, -- [1]
 					},
@@ -334,16 +334,16 @@ CritlinePerCharDB = {
 					[6603] = {
 						{
 							["normal"] = {
-								["target"] = "Stonecore Earthshaper",
+								["target"] = "Indentured Protector",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 354,
+								["targetLevel"] = 83,
+								["amount"] = 456,
 							},
 							["crit"] = {
-								["target"] = "Twilight Torturer",
+								["target"] = "Indentured Protector",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 554,
+								["targetLevel"] = 83,
+								["amount"] = 856,
 							},
 						}, -- [1]
 					},
@@ -436,10 +436,10 @@ CritlinePerCharDB = {
 								["amount"] = 17596,
 							},
 							["crit"] = {
-								["target"] = "Nether Fiend",
+								["target"] = "Scion of Al'Akir",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 29151,
+								["targetLevel"] = 83,
+								["amount"] = 31181,
 							},
 						}, -- [1]
 					},
@@ -538,16 +538,16 @@ CritlinePerCharDB = {
 					[15407] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Merciless One",
+								["target"] = "Sultan Oogah",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 81,
-								["amount"] = 2636,
+								["targetLevel"] = 83,
+								["amount"] = 2826,
 							},
 							["crit"] = {
-								["target"] = "Ick'thys the Unfathomable",
+								["target"] = "Colossus of the Sun",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 5058,
+								["targetLevel"] = 83,
+								["amount"] = 5428,
 							},
 						},
 					},
@@ -564,6 +564,22 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = false,
 								["targetLevel"] = 84,
 								["amount"] = 11031,
+							},
+						}, -- [1]
+					},
+					[73510] = {
+						{
+							["normal"] = {
+								["target"] = "Neferset Guard",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 83,
+								["amount"] = 13332,
+							},
+							["crit"] = {
+								["target"] = "Skarf",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 83,
+								["amount"] = 16539,
 							},
 						}, -- [1]
 					},
@@ -592,6 +608,22 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = true,
 								["targetLevel"] = 80,
 								["amount"] = 4694,
+							},
+						}, -- [1]
+					},
+					[64844] = {
+						{
+							["normal"] = {
+								["target"] = "Elfa",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 71,
+								["amount"] = 6020,
+							},
+							["crit"] = {
+								["target"] = "Mãsterchief",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 74,
+								["amount"] = 8258,
 							},
 						}, -- [1]
 					},
@@ -657,23 +689,23 @@ CritlinePerCharDB = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 83,
-								["amount"] = 910,
+								["amount"] = 970,
 							},
 						},
 					},
-					[64844] = {
+					[2061] = {
 						{
 							["normal"] = {
-								["target"] = "Elfa",
+								["target"] = "Kyda-Skywall",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 71,
-								["amount"] = 6020,
+								["targetLevel"] = 82,
+								["amount"] = 23027,
 							},
 							["crit"] = {
-								["target"] = "Mãsterchief",
+								["target"] = "Murdahface-Crushridge",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 74,
-								["amount"] = 8258,
+								["targetLevel"] = 83,
+								["amount"] = 32460,
 							},
 						}, -- [1]
 					},
@@ -703,22 +735,6 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2061] = {
-						{
-							["normal"] = {
-								["target"] = "Kyda-Skywall",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 82,
-								["amount"] = 23027,
-							},
-							["crit"] = {
-								["target"] = "Murdahface-Crushridge",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 83,
-								["amount"] = 32460,
-							},
-						}, -- [1]
-					},
 					[34861] = {
 						{
 							["normal"] = {
@@ -732,38 +748,6 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = true,
 								["targetLevel"] = 81,
 								["amount"] = 7996,
-							},
-						}, -- [1]
-					},
-					[88684] = {
-						{
-							["normal"] = {
-								["target"] = "Kyda-Skywall",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 82,
-								["amount"] = 14470,
-							},
-							["crit"] = {
-								["target"] = "Itzal-Saurfang",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 80,
-								["amount"] = 17008,
-							},
-						}, -- [1]
-					},
-					[33110] = {
-						{
-							["normal"] = {
-								["target"] = "Kyda-Skywall",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 82,
-								["amount"] = 10883,
-							},
-							["crit"] = {
-								["target"] = "Murdahface-Crushridge",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 83,
-								["amount"] = 15710,
 							},
 						}, -- [1]
 					},
@@ -783,23 +767,65 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[47753] = {
+					[88684] = {
+						{
+							["normal"] = {
+								["target"] = "Kyda-Skywall",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 82,
+								["amount"] = 14470,
+							},
+							["crit"] = {
+								["target"] = "Itzal-Saurfang",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 80,
+								["amount"] = 17008,
+							},
+						}, -- [1]
+					},
+					[43185] = {
+						{
+							["crit"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 83,
+								["amount"] = 5822,
+							},
+						}, -- [1]
+					},
+					[81751] = {
+						{
+							["normal"] = {
+								["target"] = "Flargg-Arathor",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 77,
+								["amount"] = 4367,
+							},
+						}, -- [1]
+					},
+					[47750] = {
 						{
 							["normal"] = {
 								["target"] = "Vladik-Darkspear",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 76,
-								["amount"] = 5522,
+								["amount"] = 4270,
+							},
+							["crit"] = {
+								["target"] = "Vladik-Darkspear",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 76,
+								["amount"] = 7263,
 							},
 						}, -- [1]
 					},
-					[75999] = {
+					[2944] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 82,
-								["amount"] = 1857,
+								["amount"] = 565,
 							},
 						}, -- [1]
 					},
@@ -819,13 +845,29 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[2944] = {
+					[75999] = {
 						{
 							["normal"] = {
 								["target"] = "Battlecollie",
 								["isPvPTarget"] = true,
 								["targetLevel"] = 82,
-								["amount"] = 565,
+								["amount"] = 1857,
+							},
+						}, -- [1]
+					},
+					[27827] = {
+						{
+							["normal"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 79,
+								["amount"] = 1,
+							},
+							["crit"] = {
+								["target"] = "Battlecollie",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 79,
+								["amount"] = 1,
 							},
 						}, -- [1]
 					},
@@ -842,22 +884,6 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = true,
 								["targetLevel"] = 83,
 								["amount"] = 12521,
-							},
-						}, -- [1]
-					},
-					[47750] = {
-						{
-							["normal"] = {
-								["target"] = "Vladik-Darkspear",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 76,
-								["amount"] = 4270,
-							},
-							["crit"] = {
-								["target"] = "Vladik-Darkspear",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 76,
-								["amount"] = 7263,
 							},
 						}, -- [1]
 					},
@@ -881,22 +907,6 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[27827] = {
-						{
-							["normal"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 79,
-								["amount"] = 1,
-							},
-							["crit"] = {
-								["target"] = "Battlecollie",
-								["isPvPTarget"] = true,
-								["targetLevel"] = 79,
-								["amount"] = 1,
-							},
-						}, -- [1]
-					},
 					[55503] = {
 						{
 							["normal"] = {
@@ -904,6 +914,16 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = true,
 								["targetLevel"] = 80,
 								["amount"] = 506,
+							},
+						}, -- [1]
+					},
+					[47753] = {
+						{
+							["normal"] = {
+								["target"] = "Vladik-Darkspear",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 76,
+								["amount"] = 5522,
 							},
 						}, -- [1]
 					},
@@ -923,13 +943,19 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[81751] = {
+					[33110] = {
 						{
 							["normal"] = {
-								["target"] = "Flargg-Arathor",
+								["target"] = "Kyda-Skywall",
 								["isPvPTarget"] = true,
-								["targetLevel"] = 77,
-								["amount"] = 4367,
+								["targetLevel"] = 82,
+								["amount"] = 10883,
+							},
+							["crit"] = {
+								["target"] = "Murdahface-Crushridge",
+								["isPvPTarget"] = true,
+								["targetLevel"] = 83,
+								["amount"] = 15710,
 							},
 						}, -- [1]
 					},

@@ -12,31 +12,37 @@ CritlineDB = {
 		},
 		["minimap"] = {
 			["profiles"] = {
-				["Fraycollie - Smolderthorn"] = {
-					["show"] = false,
-				},
 				["Hoarcollie - Smolderthorn"] = {
 					["show"] = false,
 				},
-				["Melancollie - Smolderthorn"] = {
+				["Fraycollie - Smolderthorn"] = {
 					["show"] = false,
 				},
 				["Battlecollie - Ysondre"] = {
 					["show"] = false,
 				},
-				["Warcollie - Darkspear"] = {
+				["Melancollie - Smolderthorn"] = {
 					["show"] = false,
 				},
 				["Github - Smolderthorn"] = {
 					["show"] = false,
 				},
+				["Warcollie - Darkspear"] = {
+					["show"] = false,
+				},
 				["Battlecollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Fraycollie - Nordrassil"] = {
 					["show"] = false,
 				},
 			},
 		},
 		["display"] = {
 			["profiles"] = {
+				["Hoarcollie - Smolderthorn"] = {
+					["show"] = false,
+				},
 				["Fraycollie - Smolderthorn"] = {
 					["show"] = false,
 					["pos"] = {
@@ -45,19 +51,16 @@ CritlineDB = {
 						["point"] = "BOTTOMRIGHT",
 					},
 				},
-				["Hoarcollie - Smolderthorn"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["show"] = false,
 				},
 				["Melancollie - Smolderthorn"] = {
 					["show"] = false,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Github - Smolderthorn"] = {
 					["show"] = false,
 				},
 				["Warcollie - Darkspear"] = {
-					["show"] = false,
-				},
-				["Github - Smolderthorn"] = {
 					["show"] = false,
 				},
 				["Battlecollie - Ysondre"] = {
@@ -67,6 +70,9 @@ CritlineDB = {
 						["x"] = -408.541259765625,
 						["point"] = "BOTTOMRIGHT",
 					},
+				},
+				["Fraycollie - Nordrassil"] = {
+					["show"] = false,
 				},
 			},
 		},
@@ -80,8 +86,8 @@ CritlineDB = {
 	},
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
@@ -99,9 +105,9 @@ CritlineDB = {
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
 		},
-		["Fraycollie - The Underbog"] = {
-		},
 		["Github - Smolderthorn"] = {
+		},
+		["Fraycollie - The Underbog"] = {
 		},
 		["Fraycollie - Nordrassil"] = {
 		},

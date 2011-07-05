@@ -2,8 +2,8 @@
 DataStore_PetsDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
@@ -228,44 +228,47 @@ DataStore_PetsDB = {
 				},
 			},
 			["Default.Nordrassil.Fraycollie"] = {
-				["lastUpdate"] = 1308814633,
+				["lastUpdate"] = 1309891675,
 				["CRITTER"] = {
 					10714, -- [1]
 					10716, -- [2]
 					99578, -- [3]
-					10717, -- [4]
-					78685, -- [5]
-					36027, -- [6]
-					69535, -- [7]
-					61472, -- [8]
-					69677, -- [9]
-					95787, -- [10]
-					75906, -- [11]
-					95786, -- [12]
-					69541, -- [13]
-					36028, -- [14]
-					36029, -- [15]
-					16450, -- [16]
-					69536, -- [17]
-					15999, -- [18]
+					10680, -- [4]
+					10717, -- [5]
+					78685, -- [6]
+					36027, -- [7]
+					69535, -- [8]
+					61472, -- [9]
+					69677, -- [10]
+					95787, -- [11]
+					75906, -- [12]
+					95909, -- [13]
+					69541, -- [14]
+					36028, -- [15]
+					10684, -- [16]
+					36029, -- [17]
+					16450, -- [18]
+					10711, -- [19]
+					69536, -- [20]
+					15999, -- [21]
 				},
 				["MOUNT"] = {
 					75207, -- [1]
-					60114, -- [2]
-					6899, -- [3]
+					60116, -- [2]
+					18990, -- [3]
 					75614, -- [4]
-					32239, -- [5]
-					6777, -- [6]
-					23238, -- [7]
-					23239, -- [8]
-					23240, -- [9]
-					6898, -- [10]
+					18989, -- [5]
+					23249, -- [6]
+					23248, -- [7]
+					23247, -- [8]
+					32243, -- [9]
+					64657, -- [10]
 					98727, -- [11]
 					75973, -- [12]
 				},
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
-				["lastUpdate"] = 1308783292,
+				["lastUpdate"] = 1308881248,
 				["MOUNT"] = {
 					75207, -- [1]
 					60114, -- [2]
@@ -423,11 +426,27 @@ DataStore_PetsDB = {
 					69536, -- [8]
 				},
 			},
-			["Default.Smolderthorn.Warcollie"] = {
-				["lastUpdate"] = 1308197707,
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1308959477,
+				["CRITTER"] = {
+					99578, -- [1]
+					10707, -- [2]
+					69535, -- [3]
+					10706, -- [4]
+					69677, -- [5]
+					95787, -- [6]
+					75906, -- [7]
+					95786, -- [8]
+					69541, -- [9]
+					69536, -- [10]
+				},
+				["MOUNT"] = {
+					75614, -- [1]
+					98727, -- [2]
+				},
 			},
 			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1308801970,
+				["lastUpdate"] = 1308956540,
 				["CRITTER"] = {
 					99578, -- [1]
 					69535, -- [2]
@@ -447,8 +466,8 @@ DataStore_PetsDB = {
 					98727, -- [6]
 				},
 			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1308813537,
+			["Default.Smolderthorn.Warcollie"] = {
+				["lastUpdate"] = 1308197707,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["lastUpdate"] = 1307756259,

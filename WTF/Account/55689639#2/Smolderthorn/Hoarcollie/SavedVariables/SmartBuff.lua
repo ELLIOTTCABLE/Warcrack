@@ -66,6 +66,24 @@ SMARTBUFF_Options = {
 SMARTBUFF_Buffs = {
 	{
 		["Solo"] = {
+			["Battle Shout"] = {
+				["SelfOnly"] = false,
+				["OH"] = false,
+				["RBTime"] = 0,
+				["MH"] = false,
+				["CIn"] = false,
+				["COut"] = true,
+				["EnableS"] = false,
+				["SelfNot"] = false,
+				["IgnoreList"] = {
+				},
+				["ManaLimit"] = 0,
+				["AddList"] = {
+				},
+				["Reminder"] = true,
+				["RH"] = false,
+				["EnableG"] = false,
+			},
 			["Crippling Poison"] = {
 				["EnableG"] = false,
 				["ManaLimit"] = 0,
@@ -250,6 +268,7 @@ SMARTBUFF_Buffs = {
 		["Order"] = {
 			"Battle Stance", -- [1]
 			"Defensive Stance", -- [2]
+			"Battle Shout", -- [3]
 		},
 	}, -- [1]
 }

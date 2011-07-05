@@ -30,10 +30,10 @@ CritlinePerCharDB = {
 					[34428] = {
 						{
 							["normal"] = {
-								["target"] = "Veteran Dark Ranger",
+								["target"] = "Corpse Eater",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 11,
-								["amount"] = 52,
+								["targetLevel"] = 19,
+								["amount"] = 87,
 							},
 							["crit"] = {
 								["target"] = "Brown Stag",
@@ -247,6 +247,38 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
+					[23922] = {
+						{
+							["normal"] = {
+								["target"] = "Deviate Ravager",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 19,
+								["amount"] = 115,
+							},
+							["crit"] = {
+								["target"] = "Evolving Ectoplasm",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 17,
+								["amount"] = 186,
+							},
+						}, -- [1]
+					},
+					[78] = {
+						{
+							["normal"] = {
+								["target"] = "Corpse Eater",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 19,
+								["amount"] = 64,
+							},
+							["crit"] = {
+								["target"] = "Deviate Guardian",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 19,
+								["amount"] = 115,
+							},
+						}, -- [1]
+					},
 					[6343] = {
 						{
 							["normal"] = {
@@ -256,20 +288,10 @@ CritlinePerCharDB = {
 								["amount"] = 128,
 							},
 							["crit"] = {
-								["target"] = "Sheep",
+								["target"] = "Deviate Guardian",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 3,
-								["amount"] = 73,
-							},
-						}, -- [1]
-					},
-					[22568] = {
-						{
-							["normal"] = {
-								["target"] = "Forsaken Herbalist",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 20,
-								["amount"] = 166,
+								["targetLevel"] = 19,
+								["amount"] = 88,
 							},
 						}, -- [1]
 					},
@@ -282,12 +304,22 @@ CritlinePerCharDB = {
 								["amount"] = 58,
 							},
 							["crit"] = {
-								["target"] = "Forsaken Infantry",
+								["target"] = "Frantic Geist",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 11,
-								["amount"] = 28,
+								["targetLevel"] = 19,
+								["amount"] = 52,
 							},
 						},
+					},
+					[22568] = {
+						{
+							["normal"] = {
+								["target"] = "Forsaken Herbalist",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 20,
+								["amount"] = 166,
+							},
+						}, -- [1]
 					},
 					[88161] = {
 						{
@@ -321,21 +353,21 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[78] = {
-						{
+					[18197] = {
+						[2] = {
 							["normal"] = {
-								["target"] = "Forsaken Infantry",
+								["target"] = "Druid of the Fang",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 11,
-								["amount"] = 39,
+								["targetLevel"] = 19,
+								["amount"] = 8,
 							},
 							["crit"] = {
-								["target"] = "Valnov the Mad",
+								["target"] = "Deviate Viper",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 10,
-								["amount"] = 78,
+								["targetLevel"] = 19,
+								["amount"] = 11,
 							},
-						}, -- [1]
+						},
 					},
 				},
 				["heal"] = {

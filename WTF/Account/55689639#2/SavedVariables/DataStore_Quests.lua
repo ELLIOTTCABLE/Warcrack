@@ -2,8 +2,8 @@
 DataStore_QuestsDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
@@ -134,93 +134,114 @@ DataStore_QuestsDB = {
 				},
 			},
 			["Default.Nordrassil.Fraycollie"] = {
+				["History"] = {
+					[864] = 69632,
+					[849] = 32,
+					[865] = 2097152,
+					[850] = 526592,
+					[866] = 67108864,
+					[882] = 256,
+					[867] = 67108864,
+					[884] = 2097152,
+					[900] = 40960,
+					[870] = 3758096384,
+					[873] = 262144,
+					[375] = 16,
+					[844] = 134217728,
+					[860] = 545259521,
+					[861] = 536870912,
+					[893] = 131072,
+					[892] = 2097152,
+					[891] = 4194304,
+					[879] = 66048,
+					[880] = 131200,
+				},
 				["QuestLinks"] = {
 					nil, -- [1]
-					"|cffffff00|Hquest:26766:82|h[Big Game, Big Bait]|h|r", -- [2]
-					"|cffffff00|Hquest:26768:82|h[To Catch a Dragon]|h|r", -- [3]
-					"|cffffff00|Hquest:26484:82|h[To Stonehearth's Aid]|h|r", -- [4]
-					"|cffffff00|Hquest:27040:83|h[Decryption Made Easy]|h|r", -- [5]
-					"|cffffff00|Hquest:27042:83|h[Fight Fire and Water and Air with...]|h|r", -- [6]
-					nil, -- [7]
-					"|cffffff00|Hquest:28558:84|h[Hero's Call: Uldum!]|h|r", -- [8]
-					nil, -- [9]
-					"|cff40c040|Hquest:27724:80|h[Hero's Call: Vashj'ir!]|h|r", -- [10]
-					"|cff40c040|Hquest:28826:80|h[The Eye of the Storm]|h|r", -- [11]
-					"|cffffff00|Hquest:28716:84|h[Hero's Call: Twilight Highlands!]|h|r", -- [12]
+					"|cffffff00|Hquest:27899:83|h[That Gleam in his Eye]|h|r", -- [2]
+					"|cffffff00|Hquest:28499:84|h[Punish the Trespassers]|h|r", -- [3]
+					"|cffffff00|Hquest:28498:84|h[The Secret of Nahom]|h|r", -- [4]
 				},
-				["lastUpdate"] = 1308814633,
+				["lastUpdate"] = 1309891725,
+				["Rewards"] = {
+					[3] = "c|65818|1|1,c|65817|1|1,c|65816|1|1",
+				},
 				["Quests"] = {
-					"0|Deepholm", -- [1]
-					"1||0|82000|0", -- [2]
-					"1||0|62000|0", -- [3]
-					"1||0|0|0", -- [4]
-					"1||0|86000|0", -- [5]
-					"1||0|172000|0", -- [6]
-					"0|Ruins of Uldum", -- [7]
-					"1||0|0|0", -- [8]
-					"0|Stormwind City", -- [9]
-					"1||0|0|0", -- [10]
-					"1||0|0|0", -- [11]
-					"1||0|0|0", -- [12]
+					"0|Uldum", -- [1]
+					"1||0|26200|0", -- [2]
+					"1||0|131550|0", -- [3]
+					"1||0|131550|0", -- [4]
 				},
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["History"] = {
+					[891] = 4194304,
 					[893] = 16384,
+					[895] = 8,
 					[899] = 16777270,
 					[901] = 67158016,
+					[807] = 1048577,
 					[787] = 4096,
 					[789] = 126,
+					[882] = 262976,
 					[793] = 114688,
 					[795] = 2049,
+					[860] = 545259521,
 					[799] = 272632342,
 					[801] = 605552640,
-					[866] = 268959744,
+					[866] = 470286336,
 					[805] = 196640785,
-					[807] = 1048577,
+					[870] = 4026531840,
 					[809] = 939524349,
 					[811] = 2147483654,
 					[813] = 3223322632,
 					[815] = 4325633,
 					[817] = 2952790017,
 					[819] = 131104,
+					[884] = 3145728,
+					[883] = 67108864,
+					[816] = 2222981120,
 					[764] = 65536,
+					[892] = 2097152,
+					[879] = 66048,
+					[880] = 131264,
 					[453] = 262144,
 					[900] = 2048,
+					[875] = 33554432,
+					[810] = 4038591925,
+					[850] = 524544,
+					[861] = 538968064,
+					[863] = 264192,
+					[849] = 32,
 					[788] = 2147483649,
-					[879] = 66048,
+					[865] = 2097152,
 					[792] = 4194304,
 					[794] = 20480,
 					[796] = 2147549188,
 					[798] = 2147483649,
 					[800] = 569344,
 					[802] = 235405376,
-					[867] = 4112,
+					[867] = 67112976,
 					[820] = 2048,
 					[408] = 3244032,
-					[810] = 4038591925,
+					[873] = 786432,
 					[812] = 2181038080,
 					[814] = 46,
 					[412] = 128,
 					[413] = 8,
 					[414] = 1024,
-					[816] = 2222981120,
-					[873] = 786432,
+					[864] = 126976,
+					[858] = 128,
 				},
 				["QuestLinks"] = {
-					[3] = "|cffffff00|Hquest:28141:83|h[Relics of the Sun King]|h|r",
-					[2] = "|cffffff00|Hquest:28134:83|h[Impending Retribution]|h|r",
-					[4] = "|cffffff00|Hquest:28145:83|h[Venomblood Antidote]|h|r",
+					[2] = "|cffffff00|Hquest:27899:83|h[That Gleam in his Eye]|h|r",
+					[3] = "|cffffff00|Hquest:28561:84|h[Nahom Must Hold]|h|r",
 				},
-				["lastUpdate"] = 1308783946,
-				["Rewards"] = {
-					[4] = "c|65801|1|0,c|65800|1|0,c|65802|1|1",
-				},
+				["lastUpdate"] = 1308881584,
 				["Quests"] = {
 					"0|Uldum", -- [1]
-					"1||0|86000|0", -- [2]
-					"1||0|86000|0", -- [3]
-					"1||0|86000|0", -- [4]
+					"1||0|0|0", -- [2]
+					"1||0|90000|0", -- [3]
 				},
 			},
 			["Default.Smolderthorn.Othercollie"] = {
@@ -259,8 +280,49 @@ DataStore_QuestsDB = {
 					"1||0|8500|1", -- [4]
 				},
 			},
-			["Default.Smolderthorn.Warcollie"] = {
-				["lastUpdate"] = 1308197707,
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["History"] = {
+					[440] = 1073741824,
+					[448] = 197121,
+					[772] = 982,
+					[835] = 262144,
+					[441] = 542720,
+					[449] = 3221231617,
+					[902] = 262144,
+					[770] = 1049344,
+					[764] = 4194304,
+					[450] = 4161028099,
+					[869] = 16384,
+					[873] = 8192,
+					[443] = 33792,
+					[451] = 69714,
+					[840] = 54525952,
+					[825] = 131072,
+					[444] = 268435456,
+					[452] = 2147483648,
+					[780] = 4,
+					[765] = 17825792,
+					[445] = 9296,
+					[453] = 6,
+					[779] = 16777664,
+					[891] = 4096,
+					[892] = 32,
+					[423] = 59195392,
+					[766] = 2097160,
+					[769] = 67305476,
+					[447] = 2097408,
+					[424] = 302252032,
+					[817] = 131072,
+					[771] = 65,
+				},
+				["QuestLinks"] = {
+					[2] = "|cffffff00|Hquest:27920:19|h[Armored to the Teeth]|h|r",
+				},
+				["lastUpdate"] = 1308959680,
+				["Quests"] = {
+					"0|Shadowfang Keep", -- [1]
+					"1|Dungeon|0|4000|0", -- [2]
+				},
 			},
 			["Default.Smolderthorn.Melancollie"] = {
 				["History"] = {
@@ -298,11 +360,7 @@ DataStore_QuestsDB = {
 					"|cffff8040|Hquest:26993:33|h[Compendium of the Fallen]|h|r", -- [4]
 					"|cffff8040|Hquest:26973:33|h[The Only True Path]|h|r", -- [5]
 				},
-				["lastUpdate"] = 1308801970,
-				["Rewards"] = {
-					[2] = "c|65963|1|0",
-					[5] = "c|65942|1|0",
-				},
+				["lastUpdate"] = 1308956540,
 				["Quests"] = {
 					"0|Gnomeregan", -- [1]
 					"1|Dungeon|0|10000|1", -- [2]
@@ -311,49 +369,8 @@ DataStore_QuestsDB = {
 					"1|Dungeon|0|13300|1", -- [5]
 				},
 			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["History"] = {
-					[440] = 1073741824,
-					[448] = 197121,
-					[772] = 982,
-					[441] = 542720,
-					[449] = 3221231617,
-					[835] = 262144,
-					[902] = 262144,
-					[770] = 1049344,
-					[450] = 4161028099,
-					[869] = 16384,
-					[764] = 4194304,
-					[443] = 33792,
-					[451] = 69714,
-					[840] = 20971520,
-					[825] = 131072,
-					[444] = 268435456,
-					[452] = 2147483648,
-					[780] = 4,
-					[765] = 17825792,
-					[445] = 9296,
-					[453] = 6,
-					[779] = 16777664,
-					[891] = 4096,
-					[423] = 59195392,
-					[892] = 32,
-					[766] = 2097160,
-					[769] = 67305476,
-					[447] = 2097408,
-					[424] = 302252032,
-					[817] = 131072,
-					[771] = 65,
-				},
-				["QuestLinks"] = {
-					nil, -- [1]
-					"|cff808080|Hquest:26385:10|h[Breaking Waves of Change]|h|r", -- [2]
-				},
-				["lastUpdate"] = 1308813606,
-				["Quests"] = {
-					"0|Darkshore", -- [1]
-					"1||0|85|0", -- [2]
-				},
+			["Default.Smolderthorn.Warcollie"] = {
+				["lastUpdate"] = 1308197707,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["QuestLinks"] = {

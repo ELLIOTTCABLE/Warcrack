@@ -9,6 +9,16 @@ FriendsWithBenefitsDB = {
 			["battlecollie"] = true,
 		},
 	},
+	["Horde - Smolderthorn"] = {
+		["removed"] = {
+		},
+		["notes"] = {
+		},
+		["friends"] = {
+			["fraycollie"] = true,
+			["summoneer"] = true,
+		},
+	},
 	["Alliance - Smolderthorn"] = {
 		["removed"] = {
 			["nocollie"] = true,
@@ -18,11 +28,11 @@ FriendsWithBenefitsDB = {
 		["notes"] = {
 			["aïdenna"] = "Healer",
 			["jondus"] = "Enchanter",
-			["chrissmart"] = "DPS",
+			["llilandra"] = "Alchemist",
 			["bilz"] = "Recruit",
 			["chobit"] = "Engineer",
 			["modduece"] = "Blacksmith",
-			["llilandra"] = "Alchemist",
+			["chrissmart"] = "DPS",
 		},
 		["friends"] = {
 			["aïdenna"] = true,
@@ -53,14 +63,26 @@ FriendsWithBenefitsDB = {
 			["stôrmcrow"] = true,
 		},
 	},
-	["Horde - Smolderthorn"] = {
+	["Horde - Nordrassil"] = {
 		["removed"] = {
+			["catastrophê"] = true,
 		},
 		["notes"] = {
+			["ransyd"] = "Dancing flames",
+			["smavis"] = "lol",
+			["akiza"] = "Jewelcrafter",
+			["beefs"] = "lol",
+			["happyhots"] = "Pretty dress",
+			["kyrriana"] = "Random rez",
 		},
 		["friends"] = {
+			["ransyd"] = true,
 			["fraycollie"] = true,
-			["summoneer"] = true,
+			["smavis"] = true,
+			["akiza"] = true,
+			["beefs"] = true,
+			["happyhots"] = true,
+			["kyrriana"] = true,
 		},
 	},
 	["Alliance - Darkspear"] = {

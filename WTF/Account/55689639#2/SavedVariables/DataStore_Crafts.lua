@@ -2,8 +2,8 @@
 DataStore_CraftsDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
@@ -71,10 +71,209 @@ DataStore_CraftsDB = {
 			["Default.Nordrassil.Fraycollie"] = {
 				["Professions"] = {
 					["Cooking"] = {
+						["FullLink"] = "|cffffd000|Htrade:2550:1:75:680000004B2CECE:HAAAAABAEAAAAAAQAAAAAAAAAAAAAAAAAAAA|h[Cooking]|h|r",
 						["MaxRank"] = 75,
 						["Rank"] = 1,
 					},
 					["Blacksmithing"] = {
+						["FullLink"] = "|cffffd000|Htrade:51300:412:450:680000004B2CECE:2v+2cAjCicMwfH4C+EgMofLD2gAAFAA+AAAAAAA4//PAFgAAAkOAA0DAAAAAAA+///h7+gfAAAwMBguAAAAAAAAAAAAAAAAw/7H|h[Blacksmithing]|h|r",
+						["NumCrafts"] = 177,
+						["Crafts"] = {
+							"Modify", -- [1]
+							222512, -- [2]
+							222564, -- [3]
+							"Item Enhancement", -- [4]
+							39856, -- [5]
+							39756, -- [6]
+							"Other", -- [7]
+							237620, -- [8]
+							118912, -- [9]
+							129136, -- [10]
+							118616, -- [11]
+							138428, -- [12]
+							78676, -- [13]
+							66564, -- [14]
+							66560, -- [15]
+							78672, -- [16]
+							39672, -- [17]
+							39684, -- [18]
+							78668, -- [19]
+							10696, -- [20]
+							12468, -- [21]
+							78664, -- [22]
+							10660, -- [23]
+							12464, -- [24]
+							10640, -- [25]
+							12460, -- [26]
+							"Daggers", -- [27]
+							220726, -- [28]
+							220717, -- [29]
+							118276, -- [30]
+							63888, -- [31]
+							26068, -- [32]
+							13964, -- [33]
+							35520, -- [34]
+							"One-Handed Axes", -- [35]
+							220816, -- [36]
+							118228, -- [37]
+							67876, -- [38]
+							39972, -- [39]
+							10964, -- [40]
+							13176, -- [41]
+							10952, -- [42]
+							"One-Handed Maces", -- [43]
+							225123, -- [44]
+							220731, -- [45]
+							220804, -- [46]
+							118232, -- [47]
+							40004, -- [48]
+							13184, -- [49]
+							10960, -- [50]
+							10948, -- [51]
+							"One-Handed Swords", -- [52]
+							237771, -- [53]
+							220708, -- [54]
+							220800, -- [55]
+							118284, -- [56]
+							13968, -- [57]
+							10968, -- [58]
+							10956, -- [59]
+							"Thrown", -- [60]
+							220827, -- [61]
+							220808, -- [62]
+							139932, -- [63]
+							139928, -- [64]
+							139924, -- [65]
+							139916, -- [66]
+							"Two-Handed Axes", -- [67]
+							220696, -- [68]
+							118272, -- [69]
+							67884, -- [70]
+							39948, -- [71]
+							13172, -- [72]
+							"Two-Handed Maces", -- [73]
+							118264, -- [74]
+							39940, -- [75]
+							29632, -- [76]
+							"Two-Handed Swords", -- [77]
+							220812, -- [78]
+							118260, -- [79]
+							39944, -- [80]
+							13168, -- [81]
+							39932, -- [82]
+							"Mail", -- [83]
+							118224, -- [84]
+							118212, -- [85]
+							118208, -- [86]
+							118204, -- [87]
+							39844, -- [88]
+							39748, -- [89]
+							39724, -- [90]
+							39664, -- [91]
+							28892, -- [92]
+							14032, -- [93]
+							14008, -- [94]
+							14004, -- [95]
+							14024, -- [96]
+							10700, -- [97]
+							13332, -- [98]
+							13324, -- [99]
+							10688, -- [100]
+							10680, -- [101]
+							10672, -- [102]
+							13312, -- [103]
+							31268, -- [104]
+							10664, -- [105]
+							10656, -- [106]
+							13296, -- [107]
+							13292, -- [108]
+							10644, -- [109]
+							13284, -- [110]
+							13276, -- [111]
+							10648, -- [112]
+							10652, -- [113]
+							49040, -- [114]
+							"Plate", -- [115]
+							220071, -- [116]
+							220230, -- [117]
+							237762, -- [118]
+							218222, -- [119]
+							218226, -- [120]
+							237753, -- [121]
+							220225, -- [122]
+							218209, -- [123]
+							218213, -- [124]
+							219797, -- [125]
+							219793, -- [126]
+							237744, -- [127]
+							220220, -- [128]
+							218204, -- [129]
+							218216, -- [130]
+							219784, -- [131]
+							219788, -- [132]
+							219780, -- [133]
+							219776, -- [134]
+							219764, -- [135]
+							219672, -- [136]
+							118484, -- [137]
+							210280, -- [138]
+							223340, -- [139]
+							219668, -- [140]
+							118476, -- [141]
+							210284, -- [142]
+							210268, -- [143]
+							210272, -- [144]
+							210276, -- [145]
+							223336, -- [146]
+							210288, -- [147]
+							118424, -- [148]
+							118412, -- [149]
+							118420, -- [150]
+							118200, -- [151]
+							118192, -- [152]
+							118196, -- [153]
+							66920, -- [154]
+							66652, -- [155]
+							66648, -- [156]
+							118188, -- [157]
+							66628, -- [158]
+							66632, -- [159]
+							118180, -- [160]
+							66608, -- [161]
+							66612, -- [162]
+							66596, -- [163]
+							66588, -- [164]
+							66584, -- [165]
+							66576, -- [166]
+							66568, -- [167]
+							66572, -- [168]
+							39872, -- [169]
+							39836, -- [170]
+							39740, -- [171]
+							39712, -- [172]
+							39704, -- [173]
+							"Shields", -- [174]
+							220059, -- [175]
+							218228, -- [176]
+							220052, -- [177]
+							218200, -- [178]
+							"Enchanting", -- [179]
+							130628, -- [180]
+							130624, -- [181]
+							130620, -- [182]
+							80804, -- [183]
+							57520, -- [184]
+							57516, -- [185]
+							31272, -- [186]
+							"Metal & Stone", -- [187]
+							66556, -- [188]
+							39680, -- [189]
+							13348, -- [190]
+							13304, -- [191]
+							13280, -- [192]
+							"Parts", -- [193]
+							35072, -- [194]
+						},
 						["MaxRank"] = 450,
 						["Rank"] = 412,
 					},
@@ -83,20 +282,80 @@ DataStore_CraftsDB = {
 						["Rank"] = 1,
 					},
 					["Mining"] = {
+						["NumCrafts"] = 27,
+						["Crafts"] = {
+							"Elemental", -- [1]
+							143000, -- [2]
+							143004, -- [3]
+							"Metal & Stone", -- [4]
+							298116, -- [5]
+							298148, -- [6]
+							298120, -- [7]
+							336152, -- [8]
+							220844, -- [9]
+							220832, -- [10]
+							197032, -- [11]
+							197008, -- [12]
+							117444, -- [13]
+							118744, -- [14]
+							117440, -- [15]
+							117436, -- [16]
+							117432, -- [17]
+							117424, -- [18]
+							64612, -- [19]
+							40392, -- [20]
+							282096, -- [21]
+							40388, -- [22]
+							13232, -- [23]
+							14276, -- [24]
+							13228, -- [25]
+							10632, -- [26]
+							10636, -- [27]
+							13216, -- [28]
+							10628, -- [29]
+						},
 						["MaxRank"] = 525,
 						["Rank"] = 525,
 					},
 					["First Aid"] = {
+						["FullLink"] = "|cffffd000|Htrade:3273:1:75:680000004B2CECE:FAAAAAA|h[First Aid]|h|r",
 						["MaxRank"] = 75,
 						["Rank"] = 1,
 					},
 				},
 				["Prof2"] = "Mining",
-				["lastUpdate"] = 1308814633,
+				["lastUpdate"] = 1309891675,
 				["Prof1"] = "Blacksmithing",
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["Professions"] = {
+					["Cooking"] = {
+						["FullLink"] = "|cffffd000|Htrade:2550:53:75:10000000489EEA3:HAAAAABAEAAAAAAQAAAAAAAAAAAAAAAAAAAA|h[Cooking]|h|r",
+						["MaxRank"] = 75,
+						["Rank"] = 53,
+					},
+					["Archaeology"] = {
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
+					["Herbalism"] = {
+						["MaxRank"] = 450,
+						["Rank"] = 450,
+					},
+					["Alchemy"] = {
+						["FullLink"] = "|cffffd000|Htrade:2259:1:75:10000000489EEA3:HAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|h[Alchemy]|h|r",
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
+					["Fishing"] = {
+						["MaxRank"] = 75,
+						["Rank"] = 6,
+					},
+					["First Aid"] = {
+						["FullLink"] = "|cffffd000|Htrade:3273:1:75:10000000489EEA3:FAAAAAA|h[First Aid]|h|r",
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
 					["Tailoring"] = {
 						["FullLink"] = "|cffffd000|Htrade:75156:490:525:10000000489EEA3:4////+677/vv+/v73/P59/rZ3//nNznLDEIAA4HR8vDqAAAAAoAwAACt////T4xa+/j//DGAI9PAAHA18fE|h[Tailoring]|h|r",
 						["NumCrafts"] = 281,
@@ -396,36 +655,9 @@ DataStore_CraftsDB = {
 						},
 						["Rank"] = 490,
 					},
-					["Archaeology"] = {
-						["MaxRank"] = 75,
-						["Rank"] = 1,
-					},
-					["Cooking"] = {
-						["FullLink"] = "|cffffd000|Htrade:2550:53:75:10000000489EEA3:HAAAAABAEAAAAAAQAAAAAAAAAAAAAAAAAAAA|h[Cooking]|h|r",
-						["MaxRank"] = 75,
-						["Rank"] = 53,
-					},
-					["Fishing"] = {
-						["MaxRank"] = 75,
-						["Rank"] = 6,
-					},
-					["Alchemy"] = {
-						["FullLink"] = "|cffffd000|Htrade:2259:1:75:10000000489EEA3:HAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|h[Alchemy]|h|r",
-						["MaxRank"] = 75,
-						["Rank"] = 1,
-					},
-					["First Aid"] = {
-						["FullLink"] = "|cffffd000|Htrade:3273:1:75:10000000489EEA3:FAAAAAA|h[First Aid]|h|r",
-						["MaxRank"] = 75,
-						["Rank"] = 1,
-					},
-					["Herbalism"] = {
-						["MaxRank"] = 450,
-						["Rank"] = 450,
-					},
 				},
 				["Prof2"] = "Tailoring",
-				["lastUpdate"] = 1308783292,
+				["lastUpdate"] = 1308879091,
 				["Prof1"] = "Alchemy",
 			},
 			["Default.Smolderthorn.Othercollie"] = {
@@ -468,20 +700,8 @@ DataStore_CraftsDB = {
 					},
 				},
 			},
-			["Default.Smolderthorn.Warcollie"] = {
-				["lastUpdate"] = 1308197707,
-			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["Professions"] = {
-					["Archaeology"] = {
-						["MaxRank"] = 75,
-						["Rank"] = 1,
-					},
-				},
-				["lastUpdate"] = 1308801970,
-			},
 			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1308813494,
+				["lastUpdate"] = 1308959477,
 				["Professions"] = {
 					["Skinning"] = {
 						["MaxRank"] = 75,
@@ -493,6 +713,18 @@ DataStore_CraftsDB = {
 						["Rank"] = 1,
 					},
 				},
+			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["Professions"] = {
+					["Archaeology"] = {
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
+				},
+				["lastUpdate"] = 1308956540,
+			},
+			["Default.Smolderthorn.Warcollie"] = {
+				["lastUpdate"] = 1308197707,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["Professions"] = {

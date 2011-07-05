@@ -822,6 +822,16 @@ AutoBarDB = {
 			["buttonList"] = {
 			},
 		},
+		["Combatcollie - The Underbog"] = {
+			["buttonDataList"] = {
+				["AutoBarButtonMount"] = {
+				},
+			},
+			["barList"] = {
+			},
+			["buttonList"] = {
+			},
+		},
 		["Fraycollie - The Underbog"] = {
 			["buttonDataList"] = {
 				["AutoBarButtonMount"] = {
@@ -834,20 +844,16 @@ AutoBarDB = {
 			["buttonList"] = {
 			},
 		},
-		["Combatcollie - The Underbog"] = {
-			["buttonDataList"] = {
-				["AutoBarButtonMount"] = {
-				},
-			},
-			["barList"] = {
-			},
-			["buttonList"] = {
-			},
-		},
 		["Fraycollie - Nordrassil"] = {
 			["buttonDataList"] = {
+				["AutoBarButtonCrafting"] = {
+					["arrangeOnUse"] = "Basic Campfire",
+				},
 				["AutoBarButtonMount"] = {
+					["arrangeOnUse"] = "X-53 Touring Rocket",
+					["flyingMount"] = "X-53 Touring Rocket",
 					["SetBest"] = nil --[[ skipped inline function ]],
+					["groundMount"] = "X-53 Touring Rocket",
 				},
 			},
 			["barList"] = {
@@ -926,9 +932,9 @@ AutoBarDB = {
 		["Hoarcollie - Smolderthorn"] = {
 			["buttonDataList"] = {
 				["AutoBarButtonPets"] = {
-					["arrangeOnUse"] = "Cenarion Hatchling",
 				},
 				["AutoBarButtonMount"] = {
+					["arrangeOnUse"] = "Running Wild",
 				},
 			},
 			["barList"] = {

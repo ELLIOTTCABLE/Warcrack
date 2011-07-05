@@ -138,10 +138,20 @@ Broker_RaidSaveConfig = {
 		["Nordrassil"] = {
 			["char"] = {
 				["Fraycollie"] = {
-					["numsaved"] = 0,
+					["numsaved"] = 1,
 					["name"] = "Fraycollie",
 					["numactive"] = 0,
 					["instance"] = {
+						{
+							["expires"] = 0,
+							["israid"] = false,
+							["name"] = "Blackrock Caverns",
+							["extended"] = false,
+							["id"] = 73811781,
+							["idMostSig"] = 524681216,
+							["locked"] = false,
+							["difficulty"] = 2,
+						}, -- [1]
 					},
 					["class"] = "WARRIOR",
 					["numgroup"] = 0,

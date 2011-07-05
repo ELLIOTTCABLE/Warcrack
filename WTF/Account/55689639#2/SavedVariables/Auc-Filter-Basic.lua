@@ -1,6 +1,8 @@
 
 AucAdvancedFilterBasic_IgnoreList = {
 	["Nordrassil"] = {
+		["Horde"] = {
+		},
 		["Alliance"] = {
 		},
 	},

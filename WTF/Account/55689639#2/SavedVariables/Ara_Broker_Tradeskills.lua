@@ -189,16 +189,32 @@ AraTradeskillsDB = {
 	["Nordrassil"] = {
 		["Fraycollie"] = {
 			["show"] = {
+				["Cooking"] = true,
+				["Blacksmithing"] = true,
+				["Fishing"] = false,
+				["First Aid"] = true,
+				["Smelting"] = true,
 			},
 			["trackedSkill"] = "AUTO",
-			["track"] = false,
+			["links"] = {
+				["Blacksmithing"] = "|cffffd000|Htrade:51300:412:450:680000004B2CECE:2v+2cAjCicMwfH4C+EgMofLD2gAAFAA+AAAAAAA4//PAFgAAAkOAA0DAAAAAAA+///h7+gfAAAwMBguAAAAAAAAAAAAAAAAw/7H|h[Blacksmithing]|h|r",
+			},
 			["shortcuts"] = {
 			},
-			["links"] = {
-			},
+			["track"] = false,
 			["curSkills"] = {
+				["Cooking"] = 1,
+				["Blacksmithing"] = 412,
+				["Fishing"] = 1,
+				["First Aid"] = 1,
+				["Smelting"] = 525,
 			},
 			["maxSkills"] = {
+				["Cooking"] = 75,
+				["Blacksmithing"] = 450,
+				["Fishing"] = 75,
+				["First Aid"] = 75,
+				["Smelting"] = 525,
 			},
 		},
 	},

@@ -26,9 +26,9 @@ ThreatPlatesDB = {
 		["Fraycollie - Nordrassil"] = {
 			["specInfo"] = {
 				{
-					5, -- [1]
+					4, -- [1]
 					3, -- [2]
-					31, -- [3]
+					34, -- [3]
 				}, -- [1]
 				{
 					nil, -- [1]
@@ -54,10 +54,10 @@ ThreatPlatesDB = {
 			},
 		},
 		["Battlecollie - Smolderthorn"] = {
-			["welcome"] = true,
 			["spec"] = {
 				["primary"] = false,
 			},
+			["welcome"] = true,
 			["specInfo"] = {
 				{
 					8, -- [1]
@@ -135,10 +135,10 @@ ThreatPlatesDB = {
 			},
 		},
 		["Melancollie - Smolderthorn"] = {
-			["welcome"] = true,
 			["spec"] = {
 				["primary"] = false,
 			},
+			["welcome"] = true,
 			["specInfo"] = {
 				{
 					nil, -- [1]
@@ -152,13 +152,13 @@ ThreatPlatesDB = {
 			},
 		},
 		["Hoarcollie - Smolderthorn"] = {
-			["welcome"] = true,
 			["spec"] = {
 				["primary"] = false,
 			},
+			["welcome"] = true,
 			["specInfo"] = {
 				{
-					[3] = 5,
+					[3] = 6,
 				}, -- [1]
 			},
 			["specName"] = {
@@ -222,8 +222,8 @@ ThreatPlatesDB = {
 	},
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
 		["Fraycollie - Nordrassil"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
 		["Othercollie - Smolderthorn"] = "Default",

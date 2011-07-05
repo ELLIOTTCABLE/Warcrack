@@ -2,8 +2,8 @@
 DataStore_MailsDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
@@ -186,6 +186,20 @@ DataStore_MailsDB = {
 				["lastUpdate"] = 1308332223,
 				["lastVisitDate"] = "2011/06/17 13:37",
 			},
+			["Default.Nordrassil.Fraycollie"] = {
+				["lastUpdate"] = 1309064820,
+				["lastVisitDate"] = "2011/06/26 01:07",
+				["MailCache"] = {
+					{
+						["sender"] = "Nekula",
+						["count"] = 1,
+						["link"] = "|cffa335ee|Hitem:58197:0:0:0:0:0:0:0:85:0|h[Rock Furrow Boots]|h|r",
+						["icon"] = "Interface\\Icons\\inv_boots_plate_raiddeathknight_i_01",
+						["lastCheck"] = 1309062621,
+						["daysLeft"] = 30,
+					}, -- [1]
+				},
+			},
 			["Default.Smolderthorn.Github"] = {
 				["lastUpdate"] = 1308697956,
 				["Mails"] = {
@@ -363,19 +377,20 @@ DataStore_MailsDB = {
 				["lastVisitDate"] = "2011/06/21 19:12",
 			},
 			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1308802130,
-				["Mails"] = {
-					{
-						["sender"] = "Fraycollie",
-						["subject"] = "Extra",
-						["icon"] = "Interface\\Icons\\INV_Misc_Coin_01",
-						["money"] = 45067649,
-						["text"] = "",
-						["lastCheck"] = 1308802130,
-						["daysLeft"] = 30,
-					}, -- [1]
-				},
-				["lastVisitDate"] = "2011/06/23 00:07",
+				["lastUpdate"] = 1308956563,
+				["lastVisitDate"] = "2011/06/24 19:02",
+			},
+			["Default.The Underbog.Fraycollie"] = {
+				["lastUpdate"] = 1307756269,
+				["lastVisitDate"] = "2011/06/10 21:37",
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1308957774,
+				["lastVisitDate"] = "2011/06/24 19:22",
+			},
+			["Default.Ysondre.Battlecollie"] = {
+				["lastUpdate"] = 1307762110,
+				["lastVisitDate"] = "2011/06/10 23:15",
 			},
 			["Default.The Underbog.Combatcollie"] = {
 				["lastUpdate"] = 1307756140,
@@ -450,18 +465,6 @@ DataStore_MailsDB = {
 					}, -- [8]
 				},
 				["lastVisitDate"] = "2011/06/10 21:35",
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1308799115,
-				["lastVisitDate"] = "2011/06/22 23:18",
-			},
-			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307762110,
-				["lastVisitDate"] = "2011/06/10 23:15",
-			},
-			["Default.The Underbog.Fraycollie"] = {
-				["lastUpdate"] = 1307756269,
-				["lastVisitDate"] = "2011/06/10 21:37",
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["lastUpdate"] = 1307914126,

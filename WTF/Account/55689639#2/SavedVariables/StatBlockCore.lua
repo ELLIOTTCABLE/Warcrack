@@ -2,8 +2,8 @@
 StatBlockCoreDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
 		["Github - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
 		["Fraycollie - Nordrassil"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
 		["Othercollie - Smolderthorn"] = "Default",
@@ -93,7 +93,7 @@ StatBlockCoreDB = {
 					["scale"] = 0.7,
 				},
 				["Arcana_ExperienceBroker"] = {
-					["posx"] = 694.809593844795,
+					["posx"] = 694.1695157341019,
 					["width"] = 174.9963226318359,
 					["posy"] = 753.633108154987,
 				},
@@ -135,7 +135,7 @@ StatBlockCoreDB = {
 					["lock"] = false,
 				},
 				["TomTomPing"] = {
-					["posx"] = 468.0921770373243,
+					["posx"] = 468.0922160998234,
 					["posy"] = 754.1848268926551,
 				},
 				["Gatherer"] = {

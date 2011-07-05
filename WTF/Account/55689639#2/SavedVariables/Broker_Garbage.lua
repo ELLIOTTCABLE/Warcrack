@@ -1,6 +1,6 @@
 
 BG_GlobalDB = {
-	["itemsSold"] = 623,
+	["itemsSold"] = 646,
 	["showClams"] = true,
 	["showSource"] = true,
 	["neverRepairGuildBank"] = false,
@@ -11,12 +11,12 @@ BG_GlobalDB = {
 		["Consumable.Water.Basic"] = true,
 	},
 	["sellNotWearable"] = true,
-	["moneyEarned"] = 4534613,
+	["moneyEarned"] = 4569077,
 	["showContainers"] = true,
 	["useRealValues"] = false,
 	["LDBNoJunk"] = "Junk, be gone!",
 	["showLost"] = true,
-	["moneyLostByDeleting"] = 2648,
+	["moneyLostByDeleting"] = 2686,
 	["showIcon"] = true,
 	["reportNothingToSell"] = false,
 	["tooltipMaxHeight"] = 220,
@@ -28,7 +28,7 @@ BG_GlobalDB = {
 	["autoSellList"] = {
 	},
 	["sellOldGear"] = false,
-	["itemsDropped"] = 34,
+	["itemsDropped"] = 48,
 	["showSellLog"] = false,
 	["autoRepairAtVendor"] = true,
 	["autoSellToVendor"] = true,

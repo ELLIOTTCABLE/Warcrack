@@ -1,0 +1,21 @@
+------------------------------------------------------------------------
+r13 | darkstarx | 2011-07-04 12:06:02 +0000 (Mon, 04 Jul 2011) | 1 line
+Changed paths:
+   A /tags/v1.35 (from /trunk:12)
+
+-fixed a but that the addon didnt work on a fresh install, due 4.2 changed a id for one exploration and another were removed
+------------------------------------------------------------------------
+r12 | darkstarx | 2011-07-04 12:05:38 +0000 (Mon, 04 Jul 2011) | 1 line
+Changed paths:
+   M /trunk/ExplorerCoords.lua
+   M /trunk/ExplorerCoords.toc
+   M /trunk/explorer_data.lua
+
+-fixed a but that the addon didnt work on a fresh install, due 4.2 changed a id for one exploration and another were removed
+------------------------------------------------------------------------
+r10 | darkstarx | 2011-06-29 13:51:54 +0000 (Wed, 29 Jun 2011) | 1 line
+Changed paths:
+   M /trunk/ExplorerCoords.toc
+
+-changed toc to 4.2
+------------------------------------------------------------------------

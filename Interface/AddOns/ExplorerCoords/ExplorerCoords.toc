@@ -1,0 +1,15 @@
+## Interface: 40200
+## Title: ExplorerCoords
+## Author: Dôrwîdo
+## Version: 1.35
+## Notes: Shows all coords left to explore for the achievement
+## SavedVariables: ExplorerCoords_Config, ExplorerCoord
+## X-Curse-Packaged-Version: v1.35
+## X-Curse-Project-Name: Explorer Coords
+## X-Curse-Project-ID: explorercoords
+## X-Curse-Repository-ID: wow/explorercoords/mainline
+Astrolabe\Load.xml
+ExplorerCoords.xml
+ExplorerCoords_lang.lua
+explorer_data.lua
+ExplorerCoordsConfig.lua

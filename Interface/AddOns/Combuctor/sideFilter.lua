@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 	Side Filters
 		Used for setting what types of items to show
 --]]
@@ -87,9 +87,9 @@ function SideFilter:New(parent, reversed)
 			b:SetPoint('TOPLEFT', t[k-1], 'BOTTOMLEFT', 0, -17)
 		else
 			if f:Reversed() then
-				b:SetPoint('TOPRIGHT', parent, 'TOPLEFT', 10, -80)
+				b:SetPoint('TOPRIGHT', parent, 'TOPLEFT', 0, -80)
 			else
-				b:SetPoint('TOPLEFT', parent, 'TOPRIGHT', -32, -65)
+				b:SetPoint('TOPLEFT', parent, 'TOPRIGHT', 0, -40)
 			end
 		end
 

@@ -406,6 +406,52 @@ PanelHelpers.EnableFreePositioning = EnableFreePositioning
 
 
 
+
+
+
+
+
+----------------------
+-- Call In() - Registers a callback, which hides the specified frame in X seconds
+----------------------
+do
+	local CallList = {}			-- Key = Frame, Value = Expiration Time
+	local Watcherframe = CreateFrame("Frame")
+	local WatcherframeActive = false
+	local select = select
+	local timeToUpdate = 0
+
+	local function CheckWatchList(self)
+		local curTime = GetTime()
+		if curTime < timeToUpdate then return end
+		local count = 0
+		timeToUpdate = curTime + 1
+		-- Cycle through the watchlist
+		for func, expiration in pairs(CallList) do
+			if expiration < curTime then 
+				CallList[func] = nil
+				func()
+			else count = count + 1 end
+		end
+		-- If no more frames to watch, unregister the OnUpdate script
+		if count == 0 then Watcherframe:SetScript("OnUpdate", nil) end
+	end
+
+	local function CallIn(func, expiration)
+		-- Register Frame
+		CallList[ func] = expiration + GetTime()
+		-- Init Watchframe
+		if not WatcherframeActive then 
+			Watcherframe:SetScript("OnUpdate", CheckWatchList)
+			WatcherframeActive = true
+		end
+	end
+	
+	TidyPlatesUtility.CallIn = CallIn
+	
+end
+
+
 --[[
 
 	PanelHelpers.CreateItemList

@@ -5,19 +5,20 @@
 #	Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #	To read this license, please see http://creativecommons.org/licenses/by-nc-sa/3.0/ .
 
-## Interface: 40000
+## Interface: 40200
 ## Title: Consolid8
 ## Notes: Gets rid of reputation change and money loot messages, and counts them up to make them meaningful. Slash command: /consolid8
 ## SavedVariables: Consolid8_Settings
 # Settings table members:
-#	version	: the version that is currently being used. Used to detect when upgrades occur.
-#	auto	: true if autoreporting is enabled; else false.
-#	loot	: true if loot consolidation is enabled; else false.
-#	skill	: true if tradeskill consolidation is enabled; else false.
-#	scale	: Stores the scale of the button.
-#	visible	: true if the button should be visible; else false.
+#	version		: the version that is currently being used. Used to detect when upgrades occur.
+#	auto		: true if autoreporting is enabled; else false.
+#	loot		: true if loot consolidation is enabled; else false.
+#	skill		: true if tradeskill consolidation is enabled; else false.
+#	scale		: Stores the scale of the button.
+#	visible		: true if the button should be visible; else false.
+#	countItems	: Table listing the items to be counted.
 
-## Version: 1.6
+## Version: 2.0a
 ## X-Category: Chat/Communication
 # Libraries
 LibStub.lua
@@ -26,5 +27,6 @@ LibDataBroker-1.1.lua
 
 # My Code
 locale.lua
+settingsPanel.lua
 Consolid8.lua
 Consolid8.xml

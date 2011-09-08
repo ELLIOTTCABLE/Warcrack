@@ -1,7 +1,4 @@
--- LibBars-1.0 by Antiarc, all glory to him.
--- Specialized ( = uglified) for Skada
--- Note to self: don't forget to notify original author of changes
--- in the unlikely event they end up being usable outside of Skada.
+-- LibBars-1.0 by Antiarc, all glory to him, ripped into pieces for Skada.
 local MAJOR = "SpecializedLibBars-1.0"
 local MINOR = 90000 + tonumber(("$Revision: 1 $"):match("%d+"))
 
@@ -305,6 +302,72 @@ function lib:ReleaseBar(name)
 end
 
 ---[[ Bar Groups ]]---
+function barListPrototype:AddButton(title, normaltex, highlighttex, clickfunc)
+	-- Create button frame.
+	local btn = CreateFrame("Button", nil, self.button)
+	btn.title = title
+	btn:SetFrameLevel(5)
+	btn:ClearAllPoints()
+	btn:SetHeight(12)
+	btn:SetWidth(12)
+	btn:SetNormalTexture(normaltex)
+	btn:SetHighlightTexture(highlighttex, 1.0)
+	btn:SetAlpha(0.5)
+	btn:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+	btn:SetScript("OnClick", clickfunc)
+	btn:SetScript("OnEnter", 
+		function(this) 
+			GameTooltip_SetDefaultAnchor(GameTooltip, this)
+			GameTooltip:SetText(title)
+			GameTooltip:Show()
+		end)
+	btn:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	btn:Show()
+	
+	-- Add to our list of buttons.
+	table.insert(self.buttons, btn)
+	
+	self:AdjustButtons()
+end
+
+function barListPrototype:AdjustButtons()
+	local nr = 0
+	local lastbtn = nil
+	for i, btn in ipairs(self.buttons) do
+		btn:ClearAllPoints()
+		
+		if btn:IsShown() then
+			if nr == 0 then
+				btn:SetPoint("TOPRIGHT", self.button, "TOPRIGHT", -5, 0 - (math.max(self.button:GetHeight() - btn:GetHeight(), 0) / 2))
+			else
+				btn:SetPoint("TOPRIGHT", lastbtn, "TOPLEFT", 0, 0)
+			end
+			lastbtn = btn
+			nr = nr + 1
+		end
+	end
+end
+
+function barListPrototype:SetBarBackgroundColor(r, g, b, a)
+	self.barbackgroundcolor = {r,g,b,a}
+	for i, bar in pairs(self:GetBars()) do
+		bar.bgtexture:SetVertexColor(unpack(self.barbackgroundcolor))
+	end
+end
+
+function barListPrototype:ShowButton(title, visible)
+	for i, b in ipairs(self.buttons) do
+		if b.title == title then
+			if visible then 
+				b:Show() 
+			else 
+				b:Hide() 
+			end
+		end
+	end
+	self:AdjustButtons()
+end
+
 do
 	local function move(self)
 		if not self:GetParent().locked then
@@ -323,15 +386,9 @@ do
 			end
 		end
 	end
-	local function buttonClick(self, button)
-		self:GetParent().callbacks:Fire("AnchorClicked", self:GetParent(), button)
-	end
-	local function configClick(self, button)
-		self:GetParent().callbacks:Fire("ConfigClicked", self:GetParent(), button)
-	end
 	
 	local DEFAULT_TEXTURE = [[Interface\TARGETINGFRAME\UI-StatusBar]]
-	function lib:NewBarGroup(name, orientation, length, thickness, frameName)
+	function lib:NewBarGroup(name, orientation, height, length, thickness, frameName)
 		if self == lib then
 			error("You may only call :NewBarGroup as an embedded function")
 		end
@@ -348,6 +405,7 @@ do
 		local list = setmetatable(CreateFrame("Frame", frameName, UIParent), barListPrototype_mt)
 		list:SetMovable(true)
 		list:SetClampedToScreen(true)
+		list.enablemouse = true
 
 		list.callbacks = list.callbacks or CallbackHandler:New(list)
 		barLists[self][name] = list
@@ -367,6 +425,7 @@ do
 		myfont:CopyFontObject(ChatFontSmall)
 
 		list.button = CreateFrame("Button", nil, list)
+		list.button:SetText(name)
 		list.button:SetBackdrop(frame_defaults)
 		list.button:SetNormalFontObject(myfont)
 
@@ -380,25 +439,17 @@ do
 		list.button:SetScript("OnMouseUp", stopMove)
 		list.button:SetBackdropColor(0,0,0,1)
 		list.button:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp", "Button4Up", "Button5Up")
-		list.button:SetScript("OnClick", buttonClick)
 		
-		-- MODIFIED
-		-- TODO: refactor into a generic function for adding buttons.
-		list.optbutton = CreateFrame("Button", nil, list)
-		list.optbutton:SetFrameLevel(10)
-		list.optbutton:ClearAllPoints()
-		list.optbutton:SetHeight(16)
-		list.optbutton:SetWidth(16)
-		list.optbutton:SetNormalTexture("Interface\\Addons\\Skada\\icon-config")
-		list.optbutton:SetHighlightTexture("Interface\\Addons\\Skada\\icon-config", 0.5)
-		list.optbutton:SetAlpha(0.3)
-		list.optbutton:SetPoint("TOPRIGHT", list.button, "TOPRIGHT", -5, 0 - (math.max(list.button:GetHeight() - list.optbutton:GetHeight(), 2) / 2))
-		list.optbutton:Show()
-		list.optbutton:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-		list.optbutton:SetScript("OnClick", configClick)
+		list.buttons = {}
 
-		list:SetPoint("TOPLEFT", UIParent, "CENTER")
-		list:ReverseGrowth(false)
+		list.barbackgroundcolor = {0.3, 0.3, 0.3, 0.6},
+
+		list:SetPoint("TOPLEFT", UIParent, "CENTER", 0, 0)
+		list:SetHeight(height)
+		list:SetWidth(length)
+		list:SetResizable(true)
+		list:SetMinResize(60,40)
+		list:SetMaxResize(800,800)
 
 		list.showIcon = true
 		list.showLabel = true
@@ -410,8 +461,48 @@ do
 		list.texture = DEFAULT_TEXTURE
 		list.spacing = 0
 		
-		-- MODIFIED
 		list.offset = 0
+
+		list.resizebutton = CreateFrame("Button", "BarGroupResizeButton", list)
+		list.resizebutton:Show()
+		list.resizebutton:SetFrameLevel(11)
+		list.resizebutton:SetWidth(16)
+		list.resizebutton:SetHeight(16)
+		list.resizebutton:EnableMouse(true)
+		list.resizebutton:SetScript("OnMouseDown", 
+			function(self,button) 
+				local p = self:GetParent()
+				if(button == "LeftButton") then 
+					p.isResizing = true
+					if p.growup then 
+						p:StartSizing("TOPRIGHT")
+					else 
+						p:StartSizing("BOTTOMRIGHT")
+					end
+					
+					p:SetScript("OnUpdate", function()
+								if p.isResizing then
+									-- Adjust bar sizes.
+									p:SetLength(p:GetWidth())
+								else
+									p:SetScript("OnUpdate", nil)
+								end
+							end)
+				end 
+			end)
+		list.resizebutton:SetScript("OnMouseUp", 
+			function(self,button)
+				local p = self:GetParent()
+				local top, left = p:GetTop(), p:GetLeft()
+				if p.isResizing == true then
+					p:StopMovingOrSizing()
+					p.callbacks:Fire("WindowResized", self:GetParent())
+					p.isResizing = false
+					p:SortBars()
+				end
+			end)
+			
+		list:ReverseGrowth(false)
 
 		return list
 	end
@@ -441,27 +532,34 @@ function barListPrototype:NewBarFromPrototype(prototype, ...)
 	bar.RegisterCallback(self, "FadeFinished")
 	bar.RegisterCallback(self, "TimerFinished")
 	bar:SetParent(self)
+	
+	bar:EnableMouse(self.enablemouse)
 	return bar, isNew
 end
 
-function barListPrototype:SetWidth(width)
-	if self:IsVertical() then
-		self:SetThickness(width)
-	else
-		self:SetLength(width)
+function barListPrototype:SetEnableMouse(enablemouse)
+	self.enablemouse = enablemouse
+	self:EnableMouse(enablemouse)
+	for i, bar in pairs(self:GetBars()) do
+		bar:EnableMouse(enablemouse)
 	end
 end
 
-function barListPrototype:SetHeight(height)
-	if self:IsVertical() then
-		self:SetLength(height)
-	else
-		self:SetThickness(height)
-	end
+function barListPrototype:SetBarWidth(width)
+	self:SetLength(width)
+end
+
+function barListPrototype:SetBarHeight(height)
+	self:SetThickness(height)
 end
 
 function barListPrototype:NewCounterBar(name, text, value, maxVal, icon, isTimer)
-	return self:NewBarFromPrototype(barPrototype, name, text, value, maxVal, icon, self.orientation, self.length, self.thickness, isTimer)
+	local bar = self:NewBarFromPrototype(barPrototype, name, text, value, maxVal, icon, self.orientation, self.length, self.thickness, isTimer)
+	
+	-- Apply barlist settings.
+	bar.bgtexture:SetVertexColor(unpack(self.barbackgroundcolor))
+	
+	return bar
 end
 
 local function startFlashing(bar, time)
@@ -477,10 +575,16 @@ function barListPrototype:NewTimerBar(name, text, time, maxTime, icon, flashTrig
 end
 
 function barListPrototype:Lock()
+	-- Hide resize button.
+	self.resizebutton:Hide()
+	
 	self.locked = true
 end
 
 function barListPrototype:Unlock()
+	-- Show resize button.
+	self.resizebutton:Show()
+
 	self.locked = false
 end
 
@@ -606,29 +710,6 @@ barListPrototype.GetBars = lib.GetBars
 barListPrototype.HasAnyBar = lib.HasAnyBar
 barListPrototype.IterateBars = lib.IterateBars
 
-function barListPrototype:MoveBarToGroup(bar, group)
-	if type(bar) ~= "table" then
-		bar = bars[self][bar]
-	end
-	if not bar then
-		error("Cannot find bar passed to MoveBarToGroup")
-	end
-	bars[group] = bars[group] or {}
-	if bars[group][bar.name] then
-		error("Cannot move " .. bar.name .. " to this group; a bar with that name already exists.")
-	end
-	for k, v in pairs(bars[self]) do
-		if v == bar then
-			bars[self][k] = nil
-			bar = v
-			break
-		end
-	end
-	bar:SetParent(group)
-	bar.ownerGroup = group
-	bars[group][bar.name] = bar
-end
-
 function barListPrototype:RemoveBar(bar)
 	lib.ReleaseBar(self, bar)
 end
@@ -717,42 +798,43 @@ function barListPrototype:ToggleAnchor()
 end
 
 function barListPrototype:GetBarAttachPoint()
-	local vertical, growup, lastBar = (self.orientation % 2 == 0), self.growup, self.lastBar
-	if vertical then
-		if growup then
-			return lastBar:GetLeft() - lastBar:GetWidth(), lastBar:GetTop()
-		else
-			return lastBar:GetRight() + lastBar:GetWidth(), lastBar:GetTop()
-		end
+	local growup, lastBar = self.growup, self.lastBar
+	if growup then
+		return lastBar:GetLeft(), lastBar:GetTop() + lastBar:GetHeight()
 	else
-		if growup then
-			return lastBar:GetLeft(), lastBar:GetTop() + lastBar:GetHeight()
-		else
-			return lastBar:GetLeft(), lastBar:GetBottom() - lastBar:GetHeight()
-		end
+		return lastBar:GetLeft(), lastBar:GetBottom() - lastBar:GetHeight()
 	end
 end
 
 function barListPrototype:ReverseGrowth(reverse)
 	self.growup = reverse
 	self.button:ClearAllPoints()
-	if self.orientation % 2 == 0 then
-		if reverse then
-			self.button:SetPoint("TOPRIGHT", self, "TOPRIGHT")
-			self.button:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT")
-		else
-			self.button:SetPoint("TOPLEFT", self, "TOPLEFT")
-			self.button:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT")
-		end
+
+	if reverse then
+		self.button:SetPoint("TOPLEFT", self, "BOTTOMLEFT")
+		self.button:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT")
 	else
+		self.button:SetPoint("BOTTOMLEFT", self, "TOPLEFT")
+		self.button:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT")
+	end
+	
+	if self.resizebutton then
 		if reverse then
-			self.button:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT")
-			self.button:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT")
+			self.resizebutton:SetNormalTexture("Interface\\AddOns\\Skada\\images\\ResizeGripRightTop")
+			self.resizebutton:SetHighlightTexture("Interface\\AddOns\\Skada\\images\\ResizeGripRightTop")
 		else
-			self.button:SetPoint("TOPLEFT", self, "TOPLEFT")
-			self.button:SetPoint("TOPRIGHT", self, "TOPRIGHT")
+			self.resizebutton:SetNormalTexture("Interface\\AddOns\\Skada\\images\\ResizeGripRight")
+			self.resizebutton:SetHighlightTexture("Interface\\AddOns\\Skada\\images\\ResizeGripRight")
+		end
+		
+		self.resizebutton:ClearAllPoints()
+		if reverse then
+			self.resizebutton:SetPoint("TOPRIGHT", self, "TOPRIGHT", 0, 0)
+		else
+			self.resizebutton:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, 0)
 		end
 	end
+	
 	self:SortBars()
 end
 
@@ -761,20 +843,13 @@ function barListPrototype:HasReverseGrowth()
 end
 
 function barListPrototype:UpdateOrientationLayout()
-	local vertical, length, thickness = (self.orientation % 2 == 0), self.length, self.thickness
-	if vertical then
-		barListPrototype.super.SetWidth(self, thickness)
-		barListPrototype.super.SetHeight(self, length)
-		self.button:SetWidth(thickness)
-		self.button:SetHeight(length)
-	else
-		barListPrototype.super.SetWidth(self, length)
-		barListPrototype.super.SetHeight(self, thickness)
-		self.button:SetWidth(length)
-		self.button:SetHeight(thickness)
-	end
+	local length, thickness = self.length, self.thickness
+	barListPrototype.super.SetWidth(self, length)
+--		barListPrototype.super.SetHeight(self, thickness)
+	self.button:SetWidth(length)
+	self.button:SetHeight(thickness)
 	
-	self.button:SetText(vertical and "" or self.name)
+--	self.button:SetText(self.name)
 	self:ReverseGrowth(self.growup)
 	-- self.button:SetWidth(vertical and 15 or length)
 	-- self.button:SetHeight(vertical and length or 15)
@@ -823,10 +898,6 @@ function barListPrototype:GetOrientation()
 	return self.orientation
 end
 
-function barListPrototype:IsVertical()
-	return self.orientation % 2 == 0
-end
-
 -- MODIFIED
 -- Allows nil sort function.
 function barListPrototype:SetSortFunction(func)
@@ -851,39 +922,12 @@ function barListPrototype:GetBarOffset()
 	return self.offset
 end
 
--- MODIFIED
-function barListPrototype:SetUseSpark(use)
-	self.usespark = use
-	if bars[self] then
-		for k, v in pairs(bars[self]) do
-			v:SetUseSpark(use)
-		end
-	end
-end
-
 -- group:SetSortFunction(group.NOOP) to disable sorting
 function barListPrototype.NOOP() end
 
 do
 	local values = {}
 
-	-- MODIFIED (for reverse growth)
-	local function sortFuncReverse(a, b)
-		if a.isTimer ~= b.isTimer then
-			return a.isTimer
-		end
-
-		local apct, bpct = a.value / a.maxValue, b.value / b.maxValue
-		if apct == bpct then
-			if a.maxValue == b.maxValue then
-				return a.name < b.name
-			else
-				return a.maxValue < b.maxValue
-			end
-		else
-			return apct < bpct
-		end
-	end
 	local function sortFunc(a, b)
 		if a.isTimer ~= b.isTimer then
 			return a.isTimer
@@ -899,114 +943,84 @@ do
 		else
 			return apct > bpct
 		end
-	end	function barListPrototype:SortBars()
-		local lastBar = self.button:IsVisible() and self.button or self
+	end	
+	
+	function barListPrototype:SortBars()
+		local lastBar = self
 		local ct = 0
 		if not bars[self] then return end
 		for k, v in pairs(bars[self]) do
-			if not v.isAnimating then
-				ct = ct + 1
-				values[ct] = v
-			end
+			ct = ct + 1
+			values[ct] = v
+			v:Hide()
 		end
 		for i = ct + 1, #values do
 			values[i] = nil
 		end
+		if #values == 0 then return end
 		
-		-- MODIFIED (for reverse growth)
-		if self.growup then
-			table_sort(values, self.sortFunc or sortFuncReverse)
-		else
-			table_sort(values, self.sortFunc or sortFunc)
-		end
+		table_sort(values, self.sortFunc or sortFunc)
 		
 		local orientation = self.orientation
-		local vertical = orientation % 2 == 0
 		local growup = self.growup
 		local spacing = self.spacing
 
 		local from, to
 		local thickness, showIcon = self.thickness, self.showIcon
+		local offset = self.offset
 		local x1, y1, x2, y2 = 0, 0, 0, 0
-		if vertical then
-			if growup then
-				from = "RIGHT"
-				to = "LEFT"
-				x1, x2 = -spacing, -spacing
-			else
-				from = "LEFT"
-				to = "RIGHT"
-				x1, x2 = spacing, spacing
-			end
+		local maxbars = math.min(#values, math.floor(self:GetHeight() / (thickness + spacing)))
+
+		local start, stop, step
+		if growup then
+			from = "BOTTOM"
+			to = "TOP"
+			start = math.min(#values, maxbars + offset)
+			stop = math.min(#values, 1 + offset)
+			step = -1
 		else
-			if growup then
-				from = "BOTTOM"
-				to = "TOP"
-				y1, y2 = spacing, spacing
-			else
-				from = "TOP"
-				to = "BOTTOM"
-				y1, y2 = -spacing, -spacing
-			end
+			from = "TOP"
+			to = "BOTTOM"
+			start = math.min(1 + offset, #values)
+			stop = math.min(maxbars + offset, #values)
+			step = 1
 		end
-		local totalHeight = 0
-		-- MODIFIED
+		
 		local shown = 0
-		for i = 1, #values do
+		for i = start, stop, step do
 			local origTo = to
 			local v = values[i]
-			if lastBar == self or lastBar == self.button then
-				if lastBar == self then
-					to = from
-				end
-				if vertical then
-					if orientation == 2 then
-						y1, y2 = 0, (v.showIcon and thickness or 0)
-					else
-						y1, y2 = (v.showIcon and -thickness or 0), 0
-					end
+			if lastBar == self then
+				to = from
+				if orientation == 1 then
+					x1, x2 = (v.showIcon and thickness or 0), 0
 				else
-					if orientation == 1 then
-						x1, x2 = (v.showIcon and thickness or 0), 0
-					else
-						x1, x2 = 0, (v.showIcon and -thickness or 0)
-					end
+					x1, x2 = 0, (v.showIcon and -thickness or 0)
 				end
+				y1, y2 = 0, 0
 			else
-				if vertical then
-					y1, y2 = 0, 0
+				x1, x2 = 0, 0
+				if growup then
+					y1, y2 = spacing, spacing
 				else
-					x1, x2 = 0, 0
+					y1, y2 = -spacing, -spacing
 				end
 			end
 			
-			v:ClearAllPoints()
-			-- MODIFIED
-			if (self.maxBars and shown >= self.maxBars) or (i < self:GetBarOffset() + 1) then
-				v:Hide()
-			else
+			if shown <= maxbars then
+				v:ClearAllPoints()
+				v:SetPoint(from.."LEFT", lastBar, to.."LEFT", x1, y1)
+				v:SetPoint(from.."RIGHT", lastBar, to.."RIGHT", x2, y2)
+				
 				v:Show()
 				shown = shown + 1
-				if vertical then
-					totalHeight = totalHeight + v:GetWidth() + x1			
-					v:SetPoint("TOP"..from, lastBar, "TOP"..to, x1, y1)
-					v:SetPoint("BOTTOM"..from, lastBar, "BOTTOM"..to, x2, y2)
-				else
-					totalHeight = totalHeight + v:GetHeight() + y1
-					v:SetPoint(from.."LEFT", lastBar, to.."LEFT", x1, y1)
-					v:SetPoint(from.."RIGHT", lastBar, to.."RIGHT", x2, y2)
-				end
 				lastBar = v
 			end
+			
 			to = origTo
 		end
+
 		self.lastBar = lastBar
-		-- Todo - use another frame for this; anchoring needs to be left alone
-		-- if vertical then
-			-- self.super.SetWidth(self, 20)
-		-- else
-			-- self.super.SetHeight(self, 20)
-		-- end
 	end
 end
 
@@ -1032,29 +1046,14 @@ do
 	local DEFAULT_ICON = [[Interface\ICONS\INV_Misc_QuestionMark]]
 	function barPrototype:Create(text, value, maxVal, icon, orientation, length, thickness, isTimer)
 	
---		self:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp", "Button4Up", "Button5Up")
---		self:SetScript("OnClick", barClick)
---		self:SetScript("OnEnter", barEnter)
---		self:SetScript("OnLeave", barLeave)
-	
 		self.callbacks = self.callbacks or CallbackHandler:New(self)
-	
 		self:SetScript("OnSizeChanged", self.OnSizeChanged)
-	
 		self.texture = self.texture or self:CreateTexture(nil, "ARTWORK")
 	
 		if self.timeLeftTriggers then
 			for k, v in pairs(self.timeLeftTriggers) do
 				self.timeLeftTriggers[k] = false
 			end
-		end
-	
-		if not self.spark then
-			self.spark = self:CreateTexture(nil, "OVERLAY")
-			self.spark:SetTexture([[Interface\CastingBar\UI-CastingBar-Spark]])
-			self.spark:SetWidth(10)
-			self.spark:SetHeight(10)
-			self.spark:SetBlendMode("ADD")
 		end
 	
 		self.bgtexture = self.bgtexture or self:CreateTexture(nil, "BACKGROUND")
@@ -1064,13 +1063,15 @@ do
 		self.icon = self.icon or self:CreateTexture(nil, "OVERLAY")
 		self.icon:SetPoint("LEFT", self, "LEFT", 0, 0)
 		self:SetIcon(icon or DEFAULT_ICON)
-		-- MODIFIED
 		if icon then
 			self:ShowIcon()
 		end
-		-- MODIFIED
 		self.icon:SetTexCoord(0.07,0.93,0.07,0.93);
-	
+		
+		-- Lame frame solely used for handling mouse input on icon.
+		self.iconFrame = self.iconFrame or CreateFrame("Frame", nil, self)
+		self.iconFrame:SetAllPoints(self.icon)
+		
 		self.label = self.label or self:CreateFontString(nil, "OVERLAY", "ChatFontNormal")
 		self.label:SetText(text)
 		self.label:ClearAllPoints()
@@ -1124,8 +1125,8 @@ do
 
 end
 
-barPrototype.SetWidth = barListPrototype.SetWidth
-barPrototype.SetHeight = barListPrototype.SetHeight
+barPrototype.SetWidth = barListPrototype.SetBarWidth
+barPrototype.SetHeight = barListPrototype.SetBarHeight
 
 function barPrototype:OnBarReleased()
 	self:StopTimer()
@@ -1135,7 +1136,6 @@ function barPrototype:OnBarReleased()
 	self.callbacks:Fire('BarReleased', self, self.name)
 
 	-- Reset our attributes
-	self.isAnimating = false
 	self.isTimer = false
 	self.ownerGroup = nil
 	self.fill = false
@@ -1261,54 +1261,6 @@ function barPrototype:IsIconShown()
 	return self.showIcon
 end
 
-function barPrototype:OnAnimateFinished()
-	self.callbacks:Fire("AnimateFinished", self, self.name)
-end
-
-local function animate(self, elapsed)
-	self.aniST = self.aniST + elapsed
-	local amt = min(1, self.aniST / self.aniT)
-	local x = self.aniSX + ((self.aniX - self.aniSX) * amt)
-	local y = self.aniSY + ((self.aniY - self.aniSY) * amt)
-	local s = self.aniSS + ((self.aniS - self.aniSS) * amt)
-	self:ClearAllPoints()
-	self:SetPoint("TOPLEFT", UIParent, "TOPLEFT", x, y)
-	self:SetScale(s)
-
-	if amt == 1 then
-		self.isAnimating = false
-		self:RemoveOnUpdate(animate)
-		safecall(self.OnAnimateFinished, self)
-		if self.ownerGroup then
-			self:ClearAllPoints()
-			self.ownerGroup:SortBars()
-			self:UpdateColor()
-			self:SetParent(self.ownerGroup)
-			self:SetScale(1)
-		end
-	end
-end
-
-function barPrototype:AnimateTo(x, y, scale, t)
-	self.isAnimating = true
-	self.aniSX, self.aniSY, self.aniSS, self.aniST = self:GetLeft(), self:GetTop(), self:GetScale(), 0
-	self.aniX, self.aniY, self.aniS, self.aniT = x, y, scale, t
-	self:AddOnUpdate(animate)
-	animate(0)
-end
-
-function barPrototype:AnimateToGroup(group)
-	self.isAnimating = true
-	self.ownerGroup:SortBars()
-	self.ownerGroup:MoveBarToGroup(self, group)
-	self:SetParent(UIParent)
-
-	local x, y = group:GetBarAttachPoint()
-	x = x / UIParent:GetScale()
-	y = y / UIParent:GetScale()
-	self:AnimateTo(x, y, group:GetScale(), 0.75)
-end
-
 function barPrototype:SetLabel(text)
 	self.label:SetText(text)
 end
@@ -1411,12 +1363,6 @@ do
 			self.icon:ClearAllPoints()
 			self.icon:SetPoint("RIGHT", self, "LEFT", 0, 0)
 
-			t = self.spark
-			t:ClearAllPoints()
-			t:SetPoint("TOP", self.texture, "TOPRIGHT", 0, 7)
-			t:SetPoint("BOTTOM", self.texture, "BOTTOMRIGHT", 0, -7)
-			t:SetTexCoord(0, 1, 0, 1)
-
 			t = self.texture
 			t.SetValue = t.SetWidth
 			t:ClearAllPoints()
@@ -1441,12 +1387,6 @@ do
 		elseif o == lib.BOTTOM_TO_TOP then
 			self.icon:ClearAllPoints()
 			self.icon:SetPoint("TOP", self, "BOTTOM", 0, 0)
-
-			t = self.spark
-			t:ClearAllPoints()
-			t:SetPoint("LEFT", self.texture, "TOPLEFT", -7, 0)
-			t:SetPoint("RIGHT", self.texture, "TOPRIGHT", 7, 0)
-			t:SetTexCoord(0, 1, 1, 1, 0, 0, 1, 0)
 
 			t = self.texture
 			t.SetValue = t.SetHeight
@@ -1474,12 +1414,6 @@ do
 			self.icon:ClearAllPoints()
 			self.icon:SetPoint("LEFT", self, "RIGHT", 0, 0)
 
-			t = self.spark
-			t:ClearAllPoints()
-			t:SetPoint("TOP", self.texture, "TOPLEFT", 0, 7)
-			t:SetPoint("BOTTOM", self.texture, "BOTTOMLEFT", 0, -7)
-			t:SetTexCoord(0, 1, 0, 1)
-
 			t = self.texture
 			t.SetValue = t.SetWidth
 			t:ClearAllPoints()
@@ -1504,12 +1438,6 @@ do
 		elseif o == lib.TOP_TO_BOTTOM then
 			self.icon:ClearAllPoints()
 			self.icon:SetPoint("BOTTOM", self, "TOP", 0, 0)
-
-			t = self.spark
-			t:ClearAllPoints()
-			t:SetPoint("LEFT", self.texture, "BOTTOMLEFT", -7, 0)
-			t:SetPoint("RIGHT", self.texture, "BOTTOMRIGHT", 7, 0)
-			t:SetTexCoord(0, 1, 1, 1, 0, 0, 1, 0)
 
 			t = self.texture
 			t.SetValue = t.SetHeight
@@ -1544,12 +1472,12 @@ end
 
 do
 	local function updateSize(self)
-		local vertical, thickness, length = self.orientation % 2 == 0, self.thickness, self.length
-		local iconSize = self.showIcon and (vertical and length or thickness) or 0
-		local width = vertical and thickness or max(0.0001, length - iconSize)
-		local height = vertical and max(0.00001,length - iconSize) or thickness
+		local thickness, length = self.thickness, self.length
+		local iconSize = self.showIcon and thickness or 0
+		local width = max(0.0001, length - iconSize)
+		local height = thickness
 		barPrototype.super.SetWidth(self, width)
-	        barPrototype.super.SetHeight(self, height)
+        barPrototype.super.SetHeight(self, height)
 		self.icon:SetWidth(thickness)
 		self.icon:SetHeight(thickness)
 	end
@@ -1579,10 +1507,6 @@ function barPrototype:GetOrientation()
 	return self.orientation
 end
 
-function barPrototype:IsVertical()
-	return self.orientation % 2 == 0
-end
-
 function barPrototype:SetValue(val)
 	assert(val ~= nil, "Value cannot be nil!")
 	self.value = val
@@ -1597,11 +1521,6 @@ function barPrototype:SetValue(val)
 		displayMax = self.maxValue
 	end
 	local amt = min(1, val / displayMax)
-	if amt == 1 or amt == 0 then
-		self.spark:Hide()
-	else
-		self.spark:Show()
-	end
 	local dist = (ownerGroup and ownerGroup:GetLength()) or self.length
 	self:SetTextureValue(max(amt, 0.000001), dist)
 	self:UpdateColor()

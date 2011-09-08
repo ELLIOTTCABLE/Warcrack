@@ -5,4 +5,5 @@
 	<Script file="TidyPlatesUtility.lua"/>
 	<Script file="TidyPlatesDefaults.lua"/>
 	<Script file="TidyPlatesPanel.lua"/>
+	<Script file="TidyPlatesMinimapButton.lua"/>
 </Ui>

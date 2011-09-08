@@ -333,3 +333,33 @@ L["Clickthrough"] = "Clickthrough"
 L["Disables mouse clicks on bars."] = "Disables mouse clicks on bars."
 L["DTPS"] = "DTPS"
 L["Healing taken"] = "Healing taken"
+
+L["Wipe mode"] = "Wipe mode"
+L["Automatically switch to set 'Current' and this mode after a wipe."] = "Automatically switch to set 'Current' and this mode after a wipe."
+
+L["Merge pets"] = "Merge pets"
+L["Merges pets with their owners. Changing this only affects new data."] = "Merges pets with their owners. Changing this only affects new data."
+
+L["Show totals"] = "Show totals"
+L["Shows a extra row with a summary in certain modes."] = "Shows a extra row with a summary in certain modes."
+
+L["There is nothing to report."] = "There is nothing to report."
+
+L["Buttons"] = "Buttons"
+L["Buff uptimes"] = "Buff uptimes"
+L["Buff spell list"] = "Buff spell list"
+L["'s Buffs"] = "'s Buffs"
+
+L["Deletes the chosen window."] = "Deletes the chosen window."
+L["Delete window"] = "Delete window"
+L["Window"] = "Window"
+L["Scale"] = "Scale"
+L["Sets the scale of the window."] = "Sets the scale of the window."
+
+L["Snaps the window size to best fit when resizing."] = "Snaps the window size to best fit when resizing."
+L["Snap to best fit"] = "Snap to best fit"
+
+L["Hide window"] = "Hide window"
+L["Absorb spells"] = "Absorb spells"
+
+L["Choose the background color of the bars."] = "Choose the background color of the bars."

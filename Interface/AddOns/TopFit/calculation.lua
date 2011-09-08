@@ -16,9 +16,6 @@ end
 
 function TopFit:CalculateSets(silent)
     if (not TopFit.isBlocked) then
-        if not silent then
-            HideUIPanel(InterfaceOptionsFrame)
-        end
         TopFit.silentCalculation = silent
         local setCode = tremove(TopFit.workSetList)
         while not self.db.profile.sets[setCode] and #(TopFit.workSetList) > 0 do
@@ -54,8 +51,15 @@ function TopFit:CalculateRecommendations()
     -- determine if the player can dualwield
     TopFit.playerCanDualWield = false
     TopFit.playerCanTitansGrip = false
-    if (select(2, UnitClass("player")) == "ROGUE") or (select(2, UnitClass("player")) == "DEATHKNIGHT") or ((select(2, UnitClass("player")) == "WARRIOR") and (select(8, GetTalentTabInfo(2)) == true)) or ((select(2, UnitClass("player")) == "HUNTER") and (UnitLevel("player") > 20)) or
-        ((select(2, UnitClass("player")) == "SHAMAN") and (select(8, GetTalentTabInfo(2)) == true)) then
+    
+    local playerClass = select(2, UnitClass("player"))
+    local specialization = GetPrimaryTalentTree()
+    
+    if (playerClass == "ROGUE")
+        or (playerClass == "DEATHKNIGHT")
+        or (playerClass == "HUNTER")
+        or (playerClass == "WARRIOR" and specialization == 2)
+        or (playerClass == "SHAMAN" and specialization == 2) then
         TopFit.playerCanDualWield = true
     end
     if ((select(2, UnitClass("player")) == "WARRIOR") and (select(5, GetTalentInfo(2, 20)) > 0)) then
@@ -126,25 +130,34 @@ function TopFit:InitSemiRecursiveCalculations()
     TopFit.calculationsFrame:SetScript("OnUpdate", TopFit.SemiRecursiveCalculation)
     
     -- show progress frame
-    if not TopFit.silentCalculation then
-        TopFit:CreateProgressFrame()
-    elseif not TopFit.ProgressFrame then
-        TopFit:CreateProgressFrame()
-        TopFit.ProgressFrame:Hide()
-    end
+    TopFit:CreateProgressFrame()
+    TopFit.ProgressFrame:Hide()
+
     TopFit.ProgressFrame:SetSelectedSet(TopFit.setCode)
-    TopFit.ProgressFrame:ResetProgress()
+    TopFit:ResetProgress()
 end
 
 function TopFit:ReduceItemList()
     -- remove all non-forced items from item list
-    for slotID, forceID in pairs(self.db.profile.sets[TopFit.setCode].forced) do
-        if TopFit.itemListBySlot[slotID] then
+    for slotID, _ in pairs(TopFit.slotNames) do
+        local forcedItems = TopFit:GetForcedItems(TopFit.setCode, slotID)
+        if TopFit.itemListBySlot[slotID] and #forcedItems > 0 then
             for i = #(TopFit.itemListBySlot[slotID]), 1, -1 do
                 local itemTable = TopFit:GetCachedItem(TopFit.itemListBySlot[slotID][i].itemLink)
-                if not itemTable or (itemTable.itemID ~= forceID) then
+                if not itemTable then
                     tremove(TopFit.itemListBySlot[slotID], i)
-                    --TopFit.itemListBySlot[slotID][i].reason = TopFit.itemListBySlot[slotID][i].reason.."forced item in slot; "
+                else
+                    local found = false
+                    for _, forceID in pairs(forcedItems) do
+                        if forceID == itemTable.itemID then
+                            found = true
+                            break
+                        end
+                    end
+
+                    if not found then 
+                        tremove(TopFit.itemListBySlot[slotID], i)
+                    end
                 end
             end
         end
@@ -154,13 +167,38 @@ function TopFit:ReduceItemList()
             -- always remove all 2H-weapons from mainhand
         end
     end
+
+    -- if enabled, remove armor that is not part of armor specialization
+    if TopFit.db.profile.sets[TopFit.setCode].forceArmorType and TopFit.characterLevel >= 50 then
+        local playerClass = select(2, UnitClass("player"))
+        for slotID, _ in pairs(TopFit.armoredSlots) do
+            if TopFit.itemListBySlot[slotID] and #(TopFit:GetForcedItems(TopFit.setCode, slotID)) == 0 then
+                for i = #(TopFit.itemListBySlot[slotID]), 1, -1 do
+                    local itemTable = TopFit:GetCachedItem(TopFit.itemListBySlot[slotID][i].itemLink)
+                    if playerClass == "DRUID" or playerClass == "ROGUE" then
+                        if not itemTable or not itemTable.totalBonus["TOPFIT_ARMORTYPE_LEATHER"] then
+                            tremove(TopFit.itemListBySlot[slotID], i)
+                        end
+                    elseif playerClass == "HUNTER" or playerClass == "SHAMAN" then
+                        if not itemTable or not itemTable.totalBonus["TOPFIT_ARMORTYPE_MAIL"] then
+                            tremove(TopFit.itemListBySlot[slotID], i)
+                        end
+                    elseif playerClass == "WARRIOR" or playerClass == "DEATHKNIGHT" or playerClass == "PALADIN" then
+                        if not itemTable or not itemTable.totalBonus["TOPFIT_ARMORTYPE_PLATE"] then
+                            tremove(TopFit.itemListBySlot[slotID], i)
+                        end
+                    end 
+                end
+            end
+        end
+    end
     
     -- remove all items with score <= 0 that are neither forced nor contribute to caps
     for slotID, itemList in pairs(TopFit.itemListBySlot) do
         if #itemList >= 1 then
             for i = #itemList, 1, -1 do
                 if (TopFit:GetItemScore(itemList[i].itemLink, TopFit.setCode, TopFit.ignoreCapsForCalculation) <= 0) then
-                    if not (self.db.profile.sets[TopFit.setCode].forced[slotID]) then
+                    if #(TopFit:GetForcedItems(TopFit.setCode, slotID)) == 0 then
                         -- check caps
                         local hasCap = false
                         for statCode, preferences in pairs(TopFit.Utopia) do
@@ -363,14 +401,14 @@ function TopFit:SemiRecursiveCalculation()
             end
         end
         
-        TopFit.ProgressFrame:SetProgress(progress)
+        TopFit:SetProgress(progress)
     else
-        TopFit.ProgressFrame:SetProgress(1) -- done
+        TopFit:SetProgress(1) -- done
     end
     
     -- update icons and statistics
     if TopFit.bestCombination then
-        TopFit.ProgressFrame:SetCurrentCombination(TopFit.bestCombination)
+        TopFit:SetCurrentCombination(TopFit.bestCombination)
     end
     
     if TopFit.abortCalculation then
@@ -378,7 +416,7 @@ function TopFit:SemiRecursiveCalculation()
         --TopFit:Print("Calculation aborted.")
         TopFit.abortCalculation = nil
         TopFit.isBlocked = false
-        TopFit.ProgressFrame:StoppedCalculation()
+        TopFit:StoppedCalculation()
     end
     
     TopFit:Debug("Current combination count: "..TopFit.combinationCount)
@@ -642,7 +680,7 @@ end
 -- now with assertion as optional parameter
 function TopFit:CalculateBestInSlot(itemsAlreadyChosen, insert, sID, setCode, assertion)
     if not setCode then setCode = TopFit.setCode end
-
+    
     -- get best item(s) for each equipment slot
     local bis = {}
     local itemListBySlot = TopFit.itemListBySlot or TopFit:GetEquippableItems()

@@ -1,6 +1,6 @@
 --[[
 Name: DBIcon-1.0
-Revision: $Rev: 19 $
+Revision: $Rev: 24 $
 Author(s): Rabbit (rabbit.magtheridon@gmail.com)
 Description: Allows addons to register to recieve a lightweight minimap icon as an alternative to more heavy LDB displays.
 Dependencies: LibStub
@@ -8,7 +8,7 @@ License: GPL v2 or later.
 ]]
 
 --[[
-Copyright (C) 2008-2010 Rabbit
+Copyright (C) 2008-2011 Rabbit
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 --
 
 local DBICON10 = "LibDBIcon-1.0"
-local DBICON10_MINOR = tonumber(("$Rev: 19 $"):match("(%d+)"))
+local DBICON10_MINOR = tonumber(("$Rev: 24 $"):match("(%d+)"))
 if not LibStub then error(DBICON10 .. " requires LibStub.") end
 local ldb = LibStub("LibDataBroker-1.1", true)
 if not ldb then error(DBICON10 .. " requires LibDataBroker-1.1.") end
@@ -47,11 +47,16 @@ lib.notCreated = lib.notCreated or {}
 
 function lib:IconCallback(event, name, key, value, dataobj)
 	if lib.objects[name] then
-		lib.objects[name].icon:SetTexture(dataobj.icon)
+		if key == "icon" then
+			lib.objects[name].icon:SetTexture(value)
+		elseif key == "iconCoords" then
+			lib.objects[name].icon:UpdateCoord()
+		end
 	end
 end
 if not lib.callbackRegistered then
 	ldb.RegisterCallback(lib, "LibDataBroker_AttributeChanged__icon", "IconCallback")
+	ldb.RegisterCallback(lib, "LibDataBroker_AttributeChanged__iconCoords", "IconCallback")
 	lib.callbackRegistered = true
 end
 
@@ -92,10 +97,10 @@ local minimapShapes = {
 	["CORNER-TOPRIGHT"] = {false, false, true, false},
 	["CORNER-BOTTOMLEFT"] = {false, true, false, false},
 	["CORNER-BOTTOMRIGHT"] = {true, false, false, false},
-	["SIDE-LEFT"] = {true, true, false, false},
-	["SIDE-RIGHT"] = {false, false, true, true},
-	["SIDE-TOP"] = {true, false, true, false},
-	["SIDE-BOTTOM"] = {false, true, false, true},
+	["SIDE-LEFT"] = {false, true, false, true},
+	["SIDE-RIGHT"] = {true, false, true, false},
+	["SIDE-TOP"] = {false, false, true, true},
+	["SIDE-BOTTOM"] = {true, true, false, false},
 	["TRICORNER-TOPLEFT"] = {false, true, true, true},
 	["TRICORNER-TOPRIGHT"] = {true, false, true, true},
 	["TRICORNER-BOTTOMLEFT"] = {true, true, false, true},
@@ -120,8 +125,8 @@ local function updatePosition(button)
 end
 
 local function onClick(self, b) if self.dataObject.OnClick then self.dataObject.OnClick(self, b) end end
-local function onMouseDown(self) self.icon:SetTexCoord(0, 1, 0, 1) end
-local function onMouseUp(self) self.icon:SetTexCoord(0.05, 0.95, 0.05, 0.95) end
+local function onMouseDown(self) self.isMouseDown = true; self.icon:UpdateCoord() end
+local function onMouseUp(self) self.isMouseDown = false; self.icon:UpdateCoord() end
 
 local function onUpdate(self)
 	local mx, my = Minimap:GetCenter()
@@ -138,7 +143,8 @@ end
 
 local function onDragStart(self)
 	self:LockHighlight()
-	self.icon:SetTexCoord(0, 1, 0, 1)
+	self.isMouseDown = true
+	self.icon:UpdateCoord()
 	self:SetScript("OnUpdate", onUpdate)
 	self.isMoving = true
 	GameTooltip:Hide()
@@ -146,9 +152,21 @@ end
 
 local function onDragStop(self)
 	self:SetScript("OnUpdate", nil)
-	self.icon:SetTexCoord(0.05, 0.95, 0.05, 0.95)
+	self.isMouseDown = false
+	self.icon:UpdateCoord()
 	self:UnlockHighlight()
 	self.isMoving = nil
+end
+
+local defaultCoords = {0, 1, 0, 1}
+local function updateCoord(self)
+	local coords = self:GetParent().dataObject.iconCoords or defaultCoords
+	local deltaX, deltaY = 0, 0
+	if not self:GetParent().isMouseDown then
+		deltaX = (coords[2] - coords[1]) * 0.05
+		deltaY = (coords[4] - coords[3]) * 0.05
+	end
+	self:SetTexCoord(coords[1] + deltaX, coords[2] - deltaX, coords[3] + deltaY, coords[4] - deltaY)
 end
 
 local function createButton(name, object, db)
@@ -170,11 +188,14 @@ local function createButton(name, object, db)
 	background:SetTexture("Interface\\Minimap\\UI-Minimap-Background")
 	background:SetPoint("TOPLEFT", 7, -5)
 	local icon = button:CreateTexture(nil, "ARTWORK")
-	icon:SetWidth(20); icon:SetHeight(20)
+	icon:SetWidth(17); icon:SetHeight(17)
 	icon:SetTexture(object.icon)
-	icon:SetTexCoord(0.05, 0.95, 0.05, 0.95)
-	icon:SetPoint("TOPLEFT", 7, -5)
+	icon:SetPoint("TOPLEFT", 7, -6)
 	button.icon = icon
+	button.isMouseDown = false
+
+	icon.UpdateCoord = updateCoord
+	icon:UpdateCoord()
 
 	button:SetScript("OnEnter", onEnter)
 	button:SetScript("OnLeave", onLeave)
@@ -254,6 +275,9 @@ function lib:Refresh(name, db)
 	else
 		button:Hide()
 	end
+end
+function lib:GetMinimapButton(name)
+	return lib.objects[name]
 end
 
 function lib:EnableLibrary()

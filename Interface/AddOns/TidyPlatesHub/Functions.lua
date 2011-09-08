@@ -164,6 +164,7 @@ local function ScaleDelegate(...)
 	
 	if LocalVars.ScaleIgnoreNonEliteUnits and (not unit.isElite) then
 	elseif LocalVars.ScaleIgnoreNeutralUnits and unit.reaction == "NEUTRAL" then 
+	elseif LocalVars.ScaleIgnoreInactive and not (unit.reaction == "FRIENDLY" and (unit.isInCombat or (unit.threatValue > 0) or (unit.health < unit.healthmax))) then 
 	else scale = ScaleFunctions[LocalRole][LocalVars.ScaleSpotlightMode](...)  end
 	return scale or LocalVars.ScaleStandard
 end
@@ -218,6 +219,10 @@ local function AlphaFilter(unit)
 	if LocalVars.OpacityFilterCustom[unit.name] then return true
 	elseif LocalVars.OpacityFilterNeutralUnits and unit.reaction == "NEUTRAL" then return true
 	elseif LocalVars.OpacityFilterNonElite and (not unit.isElite) then return true
+	elseif LocalVars.OpacityFilterInactive then 
+		if unit.reaction ~= "FRIENDLY" and not (unit.isInCombat or unit.threatValue > 0 or unit.health < unit.healthmax) then return true end
+		
+	--elseif LocalVars.OpacityFilterInactive and (unit.isInCombat or unit.healthmax > unit.health) then return true
 	end
 end
 
@@ -315,15 +320,22 @@ end
 	
 local ColorFunctions = {DummyFunction, ColorFunctionByClass, ColorFunctionByThreat, ColorFunctionByReaction }
 
+--local SkyBlue = {r = 0, g = .5, b = 1,}
+local SkyBlue = {r = .4, g = 0, b = 1,}
+
 local function HealthColorDelegate(unit)
 	local color	
 	
 	if LocalVars.ClassColorPartyMembers and unit.reaction == "FRIENDLY" and unit.type == "PLAYER"  then
 		local class = TidyPlatesUtility.GroupMembers.Class[unit.name]
+		--local class = TidyPlatesUtility.GroupMembers.Class[unit.name] or TidyPlatesData.UnitClass[unit.name]		-- When enabling, change "ClassColorPartyMembers to "Class Color Friendly Units" and "Enemy")
 		if class then color = RAID_CLASS_COLORS[class] end
 	else
 		color = ColorFunctions[LocalVars.ColorHealthBarMode](unit)
+		
 	end
+	
+	-- if TidyPlatesData.Guild[unit.name] then color = SkyBlue end -- Testing GUILD colors
 	
 	if color then return color.r, color.g, color.b 
 	else return unit.red, unit.green, unit.blue end
@@ -407,6 +419,8 @@ local NameColorFunctions = {
 		-- Friendly Units; Enemy units are taken care of via SetNameColorDelegate
 		if unit.reaction == "FRIENDLY" and unit.type == "PLAYER"  then
 			local class = TidyPlatesUtility.GroupMembers.Class[unit.name]
+			--local class = TidyPlatesUtility.GroupMembers.Class[unit.name] or TidyPlatesData.UnitClass[unit.name]
+
 			if class then return RAID_CLASS_COLORS[class] 
 			else return NameReactionColors[unit.reaction][unit.type] end
 		end
@@ -502,7 +516,7 @@ local DebuffPrefixModes = {
 	end,
 	-- My
 	function(debuff)
-		if debuff.caster == UnitGUID("player") then return true end
+		if debuff.caster == UnitGUID("player") then return true else return false end
 	end,
 	-- No
 	function(debuff)
@@ -537,7 +551,7 @@ local DebuffFilterModes = {
 	end,	
 	-- By Prefix	
 	function(debuff) 
-		local prefix = LocalVars.WidgetsDebuffPrefix[debuff.name]
+		local prefix = LocalVars.WidgetsDebuffPrefix[tostring(debuff.spellid)] or LocalVars.WidgetsDebuffPrefix[debuff.name]
 		if prefix then return DebuffPrefixModes[prefix](debuff) end
 	end,
 }

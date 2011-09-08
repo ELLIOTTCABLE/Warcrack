@@ -1,6 +1,6 @@
 local _, addon = ...
 -- utility for rounding
-function round(input, places)
+local function round(input, places)
     if not places then
         places = 0
     end
@@ -20,7 +20,7 @@ local function GetTextureIndex(tex) -- blatantly stolen from Tekkubs EquipSetUpd
     RefreshEquipmentSetIconInfo()
     tex = tex:lower()
     local numicons = GetNumMacroIcons()
-    for i = INVSLOT_FIRST_EQUIPPED,INVSLOT_LAST_EQUIPPED do if GetInventoryItemTexture("player", i) then numicons = numicons + 1 end end
+    for i = INVSLOT_FIRST_EQUIPPED, INVSLOT_LAST_EQUIPPED do if GetInventoryItemTexture("player", i) then numicons = numicons + 1 end end
     for i = 1, numicons do
         local texture, index = GetEquipmentSetIconInfo(i)
         if texture:lower() == tex then return index end
@@ -40,8 +40,14 @@ end
 
 -- debug function
 function TopFit:Warning(text)
-    --TODO: create table of warnings and dont print any multiples
-    --TopFit:Print("|cffff0000Warning: "..text)
+    if not TopFit.warningsCache then
+        TopFit.warningsCache = {}
+    end
+    
+    if not TopFit.warningsCache[text] then
+        TopFit.warningsCache[text] = true
+        TopFit:Print("|cffff0000Warning: "..text)
+    end
 end
 
 -- joins any number of tables together, one after the other. elements within the input-tables will get mixed, though
@@ -70,15 +76,18 @@ function TopFit.ShowTooltip(self)
     end
     GameTooltip:Show()
 end
-function TopFit.HideTooltip() GameTooltip:Hide() end
+
+function TopFit.HideTooltip()
+    GameTooltip:Hide()
+end
 
 function TopFit:EquipRecommendedItems()
     -- skip equipping if virtual items were included
-    if (not TopFit.db.profile.sets[TopFit.ProgressFrame.selectedSet].skipVirtualItems) and TopFit.db.profile.sets[TopFit.setCode].virtualItems and #(TopFit.db.profile.sets[TopFit.setCode].virtualItems) > 0 then
+    if (not TopFit.db.profile.sets[TopFit.setCode].skipVirtualItems) and TopFit.db.profile.sets[TopFit.setCode].virtualItems and #(TopFit.db.profile.sets[TopFit.setCode].virtualItems) > 0 then
         TopFit:Print(TopFit.locale.NoticeVirtualItemsUsed)
         
         -- reenable options and quit
-        TopFit.ProgressFrame:StoppedCalculation()
+        TopFit:StoppedCalculation()
         TopFit.isBlocked = false
         
         -- reset relevant score field
@@ -97,7 +106,7 @@ function TopFit:EquipRecommendedItems()
     TopFit.updateFrame:SetScript("OnUpdate", TopFit.onUpdateForEquipment)
 end
 
-function TopFit:onUpdateForEquipment()
+function TopFit:onUpdateForEquipment(elapsed)
     -- don't try equipping in combat or while dead
     if UnitAffectingCombat("player") or UnitIsDeadOrGhost("player") then
         return
@@ -114,10 +123,10 @@ function TopFit:onUpdateForEquipment()
         end
     end
     
-    TopFit.updateEquipmentCounter = TopFit.updateEquipmentCounter + 1
+    TopFit.updateEquipmentCounter = TopFit.updateEquipmentCounter + elapsed
     
     -- try equipping the items every 100 frames (some weird ring positions might stop us from correctly equipping items on the first try, for example)
-    if (TopFit.updateEquipmentCounter > 100) then
+    if (TopFit.updateEquipmentCounter > 1) then
         for slotID, recTable in pairs(TopFit.itemRecommendations) do
             slotItemLink = GetInventoryItemLink("player", slotID)
             if (slotItemLink ~= recTable.locationTable.itemLink) then
@@ -190,7 +199,7 @@ function TopFit:onUpdateForEquipment()
         
         TopFit:Debug("All Done!")
         TopFit.updateFrame:SetScript("OnUpdate", nil)
-        TopFit.ProgressFrame:StoppedCalculation()
+        TopFit:StoppedCalculation()
         
         EquipmentManagerClearIgnoredSlotsForSave()
         for _, slotID in pairs(TopFit.slots) do
@@ -308,10 +317,10 @@ function TopFit:OnInitialize()
         },
         [TopFit.locale.StatsCategoryDefensive] = {
             [1] = "ITEM_MOD_BLOCK_RATING_SHORT",
-            [4] = "ITEM_MOD_DODGE_RATING_SHORT",
-            [5] = "ITEM_MOD_PARRY_RATING_SHORT",
-            [6] = "ITEM_MOD_RESILIENCE_RATING_SHORT",
-            [7] = "RESISTANCE0_NAME",                   -- armor
+            [2] = "ITEM_MOD_DODGE_RATING_SHORT",
+            [3] = "ITEM_MOD_PARRY_RATING_SHORT",
+            [4] = "ITEM_MOD_RESILIENCE_RATING_SHORT",
+            [5] = "RESISTANCE0_NAME",                   -- armor
         },
         [TopFit.locale.StatsCategoryHybrid] = {
             [1] = "ITEM_MOD_CRIT_RATING_SHORT",
@@ -319,11 +328,6 @@ function TopFit:OnInitialize()
             [3] = "ITEM_MOD_HASTE_RATING_SHORT",
             [4] = "ITEM_MOD_HIT_RATING_SHORT",
             [5] = "ITEM_MOD_MASTERY_RATING_SHORT",
-        },
-        [TopFit.locale.StatsCategoryMisc] = {
-            [1] = "ITEM_MOD_HEALTH_SHORT",
-            [2] = "ITEM_MOD_MANA_SHORT",
-            [3] = "ITEM_MOD_HEALTH_REGENERATION_SHORT",
         },
         [TopFit.locale.StatsCategoryResistances] = {
             [1] = "RESISTANCE1_NAME",                   -- holy
@@ -333,8 +337,19 @@ function TopFit:OnInitialize()
             [5] = "RESISTANCE5_NAME",                   -- shadow
             [6] = "RESISTANCE6_NAME",                   -- arcane
         },
+        --[[ [TopFit.locale.StatsCategoryArmorTypes] = {
+            [1] = "TOPFIT_ARMORTYPE_CLOTH",
+            [2] = "TOPFIT_ARMORTYPE_LEATHER",
+            [3] = "TOPFIT_ARMORTYPE_MAIL",
+            [4] = "TOPFIT_ARMORTYPE_PLATE",
+        }]]
     }
-    
+
+    TOPFIT_ARMORTYPE_CLOTH = select(2, GetAuctionItemSubClasses(2));
+    TOPFIT_ARMORTYPE_LEATHER = select(3, GetAuctionItemSubClasses(2));
+    TOPFIT_ARMORTYPE_MAIL = select(4, GetAuctionItemSubClasses(2));
+    TOPFIT_ARMORTYPE_PLATE = select(5, GetAuctionItemSubClasses(2));
+
     -- list of inventory slot names
     TopFit.slotList = {
         --"AmmoSlot",
@@ -358,7 +373,18 @@ function TopFit:OnInitialize()
         "WaistSlot",
         "WristSlot",
     }
-    
+        
+    TopFit.armoredSlots = {
+        [1] = true,
+        [3] = true,
+        [5] = true,
+        [6] = true,
+        [7] = true,
+        [8] = true,
+        [9] = true,
+        [10] = true,
+    }
+
     -- create list of slot names with corresponding slot IDs
     TopFit.slots = {}
     TopFit.slotNames = {}
@@ -391,6 +417,8 @@ function TopFit:OnInitialize()
     TopFit.eventFrame = CreateFrame("Frame")
     TopFit.eventFrame:RegisterEvent("BAG_UPDATE")
     TopFit.eventFrame:RegisterEvent("PLAYER_LEVEL_UP")
+    TopFit.eventFrame:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+    TopFit.eventFrame:RegisterEvent("PLAYER_TALENT_UPDATE")
     TopFit.eventFrame:SetScript("OnEvent", TopFit.FrameOnEvent)
     TopFit.eventFrame:SetScript("OnUpdate", TopFit.delayCalculationOnLogin)
     
@@ -439,11 +467,11 @@ function TopFit:OnInitialize()
     
     -- button to open frame
     hooksecurefunc("ToggleCharacter", function (...)
-        if not TopFit.toggleProgressFrameButton then
-            TopFit.toggleProgressFrameButton = CreateFrame("Button", "TopFit_toggleProgressFrameButton", PaperDollFrame)
+        --[[if not TopFit.toggleProgressFrameButton then
+            TopFit.toggleProgressFrameButton = CreateFrame("Button", "TopFit_toggleProgressFrameButton", PaperDollSidebarTab1)
             TopFit.toggleProgressFrameButton:SetWidth(30)
             TopFit.toggleProgressFrameButton:SetHeight(32)
-            TopFit.toggleProgressFrameButton:SetPoint("RIGHT", GearManagerToggleButton, "LEFT")
+            TopFit.toggleProgressFrameButton:SetPoint("RIGHT", PaperDollSidebarTab1, "LEFT")
             
             local normalTexture = TopFit.toggleProgressFrameButton:CreateTexture()
             local pushedTexture = TopFit.toggleProgressFrameButton:CreateTexture()
@@ -492,18 +520,10 @@ function TopFit:OnInitialize()
             TopFit.toggleProgressFrameButton:SetScript("OnLeave", function(...)
                 GameTooltip:Hide()
             end)
-        end
-        if GearManagerToggleButton:IsShown() then
-            TopFit.toggleProgressFrameButton:SetPoint("RIGHT", GearManagerToggleButton, "LEFT", 4, 0)
-        else
-            TopFit.toggleProgressFrameButton:SetPoint("RIGHT", GearManagerToggleButton, "RIGHT")
-        end
+        end]]
+        
+        TopFit:initializeCharacterFrameUI()
     end)
-    
-    -- create default plugin frames
-    TopFit:CreateStatsPlugin()
-    TopFit:CreateVirtualItemsPlugin()
-    TopFit:CreateUtilitiesPlugin()
     
     TopFit:collectItems()
 end
@@ -568,6 +588,7 @@ end
 function TopFit:FrameOnEvent(event, ...)
     if (event == "BAG_UPDATE") then
         -- update item list
+        if TopFit.loginDelay then return end
         --TODO: only update affected bag
         TopFit:collectItems()
         
@@ -575,12 +596,19 @@ function TopFit:FrameOnEvent(event, ...)
         if TopFit:collectEquippableItems() and not TopFit.loginDelay then
             -- new equippable item in inventory!!!!
             -- calculate set silently if player wishes
-            if TopFit.db.profile.defaultUpdateSet then
-                if not TopFit.workSetList then
-                    TopFit.workSetList = {}
-                end
+            if not TopFit.workSetList then
+                TopFit.workSetList = {}
+            end
+            local runUpdate = false;
+            if (TopFit.db.profile.defaultUpdateSet and GetActiveTalentGroup() == 1) then
                 tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet)
-                
+                runUpdate = true;
+            end
+            if (TopFit.db.profile.defaultUpdateSet2 and GetActiveTalentGroup() == 2) then
+                tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet2)
+                runUpdate = true;
+            end
+            if runUpdate then
                 TopFit:CalculateSets(true) -- calculate silently
             end
         end
@@ -594,14 +622,36 @@ function TopFit:FrameOnEvent(event, ...)
         end
         
         -- if an auto-update-set is set, update that as well
-        if TopFit.db.profile.defaultUpdateSet then
             if not TopFit.workSetList then
                 TopFit.workSetList = {}
             end
-            tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet)
-            
-            TopFit:CalculateSets(true) -- calculate silently
-        end
+            local runUpdate = false;
+            if (TopFit.db.profile.defaultUpdateSet and GetActiveTalentGroup() == 1) then
+                tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet)
+                runUpdate = true;
+            end
+            if (TopFit.db.profile.defaultUpdateSet2 and GetActiveTalentGroup() == 2) then
+                tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet2)
+                runUpdate = true;
+            end
+            if runUpdate then
+                -- because right on level up there seem to be problems finding the items for equipping, delay the actual update
+                if (not TopFit.eventFrame:HasScript("OnUpdate")) then
+                    TopFit.delayCalculation = 100
+                    TopFit.eventFrame:SetScript("OnUpdate", function(self)
+                        if (TopFit.delayCalculation > 0) then
+                            TopFit.delayCalculation = TopFit.delayCalculation - 1
+                        else
+                            TopFit.eventFrame:SetScript("OnUpdate", nil)
+                            TopFit:CalculateSets(true) -- calculate silently
+                        end
+                    end)
+                end
+            end
+    elseif (event == "ACTIVE_TALENT_GROUP_CHANGED") then
+        TopFit:ClearCache()
+    elseif (event == "PLAYER_TALENT_UPDATE") then
+        TopFit:ClearCache()
     end
 end
 
@@ -611,4 +661,22 @@ end
 
 function TopFit:OnDisable()
     -- Called when the addon is disabled
+end
+
+function TopFit:CreateEquipmentSet(set)
+    if (CanUseEquipmentSets()) then
+        setName = TopFit:GenerateSetName(set)
+        -- check if a set with this name exists
+        if (GetEquipmentSetInfoByName(setName)) then
+            texture = GetEquipmentSetInfoByName(setName)
+            texture = "Interface\\Icons\\"..texture
+            
+            textureIndex = GetTextureIndex(texture)
+        else
+            textureIndex = GetTextureIndex("Interface\\Icons\\Spell_Holy_EmpowerChampion")
+        end
+        
+        TopFit:Debug("Trying to save set: "..setName..", "..(textureIndex or "nil"))
+        SaveEquipmentSet(setName, textureIndex)
+    end
 end

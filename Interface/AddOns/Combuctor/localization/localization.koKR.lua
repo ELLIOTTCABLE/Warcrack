@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 	Localization.lua
 		Translations for Combuctor
 
@@ -33,7 +33,6 @@ L.ResetPositionTip = '<오른쪽 클릭>으로 위치 초기화'
 
 L.Normal = '일반'
 L.Equipment = '장비'
-L.Keys = '열쇠'
 L.Trade = '전문 기술'
 L.Ammo = '투사체'
 L.Shards = '조각'

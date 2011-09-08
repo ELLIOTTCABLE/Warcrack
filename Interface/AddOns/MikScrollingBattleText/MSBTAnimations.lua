@@ -45,8 +45,8 @@ local ANIMATION_DELAY = 0.015
 -- Left, Center, Right Text Aligns.
 local TEXT_ALIGN_MAP = {"BOTTOMLEFT", "BOTTOM", "BOTTOMRIGHT"}
 
--- None, Thin, Thick
-local OUTLINE_MAP = {"", "OUTLINE", "THICKOUTLINE"}
+-- Outline styles.
+local OUTLINE_MAP = {"", "OUTLINE", "THICKOUTLINE", "MONOCHROME", "MONOCHROME,OUTLINE", "MONOCHROME,THICKOUTLINE"}
 
 -- Defaults for certain parameters.
 local DEFAULT_FONT_SIZE = 18

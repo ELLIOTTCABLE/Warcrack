@@ -1,7 +1,7 @@
-## Interface: 40100
+## Interface: 40200
 ## Author: jnwhiteh
 ## Title: LightHeaded_Data_NPC
-## Version: 337
+## Version: 341
 ## Notes: Load on demand data addon for LightHeaded containing NPC location information
 ## License: All Rights Reserved
 ## LoadOnDemand: 1

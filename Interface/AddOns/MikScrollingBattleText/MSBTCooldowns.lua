@@ -21,6 +21,7 @@ local MSBTTriggers = MikSBT.Triggers
 local string_gsub = string.gsub
 local string_find = string.find
 local string_format = string.format
+local string_match = string.match
 local GetSpellCooldown = GetSpellCooldown
 local EraseTable = MikSBT.EraseTable
 local GetSkillName = MikSBT.GetSkillName
@@ -45,6 +46,9 @@ local SPELLID_READINESS		= 23989
 -- Death knight rune cooldown.
 local RUNE_COOLDOWN = 10
 
+-- Parameter locations.
+local ITEM_INFO_TEXTURE_POSITION = 10
+
 
 -------------------------------------------------------------------------------
 -- Private variables.
@@ -57,15 +61,35 @@ local eventFrame = CreateFrame("Frame")
 local playerClass
 
 -- Cooldown information.
-local activeCooldowns = {player={}, pet={}}
-local delayedCooldowns = {player={}, pet={}}
+local activeCooldowns = {player={}, pet={}, item={}}
+local delayedCooldowns = {player={}, pet={}, item={}}
 local resetAbilities = {}
 local runeCooldownAbilities = {}
-local cooldownSpellID = {}
+local lastCooldownIDs = {}
+local watchItemIDs = {}
 
 -- Used for timing between updates.
 local updateDelay = MIN_COOLDOWN_UPDATE_DELAY
 local lastUpdate = 0
+
+-- Flag for whether item cooldowns are enabled.
+local itemCooldownsEnabled = true
+
+
+-------------------------------------------------------------------------------
+-- Utility functions.
+-------------------------------------------------------------------------------
+
+-- ****************************************************************************
+-- Attempts to return a texture for a given cooldown type and id.
+-- ****************************************************************************
+local function GetCooldownTexture(cooldownType, cooldownID)
+ if (cooldownType == "item") then
+  return select(ITEM_INFO_TEXTURE_POSITION, GetItemInfo(cooldownID))
+ else
+  return GetSpellTexture(cooldownID)
+ end
+end
 
 
 -------------------------------------------------------------------------------
@@ -78,7 +102,8 @@ local lastUpdate = 0
 local function OnSpellCast(unitID, spellID)
  -- Ignore the cast if the spell name is excluded.
  local spellName = GetSpellInfo(spellID) or UNKNOWN
- if (MSBTProfiles.currentProfile.cooldownExclusions[spellName]) then return end
+ local cooldownExclusions = MSBTProfiles.currentProfile.cooldownExclusions
+ if (cooldownExclusions[spellName] or cooldownExclusions[spellID]) then return end
 
  -- An ability that resets cooldowns was cast.
  if (resetAbilities[spellID] and unitID == "player") then
@@ -93,24 +118,49 @@ local function OnSpellCast(unitID, spellID)
  end
 
  -- Set the cooldown spell id to be checked on the next cooldown update event. 
- cooldownSpellID[unitID] = spellID
+ lastCooldownIDs[unitID] = spellID
+end
+
+
+-- ****************************************************************************
+-- Called when the player uses an item.
+-- ****************************************************************************
+local function OnItemUse(itemID)
+ -- Ignore if the item name is excluded.
+ local itemName = GetItemInfo(itemID)
+ local cooldownExclusions = MSBTProfiles.currentProfile.cooldownExclusions
+ if (cooldownExclusions[itemName] or cooldownExclusions[itemID]) then return end
+
+ -- Add the item to a lsit to be checked for cooldowns in a a couple of seconds.
+ -- There doesn't appear to be a realible event that can be used for items like
+ -- there is for spells, so this allows a fairly efficient method of only checking
+ -- the cooldowns on used items versus scanning all of the slots in inventory
+ -- and bages every update.
+ watchItemIDs[itemID] = GetTime()
+
+ -- Force an update.
+ updateDelay = MIN_COOLDOWN_UPDATE_DELAY
+
+ -- Check if the event frame is not visible and make it visible so the OnUpdate events start firing.
+ -- This is done to keep the number of OnUpdate events down to a minimum for better performance.
+ if (not eventFrame:IsVisible()) then eventFrame:Show() end
 end
 
 
 -- ****************************************************************************
 -- Called when a spell cooldown is started.
 -- ****************************************************************************
-local function OnSpellUpdateCooldown(unitID)
- if (not delayedCooldowns[unitID] or not activeCooldowns[unitID]) then return end
+local function OnUpdateCooldown(cooldownType, cooldownFunc)
+ if (not delayedCooldowns[cooldownType] or not activeCooldowns[cooldownType]) then return end
 
  -- Start delayed cooldowns once they have been used.
- for spellID in pairs(delayedCooldowns[unitID]) do
-  -- Check if the spell is enabled yet.
-  local _, duration, enabled = GetSpellCooldown(spellID)
+ for cooldownID in pairs(delayedCooldowns[cooldownType]) do
+  -- Check if the cooldown is enabled yet.
+  local _, duration, enabled = cooldownFunc(cooldownID)
   if (enabled == 1) then
-   -- Add the spell to the active cooldowns list if the cooldown is longer than the cooldown threshold.
+   -- Add the cooldown to the active cooldowns list if the cooldown is longer than the cooldown threshold.
    if (duration >= MSBTProfiles.currentProfile.cooldownThreshold) then
-    activeCooldowns[unitID][spellID] = duration
+    activeCooldowns[cooldownType][cooldownID] = duration
 
     -- Force an update.
     updateDelay = MIN_COOLDOWN_UPDATE_DELAY
@@ -120,39 +170,39 @@ local function OnSpellUpdateCooldown(unitID)
     if (not eventFrame:IsVisible()) then eventFrame:Show() end
    end
 
-   -- Remove the spell from the delayed cooldowns list.
-   delayedCooldowns[unitID][spellID] = nil
+   -- Remove the cooldown from the delayed cooldowns list.
+   delayedCooldowns[cooldownType][cooldownID] = nil
   end
  end
 
  -- Add the last successful spell to the active cooldowns if necessary.
- local cooldownID = cooldownSpellID[unitID]
+ local cooldownID = lastCooldownIDs[cooldownType]
  if (cooldownID) then
   -- Make sure the spell cooldown is enabled.
-  local _, duration, enabled = GetSpellCooldown(cooldownID)
+  local _, duration, enabled = cooldownFunc(cooldownID)
   if (enabled == 1) then
    -- XXX This is a hack to compensate for Blizzard's API reporting incorrect cooldown information for death knights.
    -- XXX Ignore cooldowns that are the same duration as a rune cooldown except for the abilities that truly have the same cooldown.
-   if (playerClass == "DEATHKNIGHT" and duration == RUNE_COOLDOWN and unitID == "player" and not runeCooldownAbilities[cooldownID]) then duration = -1 end
+   if (playerClass == "DEATHKNIGHT" and duration == RUNE_COOLDOWN and cooldownType == "player" and not runeCooldownAbilities[cooldownID]) then duration = -1 end
 
-   -- Add the spell to the active cooldowns list if the cooldown is longer than the cooldown threshold.
+   -- Add the cooldown to the active cooldowns list if the cooldown is longer than the cooldown threshold.
    if (duration >= MSBTProfiles.currentProfile.cooldownThreshold) then
-    activeCooldowns[unitID][cooldownID] = duration
+    activeCooldowns[cooldownType][cooldownID] = duration
 
     -- Force an update.
     updateDelay = MIN_COOLDOWN_UPDATE_DELAY
-  
+
     -- Check if the event frame is not visible and make it visible so the OnUpdate events start firing.
     -- This is done to keep the number of OnUpdate events down to a minimum for better performance.
     if (not eventFrame:IsVisible()) then eventFrame:Show() end
    end
 
-  -- Spell cooldown is NOT enabled so add it to the delayed cooldowns list.
+  -- Cooldown is NOT enabled so add it to the delayed cooldowns list.
   else
-   delayedCooldowns[unitID][cooldownID] = true
+   delayedCooldowns[cooldownType][cooldownID] = true
   end
 
-  cooldownSpellID[unitID] = nil
+  lastCooldownIDs[cooldownType] = nil
  end -- cooldownID?
 end
 
@@ -169,12 +219,25 @@ local function OnUpdate(frame, elapsed)
   -- Reset the update delay to the max value.
   updateDelay = MAX_COOLDOWN_UPDATE_DELAY
 
+  -- Loop through the item ids being watched for cooldowns.
+  local currentTime = GetTime()
+  for cooldownID, usedTime in pairs(watchItemIDs) do
+   if (currentTime >= (usedTime + 1)) then
+	lastCooldownIDs["item"] = cooldownID
+    OnUpdateCooldown("item", GetItemCooldown)
+	watchItemIDs[cooldownID] = nil
+    break
+   end
+  end
+
   -- Loop through all of the active cooldowns.
   local currentTime = GetTime()
-  for unitID, cooldowns in pairs(activeCooldowns) do
-   for spellID, remainingDuration in pairs(cooldowns) do
+  for cooldownType, cooldowns in pairs(activeCooldowns) do
+   local cooldownFunc = (cooldownType == "item") and GetItemCooldown or GetSpellCooldown
+   local infoFunc = (cooldownType == "item") and GetItemInfo or GetSpellInfo
+   for cooldownID, remainingDuration in pairs(cooldowns) do
     -- Ensure the cooldown is still valid.
-    local startTime, duration, enabled = GetSpellCooldown(spellID)
+    local startTime, duration, enabled = cooldownFunc(cooldownID)
     if (startTime ~= nil) then
      -- Calculate the remaining cooldown.
      local cooldownRemaining = startTime + duration - currentTime
@@ -182,35 +245,39 @@ local function OnUpdate(frame, elapsed)
      -- XXX This is to compensate for Blizzard's API reporting incorrect cooldown information for pets that have been dismissed.
      -- XXX Use an internal timer for pet skills.
      -- XXX This will have to be updated if any skills are added that dynamically adjust pet cooldowns.
-     if (unitID == "pet") then cooldownRemaining = remainingDuration - lastUpdate end
+     if (cooldownType == "pet") then cooldownRemaining = remainingDuration - lastUpdate end
 
      -- Cooldown completed.
      if (cooldownRemaining <= 0) then
-      local spellName = GetSpellInfo(spellID) or UNKNOWN
-      local texture = GetSpellTexture(spellID)
-      HandleCooldowns(unitID, spellID, spellName, texture)
+      local cooldownName = infoFunc(cooldownID) or UNKNOWN
+      local texture = GetCooldownTexture(cooldownType, cooldownID)
+      HandleCooldowns(cooldownType, cooldownID, cooldownName, texture)
 
       local eventSettings = MSBTProfiles.currentProfile.events.NOTIFICATION_COOLDOWN
-      if (unitID == "pet") then eventSettings = MSBTProfiles.currentProfile.events.NOTIFICATION_PET_COOLDOWN end
+      if (cooldownType == "pet") then
+	   eventSettings = MSBTProfiles.currentProfile.events.NOTIFICATION_PET_COOLDOWN
+	  elseif (cooldownType == "item") then
+	   eventSettings = MSBTProfiles.currentProfile.events.NOTIFICATION_ITEM_COOLDOWN
+	  end
       if (eventSettings and not eventSettings.disabled) then
        local message = eventSettings.message
-       local formattedSkillName = string_format("|cFF%02x%02x%02x%s|r", eventSettings.skillColorR * 255, eventSettings.skillColorG * 255, eventSettings.skillColorB * 255, string_gsub(spellName, "%(.+%)%(%)$", ""))
+       local formattedSkillName = string_format("|cFF%02x%02x%02x%s|r", eventSettings.skillColorR * 255, eventSettings.skillColorG * 255, eventSettings.skillColorB * 255, string_gsub(cooldownName, "%(.+%)%(%)$", ""))
        message = string_gsub(message, "%%e", formattedSkillName)
        DisplayEvent(eventSettings, message, texture)
       end
 
-      -- Remove the cooldown from  active cooldowns.
-      cooldowns[spellID] = nil
+      -- Remove the cooldown from active cooldowns.
+      cooldowns[cooldownID] = nil
 
      -- Cooldown NOT completed.
      else
-      cooldowns[spellID] = cooldownRemaining
+      cooldowns[cooldownID] = cooldownRemaining
       if (cooldownRemaining < updateDelay) then updateDelay = cooldownRemaining end
      end
 
     -- Cooldown is no longer valid.
     else
-     cooldowns[spellID] = nil
+     cooldowns[cooldownID] = nil
     end
    end -- cooldowns
   end -- units
@@ -221,10 +288,10 @@ local function OnUpdate(frame, elapsed)
   -- Hide the event frame if there are no active cooldowns so the OnUpdate events stop firing.
   -- This is done to keep the number of OnUpdate events down to a minimum for better performance.
   local allInactive = true
-  for unitID, cooldowns in pairs(activeCooldowns) do
+  for cooldownType, cooldowns in pairs(activeCooldowns) do
    if (next(cooldowns)) then allInactive = false end
   end
-  if (allInactive) then eventFrame:Hide() end
+  if (allInactive and not next(watchItemIDs)) then eventFrame:Hide() end
 
   -- Reset the time since last update.
   lastUpdate = 0
@@ -250,10 +317,10 @@ end
 
 
 -- ****************************************************************************
--- Called when spells cooldowns begin.
+-- Called when spell cooldowns begin.
 -- ****************************************************************************
 function eventFrame:SPELL_UPDATE_COOLDOWN()
-  OnSpellUpdateCooldown("player")
+  OnUpdateCooldown("player", GetSpellCooldown)
 end
 
 
@@ -261,7 +328,7 @@ end
 -- Called when pet cooldowns begin.
 -- ****************************************************************************
 function eventFrame:PET_BAR_UPDATE_COOLDOWN()
-  OnSpellUpdateCooldown("pet")
+  OnUpdateCooldown("pet", GetSpellCooldown)
 end
 
 
@@ -282,6 +349,11 @@ local function UpdateRegisteredEvents()
  local registerFunc = doEnable and "RegisterEvent" or "UnregisterEvent"
  eventFrame[registerFunc](eventFrame, "COMBAT_LOG_EVENT_UNFILTERED")
  eventFrame[registerFunc](eventFrame, "PET_BAR_UPDATE_COOLDOWN")
+
+ -- Toggle the flag for tracking item cooldowns depending on enabled notifications and triggers.
+ local doEnable = false
+ if (not MSBTProfiles.currentProfile.events.NOTIFICATION_ITEM_COOLDOWN.disabled or MSBTTriggers.categorizedTriggers["ITEM_COOLDOWN"]) then doEnable = true end
+ itemCooldownsEnabled = doEnable
 end
 
 
@@ -301,9 +373,64 @@ local function Disable()
  eventFrame:Hide()
  eventFrame:UnregisterAllEvents()
 
- -- Clear the active and delayed cooldowns.
- for unitID, cooldowns in pairs(activeCooldowns) do EraseTable(cooldowns) end
- for unitID, cooldowns in pairs(delayedCooldowns) do EraseTable(cooldowns) end
+ -- Clear the cooldown tracking tables.
+ for cooldownType, cooldowns in pairs(activeCooldowns) do EraseTable(cooldowns) end
+ for cooldownType, cooldowns in pairs(delayedCooldowns) do EraseTable(cooldowns) end
+ EraseTable(watchItemIDs)
+end
+
+
+-------------------------------------------------------------------------------
+-- Item usage hooks.
+-------------------------------------------------------------------------------
+
+-- ****************************************************************************
+-- Called when an action button is used.
+-- ****************************************************************************
+local function UseActionHook(slot)
+ if (not itemCooldownsEnabled) then return end
+
+ -- Get item id for the action if the action was using and item.
+ local actionType, itemID = GetActionInfo(slot)
+ if (actionType == "item") then OnItemUse(itemID) end
+end
+
+
+-- ****************************************************************************
+-- Called when an inventory item is used.
+-- ****************************************************************************
+local function UseInventoryItemHook(slot)
+ if (not itemCooldownsEnabled) then return end
+
+ -- Get item id for the used inventory item.
+ local itemID = GetInventoryItemID("player", slot);
+ if (itemID) then OnItemUse(itemID) end
+end
+
+
+-- ****************************************************************************
+-- Called when a container item is used.
+-- ****************************************************************************
+local function UseContainerItemHook(bag, slot)
+ if (not itemCooldownsEnabled) then return end
+
+ -- Get item id for the used bag and slot.
+ local itemID = GetContainerItemID(bag, slot)
+ if (itemID) then OnItemUse(itemID) end
+end
+
+
+-- ****************************************************************************
+-- Called when an item is used by name.
+-- ****************************************************************************
+local function UseItemByNameHook(itemName)
+ if (not itemCooldownsEnabled) then return end
+
+ -- Get item link for the name and extract item id from item link.
+ if (not itemName) then return end
+ local _, itemLink = GetItemInfo(itemName)
+ if (itemLink) then itemID = string_match(itemLink, "item:(%d+)") end
+ if (itemID) then OnItemUse(itemID) end
 end
 
 
@@ -318,6 +445,12 @@ eventFrame:SetScript("OnUpdate", OnUpdate)
 
 -- Get the player's class.
 _, playerClass = UnitClass("player")
+
+-- Setup hooks.
+hooksecurefunc("UseAction", UseActionHook)
+hooksecurefunc("UseInventoryItem", UseInventoryItemHook)
+hooksecurefunc("UseContainerItem", UseContainerItemHook)
+hooksecurefunc("UseItemByName", UseItemByNameHook)
 
 -- Specify the abilities that reset cooldowns.
 resetAbilities[SPELLID_COLD_SNAP] = true

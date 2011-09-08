@@ -149,7 +149,7 @@ end
 -- 4.2
 local function OnCombatEvent(self, event, ...)
 	local combatevent, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname = GetCombatEventResults(...)
-	if CombatEventHandlers[combatevent] then CombatEventHandlers[combatevent](sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname) end		
+	if CombatEventHandlers[combatevent] and sourceGUID ~= UnitGUID("target") then CombatEventHandlers[combatevent](sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname) end		
 end
 
 -----------------------------------

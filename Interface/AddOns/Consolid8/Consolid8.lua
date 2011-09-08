@@ -8,17 +8,22 @@
 
 --[[ Local variables ]]--
 local addOnName, L = ...	-- Name and locale table
+local settings, countItems	-- Reference to Consolid8_Settings and countItems sub-table
 
 local frame
 local originalHonor
-local originalXP, originalXPMax,
-	gainedXP	-- [XP] XP gained before the last level up
-local data = {}
+local originalXP, originalXPMax, gainedXP	-- [XP] XP gained before the last level up
+local data	= {}
+local items	= {}	-- Count of items looted
 local specialData = {
 	-- money	: money looted
 	-- greyValue: value of looted poor quality items
 }
-Consolid8 = { data = data, specialData = specialData, }
+Consolid8 = Consolid8 or {}
+local Consolid8 = Consolid8
+Consolid8.data = data;
+Consolid8.items = items;
+Consolid8.specialData = specialData;
 
 local GetHonorCurrency = function() return select(2,GetCurrencyInfo(392)) or 0 end
 
@@ -30,7 +35,7 @@ function print(msg)
 end
 
 function CoppersToString(copper)
-	-- Returns: a formatted money string.
+	-- Returns: a formatted money string representing the specified number of coppers.
 	local gold	 = math.floor(copper / 10000)
 	copper		 = copper % 10000
 	local silver = math.floor(copper / 100)
@@ -68,9 +73,8 @@ end
 
 --[[ Chat Message Printing ]]--
 
--- These are arrays of chat frames which receive certain message types. Each also has a msgType value equal to the
--- message type that they receive. For example, lootCFs is populated with chat frames receiving LOOT messages, and
--- lootCFs.msg = "LOOT".
+-- These are arrays of chat frames which receive certain message types. Each has a msgType value equal to the message
+-- type that they receive. e.g. lootCFs is populated with chat frames receiving LOOT messages, and lootCFs.msg = "LOOT".
 local lootCFs, skillCFs
 
 local printing = false	-- true if ChatPrint is running; else false. Consolid8's filters return false when printing is true.
@@ -115,11 +119,11 @@ end
 --[[ Tradeskill handling ]]--
 -- Note: loot message filtering for tradeskills is handled by LootFilter() in the Looting section
 
-local craftingLink	-- Link to the item being crafted
-local lastSkillMsg	-- The last skill message that was filtered by SkillFilter
+local craftingLink				-- Link to the item being crafted
+local lastSkillMsg, numSkillUps	-- The last skill message that was filtered by SkillFilter, and the number of skill ups
 
-local crafting		-- If player is crafting, the number of actions remaining; else nil.
-local totalCrafted	-- The total number of items crafted
+local crafting					-- If player is crafting, the number of actions remaining; else nil.
+local totalCrafted				-- The total number of items crafted
 
 -- DoTradeSkill hook to detect start of crafting
 local orig_DoTradeSkill = DoTradeSkill
@@ -136,19 +140,24 @@ end
 
 local function ReportCrafting()
 	-- Prints the final skill gain and loot messages to their proper chat frames.
-	if totalCrafted and totalCrafted <= 0 then return end
-	if lastSkillMsg then ChatPrint(skillCFs, lastSkillMsg) end
-	ChatPrint(lootCFs, format(LOOT_ITEM_CREATED_SELF, format("%sx%s", craftingLink, totalCrafted)))
-	craftingLink = nil
-	lastSkillMsg = nil
-	totalCrafted = nil
+	if not totalCrafted or totalCrafted <= 0 then return end
+
+	if lastSkillMsg then
+		-- Print skill up message with number of skill points gained
+		ChatPrint(skillCFs, format("%s (+%d)", lastSkillMsg, numSkillUps))
+	end
+	-- Print item created message
+	ChatPrint(lootCFs, format(LOOT_ITEM_CREATED_SELF, format("%sx%s", craftingLink or "", totalCrafted)))
+
+	-- Clear values
+	craftingLink, lastSkillMsg, numSkillUps, totalCrafted = nil
 end
 
--- TODO: Stop this happening for enchanting
 local function SkillFilter(chatFrame, event, msg)
 	-- Returns: true (discard) if crafting and the message is a skill increase.
 	if crafting and not printing and msg:match(L["SKILL_UP"]) then
 		lastSkillMsg = msg
+		numSkillUps = (numSkillUps or 0) + 1
 		return true
 	end
 end
@@ -161,7 +170,7 @@ function ToggleSkill()
 end
 
 function Consolid8.SetSkillSetting(skill)
-	Consolid8_Settings.skill = skill
+	Consolid8_Settings.skill = skill and true or false	-- Store a boolean, not 1/nil
 	if skill then
 		ChatFrame_AddMessageEventFilter("CHAT_MSG_SKILL", SkillFilter)
 	else
@@ -191,24 +200,25 @@ local function NextItem()
 	-- Calls ReportLoot if the last item has been autolooted or LootFrame has closed.
 	timeout = 10	-- [Timeout] Enable/reset timer
 
-	if type(looting) == "number" then
-		-- See whether this was the last item
+	if type(looting) == "number" then	-- See whether this was the last item
 		looting = looting - 1
 		if looting == 0 then
 			ReportLoot()
 		end
 
-	elseif not LootFrame:IsShown() then
-		-- See if the loot frame has been closed
+	elseif not LootFrame:IsShown() then	-- See if the loot frame has been closed
 		ReportLoot()
 	end
 end
 
 local function LogLoot(link, quantity)
 	quantity = (quantity == "") and 1 or quantity
-	local _,_, rarity, _,_,_,_,_,_,_, sellPrice = GetItemInfo(link)
+	local name, _, rarity, _,_,_,_,_,_,_, sellPrice = GetItemInfo(link)
 	if masterLooting and rarity > GetLootThreshold() then
 		ChatPrint(lootCFs, format(LOOT_ITEM_SELF, link))
+
+	elseif countItems[name] then
+		items[name] = (items[name] or 0) + quantity
 
 	elseif rarity > ITEM_QUALITY_POOR then -- the item is not poor quality
 		local msg = (quantity ~= 1) and format("%sx%s", link, quantity) or link
@@ -223,7 +233,8 @@ local function LootFilter(chatFrame, event, msg)	-- +[Tradeskill] Discard args 2
 	if printing then return false end
 
 	local returnValue =
-		looting and msg:match(L["LOOT"]) or msg:match(L["LOOT_OTHER"])
+		looting and msg:match(L["LOOT"])
+		or msg:match(L["LOOT_OTHER"])
 		or crafting and msg:match(L["CREATE"])
 
 	-- Set looting/crafting to false if this message was trailing (and if this is the last CF to receive LOOT messages)
@@ -248,7 +259,7 @@ function ToggleLoot()
 end
 
 function Consolid8.SetLootSetting(loot)
-	Consolid8_Settings.loot = loot
+	Consolid8_Settings.loot = loot and true or false	-- Store a boolean, not 1/nil
 	if loot then
 		ChatFrame_AddMessageEventFilter("CHAT_MSG_LOOT", LootFilter)
 	else
@@ -259,7 +270,6 @@ end
 end
 
 --[[ XP ]]--
-
 local function GetXP()
 	return UnitXP("player") - originalXP + gainedXP
 end
@@ -268,12 +278,9 @@ end
 
 function Consolid8.Reset()
 	-- Clears all stored data.
-	for key, value in pairs(data) do
-		data[key] = nil
-	end
-	for key, value in pairs(specialData) do
-		specialData[key] = nil
-	end
+	for key, value in pairs(data) do		data[key] = nil			end
+	for key, value in pairs(specialData) do	specialData[key] = nil	end
+	for key, value in pairs(items) do		items[key] = nil		end
 	originalHonor	= GetHonorCurrency()
 	originalXP		= UnitXP("player")
 	print(RESET)
@@ -330,10 +337,13 @@ local eventHandlers; eventHandlers = {
 		end
 	end,
 
+	CHAT_MSG_CURRENCY = NextItem,
+
 	UI_ERROR_MESSAGE = function(msg)				-- +[Tradeskill] Check for full inventory etc.
-		if crafting and (msg == INTERRUPTED or msg == ERR_INV_FULL) then
+		if crafting then
 			-- [Tradeskill] Register that crafting has been interrupted
 			ReportCrafting()
+			crafting = false
 		elseif msg == ERR_INV_FULL or msg == ERR_LOOT_CANT_LOOT_THAT or msg == ERR_LOOT_CANT_LOOT_THAT_NOW or msg == ERR_LOOT_ROLL_PENDING then
 			NextItem()
 		end
@@ -366,18 +376,23 @@ local eventHandlers; eventHandlers = {
 		if not Consolid8_Settings then
 			Consolid8_Settings = { loot = true, skill = true, visible = true, auto = true }
 		end
+		settings	= Consolid8_Settings
+
+		if not settings.countItems then
+			Consolid8.ResetItemsTable()
+		end
+		countItems	= settings.countItems
+
 		-- Check for upgrade
 		local versionMeta = GetAddOnMetadata(addOnName, "Version")
-		if Consolid8_Settings.version ~= versionMeta then
-			Consolid8_Settings.version = versionMeta
-			Consolid8_Settings.skill = true
+		if settings.version ~= versionMeta then
+			-- Add any new items to the settings table (none for this release)
+			settings.version = versionMeta
 		end
 
-		if not Consolid8_Settings.visible then
-			frame:Hide()
-		end
-		Consolid8.SetLootSetting(Consolid8_Settings.loot)
-		Consolid8.SetSkillSetting(Consolid8_Settings.skill)
+		if not settings.visible then frame:Hide() end
+		Consolid8.SetLootSetting(settings.loot)
+		Consolid8.SetSkillSetting(settings.skill)
 
 		-- Self-destruct
 		frame:UnregisterEvent("ADDON_LOADED")
@@ -441,6 +456,8 @@ function Consolid8.OnLoad()
 	for event in pairs(eventHandlers) do
 		frame:RegisterEvent(event)
 	end
+
+	Consolid8.OnLoad = nil
 end
 
 do --[[ UI ]]--
@@ -456,7 +473,9 @@ StaticPopupDialogs.Consolid8 = {
 	button2		= OKAY,		-- Cancel button
 
 	OnShow = function(self)
-		local namesStr, valuesStr = ConcatKeys(data, nil), ConcatValues(data, nil)
+		local namesStr, valuesStr = FACTION .. "\n" .. ConcatKeys(data), L["CHANGE"] .. "\n" .. ConcatValues(data)
+
+		namesStr, valuesStr = namesStr .. "\n\n" .. ITEMS .. "\n" .. ConcatKeys(items), valuesStr .. "\n\n#\n" .. ConcatValues(items)
 
 		-- Money, Honor, and XP
 		if specialData.money then
@@ -464,7 +483,7 @@ StaticPopupDialogs.Consolid8 = {
 			valuesStr = valuesStr .. "\n" .. CoppersToString(specialData.money)
 		end
 		if specialData.greyValue then
-			namesStr  = namesStr .. "\n"
+			namesStr  = namesStr .. "\n."
 			valuesStr = valuesStr .. "\n" .. format(GREY_TEXT, CoppersToString(specialData.greyValue))
 		end
 
@@ -481,7 +500,7 @@ StaticPopupDialogs.Consolid8 = {
 		end
 
 		-- Custom popup frames
-		local namesFS, valuesFS, autoCB
+		local namesFS, valuesFS
 		if not self.namesFS then
 			namesFS	 = self:CreateFontString(nil, "ARTWORK", "Consolid8NameStyle")
 			namesFS:SetPoint("LEFT", self, "LEFT", 15, 0)
@@ -490,28 +509,24 @@ StaticPopupDialogs.Consolid8 = {
 			valuesFS = self:CreateFontString(nil, "ARTWORK", "Consolid8ValueStyle")
 			valuesFS:SetPoint("RIGHT", self, "RIGHT", -15, 0)
 			self.valuesFS = valuesFS
-
-			autoCB 	 = CreateFrame("CheckButton", nil, self, "Consolid8_CBTemplate")
-			autoCB:SetText(L["AUTO"])
-			autoCB:SetPoint("BOTTOMLEFT", self.button1, "TOPLEFT", 0, 0)
-			self.autoCB = autoCB
 		else
 			namesFS	 = self.namesFS
 			valuesFS = self.valuesFS
-			autoCB	 = self.autoCB
 		end
-		
+
 		namesFS:SetText(namesStr)
 		namesFS:SetWidth(namesFS:GetStringWidth())
+		namesFS:Show()
 
 		valuesFS:SetText(valuesStr)
 		valuesFS:SetWidth(valuesFS:GetStringWidth())
+		valuesFS:Show()
 
-		-- Automatic report checkbox
-		autoCB:SetChecked(Consolid8_Settings.auto)
-		autoCB:Show()
-
-		self.height = self:GetHeight() + namesFS:GetStringHeight() + autoCB:GetHeight() + 10	-- Calculate the height
+		if not self.normalHeight then
+			-- Store normal height the first time. If self:GetHeight is used every time, the frame gets taller and taller.
+			self.normalHeight = self:GetHeight()
+		end
+		self.height = self.normalHeight + namesFS:GetStringHeight() + 10	-- Calculate the height
 	end,
 
 	OnUpdate = function(self)
@@ -523,11 +538,9 @@ StaticPopupDialogs.Consolid8 = {
 	OnHide = function(self)
 		self.namesFS:Hide()
 		self.valuesFS:Hide()
-		self.autoCB:Hide()
-		Consolid8.SetReportSetting(self.autoCB:GetChecked() and true or false)	-- Store a boolean, not 1/nil
 	end,
 
-	whileDead = 1, hideOnEscape = 1, notClosableByLogout = 1, timeout = 0,
+	whileDead = 1, hideOnEscape = 1, timeout = 0,
 }
 
 -- Report settings
@@ -536,7 +549,7 @@ local function ToggleReport()
 end
 
 function Consolid8.SetReportSetting(auto)
-	Consolid8_Settings.auto = auto
+	Consolid8_Settings.auto = auto and true or false	-- Store a boolean, not 1/nil
 end
 
 function Consolid8.Report()
@@ -546,29 +559,28 @@ end
 -- Slash handler
 SLASH_CONSOLID1 = "/"..addOnName
 SlashCmdList["CONSOLID"] = function(msg)
+	local pureMsg = msg
 	msg = string.lower(msg)
 	if msg == string.lower(L["REPORT"]) then
 		return Consolid8.Report()
 	elseif msg == string.lower(RESET) then
 		return Consolid8.Reset()
 	elseif msg == string.lower(L["SHOW"]) then
-		return Consolid8.Show()
+		return Consolid8.SetVisibleSetting(true)
 	elseif msg == string.lower(L["HIDE"]) then
-		return Consolid8.Hide()
+		return Consolid8.SetVisibleSetting(false)
 	else
 		return print(SLASH_CONSOLID1 .. format(" %s, %s, %s, %s", L["REPORT"], RESET, L["SHOW"], L["HIDE"]))
 	end
 end
 
--- Show/hide button
-function Consolid8.Show()
-	frame:Show()
-	Consolid8_Settings.visible = true
-end
-
-function Consolid8.Hide()
-	frame:Hide()
-	Consolid8_Settings.visible = false
+function Consolid8.SetVisibleSetting(visible)
+	Consolid8_Settings.visible = visible
+	if visible then
+		return frame:Show()
+	else
+		return frame:Hide()
+	end
 end
 
 -- Tooltip
@@ -590,9 +602,15 @@ function Consolid8.ShowTooltip()
 
 	-- Faction changes
 	tooltip:AddDoubleLine(FACTION, L["CHANGE"])	-- Column headers
-
 	for key, value in pairs(data) do
 		tooltip:AddDoubleLine(key, value, 0.5, 0.5, 1,	0.5, 0.5, 1)
+	end
+
+	-- Items
+	tooltip:AddLine(" ")
+	tooltip:AddLine(ITEMS)
+	for key, value in pairs(items) do
+		tooltip:AddDoubleLine(key, value, 1, 1, 1,	1, 1, 1)
 	end
 
 	tooltip:AddLine(" ")
@@ -644,7 +662,7 @@ local menuList =
 		end,
 		func	= ToggleLoot,
 	},
-	{	--[ ] Loot
+	{	--[ ] Tradeskill
 		text	= TRADESKILLS,
 		update	= function(tbl)
 			if Consolid8_Settings then tbl.checked = Consolid8_Settings.skill end

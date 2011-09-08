@@ -38,6 +38,7 @@ function LightHeaded:Enable()
 			positions = {
 			},
 			sound = true,
+            descs = false,
 			bgalpha = 1.0,
 			debug = false,
             fixmodel = true,
@@ -190,6 +191,25 @@ function LightHeaded:GetQIDOffsets(qid)
 			return 1, scroll
 		end
 	end
+end
+
+function LightHeaded:GetQIDDescription(qid)
+    if not LH_QIDDesc then
+        -- Try to load the addon
+        local addon = "LightHeaded_Data_QIDDesc"
+        self:Debug(1, "Loading " .. addon)
+        local succ,reason = LoadAddOn(addon)
+        if succ ~= 1 then
+            self:Debug(1, "Could not load " .. addon, reason)
+            return
+        end
+        collectgarbage("collect")
+    end
+
+    if qid then
+        local pat = string.format("%d\031(.-)\031(.-)\030", qid)
+        return LH_QIDDesc:match(pat)
+    end
 end
 
 StaticPopupDialogs["LH_OFFENDING_ADDON"] = {
@@ -712,7 +732,17 @@ function LightHeaded:GetPageText(qid, page)
 			-- Level will always exist
 			text = text .. "\n|cffffd100Level:|r " .. level
 
-			-- All other params are optional
+            if self.db.profile.descs then
+                local intro, desc = self:GetQIDDescription(qid)
+                if intro then
+                    text = text .. "\n|cffffd100Intro:|r " .. intro
+                end
+                if desc then
+                    text = text .. "\n|cffffd100Description:|r " .. desc
+                end
+            end
+
+            -- All other params are optional
 			if reqlev ~= "" then
 				text = text .. "\n|cffffd100Required Level:|r " .. reqlev
 			end

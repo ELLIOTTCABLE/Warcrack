@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 	Localization.lua
 		Translations for Combuctor
 
@@ -34,7 +34,6 @@ L.ResetPositionTip = '<右鍵點選>重設位置'
 
 L.Normal = '一般'
 L.Equipment = '裝備'
-L.Keys = '鑰匙'
 L.Trade = '商業'
 L.Ammo = '彈藥'
 L.Shards = '碎片'

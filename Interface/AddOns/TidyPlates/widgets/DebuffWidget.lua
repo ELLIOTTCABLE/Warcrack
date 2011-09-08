@@ -17,6 +17,8 @@ Spell Priority
 
 --]]
 
+TidyPlatesWidgets.DebuffWidgetBuild = 2
+
 local PlayerGUID = UnitGUID("player")
 local PolledHideIn = TidyPlatesWidgets.PolledHideIn
 local FilterFunction = function() return 1 end
@@ -108,10 +110,8 @@ end
 local function FindWidgetByName(SearchFor)
 	local widget
 	--local SearchFor = strsplit("-", NameString)
-	--print("FindWidgetByName", NameString, SearchFor)
 	for widget in pairs(WidgetList) do
 		if widget.unit.name == SearchFor then 
-			--print("Widget Found", widget)
 			return widget 
 		end
 	end
@@ -130,8 +130,7 @@ local function CallForWidgetUpdate(guid, raidicon, name)
 	if guid then widget = FindWidgetByGUID(guid) end
 	if (not widget) and name then widget = FindWidgetByName(name) end
 	if (not widget) and raidicon then widget = FindWidgetByIcon(raidicon) end
-	
-	--print(GetTime(), "Updating Widget", guid, raidicon, name, widget)
+
 	if widget then UpdateWidget(widget) end
 end
 
@@ -153,73 +152,72 @@ end
 -----------------------------------------------------
 -- Aura Instances
 -----------------------------------------------------
+
+-- New Style
 local AuraInstances = {}
-AuraInstances.SpellID = {}
-AuraInstances.ExpirationTimes = {}
-AuraInstances.Stacks = {}
-AuraInstances.Caster = {}
-AuraInstances.Duration = {}
-AuraInstances.Texture = {}
+-- AuraInstances[guid][aurainstance] = {}
 
-local function WipeAuraInstances(guid)
-	local instances = AuraInstances.ExpirationTimes[guid]
-	if not instances then return end
-	for aurainstance, expiration in pairs(instances) do
-		if expiration < GetTime() then
-			AuraInstances.SpellID[guid][aurainstance] = nil
-			AuraInstances.ExpirationTimes[guid][aurainstance] = nil
-			AuraInstances.Stacks[guid][aurainstance] = nil
-			AuraInstances.Caster[guid][aurainstance] = nil
-			AuraInstances.Duration[guid][aurainstance] = nil
-			AuraInstances.Texture[guid][aurainstance] = nil
-		end
-	end
-end
 
-local function WipeAuraLists()	
-	for guid, instances in pairs(AuraInstances.ExpirationTimes) do
-		WipeAuraInstances(guid)
+local function WipeAuraList(guid)
+	if guid and AuraInstances[guid] then
+		wipe(AuraInstances[guid])
 	end
 end
 
 local function GetAuraList(guid)
 	if guid then
-		return AuraInstances.SpellID[guid]
+		return AuraInstances[guid]
 	end
 end
 
 local function GetAuraInstance(guid, instanceid)
 	if guid and instanceid then
-		if AuraInstances.ExpirationTimes[guid] then
-			local expiration, stacks, caster, duration, texture
-			spellid = AuraInstances.SpellID[guid][instanceid]
-			expiration = AuraInstances.ExpirationTimes[guid][instanceid]
-			stacks = AuraInstances.Stacks[guid][instanceid]
-			caster = AuraInstances.Caster[guid][instanceid]
-			duration = AuraInstances.Duration[guid][instanceid]
-			texture = AuraInstances.Texture[guid][instanceid]
-			return spellid, expiration, stacks, caster, duration, texture
+		local spellid, expiration, stacks, caster, duration, texture
+		spellid = AuraInstances[guid][instanceid].SpellID
+		expiration = AuraInstances[guid][instanceid].Expiration
+		stacks = AuraInstances[guid][instanceid].Stacks
+		caster = AuraInstances[guid][instanceid].Caster
+		duration = AuraInstances[guid][instanceid].Duration
+		texture = AuraInstances[guid][instanceid].Texture
+		return spellid, expiration, stacks, caster, duration, texture
+	end
+end
+
+local function RemoveAuraInstance(guid, spellid, caster)
+	if guid and spellid and AuraInstances[guid] then
+		local instanceid = spellid..(tostring(caster or "UNKNOWN_CASTER"))
+		local aurainstance = AuraInstances[guid][instanceid]
+		if aurainstance then
+			wipe(aurainstance)
+			AuraInstances[guid][instanceid] = nil
 		end
 	end
 end
 
 local function SetAuraInstance(guid, spellid, expiration, stacks, caster, duration, texture)
-	if guid and spellid then
-		-- Add guid tables, if needed
-		AuraInstances.SpellID[guid] = AuraInstances.SpellID[guid] or {}
-		AuraInstances.ExpirationTimes[guid] = AuraInstances.ExpirationTimes[guid] or {}
-		AuraInstances.Stacks[guid] = AuraInstances.Stacks[guid] or {}
-		AuraInstances.Caster[guid] = AuraInstances.Caster[guid] or {}
-		AuraInstances.Duration[guid] = AuraInstances.Duration[guid] or {}
-		AuraInstances.Texture[guid] = AuraInstances.Texture[guid] or {}
-		-- Set Values
-		local instanceid = spellid..(tostring(caster or "UNKNOWN"))
-		AuraInstances.SpellID[guid][instanceid] = spellid
-		AuraInstances.ExpirationTimes[guid][instanceid] = expiration
-		AuraInstances.Stacks[guid][instanceid] = stacks
-		AuraInstances.Caster[guid][instanceid] = caster
-		AuraInstances.Duration[guid][instanceid] = duration
-		AuraInstances.Texture[guid][instanceid] = texture
+	if guid and spellid and caster and texture then
+		local instanceid = spellid..(tostring(caster or "UNKNOWN_CASTER"))
+		AuraInstances[guid] = AuraInstances[guid] or {}
+		AuraInstances[guid][instanceid] = AuraInstances[guid][instanceid] or {}
+		AuraInstances[guid][instanceid].SpellID = spellid
+		AuraInstances[guid][instanceid].Expiration = expiration
+		AuraInstances[guid][instanceid].Stacks = stacks
+		AuraInstances[guid][instanceid].Caster = caster
+		AuraInstances[guid][instanceid].Duration = duration
+		AuraInstances[guid][instanceid].Texture = texture
+	end
+end
+
+local function CleanAuraLists()	
+	local currentTime = GetTime()
+	for guid, instances in pairs(AuraInstances) do
+		for instanceid, instancedata in pairs(instances) do
+			if instancedata.Expiration and instancedata.Expiration < currentTime then
+				wipe(AuraInstances[guid][instanceid])
+				AuraInstances[guid][instanceid] = nil
+			end
+		end
+		CallForWidgetUpdate(guid, nil, nil)
 	end
 end
 
@@ -235,7 +233,7 @@ local function UpdateAurasByUnitID(unitid)
 		local index
 		local guid = UnitGUID(unitid)
 		-- Reset Auras for a guid
-		WipeAuraInstances(guid)
+		WipeAuraList(guid)
 		-- Add auras
 		for index = 1, 40 do
 			local name , _, texture, count, debuffType, duration, expirationTime, unitCaster, _, _, spellid = UnitDebuff(unitid, index)		-- FILTER: DEBUFF
@@ -244,6 +242,7 @@ local function UpdateAurasByUnitID(unitid)
 			SetSpellDuration(spellid, duration)
 			-- Add aura to unit
 			SetAuraInstance(guid, spellid, expirationTime, count, UnitGUID(unitCaster or ""), duration, texture)
+
 		end	
 
 		local raidicon, name
@@ -283,14 +282,14 @@ local function CombatLog_ApplyAura(...)
 	local timestamp, sourceGUID, destGUID, destName, spellid = ...
 	local duration = GetSpellDuration(spellid)
 	local texture = GetSpellTexture(spellid)
-	--print(GetTime(), "Apply", destGUID, spellid, texture)
+
 	SetAuraInstance(destGUID, spellid, GetTime() + (duration or 0), 1, sourceGUID, duration, texture)
 end
 
 local function CombatLog_RemoveAura(...) 
 	local timestamp, sourceGUID, destGUID, destName, spellid = ...
-	--print(GetTime(), "Remove", destGUID, spellid)
-	SetAuraInstance(destGUID, spellid, 0, 0, sourceGUID, 0, nil)
+
+	RemoveAuraInstance(destGUID, spellid, sourceGUID)
 end
 
 local function CombatLog_UpdateAuraStacks(...) 
@@ -351,8 +350,8 @@ local CombatLogEvents = {
 local GeneralEvents = {
 	["UNIT_TARGET"] = EventUnitTarget,
 	["UNIT_AURA"] = EventUnitAura,
-	["PLAYER_ENTERING_WORLD"] = WipeAuraLists,
-	["PLAYER_REGEN_ENABLED"] = WipeAuraLists,
+	["PLAYER_ENTERING_WORLD"] = CleanAuraLists,
+	["PLAYER_REGEN_ENABLED"] = CleanAuraLists,
 }
 
 
@@ -384,8 +383,7 @@ local function CombatEventHandler(frame, event, ...)
 	
 	-- Evaluate only for enemy units, for now
 	if (bit.band(destFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0) then							-- FILTER: ENEMY UNIT
-		--print("Destflag Unfriendly")
-		---print("CLEU", ...)
+
 		local CombatLogUpdateFunction = CombatLogEvents[combatevent]
 		-- Evaluate only for certain combat log events
 		if CombatLogUpdateFunction then 
@@ -462,7 +460,6 @@ local function UpdateIcon(frame, texture, expiration, stacks, highlight)
 		else frame.Border:SetTexture(AuraBorderArt) end
 		--]]
 	else 
-		frame:Hide()
 		PolledHideIn(frame, 0)
 	end
 end
@@ -476,33 +473,33 @@ local function UpdateIconGrid(frame, guid)
 		local AuraIconFrames = frame.AuraIconFrames
 		local AurasOnUnit = GetAuraList(guid)
 		local AuraSlotIndex = 1
+		local instanceid
 		
-		--print(GetTime(), guid)
+
 		-- Set Auras to Available Slots
 		if AurasOnUnit then
 			frame:Show()
-			local instanceid, spellid, expiration, stacks, caster, duration, texture
-			--for spellid, expiration in pairs(AurasOnUnit) do
 			for instanceid in pairs(AurasOnUnit) do
-				spellid, expiration, stacks, caster, duration, texture = GetAuraInstance(guid, instanceid)
-				
-				-- Gather Debuff Information
-				CurrentDebuff.name = GetSpellInfo(spellid)
-				CurrentDebuff.spellid = spellid
-				CurrentDebuff.stacks = stacks
-				CurrentDebuff.duration = duration
-				CurrentDebuff.caster = caster
-				--CurrentDebuff.unit = guid
-				
-				-- Filter Function
-				local showDebuff, showHighlight = frame.Filter(CurrentDebuff)
-				
-				if showDebuff and expiration > GetTime() then
-					UpdateIcon(AuraIconFrames[AuraSlotIndex], texture, expiration, stacks, showHighlight) 
-					AuraSlotIndex = AuraSlotIndex + 1	
-					-- ADD: Set Debuff Information to Icon
+				local spellid, expiration, stacks, caster, duration, texture = GetAuraInstance(guid, instanceid)
+				if tonumber(spellid) then
+					-- Gather Debuff Information
+					wipe(CurrentDebuff)
+					CurrentDebuff.name = GetSpellInfo(tonumber(spellid))
+					CurrentDebuff.spellid = spellid
+					CurrentDebuff.stacks = stacks
+					CurrentDebuff.duration = duration
+					CurrentDebuff.caster = caster
 					
-					if AuraSlotIndex > 8 then break end
+					-- Filter Function
+					local showDebuff, showHighlight = frame.Filter(CurrentDebuff)
+					
+					if showDebuff and expiration > GetTime() then
+						UpdateIcon(AuraIconFrames[AuraSlotIndex], texture, expiration, stacks, showHighlight) 
+						AuraSlotIndex = AuraSlotIndex + 1	
+						-- ADD: Set Debuff Information to Icon
+						
+						if AuraSlotIndex > 8 then break end
+					end
 				end
 			end
 		end
@@ -553,7 +550,7 @@ local function UpdateWidgetContext(frame, unit)
 	local raidicon, name
 	if unit.isMarked then
 		raidicon = unit.raidIcon
-		if guid then ByRaidIcon[raidicon] = guid end
+		if guid and raidicon then ByRaidIcon[raidicon] = guid end
 	end
 	if unit.type == "PLAYER" and unit.reaction == "HOSTILE" then name = unit.name end
 	
@@ -735,7 +732,6 @@ TableMemory = function(pTable, level)
 	for i,v in pairs(pTable) do		
 		if type(v) == 'table' then 
 			local mem = TableMemory(v, level+1)
-			--print(indent, i, mem, level)
 			sum = sum + mem
 			entries = entries + 1
 		else entries = entries + 1 end

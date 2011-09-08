@@ -37,9 +37,9 @@
  <body>
   <h1>Mik's Scrolling Battle Text</h1>
   <div id="HeaderBlock">
-   Version: 5.5<br />
+   Version: 5.6<br />
    Author: Mikord<br />
-   Updated: June 28, 2011<br />
+   Updated: July 22, 2011<br />
    Official Site: <a href="http://mikord.wowinterface.com">http://mikord.wowinterface.com</a><br /><br />
    <a href="#Credits">See Credits</a>
   </div>
@@ -196,7 +196,7 @@
       <li>Soul Shard Creation</li>
       <li>Enemy Buff Gains</li>
       <li>Monster Emotes</li>
-      <li>Player and Pet Cooldown Completions</li>
+      <li>Player, Pet, and Item Cooldown Completions</li>
      </ul>
 
      <br />
@@ -617,6 +617,10 @@
      <tr>
       <td class="ParameterName" nowrap="nowrap">Health Change:</td>
       <td class="ParameterDesc">Fired when a health value changes for one of the supported units.</td>
+     </tr>
+     <tr>
+      <td class="ParameterName" nowrap="nowrap">Item Cooldown Complete:</td>
+      <td class="ParameterDesc">Fired when an item cooldown completes.</td>
      </tr>
      <tr>
       <td class="ParameterName" nowrap="nowrap">Killing Blow:</td>
@@ -1206,6 +1210,42 @@
    <table cellspacing="3">
     <tr>
      <td class="ParameterName" nowrap="nowrap"><a name="WhatsNew"></a>Latest</td>
+     <td class="ParameterDesc">
+      <ul>
+       <li>Removed item cooldown tracking debug print.</li>
+      </ul>
+     </td>
+    </tr>
+    <tr>
+     <td class="ParameterName" nowrap="nowrap">5.6.107</td>
+     <td class="ParameterDesc">
+      <ul>
+       <li>Added support for item cooldowns:
+        <ul>
+         <li>Created new event for customizable item cooldown notifications.</li>
+         <li>Added Item Cooldown Complete to the available trigger events.</li>
+         <li>Added Item ID and Item Name condition handling for the main trigger events that support them.</li>
+         <li>Cooldown exclusions now accept skill IDs, item names, and item IDs in addition to skill names.</li>
+        </ul>
+       </li>
+       <br />
+       <li>Added monochrome, monochrome + thin, and monochrome + thick to available outline font settings for pixel font lovers.</li>
+       <li>Modified the custom font and sound validation routines to work with arbitrary case extensions.</li>
+       <li>Changed custom font validation error message to a more descriptive message when the font can't be set versus the more generic ttf message.</li>
+      </ul>
+     </td>
+    </tr>
+    <tr>
+     <td class="ParameterName" nowrap="nowrap">5.5.106</td>
+     <td class="ParameterDesc">
+      <ul>
+       <li>Added option to customize color of shadowflame damage.</li>
+       <li>Added option to customize color of frostfire damage.</li>
+      </ul>
+     </td>
+    </tr>
+    <tr>
+     <td class="ParameterName" nowrap="nowrap">5.5.105</td>
      <td class="ParameterDesc">
       <ul>
        <li>Modified combat event log parsers to work with the changes in Patch 4.2 without extra indirection.</li>

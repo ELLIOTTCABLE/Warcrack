@@ -1,5 +1,5 @@
 ## Interface: 40200
-## Version: 4.2.0.134
+## Version: 4.2.0.135
 
 ## Title: PhanxChat
 ## Notes: Removes chat frame clutter and adds some functionality.

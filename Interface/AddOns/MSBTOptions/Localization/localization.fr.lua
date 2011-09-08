@@ -23,6 +23,7 @@ L.MSG_CUSTOM_FONTS					= "Polices Personnalisées"
 L.MSG_INVALID_CUSTOM_FONT_NAME		= "Nom de Police incorrect."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "Le nom de la Police existe déjà."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "Le chemin de la Police doit pointé vers un fichier .ttf."
+--L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font." 
 L.MSG_CUSTOM_SOUNDS					= "Sons Personnalisés"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "Nom du Son incorrect."
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "Le nom du son existe déjà."
@@ -125,6 +126,7 @@ obj["hideFullOverheals"]	= { label="Cacher les Soins en Excès Total", tooltip="
 obj["allClasses"]			= { label="Toutes les classes"}
 --obj["enablePlayerCooldowns"]	= { label="Player Cooldowns", tooltip="Display notifications when your cooldowns complete."}
 --obj["enablePetCooldowns"]		= { label="Pet Cooldowns", tooltip="Display notifications when your pet's cooldowns complete."}
+--obj["enableItemCooldowns"]		= { label="Item Cooldowns", tooltip="Display notifications when item cooldowns complete."}
 obj["lootedItems"]			= { label="Items Ramassés", tooltip="Affiche les notifications quand des items sont ramassés."}
 obj["moneyGains"]			= { label="Gains d'argent", tooltip="Affiche vos gains d'argent."}
 obj["alwaysShowQuestItems"]	= { label="Toujours Montrer les Items de Quête", tooltip="Toujours montrer les items de quête quelle que soit la sélection selon la qualité des items."}
@@ -310,6 +312,7 @@ obj["FACTION_NAME"]			= "%e - Faction.\n"
 obj["EMOTE_TEXT"]			= "%e - Le texte de l'emote.\n"
 obj["MONEY_TEXT"]			= "%e - Le texte de l'argent gagné.\n"
 obj["COOLDOWN_NAME"]		= "%e - Le nom de la compétence qui est prête.\n"
+--obj["ITEM_COOLDOWN_NAME"]	= "%e - The name of item that is ready.\n"
 obj["ITEM_NAME"]			= "%e - Le nom de l'item ramassé.\n"
 obj["POWER_TYPE"]			= "%p - Type de pouvoir (énergie, rage, mana).\n"
 obj["TOTAL_ITEMS"]			= "%t - Nombre total de l'item ramassé dans l'inventaire."
@@ -536,6 +539,7 @@ obj["UNIT_HEALTH"]				= "Modification des Points de Vie"
 obj["UNIT_POWER"]				= "Modification de Puissance"
 --obj["SKILL_COOLDOWN"]			= "Player Cooldown Complete"
 --obj["PET_COOLDOWN"]				= "Pet Cooldown Complete"
+--obj["ITEM_COOLDOWN"]			= "Item Cooldown Complete"
  
 -- Main event conditions.
 obj["sourceName"]				= "Origine Unité Nom"
@@ -571,6 +575,8 @@ obj["auraType"]					= "Type Aura"
 obj["threshold"]				= "Seuil"
 obj["unitID"]					= "Unité ID"
 obj["unitReaction"]				= "Unité Réaction"
+--obj["itemID"]					= "Item ID"
+--obj["itemName"]					= "Item Name"
 
 -- Exception conditions.
 obj["activeTalents"]	= "Talents Actifs"
@@ -643,6 +649,9 @@ obj = L.OUTLINES
 obj[1] = "Aucun"
 obj[2] = "Fin"
 obj[3] = "Epais"
+--obj[4] = "Monochrome"
+--obj[5] = "Monochrome + Thin"
+--obj[6] = "Monochrome + Thick"
 
 -- Text aligns.
 obj = L.TEXT_ALIGNS

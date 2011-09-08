@@ -1,8 +1,16 @@
 ---------------
 -- Target Widget
 ---------------
+
+local CurrentTargetFrame = nil
+
 local function UpdateSelectionWidget(self, unit)
-	if unit.isTarget then self:Show() else self:Hide() end
+	if unit.isTarget then 
+		CurrentTargetFrame = self
+		self:Show() 
+	else 
+		self:Hide() 
+	end
 end
 
 local function SetSelectionWidgetTexture(self, texture)
@@ -21,3 +29,12 @@ local function CreateSelectionWidget(parent)
 end
 
 TidyPlatesWidgets.CreateSelectionWidget = CreateSelectionWidget
+
+
+--[[
+
+Watch for events
+Show animation when a "Out of Range" error occurs
+
+
+--]]

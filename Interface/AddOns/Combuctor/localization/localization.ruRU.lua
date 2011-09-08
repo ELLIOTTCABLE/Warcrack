@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 	Localization.lua
 		Translations for Combuctor
 
@@ -33,7 +33,6 @@ L.ResetPositionTip = '<ПраваяКнопкаМыши> Позиция по у�
 
 L.Normal = 'Обычное'
 L.Equipment = 'Обмундирование'
-L.Keys = 'Ключи'
 L.Trade = 'Товары'
 L.Ammo = 'Боеприпасы'
 L.Shards = 'Камни'

@@ -48,6 +48,7 @@ L.MSG_CUSTOM_FONTS					= "Custom Fonts"
 L.MSG_INVALID_CUSTOM_FONT_NAME		= "Invalid font name."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "Font name already exists."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "Font path must point to a .ttf file."
+L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font."
 L.MSG_CUSTOM_SOUNDS					= "Custom Sounds"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "Invalid sound name."
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "Sound name already exists."
@@ -150,6 +151,7 @@ obj["hideMergeTrailer"]			= { label="Hide Merge Trailer", tooltip="Don't display
 obj["allClasses"]				= { label="All Classes"}
 obj["enablePlayerCooldowns"]	= { label="Player Cooldowns", tooltip="Display notifications when your cooldowns complete."}
 obj["enablePetCooldowns"]		= { label="Pet Cooldowns", tooltip="Display notifications when your pet's cooldowns complete."}
+obj["enableItemCooldowns"]		= { label="Item Cooldowns", tooltip="Display notifications when item cooldowns complete."}
 obj["lootedItems"]				= { label="Looted Items", tooltip="Display notifications when items are looted."}
 obj["moneyGains"]				= { label="Money Gains", tooltip="Enable money you gain."}
 obj["alwaysShowQuestItems"]		= { label="Always show quest items", tooltip="Always show quest items regardless of quality selections."}
@@ -337,6 +339,7 @@ obj["FACTION_NAME"]			= "%e - Name of the faction.\n"
 obj["EMOTE_TEXT"]			= "%e - The text of the emote.\n"
 obj["MONEY_TEXT"]			= "%e - The money gained text.\n"
 obj["COOLDOWN_NAME"]		= "%e - The name of skill that is ready.\n"
+obj["ITEM_COOLDOWN_NAME"]	= "%e - The name of item that is ready.\n"
 obj["ITEM_NAME"]			= "%e - The name of the looted item.\n"
 obj["POWER_TYPE"]			= "%p - Type of power (energy, rage, mana).\n"
 obj["TOTAL_ITEMS"]			= "%t - Total number of the looted item in inventory."
@@ -563,6 +566,7 @@ obj["UNIT_HEALTH"]				= "Health Change"
 obj["UNIT_POWER"]				= "Power Change"
 obj["SKILL_COOLDOWN"]			= "Player Cooldown Complete"
 obj["PET_COOLDOWN"]				= "Pet Cooldown Complete"
+obj["ITEM_COOLDOWN"]			= "Item Cooldown Complete"
  
 -- Main event conditions.
 obj["sourceName"]				= "Source Unit Name"
@@ -598,6 +602,8 @@ obj["auraType"]					= "Aura Type"
 obj["threshold"]				= "Threshold"
 obj["unitID"]					= "Unit ID"
 obj["unitReaction"]				= "Unit Reaction"
+obj["itemID"]					= "Item ID"
+obj["itemName"]					= "Item Name"
 
 -- Exception conditions.
 obj["activeTalents"]			= "Active Talents"
@@ -670,6 +676,9 @@ obj = L.OUTLINES
 obj[1] = "None"
 obj[2] = "Thin"
 obj[3] = "Thick"
+obj[4] = "Monochrome"
+obj[5] = "Monochrome + Thin"
+obj[6] = "Monochrome + Thick"
 
 -- Text aligns.
 obj = L.TEXT_ALIGNS

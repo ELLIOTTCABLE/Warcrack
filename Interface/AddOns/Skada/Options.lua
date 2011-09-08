@@ -6,7 +6,6 @@ Skada.resetoptions = {[1] = L["No"], [2] = L["Yes"], [3] = L["Ask"]}
 Skada.windowdefaults = {
 	name = "Skada",
 	
-	barmax=10,
 	barspacing=0,
 	bartexture="BantoBar",
 	barfont="Accidental Presidency",
@@ -15,30 +14,32 @@ Skada.windowdefaults = {
 	barwidth=240,
 	barorientation=1,
 	barcolor = {r = 0.3, g = 0.3, b = 0.8, a=1},
-	baraltcolor = {r = 0.45, g = 0.45, b = 0.8, a = 1},
+	barbgcolor = {r = 0.3, g = 0.3, b = 0.3, a = 0.6},
 	barslocked=false,
 	clickthrough=false,
 
 	classcolorbars = true,
 	classcolortext = false,
 	
-	spark = true,
+	buttons = {menu = true, reset = true, report = true, mode = true, segment = true},
 	
-	title = {menubutton = true, font="Accidental Presidency", fontsize=11,margin=0, texture="Round", bordertexture="None", borderthickness=2, color = {r=0,g=0,b=0,a=0.6}},
-	background = {margin=0, height=150, texture="None", bordertexture="None", borderthickness=0, color = {r=0,g=0,b=0.5,a=0.5}},
+	title = {font="Accidental Presidency", fontsize=11,margin=0, texture="Aluminium", bordertexture="None", borderthickness=2, color = {r=0.1,g=0.1,b=0.3,a=0.8}},
+	background = {margin=0, height=200, texture="Solid", bordertexture="None", borderthickness=0, color = {r=0,g=0,b=0.5,a=0.2}},
 
 	reversegrowth=false,
 	modeincombat="",
 	returnaftercombat=false,
+	wipemode="",
 	
 	hidden = false,
 	enabletitle = true, 
-	enablebackground = false,
 	
 	set = "current",
 	mode = nil,
 	
 	display = "bar",
+	snapto = true,
+	scale = 1
 }
 
 local windefaultscopy = {}
@@ -46,6 +47,7 @@ Skada:tcopy(windefaultscopy, Skada.windowdefaults)
 
 Skada.defaults = {
 	profile = {
+		version=1,
 		reset={instance=1, join=3, leave=1},
 		icon = {hide = false, radius = 80, minimapPos = 195},
 		numberformat=1,
@@ -61,9 +63,9 @@ Skada.defaults = {
 		hidepvp=false,
 		hidedisables=true,
 		hidecombat=false,
+		mergepets=true,
 		feed = "",
-		sets = {},
-		total = nil,
+		showtotals = false,
 
 		modules = {},
 		columns = {},
@@ -114,7 +116,7 @@ function Skada:AddColumnOptions(mod)
 end
 
 local deletewindow = nil
- 
+local newdisplay = "bar"
 Skada.options = {
 	        type="group",
 			name="Skada",
@@ -129,40 +131,33 @@ Skada.options = {
 	        		windows = {
 	        			type = "group",
 	        			name = L["Windows"],
-	        			order=0,
+	        			order=1,
 						args = {
 
 							create = {
 								type="input",
 								name=L["Create window"],
 								desc=L["Enter the name for the new window."],
-								set=function(self, val) if val and val ~= "" then Skada:CreateWindow(val) end end,
+								set=function(self, val) if val and val ~= "" then Skada:CreateWindow(val, nil, newdisplay) end end,
 								order=1,
 							},
-
-							delete = {
+							
+							display = {
 								type="select",
-								name=L["Delete window"],
-								desc=L["Choose the window to be deleted."],
+								name=L["Display system"],
+								desc=L["Choose the system to be used for displaying data in this window."],
 								values=	function()
-											local windows = {}
-											for i, win in ipairs(Skada:GetWindows()) do
-												windows[win.db.name] = win.db.name
+											local list = {}
+											for name, display in pairs(Skada.displays) do
+												list[name] = display.name
 											end
-											return windows
+											return list
 										end,
-								get=function() return deletewindow end,
-								set=function(self, val) deletewindow = val end,
+								get=function() return newdisplay end,
+								set=function(i, display) newdisplay = display end,
 								order=2,
 							},
-							deleteexecute = {
-								type="execute",
-								name=L["Delete window"],
-								desc=L["Deletes the chosen window."],
-								func=function(self) if deletewindow then Skada:DeleteWindow(deletewindow) end end,
-								order=3,
-							},
-																					
+
 						},
 	        		},
 	        		
@@ -271,13 +266,29 @@ Skada.options = {
 							        	end,
 							},
 
-
+							mergepets = {
+							        type="toggle",
+							        name=L["Merge pets"],
+							        desc=L["Merges pets with their owners. Changing this only affects new data."],
+							        order=2,
+							        get=function() return Skada.db.profile.mergepets end,
+							        set=function() Skada.db.profile.mergepets = not Skada.db.profile.mergepets end,
+							},
+							
+							showtotals = {
+							        type="toggle",
+							        name=L["Show totals"],
+							        desc=L["Shows a extra row with a summary in certain modes."],
+							        order=3,
+							        get=function() return Skada.db.profile.showtotals end,
+							        set=function() Skada.db.profile.showtotals = not Skada.db.profile.showtotals end,
+							},
 							
 							onlykeepbosses = {
 							        type="toggle",
 							        name=L["Only keep boss fighs"],
 							        desc=L["Boss fights will be kept with this on, and non-boss fights are discarded."],
-							        order=3,
+							        order=4,
 							        get=function() return Skada.db.profile.onlykeepbosses end,
 							        set=function() Skada.db.profile.onlykeepbosses = not Skada.db.profile.onlykeepbosses end,
 							},
@@ -286,7 +297,7 @@ Skada.options = {
 							        type="toggle",
 							        name=L["Hide when solo"],
 							        desc=L["Hides Skada's window when not in a party or raid."],
-							        order=4,
+							        order=5,
 							        get=function() return Skada.db.profile.hidesolo end,
 							        set=function()
 							        			Skada.db.profile.hidesolo = not Skada.db.profile.hidesolo
@@ -298,7 +309,7 @@ Skada.options = {
 							        type="toggle",
 							        name=L["Hide in PvP"],
 							        desc=L["Hides Skada's window when in Battlegrounds/Arenas."],
-							        order=5,
+							        order=6,
 							        get=function() return Skada.db.profile.hidepvp end,
 							        set=function()
 							        			Skada.db.profile.hidepvp = not Skada.db.profile.hidepvp
@@ -310,7 +321,7 @@ Skada.options = {
 							        type="toggle",
 							        name=L["Hide in combat"],
 							        desc=L["Hides Skada's window when in combat."],
-							        order=6,
+							        order=7,
 							        get=function() return Skada.db.profile.hidecombat end,
 							        set=function()
 							        			Skada.db.profile.hidecombat = not Skada.db.profile.hidecombat
@@ -322,7 +333,7 @@ Skada.options = {
 							        type="toggle",
 							        name=L["Disable while hidden"],
 							        desc=L["Skada will not collect any data when automatically hidden."],
-							        order=7,
+							        order=8,
 							        get=function() return Skada.db.profile.hidedisables end,
 							        set=function()
 							        			Skada.db.profile.hidedisables = not Skada.db.profile.hidedisables

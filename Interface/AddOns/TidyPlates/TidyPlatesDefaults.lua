@@ -278,6 +278,11 @@ _, unit.healthmax 					integer, the maximum health of the unit
 unit.class 							"DEATHKNIGHT", "DRUID","HUNTER", etc.. Only for PvP Enemies
 unit.isInCombat						true, if name text is red (ie. unit is in combat with you; Unreliable because of the way that Blizz's nameplates work)
 unit.raidIcon
+unit.threatValue
+	0 - Unit has less than 100% raw threat (default UI shows no indicator)
+	1 - Unit has 100% or higher raw threat but isn't mobUnit's primary target (default UI shows yellow indicator)
+	2 - Unit is mobUnit's primary target, and another unit has 100% or higher raw threat (default UI shows orange indicator)
+	3 - Unit is mobUnit's primary target, and no other unit has 100% or higher raw threat (default UI shows red indicator)
 --]]
 TidyPlates.Template = theme
 TidyPlates:ActivateTheme(theme)		-- Activates the template as a holder theme, until the user preference is loaded

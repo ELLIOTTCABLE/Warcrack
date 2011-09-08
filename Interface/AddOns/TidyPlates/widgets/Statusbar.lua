@@ -39,6 +39,11 @@ end
 	
 local function SetStatusBarTexture(self, texture) self.Bar:SetTexture(texture) end
 local function SetStatusBarColor(self, r, g, b, a) self.Bar:SetVertexColor(r,g,b,a) end
+local function SetStatusBarGradient(self, r1, g1, b1, a1, r2, g2, b2, a2) self.Bar:SetGradientAlpha(self.Orientation, r1, g1, b1, a1, r2, g2, b2, a2) end
+
+local function SetStatusBarGradientAuto(self, r, g, b, a) 
+	self.Bar:SetGradientAlpha(self.Orientation, .5+(r*1.1), g*.7, b*.7, a, r*.7, g*.7, .5+(b*1.1), a) 
+end
 
 local function SetOrientation(self, orientation) 
 	if orientation == "VERTICAL" then
@@ -84,6 +89,8 @@ function CreateTidyPlatesStatusbar(parent)
 	frame.SetMinMaxValues = SetMinMaxValues
 	frame.SetOrientation = SetOrientation
 	frame.SetStatusBarColor = SetStatusBarColor
+	frame.SetStatusBarGradient = SetStatusBarGradient
+	frame.SetStatusBarGradientAuto = SetStatusBarGradientAuto
 	frame.SetStatusBarTexture = SetStatusBarTexture
 	
 	frame:SetScript("OnSizeChanged", UpdateSize)

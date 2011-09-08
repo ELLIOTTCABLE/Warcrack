@@ -7,12 +7,13 @@ function config:SetDefaultConfig()
 	ExplorerCoords_Config.ShowMiniMap = 0;
 	config.ShowOnMainMap:SetChecked(1);
 	config.ShowOnMiniMap:SetChecked(0);
-
+	config.ShowMissingCoords:SetChecked(0);
 end
 
 function config:SetCurrentConfig()
 	config.ShowOnMainMap:SetChecked(ExplorerCoords_Config.ShowWorldMap);
 	config.ShowOnMiniMap:SetChecked(ExplorerCoords_Config.ShowMiniMap);
+	config.ShowMissingCoords:SetChecked(ExplorerCoords_Config.ShowMissingCoords);
 end
 
 function config:ChangeState()
@@ -54,6 +55,13 @@ function config:Init()
 	ShowOnMiniMap:SetPoint( "TOPLEFT", ShowOnMainMap, "BOTTOMLEFT", 0, -16);
 	ShowOnMiniMap:SetScript("onClick",config.ChangeState);
 	_G[ ShowOnMiniMap:GetName().."Text" ]:SetText( EXPLORER_COORD_OPTION_MINIMAP );
+	
+	local ShowMissingCoords = CreateFrame( "CheckButton", "ShowMissingCoordsCheckBox", config, "InterfaceOptionsCheckButtonTemplate" );
+    config.ShowMissingCoords = ShowMissingCoords;
+	ShowMissingCoords.id = "ShowMissingCoords";
+	ShowMissingCoords:SetPoint( "TOPLEFT", ShowOnMiniMap, "BOTTOMLEFT", 0, -16);
+	ShowMissingCoords:SetScript("onClick",config.ChangeState);
+	_G[ ShowMissingCoords:GetName().."Text" ]:SetText( EXPLORER_COORD_SHOW_MISSING );
 
 	
  

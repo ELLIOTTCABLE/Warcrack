@@ -1,11 +1,40 @@
 TidyPlatesData.UnitDescriptions = {}
 TidyPlatesData.UnitClass = {}
+TidyPlatesData.Friends = {}
+TidyPlatesData.Guild = {}
+
+-- /run for i, v in pairs(TidyPlatesData.Friends) do print(i,v) end
 
 local UnitCacheMonitor
+local UnitCacheMonitorEvents = {}
 
-local function UpdateUnitInfo(frame, event, ...)
+local function UpdateGuildCache()
+	if not TidyPlatesData.Guild then TidyPlatesData.Guild = {} end
+	local guildname = GetGuildInfo("player")
+	if not guildname then return end
+	local numGuildMembers, numOnline = GetNumGuildMembers()
+	for index = 1, numGuildMembers do
+		local name, rank, rankIndex, level, class = GetGuildRosterInfo(index)
+		TidyPlatesData.Guild[name] = true
+		TidyPlatesData.UnitClass[name] = class
+		TidyPlatesData.UnitDescriptions[name] = guildname
+	end
+end
+
+local function UpdateFriendCache()
+	if not TidyPlatesData.Friends then TidyPlatesData.Friends = {} end
+	--wipe(TidyPlatesData.Friends)
+	local numFriends = GetNumFriends()
+	for index = 1, numFriends do
+		local name, level, class = GetFriendInfo(index)
+		if name then TidyPlatesData.Friends[name] = true end
+	end
+end
+
+function UnitCacheMonitorEvents.UPDATE_MOUSEOVER_UNIT(self, ...)
 	local name, class, level, description, _, unitadded
 	
+	-- If a unit is a player...
 	if UnitIsPlayer( "mouseover" ) then
 		name = UnitName("mouseover")
 		description = GetGuildInfo("mouseover")
@@ -16,6 +45,7 @@ local function UpdateUnitInfo(frame, event, ...)
 			TidyPlatesData.UnitClass[name] = class
 		end
 		
+	-- If a unit is an NPC...
 	elseif GameTooltipTextLeft1:GetText() == UnitName("mouseover") then
 		--print(GameTooltipTextLeft1:GetText(), GameTooltipTextLeft2:GetText(), GameTooltipTextLeft3:GetText(), GameTooltipTextLeft4:GetText(), GameTooltipTextLeft5:GetText())
 		
@@ -39,13 +69,30 @@ local function UpdateUnitInfo(frame, event, ...)
 	if unitadded then TidyPlates:RequestDelegateUpdate() end
 end
 
+function UnitCacheMonitorEvents.GUILD_ROSTER_UPDATE(self, ...)
+	UpdateGuildCache()
+end
+
+function UnitCacheMonitorEvents.FRIENDLIST_UPDATE(self, ...)
+	UpdateFriendCache()
+end
+
+local function OnEvent(frame, event, ...)
+	UnitCacheMonitorEvents[event](...)
+end
+
 local function Enable()
 	if not UnitCacheMonitor then UnitCacheMonitor = CreateFrame("Frame") end
-	UnitCacheMonitor:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
-	UnitCacheMonitor:SetScript("OnEvent", UpdateUnitInfo)
+	for event in pairs(UnitCacheMonitorEvents) do UnitCacheMonitor:RegisterEvent(event) end
+	UnitCacheMonitor:SetScript("OnEvent", OnEvent)
 	
 	if not TidyPlatesData.UnitDescriptions then TidyPlatesData.UnitDescriptions = {} end
 	if not TidyPlatesData.UnitClass then TidyPlatesData.UnitClass = {} end
+	if not TidyPlatesData.Guild then TidyPlatesData.Guild = {} end
+	if not TidyPlatesData.Friends then TidyPlatesData.Friends = {} end
+	
+	GuildRoster()
+	UpdateFriendCache()
 end
 
 local function Disable() 

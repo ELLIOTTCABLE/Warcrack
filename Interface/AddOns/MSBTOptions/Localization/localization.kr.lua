@@ -24,6 +24,7 @@ L.MSG_CUSTOM_FONTS					= "사용자 글꼴"
 L.MSG_INVALID_CUSTOM_FONT_NAME		= "잘못된 글꼴 이름."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "글꼴 이름이 이미 존재합니다."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "글꼴 경로가 .ttf 파일을 가리켜야 합니다."
+--L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font." 
 L.MSG_CUSTOM_SOUNDS					= "사용자 소리"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "잘못된 소리 이름."
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "소리 이름이 이미 존재합니다."
@@ -126,6 +127,7 @@ obj["hideMergeTrailer"]			= { label="요약 병합 숨김", tooltip="적중 및 
 obj["allClasses"]				= { label="모든 클래스"}
 obj["enablePlayerCooldowns"]	= { label="플레이어 재사용 대기시간", tooltip="재사용 대기시간이 종료되면 알림 메세지를 표시합니다."}
 obj["enablePetCooldowns"]		= { label="소환수 재사용 대기시간", tooltip="소환수의 재사용 대기시간이 종료되면 알림 메세지를 표시합니다."}
+--obj["enableItemCooldowns"]		= { label="Item Cooldowns", tooltip="Display notifications when item cooldowns complete."}
 obj["lootedItems"]				= { label="획득한 아이템", tooltip="아이템을 획득했을때 알림 메세지를 표시합니다."}
 obj["moneyGains"]				= { label="금전 획득", tooltip="당신의 금전 획득 사용."}
 obj["alwaysShowQuestItems"]		= { label="퀘스트 아이템 항상 표시", tooltip="선택된 품질에 관계없이 퀘스트 아이템을 항상 표시합니다."}
@@ -313,6 +315,7 @@ obj["FACTION_NAME"]			= "%e - 평판 이름.\n"
 obj["EMOTE_TEXT"]			= "%e - 감정 표현 텍스트.\n"
 obj["MONEY_TEXT"]			= "%e - 획득한 금전의 텍스트.\n"
 obj["COOLDOWN_NAME"]		= "%e - 준비된 기술의 이름.\n"
+--obj["ITEM_COOLDOWN_NAME"]	= "%e - The name of item that is ready.\n"
 obj["ITEM_NAME"]			= "%e - 획득한 아이템의 이름.\n"
 obj["POWER_TYPE"]			= "%p - 마력의 유형 (마나, 분노, 기력, 룬마력).\n"
 obj["TOTAL_ITEMS"]			= "%t - 소지품 속 획득한 아이템의 합계."
@@ -539,6 +542,7 @@ obj["UNIT_HEALTH"]				= "생명력 변화"
 obj["UNIT_POWER"]				= "마력 변화"
 obj["SKILL_COOLDOWN"]			= "플레이어 재사용 대기시간 종료"
 obj["PET_COOLDOWN"]				= "소환수 재사용 대기시간 종료"
+--obj["ITEM_COOLDOWN"]			= "Item Cooldown Complete"
  
 -- Main event conditions.
 obj["sourceName"]				= "이벤트를 제공한 유닛의 이름"
@@ -574,6 +578,8 @@ obj["auraType"]					= "오라 종류"
 obj["threshold"]				= "기준 (양/시간)"
 obj["unitID"]					= "유닛 ID"
 obj["unitReaction"]				= "유닛 반응"
+--obj["itemID"]					= "Item ID"
+--obj["itemName"]					= "Item Name"
 
 -- Exception conditions.
 obj["activeTalents"]			= "활성된 특성"
@@ -646,6 +652,9 @@ obj = L.OUTLINES
 obj[1] = "없음"
 obj[2] = "얇게"
 obj[3] = "굵게"
+--obj[4] = "Monochrome"
+--obj[5] = "Monochrome + Thin"
+--obj[6] = "Monochrome + Thick"
 
 -- Text aligns.
 obj = L.TEXT_ALIGNS

@@ -1,10 +1,10 @@
 ## Interface: 40200
 ## Title: ExplorerCoords
 ## Author: Dôrwîdo
-## Version: 1.35
+## Version: 1.36
 ## Notes: Shows all coords left to explore for the achievement
 ## SavedVariables: ExplorerCoords_Config, ExplorerCoord
-## X-Curse-Packaged-Version: v1.35
+## X-Curse-Packaged-Version: v1.36
 ## X-Curse-Project-Name: Explorer Coords
 ## X-Curse-Project-ID: explorercoords
 ## X-Curse-Repository-ID: wow/explorercoords/mainline

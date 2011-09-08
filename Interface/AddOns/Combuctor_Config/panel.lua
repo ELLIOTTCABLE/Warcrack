@@ -1,6 +1,6 @@
 --[[
-	menu.lua
-		Code for the Dominos options panel
+	panel.lua
+		Code for the options panel
 --]]
 
 --panel object

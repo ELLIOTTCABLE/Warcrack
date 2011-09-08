@@ -225,7 +225,7 @@ function ExplorerCoords_UpdateMap(whichmap)
 				  Astrolabe:PlaceIconOnMinimap(Exp_TargetMini, GetCurrentMapAreaID(),GetCurrentMapDungeonLevel(), coordx, coordy );
 			    end
 			  else
-			    if(showmissing and whichmap == "world") then
+			    if(showmissing and whichmap == "world" and (not ExplorerCoords_Config.ShowMissingCoords or ExplorerCoords_Config.ShowMissingCoords==0)) then
 				  DEFAULT_CHAT_FRAME:AddMessage("Explorer Coords: Missing coords for "..criteriaString);
 			    end
 			  end

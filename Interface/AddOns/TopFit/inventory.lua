@@ -32,6 +32,11 @@ local function tinsertonce(table, data)
     end
 end
 
+function TopFit:ClearCache()
+    TopFit.itemsCache = {}
+    TopFit.scoresCache = {}
+end
+
 function TopFit:GetSetItemFromSlot(slotID, setCode)
     local itemPositions = GetEquipmentSetLocations(TopFit:GenerateSetName(TopFit.db.profile.sets[setCode].name))
     if itemPositions then
@@ -189,11 +194,7 @@ function TopFit:GetItemInfoTable(item)
                             
                             bonusValue = (tonumber(bonusValue) or 0)
                             
-                            if (gemBonus[statCode]) then
-                                gemBonus[statCode] = gemBonus[statCode] + bonusValue
-                            else
-                                gemBonus[statCode] = bonusValue
-                            end
+                            gemBonus[statCode] = (gemBonus[statCode] or 0) + bonusValue
                         end
                     end
                 end
@@ -205,10 +206,17 @@ function TopFit:GetItemInfoTable(item)
         -- enchantment
         local enchantBonus = {}
         if enchantID > 0 then
+            local found = false
             for _, slotID in pairs(TopFit.slots) do
                 if (TopFit.enchantIDs[slotID] and TopFit.enchantIDs[slotID][enchantID]) then
                     enchantBonus = TopFit.enchantIDs[slotID][enchantID]
+                    found = true
                 end
+            end
+
+            if not found then
+                -- unknown enchant, tell the user
+                TopFit:Warning("Could not identify enchant ID "..enchantID.." of your "..itemLink..". Please tell the author so its stats can be added.")
             end
         end
         
@@ -230,6 +238,20 @@ function TopFit:GetItemInfoTable(item)
         -- add set name
         if setName then
             itemBonus["SET: "..setName] = 1
+        end
+
+        -- add armor type
+        if itemSubType == TOPFIT_ARMORTYPE_CLOTH then
+            itemBonus["TOPFIT_ARMORTYPE_CLOTH"] = 1
+        end
+        if itemSubType == TOPFIT_ARMORTYPE_LEATHER then
+            itemBonus["TOPFIT_ARMORTYPE_LEATHER"] = 1
+        end
+        if itemSubType == TOPFIT_ARMORTYPE_MAIL then
+            itemBonus["TOPFIT_ARMORTYPE_MAIL"] = 1
+        end
+        if itemSubType == TOPFIT_ARMORTYPE_PLATE then
+            itemBonus["TOPFIT_ARMORTYPE_PLATE"] = 1
         end
         
         -- dirty little mana regen fix!
@@ -281,21 +303,41 @@ function TopFit:GetItemInfoTable(item)
         
         if (hitForSpirit > 0) then
             totalBonus["ITEM_MOD_HIT_RATING_SHORT"] = (totalBonus["ITEM_MOD_HIT_RATING_SHORT"] or 0) + (totalBonus["ITEM_MOD_SPIRIT_SHORT"] or 0) * hitForSpirit
+            itemBonus["ITEM_MOD_HIT_RATING_SHORT"] = (itemBonus["ITEM_MOD_HIT_RATING_SHORT"] or 0) + (itemBonus["ITEM_MOD_SPIRIT_SHORT"] or 0) * hitForSpirit
+        end
+
+        -- also check proc / on-use effects for score calculation
+        if not TopFit.allStatsInATable then
+            TopFit.allStatsInATable = {}
+            for _, statsTable in pairs(TopFit.statList) do
+                for _, stat in pairs(statsTable) do
+                    tinsert(TopFit.allStatsInATable, stat)
+                end
+            end
+        end
+
+        local procBonus = {}
+        local procUptime = 0.5
+        local searchStat, amount, duration, cooldown = TopFit:ItemHasSpecialBonus(itemLink, unpack(TopFit.allStatsInATable))
+        if searchStat and amount and amount > 0 then
+            if not cooldown or cooldown <= 0 then cooldown = 45 end
+            procBonus[searchStat] = procUptime * amount * duration / cooldown
         end
         
         local result = {
-            ["itemLink"] = itemLink,
-            ["itemID"] = itemID,
-            ["itemQuality"] = itemQuality,
-            ["itemMinLevel"] = itemMinLevel,
-            ["itemEquipLoc"] = itemEquipLoc,
-            ["equipLocationsByType"] = TopFit:GetEquipLocationsByInvType(itemEquipLoc),
-            ["gems"] = gems,
-            ["itemBonus"] = itemBonus,
-            ["enchantBonus"] = enchantBonus,
-            ["gemBonus"] = gemBonus,
-            ["reforgeBonus"] = reforgeBonus,
-            ["totalBonus"] = totalBonus,
+            itemLink = itemLink,
+            itemID = itemID,
+            itemQuality = itemQuality,
+            itemMinLevel = itemMinLevel,
+            itemEquipLoc = itemEquipLoc,
+            equipLocationsByType = TopFit:GetEquipLocationsByInvType(itemEquipLoc),
+            gems = gems,
+            itemBonus = itemBonus,
+            enchantBonus = enchantBonus,
+            gemBonus = gemBonus,
+            reforgeBonus = reforgeBonus,
+            totalBonus = totalBonus,
+            procBonus = procBonus
         }
         
         return result
@@ -327,6 +369,15 @@ function TopFit:CalculateItemScore(itemLink)
                     capsModifier = capsModifier + statValue * itemTable.totalBonus[stat]
                 end
             end
+            if itemTable.procBonus[stat] then
+                -- check for hard cap on this stat
+                if ((not caps) or (not caps[stat]) or (not caps[stat]["active"]) or (caps[stat]["soft"])) then
+                    itemScore = itemScore + statValue * itemTable.procBonus[stat]
+                else
+                    -- part of hard cap, score calculated extra
+                    capsModifier = capsModifier + statValue * itemTable.procBonus[stat]
+                end
+            end
         end
         
         -- also calculate raw item score
@@ -341,6 +392,15 @@ function TopFit:CalculateItemScore(itemLink)
                 else
                     -- part of hard cap, score calculated extra
                     rawModifier = rawModifier + statValue * itemTable.totalBonus[stat]
+                end
+            end
+            if itemTable.procBonus[stat] then
+                -- check for hard cap on this stat
+                if ((not caps) or (not caps[stat]) or (not caps[stat]["active"]) or (caps[stat]["soft"])) then
+                    rawScore = itemScore + statValue * itemTable.procBonus[stat]
+                else
+                    -- part of hard cap, score calculated extra
+                    rawModifier = capsModifier + statValue * itemTable.procBonus[stat]
                 end
             end
         end
@@ -415,13 +475,105 @@ function TopFit:GetEquipLocationsByInvType(itemEquipLoc)
     return {}
 end
 
-
+-- items are deemed interesting if any of these conditions are true:
+-- it is currently part of a set
+-- there is no item with a higher score for the item's slot(s)
+-- it contributes more to a set's cap than any item with a higher score
+--
+-- in case of errors or weird input, this function will return true
+function TopFit:IsInterestingItem(itemID, setID)
+    if not itemID then return true, "no itemID given" end
+    
+    local item = TopFit:GetCachedItem(itemID)
+    if not item then return true, "invalid itemID or no item info available" end
+    
+    if not setID then
+        -- check if item is part of any current equipment set
+        for i = 1, GetNumEquipmentSets() do
+            local name, _, _ = GetEquipmentSetInfo(i)
+            itemIDs = GetEquipmentSetItemIDs(name)
+            
+            for _, iID in pairs(itemIDs) do
+                if iID == item.itemID then return true, "part of current set" end
+            end
+        end
+        
+        if item.isBoE then return true, "item is BoE" end
+        
+        -- check for all sets
+        for set, _ in pairs(TopFit.db.profile.sets) do
+            local isInteresting, reason = TopFit:IsInterestingItem(itemID, set)
+            if (isInteresting) then
+                return isInteresting, reason
+            end
+        end
+        return false, "item is not interesting for any set"
+    end
+    
+    -- get items available from the same slot(s)
+    for _, slotID in pairs(item.equipLocationsByType) do
+        if self.db.profile.sets[setID].forced then
+            for sID, forceID in pairs(self.db.profile.sets[setID].forced) do
+                if (sID == slotID and forceID == item.itemID) then
+                    return true, "item is forced in a set"
+                end
+            end
+        end
+        
+        -- try to see if an item exists which is definitely better
+        local betterItemExists = 0
+        local numBetterItemsNeeded = 1
+        
+        -- For items that can be used in 2 slots, we also need at least 2 better items to declare an item useless
+        if (slotID == 17) -- offhand
+            or (slotID == 12) -- ring 2
+            or (slotID == 14) -- trinket 2
+            then
+            
+            numBetterItemsNeeded = 2
+        end
+        
+        local otherItems = TopFit:GetEquippableItems(slotID)
+        for _, otherItem in pairs(otherItems) do
+            local compareTable = TopFit:GetCachedItem(otherItem.itemLink)
+            if compareTable and (item.itemID ~= compareTable.itemID) and
+                (TopFit:GetItemScore(item.itemLink, setID, false) < TopFit:GetItemScore(compareTable.itemLink, setID, false)) and
+                (item.itemEquipLoc == compareTable.itemEquipLoc) then -- especially important for weapons, we do not want to compare 2h and 1h weapons
+                
+                -- score is greater, see if caps are also better
+                local allStats = true
+                for statCode, preferences in pairs(TopFit.db.profile.sets[setID].caps) do
+                    if preferences.active then
+                        if (item.totalBonus[statCode] or 0) > (compareTable.totalBonus[statCode] or 0) then
+                            allStats = false
+                            break
+                        end
+                    end
+                end
+                
+                if allStats then
+                    betterItemExists = betterItemExists + 1
+                    if (betterItemExists >= numBetterItemsNeeded) then
+                        break
+                    end
+                end
+            end
+        end
+        
+        if betterItemExists < numBetterItemsNeeded then
+            -- there are not enough better alternatives, it is indeed an interesting item
+            return true, "one of the best items for this slot"
+        end
+    end
+    
+    return false, "item is not interesting for this set"
+end
 
 -- returns all equippable items, limited by slot, if given
 function TopFit:GetEquippableItems(requestedSlotID)
     local itemListBySlot = {}
     local availableSlots = {}
-
+    
     -- find available item ids for each slot
     for slotName, slotID in pairs(TopFit.slots) do
         itemListBySlot[slotID] = {}

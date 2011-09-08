@@ -2,7 +2,7 @@
 ## Title: Tidy Plates: Graphite
 ## Notes: Minimalist Theme
 ## Author: Binny 
-## Dependencies: TidyPlates
+## Dependencies: TidyPlates, TidyPlatesHub
 TidyPlates_Graphite.lua
 
 

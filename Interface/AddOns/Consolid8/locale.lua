@@ -1,4 +1,4 @@
---[[Consolid8, a World of Warcraft chat frame addon
+--[[Consolid10, a World of Warcraft chat frame addon
 Copyright 2011 Harry Cutts
 
 This work by Harry Cutts is licensed under a
@@ -7,35 +7,36 @@ To read this license, please see http://creativecommons.org/licenses/by-nc-sa/3.
 
 local function CreateHybridPattern(str)
 	-- Returns: a pattern string used to process reputation gain messages.
-	local returnStr = str:replace("%s", "(.*)",  0, true)
-	returnStr = returnStr:replace("%d", "(%d*)", 0, true)
+	local returnStr = gsub(str, "%%s", "(.*)")
+	returnStr = gsub(returnStr, "%%d", "(%%d*)")
 	return returnStr
 end
 
 local function CreateIntegerPattern(str)
 	-- Returns: a pattern string used to process honor and money messages.
-	return str:replace("%d", "(%d*)", 0, true)
+	return gsub(str, "%%d", "(%%d*)")
 end
 
 local function CreateStringPattern(str)
 	-- Returns: a pattern string used to process loot messages.
-	return str:replace("%s", "(.*)", 0, true)
+	return gsub(str, "%%s", "(.*)")
 end
 
 local addOnName,L= ...
 
--- Money format string with coin textures, size 16.
-L["MONEY_FORMAT"] = "%d\124TInterface\\MoneyFrame\\UI-GoldIcon:16:16:2:0\124t %d\124TInterface\\MoneyFrame\\UI-SilverIcon:16:16:2:0\124t %d\124TInterface\\MoneyFrame\\UI-CopperIcon:16:16:2:0\124t"
+-- Money format string with coin textures, size 10
+L["MONEY_FORMAT"] = [[%d|TInterface\MoneyFrame\UI-GoldIcon:10:10:2:0|t %d|TInterface\MoneyFrame\UI-SilverIcon:10:10:2:0|t %d|TInterface\MoneyFrame\UI-CopperIcon:10:10:2:0|t]]
 
 -- Localised strings
-L["CHANGE"]	= "Change"
-L["REPORT"]	= "Report"
-L["SHOW"]	= "Show"
-L["HIDE"]	= HIDE
---[[Show translations 'borrowed' from Omen Threat Meter, credits go to:
-Ben (Aesyl - US Tanaris), Pettigrow, Stan (Arcádia - EU Zirkel des Cenarius), Ananhaid, StingerSoft, and Sayclub.
-Thanks guys!]]
+L["ADD"]	= ADD
 L["AUTO"]	= "Automatically report"
+L["CHANGE"]	= "Change"
+L["ENTER_ITEM_NAME"] = "Enter the item name (case sensitive):"
+L["HIDE"]	= HIDE
+L["REMOVE"]	= REMOVE
+L["REPORT"]	= "Report"
+L["RESET_POS"]	= "Reset Position"
+L["SHOW"]	= "Show"
 
 -- Processed Blizzard Localisation
 -- Pattern strings
@@ -53,43 +54,53 @@ L["SKILL_UP"]	= CreateHybridPattern (SKILL_RANK_UP)
 L["LOOT"]		= format(LOOT_ITEM_SELF, linkAndQuantity)
 L["LOOT_OTHER"]	= CreateStringPattern (LOOT_ITEM)
 
-
 local loc = GetLocale()
 
 if loc == "frFR" then
-	L["CHANGE"] = "Changement"
-	L["REPORT"] = "Rapport"
-	L["SHOW"]	= "Afficher"
 	L["AUTO"]	= "Automatiquement rapport"
+	L["CHANGE"] = "Changement"
+	L["ENTER_ITEM_NAME"] = "Écrivez le nom d'article (distinguant majuscules et minuscules) :"
+	L["REPORT"] = "Rapport"
+	L["RESET_POS"]	= "RÀZ de la position"
+	L["SHOW"]	= "Afficher"
 
 elseif loc == "deDE" then
-	L["CHANGE"] = "Änderung"
-	L["REPORT"] = "Report"
-	L["SHOW"]	= "Zeige"
 	L["AUTO"]	= "Automatisch Report"
+	L["CHANGE"] = "Änderung"
+	L["ENTER_ITEM_NAME"] = "Tragen Sie den Einzelteilnamen ein (den Fall empfindlich):"
+	L["REPORT"] = "Report"
+	L["RESET_POS"]	= "Position zurücksetzen"
+	L["SHOW"]	= "Zeige"
 
 elseif (loc == "esES") or (loc == "esMX") then
-	L["CHANGE"] = "Cambio"
-	L["REPORT"] = "Informe"
-	L["SHOW"]	= "Mostrar"
 	L["AUTO"]	= "Automáticamente informe"
+	L["CHANGE"] = "Cambio"
+	L["ENTER_ITEM_NAME"] = "Incorpore el nombre del artículo (con diferenciación entre mayúsculas y minúsculas):"
+	L["REPORT"] = "Informe"
+	L["RESET_POS"]	= "Restablecer Posición"
+	L["SHOW"]	= "Mostrar"
 
 elseif loc == "ruRU" then
-	L["CHANGE"] = "Изменение"
-	L["REPORT"] = "Рапорт"
-	L["SHOW"]	= "Показать"
 	L["AUTO"]	= "Автоматически рапорт"
+	L["CHANGE"] = "Изменение"
+	L["ENTER_ITEM_NAME"] = "Введите имя элемента (с учетом регистра):"
+	L["REPORT"] = "Рапорт"
+	L["RESET_POS"]	= "Сбросить позицию"
+	L["SHOW"]	= "Показать"
 
 elseif loc == "zhCN" then
-	L["CHANGE"] = "变动"
-	L["REPORT"] = "报告"
-	L["SHOW"]	= "显示"
 	L["AUTO"]	= "自动报告"
+	L["CHANGE"] = "变动"
+	L["ENTER_ITEM_NAME"] = "输入项目的名称（区分大小写）："
+	L["REPORT"] = "报告"
+	L["RESET_POS"]	= "重置位置"
+	L["SHOW"]	= "显示"
 
 elseif loc == "zhTW" then
-	L["CHANGE"] = "變動"
-	L["REPORT"] = "報告"
-	L["SHOW"]	= "顯示"
 	L["AUTO"]	= "自動報告"
-
+	L["CHANGE"] = "變動"
+	L["ENTER_ITEM_NAME"] = "輸入項目名稱（區分大小寫）："
+	L["REPORT"] = "報告"
+	L["RESET_POS"]	= "重置位置"
+	L["SHOW"]	= "顯示"
 end

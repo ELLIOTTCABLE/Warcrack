@@ -1,0 +1,133 @@
+Create solutions, not bulk
+Communicate
+Fix Problems
+Smile
+---------------------------------------------------------------------
+svn://svn.wowinterface.com/TidyPlatesBeta-689/trunk
+
+
+Metasequoia
+	- Class Colored Target/Selection Widget
+
+Bungie Threat Meter
+
+- Remove class icons (use internal class icons)
+
+- Raid Icon Colors
+- Selection widget should poll "target" for melee range
+	http://wowprogramming.com/docs/events/UI_ERROR_MESSAGE
+	- Capture UI_ERROR_MESSAGE
+	- CheckInteractDistance
+
+
+- Opacity: Filter: NPCs, Players
+- Guild/Friend Colors: Default is blue
+- Gradient Options
+
+
+
+UI Additions
+- Opacity: Filter: NPCs, Players
+- UnitCache: Class Colors in Names, Bars
+- UnitCache: Guild Names, NPC Roles in Text Plates
+
+- RangeWidget: Mod to track healers in BGs (HealerTrack.lua)
+
+API Features
+Gradient Colors
+
+
+6.x...........:
+- Add description block for Automation settings
+- move auto-enable warnings to "first time run" block
+- Integrate TidyPlatesIcon into core
+- Raid Icon Coloring for Health Bar
+- Name Text, Reaction Color; Greyish red for very low level, medium red for tough, Bright red for skull
+- Reduce Double Calls / reduce context update load
+- Check for table leaks from Core to Hub, and Core internal
+- Debuff Priority (based on height in list)
+- increase debuff count columns to 5?
+- nameplate create event
+- nameplate hide event
+- call event/elegate when nameplate count changes
+- Re-do config screen, using the Hub Fonts and Such
+	- Big Titles for Theme, Show & Hide, Etc.
+- make range widget part of the usual indicators (to allow for different kinds of warnings)
+- TidyPlatesTarget Integration
+- Buffs added to Aura Widget
+
+Enemy: Buffs, Debuffs
+Friendly: Buffs, Debuffs
+
+- Use default Blizz font should change widget fonts too (or, let the threat widget use arialn)
+
+---------------------------------------------------------------------
+Tidy Plates / Metasequoia (Based on Quatre Theme)
+Tidy Threat (Classic)
+Aloe (Tidy Threat 2)
+Sparrow Unit Frames
+Shotglass Raid Frames : Buffs should show countdown when the timer drops below X seconds. Debuffs can show countdown, or fade out after X seconds, or an "X" is displayed over the fading debuff
+
+6.4+
+-------------------------------------------------------------------------------------
+Tidy Plates Hub: Heal
+Tidy Plates Hub: Gladiator
+UnitCache; Class Colors for "Everyone" (Event Handling in World, not BG or Instance; Those colors are provided by group and PvP color)
+UnitCache; Friend List/Guild Feed
+UnitCache; /who for classes?
+Name Text, Class Color Mode; Un-id'd friendly and hostile are greyish versions of the 'normal' colors
+Watermark/Highlight for "CC" prefix (Clamp, Claws, Bars, Lock, Key, ETc)
+"By Low Health" Modes, General Health Warning (greater than, less than)
+Spell Icon Border
+Texture Coordinates for Textures and Statusbar
+Revise "Core" comments
+Revise Friendly Group Member Aggro Color/Graphics
+Widget Testmodes
+Event Handling Callback Functions: Fire an Event when a nameplate is shown, hidden or created
+New Scale Modes: ScaleByActiveDebuffs, ScaleByActiveCC, ScaleByMyActiveDebuffs
+Hub Option: Spell Casting Colors (int/non-int)
+Hub Option: Threat Widget Colors, ShowText Option for Threat Line Widget (Allow text for either side of the tugging)
+
+-------------------------------------------------------------------------------------
+Tidy Plates Blog
+Design Notes
+Design Diary
+Video Content
+	- How to set up Tidy Plates for Tanking
+	- How to set up Tidy Plates for single target and multi-target DPS.
+	- How to set up Tidy Plates for PvP
+Tidy Plates Theme Hacker, Addon
+-------------------------------------------------------------------------------------
+
+
+* Allow unit.guid to be fed from another source:
+	- if unit.guid then GUID[unit.guid] = plate end
+	This should go in the OnUpdateNameplate function, I think:
+	- if not GUID[unit.guid] then GUID[unit.guid] = plate; ContextUpdate end
+* Platelevels for plates(1-100), targets(127), casters(101-120), other?(121-125) 
+
+NOTES
+---------------------
+Tank Hex Color: 3782D1
+Damage Hex Color: FF4400
+		- 
+................................................................................................................................
+
+Tidy Plates 7
+TidyPlatesStyleList, TidyPlatesThemeList
+
+Menu Design
+-Each Frame has a bounding box and an access function.
+
+Style Full Editing Suite
+Theme/Function Suite
+
+Videos
+
+Configuring a tanking setup for Tidy Plates
+- DPS
+- AoE
+- PvP
+- Leveling
+- CC
+

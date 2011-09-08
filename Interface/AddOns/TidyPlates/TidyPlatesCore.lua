@@ -5,7 +5,9 @@
 TidyPlates = {}
 local _
 local numChildren = -1
-local activetheme, massQueue, targetQueue, functionQueue = {}, {}, {}, {}		-- Queue Lists
+local activetheme = {}
+--local pollQueue = {}
+local massQueue, targetQueue, functionQueue = {}, {}, {}		-- Queue Lists
 local ForEachPlate													-- Allocated for Function (Defined later in file)
 local EMPTY_TEXTURE = "Interface\\Addons\\TidyPlates\\Media\\Empty"
 local select, pairs, tostring  = select, pairs, tostring 			-- Local function copies
@@ -29,10 +31,10 @@ local function SetFunctionQueue(func) if func then functionQueue[func] = true en
 -- Indicator Functions
 local UpdateIndicator_CustomScaleText, UpdateIndicator_Standard, UpdateIndicator_CustomAlpha
 local UpdateIndicator_Level, UpdateIndicator_ThreatGlow, UpdateIndicator_RaidIcon, UpdateIndicator_EliteIcon, UpdateIndicator_UnitColor, UpdateIndicator_Name
-local UpdateIndicator_HealthBarColor, UpdateIndicator_HealthBar, UpdateHitboxShape
+local UpdateIndicator_HealthBar, UpdateHitboxShape
 -- Data and Condition Functions
 local OnNewNameplate, OnShowNameplate, OnHideNameplate, OnUpdateNameplate, OnResetNameplate, OnEchoNewNameplate
-local OnUpdateHealth, OnUpdateLevel, OnUpdateThreatSituation, OnUpdateRaidIcon
+local OnUpdateHealth, OnUpdateLevel, OnUpdateThreatSituation, OnUpdateRaidIcon, OnUpdateHealthRange
 local OnMouseoverNameplate, OnLeaveNameplate, OnRequestWidgetUpdate, OnRequestDelegateUpdate
 -- Spell Casting
 local UpdateCastAnimation, UpdateChannelAnimation, StartCastAnimation, StopCastAnimation, OnUpdateTargetCastbar
@@ -113,12 +115,6 @@ end
 do
 	local color = {}
 	local threatborder, alpha, forcealpha, scale
-	-- UpdateIndicator_HealthBarColor: Runs the delgate function to get the desired color
-	function UpdateIndicator_HealthBarColor()
-		if activetheme.SetHealthbarColor then
-			bars.healthbar:SetStatusBarColor(activetheme.SetHealthbarColor(unit))
-		else bars.healthbar:SetStatusBarColor(bars.health:GetStatusBarColor()) end	
-	end
 	-- UpdateIndicator_HealthBar: Updates the value on the health bar
 	function UpdateIndicator_HealthBar()
 		bars.healthbar:SetMinMaxValues(bars.health:GetMinMaxValues())
@@ -173,21 +169,20 @@ do
 		-- Set Health Bar
 		if activetheme.SetHealthbarColor then
 			bars.healthbar:SetStatusBarColor(activetheme.SetHealthbarColor(unit))
+			--bars.healthbar:SetStatusBarGradientAuto(activetheme.SetHealthbarColor(unit))		-- Testing Gradient
 		else bars.healthbar:SetStatusBarColor(bars.health:GetStatusBarColor()) end	
 		-- Name Color
 		if activetheme.SetNameColor then
 			visual.name:SetTextColor(activetheme.SetNameColor(unit))
 		else visual.name:SetTextColor(1,1,1,1) end
 	end
-	-- UpdateIndicator_Standard: Updates Standard Indicators
+	-- UpdateIndicator_Standard: Updates Non-Delegate Indicators
 	function UpdateIndicator_Standard()
 		if IsPlateShown(nameplate) then
 			if unitcache.name ~= unit.name then UpdateIndicator_Name() end
 			if unitcache.level ~= unit.level then UpdateIndicator_Level() end
 			UpdateIndicator_RaidIcon()
 			if unitcache.isElite ~= unit.isElite then UpdateIndicator_EliteIcon() end
-			if (unitcache.red ~= unit.red) or (unitcache.green ~= unit.green) or (unitcache.blue ~= unit.blue) then
-				UpdateIndicator_UnitColor() end
 		end
 	end
 	-- UpdateIndicator_CustomAlpha: Calls the alpha delegate to get the requested alpha
@@ -306,9 +301,7 @@ do
 	-- Mass Gather Functions
 	--------------------------------
 	local function GatherData_Alpha(plate)
-		--unit.alpha = plate:GetAlpha()					-- Virtual Parent
 		if HasTarget then unit.alpha = plate.alpha else unit.alpha = 1 end	-- Active Alpha
-		--unit.alpha = plate:GetAlpha()					-- "No Alpha Override"
 
 		unit.isTarget = HasTarget and unit.alpha == 1
 		unit.isMouseover = regions.highlight:IsShown()
@@ -326,21 +319,17 @@ do
 			extended:SetFrameLevel(extended.frameLevel)
 		end
 		
-		--print(extended:GetFrameLevel(), extended:GetFrameStrata(), unit.name, unit.isTarget)
 		UpdateIndicator_Target()
 		if activetheme.OnContextUpdate then activetheme.OnContextUpdate(extended, unit) end
 	end
 	
-	-- GatherData_Static: Updates Static Information
-	local function GatherData_Static()
+	-- GatherData_BasicInfo: Updates Unit Variables
+	local function GatherData_BasicInfo()
 		unit.name = regions.name:GetText()
 		unit.isBoss = regions.skullicon:IsShown()
 		unit.isDangerous = unit.isBoss
 		unit.isElite = (regions.eliteicon:IsShown() or 0) == 1
-	end
-	
-	-- GatherData_BasicInfo: Updates Unit Variables
-	local function GatherData_BasicInfo()
+		
 		if unit.isBoss then unit.level = "??"
 		else unit.level = regions.level:GetText() end
 		unit.health = bars.health:GetValue() or 0
@@ -363,6 +352,8 @@ do
 			ux, uy = regions.raidicon:GetTexCoord()
 			unit.raidIcon = RaidIconCoordinate[ux][uy]
 		else unit.raidIcon = nil end
+		
+		--pollQueue[nameplate] = GetTime() + 1
 	end
 	
 	--------------------------------
@@ -405,7 +396,6 @@ do
 			-- Update Delegates
 			UpdateIndicator_Target()
 			UpdateIndicator_ThreatGlow()
-			UpdateIndicator_HealthBarColor()
 			UpdateIndicator_CustomAlpha()
 			UpdateIndicator_CustomScaleText()
 			
@@ -417,8 +407,7 @@ do
 	-- Setup
 	--------------------------------
 	local function PrepareNameplate(plate)
-		-- Gather Basic Information
-		GatherData_Static() 
+		GatherData_BasicInfo()
 		unit.frame = extended
 		unit.alpha = 1
 		unit.isTarget = false
@@ -450,8 +439,11 @@ do
 		local plate = source.parentPlate
 		UpdateReferences(plate)
 		if unit.guid then GUID[unit.guid] = nil end
-		--extended:Hide()									-- Virtual Parent
-		StopCastAnimation(plate)
+		--  StopCastAnimation(plate) -- The following is an alternative, to reduce the processing required for cleanup...
+		bars.castbar:Hide()	
+		bars.castbar:SetScript("OnUpdate", nil)
+		unit.isCasting = false
+		--
 		PlatesVisible[plate] = nil
 		wipe(extended.unit)
 		wipe(extended.unitcache)
@@ -482,10 +474,9 @@ do
 		health:HookScript("OnShow", OnShowNameplate )
 		health:HookScript("OnHide", OnHideNameplate)
 		health:HookScript("OnValueChanged", OnUpdateHealth) 
+		health:HookScript("OnMinMaxChanged", OnUpdateHealthRange) 
 		
 		-- Activates nameplate visibility
-		--extended:SetPoint("CENTER", plate)				-- Virtual Parent
-		--extended:Show()									-- Virtual Parent
 		PlatesVisible[plate] = true
 		SetTargetQueue(plate, OnEchoNewNameplate)		-- Echo for a partial update (alpha only)
 	end
@@ -503,7 +494,6 @@ do
 		UpdateIndicator_CustomAlpha()
 		UpdateHitboxShape()
 		
-		--extended:Show()									-- Virtual Parent
 		SetTargetQueue(plate, OnUpdateNameplate)		-- Echo for a full update
 	end
 
@@ -538,7 +528,6 @@ do
 		UpdateIndicator_ThreatGlow()
 		UpdateIndicator_CustomAlpha()
 		UpdateIndicator_CustomScaleText()
-		UpdateIndicator_HealthBarColor()
 	end
 	
 	-- OnUpdateRaidIcon
@@ -561,7 +550,6 @@ do
 		unit.red, unit.green, unit.blue = bars.health:GetStatusBarColor()
 		unit.reaction, unit.type = GetUnitReaction(unit.red, unit.green, unit.blue)
 		unit.class = ClassReference[ColorToString(unit.red, unit.green, unit.blue)] or "UNKNOWN"
-		UpdateIndicator_UnitColor()
 		UpdateIndicator_CustomScaleText()
 	end	
 
@@ -597,7 +585,6 @@ do
 			if not IsPlateShown(plate) then return end
 			UpdateReferences(plate)
 			UpdateIndicator_ThreatGlow()
-			UpdateIndicator_HealthBarColor()
 			UpdateIndicator_CustomAlpha()
 			UpdateIndicator_CustomScaleText()
 	end
@@ -610,9 +597,14 @@ do
 		unit.health = bars.health:GetValue() or 0
 		_, unit.healthmax = bars.health:GetMinMaxValues()
 		UpdateIndicator_HealthBar()
-		UpdateIndicator_HealthBarColor()
 		UpdateIndicator_CustomAlpha()
 		UpdateIndicator_CustomScaleText()
+	end
+	
+	-- OnUpdateHealthRange
+	function OnUpdateHealthRange(source)
+		local plate = source.parentPlate
+		OnUpdateNameplate(plate)
 	end
 
 	-- Update the Animation
@@ -662,7 +654,7 @@ do
 			end
 			
 			
-			UpdateIndicator_CustomScaleText()	
+			UpdateIndicator_CustomScaleText()
 			UpdateIndicator_CustomAlpha()
 		end
 	end
@@ -818,8 +810,8 @@ do
 	
 	-- IsFrameNameplate: Checks to see if the frame is a Blizz nameplate
 	local function IsFrameNameplate(frame)
-		local region = frame:GetRegions()
-		return region and region:GetObjectType() == "Texture" and region:GetTexture() == "Interface\\TargetingFrame\\UI-TargetingFrame-Flash" 
+		local threatRegion, borderRegion = frame:GetRegions()
+		return borderRegion and borderRegion:GetObjectType() == "Texture" and borderRegion:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
 	end
 	
 	-- OnWorldFrameChange: Checks for new Blizz Plates
@@ -864,11 +856,15 @@ do
 	-- OnUpdate: This function is processed every frame!
 	local queuedFunction
 	local HasMouseover, LastMouseover, CurrentMouseover
+	local CurrentTime, PollTime, PollIndex = 0, 0, 0
 	
 	function OnUpdate(self)
+		CurrentTime = GetTime()
 		HasMouseover = false
-		-- Alpha/Hilight Loop
+		
+		-- Alpha - Highlight - Poll Loop
 		for plate in pairs(PlatesVisible) do
+			-- Alpha
 			if (HasTarget) then 
 				plate.alpha = PlateGetAlpha(plate)	
 				PlateSetAlpha(plate, 1) 			
@@ -881,13 +877,19 @@ do
 				CurrentMouseover = plate
 			end
 			
+			--[[ Auto-Poll (Queues a nameplate for update every so often)
+			if CurrentTime > pollQueue[plate] then
+
+				SetTargetQueue(plate, OnUpdateNameplate)
+			end
+			--]]
 		end
 
 		-- Fade-In Loop
 		for plate in pairs(PlatesFading) do
 			UpdateNameplateFade(plate)
 		end
-
+		
 		-- Process the Update Request Queues
 		if massQueue[OnResetNameplate] then
 			ForEachPlate(OnResetNameplate)

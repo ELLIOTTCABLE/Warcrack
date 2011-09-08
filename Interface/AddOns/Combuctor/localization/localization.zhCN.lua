@@ -1,4 +1,4 @@
-﻿--[[
+--[[
 	Localization.lua
 	简体中文 zhCN
 		Translations for Combuctor
@@ -32,7 +32,6 @@ L.ResetPositionTip = '<右键点击> 恢复初始位置'
 
 L.Normal = '常规'
 L.Equipment = '装备'
-L.Keys = '钥匙'
 L.Trade = '商业'
 L.Ammo = '弹药'
 L.Shards = '碎片'

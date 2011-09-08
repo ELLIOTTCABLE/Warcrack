@@ -29,6 +29,7 @@ TidyPlatesHubDamageVariables = {
 	OpacityFiltered = 0,
 	OpacityFilterNeutralUnits = false,		-- OpacityHideNeutral = false,
 	OpacityFilterNonElite = false,			-- OpacityHideNonElites = false,
+	OpacityFilterInactive = false,
 	OpacityFilterCustom = {["Fanged Pit Viper"] = true,},
 
 	-- Scale
@@ -38,6 +39,7 @@ TidyPlatesHubDamageVariables = {
 	ScaleSpotlight = 1.2,
 	ScaleIgnoreNeutralUnits = false,
 	ScaleIgnoreNonEliteUnits = false,
+	ScaleIgnoreInactive = false,
 	
 	-- Text
 	---------------------------------------
@@ -556,7 +558,8 @@ local function CreateInterfacePanel( panelName, panelTitle, heading, parentTitle
 	panel.OpacityFiltered = CreateQuickSlider(panelName.."OpacityFiltered", "Filtered Unit Opacity:", AlignmentColumn, panel.OpacityFullNoTarget, 0, 2)
 	panel.OpacityFilterNeutralUnits = CreateQuickCheckbutton(panelName.."OpacityFilterNeutralUnits", "Filter Neutral Units", AlignmentColumn, panel.OpacityFiltered, 16)
 	panel.OpacityFilterNonElite = CreateQuickCheckbutton(panelName.."OpacityFilterNonElite", "Filter Non-Elite", AlignmentColumn, panel.OpacityFilterNeutralUnits, 16)
-	panel.OpacityCustomFilterLabel = CreateQuickItemLabel(nil, "Filter By Unit Name:", AlignmentColumn, panel.OpacityFilterNonElite, 16)	
+	panel.OpacityFilterInactive = CreateQuickCheckbutton(panelName.."OpacityFilterInactive", "Filter Inactive", AlignmentColumn, panel.OpacityFilterNonElite, 16)
+	panel.OpacityCustomFilterLabel = CreateQuickItemLabel(nil, "Filter By Unit Name:", AlignmentColumn, panel.OpacityFilterInactive, 16)	
 	panel.OpacityFilterCustom = CreateQuickEditbox(panelName.."OpacityFilterCustom", AlignmentColumn, panel.OpacityCustomFilterLabel, 16)
 
 	--Scale
@@ -567,10 +570,11 @@ local function CreateInterfacePanel( panelName, panelTitle, heading, parentTitle
 	panel.ScaleSpotlight = CreateQuickSlider(panelName.."ScaleSpotlight", "Spotlight Scale:", AlignmentColumn, panel.ScaleSpotlightMode, 0, 2)
 	panel.ScaleIgnoreNeutralUnits= CreateQuickCheckbutton(panelName.."ScaleIgnoreNeutralUnits", "Ignore Neutral Units", AlignmentColumn, panel.ScaleSpotlight, 16)
 	panel.ScaleIgnoreNonEliteUnits= CreateQuickCheckbutton(panelName.."ScaleIgnoreNonEliteUnits", "Ignore Non-Elite Units", AlignmentColumn, panel.ScaleIgnoreNeutralUnits, 16)
+	panel.ScaleIgnoreInactive= CreateQuickCheckbutton(panelName.."ScaleIgnoreInactive", "Ignore Inactive Units", AlignmentColumn, panel.ScaleIgnoreNonEliteUnits, 16)
 
 	--Text
 	------------------------------
-	panel.TextLabel = CreateQuickHeadingLabel(nil, "Text", AlignmentColumn, panel.ScaleIgnoreNonEliteUnits, 0, 4)
+	panel.TextLabel = CreateQuickHeadingLabel(nil, "Text", AlignmentColumn, panel.ScaleIgnoreInactive, 0, 4)
 	panel.TextNameColorMode =  CreateQuickDropdown(panelName.."TextNameColorMode", "Name Text Color Mode:", NameColorModes, 1, AlignmentColumn, panel.TextLabel)
 	panel.TextHealthTextMode =  CreateQuickDropdown(panelName.."TextHealthTextMode", "Health Text:", TextModes, 1, AlignmentColumn, panel.TextNameColorMode)
 	panel.TextShowLevel = CreateQuickCheckbutton(panelName.."TextShowLevel", "Show Level Text", AlignmentColumn, panel.TextHealthTextMode)

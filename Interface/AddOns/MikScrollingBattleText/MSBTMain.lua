@@ -205,6 +205,7 @@ local function CreateDamageMaps()
  damageColorProfileEntries[DAMAGETYPE_SHADOW] = "shadow"
  damageColorProfileEntries[DAMAGETYPE_ARCANE] = "arcane"
  damageColorProfileEntries[DAMAGETYPE_FROSTFIRE] = "frostfire"
+ damageColorProfileEntries[DAMAGETYPE_SHADOWFLAME] = "shadowflame"
 end
 
 
@@ -1386,7 +1387,8 @@ end
 -------------------------------------------------------------------------------
 
 -- Protected Variables.
-module.damageTypeMap		= damageTypeMap
+module.damageTypeMap				= damageTypeMap
+module.damageColorProfileEntries	= damageColorProfileEntries
 
 -- Protected Functions.
 module.Enable				= Enable

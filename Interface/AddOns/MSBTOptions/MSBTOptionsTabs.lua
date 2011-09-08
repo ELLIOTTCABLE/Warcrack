@@ -169,16 +169,17 @@ end
 -- ****************************************************************************
 local function MediaTab_ValidateCustomFontPath(fontPath)
  if (not fontPath or fontPath == "") then return L.MSG_INVALID_CUSTOM_FONT_PATH end
- if (not string.find(fontPath, ".ttf")) then return L.MSG_INVALID_CUSTOM_FONT_PATH end
+ local fontPathLower = string.lower(fontPath)
+ if (not string.find(fontPathLower, ".ttf")) then return L.MSG_INVALID_CUSTOM_FONT_PATH end
 
  local validationFontString = tabFrames.media.fontPathValidationFontString
  local normalFontPath, normalFontSize = GameFontNormal:GetFont()
- if (string.lower(fontPath) == string.lower(normalFontPath)) then return end
+ if (fontPathLower == string.lower(normalFontPath)) then return end
 
  validationFontString:SetFont(normalFontPath, normalFontSize)
  if (not string.find(fontPath, "\\", 1, true)) then fontPath = DEFAULT_FONT_PATH .. fontPath end
- validationFontString:SetFont(fontPath, normalFontSize)
- if (validationFontString:GetFont() == normalFontPath) then return L.MSG_INVALID_CUSTOM_FONT_PATH end
+ validationFontString:SetFont(fontPath, normalFontSize, "MONOCHROME")
+ if (validationFontString:GetFont() == normalFontPath) then return L.MSG_UNABLE_TO_SET_FONT end
 end
 
 
@@ -343,7 +344,8 @@ end
 -- ****************************************************************************
 local function MediaTab_ValidateCustomSoundPath(soundPath)
  if (not soundPath or soundPath == "") then return L.MSG_INVALID_SOUND_FILE end
- if (not string.find(soundPath, ".mp3") and not string.find(soundPath, ".ogg")) then
+ local soundPathLower = string.lower(soundPath)
+ if (not string.find(soundPathLower, ".mp3") and not string.find(soundPathLower, ".ogg")) then
   return L.MSG_INVALID_SOUND_FILE
  end
 end
@@ -2660,7 +2662,12 @@ local function CooldownsTab_SaveEventSettings(settings, eventType)
  MSBTProfiles.SetOption("events." .. eventType, "soundFile", settings.soundFile, "")
 
  local fontString = tabFrames.cooldowns.playerMessageFontString
- if (eventType == "NOTIFICATION_PET_COOLDOWN") then fontString = tabFrames.cooldowns.petMessageFontString end
+ if (eventType == "NOTIFICATION_PET_COOLDOWN") then
+  fontString = tabFrames.cooldowns.petMessageFontString
+ elseif (eventType == "NOTIFICATION_ITEM_COOLDOWN") then
+  fontString = tabFrames.cooldowns.itemMessageFontString
+ end
+ 
  fontString:SetText(settings.message) 
 end
 
@@ -2875,13 +2882,13 @@ local function CooldownsTab_Create()
     MSBTPopups.ShowEvent(configTable)
    end
  )
- controls[#controls+1] = button
+ controls.petEventSettingsButton = button
 
  -- Pet cooldown font settings button. 
  local button = MSBTControls.CreateIconButton(tabFrame, "FontSettings")
  objLocale = L.BUTTONS["eventFontSettings"]
  button:SetTooltip(objLocale.tooltip)
- button:SetPoint("RIGHT", controls[#controls], "LEFT", 0, 0)
+ button:SetPoint("RIGHT", controls.petEventSettingsButton, "LEFT", 0, 0)
  button:SetClickHandler(
    function (this)
     local eventType = "NOTIFICATION_PET_COOLDOWN"
@@ -2930,11 +2937,134 @@ local function CooldownsTab_Create()
  tabFrame.petMessageFontString = fontString
 
  
+ -- Item cooldown Colorswatch.
+ local colorswatch = MSBTControls.CreateColorswatch(tabFrame)
+ colorswatch:SetPoint("TOPLEFT", controls.petColorSwatch, "BOTTOMLEFT", 0, -10)
+ colorswatch:SetColorChangedHandler(
+   function (this)
+    local eventType = "NOTIFICATION_ITEM_COOLDOWN"
+    MSBTProfiles.SetOption("events." .. eventType, "colorR", this.r, 1)
+    MSBTProfiles.SetOption("events." .. eventType, "colorG", this.g, 1)
+    MSBTProfiles.SetOption("events." .. eventType, "colorB", this.b, 1)
+   end
+ )
+ controls.itemColorSwatch = colorswatch
+
+ -- Item skill colorswatch.
+ local colorswatch = MSBTControls.CreateColorswatch(tabFrame)
+ colorswatch:SetPoint("LEFT", controls.itemColorSwatch, "RIGHT", 5, 0)
+ colorswatch:SetColorChangedHandler(
+   function (this)
+    local eventType = "NOTIFICATION_ITEM_COOLDOWN"
+    MSBTProfiles.SetOption("events." .. eventType, "skillColorR", this.r, 1)
+    MSBTProfiles.SetOption("events." .. eventType, "skillColorG", this.g, 1)
+    MSBTProfiles.SetOption("events." .. eventType, "skillColorB", this.b, 1)
+   end
+ )
+ controls.itemSkillColorSwatch = colorswatch
+
+ -- Item enable cooldown checkbox.
+ local checkbox = MSBTControls.CreateCheckbox(tabFrame)
+ local objLocale = L.CHECKBOXES["enableItemCooldowns"]
+ checkbox:Configure(24, objLocale.label, objLocale.tooltip)
+ checkbox:SetPoint("LEFT", colorswatch, "RIGHT", 5, 0)
+ checkbox:SetPoint("RIGHT", tabFrame, "TOPLEFT", 190, -10)
+ checkbox:SetClickHandler(
+   function (this, isChecked)
+    MSBTProfiles.SetOption("events.NOTIFICATION_ITEM_COOLDOWN", "disabled", not isChecked)
+    MSBTCooldowns.UpdateRegisteredEvents()
+   end
+ )
+ controls.itemEnableCheckbox = checkbox
+
+ -- Item cooldown event settings button. 
+ local button = MSBTControls.CreateIconButton(tabFrame, "Configure")
+ objLocale = L.BUTTONS["eventSettings"]
+ button:SetTooltip(objLocale.tooltip)
+ button:SetPoint("TOPRIGHT", controls.petEventSettingsButton, "BOTTOMRIGHT", 0, -5)
+ button:SetClickHandler(
+   function (this)
+    local eventType = "NOTIFICATION_ITEM_COOLDOWN"
+    local eventSettings = MSBTProfiles.currentProfile.events[eventType]
+ 
+    EraseTable(configTable)
+    configTable.title = L.CHECKBOXES["enableItemCooldowns"].label
+    configTable.message = eventSettings.message
+    configTable.codes = L.EVENT_CODES["ITEM_COOLDOWN_NAME"]
+    configTable.scrollArea = eventSettings.scrollArea or DEFAULT_SCROLL_AREA
+    configTable.alwaysSticky = eventSettings.alwaysSticky
+    configTable.soundFile = eventSettings.soundFile
+    configTable.parentFrame = tabFrame
+    configTable.anchorFrame = tabFrame
+    configTable.anchorPoint = "TOPRIGHT"
+    configTable.relativePoint = "TOPRIGHT"
+	configTable.saveArg1 = eventType
+    configTable.saveHandler = CooldownsTab_SaveEventSettings
+    configTable.hideHandler = CooldownsTab_EnableControls
+    DisableControls(controls)
+    MSBTPopups.ShowEvent(configTable)
+   end
+ )
+ controls[#controls+1] = button
+
+ -- Item cooldown font settings button. 
+ local button = MSBTControls.CreateIconButton(tabFrame, "FontSettings")
+ objLocale = L.BUTTONS["eventFontSettings"]
+ button:SetTooltip(objLocale.tooltip)
+ button:SetPoint("RIGHT", controls[#controls], "LEFT", 0, 0)
+ button:SetClickHandler(
+   function (this)
+    local eventType = "NOTIFICATION_ITEM_COOLDOWN"
+    local eventSettings = MSBTProfiles.currentProfile.events[eventType]
+    local saSettings = MSBTProfiles.currentProfile.scrollAreas[eventSettings.scrollArea]
+    if (not saSettings) then saSettings = MSBTProfiles.currentProfile.scrollAreas[DEFAULT_SCROLL_AREA] end
+ 
+    EraseTable(configTable)
+    configTable.title = L.CHECKBOXES["enableItemCooldowns"].label
+ 
+    -- Inherit from the correct scroll area.
+    local fontName = saSettings.normalFontName
+    if (not fonts[fontName]) then fontName = MSBTProfiles.currentProfile.normalFontName end
+    if (not fonts[fontName]) then fontName = DEFAULT_FONT_NAME end
+    configTable.inheritedNormalFontName = fontName
+    configTable.inheritedNormalOutlineIndex = saSettings.normalOutlineIndex or MSBTProfiles.currentProfile.normalOutlineIndex
+    configTable.inheritedNormalFontSize = saSettings.normalFontSize or MSBTProfiles.currentProfile.normalFontSize
+    configTable.inheritedNormalFontAlpha = saSettings.normalFontAlpha or MSBTProfiles.currentProfile.normalFontAlpha
+
+    fontName = eventSettings.fontName
+    if (not fonts[fontName]) then fontName = nil end
+    configTable.normalFontName = fontName
+    configTable.normalOutlineIndex = eventSettings.outlineIndex
+    configTable.normalFontSize = eventSettings.fontSize
+    configTable.normalFontAlpha = eventSettings.fontAlpha
+
+    configTable.hideCrit = true
+    configTable.parentFrame = tabFrames.cooldowns
+    configTable.anchorFrame = tabFrames.cooldowns
+    configTable.anchorPoint = "BOTTOM"
+    configTable.relativePoint = "BOTTOM"
+	configTable.saveArg1 = eventType
+    configTable.saveHandler = CooldownsTab_SaveFontSettings
+    configTable.hideHandler = CooldownsTab_EnableControls
+    DisableControls(controls)
+    MSBTPopups.ShowFont(configTable)
+   end
+ )
+ controls[#controls+1] = button
+
+ -- Item message font string.
+ local fontString = tabFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+ fontString:SetPoint("LEFT", checkbox, "RIGHT", 10, 0)
+ fontString:SetPoint("RIGHT", button, "LEFT", -10, 0)
+ fontString:SetJustifyH("LEFT")
+ tabFrame.itemMessageFontString = fontString
+
+ 
  -- Cooldown threshold slider.
  local slider = MSBTControls.CreateSlider(tabFrame)
  objLocale = L.SLIDERS["cooldownThreshold"] 
  slider:Configure(180, objLocale.label, objLocale.tooltip)
- slider:SetPoint("TOPLEFT", controls.petColorSwatch, "BOTTOMLEFT", 0, -40)
+ slider:SetPoint("TOPLEFT", controls.itemColorSwatch, "BOTTOMLEFT", 0, -40)
  slider:SetMinMaxValues(3, 300)
  slider:SetValueStep(1)
  slider:SetValueChangedHandler(
@@ -2995,6 +3125,12 @@ local function CooldownsTab_OnShow()
  controls.petEnableCheckbox:SetChecked(not eventSettings.disabled)
  tabFrame.petMessageFontString:SetText(eventSettings.message)
  
+ local eventSettings = currentProfile.events["NOTIFICATION_ITEM_COOLDOWN"]
+ controls.itemColorSwatch:SetColor(eventSettings.colorR or 1, eventSettings.colorG or 1, eventSettings.colorB or 1)
+ controls.itemSkillColorSwatch:SetColor(eventSettings.skillColorR or 1, eventSettings.skillColorG or 1, eventSettings.skillColorB or 1)
+ controls.itemEnableCheckbox:SetChecked(not eventSettings.disabled)
+ tabFrame.itemMessageFontString:SetText(eventSettings.message)
+
  controls.cooldownSlider:SetValue(currentProfile.cooldownThreshold)
 end
 

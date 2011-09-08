@@ -26,6 +26,7 @@ L.MSG_CUSTOM_FONTS					= "自定义字体"
 L.MSG_INVALID_CUSTOM_FONT_NAME		= "无效字体名."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "字体名字已经存在."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "字体路径必须指向.ttf文件"
+--L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font." 
 L.MSG_CUSTOM_SOUNDS					= "自定义声音"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "无效声音名"
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "声音名已经存在"
@@ -128,6 +129,7 @@ obj["hideMergeTrailer"]			= { label="隐藏合并攻击细节", tooltip="不在�
 obj["allClasses"]				= { label="所有职业"}
 obj["enablePlayerCooldowns"]	= { label="技能冷却", tooltip="在技能冷却完成之后显示提示信息"}
 obj["enablePetCooldowns"]		= { label="宠物技能冷却", tooltip="在宠物技能冷却完成之后显示提示信息"}
+--obj["enableItemCooldowns"]		= { label="Item Cooldowns", tooltip="Display notifications when item cooldowns complete."}
 obj["lootedItems"]				= { label="拾取物品", tooltip="显示物品拾取."}
 obj["moneyGains"]				= { label="获得金钱", tooltip="显示获得的金钱"}
 obj["alwaysShowQuestItems"]		= { label="总是显示任务物品", tooltip="总是显示任务物品, 无论其是何品质."}
@@ -315,6 +317,7 @@ obj["FACTION_NAME"]			= "%e - 声望阵营名.\n"
 obj["EMOTE_TEXT"]			= "%e - 表情文字.\n"
 obj["MONEY_TEXT"]			= "%e - 获取金钱文字.\n"
 obj["COOLDOWN_NAME"]		= "%e - 就绪的法术名字.\n"
+--obj["ITEM_COOLDOWN_NAME"]	= "%e - The name of item that is ready.\n"
 obj["ITEM_NAME"]			= "%e - 拾取物品的名称.\n"
 obj["POWER_TYPE"]			= "%p - 能力类别 (能量, 怒气, 法力).\n"
 obj["TOTAL_ITEMS"]			= "%t - 拾取物品的总数."
@@ -541,6 +544,7 @@ obj["UNIT_HEALTH"]				= "生命值改变"
 obj["UNIT_POWER"]				= "法力值改变"
 obj["SKILL_COOLDOWN"]			= "技能冷却完成"
 obj["PET_COOLDOWN"]				= "宠物技能冷却完成"
+--obj["ITEM_COOLDOWN"]			= "Item Cooldown Complete"
  
 -- Main event conditions.
 obj["sourceName"]				= "来源玩家名字"
@@ -576,6 +580,8 @@ obj["auraType"]					= "光环类型"
 obj["threshold"]				= "起点阀值"
 obj["unitID"]					= "玩家 ID"
 obj["unitReaction"]				= "玩家反应"
+--obj["itemID"]					= "Item ID"
+--obj["itemName"]					= "Item Name"
 
 -- Exception conditions.
 obj["activeTalents"]			= "启用天赋"
@@ -583,7 +589,7 @@ obj["buffActive"]				= "BUFF生效"
 obj["buffInactive"]				= "Buff失效"
 obj["currentCP"]				= "当前连击点"
 obj["currentPower"]				= "当前能量"
-obj["inCombat"]				= "战斗中"
+obj["inCombat"]					= "战斗中"
 obj["recentlyFired"]			= "触发器最近被触发"
 obj["trivialTarget"]			= "无效目标"
 obj["unavailableSkill"]			= "不可用技能"
@@ -648,6 +654,9 @@ obj = L.OUTLINES
 obj[1] = "无"
 obj[2] = "细"
 obj[3] = "粗"
+--obj[4] = "Monochrome"
+--obj[5] = "Monochrome + Thin"
+--obj[6] = "Monochrome + Thick"
 
 -- Text aligns.
 obj = L.TEXT_ALIGNS

@@ -1,5 +1,6 @@
 
 
+local CallIn = TidyPlatesUtility.CallIn
 local copytable = TidyPlatesUtility.copyTable
 local mergetable = TidyPlatesUtility.mergeTable
 local PanelHelpers = TidyPlatesUtility.PanelHelpers
@@ -37,7 +38,7 @@ TidyPlatesOptions = {
 	EnemyAutomation = NO_AUTOMATION,
 	EnableCastWatcher = false, 
 	WelcomeShown = false,
-	ShowIconButton = false,
+	EnableMinimapButton = false,
 }
 	
 local TidyPlatesOptionsDefaults = copytable(TidyPlatesOptions)
@@ -309,9 +310,10 @@ local function ActivateInterfacePanel()
 	panel.EnableCastWatcher:SetScript("OnClick", function(self) SetSpellCastWatcher(self:GetChecked()) end)
 	
 	-- Minimap Button
-	--panel.EnableIconButton = PanelHelpers:CreateCheckButton("TidyPlatesOptions_EnableIconButton", panel, "Show Minimap Button")
-	--panel.EnableIconButton:SetPoint("TOPLEFT", panel.EnableCastWatcher, "TOPLEFT", 0, -35)
-	--panel.EnableIconButton:SetScript("OnClick", function(self) SetSpellCastWatcher(self:GetChecked()) end)
+	panel.EnableMinimapButton = PanelHelpers:CreateCheckButton("TidyPlatesOptions_EnableMinimapButton", panel, "Enable Minimap Icon")
+	panel.EnableMinimapButton:SetPoint("TOPLEFT", panel.EnableCastWatcher, "TOPLEFT", 0, -35)
+	panel.EnableMinimapButton:SetScript("OnClick", function(self) if self:GetChecked() then TidyPlatesUtility:ShowMinimapButton() else TidyPlatesUtility:HideMinimapButton() end; end)
+	panel.EnableMinimapButton:Hide()
 	
 	-- Reset
 	ResetButton = CreateFrame("Button", "TidyPlatesOptions_ResetButton", panel, "UIPanelButtonTemplate2")
@@ -328,6 +330,7 @@ local function ActivateInterfacePanel()
 		panel.PrimarySpecTheme:SetValue(TidyPlatesOptions.primary)
 		panel.SecondarySpecTheme:SetValue(TidyPlatesOptions.secondary)
 		panel.EnableCastWatcher:SetChecked(TidyPlatesOptions.EnableCastWatcher)
+		panel.EnableMinimapButton:SetChecked(TidyPlatesOptions.EnableMinimapButton)
 		panel.AutoShowFriendly:SetValue(TidyPlatesOptions.FriendlyAutomation)
 		panel.AutoShowEnemy:SetValue(TidyPlatesOptions.EnemyAutomation)	
 		
@@ -377,12 +380,15 @@ end
 TidyPlatesInterfacePanel = panel
 
 local function ApplyAutomationSettings()
-	--SetAutoHide(TidyPlatesOptions.autohide) 
 	SetSpellCastWatcher(TidyPlatesOptions.EnableCastWatcher)
 
 	-- Spell Casting
 	if	TidyPlatesOptions.EnableCastWatcher then TidyPlates:StartSpellCastWatcher()
 	else TidyPlates:StopSpellCastWatcher()	end
+	
+	-- Minimap Icon
+	if TidyPlatesOptions.EnableMinimapButton then TidyPlatesUtility:ShowMinimapButton()
+	else TidyPlatesUtility:HideMinimapButton() end
 	
 	TidyPlates:ForceUpdate()
 end
@@ -393,6 +399,7 @@ ApplyPanelSettings = function()
 	TidyPlatesOptions.FriendlyAutomation = panel.AutoShowFriendly:GetValue()
 	TidyPlatesOptions.EnemyAutomation = panel.AutoShowEnemy:GetValue()
 	TidyPlatesOptions.EnableCastWatcher = panel.EnableCastWatcher:GetChecked()
+	TidyPlatesOptions.EnableMinimapButton = panel.EnableMinimapButton:GetChecked()
 
 	-- Clear Widgets
 	TidyPlatesWidgets:ResetWidgets()
@@ -426,6 +433,19 @@ end
 -------------------------------------------------------------------------------------
 local panelevents = {}
 
+local function ShowWarnings()
+	if not( TidyPlatesWidgets.DebuffWidgetBuild and TidyPlatesWidgets.DebuffWidgetBuild > 1) then
+		print("|cFFFF6600Tidy Plates: |cFFFFFFFFWidget file versions do not match.  This may be caused by an issue with auto-updater software.",
+			"Please uninstall Tidy Plates, and then re-install.  You do NOT need to clear your variables.")
+	end
+	
+	-- Warn user if no theme is selected
+	if currentThemeName == "None" and not warned[activespec] then
+		print("|cFFFF6600Tidy Plates: |cFFFF9900No Theme is Selected. |cFF77FF00Use |cFFFFFF00/tidyplates|cFF77FF00 to bring up the Theme Selection Window")
+		warned[activespec] = true
+	end
+end
+
 function panelevents:ACTIVE_TALENT_GROUP_CHANGED()
 	if GetActiveTalentGroup(false, false) == 2 then activespec = "secondary" 
 	else activespec = "primary" end
@@ -434,13 +454,7 @@ function panelevents:ACTIVE_TALENT_GROUP_CHANGED()
 	TidyPlatesWidgets:ResetWidgets()
 	TidyPlates:ForceUpdate()
 	
-	-- Warn user if no theme is selected
-	if currentThemeName == "None" and not warned[activespec] then
-		print("|cFFFF6600Tidy Plates: |cFFFF9900No Theme is Selected.")
-		print("|cFF77FF00Use |cFFFFFF00/tidyplates|cFF77FF00 to bring up the Theme Selection Window")
-		warned[activespec] = true
-	end
-	
+	CallIn(ShowWarnings, 2)
 end
 
 function panelevents:PLAYER_ENTERING_WORLD() panelevents:ACTIVE_TALENT_GROUP_CHANGED() end
@@ -477,6 +491,7 @@ end
 
 
 function panelevents:PLAYER_LOGIN()
+	TidyPlatesUtility:CreateMinimapButton()
 	UpdateThemeNames()
 	ActivateInterfacePanel()
 	ShowWelcome()

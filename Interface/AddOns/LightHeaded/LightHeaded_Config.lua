@@ -26,6 +26,8 @@ local function CreatePanel(panel)
 
     panel.sound = makeToggle("Play open/close sound", "Enable or disable the playing of an open/close sound when opening or closing the LightHeaded window.", "sound")
 
+    panel.descs = makeToggle("Show english quest descriptions", "This option is really only useful for english speakers who are playing in a non-english locate", "descs")
+
     panel.page = makeToggle("Show comments on a single page", "Shows comments on a single page, rather than one page per comment", "singlepage")
 
     panel.debug = makeToggle("Show debug messages", "Displays periodic debug messages about the operations of LightHeaded", "debug")
@@ -76,6 +78,7 @@ local function CreatePanel(panel)
     table.insert(options, panel.cart3)
     table.insert(options, panel.mapnotes)
     table.insert(options, panel.sound)
+    table.insert(options, panel.descs)
     table.insert(options, panel.page)
     table.insert(options, panel.debug)
     table.insert(options, panel.fixmodel)

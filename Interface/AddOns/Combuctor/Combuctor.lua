@@ -21,28 +21,32 @@ BINDING_NAME_COMBUCTOR_TOGGLE_BANK = L.ToggleBank
 function Combuctor:OnInitialize()
 	self.profile = self:InitDB()
 
-	--version update
+	-- version update
 	local version = self.db.version
 	if version then
 		if version ~= CURRENT_VERSION then
 			self:UpdateSettings(version:match('(%w+)%.(%w+)%.(%w+)'))
 			self:UpdateVersion()
 		end
-	--new user
+		
+	-- new user
 	else
 		version = CURRENT_VERSION
 	end
 
-	--create a loader for the options menu
+	-- create a loader for the options menu
 	local f = CreateFrame('Frame', nil, InterfaceOptionsFrame)
 	f:SetScript('OnShow', function(self)
 		self:SetScript('OnShow', nil)
 		LoadAddOn('Combuctor_Config')
 	end)
 
-	--slash command support
+	-- slash command support
 	self:RegisterChatCommand('combuctor', 'OnSlashCommand')
 	self:RegisterChatCommand('cbt', 'OnSlashCommand')
+	
+	-- base set
+	self:GetModule('Sets'):Register(L.All, 'Interface/Icons/INV_Misc_EngGizmos_17', function() return true end)
 end
 
 function Combuctor:InitDB()

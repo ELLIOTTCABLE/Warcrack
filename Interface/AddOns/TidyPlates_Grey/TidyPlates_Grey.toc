@@ -3,6 +3,5 @@
 ## Notes: Use apostrophes wisely. 
 ## Author: A very very foolish man
 ## Dependencies: TidyPlates, TidyPlatesHub
-## SavedVariablesPerCharacter: TidyPlatesGreyTankSavedVariables,TidyPlatesGreyDPSSavedVariables
 
 Grey.lua

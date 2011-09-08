@@ -1106,6 +1106,18 @@ local masterProfile = {
    skillColorG	= 0.41,
    skillColorB	= 0.41,
   },
+  NOTIFICATION_ITEM_COOLDOWN = {
+   colorR		= 0.784,
+   colorG		= 0.784,
+   colorB		= 0,
+   message		= " %e " .. L.MSG_READY_NOW .. "!",
+   scrollArea	= "Static",
+   fontSize		= 22,
+   soundFile	= "MSBT Cooldown",
+   skillColorR	= 1,
+   skillColorG	= 0.588,
+   skillColorB	= 0.588,
+  },
   NOTIFICATION_LOOT = {
    colorB		= 0,
    message		= "+%a %e (%t)",
@@ -1580,6 +1592,7 @@ local masterProfile = {
  shadow			= { colorR = 0.628, colorG = 0, colorB = 0.628 },
  arcane			= { colorR = 1, colorG = 0.725, colorB = 1 },
  frostfire		= { colorR = 0.824, colorG = 0.314, colorB = 0.471 },
+ shadowflame	= { colorR = 0.824, colorG = 0.5, colorB = 0.628 },
 
 
  -- Class color settings.

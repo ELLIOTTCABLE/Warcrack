@@ -419,6 +419,11 @@ local function CategorizeTrigger(triggerSettings)
     eventConditions[#eventConditions+1] = conditions
     MikSBT.Cooldowns.UpdateRegisteredEvents()
 
+   -- Item cooldown events.
+   elseif (mainEvent == "ITEM_COOLDOWN") then
+    eventConditions[#eventConditions+1] = conditions
+    MikSBT.Cooldowns.UpdateRegisteredEvents()
+
    -- Combat log event.
    elseif (captureFuncs[mainEvent]) then
     listenEvents["COMBAT_LOG_EVENT_UNFILTERED"] = true
@@ -646,18 +651,27 @@ end
 -- ****************************************************************************
 -- Handles triggers for skill cooldowns.
 -- ****************************************************************************
-local function HandleCooldowns(unitID, skillID, skillName, effectTexture)
- -- Choose the correct cooldown event based on the unit ID.
+local function HandleCooldowns(cooldownType, cooldownID, cooldownName, effectTexture)
+ -- Choose the correct cooldown event based on the cooldown type.
  local event = "SKILL_COOLDOWN"
- if (unitID == "pet") then event = "PET_COOLDOWN" end
+ if (cooldownType == "pet") then
+  event = "PET_COOLDOWN"
+ elseif (cooldownType == "item") then
+  event = "ITEM_COOLDOWN"
+ end
 
  -- Ignore the event if there are no triggers to search for it.
  local eventTriggers = categorizedTriggers[event]
  if (not eventTriggers) then return end
  
  -- Populate the lookup table for conditions checking.
- lookupTable.skillID = skillID
- lookupTable.skillName = skillName
+ if (cooldownType == "item") then
+  lookupTable.itemID = cooldownID
+  lookupTable.itemName = cooldownName
+ else
+  lookupTable.skillID = cooldownID
+  lookupTable.skillName = cooldownName
+ end
 
  -- Erase the list of triggers to fire.
  for k in pairs(triggersToFire) do triggersToFire[k] = nil end

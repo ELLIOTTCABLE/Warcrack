@@ -268,8 +268,10 @@ end
 
 function playermod:Enter(win, id, label)
 	local player = Skada:find_player(win:get_selected_set(), id)
-	playermod.playerid = id
-	playermod.title = player.name..L["'s Damage"]
+	if player then
+		playermod.playerid = id
+		playermod.title = player.name..L["'s Damage"]
+	end
 end
 
 -- Detail view of a player.
@@ -291,6 +293,7 @@ function playermod:Update(win, set)
 				d.label = spellname
 				d.id = spellname
 				d.icon = select(3, GetSpellInfo(spell.id))
+				d.spellid = spell.id
 				d.value = spell.damage
 				d.valuetext = Skada:FormatValueText(
 												Skada:FormatNumber(spell.damage), self.metadata.columns.Damage,
@@ -509,7 +512,10 @@ function mod:AddToTooltip(set, tooltip)
 end
 
 function mod:GetSetSummary(set)
-	return Skada:FormatNumber(set.damage)
+	return Skada:FormatValueText(
+						Skada:FormatNumber(set.damage), self.metadata.columns.Damage, 
+						("%02.1f"):format(getRaidDPS(set)), self.metadata.columns.DPS
+					)
 end
 
 -- Called by Skada when a new player is added to a set.

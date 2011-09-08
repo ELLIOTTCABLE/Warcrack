@@ -1,0 +1,11 @@
+
+TidyPlates Release Checklist
+------------------------------------------------
+1.	 Update changelog.txt
+2.	 Commit All Changes
+3.	 Export Trunk to E:\TidyPlates\r%REVISION%
+4.	 Check for Thumbs.db
+5.	 Remove Icon folder
+6.	 Update TOC file for version
+7.	 Zip file
+

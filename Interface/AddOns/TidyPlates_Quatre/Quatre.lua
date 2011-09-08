@@ -336,6 +336,7 @@ local function CustomText(unit)
 	if unit.style == "NameOnly" then
 		local description, elite
 		if TidyPlatesData.UnitDescriptions and unit.type == "NPC" then
+		--if TidyPlatesData.UnitDescriptions then
 			return (TidyPlatesData.UnitDescriptions[unit.name] or GetLevelDescription(unit) or "") , 1, 1, 1, .70
 		end
 	end

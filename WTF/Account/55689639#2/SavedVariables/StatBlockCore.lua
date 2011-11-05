@@ -2,21 +2,24 @@
 StatBlockCoreDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
-		["Github - Smolderthorn"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
 		["Fraycollie - Nordrassil"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
-		["Othercollie - Smolderthorn"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
-		["Nocollie - Smolderthorn"] = "Default",
-		["Combatcollie - The Underbog"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
+		["Fraycollie - Hyjal"] = "Default",
 		["Melancollie - Smolderthorn"] = "Default",
-		["Hoarcollie - Smolderthorn"] = "Default",
 		["Summoneer - Ysondre"] = "Default",
-		["Warcollie - Darkspear"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
+		["Othercollie - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
 		["Warmongrel - Ysondre"] = "Default",
+		["Elliottcable - Hyjal"] = "Default",
+		["Github - Smolderthorn"] = "Default",
+		["Nocollie - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Armscollie - Akama"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
+		["Warcollie - Darkspear"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -75,16 +78,15 @@ StatBlockCoreDB = {
 					["posx"] = 891.2870894531807,
 					["posy"] = 767.7131078402745,
 				},
+				["Broker_Garbage"] = {
+					["posx"] = 340.732140821543,
+					["posy"] = 768.2648265779426,
+				},
 				["Swatter"] = {
 					["posx"] = 990.7027459251549,
 					["posy"] = 271.4615215706726,
 					["lock"] = false,
 					["scale"] = 0.7,
-				},
-				["|cFFFFB366Ara|r Tradeskills"] = {
-					["posx"] = 533.3720193282061,
-					["width"] = 86.99964904785156,
-					["posy"] = 768.2648265779426,
 				},
 				["StealYourCarbon"] = {
 					["posx"] = 989.500824093011,
@@ -101,8 +103,9 @@ StatBlockCoreDB = {
 					["posx"] = 956.567087994059,
 					["posy"] = 767.7131078402745,
 				},
-				["Broker_Garbage"] = {
-					["posx"] = 340.732140821543,
+				["|cFFFFB366Ara|r Tradeskills"] = {
+					["posx"] = 533.3720193282061,
+					["width"] = 86.99964904785156,
 					["posy"] = 768.2648265779426,
 				},
 				["Critline healing"] = {

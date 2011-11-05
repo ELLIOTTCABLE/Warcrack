@@ -2,21 +2,24 @@
 DataStore_MailsDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Fraycollie - Hyjal"] = "Fraycollie - Hyjal",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Armscollie - Akama"] = "Armscollie - Akama",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -186,19 +189,9 @@ DataStore_MailsDB = {
 				["lastUpdate"] = 1308332223,
 				["lastVisitDate"] = "2011/06/17 13:37",
 			},
-			["Default.Nordrassil.Fraycollie"] = {
-				["lastUpdate"] = 1309064820,
-				["lastVisitDate"] = "2011/06/26 01:07",
-				["MailCache"] = {
-					{
-						["sender"] = "Nekula",
-						["count"] = 1,
-						["link"] = "|cffa335ee|Hitem:58197:0:0:0:0:0:0:0:85:0|h[Rock Furrow Boots]|h|r",
-						["icon"] = "Interface\\Icons\\inv_boots_plate_raiddeathknight_i_01",
-						["lastCheck"] = 1309062621,
-						["daysLeft"] = 30,
-					}, -- [1]
-				},
+			["Default.Hyjal.Elliottcable"] = {
+				["lastUpdate"] = 1315452263,
+				["lastVisitDate"] = "2011/09/07 23:24",
 			},
 			["Default.Smolderthorn.Github"] = {
 				["lastUpdate"] = 1308697956,
@@ -376,22 +369,6 @@ DataStore_MailsDB = {
 				},
 				["lastVisitDate"] = "2011/06/21 19:12",
 			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1308956563,
-				["lastVisitDate"] = "2011/06/24 19:02",
-			},
-			["Default.The Underbog.Fraycollie"] = {
-				["lastUpdate"] = 1307756269,
-				["lastVisitDate"] = "2011/06/10 21:37",
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1308957774,
-				["lastVisitDate"] = "2011/06/24 19:22",
-			},
-			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307762110,
-				["lastVisitDate"] = "2011/06/10 23:15",
-			},
 			["Default.The Underbog.Combatcollie"] = {
 				["lastUpdate"] = 1307756140,
 				["Mails"] = {
@@ -465,6 +442,36 @@ DataStore_MailsDB = {
 					}, -- [8]
 				},
 				["lastVisitDate"] = "2011/06/10 21:35",
+			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1308956563,
+				["lastVisitDate"] = "2011/06/24 19:02",
+			},
+			["Default.The Underbog.Fraycollie"] = {
+				["lastUpdate"] = 1307756269,
+				["lastVisitDate"] = "2011/06/10 21:37",
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1308957774,
+				["lastVisitDate"] = "2011/06/24 19:22",
+			},
+			["Default.Ysondre.Battlecollie"] = {
+				["lastUpdate"] = 1307762110,
+				["lastVisitDate"] = "2011/06/10 23:15",
+			},
+			["Default.Nordrassil.Fraycollie"] = {
+				["lastUpdate"] = 1309064820,
+				["lastVisitDate"] = "2011/06/26 01:07",
+				["MailCache"] = {
+					{
+						["sender"] = "Nekula",
+						["count"] = 1,
+						["link"] = "|cffa335ee|Hitem:58197:0:0:0:0:0:0:0:85:0|h[Rock Furrow Boots]|h|r",
+						["icon"] = "Interface\\Icons\\inv_boots_plate_raiddeathknight_i_01",
+						["lastCheck"] = 1309062621,
+						["daysLeft"] = 30,
+					}, -- [1]
+				},
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["lastUpdate"] = 1307914126,

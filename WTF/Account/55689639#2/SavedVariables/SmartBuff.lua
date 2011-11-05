@@ -1,4 +1,6 @@
 
 SMARTBUFF_OptionsGlobal = {
-	["FirstStart"] = "v4.1b",
+	["SplashIcon"] = true,
+	["SplashMsgShort"] = false,
+	["FirstStart"] = "v4.2a",
 }

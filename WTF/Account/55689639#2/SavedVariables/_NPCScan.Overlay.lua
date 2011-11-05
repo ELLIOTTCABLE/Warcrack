@@ -6,7 +6,7 @@ _NPCScanOverlayOptions = {
 		["AlphaMap3"] = 0.5,
 		["BattlefieldMinimap"] = 0.800000011920929,
 	},
-	["Version"] = "4.1.0.3",
+	["Version"] = "4.2.0.2",
 	["ShowAll"] = false,
 	["ModulesExtra"] = {
 		["WorldMap"] = {

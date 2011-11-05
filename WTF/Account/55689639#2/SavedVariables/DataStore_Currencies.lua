@@ -2,21 +2,24 @@
 DataStore_CurrenciesDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Fraycollie - Hyjal"] = "Fraycollie - Hyjal",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Armscollie - Akama"] = "Armscollie - Akama",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 	},
 	["global"] = {
 		["Reference"] = {
@@ -38,6 +41,13 @@ DataStore_CurrenciesDB = {
 			},
 		},
 		["Characters"] = {
+			["Default.Hyjal.Fraycollie"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+				["lastUpdate"] = 1315450615,
+			},
 			["Default.The Underbog.Combatcollie"] = {
 				["Currencies"] = {
 					7, -- [1]
@@ -55,41 +65,6 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1308802058,
 			},
-			["Default.Smolderthorn.Summoneer"] = {
-				["Currencies"] = {
-					7, -- [1]
-					8, -- [2]
-				},
-				["lastUpdate"] = 1308566353,
-			},
-			["Default.Nordrassil.Fraycollie"] = {
-				["Currencies"] = {
-					3, -- [1]
-					126340, -- [2]
-					12, -- [3]
-					7, -- [4]
-					8, -- [5]
-					36490, -- [6]
-				},
-				["lastUpdate"] = 1309891675,
-			},
-			["Default.Smolderthorn.Battlecollie"] = {
-				["Currencies"] = {
-					3, -- [1]
-					155908, -- [2]
-					7, -- [3]
-					8, -- [4]
-					20362, -- [5]
-				},
-				["lastUpdate"] = 1308881102,
-			},
-			["Default.Smolderthorn.Othercollie"] = {
-				["Currencies"] = {
-					7, -- [1]
-					8, -- [2]
-				},
-				["lastUpdate"] = 1308332289,
-			},
 			["Default.Ysondre.Warmongrel"] = {
 				["Currencies"] = {
 					7, -- [1]
@@ -97,34 +72,12 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1308801588,
 			},
-			["Default.Darkspear.Warcollie"] = {
+			["Default.Smolderthorn.Othercollie"] = {
 				["Currencies"] = {
 					7, -- [1]
 					8, -- [2]
 				},
-				["lastUpdate"] = 1308162231,
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["Currencies"] = {
-					7, -- [1]
-					8, -- [2]
-				},
-				["lastUpdate"] = 1308959477,
-			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["Currencies"] = {
-					7, -- [1]
-					8, -- [2]
-					138, -- [3]
-				},
-				["lastUpdate"] = 1308956540,
-			},
-			["Default.Smolderthorn.Warcollie"] = {
-				["Currencies"] = {
-					7, -- [1]
-					8, -- [2]
-				},
-				["lastUpdate"] = 1308197707,
+				["lastUpdate"] = 1308332289,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["Currencies"] = {
@@ -146,12 +99,83 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1307762090,
 			},
+			["Default.Darkspear.Warcollie"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+				["lastUpdate"] = 1308162231,
+			},
+			["Default.Smolderthorn.Warcollie"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+				["lastUpdate"] = 1308197707,
+			},
+			["Default.Smolderthorn.Summoneer"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+				["lastUpdate"] = 1308566353,
+			},
 			["Default.Smolderthorn.Github"] = {
 				["Currencies"] = {
 					7, -- [1]
 					8, -- [2]
 				},
 				["lastUpdate"] = 1308697100,
+			},
+			["Default.Akama.Armscollie"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+				["lastUpdate"] = 1315462515,
+			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+					138, -- [3]
+				},
+				["lastUpdate"] = 1308956540,
+			},
+			["Default.Hyjal.Elliottcable"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+				["lastUpdate"] = 1315451950,
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+				["lastUpdate"] = 1308959477,
+			},
+			["Default.Nordrassil.Fraycollie"] = {
+				["Currencies"] = {
+					3, -- [1]
+					126340, -- [2]
+					12, -- [3]
+					7, -- [4]
+					8, -- [5]
+					36490, -- [6]
+				},
+				["lastUpdate"] = 1315462458,
+			},
+			["Default.Smolderthorn.Battlecollie"] = {
+				["Currencies"] = {
+					3, -- [1]
+					155908, -- [2]
+					7, -- [3]
+					8, -- [4]
+					20362, -- [5]
+				},
+				["lastUpdate"] = 1308881102,
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["Currencies"] = {

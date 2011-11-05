@@ -1,5 +1,11 @@
 
 AucAdvancedFilterBasic_IgnoreList = {
+	["Smolderthorn"] = {
+		["Horde"] = {
+		},
+		["Alliance"] = {
+		},
+	},
 	["Nordrassil"] = {
 		["Horde"] = {
 		},
@@ -10,9 +16,7 @@ AucAdvancedFilterBasic_IgnoreList = {
 		["Alliance"] = {
 		},
 	},
-	["Smolderthorn"] = {
-		["Horde"] = {
-		},
+	["Akama"] = {
 		["Alliance"] = {
 		},
 	},

@@ -1,66 +1,12 @@
 
 FriendsWithBenefitsDB = {
-	["Alliance - Ysondre"] = {
+	["Alliance - Darkspear"] = {
 		["removed"] = {
 		},
 		["notes"] = {
 		},
 		["friends"] = {
-			["battlecollie"] = true,
-		},
-	},
-	["Horde - Smolderthorn"] = {
-		["removed"] = {
-		},
-		["notes"] = {
-		},
-		["friends"] = {
-			["fraycollie"] = true,
-			["summoneer"] = true,
-		},
-	},
-	["Alliance - Smolderthorn"] = {
-		["removed"] = {
-			["nocollie"] = true,
-			["brandywine"] = true,
 			["warcollie"] = true,
-		},
-		["notes"] = {
-			["aïdenna"] = "Healer",
-			["jondus"] = "Enchanter",
-			["llilandra"] = "Alchemist",
-			["bilz"] = "Recruit",
-			["chobit"] = "Engineer",
-			["modduece"] = "Blacksmith",
-			["chrissmart"] = "DPS",
-		},
-		["friends"] = {
-			["aïdenna"] = true,
-			["raethen"] = true,
-			["llilandra"] = true,
-			["strudelface"] = true,
-			["saidix"] = true,
-			["modduece"] = true,
-			["bilz"] = true,
-			["leahs"] = true,
-			["diggyhole"] = true,
-			["fylthious"] = true,
-			["stephany"] = true,
-			["fraycollie"] = true,
-			["github"] = true,
-			["shamangirl"] = true,
-			["halfevil"] = true,
-			["qidran"] = true,
-			["battlecollie"] = true,
-			["mcgrruff"] = true,
-			["chrissmart"] = true,
-			["othercollie"] = true,
-			["jondus"] = true,
-			["xarleas"] = true,
-			["melancollie"] = true,
-			["chobit"] = true,
-			["hoarcollie"] = true,
-			["stôrmcrow"] = true,
 		},
 	},
 	["Horde - Nordrassil"] = {
@@ -85,15 +31,6 @@ FriendsWithBenefitsDB = {
 			["kyrriana"] = true,
 		},
 	},
-	["Alliance - Darkspear"] = {
-		["removed"] = {
-		},
-		["notes"] = {
-		},
-		["friends"] = {
-			["warcollie"] = true,
-		},
-	},
 	["Horde - The Underbog"] = {
 		["removed"] = {
 		},
@@ -115,6 +52,50 @@ FriendsWithBenefitsDB = {
 			["iwannadoyou"] = true,
 		},
 	},
+	["Alliance - Smolderthorn"] = {
+		["removed"] = {
+			["brandywine"] = true,
+			["nocollie"] = true,
+			["warcollie"] = true,
+		},
+		["notes"] = {
+			["aïdenna"] = "Healer",
+			["jondus"] = "Enchanter",
+			["chrissmart"] = "DPS",
+			["bilz"] = "Recruit",
+			["chobit"] = "Engineer",
+			["modduece"] = "Blacksmith",
+			["llilandra"] = "Alchemist",
+		},
+		["friends"] = {
+			["aïdenna"] = true,
+			["raethen"] = true,
+			["llilandra"] = true,
+			["strudelface"] = true,
+			["saidix"] = true,
+			["modduece"] = true,
+			["bilz"] = true,
+			["leahs"] = true,
+			["diggyhole"] = true,
+			["fylthious"] = true,
+			["stephany"] = true,
+			["fraycollie"] = true,
+			["github"] = true,
+			["shamangirl"] = true,
+			["qidran"] = true,
+			["halfevil"] = true,
+			["battlecollie"] = true,
+			["mcgrruff"] = true,
+			["chrissmart"] = true,
+			["othercollie"] = true,
+			["jondus"] = true,
+			["xarleas"] = true,
+			["melancollie"] = true,
+			["chobit"] = true,
+			["hoarcollie"] = true,
+			["stôrmcrow"] = true,
+		},
+	},
 	["Alliance - Nordrassil"] = {
 		["removed"] = {
 		},
@@ -122,6 +103,34 @@ FriendsWithBenefitsDB = {
 		},
 		["friends"] = {
 			["fraycollie"] = true,
+		},
+	},
+	["Alliance - Ysondre"] = {
+		["removed"] = {
+		},
+		["notes"] = {
+		},
+		["friends"] = {
+			["battlecollie"] = true,
+		},
+	},
+	["Horde - Smolderthorn"] = {
+		["removed"] = {
+		},
+		["notes"] = {
+		},
+		["friends"] = {
+			["summoneer"] = true,
+			["fraycollie"] = true,
+		},
+	},
+	["Alliance - Akama"] = {
+		["removed"] = {
+		},
+		["notes"] = {
+		},
+		["friends"] = {
+			["armscollie"] = true,
 		},
 	},
 	["Horde - Ysondre"] = {
@@ -156,12 +165,12 @@ FriendsWithBenefitsDB = {
 			["lynnea"] = true,
 			["zenas"] = true,
 			["raziell"] = true,
-			["daulbus"] = true,
-			["kathyayini"] = true,
-			["sweetmilk"] = true,
+			["pinkhowl"] = true,
+			["waltz"] = true,
+			["windsocks"] = true,
 			["chastity"] = true,
 			["attendant"] = true,
-			["rakrurn"] = true,
+			["zachaeus"] = true,
 			["undeadsummon"] = true,
 			["vermane"] = true,
 			["celestine"] = true,
@@ -169,33 +178,33 @@ FriendsWithBenefitsDB = {
 			["superfreek"] = true,
 			["ikilledpeter"] = true,
 			["zedatojaks"] = true,
-			["ikkitakeda"] = true,
+			["ßeserk"] = true,
 			["warmongrel"] = true,
-			["adrales"] = true,
-			["anderthal"] = true,
+			["egönömic"] = true,
+			["rashnu"] = true,
 			["faptor"] = true,
 			["anatou"] = true,
 			["harem"] = true,
 			["diplo"] = true,
 			["bottledwater"] = true,
-			["czariana"] = true,
+			["fulgent"] = true,
 			["meepps"] = true,
 			["greenbloodx"] = true,
-			["nightstep"] = true,
+			["qoljyr"] = true,
 			["nãrcissã"] = true,
 			["lionspleen"] = true,
-			["qoljyr"] = true,
+			["nightstep"] = true,
 			["ohgeez"] = true,
-			["fulgent"] = true,
+			["czariana"] = true,
 			["gessa"] = true,
-			["rashnu"] = true,
-			["egönömic"] = true,
-			["ßeserk"] = true,
+			["anderthal"] = true,
+			["adrales"] = true,
+			["ikkitakeda"] = true,
 			["starberry"] = true,
-			["zachaeus"] = true,
-			["windsocks"] = true,
-			["waltz"] = true,
-			["pinkhowl"] = true,
+			["rakrurn"] = true,
+			["sweetmilk"] = true,
+			["kathyayini"] = true,
+			["daulbus"] = true,
 		},
 	},
 }

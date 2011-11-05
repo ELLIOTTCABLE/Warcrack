@@ -1,8 +1,8 @@
 
 MissingFriends_List = {
-	"Akiza", -- [1]
-	"Beefs", -- [2]
-	"Happyhots", -- [3]
+	"Happyhots", -- [1]
+	"Akiza", -- [2]
+	"Beefs", -- [3]
 	"Kyrriana", -- [4]
 	"Ransyd", -- [5]
 	"Smavis", -- [6]

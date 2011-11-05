@@ -22,7 +22,7 @@ BulkMail2Inbox: enabled
 CensusPlus: enabled
 ChatEdit: enabled
 Clique: enabled
-Consolid8: enabled
+Consolid8: disabled
 Critline: enabled
 DataStore: enabled
 DataStore_Achievements: enabled

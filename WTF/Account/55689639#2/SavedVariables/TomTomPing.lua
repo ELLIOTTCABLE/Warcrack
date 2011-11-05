@@ -7,6 +7,7 @@ TomTomPing_DB = {
 		["Github - Smolderthorn"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
 		["Fraycollie - Smolderthorn"] = "Default",
+		["Armscollie - Akama"] = "Default",
 		["Melancollie - Smolderthorn"] = "Default",
 		["Othercollie - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",

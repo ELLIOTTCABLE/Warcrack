@@ -6,11 +6,14 @@ TomTomDB = {
 		["Summoneer - Smolderthorn"] = "Default",
 		["Github - Smolderthorn"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
+		["Elliottcable - Hyjal"] = "Default",
 		["Fraycollie - Smolderthorn"] = "Default",
+		["Armscollie - Akama"] = "Default",
 		["Melancollie - Smolderthorn"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
 		["Othercollie - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
-		["Hoarcollie - Smolderthorn"] = "Default",
+		["Fraycollie - Hyjal"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -31,11 +34,14 @@ TomTomWaypointsMF = {
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Fraycollie - Hyjal"] = "Fraycollie - Hyjal",
 	},
 	["profiles"] = {
 		["Warmongrel - Ysondre"] = {
@@ -48,15 +54,21 @@ TomTomWaypointsMF = {
 		},
 		["Nocollie - Smolderthorn"] = {
 		},
+		["Elliottcable - Hyjal"] = {
+		},
 		["Fraycollie - Smolderthorn"] = {
 		},
+		["Armscollie - Akama"] = {
+		},
 		["Melancollie - Smolderthorn"] = {
+		},
+		["Hoarcollie - Smolderthorn"] = {
 		},
 		["Othercollie - Smolderthorn"] = {
 		},
 		["Battlecollie - Smolderthorn"] = {
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Fraycollie - Hyjal"] = {
 		},
 	},
 }

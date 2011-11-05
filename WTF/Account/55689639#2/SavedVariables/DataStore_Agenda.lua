@@ -2,24 +2,30 @@
 DataStore_AgendaDB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Warcollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Ysondre"] = "Battlecollie - Ysondre",
-		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Fraycollie - Hyjal"] = "Fraycollie - Hyjal",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Summoneer - Ysondre"] = "Summoneer - Ysondre",
-		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Armscollie - Akama"] = "Armscollie - Akama",
+		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
+			["Default.Hyjal.Fraycollie"] = {
+				["lastUpdate"] = 1315450720,
+			},
 			["Default.The Underbog.Combatcollie"] = {
 				["lastUpdate"] = 1307756139,
 				["Contacts"] = {
@@ -64,69 +70,6 @@ DataStore_AgendaDB = {
 					"Stôrmcrow", -- [23]
 					"Strudelface", -- [24]
 					"Xarleas", -- [25]
-				},
-			},
-			["Default.Smolderthorn.Summoneer"] = {
-				["lastUpdate"] = 1308566445,
-			},
-			["Default.Nordrassil.Fraycollie"] = {
-				["lastUpdate"] = 1309892079,
-				["Contacts"] = {
-					"Akiza", -- [1]
-					"Beefs", -- [2]
-					"Happyhots", -- [3]
-					"Kyrriana", -- [4]
-					"Ransyd", -- [5]
-					"Smavis", -- [6]
-				},
-			},
-			["Default.Smolderthorn.Battlecollie"] = {
-				["lastUpdate"] = 1308882411,
-				["Contacts"] = {
-					"Chobit", -- [1]
-					"Chrissmart", -- [2]
-					"Aïdenna", -- [3]
-					"Bilz", -- [4]
-					"Diggyhole", -- [5]
-					"Fraycollie", -- [6]
-					"Fylthious", -- [7]
-					"Github", -- [8]
-					"Halfevil", -- [9]
-					"Hoarcollie", -- [10]
-					"Jondus", -- [11]
-					"Leahs", -- [12]
-					"Llilandra", -- [13]
-					"Mcgrruff", -- [14]
-					"Melancollie", -- [15]
-					"Modduece", -- [16]
-					"Othercollie", -- [17]
-					"Qidran", -- [18]
-					"Raethen", -- [19]
-					"Saidix", -- [20]
-					"Shamangirl", -- [21]
-					"Stephany", -- [22]
-					"Stôrmcrow", -- [23]
-					"Strudelface", -- [24]
-					"Xarleas", -- [25]
-				},
-			},
-			["Default.Smolderthorn.Othercollie"] = {
-				["lastUpdate"] = 1308332506,
-				["Contacts"] = {
-					"Brandywine", -- [1]
-					"Battlecollie", -- [2]
-					"Chobit", -- [3]
-					"Fraycollie", -- [4]
-					"Fylthious", -- [5]
-					"Halfevil", -- [6]
-					"Hoarcollie", -- [7]
-					"Jondus", -- [8]
-					"Leahs", -- [9]
-					"Melancollie", -- [10]
-					"Modduece", -- [11]
-					"Raethen", -- [12]
-					"Saidix", -- [13]
-					"Xarleas", -- [14]
 				},
 			},
 			["Default.Ysondre.Warmongrel"] = {
@@ -189,38 +132,58 @@ DataStore_AgendaDB = {
 					"Zedatojaks", -- [55]
 				},
 			},
+			["Default.Smolderthorn.Othercollie"] = {
+				["lastUpdate"] = 1308332506,
+				["Contacts"] = {
+					"Brandywine", -- [1]
+					"Battlecollie", -- [2]
+					"Chobit", -- [3]
+					"Fraycollie", -- [4]
+					"Fylthious", -- [5]
+					"Halfevil", -- [6]
+					"Hoarcollie", -- [7]
+					"Jondus", -- [8]
+					"Leahs", -- [9]
+					"Melancollie", -- [10]
+					"Modduece", -- [11]
+					"Raethen", -- [12]
+					"Saidix", -- [13]
+					"Xarleas", -- [14]
+				},
+			},
+			["Default.The Underbog.Fraycollie"] = {
+				["lastUpdate"] = 1307756265,
+				["Contacts"] = {
+					"Cassidyjayee", -- [1]
+					"Combatcollie", -- [2]
+					"Drunkelf", -- [3]
+					"Fenrirfoxx", -- [4]
+					"Frostbunny", -- [5]
+					"Hersheyõ", -- [6]
+					"Integration", -- [7]
+					"Iwannadoyou", -- [8]
+					"Millianna", -- [9]
+					"Nessirea", -- [10]
+					"Twooter", -- [11]
+				},
+			},
+			["Default.Ysondre.Battlecollie"] = {
+				["lastUpdate"] = 1307762194,
+			},
 			["Default.Darkspear.Warcollie"] = {
 				["lastUpdate"] = 1308165924,
 			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1308959672,
-				["Contacts"] = {
-					"Chobit", -- [1]
-					"Chrissmart", -- [2]
-					"Mcgrruff", -- [3]
-					"Stephany", -- [4]
-					"Aïdenna", -- [5]
-					"Battlecollie", -- [6]
-					"Bilz", -- [7]
-					"Diggyhole", -- [8]
-					"Fraycollie", -- [9]
-					"Fylthious", -- [10]
-					"Github", -- [11]
-					"Halfevil", -- [12]
-					"Jondus", -- [13]
-					"Leahs", -- [14]
-					"Llilandra", -- [15]
-					"Melancollie", -- [16]
-					"Modduece", -- [17]
-					"Othercollie", -- [18]
-					"Qidran", -- [19]
-					"Raethen", -- [20]
-					"Saidix", -- [21]
-					"Shamangirl", -- [22]
-					"Stôrmcrow", -- [23]
-					"Strudelface", -- [24]
-					"Xarleas", -- [25]
-				},
+			["Default.Smolderthorn.Warcollie"] = {
+				["lastUpdate"] = 1308197708,
+			},
+			["Default.Smolderthorn.Summoneer"] = {
+				["lastUpdate"] = 1308566445,
+			},
+			["Default.Smolderthorn.Github"] = {
+				["lastUpdate"] = 1308701214,
+			},
+			["Default.Akama.Armscollie"] = {
+				["lastUpdate"] = 1315466897,
 			},
 			["Default.Smolderthorn.Melancollie"] = {
 				["lastUpdate"] = 1308956563,
@@ -252,30 +215,93 @@ DataStore_AgendaDB = {
 					"Xarleas", -- [25]
 				},
 			},
-			["Default.Smolderthorn.Warcollie"] = {
-				["lastUpdate"] = 1308197708,
+			["Default.Hyjal.Elliottcable"] = {
+				["lastUpdate"] = 1315453928,
 			},
-			["Default.The Underbog.Fraycollie"] = {
-				["lastUpdate"] = 1307756265,
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1308959672,
 				["Contacts"] = {
-					"Cassidyjayee", -- [1]
-					"Combatcollie", -- [2]
-					"Drunkelf", -- [3]
-					"Fenrirfoxx", -- [4]
-					"Frostbunny", -- [5]
-					"Hersheyõ", -- [6]
-					"Integration", -- [7]
-					"Iwannadoyou", -- [8]
-					"Millianna", -- [9]
-					"Nessirea", -- [10]
-					"Twooter", -- [11]
+					"Chobit", -- [1]
+					"Chrissmart", -- [2]
+					"Mcgrruff", -- [3]
+					"Stephany", -- [4]
+					"Aïdenna", -- [5]
+					"Battlecollie", -- [6]
+					"Bilz", -- [7]
+					"Diggyhole", -- [8]
+					"Fraycollie", -- [9]
+					"Fylthious", -- [10]
+					"Github", -- [11]
+					"Halfevil", -- [12]
+					"Jondus", -- [13]
+					"Leahs", -- [14]
+					"Llilandra", -- [15]
+					"Melancollie", -- [16]
+					"Modduece", -- [17]
+					"Othercollie", -- [18]
+					"Qidran", -- [19]
+					"Raethen", -- [20]
+					"Saidix", -- [21]
+					"Shamangirl", -- [22]
+					"Stôrmcrow", -- [23]
+					"Strudelface", -- [24]
+					"Xarleas", -- [25]
 				},
 			},
-			["Default.Ysondre.Battlecollie"] = {
-				["lastUpdate"] = 1307762194,
+			["Default.Nordrassil.Fraycollie"] = {
+				["lastUpdate"] = 1315462468,
+				["Contacts"] = {
+					["Ransyd"] = {
+						["note"] = "",
+					},
+					["Smavis"] = {
+						["note"] = "",
+					},
+					["Akiza"] = {
+						["note"] = "",
+					},
+					["Beefs"] = {
+						["note"] = "",
+					},
+					["Happyhots"] = {
+						["note"] = "",
+						["level"] = 85,
+						["class"] = "Druid",
+					},
+					["Kyrriana"] = {
+						["note"] = "",
+					},
+				},
 			},
-			["Default.Smolderthorn.Github"] = {
-				["lastUpdate"] = 1308701214,
+			["Default.Smolderthorn.Battlecollie"] = {
+				["lastUpdate"] = 1308882411,
+				["Contacts"] = {
+					"Chobit", -- [1]
+					"Chrissmart", -- [2]
+					"Aïdenna", -- [3]
+					"Bilz", -- [4]
+					"Diggyhole", -- [5]
+					"Fraycollie", -- [6]
+					"Fylthious", -- [7]
+					"Github", -- [8]
+					"Halfevil", -- [9]
+					"Hoarcollie", -- [10]
+					"Jondus", -- [11]
+					"Leahs", -- [12]
+					"Llilandra", -- [13]
+					"Mcgrruff", -- [14]
+					"Melancollie", -- [15]
+					"Modduece", -- [16]
+					"Othercollie", -- [17]
+					"Qidran", -- [18]
+					"Raethen", -- [19]
+					"Saidix", -- [20]
+					"Shamangirl", -- [21]
+					"Stephany", -- [22]
+					"Stôrmcrow", -- [23]
+					"Strudelface", -- [24]
+					"Xarleas", -- [25]
+				},
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["lastUpdate"] = 1307914195,

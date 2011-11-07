@@ -8,7 +8,8 @@ local font = ArtworkPath.."Qlassik_TB.ttf";  local NameTextVerticalAdjustment = 
 local blizzfont =				NAMEPLATE_FONT
 --local blizzfont =					"FONTS\\ARIALN.TTF"
 --local font = ArtworkPath.."AccidentalPresidency.ttf"; local NameTextVerticalAdjustment = -7
---local font = ArtworkPath.."Pakenham.ttf"; local NameTextVerticalAdjustment = -8
+local font = ArtworkPath.."Pakenham.ttf"; local NameTextVerticalAdjustment = -10;  fontsize = 12;
+--local font = "FONTS\\ARIALN.TTF"; NameTextVerticalAdjustment = -8;  fontsize = 12;
 local EmptyTexture = ArtworkPath.."Neon_Empty"
 local CastBarVerticalAdjustment = -24
 
@@ -33,7 +34,7 @@ DefaultStyle.healthborder = {
 DefaultStyle.healthbar = {
 	texture =					 ArtworkPath.."Neon_Bar",
 	backdrop =					 ArtworkPath.."Neon_Bar_Backdrop",
-	width = 100,
+	width = 102,
 	height = 32,
 	x = 0,
 	y = 0,
@@ -242,6 +243,7 @@ DefaultStyle.name = {
 	anchor = "CENTER",
 	vertical = "CENTER",
 	shadow = true,
+	flags = "NONE",
 }
 
 DefaultStyle.level = {
@@ -468,10 +470,10 @@ local function CustomText(unit)
 	if unit.style == "NameOnly" then
 		local description, elite
 		if TidyPlatesData.UnitDescriptions and unit.type == "NPC" then
-			return (TidyPlatesData.UnitDescriptions[unit.name] or GetLevelDescription(unit) or "")
+			return (TidyPlatesData.UnitDescriptions[unit.name] or GetLevelDescription(unit) or ""), 1,1,1,.65
 		end
 	end
-	return HubCustomText(unit) 
+	return HubCustomText(unit)
 end
 Theme.SetCustomText = CustomText
 

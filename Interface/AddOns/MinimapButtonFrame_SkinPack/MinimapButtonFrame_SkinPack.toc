@@ -1,4 +1,4 @@
-## Interface: 40100
+## Interface: 40200
 ## Title: Minimap Button Frame Skin Pack
 ## Notes: Skin Pack for MinimapButtonFrame.
 ## Author: Bachlott

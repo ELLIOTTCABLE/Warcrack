@@ -1,0 +1,21 @@
+------------------------------------------------------------------------
+r6 | thaoky | 2011-10-30 10:21:19 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   A /tags/DataStore_Agenda 4.2.002 (from /trunk:5)
+
+Tagging as DataStore_Agenda 4.2.002
+------------------------------------------------------------------------
+r5 | thaoky | 2011-10-30 09:40:39 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Agenda.toc
+
+TOC update
+------------------------------------------------------------------------
+r4 | thaoky | 2011-06-29 17:57:46 +0000 (Wed, 29 Jun 2011) | 2 lines
+Changed paths:
+   M /trunk/DataStore_Agenda.lua
+   M /trunk/DataStore_Agenda.toc
+
+TOC update
+Modified a few functions to manage contacts (unused/wip)
+------------------------------------------------------------------------

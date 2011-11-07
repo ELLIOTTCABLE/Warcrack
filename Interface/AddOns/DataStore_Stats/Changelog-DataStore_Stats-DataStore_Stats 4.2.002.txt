@@ -1,0 +1,19 @@
+------------------------------------------------------------------------
+r12 | thaoky | 2011-10-30 10:37:20 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   A /tags/DataStore_Stats 4.2.002 (from /trunk:11)
+
+Tagging as DataStore_Stats 4.2.002
+------------------------------------------------------------------------
+r11 | thaoky | 2011-10-30 09:55:22 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Stats.toc
+
+TOC update
+------------------------------------------------------------------------
+r10 | thaoky | 2011-06-29 18:00:30 +0000 (Wed, 29 Jun 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Stats.toc
+
+TOC update
+------------------------------------------------------------------------

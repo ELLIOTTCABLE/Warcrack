@@ -585,13 +585,13 @@ local function _GetNumFreeBankSlots(character)
 	return character.numFreeBankSlots
 end
 	
-local function _DeleteGuild(name, realm, account)
-	realm = realm or GetRealmName()
-	account = account or THIS_ACCOUNT
+-- local function _DeleteGuild(name, realm, account)
+	-- realm = realm or GetRealmName()
+	-- account = account or THIS_ACCOUNT
 	
-	local key = format("%s.%s.%s", account, realm, name)
-	addon.db.global.Guilds[key] = nil
-end
+	-- local key = format("%s.%s.%s", account, realm, name)
+	-- addon.db.global.Guilds[key] = nil
+-- end
 
 local function _GetGuildBankItemCount(guild, searchedID)
 	local count = 0
@@ -697,7 +697,7 @@ local PublicMethods = {
 	GetNumFreeBagSlots = _GetNumFreeBagSlots,
 	GetNumBankSlots = _GetNumBankSlots,
 	GetNumFreeBankSlots = _GetNumFreeBankSlots,
-	DeleteGuild = _DeleteGuild,
+	-- DeleteGuild = _DeleteGuild,
 	GetGuildBankItemCount = _GetGuildBankItemCount,
 	GetGuildBankTab = _GetGuildBankTab,
 	GetGuildBankTabName = _GetGuildBankTabName,

@@ -1,14 +1,14 @@
-## Interface: 40000
+## Interface: 40200
 ## 
 ## Title: GathererDB: |cffce0a11Wowhead|r
 ## Notes: Gatherer preloaded database, courtesy of |cffce0a11http://wowhead.com|r
-## Version: 1.0.2010-12-19
+## Version: 1.0.2011-11-03
 ##
 ## X-Website: http://www.gathereraddon.com
 ## X-Author: Norganna's AddOns - Nechckn, Project Administrator, MentalPower
 ## X-CompatibleLocales: enUS, enGB, deDE, frFR, koKR, zhCN, zhTW, esES
 ## X-Category: Tradeskill
-## X-Date: 2010-12-19
+## X-Date: 2011-11-03
 ##
 ## RequiredDeps: Gatherer
 

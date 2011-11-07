@@ -1,0 +1,19 @@
+------------------------------------------------------------------------
+r22 | thaoky | 2011-10-30 10:30:51 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   A /tags/DataStore_Mails 4.2.002 (from /trunk:21)
+
+Tagging as DataStore_Mails 4.2.002
+------------------------------------------------------------------------
+r21 | thaoky | 2011-10-30 09:46:23 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Mails.toc
+
+TOC update
+------------------------------------------------------------------------
+r20 | thaoky | 2011-06-29 17:59:47 +0000 (Wed, 29 Jun 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Mails.toc
+
+TOC update
+------------------------------------------------------------------------

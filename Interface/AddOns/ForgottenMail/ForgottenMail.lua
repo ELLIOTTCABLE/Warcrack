@@ -12,33 +12,11 @@ local function SetDesaturation(texture, desaturation)
 end
 
 
--- hook mail icon tooltip text to reflect old inbox items if applicable
-function ForgottenMail_MinimapMailFrameUpdate()
-	sender1,sender2,sender3 = GetLatestThreeSenders()
-	
-	if( sender1 or sender2 or sender3 ) then
-		toolText = HAVE_MAIL_FROM
-	elseif HasNewMail() then
-		toolText = HAVE_MAIL
-	else
-		-- show amount of old inbox items
-		toolText = "You have "..ForgottenMailNumInboxItems.." old inbox |4item:items;"
-	end
-	
-	if( sender1 ) then
-		toolText = toolText.."\n"..sender1
-	end
-	if( sender2 ) then
-		toolText = toolText.."\n"..sender2
-	end
-	if( sender3 ) then
-		toolText = toolText.."\n"..sender3
-	end
-	GameTooltip:SetText(toolText)
-end
-
-
-function ForgottenMail_OnEvent(self, event, ...)
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("ADDON_LOADED")
+frame:RegisterEvent("MAIL_INBOX_UPDATE")
+frame:RegisterEvent("UPDATE_PENDING_MAIL")
+frame:SetScript("OnEvent", function(self, event, addon)
 	if event == "MAIL_INBOX_UPDATE" or event == "UPDATE_PENDING_MAIL" then
 		if event == "MAIL_INBOX_UPDATE" then
 			-- GetInboxNumItems returns 0 until you have checked the inbox, so we need to store it
@@ -59,7 +37,7 @@ function ForgottenMail_OnEvent(self, event, ...)
 			-- no mail at all, hide mail icon
 			MiniMapMailFrame:Hide()
 		end
-	elseif select(1, ...) == "ForgottenMail" then
+	elseif addon == "ForgottenMail" then
 		-- old inbox items from last session?
 		if not ForgottenMailNumInboxItems then
 			ForgottenMailNumInboxItems = 0
@@ -68,15 +46,33 @@ function ForgottenMail_OnEvent(self, event, ...)
 			SetDesaturation(MiniMapMailIcon, 1)
 			SetDesaturation(MiniMapMailBorder, 1)
 		end
+		self:UnregisterEvent("ADDON_LOADED")
 	end
+end)
+
+
+-- hook mail icon tooltip text to reflect old inbox items if applicable
+function MinimapMailFrameUpdate()
+	local sender1, sender2, sender3 = GetLatestThreeSenders()
+	local toolText
+	
+	if (sender1 or sender2 or sender3) then
+		toolText = HAVE_MAIL_FROM
+	elseif HasNewMail() then
+		toolText = HAVE_MAIL
+	else
+		-- show amount of old inbox items
+		toolText = "You have "..ForgottenMailNumInboxItems.." inbox |4item:items;"
+	end
+	
+	if sender1 then
+		toolText = toolText.."\n"..sender1
+	end
+	if sender2 then
+		toolText = toolText.."\n"..sender2
+	end
+	if sender3 then
+		toolText = toolText.."\n"..sender3
+	end
+	GameTooltip:SetText(toolText)
 end
-
-
-MinimapMailFrameUpdate = ForgottenMail_MinimapMailFrameUpdate
-
-
-local frame = CreateFrame("Frame")
-frame:SetScript("OnEvent", ForgottenMail_OnEvent)
-frame:RegisterEvent("ADDON_LOADED")
-frame:RegisterEvent("MAIL_INBOX_UPDATE")
-frame:RegisterEvent("UPDATE_PENDING_MAIL")

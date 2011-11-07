@@ -39,6 +39,7 @@ TidyPlatesOptions = {
 	EnableCastWatcher = false, 
 	WelcomeShown = false,
 	EnableMinimapButton = false,
+	_EnableMiniButton = false,
 }
 	
 local TidyPlatesOptionsDefaults = copytable(TidyPlatesOptions)
@@ -312,7 +313,7 @@ local function ActivateInterfacePanel()
 	-- Minimap Button
 	panel.EnableMinimapButton = PanelHelpers:CreateCheckButton("TidyPlatesOptions_EnableMinimapButton", panel, "Enable Minimap Icon")
 	panel.EnableMinimapButton:SetPoint("TOPLEFT", panel.EnableCastWatcher, "TOPLEFT", 0, -35)
-	panel.EnableMinimapButton:SetScript("OnClick", function(self) if self:GetChecked() then TidyPlatesUtility:ShowMinimapButton() else TidyPlatesUtility:HideMinimapButton() end; end)
+	-- panel.EnableMinimapButton:SetScript("OnClick", function(self) if self:GetChecked() then TidyPlatesUtility:ShowMinimapButton() else TidyPlatesUtility:HideMinimapButton() end; end)
 	panel.EnableMinimapButton:Hide()
 	
 	-- Reset
@@ -354,12 +355,12 @@ local function ActivateInterfacePanel()
 		_G["InterfaceOptionsNamesPanelUnitNameplatesFriends"]:SetChecked(false)
 		
 		if IsShiftKeyDown() then
-			wipe(TidyPlatesOptions)
+			TidyPlatesOptions = wipe(TidyPlatesOptions)
 			for i, v in pairs(TidyPlatesOptionsDefaults) do TidyPlatesOptions[i] = v end
 			SetCVar("nameplateShowFriends", 0)
 			ReloadUI()
 		else
-			wipe(TidyPlatesOptions)
+			TidyPlatesOptions = wipe(TidyPlatesOptions)
 			for i, v in pairs(TidyPlatesOptionsDefaults) do TidyPlatesOptions[i] = v end
 			RefreshPanel()
 			ApplyPanelSettings()
@@ -387,8 +388,13 @@ local function ApplyAutomationSettings()
 	else TidyPlates:StopSpellCastWatcher()	end
 	
 	-- Minimap Icon
-	if TidyPlatesOptions.EnableMinimapButton then TidyPlatesUtility:ShowMinimapButton()
-	else TidyPlatesUtility:HideMinimapButton() end
+	--if TidyPlatesOptions.EnableMinimapButton then TidyPlatesUtility:ShowMinimapButton()
+	--else TidyPlatesUtility:HideMinimapButton() end
+	if TidyPlatesOptions._EnableMiniButton then 
+		TidyPlatesUtility:CreateMinimapButton()
+		TidyPlatesUtility:ShowMinimapButton() 
+	end
+	-- /run TidyPlatesOptions._EnableMiniButton = true; ReloadUI()
 	
 	TidyPlates:ForceUpdate()
 end
@@ -402,7 +408,7 @@ ApplyPanelSettings = function()
 	TidyPlatesOptions.EnableMinimapButton = panel.EnableMinimapButton:GetChecked()
 
 	-- Clear Widgets
-	TidyPlatesWidgets:ResetWidgets()
+	if TidyPlatesWidgets then TidyPlatesWidgets:ResetWidgets() end
 	
 	if currentThemeName ~= TidyPlatesOptions[activespec] then 
 		LoadTheme(TidyPlatesOptions[activespec]) 
@@ -434,9 +440,11 @@ end
 local panelevents = {}
 
 local function ShowWarnings()
-	if not( TidyPlatesWidgets.DebuffWidgetBuild and TidyPlatesWidgets.DebuffWidgetBuild > 1) then
-		print("|cFFFF6600Tidy Plates: |cFFFFFFFFWidget file versions do not match.  This may be caused by an issue with auto-updater software.",
-			"Please uninstall Tidy Plates, and then re-install.  You do NOT need to clear your variables.")
+	if TidyPlatesWidgets then
+		if not( TidyPlatesWidgets.DebuffWidgetBuild and TidyPlatesWidgets.DebuffWidgetBuild > 1) then
+			print("|cFFFF6600Tidy Plates: |cFFFFFFFFWidget file versions do not match.  This may be caused by an issue with auto-updater software.",
+				"Please uninstall Tidy Plates, and then re-install.  You do NOT need to clear your variables.")
+		end
 	end
 	
 	-- Warn user if no theme is selected
@@ -451,7 +459,7 @@ function panelevents:ACTIVE_TALENT_GROUP_CHANGED()
 	else activespec = "primary" end
 	LoadTheme(TidyPlatesOptions[activespec])
 
-	TidyPlatesWidgets:ResetWidgets()
+	if TidyPlatesWidgets then TidyPlatesWidgets:ResetWidgets() end
 	TidyPlates:ForceUpdate()
 	
 	CallIn(ShowWarnings, 2)
@@ -491,7 +499,7 @@ end
 
 
 function panelevents:PLAYER_LOGIN()
-	TidyPlatesUtility:CreateMinimapButton()
+	--TidyPlatesUtility:CreateMinimapButton()
 	UpdateThemeNames()
 	ActivateInterfacePanel()
 	ShowWelcome()

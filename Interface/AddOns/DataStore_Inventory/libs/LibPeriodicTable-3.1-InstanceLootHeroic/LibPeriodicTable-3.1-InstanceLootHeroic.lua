@@ -1,7 +1,7 @@
 -- (c) 2007 Nymbia.  see LGPLv2.1.txt for full details.
 --DO NOT MAKE CHANGES TO THIS FILE BEFORE READING THE WIKI PAGE REGARDING CHANGING THESE FILES
 if not LibStub("LibPeriodicTable-3.1", true) then error("PT3 must be loaded before data") end
-LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 352 $", "(%d+)", function(n) return n+90000 end), {
+LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 371 $", "(%d+)", function(n) return n+90000 end), {
 	["InstanceLootHeroic.Auchindoun"]="m,InstanceLootHeroic.Auchenai Crypts,InstanceLootHeroic.Mana-Tombs,InstanceLootHeroic.Shadow Labyrinth,InstanceLootHeroic.Sethekk Halls",
 	["InstanceLootHeroic.Auchenai Crypts.Exarch Maladaar"]="27523:131,27867:108,27869:127,27870:106,27871:132,27872:105,29244:230,29257:270,29354:116,30586:76,30587:75,30588:71",
 	["InstanceLootHeroic.Auchenai Crypts.Shirrak the Dead Watcher"]="27493:131,27845:139,27846:135,27847:106,27865:109,27866:145,30586:56,30587:47,30588:52",
@@ -330,8 +330,6 @@ LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 352 $"
 	["InstanceLootHeroic.The Deadmines.Admiral Ripsnarl"]="",
 	["InstanceLootHeroic.The Deadmines.\"Captain\" Cookie"]= "",
 	["InstanceLootHeroic.The Deadmines.Vanessa VanCleef"]="",
--- Baradin Hold
-	["InstanceLootHeroic.Baradin Hold.Argaloth"]="",
 -- Blackrock Mountain: Blackwing Descent
 	["InstanceLootHeroic.Blackwing Descent.Magmaw"]="",
 	["InstanceLootHeroic.Blackwing Descent.Electron"]="",
@@ -360,5 +358,15 @@ LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 352 $"
 	["InstanceLootHeroic.Throne of the Four Winds.Rohash"]="",
 	["InstanceLootHeroic.Throne of the Four Winds.Conclave of Wind"]="m,InstanceLootHeroic.Throne of the Four Winds.Nezir,InstanceLootHeroic.Throne of the Four Winds.Anshal,InstanceLootHeroic.Throne of the Four Winds.Rohash",
 	["InstanceLootHeroic.Throne of the Four Winds.Al'Akir"]="",
+-- Firelands
+	["InstanceLootHeroic.Firelands.Beth'tilac"]="",
+	["InstanceLootHeroic.Firelands.Lord Rhyolith"]="",
+	["InstanceLootHeroic.Firelands.Alysrazor"]="",
+	["InstanceLootHeroic.Firelands.Shannox"]="",
+	["InstanceLootHeroic.Firelands.Baleroc"]="",
+	["InstanceLootHeroic.Firelands.Majordomo Staghelm"]="",
+	["InstanceLootHeroic.Firelands.Cache of the Fire Lord"]="",
+	["InstanceLootHeroic.Firelands.Ragnaros"]="m,InstanceLootHeroic.Firelands.Cache of the Fire Lord",
+	["InstanceLootHeroic.Firelands.Trash Mobs"]="",
 ]]
 })

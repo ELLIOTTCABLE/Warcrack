@@ -1,6 +1,6 @@
 --[[
 Name: LibBabble-Faction-3.0
-Revision: $Rev: 137 $
+Revision: $Rev: 147 $
 Maintainers: ckknight, nevcairiel, Ackis
 Website: http://www.wowace.com/projects/libbabble-faction-3-0/
 Dependencies: None
@@ -8,7 +8,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibBabble-Faction-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 137 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 147 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub.") end
 local lib = LibStub("LibBabble-3.0"):New(MAJOR_VERSION, MINOR_VERSION)
@@ -22,6 +22,7 @@ lib:SetBaseTranslations {
 	["Argent Crusade"] = "Argent Crusade",
 	["Argent Dawn"] = "Argent Dawn",
 	["Ashtongue Deathsworn"] = "Ashtongue Deathsworn",
+	["Avengers of Hyjal"] = "Avengers of Hyjal",
 	["Baradin's Wardens"] = "Baradin's Wardens",
 	["Bilgewater Cartel"] = "Bilgewater Cartel",
 	["Bloodsail Buccaneers"] = "Bloodsail Buccaneers",
@@ -122,6 +123,7 @@ elseif GAME_LOCALE == "deDE" then
 	["Argent Crusade"] = "Argentumkreuzzug",
 	["Argent Dawn"] = "Argentumdämmerung",
 	["Ashtongue Deathsworn"] = "Die Todeshörigen",
+	["Avengers of Hyjal"] = "Rächer des Hyjal",
 	["Baradin's Wardens"] = "Wächter von Baradin",
 	["Bilgewater Cartel"] = "Bilgewasserkartell",
 	["Bloodsail Buccaneers"] = "Blutsegelbukaniere",
@@ -218,6 +220,7 @@ elseif GAME_LOCALE == "frFR" then
 	["Argent Crusade"] = "La Croisade d'argent",
 	["Argent Dawn"] = "Aube d'argent",
 	["Ashtongue Deathsworn"] = "Ligemort cendrelangue",
+	["Avengers of Hyjal"] = "Vengeurs d’Hyjal", -- Needs review
 	["Baradin's Wardens"] = "Gardiens de Baradin",
 	["Bilgewater Cartel"] = "Cartel Baille-fonds",
 	["Bloodsail Buccaneers"] = "La Voile sanglante",
@@ -233,7 +236,7 @@ elseif GAME_LOCALE == "frFR" then
 	Exalted = "Exalté",
 	Exodar = "Exodar",
 	["Explorers' League"] = "Ligue des explorateurs",
-	["Frenzyheart Tribe"] = "La tribu Frénécœur",
+	["Frenzyheart Tribe"] = "Tribu Frénécœur", -- Needs review
 	Friendly = "Amical",
 	["Frostwolf Clan"] = "Clan Loup-de-givre",
 	Gadgetzan = "Gadgetzan",
@@ -314,6 +317,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Argent Crusade"] = "은빛십자군",
 	["Argent Dawn"] = "은빛 여명회",
 	["Ashtongue Deathsworn"] = "잿빛혓바닥 결사단",
+	["Avengers of Hyjal"] = "하이잘의 복수자",
 	["Baradin's Wardens"] = "바라딘 집행단",
 	["Bilgewater Cartel"] = "빌지워터 무역회사",
 	["Bloodsail Buccaneers"] = "붉은 해적단",
@@ -329,7 +333,7 @@ elseif GAME_LOCALE == "koKR" then
 	Exalted = "확고한 동맹",
 	Exodar = "엑소다르",
 	["Explorers' League"] = "탐험가 연맹",
-	["Frenzyheart Tribe"] = "광란심장 일족", -- Needs review
+	["Frenzyheart Tribe"] = "광란심장 일족",
 	Friendly = "약간 우호적",
 	["Frostwolf Clan"] = "서리늑대 부족",
 	Gadgetzan = "가젯잔",
@@ -410,6 +414,7 @@ elseif GAME_LOCALE == "esES" then
 	["Argent Crusade"] = "Cruzada Argenta",
 	["Argent Dawn"] = "El Alba Argenta",
 	["Ashtongue Deathsworn"] = "Juramorte Lengua de ceniza",
+	["Avengers of Hyjal"] = "Vengadores de Hyjal",
 	["Baradin's Wardens"] = "Celadores de Baradin",
 	["Bilgewater Cartel"] = "Cártel Pantoque",
 	["Bloodsail Buccaneers"] = "Bucaneros Velasangre",
@@ -504,10 +509,11 @@ elseif GAME_LOCALE == "esMX" then
 	Alliance = "Alianza",
 	["Alliance Vanguard"] = "Vanguardia de la Alianza",
 	["Argent Crusade"] = "Cruzada Argenta",
-	["Argent Dawn"] = "Alba Argenta",
+	["Argent Dawn"] = "El Alba Argenta",
 	["Ashtongue Deathsworn"] = "Juramorte Lengua de ceniza",
-	["Baradin's Wardens"] = "Baradin's Wardens", -- Needs review
-	["Bilgewater Cartel"] = "Bilgewater Cartel", -- Needs review
+	["Avengers of Hyjal"] = "Vengadores de Hyjal", -- Needs review
+	["Baradin's Wardens"] = "Celadores de Baradin",
+	["Bilgewater Cartel"] = "Cártel Pantoque",
 	["Bloodsail Buccaneers"] = "Bucaneros Velasangre",
 	["Booty Bay"] = "Bahía del Botín",
 	["Brood of Nozdormu"] = "Linaje de Nozdormu",
@@ -516,33 +522,33 @@ elseif GAME_LOCALE == "esMX" then
 	["Darkmoon Faire"] = "Feria de la Luna Negra",
 	["Darkspear Trolls"] = "Trols Lanza Negra",
 	Darnassus = "Darnassus",
-	["Dragonmaw Clan"] = "Dragonmaw Clan", -- Needs review
+	["Dragonmaw Clan"] = "Clan Faucedraco",
 	Everlook = "Vista Eterna",
 	Exalted = "Exaltado",
-	Exodar = "Exodar",
+	Exodar = "El Exodar",
 	["Explorers' League"] = "Liga de Expedicionarios",
 	["Frenzyheart Tribe"] = "Tribu Corazón Frenético",
 	Friendly = "Amistoso",
 	["Frostwolf Clan"] = "Clan Lobo Gélido",
 	Gadgetzan = "Gadgetzan",
-	["Gelkis Clan Centaur"] = "Centauro del clan Gelkis",
+	["Gelkis Clan Centaur"] = "Centauros del clan Gelkis",
 	Gilneas = "Gilneas", -- Needs review
 	Gnomeregan = "Gnomeregan", -- Needs review
 	["Gnomeregan Exiles"] = "Exiliados de Gnomeregan",
-	["Guardians of Hyjal"] = "Guardians of Hyjal", -- Needs review
-	["Hellscream's Reach"] = "Hellscream's Reach", -- Needs review
+	["Guardians of Hyjal"] = "Guardianes de Hyjal",
+	["Hellscream's Reach"] = "Mando Grito Infernal",
 	["Honor Hold"] = "Bastión del Honor",
 	Honored = "Honorable",
 	Horde = "Horda",
 	["Horde Expedition"] = "Expedición de la Horda",
 	["Hydraxian Waterlords"] = "Srs. del Agua de Hydraxis",
 	Ironforge = "Forjaz",
-	["Keepers of Time"] = "Vigilantes del tiempo",
+	["Keepers of Time"] = "Vigilantes del Tiempo",
 	["Kirin Tor"] = "Kirin Tor",
 	["Knights of the Ebon Blade"] = "Caballeros de la Espada de Ébano",
 	Kurenai = "Kurenai",
 	["Lower City"] = "Bajo Arrabal",
-	["Magram Clan Centaur"] = "Centauro del clan Magram",
+	["Magram Clan Centaur"] = "Centauros del clan Magram",
 	Netherwing = "Ala Abisal",
 	Neutral = "Neutral",
 	["Ogri'la"] = "Ogri'la",
@@ -561,10 +567,10 @@ elseif GAME_LOCALE == "esMX" then
 	Stormwind = "Ventormenta",
 	Syndicate = "La Hermandad",
 	["The Aldor"] = "Los Aldor",
-	["The Ashen Verdict"] = "The Ashen Verdict", -- Needs review
+	["The Ashen Verdict"] = "El Veredicto Cinéreo",
 	["The Consortium"] = "El Consorcio",
 	["The Defilers"] = "Los Rapiñadores",
-	["The Earthen Ring"] = "The Earthen Ring", -- Needs review
+	["The Earthen Ring"] = "El Anillo de la Tierra",
 	["The Frostborn"] = "Los Natoescarcha",
 	["The Hand of Vengeance"] = "La Mano de la Venganza",
 	["The Kalu'ak"] = "Los Kalu'ak",
@@ -581,18 +587,18 @@ elseif GAME_LOCALE == "esMX" then
 	["The Violet Eye"] = "El Ojo Violeta",
 	["The Wyrmrest Accord"] = "El Acuerdo del Reposo del Dragón",
 	Therazane = "Therazane", -- Needs review
-	["Thorium Brotherhood"] = "Hermandad del torio",
+	["Thorium Brotherhood"] = "Hermandad del Torio",
 	Thrallmar = "Thrallmar",
 	["Thunder Bluff"] = "Cima del Trueno",
 	["Timbermaw Hold"] = "Bastión Fauces de Madera",
-	Tranquillien = "Tranquilien",
+	Tranquillien = "Tranquillien",
 	Undercity = "Entrañas",
 	["Valiance Expedition"] = "Expedición de Denuedo",
 	["Warsong Offensive"] = "Ofensiva Grito de Guerra",
 	["Warsong Outriders"] = "Escoltas Grito de Guerra",
 	["Wildhammer Clan"] = "Clan Martillo Salvaje",
 	["Winterfin Retreat"] = "Retiro Aleta Invernal",
-	["Wintersaber Trainers"] = "Instructores de Sableinvernales",
+	["Wintersaber Trainers"] = "Instructores de sableinvernales",
 	["Zandalar Tribe"] = "Tribu Zandalar",
 }
 elseif GAME_LOCALE == "ruRU" then
@@ -602,6 +608,7 @@ elseif GAME_LOCALE == "ruRU" then
 	["Argent Crusade"] = "Серебряный Авангард",
 	["Argent Dawn"] = "Серебряный Рассвет",
 	["Ashtongue Deathsworn"] = "Пеплоусты-служители",
+	["Avengers of Hyjal"] = "Хиджальские мстители", -- Needs review
 	["Baradin's Wardens"] = "Защитники Тол Барада",
 	["Bilgewater Cartel"] = "Картель Трюмных Вод",
 	["Bloodsail Buccaneers"] = "Пираты Кровавого Паруса",
@@ -698,6 +705,7 @@ elseif GAME_LOCALE == "zhCN" then
 	["Argent Crusade"] = "银色北伐军",
 	["Argent Dawn"] = "银色黎明",
 	["Ashtongue Deathsworn"] = "灰舌死誓者",
+	["Avengers of Hyjal"] = "海加尔复仇者",
 	["Baradin's Wardens"] = "巴拉丁典狱官",
 	["Bilgewater Cartel"] = "锈水财阀",
 	["Bloodsail Buccaneers"] = "血帆海盗",
@@ -794,8 +802,9 @@ elseif GAME_LOCALE == "zhTW" then
 	["Argent Crusade"] = "銀白十字軍",
 	["Argent Dawn"] = "銀色黎明",
 	["Ashtongue Deathsworn"] = "灰舌死亡誓言者",
+	["Avengers of Hyjal"] = "海加爾復仇者",
 	["Baradin's Wardens"] = "巴拉丁鐵衛",
-	["Bilgewater Cartel"] = "污水企業",
+	["Bilgewater Cartel"] = "污水企業聯合",
 	["Bloodsail Buccaneers"] = "血帆海盜",
 	["Booty Bay"] = "藏寶海灣",
 	["Brood of Nozdormu"] = "諾茲多姆的子嗣",
@@ -875,9 +884,9 @@ elseif GAME_LOCALE == "zhTW" then
 	["Timbermaw Hold"] = "木喉要塞",
 	Tranquillien = "安寧地",
 	Undercity = "幽暗城",
-	["Valiance Expedition"] = "驍勇遠征隊",
+	["Valiance Expedition"] = "驍勇遠征軍",
 	["Warsong Offensive"] = "戰歌進攻部隊",
-	["Warsong Outriders"] = "戰歌偵察騎兵",
+	["Warsong Outriders"] = "戰歌先遣騎",
 	["Wildhammer Clan"] = "蠻錘氏族",
 	["Winterfin Retreat"] = "冬鰭避居地",
 	["Wintersaber Trainers"] = "冬刃豹訓練師",

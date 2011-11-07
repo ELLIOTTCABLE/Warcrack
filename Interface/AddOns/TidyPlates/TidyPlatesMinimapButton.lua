@@ -1,5 +1,6 @@
 
 local addonName = "TidyPlatesIcon"
+TidyPlatesIconFrame = {}
 
 ----------------------------------------------------------------------------------------
 -- Dropdown Menu Functions
@@ -7,8 +8,6 @@ local addonName = "TidyPlatesIcon"
 
 local DropdownFrame = CreateFrame("Frame", "TidyPlatesDropdownFrame", UIParent, "UIDropDownMenuTemplate" )
 local ButtonTexture = "Interface\\Addons\\TidyPlates\\media\\TidyPlatesIcon"
-
-TidyPlatesIconFrame = CreateFrame("Button", "TidyPlatesIconFrame", UIParent)
 
 local function GetCurrentSpec()
 	if GetActiveTalentGroup(false, false) == 2 then return "secondary" 
@@ -88,8 +87,11 @@ end
 -- Standalone Button Creation
 ----------------------------------------------------------------------------------------
 
+
+
 local function CreateStandaloneIcon()
-	local ButtonFrame = TidyPlatesIconFrame
+	local ButtonFrame = CreateFrame("Button", "TidyPlatesIconFrame", UIParent)
+	
 	--ButtonFrame:SetUserPlaced()
 	ButtonFrame:SetWidth(31)
 	ButtonFrame:SetHeight(31)
@@ -162,6 +164,8 @@ local function CreateStandaloneIcon()
 	ButtonFrame:SetScript("OnDragStop",OnDragStop)
 
 	ButtonFrame:SetPoint("CENTER", UIParent)
+	
+	TidyPlatesIconFrame = ButtonFrame
 end
 
 

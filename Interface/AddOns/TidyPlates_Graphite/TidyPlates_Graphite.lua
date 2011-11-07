@@ -19,6 +19,8 @@ local heightfactor = .8
 
 local StyleDefault = {}
 
+Theme.SetStatusbarWidthMatching = true
+
 StyleDefault.hitbox = {
 	width = 100,
 	height = 35,
@@ -34,18 +36,30 @@ StyleDefault.frame = {
 
 StyleDefault.healthborder = {
 	texture	= path.."HealthBorder",
-	width = artwidth*widthfactor,
+	--width = artwidth*widthfactor,
+	width = 2,
 	height = borderheight*heightfactor,
 	x = 0,
 	y = 0,
 }
 
-StyleDefault.target = {
-	texture 			= path.."TextPlate_Target",
-	width = 128,
-	height = 36,
+StyleDefault.healthbar = {
+	texture 				= path.."StatusBar",
+	width = 2,
+	--width = 96*widthfactor,
+	height = barheight*heightfactor,
 	x = 0,
-	y = -4,
+	y = 4,
+}
+
+StyleDefault.target = {
+	texture 			= path.."Graphite2_Target_Backup",
+	--width = 128,
+	width = 16,
+	--height = 36,
+	height = borderheight*heightfactor,
+	x = 0,
+	y = 0,
 	anchor = "CENTER",
 	show = true,
 }
@@ -59,12 +73,12 @@ StyleDefault.threatborder = {
 }
 
 StyleDefault.castbar = {
-	texture 				= path.."StatusBar",
-	width = 96*widthfactor,
+	texture 				= path.."Graphite2_StatusBar",
+	width = artwidth*widthfactor,
 	height = barheight*heightfactor,
 	anchor = "CENTER",
 	x = 0,
-	y = -6+castoffset,
+	y = -8+castoffset,
 }
 
 StyleDefault.castborder = {
@@ -73,7 +87,7 @@ StyleDefault.castborder = {
 	height = borderheight*heightfactor,
 	anchor = "CENTER",
 	x = 0,
-	y = -6+castoffset,
+	y = -3+castoffset,
 }
 
 StyleDefault.castnostop = {
@@ -82,7 +96,7 @@ StyleDefault.castnostop = {
 	height = borderheight*heightfactor,
 	anchor = "CENTER",
 	x = 0,
-	y = -6+castoffset,
+	y = -3+castoffset,
 }
 
 StyleDefault.name = {
@@ -106,14 +120,7 @@ StyleDefault.level = {
 	show = false,
 }
 
-StyleDefault.healthbar = {
-	texture 				= path.."StatusBar",
-	width = 98*widthfactor,
-	--width = 96*widthfactor,
-	height = barheight*heightfactor,
-	x = 0,
-	y = 0,
-}
+
 
 StyleDefault.customtext = {
 	typeface =					font,
@@ -137,21 +144,21 @@ StyleDefault.spelltext = {
 	width = 175,
 	height = 14,
 	x = 0,
-	y = -16+castoffset,		-- For UNDER the bar
+	y = -12+castoffset,		-- For UNDER the bar
 	align = "CENTER",
 	anchor = "CENTER",
 	vertical = "CENTER",
 	--flags = "",
-	shadow = false,
+	shadow = true,
 	show = true,
 }
 
 StyleDefault.spellicon = {
-	height = 12,
-	width = 12,
-	x = -38,
-	y = -4,
-	show = false,
+	height = 20,
+	width = 20,
+	x = 0,
+	y = -26,
+	show = true,
 }
 
 StyleDefault.eliteicon = {
@@ -193,8 +200,9 @@ StyleTextOnly.eliteicon.show = false
 --StyleTextOnly.raidicon.y = 
 StyleTextOnly.highlight.texture = path.."TextPlate_Highlight"
 StyleTextOnly.target.texture = path.."TextPlate_Target"
---StyleTextOnly.target.y = 21
---StyleTextOnly.target.height = 46
+StyleTextOnly.target.y = -3
+StyleTextOnly.target.width = 128
+StyleTextOnly.target.height = 36
 --StyleTextOnly.target.texture = EmptyTexture
 
 local WidgetConfig = {}
@@ -203,7 +211,7 @@ WidgetConfig.TotemIcon = { anchor = "TOP" , x = 0 ,y = 26 }
 WidgetConfig.ThreatLineWidget = { anchor =  "TOP", x = 0 ,y = 0 }	-- y = 20
 --WidgetConfig.ThreatWheelWidget = { anchor =  "CENTER", x = 33 ,y = 12 } -- "CENTER", plate, 30, 18
 WidgetConfig.ThreatWheelWidget = { anchor =  "CENTER", x = 0 ,y = 16 } -- "CENTER", plate, 30, 18
-WidgetConfig.ComboWidget = { anchor = "CENTER" , x = 0 ,y = 18 }
+WidgetConfig.ComboWidget = { anchor = "CENTER" , x = 0 ,y = 16 }
 WidgetConfig.RangeWidget = { anchor = "CENTER" , x = 0 ,y = 12 }
 WidgetConfig.DebuffWidget = { anchor = "TOP" , x = 15 ,y = 15 }
 

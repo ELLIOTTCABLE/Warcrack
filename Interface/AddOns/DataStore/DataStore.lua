@@ -478,6 +478,21 @@ function addon:GetGuildFaction(name, realm, account)
 	end
 end
 
+function addon:DeleteGuild(name, realm, account)
+	local key = GetKey(name, realm, account)
+	if not Guilds[key] then return end
+	
+	-- delete the guild in all modules
+	for moduleName, moduleDB in pairs(RegisteredModules) do
+		if moduleDB.Guilds then
+			moduleDB.Guilds[key] = nil
+		end
+	end
+	
+	-- delete the key in DataStore
+	Guilds[key] = nil
+end
+
 function addon:DeleteRealm(realm, account)
 	for name, _ in pairs(addon:GetCharacters(realm, account)) do
 		addon:DeleteCharacter(name, realm, account)

@@ -2,11 +2,13 @@
 ## Title: Tidy Plates Hub
 ## Notes: Provides a common configuration panel for supported themes.
 ## Author: Daniel/Binbwen
-## Dependencies: TidyPlates
-## SavedVariables: TidyPlatesHubTankCache, TidyPlatesHubDamageCache
-## SavedVariablesPerCharacter: TidyPlatesHubTankSavedVariables, TidyPlatesHubDamageSavedVariables
+## Dependencies: TidyPlates, TidyPlatesWidgets
+## SavedVariables: TidyPlatesHubCache, TidyPlatesHubTankCache, TidyPlatesHubDamageCache
+## SavedVariablesPerCharacter: TidyPlatesHubSavedVariables, TidyPlatesHubTankSavedVariables, TidyPlatesHubDamageSavedVariables
 
+
+Helpers.lua
+RapidPanel.lua
 DamagePanel.lua
 TankPanel.lua
-
 Functions.lua

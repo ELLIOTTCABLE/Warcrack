@@ -95,7 +95,6 @@ local support = {
 			"What should I do before reporting?",
 			"I just upgraded to the latest version, and there are so many Lua errors, what the..??",
 			"I have multiple Lua errors at login, should I report them all?",
-			"Thaoky you're so cool, can I hire you?",
 		},
 		answers = {
 			"Both Curse and WoWInterface have a ticket section, I also read comments and respond as often as I materially can, so feel free to report in one of these places.",
@@ -109,12 +108,6 @@ local support = {
 			),
 			"I'm just human, I make mistakes. But because I'm human, I fix them too, so be patient. This is a project that I develop in my spare time, and it fluctuates a lot.",
 			"No. Only the first error you will get is relevant, it means that something failed during the initialization process of the add-on, or of a library, and this is likely to cause several subsequent errors that are more often than not irrelevant.",
-			format("%s\n%s|r\n%s\n%s",
-				"That would be a very good idea! :)\nFull resume is available on demand, send serious job proposals by mail:",
-				GREEN.."thaoky.altoholic@yahoo.com",
-				"Age: 35\nSector: IT\nReady to relocate about anywhere in the EU & the US.",
-				"Positions sought include (but are not limited to): Project Management, Solutions Architect, Software Development."
-			)
 		}
 	},
 	{	name = "Live support",
@@ -129,6 +122,23 @@ local support = {
 
 -- this content will be subject to frequent changes, do not bother translating it !!
 local whatsnew = {
+	{	name = "4.2.002 Changes",
+		bulletedList = {
+			"Added several missing achievements.",
+			"Added faction 'Avengers of Hyjal'.",
+			"Deleting guild data now deletes the guild across all DataStore modules (instead of only DataStore_Containers before).",
+			"Fixed a Lua error when mousing over a character tooltip in the character's tab.",
+		},
+	},
+	{	name = "4.2.001 Changes",
+		bulletedList = {
+			"Fixed the expand/collapse buttons not working in the profession recipes pane.",
+			"Added missing achievment: 'The Oceanographer'.",
+			"Fixed item name not displayed with the right color code in several places (4.2).",
+			"Removed keyring support (4.2).",
+			"Achievements, Pets & Mounts have been updated.",
+		},
+	},
 	{	name = "4.1.001b Changes",
 		bulletedList = {
 			"DataStore_Agenda: Fixed a typo & a few function flags not correctly initialized.",
@@ -141,29 +151,6 @@ local whatsnew = {
 			"Suggestions localized to Korean (thanks Seashop !).",
 			"DataStore_Agenda : New module! It will manage the calendar, raid id, and friend list stored in Altoholic's DB until now. In the future, it will also take care of Notes & To-Do-Lists!",
 			"The Calendar pane has been moved from the 'Summary' tab to the new 'Agenda' tab.",
-		},
-	},
-	{	name = "4.0.006b Changes",
-		bulletedList = {
-			"DataStore_Reputations : Reverted a fix brought in r13, as it seems to slow down the game due to a conflict with a yet unidentified addon.",
-		},
-	},
-	{	name = "4.0.006 Changes",
-		bulletedList = {
-			"DataStore_Characters : Added an option to request\n/played at logon or not.",
-			"DataStore_Characters : Added an option to hide real /played and return 0 instead.",
-			"Added an option to set the minimum time before you get the next mail expiry warning (from 1 to 12 hours, default : 3 hours).",
-			"Added a mouse over menu over both option icons in the summary tab. The intent is to make option categories as well as the help section a bit more visible.",
-			"Fixed a bug that prevented viewing imported guild banks.",
-			"Fixed the currency tab tooltips not displaying Blizzard's information before the counters.",
-			"Calendar events with the status 'invited' are now ignored.",
-			"Added a rarity filter in the guild bank pane.",
-			"Stopped listening to bag updates during a multi-sell at the AH. The whole thing slows down a bit too much. Bag updates are resumed at the end of the multi-sell. (Thanks AnrDaemon)",
-			"Updated part of the loot table, leveling suggestions, and mining/herbalism nodes. (Thanks TwoTailedFox)",
-			"Changed Mysterious Egg's & Disgusting Jar's cooldowns to 3 days. (Thanks TwoTailedFox)",
-			"The recipes pane is now immediatelly refreshed after a successful profession scan.",
-			"Slightly modified the way colours are handled in the reputations pane. (Thanks Belechannas)",
-			"Achievements in the Classic, BC & LK dungeon categories are now sorted by dungeon difficulty (as in the game's UI).",
 		},
 	},
 	{	name = "Earlier changes",

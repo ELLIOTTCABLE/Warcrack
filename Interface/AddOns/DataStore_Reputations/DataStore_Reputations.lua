@@ -139,6 +139,7 @@ local FactionUIDs = {
 	BF["Baradin's Wardens"],
 	BF["Dragonmaw Clan"],
 	BF["Hellscream's Reach"],
+	BF["Avengers of Hyjal"],
 }
 
 local FactionUIDsRev = {}

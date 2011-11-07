@@ -1,8 +1,8 @@
-## Interface: 30000
+## Interface: 40200
 ## Title: ForgottenMail
+## Version: 1.2.1
 ## Notes: Grays out the minimap mail icon if you have old mail in the inbox.
 ## Author: L'ombra
-## Version: 1.2
 ## SavedVariablesPerCharacter: ForgottenMailNumInboxItems
 
 ForgottenMail.lua

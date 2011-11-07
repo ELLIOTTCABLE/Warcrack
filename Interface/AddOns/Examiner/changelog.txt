@@ -1,3 +1,9 @@
+Examiner Changes | 2011 Sep 29
+------------------------------
+- Changed the TOC version to 40200 for the 4.2 patch.
+- Fixed a rare UnitIsUnit() error on UNIT_MODEL_CHANGED event due to the unit arg being passed as nil.
+- LibGearExam: Changed the base value for resilience. DR are still not taken into account.
+
 Examiner Changes | 2011 Jan 28
 ------------------------------
 - The slash command "/ex si" which scans an item and lists its stats, will now display an alternative text for ratings, which will be either the rating or percentage, depending on your configuration.

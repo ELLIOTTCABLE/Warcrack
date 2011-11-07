@@ -30,7 +30,8 @@ TidyPlatesHubDamageVariables = {
 	OpacityFilterNeutralUnits = false,		-- OpacityHideNeutral = false,
 	OpacityFilterNonElite = false,			-- OpacityHideNonElites = false,
 	OpacityFilterInactive = false,
-	OpacityFilterCustom = {["Fanged Pit Viper"] = true,},
+	OpacityFilterList = "Fanged Pit Viper",
+	OpacityFilterLookup = {},
 
 	-- Scale
 	---------------------------------------
@@ -55,16 +56,6 @@ TidyPlatesHubDamageVariables = {
 	ColorAttackingMe = {r = 255/255, g = 128/255, b = 0,},			-- Orange
 	ColorAggroTransition = {r = 255/255, g = 216/255, b = 0/255},		-- Yellow
 	ColorAttackingOthers = {r = 15/255, g = 133/255, b = 255/255},	-- Bright Blue
-	
-	--ColorAttackingMe = {r = 235/255, g = 32/255, b = 0/255},		-- Tinted Red
-	--ColorAggroTransition = {r = 255/255, g = 125/255, b = 0/255},	-- Orange
-	--ColorAttackingOthers = {r = 175/255, g = 255/255, b = 0,},		-- Greenish Yellow
-	
-	--[[
-	ColorAttackingMe = {r = 235/255, g = 32/255, b = 0/255},	
-	ColorAggroTransition = {r = 255/255, g = 125/255, b = 0/255},	
-	ColorAttackingOthers = {r = 175/255, g = 255/255, b = 0,},
-	--]]
 	ColorDangerGlowOnParty = false,
 	ClassColorPartyMembers = false,
 	
@@ -82,40 +73,11 @@ TidyPlatesHubDamageVariables = {
 	WidgetsRangeMode = 1,
 	WidgetsDebuff = true,
 	WidgetsDebuffMode = 3,
-	WidgetsDebuffList = { ["Rip"] = true, ["Rake"] = true, ["Lacerate"] = true, },
-	WidgetsDebuffPrefix = {},
-	--[[
-	WidgetsDebuffList = { 
-		["Sap"] = true, 
-		["Hex"] = true, 
-		["Polymorph"] = true, 
-		["Banish"] = true, 
-		["Seduction"] = true, 
-		["Bind Elemental"] = true, 
-		["Mind Control"] = true, 
-		["Shackle Undead"] = true, 
-		["Repentance"] = true, 
-		["Freezing Trap"] = true, 
-		["Wyvern Sting"] = true, 
-		["Hibernate"] = true, 
-		["Entangling Roots"] = true, 	
-Sap 
-Hex
-Polymorph
-Banish
-Seduction
-Bind Elemental
-Mind Control
-Shackle Undead
-Repentance
-Freezing Trap
-Wyvern Sting
-Hibernate
-Entangling Roots
-MY Rip
-MY Rake
-MY Lacerate
-	},--]]
+	WidgetsDebuffList = {["Obsolete"] = true,},
+	--WidgetsDebuffTrackList = "Moonfire",
+	WidgetsDebuffTrackList = "My Rake\nMy Rip\nMy Moonfire\nAll 339",
+	WidgetsDebuffLookup = {},
+	WidgetsDebuffPriority = {},
 	
 	-- Frame
 	---------------------------------------
@@ -127,40 +89,17 @@ local TidyPlatesHubDamageDefaults = CopyTable(TidyPlatesHubDamageVariables)
 	
 ---------------
 -- Helpers
----------------
+--------------- 
 local function CallForStyleUpdate()
 	for name, theme in pairs(TidyPlatesThemeList) do
 		if theme.OnApplyThemeCustomization then theme.OnApplyThemeCustomization() end
 	end
 end
 
-local function SplitToTable( ... )
-	local t = {}
-	local index, line
-	for index = 1, select("#", ...) do
-		line = select(index, ...)
-		if line ~= "" then t[line] = true end
-	end
-	return t
-end
-
-local function TableToString(t)
-	local str = ""
-	for i in pairs(t) do
-		if str then str = "\n" ..str else str = "" end
-		str = (tostring(i))..str
-	end
-	return str
-end
-
 local function GetPanelValues(panel, targetTable, cloneTable)
 	local index
 	for index in pairs(targetTable) do
 		if panel[index] then
-			--if type(targetTable[index]) == 'table' then
-			--	wipe(targetTable[index])
-			--	wipe(cloneTable[index])
-			--end
 			targetTable[index] = panel[index]:GetValue()
 			cloneTable[index] = targetTable[index]
 		end
@@ -183,33 +122,66 @@ local function GetSavedVariables(targetTable, cloneTable)
 		end
 	end
 end
+	
 
--- ConvertPrefix(WidgetsDebuffList, WidgetsDebuffPrefix, testPrefixList)
---[[
-/run print(TidyPlatesHubDamageVariables.WidgetsDebuffPrefix);for i,v in pairs(TidyPlatesHubDamageVariables.WidgetsDebuffPrefix) do print(i,v) end
---]]
+
+local function ListToTable( ... )
+	local t = {}
+	local index, line
+	for index = 1, select("#", ...) do
+		line = select(index, ...)	
+		if line ~= "" then t[index] = line end
+	end
+	return t
+end
+
+local function ConvertStringToTable(source, target )
+	local temp = ListToTable(strsplit("\n", source))
+	target = wipe(target)
+	
+	for index = 1, #source do
+		local str = temp[index]
+		if str then target[str] = true end
+	end		
+end
+
 local PrefixList = {
    ["ALL"] = 1,
+   ["All"] = 1,
+   ["all"] = 1,
    ["MY"] = 2,
+   ["My"] = 2,
+   ["my"] = 2,
    ["NO"] = 3,
    ["CC"] = 4,
    ["OTHER"] = 5,
-}		
+}	
+
+local function ConvertDebuffListTable(source, target, order)
+--local function ConvertStringToTable(source, target, prefixes, order)
+	local temp = ListToTable(strsplit("\n", source))
+	target = wipe(target)
+	if order then order = wipe(order) end
 	
-local function ConvertPrefix(source, target, prefixList )
-	wipe(target)
-	for item in pairs(source) do
-		local _, _, prefix, suffix = string.find( item, "(%w+)[%s%p]*(.*)");
+	for index = 1, #temp do
+		local str = temp[index]
+		local item
+		local _, _, prefix, suffix = string.find( str, "(%w+)[%s%p]*(.*)");
 		if prefix then
-			if prefixList[prefix] then
-				target[suffix] = prefixList[prefix]
+			if PrefixList[prefix] then
+				item = suffix
+				target[item] = PrefixList[prefix]
 			else -- If no prefix is listed, assume 1
-				if suffix and suffix ~= "" then target[prefix.." "..suffix] = 1
-				else target[prefix] = 1 end
+				if suffix and suffix ~= "" then item = prefix.." "..suffix
+				else item = prefix end
+				target[item] = 1
 			end
+			if order then order[item] = index end
 		end
-	end		
+	end	
+	
 end
+
 	
 ------------------------------------------------
 -- Rapid Panel Functions
@@ -217,8 +189,9 @@ end
 local function OnPanelItemChange() 
 	GetPanelValues(Panel, TidyPlatesHubDamageVariables, TidyPlatesHubDamageSavedVariables)
 	CallForStyleUpdate()
-	ConvertPrefix(TidyPlatesHubDamageVariables.WidgetsDebuffList, TidyPlatesHubDamageVariables.WidgetsDebuffPrefix, PrefixList)
-	--TidyPlates:ForceUpdate()
+	
+	ConvertDebuffListTable(TidyPlatesHubDamageVariables.WidgetsDebuffTrackList, TidyPlatesHubDamageVariables.WidgetsDebuffLookup, TidyPlatesHubDamageVariables.WidgetsDebuffPriority)
+	ConvertStringToTable(TidyPlatesHubDamageVariables.OpacityFilterList, TidyPlatesHubDamageVariables.OpacityFilterLookup)
 end
 	
 local function QuickSetPoints(frame, columnFrame, neighborFrame, xOffset, yOffset)
@@ -307,8 +280,10 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 		--EditBox:SetIndentedWordWrap(true)
 		--print(name, EditBox:GetFrameLevel(), frame:GetFrameLevel(), EditBox:GetFrameStrata(), frame:GetFrameStrata())
 		-- Functions
-		function frame:GetValue() return SplitToTable(strsplit("\n", EditBox:GetText() )) end
-		function frame:SetValue(value) EditBox:SetText(TableToString(value)) end
+		--function frame:GetValue() return SplitToTable(strsplit("\n", EditBox:GetText() )) end
+		--function frame:SetValue(value) EditBox:SetText(TableToString(value)) end
+		function frame:GetValue() return EditBox:GetText() end
+		function frame:SetValue(value) EditBox:SetText(value) end
 		frame._SetWidth = frame.SetWidth
 		function frame:SetWidth(value) frame:_SetWidth(value); EditBox:SetWidth(value) end
 		-- Set Positions
@@ -560,11 +535,11 @@ local function CreateInterfacePanel( panelName, panelTitle, heading, parentTitle
 	panel.OpacityFilterNonElite = CreateQuickCheckbutton(panelName.."OpacityFilterNonElite", "Filter Non-Elite", AlignmentColumn, panel.OpacityFilterNeutralUnits, 16)
 	panel.OpacityFilterInactive = CreateQuickCheckbutton(panelName.."OpacityFilterInactive", "Filter Inactive", AlignmentColumn, panel.OpacityFilterNonElite, 16)
 	panel.OpacityCustomFilterLabel = CreateQuickItemLabel(nil, "Filter By Unit Name:", AlignmentColumn, panel.OpacityFilterInactive, 16)	
-	panel.OpacityFilterCustom = CreateQuickEditbox(panelName.."OpacityFilterCustom", AlignmentColumn, panel.OpacityCustomFilterLabel, 16)
+	panel.OpacityFilterList = CreateQuickEditbox(panelName.."OpacityFilterList", AlignmentColumn, panel.OpacityCustomFilterLabel, 16)
 
 	--Scale
 	------------------------------
-	panel.ScaleLabel = CreateQuickHeadingLabel(nil, "Scale", AlignmentColumn, panel.OpacityFilterCustom, 0, 4)
+	panel.ScaleLabel = CreateQuickHeadingLabel(nil, "Scale", AlignmentColumn, panel.OpacityFilterList, 0, 4)
 	panel.ScaleStandard = CreateQuickSlider(panelName.."ScaleStandard", "Normal Scale:", AlignmentColumn, panel.ScaleLabel, 0, 2)
 	panel.ScaleSpotlightMode =  CreateQuickDropdown(panelName.."ScaleSpotlightMode", "Scale Spotlight Mode:", ScaleModes, 1, AlignmentColumn, panel.ScaleStandard)
 	panel.ScaleSpotlight = CreateQuickSlider(panelName.."ScaleSpotlight", "Spotlight Scale:", AlignmentColumn, panel.ScaleSpotlightMode, 0, 2)
@@ -609,11 +584,18 @@ local function CreateInterfacePanel( panelName, panelTitle, heading, parentTitle
 	panel.WidgetsDebuff = CreateQuickCheckbutton(panelName.."WidgetsDebuff", "Show My Debuff Timers", AlignmentColumn, panel.WidgetsRangeMode)
 	panel.WidgetsDebuffMode =  CreateQuickDropdown(panelName.."WidgetsDebuffMode", "Debuff Filter:", DebuffModes, 1, AlignmentColumn, panel.WidgetsDebuff, 16)
 	panel.WidgetsDebuffListLabel = CreateQuickItemLabel(nil, "Debuff Names:", AlignmentColumn, panel.WidgetsDebuffMode, 16)	
-	panel.WidgetsDebuffList = CreateQuickEditbox(panelName.."WidgetsDebuffList", AlignmentColumn, panel.WidgetsDebuffListLabel, 16)
+	panel.WidgetsDebuffTrackList = CreateQuickEditbox(panelName.."WidgetsDebuffTrackList", AlignmentColumn, panel.WidgetsDebuffListLabel, 16)
+		-- TIP
+		panel.WidgetsDebuffTrackListDescription = CreateQuickItemLabel(nil, "Tip: |cffCCCCCCDebuffs should be listed with the exact name, or a spell ID number. "..
+			"You can use the prefixes, 'My' or 'All', to distinguish personal damage spells from global crowd control spells. "..
+			"Auras at the top of the list will get displayed before lower ones.", AlignmentColumn, panel.WidgetsDebuffListLabel, 210)	
+		panel.WidgetsDebuffTrackListDescription:SetHeight(128)
+		panel.WidgetsDebuffTrackListDescription:SetWidth(200)
+		panel.WidgetsDebuffTrackListDescription.Text:SetJustifyV("TOP")
 
 	--Frame
 	------------------------------
-	panel.FrameLabel = CreateQuickHeadingLabel(nil, "Frame", AlignmentColumn, panel.WidgetsDebuffList, 0, 4)
+	panel.FrameLabel = CreateQuickHeadingLabel(nil, "Frame", AlignmentColumn, panel.WidgetsDebuffTrackList, 0, 4)
 	panel.FrameVerticalPosition = CreateQuickSlider(panelName.."FrameVerticalPosition", "Vertical Position of Artwork:", AlignmentColumn, panel.FrameLabel, 0, 2)
 
 
@@ -622,8 +604,8 @@ local function CreateInterfacePanel( panelName, panelTitle, heading, parentTitle
 	SetSliderMechanics(panel.OpacityNonTarget, 1, 0, 1, .01)
 	SetSliderMechanics(panel.OpacitySpotlight, 1, 0, 1, .01)
 	SetSliderMechanics(panel.OpacityFiltered, 1, 0, 1, .01)
-	SetSliderMechanics(panel.ScaleStandard, 1, .1, 3, .1)
-	SetSliderMechanics(panel.ScaleSpotlight, 1, .1, 3, .1)
+	SetSliderMechanics(panel.ScaleStandard, 1, .1, 3, .01)
+	SetSliderMechanics(panel.ScaleSpotlight, 1, .1, 3, .01)
 	SetSliderMechanics(panel.FrameVerticalPosition, .5, 0, 1, .02)
 	
 		-- [[
@@ -687,7 +669,9 @@ local function CreateInterfacePanel( panelName, panelTitle, heading, parentTitle
 		elseif event == "PLAYER_ENTERING_WORLD" then 
 			GetSavedVariables(TidyPlatesHubDamageVariables, TidyPlatesHubDamageSavedVariables)
 			CallForStyleUpdate()
-			ConvertPrefix(TidyPlatesHubDamageVariables.WidgetsDebuffList, TidyPlatesHubDamageVariables.WidgetsDebuffPrefix, PrefixList)
+			
+			ConvertDebuffListTable(TidyPlatesHubDamageVariables.WidgetsDebuffTrackList, TidyPlatesHubDamageVariables.WidgetsDebuffLookup, TidyPlatesHubDamageVariables.WidgetsDebuffPriority)
+			ConvertStringToTable(TidyPlatesHubDamageVariables.OpacityFilterList, TidyPlatesHubDamageVariables.OpacityFilterLookup)
 		end
 	end)
 	panel:RegisterEvent("PLAYER_LOGIN")

@@ -154,6 +154,7 @@ local Factions = {
 			{ name = BF["Baradin's Wardens"], icon = "inv_misc_tabard_baradinwardens" },
 			{ name = BF["Dragonmaw Clan"], icon = "inv_misc_tabard_dragonmawclan" },
 			{ name = BF["Hellscream's Reach"], icon = "inv_misc_tabard_hellscream" },
+			{ name = BF["Avengers of Hyjal"], icon = "inv_neck_hyjaldaily_04" },
 		}
 	},
 	{	-- [5]

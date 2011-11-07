@@ -1,6 +1,6 @@
 --[[
 Name: LibBabble-Inventory-3.0
-Revision: $Rev: 135 $
+Revision: $Rev: 137 $
 Maintainers: ckknight, nevcairiel, Ackis
 Website: http://www.wowace.com/projects/libbabble-inventory-3-0/
 Dependencies: None
@@ -8,7 +8,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibBabble-Inventory-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 135 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 137 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub.") end
 local lib = LibStub("LibBabble-3.0"):New(MAJOR_VERSION, MINOR_VERSION)
@@ -1351,7 +1351,7 @@ elseif GAME_LOCALE == "zhTW" then
 	Bows = "弓",
 	Bullet = "子彈",
 	Chest = "胸部",
-	Cloth = "布料",
+	Cloth = "布甲",
 	Cogwheel = "榫輪",
 	Companion = "夥伴",
 	Companions = "夥伴們",
@@ -1412,7 +1412,7 @@ elseif GAME_LOCALE == "zhTW" then
 	Jewelcrafting = "珠寶設計",
 	Junk = "垃圾",
 	Key = "鑰匙",
-	Leather = "皮革",
+	Leather = "皮甲",
 	Leatherworking = "製皮",
 	["Leatherworking Bag"] = "製皮包",
 	Legs = "腿部",

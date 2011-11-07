@@ -8,6 +8,14 @@ IMPORTANT NOTE: If you're upgrading from 3.x :
 - Make sure you delete the addon's databases in SavedVariables. ie: Altoholic.lua and all DataStore*.lua.
 - Make sure to delete the old addon directories (Altoholic & all DataStore modules) as many files have changed/moved. A patch like this one is always a good opportunity for a fresh install.
 
+4.2.002 (30/10/2011)
+
+- Added several missing achievements.
+- Added faction "Avengers of Hyjal".
+- Deleting guild data now deletes the guild across all DataStore modules (instead of only DataStore_Containers before).
+- Fixed a Lua error when mousing over a character tooltip in the character's tab.
+
+
 4.2.001 (29/06/2011)
 
 - Fixed the expand/collapse buttons not working in the profession recipes pane.

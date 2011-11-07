@@ -216,7 +216,7 @@ local function AlphaFunctionByActiveDebuffs(unit)
 end
 
 local function AlphaFilter(unit)
-	if LocalVars.OpacityFilterCustom[unit.name] then return true
+	if LocalVars.OpacityFilterLookup[unit.name] then return true
 	elseif LocalVars.OpacityFilterNeutralUnits and unit.reaction == "NEUTRAL" then return true
 	elseif LocalVars.OpacityFilterNonElite and (not unit.isElite) then return true
 	elseif LocalVars.OpacityFilterInactive then 
@@ -324,8 +324,8 @@ local ColorFunctions = {DummyFunction, ColorFunctionByClass, ColorFunctionByThre
 local SkyBlue = {r = .4, g = 0, b = 1,}
 
 local function HealthColorDelegate(unit)
-	local color	
-	
+	local color	, color2
+
 	if LocalVars.ClassColorPartyMembers and unit.reaction == "FRIENDLY" and unit.type == "PLAYER"  then
 		local class = TidyPlatesUtility.GroupMembers.Class[unit.name]
 		--local class = TidyPlatesUtility.GroupMembers.Class[unit.name] or TidyPlatesData.UnitClass[unit.name]		-- When enabling, change "ClassColorPartyMembers to "Class Color Friendly Units" and "Enemy")
@@ -337,7 +337,18 @@ local function HealthColorDelegate(unit)
 	
 	-- if TidyPlatesData.Guild[unit.name] then color = SkyBlue end -- Testing GUILD colors
 	
-	if color then return color.r, color.g, color.b 
+	--if color then return color.r, color.g, color.b, color2.r, color2.g, color2.b
+	
+	if color then 
+		local r, g, b = color.r, color.g, color.b
+		--local r2, g2, b2 = (g+(1.5*r))/3, (b+(1.5*g))/3, (r+(1.5*b))/3
+		--local r2, g2, b2 = (b+g+(1.75*r))/4, (b+(1.75*g))/3, g
+		--local r2, g2, b2 = r-(g/3), (g+r)/2, b
+		--local r2, g2, b2 = (r+2)/3, (g+1.2)/3, (b)/3
+		--local r2, g2, b2 = 1, .5, 0 
+		
+		return color.r, color.g, color.b
+		--return 1, 0, 0, 1, 1, 0
 	else return unit.red, unit.green, unit.blue end
 end
 
@@ -385,8 +396,8 @@ end
 ---------------------------------------
 local function CastBarDelegate(unit)
 	local color
-	if unit.spellIsShielded then color = WhiteColor -- OrangeColor or WhiteColor
-	else color = GoldColor end 
+	if unit.spellInterruptible then color = GoldColor 
+	else color = WhiteColor end 
 	return color.r, color.g, color.b, 1
 end
 
@@ -420,7 +431,7 @@ local NameColorFunctions = {
 		if unit.reaction == "FRIENDLY" and unit.type == "PLAYER"  then
 			local class = TidyPlatesUtility.GroupMembers.Class[unit.name]
 			--local class = TidyPlatesUtility.GroupMembers.Class[unit.name] or TidyPlatesData.UnitClass[unit.name]
-
+			
 			if class then return RAID_CLASS_COLORS[class] 
 			else return NameReactionColors[unit.reaction][unit.type] end
 		end
@@ -500,14 +511,14 @@ end
 ---------------------------------------
 -- Widgets
 ---------------------------------------
---[[
-	CurrentDebuff.name = GetSpellInfo(spellid)
-	CurrentDebuff.spellid = spellid
-	CurrentDebuff.stacks = stacks
-	CurrentDebuff.duration = duration
-	CurrentDebuff.caster = caster
-	--UnitGUID("player")
---]]
+
+local function GetPrefixPriority(debuff)
+	local spellid = tostring(debuff.spellid)
+	local name = debuff.name
+	local prefix = LocalVars.WidgetsDebuffLookup[spellid] or LocalVars.WidgetsDebuffLookup[name]
+	local priority = LocalVars.WidgetsDebuffPriority[spellid] or LocalVars.WidgetsDebuffPriority[name]
+	return prefix, priority
+end
 
 local DebuffPrefixModes = {
 	-- All
@@ -516,7 +527,7 @@ local DebuffPrefixModes = {
 	end,
 	-- My
 	function(debuff)
-		if debuff.caster == UnitGUID("player") then return true else return false end
+		if debuff.caster == UnitGUID("player") then return true else return nil end
 	end,
 	-- No
 	function(debuff)
@@ -539,7 +550,8 @@ local DebuffFilterModes = {
 	end,
 	-- Specific	
 	function(debuff) 
-		if LocalVars.WidgetsDebuffList[debuff.name] then return true end
+		local prefix, priority = GetPrefixPriority(debuff)
+		if prefix then return true, priority end
 	end,
 	-- All mine	
 	function(debuff) 
@@ -547,17 +559,46 @@ local DebuffFilterModes = {
 	end,
 	-- My specific	
 	function(debuff) 
-		if LocalVars.WidgetsDebuffList[debuff.name] and debuff.caster == UnitGUID("player") then return true end
+		local prefix, priority = GetPrefixPriority(debuff)
+		if prefix and debuff.caster == UnitGUID("player") then return true, priority end
 	end,	
 	-- By Prefix	
 	function(debuff) 
-		local prefix = LocalVars.WidgetsDebuffPrefix[tostring(debuff.spellid)] or LocalVars.WidgetsDebuffPrefix[debuff.name]
-		if prefix then return DebuffPrefixModes[prefix](debuff) end
+		local prefix, priority = GetPrefixPriority(debuff)
+		if prefix then return DebuffPrefixModes[prefix](debuff), priority end
 	end,
 }
 
-local function DebuffFilter(debuff)
-	return DebuffFilterModes[LocalVars.WidgetsDebuffMode](debuff)
+local AURA_TYPE_DEBUFF = 6
+local AURA_TYPE_BUFF = 1
+local AURA_TARGET_HOSTILE = 1
+local AURA_TARGET_FRIENDLY = 2
+
+local AURA_TYPE = {
+	"Buff",
+	"Curse",
+	"Disease",
+	"Magic",
+	"Poison",
+	"Debuff",
+}
+
+local function DebuffFilter(aura)
+
+	-- Buffs/Hots on Friendly Units
+	if aura.type == AURA_TYPE_BUFF then 
+		return true		-- false
+		--if aura.duration < 30 and aura.caster == UnitGUID("player") then return true else return false end
+	end
+	
+	-- Debuffs on Friendly Units
+	if aura.target == AURA_TARGET_FRIENDLY then  
+		-- return TidyPlatesWidgets.CanPlayerDispel(AURA_TYPE[aura.type or 0] or "")
+		return false 
+	end
+	
+	-- Debuffs on Hostile Units
+	return DebuffFilterModes[LocalVars.WidgetsDebuffMode](aura)
 end
 
 	
@@ -702,7 +743,7 @@ end
 local function EnableWatchers()
 	TidyPlatesUtility:EnableGroupWatcher()
 	TidyPlatesUtility:EnableUnitCache()
-	TidyPlatesWidgets:EnableAuraWatcher()
+	if LocalVars.WidgetsDebuff then TidyPlatesWidgets:EnableAuraWatcher() else TidyPlatesWidgets:DisableAuraWatcher() end
 	TidyPlatesWidgets:EnableTankWatch()
 	--SetCVar("threatWarning", 3)		-- Required for threat/aggro detection
 end

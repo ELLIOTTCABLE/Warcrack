@@ -694,7 +694,7 @@ local function BrowseRealm(realm, account, bothFactions)
 			if bothFactions or DataStore:GetGuildBankFaction(guild) == UnitFactionGroup("player") then
 				currentResultKey = format("%s.%s.%s", account, realm, guildName)
 				
-				for tabID = 1, 6 do
+				for tabID = 1, 8 do
 					local tab = DataStore:GetGuildBankTab(guild, tabID)
 					if tab.name then
 						for slotID = 1, 98 do

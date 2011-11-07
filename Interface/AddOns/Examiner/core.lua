@@ -179,7 +179,7 @@ end
 
 -- Model or Portrait Change
 function ex:UNIT_MODEL_CHANGED(event,unit)
-	if (self:ValidateUnit() and UnitIsUnit(unit,self.unit)) then
+	if (unit and self:ValidateUnit() and UnitIsUnit(unit,self.unit)) then
 		self.model:SetUnit(self.unit);
 		SetPortraitTexture(self.portrait,self.unit);
 	end

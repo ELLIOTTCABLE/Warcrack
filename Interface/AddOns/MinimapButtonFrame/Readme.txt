@@ -204,9 +204,16 @@ History
 	New    - Added ability for the buttons to file the frame from the bottom up (Config:Sorting:Grow Buttons Up)
 	New    - Added the ability to choose which corner the MBF frame is anchored at (Config:Display:MBF Anchor)
 	Change - Sort by rows option moved to the Sorting section of the options
-3.1.5	Change - Toc updated for current wow version
-	Change - Added exceptions for Archy and EveryQuest Quest Givers.
-	Change - New zhTW translation.  Thank you scars377!
+3.1.1	Fixed  - Updated Libraries
+	Fixed  - Removed all references to arg1 and this
+	Fixed  - getglobal and setglobal replaced with _G
+3.1.2	Fixed  - Toc updated to 40000
+	Fixed  - Typo preventing libdatabroker from being found
+3.1.4	Fixed  - Black background hiding buttons properly this time
+	Fixed  - Updated skinpack Toc to 40000
+3.1.5	Update - Toc updated for current wow version
+	Update - Added exceptions for Archy and EveryQuest Quest Givers.
+	Update - New zhTW translation.  Thank you scars377!
 	Change - Scanning now paused during combat lockdown.
 	
 Known Incompatibilities / Bugs

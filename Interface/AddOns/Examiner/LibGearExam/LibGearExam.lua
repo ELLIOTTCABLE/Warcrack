@@ -141,6 +141,7 @@ local EMPTY_SOCKET_NAMES = {
 -- 09.09.19		3.2.2		Armor Penetration	patch		"The amount of armor penetration gained per point of this rating has been reduced by 12%."
 -- 10.01.20		3.3.0a		Resilience			hotfix		"Resilience damage reduction doubled. So depending on their current amount of resilience, characters might experience a 10 to 20% decrease in damage taken from other players."
 -- 10.10.19		4.0.1		Resilience			blue/hf		"We had buffed resilience by 50% and then lowered it by 25%. This is a 12.5% buff from before the patch."
+-- 11.04.26		4.1			Resilience			patch		"Resilience scaling has been modified for linear returns, as opposed to increasing returns. Under the new formula, going from 30 resilience to 40 resilience gives players the same increase to survivability as going from 0 to 10. Resilience now scales in the same way armor and magic resistances do. A player with 32.5% damage reduction from resilience in 4.0.6 should see their damage reduction unchanged in 4.1. Those with less than 32.5% will gain slightly. Those with more will lose some damage reduction, increasingly so as their resilience climbs."
 
 LGE.StatRatingBaseTable = {
 	SPELLHASTE = 10,
@@ -157,8 +158,9 @@ LGE.StatRatingBaseTable = {
 
 	-- Az: resilience is a mess, how do they get to the current value as of patch 4.0.3a? It seems to be 9.58333333333333333 which is 28.75 / 3. How are they getting to this though?
 --	RESILIENCE = 28.75 * 0.75 / 2.25,	-- Reduced 25% compared to wrath, then buffed by 100% as a "hotfix". 10.12.05: found out this didnt match the char sheet, and it must have been changed again
-	RESILIENCE = 28.75 * 0.75 / 2.9,	-- This seems to be correct at 85, somehow I think resilience scales differently now depending on level
+--	RESILIENCE = 28.75 * 0.75 / 2.9,	-- This seems to be correct at 85, somehow I think resilience scales differently now depending on level
 --	RESILIENCE = 28.75 * 0.75 / 2 / 1.125,
+	RESILIENCE = 7.96418,				-- Apparently, this is the value for 4.1?
 
 
 	DEFENSE = 1.5,

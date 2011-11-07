@@ -768,7 +768,8 @@ function addon:DrawCharacterTooltip(self, character)
 	AltoTooltip:AddLine("Average iLevel: " .. GREEN .. format("%.1f", DS:GetAverageItemLevel(character)),1,1,1);	
 
 	if IsAddOnLoaded("DataStore_Achievements") then
-		if DS:GetNumCompletedAchievements(character) > 0 then
+		local numAchievements = DS:GetNumCompletedAchievements(character) or 0
+		if numAchievements > 0 then
 			AltoTooltip:AddLine(ACHIEVEMENTS_COMPLETED ..": " .. GREEN .. DS:GetNumCompletedAchievements(character) .. "/"..DS:GetNumAchievements(character))
 			AltoTooltip:AddLine(ACHIEVEMENT_TITLE ..": " .. GREEN .. DS:GetNumAchievementPoints(character))
 		end

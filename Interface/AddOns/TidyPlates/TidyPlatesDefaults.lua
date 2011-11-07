@@ -46,7 +46,8 @@ theme.highlight = {
 theme.healthborder = {
 	texture		 =				EMPTY_TEXTURE,
 	--elitetexture =					EMPTY_TEXTURE,
-	width = 128,
+	--width = 128,
+	width = 0,
 	height = 64,
 	x = 0,
 	y = -5,
@@ -129,12 +130,17 @@ theme.healthbar = {
 	texture =					 EMPTY_TEXTURE,
 	backdrop = 				EMPTY_TEXTURE,
 	height = 12,
-	width = 101,
+	--width = 101,
+	width = 0,
 	x = 0,
 	y = 10,
 	anchor = "CENTER",
 	orientation = "HORIZONTAL",
-	texcoord = {left = 0,right = 1,top = 0,bottom = 1}, 
+	texcoord = {left = 0,right = 1,top = 0,bottom = 1}, 		-- Does nothing, at the moment
+	linkwidth = false,
+	edgeFile = EMPTY_TEXTURE,
+	edgeSize = 1,
+	edgeInset = { left = 0, right = 0, top = 0, bottom = 0, }	,		
 }
 
 theme.castbar = {
@@ -146,7 +152,11 @@ theme.castbar = {
 	y = -19,
 	anchor = "CENTER",
 	orientation = "HORIZONTAL",
-	texcoord = {left = 0,right = 1,top = 0,bottom = 1}, 
+	texcoord = {left = 0,right = 1,top = 0,bottom = 1}, 		-- Does nothing, at the moment
+	linkwidth = false,
+	edgeFile = EMPTY_TEXTURE,
+	edgeSize = 1,		-- Border thickness and corner size
+	edgeInset = { left = 0, right = 0, top = 0, bottom = 0, },	-- Controls how far into the frame the background will be drawn (use higher values the thicker the edges are)
 }
 
 theme.spelltext = {
@@ -242,6 +252,8 @@ theme.threatcolor = {
 
 --[[  Delegate Functions
 -- Appearance and Indicators
+theme.SetNameColor
+
 theme.SetCustomText = function(unit) return "Text to Display" end
 theme.SetScale = function(unit) local scale = 1; return scale end
 theme.SetAlpha = function(unit) local alpha = 1; return alpha end

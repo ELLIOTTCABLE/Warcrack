@@ -1,0 +1,19 @@
+------------------------------------------------------------------------
+r15 | thaoky | 2011-10-30 10:23:45 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   A /tags/DataStore_Currencies 4.2.002 (from /trunk:14)
+
+Tagging as DataStore_Currencies 4.2.002
+------------------------------------------------------------------------
+r14 | thaoky | 2011-10-30 09:45:04 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Currencies.toc
+
+TOC update
+------------------------------------------------------------------------
+r13 | thaoky | 2011-06-29 17:59:29 +0000 (Wed, 29 Jun 2011) | 1 line
+Changed paths:
+   M /trunk/DataStore_Currencies.toc
+
+TOC update
+------------------------------------------------------------------------

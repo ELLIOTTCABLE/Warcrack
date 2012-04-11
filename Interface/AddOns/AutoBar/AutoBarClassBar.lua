@@ -6,7 +6,7 @@
 -- Layout Bars for AutoBar
 -- Layout Bars logically organize similar buttons and provide for layout options for the Bar and its Buttons
 -- Sticky dragging is provided as well
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 --
 
 local AutoBar = AutoBar

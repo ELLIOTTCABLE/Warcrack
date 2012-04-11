@@ -12,7 +12,7 @@ local DATE = ("$Date: 2010/12/14 01:12:09 $"):match("%d%d%d%d%-%d%d%-%d%d")
 -- New Stuff Copyright 2006+ Toadkiller of Proudmoore.
 
 -- Maintained by Azethoth / Toadkiller of Proudmoore.  Original author Saien of Hyjal
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 
 -- See Changelist.lua for changes
 
@@ -65,14 +65,12 @@ AutoBar.events = {}
 
 AutoBar.delay = {}
 
+AutoBarMountFilter = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
+
 
 function AutoBar:ConfigToggle()
 	if (not InCombatLockdown()) then
----		if (waterfall:IsOpen("AutoBar")) then
----			waterfall:Close("AutoBar")
----		else
 			AutoBar:OpenOptions()
----		end
 	end
 end
 
@@ -406,17 +404,17 @@ end
 -- Layered delayed callback objects
 -- Timers lower down the list are superceded and cancelled by those higher up
 local timerList = {
-	{name = "AutoBarInit", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateCategories", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateCustomBars", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateCustomButtons", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateSpells", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateObjects", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateRescan", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateScan", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateAttributes", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateActive", timer = nil, runPostCombat = false, callback = nil},
-	{name = "UpdateButtons", timer = nil, runPostCombat = false, callback = nil},
+	{name = "AutoBarInit", 			timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateCategories", 	timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateCustomBars", 	timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateCustomButtons",timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateSpells", 		timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateObjects", 		timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateRescan", 		timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateScan", 			timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateAttributes", 	timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateActive", 		timer = nil, runPostCombat = false, callback = nil},
+	{name = "UpdateButtons", 		timer = nil, runPostCombat = false, callback = nil},
 }
 local timerIndexList = {
 	["AutoBarInit"] = 1,
@@ -856,7 +854,8 @@ end
 function AutoBar.events:UPDATE_BATTLEFIELD_STATUS()
 	if (AutoBar.inWorld) then
 		local bgStatus = false
-		for i = 1, MAX_BATTLEFIELD_QUEUES do
+		local max_battlefield_id = GetMaxBattlefieldID()
+		for i = 1, max_battlefield_id do
 			local status, mapName, instanceID = GetBattlefieldStatus(i);
 			if (instanceID ~= 0) then
 				bgStatus = true

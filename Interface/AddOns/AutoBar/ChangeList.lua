@@ -2,7 +2,7 @@
 -- AutoBar Change List
 --
 -- Maintained by Azethoth / Toadkiller of Proudmoore.  Original author Saien of Hyjal
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 
 
 --

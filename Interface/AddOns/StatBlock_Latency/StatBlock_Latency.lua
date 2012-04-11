@@ -1,14 +1,26 @@
 
-local latency = {}
-local lbl = "MS"
-latency.obj = _G.LibStub("LibDataBroker-1.1"):NewDataObject("Latency", {type = "data source", value = "0", suffix = lbl, text = "0"..lbl})
-_G.LibStub("AceTimer-3.0"):Embed(latency)
+local latency = CreateFrame("Frame"):CreateAnimationGroup()
+local lbl = MILLISECONDS_ABBR
+local L_TOOLTIP = MAINMENUBAR_LATENCY_LABEL
+local obj = LibStub("LibDataBroker-1.1"):NewDataObject("Latency", {type = "data source", value = "0", suffix = lbl, text = "0"..lbl})
 
-function latency:Update()
-	local _, _, l = _G.GetNetStats()
-	self.obj.text = l..lbl
-	self.obj.value = l
+local GetNetStats = GetNetStats
+
+function obj.OnTooltipShow(tooltip)
+	if not tooltip or not tooltip.AddLine then return end
+
+	local _, _, home, world = GetNetStats()
+	tooltip:AddLine(L_TOOLTIP:format(home, world), 0, 1, 1)
 end
 
-latency:ScheduleRepeatingTimer("Update", 30)
-latency:ScheduleTimer("Update", 4)
+local update = latency:CreateAnimation()
+latency:SetScript("OnLoop", function()
+	local _, _, l = GetNetStats()
+	obj.text = l..lbl
+	obj.value = l
+end)
+update:SetOrder(1)
+update:SetDuration(20)
+latency:SetLooping("REPEAT")
+latency:Play()
+

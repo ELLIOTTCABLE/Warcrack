@@ -56,6 +56,8 @@ function addon:Initialize()
     self.header = CreateFrame("Frame", addonName .. "HeaderFrame", UIParent, "SecureHandlerBaseTemplate,SecureHandlerAttributeTemplate")
     ClickCastHeader = addon.header
 
+	-- This snippet will clear any dangling bindings that might have occurred
+	-- as a result of frames being shown/hidden.
     self.header:SetAttribute("_onattributechanged", [[
         if name == "hasunit" then
             if value == "false" and danglingButton then
@@ -307,9 +309,11 @@ local function ApplicationOrder(a, b)
 
     -- Force out-of-combat clicks to take the HIGHEST priority
     if a.sets.ooc and not b.sets.ooc then
-        return false
+        return true
+	elseif b.sets.ooc and not a.sets.ooc then
+		return false
     elseif a.sets.ooc and b.sets.ooc then
-        return bcnt < acnt
+        return acnt < bcnt
     end
 
     -- Try to give any 'default' clicks LOWEST priority
@@ -335,6 +339,15 @@ local function shouldApply(global, entry)
     end
 end
 
+local function correctSpec(entry, currentSpec)
+	if entry.sets.pritalent and currentSpec ~= 1 then
+		return false
+	elseif entry.sets.sectalent and currentSpec ~= 2 then
+		return false
+	end
+	return true
+end
+
 -- This function takes a single argument indicating if the attributes being
 -- computed are for the special 'global' button used by Clique.  It then
 -- computes the set of attributes necessary for the player's bindings to be
@@ -344,20 +357,20 @@ end
 function addon:GetClickAttributes(global)
     -- In these scripts, 'self' should always be the header
     local bits = {
-        "local inCombat = control:GetAttribute('inCombat')",
+		"local inCombat = control:GetAttribute('inCombat')",
         "local setupbutton = self:GetFrameRef('cliquesetup_button')",
         "local button = setupbutton or self",
     }
 
     local rembits = {
-        "local inCombat = control:GetAttribute('inCombat')",
+		"local inCombat = control:GetAttribute('inCombat')",
         "local setupbutton = self:GetFrameRef('cliquesetup_button')",
         "local button = setupbutton or self",
     }
 
     -- Check to see if the frame being setup is blacklisted. Do not perform
     -- this check on the global frame.
-    if not global then 
+    if not global then
         bits[#bits + 1] = "local name = button:GetName()"
         bits[#bits + 1] = "if blacklist[name] then return end"
 
@@ -365,14 +378,15 @@ function addon:GetClickAttributes(global)
         rembits[#rembits + 1] = "if blacklist[name] then return end"
     end
 
-    -- Sort the bindings so they are applied in order
+    -- Sort the bindings so they are applied in order. This sort ensures that
+	-- any 'ooc' bindings are applied first.
     table.sort(self.bindings, ApplicationOrder)
 
-    -- Build a small table of ooc keys that are 'taken' sowe can check for
+    -- Build a small table of ooc keys that are 'taken' so we can check for
     -- masking conflicts with the friend/enemy sets.
     local oocKeys = {}
     for idx, entry in ipairs(self.bindings) do
-        if shouldApply(global, entry) and entry.sets.ooc then
+        if shouldApply(global, entry) and entry.sets.ooc and entry.key then
             oocKeys[entry.key] = true
         end
     end
@@ -383,7 +397,7 @@ function addon:GetClickAttributes(global)
         -- non-global bindings are only applied on non-global frames. handle
         -- this logic here.
 
-        if shouldApply(global, entry) then
+        if shouldApply(global, entry) and correctSpec(entry, GetActiveTalentGroup()) and entry.key then
             -- Check to see if this is a 'friend' or an 'enemy' binding, and
             -- check if it would mask an 'ooc' binding with the same key. If
             -- so, we need to add code that prevents this from happening, by
@@ -393,14 +407,26 @@ function addon:GetClickAttributes(global)
             local indent = ""
             local oocmask = oocKeys[entry.key]
 
-            if oocmask and not entry.sets.ooc then 
-                bits[#bits + 1] = "if inCombat then"
+			-- This code needs to set/clear a binding depending on combat
+			-- state. We do both in this function to ensure that we don't have
+			-- to run remove_clicks every single time the combat status
+			-- changes.
+
+			local startbits
+            if oocmask and not entry.sets.ooc then
+				-- This means that the binding will mask the 'ooc' binding
+				-- with the same key, so we must ensure this is only set when
+				-- we are in combat.
+                bits[#bits + 1] = "if inCombat then      -- non-ooc that is masking"
                 indent = indent .. "  "
-            elseif entry.sets.ooc then
-                bits[#bits + 1] = "if not inCombat then"
-                indent = indent .. "  "
+			elseif entry.sets.ooc then
+				-- This is a standard 'ooc' binding, so we want to ensure its
+				-- only applied when out of combat, and cleared otherwise.
+				bits[#bits + 1] = "if not inCombat then  -- ooc binding"
+				indent = indent .. "  "
+				startbits = #rembits + 1
             end
- 
+
             local prefix, suffix = addon:GetBindingPrefixSuffix(entry, global)
 
             -- Set up help/harm bindings. The button value will be either a number,
@@ -468,12 +494,22 @@ function addon:GetClickAttributes(global)
             end
 
             -- Finish the conditional statements started above
-            if oocmask and not entry.sets.ooc then 
-                bits[#bits + 1] = "end"
+            if oocmask and not entry.sets.ooc then
+				-- This means that the binding will mask the 'ooc' binding
+				-- with the same key, so we must ensure this is only set when
+				-- we are in combat.
+				bits[#bits + 1] = "end"
                 indent = indent:sub(1, -3)
-            elseif entry.sets.ooc then
-                bits[#bits + 1] = "end"
-                indent = indent:sub(1, -3)
+			elseif entry.sets.ooc then
+				-- This is a standard 'ooc' binding, so we want to ensure its
+				-- only applied when out of combat, and cleared otherwise.
+				local endbits = #rembits
+				bits[#bits + 1] = "else                  -- clear ooc binding"
+				for i = startbits, endbits, 1 do
+					bits[#bits + 1] = indent .. rembits[i]
+				end
+				bits[#bits + 1] = "end"
+				indent = indent:sub(1, -3)
             end
         end
     end
@@ -484,7 +520,7 @@ end
 local B_SET = [[self:SetBindingClick(true, %q, self, %q);]]
 local B_CLR = [[self:ClearBinding(%q);]]
 
--- This function takes a single argument, indicating whether the attributes 
+-- This function takes a single argument, indicating whether the attributes
 -- should be built for the special global button or not, and returns an
 -- attribute that can set the appropriate attributes, and one that can clear
 function addon:GetBindingAttributes(global)
@@ -523,38 +559,40 @@ function addon:GetBindingAttributes(global)
     local unique = {}
 
     for idx, entry in ipairs(self.bindings) do
-        if shouldApply(global, entry) then
-            if global then
-                -- Allow for the re-binding of clicks and keys, except for
-                -- unmodified left/right-click
-                if entry.key ~= "BUTTON1" and entry.key ~= "BUTTON2" then
-                    local prefix, suffix = addon:GetBindingPrefixSuffix(entry, global)
-                    local key = self:ConvertSpecialKeys(entry)
+		if entry.key then
+			if shouldApply(global, entry) then
+				if global then
+					-- Allow for the re-binding of clicks and keys, except for
+					-- unmodified left/right-click
+					if entry.key ~= "BUTTON1" and entry.key ~= "BUTTON2" then
+						local prefix, suffix = addon:GetBindingPrefixSuffix(entry, global)
+						local key = self:ConvertSpecialKeys(entry)
 
-                    local attr = B_SET:format(key, suffix)
-                    if not unique[attr] then
-                        set[#set + 1] = attr 
-                        clr[#clr + 1] = B_CLR:format(key)
-                        unique[attr] = true
-                    end
-                end
-            else
-                local buttonNum = entry.key:match("BUTTON(%d+)$")
-                if not buttonNum then
-                    -- Only apply key-based binding clicks, let the raw
-                    -- attributes handle the others
-                    local prefix, suffix = addon:GetBindingPrefixSuffix(entry, global)
-                    local key = self:ConvertSpecialKeys(entry)
+						local attr = B_SET:format(key, suffix)
+						if not unique[attr] then
+							set[#set + 1] = attr
+							clr[#clr + 1] = B_CLR:format(key)
+							unique[attr] = true
+						end
+					end
+				else
+					local buttonNum = entry.key:match("BUTTON(%d+)$")
+					if not buttonNum then
+						-- Only apply key-based binding clicks, let the raw
+						-- attributes handle the others
+						local prefix, suffix = addon:GetBindingPrefixSuffix(entry, global)
+						local key = self:ConvertSpecialKeys(entry)
 
-                    local attr = B_SET:format(key, suffix)
-                    if not unique[attr] then
-                        set[#set + 1] = attr 
-                        clr[#clr + 1] = B_CLR:format(key)
-                        unique[attr] = true
-                    end
-                end
-            end
-        end
+						local attr = B_SET:format(key, suffix)
+						if not unique[attr] then
+							set[#set + 1] = attr
+							clr[#clr + 1] = B_CLR:format(key)
+							unique[attr] = true
+						end
+					end
+				end
+			end
+		end
     end
 
     return table.concat(set, "\n"), table.concat(clr, "\n")
@@ -701,9 +739,9 @@ function addon:TalentGroupChanged()
     local currentProfile = self.db:GetCurrentProfile()
     local newProfile
 
-    if self.settings.specswap then
+	if self.settings.specswap then
+		self.talentGroup = GetActiveTalentGroup()
         -- Determine which profile to set, based on talent group
-        self.talentGroup = GetActiveTalentGroup()
         if self.talentGroup == 1 and self.settings.pri_profileKey then
             newProfile = self.settings.pri_profileKey
         elseif self.talentGroup == 2 and self.settings.sec_profileKey then
@@ -795,7 +833,7 @@ function addon:CheckPartyCombat(event, unit)
     if InCombatLockdown() or not unit then return end
     if not self.has_ooc then
         -- No change required if no ooc bindings
-        return 
+        return
     end
 
     if self.settings.fastooc then
@@ -831,6 +869,8 @@ function addon:IsFrameBlacklisted(frame)
     return self.settings.blacklist[name]
 end
 
+-- Update both registered clicks, and ensure that mousewheel events are enabled
+-- on the frame.
 function addon:UpdateRegisteredClicks(button)
     if InCombatLockdown() then
         table.insert(self.regclickqueue, button)
@@ -842,18 +882,21 @@ function addon:UpdateRegisteredClicks(button)
     -- Short version that only updates clicks for one frame
     if button and not self:IsFrameBlacklisted(button) then
         button:RegisterForClicks(direction)
+        button:EnableMouseWheel(true)
         return
     end
 
     for button in pairs(self.ccframes) do
         if not self:IsFrameBlacklisted(button) then
             button:RegisterForClicks(direction)
+            button:EnableMouseWheel(true)
         end
     end
 
     for name, button in pairs(self.hccframes) do
        if not self:IsFrameBlacklisted(button) then
            button:RegisterForClicks(direction)
+           button:EnableMouseWheel(true)
        end
     end
 end

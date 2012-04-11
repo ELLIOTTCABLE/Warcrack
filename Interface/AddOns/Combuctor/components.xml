@@ -221,20 +221,14 @@
 
 		<Scripts>
 			<OnLoad>
-				self:RegisterForClicks('anyUp')
 				self:RegisterForDrag('LeftButton')
 				self:SetPoint('TOP', self:GetParent().TitleText)
 			</OnLoad>
-			<OnClick>
-				if IsAltKeyDown() then
-					if button == 'RightButton' then
-						self:GetParent():SavePosition(nil)
-					end
-				end
-			</OnClick>
 			<OnMouseDown>
-				self.isMoving = true
-				self:GetParent():StartMoving()
+        if self:GetParent().sets.position then
+          self.isMoving = true
+          self:GetParent():StartMoving()
+        end
 			</OnMouseDown>
 			<OnMouseUp>
 				if self.isMoving then
@@ -243,12 +237,6 @@
 					self:GetParent():SavePosition(self:GetParent():GetPoint())
 				end
 			</OnMouseUp>
-			<OnEnter>
-				self:GetParent():OnTitleEnter(self)
-			</OnEnter>
-			<OnLeave>
-				GameTooltip:Hide()
-			</OnLeave>
 		</Scripts>
 
 		<NormalFont style="GameFontNormal"/>

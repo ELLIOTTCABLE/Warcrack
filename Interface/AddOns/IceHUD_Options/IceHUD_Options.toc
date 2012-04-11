@@ -1,12 +1,12 @@
-## Interface: 40200
+## Interface: 40300
 ## Title: IceHUD |cff7fff7f-Options-|r
 ## Author: Parnic
-## Version: 1.7.6
+## Version: 1.7.10
 ## Notes: Configuration options for IceHUD
 ## OptionalDeps: AceGUI-3.0-SharedMediaWidgets
 ## Dependencies: IceHUD
 ## LoadOnDemand: 1
-## X-Curse-Packaged-Version: 1.7.6
+## X-Curse-Packaged-Version: 1.7.10
 ## X-Curse-Project-Name: IceHUD
 ## X-Curse-Project-ID: ice-hud
 ## X-Curse-Repository-ID: wow/ice-hud/mainline

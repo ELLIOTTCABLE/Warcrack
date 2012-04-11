@@ -313,6 +313,7 @@ L["Damage done"] = "Damage done"
 L["Active time"] = "Active time"
 L["Segment time"] = "Segment time"
 L["Absorbs and healing"] = "Absorbs and healing"
+L["Activity"] = true
 
 L["Show rank numbers"] = "Show rank numbers"
 L["Shows numbers for relative ranks for modes where it is applicable."] = "Shows numbers for relative ranks for modes where it is applicable."
@@ -363,3 +364,11 @@ L["Hide window"] = "Hide window"
 L["Absorb spells"] = "Absorb spells"
 
 L["Choose the background color of the bars."] = "Choose the background color of the bars."
+
+L["Font flags"] = "Font flags"
+L["Sets the font flags."] = "Sets the font flags."
+L["None"] = "None"
+L["Outline"] = "Outline"
+L["Thick outline"] = "Thick outline"
+L["Monochrome"] = "Monochrome"
+L["Outlined monochrome"] = "Outlined monochrome"

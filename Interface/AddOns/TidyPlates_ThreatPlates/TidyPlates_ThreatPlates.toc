@@ -1,0 +1,21 @@
+﻿## Interface: 30300
+## Title: Tidy Plates: |cff89F559Threat Plates|r
+## Notes: Revolutionary |cff89F559threat reactive nameplates|r by |cff3079ffSyronius|r.
+## Author: Syronius of Black Dragonflight
+## RequiredDeps: TidyPlates
+## SavedVariables: ThreatPlates3DB
+## Version: 3.0.4
+## OptionalDeps: Ace3, LibSharedMedia-3.0
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+embeds.xml
+
+TidyPlatesThreat.lua
+extentions.lua
+options.lua
+empty.lua
+normal.lua
+tank.lua
+dps.lua
+

@@ -1,14 +1,16 @@
-## Interface: 40200
+## Interface: 40300
 ## Title: Tidy Plates Hub
 ## Notes: Provides a common configuration panel for supported themes.
+## Version: r432
 ## Author: Daniel/Binbwen
 ## Dependencies: TidyPlates, TidyPlatesWidgets
 ## SavedVariables: TidyPlatesHubCache, TidyPlatesHubTankCache, TidyPlatesHubDamageCache
-## SavedVariablesPerCharacter: TidyPlatesHubSavedVariables, TidyPlatesHubTankSavedVariables, TidyPlatesHubDamageSavedVariables
+## SavedVariablesPerCharacter: TidyPlatesHubSavedVariables, TidyPlatesHubTankSavedVariables, TidyPlatesHubDamageSavedVariables, TidyPlatesHubSettings
 
 
+ModeLists.lua
+DefaultSettings.lua
 Helpers.lua
 RapidPanel.lua
-DamagePanel.lua
-TankPanel.lua
+UniversalPanel.lua
 Functions.lua

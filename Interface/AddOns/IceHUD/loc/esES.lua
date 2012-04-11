@@ -3,16 +3,16 @@ if not L then return end
 
 L["(De)Buff watcher"] = "(De)Buff watcher" -- Requires localization
 L["1 combo point: yellow, 5 combo points: red"] = "1 punto de combo: amarillo, 5 puntos de combo: rojo" -- Needs review
-L["1 lacerate: yellow, 5 lacerates: red"] = "1 lacerate: yellow, 5 lacerates: red" -- Requires localization
-L["1 maelstrom: yellow, 5 maelstroms: red"] = "1 maelstrom: yellow, 5 maelstroms: red" -- Requires localization
-L["1 sunder: yellow, 5 sunders: red"] = "1 sunder: yellow, 5 sunders: red" -- Requires localization
+L["1 lacerate: yellow, 5 lacerates: red"] = "1 lacerar: amarillo, 5 lacerar: rojo" -- Needs review
+L["1 maelstrom: yellow, 5 maelstroms: red"] = "1 vorágine: amarillo, 5 vorágines: rojo" -- Needs review
+L["1 sunder: yellow, 5 sunders: red"] = "1 hender: amarillo, 5 hender: rojo" -- Needs review
 L["A custom bar has been created and can be configured through Module Settings => MyCustomBar. It is highly recommended that you change the bar name of this module so that it's easier to identify."] = "A custom bar has been created and can be configured through Module Settings => MyCustomBar. It is highly recommended that you change the bar name of this module so that it's easier to identify." -- Requires localization
 L["A custom cooldown bar has been created and can be configured through Module Settings => MyCustomCD. It is highly recommended that you change the bar name of this module so that it's easier to identify."] = "A custom cooldown bar has been created and can be configured through Module Settings => MyCustomCD. It is highly recommended that you change the bar name of this module so that it's easier to identify." -- Requires localization
 L["A custom counter has been created and can be configured through Module Settings => MyCustomCounter. It is highly recommended that you change the bar name of this module so that it's easier to identify."] = "A custom counter has been created and can be configured through Module Settings => MyCustomCounter. It is highly recommended that you change the bar name of this module so that it's easier to identify." -- Requires localization
 L["A custom health bar has been created and can be configured through Module Settings => MyCustomHealth. It is highly recommended that you change the bar name of this module so that it's easier to identify."] = "A custom health bar has been created and can be configured through Module Settings => MyCustomHealth. It is highly recommended that you change the bar name of this module so that it's easier to identify." -- Requires localization
 L["A custom mana bar has been created and can be configured through Module Settings => MyCustomMana. It is highly recommended that you change the bar name of this module so that it's easier to identify."] = "A custom mana bar has been created and can be configured through Module Settings => MyCustomMana. It is highly recommended that you change the bar name of this module so that it's easier to identify." -- Requires localization
-L["Abbreviate estimated health"] = "Abbreviate estimated health" -- Requires localization
-L["Abbreviate health"] = "Abbreviate health" -- Requires localization
+L["Abbreviate estimated health"] = "Acortar salud estimada" -- Needs review
+L["Abbreviate health"] = "Abreviar salud" -- Needs review
 L["Adjust the horizontal position of the aura icon"] = "Ajustar la posicion horizontal del icono de aura" -- Needs review
 L["Adjust the vertical placement of this bar"] = "Ajustar la posicion vertical de esta barra"
 L["Adjust the vertical position of the aura icon"] = "Ajustar la posicion vertical del icono de aura" -- Needs review
@@ -25,11 +25,11 @@ L["Allow click casting"] = "Permitir lanzar hechizos con click" -- Needs review
 L["Allow click-targeting"] = "Permiticar seleccionar con click" -- Needs review
 L["Allow click-targeting in combat"] = "Permitir seleccionar con click en combate" -- Needs review
 L["Allow mouse interaction"] = "Allow mouse interaction" -- Requires localization
-L["Alpha OOC and Target"] = "Alpha OOC and Target" -- Requires localization
-L["Alpha OOC and not full"] = "Alpha OOC and not full" -- Requires localization
-L["Alpha in combat"] = "Alpha in combat" -- Requires localization
-L["Alpha out of combat"] = "Alpha out of combat" -- Requires localization
-L["Always display bar"] = "Always display bar" -- Requires localization
+L["Alpha OOC and Target"] = "Transparencia FdC y Objetivo" -- Needs review
+L["Alpha OOC and not full"] = "Transparencia FdC y no lleno" -- Needs review
+L["Alpha in combat"] = "Transparencia en combate" -- Needs review
+L["Alpha out of combat"] = "Transparencia fuera de combate" -- Needs review
+L["Always display bar"] = "Siempre mostrar barra" -- Needs review
 L["Always show at 100% alpha"] = "Always show at 100% alpha" -- Requires localization
 L["Animate changes"] = "Animate changes" -- Requires localization
 L["Animation Duration"] = "Animation Duration" -- Requires localization
@@ -46,8 +46,8 @@ L["BG Alpha OOC and Target"] = "BG Alpha OOC and Target" -- Requires localizatio
 L["BG Alpha OOC and not Full"] = "BG Alpha OOC and not Full" -- Requires localization
 L["BG Alpha in combat"] = "BG Alpha in combat" -- Requires localization
 L["BG Alpha out of combat"] = "BG Alpha out of combat" -- Requires localization
-L["Background Alpha"] = "Background Alpha" -- Requires localization
-L["Background Color"] = "Background Color" -- Requires localization
+L["Background Alpha"] = "Transparencia del Fondo" -- Needs review
+L["Background Color"] = "Color del Fondo" -- Needs review
 L["Background alpha for bars IC"] = "Background alpha for bars IC" -- Requires localization
 L["Background alpha for bars OOC and bar not full (Target takes precedence over this)"] = "Background alpha for bars OOC and bar not full (Target takes precedence over this)" -- Requires localization
 L["Background alpha for bars OOC and target accuired (takes precedence over Not Full)"] = "Background alpha for bars OOC and target acquired (takes precedence over Not Full)" -- Requires localization
@@ -513,6 +513,8 @@ L["Show spell rank"] = "Show spell rank" -- Requires localization
 L["Show stacking debuffs"] = "Show stacking debuffs" -- Requires localization
 L["Show stacking debuffs in ToT info"] = "Show stacking debuffs in ToT info" -- Requires localization
 L["Show status icon"] = "Show status icon" -- Requires localization
+L["Show the tooltip for this unit when the mouse is hovering over it."] = "Show the tooltip for this unit when the mouse is hovering over it." -- Requires localization
+L["Show tooltip"] = "Show tooltip" -- Requires localization
 L["Shows a flash behind each holy rune when it becomes available."] = "Shows a flash behind each holy rune when it becomes available." -- Requires localization
 L["Shows a flash behind each shard when it becomes available."] = "Shows a flash behind each shard when it becomes available." -- Requires localization
 L["Side"] = "Side" -- Requires localization

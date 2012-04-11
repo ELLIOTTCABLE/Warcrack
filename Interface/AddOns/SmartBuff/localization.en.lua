@@ -4,8 +4,8 @@
 
 -- Whats new info
 SMARTBUFF_WHATSNEW = "|cffffffffWhats new:|r\n\n"
-  .."- Added options: Splash frame 'Show Icon' and 'Short Message'\n\n"
-  .."- Added buff: Warrior (Shield Block)\n\n"
+  .."- Added buffs: Paladin (Beacon of Light)\n\n"
+  .."- Added items: Fortune Cookie, Celebration Package, Warts-B-Gone Lip Balm\n\n"
   .."- Updated TOC\n\n"
   ;
 

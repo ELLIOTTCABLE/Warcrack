@@ -3,7 +3,7 @@
 -- Copyright 2007+ Toadkiller of Proudmoore.
 --
 -- Configuration Options for AutoBar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 --
 
 -- Custom Category:

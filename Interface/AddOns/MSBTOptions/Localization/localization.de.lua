@@ -22,8 +22,8 @@ local L = MikSBT.translations
 L.MSG_CUSTOM_FONTS					= "Benutzerdefinierte Schrift"
 L.MSG_INVALID_CUSTOM_FONT_NAME		= "Ungültiger Schriftname."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "Schriftname existiert bereits."
-L.MSG_INVALID_CUSTOM_FONT_PATH		= "Schrift Pfad muss zu einer .ttf Datei führen."
---L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font." 
+L.MSG_INVALID_CUSTOM_FONT_PATH		= "Schriftpfad muss zu einer .ttf-Datei führen."
+L.MSG_UNABLE_TO_SET_FONT			= "Die ausgewählte Schrift kann nicht verwendet werden." 
 L.MSG_CUSTOM_SOUNDS					= "Benutzerdefinierte Sounds"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "Ungültiger Sound-Name."
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "Sound-Name existiert bereits."
@@ -126,7 +126,7 @@ obj["hideMergeTrailer"]			= { label="Verbinden-Anhang verstecken", tooltip="Der 
 obj["allClasses"]				= { label="Alle Klassen"}
 obj["enablePlayerCooldowns"]	= { label="Spieler Abklingzeiten", tooltip="Zeigt Benachrichtigungen, wenn deine Abklingzeiten abgelaufen sind."}
 obj["enablePetCooldowns"]		= { label="Begleiter Abklingzeiten", tooltip="Zeigt Benachrichtigungen, wenn die Abklingzeiten deines Begleiters abgelaufen sind."}
---obj["enableItemCooldowns"]		= { label="Item Cooldowns", tooltip="Display notifications when item cooldowns complete."}
+obj["enableItemCooldowns"]		= { label="Gegenstand Abklingzeiten", tooltip="Zeigt Benachrichtigungen, wenn deine Gegenstands-Abklingzeiten abgelaufen sind."}
 obj["lootedItems"]				= { label="Geplünderte Gegenstände", tooltip="Zeigt Benachrichtigungen, wenn Gegenstände geplündert wurden."}
 obj["moneyGains"]				= { label="Gold erhalten", tooltip="Zeigt Benachrichtigungen, wenn Gold erhalten wurde."}
 obj["alwaysShowQuestItems"]		= { label="Questgegenstände immer anzeigen", tooltip="Questgegenstände immer anzeigen, unabhängig der ausgewählten Qualitäten."}
@@ -313,7 +313,7 @@ obj["FACTION_NAME"]			= "%e - Name der Fraktion.\n"
 obj["EMOTE_TEXT"]			= "%e - Der Text der Geste.\n"
 obj["MONEY_TEXT"]			= "%e - Der Text des erhaltenen Geldes.\n"
 obj["COOLDOWN_NAME"]		= "%e - Name der Fähigkeit, die bereit ist.\n"
---obj["ITEM_COOLDOWN_NAME"]	= "%e - The name of item that is ready.\n"
+obj["ITEM_COOLDOWN_NAME"]	= "%e - Name des Gegenstands, der bereit ist.\n"
 obj["ITEM_NAME"]			= "%e - Der Name des geplünderten Gegenstands.\n"
 obj["POWER_TYPE"]			= "%p - Art der Energie (Energie, Wut, Mana, Runenmacht, usw.).\n"
 obj["TOTAL_ITEMS"]			= "%t - Gesamte Anzahl der geplünderten Gegenstände im Inventar."
@@ -540,7 +540,7 @@ obj["UNIT_HEALTH"]				= "Lebenspunkteveränderung"
 obj["UNIT_POWER"]				= "Powerveränderung"
 obj["SKILL_COOLDOWN"]			= "Spielerabklingzeit abgelaufen"
 obj["PET_COOLDOWN"]				= "Begleiterabklingzeit abgelaufen"
---obj["ITEM_COOLDOWN"]			= "Item Cooldown Complete"
+obj["ITEM_COOLDOWN"]			= "Gegenstandabklingzeit abgelaufen"
  
 -- Main event conditions.
 obj["sourceName"]				= "Quellenname"
@@ -576,8 +576,8 @@ obj["auraType"]					= "Auren-Typ"
 obj["threshold"]				= "Schwelle"
 obj["unitID"]					= "Einheit ID"
 obj["unitReaction"]				= "Einheit Reaktion"
---obj["itemID"]					= "Item ID"
---obj["itemName"]					= "Item Name"
+obj["itemID"]					= "Gegenstand ID"
+obj["itemName"]					= "Gegenstandsname"
 
 -- Exception conditions.
 obj["activeTalents"]			= "Aktive Talente"
@@ -650,9 +650,9 @@ obj = L.OUTLINES
 obj[1] = "Kein"
 obj[2] = "Dünn"
 obj[3] = "Dick"
---obj[4] = "Monochrome"
---obj[5] = "Monochrome + Thin"
---obj[6] = "Monochrome + Thick"
+obj[4] = "Monochrom"
+obj[5] = "Monochrom + Dünn"
+obj[6] = "Monochrom + Dick"
 
 -- Text aligns.
 obj = L.TEXT_ALIGNS

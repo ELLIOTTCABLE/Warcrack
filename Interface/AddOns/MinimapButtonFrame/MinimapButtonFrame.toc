@@ -1,4 +1,4 @@
-﻿## Interface: 40200
+﻿## Interface: 40300
 ## Title: Minimap Button Frame
 ## Notes: Collects the minimap buttons and puts them into a moveable frame.
 ## Notes-deDE: Sammelt die Minikarte Tasten und stellt sie in einen beweglichen Rahmen.
@@ -10,13 +10,13 @@
 ## Notes-zhCN: 收集minimap按钮和使他们成为一个可移动的框架。
 ## Notes-zhTW: 收集minimap按鈕和使他們成為一個可移動的框架。
 ## Author: Bachlott
-## Version: 3.1.6
+## Version: 3.1.7
 ## SavedVariables: MBFDB
 ## OptionalDeps: Ace3, LibDataBroker-1.1, LibAboutPanel
 ## X-Embeds: Ace3, LibDataBroker-1.1, LibAboutPanel
 ## X-eMail: qflux@hotmail.com
 ## X-Website: http://wow.curse.com/downloads/wow-addons/details/minimap-button-frame.aspx
-## X-Date: 2011-10-14
+## X-Date: 2011-12-10
 ## X-Category: Interface Enhancements
 ## X-Localizations: enUS, deDE, frFR, esES, esMX, koKR, ruRU, zhCN, zhTW
 ## X-WoWI-ID: 7929

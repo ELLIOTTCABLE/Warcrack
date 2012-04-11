@@ -11,6 +11,11 @@ local L = OVERACHIEVER_STRINGS
 local GetAchievementInfo = Overachiever.GetAchievementInfo
 
 local categories_sel = Overachiever.UI_GetValidCategories(1)
+local EditBoxes = {}
+
+
+-- Set this to "true" (without quotes) to make Search tab edit boxes lose their input focus when a search begins.
+local OPTION_LoseFocusOnSearch = false
 
 
 local function copytab(from, to)
@@ -168,8 +173,16 @@ sortdrop:SetLabel(L.TAB_SORT, true)
 sortdrop:SetPoint("TOPLEFT", panel, "TOPLEFT", -16, -22)
 sortdrop:OnSelect(SortDrop_OnSelect)
 
-local function beginSearch()
+local function beginSearch(self)
   PlaySound("igMainMenuOptionCheckBoxOn")
+  
+  if (OPTION_LoseFocusOnSearch) then
+    for i,editbox in ipairs(EditBoxes) do
+      _G[editbox]:SetAutoFocus(false)
+      _G[editbox]:ClearFocus()
+    end
+  end
+
   local name, desc, criteria, reward, any = EditName:GetText(), EditDesc:GetText(), EditCriteria:GetText(), EditReward:GetText(), EditAny:GetText()
   if (name == "" and desc == "" and criteria == "" and reward == "" and any == "") then  -- all fields are blank
     ResultsLabel:Hide()
@@ -202,7 +215,6 @@ function frame.SetNumListed(num)
   ResultsLabel:SetText(L.SEARCH_RESULTS:format(num))
 end
 
-local EditBoxes = {}
 
 local function tabPressed(self)
   self:SetAutoFocus(false)
@@ -213,7 +225,7 @@ local function escapeEditBox(self)
   self:SetAutoFocus(false)
 end
 
-local function focusEditBox(self)
+local function focusEditBox(self, clearAll)
   for i,editbox in ipairs(EditBoxes) do
     _G[editbox]:SetAutoFocus(false)
   end

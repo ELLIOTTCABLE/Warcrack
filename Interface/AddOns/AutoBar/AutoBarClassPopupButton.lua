@@ -4,7 +4,7 @@
 --
 -- Popup Buttons for AutoBar
 -- Popup Buttons are contained by AutoBar.Class.Button
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 --
 
 local AutoBar = AutoBar

@@ -696,10 +696,10 @@ local defaults = {
 		MBFHideMiniMapBattlefieldFrame = false,
 		-- Exception Vars
 		currentMinimapIcon = "Note",
-		MinimapIcons = { "Note", "JQuest", "NauticusMiniIcon", "MinimapIcon", "GatherMatePin", "WestPointer", "Chinchilla_", "SmartMinimapZoom", "pMinimap", "GuildMap3Mini", "MiniButton", "DropCount", "ZGVMarker", "QuestGiversPin", "ArchyMinimapPOI", "ArchyBlobMinimap" },
+		MinimapIcons = { "Note", "JQuest", "NauticusMiniIcon", "MinimapIcon", "GatherMatePin", "WestPointer", "Chinchilla_", "SmartMinimapZoom", "pMinimap", "GuildMap3Mini", "MiniButton", "DropCount", "ZGVMarker", "QuestGiversPin", "ArchyMinimapPOI", "ArchyBlobMinimap", "BreadCrumbsPoints"  },
 		currentButtonOverride = "notesiconframe",
-		ButtonOverride = { "notesiconframe", "duckiebank_minimapicon", "cta_minimapicon", "BejeweledMinimapIcon", "EMPMINIMAPBUTTON", "MobMapMinimapButtonFrame", "Karma_MinimapIconFrame", "FuBarPluginCraftNotesFrameMinimapButton", "PeggledMinimapIcon", "DropCount_MinimapIcon", "BreadCrumbsPoints" },
-		UserUIProtected = { "TitanPanel", "AutoBarButton", "FuBarFrame", "RicoMinimap_CoordinatesFrame", "MinimapZoom", "MinimapButtonFrame", "Xparky", "MBFRestoreButton", "BasicMiniMap", "CT_RASetsFrame", "SMM", "GuildOrg_Toggle", "ElvuiMinimap" },
+		ButtonOverride = { "notesiconframe", "duckiebank_minimapicon", "cta_minimapicon", "BejeweledMinimapIcon", "EMPMINIMAPBUTTON", "MobMapMinimapButtonFrame", "Karma_MinimapIconFrame", "FuBarPluginCraftNotesFrameMinimapButton", "PeggledMinimapIcon", "DropCount_MinimapIcon" },
+		UserUIProtected = { "TitanPanel", "AutoBarButton", "FuBarFrame", "RicoMinimap_CoordinatesFrame", "MinimapZoom", "MinimapButtonFrame", "Xparky", "MBFRestoreButton", "BasicMiniMap", "CT_RASetsFrame", "SMM", "GuildOrg_Toggle", "ElvuiMinimap"},
 		ParentStop = { "CECBMiniMapButtonFrame", "CT_RASetsFrame", "GuildOrg_Toggle", "PoisonerStateHeader" },
 		MBF_Ignore = { "MetamapButton" },
 		MBF_Include = { },

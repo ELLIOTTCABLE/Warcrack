@@ -5,7 +5,7 @@
 --
 -- Layout Buttons for AutoBar
 -- Buttons are contained by AutoBar.Class.Bar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 --
 
 local AutoBar = AutoBar

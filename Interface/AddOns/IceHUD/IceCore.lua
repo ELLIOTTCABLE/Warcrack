@@ -127,7 +127,7 @@ StaticPopupDialogs["ICEHUD_UPDATE_PERIOD_MATTERS"] =
 function IceCore.prototype:CheckDisplayUpdateMessage()
 	local thisVersion
 --@non-debug@
-	thisVersion = 855
+	thisVersion = 870
 --@end-non-debug@
 --[===[@debug@
 	thisVersion = 9999
@@ -848,7 +848,11 @@ end
 
 function IceCore.prototype:RequestUpdates(module, func)
 	if self.updatees[module] ~= func then
-		self.updatees[module] = func
+		-- Parnic: this prevents modules who are handling their own updates (as opposed to relying on IceBarElement)
+		--         from having their update request yanked out from under them.
+		if func ~= nil or not module.handlesOwnUpdates then
+			self.updatees[module] = func
+		end
 	end
 
 	local count = 0

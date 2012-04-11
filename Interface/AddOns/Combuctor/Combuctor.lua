@@ -92,12 +92,12 @@ local function addSet(sets, exclude, name, ...)
 end
 
 local function getDefaultInventorySets(class)
-	local sets, exclude = addSet(sets, exclude, L.All, L.All, L.Keys)
+	local sets, exclude = addSet(sets, exclude, L.All, L.All)
 	return sets, exclude
 end
 
 local function getDefaultBankSets(class)
-	local sets, exclude = addSet(sets, exclude, L.All, L.All, L.Keys)
+	local sets, exclude = addSet(sets, exclude, L.All, L.All)
 	sets, exclude = addSet(sets, exclude, L.Equipment)
 	sets, exclude = addSet(sets, exclude, L.TradeGood)
 	sets, exclude = addSet(sets, exclude, L.Misc)
@@ -281,6 +281,10 @@ end
 
 
 --[[ Utility Functions ]]--
+
+function Combuctor:GetFrame(key)
+  return self.Frames[key]
+end
 
 function Combuctor:Print(...)
 	return print('|cffFFBA00'.. AddonName .. '|r:', ...)

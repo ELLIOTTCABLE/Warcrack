@@ -28,8 +28,6 @@ L.Bags = '가방'
 L.BagToggle = '<왼쪽 클릭>으로 가방 보기 토글'
 L.InventoryToggle = '<오른쪽 클릭>으로 인벤토리 프레임 토글'
 L.BankToggle = '<오른쪽 클릭>으로 은행 프레임 토글'
-L.MoveTip = '<앨트-왼쪽 드래그>로 이동'
-L.ResetPositionTip = '<오른쪽 클릭>으로 위치 초기화'
 
 L.Normal = '일반'
 L.Equipment = '장비'

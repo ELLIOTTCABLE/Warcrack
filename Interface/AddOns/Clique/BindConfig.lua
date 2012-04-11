@@ -64,7 +64,7 @@ function CliqueConfig:SetupGUI()
     end
 
     _G[self:GetName() .. "TitleText"]:SetText(L["Clique Binding Configuration"])
-    
+
     self.dialog = _G["CliqueDialog"]
     self.dialog.title = _G["CliqueDialogTitleText"]
     self.dialog:SetUserPlaced(false)
@@ -98,12 +98,12 @@ function CliqueConfig:SetupGUI()
     self.page1.button_spell:SetText(L["Bind spell"])
     self.page1.button_other:SetText(L["Bind other"])
     self.page1.button_options:SetText(L["Options"])
-  
+
     self.page2.button_binding:SetText(L["Set binding"])
     self.page2.button_save:SetText(L["Save"])
     self.page2.button_cancel:SetText(L["Cancel"])
     local desc = L["You can use this page to create a custom macro to be run when activating a binding on a unit. When creating this macro you should keep in mind that you will need to specify the target of any actions in the macro by using the 'mouseover' unit, which is the unit you are clicking on. For example, you can do any of the following:\n\n/cast [target=mouseover] Regrowth\n/cast [@mouseover] Regrowth\n/cast [@mouseovertarget] Taunt\n\nHover over the 'Set binding' button below and either click or press a key with any modifiers you would like included. Then edit the box below to contain the macro you would like to have run when this binding is activated."]
-    
+
     self.page2.desc:SetText(desc)
     self.page2.editbox = CliqueScrollFrameEditBox
 
@@ -141,7 +141,7 @@ end
 
 function CliqueConfig:EnableSpellbookButtons()
     local enabled;
-    
+
     if self.page1:IsVisible() and SpellBookFrame:IsVisible() then
         enabled = true
     end
@@ -168,14 +168,14 @@ end
 
 function CliqueConfig:Spellbook_OnBinding(button, key)
     if key == "ESCAPE" then
-        HideUIPanel(CliqueConfig) 
+        HideUIPanel(CliqueConfig)
         return
     end
 
     local slot = SpellBook_GetSpellBookSlot(button:GetParent());
     local name, subtype = GetSpellBookItemName(slot, SpellBookFrame.bookType)
     local texture = GetSpellBookItemTexture(slot, SpellBookFrame.bookType)
-    
+
     local key = addon:GetCapturedKey(key)
     if not key then
         return
@@ -201,12 +201,12 @@ function CliqueConfig:Button_OnClick(button)
     elseif button == self.page1.button_other then
         local config = CliqueConfig
         local menu = {
-            { 
-                text = L["Select a binding type"], 
+            {
+                text = L["Select a binding type"],
                 isTitle = true,
                 notCheckable = true,
             },
-            { 
+            {
                 text = L["Target clicked unit"],
                 func = function()
                     self:SetupCaptureDialog("target")
@@ -235,17 +235,17 @@ function CliqueConfig:Button_OnClick(button)
             },
         }
         UIDropDownMenu_SetAnchor(self.dropdown, 0, 0, "BOTTOMLEFT", self.page1.button_other, "TOP")
-        EasyMenu(menu, self.dropdown, nil, 0, 0, nil, nil) 
+        EasyMenu(menu, self.dropdown, nil, 0, 0, nil, nil)
 
     -- Click handler for "Edit" button
     elseif button == self.page1.button_options then
         local menu = {
-            { 
-                text = L["Select an options category"], 
+            {
+                text = L["Select an options category"],
                 isTitle = true,
                 notCheckable = true,
             },
-            { 
+            {
                 text = L["Clique general options"],
                 func = function()
                     HideUIPanel(SpellBookFrame)
@@ -274,13 +274,13 @@ function CliqueConfig:Button_OnClick(button)
             },
         }
         UIDropDownMenu_SetAnchor(self.dropdown, 0, 0, "BOTTOMLEFT", self.page1.button_options, "TOP")
-        EasyMenu(menu, self.dropdown, nil, 0, 0, nil, nil) 
+        EasyMenu(menu, self.dropdown, nil, 0, 0, nil, nil)
     elseif button == self.page2.button_save then
         -- Check the input
         local key = self.page2.key
         local macrotext = self.page2.editbox:GetText()
 
-        if self.page2.binding then  
+        if self.page2.binding then
             self.page2.binding.key = key
             self.page2.binding.macrotext = macrotext
             self.page2.binding = nil
@@ -331,7 +331,11 @@ compareFunctions = {
     end,
     binding = function(a, b)
         local mem = memoizeBindings
-        return mem[a] < mem[b]
+		if mem[a] == mem[b] then
+			return compareFunctions.name(a, b)
+		else
+			return mem[a] < mem[b]
+		end
     end,
 }
 
@@ -354,7 +358,7 @@ function CliqueConfig:UpdateList()
     end
 
     if page.sortType then
-        table.sort(sort, compareFunctions[page.sortType]) 
+        table.sort(sort, compareFunctions[page.sortType])
     else
         table.sort(sort, compareFunctions.key)
     end
@@ -391,9 +395,9 @@ function CliqueConfig:UpdateList()
             row.name:SetText(addon:GetBindingActionText(bind.type, bind))
             row.info:SetText(addon:GetBindingInfoText(bind))
             row.bind:SetText(addon:GetBindingKeyComboText(bind))
-            row.binding = bind 
+            row.binding = bind
             row:Show()
-        else 
+        else
             row:Hide()
         end
     end
@@ -445,7 +449,7 @@ end
 function CliqueConfig:MacroBindingButton_OnClick(button, key)
     local key = addon:GetCapturedKey(key)
     if key then
-        self.page2.key = key 
+        self.page2.key = key
         self.page2.bindText:SetText(addon:GetBindingKeyComboText(key))
         self.page2.button_save:Enable()
     else
@@ -498,7 +502,7 @@ local function toggleSet(binding, set, ...)
             binding.sets[exclset] = nil
         end
 
-        UIDropDownMenu_Refresh(UIDROPDOWNMENU_OPEN_MENU, nil, UIDROPDOWNMENU_MENU_LEVEL) 
+        UIDropDownMenu_Refresh(UIDROPDOWNMENU_OPEN_MENU, nil, UIDROPDOWNMENU_MENU_LEVEL)
         CliqueConfig:UpdateList()
         addon:FireMessage("BINDINGS_CHANGED")
     end
@@ -514,7 +518,7 @@ function CliqueConfig:Row_OnClick(frame, button)
             notCheckable = true,
             isTitle = true,
         },
-        { 
+        {
             text = L["Change binding"],
             func = function()
                 local binding = frame.binding
@@ -533,7 +537,7 @@ function CliqueConfig:Row_OnClick(frame, button)
     }
 
     if binding.type == "macro" then
-        -- Replace 'Change Binding' with 'Edit macro' 
+        -- Replace 'Change Binding' with 'Edit macro'
         menu[2] = {
             text = L["Edit macro"],
             func = function()
@@ -558,7 +562,7 @@ function CliqueConfig:Row_OnClick(frame, button)
         menuList = {},
     }
     table.insert(menu, submenu)
- 
+
     table.insert(submenu.menuList, {
         text = L["Default"],
         checked = function() return binding.sets["default"] end,
@@ -587,11 +591,29 @@ function CliqueConfig:Row_OnClick(frame, button)
     })
 
     table.insert(submenu.menuList, {
-        text = L["Out-of-combat only"],
+        text = L["Out-of-combat (ONLY)"],
         checked = function() return binding.sets["ooc"] end,
         func = toggleSet(binding, "ooc"),
         tooltipTitle = L["Clique: 'ooc' binding-set"],
-        tooltipText = L["A binding that belongs to the 'ooc' binding-set will only be active when the player is out-of-combat. As soon as the player enters combat, these bindings will no longer be active, so be careful when choosing this binding-set for any spells you use frequently."],
+        tooltipText = L["A binding that belongs to the 'ooc' binding-set will only be active when the player is out-of-combat, regardless of the other binding-sets this binding belongs to. As soon as the player enters combat, these bindings will no longer be active, so be careful when choosing this binding-set for any spells you use frequently."],
+        keepShownOnClick = true,
+    })
+
+	table.insert(submenu.menuList, {
+        text = L["Primary talent spec (ONLY)"],
+        checked = function() return binding.sets["pritalent"] end,
+        func = toggleSet(binding, "pritalent"),
+        tooltipTitle = L["Clique: 'pritalent' binding-set"],
+        tooltipText = L["A binding that belongs to the 'pritalent' binding-set is only active when the player is currently using their primary talent spec, regardless of the other binding-sets that this binding belongs to."],
+        keepShownOnClick = true,
+    })
+
+	table.insert(submenu.menuList, {
+        text = L["Secondary talent spec (ONLY)"],
+        checked = function() return binding.sets["sectalent"] end,
+        func = toggleSet(binding, "sectalent"),
+        tooltipTitle = L["Clique: 'sectalent' binding-set"],
+        tooltipText = L["A binding that belongs to the 'sectalent' binding-set is only active when the player is currently using their secondary talent spec, regardless of the other binding-sets that this binding belongs to."],
         keepShownOnClick = true,
     })
 
@@ -612,7 +634,7 @@ function CliqueConfig:Row_OnClick(frame, button)
         tooltipText = L["A binding that belongs to the 'global' binding-set is always active. If the spell requires a target, you will be given the 'casting hand', otherwise the spell will be cast. If the spell is an AOE spell, then you will be given the ground targeting circle."],
         keepShownOnClick = true,
     })
-    
+
     EasyMenu(menu, self.dropdown, "cursor", 0, 0, nil, nil)
 end
 

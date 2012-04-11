@@ -1,6 +1,6 @@
 ﻿--
 -- AutoBar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 -- Various Artists
 --
 
@@ -184,7 +184,6 @@ if (GetLocale() == "zhTW") then
 		["Shift-Click"] = "Shift+點擊",
 		["Ctrl-Shift-Click"] = "Ctrl+Shift+點擊",
 		["ButtonFacade is required to Skin the Buttons"] = "ButtonFacade 需要按鈕外觀",
-		["Waterfall-1.0 is required to access the GUI"] = "圖形用戶介面設定需要 Waterfall-1.0",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "基本",

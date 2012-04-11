@@ -1,0 +1,94 @@
+------------------------------------------------------------------------
+r383 | zarnivoop | 2012-02-14 07:59:06 +0000 (Tue, 14 Feb 2012) | 1 line
+Changed paths:
+   A /tags/1.3-11 (from /trunk:382)
+
+Tagging as 1.3-11
+------------------------------------------------------------------------
+r382 | zarnivoop | 2012-02-13 22:12:45 +0000 (Mon, 13 Feb 2012) | 1 line
+Changed paths:
+   A /trunk/locale/esES.lua
+
+added Spanish translation
+------------------------------------------------------------------------
+r381 | zarnivoop | 2012-02-13 22:10:47 +0000 (Mon, 13 Feb 2012) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   D /trunk/modules/SkadaAbsorbs
+   M /trunk/modules.xml
+
+Removed Absorbs module; relevant bits are included in Healing now. Use the thirdparty SkadaHealAbsorbs addon for more in-depth absorbs monitoring.
+------------------------------------------------------------------------
+r380 | eridius | 2012-02-05 03:58:06 +0000 (Sun, 05 Feb 2012) | 4 lines
+Changed paths:
+   M /trunk/BarDisplay.lua
+
+Make the tooltip functions a bit more intelligent
+
+Only add the spacer in the tooltip if the module's tooltip or
+post-tooltip function actually added any lines.
+------------------------------------------------------------------------
+r379 | zarnivoop | 2012-02-03 20:42:59 +0000 (Fri, 03 Feb 2012) | 1 line
+Changed paths:
+   M /trunk/modules/SkadaHealing/Healing.lua
+
+Added new absorb handling to Healing module (thanks oliv48)
+------------------------------------------------------------------------
+r378 | eridius | 2012-01-25 03:47:28 +0000 (Wed, 25 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/modules/SkadaHealing/Healing.lua
+
+Update pre-existing healingspells for absorbed in AddPlayerAttributes
+------------------------------------------------------------------------
+r377 | eridius | 2012-01-24 05:28:47 +0000 (Tue, 24 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/BarDisplay.lua
+
+Tweak spacer for post_tooltips
+------------------------------------------------------------------------
+r376 | eridius | 2012-01-22 02:06:00 +0000 (Sun, 22 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/BarDisplay.lua
+   M /trunk/locale/enUS.lua
+   M /trunk/modules/SkadaDamage/Damage.lua
+
+Add Activity display to the Damage tooltip
+------------------------------------------------------------------------
+r375 | eridius | 2012-01-20 08:33:43 +0000 (Fri, 20 Jan 2012) | 4 lines
+Changed paths:
+   M /trunk/modules/SkadaHealing/Healing.lua
+
+Fix up SkadaHealing's attribute initializers (ticket 256)
+
+Rewrite the AddSetAttributes and AddPlayerAttributes functions to ensure
+all required attributes are initialized if not already present.
+------------------------------------------------------------------------
+r374 | eridius | 2012-01-20 06:07:30 +0000 (Fri, 20 Jan 2012) | 5 lines
+Changed paths:
+   M /trunk/modules/SkadaHealing/Healing.lua
+
+Account for sets created before r373 (ticket 256)
+
+When adding healingabsorbed to the set total, handle the case where the
+set doesn't have that field (because it was created before updating
+Skada).
+------------------------------------------------------------------------
+r373 | eridius | 2012-01-17 21:36:23 +0000 (Tue, 17 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/modules/SkadaHealing/Healing.lua
+
+Track absorbed healing on a per-spell, per-player, and per-set basis
+------------------------------------------------------------------------
+r372 | eridius | 2012-01-17 21:36:17 +0000 (Tue, 17 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/modules/SkadaHealing/Healing.lua
+
+Add absorbed healing to the regular healing numbers (ticket 255)
+------------------------------------------------------------------------
+r371 | oscarucb | 2011-12-29 23:33:08 +0000 (Thu, 29 Dec 2011) | 2 lines
+Changed paths:
+   M /trunk/modules/SkadaDamage/Damage.lua
+
+workaround for ticket 251
+
+------------------------------------------------------------------------

@@ -1,9 +1,9 @@
-## Interface: 40200
-## X-Compatible-With: 40200
+## Interface: 40300
+## X-Min-Interface: 40200
 ## Title: Broker_Wallet
 ## Author: Krevlorn
 ## Co-Authors: Torhal, Arkayenro
-## Version: 3.5
+## Version: 3.6
 ## X-eMail: krevlorn@gmail.com
 ## Notes: Simple Currency display for LDB.
 

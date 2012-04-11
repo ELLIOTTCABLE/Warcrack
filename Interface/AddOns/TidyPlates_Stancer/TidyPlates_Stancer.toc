@@ -1,0 +1,9 @@
+## Interface: 40000
+## Title: Tidy Plates |cffff008aStancer|r
+## Notes: Allows automatic theme changing on stances or shapeshifts.
+## Author: Suicidal Katt
+## RequiredDeps: TidyPlates
+## Version: 1.0
+## SavedVariablesPerCharacter: TidyPlates_StancerDB
+
+TidyPlates_Stancer.lua

@@ -1,6 +1,6 @@
 ﻿--
 -- AutoBar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 -- Courtesy of PDI175, lostcup
 --
 
@@ -182,7 +182,6 @@ if (GetLocale() == "esMX") then
 		["Shift-Click"] = "Mayús-Click",
 		["Ctrl-Shift-Click"] = "Ctrl-Mayús-Click",
 		["ButtonFacade is required to Skin the Buttons"] = "ButtonFacade es necesario para la Piel de los Botones",
-		["Waterfall-1.0 is required to access the GUI"] = "Waterfall-1.0 es necesario para acceder al GUI",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "Básica",

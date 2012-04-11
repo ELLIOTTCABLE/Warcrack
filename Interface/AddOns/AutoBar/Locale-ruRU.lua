@@ -1,6 +1,6 @@
 ﻿--
 -- AutoBar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 -- Russian translation by StingerSoft (Eritnull aka Шептун)
 --
 
@@ -184,7 +184,6 @@ if (GetLocale() == "ruRU") then
 		["Shift-Click"] = "Shift-Клик",
 		["Ctrl-Shift-Click"] = "Ctrl-Shift-Клик",
 		["ButtonFacade is required to Skin the Buttons"] = "Требуется ButtonFacade для смены шкурки кнопок",
-		["Waterfall-1.0 is required to access the GUI"] = "Требуется Waterfall-1.0 для доступа к ГИП",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "Основной",

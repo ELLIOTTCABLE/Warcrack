@@ -41,7 +41,7 @@ L["Aura icon scale"] = "光環圖示刻度"
 L["Aura icon vertical offset"] = "光環圖示垂直位移"
 L["Aura settings"] = "光環設定"
 L["Aura to track"] = "光環追蹤"
-L["Automatically size this module to the addon's 'gap' setting"] = "自動調整 gap 插件設定模組的大小" -- Needs review
+L["Automatically size this module to the addon's 'gap' setting"] = "自動調整 gap 插件設定模組的大小"
 L["BG Alpha OOC and Target"] = "背景透明度 OCC 及目標"
 L["BG Alpha OOC and not Full"] = "背景透明度 OCC 及不充滿"
 L["BG Alpha in combat"] = "戰鬥內背景透明度"
@@ -129,7 +129,7 @@ L["Color NPC by hostility"] = "顏色 NPC 由敵方"
 L["Color bar by health %"] = "顏色條列由生命 %"
 L["Color bar by mana %"] = "顏色條列由法力 %"
 L["Colors"] = "顏色"
-L["Colors the health bar from MaxHealthColor to MinHealthColor based on current health %"] = "從最高血量顏色到最低血量顏色, 根據當前血量百分比改變生命條顏色" -- Needs review
+L["Colors the health bar from MaxHealthColor to MinHealthColor based on current health %"] = "從最高血量顏色到最低血量顏色, 根據當前血量百分比改變生命條顏色"
 L[ [=[Colors the health bar from MaxHealthColor to MinHealthColor based on current health %
 
 (Note: This overrides the 'class color bar' setting. Disable this to use class coloring)]=] ] = [=[Colors the health bar from MaxHealthColor to MinHealthColor based on current health %
@@ -513,6 +513,8 @@ L["Show spell rank"] = "顯示法術等級"
 L["Show stacking debuffs"] = "顯示堆疊減益"
 L["Show stacking debuffs in ToT info"] = "顯示在 ToT 資訊堆疊減益"
 L["Show status icon"] = "顯示狀態圖示"
+L["Show the tooltip for this unit when the mouse is hovering over it."] = "Show the tooltip for this unit when the mouse is hovering over it." -- Requires localization
+L["Show tooltip"] = "Show tooltip" -- Requires localization
 L["Shows a flash behind each holy rune when it becomes available."] = "Shows a flash behind each holy rune when it becomes available." -- Requires localization
 L["Shows a flash behind each shard when it becomes available."] = "Shows a flash behind each shard when it becomes available." -- Requires localization
 L["Side"] = "側面"

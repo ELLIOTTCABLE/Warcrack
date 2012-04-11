@@ -37,8 +37,11 @@ function GeneralOptions:AddWidgets()
 	local showModels = self:CreateShowCooldownModelsCheckbox()
 	showModels:SetPoint('TOPLEFT', scaleText, 'BOTTOMLEFT', 0, -BUTTON_SPACING)
 
+    local aniUpdate = self:CreateUseAniUpdaterCheckbox()
+    aniUpdate:SetPoint('TOPLEFT', showModels, 'BOTTOMLEFT', 0, -BUTTON_SPACING)
+
 	local finishEffect = self:CreateFinishEffectPicker()
-	finishEffect:SetPoint('TOPLEFT', showModels, 'BOTTOMLEFT', -16, -(BUTTON_SPACING + 16))
+	finishEffect:SetPoint('TOPLEFT', aniUpdate, 'BOTTOMLEFT', -16, -(BUTTON_SPACING + 16))
 
 	--sliders
 	local minEffectDuration = self:CreateMinEffectDurationSlider()
@@ -146,8 +149,31 @@ function GeneralOptions:CreateShowCooldownModelsCheckbox()
 	end
 
 	b.tooltip = L.ShowCooldownModelsTip
+    b.smallTip = L.ShowCooldownModelsSmallTip
 
 	return b
+end
+
+--use classic updater
+function GeneralOptions:CreateUseAniUpdaterCheckbox()
+    local b = self:NewCheckbox(L.UseAniUpdater)
+
+    b.OnEnableSetting = function(self, enable)
+        if OmniCC:GetUpdateEngineName() == 'ClassicUpdater' then
+            OmniCC:SetUpdateEngine(nil)
+        else
+            OmniCC:SetUpdateEngine('ClassicUpdater')
+        end
+    end
+
+    b.IsSettingEnabled = function(self)
+        return OmniCC:GetUpdateEngineName() ~= 'ClassicUpdater'
+    end
+
+    b.tooltip = L.UseAniUpdaterTip
+    b.smallTip = L.UseAniUpdaterSmallTip
+
+    return b
 end
 
 --[[ Sliders ]]--
@@ -292,7 +318,7 @@ function GeneralOptions:CreateFinishEffectPicker()
 	local parent = self
 	local dd = OmniCCOptions.Dropdown:New(L.FinishEffect, parent, 120)
 
-	local effects = OmniCC:ForEachEffect(function(effect) return {name = effect.name, value = effect.id} end)
+	local effects = OmniCC:ForEachEffect(function(effect) return {name = effect.name, value = effect.id, tooltip = effect.desc} end)
 	table.sort(effects, function(e1, e2) return e1.name < e2.name end)
 	table.insert(effects, 1, {name = NONE, value = 'none'})
 
@@ -314,7 +340,7 @@ function GeneralOptions:CreateFinishEffectPicker()
 
 	UIDropDownMenu_Initialize(dd, function(self)
 		for n, v in ipairs(effects) do
-			self:AddItem(v.name, v.value)
+			self:AddItem(v.name, v.value, v.tooltip)
 		end
 	end)
 

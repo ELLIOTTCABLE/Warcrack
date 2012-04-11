@@ -1,4 +1,5 @@
 -- Tidy Plates - Dedicated to the loves-of-my-life..
+-- Tidy Plates - Dedicated to the loves-of-my-life..
 --------------------------------------------------------------------------------------------------------------
 -- I. Variables and Functions
 --------------------------------------------------------------------------------------------------------------
@@ -49,48 +50,58 @@ local ApplyPlateExtension
 --------------------------------------------------------------------------------------------------------------
 
 local function SetObjectShape(object, width, height) object:SetWidth(width); object:SetHeight(height) end
-local function SetObjectFont(object,  font, size, flags) object:SetFont(font, size, flags) end
+local function SetObjectFont(object,  font, size, flags) if not object:SetFont(font, size, flags) then object:SetFont("FONTS\\ARIALN.TTF", size or 12, flags) end end
 local function SetObjectJustify(object, horz, vert) object:SetJustifyH(horz); object:SetJustifyV(vert) end
 local function SetObjectShadow(object, shadow) if shadow then object:SetShadowColor(0,0,0, tonumber(shadow) or 1); object:SetShadowOffset(.5, -.5) else object:SetShadowColor(0,0,0,0) end  end
 local function SetObjectAnchor(object, anchor, anchorTo, x, y) object:ClearAllPoints();object:SetPoint(anchor, anchorTo, anchor, x, y) end
-local function SetObjectTexture(object, texture) object:SetTexture(texture); object:SetTexCoord(0,1,0,1)  end
+local function SetObjectTexture(object, texture) object:SetTexture(texture) end -- object:SetTexCoord(0,1,0,1)  end
+local function SetObjectCrop(object, coords) object:SetTexCoord(left,right,top,bottom)  end
 local function SetObjectBartexture(obj, tex, ori, crop) obj:SetStatusBarTexture(tex); obj:SetOrientation(ori); end
 -- SetFontGroupObject
 local function SetFontGroupObject(object, objectstyle) 
-		SetObjectFont(object, objectstyle.typeface, objectstyle.size, objectstyle.flags) 
-		SetObjectJustify(object, objectstyle.align, objectstyle.vertical)
-		SetObjectShadow(object, objectstyle.shadow)
+	if objectstyle then
+		SetObjectFont(object, objectstyle.typeface or "FONTS\\ARIALN.TTF",  objectstyle.size or 12, objectstyle.flags or "NONE") 
+		SetObjectJustify(object, objectstyle.align or "CENTER", objectstyle.vertical or "BOTTOM")
+		SetObjectShadow(object, objectstyle.shadow or 1)
+	end
 end
 -- SetAnchorGroupObject
 local function SetAnchorGroupObject(object, objectstyle, anchorTo)
-		SetObjectShape(object, objectstyle.width, objectstyle.height) --end				
-		SetObjectAnchor(object, objectstyle.anchor, anchorTo, objectstyle.x, objectstyle.y) 
+	if objectstyle and anchorTo then
+		SetObjectShape(object, objectstyle.width or 128, objectstyle.height or 16) --end				
+		SetObjectAnchor(object, objectstyle.anchor or "CENTER", anchorTo, objectstyle.x or 0, objectstyle.y or 0) 
+	end
+end
+-- SetTextureGroupObject
+local function SetTextureGroupObject(object, objectstyle)
+	if objectstyle then
+		SetObjectTexture(object, objectstyle.texture or EMPTY_TEXTURE)
+	end
+end
+-- SetCropGroupObject
+local function SetCropGroupObject(object, objectstyle)
+	if objectstyle and objectstyle.coords then
+		SetObjectCrop(object, objectstyle.coords)
+	else object:SetTexCoord(0,1,0,1) end
 end
 -- SetBarGroupObject
 local backdropTable = {}
 local function SetBarGroupObject(object, objectstyle, anchorTo)
-		SetObjectShape(object, objectstyle.width, objectstyle.height)
-		SetObjectAnchor(object, objectstyle.anchor, anchorTo, objectstyle.x, objectstyle.y) 
-		SetObjectBartexture(object, objectstyle.texture, objectstyle.orientation, objectstyle.texcoord)
-		backdropTable.bgFile = objectstyle.backdrop
-		--[[
-		if objectstyle.edgeFile then
-			backdropTable.edgeFile = objectstyle.edgeFile
-			backdropTable.edgeSize = objectstyle.edgeSize
-			backdropTable.insets = objectstyle.edgeInset
+	if objectstyle then
+		SetAnchorGroupObject(object, objectstyle, anchorTo)
+		SetObjectBartexture(object, objectstyle.texture or EMPTY_TEXTURE, objectstyle.orientation or "HORIZONTAL") -- objectstyle.texcoord)
+		if objectstyle.backdrop then
+			backdropTable.bgFile = objectstyle.backdrop
+			object:SetBackdrop(backdropTable)
 		end
-		--]]
-		object:SetBackdrop(backdropTable)
+	end
 end
 local function MatchTextWidth()
 	local stringwidth = visual.name:GetStringWidth() or 100
 	bars.healthbar:SetWidth(stringwidth+style.healthbar.width )
 	visual.healthborder:SetWidth(stringwidth+style.healthborder.width)
 	visual.target:SetWidth(stringwidth+style.target.width)
-	--bars.castbar:SetWidth(visual.name:GetStringWidth()+style.castbar.width)
 	extended:SetWidth(stringwidth+style.frame.width)
-	--visual.castborder:SetWidth(visual.name:GetStringWidth()+style.frame.width)
-	--visual.castnostop:SetWidth(visual.name:GetStringWidth()+style.frame.width)
 end
 		
 --------------------------------------------------------------------------------------------------------------
@@ -107,7 +118,8 @@ do
 						"name",  "spelltext", "customtext", "level",
 						"customart", "spellicon", "raidicon", "skullicon", "eliteicon", "target"}		
 	local bargroup = {"castbar", "healthbar"}
-	local texturegroup = {"castborder", "castnostop", "healthborder", "threatborder", "eliteicon", "skullicon", "highlight", "target"}
+	local texturegroup = { "castborder", "castnostop", "healthborder", "threatborder", "eliteicon", "skullicon", "highlight", "target" }
+	--local cropgroup = { "healthborder", "castborder", "castnostop", "spellicon", "threatborder", "target", "eliteicon", "skullicon", "customart", }
 	-- UpdateStyle: 
 	function UpdateStyle()
 		-- Frame
@@ -121,7 +133,9 @@ do
 		-- Bars
 		for index = 1, #bargroup do objectname = bargroup[index]; SetBarGroupObject(bars[objectname], style[objectname], extended) end
 		-- Texture
-		for index = 1, #texturegroup do objectname = texturegroup[index]; SetObjectTexture(visual[objectname], style[objectname].texture) end
+		for index = 1, #texturegroup do objectname = texturegroup[index]; SetTextureGroupObject(visual[objectname], style[objectname]) end
+		-- Crop Group
+		--for index = 1, #cropgroup do objectname = cropgroup[index]; SetCropGroupObject(visual[objectname], style[objectname]) end
 		-- Font Group
 		for index = 1, #fontgroup do objectname = fontgroup[index];SetFontGroupObject(visual[objectname], style[objectname]) end
 		-- Hide Stuff
@@ -152,20 +166,6 @@ do
 			visual.name:SetTextColor(activetheme.SetNameColor(unit))
 		else visual.name:SetTextColor(1,1,1,1) end
 		if activetheme.SetStatusbarWidthMatching then MatchTextWidth() end
-		--[[
-		-- Width Matching
-		if activetheme.SetStatusbarWidthMatching then
-			local stringwidth = visual.name:GetStringWidth() or 100
-			bars.healthbar:SetWidth(stringwidth+style.healthbar.width )
-			visual.healthborder:SetWidth(stringwidth+style.healthborder.width)
-			visual.target:SetWidth(stringwidth+style.target.width)
-			--bars.castbar:SetWidth(visual.name:GetStringWidth()+style.castbar.width)
-			extended:SetWidth(stringwidth+style.frame.width)
-			
-			--visual.castborder:SetWidth(visual.name:GetStringWidth()+style.frame.width)
-			--visual.castnostop:SetWidth(visual.name:GetStringWidth()+style.frame.width)
-		end
-		--]]
 	end
 	-- UpdateIndicator_Level:
 	function UpdateIndicator_Level() 
@@ -347,7 +347,7 @@ do
 		if HasTarget then unit.alpha = plate.alpha else unit.alpha = 1 end	-- Active Alpha
 
 		unit.isTarget = HasTarget and unit.alpha == 1
-		unit.isMouseover = regions.highlight:IsShown()
+		unit.isMouseover = (regions.highlight:IsShown() == 1)
 		-- GUID
 		if unit.isTarget then 
 			currentTarget = plate
@@ -373,8 +373,14 @@ do
 		unit.isDangerous = unit.isBoss
 		unit.isElite = (regions.eliteicon:IsShown() or 0) == 1
 		
-		if unit.isBoss then unit.level = "??"
-		else unit.level = regions.level:GetText() end
+		if unit.isBoss then 
+			unit.level = "??"
+			unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue = 1, 0, 0
+		else 
+			unit.level = regions.level:GetText() 
+			unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue = regions.level:GetTextColor()
+		end
+		
 		unit.health = bars.health:GetValue() or 0
 		_, unit.healthmax = bars.health:GetMinMaxValues()
 		
@@ -386,7 +392,6 @@ do
 		
 		unit.isInCombat = GetUnitCombatStatus(regions.name:GetTextColor())
 		unit.red, unit.green, unit.blue = bars.health:GetStatusBarColor()
-		unit.levelcolorRed, levelcolorGreen, levelcolorBlue = regions.level:GetTextColor()
 		unit.reaction, unit.type = GetUnitReaction(unit.red, unit.green, unit.blue)
 		unit.class = ClassReference[ColorToString(unit.red, unit.green, unit.blue)] or "UNKNOWN"
 		unit.InCombatLockdown = InCombat
@@ -600,7 +605,7 @@ do
 	function OnMouseoverNameplate(plate)
 		if not IsPlateShown(plate) then return end
 		UpdateReferences(plate)
-		unit.isMouseover = regions.highlight:IsShown()
+		unit.isMouseover = (regions.highlight:IsShown() == 1)
 		
 		if unit.isMouseover then
 			visual.highlight:Show()
@@ -751,11 +756,41 @@ end
 -- VI. Nameplate Extension: Applies scripts, hooks, and adds additional frame variables and elements
 --------------------------------------------------------------------------------------------------------------
 
+
 do
 	local bars, regions, health, castbar, healthbar, visual
-	local region
 	local platelevels = 125
 	
+	local function CreateGraphicalElements(extended)
+		-- Create Statusbars
+		bars.healthbar = CreateTidyPlatesStatusbar(extended) 
+		bars.castbar = CreateTidyPlatesStatusbar(extended) 
+		health, cast, healthbar, castbar = bars.health, bars.cast, bars.healthbar, bars.castbar
+
+		-- Textures
+		visual = extended.visual
+		visual.customart = extended:CreateTexture(nil, "OVERLAY")
+		visual.target = extended:CreateTexture(nil, "ARTWORK")
+		visual.raidicon = extended:CreateTexture(nil, "OVERLAY")
+		visual.raidicon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcons")		
+		visual.eliteicon = extended:CreateTexture(nil, "OVERLAY")
+		visual.skullicon = extended:CreateTexture(nil, "OVERLAY")
+		visual.healthborder = healthbar:CreateTexture(nil, "ARTWORK")
+		visual.threatborder = healthbar:CreateTexture(nil, "ARTWORK")
+		visual.highlight = healthbar:CreateTexture(nil, "OVERLAY")
+		visual.highlight:SetAllPoints(visual.healthborder)
+		visual.highlight:SetBlendMode("ADD")
+		visual.castborder = castbar:CreateTexture(nil, "ARTWORK")
+		visual.castnostop = castbar:CreateTexture(nil, "ARTWORK")
+		visual.spellicon = castbar:CreateTexture(nil, "OVERLAY")
+		for i, v in pairs(visual) do v:SetNonBlocking(true) end
+		-- Formatted Text
+		visual.customtext = extended:CreateFontString(nil, "OVERLAY")
+		visual.name  = extended:CreateFontString(nil, "OVERLAY")
+		visual.level = extended:CreateFontString(nil, "OVERLAY")
+		visual.spelltext = castbar:CreateFontString(nil, "OVERLAY")
+	end
+
 	local function GetNameplateRegions(plate, regions, cast)
 		regions.threatglow, regions.healthborder, regions.highlight, regions.name, regions.level, 
 			regions.skullicon, regions.raidicon, regions.eliteicon = plate:GetRegions()
@@ -770,9 +805,7 @@ do
 		platelevels = platelevels - 1; if platelevels < 1 then platelevels = 1 end
 		extended.frameLevel = platelevels
 		extended:SetFrameLevel(platelevels)
-		
 		extended.style, extended.unit, extended.unitcache, extended.stylecache, extended.widgets = {}, {}, {}, {}, {}
-		
 		extended.regions, extended.bars, extended.visual = {}, {}, {}
 		regions = extended.regions
 		bars = extended.bars
@@ -798,50 +831,20 @@ do
 		bars.health:SetStatusBarTexture(EMPTY_TEXTURE) 
 		bars.cast:SetStatusBarTexture(EMPTY_TEXTURE) 
 		
-		-- Create Statusbars
-		bars.healthbar = CreateTidyPlatesStatusbar(extended) 
-		bars.castbar = CreateTidyPlatesStatusbar(extended) 
+		CreateGraphicalElements(extended)
+
+		-- Visible Bars
 		health, cast, healthbar, castbar = bars.health, bars.cast, bars.healthbar, bars.castbar
+		healthbar:SetFrameLevel(platelevels-1)
+		castbar:Hide()
+		castbar:SetFrameLevel(platelevels)
+		castbar:SetStatusBarColor(1,.8,0)
+		
 		extended.parentPlate = plate
 		health.parentPlate = plate
 		cast.parentPlate = plate
 		castbar.parentPlate = plate
 		
-		-- Visible Bars
-		--local level = extended:GetFrameLevel()
-		healthbar:SetFrameLevel(platelevels-1)
-		--castbar.parent = plate
-		castbar:Hide()
-		castbar:SetFrameLevel(platelevels)
-		castbar:SetStatusBarColor(1,.8,0)
-		
-		-- Visual Regions
-		visual = extended.visual
-		visual.customart = extended:CreateTexture(nil, "OVERLAY")
-		visual.target = extended:CreateTexture(nil, "ARTWORK")
-		visual.raidicon = extended:CreateTexture(nil, "OVERLAY")
-		visual.raidicon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcons")		
-		visual.eliteicon = extended:CreateTexture(nil, "OVERLAY")
-		visual.healthborder = healthbar:CreateTexture(nil, "ARTWORK")
-		visual.threatborder = healthbar:CreateTexture(nil, "ARTWORK")
-		visual.skullicon = healthbar:CreateTexture(nil, "OVERLAY")
-		visual.highlight = healthbar:CreateTexture(nil, "OVERLAY")
-		visual.highlight:SetAllPoints(visual.healthborder)
-		visual.highlight:SetBlendMode("ADD")
-		visual.castborder = castbar:CreateTexture(nil, "ARTWORK")
-		visual.castnostop = castbar:CreateTexture(nil, "ARTWORK")
-		visual.spellicon = castbar:CreateTexture(nil, "OVERLAY")
-		
-		for i, v in pairs(visual) do v:SetNonBlocking(true) end
-		
-		visual.customtext = extended:CreateFontString(nil, "OVERLAY")
-		visual.name  = extended:CreateFontString(nil, "OVERLAY")
-		visual.level = extended:CreateFontString(nil, "OVERLAY")
-		visual.spelltext = castbar:CreateFontString(nil, "OVERLAY")
-		
-
-		
-
 		if not extendedSetAlpha then
 			PlateSetAlpha = plate.SetAlpha
 			PlateGetAlpha = plate.GetAlpha
@@ -850,6 +853,35 @@ do
 		end
 				
 		OnNewNameplate(plate)
+	end
+	
+	-- Creates a standalone frame for using Tidy Plates to create and style fixed-position unit frames
+	local function CreateStandalonePlate(parentFrame)
+		parentFrame.bars = {}
+		parentFrame.visual = {}
+		
+		visual = parentFrame.bars
+		bars = parentFrame.bars
+		
+		CreateGraphicalElements(parentFrame)
+	end
+		
+end
+
+local function UpdateStandalonePlate(parentFrame, unitTable, customStyle)
+	if unitTable then
+		--[[
+		nameplate = parentFrame
+		extended = parentFrame
+		visual = parentFrame.bars
+		bars = parentFrame.bars
+		if customStyle then style = customStyle 
+		else
+		end
+		
+		UpdateStyle()
+		local unit, unitcache, style, stylename, unitchanged				-- Temp References
+		--]]
 	end
 end
 

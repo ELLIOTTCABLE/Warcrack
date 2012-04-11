@@ -1,9 +1,9 @@
 ﻿--[[
 ************************************************************************
 Project				: Broker_Factions
-Author				: zhinjio
-Project Revision	: 3.2.5-release
-Project Date		: 20110515000702
+Author				: torhal
+Project Revision	: 3.2.6-release
+Project Date		: 20111012085757
 
 File				: Broker_Factions.lua
 Commit Author		: zhinjio
@@ -34,8 +34,8 @@ local AceConfigDialog 	= LibStub("AceConfigDialog-3.0")
 
 local addonversion = GetAddOnMetadata( FULLNAME, "Version" )
 addonversion = string.gsub( addonversion, "@project.version@", " - Development" )
-local addonauthor = "zhinjio"
-local builddate = "20110515000702"
+local addonauthor = "torhal"
+local builddate = "20111012085757"
 
 local _G = getfenv(0)
 _G["BFactions"] = BFactions

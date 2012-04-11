@@ -1,7 +1,7 @@
-## Interface: 40200
+## Interface: 40300
 ## Author: jnwhiteh
 ## Title: LightHeaded
-## Version: 341
+## Version: 344
 ## Notes: Allows you to view WoWHead comments for quests in-game
 ## License: All Rights Reserved
 ## SavedVariables: LightHeadedDB

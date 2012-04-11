@@ -597,10 +597,10 @@ local function CreateCaptureFuncs()
   DAMAGE_SHIELD = function (p, ...) p.eventType, p.isDamageShield, p.skillID, p.skillName, p.skillSchool, p.amount, p.overkillAmount, p.damageType, p.resistAmount, p.blockAmount, p.absorbAmount, p.isCrit, p.isGlancing, p.isCrushing = "damage", true, ... end,
 
   -- Miss events.
-  SWING_MISSED = function (p, ...) p.eventType, p.missType, p.amount = "miss", ... end,
-  RANGE_MISSED = function (p, ...) p.eventType, p.isRange, p.skillID, p.skillName, p.skillSchool, p.missType, p.amount = "miss", true, ... end,
-  SPELL_MISSED = function (p, ...) p.eventType, p.skillID, p.skillName, p.skillSchool, p.missType, p.amount = "miss", ... end,
-  DAMAGE_SHIELD_MISSED = function (p, ...) p.eventType, p.isDamageShield, p.skillID, p.skillName, p.skillSchool, p.missType, p.amount = "miss", true, ... end,
+  SWING_MISSED = function (p, ...) p.eventType, p.missType, p.isOffHand, p.amount = "miss", ... end,
+  RANGE_MISSED = function (p, ...) p.eventType, p.isRange, p.skillID, p.skillName, p.skillSchool, p.missType, p.isOffHand, p.amount = "miss", true, ... end,
+  SPELL_MISSED = function (p, ...) p.eventType, p.skillID, p.skillName, p.skillSchool, p.missType, p.isOffHand, p.amount = "miss", ... end,
+  DAMAGE_SHIELD_MISSED = function (p, ...) p.eventType, p.isDamageShield, p.skillID, p.skillName, p.skillSchool, p.missType, p.isOffHand, p.amount = "miss", true, ... end,
   SPELL_DISPEL_FAILED = function (p, ...) p.eventType, p.missType, p.skillID, p.skillName, p.skillSchool, p.extraSkillID, p.extraSkillName, p.extraSkillSchool = "miss", "RESIST", ... end,
 
   -- Heal events.

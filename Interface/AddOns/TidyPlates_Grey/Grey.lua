@@ -4,12 +4,19 @@
 local Theme = {}
 local CopyTable = TidyPlatesUtility.copyTable
 
-local defaultArtPath = "Interface\\Addons\\TidyPlates_Grey\\Media"
-local font =					defaultArtPath.."\\LiberationSans-Regular.ttf"
-local blizzfont =				NAMEPLATE_FONT
---local blizzfont =					"FONTS\\ARIALN.TTF"
+local defaultArtPath = "Interface\\Addons\\TidyPlates_Grey"
+--local font =					defaultArtPath.."\\LiberationSans-Regular.ttf"
+--local font = "Interface\\Addons\\TidyPlatesHub\\shared\\AccidentalPresidency.ttf"
+--local font = "Interface\\Addons\\TidyPlates\\media\\DefaultFont.ttf"
+local font =					"FONTS\\ARIALN.TTF"
+
 local nameplate_verticalOffset = -5
 local castBar_verticalOffset = -6 -- Adjust Cast Bar distance
+local EmptyTexture = "Interface\\Addons\\TidyPlatesHub\\shared\\Empty"
+
+-- Non-Latin Font Bypass
+local NonLatinLocales = { ["ruRU"] = true, ["koKR"] = true, ["zhCN"] = true, ["zhTW"] = true, }
+if NonLatinLocales[GetLocale()] == true then font = NAMEPLATE_FONT end
 
 local StyleDefault = {}
 
@@ -52,7 +59,6 @@ StyleDefault.target = {
 
 StyleDefault.threatborder = {
 	texture =			defaultArtPath.."\\RegularThreat",
-	elitetexture =			defaultArtPath.."\\EliteThreat",
 	width = 128,
 	height = 64,
 	x = 0,
@@ -108,7 +114,7 @@ StyleDefault.level = {
 
 StyleDefault.healthbar = {
 	texture =					 defaultArtPath.."\\Statusbar",
-	backdrop = 				defaultArtPath.."\\Empty",
+	backdrop = 				EmptyTexture,
 	--backdrop = 				defaultArtPath.."\\Statusbar",
 	height = 12,
 	width = 101,
@@ -120,7 +126,7 @@ StyleDefault.healthbar = {
 
 StyleDefault.castbar = {
 	texture =					defaultArtPath.."\\Statusbar",
-	backdrop = 				defaultArtPath.."\\Empty",
+	backdrop = 				EmptyTexture,
 	--backdrop = 				defaultArtPath.."\\Statusbar",
 	height = 12,
 	width = 99,
@@ -133,10 +139,10 @@ StyleDefault.castbar = {
 StyleDefault.customtext = {
 	typeface =					font,
 	size = 9,
-	width = 93,
+	width = 97,
 	height = 10,
 	x = 0,
-	y = 16+nameplate_verticalOffset,
+	y = 15.5+nameplate_verticalOffset,
 	align = "RIGHT",
 	anchor = "CENTER",
 	vertical = "BOTTOM",
@@ -202,6 +208,7 @@ StyleDefault.threatcolor = {
 local StyleTextOnly = CopyTable(StyleDefault)
 StyleTextOnly.threatborder.texture = EmptyTexture
 StyleTextOnly.healthborder.texture = EmptyTexture
+StyleTextOnly.healthborder.y = nameplate_verticalOffset - 7
 StyleTextOnly.healthbar.texture = EmptyTexture
 StyleTextOnly.healthbar.backdrop = EmptyTexture
 StyleTextOnly.eliteicon.texture = EmptyTexture
@@ -220,8 +227,10 @@ StyleTextOnly.customtext.x = 0
 StyleTextOnly.level.show = false
 StyleTextOnly.skullicon.show = false
 StyleTextOnly.eliteicon.show = false
-StyleTextOnly.highlight.texture = defaultArtPath.."\\TextPlate_Highlight"
-StyleTextOnly.target.texture = defaultArtPath.."\\TextPlate_Target"
+StyleTextOnly.highlight.texture = "Interface\\Addons\\TidyPlatesHub\\shared\\Highlight"
+StyleTextOnly.target.texture = "Interface\\Addons\\TidyPlatesHub\\shared\\Target"
+StyleTextOnly.target.y = nameplate_verticalOffset - 8
+StyleTextOnly.target.height = 66
 
 local WidgetConfig = {}
 WidgetConfig.ClassIcon = { anchor = "TOP" , x = -32 ,y = 7 }
@@ -235,8 +244,9 @@ WidgetConfig.DebuffWidget = { anchor = "CENTER" , x = 15 ,y = 35 }
 
 local DamageThemeName = "Grey/|cFFFF4400Damage"
 local TankThemeName = "Grey/|cFF3782D1Tank"
--- local DamageThemeStyle
 
+Theme["Default"] = StyleDefault
+Theme["NameOnly"] = StyleTextOnly			
 
 SLASH_GREYTANK1 = '/greytank'
 SlashCmdList['GREYTANK'] = ShowTidyPlatesHubTankPanel
@@ -244,48 +254,18 @@ SlashCmdList['GREYTANK'] = ShowTidyPlatesHubTankPanel
 SLASH_GREYDPS1 = '/greydps'
 SlashCmdList['GREYDPS'] = ShowTidyPlatesHubDamagePanel
 
+
 ---------------------------------------------
 -- Tidy Plates Hub Integration
 ---------------------------------------------
-Theme["Default"] = StyleDefault
-Theme["NameOnly"] = StyleTextOnly			-- (6.2)
-
-local function StyleDelegate(unit)
-	return "Default"
-end
-
-Theme.SetStyle = StyleDelegate
 
 TidyPlatesThemeList[DamageThemeName] = Theme
 local LocalVars = TidyPlatesHubDamageVariables
 
-local function ApplyFontCustomization(style)
-	local currentFont = font
-	if LocalVars.TextUseBlizzardFont then currentFont = blizzfont end
-	style.name.typeface = currentFont
-	style.level.typeface = currentFont
-	style.customtext.typeface = currentFont
-	style.spelltext.typeface = currentFont
-	
-	style.frame.y = ((LocalVars.FrameVerticalPosition-.5)*50)-5
-end
+local ApplyThemeCustomization = TidyPlatesHubFunctions.ApplyThemeCustomization
 
-local function OnApplyStyleCustomization(style)
-	style.level.show = (LocalVars.TextShowLevel == true)
-	style.target.show = (LocalVars.WidgetTargetHighlight == true)
-	style.eliteicon.show = (LocalVars.WidgetEliteIndicator == true)
-	ApplyFontCustomization(style)
-end
-
-local function OnApplyThemeCustomization(theme)
-	OnApplyStyleCustomization(theme["Default"])
-	ApplyFontCustomization(theme["NameOnly"])
-	TidyPlates:ForceUpdate()
-end
-
-
-local function OnApplyDamageCustomization()
-	OnApplyThemeCustomization(Theme)
+local function ApplyDamageCustomization()
+	ApplyThemeCustomization(Theme)
 end
 
 local function OnInitialize(plate)
@@ -295,7 +275,7 @@ end
 local function OnActivateTheme(themeTable)
 		if Theme == themeTable then
 			LocalVars = TidyPlatesHubFunctions:UseDamageVariables()
-			OnApplyDamageCustomization()
+			ApplyDamageCustomization()
 		end
 end
 
@@ -309,77 +289,29 @@ Theme.SetCustomText = TidyPlatesHubFunctions.SetCustomText
 Theme.OnUpdate = TidyPlatesHubFunctions.OnUpdate
 Theme.OnContextUpdate = TidyPlatesHubFunctions.OnContextUpdate
 Theme.ShowConfigPanel = ShowTidyPlatesHubDamagePanel
-
+Theme.SetStyle = TidyPlatesHubFunctions.SetStyleBinary
+Theme.SetCustomText = TidyPlatesHubFunctions.SetCustomTextBinary
 Theme.OnInitialize = OnInitialize		-- Need to provide widget positions
 Theme.OnActivateTheme = OnActivateTheme -- called by Tidy Plates Core, Theme Loader
-Theme.OnApplyThemeCustomization = OnApplyDamageCustomization -- Called By Hub Panel
-
-
--- [[ (6.2)
-local function GetLevelDescription(unit)
-	local description
-	if unit.reaction ~= "FRIENDLY" then
-		description = "Level "..unit.level
-		if unit.isElite then description = description.." (Elite)" end
-		return description
-	end
-end
-
-local HubCustomText = TidyPlatesHubFunctions.SetCustomText
-local function CustomText(unit)
-	if unit.style == "NameOnly" then
-		local description, elite
-		if TidyPlatesData.UnitDescriptions and unit.type == "NPC" then
-			return (TidyPlatesData.UnitDescriptions[unit.name] or GetLevelDescription(unit) or "")
-		end
-	end
-	return HubCustomText(unit) 
-end
-Theme.SetCustomText = CustomText
-
-local StyleIndex = {"Default", "NameOnly"}
-local function SetStyleDelegate(unit)
-	return StyleIndex[TidyPlatesHubFunctions.SetMultistyle(unit)] or "Default"
-end
-
-Theme.SetStyle = SetStyleDelegate		-- (6.2)
-
-local GreyColor = { r = 98/255, g = 98/255, b = 98/255}
-local function NameColorDelegate(unit)
-	local class = TidyPlatesData.UnitClass[unit.name]
-	local color
-	if class then 
-		color = RAID_CLASS_COLORS[class]
-	end
-	if color then return color.r, color.g, color.b end
-	return TidyPlatesHubFunctions.SetNameColor(unit)
-end
---Theme.SetNameColor = NameColorDelegate
---]]
+Theme.OnApplyThemeCustomization = ApplyDamageCustomization -- Called By Hub Panel
 
 do
 	local TankTheme = CopyTable(Theme)
 	TidyPlatesThemeList[TankThemeName] = TankTheme
 	
-	local function OnApplyTankCustomization()
-		OnApplyThemeCustomization(TankTheme)  -- OnApplyTankCustomization
+	local function ApplyTankCustomization()
+		ApplyThemeCustomization(TankTheme)
 	end
 
 	local function OnActivateTheme(themeTable)
 		if TankTheme == themeTable then
 			LocalVars = TidyPlatesHubFunctions:UseTankVariables()
-			OnApplyTankCustomization()
+			ApplyTankCustomization()
 		end
 	end
 	
 	TankTheme.OnActivateTheme = OnActivateTheme -- called by Tidy Plates Core, Theme Loader
-	TankTheme.OnApplyThemeCustomization = OnApplyTankCustomization -- Called By Hub Panel
+	TankTheme.OnApplyThemeCustomization = ApplyTankCustomization -- Called By Hub Panel
 	TankTheme.ShowConfigPanel = ShowTidyPlatesHubTankPanel
 end
-
-
-
-
-
-
 

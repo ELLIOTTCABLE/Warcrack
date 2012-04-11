@@ -90,6 +90,7 @@ end
 
 
 local function CreateStandaloneIcon()
+	if TidyPlatesIconFrame and TidyPlatesIconFrame.Show then return end
 	local ButtonFrame = CreateFrame("Button", "TidyPlatesIconFrame", UIParent)
 	
 	--ButtonFrame:SetUserPlaced()
@@ -259,7 +260,18 @@ TidyPlatesUtility.ShowMinimapButton = ShowMinimapButton
 --WatcherFrame:SetScript("OnEvent", CreateButton)
 
 
+-------------------------------------------------------------------------------------
+-- Slash Commands
+-------------------------------------------------------------------------------------
 
+function EnableTidyPlatesMiniButton(arg)
+		TidyPlatesOptions._EnableMiniButton = true
+		CreateMinimapButton()
+		ShowMinimapButton()
+end
+
+SLASH_TIDYPLATESICON1 = '/tidyplatesicon'
+SlashCmdList['TIDYPLATESICON'] = EnableTidyPlatesMiniButton;
 	
 	
 

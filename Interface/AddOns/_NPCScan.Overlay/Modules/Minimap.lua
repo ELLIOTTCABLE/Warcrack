@@ -6,13 +6,13 @@
 
 local Overlay = select( 2, ... );
 local Minimap = Minimap;
-local me = CreateFrame( "Frame" );
+local NS = CreateFrame( "Frame" );
 
-me.InsideAlphaMultiplier = 1 / 3;
-me.UpdateDistance = 0.5;
-me.UpdateRateDefault  = 0.04;
-me.UpdateRateRotating = 0.02; -- Faster so that spinning the minimap appears smooth
-local UpdateRate = me.UpdateRateDefault;
+NS.InsideAlphaMultiplier = 1 / 3;
+NS.UpdateDistance = 0.5;
+NS.UpdateRateDefault  = 0.04;
+NS.UpdateRateRotating = 0.02; -- Faster so that spinning the minimap appears smooth
+local UpdateRate = NS.UpdateRateDefault;
 
 local UpdateForce, IsInside, RotateMinimap, Radius, Quadrants;
 
@@ -167,52 +167,57 @@ do
 		do
 			local ABx, ABy;
 			local PointX, PointY;
-			local IntersectPos, Intercept, Length, Temp;
-			--- Adds the intersection of a line with the minimap to the Points list.
+			local IntersectPos, Intercept, Length2, Temp;
+			--- Adds the intersection of line AB with the minimap to the Points list.
 			-- @param PerpDist2  Distance from center to intersection squared.
 			-- @param IsExiting  True if should save found intersection as the last exit point.
 			function AddIntersection ( Ax, Ay, Bx, By, PerpDist2, IsExiting )
 				PointX, PointY = nil;
 				ABx, ABy = Ax - Bx, Ay - By;
+				--assert( ABx ~= 0 or ABy ~= 0, "Points A and B don't form a line." );
 
 				-- Clip to square
 				if ( Ax >= -0.5 and Ax <= 0.5 and Ay >= -0.5 and Ay <= 0.5 ) then
 					PointX, PointY = Ax, Ay;
 				else
-					-- Test intersection with horizontal border
-					Intercept = ABy < 0 and -0.5 or 0.5;
-					IntersectPos = ( Ay - Intercept ) / ABy;
-					if ( IntersectPos >= 0 and IntersectPos <= 1 ) then
-						PointX = Ax - ABx * IntersectPos;
-						if ( PointX >= -0.5 and PointX <= 0.5 ) then
-							PointY = Intercept;
+					if ( ABy ~= 0 ) then -- Not horizontal line
+						-- Test vertical intersection
+						Intercept = ABy < 0 and -0.5 or 0.5;
+						IntersectPos = ( Ay - Intercept ) / ABy;
+						if ( IntersectPos >= 0 and IntersectPos <= 1 ) then
+							PointX = Ax - ABx * IntersectPos;
+							if ( PointX >= -0.5 and PointX <= 0.5 ) then
+								PointY = Intercept;
+							end
 						end
 					end
 
-					-- Test vertical border intersection
-					if ( not PointY ) then -- Was no horizontal intersect
+					if ( not PointY -- Was no vertical intersect
+						and ABx ~= 0 -- Not vertical line
+					) then
+						-- Test horizontal intersection
 						Intercept = ABx < 0 and -0.5 or 0.5;
 						IntersectPos = ( Ax - Intercept ) / ABx;
 						if ( IntersectPos >= 0 and IntersectPos <= 1 ) then
 							PointY = Ay - ABy * IntersectPos;
 							if ( PointY >= -0.5 and PointY <= 0.5 ) then
 								PointX = Intercept;
-							else
-								return;
 							end
-						else
-							return;
 						end
+					end
+
+					if ( not PointX or not PointY ) then
+						return;
 					end
 				end
 
 				if ( IsQuadrantRound( PointX, PointY ) ) then
 					-- Clip to circle
 					if ( PerpDist2 < 0.25 ) then
-						Length = ABx * ABx + ABy * ABy;
+						Length2 = ABx * ABx + ABy * ABy;
 						Temp = ABx * Bx + ABy * By;
 
-						IntersectPos = ( ( Temp * Temp - Length * ( Bx * Bx + By * By - 0.25 ) ) ^ 0.5 - Temp ) / Length;
+						IntersectPos = ( ( Temp * Temp - Length2 * ( Bx * Bx + By * By - 0.25 ) ) ^ 0.5 - Temp ) / Length2;
 						if ( IntersectPos >= 0 and IntersectPos <= 1 ) then
 							PointX, PointY = Bx + ABx * IntersectPos, By + ABy * IntersectPos;
 						else
@@ -299,85 +304,89 @@ do
 						BCx, BCy = Bx - Cx, By - Cy;
 						ACx, ACy = Ax - Cx, Ay - Cy;
 
-						-- Intersection between the side and a line perpendicular to it that passes through the center
-						IntersectPos = ( Ax * ABx + Ay * ABy ) / ( ABx * ABx + ABy * ABy );
-						PerpX, PerpY = Ax - IntersectPos * ABx, Ay - IntersectPos * ABy;
-						ABPerpDist2 = PerpX * PerpX + PerpY * PerpY; -- From center to intersection squared
+						if ( ( ABx ~= 0 or ABy ~= 0 ) and ( BCx ~= 0 or BCy ~= 0 ) and ( ACx ~= 0 or ACy ~= 0 ) ) then
+							-- Intersection between the side and a line perpendicular to it that passes through the center
+							IntersectPos = ( Ax * ABx + Ay * ABy ) / ( ABx * ABx + ABy * ABy );
+							PerpX, PerpY = Ax - IntersectPos * ABx, Ay - IntersectPos * ABy;
+							ABPerpDist2 = PerpX * PerpX + PerpY * PerpY; -- From center to intersection squared
 
-						IntersectPos = ( Bx * BCx + By * BCy ) / ( BCx * BCx + BCy * BCy );
-						PerpX, PerpY = Bx - IntersectPos * BCx, By - IntersectPos * BCy;
-						BCPerpDist2 = PerpX * PerpX + PerpY * PerpY;
+							IntersectPos = ( Bx * BCx + By * BCy ) / ( BCx * BCx + BCy * BCy );
+							PerpX, PerpY = Bx - IntersectPos * BCx, By - IntersectPos * BCy;
+							BCPerpDist2 = PerpX * PerpX + PerpY * PerpY;
 
-						IntersectPos = ( Ax * ACx + Ay * ACy ) / ( ACx * ACx + ACy * ACy );
-						PerpX, PerpY = Ax - IntersectPos * ACx, Ay - IntersectPos * ACy;
-						ACPerpDist2 = PerpX * PerpX + PerpY * PerpY;
+							IntersectPos = ( Ax * ACx + Ay * ACy ) / ( ACx * ACx + ACy * ACy );
+							PerpX, PerpY = Ax - IntersectPos * ACx, Ay - IntersectPos * ACy;
+							ACPerpDist2 = PerpX * PerpX + PerpY * PerpY;
 
 
-						if ( #Points > 0 ) then
-							wipe( Points );
-						end
-						LastExitPoint = nil;
-
-						-- Check intersection with circle with radius at minimap's corner
-						if ( ABPerpDist2 < 0.5 or BCPerpDist2 < 0.5 or ACPerpDist2 < 0.5 ) then -- Inside radius ~= 0.71
-							-- Find all polygon vertices
-							IsClockwise = BCx * ( By + Cy ) + ABx * ( Ay + By ) + ( Cx - Ax ) * ( Cy + Ay ) > 0;
-							if ( AInside ) then
-								Points[ #Points + 1 ] = Ax;
-								Points[ #Points + 1 ] = Ay;
-							else
-								AddIntersection( Ax, Ay, Cx, Cy, ACPerpDist2, true );
-								AddIntersection( Ax, Ay, Bx, By, ABPerpDist2 );
+							if ( #Points > 0 ) then
+								wipe( Points );
 							end
-							if ( BInside ) then
-								Points[ #Points + 1 ] = Bx;
-								Points[ #Points + 1 ] = By;
-							else
-								AddIntersection( Bx, By, Ax, Ay, ABPerpDist2, true );
-								AddIntersection( Bx, By, Cx, Cy, BCPerpDist2 );
-							end
-							if ( CInside ) then
-								Points[ #Points + 1 ] = Cx;
-								Points[ #Points + 1 ] = Cy;
-							else
-								AddIntersection( Cx, Cy, Bx, By, BCPerpDist2, true );
-								AddIntersection( Cx, Cy, Ax, Ay, ACPerpDist2 );
-							end
-							if ( LastExitPoint ) then -- Final split points between C and A
-								AddSplit( Points[ 1 ], Points[ 2 ], true );
+							LastExitPoint = nil;
+
+							-- Check intersection with circle with radius at minimap's corner
+							if ( ABPerpDist2 < 0.5 or BCPerpDist2 < 0.5 or ACPerpDist2 < 0.5 ) then -- Inside radius ~= 0.71
+								-- Find all polygon vertices
+								IsClockwise = BCx * ( By + Cy ) + ABx * ( Ay + By ) + ( Cx - Ax ) * ( Cy + Ay ) > 0;
+								if ( AInside ) then
+									Points[ #Points + 1 ] = Ax;
+									Points[ #Points + 1 ] = Ay;
+								else
+									AddIntersection( Ax, Ay, Cx, Cy, ACPerpDist2, true );
+									AddIntersection( Ax, Ay, Bx, By, ABPerpDist2 );
+								end
+								if ( BInside ) then
+									Points[ #Points + 1 ] = Bx;
+									Points[ #Points + 1 ] = By;
+								else
+									AddIntersection( Bx, By, Ax, Ay, ABPerpDist2, true );
+									AddIntersection( Bx, By, Cx, Cy, BCPerpDist2 );
+								end
+								if ( CInside ) then
+									Points[ #Points + 1 ] = Cx;
+									Points[ #Points + 1 ] = Cy;
+								else
+									AddIntersection( Cx, Cy, Bx, By, BCPerpDist2, true );
+									AddIntersection( Cx, Cy, Ax, Ay, ACPerpDist2 );
+								end
+								if ( LastExitPoint ) then -- Final split points between C and A
+									AddSplit( Points[ 1 ], Points[ 2 ], true );
+								end
+
+								-- Draw tris between convex polygon vertices
+								for Index = #Points, 6, -2 do
+									Overlay.TextureAdd( self, "ARTWORK", R, G, B,
+										Points[ 1 ] + 0.5, Points[ 2 ] + 0.5, Points[ Index - 3 ] + 0.5, Points[ Index - 2 ] + 0.5, Points[ Index - 1 ] + 0.5, Points[ Index ] + 0.5 );
+								end
 							end
 
-							-- Draw tris between convex polygon vertices
-							for Index = #Points, 6, -2 do
-								Overlay.TextureAdd( self, "ARTWORK", R, G, B,
-									Points[ 1 ] + 0.5, Points[ 2 ] + 0.5, Points[ Index - 3 ] + 0.5, Points[ Index - 2 ] + 0.5, Points[ Index - 1 ] + 0.5, Points[ Index ] + 0.5 );
-							end
-						end
+							if ( #Points == 0 ) then -- No intersections
+								-- Check if the center is in the triangle
+								Dot00, Dot01 = ACx * ACx + ACy * ACy, ACx * BCx + ACy * BCy;
+								Dot02 = ACx * -Cx - ACy * Cy;
+								Dot11, Dot12 = BCx * BCx + BCy * BCy, BCx * -Cx - BCy * Cy;
 
-						if ( #Points == 0 ) then -- No intersections
-							-- Check if the center is in the triangle
-							Dot00, Dot01 = ACx * ACx + ACy * ACy, ACx * BCx + ACy * BCy;
-							Dot02 = ACx * -Cx - ACy * Cy;
-							Dot11, Dot12 = BCx * BCx + BCy * BCy, BCx * -Cx - BCy * Cy;
+								Denominator = Dot00 * Dot11 - Dot01 * Dot01;
+								if ( Denominator ~= 0 ) then -- Points aren't co-linear
+									U, V = ( Dot11 * Dot02 - Dot01 * Dot12 ) / Denominator,
+										( Dot00 * Dot12 - Dot01 * Dot02 ) / Denominator;
 
-							Denominator = Dot00 * Dot11 - Dot01 * Dot01;
-							U, V = ( Dot11 * Dot02 - Dot01 * Dot12 ) / Denominator,
-								( Dot00 * Dot12 - Dot01 * Dot02 ) / Denominator;
-
-							if ( U > 0 and V > 0 and U + V < 1 ) then -- Entire minimap is contained
-								for Index = 1, 4 do
-									Texture = Overlay.TextureCreate( self, "ARTWORK", R, G, B );
-									Left, Top = Index == 2 or Index == 3, Index <= 2;
-									Texture:SetPoint( "LEFT", self, Left and "LEFT" or "CENTER" );
-									Texture:SetPoint( "RIGHT", self, Left and "CENTER" or "RIGHT" );
-									Texture:SetPoint( "TOP", self, Top and "TOP" or "CENTER" );
-									Texture:SetPoint( "BOTTOM", self, Top and "CENTER" or "BOTTOM" );
-									if ( Quadrants[ Index ] ) then -- Rounded
-										Texture:SetTexture( [[Interface\CHARACTERFRAME\TempPortraitAlphaMask]] );
-										Texture:SetTexCoord( Left and 0 or 0.5, Left and 0.5 or 1, Top and 0 or 0.5, Top and 0.5 or 1 );
-									else -- Square
-										Texture:SetTexture( [[Interface\Buttons\WHITE8X8]] );
-										Texture:SetTexCoord( 0, 1, 0, 1 );
+									if ( U > 0 and V > 0 and U + V < 1 ) then -- Entire minimap is contained
+										for Index = 1, 4 do
+											Texture = Overlay.TextureCreate( self, "ARTWORK", R, G, B );
+											Left, Top = Index == 2 or Index == 3, Index <= 2;
+											Texture:SetPoint( "LEFT", self, Left and "LEFT" or "CENTER" );
+											Texture:SetPoint( "RIGHT", self, Left and "CENTER" or "RIGHT" );
+											Texture:SetPoint( "TOP", self, Top and "TOP" or "CENTER" );
+											Texture:SetPoint( "BOTTOM", self, Top and "CENTER" or "BOTTOM" );
+											if ( Quadrants[ Index ] ) then -- Rounded
+												Texture:SetTexture( [[Interface\CHARACTERFRAME\TempPortraitAlphaMask]] );
+												Texture:SetTexCoord( Left and 0 or 0.5, Left and 0.5 or 1, Top and 0 or 0.5, Top and 0.5 or 1 );
+											else -- Square
+												Texture:SetTexture( [[Interface\Buttons\WHITE8X8]] );
+												Texture:SetTexCoord( 0, 1, 0, 1 );
+											end
+										end
 									end
 								end
 							end
@@ -410,7 +419,7 @@ do
 	local RadiiOutside = { 233 + 1 / 3, 200, 166 + 2 / 3, 133 + 1 / 3, 100, 66 + 2 / 3 };
 	local Cos, Sin = math.cos, math.sin;
 	--- Draws paths on the minimap from a given player position and direction.
-	function me:Paint ( Map, NewX, NewY, NewFacing )
+	function NS:Paint ( Map, NewX, NewY, NewFacing )
 		Overlay.TextureRemoveAll( self );
 
 		Quadrants = MinimapShapes[ GetMinimapShape and GetMinimapShape() ] or MinimapShapes[ "ROUND" ];
@@ -420,20 +429,21 @@ do
 
 			-- Cache split points
 			wipe( SplitPoints );
-			for Index = 1, 4 do
-				if ( Quadrants[ Index ] ) then -- Round
-					if ( not Quadrants[ ( Index - 2 ) % 4 + 1 ] ) then -- Transition from previous
-						local Angle = ( Index - 1 ) * math.pi / 2;
-						SplitPoints[ #SplitPoints + 1 ] = Cos( Angle ) * 0.5;
-						SplitPoints[ #SplitPoints + 1 ] = Sin( Angle ) * -0.5;
+			for Quadrant = 1, 4 do
+				if ( Quadrants[ Quadrant ] ) then -- Round
+					if ( not Quadrants[ ( Quadrant - 2 ) % 4 + 1 ] ) then -- Transition from previous
+						local Angle = ( Quadrant - 1 ) * math.pi / 2;
+						-- Round coords to exactly 0 or 0.5; Necessary for later comparisons
+						SplitPoints[ #SplitPoints + 1 ] = floor( Cos( Angle ) + 0.5 ) * 0.5;
+						SplitPoints[ #SplitPoints + 1 ] = floor( Sin( Angle ) + 0.5 ) * -0.5;
 					end
-					if ( not Quadrants[ Index % 4 + 1 ] ) then -- Transition to next
-						local Angle = Index * math.pi / 2;
-						SplitPoints[ #SplitPoints + 1 ] = Cos( Angle ) * 0.5;
-						SplitPoints[ #SplitPoints + 1 ] = Sin( Angle ) * -0.5;
+					if ( not Quadrants[ Quadrant % 4 + 1 ] ) then -- Transition to next
+						local Angle = Quadrant * math.pi / 2;
+						SplitPoints[ #SplitPoints + 1 ] = floor( Cos( Angle ) + 0.5 ) * 0.5;
+						SplitPoints[ #SplitPoints + 1 ] = floor( Sin( Angle ) + 0.5 ) * -0.5;
 					end
 				else -- Square
-					local Left, Top = Index == 2 or Index == 3, Index <= 2;
+					local Left, Top = Quadrant == 2 or Quadrant == 3, Quadrant <= 2;
 					SplitPoints[ #SplitPoints + 1 ] = Left and -0.5 or 0.5;
 					SplitPoints[ #SplitPoints + 1 ] = Top and -0.5 or 0.5;
 				end
@@ -482,7 +492,7 @@ end
 
 
 --- Force a repaint when the minimap swaps between indoor and outdoor zoom.
-function me:MINIMAP_UPDATE_ZOOM ()
+function NS:MINIMAP_UPDATE_ZOOM ()
 	local Zoom = Minimap:GetZoom();
 	if ( GetCVar( "minimapZoom" ) == GetCVar( "minimapInsideZoom" ) ) then -- Indeterminate case
 		Minimap:SetZoom( Zoom > 0 and Zoom - 1 or Zoom + 1 ); -- Any change to make the cvars unequal
@@ -497,7 +507,7 @@ function me:MINIMAP_UPDATE_ZOOM ()
 	end
 end
 --- Force a repaint and cache map size when changing zones.
-function me:ZONE_CHANGED_NEW_AREA ()
+function NS:ZONE_CHANGED_NEW_AREA ()
 	UpdateForce = true;
 	if ( not WorldMapFrame:IsVisible() ) then
 		SetMapToCurrentZone();
@@ -507,7 +517,7 @@ do
 	local GetCurrentMapAreaID = GetCurrentMapAreaID;
 	local MapLast;
 	--- Force a repaint if world map swaps back to the current zone (making player coordinates available).
-	function me:WORLD_MAP_UPDATE ()
+	function NS:WORLD_MAP_UPDATE ()
 		local Map = GetCurrentMapAreaID();
 		if ( MapLast ~= Map ) then -- Changed zones
 			MapLast = Map;
@@ -519,7 +529,7 @@ do
 	end
 end
 --- Force a repaint when minimap gets shown or module gets enabled.
-function me:OnShow ()
+function NS:OnShow ()
 	UpdateForce = true;
 end
 do
@@ -532,7 +542,7 @@ do
 	local LastX, LastY, LastFacing;
 	local Map, X, Y, Facing, Width, Height;
 	--- Throttles repaints based on a timer, and only repaints if the minimap view changes.
-	function me:OnUpdate ( Elapsed )
+	function NS:OnUpdate ( Elapsed )
 		UpdateNext = UpdateNext - Elapsed;
 		if ( UpdateForce or UpdateNext <= 0 ) then
 			UpdateNext = UpdateRate;
@@ -572,15 +582,15 @@ end
 
 
 do
-	local Backup = me.SetAlpha;
+	local Backup = NS.SetAlpha;
 	--- Fades overlay when indoors.
-	function me:SetAlpha ( Alpha, ... )
-		return Backup( self, IsInside and Alpha * me.InsideAlphaMultiplier or Alpha, ... );
+	function NS:SetAlpha ( Alpha, ... )
+		return Backup( self, IsInside and Alpha * NS.InsideAlphaMultiplier or Alpha, ... );
 	end
 end
 --- Reparents this canvas to Frame.
 -- @return True if set successfully.
-function me:SetMinimapFrame ( Frame )
+function NS:SetMinimapFrame ( Frame )
 	if ( self.ScrollFrame and self.ScrollFrame:GetParent() ~= Frame ) then
 		self.ScrollFrame:SetParent( Frame );
 		self.ScrollFrame:SetAllPoints();
@@ -591,19 +601,19 @@ end
 
 --- Force a repaint if shown paths change.
 -- @param Map  AreaID that changed, or nil if all zones must update.
-function me:OnMapUpdate ( Map )
+function NS:OnMapUpdate ( Map )
 	if ( not Map or Map == Overlay.GetMapID( GetRealZoneText() ) ) then
 		UpdateForce = true;
 	end
 end
 --- Shows the canvas when enabled.
-function me:OnEnable ()
+function NS:OnEnable ()
 	self.ScrollFrame:Show();
 	self:RegisterEvent( "WORLD_MAP_UPDATE" );
 	self:RegisterEvent( "ZONE_CHANGED_NEW_AREA" );
 end
 --- Hides the canvas when disabled.
-function me:OnDisable ()
+function NS:OnDisable ()
 	self.ScrollFrame:Hide();
 	Overlay.TextureRemoveAll( self );
 	self:UnregisterEvent( "WORLD_MAP_UPDATE" );
@@ -615,7 +625,7 @@ do
 		UpdateForce, Radius = true;
 	end
 	--- Initializes the canvas after its dependencies load.
-	function me:OnLoad ()
+	function NS:OnLoad ()
 		self.ScrollFrame = CreateFrame( "ScrollFrame" );
 		self.ScrollFrame:Hide();
 		self.ScrollFrame:SetScrollChild( self );
@@ -651,14 +661,14 @@ do
 	end
 end
 --- Clears all methods and scripts to be garbage collected.
-function me:OnUnload ()
+function NS:OnUnload ()
 	self:SetScript( "OnShow", nil );
 	self:SetScript( "OnUpdate", nil );
 	self:SetScript( "OnEvent", nil );
 	self:UnregisterEvent( "MINIMAP_UPDATE_ZOOM" );
 end
 --- Clears most module data to be garbage collected.
-function me:OnUnregister ()
+function NS:OnUnregister ()
 	self.Paint, self.OnShow, self.OnUpdate = nil;
 	self.MINIMAP_UPDATE_ZOOM = nil;
 	self.ZONE_CHANGED_NEW_AREA = nil;
@@ -670,36 +680,36 @@ end
 
 --- Enables the minimap range ring.
 -- @return True if changed.
-function me.RangeRingSetEnabled ( Enable )
+function NS.RangeRingSetEnabled ( Enable )
 	if ( Enable ~= Overlay.Options.ModulesExtra[ "Minimap" ].RangeRing ) then
 		Overlay.Options.ModulesExtra[ "Minimap" ].RangeRing = Enable;
 
-		me.Config.RangeRing:SetChecked( Enable );
+		NS.Config.RangeRing:SetChecked( Enable );
 
 		if ( Enable ) then
 			UpdateForce = true;
-		elseif ( me.Loaded ) then
-			me.RangeRing:Hide();
+		elseif ( NS.Loaded ) then
+			NS.RangeRing:Hide();
 		end
 		return true;
 	end
 end
 --- Synchronizes custom settings to options table.
-function me:OnSynchronize ( OptionsExtra )
+function NS:OnSynchronize ( OptionsExtra )
 	self.RangeRingSetEnabled( OptionsExtra.RangeRing ~= false );
 end
 
 
 
 
-Overlay.Modules.Register( "Minimap", me, Overlay.L.MODULE_MINIMAP );
+Overlay.Modules.Register( "Minimap", NS, Overlay.L.MODULE_MINIMAP );
 
-local Config = me.Config;
+local Config = NS.Config;
 local Checkbox = CreateFrame( "CheckButton", "$parentRangeRing", Config, "InterfaceOptionsCheckButtonTemplate" );
 Config.RangeRing = Checkbox;
 --- Toggles the range ring when clicked.
 function Checkbox.setFunc ( Enable )
-	me.RangeRingSetEnabled( Enable == "1" );
+	NS.RangeRingSetEnabled( Enable == "1" );
 end
 
 Checkbox:SetPoint( "TOPLEFT", Config.Enabled, "BOTTOMLEFT" );

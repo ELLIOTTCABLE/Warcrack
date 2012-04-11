@@ -1,6 +1,6 @@
 ﻿--
 -- AutoBar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 -- Courtesy of Sayclub
 --
 
@@ -184,7 +184,6 @@ if (GetLocale() == "koKR") then
 		["Shift-Click"] = "Shift-클릭",
 		["Ctrl-Shift-Click"] = "Ctrl-Shift-클릭",
 		["ButtonFacade is required to Skin the Buttons"] = "버튼에 스킨을 적용하기 위해 ButtonFacade가 필요합니다.",
-		["Waterfall-1.0 is required to access the GUI"] = "GUI 설정을 위해 Waterfall-1.0이 필요합니다.",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "기본",

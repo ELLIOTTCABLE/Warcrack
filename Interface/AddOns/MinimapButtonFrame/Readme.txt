@@ -215,6 +215,10 @@ History
 	Update - Added exceptions for Archy and EveryQuest Quest Givers.
 	Update - New zhTW translation.  Thank you scars377!
 	Change - Scanning now paused during combat lockdown.
+3.1.6	Update - TOC to 40200
+	Update - Added exceptions for ElvUI
+3.1.7	Update - TOC to 40300	
+	Fixed  - Breadcrumbs exception moved to the proper location
 	
 Known Incompatibilities / Bugs
 

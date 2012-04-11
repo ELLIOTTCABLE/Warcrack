@@ -27,7 +27,7 @@ SMARTBUFF_DEATHKNIGHT_PATTERN = {"%a+領域$"};
 -- Rogue
 
 -- Weapon types
-SMARTBUFF_WEAPON_STANDARD = {"匕首", "斧", "劍", "錘", "法杖", "拳套", "長柄武器"};
+SMARTBUFF_WEAPON_STANDARD = {"匕首", "斧", "劍", "錘", "法杖", "拳套", "長柄武器", "投擲武器"};
 SMARTBUFF_WEAPON_BLUNT = {"魔杖", "法杖", "拳套"};
 SMARTBUFF_WEAPON_BLUNT_PATTERN = "平衡石$";
 SMARTBUFF_WEAPON_SHARP = {"匕首", "斧", "劍", "長柄武器"};
@@ -154,6 +154,7 @@ SMARTBUFF_BST_COMBATIN       = "戰鬥狀態觸發";
 SMARTBUFF_BST_COMBATOUT      = "非戰鬥狀態觸發";
 SMARTBUFF_BST_MAINHAND       = "主手";
 SMARTBUFF_BST_OFFHAND        = "副手";
+SMARTBUFF_BST_RANGED         = "投擲";
 SMARTBUFF_BST_REMINDER       = "通知";
 SMARTBUFF_BST_MANALIMIT      = "力能底線";--力能是技能施放來源,如怒氣、能量、法力
 
@@ -164,6 +165,7 @@ SMARTBUFF_BSTT_COMBATIN      = "在戰鬥狀態時保持自動觸發技能.";
 SMARTBUFF_BSTT_COMBATOUT     = "在非戰鬥狀態時保持自動觸發技能.";
 SMARTBUFF_BSTT_MAINHAND      = "Buff主手.";
 SMARTBUFF_BSTT_OFFHAND       = "Buff副手.";
+SMARTBUFF_BSTT_RANGED        = "Buff遠程武器";
 SMARTBUFF_BSTT_REMINDER      = "顯示提示訊息.";
 SMARTBUFF_BSTT_REBUFFTIMER   = "Buff消失前多少秒,\n發出警告訊息.0 = 不提示";
 SMARTBUFF_BSTT_MANALIMIT     = "設定魔法/怒氣/能量保留門檻.";

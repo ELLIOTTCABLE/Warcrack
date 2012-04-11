@@ -1,5 +1,5 @@
-## Interface: 40200
-## Title: Integrated PopBar (v3.13)
+## Interface: 40300
+## Title: Integrated PopBar (v3.14)
 ## Notes: An extra set of 11x3 buttons, integrated into the default action bar.
 ## Author: Xinhuan
 ## OptionalDeps: Ace3
@@ -7,8 +7,8 @@
 ## X-eMail: xinhuan @ gmail DOT com
 ## X-Category: Action Bars
 ## X-License: GPL v2
-## Version: 3.13
-## X-Curse-Packaged-Version: v3.13
+## Version: 3.14
+## X-Curse-Packaged-Version: v3.14
 ## X-Curse-Project-Name: IPopBar
 ## X-Curse-Project-ID: ipop-bar
 ## X-Curse-Repository-ID: wow/ipop-bar/mainline

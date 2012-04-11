@@ -434,14 +434,13 @@ local function CheckDraggable_AchFrame(self, key, val, clicked, LoadPos)
       if (not MadeDraggable_AchFrame) then
         TjDragIt.EnableDragging(AchievementFrame, AchievementFrameHeader, AchievementFrameCategoriesContainer,
                                 AchievementFrameAchievementsContainer, AchievementFrameStatsContainer,
-                                Overachiever_SearchFrameContainer, Overachiever_SuggestionsFrameContainer,
-                                Overachiever_WatchFrameContainer)
+                                Overachiever_SearchFrameContainer, Overachiever_SuggestionsFrameContainer, Overachiever_WatchFrameContainer)
         MadeDraggable_AchFrame = true
       end
     elseif (MadeDraggable_AchFrame) then
       TjDragIt.DisableDragging(AchievementFrame, AchievementFrameHeader, AchievementFrameCategoriesContainer,
                                AchievementFrameAchievementsContainer, AchievementFrameStatsContainer,
-                               Overachiever_SearchFrameContainer, Overachiever_SuggestionsFrameContainer)
+                               Overachiever_SearchFrameContainer, Overachiever_SuggestionsFrameContainer, Overachiever_WatchFrameContainer)
       MadeDraggable_AchFrame = nil
     end
     if (key and AchievementFrame:IsShown()) then

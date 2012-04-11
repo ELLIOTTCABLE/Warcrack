@@ -121,6 +121,7 @@ local function setButtonGuildView(button, guildView)
 	-- icon frame
 	button.icon.frame:SetTexture("Interface\\AchievementFrame\\UI-Achievement-Guild");
 	button.icon.frame:SetTexCoord(0.25976563, 0.40820313, 0.50000000, 0.64453125);
+	button.icon.frame:SetPoint("CENTER", 2, 2);
 	-- tsunami
 	local tsunami = _G[name.."BottomTsunami1"];
 	tsunami:SetTexture("Interface\\AchievementFrame\\UI-Achievement-Borders");
@@ -144,6 +145,7 @@ local function setButtonGuildView(button, guildView)
 	-- icon frame
 	button.icon.frame:SetTexture("Interface\\AchievementFrame\\UI-Achievement-IconFrame");
 	button.icon.frame:SetTexCoord(0, 0.5625, 0, 0.5625);
+	button.icon.frame:SetPoint("CENTER", -1, 2);
 	-- tsunami
 	local tsunami = _G[name.."BottomTsunami1"];
 	tsunami:SetTexture("Interface\\AchievementFrame\\UI-Achievement-Borders");
@@ -789,7 +791,7 @@ do
   function recolor_AchievementObjectives_DisplayCriteria(objectivesFrame, id)
     if (isSet or not id or GetPreviousAchievement(id) or isAchievementInUI(id, true)) then  return;  end
     -- Checking for isSet like this means we "ignore" calls when CRITERIA_UPDATE events have been detected until
-    -- until the OnUpdate function clears it. Since the OnUpdate func calls AchievementButton_DisplayObjectives
+    -- the OnUpdate function clears it. Since the OnUpdate func calls AchievementButton_DisplayObjectives
     -- which in turn calls AchievementObjectives_DisplayCriteria which will in turn trigger this function (since
     -- it should be hooked to it), this simple check should be all that's needed to throttle this function.
     -- (Throttling is required in the first place because the default achievement UI responds to CRITERIA_UPDATE by
@@ -819,8 +821,11 @@ do
         local id = AchievementFrameAchievementsObjectives.id;
         local button = AchievementFrameAchievementsObjectives:GetParent();
         AchievementFrameAchievementsObjectives.id = nil;
-        AchievementButton_DisplayObjectives(button, id, button.completed);
-        updateAchievementsList(frame)
+        -- if ( self:IsVisible() ) then    -- this visibility check was added to WoW's UI code, but it shouldn't
+	--         be necessary here because LeftFrame_OnUpdate should only be called when it's visible anyway.
+          AchievementButton_DisplayObjectives(button, id, button.completed);
+          updateAchievementsList(frame)
+        -- end
         return; -- This only needs to happen once, no matter which frame it is that's currently shown.
       end
     end

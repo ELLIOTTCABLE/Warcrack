@@ -137,12 +137,12 @@ function GridFrame:InitializeFrame(frame)
 	frame.IconBG:SetWidth(GridFrame.db.profile.iconSize)
 	frame.IconBG:SetHeight(GridFrame.db.profile.iconSize)
 	frame.IconBG:SetPoint("CENTER", frame, "CENTER")
-	frame.IconBG:SetBackdrop( {
-				-- bgFile = "Interface\\Addons\\Grid\\white16x16", tile = true, tileSize = 16,
-				edgeFile = "Interface\\Addons\\Grid\\white16x16", edgeSize = 2,
-				insets = {left = 2, right = 2, top = 2, bottom = 2},
-				})
-	frame.IconBG:SetBackdropBorderColor(1,1,1,1)
+	frame.IconBG:SetBackdrop({
+			-- bgFile = "Interface\\Addons\\Grid\\white16x16", tile = true, tileSize = 16,
+			edgeFile = "Interface\\Addons\\Grid\\white16x16", edgeSize = 2,
+			insets = { left = 2, right = 2, top = 2, bottom = 2 },
+		})
+	frame.IconBG:SetBackdropBorderColor(1, 1, 1, 1)
 	frame.IconBG:SetBackdropColor(0, 0, 0, 0)
 	frame.IconBG:SetFrameLevel(5)
 	frame.IconBG:Hide()
@@ -164,6 +164,7 @@ function GridFrame:InitializeFrame(frame)
 	-- create icon cooldown
 	frame.IconCD = CreateFrame("Cooldown", nil, frame.IconBG, "CooldownFrameTemplate")
 	frame.IconCD:SetAllPoints(frame.Icon)
+	frame.IconCD:SetReverse(true)
 	frame.IconCD:SetScript("OnHide", function()
 		frame.IconStackText:SetParent(frame.IconBG)
 		frame.IconStackText:SetPoint("BOTTOMRIGHT", frame.IconBG, 2, -2)
@@ -178,7 +179,7 @@ function GridFrame:InitializeFrame(frame)
 	frame.IconStackText:SetJustifyV("BOTTOM")
 
 	-- set texture
-	frame:SetNormalTexture(1,1,1,0)
+	frame:SetNormalTexture(1, 1, 1, 0)
 	frame:EnableMouseoverHighlight(GridFrame.db.profile.enableMouseoverHighlight)
 
 	if frame:CanChangeAttribute() then

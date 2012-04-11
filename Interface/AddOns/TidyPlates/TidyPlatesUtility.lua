@@ -1,9 +1,11 @@
 TidyPlatesUtility = {}
 TidyPlatesData = {}
 
+
 -------------------------------------------------------------------------------------
 --  General Helpers
 -------------------------------------------------------------------------------------
+local _
 local copytable
 copytable = function(original)
 	local duplicate = {}
@@ -265,25 +267,27 @@ local function CreateDropdownFrame(helpertable, reference, parent, menu, default
 		dropdown.Label:SetPoint("TOPLEFT", 18, 18)
 		dropdown.Label:SetText(label)
 	end
-	--
+
 	
 	dropdown.Value = default
 	
-	dropdown.initialize = function(self, level)		-- Injects the init function into the template
-		-- if not level == 1 then return end
+	local function OnClickDropdownItem(self) 
+		dropdown.Text:SetText(self:GetText())
+		dropdown.Value = self:GetID()
+		if dropdown.OnValueChanged then dropdown.OnValueChanged() end
+	end
+			
+	dropdown.initialize = function(self, level)		-- Replaces the default init function 
 		for index, item in pairs(menu) do
-			item.func = function(self) 
-				dropdown.Text:SetText(item.text)
-				dropdown.Value = index
-				if dropdown.OnValueChanged then dropdown.OnValueChanged() end
-			end
-			UIDropDownMenu_AddButton(item, level)
-			--UIDropDownMenu_AddButton(item)
+			item.value = index
+			item.func = OnClickDropdownItem 
+
+			UIDropDownMenu_AddButton(item)
 		end 
 	end
 	
 	dropdown.SetValue = function (self, value) 
-		if byName then dropdown.Text:SetText(value) else 
+		if byName and value then dropdown.Text:SetText(value) else 
 			dropdown.Text:SetText(menu[value].text); dropdown.Value = value 
 		end
 	end
@@ -294,7 +298,6 @@ local function CreateDropdownFrame(helpertable, reference, parent, menu, default
 		end
 	end
 	
-	--dropdown.tooltipText = "Dropdown"
 	return dropdown
 end
 

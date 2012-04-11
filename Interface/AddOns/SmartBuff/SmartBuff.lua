@@ -40,7 +40,7 @@ GameTooltip:SetUnitDebuff("unit", [index] or ["name", "rank"][, "filter"]);
 * The untilCanceled return value is true if the buff doesn't have its own duration (e.g. stealth)
 ]]--
 
-SMARTBUFF_VERSION       = "v4.2a";
+SMARTBUFF_VERSION       = "v4.3a";
 SMARTBUFF_TITLE         = "SmartBuff";
 SMARTBUFF_SUBTITLE      = "Supports you in cast buffs";
 SMARTBUFF_DESC          = "Cast the most important buffs on you or party/raid members/pets";
@@ -1507,10 +1507,10 @@ end
 -- END SMARTBUFF_IsShapeshifted
 
 
+local IsChecking = false;
 function SMARTBUFF_Check(mode, force)
-  if (not SMARTBUFF_PreCheck(mode, force)) then
-    return;
-  end
+  if (IsChecking or not SMARTBUFF_PreCheck(mode, force)) then return; end
+  IsChecking = true;
   
   local ct = currentTemplate;
   local unit = nil;
@@ -1543,6 +1543,7 @@ function SMARTBUFF_Check(mode, force)
         local ret, actionType, spellName, slot, unit, buffType = SMARTBUFF_BuffUnit("player", 0, mode, spell)
         --SMARTBUFF_AddMsgD("Check combat spell: " .. spell .. ", ret = " .. ret);
         if (ret and ret == 0) then
+          IsChecking = false;
           return;
         end
       end
@@ -1557,6 +1558,7 @@ function SMARTBUFF_Check(mode, force)
       if (i == 0) then
         --tLastCheck = GetTime() - O.AutoTimer + GlobalCd;
       end
+      IsChecking = false;
       return i, actionType, spellName, slot, "target", buffType;
     end    
   end 
@@ -1595,6 +1597,7 @@ function SMARTBUFF_Check(mode, force)
                 --tLastCheck = tLastCheck + 2;
               end
             end
+            IsChecking = false;
             return i, actionType, spellName, slot, unit, buffType;
           end
         end
@@ -1612,7 +1615,7 @@ function SMARTBUFF_Check(mode, force)
     end
   end
   --tLastCheck = GetTime();
-  
+  IsChecking = false;
 end
 -- END SMARTBUFF_Check
 
@@ -2752,7 +2755,7 @@ end
 -- checks if the player is inside a battlefield
 function SMARTBUFF_IsActiveBattlefield(zone)
   local i, status, map, instanceId, teamSize;
-  for i = 1, MAX_BATTLEFIELD_QUEUES do
+  for i = 1, GetMaxBattlefieldID() do
     status, map, instanceId, _, _, teamSize = GetBattlefieldStatus(i);
     SMARTBUFF_AddMsgD("Battlefield status = "..ChkS(status)..", Id = "..instanceId..", TS = "..teamSize..", Map = "..ChkS(map)..", Zone = "..ChkS(zone));
     --if (status == "active" and map and (instanceId ~= 0 or (teamSize > 0 and zone and map == zone)) then

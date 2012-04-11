@@ -3,15 +3,16 @@
 -----------------------------------------------------
 local Theme = {}
 local CopyTable = TidyPlatesUtility.copyTable
+local path = "Interface\\Addons\\TidyPlates_Quatre\\"
+local font = "Interface\\Addons\\TidyPlatesHub\\shared\\AccidentalPresidency.ttf"
+local EmptyTexture = "Interface\\Addons\\TidyPlatesHub\\shared\\Empty"
 
-local path = "Interface\\Addons\\TidyPlates_Quatre\\Media\\"
-local font =					path.."Font.ttf"
-local blizzfont =				NAMEPLATE_FONT
---local blizzfont =					"FONTS\\ARIALN.TTF"
---local font =					"FONTS\\FRIZQT__.TTF"
---local font =					NAMEPLATE_FONT
+-- Non-Latin Font Bypass
+local NonLatinLocales = { ["ruRU"] = true, ["koKR"] = true, ["zhCN"] = true, ["zhTW"] = true, }
+if NonLatinLocales[GetLocale()] == true then font = NAMEPLATE_FONT end
 
-local castbarVertical = -15
+local VerticalAdjustment = -12
+local castbarVertical = VerticalAdjustment - 15
 
 local StyleDefault = {}
 
@@ -28,7 +29,7 @@ StyleDefault.healthborder = {
 	width = 128,
 	height = 64,
 	x = 0,
-	y = 0,
+	y = VerticalAdjustment,
 	anchor = "CENTER",
 }
 
@@ -37,7 +38,7 @@ StyleDefault.target = {
 	width = 128,
 	height = 64,
 	x = 0,
-	y = 0,
+	y = VerticalAdjustment,
 	anchor = "CENTER",
 	show = true,
 }
@@ -50,17 +51,17 @@ StyleDefault.highlight = {
 }
 
 StyleDefault.threatborder = {
-	texture =			path.."RegularThreatLarger",
+	texture =			path.."Warning",
 	width = 128,
 	height = 64,
 	x = 0,
-	y = 0,
+	y = VerticalAdjustment,
 	anchor = "CENTER",
 }
 
 StyleDefault.castbar = {
 	texture =					path.."Statusbar",
-	backdrop = 				path.."Empty",
+	backdrop = 				EmptyTexture,
 	height = 8,
 	width = 99,
 	x = 0,
@@ -93,7 +94,7 @@ StyleDefault.name = {
 	height = 12,
 	width = 180,
 	x = 0,
-	y = 9,
+	y = VerticalAdjustment + 9,
 	align = "CENTER",
 	anchor = "TOP",
 	vertical = "BOTTOM",
@@ -107,7 +108,7 @@ StyleDefault.level = {
 	width = 93,
 	height = 10,
 	x = -2,
-	y = 14.85,
+	y = VerticalAdjustment + 14.85,
 	align = "LEFT",
 	anchor = "CENTER",
 	vertical = "BOTTOM",
@@ -118,12 +119,11 @@ StyleDefault.level = {
 
 StyleDefault.healthbar = {
 	texture =					 path.."Statusbar",
-	backdrop = 				path.."StatusbarBackground40",
-	--backdrop = 				path.."StatusbarBackground75",
+	backdrop = 				path.."StatusbarBackground",
 	height = 8.5,
 	width = 98.5,
 	x = 0,
-	y = 15,
+	y = VerticalAdjustment + 15,
 	anchor = "CENTER",
 	orientation = "HORIZONTAL",
 }
@@ -134,7 +134,7 @@ StyleDefault.customtext = {
 	width = 93,
 	height = 10,
 	x = 0,
-	y = 16,
+	y = VerticalAdjustment + 16,
 	align = "RIGHT",
 	anchor = "CENTER",
 	vertical = "BOTTOM",
@@ -165,23 +165,13 @@ StyleDefault.spellicon = {
 	y = 22+castbarVertical,
 	anchor = "CENTER",
 }
---[[
+
 StyleDefault.eliteicon = {
-	texture = path.."Star",
-	width = 16,
-	height = 16,
-	x = -16, -- or -14
-	y = 2,
-	anchor = "TOPLEFT",
-	show = true,
-}
---]]
-StyleDefault.eliteicon = {
-	texture = path.."EliteBorder3",
+	texture = path.."EliteBorder",
 	width = 128,
 	height = 64,
 	x = 0,
-	y = 0,
+	y = VerticalAdjustment,
 	anchor = "CENTER",
 	show = true,
 }
@@ -192,7 +182,7 @@ StyleDefault.raidicon = {
 	--x = 0,
 	--y = 39,
 	x = -55,
-	y = 21,
+	y = VerticalAdjustment + 21,
 	anchor = "CENTER",
 }
 
@@ -200,7 +190,7 @@ StyleDefault.skullicon = {
 	width = 8,
 	height = 8,
 	x = 2,
-	y = 15,
+	y = VerticalAdjustment + 15,
 	anchor = "LEFT",
 }
 
@@ -219,41 +209,24 @@ StyleTextOnly.healthbar.backdrop = EmptyTexture
 StyleTextOnly.eliteicon.texture = EmptyTexture
 StyleTextOnly.customtext.align = "CENTER"
 StyleTextOnly.customtext.size = 10
-StyleTextOnly.customtext.y = 16
+StyleTextOnly.customtext.y = VerticalAdjustment + 16
 StyleTextOnly.level.show = false
 StyleTextOnly.skullicon.show = false
 StyleTextOnly.eliteicon.show = false
---StyleTextOnly.raidicon.x = 
---StyleTextOnly.raidicon.y = 
-StyleTextOnly.highlight.texture = path.."TextPlate_Highlight"
-StyleTextOnly.target.texture = path.."TextPlate_Target"
---StyleTextOnly.target.y = 21
---StyleTextOnly.target.height = 46
---StyleTextOnly.target.texture = EmptyTexture
+StyleTextOnly.highlight.texture = "Interface\\Addons\\TidyPlatesHub\\shared\\Highlight"
+StyleTextOnly.target.texture = "Interface\\Addons\\TidyPlatesHub\\shared\\Target"
 
 local WidgetConfig = {}
-WidgetConfig.ClassIcon = { anchor = "TOP" , x = 0,y = 26 }		-- Above Name
---WidgetConfig.ClassIcon = { anchor = "TOP" , x = -35 ,y = 14 }		-- Aside Name
---WidgetConfig.ClassIcon = { anchor = "TOP" , x = -26 ,y = 10 }		-- Upper Left on Bar
---WidgetConfig.ClassIcon = { anchor = "TOP" , x = 46 ,y = -8 }		-- Right, Opposite Spell Icon (not done)
-WidgetConfig.TotemIcon = { anchor = "TOP" , x = 0 ,y = 26 }
---WidgetConfig.ThreatLineWidget = { anchor =  "TOP", x = 0 ,y = -7 }
-WidgetConfig.ThreatLineWidget = { anchor =  "TOP", x = 0 ,y = 20 }	-- y = 20
---WidgetConfig.ThreatLineWidget = { anchor =  "TOP", x = 0 ,y = -2 }	-- y = 20
--- WidgetConfig.ThreatWheelWidget = { anchor =  "CENTER", x = 60 ,y = 15 } 
-WidgetConfig.ThreatWheelWidget = { anchor =  "CENTER", x = 33 ,y = 27 } -- "CENTER", plate, 30, 18
-WidgetConfig.ComboWidget = { anchor = "TOP" , x = 0 ,y = 0 }
-WidgetConfig.RangeWidget = { anchor = "CENTER" , x = 0 ,y = 12 }
-WidgetConfig.DebuffWidget = { anchor = "TOP" , x = 15 ,y = 33 }
+WidgetConfig.ClassIcon = { anchor = "TOP" , x = 0,y = VerticalAdjustment + 26 }		-- Above Name
+WidgetConfig.TotemIcon = { anchor = "TOP" , x = 0 ,y = VerticalAdjustment + 26 }
+WidgetConfig.ThreatLineWidget = { anchor =  "TOP", x = 0 ,y = VerticalAdjustment + 20 }	-- y = 20
+WidgetConfig.ThreatWheelWidget = { anchor =  "CENTER", x = 33 ,y = VerticalAdjustment + 27 } -- "CENTER", plate, 30, 18
+WidgetConfig.ComboWidget = { anchor = "TOP" , x = 0 ,y = VerticalAdjustment + 0 }
+WidgetConfig.RangeWidget = { anchor = "CENTER" , x = 0 ,y = VerticalAdjustment + 12 }
+WidgetConfig.DebuffWidget = { anchor = "TOP" , x = 15 ,y = VerticalAdjustment + 33 }
 
 local DamageThemeName = "Quatre/|cFFFF4400Damage"
 local TankThemeName = "Quatre/|cFF3782D1Tank"
-
-SLASH_QUATRETANK1 = '/quatretank'
-SlashCmdList['QUATRETANK'] = ShowTidyPlatesHubTankPanel
-
-SLASH_QUATREDAMAGE = '/quatredamage'
-SlashCmdList['QUATREDAMAGE'] = ShowTidyPlatesHubDamagePanel
 
 ---------------------------------------------
 -- Tidy Plates Hub Integration
@@ -264,34 +237,10 @@ Theme["NameOnly"] = StyleTextOnly			-- (6.2)
 TidyPlatesThemeList[DamageThemeName] = Theme
 local LocalVars = TidyPlatesHubDamageVariables
 
--- (6.2)
+local ApplyThemeCustomization = TidyPlatesHubFunctions.ApplyThemeCustomization
 
-local function ApplyFontCustomization(style)
-	local currentFont = font
-	if LocalVars.TextUseBlizzardFont then currentFont = blizzfont end
-	style.name.typeface = currentFont
-	style.level.typeface = currentFont
-	style.customtext.typeface = currentFont
-	style.spelltext.typeface = currentFont
-	
-	style.frame.y = ((LocalVars.FrameVerticalPosition-.5)*50)-16
-end
-
-local function OnApplyStyleCustomization(style)
-	style.level.show = (LocalVars.TextShowLevel == true)
-	style.target.show = (LocalVars.WidgetTargetHighlight == true)
-	style.eliteicon.show = (LocalVars.WidgetEliteIndicator == true)
-	ApplyFontCustomization(style)
-end
-
-local function OnApplyThemeCustomization(theme)
-	OnApplyStyleCustomization(theme["Default"])
-	ApplyFontCustomization(theme["NameOnly"])
-	TidyPlates:ForceUpdate()
-end
-
-local function OnApplyDamageCustomization()
-	OnApplyThemeCustomization(Theme)
+local function ApplyDamageCustomization()
+	ApplyThemeCustomization(Theme)
 end
 
 local function OnInitialize(plate)
@@ -301,12 +250,8 @@ end
 local function OnActivateTheme(themeTable)
 		if Theme == themeTable then
 			LocalVars = TidyPlatesHubFunctions:UseDamageVariables()
-			OnApplyDamageCustomization()
+			ApplyDamageCustomization()
 		end
-end
-
-local function StyleDelegate(unit)
-	return "Default"
 end
 
 Theme.SetNameColor = TidyPlatesHubFunctions.SetNameColor
@@ -319,72 +264,29 @@ Theme.SetCustomText = TidyPlatesHubFunctions.SetCustomText
 Theme.OnUpdate = TidyPlatesHubFunctions.OnUpdate
 Theme.OnContextUpdate = TidyPlatesHubFunctions.OnContextUpdate
 Theme.ShowConfigPanel = ShowTidyPlatesHubDamagePanel
-Theme.SetStyle = StyleDelegate
-
--- [[ (6.2)
-local function GetLevelDescription(unit)
-	local description
-	if unit.reaction ~= "FRIENDLY" then
-		description = "Level "..unit.level
-		if unit.isElite then description = description.." (Elite)" end
-		return description
-	end
-end
-
-local HubCustomText = TidyPlatesHubFunctions.SetCustomText
-local function CustomText(unit)
-	if unit.style == "NameOnly" then
-		local description, elite
-		if TidyPlatesData.UnitDescriptions and unit.type == "NPC" then
-		--if TidyPlatesData.UnitDescriptions then
-			return (TidyPlatesData.UnitDescriptions[unit.name] or GetLevelDescription(unit) or "") , 1, 1, 1, .70
-		end
-	end
-	return HubCustomText(unit) 
-end
-Theme.SetCustomText = CustomText
-
-local StyleIndex = {"Default", "NameOnly"}
-local function SetStyleDelegate(unit)
-	return StyleIndex[TidyPlatesHubFunctions.SetMultistyle(unit)] or "Default"
-end
-
-Theme.SetStyle = SetStyleDelegate		-- (6.2)
-
-local GreyColor = { r = 98/255, g = 98/255, b = 98/255}
-local function NameColorDelegate(unit)
-	local class = TidyPlatesData.UnitClass[unit.name]
-	local color
-	if class then 
-		color = RAID_CLASS_COLORS[class]
-	end
-	if color then return color.r, color.g, color.b end
-	return TidyPlatesHubFunctions.SetNameColor(unit)
-end
---Theme.SetNameColor = NameColorDelegate
---]]
-
+Theme.SetStyle = TidyPlatesHubFunctions.SetStyleBinary
+Theme.SetCustomText = TidyPlatesHubFunctions.SetCustomTextBinary
 Theme.OnInitialize = OnInitialize		-- Need to provide widget positions
 Theme.OnActivateTheme = OnActivateTheme -- called by Tidy Plates Core, Theme Loader
-Theme.OnApplyThemeCustomization = OnApplyDamageCustomization -- Called By Hub Panel
+Theme.OnApplyThemeCustomization = ApplyDamageCustomization -- Called By Hub Panel
 
 do
 	local TankTheme = CopyTable(Theme)
 	TidyPlatesThemeList[TankThemeName] = TankTheme
 	
-	local function OnApplyTankCustomization()
-		OnApplyThemeCustomization(TankTheme)  -- OnApplyTankCustomization
+	local function ApplyTankCustomization()
+		ApplyThemeCustomization(TankTheme)
 	end
 
 	local function OnActivateTheme(themeTable)
 		if TankTheme == themeTable then
 			LocalVars = TidyPlatesHubFunctions:UseTankVariables()
-			OnApplyTankCustomization()
+			ApplyTankCustomization()
 		end
 	end
 	
 	TankTheme.OnActivateTheme = OnActivateTheme -- called by Tidy Plates Core, Theme Loader
-	TankTheme.OnApplyThemeCustomization = OnApplyTankCustomization -- Called By Hub Panel
+	TankTheme.OnApplyThemeCustomization = ApplyTankCustomization -- Called By Hub Panel
 	TankTheme.ShowConfigPanel = ShowTidyPlatesHubTankPanel
 end
 

@@ -16,18 +16,6 @@ local function round(input, places)
     end
 end
 
--- for keeping a set's icon intact when it is updated
-local function GetTextureIndex(tex) -- blatantly stolen from Tekkubs EquipSetUpdate. Thanks!
-    RefreshEquipmentSetIconInfo()
-    tex = tex:lower()
-    local numicons = GetNumMacroIcons()
-    for i = INVSLOT_FIRST_EQUIPPED, INVSLOT_LAST_EQUIPPED do if GetInventoryItemTexture("player", i) then numicons = numicons + 1 end end
-    for i = 1, numicons do
-        local texture, index = GetEquipmentSetIconInfo(i)
-        if texture:lower() == tex then return index end
-    end
-end
-
 -- create Addon object
 TopFit = LibStub("AceAddon-3.0"):NewAddon("TopFit", "AceConsole-3.0")
 TopFit.locale = addon.locale
@@ -212,19 +200,17 @@ function TopFit:onUpdateForEquipment(elapsed)
         
         -- save equipment set
         if (CanUseEquipmentSets()) then
+            local texture
             setName = TopFit:GenerateSetName(TopFit.currentSetName)
             -- check if a set with this name exists
             if (GetEquipmentSetInfoByName(setName)) then
                 texture = GetEquipmentSetInfoByName(setName)
-                texture = "Interface\\Icons\\"..texture
-                
-                textureIndex = GetTextureIndex(texture)
             else
-                textureIndex = GetTextureIndex("Interface\\Icons\\Spell_Holy_EmpowerChampion")
+                texture = "Spell_Holy_EmpowerChampion"
             end
             
-            TopFit:Debug("Trying to save set: "..setName..", "..(textureIndex or "nil"))
-            SaveEquipmentSet(setName, textureIndex)
+            TopFit:Debug("Trying to save set: "..setName..", "..(texture or "nil"))
+            SaveEquipmentSet(setName, texture)
         end
     
         -- we are done with this set
@@ -439,18 +425,29 @@ function TopFit:OnInitialize()
     end
     
     -- tables of itemIDs for heirlooms which change armor type
+    -- 1: head, 3: shoulder, 5: chest
     TopFit.heirloomInfo = {
         plateHeirlooms = {
+            [1] = {
+                [1] = 69887,
+                [2] = 61931,
+             },
             [3] = {
                 [1] = 42949,
                 [2] = 44100,
                 [3] = 44099,
+                [4] = 69890,
             },
             [5] = {
                 [1] = 48685,
+                [2] = 69889,
             },
         },
         mailHeirlooms = {
+            [1] = {
+                [1] = 61936,
+                [2] = 61935,
+            },
             [3] = {
                 [1] = 44102,
                 [2] = 42950,
@@ -545,21 +542,7 @@ function TopFit:FrameOnEvent(event, ...)
         if TopFit:collectEquippableItems() and not TopFit.loginDelay then
             -- new equippable item in inventory!!!!
             -- calculate set silently if player wishes
-            if not TopFit.workSetList then
-                TopFit.workSetList = {}
-            end
-            local runUpdate = false;
-            if (TopFit.db.profile.defaultUpdateSet and GetActiveTalentGroup() == 1) then
-                tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet)
-                runUpdate = true;
-            end
-            if (TopFit.db.profile.defaultUpdateSet2 and GetActiveTalentGroup() == 2) then
-                tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet2)
-                runUpdate = true;
-            end
-            if runUpdate then
-                TopFit:CalculateSets(true) -- calculate silently
-            end
+            TopFit:RunAutoUpdate(true)
         end
     elseif (event == "PLAYER_LEVEL_UP") then
         -- remove cache info for heirlooms so they are rescanned
@@ -571,36 +554,48 @@ function TopFit:FrameOnEvent(event, ...)
         end
         
         -- if an auto-update-set is set, update that as well
-            if not TopFit.workSetList then
-                TopFit.workSetList = {}
-            end
-            local runUpdate = false;
-            if (TopFit.db.profile.defaultUpdateSet and GetActiveTalentGroup() == 1) then
-                tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet)
-                runUpdate = true;
-            end
-            if (TopFit.db.profile.defaultUpdateSet2 and GetActiveTalentGroup() == 2) then
-                tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet2)
-                runUpdate = true;
-            end
-            if runUpdate then
-                -- because right on level up there seem to be problems finding the items for equipping, delay the actual update
-                if (not TopFit.eventFrame:HasScript("OnUpdate")) then
-                    TopFit.delayCalculation = 100
-                    TopFit.eventFrame:SetScript("OnUpdate", function(self)
-                        if (TopFit.delayCalculation > 0) then
-                            TopFit.delayCalculation = TopFit.delayCalculation - 1
-                        else
-                            TopFit.eventFrame:SetScript("OnUpdate", nil)
-                            TopFit:CalculateSets(true) -- calculate silently
-                        end
-                    end)
-                end
-            end
+        TopFit:RunAutoUpdate()
     elseif (event == "ACTIVE_TALENT_GROUP_CHANGED") then
         TopFit:ClearCache()
+        if not TopFit.db.profile.preventAutoUpdateOnRespec then
+            TopFit:RunAutoUpdate()
+        end
     elseif (event == "PLAYER_TALENT_UPDATE") then
         TopFit:ClearCache()
+    end
+end
+
+function TopFit:RunAutoUpdate(skipDelay)
+    if not TopFit.workSetList then
+        TopFit.workSetList = {}
+    end
+    local runUpdate = false;
+    if (TopFit.db.profile.defaultUpdateSet and GetActiveTalentGroup() == 1) then
+        tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet)
+        runUpdate = true;
+    end
+    if (TopFit.db.profile.defaultUpdateSet2 and GetActiveTalentGroup() == 2) then
+        tinsert(TopFit.workSetList, TopFit.db.profile.defaultUpdateSet2)
+        runUpdate = true;
+    end
+    if runUpdate then
+        if not TopFit.autoUpdateTimerFrame then
+            TopFit.autoUpdateTimerFrame = CreateFrame("Frame")
+        end
+        -- because right on level up there seem to be problems finding the items for equipping, delay the actual update
+        if not skipDelay then
+            TopFit.delayCalculation = 0.5 -- delay in seconds until update
+        else
+            TopFit.delayCalculation = 0
+        end
+        TopFit.autoUpdateTimerFrame:SetScript("OnUpdate", function(self, delay)
+            if (TopFit.delayCalculation > 0) then
+                TopFit.delayCalculation = TopFit.delayCalculation - delay
+            else
+                TopFit.autoUpdateTimerFrame:SetScript("OnUpdate", nil)
+                TopFit:CalculateSets(true) -- calculate silently
+            end
+        end)
     end
 end
 
@@ -618,14 +613,11 @@ function TopFit:CreateEquipmentSet(set)
         -- check if a set with this name exists
         if (GetEquipmentSetInfoByName(setName)) then
             texture = GetEquipmentSetInfoByName(setName)
-            texture = "Interface\\Icons\\"..texture
-            
-            textureIndex = GetTextureIndex(texture)
         else
-            textureIndex = GetTextureIndex("Interface\\Icons\\Spell_Holy_EmpowerChampion")
+            texture = "Spell_Holy_EmpowerChampion"
         end
         
-        TopFit:Debug("Trying to save set: "..setName..", "..(textureIndex or "nil"))
-        SaveEquipmentSet(setName, textureIndex)
+        TopFit:Debug("Trying to create set: "..setName..", "..(texture or "nil"))
+        SaveEquipmentSet(setName, texture)
     end
 end

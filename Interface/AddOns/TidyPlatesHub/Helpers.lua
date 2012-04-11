@@ -8,6 +8,15 @@ local PrefixList = {
    ["NO"] = 3,
    ["CC"] = 4,
    ["OTHER"] = 5,
+   ["All"] = 1,
+   ["My"] = 2,
+   ["No"] = 3,
+   ["Other"] = 5,
+   ["all"] = 1,
+   ["my"] = 2,
+   ["no"] = 3,
+   ["cc"] = 4,
+   ["other"] = 5,
 }
 
 local function CallForStyleUpdate()
@@ -16,12 +25,15 @@ local function CallForStyleUpdate()
 	end
 end
 
-local function GetPanelValues(panel, targetTable, cloneTable)
+local function GetPanelValues(panel, targetTable)
 	local index
 	for index in pairs(targetTable) do
 		if panel[index] then
 			targetTable[index] = panel[index]:GetValue()
-			cloneTable[index] = targetTable[index]
+	--for index, widget in pairs(panel) do
+		--if widget.GetValue then
+			--targetTable[index] = widget:GetValue()
+
 		end
 	end
 end
@@ -58,13 +70,12 @@ local function ConvertStringToTable(source, target )
 	target = wipe(target)
 	
 	for index = 1, #source do
-		local str = source[index]
+		local str = temp[index]
 		if str then target[str] = true end
 	end		
 end
 
 local function ConvertDebuffListTable(source, target, order)
---local function ConvertStringToTable(source, target, prefixes, order)
 	local temp = ListToTable(strsplit("\n", source))
 	target = wipe(target)
 	if order then order = wipe(order) end
@@ -72,7 +83,9 @@ local function ConvertDebuffListTable(source, target, order)
 	for index = 1, #temp do
 		local str = temp[index]
 		local item
-		local _, _, prefix, suffix = string.find( str, "(%w+)[%s%p]*(.*)");
+		local _, prefix, suffix
+		_, _, prefix, suffix = string.find( str, "(%w+)[%s%p]*(.*)");
+		--print(prefix, index, suffix)
 		if prefix then
 			if PrefixList[prefix] then
 				item = suffix
@@ -84,7 +97,8 @@ local function ConvertDebuffListTable(source, target, order)
 			end
 			if order then order[item] = index end
 		end
-	end		
+	end	
+	
 end
 
 
@@ -98,9 +112,16 @@ TidyPlatesHubHelpers.GetSavedVariables = GetSavedVariables
 TidyPlatesHubHelpers.ListToTable = ListToTable
 TidyPlatesHubHelpers.ConvertStringToTable = ConvertStringToTable
 TidyPlatesHubHelpers.ConvertDebuffListTable = ConvertDebuffListTable
--- TidyPlatesHubHelpers.CreateHubInterfacePanel = CreateHubInterfacePanel
 
-
+--[[
+local CallForStyleUpdate = TidyPlatesHubHelpers.CallForStyleUpdate
+local GetPanelValues = TidyPlatesHubHelpers.GetPanelValues
+local SetPanelValues = TidyPlatesHubHelpers.SetPanelValues
+local GetSavedVariables = TidyPlatesHubHelpers.GetSavedVariables
+local ListToTable = TidyPlatesHubHelpers.ListToTable
+local ConvertStringToTable = TidyPlatesHubHelpers.ConvertStringToTable
+local ConvertDebuffListTable = TidyPlatesHubHelpers.ConvertDebuffListTable
+--]]
 
 
 

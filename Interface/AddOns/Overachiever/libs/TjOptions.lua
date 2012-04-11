@@ -10,13 +10,16 @@
 --  See TjOptions.txt for documentation.
 --
 
-local THIS_VERSION = 0.41
+local THIS_VERSION = 0.42
 
 if (not TjOptions or TjOptions.Version < THIS_VERSION) then
   TjOptions = TjOptions or {};
   local TjOptions = TjOptions
   local oldver = TjOptions.Version or 0
   TjOptions.Version = THIS_VERSION;
+  
+  local MAIN_HEIGHT, MAIN_WIDTH = 546, 588  --410, 382
+  local SCROLLCHILD_HEIGHT, SCROLLCHILD_WIDTH = MAIN_HEIGHT - 40, MAIN_WIDTH - 12  --370, 370
 
   local type = type
 
@@ -352,7 +355,7 @@ if (not TjOptions or TjOptions.Version < THIS_VERSION) then
       panel.titleLabel:SetPoint("TOPLEFT", panel, "TOPLEFT", 16, -16);
       panel.titleLabel:SetText(tab.title);
       if (tab.titleCenter) then
-        panel.titleLabel:SetWidth(382)
+        panel.titleLabel:SetWidth(MAIN_WIDTH)
         panel.titleLabel:SetJustifyH("CENTER")
       end
     end
@@ -362,12 +365,12 @@ if (not TjOptions or TjOptions.Version < THIS_VERSION) then
       local scrollname = type(tab.scrolling) == "string" and tab.scrolling or ScrollFrameGlobalName..(TjOptions.numScrollFrames + 1)
       local scrollframe = CreateFrame("ScrollFrame", scrollname, panel, "UIPanelScrollFrameTemplate")
       TjOptions.numScrollFrames = TjOptions.numScrollFrames + 1
-      scrollframe:SetWidth(382)
+      scrollframe:SetWidth(MAIN_WIDTH)
       if (panel.titleLabel) then
-        scrollframe:SetHeight(398 - panel.titleLabel:GetHeight())
+        scrollframe:SetHeight(MAIN_HEIGHT - 12 - panel.titleLabel:GetHeight())
         scrollframe:SetPoint("TOPLEFT", panel.titleLabel, "TOPLEFT", -16, -21)
       else
-        scrollframe:SetHeight(410)
+        scrollframe:SetHeight(MAIN_HEIGHT)
         scrollframe:SetPoint("TOPLEFT", panel, "TOPLEFT", 0, -9)
       end
 
@@ -377,8 +380,8 @@ if (not TjOptions or TjOptions.Version < THIS_VERSION) then
       scrollbarBG:SetAllPoints()
 
       local scrollchild = CreateFrame("Frame", nil, scrollframe)
-      scrollchild:SetHeight(370)
-      scrollchild:SetWidth(370)
+      scrollchild:SetHeight(SCROLLCHILD_HEIGHT)
+      scrollchild:SetWidth(SCROLLCHILD_WIDTH)
       scrollchild:SetPoint("TOPLEFT", scrollframe, "TOPLEFT")
       scrollframe:SetScrollChild(scrollchild)
       panel.TjOpt_scrollchild = scrollchild
@@ -831,7 +834,7 @@ if (not TjOptions or TjOptions.Version < THIS_VERSION) then
 
   local function CreateLabel_wrap(name, parent, data, font)
     data.justifyH = data.justifyH or "LEFT"
-    data.width = data.width or 370
+    data.width = data.width or SCROLLCHILD_WIDTH
   end
 
   -- Register built-in item types:

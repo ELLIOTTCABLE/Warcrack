@@ -1,6 +1,6 @@
 ﻿--
 -- AutoBar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 -- Courtesy of PDI175, lostcup
 --
 
@@ -184,7 +184,6 @@ if (GetLocale() == "zhCN") then
 		["Shift-Click"] = "Shift+点击",
 		["Ctrl-Shift-Click"] = "Ctrl+Shift+点击",
 		["ButtonFacade is required to Skin the Buttons"] = "ButtonFacade 需要按钮皮肤",
-		["Waterfall-1.0 is required to access the GUI"] = "要进入这个GUI界面你需要安装WaterFall 1.0",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "基本",

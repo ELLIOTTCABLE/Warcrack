@@ -1,6 +1,7 @@
 -- obj:SetTexCoord(crop.left, crop.right, crop.top, crop.bottom)
 
 local fraction, range, value, barsize
+
 local function UpdateBar(self)
 	range = self.MaxVal - self.MinVal 
 	value = self.Value - self.MinVal

@@ -6,7 +6,8 @@ if not TidyPlatesThemeList then TidyPlatesThemeList = {} end
 
 local theme = {}
 local defaultArtPath = "Interface\\Addons\\TidyPlates\\Media"
-local font =					"FONTS\\arialn.ttf"
+--local font =					"FONTS\\arialn.ttf"
+local font =					NAMEPLATE_FONT
 local EMPTY_TEXTURE = defaultArtPath.."\\Empty"
 
 --[[  Theme elements
@@ -136,7 +137,7 @@ theme.healthbar = {
 	y = 10,
 	anchor = "CENTER",
 	orientation = "HORIZONTAL",
-	texcoord = {left = 0,right = 1,top = 0,bottom = 1}, 		-- Does nothing, at the moment
+	
 	linkwidth = false,
 	edgeFile = EMPTY_TEXTURE,
 	edgeSize = 1,
@@ -152,7 +153,7 @@ theme.castbar = {
 	y = -19,
 	anchor = "CENTER",
 	orientation = "HORIZONTAL",
-	texcoord = {left = 0,right = 1,top = 0,bottom = 1}, 		-- Does nothing, at the moment
+	
 	linkwidth = false,
 	edgeFile = EMPTY_TEXTURE,
 	edgeSize = 1,		-- Border thickness and corner size

@@ -1,7 +1,7 @@
-## Interface: 40200
+## Interface: 40300
 ## Title: Tidy Plates: Grey Theme
 ## Notes: Use apostrophes wisely. 
-## Author: A very very foolish man
+## Author: Binny
 ## Dependencies: TidyPlates, TidyPlatesHub
 
 Grey.lua

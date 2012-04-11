@@ -72,9 +72,11 @@ function IceCustomBar.prototype:ConditionalSubscribe()
 				self.CustomBarUpdateFunc = function() self:UpdateCustomBar() end
 			end
 
+			self.handlesOwnUpdates = true
 			IceHUD.IceCore:RequestUpdates(self, self.CustomBarUpdateFunc)
 		end
 	else
+		self.handlesOwnUpdates = false
 		IceHUD.IceCore:RequestUpdates(self, nil)
 	end
 end
@@ -270,9 +272,10 @@ function IceCustomBar.prototype:GetOptions()
 		end,
 		set = function(info, v)
 			local orig = v
-			if tonumber(v) ~= nil then
-				v = GetSpellInfo(tonumber(v))
-			end
+			--Parnic: we now allow spell IDs to be used directly
+			--if tonumber(v) ~= nil then
+			--	v = GetSpellInfo(tonumber(v))
+			--end
 			if v == nil then
 				v = orig
 			end
@@ -585,17 +588,24 @@ function IceCustomBar.prototype:GetAuraDuration(unitName, buffName)
 	local remaining
 	local isBuff = self.moduleSettings.buffOrDebuff == "buff" and true or false
 	local buffFilter = (isBuff and "HELPFUL" or "HARMFUL") .. (self.moduleSettings.trackOnlyMine and "|PLAYER" or "")
-	local buff, rank, texture, count, type, duration, endTime, unitCaster = UnitAura(unitName, i, buffFilter)
+	local buff, rank, texture, count, type, duration, endTime, unitCaster, _, _, spellId = UnitAura(unitName, i, buffFilter)
 	local isMine = unitCaster == "player"
+	local mySpellId = tonumber(self.moduleSettings.buffToTrack)
+	local checkId = mySpellId ~= nil
+	local validId = true
 
 	while buff do
 		if self.moduleSettings.maxDuration and self.moduleSettings.maxDuration ~= 0 then
 			duration = self.moduleSettings.maxDuration
 		end
 
+		if checkId and self.moduleSettings.exactMatch then
+			validId = spellId == mySpellId
+		end
+
 		if (((self.moduleSettings.exactMatch and buff:upper() == buffName:upper())
 				or (not self.moduleSettings.exactMatch and string.match(buff:upper(), buffName:upper())))
-			and (not self.moduleSettings.trackOnlyMine or isMine)) then
+				and (not self.moduleSettings.trackOnlyMine or isMine) and validId) then
 			if endTime and not remaining then
 				remaining = endTime - GetTime()
 			end
@@ -604,7 +614,7 @@ function IceCustomBar.prototype:GetAuraDuration(unitName, buffName)
 
 		i = i + 1;
 
-		buff, rank, texture, count, type, duration, endTime, unitCaster = UnitAura(unitName, i, buffFilter)
+		buff, rank, texture, count, type, duration, endTime, unitCaster, _, _, spellId = UnitAura(unitName, i, buffFilter)
 		isMine = unitCaster == "player"
 	end
 
@@ -654,8 +664,13 @@ function IceCustomBar.prototype:UpdateCustomBar(unit, fromUpdate)
 	local endTime = 0
 
 	if not fromUpdate then
-		self.auraDuration, remaining, count, auraIcon, endTime =
-			self:GetAuraDuration(self.unit, self.moduleSettings.buffToTrack)
+		if tonumber(self.moduleSettings.buffToTrack) == nil then
+			self.auraDuration, remaining, count, auraIcon, endTime =
+				self:GetAuraDuration(self.unit, self.moduleSettings.buffToTrack)
+		else
+			self.auraDuration, remaining, count, auraIcon, endTime =
+				self:GetAuraDuration(self.unit, GetSpellInfo(self.moduleSettings.buffToTrack))
+		end
 
 		if endTime == 0 then
 			self.bIsAura = true
@@ -687,6 +702,7 @@ function IceCustomBar.prototype:UpdateCustomBar(unit, fromUpdate)
 				self.UpdateCustomBarFunc = function() self:UpdateCustomBar(self.unit, true) end
 			end
 
+			self.handlesOwnUpdates = true
 			IceHUD.IceCore:RequestUpdates(self, self.UpdateCustomBarFunc)
 		end
 
@@ -705,6 +721,7 @@ function IceCustomBar.prototype:UpdateCustomBar(unit, fromUpdate)
 		self:UpdateBar(0, "undef")
 		self:Show(false)
 		if not self:ShouldAlwaysSubscribe() then
+			self.handlesOwnUpdates = false
 			IceHUD.IceCore:RequestUpdates(self, nil)
 		end
 	end

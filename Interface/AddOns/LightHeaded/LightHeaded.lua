@@ -360,26 +360,23 @@ end
 --  GetZoneTableCode.lua to get a mapping from WowHead zone numeric id to
 --  MPQ filename.  This allows for local independent mapping of coordinates
 
-local wzid = { -- PUT THE TABLE HERE }
+local wzid = {
+}
 
-local ltofile = {}
--- Create mapping table
-local c = {GetMapContinents()}
-for cid in ipairs(c) do
-   local z = {GetMapZones(cid)}
-   for zid,zname in ipairs(z) do
-      SetMapZoom(cid, zid)
-      local file = GetMapInfo()
-      ltofile[zname] = file
+local ntoid = {}
+for i = 0, 5000 do
+   local name = GetMapNameByID(i)
+   if name then
+      ntoid[name] = i
    end
 end
 
 for k,v in pairs(wzid) do
-   if not ltofile[v] then
+   if not ntoid[v] then
       print("NO ZONE INFO FOR : " .. v)
       wzid[k] = nil
    else
-      wzid[k] = ltofile[v]
+      wzid[k] = ntoid[v]
    end
 end
 
@@ -401,109 +398,150 @@ frame:SetAutoFocus(false)
 frame:Show()
 frame:SetHeight(400)
 frame:SetWidth(400)
-frame:SetText(out)
+frame:SetText(out)-------------------------------------------------------------------------]]--
 
--------------------------------------------------------------------------]]--
-
+-- A mapping from wowhead zone id (dbc) to in-game map id
 local zidmap = {
-   [1] = "DunMorogh",
-   [3] = "Badlands",
-   [4] = "BlastedLands",
-   [8] = "SwampOfSorrows",
-   [10] = "Duskwood",
-   [11] = "Wetlands",
-   [12] = "Elwynn",
-   [14] = "Durotar",
-   [15] = "Dustwallow",
-   [16] = "Aszhara",
-   [17] = "Barrens",
-   [28] = "WesternPlaguelands",
-   [33] = "Stranglethorn",
-   [36] = "Alterac",
-   [38] = "LochModan",
-   [40] = "Westfall",
-   [41] = "DeadwindPass",
-   [44] = "Redridge",
-   [45] = "Arathi",
-   [46] = "BurningSteppes",
-   [47] = "Hinterlands",
-   [51] = "SearingGorge",
-   [65] = "Dragonblight",
-   [66] = "ZulDrak",
-   [67] = "TheStormPeaks",
-   [85] = "Tirisfal",
-   [130] = "Silverpine",
-   [139] = "EasternPlaguelands",
-   [141] = "Teldrassil",
-   [148] = "Darkshore",
-   [210] = "IcecrownGlacier",
-   [215] = "Mulgore",
-   [267] = "Hilsbrad",
-   [331] = "Ashenvale",
-   [357] = "Feralas",
-   [361] = "Felwood",
-   [394] = "GrizzlyHills",
-   [400] = "ThousandNeedles",
-   [405] = "Desolace",
-   [406] = "StonetalonMountains",
-   [440] = "Tanaris",
-   [490] = "UngoroCrater",
-   [493] = "Moonglade",
-   [495] = "HowlingFjord",
-   [618] = "Winterspring",
-   [1377] = "Silithus",
-   [1497] = "Undercity",
-   [1519] = "Stormwind",
-   [1537] = "Ironforge",
-   [1637] = "Ogrimmar",
-   [1638] = "ThunderBluff",
-   [1657] = "Darnassis",
-   [3430] = "EversongWoods",
-   [3433] = "Ghostlands",
-   [3483] = "Hellfire",
-   [3487] = "SilvermoonCity",
-   [3518] = "Nagrand",
-   [3519] = "TerokkarForest",
-   [3520] = "ShadowmoonValley",
-   [3521] = "Zangarmarsh",
-   [3522] = "BladesEdgeMountains",
-   [3523] = "Netherstorm",
-   [3524] = "AzuremystIsle",
-   [3525] = "BloodmystIsle",
-   [3537] = "BoreanTundra",
-   [3557] = "TheExodar",
-   [3703] = "ShattrathCity",
-   [3711] = "SholazarBasin",
-   [4080] = "Sunwell",
-   [4197] = "LakeWintergrasp",
-   [4395] = "Dalaran",
+   [1] = "27",
+   [3] = "17",
+   [4] = "19",
+   [8] = "38",
+   [10] = "34",
+   [11] = "40",
+   [12] = "30",
+   [14] = "4",
+   [15] = "141",
+   [16] = "181",
+   [17] = "11",
+   [28] = "22",
+   [33] = "37",
+   [38] = "35",
+   [40] = "39",
+   [41] = "32",
+   [44] = "36",
+   [45] = "16",
+   [46] = "29",
+   [47] = "26",
+   [51] = "28",
+   [65] = "488",
+   [66] = "496",
+   [67] = "495",
+   [85] = "20",
+   [130] = "21",
+   [139] = "23",
+   [141] = "41",
+   [148] = "42",
+   [209] = "764",
+   [210] = "492",
+   [215] = "9",
+   [267] = "24",
+   [331] = "43",
+   [357] = "121",
+   [361] = "182",
+   [394] = "490",
+   [400] = "61",
+   [405] = "101",
+   [406] = "81",
+   [440] = "161",
+   [490] = "201",
+   [491] = "761",
+   [493] = "241",
+   [495] = "491",
+   [616] = "683",
+   [618] = "281",
+   [722] = "760",
+   [796] = "762",
+   [1176] = "686",
+   [1377] = "261",
+   [1497] = "382",
+   [1519] = "301",
+   [1537] = "341",
+   [1637] = "321",
+   [1638] = "362",
+   [1657] = "381",
+   [1977] = "793",
+   [2017] = "765",
+   [2057] = "763",
+   [2100] = "750",
+   [2366] = "733",
+   [2367] = "734",
+   [2597] = "401",
+   [2817] = "510",
+   [3430] = "462",
+   [3433] = "463",
+   [3483] = "465",
+   [3487] = "480",
+   [3518] = "477",
+   [3519] = "478",
+   [3520] = "473",
+   [3521] = "467",
+   [3522] = "475",
+   [3523] = "479",
+   [3524] = "464",
+   [3525] = "476",
+   [3537] = "486",
+   [3557] = "471",
+   [3703] = "481",
+   [3711] = "493",
+   [3805] = "781",
+   [4080] = "499",
+   [4197] = "501",
+   [4228] = "528",
+   [4265] = "803",
+   [4298] = "502",
+   [4395] = "504",
+   [4706] = "684",
+   [4709] = "607",
+   [4714] = "679",
+   [4720] = "682",
+   [4737] = "605",
+   [4755] = "611",
+   [4812] = "604",
+   [4813] = "602",
+   [4815] = "610",
+   [4820] = "603",
+   [4922] = "770",
+   [4987] = "609",
+   [5034] = "748",
+   [5042] = "640",
+   [5095] = "708",
+   [5144] = "615",
+   [5145] = "614",
+   [5146] = "613",
+   [5287] = "673",
+   [5389] = "709",
+   [5396] = "747",
+   [5416] = "751",
+   [5695] = "772",
+   [5733] = "795",
+   [5788] = "816",
+   [5789] = "820",
+   [5844] = "819",
+   [5861] = "823",
+   [5892] = "824",
 }
 
 local czmap = {}
-function LightHeaded:FileToCZ(file)
-	if not next(czmap) then
-		local oc = GetCurrentMapContinent()
-		local oz = GetCurrentMapZone()
+function LightHeaded:WZIDToCZ(zid)
+	local mapid = zidmap[zid]
+	if mapid then
+		mapid = tonumber(mapid)
 
-		-- Create mapping table
-		local c = {GetMapContinents()}
-		for cid in ipairs(c) do
-			local z = {GetMapZones(cid)}
-			for zid in ipairs(z) do
-				SetMapZoom(cid, zid)
-				local file = GetMapInfo()
-				czmap[file] = {cid, zid}
+		-- Fill up the list
+		if not next(czmap) then
+			local c = {GetMapContinents()}
+			for cid, cname in ipairs(c) do
+				local z = {GetMapZones(cid)}
+				for zid, zname in ipairs(z) do
+					czmap[zname] = {cid, zid}
+				end
 			end
 		end
-	end
 
-	if czmap[file] then
-		return unpack(czmap[file])
+		-- Spit it out
+		local name = GetMapNameByID(mapid)
+		return unpack(czmap[name])
 	end
-end
-
-function LightHeaded:WZIDToCZ(zid)
-	return self:FileToCZ(zidmap[zid])
 end
 
 -- IMPORTANT: Addon authors that wish to use this API and data should
@@ -511,10 +549,18 @@ end
 -- They are kind enough to let me continue parsing their database, and we
 -- owe them at least that much.  Thank you.
 
+-- COMMENTINFO:
+-- Comment format in the data files has changed:
+--   user, userRating, rating, sticky, date, body (\031)
+--
+-- Replies use the same format and follow after a comment
+
 function LightHeaded:GetNumQuestComments(qid)
 	local data = self:GetQuestData(qid)
 	return data and #data - 1 or 0
 end
+
+local comment_pattern = string.rep("([^\031]*)\031", 6) .. "$"
 
 function LightHeaded:GetQuestComment(qid, idx)
 	-- Adjust for offset
@@ -522,8 +568,9 @@ function LightHeaded:GetQuestComment(qid, idx)
 	local data = self:GetQuestData(qid)
 	local cinfo = data and data[idx]
 	if cinfo then
-		local qid,cid,rating,indent,parent,date,poster,comment = cinfo:match("([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)$")
-		return qid,cid,rating,indent,parent,date,poster,comment
+		local user, urating, rating, sticky, date, body = cinfo:match(comment_pattern)
+		return qid, 0, rating, 0, 0, date, user, body
+		--return qid,cid,rating,indent,parent,date,poster,comment
 	end
 end
 
@@ -531,8 +578,9 @@ local function iter_comments(tbl, idx)
 	idx = idx + 1
 	local val = tbl and tbl[idx]
 	if val then
-		local qid,cid,rating,indent,parent,date,poster,comment = val:match("([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)\031([^\031]*)$")
-		return idx,qid,cid,rating,indent,parent,date,poster,comment
+		local user, urating, rating, sticky, date, body = cinfo:match(comment_pattern)
+		return qid, 0, rating, 0, 0, date, user, body
+		--return idx,qid,cid,rating,indent,parent,date,poster,comment
 	end
 end
 
@@ -1828,13 +1876,7 @@ function LightHeaded:CreateGUI()
 
 	lhframe.scroll:SetScrollChild(lhframe.scrollchild)
 
---	text = "<HTML><BODY>"
---	text = text .. "<P>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed quis lacus. Mauris fringilla consequat velit. Aenean dolor libero, placerat nec, feugiat sed, tincidunt ac, leo. In hac habitasse platea dictumst. Aliquam non sem adipiscing massa sagittis suscipit. Pellentesque ultrices nisl at ante. Vestibulum dapibus. Nulla facilisi. Nullam lobortis dictum diam. Donec mollis augue ut nulla. Donec ullamcorper mauris sit amet erat. Vivamus ante augue, rutrum sit amet, iaculis sit amet, congue vel, risus. Sed magna. Sed a eros. Aenean sed orci nec sem dapibus fringilla. Donec id diam. Praesent adipiscing. Sed dignissim pellentesque velit. Aenean blandit sapien a ipsum. Quisque tempus commodo erat.</P>"
---	text = text .. "<P>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed quis lacus. Mauris fringilla consequat velit. Aenean dolor libero, placerat nec, feugiat sed, tincidunt ac, leo. In hac habitasse platea dictumst. Aliquam non sem adipiscing massa sagittis suscipit. Pellentesque ultrices nisl at ante. Vestibulum dapibus. Nulla facilisi. Nullam lobortis dictum diam. Donec mollis augue ut nulla. Donec ullamcorper mauris sit amet erat. Vivamus ante augue, rutrum sit amet, iaculis sit amet, congue vel, risus. Sed magna. Sed a eros. Aenean sed orci nec sem dapibus fringilla. Donec id diam. Praesent adipiscing. Sed dignissim pellentesque velit. Aenean blandit sapien a ipsum. Quisque tempus commodo erat.</P>"
---	text = text .. "</BODY></HTML>"
-
-	local text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed quis lacus. Mauris fringilla consequat velit. Aenean dolor libero, placerat nec, feugiat sed, tincidunt ac, leo. In hac habitasse platea dictumst. Aliquam non sem adipiscing massa sagittis suscipit. Pellentesque ultrices nisl at ante. Vestibulum dapibus. Nulla facilisi. Nullam lobortis dictum diam. Donec mollis augue ut nulla. Donec ullamcorper mauris sit amet erat. Vivamus ante augue, rutrum sit amet, iaculis sit amet, congue vel, risus. Sed magna. Sed a eros. Aenean sed orci nec sem dapibus fringilla. Donec id diam. Praesent adipiscing. Sed dignissim pellentesque velit. Aenean blandit sapien a ipsum. Quisque tempus commodo erat."
-	text = text .. "\n\nLorem |cffffffffipsum|r dolor |cffff3311sit amet|r, consectetuer adipiscing elit. Sed quis lacus. Mauris fringilla consequat velit. Aenean dolor libero, placerat nec, feugiat sed, tincidunt ac, leo. In hac habitasse platea dictumst. Aliquam non sem adipiscing massa sagittis suscipit. Pellentesque ultrices nisl at ante. Vestibulum dapibus. Nulla facilisi. Nullam lobortis dictum diam. Donec mollis augue ut nulla. Donec ullamcorper mauris sit amet erat. Vivamus ante augue, rutrum sit amet, iaculis sit amet, congue vel, risus. Sed magna. Sed a eros. Aenean sed orci nec sem dapibus fringilla. Donec id diam. Praesent adipiscing. Sed dignissim pellentesque velit. Aenean blandit sapien a ipsum. Quisque tempus commodo erat."
+	local text = "Please select a quest in your quest log, or type a name/id into the above search box"
 
 	local function resizebg(frame)
 		local width = frame:GetWidth() - 5

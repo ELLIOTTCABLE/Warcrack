@@ -121,10 +121,11 @@ do
 end
 
 
-local InventoryFrame = LibStub('Classy-1.0'):New('Frame'); Addon.Frame = InventoryFrame
+local InventoryFrame = LibStub('Classy-1.0'):New('Frame');
+Addon.Frame = InventoryFrame
+Addon.Frames = {}
 
 --local references
-local _G = getfenv(0)
 local L = LibStub('AceLocale-3.0'):GetLocale('Combuctor')
 local CombuctorSet = Addon('Sets')
 
@@ -178,8 +179,8 @@ function InventoryFrame:New(titleText, settings, isBank, key)
 	f:UpdateClampInsets()
 
 	lastID = lastID + 1
-
 	table.insert(UISpecialFrames, f:GetName())
+  Addon.Frames[key] = f
 
 	return f
 end
@@ -191,14 +192,6 @@ end
 
 function InventoryFrame:UpdateTitleText()
 	self.title:SetFormattedText(self.titleText, self:GetPlayer())
-end
-
-function InventoryFrame:OnTitleEnter(title)
-	GameTooltip:SetOwner(title, 'ANCHOR_LEFT')
-	GameTooltip:SetText(title:GetText(), 1, 1, 1)
-	GameTooltip:AddLine(L.MoveTip)
-	GameTooltip:AddLine(L.ResetPositionTip)
-	GameTooltip:Show()
 end
 
 
@@ -543,18 +536,21 @@ function InventoryFrame:LoadPosition()
 end
 
 function InventoryFrame:UpdateManagedPosition()
+  local shown = self:IsShown()
+
 	if self.sets.position then
 		if self:GetAttribute('UIPanelLayout-enabled') then
-			if self:IsShown() then
-				HideUIPanel(self)
-				self:SetAttribute('UIPanelLayout-defined', false)
-				self:SetAttribute('UIPanelLayout-enabled', false)
-				self:SetAttribute('UIPanelLayout-whileDead', false)
-				self:SetAttribute('UIPanelLayout-area', nil)
-				self:SetAttribute('UIPanelLayout-pushable', nil)
+      HideUIPanel(self)
+      self:SetAttribute('UIPanelLayout-defined', false)
+      self:SetAttribute('UIPanelLayout-enabled', false)
+      self:SetAttribute('UIPanelLayout-whileDead', false)
+      self:SetAttribute('UIPanelLayout-area', nil)
+      self:SetAttribute('UIPanelLayout-pushable', nil)
+      
+      if shown then
 				ShowUIPanel(self)
-			end
-		end
+      end
+    end
 	elseif not self:GetAttribute('UIPanelLayout-enabled') then
 		self:SetAttribute('UIPanelLayout-defined', true)
 		self:SetAttribute('UIPanelLayout-enabled', true)
@@ -562,7 +558,7 @@ function InventoryFrame:UpdateManagedPosition()
 		self:SetAttribute('UIPanelLayout-area', 'left')
 		self:SetAttribute('UIPanelLayout-pushable', 1)
 
-		if self:IsShown() then
+		if shown then
 			HideUIPanel(self)
 			ShowUIPanel(self)
 		end

@@ -1,5 +1,5 @@
 
-TjOptions v0.41
+TjOptions v0.42
 ========================================
 
 Author: Tuhljin
@@ -226,7 +226,7 @@ Item Fields - label or labelwhite:
   justifyH      String. The horizontal justification of the text (such as "LEFT").
 
 Item Fields - checkbox, checkboxsmall, or checkboxnolabel:
-  One additional optional field is available for labels.
+  One additional optional field is available for checkboxes.
 
   width         Integer. Used to expand the checkbox's hit rectangle to the right. For example, using 100 means
                 the hit rectangle will be expanded 100 pixels (toward its text label, if it has one). If omitted,
@@ -487,6 +487,9 @@ Example usage:
 
 Recent changes
 ================
+
+v0.42
+- Adjusted the size of the scrolling area to better utilize the space provided by the updated Interface Options UI.
 
 v0.41
 - TjOptions now supports the use of a single variables table for multiple options "pages" and other miscellaneous

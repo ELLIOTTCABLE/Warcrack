@@ -19,6 +19,7 @@ Overachiever.DefaultSettings = {
   SchoolTip_fished = true;
   Item_consumed = true;
   Item_consumed_whencomplete = false;
+  Item_satisfied = true;
   CreatureTip_killed = false;
   LetItSnow_flaked = false;
   FistfulOfLove_petals = false;
@@ -95,6 +96,9 @@ function Overachiever.CreateOptions(THIS_TITLE, BuildCriteriaLookupTab_check, Au
 	{ type = "Oa_AchLabel", text = L.OPT_LABEL_ACHFOUR, topBuffer = 4, id1 = IDs.TastesLikeChicken, id2 = IDs.HappyHour, id3 = IDs.CataclysmicallyDelicious, id4 = IDs.DrownYourSorrows, xOffset = 0 },
 	{ variable = "Item_consumed", text = L.OPT_CONSUMEITEMTIPS, tooltip = L.OPT_CONSUMEITEMTIPS_TIP, tooltip2 = L.OPT_CONSUMEITEMTIPS_TIP2, xOffset = 28 },
 	{ variable = "Item_consumed_whencomplete", text = L.OPT_CONSUMEITEMTIPS_WHENCOMPLETE, xOffset = 39 },
+	
+	{ type = "Oa_AchLabel", topBuffer = 4, id1 = IDs.RightAsRain, xOffset = 0 },
+	{ variable = "Item_satisfied", text = L.OPT_SATISFIEDTIPS, tooltip = L.OPT_SATISFIEDTIPS_TIP, xOffset = 28 },
 
 	{ type = "labelwrap", text = L.OPT_LABEL_SEASONALACHS, justifyH = "CENTER", topBuffer = 16, xOffset = 0 },
 
@@ -119,7 +123,7 @@ function Overachiever.CreateOptions(THIS_TITLE, BuildCriteriaLookupTab_check, Au
   local mainpanel, oldver = TjOptions.CreatePanel(THIS_TITLE, nil, {
 	title = title,
 	itemspacing = 3,
-	scrolling = true,
+	--scrolling = true,
 	items = items_general,
 	variables = "Overachiever_Settings",
 	defaults = Overachiever.DefaultSettings
@@ -229,7 +233,7 @@ do
 
       data.icon1 = first
       data.justifyH = data.justifyH or "LEFT"
-      data.width = data.width or (369 - w)
+      data.width = data.width or (505 - w)
       data.lbl_yOffset = yOffset
 
       local text = data.text

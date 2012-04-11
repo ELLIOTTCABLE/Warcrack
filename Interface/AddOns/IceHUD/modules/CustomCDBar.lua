@@ -478,35 +478,22 @@ function IceCustomCDBar.prototype:GetCooldownDuration(buffName)
 	buffName = self:GetSpellNameOrId(buffName)
 
 	local now = GetTime()
-	local localDuration = nil
-	local localStart, localRemaining, hasCooldown = GetSpellCooldown(buffName)
+	local localRemaining = nil
+	local localStart, localDuration, hasCooldown = GetSpellCooldown(buffName)
 
 	if (hasCooldown == 1) then
 		-- the item has a potential cooldown
-		if localStart == 0 and localRemaining == 0 then
+		if (localDuration <= 1.5) then
 			return nil, nil
-		elseif (localStart > now) then
-			localRemaining = localRemaining + (localStart - now)
-			localDuration = localRemaining
-		else
-			localRemaining = localRemaining + (localStart - now)
-			localDuration = (now - localStart) + localRemaining
 		end
 
-		if self.moduleSettings.maxDuration and tonumber(self.moduleSettings.maxDuration) ~= 0 and localDuration > 1.5 then
+		localRemaining = localDuration + (localStart - now)
+
+		if self.moduleSettings.maxDuration and tonumber(self.moduleSettings.maxDuration) ~= 0 then
 			localDuration = tonumber(self.moduleSettings.maxDuration)
 		end
 
-		if localDuration > 1.5  then
-			return localDuration, localRemaining
-		else
-			localRemaining = (self.cooldownEndTime or now) - now
-			if localRemaining > 0 then
-				return self.cooldownDuration, localRemaining
-			else
-				return nil, nil
-			end
-		end
+		return localDuration, localRemaining
 	else
 		return nil, nil
 	end
@@ -533,6 +520,8 @@ function IceCustomCDBar.prototype:EnableUpdates(enable_update)
 			enable_update = true
 --	 	end
 	end
+
+	self.handlesOwnUpdates = enable_update
 
 	if enable_update then
 		if not self.CustomUpdateFunc then

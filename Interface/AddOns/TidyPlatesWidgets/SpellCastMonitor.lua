@@ -6,6 +6,7 @@ Tasks:
 
 
 local RaidTargetReference
+local _
 
 if (tonumber((select(2, GetBuildInfo()))) >= 14299) then
 	-- 4.2
@@ -86,7 +87,7 @@ local function OnSpellCast(...)
 	local FoundPlate = nil
 	
 	-- Gather Spell Info
-	local spell, displayName, icon, castTime
+	local spell, displayName, icon, castTime, _
 	spell, displayName, icon, _, _, _, castTime, _, _ = GetSpellInfo(spellid)
 	if not (castTime > 0) then return end
 	
@@ -179,8 +180,10 @@ TidyPlates.StopSpellCastWatcher = StopSpellCastWatcher
 function TestTidyPlatesCastBar(SearchFor, SpellID, Shielded, ForceChanneled)
 	local VisiblePlate, FoundPlate
 	local currentTime = GetTime()
-	local spell, displayName, icon, _, _, _, castTime, _, _ = GetSpellInfo(SpellID)
-	local channel
+	local spell, displayName, icon,castTime, channel, _
+	
+	spell, displayName, icon, _, _, _, castTime, _, _ = GetSpellInfo(SpellID)
+	
 	
 	print("Testing Spell Cast on", SearchFor)
 	-- Search for the nameplate, by name (you could also search by GUID)

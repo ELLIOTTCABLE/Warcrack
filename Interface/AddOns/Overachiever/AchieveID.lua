@@ -12,6 +12,8 @@ OVERACHIEVER_ACHID = {
 	HappyHour = 1833,		-- "It's Happy Hour Somewhere"
 	CataclysmicallyDelicious = 5753,-- "Cataclysmically Delicious"
 	DrownYourSorrows = 5754,	-- "Drown Your Sorrows"
+	
+	RightAsRain = 5779,		-- "You'll Feel Right as Rain"
 
 	Scavenger = 1257,		-- "The Scavenger"
 	OutlandAngler = 1225,		-- "Outland Angler"

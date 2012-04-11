@@ -1,6 +1,6 @@
 ﻿--
 -- AutoBar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 -- Courtesy of Teodred, curexx
 --
 
@@ -184,7 +184,6 @@ if (GetLocale() == "deDE") then
 		["Shift-Click"] = "Shift-Klick",
 		["Ctrl-Shift-Click"] = "Strg-Shift-Klick",
 		["ButtonFacade is required to Skin the Buttons"] = "Das ButtonFacade Addon ist Vorraussetzung um die Tasten skinnen zu können!",
-		["Waterfall-1.0 is required to access the GUI"] = "Waterfall-1.0 wird vorrausgesetzt um das GUI öffnen zu können!",
 
 		-- Bar Names
 		["AutoBarClassBarBasic"] = "Basic",

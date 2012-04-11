@@ -4,7 +4,7 @@
 --
 -- Categories for AutoBar
 -- A Category encapsulates a list of items / spells etc. along with metadata describing their use.
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 --
 
 --	PeriodicGroup

@@ -1025,7 +1025,6 @@ local function ParserEventsHandler(parserEvent)
  -- Set the damage type to the school of the fully absorbed skills.
  if (eventType == "miss" and parserEvent.missType == "ABSORB") then damageType = parserEvent.skillSchool or DAMAGETYPE_PHYSICAL end
 
-
  -- Get the formatted partial effects if it's a damage or environmental event. 
  local partialEffects
  if (eventType == "damage" or eventType == "environmental") then

@@ -1,31 +1,29 @@
 ------------------------------
 -- Debuff and Roster Handler
 ------------------------------
-local UnitIds = TidyPlatesUtility.GroupMembers.UnitId
+local UnitNameCache = TidyPlatesUtility.GroupMembers.UnitId
 local DangerWatcher
 
 	
 -- Event Handler
 local function AggroEvents(frame, event, unit)
-	--print("Aggro Event", unit)
+	
 	local isUnitInParty = UnitPlayerOrPetInParty(unit)
 	local isUnitInRaid = UnitInRaid(unit)
 	local isUnitPet = (unit == "pet")
 	
 	if isUnitInParty or isUnitInRaid or isUnitPet then
-		--print(UnitName(unit), unit)
-		--UnitNameCache[UnitName(unit)] = unit
+		UnitNameCache[UnitName(unit)] = unit
 		TidyPlates:Update()		-- Theoretically, this should not 'double-call' since it's queued.
 	end
 end
 
-local function GetThreatCondition(name)	
-	--local unitid = UnitNameCache[name]
-	local unitid = UnitIds[name]
-
+-- /run print(UnitThreatSituation("party1"), UnitAffectingCombat("party1"))
+local function GetThreatCondition(name)		
+	local unitid = UnitNameCache[name]
 	if unitid then
 		local unitaggro = UnitThreatSituation(unitid)
-		if unitaggro and unitaggro > 1 then return true end
+		if unitaggro and unitaggro > 1 then return true end	
 	end
 end
 

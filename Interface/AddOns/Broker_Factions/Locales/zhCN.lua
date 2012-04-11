@@ -1,9 +1,9 @@
 --[[
 ************************************************************************
 Project				: Broker_Factions
-Author				: zhinjio
-Project Revision	: 3.2.5-release
-Project Date		: 20110515000702
+Author				: torhal
+Project Revision	: 3.2.6-release
+Project Date		: 20111012085757
 
 File				: Locales\zhCN.lua
 Commit Author		: zhinjio
@@ -27,24 +27,24 @@ L["Appends percentage values to the button label."] = "在按钮中显示声望�
 L["Appends raw numbers in the form of (xxx/xxxx), to the button label."] = "以 (xxx/xxxx) 的格式在按钮中显示声望的具体数值"
 L["Appends remaining reputation to reach the next standing, to the button label."] = "在按钮中显示达到下一关系所需获得的声望数"
 L["Appends session reputation gains in the form of [xxx], to the button label."] = "以 [xxx] 的格式在按钮中显示当前区间获得的声望总量"
--- L["Author : "] = "Author : "
+L["Author : "] = "作者:" -- Needs review
 L["Auto faction watch on reputation gains"] = "自动监视获得声望的阵营"
 L["Automatically sets the faction watched on the button/block to the last faction you gained reputation with."] = "自动监视你最近获得声望的阵营，将它显示在你的按钮/模组上"
--- L["Build Date : "] = "Build Date : "
+L["Build Date : "] = "建立日期 : " -- Needs review
 L["Button"] = "按钮显示设置"
 L["Change color of percentages/raw numbers/'to go' according to faction reputation standing."] = "根据阵营声望的高低彩色化显示百分比、精确数值以及“尚欠”文字"
 -- L["Click header lines to expand/contract"] = "Click header lines to expand/contract"
 L["Colorize faction statistics"] = "彩色化阵营状态信息"
 L["Ctrl+Left Click"] = "Ctrl+左鍵"
--- L["DISPLAY_DEBUG_DESC"] = "Checked to display DEBUG information"
+L["DISPLAY_DEBUG_DESC"] = "检查以显示调试信息" -- Needs review
 -- L["DISPLAY_HIDEEXALTED_DESC"] = "Check to hide Exalted factions in the tooltip"
--- L["DISPLAY_OPTIONS_DESC"] = "Options that change the way data is displayed in the tooltip"
--- L["DISPLAY_SHOWCOLLAPSED_DESC"] = "Check to display collapsed headers"
--- L["DISPLAY_SHOWGAINS_DESC"] = "Check to display session gains"
--- L["DISPLAY_SHOWHINTS_DESC"] = "Check to display tooltip hints"
--- L["DISPLAY_SHOWPERC_DESC"] = "Check to display percentage complete"
--- L["DISPLAY_SHOWRAW_DESC"] = "Check to display raw values"
--- L["DISPLAY_SHOWREMAIN_DESC"] = "Check to display remaining rep to next level"
+L["DISPLAY_OPTIONS_DESC"] = "设置使改变的数值显示于提示栏" -- Needs review
+L["DISPLAY_SHOWCOLLAPSED_DESC"] = "检查以显示collapsed headers" -- Needs review
+L["DISPLAY_SHOWGAINS_DESC"] = "检查以显示session收益" -- Needs review
+L["DISPLAY_SHOWHINTS_DESC"] = "检查以显示提示栏" -- Needs review
+L["DISPLAY_SHOWPERC_DESC"] = "检查以显示完成百分比" -- Needs review
+L["DISPLAY_SHOWRAW_DESC"] = "检查以显示原始数值" -- Needs review
+L["DISPLAY_SHOWREMAIN_DESC"] = "检查以显示到达下一等级所需声望" -- Needs review
 -- L["Database Version : "] = "Database Version : "
 -- L["Database upgraded to %s"] = "Database upgraded to %s"
 -- L["Display Debug"] = "Display Debug"

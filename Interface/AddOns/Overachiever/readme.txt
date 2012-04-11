@@ -1,5 +1,5 @@
 
-Overachiever v0.63
+Overachiever v0.65
 ==============================
 
 Author: Tuhljin
@@ -106,6 +106,26 @@ Change log
 ==========
 
 The change log lists changes of particular note to users, not every change made.
+
+v0.65
+- Updated for WoW patch 4.3.
+- Suggestions Tab: Added suggestions for the Darkmoon Faire, Twin Peaks battleground, Tol Barad/Tol Barad Peninsula,
+  and Alterac Valley. ("The Alterac Blitz" was moved out of the meta-achievement so it's now a suggestion, lest it be
+  forgotten!)
+- Brazilian Portuguese localization (ptBR) is now supported.
+- Remember, translations are provided by users like you. Thanks for your generosity! Please help contribute if you are
+  able: http://wow.curseforge.com/projects/overachiever/localization/
+
+v0.64
+- Updated for WoW patch 4.2.
+- Suggestions Tab: Removed several suggestions that are now Feats of Strength and one that was removed from the game.
+- Suggestions Tab: Added new suggestions for Mount Hyjal, Molten Front, Firelands, Zul'Aman, and Zul'Gurub, as well as
+  for the new fishing and cooking daily quests.
+- "You'll Feel Right as Rain" (new): Added an option to display a reminder tooltip for gorging yourself on Chocolate
+  Cookies.
+- "Check Your Head" and "Shake Your Bunny-Maker": Fixed an issue where some races were associated with the wrong
+  criteria. (Blizzard added goblins and worgen to the criteria and also changed the order.)
+- Updated options layout.
 
 v0.63
 - Updated for WoW patch 4.1.
@@ -360,7 +380,6 @@ v0.32
 - Changed achievement sorting so that two strings beginning with numbers compare the numbers first. This means
   "5 Exalted Reputations" is now listed before "20 Exalted Reputations," for example.
 - Updated most localizations. Translations are generously provided by users like you! Please help contribute if you
-
   are able: http://wow.curseforge.com/projects/overachiever/localization/
 
 v0.31
@@ -477,3 +496,4 @@ v0.12
 
 v0.11
 - Initial release.
+

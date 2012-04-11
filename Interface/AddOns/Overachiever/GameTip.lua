@@ -159,22 +159,19 @@ end
 
 local RaceClassAch = {
   FistfulOfLove = { "FistfulOfLove_petals", L.ACH_FISTFULOFLOVE_COMPLETE, L.ACH_FISTFULOFLOVE_INCOMPLETE,
-    { "Gnome WARLOCK", "Orc DEATHKNIGHT", "Human DEATHKNIGHT", "NightElf PRIEST", "Orc SHAMAN", "Tauren DRUID",
-      "Scourge WARRIOR", "Troll ROGUE", "BloodElf MAGE", "Draenei PALADIN", "Dwarf HUNTER" }
+    { "Gnome WARLOCK", "Orc DEATHKNIGHT", "Human DEATHKNIGHT", "NightElf PRIEST", "Orc SHAMAN", "Tauren DRUID", "Scourge WARRIOR", "Troll ROGUE", "BloodElf MAGE", "Draenei PALADIN", "Dwarf HUNTER" }
   },
   LetItSnow = { "LetItSnow_flaked", L.ACH_LETITSNOW_COMPLETE, L.ACH_LETITSNOW_INCOMPLETE,
-    { "Orc DEATHKNIGHT", "Human WARRIOR", "Tauren SHAMAN", "NightElf DRUID", "Scourge ROGUE", "Troll HUNTER",
-      "Gnome MAGE", "Dwarf PALADIN", "BloodElf WARLOCK", "Draenei PRIEST" }
+    { "Orc DEATHKNIGHT", "Human WARRIOR", "Tauren SHAMAN", "NightElf DRUID", "Scourge ROGUE", "Troll HUNTER", "Gnome MAGE", "Dwarf PALADIN", "BloodElf WARLOCK", "Draenei PRIEST" }
   },
   CheckYourHead = { "CheckYourHead_pumpkin", L.ACH_CHECKYOURHEAD_COMPLETE, L.ACH_CHECKYOURHEAD_INCOMPLETE,
-    { "Gnome", "BloodElf", "Draenei", "Dwarf", "Human", "NightElf", "Orc", "Tauren", "Troll", "Scourge" }, true
+    { "BloodElf", "Draenei", "Dwarf", "Gnome", "Goblin", "Human", "NightElf", "Orc", "Tauren", "Troll", "Scourge", "Worgen" }, true
   },
   TurkeyLurkey = { "TurkeyLurkey_feathered", L.ACH_TURKEYLURKEY_COMPLETE, L.ACH_TURKEYLURKEY_INCOMPLETE,
-    { "BloodElf ROGUE", "Dwarf ROGUE", "Gnome ROGUE", "Human ROGUE", "NightElf ROGUE", "Orc ROGUE", "Troll ROGUE",
-      "Scourge ROGUE" }
+    { "BloodElf ROGUE", "Dwarf ROGUE", "Gnome ROGUE", "Human ROGUE", "NightElf ROGUE", "Orc ROGUE", "Troll ROGUE", "Scourge ROGUE" }
   },
   BunnyMaker = { "BunnyMaker_eared", L.ACH_BUNNYMAKER_COMPLETE, L.ACH_BUNNYMAKER_INCOMPLETE,
-    { "BloodElf", "Draenei", "Dwarf", "Gnome", "Human", "NightElf", "Orc", "Tauren", "Troll", "Scourge" }, true,
+    { "BloodElf", "Draenei", "Dwarf", "Gnome", "Goblin", "Human", "NightElf", "Orc", "Tauren", "Troll", "Scourge", "Worgen" }, true,
     function(unit)
       if (UnitSex(unit) == 3) then
         local level = UnitLevel(unit)
@@ -185,6 +182,33 @@ local RaceClassAch = {
     end
   },
 };
+--[[
+-- /run Overachiever.Debug_GetRaceClassAchCrit()
+function Overachiever.Debug_GetRaceClassAchCrit()
+  local s, sub = ""
+  for k,tab in pairs(RaceClassAch) do
+    local id = OVERACHIEVER_ACHID[k]
+    sub = k.." ("..id.."): "
+    for i=1,GetAchievementNumCriteria(id) do
+      local n = GetAchievementCriteriaInfo(id, i)
+      local r, c
+      local n1, n2, n3, n4 = strsplit(" ", n, 4)
+      if (n2 == "Elf") then
+        r = n1..n2
+        if (n3) then  c = strupper(n3..(n4 or ""));  end
+      else
+        r = n1 == "Undead" and "Scourge" or n1
+        if (n2) then  c = strupper(n2..(n3 or ""));  end
+      end
+      n = r..(c and " "..c or "")
+      sub = sub..'"'..n..'"'..", "
+    end
+    print(sub)
+    s = s == "" and sub or s.."|n|n"..sub
+  end
+  error(s) -- Use the popup for easy copy+paste
+end
+--]]
 
 local function RaceClassCheck(ach, tab, raceclass, race, unit)
   local id = OVERACHIEVER_ACHID[ach]
@@ -284,7 +308,7 @@ function Overachiever.ExamineSetUnit(tooltip)
               for id, crit in pairs(potential) do
                 cat = GetAchievementCategory(id)
                 if ((not heroic and (OVERACHIEVER_CATEGORY_HEROIC[cat] or (OVERACHIEVER_HEROIC_CRITERIA[id] and OVERACHIEVER_HEROIC_CRITERIA[id][crit])))
-		    or (not twentyfive and OVERACHIEVER_CATEGORY_25[cat])) then
+                    or (not twentyfive and OVERACHIEVER_CATEGORY_25[cat])) then
                   numincomplete = numincomplete - 1
                 else
                   t = t or time()
@@ -509,6 +533,20 @@ local function ItemConsumedCheck(ach, itemID)
   end
 end
 
+
+local MiscItemAch = {
+  [62680] = { "RightAsRain", "Item_satisfied", L.ACH_CONSUME_91_COMPLETE, L.ACH_CONSUME_91_INCOMPLETE },
+}
+
+local function MiscItemCheck(tab)
+  --local tab = MiscItemAch[itemID]
+  if (not Overachiever_Settings[ tab[2] ]) then  return;  end
+  local id = OVERACHIEVER_ACHID[tab[1]]
+  local _, _, _, complete = GetAchievementInfo(id)
+  return id, complete and tab[3] or tab[4], complete
+end
+
+
 function Overachiever.ExamineItem(tooltip)
   skipNextExamineOneLiner = true
   tooltip = tooltip or this or GameTooltip  -- Workaround in case another addon breaks this
@@ -541,8 +579,31 @@ function Overachiever.ExamineItem(tooltip)
       end
       tooltip:AddLine(text, r, g, b)
       tooltip:AddTexture(AchievementIcon)
-      tooltip:Show()
+      needtipshow = true
     end
+
+    if (MiscItemAch[itemID]) then
+      id, text, complete = MiscItemCheck(MiscItemAch[itemID])
+      if (text) then
+        local r, g, b
+        if (complete) then
+          r, g, b = tooltip_complete.r, tooltip_complete.g, tooltip_complete.b
+        else
+          r, g, b = tooltip_incomplete.r, tooltip_incomplete.g, tooltip_incomplete.b
+          if (tooltip == GameTooltip and itemMinLevel <= UnitLevel("player")) then
+            -- Extra checks needed since the previous item sometimes shows up on the tooltip?
+            PlayReminder()
+            RecentReminders[id] = time()
+          end
+        end
+        tooltip:AddLine(text, r, g, b)
+        tooltip:AddTexture(AchievementIcon)
+        needtipshow = true
+      end
+    end
+
+    if (needtipshow) then  tooltip:Show();  end
+
   end
 end
 

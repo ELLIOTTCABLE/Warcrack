@@ -3,7 +3,7 @@
 -- Copyright 2007+ Toadkiller of Proudmoore.
 --
 -- Buttons for AutoBar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 --
 
 local AutoBar = AutoBar

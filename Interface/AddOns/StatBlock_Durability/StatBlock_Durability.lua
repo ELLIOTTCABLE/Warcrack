@@ -1,20 +1,12 @@
-﻿
-local Dura = _G.CreateFrame("Frame", "StatBlock_Durability")
-Dura.obj = _G.LibStub("LibDataBroker-1.1"):NewDataObject("Durability", {
-	type = "data source", value = "0", suffix = "%", text = "0%",
-	icon = "Interface\\Icons\\Trade_BlackSmithing",
-	}
-)
 
-_G.DurabilityFrame:UnregisterAllEvents()
-_G.DurabilityFrame:Hide()
+local Dura = CreateFrame("Frame", "StatBlock_Durability")
+Dura.obj = LibStub("LibDataBroker-1.1"):NewDataObject("Durability", {type = "data source", text = "0%", icon = "Interface\\Icons\\Trade_BlackSmithing"})
 
-Dura:RegisterEvent("PLAYER_DEAD")
-Dura:RegisterEvent("MERCHANT_CLOSED")
-Dura:RegisterEvent("PLAYER_REGEN_ENABLED")
-Dura:RegisterEvent("PLAYER_ENTERING_WORLD")
+local L_GOLD = GOLD_AMOUNT_SYMBOL
+local L_SILVER = SILVER_AMOUNT_SYMBOL
+local L_COPPER = COPPER_AMOUNT_SYMBOL
 
-local itemslots = {
+local itemSlots = {
 	"HeadSlot",
 	"ShoulderSlot",
 	"ChestSlot",
@@ -28,61 +20,45 @@ local itemslots = {
 	"RangedSlot",
 }
 
-local function updateItem(slotName)
-	local slotId = GetInventorySlotInfo(slotName)
+Dura:SetScript("OnEvent", function(self)
+	local durability, maximum = 0, 0
 
-	local itemLink = GetInventoryItemLink("player", slotId)
-	if not itemLink then
-		return -1
+	for i=1, #itemSlots do
+		local slotId = GetInventorySlotInfo(itemSlots[i])
+		local d, m = GetInventoryItemDurability(slotId)
+		durability = durability + (d or 0)
+		maximum = maximum + (m or 0)
 	end
 
-	local durability, maximum = GetInventoryItemDurability(slotId)
-	 if not durability or (maximum == 0)then
-		return -1
-	end
-
-	return (durability / maximum)
-end
-
-Dura:SetScript("OnEvent", function()
-	local durabilityValue = 1
-	local itemCounter = 0
-	local durability = -1
-
-	for _,slotName in ipairs(itemslots) do
-		durability = updateItem(slotName)
-		if durability >= 0 then
-			durabilityValue = min(durabilityValue, durability)
-			itemCounter = itemCounter + 1
-		end
-	end
-
-	if itemCounter == 0 then return end
-
-	local tDura = format("%i", floor(durabilityValue * 100))
-	Dura.obj.text = tDura.."%"
-	Dura.obj.value = tDura
+	self.obj.text = ("%.0f%%"):format(durability / maximum * 100)
 end)
+Dura:RegisterEvent("PLAYER_DEAD")
+Dura:RegisterEvent("MERCHANT_CLOSED")
+Dura:RegisterEvent("PLAYER_REGEN_ENABLED")
+Dura:RegisterEvent("PLAYER_ENTERING_WORLD")
 
-local function FormatCurrency(amount)
+local function FormatCurrency(amount, rep)
+	if rep then
+		local percent = amount*20/100
+		amount = amount - percent
+	end
 	local gold = floor(amount / 10000)
 	local silver = floor((amount - (gold * 10000)) / 100)
 	local copper = mod(amount, 100)
 
-	return format("%i|cffffd700g|r %i|cffc7c7cfs|r %i|cffeda55fc|r", gold, silver, copper)
+	return ("%i|cffffd700%s|r %i|cffc7c7cf%s|r %i|cffeda55f%s|r"):format(gold, L_GOLD, silver, L_SILVER, copper, L_COPPER)
 end
 
 local myTip = nil
 function Dura.obj.OnTooltipShow(tip)
-	if not tip or not tip.AddLine or not tip.AddDoubleLine then return end
+	if not tip or not tip.AddDoubleLine or MerchantFrame:IsShown() then return end
 
-	if not myTip then myTip = _G.CreateFrame("GameTooltip", "StatBlock_DurabilityTip") end
+	if not myTip then myTip = CreateFrame("GameTooltip") end
 	local wornRepairCost, bagRepairCost, totalRepairCost = 0, 0, 0
 
-	for _,slotName in ipairs(itemslots) do
-		local item = _G["Character" .. slotName]
+	for i=1, #itemSlots do
+		local item = _G["Character" .. itemSlots[i]]
 		local hasItem, _, repairCost = myTip:SetInventoryItem("player", item:GetID())
-
 		if hasItem and repairCost and repairCost > 0 then
 			wornRepairCost = wornRepairCost + repairCost
 		end
@@ -100,9 +76,10 @@ function Dura.obj.OnTooltipShow(tip)
 
 	totalRepairCost = wornRepairCost + bagRepairCost
 
-	tip:AddLine(_G["REPAIR_COST"])
-	tip:AddDoubleLine(_G["CURRENTLY_EQUIPPED"], FormatCurrency(wornRepairCost))
-	tip:AddDoubleLine(_G["TUTORIAL_TITLE10"], FormatCurrency(bagRepairCost)) --Bags
-	tip:AddDoubleLine(_G["REPAIR_ALL_ITEMS"], FormatCurrency(totalRepairCost))
+	tip:AddDoubleLine(REPAIR_ALL_ITEMS, FormatCurrency(totalRepairCost), 0, 1, 1, 0, 1, 0)
+	tip:AddDoubleLine(("-20%% (%s)"):format(REPUTATION), FormatCurrency(totalRepairCost, true), 0, 1, 1, 0, 1, 0)
+	tip:AddDoubleLine(" ", " ")
+	tip:AddDoubleLine(CURRENTLY_EQUIPPED, FormatCurrency(wornRepairCost), 0, 1, 1, 0, 1, 0)
+	tip:AddDoubleLine(BAGSLOT, FormatCurrency(bagRepairCost), 0, 1, 1, 0, 1, 0)
 end
 

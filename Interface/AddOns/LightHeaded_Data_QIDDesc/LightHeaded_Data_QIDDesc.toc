@@ -1,7 +1,7 @@
 ## Interface: 40200
 ## Author: jnwhiteh
 ## Title: LightHeaded_Data_QIDDesc
-## Version: 341
+## Version: 344
 ## Notes: Load on demand data addon for LightHeaded containing a mapping between QIDs and english-language quest descriptions
 ## License: All Rights Reserved
 ## LoadOnDemand: 1

@@ -1,7 +1,7 @@
-## Interface: 40200
+## Interface: 40300
 ## Title: Clique
 ## Author: Cladhaire
-## Version: v40200-1.4.0-30b3058
+## Version: v40300-1.5.1-43e9010
 ## Notes: Simply powerful click-casting interface
 ## SavedVariables: CliqueDB, CliqueDB3
 

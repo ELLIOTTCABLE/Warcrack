@@ -3,7 +3,7 @@
 -- Author: Mikord
 -- Credits:
 --	Whitepaw  @ 暗影之月(TW-Shadowmoon)
---	yleaf(yaroot#gmail_com)
+--	yaroot#gmail_com
 -------------------------------------------------------------------------------
 
 -- Don't do anything if the locale isn't Traditional Chinese.
@@ -25,7 +25,7 @@ L.MSG_CUSTOM_FONTS					= "自定義字體"
 L.MSG_INVALID_CUSTOM_FONT_NAME		= "無效字體名."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "字體名字已經存在."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "字體路徑必須指向.ttf文件"
---L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font." 
+L.MSG_UNABLE_TO_SET_FONT			= "無法使用選定字型" 
 L.MSG_CUSTOM_SOUNDS					= "自定義聲音"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "無效聲音名"
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "聲音名已經存在"
@@ -128,7 +128,7 @@ obj["hideMergeTrailer"]			= { label="隱藏合併攻擊細節", tooltip="不在�
 obj["allClasses"]				= { label="所有職業"}
 obj["enablePlayerCooldowns"]	= { label="技能冷卻", tooltip="在技能冷卻完成之後顯示提示信息"}
 obj["enablePetCooldowns"]		= { label="寵物技能冷卻", tooltip="在寵物技能冷卻完成之後顯示提示信息"}
---obj["enableItemCooldowns"]		= { label="Item Cooldowns", tooltip="Display notifications when item cooldowns complete."}
+obj["enableItemCooldowns"]		= { label="物品冷卻", tooltip="在物品冷卻完成後顯示提示信息."}
 obj["lootedItems"]				= { label="拾取物品", tooltip="顯示物品拾取."}
 obj["moneyGains"]				= { label="獲得金錢", tooltip="顯示獲得的金錢"}
 obj["alwaysShowQuestItems"]		= { label="總是顯示任務物品", tooltip="總是顯示任務物品, 無論其是何品質."}
@@ -316,7 +316,7 @@ obj["FACTION_NAME"]			= "%e - 聲望陣營名.\n"
 obj["EMOTE_TEXT"]			= "%e - 表情文字.\n"
 obj["MONEY_TEXT"]			= "%e - 獲取金錢文字.\n"
 obj["COOLDOWN_NAME"]		= "%e - 就緒的法術名字.\n"
---obj["ITEM_COOLDOWN_NAME"]	= "%e - The name of item that is ready.\n"
+obj["ITEM_COOLDOWN_NAME"]	= "%e - 就緒的物品名字.\n"
 obj["ITEM_NAME"]			= "%e - 拾取物品的名稱.\n"
 obj["POWER_TYPE"]			= "%p - 能力類別 (能量, 怒氣, 法力).\n"
 obj["TOTAL_ITEMS"]			= "%t - 拾取物品的總數."
@@ -543,7 +543,7 @@ obj["UNIT_HEALTH"]				= "生命值改變"
 obj["UNIT_POWER"]				= "法力值改變"
 obj["SKILL_COOLDOWN"]			= "技能冷卻完成"
 obj["PET_COOLDOWN"]				= "寵物技能冷卻完成"
---obj["ITEM_COOLDOWN"]			= "Item Cooldown Complete"
+obj["ITEM_COOLDOWN"]			= "物品冷卻完成"
  
 -- Main event conditions.
 obj["sourceName"]				= "來源玩家名字"
@@ -579,8 +579,8 @@ obj["auraType"]					= "光環類型"
 obj["threshold"]				= "起點閥值"
 obj["unitID"]					= "玩家 ID"
 obj["unitReaction"]				= "玩家反應"
---obj["itemID"]					= "Item ID"
---obj["itemName"]					= "Item Name"
+obj["itemID"]					= "物品 ID"
+obj["itemName"]					= "物品名字"
 
 -- Exception conditions.
 obj["activeTalents"]			= "啟用天賦"
@@ -653,9 +653,9 @@ obj = L.OUTLINES
 obj[1] = "無"
 obj[2] = "細"
 obj[3] = "粗"
---obj[4] = "Monochrome"
---obj[5] = "Monochrome + Thin"
---obj[6] = "Monochrome + Thick"
+obj[4] = "單線"
+obj[5] = "單線 細"
+obj[6] = "單線 粗"
 
 -- Text aligns.
 obj = L.TEXT_ALIGNS

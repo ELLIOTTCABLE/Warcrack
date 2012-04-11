@@ -51,7 +51,7 @@ function ExplorerCoords_OnLoad()
 end
 
 function ExplorerCoords_Init()
-	if not (ExplorerCoord ) or not (ExplorerCoord["v"]) or (ExplorerCoord["v"] ~= 6)  then
+	if not (ExplorerCoord ) or not (ExplorerCoord["v"]) or (ExplorerCoord["v"] ~= 8)  then
 		
 		ExplorerCoord = {};
 		for index,value in pairs(ExplorerCoordInit) do 
@@ -91,7 +91,7 @@ function ExplorerCoords_Init()
 			end
 		end
 		ExplorerCoord["v"] = {};
-		ExplorerCoord["v"] = 6;
+		ExplorerCoord["v"] = 8;
 		ExplorerCoordInit = nil;
 	end
 end

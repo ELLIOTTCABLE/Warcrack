@@ -2,6 +2,7 @@ local EncounterWatcherFrame = CreateFrame("Frame")
 local UnitEventHandlers = {}
 local UnitLookupTable = {}
 local TrackedAuras = {}
+local _
 
 -- Widget Event Handler
 local function EventHandler(frame, unit)

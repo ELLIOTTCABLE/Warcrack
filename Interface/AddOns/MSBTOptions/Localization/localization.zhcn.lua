@@ -4,7 +4,7 @@
 -- Simplified Chinese Translation by:
 --	elafor
 --	hscui
---	yleaf(yaroot#gmail_com)
+--	yaroot#gmail_com
 -------------------------------------------------------------------------------
 
 -- Don't do anything if the locale isn't Simplified Chinese.
@@ -26,7 +26,7 @@ L.MSG_CUSTOM_FONTS					= "自定义字体"
 L.MSG_INVALID_CUSTOM_FONT_NAME		= "无效字体名."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "字体名字已经存在."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "字体路径必须指向.ttf文件"
---L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font." 
+L.MSG_UNABLE_TO_SET_FONT			= "无法使用指定字体." 
 L.MSG_CUSTOM_SOUNDS					= "自定义声音"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "无效声音名"
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "声音名已经存在"
@@ -129,7 +129,7 @@ obj["hideMergeTrailer"]			= { label="隐藏合并攻击细节", tooltip="不在�
 obj["allClasses"]				= { label="所有职业"}
 obj["enablePlayerCooldowns"]	= { label="技能冷却", tooltip="在技能冷却完成之后显示提示信息"}
 obj["enablePetCooldowns"]		= { label="宠物技能冷却", tooltip="在宠物技能冷却完成之后显示提示信息"}
---obj["enableItemCooldowns"]		= { label="Item Cooldowns", tooltip="Display notifications when item cooldowns complete."}
+obj["enableItemCooldowns"]		= { label="物品冷却", tooltip="在物品冷却完成后显示提示信息."}
 obj["lootedItems"]				= { label="拾取物品", tooltip="显示物品拾取."}
 obj["moneyGains"]				= { label="获得金钱", tooltip="显示获得的金钱"}
 obj["alwaysShowQuestItems"]		= { label="总是显示任务物品", tooltip="总是显示任务物品, 无论其是何品质."}
@@ -317,7 +317,7 @@ obj["FACTION_NAME"]			= "%e - 声望阵营名.\n"
 obj["EMOTE_TEXT"]			= "%e - 表情文字.\n"
 obj["MONEY_TEXT"]			= "%e - 获取金钱文字.\n"
 obj["COOLDOWN_NAME"]		= "%e - 就绪的法术名字.\n"
---obj["ITEM_COOLDOWN_NAME"]	= "%e - The name of item that is ready.\n"
+obj["ITEM_COOLDOWN_NAME"]	= "%e - 就绪的物品名字.\n"
 obj["ITEM_NAME"]			= "%e - 拾取物品的名称.\n"
 obj["POWER_TYPE"]			= "%p - 能力类别 (能量, 怒气, 法力).\n"
 obj["TOTAL_ITEMS"]			= "%t - 拾取物品的总数."
@@ -453,10 +453,10 @@ obj["PET_OUTGOING_SPELL_RESIST"]				= { label="法术抵抗", tooltip="显示宠
 obj["PET_OUTGOING_SPELL_ABSORB"]				= { label="技能吸收", tooltip="显示宠物的技能伤害被吸收"}
 obj["PET_OUTGOING_SPELL_IMMUNE"]				= { label="技能免疫", tooltip="显示宠物的技能伤害被免疫"}
 obj["PET_OUTGOING_SPELL_EVADE"]					= { label="技能闪避", tooltip="显示宠物的技能攻击被闪避"}
---obj["PET_OUTGOING_HEAL"]						= { label="治疗", tooltip="显示宠物治疗"}
---obj["PET_OUTGOING_HEAL_CRIT"]					= { label="治疗暴击", tooltip="显示宠物治疗暴击"}
---obj["PET_OUTGOING_HOT"]							= { label="持续治疗", tooltip="显示宠物持续治疗"}
---obj["PET_OUTGOING_HOT_CRIT"]					= { label="持续治疗暴击", tooltip="显示宠物持续治疗暴击"}
+obj["PET_OUTGOING_HEAL"]						= { label="治疗", tooltip="显示宠物治疗"}
+obj["PET_OUTGOING_HEAL_CRIT"]					= { label="治疗暴击", tooltip="显示宠物治疗暴击"}
+obj["PET_OUTGOING_HOT"]							= { label="持续治疗", tooltip="显示宠物持续治疗"}
+obj["PET_OUTGOING_HOT_CRIT"]					= { label="持续治疗暴击", tooltip="显示宠物持续治疗暴击"}
 obj["PET_OUTGOING_DISPEL"]						= { label="驱散", tooltip="显示宠物的驱散."}
 
 
@@ -479,8 +479,8 @@ obj["NOTIFICATION_POWER_GAIN"]			= { label="能量获得", tooltip="显示你额
 obj["NOTIFICATION_POWER_LOSS"]			= { label="能量行动", tooltip="显示你失去的法力，怒气或者能量"}
 obj["NOTIFICATION_CP_GAIN"]				= { label="连击点获得", tooltip="显示你获得的连击点"}
 obj["NOTIFICATION_CP_FULL"]				= { label="连击点已满", tooltip="显示你的连击点已满"}
-obj["NOTIFICATION_HOLY_POWER_CHANGE"]	= { label="Holy Power Changes", tooltip="Enable when you change holy power."}
-obj["NOTIFICATION_HOLY_POWER_FULL"]		= { label="Holy Power Full", tooltip="Enable when you attain full holy power."}
+obj["NOTIFICATION_HOLY_POWER_CHANGE"]	= { label="神圣能量变化", tooltip="显示你的神圣能量变化"}
+obj["NOTIFICATION_HOLY_POWER_FULL"]		= { label="神圣能量已满", tooltip="显示你的神圣能量已满"}
 obj["NOTIFICATION_HONOR_GAIN"]			= { label="获得荣誉", tooltip="显示你获得荣誉"}
 obj["NOTIFICATION_REP_GAIN"]			= { label="声望提高", tooltip="显示你的声望提高"}
 obj["NOTIFICATION_REP_LOSS"]			= { label="声望下降", tooltip="显示你的声望下降"}
@@ -544,7 +544,7 @@ obj["UNIT_HEALTH"]				= "生命值改变"
 obj["UNIT_POWER"]				= "法力值改变"
 obj["SKILL_COOLDOWN"]			= "技能冷却完成"
 obj["PET_COOLDOWN"]				= "宠物技能冷却完成"
---obj["ITEM_COOLDOWN"]			= "Item Cooldown Complete"
+obj["ITEM_COOLDOWN"]			= "物品冷却完成"
  
 -- Main event conditions.
 obj["sourceName"]				= "来源玩家名字"
@@ -580,8 +580,8 @@ obj["auraType"]					= "光环类型"
 obj["threshold"]				= "起点阀值"
 obj["unitID"]					= "玩家 ID"
 obj["unitReaction"]				= "玩家反应"
---obj["itemID"]					= "Item ID"
---obj["itemName"]					= "Item Name"
+obj["itemID"]					= "物品 ID"
+obj["itemName"]					= "物品名字"
 
 -- Exception conditions.
 obj["activeTalents"]			= "启用天赋"
@@ -654,9 +654,9 @@ obj = L.OUTLINES
 obj[1] = "无"
 obj[2] = "细"
 obj[3] = "粗"
---obj[4] = "Monochrome"
---obj[5] = "Monochrome + Thin"
---obj[6] = "Monochrome + Thick"
+obj[4] = "单线"
+obj[5] = "单线 细"
+obj[6] = "单线 粗"
 
 -- Text aligns.
 obj = L.TEXT_ALIGNS

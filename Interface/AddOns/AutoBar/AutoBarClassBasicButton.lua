@@ -4,7 +4,7 @@
 -- Implements SecureHandler and other code common to both anchor and popup buttons
 --
 -- Buttons are contained by AutoBar.Class.Bar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 --
 
 local AutoBar = AutoBar

@@ -4,7 +4,7 @@ Author: Toadkiller of Proudmoore
 Website: http://www.wowace.com/
 ]]
 -- Copyright 2007+ Toadkiller of Proudmoore.
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 
 local AutoBar = AutoBar
 local REVISION = tonumber(("$Revision: 1.1 $"):match("%d+"))
@@ -1108,16 +1108,20 @@ end
 -- Multiple calls refresh current state of the spell
 -- {spellName = {canCast, spellLink, spellTab}}
 function AutoBarSearch:RegisterSpell(spellName, noSpellCheck, spellLink)
+
 	local spellInfo = AutoBarSearch.spells[spellName]
+	
 	if (not spellInfo) then
 		spellInfo = {}
 		AutoBarSearch.spells[spellName] = spellInfo
 	end
+	
 	if (spellLink) then
 		spellInfo.spellLink = spellLink
 	elseif (not spellInfo.spellLink) then
 		spellInfo.spellLink = GetSpellLink(spellName)
 	end
+	
 	if (noSpellCheck) then
 		spellInfo.noSpellCheck = true
 	end

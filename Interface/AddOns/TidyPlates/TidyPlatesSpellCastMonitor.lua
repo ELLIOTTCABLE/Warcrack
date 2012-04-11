@@ -1,4 +1,5 @@
 local RaidTargetReference
+local _
 
 if (tonumber((select(2, GetBuildInfo()))) >= 14299) then
 	-- 4.2

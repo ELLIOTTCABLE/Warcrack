@@ -125,13 +125,16 @@ local function BarEnter(win, id, label)
 		ttactive = true
 		Skada:SetTooltipPosition(t, win.bargroup)
 	    t:ClearLines()
+
+		local hasClick = win.metadata.click1 or win.metadata.click2 or win.metadata.click3
 	    
 	    -- Current mode's own tooltips.
 		if win.metadata.tooltip then
+			local numLines = t:NumLines()
 			win.metadata.tooltip(win, id, label, t)
 			
 			-- Spacer
-			if win.metadata.click1 or win.metadata.click2 or win.metadata.click3 then
+			if t:NumLines() ~= numLines and hasClick then
 				t:AddLine(" ")
 			end
 		end
@@ -146,6 +149,17 @@ local function BarEnter(win, id, label)
 			end
 			if win.metadata.click3 then
 				Skada:AddSubviewToTooltip(t, win, win.metadata.click3, id, label)
+			end
+		end
+
+		-- Current mode's own post-tooltips.
+		if win.metadata.post_tooltip then
+			local numLines = t:NumLines()
+			win.metadata.post_tooltip(win, id, label, t)
+
+			-- Spacer
+			if t:NumLines() ~= numLines and hasClick then
+				t:AddLine(" ")
 			end
 		end
 		
@@ -513,7 +527,7 @@ function mod:AddDisplayOptions(win, options)
 		         			db.barfont = key
 		         			Skada:ApplySettings()
 						end,
-				order=10,
+				order=1,
 		    },
 
 			barfontsize = {
@@ -528,9 +542,22 @@ function mod:AddDisplayOptions(win, options)
 							db.barfontsize = size
 		         			Skada:ApplySettings()
 						end,
-				order=11,
+				order=2,
 			},
 
+		    barfontflags = {
+		         type = 'select',
+		         name = L["Font flags"],
+		         desc = L["Sets the font flags."],
+		         values = {[""] = L["None"], ["OUTLINE"] = L["Outline"], ["THICKOUTLINE"] = L["Thick outline"], ["MONOCHROME"] = L["Monochrome"], ["OUTLINEMONOCHROME"] = L["Outlined monochrome"]},
+		         get = function() return db.barfontflags end,
+		         set = function(win,key) 
+		         			db.barfontflags = key
+		         			Skada:ApplySettings()
+						end,
+				order=3,
+		    },
+			
 		    bartexture = {
 		         type = 'select',
 		         dialogControl = 'LSM30_Statusbar',
@@ -715,6 +742,18 @@ function mod:AddDisplayOptions(win, options)
 				order=2,
 			},
 			
+		    fontflags = {
+		         type = 'select',
+		         name = L["Font flags"],
+		         desc = L["Sets the font flags."],
+		         values = {[""] = L["None"], ["OUTLINE"] = L["Outline"], ["THICKOUTLINE"] = L["Thick outline"], ["MONOCHROME"] = L["Monochrome"], ["OUTLINEMONOCHROME"] = L["Outlined monochrome"]},
+		         get = function() return db.title.fontflags end,
+		         set = function(win,key) 
+		         			db.title.fontflags = key
+		         			Skada:ApplySettings()
+						end,
+				order=3,
+		    },
 			
 			texture = {
 		         type = 'select',
@@ -728,7 +767,7 @@ function mod:AddDisplayOptions(win, options)
 	         				db.title.texture = key
 		         			Skada:ApplySettings()
 						end,
-				order=3,
+				order=4,
 		    },						    
 		    
 		    bordertexture = {
@@ -743,7 +782,7 @@ function mod:AddDisplayOptions(win, options)
 	         				db.title.bordertexture = key
 		         			Skada:ApplySettings()
 						end,
-				order=4,
+				order=5,
 		    },					
 	
 			thickness = {
@@ -759,7 +798,7 @@ function mod:AddDisplayOptions(win, options)
 							db.title.borderthickness = val
 		         			Skada:ApplySettings()
 						end,
-				order=5,
+				order=6,
 			},
 
 			margin = {
@@ -775,7 +814,7 @@ function mod:AddDisplayOptions(win, options)
 							db.title.margin = val
 		         			Skada:ApplySettings()
 						end,
-				order=6,
+				order=7,
 			},	
 										
 			color = {
@@ -792,7 +831,7 @@ function mod:AddDisplayOptions(win, options)
 						db.title.color = {["r"] = r, ["g"] = g, ["b"] = b, ["a"] = a}
 						Skada:ApplySettings()
 					end,
-				order=7,
+				order=8,
 			},
 			
 			buttons = {

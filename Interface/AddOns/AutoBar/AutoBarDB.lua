@@ -3,7 +3,7 @@
 -- Copyright 2008+ Toadkiller of Proudmoore.
 --
 -- Defaults, initialization and persistence for AutoBar
--- http://code.google.com/p/autobar/
+-- http://muffinmangames.com
 --
 
 -- Custom Category:

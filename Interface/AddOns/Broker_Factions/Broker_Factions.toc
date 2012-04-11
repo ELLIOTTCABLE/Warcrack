@@ -1,13 +1,13 @@
-## Interface: 40100
+## Interface: 40200
 ##
 ## Title: Broker [Factions]
-## Version:  3.2.5-release
+## Version:  3.2.6-release
 ## Notes: LDB data source for reputation monitoring.
-## Author: zhinjio
+## Author: torhal
 ## X-Email: zhinjio@gmail.com
 ## X-Category: Miscellaneous
 ##
-## X-Date: 2011-05-15T00:07:02Z
+## X-Date: 2011-10-12T08:57:57Z
 ## X-WoWI-ID: 11020
 ##
 ## LoadManagers: AddonLoader
@@ -16,7 +16,7 @@
 ## SavedVariables: BFactions_DB
 ##
 ## OptionalDeps: Ace3, LibQTip-1.0, LibDBIcon-1.0, LibDataBroker-1.1
-## X-Curse-Packaged-Version: 3.2.5-release
+## X-Curse-Packaged-Version: 3.2.6-release
 ## X-Curse-Project-Name: Broker_Factions
 ## X-Curse-Project-ID: brokerfactions
 ## X-Curse-Repository-ID: wow/brokerfactions/mainline

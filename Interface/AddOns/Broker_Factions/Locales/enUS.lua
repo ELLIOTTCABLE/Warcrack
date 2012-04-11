@@ -1,9 +1,9 @@
 --[[
 ************************************************************************
 Project				: Broker_Factions
-Author				: zhinjio
-Project Revision	: 3.2.5-release
-Project Date		: 20110515000702
+Author				: torhal
+Project Revision	: 3.2.6-release
+Project Date		: 20111012085757
 
 File				: Locales\enUS.lua
 Commit Author		: zhinjio

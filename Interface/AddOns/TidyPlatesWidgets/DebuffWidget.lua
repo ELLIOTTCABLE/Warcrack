@@ -17,6 +17,8 @@ local AURA_TARGET_FRIENDLY = 2
 local AURA_TYPE_BUFF = 1
 local AURA_TYPE_DEBUFF = 6
 
+local _
+
 local AURA_TYPE = {
 	["Buff"] = 1,
 	["Curse"] = 2,
@@ -187,7 +189,6 @@ end
 -----------------------------------------------------
 TidyPlatesData.CachedAuraDurations = {}
 
--- /run for i, v in pairs(TidyPlatesData.CachedAuraDurations) do print(i,v) end
 local function GetSpellDuration(spellid)
 	if spellid then return TidyPlatesData.CachedAuraDurations[spellid] end
 end
@@ -596,7 +597,9 @@ local function UpdateIconGrid(frame, guid)
 					
 					-- Call Filter Function
 					local show, priority = frame.Filter(aura)
+					--local show, priority = true, 10		-- Testing
 					aura.priority = priority or 10
+					
 					
 					-- Get Order/Priority
 					if show and aura.expiration > GetTime() then
@@ -694,7 +697,9 @@ local AuraBorderArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrame"			
 local AuraGlowArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraGlow"	
 local AuraHighlightArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\CCBorder"			-- AuraBorderArt, AuraHighlightArt
 local AuraTestArt = ""
-local AuraFont = "Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf"
+--local AuraFont = "Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf"
+local AuraFont = "FONTS\\ARIALN.TTF"
+
 
 local function Enable()
 	AuraMonitor:SetScript("OnEvent", CombatEventHandler)

@@ -1,0 +1,64 @@
+------------------------------------------------------------------------
+r871 | parnic | 2011-12-06 04:46:55 +0000 (Tue, 06 Dec 2011) | 1 line
+Changed paths:
+   A /tags/1.7.10 (from /trunk:870)
+
+Tagging as 1.7.10
+------------------------------------------------------------------------
+r870 | parnic | 2011-12-06 03:51:22 +0000 (Tue, 06 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/IceCore.lua
+   M /trunk/modules/CustomBar.lua
+   M /trunk/modules/CustomCDBar.lua
+
+- added code to buff/debuff watchers and cooldown watchers to prevent them from sometimes getting stuck (not updating/animating)
+------------------------------------------------------------------------
+r867 | parnic | 2011-12-03 01:31:48 +0000 (Sat, 03 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/modules/TargetInfo.lua
+
+- added missing "end" for TargetInfo change from earlier today
+------------------------------------------------------------------------
+r866 | parnic | 2011-12-02 23:53:19 +0000 (Fri, 02 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/modules/TargetInfo.lua
+
+- drycoded a toggle to enable tooltips when mousing over an Info module to help diagnose a reported error from wowinterface
+------------------------------------------------------------------------
+r865 | parnic | 2011-12-02 02:35:29 +0000 (Fri, 02 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/modules/CustomCDBar.lua
+
+- and now for the correctly-merged version of the cd bar
+------------------------------------------------------------------------
+r864 | parnic | 2011-12-01 23:00:56 +0000 (Thu, 01 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/modules/CustomCDBar.lua
+
+- cooldown bar fixes submitted by JontomXire (thanks!)
+------------------------------------------------------------------------
+r863 | parnic | 2011-12-01 02:20:39 +0000 (Thu, 01 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/modules/CustomCDBar.lua
+
+- don't trigger the ability cooldown bar if the spell in question only has a 1.5 second or less cooldown. this indicates that it's on cooldown as part of the GCD and we have a separate module for GCD tracking
+------------------------------------------------------------------------
+r861 | parnic | 2011-11-29 19:39:04 +0000 (Tue, 29 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/IceHUD.toc
+   M /trunk/IceHUD_Options/IceHUD_Options.toc
+
+- 4.3 toc update
+------------------------------------------------------------------------
+r860 | parnic | 2011-11-06 01:57:40 +0000 (Sun, 06 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/modules/Totems.lua
+
+- enabled the Totems module for druids since 'wild mushroom' is considered a totem (ticket #137)
+------------------------------------------------------------------------
+r859 | parnic | 2011-08-03 00:23:11 +0000 (Wed, 03 Aug 2011) | 1 line
+Changed paths:
+   M /trunk/modules/CustomBar.lua
+
+- only do spell id exact-match checking if "exact match" is set. otherwise, it will compare spell names
+------------------------------------------------------------------------

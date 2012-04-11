@@ -163,6 +163,10 @@ aeldra@sonnenkinder.org
 Changes: 
 Rev     Date        Description
 ------  ----------  -----------------------
+4.3a    2011-11-30  Added buffs: Paladin (Beacon of Light)
+                    Added items: Fortune Cookie, Celebration Package, Warts-B-Gone Lip Balm
+                    Updated TOC
+                    
 4.2a    2011-06-29  Added options: Splash frame 'Show Icon' and 'Short Message'
                     Added buffs: Warrior (Shield Block)
                     Updated TOC

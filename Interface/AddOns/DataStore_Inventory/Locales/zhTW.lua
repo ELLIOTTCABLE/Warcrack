@@ -2,7 +2,6 @@
 
 if not L then return end
 
-L["%s is inspecting %s"] = "%s 正在查看 %s"
 L["BROADCAST_AIL_DISABLED"] = "將沒有任何發送."
 L["BROADCAST_AIL_ENABLED"] = "你所有的角色的裝備的平均等級會你上線時在公會廣播."
 L["BROADCAST_AIL_TEXT"] = "上線時在公會廣播我的裝備的平均等級"
@@ -16,5 +15,6 @@ L["EQUIP_REQ_ENABLED"] = "當有人查看你的角色的裝備時, 聊天視窗�
 L["EQUIP_REQ_TEXT"] = "當有人查看你的角色的裝備時通知你."
 L["EQUIP_REQ_TITLE"] = "查看裝備通知"
 L["Heroic"] = "英雄"
+L["%s is inspecting %s"] = "%s 正在查看 %s"
 L["Trash Mobs"] = "一般怪物"
 

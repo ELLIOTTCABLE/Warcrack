@@ -73,7 +73,7 @@ local sliderValue, hasSlider, UpdateTablet, extraHeight = 0
 local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
 local info, buttons, toasts, playerRealm = {}
 local totalFriends, onlineFriends, nbRealFriends, realFriendsHeight, nbBroadcast = 0, 0, 0
-local WOW, SC2 = 1, 2
+local WOW, SC2, D3 = 1, 2, 3
 local configMenu, options, c, cname, SetOption, UpdateColor, ColorPickerChange, ColorPickerCancel, OpenColorPicker, ColorPickerOpacity, colors
 local preformatedStatusText, sortIndexes
 
@@ -151,6 +151,10 @@ function f:GUILD_ROSTER_UPDATE()
 		if connected or isMobile then
 			local notes = note ~= "" and (offnote == "" and note or ("%s |cffffcc00-|r %s%s"):format(note, officerColor, offnote)) or
 				offnote == "" and "|cffffcc00-" or officerColor..offnote
+				if status == 0 then status = ""
+				elseif status == 1 then status = CHAT_FLAG_AFK
+				elseif status == 2 then status = CHAT_FLAG_DND
+				end
 			guildEntries[#guildEntries+1] = new( L[class] or "", name or "", level or 0, zone or UNKNOWN, notes, isMobile and "<Mobile>" or status or "", rankIndex or 0, rank or 0, i, isMobile )
 		end
 	end
@@ -527,8 +531,7 @@ local function SetToastData( index, inGroup )
 	toast.realID = BATTLENET_NAME_FORMAT:format(givenName, surname)
 
 	SetStatusLayout( --[[isMobile]]false, isAFK, isDND, toast.status, toast.name )
-
-	client = client == BNET_CLIENT_WOW and WOW or BNET_CLIENT_SC2 and SC2 or 0
+	client = client == BNET_CLIENT_WOW and WOW or client == BNET_CLIENT_SC2 and SC2 or client == BNET_CLIENT_D3 and D3 or 0
 	toast.client = client
 
 	if client == WOW then
@@ -562,6 +565,14 @@ local function SetToastData( index, inGroup )
 		zone = gameText
 		toast.zone:SetPoint("TOPLEFT", toast.name, "TOPRIGHT", GAP, 0)
 		toast.zone:SetTextColor( 1, .77, 0 )
+	elseif client == D3 then
+		toast.class:SetTexture"Interface\\FriendsFrame\\Battlenet-D3icon"
+		toast.class:SetTexCoord( .2, .8, .2, .8 )
+		toast.name:SetTextColor( .8, .8, .8 )
+		toast.faction:SetTexture""
+		zone = gameText
+		toast.zone:SetPoint("TOPLEFT", toast.name, "TOPRIGHT", GAP, 0)
+		toast.zone:SetTextColor( 1, .77, 0 )
 	end
 
 	if config.realID == "none" then
@@ -588,7 +599,7 @@ local function SetToastData( index, inGroup )
 
 	return	toast, client,
 		toast.name:GetStringWidth(),
-		client == SC2 and -GAP or toast.level:GetStringWidth(),
+		client == (SC2 or D3) and -GAP or toast.level:GetStringWidth(),
 		toast.zone:GetStringWidth(),
 		toast.note:GetStringWidth()
 end
@@ -790,6 +801,7 @@ UpdateTablet = function()
 		nbBroadcast = 0
 		for i=1, nbRealFriends do
 			local button, client, tnW, lW, zW, nW, spanZoneW = SetToastData(i,inGroup)
+			--print(button, client, tnW, lW, zW, nW, spanZoneW)
 
 			if tnW>tnC then tnC=tnW end
 
@@ -797,6 +809,8 @@ UpdateTablet = function()
 				if lW>lC then lC=lW end
 				if zW>zC then zC=zW end
 			elseif client == SC2 then
+				if zW > spanZoneC then spanZoneC = zW end
+			elseif client == D3 then
 				if zW > spanZoneC then spanZoneC = zW end
 			end
 
@@ -932,6 +946,8 @@ UpdateTablet = function()
 		button:SetWidth( maxWidth )
 		button.name:SetWidth(tnC)
 		if button.client == SC2 then
+			button.zone:SetWidth(spanZoneC)
+		elseif button.client == D3 then
 			button.zone:SetWidth(spanZoneC)
 		elseif button.client == WOW then
 			button.level:SetWidth(lC)

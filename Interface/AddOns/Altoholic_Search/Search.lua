@@ -603,7 +603,9 @@ local function BrowseCharacter(character)
 	local containers = DataStore:GetContainers(character)
 	if containers then
 		for containerName, container in pairs(containers) do
-			if (containerName == "Bag100") then
+			if (containerName == "VoidStorage") then
+				currentResultLocation = VOID_STORAGE
+			elseif (containerName == "Bag100") then
 				currentResultLocation = L["Bank"]
 			elseif (containerName == "Bag-2") then
 				currentResultLocation = KEYRING
@@ -811,7 +813,7 @@ function ns:FindItem(searchType, searchSubType)
 	filters:ClearFilters()
 	
 	if not AltoholicTabSearch:IsVisible() then
-		addon.Tabs:OnClick(3)
+		addon.Tabs:OnClick("Search")
 	end
 	
 	if ns:GetNumResults() == 0 then
@@ -939,7 +941,7 @@ function ns:FindEquipmentUpgrade()
 	AltoTooltip:Hide();	-- mandatory hide after processing	
 	
 	if not AltoholicTabSearch:IsVisible() then
-		addon.Tabs:OnClick(3)
+		addon.Tabs:OnClick("Search")
 	end
 	
 	if upgradeType ~= -1 then	-- not an item level upgrade

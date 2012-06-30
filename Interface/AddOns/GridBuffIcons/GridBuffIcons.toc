@@ -1,10 +1,11 @@
-﻿## Interface: 40000
-## Title: GridBuffIcons |cff7fff7f -Ace2-|r
+﻿## Interface: 40300
+## Title: GridBuffIcons
+## Title-zhCN: |cff880303[网易有爱]|r Grid额外状态图标
 ## Notes: Adds Buff/Debuff icons to the grid frame.
-## Author: Warbaby
+## Author: Warbaby @ 网易有爱
 ## Grid Author: Pastamancer & Maia
 ## Dependencies: Grid
-## X-Curse-Packaged-Version: r13
+## X-Curse-Packaged-Version: 2.02.22
 ## X-Curse-Project-Name: GridBuffIcons
 ## X-Curse-Project-ID: gridbufficons
 ## X-Curse-Repository-ID: wow/gridbufficons/mainline

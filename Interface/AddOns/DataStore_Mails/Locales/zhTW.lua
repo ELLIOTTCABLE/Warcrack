@@ -16,7 +16,7 @@ L["EXPIRY_CHECK_TITLE"] = "郵件屆滿檢查"
 L["Mail Expiry Warning"] = "郵件屆滿警告"
 L["SCAN_MAIL_BODY_DISABLED"] = "只有郵件附件將被讀取。郵件將保持未讀取的狀態."
 L["SCAN_MAIL_BODY_ENABLED"] = "掃描時郵箱裡每個郵件的內容將被讀取。所有郵件將被標記為已讀取."
-L["SCAN_MAIL_BODY_TITLE"] = "掃描郵件內容"
 L["Scan mail body (marks it as read)"] = "掃描郵件內容 (標記為己讀取)"
+L["SCAN_MAIL_BODY_TITLE"] = "掃描郵件內容"
 L["Warn when mail expires in less days than this value"] = "當郵件屆滿少過此值的日數時發出警告"
 

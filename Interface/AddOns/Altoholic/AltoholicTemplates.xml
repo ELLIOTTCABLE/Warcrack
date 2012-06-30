@@ -206,6 +206,45 @@
 		<NormalFont style="GameFontNormalSmallLeft"/>
 		<HighlightFont style="GameFontHighlightSmallLeft"/>
 	</Button>
+
+	<Button name="AltoMenuNamedIconTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="136" y="40"/>
+		</Size>
+		<Layers>
+			<Layer level="BORDER">
+				<Texture file="Interface\Icons\INV_BannerPVP_02">
+					<Size x="36" y="36"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\AuctionFrame\UI-AuctionItemNameFrame">
+					<Size x="110" y="36"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="40" y="0"/>
+					</Anchors>
+					<TexCoords left="0.15625" right="0.83203125" top="0.171875" bottom="0.796875"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentText" inherits="GameFontNormal" justifyH="CENTER" text="Reputations">
+					<Size>
+						<AbsDimension x="80" y="18"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="50" y="-9"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1" g="1" b="1" /> 
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+
 	
 	<Button name="AltoSortButtonTemplate" virtual="true">
 		<Layers>
@@ -311,7 +350,7 @@
 			<Layer level="OVERLAY"> 
 				<FontString name="$parentName" inherits="GameFontNormalSmall" justifyH="CENTER" >
 					<Size>
-						<AbsDimension x="26" y="18"/>
+						<AbsDimension x="30" y="18"/>
 					</Size>
 					<Anchors>
 						<Anchor point="BOTTOMRIGHT">
@@ -328,6 +367,7 @@
 			<OnLoad>
 				local level = self:GetParent():GetFrameLevel()
 				self:SetFrameLevel(level + 1)
+				self:RegisterForClicks("LeftButtonDown", "RightButtonDown")
 			</OnLoad>
 			<OnLeave>
 				AltoTooltip:Hide();

@@ -10,11 +10,11 @@
 ## Author: Funkydude
 ## X-Category: Interface Enhancements
 ## X-License: All Rights Reserved
-## Version: 2.70
+## Version: 2.71
 ## SavedVariables: StatBlockCoreDB
 ## OptionalDeps: Ace3, LibSharedMedia-3.0, SharedMedia
 ## X-Embeds: Ace3, LibSharedMedia-3.0
-## X-Curse-Packaged-Version: v2.70
+## X-Curse-Packaged-Version: v2.71
 ## X-Curse-Project-Name: StatBlockCore
 ## X-Curse-Project-ID: stat-block-core
 ## X-Curse-Repository-ID: wow/stat-block-core/mainline

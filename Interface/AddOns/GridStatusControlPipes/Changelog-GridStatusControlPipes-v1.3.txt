@@ -1,0 +1,27 @@
+------------------------------------------------------------------------
+r69 | julith | 2011-06-29 08:37:14 +0000 (Wed, 29 Jun 2011) | 1 line
+Changed paths:
+   A /tags/v1.3 (from /trunk:68)
+
+Tagging as v1.3
+------------------------------------------------------------------------
+r68 | julith | 2011-06-29 08:34:39 +0000 (Wed, 29 Jun 2011) | 3 lines
+Changed paths:
+   M /trunk/GridPipe.lua
+   M /trunk/GridStatusControlPipes.toc
+   M /trunk/PipeGuards.lua
+   M /trunk/local-enUS.lua
+
+GridStatusControlPipes:
+- added guard for only open/closed for the players unit frame
+- updated toc for 4.2
+------------------------------------------------------------------------
+r67 | julith | 2010-10-19 17:14:04 +0000 (Tue, 19 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/GridStatusControlPipes.toc
+   M /trunk/PipeGuards.lua
+   M /trunk/local-enUS.lua
+
+GridStatusControlPipes: added "Role guard" (and some up cleaning of code)
+------------------------------------------------------------------------

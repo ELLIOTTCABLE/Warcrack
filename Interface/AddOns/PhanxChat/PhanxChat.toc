@@ -1,5 +1,5 @@
 ## Interface: 40300
-## Version: 4.3.0.139
+## Version: 4.3.3.147
 
 ## Title: PhanxChat
 ## Notes: Removes chat frame clutter and adds some functionality.
@@ -9,7 +9,7 @@
 ## Notes-ruRU: Удаляет беспорядок в окне чата и добавляет новые возможности.
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright © 2006–2011 Phanx.
+## X-Copyright: Copyright © 2006–2012 Phanx.
 ## X-License: Some rights reserved. See LICENSE.txt for details.
 ## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW
 ## X-Localizations: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN
@@ -24,6 +24,7 @@ Libs\LibStub\LibStub.lua
 Libs\LibAboutPanel\LibAboutPanel.lua
 Libs\PhanxConfig-Checkbox\PhanxConfig-Checkbox.lua
 Libs\PhanxConfig-Dropdown\PhanxConfig-Dropdown.lua
+Libs\PhanxConfig-EditBox\PhanxConfig-EditBox.lua
 Libs\PhanxConfig-Header\PhanxConfig-Header.lua
 Libs\PhanxConfig-OptionsPanel\PhanxConfig-OptionsPanel.lua
 Libs\PhanxConfig-Slider\PhanxConfig-Slider.lua

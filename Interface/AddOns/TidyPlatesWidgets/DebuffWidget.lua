@@ -1,4 +1,32 @@
 
+--[[
+Things to do..
+
+- Single Target Mode
+UpdateWidgetContextTargetOnly
+UpdateIconGrid
+TargetOnlyEventHandler
+
+- Raid-Target Only Mode
+
+- More recycling of table entries
+
+	The Prefilter should discard spells based on a general criteria
+	
+	Allowed spells
+		- SpellID match
+		- Debuffs (right now)
+		- Target GUID
+		
+	Testing
+	/wg emilye nagrand arena
+	
+	
+	Arena UnitID support
+		- Debuffs
+		- Cast bars
+--]]
+
 TidyPlatesWidgets.DebuffWidgetBuild = 2
 
 local PlayerGUID = UnitGUID("player")
@@ -9,7 +37,10 @@ local WatcherIsEnabled = false
 local WidgetList, WidgetGUID = {}, {}
 local UpdateWidget
 local TargetOfGroupMembers = {}
-local MaximumDisplayableDebuffs = 6
+local DebuffColumns = 3
+
+local function DefaultDebuffPreFilter() return true end
+local DebuffPrefilter = DefaultDebuffPreFilter
 
 local AURA_TARGET_HOSTILE = 1
 local AURA_TARGET_FRIENDLY = 2
@@ -45,6 +76,8 @@ local function IsAuraShown(widget, aura)
 			end
 		end
 end
+
+
 
 -- Raid Icon BIT Reference 4.1
 local RaidIconBit
@@ -187,14 +220,14 @@ end
 -----------------------------------------------------
 -- Aura Durations
 -----------------------------------------------------
-TidyPlatesData.CachedAuraDurations = {}
+TidyPlatesWidgetData.CachedAuraDurations = {}
 
 local function GetSpellDuration(spellid)
-	if spellid then return TidyPlatesData.CachedAuraDurations[spellid] end
+	if spellid then return TidyPlatesWidgetData.CachedAuraDurations[spellid] end
 end
 
 local function SetSpellDuration(spellid, duration)
-	if spellid then TidyPlatesData.CachedAuraDurations[spellid] = duration end
+	if spellid then TidyPlatesWidgetData.CachedAuraDurations[spellid] = duration end
 end
 
 -----------------------------------------------------
@@ -202,10 +235,9 @@ end
 -----------------------------------------------------
 
 -- New Style
-local AuraInstances = {}
-
 local Aura_List = {}	-- Two Dimensional
 local Aura_Spellid = {}
+local Aura_Spellname = {}
 local Aura_Expiration = {}
 local Aura_Stacks = {}
 local Aura_Caster = {}
@@ -214,13 +246,16 @@ local Aura_Texture = {}
 local Aura_Type = {}
 local Aura_Target = {}
 
-local function SetAuraInstance(guid, spellid, expiration, stacks, caster, duration, texture, auratype, auratarget)
+local function SetAuraInstance(guid, spellid, spellname, expiration, stacks, caster, duration, texture, auratype, auratarget)
 	if guid and spellid and caster and texture then
+		if DebuffPrefilter(spellid, spellname, auratype) ~= true then return end
+		
 		local aura_id = spellid..(tostring(caster or "UNKNOWN_CASTER"))
 		local aura_instance_id = guid..aura_id
 		Aura_List[guid] = Aura_List[guid] or {}
 		Aura_List[guid][aura_id] = aura_instance_id
 		Aura_Spellid[aura_instance_id] = spellid
+		Aura_Spellname[aura_instance_id] = spellname
 		Aura_Expiration[aura_instance_id] = expiration
 		Aura_Stacks[aura_instance_id] = stacks
 		Aura_Caster[aura_instance_id] = caster
@@ -228,6 +263,7 @@ local function SetAuraInstance(guid, spellid, expiration, stacks, caster, durati
 		Aura_Texture[aura_instance_id] = texture
 		Aura_Type[aura_instance_id] = auratype
 		Aura_Target[aura_instance_id] = auratarget
+
 	end
 end
 
@@ -236,6 +272,7 @@ local function GetAuraInstance(guid, aura_id)
 		local aura_instance_id = guid..aura_id
 		local spellid, expiration, stacks, caster, duration, texture, auratype
 		spellid = Aura_Spellid[aura_instance_id]
+		spellname = Aura_Spellname[aura_instance_id]
 		expiration = Aura_Expiration[aura_instance_id]
 		stacks = Aura_Stacks[aura_instance_id]
 		caster = Aura_Caster[aura_instance_id]
@@ -243,15 +280,16 @@ local function GetAuraInstance(guid, aura_id)
 		texture = Aura_Texture[aura_instance_id]
 		auratype  = Aura_Type[aura_instance_id]
 		auratarget  = Aura_Target[aura_instance_id]
-		return spellid, expiration, stacks, caster, duration, texture, auratype, auratarget
+		return spellid, spellname, expiration, stacks, caster, duration, texture, auratype, auratarget
 	end
 end
 
-local function WipeAuraList(guid)
+local function WipeUnitAuraList(guid)
 	if guid and Aura_List[guid] then
 		local unit_aura_list = Aura_List[guid]
 		for aura_id, aura_instance_id in pairs(unit_aura_list) do
 			Aura_Spellid[aura_instance_id] = nil
+			Aura_Spellname[aura_instance_id] = nil
 			Aura_Expiration[aura_instance_id] = nil
 			Aura_Stacks[aura_instance_id] = nil
 			Aura_Caster[aura_instance_id] = nil
@@ -274,6 +312,7 @@ local function RemoveAuraInstance(guid, spellid, caster)
 		local aura_id = spellid..(tostring(caster or "UNKNOWN_CASTER"))
 		if Aura_List[guid][aura_id] then
 			Aura_Spellid[aura_instance_id] = nil
+			Aura_Spellname[aura_instance_id] = nil
 			Aura_Expiration[aura_instance_id] = nil
 			Aura_Stacks[aura_instance_id] = nil
 			Aura_Caster[aura_instance_id] = nil
@@ -295,6 +334,7 @@ local function CleanAuraLists()
 			if expiration and expiration < currentTime then
 				Aura_List[guid][aura_id] = nil
 				Aura_Spellid[aura_instance_id] = nil
+				Aura_Spellname[aura_instance_id] = nil
 				Aura_Expiration[aura_instance_id] = nil
 				Aura_Stacks[aura_instance_id] = nil
 				Aura_Caster[aura_instance_id] = nil
@@ -326,22 +366,22 @@ local function UpdateAurasByUnitID(unitid)
 		local index
 		local guid = UnitGUID(unitid)
 		-- Reset Auras for a guid
-		WipeAuraList(guid)
+		WipeUnitAuraList(guid)
 		-- Debuffs
 		for index = 1, 40 do
-			local name , _, texture, count, dispelType, duration, expirationTime, unitCaster, _, _, spellid, _, isBossDebuff = UnitDebuff(unitid, index)
-			if not name then break end
+			local spellname , _, texture, count, dispelType, duration, expirationTime, unitCaster, _, _, spellid, _, isBossDebuff = UnitDebuff(unitid, index)
+			if not spellname then break end
 			SetSpellDuration(spellid, duration)			-- Caches the aura data for times when the duration cannot be determined (ie. via combat log)
-			SetAuraInstance(guid, spellid, expirationTime, count, UnitGUID(unitCaster or ""), duration, texture, AURA_TYPE[dispelType or "Debuff"], unitType)
+			SetAuraInstance(guid, spellid, spellname, expirationTime, count, UnitGUID(unitCaster or ""), duration, texture, AURA_TYPE[dispelType or "Debuff"], unitType)
 		end	
 		
 		-- Buffs (Only for friendly units)
 		if unitType == AURA_TARGET_FRIENDLY then	
 			for index = 1, 40 do
-				local name , _, texture, count, dispelType, duration, expirationTime, unitCaster, _, _, spellid, _, isBossDebuff = UnitBuff(unitid, index)
-				if not name then break end
+				local spellname , _, texture, count, dispelType, duration, expirationTime, unitCaster, _, _, spellid, _, isBossDebuff = UnitBuff(unitid, index)
+				if not spellname then break end
 				SetSpellDuration(spellid, duration)			-- Caches the aura data for times when the duration cannot be determined (ie. via combat log)
-				SetAuraInstance(guid, spellid, expirationTime, count, UnitGUID(unitCaster or ""), duration, texture, AURA_TYPE_BUFF, AURA_TARGET_FRIENDLY)
+				SetAuraInstance(guid, spellid, spellname, expirationTime, count, UnitGUID(unitCaster or ""), duration, texture, AURA_TYPE_BUFF, AURA_TARGET_FRIENDLY)
 			end	
 		end
 
@@ -381,11 +421,11 @@ local function UpdateAurasByUnitID(unitid)
 -----------------------------------------------------
 
 local function CombatLog_ApplyAura(...)
-	local timestamp, sourceGUID, destGUID, destName, spellid = ...
+	local timestamp, sourceGUID, destGUID, destName, spellid, spellname, stackCount = ...
 	local duration = GetSpellDuration(spellid)
 	local texture = GetSpellTexture(spellid)
 
-	SetAuraInstance(destGUID, spellid, GetTime() + (duration or 0), 1, sourceGUID, duration, texture, AURA_TYPE_DEBUFF, AURA_TARGET_HOSTILE)
+	SetAuraInstance(destGUID, spellid, spellname, GetTime() + (duration or 0), 1, sourceGUID, duration, texture, AURA_TYPE_DEBUFF, AURA_TARGET_HOSTILE)
 end
 
 local function CombatLog_RemoveAura(...) 
@@ -395,10 +435,10 @@ local function CombatLog_RemoveAura(...)
 end
 
 local function CombatLog_UpdateAuraStacks(...) 
-	local timestamp, sourceGUID, destGUID, destName, spellid, stackCount = ...
+	local timestamp, sourceGUID, destGUID, destName, spellid, spellname, stackCount = ...
 	local duration = GetSpellDuration(spellid)
 	local texture = GetSpellTexture(spellid)
-	SetAuraInstance(destGUID, spellid, GetTime() + (duration or 0), stackCount, sourceGUID, duration, texture, AURA_TYPE_DEBUFF, AURA_TARGET_HOSTILE)
+	SetAuraInstance(destGUID, spellid, spellname, GetTime() + (duration or 0), stackCount, sourceGUID, duration, texture, AURA_TYPE_DEBUFF, AURA_TARGET_HOSTILE)
 end
 
 
@@ -406,6 +446,8 @@ end
 -----------------------------------------------------
 -- General Events
 -----------------------------------------------------
+
+
 
 local function EventUnitTarget()
 	TargetOfGroupMembers = wipe(TargetOfGroupMembers)
@@ -460,21 +502,19 @@ local GeneralEvents = {
 	["ACTIVE_TALENT_GROUP_CHANGED"] = UpdatePlayerDispelTypes,
 }
 
-
+local function TargetOnlyEventHandler(frame, event, unitid)
+	if unitid == "target" then
+		UpdateAurasByUnitID("target")
+	end
+end
 
 local GetCombatEventResults
-if (tonumber((select(2, GetBuildInfo()))) >= 14299) then
-	function GetCombatEventResults(...)
-		local timestamp, combatevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlag, spellid  = ...		-- WoW 4.2
-		local auraType, stackCount = select(15, ...)
-		return timestamp, combatevent, sourceGUID, destGUID, destName, destFlags, destRaidFlag, auraType, spellid, stackCount
-	end
-else
-	function GetCombatEventResults(...)
-		local timestamp, combatevent, hideCaster, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellid = ...		-- WoW 4.1
-		local auraType, stackCount = select(13, ...)
-		return timestamp, combatevent, sourceGUID, destGUID, destName, destFlags, destFlags, auraType, spellid, stackCount
-	end
+--if (tonumber((select(2, GetBuildInfo()))) >= 14299) then else end
+
+function GetCombatEventResults(...)
+	local timestamp, combatevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlag, spellid, spellname  = ...		-- WoW 4.2
+	local auraType, stackCount = select(15, ...)
+	return timestamp, combatevent, sourceGUID, destGUID, destName, destFlags, destRaidFlag, auraType, spellid, spellname, stackCount
 end
 
 local function CombatEventHandler(frame, event, ...)	
@@ -485,7 +525,7 @@ local function CombatEventHandler(frame, event, ...)
 	end
 	
 	-- Combat Log Unfiltered
-	local timestamp, combatevent, sourceGUID, destGUID, destName, destFlags, destRaidFlag, auraType, spellid, stackCount = GetCombatEventResults(...)
+	local timestamp, combatevent, sourceGUID, destGUID, destName, destFlags, destRaidFlag, auraType, spellid, spellname, stackCount = GetCombatEventResults(...)
 	
 	-- Evaluate only for enemy units, for now
 	if (bit.band(destFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) == 0) then							-- FILTER: ENEMY UNIT
@@ -500,7 +540,7 @@ local function CombatEventHandler(frame, event, ...)
 				-- Update Auras via API/UnitID Search
 				if not UpdateAuraByLookup(destGUID) then
 					-- Update Auras via Combat Log		
-					CombatLogUpdateFunction(timestamp, sourceGUID, destGUID, destName, spellid, stackCount)
+					CombatLogUpdateFunction(timestamp, sourceGUID, destGUID, destName, spellid, spellname, stackCount)
 				end
 				-- To Do: Need to write something to detect when a change was made to the destID
 				-- Return values on functions?
@@ -512,6 +552,7 @@ local function CombatEventHandler(frame, event, ...)
 					ByName[rawName] = destGUID
 					name = rawName
 				end
+				
 				-- Cache Raid Icon Data for alternative lookup strategy
 				for iconname, bitmask in pairs(RaidIconBit) do
 					if bit.band(destRaidFlag, bitmask) > 0  then
@@ -537,11 +578,12 @@ local function DefaultFilterFunction(debuff, unit)
 end
 
 local function UpdateWidgetTime(frame, expiration)
-	local timeleft = ceil(expiration-GetTime())
+	local timeleft = expiration-GetTime()
 	if timeleft > 60 then 
-		frame.TimeLeft:SetText(ceil(timeleft/60).."m")
+		frame.TimeLeft:SetText(floor(timeleft/60).."m")
 	else
-		frame.TimeLeft:SetText(ceil(timeleft))
+		frame.TimeLeft:SetText(floor(timeleft))
+		--frame.TimeLeft:SetText(floor(timeleft*10)/10)
 	end
 end
 
@@ -559,7 +601,7 @@ local function UpdateIcon(frame, texture, expiration, stacks)
 		UpdateWidgetTime(frame, expiration)
 		frame:Show()
 		PolledHideIn(frame, expiration)
-	else 
+	elseif frame then
 		PolledHideIn(frame, 0)
 	end
 end
@@ -570,7 +612,7 @@ local AuraSlotPriority = {} 	-- auraSlot[slot] = priority
 local function debuffSort(a,b) return a.priority < b.priority end
 
 local DebuffCache = {}
---local CurrentAura = {}
+local CurrentAura = {}
 
 local function UpdateIconGrid(frame, guid)
 
@@ -578,21 +620,26 @@ local function UpdateIconGrid(frame, guid)
 		local AurasOnUnit = GetAuraList(guid)
 		local AuraSlotIndex = 1
 		local instanceid
+		local DebuffLimit = DebuffColumns * 2
 		
 		DebuffCache = wipe(DebuffCache)
 		local debuffCount = 0
+		local currentAuraIndex = 0
+		local aura
 		
 		-- Cache displayable debuffs
 		if AurasOnUnit then
 			frame:Show()
 			for instanceid in pairs(AurasOnUnit) do
+				currentAuraIndex = debuffCount + 1
 				
-				--for i,v in pairs(aura) do aura[i] = nil end
-				local aura = {}
-				aura.spellid, aura.expiration, aura.stacks, aura.caster, aura.duration, aura.texture, aura.type, aura.target = GetAuraInstance(guid, instanceid)
+				--local aura = {}
+				CurrentAura[currentAuraIndex] = wipe(CurrentAura[currentAuraIndex] or {})
+				aura = CurrentAura[currentAuraIndex]
+
+				aura.spellid, aura.name, aura.expiration, aura.stacks, aura.caster, aura.duration, aura.texture, aura.type, aura.target = GetAuraInstance(guid, instanceid)
 				
 				if tonumber(aura.spellid) then
-					aura.name = GetSpellInfo(tonumber(aura.spellid))
 					aura.unit = frame.unit
 					
 					-- Call Filter Function
@@ -617,17 +664,15 @@ local function UpdateIconGrid(frame, guid)
 			for index = 1,  #DebuffCache do
 				local cachedaura = DebuffCache[index]
 				if cachedaura.spellid and cachedaura.expiration then 
-					--local _, expiration, stacks, _, _, texture, atype, _ = GetAuraInstance(guid, instanceid)
-					--UpdateIcon(AuraIconFrames[AuraSlotIndex], texture, expiration, stacks) 
 					UpdateIcon(AuraIconFrames[AuraSlotIndex], cachedaura.texture, cachedaura.expiration, cachedaura.stacks) 
 					AuraSlotIndex = AuraSlotIndex + 1
 				end
-				if AuraSlotIndex > MaximumDisplayableDebuffs then break end
+				if AuraSlotIndex > DebuffLimit then break end
 			end
 		end
 		
 		-- Clear Extra Slots
-		for AuraSlotIndex = AuraSlotIndex, MaximumDisplayableDebuffs do UpdateIcon(AuraIconFrames[AuraSlotIndex]) end
+		for AuraSlotIndex = AuraSlotIndex, DebuffLimit do UpdateIcon(AuraIconFrames[AuraSlotIndex]) end
 		
 		DebuffCache = wipe(DebuffCache)
 end
@@ -660,7 +705,7 @@ end
 
 
 -- Context Update (mouseover, target change)
-local function UpdateWidgetContext(frame, unit)
+local function UpdateWidgetContextFull(frame, unit)
 	local guid = unit.guid
 	frame.unit = unit
 	frame.guidcache = guid
@@ -681,6 +726,15 @@ local function UpdateWidgetContext(frame, unit)
 	CallForWidgetUpdate(guid, raidicon, name)
 end
 
+local function UpdateWidgetContextTargetOnly(frame, unit)
+	if unit.isTarget then 
+		-- UpdateAurasByUnitID("target")
+		
+	end
+end
+
+local UpdateWidgetContext = UpdateWidgetContextFull
+
 local function ClearWidgetContext(frame)
 	if frame.guidcache then 
 		WidgetGUID[frame.guidcache] = nil 
@@ -693,7 +747,8 @@ end
 -------------------------------------------------------------
 -- Widget Frames
 -------------------------------------------------------------
-local AuraBorderArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrame"				-- FINISH ART
+local WideArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrameWide"				-- FINISH ART
+local SquareArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrameSquare"				-- FINISH ART
 local AuraGlowArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraGlow"	
 local AuraHighlightArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\CCBorder"			-- AuraBorderArt, AuraHighlightArt
 local AuraTestArt = ""
@@ -711,10 +766,21 @@ local function Enable()
 	TidyPlatesUtility:EnableGroupWatcher()
 	WatcherIsEnabled = true
 	
-	if not TidyPlatesData.CachedAuraDurations then
-		TidyPlatesData.CachedAuraDurations = {}
+	if not TidyPlatesWidgetData.CachedAuraDurations then
+		TidyPlatesWidgetData.CachedAuraDurations = {}
 	end
+	--print("TidyPlatesBeta Message: Debuff Monitoring is Enabled")
+end
+
+local function EnableForTargetOnly()
+	AuraMonitor:UnregisterAllEvents()
+	AuraMonitor:SetScript("OnEvent", TargetEventHandler)
 	
+	--	AuraMonitor:RegisterEvent("UNIT_TARGET")
+	AuraMonitor:RegisterEvent("UNIT_AURA")
+
+	TidyPlatesUtility:EnableGroupWatcher()
+	WatcherIsEnabled = true
 end
 
 local function Disable() 
@@ -722,12 +788,13 @@ local function Disable()
 	AuraMonitor:UnregisterAllEvents()
 	--TidyPlatesUtility:DisableGroupWatcher()
 	WatcherIsEnabled = false
+	--print("TidyPlatesBeta Message: Debuff Monitoring is Disabled")
 end
 
 -- Create an Aura Icon
-local function CreateAuraIconFrame(parent)
+local function CreateWideAuraIconFrame(parent)
 	local frame = CreateFrame("Frame", nil, parent)
-	frame:SetWidth(26); frame:SetHeight(14)
+	frame:SetWidth(26.5); frame:SetHeight(14.5)
 	-- Icon
 	frame.Icon = frame:CreateTexture(nil, "BACKGROUND")
 	frame.Icon:SetAllPoints(frame)
@@ -737,7 +804,7 @@ local function CreateAuraIconFrame(parent)
 	frame.Border = frame:CreateTexture(nil, "ARTWORK")
 	frame.Border:SetWidth(32); frame.Border:SetHeight(32)
 	frame.Border:SetPoint("CENTER", 1, -2)
-	frame.Border:SetTexture(AuraBorderArt)
+	frame.Border:SetTexture(WideArt)
 	-- Glow
 	--frame.Glow = frame:CreateTexture(nil, "ARTWORK")
 	--frame.Glow:SetAllPoints(frame.Border)
@@ -774,8 +841,57 @@ local function CreateAuraIconFrame(parent)
 	return frame
 end
 
+-- Create an Aura Icon
+local function CreateSquareAuraIconFrame(parent)
+	local frame = CreateFrame("Frame", nil, parent)
+	frame:SetWidth(16.5); frame:SetHeight(14.5)	
+	-- Icon
+	frame.Icon = frame:CreateTexture(nil, "BACKGROUND")
+	frame.Icon:SetAllPoints(frame)
+	frame.Icon:SetTexCoord(.10, 1-.07, .12, 1-.12)  -- obj:SetTexCoord(left,right,top,bottom)
+	-- Border
+	-- [[
+	frame.Border = frame:CreateTexture(nil, "ARTWORK")
+	frame.Border:SetWidth(32); frame.Border:SetHeight(32)
+	frame.Border:SetPoint("CENTER", 0, -2)
+	frame.Border:SetTexture(SquareArt)
+	--]]
+	--  Time Text
+	frame.TimeLeft = frame:CreateFontString(nil, "OVERLAY")
+	frame.TimeLeft:SetFont(AuraFont ,9, "OUTLINE")
+	frame.TimeLeft:SetShadowOffset(1, -1)
+	frame.TimeLeft:SetShadowColor(0,0,0,1)
+	frame.TimeLeft:SetPoint("RIGHT", 0, 8)
+	frame.TimeLeft:SetWidth(26)
+	frame.TimeLeft:SetHeight(16)
+	frame.TimeLeft:SetJustifyH("RIGHT")
+	--  Stacks
+	frame.Stacks = frame:CreateFontString(nil, "OVERLAY")
+	frame.Stacks:SetFont(AuraFont,10, "OUTLINE")
+	frame.Stacks:SetShadowOffset(1, -1)
+	frame.Stacks:SetShadowColor(0,0,0,1)
+	frame.Stacks:SetPoint("RIGHT", 0, -6)
+	frame.Stacks:SetWidth(26)
+	frame.Stacks:SetHeight(16)
+	frame.Stacks:SetJustifyH("RIGHT")
+	-- Information about the currently displayed aura
+	frame.AuraInfo = {	
+		Name = "",
+		Icon = "",
+		Stacks = 0,
+		Expiration = 0,
+		Type = "",
+	}		
+	--frame.Poll = UpdateWidgetTime
+	frame.Poll = parent.PollFunction
+	frame:Hide()
+	return frame
+end
+
+local CreateIconFrame = CreateWideAuraIconFrame
+
 -- Create the Main Widget Body and Icon Array
-local function CreateAuraWidget(parent)
+local function CreateAuraWidget(parent, style)
 	--if not WatcherIsEnabled then Enable() end
 	-- Create Base frame
 	local frame = CreateFrame("Frame", nil, parent)
@@ -785,13 +901,14 @@ local function CreateAuraWidget(parent)
 	frame.AuraIconFrames = {}
 	local AuraIconFrames = frame.AuraIconFrames
 	
-	for index = 1, MaximumDisplayableDebuffs do AuraIconFrames[index] = CreateAuraIconFrame(frame);  end
-	local FirstRowCount = min(MaximumDisplayableDebuffs/2)
+	local DebuffLimit = DebuffColumns * 2
+	
+	for index = 1, DebuffLimit do AuraIconFrames[index] = CreateIconFrame(frame);  end
 	-- Set Anchors	
 	AuraIconFrames[1]:SetPoint("LEFT", frame)
-	for index = 2, FirstRowCount do AuraIconFrames[index]:SetPoint("LEFT", AuraIconFrames[index-1], "RIGHT", 5, 0) end
-	AuraIconFrames[FirstRowCount+1]:SetPoint("BOTTOMLEFT", AuraIconFrames[1], "TOPLEFT", 0, 8)
-	for index = (FirstRowCount+2), MaximumDisplayableDebuffs do AuraIconFrames[index]:SetPoint("LEFT", AuraIconFrames[index-1], "RIGHT", 5, 0) end
+	for index = 2, DebuffColumns do AuraIconFrames[index]:SetPoint("LEFT", AuraIconFrames[index-1], "RIGHT", 5, 0) end
+	AuraIconFrames[DebuffColumns+1]:SetPoint("BOTTOMLEFT", AuraIconFrames[1], "TOPLEFT", 0, 8)
+	for index = (DebuffColumns+2), DebuffLimit do AuraIconFrames[index]:SetPoint("LEFT", AuraIconFrames[index-1], "RIGHT", 5, 0) end
 	-- Functions
 	frame._Hide = frame.Hide
 	frame.Hide = function() ClearWidgetContext(frame); frame:_Hide() end
@@ -803,6 +920,22 @@ local function CreateAuraWidget(parent)
 	return frame
 end
 
+local function UseSquareDebuffIcon() 
+	CreateIconFrame = CreateSquareAuraIconFrame
+	DebuffColumns = 5
+	TidyPlates:ForceUpdate()
+end
+
+local function UseWideDebuffIcon() 
+	CreateIconFrame = CreateWideAuraIconFrame
+	DebuffColumns = 3
+	TidyPlates:ForceUpdate()
+end
+
+local function SetPrefilter(func)
+	DebuffPrefilter = func or DefaultDebuffPreFilter
+end
+
 -----------------------------------------------------
 -- External
 -----------------------------------------------------
@@ -810,58 +943,19 @@ TidyPlatesWidgets.GetAuraWidgetByGUID = GetAuraWidgetByGUID
 TidyPlatesWidgets.IsAuraShown = IsAuraShown
 TidyPlatesWidgets.CanPlayerDispel = CanPlayerDispel
 
+TidyPlatesWidgets.UseSquareDebuffIcon = UseSquareDebuffIcon
+TidyPlatesWidgets.UseWideDebuffIcon = UseWideDebuffIcon
+TidyPlatesWidgets.SetDebuffPrefilter = SetPrefilter
+
 TidyPlatesWidgets.CreateAuraWidget = CreateAuraWidget
+
 TidyPlatesWidgets.EnableAuraWatcher = Enable
+TidyPlatesWidgets.EnableAuraWatcherTargetOnly = EnableForTargetOnly
 TidyPlatesWidgets.DisableAuraWatcher = Disable
 
------------------------------------------------------
--- Debuff Library
------------------------------------------------------
---[[
-	-- Druid
-	SetSpellDuration(8921, 12)	-- Moonfire
-	SetSpellDuration(1822, 9)	-- Rake
-	SetSpellDuration(33876, 60)	-- Mangle
 
-	-- Deathknight
-	-- Hunter
-	-- Mage
-	-- Paladin
-	-- Priest
-	-- Rogue
-	-- Shaman
-	-- Warlock
-	-- Warrior
---]]
 
-function DynamicHashTableSize(entries)
-  if (entries == 0) then
-    return 36;
-  else
-    return math.pow(2, math.ceil(math.log(entries) / math.log(2))) * 40 + 36;
-  end
-end
 
-local TableMemory
-
-TableMemory = function(pTable, level)
-	level = level or 1
-	local sum = 0
-	local entries = 0
-	local indent = " "
-	for s = 1, level do
-		indent = indent.." "
-	end
-			
-	for i,v in pairs(pTable) do		
-		if type(v) == 'table' then 
-			local mem = TableMemory(v, level+1)
-			sum = sum + mem
-			entries = entries + 1
-		else entries = entries + 1 end
-	end
-	return DynamicHashTableSize(entries) + sum, entries
-end
 
 
 

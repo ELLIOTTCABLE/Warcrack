@@ -1,0 +1,21 @@
+------------------------------------------------------------------------
+r10 | watchout | 2011-07-31 21:01:35 +0000 (Sun, 31 Jul 2011) | 1 line
+Changed paths:
+   A /tags/40200.1 (from /trunk:9)
+
+Tagging as 40200.1
+------------------------------------------------------------------------
+r9 | watchout | 2011-07-31 21:01:03 +0000 (Sun, 31 Jul 2011) | 1 line
+Changed paths:
+   M /trunk/GridUnitMenu.lua
+
+removed debug messages
+------------------------------------------------------------------------
+r7 | watchout | 2011-06-30 19:04:18 +0000 (Thu, 30 Jun 2011) | 2 lines
+Changed paths:
+   M /trunk/GridUnitMenu.lua
+   M /trunk/GridUnitMenu.toc
+
+- toc bump
+- long overdue attempt at fixing menu taint. which doesn't work.
+------------------------------------------------------------------------

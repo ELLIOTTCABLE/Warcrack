@@ -2,9 +2,9 @@
 	PhanxChat
 	Reduces chat frame clutter and enhances chat frame functionality.
 	Written by Phanx <addons@phanx.net>
-	Copyright © 2006–2011 Phanx. Some rights reserved. See LICENSE.txt for details.
+	Copyright © 2006–2012 Phanx. Some rights reserved. See LICENSE.txt for details.
 	http://www.wowinterface.com/downloads/info6323-PhanxChat.html
-	http://wow.curse.com/downloads/wow-addons/details/phanxchat.aspx
+	http://www.curse.com/addons/wow/phanxchat
 ----------------------------------------------------------------------]]
 
 local STRING_STYLE  = "%s|| "
@@ -365,7 +365,10 @@ end
 
 PhanxChat.frame = CreateFrame("Frame")
 PhanxChat.frame:RegisterEvent("ADDON_LOADED")
-PhanxChat.frame:SetScript("OnEvent", function(self, event, ...) return PhanxChat[event] and PhanxChat[event](PhanxChat, ...) end)
+PhanxChat.frame:SetScript("OnEvent", function(self, event, ...)
+	-- print("PhanxChat: " .. event)
+	return PhanxChat[event] and PhanxChat[event](PhanxChat, ...)
+end)
 
 function PhanxChat:RegisterEvent(event) return self.frame:RegisterEvent(event) end
 function PhanxChat:UnregisterEvent(event) return self.frame:UnregisterEvent(event) end

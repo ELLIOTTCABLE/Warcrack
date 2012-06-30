@@ -82,7 +82,11 @@ local function OnSpellCast(...)
 	-- Gather Spell Info
 	local spell, displayName, icon, castTime
 	spell, displayName, icon, _, _, _, castTime, _, _ = GetSpellInfo(spellid)
-	if not (castTime > 0) then return end
+	
+	
+	-- Testing: Always make the casts a minimum of 1.5 seconds
+	castTime = max(castTime, 1500)
+	--if not (castTime > 0) then return end
 	
 	if bit.band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 then 
 		if bit.band(sourceFlags, COMBATLOG_OBJECT_CONTROL_PLAYER) > 0 then 

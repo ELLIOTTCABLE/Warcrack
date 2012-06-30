@@ -1,4 +1,4 @@
-## Interface: 40000
+## Interface: 42000
 ## Title: GridStatusShield
 ## Notes: Status indicator that shows the remaining of value of Powerword shield.
 ## Author: Julith
@@ -6,7 +6,7 @@
 ## X-Category: UnitFrame
 ## Dependencies: Grid
 ## OptionalDeps: Ace3
-## X-Curse-Packaged-Version: v1.23
+## X-Curse-Packaged-Version: v1.23-toc4.2
 ## X-Curse-Project-Name: GridStatusShield
 ## X-Curse-Project-ID: gsshield
 ## X-Curse-Repository-ID: wow/gsshield/mainline

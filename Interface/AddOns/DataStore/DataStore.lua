@@ -15,7 +15,7 @@ Other services offered by DataStore:
 DataStore = LibStub("AceAddon-3.0"):NewAddon("DataStore", "AceConsole-3.0", "AceEvent-3.0", "AceComm-3.0", "AceSerializer-3.0")
 
 local addon = DataStore
-addon.Version = "v4.0.001"
+addon.Version = "v4.3.001"
 
 local THIS_ACCOUNT = "Default"
 local commPrefix = "DataStore"
@@ -294,10 +294,10 @@ function addon:OnEnable()
 		addon:RegisterEvent("CHAT_MSG_SYSTEM", OnChatMsgSystem)
 		addon:RegisterComm(commPrefix, GuildCommHandler)
 
-		-- for 4.1
-		-- if not IsAddonMessagePrefixRegistered(commPrefix) then
-			-- RegisterAddonMessagePrefix(commPrefix)
-		-- end
+		-- since 4.1, required !
+		if not IsAddonMessagePrefixRegistered(commPrefix) then
+			RegisterAddonMessagePrefix(commPrefix)
+		end
 		
 		local guild = GetGuildInfo("player")		-- will be nil in a standard login (called too soon), but ok for a reloadui.
 		if guild then
@@ -319,29 +319,40 @@ function addon:RegisterModule(moduleName, module, publicMethods)
 	assert(type(moduleName) == "string")
 	assert(type(module) == "table")
 	
-	if not RegisteredModules[moduleName] then		-- add the module's database address (addon.db.global) to the list of known modules
-		RegisteredModules[moduleName] = module
-		local db = module.db.global
+	-- add the module's database address (addon.db.global) to the list of known modules, if it is not already known
+	if RegisteredModules[moduleName] then return end
+	
+	RegisteredModules[moduleName] = module
+	local db = module.db.global
 
-		-- simplifies the life of child modules, and prepares a few pointers for them
-		module.ThisCharacter = db.Characters[GetKey()]
-		module.Characters = db.Characters
-		module.Guilds = db.Guilds
+	-- simplifies the life of child modules, and prepares a few pointers for them
+	module.ThisCharacter = db.Characters[GetKey()]
+	module.Characters = db.Characters
+	module.Guilds = db.Guilds
 
-		-- register module's public method
-		for methodName, method in pairs(publicMethods) do
-			if RegisteredMethods[methodName] then
-				print(format("DataStore:RegisterMethod() : adding method for module <%s> failed.", moduleName))
-				print(format("DataStore:RegisterMethod() : method <%s> already exists !", methodName))
-				return 
-			end
-			
-			RegisteredMethods[methodName] = {
-				func = method,
-				owner = module, 			-- module that owns this method & associated data
-			}
+	-- register module's public method
+	for methodName, method in pairs(publicMethods) do
+		if RegisteredMethods[methodName] then
+			print(format("DataStore:RegisterMethod() : adding method for module <%s> failed.", moduleName))
+			print(format("DataStore:RegisterMethod() : method <%s> already exists !", methodName))
+			return 
 		end
+		
+		RegisteredMethods[methodName] = {
+			func = method,
+			owner = module, 			-- module that owns this method & associated data
+		}
 	end
+	
+	-- automatically clean orphan data in child modules (ie: data exist for a char/guild in a sub module, but no key in the main module)
+	-- needs fixing ! test with empty sv files to reproduce
+	-- for charKey, _ in pairs(db.Characters) do
+		
+		-- if the key is not valid in the main module, kill the data
+		-- if not Characters[charKey] or not Characters[charKey].faction then
+			-- db.Characters[charKey] = nil
+		-- end
+	-- end
 end
 
 function addon:SetCharacterBasedMethod(methodName)

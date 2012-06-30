@@ -2,9 +2,9 @@
 	PhanxChat
 	Reduces chat frame clutter and enhances chat frame functionality.
 	Written by Phanx <addons@phanx.net>
-	Copyright © 2006–2011 Phanx. Some rights reserved. See LICENSE.txt for details.
+	Copyright © 2006–2012 Phanx. Some rights reserved. See LICENSE.txt for details.
 	http://www.wowinterface.com/downloads/info6323-PhanxChat.html
-	http://wow.curse.com/downloads/wow-addons/details/phanxchat.aspx
+	http://www.curse.com/addons/wow/phanxchat
 ----------------------------------------------------------------------]]
 
 local URL_STYLE = "|cff33ccff%s|r"
@@ -46,7 +46,7 @@ end
 ------------------------------------------------------------------------
 
 function PhanxChat.ChatFrame_OnHyperlinkShow(frame, link, text, button)
-	if link:sub(1, 3) == "url" then
+	if link:sub(1, 4) == "url:" then -- ignore Blizzard urlIndex links
 		currentURL = link:sub(5)
 		StaticPopup_Show("URL_COPY_DIALOG")
 		return
@@ -91,6 +91,7 @@ function PhanxChat:SetLinkURLs(v)
 			showAlert = 1,
 			timeout = 0,
 			whileDead = 1,
+			preferredIndex = 3, -- helps prevent taint; see http://forums.wowace.com/showthread.php?t=19960
 			OnShow = function(self)
 				(self.icon or _G[self:GetName().."AlertIcon"]):Hide()
 

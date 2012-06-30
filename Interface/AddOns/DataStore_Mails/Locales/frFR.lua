@@ -16,7 +16,7 @@ L["EXPIRY_CHECK_TITLE"] = "Vérifier les expirations de courrier"
 L["Mail Expiry Warning"] = "Avertis. d'expiration du courrier"
 L["SCAN_MAIL_BODY_DISABLED"] = "Seules les pièces jointes seront lues. Les lettres garderont leur statut 'non-lu'."
 L["SCAN_MAIL_BODY_ENABLED"] = "Le corps de chaque lettre sera lu durant le scan de la boîte aux lettres. Tous les courriers seront marqués comme lus."
-L["SCAN_MAIL_BODY_TITLE"] = "Lire le corps du courrier"
 L["Scan mail body (marks it as read)"] = "Lire le courrier (le marque comme lu)"
+L["SCAN_MAIL_BODY_TITLE"] = "Lire le corps du courrier"
 L["Warn when mail expires in less days than this value"] = "Avertir quand du courrier arrive à expiration dans moins de jours que cette valeur"
 

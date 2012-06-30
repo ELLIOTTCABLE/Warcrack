@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r35 | slaren | 2012-03-31 12:17:43 +0000 (Sat, 31 Mar 2012) | 1 line
+Changed paths:
+   A /tags/v1.6c (from /trunk:34)
+
+Tagging as v1.6c
+------------------------------------------------------------------------
+r34 | slaren | 2012-03-31 12:13:42 +0000 (Sat, 31 Mar 2012) | 1 line
+Changed paths:
+   M /trunk/GridStatusTankCooldown.lua
+   M /trunk/SpellsWidget.lua
+
+- Updated spell list contributed by savethetrees
+------------------------------------------------------------------------

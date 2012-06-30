@@ -1,0 +1,7 @@
+## Interface: 40300
+## Version: 12.05.20
+## Title: TipTacItemRef
+## Author: Aezay (Earthen Ring EU)
+## Notes: Improved ItemRefTooltip
+## OptionalDeps: TipTac
+core.lua

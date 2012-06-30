@@ -1,6 +1,6 @@
-## Interface: 40200
+## Interface: 40300
 ## Title: |cFFFFB366Ara|r - Broker - Guild & Friends
-## Version: r43
+## Version: r44
 ## Author: Ara
 ## Notes: Provides guildmates & friends informations and interactions.
 ## SavedVariables: AraBrokerGuildFriendsDB

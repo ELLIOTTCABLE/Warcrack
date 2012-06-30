@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r21 | thaoky | 2012-01-29 10:19:37 +0000 (Sun, 29 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/DataStore_Reputations.lua
+
+Fixed scanning guild reputation.
+------------------------------------------------------------------------
+r20 | thaoky | 2011-12-10 14:53:14 +0000 (Sat, 10 Dec 2011) | 2 lines
+Changed paths:
+   M /trunk/DataStore_Reputations.toc
+
+TOC Update
+
+------------------------------------------------------------------------

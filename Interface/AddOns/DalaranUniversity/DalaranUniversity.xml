@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	<StatusBar name="DalaranUniversity_Main_BarTemplate" minValue="0" maxValue="10800" orientation="HORIZONTAL" virtual="true">
+		<Size>
+			<AbsDimension x="120" y="16" />
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parent_Text" inherits="SystemFont_Med1">
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<Texture name="$parent_Border" file="Interface\Glues\LoadingBar\Loading-BarBorder">
+					<Size>
+						<AbsDimension x="138" y="30" />
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset x="0" y="0" />
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				DalaranUniversity.Main.Bar.OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DalaranUniversity.Main.Bar.OnUpdate(self);
+			</OnUpdate>
+			<OnEnter>
+				DalaranUniversity.Main.Bar.OnEnter(self);
+			</OnEnter>
+			<OnLeave>
+				DalaranUniversity.Main.Bar.OnLeave(self);
+			</OnLeave>
+			<OnMouseUp>
+				DalaranUniversity.Main.Bar.OnMouseUp(self, button);
+			</OnMouseUp>
+		</Scripts>
+		<BarTexture name="$parent_Texture" file="Interface\Addons\DalaranUniversity\Textures\StatusBar\Flat" />
+		<BarColor r="0.3" g="0.3" b="0.3" a="1.0" />
+	</StatusBar>
+
+	<Script file="Localization\enUS.lua"/>
+	<Script file="DalaranUniversity.lua"/>
+	<Frame name="DalaranUniversity_Main" enableMouse="true" movable="true" parent="UIParent">
+		<Size>
+			<AbsDimension x="150" y="200"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4"/>
+			</BackgroundInsets>
+			<Color r="0" g="0" b="0" a="0.8"/>
+		</Backdrop>
+		<Scripts>
+			<OnMouseDown>
+				if (not self.isLocked and button == "LeftButton") then
+					self:StartMoving();
+					self.isMoving = true;
+				end;
+			</OnMouseDown>
+			<OnMouseUp>
+				if (self.isMoving and button == "LeftButton") then
+					self:StopMovingOrSizing();
+					self.isMoving = false;
+				else
+					DalaranUniversity.Main.OnMouseUp(self, button);
+				end;
+			</OnMouseUp>
+			<OnHide>
+				if (self.isMoving) then
+					self:StopMovingOrSizing();
+					self.isMoving = false;
+				end;
+			</OnHide>
+			<OnLoad>
+				DalaranUniversity.Main.OnLoad(self);
+			</OnLoad>
+			<OnEvent function="DalaranUniversity_OnEvent" />
+			<OnUpdate>
+				DalaranUniversity.Main.OnUpdate(self);
+			</OnUpdate>
+		</Scripts>
+		<Layers>
+			<Layer level="BORDER">
+				<FontString name="$parent_Title" inherits="SystemFont_Med1" text="DalaranUniversity_Main_TitleText">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-10"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parent_CloseButton" inherits="UIPanelCloseButton">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DalaranUniversity.Main.Button.Close.OnClick(self);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_MuteButton">
+				<Size>
+					<AbsDimension x="10" y="10" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="5" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DalaranUniversity.Main.Button.Mute.OnClick(self);
+					</OnClick>
+					<OnEnter>
+						DalaranUniversity.Main.Button.Mute.OnEnter(self);
+					</OnEnter>
+					<OnLeave>
+						DalaranUniversity.Main.Button.Mute.OnLeave(self);
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-GuildButton-MOTD-Up" />
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+			</Button>
+			<StatusBar name="DalaranUniversity_VG" inherits="DalaranUniversity_Main_BarTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-30" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<StatusBar name="DalaranUniversity_DVC" inherits="DalaranUniversity_Main_BarTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-50" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<StatusBar name="DalaranUniversity_LVC" inherits="DalaranUniversity_Main_BarTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-70" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<StatusBar name="DalaranUniversity_UVC" inherits="DalaranUniversity_Main_BarTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-90" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<StatusBar name="DalaranUniversity_TOF" inherits="DalaranUniversity_Main_BarTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-110" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<StatusBar name="DalaranUniversity_VH" inherits="DalaranUniversity_Main_BarTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-130" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<StatusBar name="DalaranUniversity_ULL" inherits="DalaranUniversity_Main_BarTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-150" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<StatusBar name="DalaranUniversity_LLL" inherits="DalaranUniversity_Main_BarTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-170" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</StatusBar>
+			<Frame name="$parent_DropDown" inherits="UIDropDownMenuTemplate" id="1">
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_Initialize(self, DalaranUniversity.Main.DropDown.Initialize, "MENU");
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame name="$parent_Bar_DropDown" inherits="UIDropDownMenuTemplate" id="1">
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_Initialize(self, DalaranUniversity.Main.Bar.DropDown.Initialize, "MENU");
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+	</Frame>
+	
+	<Frame name="DalaranUniversity_SetTime" hidden="true" enableMouse="true" movable="true" parent="UIParent">
+		<Size>
+			<AbsDimension x="350" y="100"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4"/>
+			</BackgroundInsets>
+			<Color r="0" g="0" b="0" a="0.8"/>
+		</Backdrop>
+		<Scripts>
+			<OnLoad>
+				DalaranUniversity.SetTime.OnLoad(self);
+			</OnLoad>
+			<OnShow>
+				DalaranUniversity.SetTime.OnShow(self);
+			</OnShow>
+			<OnMouseDown>
+				if (not self.isLocked) then
+					self:StartMoving();
+					self.isMoving = true;
+				end;
+			</OnMouseDown>
+			<OnMouseUp>
+				if (self.isMoving) then
+					self:StopMovingOrSizing();
+					self.isMoving = false;
+				end;
+			</OnMouseUp>
+			<OnHide>
+				if (self.isMoving) then
+					self:StopMovingOrSizing();
+					self.isMoving = false;
+				end;
+			</OnHide>
+		</Scripts>
+		<Layers>
+			<Layer level="BORDER">
+				<FontString name="$parent_Title" inherits="SystemFont_Med1" text="DalaranUniversity_SetTime_TitleText">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-10"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_TimeSeparator" inherits="SystemFont_Med1" text=":" />
+				<FontString name="$parent_DummyText" inherits="GameFontHighlightSmall" hidden="true">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parent_Book_DropDown" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset>
+							<AbsDimension x="5" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Frame name="$parent_Spawn_DropDown" inherits="UIDropDownMenuTemplate" />
+			<EditBox name="$parent_Hours" inherits="InputBoxTemplate" autoFocus="false" numeric="true">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_Spawn_DropDown" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="2" y="3" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnTabPressed>
+						getglobal(self:GetParent():GetName().."_Minutes"):SetFocus();
+					</OnTabPressed>
+					<OnEnterPressed>
+						getglobal(self:GetParent():GetName().."_Set_Button"):Click();
+					</OnEnterPressed>
+					<OnEscapePressed>
+						getglobal(self:GetParent():GetName().."_Cancel_Button"):Click();
+					</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+			<EditBox name="$parent_Minutes" inherits="InputBoxTemplate" autoFocus="false" numeric="true">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_Hours" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="10" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnTabPressed>
+						getglobal(self:GetParent():GetName().."_Hours"):SetFocus();
+					</OnTabPressed>
+					<OnEnterPressed>
+						getglobal(self:GetParent():GetName().."_Set_Button"):Click();
+					</OnEnterPressed>
+					<OnEscapePressed>
+						getglobal(self:GetParent():GetName().."_Cancel_Button"):Click();
+					</OnEscapePressed>
+				</Scripts>
+			</EditBox>
+			<Frame name="$parent_AMPM_DropDown" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_Minutes" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-15" y="-3" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Button name="$parent_Set_Button" inherits="UIPanelButtonTemplate" text="DalaranUniversity_Set_ButtonText">
+				<Size>
+					<AbsDimension x="50" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="-6" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DalaranUniversity.SetTime.Button.Set.OnClick(self);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Cancel_Button" inherits="UIPanelButtonTemplate" text="DalaranUniversity_Cancel_ButtonText">
+				<Size>
+					<AbsDimension x="50" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="6" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						self:GetParent():Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>

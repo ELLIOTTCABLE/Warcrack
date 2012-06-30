@@ -1,7 +1,7 @@
 -- (c) 2007 Nymbia.  see LGPLv2.1.txt for full details.
 --DO NOT MAKE CHANGES TO THIS FILE BEFORE READING THE WIKI PAGE REGARDING CHANGING THESE FILES
 if not LibStub("LibPeriodicTable-3.1", true) then error("PT3 must be loaded before data") end
-LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 371 $", "(%d+)", function(n) return n+90000 end), {
+LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 373 $", "(%d+)", function(n) return n+90000 end), {
 	["InstanceLootHeroic.Auchindoun"]="m,InstanceLootHeroic.Auchenai Crypts,InstanceLootHeroic.Mana-Tombs,InstanceLootHeroic.Shadow Labyrinth,InstanceLootHeroic.Sethekk Halls",
 	["InstanceLootHeroic.Auchenai Crypts.Exarch Maladaar"]="27523:131,27867:108,27869:127,27870:106,27871:132,27872:105,29244:230,29257:270,29354:116,30586:76,30587:75,30588:71",
 	["InstanceLootHeroic.Auchenai Crypts.Shirrak the Dead Watcher"]="27493:131,27845:139,27846:135,27847:106,27865:109,27866:145,30586:56,30587:47,30588:52",
@@ -125,7 +125,7 @@ LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 371 $"
 	["InstanceLootHeroic.Naxxramas.Sir Zeliek"]="m,InstanceLootHeroic.Naxxramas.Four Horsemen Chest",
 	["InstanceLootHeroic.Naxxramas.Thaddius"]="40294:180,40296:181,40297:172,40298:183,40299:181,40300:192,40301:185,40302:173,40303:196,40304:186,40634:559,40635:582,40636:761",
 	["InstanceLootHeroic.Naxxramas.Thane Korth'azz"]="m,InstanceLootHeroic.Naxxramas.Four Horsemen Chest",
-	["InstanceLootHeroic.Naxxramas.Trash Mobs"]="40064,40065,40069,40071,40074,40075,40080,40107,40108,40250,40251,40252,40253,40254,40255,40256,40257,40258,40406,40407,40408,40409,40410,40412,40414",
+	["InstanceLootHeroic.Naxxramas.Trash Mobs"]="37196,37197,37243,37290,37364,37365,37366,37410,37587,37590,37624,37625,37646,37647,37648,37671,37672,37673,37799,37800,37801,37856,37857,37858,40064,40065,40069,40071,40074,40075,40080,40107,40108,40250,40251,40252,40253,40254,40255,40256,40257,40258",
 
 	["InstanceLootHeroic.The Nexus Hub"]="m,InstanceLootHeroic.The Eye of Eternity,InstanceLootHeroic.The Nexus,InstanceLootHeroic.The Oculus",
 -- The Eye of Eternity
@@ -177,7 +177,7 @@ LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 371 $"
 	["InstanceLootHeroic.Ulduar.Thorim"]="m,InstanceLootHeroic.Ulduar.Cache of Storms",
 	["InstanceLootHeroic.Ulduar.XT-002 Deconstructor"]="45090:5,45093:5,45096:5,45101:4,45104:3,45105:4,45246:186,45247:187,45248:193,45249:186,45250:182,45251:187,45252:197,45253:203,45254:188,45255:186,45256:197,45257:197,45258:191,45259:185,45260:210,45442:24,45443:19,45444:27,45445:24,45446:24",
 	["InstanceLootHeroic.Ulduar.Yogg-Saron"]="45093:8,45104:4,45521:161,45522:190,45523:161,45524:133,45525:161,45527:105,45529:210,45530:157,45531:157,45532:226,45533:12,45534:20,45535:12,45536:12,45537:20,45656:518,45657:591,45658:704,45693:12,45897:8",
-	["InstanceLootHeroic.Ulduar.Trash Mobs"]="45538,45539,45540,45541,45542,45543,45544,45547,45548,45549,46138,45605",
+	["InstanceLootHeroic.Ulduar.Trash Mobs"]="45605",
 
 	["InstanceLootHeroic.Ulduar Hub"]="m,InstanceLootHeroic.Halls of Lightning,InstanceLootHeroic.Halls of Stone",
 -- Halls of Lightning
@@ -268,7 +268,7 @@ LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 371 $"
 -- The Frozen Throne
 	["InstanceLootHeroic.Icecrown Citadel.The Lich King"]="49426:0,50730:0,50731:0,50732:0,50733:0,50734:0,50735:0,50736:0,50737:0,50738:0,50818:0,51939:0,51940:0,51941:0,51942:0,51943:0,51944:0,51945:0,51946:0,51947:0,52025:0,52026:0,52027:0,52028:0,52029:0,52030:0",
 -- Trash
-	["InstanceLootHeroic.Icecrown Citadel.Trash Mobs"]="",
+	["InstanceLootHeroic.Icecrown Citadel.Trash Mobs"]="50444,50447,50449,50450,50451,50452,50453",
 
 -- The Ruby Sanctum
 	["InstanceLootHeroic.The Ruby Sanctum.Halion"]="",
@@ -341,7 +341,7 @@ LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 371 $"
 	["InstanceLootHeroic.Blackwing Descent.Atramedes"]="",
 	["InstanceLootHeroic.Blackwing Descent.Chimaeron"]="",
 	["InstanceLootHeroic.Blackwing Descent.Nefarian"]="",
-	["InstanceLootHeroic.Blackwing Descent.Trash Mobs"]="",
+	["InstanceLootHeroic.Blackwing Descent.Trash Mobs"]="59460,59461,59462,59463,59464,59465,59466,59467,59468,59520,59521,59525,59901,60201,60202,60210,60211",
 -- The Bastion of Twilight
 	["InstanceLootHeroic.The Bastion of Twilight.Halfus Wyrmbreaker"]="",
 	["InstanceLootHeroic.The Bastion of Twilight.Valiona"]="",
@@ -351,7 +351,7 @@ LibStub("LibPeriodicTable-3.1"):AddData("InstanceLootHeroic", gsub("$Rev: 371 $"
 	["InstanceLootHeroic.The Bastion of Twilight.Twilight Ascendant Council"]="m,InstanceLootHeroic.The Bastion of Twilight.Elementium Monstrosity",
 	["InstanceLootHeroic.The Bastion of Twilight.Cho'gall"]="",
 	["InstanceLootHeroic.The Bastion of Twilight.Sinestra"]="",
-	["InstanceLootHeroic.The Bastion of Twilight.Trash Mobs"]="",
+	["InstanceLootHeroic.The Bastion of Twilight.Trash Mobs"]="59460,59461,59462,59463,59464,59465,59466,59467,59468,59520,59521,59525,59901,60201,60202,60210,60211",
 -- Throne of the Four Winds
 	["InstanceLootHeroic.Throne of the Four Winds.Nezir"]="",
 	["InstanceLootHeroic.Throne of the Four Winds.Anshal"]="",

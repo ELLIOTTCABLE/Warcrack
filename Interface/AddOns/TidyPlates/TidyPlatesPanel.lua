@@ -139,7 +139,8 @@ local AutomationDropdownItems = {
 local panel = PanelHelpers:CreatePanelFrame( "TidyPlatesInterfaceOptions", "Tidy Plates", titleString )
 local helppanel = PanelHelpers:CreatePanelFrame( "TidyPlatesInterfaceOptionsHelp", "Troubleshooting" )
 panel:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", insets = { left = 2, right = 2, top = 2, bottom = 2 },})
-panel:SetBackdropColor(0.06, 0.06, 0.06, 1)
+
+panel:SetBackdropColor(0.06, 0.06, 0.06, .7)
 
 -- Convert the Theme List into a Menu List
 local function UpdateThemeNames()
@@ -299,7 +300,7 @@ local function ActivateInterfacePanel()
 --]]
 	
 	-- Blizz Button
-	BlizzOptionsButton = CreateFrame("Button", "TidyPlatesOptions_BlizzOptionsButton", panel, "UIPanelButtonTemplate2")
+	local BlizzOptionsButton = CreateFrame("Button", "TidyPlatesOptions_BlizzOptionsButton", panel, "UIPanelButtonTemplate2")
 	--BlizzOptionsButton:SetPoint("TOPRIGHT", ResetButton, "TOPLEFT", -8, 0)
 	BlizzOptionsButton:SetPoint("TOPLEFT", panel.AutoShowEnemy, "TOPLEFT", 16, -55)
 	BlizzOptionsButton:SetWidth(300)

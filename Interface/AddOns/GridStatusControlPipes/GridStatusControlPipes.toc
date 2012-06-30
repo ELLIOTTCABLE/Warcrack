@@ -1,14 +1,15 @@
-﻿## Interface: 40000
+﻿## Interface: 42000
 ## Title: GridStatusControlPipes
 ## Notes: Adds pipes which can control arbitary other statuses (like toggle status on key or "in combat"-state).
 ## Author: Julith
-## Version: 1.22
+## Version: 1.3
 ## Grid Author: Pastamancer & Maia
 ## Dependencies: Grid
-## X-Curse-Packaged-Version: v1.22
-## X-Curse-Project-Name: GridStatusControlPipes
-## X-Curse-Project-ID: grid-status-control-pipes
-## X-Curse-Repository-ID: wow/grid-status-control-pipes/mainline
+## OptionalDeps: Ace3
+
+#@no-lib-strip@
+Libs\AceLocale-3.0\AceLocale-3.0.lua
+#@end-no-lib-strip@
 
 local-enUS.lua
 
@@ -17,3 +18,7 @@ GridPipe.lua
 PipeGuards.lua
 PipeFilters.lua
 GridStatusControlPipes.lua
+-- X-Curse-Packaged-Version: v1.3
+-- X-Curse-Project-Name: GridStatusControlPipes
+-- X-Curse-Project-ID: grid-status-control-pipes
+-- X-Curse-Repository-ID: wow/grid-status-control-pipes/mainline

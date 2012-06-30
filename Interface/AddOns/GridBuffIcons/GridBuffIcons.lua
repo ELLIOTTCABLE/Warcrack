@@ -9,7 +9,7 @@ local GridBuffIconStatus = Grid:NewModule("GridBuffIconStatus", "AceBucket-3.0")
 GridBuffIconStatus.menuName = L["Buff Icons"]
 
 GridBuffIconStatus.defaultDB = {
-	debug = false,
+    enabled = true,
 	iconsize = 9,
 	offsetx = -1,
 	offsety = -1,
@@ -33,13 +33,32 @@ GridBuffIconStatus.defaultDB = {
 	} 
 }
 
-GridBuffIconStatus.options = {
+local options = {
 	type = "group",
+    inline = GridFrame.options.args.bar.inline,
 	name = L["Buff Icons"],
 	desc = L["Buff Icons"],
+    order = 1200,
 	args = {
+		["Enable"] = {
+			order = 40, width = "double",
+			type = "toggle",
+			name = L["启用模块"],
+			desc = L["启用/停用模块，会在框体外部(可设置)显示所有的增益或负面状态图标。"],
+			get = function()
+				return GridBuffIconStatus.db.profile.enabled;
+			end,
+			set = function(_, v)
+                GridBuffIconStatus.db.profile.enabled = v;
+                if v and not GridBuffIconStatus.enabled then
+                    GridBuffIconStatus:OnEnable()
+                elseif not v and GridBuffIconStatus.enabled then
+                    GridBuffIconStatus:OnDisable()
+                end
+			end,
+		},
 		["Show Buff Not Debuff"] = {
-			order = 50,
+			order = 50, width = "double",
 			type = "toggle",
 			name = L["Show Buff instead of Debuff"],
 			desc = L["If selected, the icons will present unit buffs instead of debuffs."],
@@ -52,7 +71,7 @@ GridBuffIconStatus.options = {
 			end,
 		},
 		["Buff Filter"] = {
-			order = 50,
+			order = 50, width = "double",
 			type = "toggle",
 			name = L["Only castable/removable"],
 			desc = L["If selected, only shows the buffs you can cast or the debuffs you can remove."],
@@ -65,22 +84,22 @@ GridBuffIconStatus.options = {
 			end,
 		},
 		["Buff Name Filter"] = {
-			order = 52,
+			order = 52, width = "full",
 			type = "input",
 			name =  L["Buff Name Filter"],
-			desc =  L["Buffs NOT TO show. Use '|' between the names."],
+			desc =  L["Buffs NOT TO show. Use ',' between the names."],
 			get = function()
 				return GridBuffIconStatus.db.profile.namefilter;
 			end,
 			usage =  "<buff name>",
 			set = function(_, v) 
 				GridBuffIconStatus.db.profile.namefilter = v;
-				GridBuffIconStatus.namefilter = {strsplit("||", GridBuffIconStatus.db.profile.namefilter or "")}
+				GridBuffIconStatus:SetNameFilter()
 				GridBuffIconStatus:UpdateAllUnitsBuffs();
 			end,
 		},
 		["Icons size"] = {
-			order = 55,
+			order = 55, width = "double",
 			type = "range",
 			name = L["Icons Size"],
 			desc = L["Size for each buff icon"],
@@ -93,8 +112,22 @@ GridBuffIconStatus.options = {
 				GridFrame:WithAllFrames(function (f) GridBuffIconStatus.ResetBuffIconSize(f) end)
 			end
 		},
-		["Offset X"] = {
-			order = 60,
+		["Alpha"] = {
+			order = 70, width = "double",
+			type = "range",
+			name = L["Alpha"],
+			desc = L["Alpha value for each buff icon"],
+			max = 1,
+			min = 0.1,
+			step = 0.1,
+			get = function () return GridBuffIconStatus.db.profile.alpha end,
+			set = function(_, v)
+				GridBuffIconStatus.db.profile.alpha = v;
+				GridFrame:WithAllFrames(function (f) GridBuffIconStatus.ResetBuffIconAlpha(f) end)
+			end
+		},
+        ["Offset X"] = {
+			order = 60, width = "double",
 			type = "range",
 			name = L["Offset X"],
 			desc = L["X-axis offset from the selected anchor point, minus value to move inside."],
@@ -108,7 +141,7 @@ GridBuffIconStatus.options = {
 			end
 		},
 		["Offset Y"] = {
-			order = 65,
+			order = 65, width = "double",
 			type = "range",
 			name = L["Offset Y"],
 			desc = L["Y-axis offset from the selected anchor point, minus value to move inside."],
@@ -121,22 +154,8 @@ GridBuffIconStatus.options = {
 				GridFrame:WithAllFrames(function (f) GridBuffIconStatus.ResetBuffIconPos(f) end)
 			end
 		},
-		["Alpha"] = {
-			order = 70,
-			type = "range",
-			name = L["Alpha"],
-			desc = L["Alpha value for each buff icon"],
-			max = 1,
-			min = 0.1,
-			step = 0.1,
-			get = function () return GridBuffIconStatus.db.profile.alpha end,
-			set = function(_, v)
-				GridBuffIconStatus.db.profile.alpha = v;
-				GridFrame:WithAllFrames(function (f) GridBuffIconStatus.ResetBuffIconAlpha(f) end)
-			end
-		},
 		["Icon Numbers"] = {
-			order = 75,
+			order = 75, width = "double",
 			type = "range",
 			name = L["Icon Numbers"],
 			desc = L["Max icons to show."],
@@ -152,7 +171,7 @@ GridBuffIconStatus.options = {
 			end,
 		},
 		["Icons Per Row"] = {
-			order = 75,
+			order = 75, width = "double",
 			type = "range",
 			name = L["Icons Per Row"],
 			desc = L["Sperate icons in several rows."],
@@ -168,7 +187,7 @@ GridBuffIconStatus.options = {
 			end,
 		},
 		["orientation"] = {
-			order = 80;
+			order = 80,  width = "double",
 			type = "select",
 			name = L["Orientation of Icon"],
 			desc = L["Set icons list orientation."],
@@ -182,7 +201,7 @@ GridBuffIconStatus.options = {
 			values ={["HORIZONTAL"] = L["HORIZONTAL"], ["VERTICAL"] = L["VERTICAL"]}
 		},
 		["anchor"] = {
-			order = 80;
+			order = 90,  width = "double",
 			type = "select",
 			name = L["Anchor Point"],
 			desc = L["Anchor point of the first icon."],
@@ -197,18 +216,21 @@ GridBuffIconStatus.options = {
 		},
 	}
 }
+GridFrame.options.args.GridBuffIconStatus = options;
 
 function GridBuffIconStatus.InitializeFrame(gridFrameObj, f)
-	f.BuffIcons = {};
-	for i=1, MAX_BUFFS do
-		f.BuffIcons[i] = f.Bar:CreateTexture("BuffIcon"..i, "OVERLAY");
-		f.BuffIcons[i]:SetTexCoord(0.05, 0.95, 0.05, 0.95)
-		f.BuffIcons[i]:SetTexture(1,1,1,0)
-	end
+    if not f.BuffIcons then
+        f.BuffIcons = {};
+        for i=1, MAX_BUFFS do
+            f.BuffIcons[i] = f.Bar:CreateTexture("BuffIcon"..i, "OVERLAY");
+            f.BuffIcons[i]:SetTexCoord(0.05, 0.95, 0.05, 0.95)
+            f.BuffIcons[i]:SetTexture(1,1,1,0)
+        end
 
-	GridBuffIconStatus.ResetBuffIconSize(f);
-	GridBuffIconStatus.ResetBuffIconPos(f);
-	GridBuffIconStatus.ResetBuffIconAlpha(f);
+        GridBuffIconStatus.ResetBuffIconSize(f);
+        GridBuffIconStatus.ResetBuffIconPos(f);
+        GridBuffIconStatus.ResetBuffIconAlpha(f);
+    end
 end
 
 function GridBuffIconStatus.ResetBuffIconSize(f)
@@ -291,26 +313,25 @@ end
 
 function GridBuffIconStatus:OnInitialize()
 	self.super.OnInitialize(self)
-	--self:RegisterStatus('unit_buff_icons',L["Buff Icons"], buff_icons_options, true)
-
+	GridFrame:WithAllFrames(function(f) GridBuffIconStatus.InitializeFrame(nil, f); end)
 	hooksecurefunc(GridFrame, "InitializeFrame", self.InitializeFrame);
 end
 
 function GridBuffIconStatus:OnEnable()
-	self:RegisterEvent("UNIT_AURA", UNIT_AURA)
-	--self:RegisterMessage("Grid_UnitJoined")
-	--self:RegisterEvent("PARTY_MEMBERS_CHANGED", "UpdateAllUnitsBuffs")
-	--self:RegisterMessage("Grid_UpdateLayoutSize", "UpdateAllUnitsBuffs");
+    if not GridBuffIconStatus.db.profile.enabled then return end
+    self.enabled = true
+	self:RegisterEvent("UNIT_AURA")
 	if(not self.bucket) then
 		self:Debug("registering bucket");
 		self.bucket = self:RegisterBucketMessage("Grid_UpdateLayoutSize", 1, "UpdateAllUnitsBuffs")
 	end
-	self.namefilter = {strsplit("||", GridBuffIconStatus.db.profile.namefilter or "")}
+	self:SetNameFilter()
 
 	self:UpdateAllUnitsBuffs();
 end
 
-function GridBuffIconStatus:OnDisable(status)
+function GridBuffIconStatus:OnDisable()
+    self.enabled = nil
 	self:UnregisterEvent("UNIT_AURA")
 	if(self.bucket) then
 		self:Debug("unregistering bucket");
@@ -324,62 +345,66 @@ function GridBuffIconStatus:OnDisable(status)
 	end
 end
 
+function GridBuffIconStatus:SetNameFilter()
+	local str = string.gsub(GridBuffIconStatus.db.profile.namefilter or "", "，", ",")
+	self.namefilter = {strsplit(",", str)}
+end
+
 function GridBuffIconStatus:Reset()
 	self.super.Reset(self)
-	self.namefilter = {strsplit("||", GridBuffIconStatus.db.profile.namefilter or "")}
+	self:SetNameFilter()
+end
+
+local function updateFrame(v)
+    --if(not v.BuffIcons) then
+    --	v:CreateIndicator("bufficons");
+    --end
+
+    local i = 1
+    local n = 1
+    while(n <= GridBuffIconStatus.db.profile.iconnum and i<40) do
+        local name, rank, iconTexture, count, duration, timeLeft;
+        if GridBuffIconStatus.db.profile.showbuff then
+            name, rank, iconTexture, count, duration, timeLeft = UnitBuff(v.unit, i, GridBuffIconStatus.db.profile.bufffilter and "RAID");
+        else
+            name, rank, iconTexture, count, duration, timeLeft = UnitDebuff(v.unit,i, GridBuffIconStatus.db.profile.bufffilter and "RAID");
+        end
+        if(name) then
+            local flag = true
+            for k,v in pairs(GridBuffIconStatus.namefilter) do
+                if(name==v) then
+                    flag = false;
+                    break;
+                end
+            end
+            if(flag)then
+                v.BuffIcons[n]:SetTexture(iconTexture);
+                n=n+1
+            end
+        else
+            break;
+        end
+        i=i+1
+    end
+    for i=n, MAX_BUFFS do
+        v.BuffIcons[i]:SetTexture(nil);
+    end
 end
 
 function GridBuffIconStatus:UNIT_AURA(event, unitid)
-
-	local guid = UnitGUID(unitid)
-	if not GridRoster:IsGUIDInRaid(guid) then return end
-
-	for k,v in pairs(GridFrame.registeredFrames) do
-		if v.unitGUID == guid then
-			--if(not v.BuffIcons) then
-			--	v:CreateIndicator("bufficons");
-			--end
-
-			local i = 1
-			local n = 1
-			while(n <= GridBuffIconStatus.db.profile.iconnum and i<40) do
-				local name, rank, iconTexture, count, duration, timeLeft;
-				if GridBuffIconStatus.db.profile.showbuff then 
-					name, rank, iconTexture, count, duration, timeLeft = UnitBuff(unitid, i, GridBuffIconStatus.db.profile.bufffilter and "RAID");
-				else
-					name, rank, iconTexture, count, duration, timeLeft = UnitDebuff(unitid,i, GridBuffIconStatus.db.profile.bufffilter and "RAID");
-				end
-				if(name) then
-					local flag = true
-					for k,v in pairs(self.namefilter) do
-						if(name==v) then
-							flag = false;
-							break;
-						end
-					end
-					if(flag)then
-						v.BuffIcons[n]:SetTexture(iconTexture);
-						n=n+1
-					end
-				else
-					break;
-				end
-				i=i+1
-			end
-			for i=n, MAX_BUFFS do
-				v.BuffIcons[i]:SetTexture(nil);
-			end
+	if not self.enabled then return end
+	if GridRoster.GetRaidUnitGUID then
+		local guid = GridRoster:GetRaidUnitGUID(unitid)
+		if not guid then return end
+		GridFrame:WithGUIDFrames(guid, updateFrame)
+	else
+		local guid = UnitGUID(unitid)
+		if not GridRoster:IsGUIDInRaid(guid) then return end
+		for k,v in pairs(GridFrame.registeredFrames) do
+			if v.unitGUID == guid then updateFrame(v) end
 		end
 	end
-end
-
-function GridBuffIconStatus:Grid_UnitJoined(guid, unitid)
-	for k,v in pairs(GridFrame.registeredFrames) do
-		if v.guid == guid then
-			v.unitid = unitid
-			self:UNIT_AURA("Grid_UnitJoined", unitid)
-		end
-	end
+	
 end
 
 function GridBuffIconStatus:UpdateAllUnitsBuffs()

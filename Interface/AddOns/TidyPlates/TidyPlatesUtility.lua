@@ -1,5 +1,5 @@
 TidyPlatesUtility = {}
-TidyPlatesData = {}
+-- TidyPlatesData = {}	-- ## SavedVariables: TidyPlatesData
 
 
 -------------------------------------------------------------------------------------

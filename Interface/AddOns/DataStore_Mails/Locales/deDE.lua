@@ -16,7 +16,7 @@ L["EXPIRY_CHECK_TITLE"] = "Auf verfallende Post überprüfen"
 L["Mail Expiry Warning"] = "Warnung bei verfallender Post"
 L["SCAN_MAIL_BODY_DISABLED"] = "Nur die Anhänge der Sendungen werden gelesen. Die Sendungen behalten ihren Status \"nicht gelesen\"."
 L["SCAN_MAIL_BODY_ENABLED"] = "Der Text jeder Sendung wird gelesen, wenn der Briefkasten gescant wird. Alle Sendungen werden als gelesen markiert."
-L["SCAN_MAIL_BODY_TITLE"] = "Brieftext scannen"
 L["Scan mail body (marks it as read)"] = "Brieftext scannen (markiert als gelesen)"
+L["SCAN_MAIL_BODY_TITLE"] = "Brieftext scannen"
 L["Warn when mail expires in less days than this value"] = "Warnen, wenn Post verfällt in weniger Tagen als "
 

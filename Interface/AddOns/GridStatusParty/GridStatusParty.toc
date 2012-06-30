@@ -1,0 +1,24 @@
+﻿## Interface: 40300
+## Version: 4.3.4.45
+## X-Curse-Packaged-Version: 4.3.4.45
+## X-Curse-Project-Name: GridStatusParty
+## X-Curse-Project-ID: grid-status-party
+## X-Curse-Repository-ID: wow/grid-status-party/mainline
+
+## Title: GridStatusParty
+## Notes: Shows the party leader, raid leader, raid assistant, and master looter on Grid.
+## Notes-zhCN: [Grid] 在 Grid 中显示队长，团队领袖，团队助理和团队拾取状态。
+## Notes-zhTW: [Grid] 在 Grid 中顯示隊長，團隊領袖，團隊助理和團隊拾取狀態。
+## Author: Phanx, Dashkal, Pastamancer
+## X-Email: addons@phanx.net
+## X-License: BSD (2 Clause)
+## X-Copyright: Copyright (c) 2008, Byron Shelden (Dashkal), Kyle Smith (pastamancer)
+## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW
+## X-Localizations: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW
+## X-Website: http://www.curse.com/addons/wow/grid-status-party
+## X-Curse-Project-ID: grid-status-party
+
+## Dependencies: Grid
+
+Localization.lua
+GridStatusParty.lua

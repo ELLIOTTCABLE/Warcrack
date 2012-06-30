@@ -1,0 +1,21 @@
+## Interface: 40300
+## Version: 4.3.0.15
+
+## Title: GridStatus Heal Trace
+## Notes: Shows in Grid who was healed by your multi-target heals.
+## Notes-esES: Muestra en Grid que fue sanada por tus hechizos de curación de objetivos múltiples.
+## Notes-esMX: Muestra en Grid que fue sanada por tus hechizos de curación de objetivos múltiples.
+## Notes-ptBR: Mostra no Grid que foi curado por seu feitiços de cura de múltiplos alvos.
+## Author: Akkorian, Phanx
+## X-Email: addons@phanx.net
+## X-Copyright: Copyright © 2010–2011 Akkorian
+## X-License: Some rights reserved. See LICENSE.txt for details.
+## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, ptBR, koKR, ruRU, zhCN, zhTW
+## X-Localizations: enUS, esES, esMX, ptBR
+## X-Website: http://www.wowinterface.com/downloads/info16608-GridStatusHealTrace.html
+## X-Curse-Project-ID: gridstatushealtrace
+## X-WoWI: 16608
+
+## Dependencies: Grid
+
+GridStatusHealTrace.lua

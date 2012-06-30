@@ -25,6 +25,7 @@ local playerClass, englishClass = UnitClass("player")
 local playerRace, englishRace = UnitRace("player")
 
 local spellNameCache = {};
+local spellIconCache = {};
 --Druid
 spellNameCache.Lifebloom1 = GetSpellInfo(33763);
 spellNameCache.Lifebloom2 = GetSpellInfo(94447);
@@ -37,16 +38,23 @@ spellNameCache.BeaconofLight = GetSpellInfo(53563);
 
 --Priest
 spellNameCache.Grace = GetSpellInfo(47930);
-spellNameCache.HolyWordAspire = GetSpellInfo(88682);
 spellNameCache.PrayerofMending = GetSpellInfo(33076);
 spellNameCache.Renew = GetSpellInfo(139);
 spellNameCache.PowerWordShield = GetSpellInfo(17);
 spellNameCache.WeakenedSoul = GetSpellInfo(6788);
+spellNameCache.DivineAegis = GetSpellInfo(47753);
+spellNameCache.Inspiration = GetSpellInfo(15357);
 
 --Shaman
 spellNameCache.Earthliving = GetSpellInfo(51945);
 spellNameCache.EarthShield = GetSpellInfo(974);
 spellNameCache.Riptide = GetSpellInfo(61295);
+spellNameCache.AncestralFortitude = GetSpellInfo(16236);
+local fort_name, fort_rank, fort_icon = GetSpellInfo(16236);
+spellIconCache.AncestralFortitude = fort_icon
+spellNameCache.AncestralVigor = GetSpellInfo(105284);
+local vigor_name, vigor_rank, vigor_icon = GetSpellInfo(105284);
+spellIconCache.AncestralVigor = vigor_icon
 
 --Draenei
 spellNameCache.GiftoftheNaaru = GetSpellInfo(28880);
@@ -71,20 +79,20 @@ GridStatusHots.defaultDB = {
 	--Druid
 	alert_lifebl = {
 		text = L["Hots: My Lifebloom"],
-		enable = true,
+		enable = false,
 		totshow = true,
 		decshow = true,
 		priority = 99,
 		range = false,
 		threshold2 = 4,
 		threshold3 = 2,
-		color = { r = 1, g = 0, b = 0, a = 1 },
+		color = { r = 0, g = 1, b = 0, a = 1 },
 		color2 = { r = 1, g = 1, b = 0, a = 1 },
-		color3 = { r = 0, g = 1, b = 0, a = 1 },
+		color3 = { r = 1, g = 0, b = 0, a = 1 },
 	},
 	alert_lifebl_stack = {
 		text = L["Hots: My Lifebloom Stack Colored"],
-		enable = true,
+		enable = false,
 		totshow = true,
 		decshow = true,
 		priority = 99,
@@ -97,37 +105,37 @@ GridStatusHots.defaultDB = {
 	},
 	alert_regrow = {
 		text = L["Hots: My Regrowth"],
-		enable = true,
+		enable = false,
 		totshow = true,
 		priority = 97,
 		range = false,
 		threshold2 = 4,
 		threshold3 = 2,
-		color = { r = 1, g = 1, b = 1, a = 1 },
+		color = { r = 0, g = 1, b = 0, a = 1 },
 		color2 = { r = 1, g = 1, b = 0, a = 1 },
 		color3 = { r = 1, g = 0, b = 0, a = 1 },
 	},
 	alert_rejuv = {
 		text = L["Hots: My Rejuvenation"],
-		enable = true,
+		enable = false,
 		totshow = true,
 		priority = 98,
 		range = false,
 		threshold2 = 4,
 		threshold3 = 2,
-		color = { r = 0, g = 0, b = 1, a = 1 },
+		color = { r = 0, g = 1, b = 0, a = 1 },
 		color2 = { r = 1, g = 1, b = 0, a = 1 },
 		color3 = { r = 1, g = 0, b = 0, a = 1 },
 	},
 	alert_wgrowth = {
 		text = L["Hots: My Wild Growth"],
-		enable = true,
+		enable = false,
 		totshow = true,
 		priority = 96,
 		range = false,
 		threshold2 = 4,
 		threshold3 = 2,
-		color = { r = 0, g = 1, b = 1, a = 1 },
+		color = { r = 0, g = 1, b = 0, a = 1 },
 		color2 = { r = 1, g = 1, b = 0, a = 1 },
 		color3 = { r = 1, g = 0, b = 0, a = 1 },
 	},
@@ -135,7 +143,7 @@ GridStatusHots.defaultDB = {
 	--Paladin
 	alert_beacon = {
 		text = L["Hots: My Beacon of Light"],
-		enable = true,
+		enable = false,
 		priority = 96,
 		range = false,
 		threshold2 = 10,
@@ -148,7 +156,7 @@ GridStatusHots.defaultDB = {
 	--Priest
 	alert_gracestack = {
 		text = L["Hots: My Grace Stack"],
-		enable = true,
+		enable = false,
 		priority = 90,
 		range = false,
 		color = { r = 1, g = 0, b = 0, a = 1 },
@@ -157,7 +165,7 @@ GridStatusHots.defaultDB = {
 	},
 	alert_gracedurstack = {
 		text = L["Hots: My Grace Duration + Stack"],
-		enable = true,
+		enable = false,
 		priority = 90,
 		range = false,
 		threshold2 = 5.5,
@@ -168,7 +176,7 @@ GridStatusHots.defaultDB = {
 	},
 	alert_pom = {
 		text = L["Hots: My Prayer of Mending"],
-		enable = true,
+		enable = false,
 		priority = 70,
 		range = false,
 		mine = false,
@@ -181,7 +189,7 @@ GridStatusHots.defaultDB = {
 	},
 	alert_pomdur = {
 		text = L["Hots: My Prayer of Mending - duration colored"],
-		enable = true,
+		enable = false,
 		priority = 70,
 		range = false,
 		mine = false,
@@ -193,7 +201,7 @@ GridStatusHots.defaultDB = {
 	},
 	alert_pws = {
 		text = L["Hots: Power Word: Shield"],
-		enable = true,
+		enable = false,
 		wsshow = false,
 		priority = 91,
 		range = false,
@@ -205,7 +213,7 @@ GridStatusHots.defaultDB = {
 	},
 	alert_weakenedsoul = {
 		text = L["Hots: Weakened Soul"],
-		enable = true,
+		enable = false,
 		priority = 92,
 		range = false,
 		threshold2 = 4,
@@ -216,7 +224,7 @@ GridStatusHots.defaultDB = {
 	},
 	alert_renew = {
 		text = L["Hots: My Renew"],
-		enable = true,
+		enable = false,
 		totshow = true,
 		priority = 99,
 		range = false,
@@ -226,14 +234,26 @@ GridStatusHots.defaultDB = {
 		color2 = { r = 1, g = 1, b = 0, a = 1 },
 		color3 = { r = 1, g = 0, b = 0, a = 1 },
 	},
-	alert_aspire = {
-		text = L["Hots: My Holy Word: Aspire"],
-		enable = true,
+	alert_aegis = {
+		text = L["Hots: Divine Aegis"],
+		enable = false,
 		totshow = true,
 		priority = 99,
 		range = false,
-		threshold2 = 4,
-		threshold3 = 2,
+		threshold2 = 8,
+		threshold3 = 4,
+		color = { r = 0, g = 1, b = 0, a = 1 },
+		color2 = { r = 1, g = 1, b = 0, a = 1 },
+		color3 = { r = 1, g = 0, b = 0, a = 1 },
+	},
+	alert_inspiration = {
+		text = L["Hots: Inspiration"],
+		enable = false,
+		totshow = true,
+		priority = 99,
+		range = false,
+		threshold2 = 8,
+		threshold3 = 4,
 		color = { r = 0, g = 1, b = 0, a = 1 },
 		color2 = { r = 1, g = 1, b = 0, a = 1 },
 		color3 = { r = 1, g = 0, b = 0, a = 1 },
@@ -242,7 +262,7 @@ GridStatusHots.defaultDB = {
 	--Shaman
 	alert_earthliving = {
 		text = L["Hots: My Earthliving"],
-		enable = true,
+		enable = false,
 		totshow = true,
 		priority = 98,
 		range = false,
@@ -254,7 +274,7 @@ GridStatusHots.defaultDB = {
 	},
 	alert_earthshield = {
 		text = L["Hots: My Earth Shield"],
-		enable = true,
+		enable = false,
 		priority = 91,
 		range = false,
 		threshold2 = 2,
@@ -267,7 +287,7 @@ GridStatusHots.defaultDB = {
 	},
 	alert_riptide = {
 		text = L["Hots: My Riptide"],
-		enable = true,
+		enable = false,
 		totshow = true,
 		priority = 99,
 		range = false,
@@ -277,11 +297,35 @@ GridStatusHots.defaultDB = {
 		color2 = { r = 1, g = 1, b = 0, a = 1 },
 		color3 = { r = 1, g = 0, b = 0, a = 1 },
 	},
+	alert_fortitude = {
+		text = L["Hots: Ancestral Fortitude"],
+		enable = false,
+		totshow = true,
+		priority = 99,
+		range = false,
+		threshold2 = 8,
+		threshold3 = 4,
+		color = { r = 0, g = 1, b = 0, a = 1 },
+		color2 = { r = 1, g = 1, b = 0, a = 1 },
+		color3 = { r = 1, g = 0, b = 0, a = 1 },
+	},
+	alert_vigor = {
+		text = L["Hots: Ancestral Vigor"],
+		enable = false,
+		totshow = true,
+		priority = 99,
+		range = false,
+		threshold2 = 8,
+		threshold3 = 4,
+		color = { r = 0, g = 1, b = 0, a = 1 },
+		color2 = { r = 1, g = 1, b = 0, a = 1 },
+		color3 = { r = 1, g = 0, b = 0, a = 1 },
+	},
 
 	--Draenei
 	alert_gift = {
 		text = L["Hots: My Gift of the Naaru"],
-		enable = true,
+		enable = false,
 		totshow = true,
 		priority = 91,
 		range = false,
@@ -371,76 +415,6 @@ local renew_hotcolors = {
 		get = function () return GridStatusHots.db.profile.alert_renew.totshow end,
 		set = function (_, arg)
 			GridStatusHots.db.profile.alert_renew.totshow = arg
-		end,
-	},
-}
-
-local aspire_hotcolors = {
-	["threshold2"] = {
-		type = "range",
-		name = L["Threshold to activate color 2"],
-		max = 10,
-		min = 1,
-		step = .5,
-		get = function ()
-			return GridStatusHots.db.profile.alert_aspire.threshold2
-		end,
-		set = function (_, v)
-			GridStatusHots.db.profile.alert_aspire.threshold2 = v
-		end,
-	},
-	["color2"] = {
-		type = "color",
-		name = L["Color 2"],
-		hasAlpha = true,
-		get = function ()
-			local color = GridStatusHots.db.profile.alert_aspire.color2
-			return color.r, color.g, color.b, color.a
-		end,
-		set = function (_, r, g, b, a)
-			local color = GridStatusHots.db.profile.alert_aspire.color2
-			color.r = r
-			color.g = g
-			color.b = b
-			color.a = a or 1
-		end,
-	},
-	["threshold3"] = {
-		type = "range",
-		name = L["Threshold to activate color 3"],
-		max = 10,
-		min = 1,
-		step = .5,
-		get = function ()
-			return GridStatusHots.db.profile.alert_aspire.threshold3
-		end,
-		set = function (_, v)
-			GridStatusHots.db.profile.alert_aspire.threshold3 = v
-		end,
-	},
-	["color3"] = {
-		type = "color",
-		name = L["Color 3"],
-		hasAlpha = true,
-		get = function ()
-			local color = GridStatusHots.db.profile.alert_aspire.color3
-			return color.r, color.g, color.b, color.a
-		end,
-		set = function (_, r, g, b, a)
-			local color = GridStatusHots.db.profile.alert_aspire.color3
-			color.r = r
-			color.g = g
-			color.b = b
-			color.a = a or 1
-		end,
-	},
-	["totshow"] = {
-		type = "toggle",
-		name = L["Show HoT-Counter"],
-		desc = L["Check, if you want to see the total of HoTs behind the countdown of your HoT(i.e. 13-5)"],
-		get = function () return GridStatusHots.db.profile.alert_aspire.totshow end,
-		set = function (_, arg)
-			GridStatusHots.db.profile.alert_aspire.totshow = arg
 		end,
 	},
 }
@@ -858,6 +832,128 @@ local riptide_hotcolors = {
 	},
 }
 
+local fortitude_hotcolors = {
+	["threshold2"] = {
+		type = "range",
+		name = L["Threshold to activate color 2"],
+		max = 10,
+		min = 1,
+		step = .5,
+		get = function ()
+			return GridStatusHots.db.profile.alert_fortitude.threshold2
+		end,
+		set = function (_, v)
+			GridStatusHots.db.profile.alert_fortitude.threshold2 = v
+		end,
+	},
+	["color2"] = {
+		type = "color",
+		name = L["Color 2"],
+		hasAlpha = true,
+		get = function ()
+			local color = GridStatusHots.db.profile.alert_fortitude.color2
+			return color.r, color.g, color.b, color.a
+		end,
+		set = function (_, r, g, b, a)
+			local color = GridStatusHots.db.profile.alert_fortitude.color2
+			color.r = r
+			color.g = g
+			color.b = b
+			color.a = a or 1
+		end,
+	},
+	["threshold3"] = {
+		type = "range",
+		name = L["Threshold to activate color 3"],
+		max = 10,
+		min = 1,
+		step = .5,
+		get = function ()
+			return GridStatusHots.db.profile.alert_fortitude.threshold3
+		end,
+		set = function (_, v)
+			GridStatusHots.db.profile.alert_fortitude.threshold3 = v
+		end,
+	},
+	["color3"] = {
+		type = "color",
+		name = L["Color 3"],
+		hasAlpha = true,
+		get = function ()
+			local color = GridStatusHots.db.profile.alert_fortitude.color3
+			return color.r, color.g, color.b, color.a
+		end,
+		set = function (_, r, g, b, a)
+			local color = GridStatusHots.db.profile.alert_fortitude.color3
+			color.r = r
+			color.g = g
+			color.b = b
+			color.a = a or 1
+		end,
+	},
+}
+
+local vigor_hotcolors = {
+	["threshold2"] = {
+		type = "range",
+		name = L["Threshold to activate color 2"],
+		max = 10,
+		min = 1,
+		step = .5,
+		get = function ()
+			return GridStatusHots.db.profile.alert_vigor.threshold2
+		end,
+		set = function (_, v)
+			GridStatusHots.db.profile.alert_vigor.threshold2 = v
+		end,
+	},
+	["color2"] = {
+		type = "color",
+		name = L["Color 2"],
+		hasAlpha = true,
+		get = function ()
+			local color = GridStatusHots.db.profile.alert_vigor.color2
+			return color.r, color.g, color.b, color.a
+		end,
+		set = function (_, r, g, b, a)
+			local color = GridStatusHots.db.profile.alert_vigor.color2
+			color.r = r
+			color.g = g
+			color.b = b
+			color.a = a or 1
+		end,
+	},
+	["threshold3"] = {
+		type = "range",
+		name = L["Threshold to activate color 3"],
+		max = 10,
+		min = 1,
+		step = .5,
+		get = function ()
+			return GridStatusHots.db.profile.alert_vigor.threshold3
+		end,
+		set = function (_, v)
+			GridStatusHots.db.profile.alert_vigor.threshold3 = v
+		end,
+	},
+	["color3"] = {
+		type = "color",
+		name = L["Color 3"],
+		hasAlpha = true,
+		get = function ()
+			local color = GridStatusHots.db.profile.alert_vigor.color3
+			return color.r, color.g, color.b, color.a
+		end,
+		set = function (_, r, g, b, a)
+			local color = GridStatusHots.db.profile.alert_vigor.color3
+			color.r = r
+			color.g = g
+			color.b = b
+			color.a = a or 1
+		end,
+	},
+}
+
 local pom_hotcolors = {
 	["color2"] = {
 		type = "color",
@@ -1159,6 +1255,127 @@ local weakenedsoul_hotcolors = {
 	},
 }
 
+local aegis_hotcolors = {
+	["threshold2"] = {
+		type = "range",
+		name = L["Threshold to activate color 2"],
+		max = 10,
+		min = 1,
+		step = .5,
+		get = function ()
+			return GridStatusHots.db.profile.alert_aegis.threshold2
+		end,
+		set = function (_, v)
+			GridStatusHots.db.profile.alert_aegis.threshold2 = v
+		end,
+	},
+	["color2"] = {
+		type = "color",
+		name = L["Color 2"],
+		hasAlpha = true,
+		get = function ()
+			local color = GridStatusHots.db.profile.alert_aegis.color2
+			return color.r, color.g, color.b, color.a
+		end,
+		set = function (_, r, g, b, a)
+			local color = GridStatusHots.db.profile.alert_aegis.color2
+			color.r = r
+			color.g = g
+			color.b = b
+			color.a = a or 1
+		end,
+	},
+	["threshold3"] = {
+		type = "range",
+		name = L["Threshold to activate color 3"],
+		max = 10,
+		min = 1,
+		step = .5,
+		get = function ()
+			return GridStatusHots.db.profile.alert_aegis.threshold3
+		end,
+		set = function (_, v)
+			GridStatusHots.db.profile.alert_aegis.threshold3 = v
+		end,
+	},
+	["color3"] = {
+		type = "color",
+		name = L["Color 3"],
+		hasAlpha = true,
+		get = function ()
+			local color = GridStatusHots.db.profile.alert_aegis.color3
+			return color.r, color.g, color.b, color.a
+		end,
+		set = function (_, r, g, b, a)
+			local color = GridStatusHots.db.profile.alert_aegis.color3
+			color.r = r
+			color.g = g
+			color.b = b
+			color.a = a or 1
+		end,
+	},
+}
+
+local inspiration_hotcolors = {
+	["threshold2"] = {
+		type = "range",
+		name = L["Threshold to activate color 2"],
+		max = 10,
+		min = 1,
+		step = .5,
+		get = function ()
+			return GridStatusHots.db.profile.alert_inspiration.threshold2
+		end,
+		set = function (_, v)
+			GridStatusHots.db.profile.alert_inspiration.threshold2 = v
+		end,
+	},
+	["color2"] = {
+		type = "color",
+		name = L["Color 2"],
+		hasAlpha = true,
+		get = function ()
+			local color = GridStatusHots.db.profile.alert_inspiration.color2
+			return color.r, color.g, color.b, color.a
+		end,
+		set = function (_, r, g, b, a)
+			local color = GridStatusHots.db.profile.alert_inspiration.color2
+			color.r = r
+			color.g = g
+			color.b = b
+			color.a = a or 1
+		end,
+	},
+	["threshold3"] = {
+		type = "range",
+		name = L["Threshold to activate color 3"],
+		max = 10,
+		min = 1,
+		step = .5,
+		get = function ()
+			return GridStatusHots.db.profile.alert_inspiration.threshold3
+		end,
+		set = function (_, v)
+			GridStatusHots.db.profile.alert_inspiration.threshold3 = v
+		end,
+	},
+	["color3"] = {
+		type = "color",
+		name = L["Color 3"],
+		hasAlpha = true,
+		get = function ()
+			local color = GridStatusHots.db.profile.alert_inspiration.color3
+			return color.r, color.g, color.b, color.a
+		end,
+		set = function (_, r, g, b, a)
+			local color = GridStatusHots.db.profile.alert_inspiration.color3
+			color.r = r
+			color.g = g
+			color.b = b
+			color.a = a or 1
+		end,
+	},
+}
 
 local beacon_hotcolors = {
 	["threshold2"] = {
@@ -1552,67 +1769,64 @@ function GridStatusHots:Reset()
 end
 
 function GridStatusHots:RegisterStatuses()
+	-- Priest
 	self:RegisterStatus("alert_tothots", L["Hots: Hot Count"], tothots_options)
-	if englishClass == "PRIEST" then
-		self:RegisterStatus("alert_renew", L["Hots: My Renew"], renew_hotcolors)
-		self:RegisterStatus("alert_aspire", L["Hots: My Holy Word: Aspire"], aspire_hotcolors)
-        self:RegisterStatus("alert_pom", L["Hots: My Prayer of Mending"], pom_hotcolors)
-        self:RegisterStatus("alert_pomdur", L["Hots: My Prayer of Mending - duration colored"], pomdur_hotcolors)
-		self:RegisterStatus("alert_gracestack", L["Hots: My Grace Stack"], gracestack_hotcolors)
-		self:RegisterStatus("alert_gracedurstack", L["Hots: My Grace Duration + Stack"], gracedurstack_hotcolors)
-		self:RegisterStatus("alert_pws", L["Hots: Power Word: Shield"], pws_hotcolors)
-        self:RegisterStatus("alert_weakenedsoul", L["Hots: Weakened Soul"], weakenedsoul_hotcolors)
-	end
-	if englishClass == "DRUID" then
-		self:RegisterStatus("alert_rejuv", L["Hots: My Rejuvenation"], rejuv_hotcolors)
-		self:RegisterStatus("alert_regrow", L["Hots: My Regrowth"], regrow_hotcolors)
-		self:RegisterStatus("alert_lifebl", L["Hots: My Lifebloom"], lifebl_hotcolors)
-		self:RegisterStatus("alert_lifebl_stack", L["Hots: My Lifebloom Stack Colored"], lifebl_stack_hotcolors)
-		self:RegisterStatus("alert_wgrowth", L["Hots: My Wild Growth"], wgrowth_hotcolors)
-	end
-	if englishClass == "PALADIN" then
-		self:RegisterStatus("alert_beacon", L["Hots: My Beacon of Light"], beacon_hotcolors)
-	end
-	if englishClass == "SHAMAN" then
-		self:RegisterStatus("alert_riptide", L["Hots: My Riptide"], riptide_hotcolors)
-		self:RegisterStatus("alert_earthliving", L["Hots: My Earthliving"], earthliving_hotcolors)
-		self:RegisterStatus("alert_earthshield", L["Hots: My Earth Shield"], earthshield_hotcolors)
-	end
-	if englishRace == "Draenei" then
-		self:RegisterStatus("alert_gift", L["Hots: My Gift of the Naaru"], gift_hotcolors)
-	end
+	self:RegisterStatus("alert_renew", L["Hots: My Renew"], renew_hotcolors)
+    self:RegisterStatus("alert_pom", L["Hots: My Prayer of Mending"], pom_hotcolors)
+    self:RegisterStatus("alert_pomdur", L["Hots: My Prayer of Mending - duration colored"], pomdur_hotcolors)
+	self:RegisterStatus("alert_gracestack", L["Hots: My Grace Stack"], gracestack_hotcolors)
+	self:RegisterStatus("alert_gracedurstack", L["Hots: My Grace Duration + Stack"], gracedurstack_hotcolors)
+	self:RegisterStatus("alert_pws", L["Hots: Power Word: Shield"], pws_hotcolors)
+    self:RegisterStatus("alert_weakenedsoul", L["Hots: Weakened Soul"], weakenedsoul_hotcolors)
+	self:RegisterStatus("alert_aegis", L["Hots: Divine Aegis"], aegis_hotcolors)
+	self:RegisterStatus("alert_inspiration", L["Hots: Inspiration"], inspiration_hotcolors)
+	-- Druid
+	self:RegisterStatus("alert_rejuv", L["Hots: My Rejuvenation"], rejuv_hotcolors)
+	self:RegisterStatus("alert_regrow", L["Hots: My Regrowth"], regrow_hotcolors)
+	self:RegisterStatus("alert_lifebl", L["Hots: My Lifebloom"], lifebl_hotcolors)
+	self:RegisterStatus("alert_lifebl_stack", L["Hots: My Lifebloom Stack Colored"], lifebl_stack_hotcolors)
+	self:RegisterStatus("alert_wgrowth", L["Hots: My Wild Growth"], wgrowth_hotcolors)
+	-- Paladin
+	self:RegisterStatus("alert_beacon", L["Hots: My Beacon of Light"], beacon_hotcolors)
+	-- Shaman
+	self:RegisterStatus("alert_riptide", L["Hots: My Riptide"], riptide_hotcolors)
+	self:RegisterStatus("alert_earthliving", L["Hots: My Earthliving"], earthliving_hotcolors)
+	self:RegisterStatus("alert_earthshield", L["Hots: My Earth Shield"], earthshield_hotcolors)
+	self:RegisterStatus("alert_fortitude", L["Hots: Ancestral Fortitude"], fortitude_hotcolors)
+	self:RegisterStatus("alert_vigor", L["Hots: Ancestral Vigor"], vigor_hotcolors)
+	-- Draenei
+	self:RegisterStatus("alert_gift", L["Hots: My Gift of the Naaru"], gift_hotcolors)
 end
 
 function GridStatusHots:UnregisterStatuses()
 	self:UnregisterStatus("alert_tothots")
-	if englishClass == "PRIEST" then
-		self:UnregisterStatus("alert_renew")
-		self:UnregisterStatus("alert_aspire")
-        self:UnregisterStatus("alert_pom")
-        self:UnregisterStatus("alert_pomdur")
-		self:UnregisterStatus("alert_gracestack")
-		self:UnregisterStatus("alert_gracedurstack")
-		self:UnregisterStatus("alert_pws")
-        self:UnregisterStatus("alert_weakenedsoul")
-	end
-	if englishClass == "DRUID" then
-		self:UnregisterStatus("alert_rejuv")
-		self:UnregisterStatus("alert_regrow")
-		self:UnregisterStatus("alert_lifebl")
-		self:UnregisterStatus("alert_lifebl_stack")
-		self:UnregisterStatus("alert_wgrowth")
-	end
-	if englishClass == "PALADIN" then
-		self:UnregisterStatus("alert_beacon")
-	end
-	if englishClass == "SHAMAN" then
-		self:UnregisterStatus("alert_riptide")
-		self:UnregisterStatus("alert_earthliving")
-		self:UnregisterStatus("alert_earthshield")
-	end
-	if englishRace == "Draenei" then
-		self:UnregisterStatus("alert_gift")
-	end
+	-- Priest
+	self:UnregisterStatus("alert_renew")
+	self:UnregisterStatus("alert_pom")
+	self:UnregisterStatus("alert_pomdur")
+	self:UnregisterStatus("alert_gracestack")
+	self:UnregisterStatus("alert_gracedurstack")
+	self:UnregisterStatus("alert_pws")
+	self:UnregisterStatus("alert_weakenedsoul")
+	self:UnregisterStatus("alert_aegis")
+	self:UnregisterStatus("alert_inspiration")
+	-- Druid
+	self:UnregisterStatus("alert_rejuv")
+	self:UnregisterStatus("alert_regrow")
+	self:UnregisterStatus("alert_lifebl")
+	self:UnregisterStatus("alert_lifebl_stack")
+	self:UnregisterStatus("alert_wgrowth")
+	-- Paladin
+	self:UnregisterStatus("alert_beacon")
+	-- Shaman
+	self:UnregisterStatus("alert_riptide")
+	self:UnregisterStatus("alert_earthliving")
+	self:UnregisterStatus("alert_earthshield")
+	self:UnregisterStatus("alert_fortitude")
+	self:UnregisterStatus("alert_vigor")
+	-- Draenei
+	self:UnregisterStatus("alert_gift")
+
 end
 
 function GridStatusHots:Grid_UnitJoined(guid, unitid)
@@ -1627,7 +1841,7 @@ end
 
 function UpdateUnit(self, guid, unitid)
 	local total_hots, lbstack, pomstack, mypomstack, grastack, esstack = 0, 0, 0, 0, 0, 0;
-	local asptime,retime,rjtime,rgtime,lbtime,wgtime,sltime,sstime,ritime,pomtime,mypomtime,pwstime,boltime,eltime,estime,gratime,gifttime
+	local retime,rjtime,rgtime,lbtime,wgtime,sltime,sstime,ritime,pomtime,mypomtime,pwstime,boltime,eltime,estime,gratime,gifttime,datime,insptime,forttime,vigtime
 	local wstime
 
 	local now = GetTime()
@@ -1640,9 +1854,6 @@ function UpdateUnit(self, guid, unitid)
 		if bname == spellNameCache["Renew"] then
 			total_hots = total_hots + 1;
 			if (bismine == "player" and btime) then retime = btime end
-		elseif bname == spellNameCache["HolyWordAspire"] then
-			total_hots = total_hots + 1;
-			if (bismine == "player" and btime) then asptime = btime end
 		elseif bname == spellNameCache["Regrowth"] then
 			total_hots = total_hots + 1;
 			if (bismine == "player" and btime) then rgtime = btime end
@@ -1676,6 +1887,14 @@ function UpdateUnit(self, guid, unitid)
 			if btime then
 				pwstime = btime
 			end
+		elseif bname == spellNameCache["DivineAegis"] then
+			if btime then
+				datime = btime
+			end
+		elseif bname == spellNameCache["Inspiration"] then
+			if btime then
+				insptime = btime
+			end
 		elseif bname == spellNameCache["BeaconofLight"] then
 			if (bismine == "player" and btime) then boltime = btime end
 		elseif bname == spellNameCache["Earthliving"] then
@@ -1685,6 +1904,14 @@ function UpdateUnit(self, guid, unitid)
 			if (bismine == "player" and btime) then
 				estime = btime
 				esstack = bcount
+			end
+		elseif bname == spellNameCache["AncestralFortitude"] and btexture == spellIconCache["AncestralFortitude"] then
+			if btime then
+				forttime = btime
+			end
+		elseif bname == spellNameCache["AncestralVigor"] and btexture == spellIconCache["AncestralVigor"] then
+			if btime then
+				vigtime = btime
 			end
 		elseif bname == spellNameCache["Grace"] then
 			if (bismine == "player" and btime) then
@@ -1747,32 +1974,6 @@ function UpdateUnit(self, guid, unitid)
 		end
 	else
 		if self.core:GetCachedStatus(guid, "alert_renew") then self.core:SendStatusLost(guid, "alert_renew") end
-	end
-
-	--Holy Word: Aspire
-	if asptime and self.db.profile.alert_aspire.enable then
-		-- Add self thrown countdown and status
-		local settings = self.db.profile.alert_aspire
-		local hotcolor = settings.color
-		if asptime <= settings.threshold2 then hotcolor = settings.color2 end
-		if asptime <= settings.threshold3 then hotcolor = settings.color3 end
-		if settings.totshow then
-			self.core:SendStatusGained(guid, "alert_aspire",
-				settings.priority,
-				(settings.range and 40),
-				hotcolor,
-				string.format("%d-%d", asptime, total_hots)
-			)
-		else
-			self.core:SendStatusGained(guid, "alert_aspire",
-				settings.priority,
-				(settings.range and 40),
-				hotcolor,
-				string.format("%d", asptime)
-			)
-		end
-	else
-		if self.core:GetCachedStatus(guid, "alert_aspire") then self.core:SendStatusLost(guid, "alert_aspire") end
 	end
 
 	--Regrowth
@@ -2102,6 +2303,40 @@ function UpdateUnit(self, guid, unitid)
 		if self.core:GetCachedStatus(guid, "alert_weakenedsoul") then self.core:SendStatusLost(guid, "alert_weakenedsoul") end
 	end
 
+	--Divine Aegis
+	if datime and self.db.profile.alert_aegis.enable then
+		-- Add self thrown countdown and status
+		local settings = self.db.profile.alert_aegis
+		local hotcolor = settings.color
+		if datime <= settings.threshold2 then hotcolor = settings.color2 end
+		if datime <= settings.threshold3 then hotcolor = settings.color3 end
+		self.core:SendStatusGained(guid, "alert_aegis",
+			settings.priority,
+			(settings.range and 40),
+			hotcolor,
+			string.format("%d", datime)
+		)
+	else
+		if self.core:GetCachedStatus(guid, "alert_aegis") then self.core:SendStatusLost(guid, "alert_aegis") end
+	end
+
+	--Inspiration
+	if insptime and self.db.profile.alert_inspiration.enable then
+		-- Add self thrown countdown and status
+		local settings = self.db.profile.alert_inspiration
+		local hotcolor = settings.color
+		if insptime <= settings.threshold2 then hotcolor = settings.color2 end
+		if insptime <= settings.threshold3 then hotcolor = settings.color3 end
+		self.core:SendStatusGained(guid, "alert_inspiration",
+			settings.priority,
+			(settings.range and 40),
+			hotcolor,
+			string.format("%d", insptime)
+		)
+	else
+		if self.core:GetCachedStatus(guid, "alert_inspiration") then self.core:SendStatusLost(guid, "alert_inspiration") end
+	end
+
 	--Beacon of Light
 	if boltime and self.db.profile.alert_beacon.enable then
 		-- Add self thrown countdown and status
@@ -2143,6 +2378,40 @@ function UpdateUnit(self, guid, unitid)
 		end
 	else
 		if self.core:GetCachedStatus(guid, "alert_earthliving") then self.core:SendStatusLost(guid, "alert_earthliving") end
+	end
+
+	--Ancestral Fortitude
+	if forttime and self.db.profile.alert_fortitude.enable then
+		-- Add self thrown countdown and status
+		local settings = self.db.profile.alert_fortitude
+		local hotcolor = settings.color
+		if forttime <= settings.threshold2 then hotcolor = settings.color2 end
+		if forttime <= settings.threshold3 then hotcolor = settings.color3 end
+		self.core:SendStatusGained(guid, "alert_fortitude",
+			settings.priority,
+			(settings.range and 40),
+			hotcolor,
+			string.format("%d", forttime)
+		)
+	else
+		if self.core:GetCachedStatus(guid, "alert_fortitude") then self.core:SendStatusLost(guid, "alert_fortitude") end
+	end
+
+	--Ancestral Vigor
+	if vigtime and self.db.profile.alert_vigor.enable then
+		-- Add self thrown countdown and status
+		local settings = self.db.profile.alert_vigor
+		local hotcolor = settings.color
+		if vigtime <= settings.threshold2 then hotcolor = settings.color2 end
+		if vigtime <= settings.threshold3 then hotcolor = settings.color3 end
+		self.core:SendStatusGained(guid, "alert_vigor",
+			settings.priority,
+			(settings.range and 40),
+			hotcolor,
+			string.format("%d", vigtime)
+		)
+	else
+		if self.core:GetCachedStatus(guid, "alert_vigor") then self.core:SendStatusLost(guid, "alert_vigor") end
 	end
 
 	--Grace

@@ -1,6 +1,10 @@
 ﻿if GetLocale() ~= "zhCN" then return end
+BINDING_HEADER_GRIDBUFFICONS = "Grid增益减益图标";
+BINDING_NAME_GRIDBUFFICONS_TOGGLE_BUFF = "切换显示增益或减益";
+BINDING_NAME_GRIDBUFFICONS_TOGGLE_BUFF_FILTER = "切换显示全部或仅仅可施放(可移除)的状态";
+
 GridBuffIconsLocale = {
-	["Buff Icons"] = "状态图标",
+	["Buff Icons"] = "额外状态图标",
 
 	["Show Buff instead of Debuff"] = "显示增益状态",
 	["If selected, the icons will present unit buffs instead of debuffs."] = "默认显示Debuff, 如果选中则显示Buff",
@@ -9,7 +13,7 @@ GridBuffIconsLocale = {
 	["If selected, only shows the buffs you can cast or the debuffs you can remove."] = "勾选此项则显示Debuff时仅显示你可以驱散的, 显示Buff时仅显示你可以施加的",
 
 	["Buff Name Filter"] = "隐藏特定状态",
-	["Buffs NOT TO show. Use '|' between the names."] = "输入要隐藏的增益或减益名称, 用'|'分隔多个, 例如'精疲力竭|英勇风采'",
+	["Buffs NOT TO show. Use ',' between the names."] = "输入要隐藏的增益或减益名称, 用','分隔多个, 例如'精疲力竭,英勇风采'",
 	
 	["Icons Size"] = "图标大小",
 	["Size for each buff icon"] = "每个图标的大小",

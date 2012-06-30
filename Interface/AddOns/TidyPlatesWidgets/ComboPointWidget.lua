@@ -2,6 +2,12 @@
 ------------------------------
 -- Combo Point Widget
 ------------------------------
+
+--[[
+
+	- Proc Widget
+	
+--]]
 local comboWidgetPath = "Interface\\Addons\\TidyPlatesWidgets\\ComboWidget\\"
 
 local WidgetList = {}
@@ -73,6 +79,9 @@ local function CreateWidgetFrame(parent)
 	frame:SetWidth(64)
 	frame.Icon = frame:CreateTexture(nil, "OVERLAY")
 	frame.Icon:SetAllPoints(frame)
+	--frame.Icon:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -2, -2)
+	--frame.Icon:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 2, 2)
+	
 	-- End Custom Code
 	
 	-- Required Widget Code

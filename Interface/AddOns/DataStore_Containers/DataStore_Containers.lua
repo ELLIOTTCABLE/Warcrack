@@ -387,6 +387,17 @@ local function ScanBag(bagID)
 	ScanBagSlotsInfo()
 end
 
+local function ScanVoidStorage()
+	local bag = addon.ThisCharacter.Containers["VoidStorage"]
+	bag.size = 80
+	
+	local itemID
+	for i = 1, bag.size do
+		itemID = GetVoidItemInfo(i)
+		bag.ids[i] = itemID
+	end
+end
+
 -- *** Event Handlers ***
 local function OnBagUpdate(event, bag)
 	if bag < 0 then
@@ -479,6 +490,21 @@ local function OnAuctionHouseShow()
 	addon:RegisterEvent("AUCTION_HOUSE_CLOSED", OnAuctionHouseClosed)
 end
 
+local function OnVoidStorageClosed()
+	addon:UnregisterEvent("VOID_STORAGE_CLOSE")
+	addon:UnregisterEvent("VOID_TRANSFER_DONE")
+end
+
+local function OnVoidStorageTransferDone()
+	ScanVoidStorage()
+end
+
+local function OnVoidStorageOpened()
+	ScanVoidStorage()
+	addon:RegisterEvent("VOID_STORAGE_CLOSE", OnVoidStorageClosed)
+	addon:RegisterEvent("VOID_TRANSFER_DONE", OnVoidStorageTransferDone)
+end
+
 
 -- ** Mixins **
 local function _GetContainer(character, containerID)
@@ -541,16 +567,19 @@ end
 local function _GetContainerItemCount(character, searchedID)
 	local bagCount = 0
 	local bankCount = 0
+	local voidCount = 0
 	local id
 	
 	for containerName, container in pairs(character.Containers) do
-		for slotID=1, container.size do
+		for slotID = 1, container.size do
 			id = container.ids[slotID]
 			
 			if (id) and (id == searchedID) then
 				local itemCount = container.counts[slotID] or 1
 				
-				if (containerName == "Bag100") then
+				if (containerName == "VoidStorage") then
+					voidCount = voidCount + 1
+				elseif (containerName == "Bag100") then
 					bankCount = bankCount + itemCount
 				elseif (containerName == "Bag-2") then
 					bagCount = bagCount + itemCount
@@ -566,7 +595,7 @@ local function _GetContainerItemCount(character, searchedID)
 		end
 	end
 
-	return bagCount, bankCount
+	return bagCount, bankCount, voidCount
 end
 
 local function _GetNumBagSlots(character)
@@ -584,7 +613,11 @@ end
 local function _GetNumFreeBankSlots(character)
 	return character.numFreeBankSlots
 end
-	
+
+local function _GetVoidStorageItem(character, index)
+	return character.Containers["VoidStorage"].ids[index]
+end
+
 -- local function _DeleteGuild(name, realm, account)
 	-- realm = realm or GetRealmName()
 	-- account = account or THIS_ACCOUNT
@@ -697,6 +730,7 @@ local PublicMethods = {
 	GetNumFreeBagSlots = _GetNumFreeBagSlots,
 	GetNumBankSlots = _GetNumBankSlots,
 	GetNumFreeBankSlots = _GetNumFreeBankSlots,
+	GetVoidStorageItem = _GetVoidStorageItem,
 	-- DeleteGuild = _DeleteGuild,
 	GetGuildBankItemCount = _GetGuildBankItemCount,
 	GetGuildBankTab = _GetGuildBankTab,
@@ -800,6 +834,7 @@ function addon:OnInitialize()
 	DataStore:SetCharacterBasedMethod("GetNumFreeBagSlots")
 	DataStore:SetCharacterBasedMethod("GetNumBankSlots")
 	DataStore:SetCharacterBasedMethod("GetNumFreeBankSlots")
+	DataStore:SetCharacterBasedMethod("GetVoidStorageItem")
 	
 	DataStore:SetGuildBasedMethod("GetGuildBankItemCount")
 	DataStore:SetGuildBasedMethod("GetGuildBankTab")
@@ -825,6 +860,7 @@ function addon:OnEnable()
 	addon:RegisterEvent("BAG_UPDATE", OnBagUpdate)
 	addon:RegisterEvent("BANKFRAME_OPENED", OnBankFrameOpened)
 	addon:RegisterEvent("GUILDBANKFRAME_OPENED", OnGuildBankFrameOpened)
+	addon:RegisterEvent("VOID_STORAGE_OPEN", OnVoidStorageOpened)
 	
 	-- disable bag updates during multi sell at the AH
 	addon:RegisterEvent("AUCTION_HOUSE_SHOW", OnAuctionHouseShow)

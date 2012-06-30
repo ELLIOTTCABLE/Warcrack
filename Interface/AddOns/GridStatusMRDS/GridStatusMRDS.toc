@@ -1,0 +1,14 @@
+## Interface: 40200
+## Title: GridStatusMRDS
+## Notes: Shows the most recent damage source
+## Author: Slaren
+## Version: v1.2c
+## Dependencies: Grid
+## OptionalDeps: LibQuickHealth-2.0
+## X-GridStatusModule: GridStatusMRDS
+## X-Curse-Packaged-Version: v1.2c
+## X-Curse-Project-Name: GridStatusMRDS
+## X-Curse-Project-ID: gridstatusmrds
+## X-Curse-Repository-ID: wow/gridstatusmrds/mainline
+
+GridStatusMRDS.lua

@@ -261,7 +261,7 @@ function ns:OnClick(self)
 	end
 	
 	if action then
-		addon.Tabs:OnClick(2)
+		addon.Tabs:OnClick("Characters")
 		addon.Tabs.Characters:SetAlt( Characters:GetInfo(line) )
 		addon.Tabs.Characters:MenuItem_OnClick(AltoholicTabCharacters_Characters, "LeftButton")
 		addon.Tabs.Characters:ViewCharInfo(action)	

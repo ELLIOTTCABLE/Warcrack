@@ -247,7 +247,7 @@ local function log_absorb(set, srcName, dstName, amount, spell_id)
 	end
 end
 
-local function consider_absorb(amount, dstName, srcName, timestamp)
+local function consider_absorb(amount, dstName, timestamp)
 	local mintime = nil
 	local found_shield_src
 	local spell_id
@@ -270,7 +270,7 @@ local function SwingDamage(timestamp, eventtype, srcGUID, srcName, srcFlags, dst
 	local samount, soverkill, sschool, sresisted, sblocked, absorbed, scritical, sglancing, scrushing = ...
 	if absorbed and absorbed > 0 and dstName and shields[dstName] and srcName then
 		--Skada:Print(dstName.." absorbed "..absorbed.." from "..srcName.." (SWING)")
-		consider_absorb(absorbed, dstName, srcName, timestamp)
+		consider_absorb(absorbed, dstName, timestamp)
 	end
 end
 
@@ -278,20 +278,23 @@ local function SpellDamage(timestamp, eventtype, srcGUID, srcName, srcFlags, dst
 	local spellId, spellName, spellSchool, samount, soverkill, sschool, sresisted, sblocked, absorbed, scritical, sglancing, scrushing = ...
 	if absorbed and absorbed > 0 and dstName and shields[dstName] and srcName then
 		--Skada:Print(dstName.." absorbed "..absorbed.." from "..srcName.." (SPELL)")
-		consider_absorb(absorbed, dstName, srcName, timestamp)
+		consider_absorb(absorbed, dstName, timestamp)
 	end
 end
 
 local function SpellMissed(timestamp, eventtype, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
-	local spellId, spellName, spellSchool, misstype, absorbed = ...
-	if misstype == "ABSORB" and absorbed > 0 and dstName and shields[dstName] and srcName then
+	local spellId, spellName, spellSchool, misstype, isOffHand, absorbed = ...
+	if misstype == "ABSORB" and absorbed and absorbed > 0 and dstName and shields[dstName] and srcName then
 		--Skada:Print(dstName.." absorbed "..absorbed.." from "..srcName.." (MISS)")
-		consider_absorb(absorbed, dstName, srcName, timestamp)
+		consider_absorb(absorbed, dstName, timestamp)
 	end
 end
 
 local function SwingMissed(timestamp, eventtype, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
-	SpellMissed(timestamp, eventtype, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, nil, nil, nil, ...)
+	local missType, isOffHand, amount = ...
+	if missType == "ABSORB" and amount and amount > 0 and dstName and shields[dstName] and srcName then
+		consider_absorb(amount, dstName, timestamp)
+	end
 end
 
 local function getHPS(set, player)
@@ -353,6 +356,9 @@ local function spell_tooltip(win, id, label, tooltip)
 			end
 			if spell.hits then
 				tooltip:AddDoubleLine(L["Overhealing"]..":", ("%02.1f%%"):format(spell.overhealing / (spell.overhealing + spell.healing) * 100), 255,255,255,255,255,255)
+			end
+			if spell.hits and spell.absorbed then
+				tooltip:AddDoubleLine(L["Absorbed"]..":", ("%02.1f%%"):format(spell.absorbed / (spell.overhealing + spell.healing) * 100), 255,255,255,255,255,255)
 			end
 		end
 	end

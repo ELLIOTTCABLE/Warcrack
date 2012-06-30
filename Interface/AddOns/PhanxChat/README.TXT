@@ -2,9 +2,9 @@ PhanxChat
 =========
 
 * Written by Phanx <addons@phanx.net>
-* Copyright © 2006–2011 Phanx. Some rights reserved. See LICENSE.txt for details.
+* Copyright © 2006–2012 Phanx. Some rights reserved. See LICENSE.txt for details.
 * http://www.wowinterface.com/downloads/info6323-PhanxChat.html
-* http://wow.curse.com/downloads/wow-addons/details/phanxchat.aspx
+* http://www.curse.com/addons/wow/phanxchat
 
 
 Features
@@ -38,12 +38,12 @@ Usage
 Localization
 ------------
 
-Compatible with English, Deutsch, Español, Français, Русский, 한국어,
-简体中文, and 正體中文 game clients.
+Compatible with English, Deutsch, Español, Français, Português, Русский,
+한국어, 简体中文, and 正體中文 game clients.
 
-Translated into English, Deutsch, Español, Français, Русский, 한국어, and
-简体中文. If you can provide translations for another locale, please see the
-Localization tab on the CurseForge project page:
+Translated into English, Deutsch, Español, Français, Português, Русский,
+한국어, and 简体中文. If you can provide translations for another locale,
+please see the Localization tab on the CurseForge project page:
 
 http://wow.curseforge.com/addons/phanxchat/localization/
 

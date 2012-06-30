@@ -42,6 +42,7 @@ local AddonDB_Defaults = {
 			['*'] = {				-- ["Account.Realm.Name"] 
 				lastUpdate = nil,
 				averageItemLvl = 0,
+				overallAIL = 0,
 				Inventory = {},		-- 19 inventory slots, a simple table containing item id's or full item string if enchanted
 			}
 		}
@@ -49,6 +50,8 @@ local AddonDB_Defaults = {
 }
 
 -- *** Utility functions ***
+local NUM_EQUIPMENT_SLOTS = 19
+
 local function GetOption(option)
 	return addon.db.global.Options[option]
 end
@@ -136,46 +139,54 @@ local function ClearGuildInventories()
 	end
 end
 
+
 -- *** Scanning functions ***
-local NUM_EQUIPMENT_SLOTS = 19
+local function ScanAverageItemLevel()
+	local overallAiL, AiL = GetAverageItemLevel()
+	if overallAiL and AiL and overallAiL > 0 and AiL > 0 then
+		local character = addon.ThisCharacter
+		character.overallAIL = overallAiL
+		character.averageItemLvl = AiL
+	end
+end
+
+local function ScanInventorySlot(slot)
+	local inventory = addon.ThisCharacter.Inventory
+	local link = GetInventoryItemLink("player", slot)
+
+	if link then 
+		if IsEnchanted(link) then		-- if there's an enchant, save the full link
+			inventory[slot] = link
+		else 									-- .. otherwise, only save the id
+			inventory[slot] = tonumber(link:match("item:(%d+)"))
+		end
+	else
+		inventory[slot] = nil
+	end
+end
 
 local function ScanInventory()
-	local totalItemLevel = 0
-	local itemCount = 0	
-	
-	local inventory = addon.ThisCharacter.Inventory
-	wipe(inventory)
-	
-	local shirtSlot = GetInventorySlotInfo("ShirtSlot")
-	local tabardSlot = GetInventorySlotInfo("TabardSlot")
-	
-	for i = 1, NUM_EQUIPMENT_SLOTS do
-		local link = GetInventoryItemLink("player", i)
-		if link then 
-			if IsEnchanted(link) then		-- if there's an enchant, save the full link
-				inventory[i] = link
-			else 									-- .. otherwise, only save the id
-				inventory[i] = tonumber(link:match("item:(%d+)"))
-			end		
-			
-			if (i ~= shirtSlot) and (i ~= tabardSlot) then
-				itemCount = itemCount + 1
-				totalItemLevel = totalItemLevel + tonumber(((select(4, GetItemInfo(link))) or 0))
-			end
-		end
+	for slot = 1, NUM_EQUIPMENT_SLOTS do
+		ScanInventorySlot(slot)
 	end
 	
-	addon.ThisCharacter.averageItemLvl = totalItemLevel / itemCount
 	addon.ThisCharacter.lastUpdate = time()
 end
 
 -- *** Event Handlers ***
 local function OnPlayerAlive()
 	ScanInventory()
+	ScanAverageItemLevel()
 end
 
-local function OnUnitInventoryChanged()
-	ScanInventory()
+local function OnPlayerEquipmentChanged(event, slot)
+	ScanInventorySlot(slot)
+	ScanAverageItemLevel()
+	addon.ThisCharacter.lastUpdate = time()
+end
+
+local function OnPlayerAilReady()
+	ScanAverageItemLevel()
 end
 
 -- ** Mixins **
@@ -324,7 +335,9 @@ end
 
 function addon:OnEnable()
 	addon:RegisterEvent("PLAYER_ALIVE", OnPlayerAlive)
-	addon:RegisterEvent("UNIT_INVENTORY_CHANGED", OnUnitInventoryChanged)
+	addon:RegisterEvent("PLAYER_EQUIPMENT_CHANGED", OnPlayerEquipmentChanged)
+	addon:RegisterEvent("PLAYER_AVG_ITEM_LEVEL_READY", OnPlayerAilReady)
+	
 	addon:SetupOptions()
 	
 	if GetOption("AutoClearGuildInventory") == 1 then
@@ -334,7 +347,7 @@ end
 
 function addon:OnDisable()
 	addon:UnregisterEvent("PLAYER_ALIVE")
-	addon:UnregisterEvent("UNIT_INVENTORY_CHANGED")
+	addon:UnregisterEvent("PLAYER_EQUIPMENT_CHANGED")
 end
 
 

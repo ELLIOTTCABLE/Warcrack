@@ -1,4 +1,5 @@
 TidyPlatesWidgets = {}
+TidyPlatesWidgetData = {}
 
 ----------------------
 -- HideIn() - Registers a callback, which hides the specified frame in X seconds
@@ -41,6 +42,7 @@ end
 ----------------------
 
 do
+	local updateInterval = 1
 	local PolledHideIn
 	local Framelist = {}			-- Key = Frame, Value = Expiration Time
 	local Watcherframe = CreateFrame("Frame")
@@ -52,7 +54,7 @@ do
 		local curTime = GetTime()
 		if curTime < timeToUpdate then return end
 		local framecount = 0
-		timeToUpdate = curTime + 1
+		timeToUpdate = curTime + updateInterval
 		-- Cycle through the watchlist, hiding frames which are timed-out
 		for frame, expiration in pairs(Framelist) do
 			-- If expired...

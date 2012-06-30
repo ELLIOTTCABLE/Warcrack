@@ -1,0 +1,1 @@
+## Interface: 40000## Title: GridStatusSwiftmendable## Notes: Swiftmend feature for Grid## Author: Kurohoshi (EU - Minahonda)## Version: 1.0.0## Dependencies: Grid## X-GridStatusModule: GridStatusSwiftmendableGridStatusSwiftmendable.lua

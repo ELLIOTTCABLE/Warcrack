@@ -1,0 +1,19 @@
+## Interface: 40300
+##
+## Title: Dalaran University
+##
+## Notes: Keeps track of the Higher Learning book spawns in Dalaran.
+##
+## Author: EmForAce
+## Version: 4.3c
+## Revision: 19
+##
+## X-Category: Chat/Communication, Miscellaneous, Achievement
+## OptionalDeps: HigherLearning
+##
+## SavedVariables: DalaranUniversity_SavedSettings
+##
+
+embeds.xml
+
+DalaranUniversity.xml

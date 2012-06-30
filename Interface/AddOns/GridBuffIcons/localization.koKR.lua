@@ -9,7 +9,7 @@ GridBuffIconsLocale = {
 	["If selected, only shows the buffs you can cast or the debuffs you can remove."] = "선택시, 시전하여 제거할 수 있는 디버프나 버프만을 표시합니다.",
 
 	["Buff Name Filter"] = "버프 이름 필터",
-	["Buffs NOT TO show. Use '|' between the names."] = "표시하지 않을 버프를 설정합니다. 이름 사이에 '|'을 사용합니다.",
+	["Buffs NOT TO show. Use ',' between the names."] = "표시하지 않을 버프를 설정합니다. 이름 사이에 ','을 사용합니다.",
 
 	["Icons Size"] = "아이콘 크기",
 	["Size for each buff icon"] = "각 버프 아이콘의 크기를 설정합니다.",

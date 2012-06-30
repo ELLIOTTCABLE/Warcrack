@@ -17,4 +17,5 @@ if L then
 	L["HPS"] = true
 	L["Critical"] = true
 	L["Overhealing"] = true
+	L["Absorbed"] = true
 end

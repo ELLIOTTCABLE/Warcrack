@@ -10,6 +10,7 @@ local addonList = {
 	"Altoholic_Guild",
 	"Altoholic_Achievements",
 	"Altoholic_Agenda",
+	"Altoholic_Grids",
 }
 
 local WHITE		= "|cFFFFFFFF"
@@ -122,35 +123,39 @@ local support = {
 
 -- this content will be subject to frequent changes, do not bother translating it !!
 local whatsnew = {
-	{	name = "4.2.002 Changes",
+	{	name = "4.3.003b Changes",
 		bulletedList = {
-			"Added several missing achievements.",
-			"Added faction 'Avengers of Hyjal'.",
-			"Deleting guild data now deletes the guild across all DataStore modules (instead of only DataStore_Containers before).",
-			"Fixed a Lua error when mousing over a character tooltip in the character's tab.",
+			"Added a faction filter in Grids -> Mounts.",
+			"Added an expansion pack filter in Grids -> Pets.",
+			"Added the possibility to link a mount/pet in their respective grid view.",
+			"Fixed Pets.xml removed from a TOC file in previous version (oops !).",
 		},
 	},
-	{	name = "4.2.001 Changes",
+	{	name = "4.3.003 Changes",
 		bulletedList = {
-			"Fixed the expand/collapse buttons not working in the profession recipes pane.",
-			"Added missing achievment: 'The Oceanographer'.",
-			"Fixed item name not displayed with the right color code in several places (4.2).",
-			"Removed keyring support (4.2).",
+			"Average item level now scanned after PLAYER_ALIVE. Fixes AiL staying at 0.",
+			"Added an option to delete a character's mailbox content (Tab 'Characters' -> Mail drop down).",
+			"Added a new tab : Grids. This tab gathers all the 'grid' views from the Characters tab in a single view. Much easier to manage, and to enhance.",
+			"Equipment, reputations, currencies, tabards, mounts and pets have been moved to the new 'Grids' tab.",
+			"Added 2 new views to the Grids tab: tradeskills & archeology. ",
+		},
+	},
+	{	name = "4.3.002 Changes",
+		bulletedList = {
+			"Removed old, unused libraries from the package.",
+			"Fixed a few minor errors.",
+			"Fixed a Lua error when viewing Auctions/Bids (Auction API changed by Blizzard).",
+			"Added support for Tabards. (Characters tab, similar to pets/mounts view)",
+			"Fixed average item level not always being correctly calculated due to GetItemInfo not returning values at load time. Now using the game's value, which is always correct.",
+			"Fixed scanning guild reputation updates.",
+			"Fixed guild communication not working anymore.",
+		},
+	},
+	{	name = "4.3.001 Changes",
+		bulletedList = {
 			"Achievements, Pets & Mounts have been updated.",
-		},
-	},
-	{	name = "4.1.001b Changes",
-		bulletedList = {
-			"DataStore_Agenda: Fixed a typo & a few function flags not correctly initialized.",
-			"Fixed a Lua error when open the addon via Titan Panel.",
-		},
-	},
-	{	name = "4.1.001 Changes",
-		bulletedList = {
-			"Achievements, Pets & Mounts have been updated.",
-			"Suggestions localized to Korean (thanks Seashop !).",
-			"DataStore_Agenda : New module! It will manage the calendar, raid id, and friend list stored in Altoholic's DB until now. In the future, it will also take care of Notes & To-Do-Lists!",
-			"The Calendar pane has been moved from the 'Summary' tab to the new 'Agenda' tab.",
+			"Added support for ptBR localization. Please use Curse to complete it missing translations: http://wow.curseforge.com/addons/altoholic/localization/",
+			"Datastore will now automatically clean orphan data in its modules (caused by failed account sharing, etc..)",
 		},
 	},
 	{	name = "Earlier changes",

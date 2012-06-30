@@ -19,7 +19,7 @@ L["EXPIRY_CHECK_TITLE"] = "Check Mail Expiries"
 L["Mail Expiry Warning"] = true
 L["SCAN_MAIL_BODY_DISABLED"] = "Only mail attachments will be read. Mails will keep their unread status."
 L["SCAN_MAIL_BODY_ENABLED"] = "The body of each mail will be read when the mailbox is scanned. All mails will be marked as read."
-L["SCAN_MAIL_BODY_TITLE"] = "Scan Mail Body"
 L["Scan mail body (marks it as read)"] = true
+L["SCAN_MAIL_BODY_TITLE"] = "Scan Mail Body"
 L["Warn when mail expires in less days than this value"] = true
 

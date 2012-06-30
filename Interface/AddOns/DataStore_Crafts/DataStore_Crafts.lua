@@ -50,6 +50,7 @@ local AddonDB_Defaults = {
 						Cooldowns = { ['*'] = nil },		-- list of active cooldowns
 					}
 				},
+				ArcheologyItems = {},
 			}
 		}
 	}
@@ -536,6 +537,34 @@ local function ScanTradeSkills()
 	addon.ThisCharacter.lastUpdate = time()
 end
 
+local function ScanArcheologyItems()
+	local items = addon.ThisCharacter.ArcheologyItems
+	wipe(items)
+	
+	local names = {}
+	local spellName
+	local artifactName, completionCount
+	
+	for raceIndex = 1, GetNumArchaeologyRaces() do
+		wipe(names)
+		
+		-- Create a table where ["Artifact Name"] = associated spell id 
+		-- this is necessary because the archaeology API does not return any other way to match artifacts with either spell ID or item ID
+		for index, artifact in pairs(addon.artifactDB[raceIndex]) do
+			spellName = GetSpellInfo(artifact.spellID)
+			names[spellName] = artifact.spellID
+		end
+		
+		for artifactIndex = 1, GetNumArtifactsByRace(raceIndex) do
+			artifactName, _, _, _, _,  _, _, _, completionCount = GetArtifactInfoByRace(raceIndex, artifactIndex)
+
+			if names[artifactName] and completionCount > 0 then
+				items[names[artifactName]] = true
+			end
+		end
+	end
+end
+
 -- *** Event Handlers ***
 local function OnPlayerAlive()
 	ScanProfessionLinks()
@@ -560,6 +589,14 @@ local function OnTradeSkillUpdate()
 	-- unregister it before calling the update, or the event will be called recursively (due to expand/collapse)
 	addon:UnregisterEvent("TRADE_SKILL_UPDATE")
 	ScanCooldowns()	-- only cooldowns need to be refreshed
+end
+
+local function OnArtifactHistoryReady()
+	ScanArcheologyItems()
+end
+
+local function OnArtifactComplete()
+	ScanArcheologyItems()
 end
 
 -- this turns
@@ -724,6 +761,19 @@ local function _GetCraftLevels(spellID)
 	end
 end
 
+local function _GetItemTradeSkillLevel(itemID, profession)
+	-- variant: use item level for more accurate results
+	
+	-- profession should look like : "TradeskillLevels.Cooking",
+	-- refer to LibPeriodicTable-3.1-TradeskillLevels.lua
+	local PT = LibStub("LibPeriodicTable-3.1")
+	
+	local levels = PT:ItemInSet(itemID, profession)
+	if not levels then return end
+	
+	return strsplit("/", levels)
+end
+
 local function _GetNumRecipesByColor(profession)
 	-- counts the number of orange, yellow, green and grey recipes.
 	local counts = { [0] = 0, [1] = 0, [2] = 0, [3] = 0 }
@@ -816,6 +866,21 @@ local function _GetArchaeologyRank(character)
 	end
 end
 
+local function _GetArchaeologyRaceArtifacts(race)
+	return addon.artifactDB[race]
+end
+
+local function _GetRaceNumArtifacts(race)
+	return #addon.artifactDB[race]
+end
+
+local function _GetArtifactInfo(race, index)
+	return addon.artifactDB[race][index]
+end
+
+local function _IsArtifactKnown(character, spellID)
+	return character.ArcheologyItems[spellID]
+end
 
 local PublicMethods = {
 	GetProfession = _GetProfession,
@@ -839,6 +904,11 @@ local PublicMethods = {
 	GetCookingRank = _GetCookingRank,
 	GetFishingRank = _GetFishingRank,
 	GetArchaeologyRank = _GetArchaeologyRank,
+	GetItemTradeSkillLevel = _GetItemTradeSkillLevel,
+	GetArchaeologyRaceArtifacts = _GetArchaeologyRaceArtifacts,
+	GetRaceNumArtifacts = _GetRaceNumArtifacts,
+	GetArtifactInfo = _GetArtifactInfo,
+	IsArtifactKnown = _IsArtifactKnown,
 }
 
 -- *** Guild Comm ***
@@ -883,6 +953,7 @@ function addon:OnInitialize()
 	DataStore:SetCharacterBasedMethod("GetCookingRank")
 	DataStore:SetCharacterBasedMethod("GetFishingRank")
 	DataStore:SetCharacterBasedMethod("GetArchaeologyRank")
+	DataStore:SetCharacterBasedMethod("IsArtifactKnown")
 	
 	DataStore:SetGuildBasedMethod("GetGuildCrafters")
 	DataStore:SetGuildBasedMethod("GetGuildMemberProfession")
@@ -896,6 +967,14 @@ function addon:OnEnable()
 	addon:RegisterEvent("TRADE_SKILL_SHOW", OnTradeSkillShow)
 	addon:RegisterEvent("CHAT_MSG_SKILL", OnChatMsgSkill)
 	addon:RegisterEvent("CHAT_MSG_SYSTEM", OnChatMsgSystem)
+	
+	local _, _, arch = GetProfessions()
+
+	if arch then
+		addon:RegisterEvent("ARTIFACT_HISTORY_READY", OnArtifactHistoryReady)
+		addon:RegisterEvent("ARTIFACT_COMPLETE", OnArtifactComplete)
+		RequestArtifactCompletionHistory()		-- this will trigger ARTIFACT_HISTORY_READY
+	end
 	
 --	addon:SetupOptions()
 	ClearExpiredProfessions()	-- automatically cleanup guild profession links that are from an older version
@@ -923,6 +1002,8 @@ function addon:GetSource(searchedID)
 		return localizedProfession or profession, level
 	end
 end
+
+
 
 function addon:IsTradeSkillWindowOpen()
 	-- note : maybe there's a function in the WoW API to test this, but I did not find it :(

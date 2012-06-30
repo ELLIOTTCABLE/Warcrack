@@ -9,7 +9,7 @@ GridBuffIconsLocale = {
 	["If selected, only shows the buffs you can cast or the debuffs you can remove."] = "勾選此項則顯示Debuff時僅顯示你可以驅散的, 顯示Buff時僅顯示你可以施加的",
 
 	["Buff Name Filter"] = "隱藏特定狀態",
-	["Buffs NOT TO show. Use '|' between the names."] = "輸入要隱藏的增益或減益名稱, 用'|'分隔多個, 例如'精疲力竭|英勇風采'",
+	["Buffs NOT TO show. Use ',' between the names."] = "輸入要隱藏的增益或減益名稱, 用','分隔多個, 例如'精疲力竭,英勇風采'",
 	
 	["Icons Size"] = "圖示大小",
 	["Size for each buff icon"] = "每個圖示的大小",

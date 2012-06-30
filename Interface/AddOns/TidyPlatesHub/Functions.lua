@@ -17,6 +17,16 @@ local IsTankedByAnotherTank = TidyPlatesWidgets.IsTankedByAnotherTank
 local GetAggroCondition = TidyPlatesWidgets.GetThreatCondition
 local IsTotem = TidyPlatesUtility.IsTotem
 local IsAuraShown = TidyPlatesWidgets.IsAuraShown
+local IsHealer = TidyPlatesUtility.IsHealer
+local InstanceStatus = TidyPlatesUtility.InstanceStatus
+
+local CachedUnitDescription = TidyPlatesUtility.CachedUnitDescription
+local CachedUnitGuild = TidyPlatesUtility.CachedUnitGuild
+local CachedUnitClass = TidyPlatesUtility.CachedUnitClass
+local IsFriend = TidyPlatesUtility.IsFriend
+local IsGuildmate = TidyPlatesUtility.IsGuildmate
+
+-- InstanceStatus, CachedUnitDescription, CachedUnitGuild, CachedUnitClass, IsFriend, IsGuildmate
 
 local CreateThreatLineWidget = WidgetLib.CreateThreatLineWidget
 local CreateAuraWidget = WidgetLib.CreateAuraWidget
@@ -25,6 +35,31 @@ local CreateRangeWidget = WidgetLib.CreateRangeWidget
 local CreateComboPointWidget = WidgetLib.CreateComboPointWidget
 local CreateTotemIconWidget = WidgetLib.CreateTotemIconWidget
 
+local function DummyFunction() end
+
+local NameReactionColors = {
+	["FRIENDLY"] = {
+		["PLAYER"] = {r = 60/255, g = 168/255, b = 255/255,},
+		["NPC"] = {r = 96/255, g = 224/255, b = 37/255,},
+	},
+	["HOSTILE"] = {
+		["PLAYER"] = {r = 255/255, g = 51/255, b = 32/255,},
+		["NPC"] = {r = 255/255, g = 51/255, b = 32/255,},
+	},
+	["NEUTRAL"] = {
+		["NPC"] = {r = 252/255, g = 180/255, b = 27/255,},
+	},
+}
+
+--local NormalGrey = {r = .5, g = .5, b = .5, a = .3}
+--local EliteGrey = {r = .8, g = .7, b = .4, a = .5}
+--local BossGrey = {r = .8, g = .6, b = .1, a = 1}
+
+local NormalGrey = {r = .65, g = .65, b = .65, a = .4}
+local EliteGrey = {r = .9, g = .7, b = .3, a = .5}
+local BossGrey = {r = 1, g = .85, b = .1, a = .8}
+
+-- Colors
 local BlueColor = {r = 60/255, g =  168/255, b = 255/255, }
 local GreenColor = { r = 96/255, g = 224/255, b = 37/255, }
 local RedColor = { r = 255/255, g = 51/255, b = 32/255, }
@@ -33,10 +68,45 @@ local GoldColor = { r = 252/255, g = 140/255, b = 0, }
 local OrangeColor = { r = 255/255, g = 64/255, b = 0, }
 local WhiteColor = { r = 250/255, g = 250/255, b = 250/255, }
 
-local function DummyFunction() end
-
 local White = {r = 1, g = 1, b = 1}
 local Black = {r = 0, g = 0, b = 0}
+
+local RaidIconColors = {
+	["STAR"] = {r = 251/255, g = 240/255, b = 85/255,}, 
+	["MOON"] = {r = 100/255, g = 180/255, b = 255/255,}, 
+	["CIRCLE"] = {r = 230/255, g = 116/255, b = 11/255,}, 
+	["SQUARE"] = {r = 0, g = 174/255, b = 1,}, 
+	["DIAMOND"] = {r = 207/255, g = 49/255, b = 225/255,}, 
+	--["CROSS"] = {r = 195/255, g = 38/255, b = 23/255,}, 
+	["CROSS"] = {r = 255/255, g = 130/255, b = 100/255,}, 
+	["TRIANGLE"] = {r = 31/255, g = 194/255, b = 27/255,}, 
+	["SKULL"] = {r = 244/255, g = 242/255, b = 240/255,}, 
+}
+
+--"By Reaction"
+--local SkyBlue = {r = 0, g = .5, b = 1,}
+--local BrightBlue = {r = 0, g = 120/255, b = 200/255,}
+local BrightBlue =  {r = 0, g = 70/255, b = 240/255,} -- {r = 0, g = 75/255, b = 240/255,}
+local BrightBlueText = {r = 112/255, g = 219/255, b = 255/255,}
+local PaleBlue = {r = 0, g = 130/255, b = 225/255,}
+local PaleBlueText = {r = 194/255, g = 253/255, b = 1,}
+local DarkRed = {r = .9, g = 0.08, b = .08,}
+
+local ReactionColors = {
+	["FRIENDLY"] = {
+		["PLAYER"] = {r = 0, g = 0, b = 1,},
+		["NPC"] = {r = 0, g = 1, b = 0,},
+	},
+	["HOSTILE"] = {
+		["PLAYER"] = {r = 1, g = 0, b = 0,},
+		["NPC"] = {r = 1, g = 0, b = 0,},
+	},
+	["NEUTRAL"] = {
+		["NPC"] = {r = 1, g = 1, b = 0,},
+	},
+}
+
+local RaidClassColors = RAID_CLASS_COLORS
 
 ---------------------------------------
 -- Helper Functions
@@ -66,13 +136,13 @@ end
 local function GetFriendlyClass(name)
 	local class = TidyPlatesUtility.GroupMembers.Class[name] 
 	if (not class) and LocalVars.AdvancedEnableUnitCache then 
-		class = TidyPlatesData.UnitClass[name] end	
+		class = CachedUnitClass(name) end	
 	return class
 end
 
 local function GetEnemyClass(name)
 	if LocalVars.AdvancedEnableUnitCache then 
-		return TidyPlatesData.UnitClass[name] end	
+			return CachedUnitClass(name) end	
 end
 
 
@@ -139,7 +209,8 @@ end
 -- By Enemy Healer
 local function ScaleFunctionByEnemyHealer(unit)
 	if unit.reaction == "HOSTILE" and unit.type == "PLAYER" then
-		if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
+		--if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
+		if IsHealer(unit.name) then
 			return LocalVars.ScaleSpotlight
 		end
 	end
@@ -166,6 +237,7 @@ local ScaleFunctionsUniversal = { DummyFunction, ScaleFunctionByElite, ScaleFunc
 		ScaleFunctionByActiveDebuffs, ScaleFunctionByEnemy,ScaleFunctionByNPC, ScaleFunctionByRaidIcon, 
 		ScaleFunctionByEnemyHealer, ScaleFunctionByLowHealth, ScaleFunctionByBoss}
 
+
 -- Scale Functions Listed by Role order: Damage, Tank, Heal
 -- local ScaleFunctions = {ScaleFunctionsDamage, ScaleFunctionsTank}
 
@@ -173,13 +245,13 @@ local function ScaleDelegate(...)
 	local unit = ...
 	local scale
 	
-	
 	if LocalVars.ScaleIgnoreNonEliteUnits and (not unit.isElite) then
 	elseif LocalVars.ScaleIgnoreNeutralUnits and unit.reaction == "NEUTRAL" then 
 	elseif LocalVars.ScaleIgnoreInactive and not (unit.reaction == "FRIENDLY" and (unit.isInCombat or (unit.threatValue > 0) or (unit.health < unit.healthmax))) then 
-	--else scale = ScaleFunctions[LocalRole][LocalVars.ScaleSpotlightMode](...)  end
-	else scale = ScaleFunctionsUniversal[LocalVars.ScaleSpotlightMode](...)  end
-	--print(LocalVars.ScaleSpotlightMode, scale, LocalVars.ScaleStandard)
+	elseif LocalVars.ScaleCastingSpotlight and unit.isCasting then scale = LocalVars.ScaleSpotlight
+	else scale = ScaleFunctionsUniversal[LocalVars.ScaleSpotlightMode](...)  
+	end
+	
 	return scale or LocalVars.ScaleStandard
 end
 
@@ -241,7 +313,8 @@ end
 -- By Enemy Healer
 local function AlphaFunctionByEnemyHealer(unit)
 	if unit.reaction == "HOSTILE" and unit.type == "PLAYER" then
-		if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
+		--if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
+		if IsHealer(unit.name) then
 			return LocalVars.OpacitySpotlight
 		end
 	end
@@ -260,7 +333,7 @@ local function AlphaFilter(unit)
 	elseif LocalVars.OpacityFilterNPC and unit.type == "NPC" then return true
 	elseif LocalVars.OpacityFilterNonElite and (not unit.isElite) then return true
 	elseif LocalVars.OpacityFilterInactive then 
-		if unit.reaction ~= "FRIENDLY" and not (unit.isInCombat or unit.threatValue > 0 or unit.health < unit.healthmax) then return true end
+		if unit.reaction ~= "FRIENDLY" and not (unit.isMarked or unit.isInCombat or unit.threatValue > 0 or unit.health < unit.healthmax) then return true end
 		
 	--elseif LocalVars.OpacityFilterInactive and (unit.isInCombat or unit.healthmax > unit.health) then return true
 	end
@@ -324,8 +397,8 @@ local function ColorFunctionByClassEnemy(unit)
 		if unit.reaction ~= "FRIENDLY" then class = unit.class or GetEnemyClass(unit.name) end
 		
 		-- Return Color
-		if class and RAID_CLASS_COLORS[class] then 
-			return RAID_CLASS_COLORS[class] end
+		if class and RaidClassColors[class] then 
+			return RaidClassColors[class] end
 	end
 	
 	-- For unit types with no Class info available, the function returns nil (meaning, default reaction color)
@@ -339,8 +412,8 @@ local function ColorFunctionByClassFriendly(unit)
 		if unit.reaction == "FRIENDLY" then class = GetFriendlyClass(unit.name)	end
 		
 		-- Return Color
-		if class and RAID_CLASS_COLORS[class] then 
-			return RAID_CLASS_COLORS[class] end
+		if class and RaidClassColors[class] then 
+			return RaidClassColors[class] end
 	end
 	
 	-- For unit types with no Class info available, the function returns nil (meaning, default reaction color)
@@ -400,48 +473,15 @@ end
 
 
 -- By Raid Icon
-local RaidIconColors = {
-	["STAR"] = {r = 251/255, g = 240/255, b = 85/255,}, 
-	["MOON"] = {r = 100/255, g = 180/255, b = 255/255,}, 
-	["CIRCLE"] = {r = 230/255, g = 116/255, b = 11/255,}, 
-	["SQUARE"] = {r = 0, g = 174/255, b = 1,}, 
-	["DIAMOND"] = {r = 207/255, g = 49/255, b = 225/255,}, 
-	--["CROSS"] = {r = 195/255, g = 38/255, b = 23/255,}, 
-	["CROSS"] = {r = 255/255, g = 130/255, b = 100/255,}, 
-	["TRIANGLE"] = {r = 31/255, g = 194/255, b = 27/255,}, 
-	["SKULL"] = {r = 244/255, g = 242/255, b = 240/255,}, 
-}
-
 local function ColorFunctionByRaidIcon(unit)
 	return RaidIconColors[unit.raidIcon]
 end
 
---"By Reaction"
---local SkyBlue = {r = 0, g = .5, b = 1,}
---local BrightBlue = {r = 0, g = 120/255, b = 200/255,}
-local BrightBlue =  {r = 0, g = 70/255, b = 240/255,} -- {r = 0, g = 75/255, b = 240/255,}
-local BrightBlueText = {r = 112/255, g = 219/255, b = 255/255,}
-local PaleBlue = {r = 0, g = 130/255, b = 225/255,}
-local PaleBlueText = {r = 194/255, g = 253/255, b = 1,}
-local DarkRed = {r = .9, g = 0.08, b = .08,}
-
-local ReactionColors = {
-	["FRIENDLY"] = {
-		["PLAYER"] = {r = 0, g = 0, b = 1,},
-		["NPC"] = {r = 0, g = 1, b = 0,},
-	},
-	["HOSTILE"] = {
-		["PLAYER"] = {r = 1, g = 0, b = 0,},
-		["NPC"] = {r = 1, g = 0, b = 0,},
-	},
-	["NEUTRAL"] = {
-		["NPC"] = {r = 1, g = 1, b = 0,},
-	},
-}
-
 local function ColorFunctionByReaction(unit)
-	if TidyPlatesData.Guild[unit.name] then return PaleBlue				
-	elseif TidyPlatesData.Friends[unit.name] then return BrightBlue end
+	if unit.reaction == "FRIENDLY" and unit.type == "PLAYER" then
+		if IsGuildmate(unit.name) then return PaleBlue				
+		elseif IsFriend(unit.name) then return BrightBlue end
+	end
 	
 	return ReactionColors[unit.reaction][unit.type]
 end
@@ -516,7 +556,8 @@ end
 -- By Enemy Healer
 local function WarningBorderFunctionByEnemyHealer(unit)
 	if unit.reaction == "HOSTILE" and unit.type == "PLAYER" then
-		if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
+		--if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
+		if IsHealer(unit.name) then
 			WarningColor.r = unit.red
 			WarningColor.g = unit.green
 			WarningColor.b = unit.blue
@@ -558,35 +599,16 @@ end
 ---------------------------------------
 -- Name Text Color
 ---------------------------------------
-local NameReactionColors = {
-	["FRIENDLY"] = {
-		["PLAYER"] = {r = 60/255, g = 168/255, b = 255/255,},
-		["NPC"] = {r = 96/255, g = 224/255, b = 37/255,},
-	},
-	["HOSTILE"] = {
-		["PLAYER"] = {r = 255/255, g = 51/255, b = 32/255,},
-		["NPC"] = {r = 255/255, g = 51/255, b = 32/255,},
-	},
-	["NEUTRAL"] = {
-		["NPC"] = {r = 252/255, g = 180/255, b = 27/255,},
-	},
-}
-
---local NormalGrey = {r = .5, g = .5, b = .5, a = .3}
---local EliteGrey = {r = .8, g = .7, b = .4, a = .5}
---local BossGrey = {r = .8, g = .6, b = .1, a = 1}
 
 -- By Reaction
-local function NameColorByReaction(unit)	
-	if TidyPlatesData.Guild[unit.name] then return PaleBlueText				
-	elseif TidyPlatesData.Friends[unit.name] then return BrightBlueText end
+local function NameColorByReaction(unit)
+	if IsGuildmate(unit.name) then return PaleBlueText				
+	elseif IsFriend(unit.name) then return BrightBlueText end
 
 	return NameReactionColors[unit.reaction][unit.type]
 end
 	
-local NormalGrey = {r = .65, g = .65, b = .65, a = .4}
-local EliteGrey = {r = .9, g = .7, b = .3, a = .5}
-local BossGrey = {r = 1, g = .85, b = .1, a = .8}
+
 
 -- By Significance
 local function NameColorBySignificance(unit)	
@@ -609,8 +631,39 @@ local function NameColorByClass(unit)
 		else class = unit.class or GetEnemyClass(unit.name); end
 		
 		-- Return color
-		if class and RAID_CLASS_COLORS[class] then 
-			return RAID_CLASS_COLORS[class] end
+		if class and RaidClassColors[class] then 
+			return RaidClassColors[class] end
+	end
+
+	-- For unit types with no Class info available, return reaction color
+	return NameReactionColors[unit.reaction][unit.type]
+end
+
+local function NameColorByFriendlyClass(unit)
+	local class, color
+	
+	if unit.type == "PLAYER" and unit.reaction == "FRIENDLY" then
+		-- Determine Unit Class
+		class = GetFriendlyClass(unit.name)	
+		
+		-- Return color
+		if class and RaidClassColors[class] then 
+			return RaidClassColors[class] end
+	end
+
+	-- For unit types with no Class info available, return reaction color
+	return NameReactionColors[unit.reaction][unit.type]
+end
+
+local function NameColorByEnemyClass(unit)
+	local class, color
+	
+	if unit.type == "PLAYER" and unit.reaction == "HOSTILE" then
+		class = unit.class or GetEnemyClass(unit.name)
+		
+		-- Return color
+		if class and RaidClassColors[class] then 
+			return RaidClassColors[class] end
 	end
 
 	-- For unit types with no Class info available, return reaction color
@@ -623,15 +676,18 @@ local function NameColorByThreat(unit)
 end
 
 local function NameColorByThreatAutoDetect(unit)
-	if InCombatLockdown() then return ColorFunctionByThreatAutoDetect(unit)
-	else return NameReactionColors[unit.reaction][unit.type] end
+	local color
+	if InCombatLockdown() then color = ColorFunctionByThreatAutoDetect(unit) end
+	if not color then color = NameReactionColors[unit.reaction][unit.type] end
+	return color
 end
 
 local NameColorFunctions = {
 	-- Default
 	function(unit) return White end,
 	-- By Class
-	NameColorByClass,
+	NameColorByEnemyClass,
+	--NameColorByClass,
 	-- By Threat
 	NameColorByThreatAutoDetect,
 	-- By Reaction
@@ -644,6 +700,8 @@ local NameColorFunctions = {
 	NameColorBySignificance,
 	-- By Threat (Legacy)
 	NameColorByThreat,
+	-- By Friendly Class
+	NameColorByFriendlyClass,
 }
 
 local function SetNameColorDelegate(unit)
@@ -720,7 +778,6 @@ local DebuffFilterModes = {
 	end,
 	-- My specific	
 	function(debuff) 
-	
 		local prefix, priority = GetPrefixPriority(debuff)	
 		if prefix and debuff.caster == UnitGUID("player") then return true, priority end
 	end,	
@@ -745,8 +802,8 @@ local AURA_TYPE = {
 	"Debuff",
 }
 
+
 local function DebuffFilter(aura)
-	--print(aura.name)
 	--[[
 	-- Buffs/Hots on Friendly Units
 	if aura.type == AURA_TYPE_BUFF then 
@@ -760,11 +817,13 @@ local function DebuffFilter(aura)
 		-- return TidyPlatesWidgets.CanPlayerDispel(AURA_TYPE[aura.type or 0] or "")
 		return false 
 	end
-	
-	--print(aura.name, LocalVars.WidgetsDebuffMode, DebuffFilterModes[LocalVars.WidgetsDebuffMode](aura))
-	
+
 	-- Debuffs on Hostile Units
 	return DebuffFilterModes[LocalVars.WidgetsDebuffMode](aura)
+end
+
+local function Prefilter(spellid, spellname, auratype)
+	return (LocalVars.WidgetsDebuffLookup[tostring(spellid)] or LocalVars.WidgetsDebuffLookup[spellname] ~= nil)
 end
 
 	
@@ -888,7 +947,10 @@ local function OnInitializeWidgets(plate, configTable)
 	AddThreatLineWidget(plate, LocalVars.WidgetsThreatIndicator and (LocalVars.WidgetsThreatIndicatorMode == 1), configTable.ThreatLineWidget)
 	AddComboPoints(plate, LocalVars.WidgetsComboPoints, configTable.ComboWidget )
 	AddRangeWidget(plate, LocalVars.WidgetsRangeIndicator, configTable.RangeWidget )
-	AddDebuffWidget(plate, LocalVars.WidgetsDebuff, configTable.DebuffWidget )
+	if LocalVars.WidgetsComboPoints and configTable.DebuffWidgetPlus then -- If the combo widget is active, it often overlaps the debuff widget "DebuffWidgetPlus" will provide an alternative
+		AddDebuffWidget(plate, LocalVars.WidgetsDebuff, configTable.DebuffWidgetPlus )	
+	else AddDebuffWidget(plate, LocalVars.WidgetsDebuff, configTable.DebuffWidget ) end
+	
 end
 
 local function OnContextUpdateDelegate(plate, unit)
@@ -907,9 +969,20 @@ local function OnUpdateDelegate(plate, unit)
 end
 
 local function EnableWatchers()
+	if LocalVars.WidgetsDebuffStyle == 2 then TidyPlatesWidgets.UseSquareDebuffIcon() else TidyPlatesWidgets.UseWideDebuffIcon()end
 	TidyPlatesUtility:EnableGroupWatcher()
 	if LocalVars.AdvancedEnableUnitCache then TidyPlatesUtility:EnableUnitCache() else TidyPlatesUtility:DisableUnitCache() end
-	TidyPlatesUtility:EnableHealerTrack()
+	
+	if (ScaleFunctionsUniversal[LocalVars.ScaleSpotlightMode] == ScaleFunctionByEnemyHealer) or
+		AlphaFunctionsUniversal[LocalVars.OpacitySpotlightMode] == AlphaFunctionByEnemyHealer or
+		WarningBorderFunctionsUniversal[LocalVars.ColorDangerGlowMode] == WarningBorderFunctionByEnemyHealer then
+			TidyPlatesUtility:EnableHealerTrack()
+	else
+		TidyPlatesUtility:DisableHealerTrack()
+	end
+	
+	if LocalVars.WidgetsDebuffMode == 5 then TidyPlatesWidgets.SetDebuffPrefilter(Prefilter) else TidyPlatesWidgets.SetDebuffPrefilter(nil) end
+	
 	TidyPlatesWidgets:EnableTankWatch()
 	TidyPlatesWidgets:EnableAggroWatch()		--SetCVar("threatWarning", 3)		-- Required for threat/aggro detection
 	if LocalVars.WidgetsDebuff then TidyPlatesWidgets:EnableAuraWatcher() else TidyPlatesWidgets:DisableAuraWatcher() end
@@ -917,6 +990,7 @@ end
 
 local CreateVariableSet = TidyPlatesHubRapidPanel.CreateVariableSet
 
+-- [[
 -- TidyPlatesHubSettings["HubPanelSettingsDamage"] 
 local function UseDamageVariables()
 	local objectName = "HubPanelSettingsDamage"
@@ -931,6 +1005,7 @@ local function UseTankVariables()
 	--EnableWatchers()
 	return LocalVars
 end
+--]]
 
 local function UseVariables(suffix)
 	if suffix then
@@ -964,45 +1039,87 @@ TidyPlatesHubFunctions._WidgetDebuffFilter = DebuffFilter
 -- Style
 ---------------------------------------
 
+local BARMODE, HEADLINEMODE = 1, 2
+
 local StyleModeFunctions = {
 	--	Full Bars and Widgets
 	function(unit)
-		return 1
+		return BARMODE
 	end,
 	-- NameOnly
 	function(unit)
-		return 2
+		return HEADLINEMODE
 	end,
 	-- Bars during combat
 	function(unit)
 		if InCombatLockdown() then 
-			return 1 
-		else return 2 end
+			return BARMODE
+		else return HEADLINEMODE end
 	end,
 	-- Bars when unit is active or damaged
 	function(unit)
 		if (unit.health < unit.healthmax) or (unit.threatValue > 1) or unit.isInCombat or unit.isMarked then 
-			return 1
+			return BARMODE
 		end
-		return 2
+		return HEADLINEMODE
 	end,
 	-- elite units
 	function(unit)
 		if unit.isElite then 
-			return 1 
-		else return 2 end
+			return BARMODE 
+		else return HEADLINEMODE end
 	end,
 	-- marked
 	function(unit)
 		if unit.isMarked then 
-			return 1 
-		else return 2 end
+			return BARMODE 
+		else return HEADLINEMODE end
 	end,
 		-- player chars
 	function(unit)
 		if unit.type == "PLAYER" then 
-			return 1 
-		else return 2 end
+			return BARMODE 
+		else return HEADLINEMODE end
+	end,
+	
+	--[[
+		if TidyPlatesWidgets.IsTankingAuraActive then return AlphaFunctionByThreatLow(unit)	-- tank mode
+	else return AlphaFunctionByThreatHigh(unit) end		
+	
+	-- By Threat (High)
+local function AlphaFunctionByThreatHigh (unit) 
+	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+		if unit.threatValue > 1 and unit.health > 0 then return LocalVars.OpacitySpotlight end
+	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
+		if GetAggroCondition(unit.name) then return LocalVars.OpacitySpotlight end
+	end
+end
+
+-- Tank Mode
+local function AlphaFunctionByThreatLow (unit) 
+	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+		if IsTankedByAnotherTank(unit) then return end
+		if unit.threatValue < 2 and unit.health > 0 then return LocalVars.OpacitySpotlight end
+	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
+		if GetAggroCondition(unit.name) then return LocalVars.OpacitySpotlight end
+	end
+end
+	--]]
+	-- Current Target
+	function(unit)
+		if unit.isTarget == true then 
+			return BARMODE 
+		else return HEADLINEMODE end
+	end,
+	-- low threat
+	function(unit)
+		if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+			if IsTankedByAnotherTank(unit) then return HEADLINEMODE end
+			if unit.threatValue < 2 and unit.health > 0 then return BARMODE end
+		elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
+			if GetAggroCondition(unit.name) == true then return BARMODE end
+		end
+		return HEADLINEMODE
 	end,
 }
 
@@ -1090,16 +1207,14 @@ end
 -- Binary Styles Theme Support (Bars/Text Styles)
 ---------------------------------------------
 
---TidyPlatesData.UnitDescriptions = TidyPlatesData.UnitDescriptions or {}
-
 local function SetStyleBinaryDelegate(unit)
 	if StyleDelegate(unit) == 2 then return "NameOnly"
 	else return "Default" end
 end
 
 local function RoleOrGuildText(unit)
-	if TidyPlatesData.UnitDescriptions and unit.type == "NPC" then
-		return (TidyPlatesData.UnitDescriptions[unit.name] or GetLevelDescription(unit) or "") , 1, 1, 1, .70
+	if unit.type == "NPC" then
+		return (CachedUnitDescription(unit.name) or GetLevelDescription(unit) or "") , 1, 1, 1, .70
 	end
 end
 
@@ -1112,15 +1227,15 @@ local function TextRoleGuildLevel(unit)
 	local r, g, b = 1,1,1
 	
 	if unit.type == "NPC" then
-		description = TidyPlatesData.UnitDescriptions[unit.name]
-		
+		description = CachedUnitDescription(unit.name)
+	
 		if not description and unit.reaction ~= "FRIENDLY" then 
 			description =  GetLevelDescription(unit)
 			r, g, b = unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue
 		end
 		
 	elseif unit.type == "PLAYER" then
-		description = TidyPlatesData.UnitGuild[unit.name]
+		description = CachedUnitGuild(unit.name)
 		r, g, b = .5, .5, .7
 	end
 	
@@ -1133,10 +1248,10 @@ local function TextRoleGuild(unit)
 	local r, g, b = 1,1,1
 	
 	if unit.type == "NPC" then
-		description = TidyPlatesData.UnitDescriptions[unit.name]
+		description = CachedUnitDescription(unit.name)
 
 	elseif unit.type == "PLAYER" then
-		description = TidyPlatesData.UnitGuild[unit.name]
+		description = CachedUnitGuild(unit.name)
 		r, g, b = .5, .5, .7
 	end
 	
@@ -1146,7 +1261,7 @@ end
 -- NPC Role
 local function TextNPCRole(unit)
 	if unit.type == "NPC" then
-		return TidyPlatesData.UnitDescriptions[unit.name]
+		return CachedUnitDescription(unit.name)
 	end
 end
 
@@ -1308,6 +1423,22 @@ TidyPlatesHubFunctions.ApplyFontCustomization = ApplyFontCustomization
 TidyPlatesHubFunctions.ApplyStyleCustomization = ApplyStyleCustomization
 TidyPlatesHubFunctions.ApplyThemeCustomization = ApplyThemeCustomization
 
+------------
+
+local function GetCurrentSpec()
+	if GetActiveTalentGroup(false, false) == 2 then return "secondary" 
+	else return "primary" end
+end
+
+local function ShowCurrentHubPanel()
+	local theme = TidyPlatesThemeList[TidyPlatesOptions[GetCurrentSpec()]]
+	if theme and theme.ShowConfigPanel and type(theme.ShowConfigPanel) == 'function' then theme.ShowConfigPanel() end
+end
+
+SLASH_HUB1 = '/hub'
+SlashCmdList['HUB'] = ShowCurrentHubPanel
+
+--[[
 ---------------
 -- Apply Customization for Dynamic style
 ---------------
@@ -1319,3 +1450,4 @@ local function ApplyThemeCustomizationDynamic(theme)
 end
 
 TidyPlatesHubFunctions.ApplyThemeCustomizationDynamic = ApplyThemeCustomizationDynamic
+--]]

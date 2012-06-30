@@ -92,7 +92,7 @@ local TankAuras = {
 --TidyPlatesWidgets.IsTankingAuraActive = false
 
 local function CheckPlayerAuras()
-	local spellid, _, name
+	local spellID, _, name
 	local tankAura = false
 	-- Check Auras
 	for i = 1, 40 do

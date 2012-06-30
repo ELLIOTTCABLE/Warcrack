@@ -4,8 +4,8 @@ _G[addonName] = LibStub("AceAddon-3.0"):NewAddon(addonName, "AceConsole-3.0", "A
 
 local addon = _G[addonName]
 
-addon.Version = "v4.2.002"
-addon.VersionNum = 402002
+addon.Version = "v4.3.003b"
+addon.VersionNum = 403003
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 local commPrefix = addonName
@@ -253,6 +253,7 @@ local tabList = {
 	"Guild",
 	"Achievements",
 	"Agenda",
+	"Grids",
 }
 
 local frameToID = {}
@@ -298,7 +299,7 @@ function addon.Tabs:OnClick(index)
 	self.current = index
 	self.Columns.prefix = addonName.."Tab"..tabList[index].."_Sort"
 	
-	if index >= 2 and index <= 6 then
+	if index >= 2 and index <= 7 then
 		local moduleName = format("%s_%s", addonName, tabList[index])
 		SafeLoadAddOn(moduleName)		-- make this part a bit more generic once we'll have more LoD parts
 		

@@ -8,6 +8,44 @@ IMPORTANT NOTE: If you're upgrading from 3.x :
 - Make sure you delete the addon's databases in SavedVariables. ie: Altoholic.lua and all DataStore*.lua.
 - Make sure to delete the old addon directories (Altoholic & all DataStore modules) as many files have changed/moved. A patch like this one is always a good opportunity for a fresh install.
 
+4.3.003b (05/05/2012)
+
+- Added a faction filter in Grids -> Mounts
+- Added an expansion pack filter in Grids -> Pets
+- Added the possibility to link a mount/pet in their respective grid view.
+- Fixed Pets.xml removed from a TOC file in previous version (oops !)
+
+4.3.003 (04/05/2012)
+
+- Average item level now scanned after PLAYER_ALIVE. Fixes AiL staying at 0.
+- Added an option to delete a character's mailbox content (Tab "Characters" -> Mail drop down).
+- Added a new tab : Grids. This tab gathers all the "grid" views from the Characters tab in a single view. Much easier to manage, and to enhance.
+- Equipment, reputations, currencies, tabards, mounts and pets have been moved to the new "Grids" tab.
+- Added 2 new views to the Grids tab: tradeskills & archeology. These allow you to visualize your progress in those professions on multiple alts, have a reference for profession leveling, and see what crafts you are missing.
+
+Note: More changes are on their way for the Character's tab, including a UI for the void storage, which was pushed back by the development of the Grids tab.
+I had to make some cleanup to facilitate that implementation and future ones.
+
+4.3.002 (29/01/2012)
+
+Four Year Anniversary Edition
+
+- Removed old, unused libraries from the package.
+- Fixed a few minor errors.
+- Fixed a Lua error when viewing Auctions/Bids (Auction API changed by Blizzard).
+- Added support for Tabards. (Characters tab, similar to pets/mounts view)
+- Fixed average item level not always being correctly calculated due to GetItemInfo not returning values at load time. Now using the game's value, which is always correct.
+- Fixed scanning guild reputation updates.
+- Fixed guild communication not working anymore.
+
+4.3.001 (10/12/2011)
+
+- Achievements, Pets & Mounts have been updated.
+- Added support for ptBR localization. Please use Curse to complete it missing translations: http://wow.curseforge.com/addons/altoholic/localization/
+- Datastore will now automatically clean orphan data in its modules (caused by failed account sharing, etc..)
+
+Note: Void storage will soon be added (coding has already started), but as I will be in a business trip next week, and I did not want to delay the release of 4.3.001, I had to go to the essential.
+
 4.2.002 (30/10/2011)
 
 - Added several missing achievements.

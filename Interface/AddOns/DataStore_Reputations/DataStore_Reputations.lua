@@ -270,7 +270,7 @@ end
 local function OnFactionChange(event, messageType, faction, amount)
 	if messageType ~= "FACTION" then return end
 	
-	if faction == GUILD_REPUTATION then
+	if faction == GUILD then
 		ScanGuildReputation()
 		return
 	end

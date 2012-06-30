@@ -1,9 +1,9 @@
 PhanxChat
 by Phanx <addons@phanx.net>
 http://www.wowinterface.com/downloads/info6323-PhanxChat.html
-http://wow.curse.com/downloads/wow-addons/details/phanxchat.aspx
+http://www.curse.com/addons/wow/phanxchat
 
-Copyright © 2006–2010 Phanx
+Copyright © 2006–2012 Phanx
 
 The contents of this software, excluding third-party resources, are
 copyrighted to its author with all rights reserved, under United States

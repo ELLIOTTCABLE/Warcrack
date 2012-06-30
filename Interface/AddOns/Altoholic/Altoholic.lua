@@ -535,7 +535,7 @@ function addon:GetSpellIcon(spellID)
 end
 
 function addon:GetRecipeLink(spellID, profession, color)
-	local name = GetSpellInfo(spellID)
+	local name = GetSpellInfo(spellID) or ""
 	color = color or "|cffffd000"
 	return format("%s|Henchant:%s|h[%s: %s]|h|r", color, spellID, profession, name)
 end
@@ -553,6 +553,7 @@ function addon:GetSpellIDFromRecipeLink(link)
 end
 
 function addon:GetMoneyString(copper, color, noTexture)
+	copper = copper or 0
 	color = color or "|cFFFFD700"
 
 	local gold = floor( copper / 10000 );
@@ -573,6 +574,8 @@ function addon:GetMoneyString(copper, color, noTexture)
 end
 
 function addon:GetTimeString(seconds)
+	seconds = seconds or 0
+
 	local days = floor(seconds / 86400);				-- TotalTime is expressed in seconds
 	seconds = mod(seconds, 86400)
 	local hours = floor(seconds / 3600);

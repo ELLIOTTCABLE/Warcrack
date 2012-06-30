@@ -7,6 +7,7 @@
 <Include file="Locales\esES.lua"/>
 <Include file="Locales\esMX.lua"/>
 <Include file="Locales\frFR.lua"/>
+<Include file="Locales\ptBR.lua"/>
 <Include file="Locales\koKR.lua"/>
 <Include file="Locales\ruRU.lua"/>
 <Include file="Locales\zhCN.lua"/>

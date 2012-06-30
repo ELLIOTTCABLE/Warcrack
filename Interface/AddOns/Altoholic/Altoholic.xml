@@ -105,7 +105,7 @@
 			<OnLoad>
 				self:RegisterForDrag("LeftButton");
 				self.elapsed = 0;
-				PanelTemplates_SetNumTabs(AltoholicFrame, 6);
+				PanelTemplates_SetNumTabs(AltoholicFrame, 7);
 				PanelTemplates_SetTab(AltoholicFrame, 1);
 			</OnLoad>
 			<OnDragStart>
@@ -322,6 +322,15 @@
 					</Anchor>
 				</Anchors>
 			</Button>
+			<Button name="$parentTab7" inherits="AltoTabTemplate" id="7" text="Grids">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentTab6" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-8" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
 
 			<EditBox name="$parent_SearchEditBox" inherits="InputBoxTemplate">
 				<Size x="140" y="16" />
@@ -335,7 +344,7 @@
 						self:SetAutoFocus( false );
 					</OnLoad>
 					<OnEnterPressed>
-						Altoholic.Tabs:OnClick(3)
+						Altoholic.Tabs:OnClick("Search")
 						Altoholic.Search:FindItem();
 						self:ClearFocus();
 					</OnEnterPressed>
@@ -376,7 +385,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						Altoholic.Tabs:OnClick(3)
+						Altoholic.Tabs:OnClick("Search")
 						Altoholic.Search:FindItem();
 					</OnClick>
 				</Scripts>

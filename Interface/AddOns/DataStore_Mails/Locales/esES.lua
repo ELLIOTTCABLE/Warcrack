@@ -16,7 +16,7 @@ L["EXPIRY_CHECK_TITLE"] = "Revisar Tiempos de Borrado de Correo"
 L["Mail Expiry Warning"] = "Advertencia de Borrado de Correo"
 L["SCAN_MAIL_BODY_DISABLED"] = "Sólo correos leídos serán escaneados. Los correos seguirán teniendo el estado de no leídos."
 L["SCAN_MAIL_BODY_ENABLED"] = "Los correos serán completamente escaneados al abrir el buzón. Todos los correos serán marcados como leídos."
-L["SCAN_MAIL_BODY_TITLE"] = "Escaneo Completo del Correo"
 L["Scan mail body (marks it as read)"] = "Escanear el contenido de los correos (marcarlos como leídos)"
+L["SCAN_MAIL_BODY_TITLE"] = "Escaneo Completo del Correo"
 L["Warn when mail expires in less days than this value"] = "Avisar cuando el correo sea borrado en menos días que los indicados"
 

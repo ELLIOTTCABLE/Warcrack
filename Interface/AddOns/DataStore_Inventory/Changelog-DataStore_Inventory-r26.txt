@@ -1,0 +1,13 @@
+------------------------------------------------------------------------
+r26 | thaoky | 2012-05-04 14:32:25 +0000 (Fri, 04 May 2012) | 1 line
+Changed paths:
+   M /trunk/DataStore_Inventory.lua
+
+Fixed average item level incorrectly scanned
+------------------------------------------------------------------------
+r25 | thaoky | 2012-01-29 10:55:14 +0000 (Sun, 29 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/DataStore_Inventory.lua
+
+More AiL fixes.
+------------------------------------------------------------------------

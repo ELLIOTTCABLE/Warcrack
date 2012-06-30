@@ -6,11 +6,6 @@ local L = GridIndicatorText3_Locales
 
 local Grid = Grid
 
-if not Grid or not Grid.options or not Grid.options.childGroups or Grid.options.childGroups ~= "tab" then
-	print("Please update Grid! GridIndicatorText3 deactivated!")
-	return
-end
-
 local GridFrame = Grid:GetModule("GridFrame")
 local GridIndicatorText3 = GridFrame:NewModule("GridIndicatorText3", "AceEvent-3.0")
 local media = LibStub("LibSharedMedia-3.0", true)

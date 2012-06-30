@@ -1,0 +1,24 @@
+------------------------------------------------------------------------
+r17 | warbaby | 2012-02-22 06:46:18 +0000 (Wed, 22 Feb 2012) | 1 line
+Changed paths:
+   A /tags/2.02.22 (from /trunk:16)
+
+Tagging as 2.02.22
+------------------------------------------------------------------------
+r16 | warbaby | 2012-02-22 06:45:16 +0000 (Wed, 22 Feb 2012) | 2 lines
+Changed paths:
+   M /trunk/Bindings.xml
+   M /trunk/GridBuffIcons.lua
+   M /trunk/GridBuffIcons.toc
+   M /trunk/localization.zhCN.lua
+
+- add enable/disable option.
+- toc update for 4.3
+------------------------------------------------------------------------
+r15 | warbaby | 2010-10-20 18:42:47 +0000 (Wed, 20 Oct 2010) | 2 lines
+Changed paths:
+   M /trunk/GridBuffIcons.lua
+
+- update for tw locale
+- 名称过滤支持全角的逗号
+------------------------------------------------------------------------

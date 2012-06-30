@@ -158,7 +158,7 @@ local function ScanAuctions()
 	_ClearAuctionEntries(character, "Auctions", AHZone)
 	
 	for i = 1, GetNumAuctionItems("owner") do
-		local itemName, _, count, _, _, _,	startPrice, 
+		local itemName, _, count, _, _, _, _, startPrice, 
 			_, buyoutPrice, _,	highBidder = GetAuctionItemInfo("owner", i);
 
 		if itemName then
@@ -186,7 +186,7 @@ local function ScanBids()
 	_ClearAuctionEntries(character, "Bids", AHZone)
 	
 	for i = 1, GetNumAuctionItems("bidder") do
-		local itemName, _, count, _, _, _,	_, 
+		local itemName, _, count, _, _, _, _, _, 
 			_, buyoutPrice, bidPrice, _, ownerName = GetAuctionItemInfo("bidder", i);
 			
 		if itemName then

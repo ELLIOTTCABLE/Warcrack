@@ -25,6 +25,7 @@ local AddonDB_Defaults = {
 			['*'] = {				-- ["Account.Realm.Name"] 
 				lastUpdate = nil,
 				Currencies = {},
+				Archeology = {},
 			}
 		}
 	}
@@ -115,17 +116,31 @@ local function ScanCurrencies()
 	addon.ThisCharacter.lastUpdate = time()
 end
 
+local function ScanArcheology()
+	local currencies = addon.ThisCharacter.Archeology
+	wipe(currencies)
+	
+	for i = 1, GetNumArchaeologyRaces() do
+		_, _, _, currencies[i] = GetArchaeologyRaceInfo(i)
+	end
+end
+
 -- *** Event Handlers ***
 local function OnCurrencyDisplayUpdate()
 	ScanCurrencies()
+	ScanArcheology()
 end
 
 local function OnChatMsgSystem(event, arg)
 	if arg and arg == ITEM_REFUND_MSG then
 		ScanCurrencies()
+		ScanArcheology()
 	end
 end
 
+local function OnArtifactHistoryReady()
+	ScanArcheology()
+end
 
 -- ** Mixins **
 local function _GetNumCurrencies(character)
@@ -179,11 +194,16 @@ local function _GetCurrencyItemCount(character, searchedID)
 	-- end
 end
 
+local function _GetArcheologyCurrencyInfo(character, index)
+	return character.Archeology[index] or 0
+end
+
 local PublicMethods = {
 	GetNumCurrencies = _GetNumCurrencies,
 	GetCurrencyInfo = _GetCurrencyInfo,
 	GetCurrencyInfoByName = _GetCurrencyInfoByName,
 	GetCurrencyItemCount = _GetCurrencyItemCount,
+	GetArcheologyCurrencyInfo = _GetArcheologyCurrencyInfo,
 }
 
 function addon:OnInitialize()
@@ -194,11 +214,19 @@ function addon:OnInitialize()
 	DataStore:SetCharacterBasedMethod("GetCurrencyInfo")
 	DataStore:SetCharacterBasedMethod("GetCurrencyInfoByName")
 	DataStore:SetCharacterBasedMethod("GetCurrencyItemCount")
+	DataStore:SetCharacterBasedMethod("GetArcheologyCurrencyInfo")
 end
 
 function addon:OnEnable()
 	addon:RegisterEvent("CURRENCY_DISPLAY_UPDATE", OnCurrencyDisplayUpdate)
 	addon:RegisterEvent("CHAT_MSG_SYSTEM", OnChatMsgSystem)
+	
+	local _, _, arch = GetProfessions()
+
+	if arch then
+		addon:RegisterEvent("ARTIFACT_HISTORY_READY", OnArtifactHistoryReady)
+		RequestArtifactCompletionHistory()		-- this will trigger ARTIFACT_HISTORY_READY
+	end
 end
 
 function addon:OnDisable()

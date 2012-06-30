@@ -1,0 +1,7 @@
+## Interface: 40300
+## Version: 12.05.20
+## Title: TipTac
+## Author: Aezay (Earthen Ring EU)
+## Notes: Highly Customizable Tooltip Enhancement Addon
+## SavedVariables: TipTac_Config
+core.lua

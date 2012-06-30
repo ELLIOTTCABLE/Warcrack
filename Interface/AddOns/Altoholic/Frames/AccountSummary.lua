@@ -55,7 +55,7 @@ addon.Summary = {}
 local ns = addon.Summary		-- ns = namespace
 
 local function ViewAltInfo(self, characterInfoLine)
-	addon.Tabs:OnClick(2)
+	addon.Tabs:OnClick("Characters")
 	addon.Tabs.Characters:SetAlt(Characters:GetInfo(characterInfoLine))
 	addon.Tabs.Characters:ViewCharInfo(self.value)
 end
@@ -397,7 +397,7 @@ function ns:Level_OnClick(frame, button)
 		ToggleDropDownMenu(1, nil, AltoholicFrameSummaryRightClickMenu, frame:GetName(), 0, -5);
 		return
 	elseif button == "LeftButton" and lineType == INFO_CHARACTER_LINE then
-		addon.Tabs:OnClick(2)
+		addon.Tabs:OnClick("Characters")
 		
 		local tc = addon.Tabs.Characters
 		tc:SetAlt(Characters:GetInfo(line))

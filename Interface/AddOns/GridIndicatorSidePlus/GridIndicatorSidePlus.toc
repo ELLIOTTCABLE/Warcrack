@@ -1,11 +1,11 @@
-## Interface: 40000
+## Interface: 40300
 ## Author: kunda
 ## Title: GridIndicatorSidePlus
 ## Notes: Adds 3 indicators to each side (top, bottom, left and right).
 ## Notes-deDE: Fügt 3 Indikatoren an jeder Seite (oben, unten, links und rechts) hinzu.
-## Version: 40000-3
+## Version: 40300-1
 ## Dependencies: Grid
-## X-Curse-Packaged-Version: r16
+## X-Curse-Packaged-Version: 40300-1
 ## X-Curse-Project-Name: GridIndicatorSidePlus
 ## X-Curse-Project-ID: grid-indicator-side-plus
 ## X-Curse-Repository-ID: wow/grid-indicator-side-plus/mainline

@@ -73,20 +73,7 @@ local ICON_VIEW_SPELLBOOK = "Interface\\Icons\\INV_Misc_Book_09"
 local ICON_VIEW_PROFESSIONS = "Interface\\Icons\\Achievement_GuildPerk_WorkingOvertime"
 
 -- ** Left menu **
-local VIEW_CHARACTERS = 1
-local VIEW_EQUIP = 2
-local VIEW_REP = 3
-local VIEW_TOKENS = 4
-local VIEW_ALL_COMPANIONS = 5
-local VIEW_ALL_MOUNTS = 6
-
-local ICON_QUESTIONMARK = "Interface\\RaidFrame\\ReadyCheck-Waiting"
 local ICON_CHARACTERS = "Interface\\Icons\\Achievement_GuildPerk_Everyones a Hero_rank2"
-local ICON_VIEW_EQUIP = "Interface\\Icons\\INV_Chest_Plate04"
-local ICON_VIEW_REP = "Interface\\Icons\\INV_BannerPVP_02"
-local ICON_VIEW_TOKENS = "Interface\\Icons\\Spell_Holy_SummonChampion"
-local ICON_VIEW_COMPANIONS = "Interface\\Icons\\INV_Box_Birdcage_01"
-local ICON_VIEW_MOUNTS = "Interface\\Icons\\Ability_Mount_RidingHorse"
 
 addon.Tabs.Characters = {}
 
@@ -114,18 +101,9 @@ local function HideAll()
 	AltoholicFrameMail:Hide()
 	AltoholicFrameQuests:Hide()
 	AltoholicFrameAuctions:Hide()
-	AltoholicFramePets:Hide()
 	AltoholicFrameRecipes:Hide()
-	AltoholicFrameReputations:Hide()
-	AltoholicFrameEquipment:Hide()
-	AltoholicFrameCurrencies:Hide()
 	AltoholicFrameGlyphs:Hide()
 	AltoholicFrameSpellbook:Hide()
-	
-	-- hide class icons
-	for i = 1, 10 do
-		_G[ parent .. "_ClassIcon" .. i ]:Hide()
-	end
 end
 
 local function EnableIcon(name)
@@ -133,78 +111,11 @@ local function EnableIcon(name)
 	_G[name.."IconTexture"]:SetDesaturated(0)
 end
 
-local function DisableIcon(name)
-	_G[name]:Disable()
-	_G[name.."IconTexture"]:SetDesaturated(1)
-end
-
-local function UpdateViewIcons()
-	
-	-- ** Characters / Equipment / Reputations / Currencies **
-	if DataStore_Inventory then
-		EnableIcon(parent .. "_Equipment")
-	else
-		DisableIcon(parent .. "_Equipment")
-	end
-
-	if DataStore_Reputations then
-		EnableIcon(parent .. "_Factions")
-	else
-		DisableIcon(parent .. "_Factions")
-	end
-	
-	if DataStore_Currencies then
-		EnableIcon(parent .. "_Tokens")
-	else
-		DisableIcon(parent .. "_Tokens")
-	end
-	
-	-- ** Pets / Mounts / Reputations **
-	if DataStore_Pets then
-		EnableIcon(parent .. "_Pets")
-		EnableIcon(parent .. "_Mounts")
-	else
-		DisableIcon(parent .. "_Pets")
-		DisableIcon(parent .. "_Mounts")
-	end
-end
-
-local function ShowCategory(id)
-	ns:UpdateClassIcons()
-
-	if id == VIEW_EQUIP then
-		AltoholicFrameEquipment:Show()
-		addon.Equipment:Update()
-	elseif id == VIEW_REP then
-		AltoholicFrameReputations:Show()
-		addon.Reputations:Update()
-	elseif id == VIEW_TOKENS then
-		AltoholicFrameCurrencies:Show()
-		addon.Currencies:Update()
-	elseif id == VIEW_ALL_COMPANIONS then
-		addon.Pets:SetAllInOneView("CRITTER")
-		addon.Pets:UpdatePetsAllInOne()
-	elseif id == VIEW_ALL_MOUNTS then
-		addon.Pets:SetAllInOneView("MOUNT")
-		addon.Pets:UpdatePetsAllInOne()
-	end
-end
-
 local DDM_Add = addon.Helpers.DDM_Add
 local DDM_AddTitle = addon.Helpers.DDM_AddTitle
 local DDM_AddCloseMenu = addon.Helpers.DDM_AddCloseMenu
 
 function ns:OnShow()
-
-	if AltoholicFrameReputations:IsVisible() or 
-		AltoholicFrameEquipment:IsVisible() or 
-		AltoholicFrameCurrencies:IsVisible() or 
-		AltoholicFramePetsAllInOne:IsVisible() then
-		ns:UpdateClassIcons()
-	end
-	
-	UpdateViewIcons()
-	
 	if currentView == 0 then
 		StartAutoCastShine(_G[parent .. "_Characters"])
 		ns:ViewCharInfo(VIEW_BAGS)
@@ -221,29 +132,14 @@ function ns:MenuItem_OnClick(frame, button)
 	local id = frame:GetID()
 	currentCategory = id
 
-	if id == VIEW_CHARACTERS then
-		_G[parent .. "_CharactersIcon"]:Show()
-		_G[parent .. "_BagsIcon"]:Show()
-		_G[parent .. "_QuestsIcon"]:Show()
-		_G[parent .. "_TalentsIcon"]:Show()
-		_G[parent .. "_AuctionIcon"]:Show()
-		_G[parent .. "_MailIcon"]:Show()
-		_G[parent .. "_SpellbookIcon"]:Show()
-		_G[parent .. "_ProfessionsIcon"]:Show()
-		
-		return
-	end
-
-	_G[parent .. "_CharactersIcon"]:Hide()
-	_G[parent .. "_BagsIcon"]:Hide()
-	_G[parent .. "_QuestsIcon"]:Hide()
-	_G[parent .. "_TalentsIcon"]:Hide()
-	_G[parent .. "_AuctionIcon"]:Hide()
-	_G[parent .. "_MailIcon"]:Hide()
-	_G[parent .. "_SpellbookIcon"]:Hide()
-	_G[parent .. "_ProfessionsIcon"]:Hide()
-	
-	ShowCategory(id)
+	_G[parent .. "_CharactersIcon"]:Show()
+	_G[parent .. "_BagsIcon"]:Show()
+	_G[parent .. "_QuestsIcon"]:Show()
+	_G[parent .. "_TalentsIcon"]:Show()
+	_G[parent .. "_AuctionIcon"]:Show()
+	_G[parent .. "_MailIcon"]:Show()
+	_G[parent .. "_SpellbookIcon"]:Show()
+	_G[parent .. "_ProfessionsIcon"]:Show()
 end
 
 -- ** realm selection **
@@ -265,20 +161,6 @@ local function OnRealmChange(self, account, realm)
 			currentProfession = nil
 			
 			HideAll()
-
-			DisableIcon(parent .. "_BagsIcon")
-			DisableIcon(parent .. "_QuestsIcon")
-			DisableIcon(parent .. "_TalentsIcon")
-			DisableIcon(parent .. "_AuctionIcon")
-			DisableIcon(parent .. "_MailIcon")
-			DisableIcon(parent .. "_SpellbookIcon")
-			DisableIcon(parent .. "_ProfessionsIcon")
-			
-			if currentCategory ~= VIEW_CHARACTERS then
-				ShowCategory(currentCategory)
-			else
-				StopAutoCastShine()
-			end
 		end
 	end
 end
@@ -328,7 +210,6 @@ function ns:DropDownRealm_Initialize()
 			end
 		end
 	end
-	
 end
 
 
@@ -444,95 +325,6 @@ function ns:SetAlt(alt, realm, account)
 	-- set drop down menu
 	ns:DropDownRealm_Initialize()
 	UIDropDownMenu_SetSelectedValue(AltoholicTabCharacters_SelectRealm, account .."|".. realm)
-end
-
-
--- ** Class Icons **
-function ns:ClassIcon_OnEnter(frame)
-	local currentMenuID = frame:GetID()
-	
-	-- hide all
-	for i = 1, 8 do
-		if i ~= currentMenuID and _G[ classMenu .. i ].visible then
-			ToggleDropDownMenu(1, nil, _G[ classMenu .. i ], frame:GetName(), 0, -5);	
-			_G[ classMenu .. i ].visible = false
-		end
-	end
-
-	-- show current
-	ToggleDropDownMenu(1, nil, _G[ classMenu .. currentMenuID ], frame:GetName(), 0, -5);	
-	_G[ classMenu .. currentMenuID ].visible = true
-	
-	local key = addon:GetOption(format("Tabs.Characters.%s.%s.Column%d", currentAccount, currentRealm, currentMenuID))
-	if key then
-		addon:DrawCharacterTooltip(frame, key)
-	end
-end
-
-function ns:UpdateClassIcons()
-	local key = addon:GetOption(format("Tabs.Characters.%s.%s.Column1", currentAccount, currentRealm))
-	if not key then	-- first time this realm is displayed
-	
-		local index = 1
-
-		-- add the first 10 keys found on this realm
-		for characterName, characterKey in pairs(DataStore:GetCharacters(currentRealm, currentAccount)) do	
-			-- ex: : ["Tabs.Characters.Default.MyRealm.Column4"] = "Account.realm.alt7"
-
-			addon:SetOption(format("Tabs.Characters.%s.%s.Column%d", currentAccount, currentRealm, index), characterKey)
-			
-			index = index + 1
-			if index > 10 then
-				break
-			end
-		end
-		
-		while index <= 10 do
-			addon:SetOption(format("Tabs.Characters.%s.%s.Column%d", currentAccount, currentRealm, index), nil)
-			index = index + 1
-		end
-	end
-	
-	local itemName, itemButton, itemTexture
-	local class
-	
-	for i = 1, 10 do
-		itemName = parent .. "_ClassIcon" .. i
-		itemButton = _G[itemName]
-		
-		key = addon:GetOption(format("Tabs.Characters.%s.%s.Column%d", currentAccount, currentRealm, i))
-		itemTexture = _G[itemName .. "IconTexture"]
-		addon:CreateButtonBorder(itemButton)
-		
-		if key then
-			_, class = DataStore:GetCharacterClass(key)
-		end
-		
-		if key and class then
-			local tc = CLASS_ICON_TCOORDS[class]
-		
-			itemTexture:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes");
-			itemTexture:SetTexCoord(tc[1], tc[2], tc[3], tc[4])
-		
-			if DataStore:GetCharacterFaction(key) == "Alliance" then
-				itemButton.border:SetVertexColor(0.1, 0.25, 1, 0.5)
-			else
-				itemButton.border:SetVertexColor(1, 0, 0, 0.5)
-			end
-		else	-- no key ? display a question mark icon
-			itemTexture:SetTexture(ICON_QUESTIONMARK)
-			itemTexture:SetTexCoord(0, 1, 0, 1)
-			
-			itemButton.border:SetVertexColor(0, 1, 0, 0.5)
-		end
-		
-		itemTexture:SetWidth(36)
-		itemTexture:SetHeight(36)
-		itemTexture:SetAllPoints(itemButton)
-		
-		itemButton.border:Show()
-		itemButton:Show()
-	end
 end
 
 
@@ -682,6 +474,13 @@ local function OnClearAHEntries(self)
 	addon.AuctionHouse:InvalidateView()
 end
 
+local function OnClearMailboxEntries(self)
+	local character = ns:GetAltKey()
+	DataStore:ClearMailboxEntries(character)
+	addon.Mails:Update()
+end
+
+
 local function GetCharacterLoginText(character)
 	local last = DataStore:GetLastLogout(character)
 	local _, _, name = strsplit(".", character)
@@ -696,20 +495,6 @@ local function GetCharacterLoginText(character)
 		last = format("%s: %s", LASTONLINE, RED..L["N/A"])
 	end
 	return format("%s %s(%s%s)", DataStore:GetColoredCharacterName(character), WHITE, last, WHITE)
-end
-
-local function OnCharacterClassChange(self, id)
-	if not id then return end		-- no icon id ? exit
-	
-	local key = self.value		-- key is either a datastore character key, or nil (if "None" is selected by the player for this column)
-
-	if key == "empty" then		-- if the keyword "empty" is passed, save a nil value in the options
-		key = nil
-	end
-	
-	addon:SetOption(format("Tabs.Characters.%s.%s.Column%d", currentAccount, currentRealm, id), key)
-	ns:UpdateClassIcons()
-	ShowCategory(currentCategory)
 end
 
 
@@ -900,6 +685,7 @@ local function MailIcon_Initialize(self, level)
 		DDM_Add(format(L["Mails %s(%d)"], GREY, 0), nil, nil)
 	end
 
+	DDM_Add(WHITE .. L["Clear all entries"], nil, OnClearMailboxEntries)
 	DDM_AddTitle("|r ")
 	DDM_AddTitle(GAMEOPTIONS_MENU)
 	DDM_Add(MAIL_LABEL, nil, function() Altoholic:ToggleUI(); InterfaceOptionsFrame_OpenToCategory(AltoholicMailOptions) end)
@@ -1112,43 +898,6 @@ local function ProfessionsIcon_Initialize(self, level)
 	end
 end
 
-local function ClassIcon_Initialize(self, level)
-	local id = self:GetID()
-	
-	DDM_AddTitle(L["Characters"])
-	local nameList = {}		-- we want to list characters alphabetically
-	for _, character in pairs(DataStore:GetCharacters(currentRealm, currentAccount)) do
-		table.insert(nameList, character)	-- we can add the key instead of just the name, since they will all be like account.realm.name, where account & realm are identical
-	end
-	table.sort(nameList)
-	
-	-- get the key associated with this button
-	local key = addon:GetOption(format("Tabs.Characters.%s.%s.Column%d", currentAccount, currentRealm, id)) or ""
-	
-	for _, character in ipairs(nameList) do
-		local info = UIDropDownMenu_CreateInfo()
-		
-		info.text		= DataStore:GetColoredCharacterName(character)
-		info.value		= character
-		info.func		= OnCharacterClassChange
-		info.checked	= (key == character)
-		info.arg1		= id
-		UIDropDownMenu_AddButton(info, 1)
-	end
-
-	DDM_AddTitle(" ")
-	
-	local info = UIDropDownMenu_CreateInfo()
-	info.text		= (id == 1) and RESET or NONE		-- reset on the first icon, none otherwise
-	info.value		= "empty"
-	info.func		= OnCharacterClassChange
-	info.checked	= (key == "")
-	info.arg1		= id
-	UIDropDownMenu_AddButton(info, 1)
-	
-	DDM_AddCloseMenu()
-end
-
 
 function ns:OnLoad()
 	-- Menu Icons
@@ -1209,23 +958,6 @@ function ns:OnLoad()
 	-- ** Characters / Equipment / Reputations / Currencies **
 	addon:SetItemButtonTexture(parent .. "_Characters", ICON_CHARACTERS, size, size)
 	_G[parent .. "_Characters"].text = L["Characters"]
-	addon:SetItemButtonTexture(parent .. "_Equipment", ICON_VIEW_EQUIP, size, size)
-	_G[parent .. "_Equipment"].text = L["Equipment"]
-	addon:SetItemButtonTexture(parent .. "_Factions", ICON_VIEW_REP, size, size)
-	_G[parent .. "_Factions"].text = L["Reputations"]
-	addon:SetItemButtonTexture(parent .. "_Tokens", ICON_VIEW_TOKENS, size, size)
-	_G[parent .. "_Tokens"].text = CURRENCY
-
-	-- ** Pets / Mounts  **
-	addon:SetItemButtonTexture(parent .. "_Pets", ICON_VIEW_COMPANIONS, size, size)
-	_G[parent .. "_Pets"].text = COMPANIONS
-	addon:SetItemButtonTexture(parent .. "_Mounts", ICON_VIEW_MOUNTS, size, size)
-	_G[parent .. "_Mounts"].text = MOUNTS
-
-	-- Class Icons
-	for i = 1, 10 do
-		UIDropDownMenu_Initialize(_G[classMenu..i], ClassIcon_Initialize, "MENU")
-	end
 	
 	addon:RegisterMessage("DATASTORE_RECIPES_SCANNED")
 end

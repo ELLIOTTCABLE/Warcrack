@@ -36,6 +36,7 @@ local AddonDB_Defaults = {
 				Partial = {},
 				Completed = {},
 				CompletionDates = {},
+				Tabards = {},
 			}
 		}
 	}
@@ -54,6 +55,17 @@ end
 
 -- *** Scanning functions ***
 local CriteriaCache = {}
+
+local function ScanTabards()
+	local criteriaID, isCompleted
+	
+	for i = 1, 87 do
+		_, _, _, _, _, _, _, _, _, criteriaID = GetAchievementCriteriaInfo(1021, i)
+		_, _, isCompleted = GetAchievementCriteriaInfo(criteriaID)
+
+		addon.ThisCharacter.Tabards[criteriaID] = (isCompleted == true) and true or nil
+	end
+end
 
 local function ScanSingleAchievement(id, isCompleted, month, day, year)
 	addon.ThisCharacter.lastUpdate = time()
@@ -155,6 +167,8 @@ local function OnPlayerAlive()
 	
 	ScanAllAchievements()
 	ScanProgress()
+	ScanTabards()
+	
 	addon.ThisCharacter.guid = strsub(UnitGUID("player"), 3)	-- get rid at the 0x at the beginning of the string
 end
 
@@ -166,6 +180,12 @@ local function OnAchievementEarned(event, id)
 	end
 end
 
+local function OnPlayerEquipmentChanged(slot)
+	-- if it's the tavard slot and we actually equipped one, then scan
+	if slot == GetInventorySlotInfo("TabardSlot") and GetInventoryItemLink("player", tabardSlot) then
+		ScanTabards()
+	end
+end
 
 -- ** Mixins **
 local function _GetAchievementInfo(character, achievementID)
@@ -278,6 +298,12 @@ local function _GetAchievementLink(character, achievementID)
 	return format("|cffffff00|Hachievement:%s:%s:%s:%s|h\[%s\]|h|r", achievementID, character.guid, completion, criterias, name)
 end
 
+local function _IsTabardKnown(character, criteriaID)
+	if character.Tabards[criteriaID] then
+		return true
+	end
+end
+
 local PublicMethods = {
 	GetAchievementInfo = _GetAchievementInfo,
 	GetCriteriaInfo = _GetCriteriaInfo,
@@ -285,6 +311,7 @@ local PublicMethods = {
 	GetNumCompletedAchievements = _GetNumCompletedAchievements,
 	GetNumAchievementPoints = _GetNumAchievementPoints,
 	GetAchievementLink = _GetAchievementLink,
+	IsTabardKnown = _IsTabardKnown,
 }
 
 function addon:OnInitialize()
@@ -297,14 +324,17 @@ function addon:OnInitialize()
 	DataStore:SetCharacterBasedMethod("GetNumCompletedAchievements")
 	DataStore:SetCharacterBasedMethod("GetNumAchievementPoints")
 	DataStore:SetCharacterBasedMethod("GetAchievementLink")
+	DataStore:SetCharacterBasedMethod("IsTabardKnown")
 end
 
 function addon:OnEnable()
 	addon:RegisterEvent("PLAYER_ALIVE", OnPlayerAlive)
 	addon:RegisterEvent("ACHIEVEMENT_EARNED", OnAchievementEarned)
+	addon:RegisterEvent("PLAYER_EQUIPMENT_CHANGED", OnPlayerEquipmentChanged)
 end
 
 function addon:OnDisable()
 	addon:UnregisterEvent("PLAYER_ALIVE")
 	addon:UnregisterEvent("ACHIEVEMENT_EARNED")
+	addon:UnregisterEvent("PLAYER_EQUIPMENT_CHANGED")
 end

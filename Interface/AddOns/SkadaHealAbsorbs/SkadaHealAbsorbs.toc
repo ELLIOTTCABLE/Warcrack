@@ -6,7 +6,7 @@
 ## X-Curse-Project-Name: SkadaHealAbsorbs
 ## X-Curse-Project-ID: skadahealabsorbs
 ## X-Curse-Repository-ID: wow/skadahealabsorbs/mainline
-## X-Curse-Packaged-Version: r19
+## X-Curse-Packaged-Version: r22
 ## X-Curse-Project-Name: SkadaHealAbsorbs
 ## X-Curse-Project-ID: skadahealabsorbs
 ## X-Curse-Repository-ID: wow/skadahealabsorbs/mainline

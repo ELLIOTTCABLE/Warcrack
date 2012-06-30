@@ -1,56 +1,123 @@
 
 
 --[[
+	The Tidy Plates Healer Tracking system uses two concurrent methods:
+		1. Direct query of the Battleground Scoreboard for Talent Specialization
+		2. Active monitoring of the combat log for Healer-Only spells
+		
+		Q: Why do I use TWO methods?  
+			A: Querying the Battleground Scoreboard is the most accurate method,
+		but it doesn't always work.  In addition, there are PvP encounters where
+		you're not in a battleground.
 
-Monitor Combat Log for Healing and Role Specific spells
-
-
-- Store Per-Match Data, When the match ends, Clear all data
-
-- Recently Cast Heal
-- Look at Player's Maximum Health
-
-If the heal is less than...
-
-118k
-2k or greater
-
-
-Minimum Percents...  (1.4 to 2 percent for HoTs)
-
-
-1700
-
-PlayerGUID, Healing from Spells
-
-1. Look at Internal Data
-	- COMBAT_LOG_EVENT_UNFILTERED 
-		- Spell Cast Events
-		- Aura events
-	- Mouseover & Target
-		- Aura
-	
-2. Look at BG Scores
-
-
-Need to make a warning glow for Graphite
-
-
-Indicators
-	- Role Icon on Plate
-	- Scale Spotlight: By Healer Role
-	- Opacity Spotlight: By Healer Role
-	- Color: By Role  (Healer, Damage, Tank; Blue/Cyan, Red/Magenta, Yellow)
-	- Warning Glow: By Healer (Blue/Cyan/Light Blue)
-	
-	-- Healer:				Blue
-	-- Possible Healer: 	Green
 --]]
 
----------------------------------------------------------------------------
+local RoleList = {}
+local HealerListByGUID = {}
+local HealerListByName = {}
 
-local WhiteListSpells = {
+local function ParseName(identifier)
+	local _, _, name, server = strfind(identifier, "([^-]+)-?(.*)")
+	return name, server
+end
 
+
+
+--[[
+Detection Method 1: 
+Direct query of the Battleground Scoreboard for Talent Specialization
+--]]
+
+-- Class talent specs
+local ClassRoles = {
+	["Death Knight"] = {
+		["Blood"]         = "Tank",
+		["Frost"]         = "Melee",
+		["Unholy"]        = "Melee",
+	},
+	["Druid"] = {
+		["Balance"]       = "Ranged",
+		["Feral Combat"]  = "Tank",
+		["Restoration"]   = "Healer",
+	},
+	["Hunter"] = {
+		["Beast Mastery"] = "Ranged",
+		["Marksmanship"]  = "Ranged",
+		["Survival"]      = "Ranged",
+	},
+	["Mage"] = {
+		["Arcane"]        = "Ranged",
+		["Fire"]          = "Ranged",
+		["Frost"]         = "Ranged",
+	},
+	["Paladin"] = {
+		["Holy"]          = "Healer",
+		["Protection"]    = "Tank",
+		["Retribution"]   = "Melee",
+	},
+	["Priest"] = {
+		["Discipline"]    = "Healer",
+		["Holy"]          = "Healer",
+		["Shadow"]        = "Ranged",
+	},
+	["Rogue"] = {
+		["Assassination"] = "Melee",
+		["Combat"]        = "Melee",
+		["Subtlety"]      = "Melee",
+	},
+	["Shaman"] = {
+		["Elemental"]     = "Ranged",
+		["Enhancement"]   = "Melee",
+		["Restoration"]   = "Healer",
+	},
+	["Warlock"] = {
+		["Affliction"]    = "Ranged",
+		["Demonology"]    = "Ranged",
+		["Destruction"]   = "Ranged",
+	},
+	["Warrior"] = {
+		["Arms"]          = "Melee",
+		["Fury"]          = "Melee",
+		["Protection"]    = "Tank",
+	},
+}
+
+-- local DisplayFaction = 0; if UnitFactionGroup("player") == "Horde" then DisplayFaction = 1 end
+local NextUpdate = 0
+local function UpdateRolesViaScoreboard()
+	local now = GetTime()
+	
+	if now > NextUpdate then
+		NextUpdate = now + 3		-- Throttles update frequency to every 3 seconds.
+	else return end
+	
+	--print("Scoreboard Update", now)
+	
+	local UpdateIsNeeded = false
+	local NumScores = GetNumBattlefieldScores()
+	
+	-- SetBattlefieldScoreFaction(DisplayFaction) -- faction 0=Horde, 1=Alliance
+
+	if NumScores > 0 then
+		for i = 1, NumScores do
+			local name, _, _, _, _, faction, _, class, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
+			if name and class and talentSpec then
+				local Role = ClassRoles[class][talentSpec]
+				
+				if RoleList[name] ~= Role then
+					RoleList[name] = Role
+					--if Role == "Healer" then print(name, Role, faction) end
+					UpdateIsNeeded = true
+					
+				end 
+			end
+		end
+		if UpdateIsNeeded then TidyPlates:RequestDelegateUpdate() end
+	end
+
+end
+		
+local HealerSpells = {
         -- Priest
 		----------
         [47540] = "PRIEST", -- Penance
@@ -72,8 +139,6 @@ local WhiteListSpells = {
         [17116] = "DRUID", -- Nature's Swiftness
         [48438] = "DRUID", -- Wild Growth
         [33891] = "DRUID", -- Tree of Life
-        --[774] = "DRUID", -- Rejuvenation (Only For Testing)
-		-- Rejuvenation, Lifebloom, Nourish
 
         -- Shaman
 		---------
@@ -92,34 +157,6 @@ local WhiteListSpells = {
         [85222] = "PALADIN", -- Light of Dawn
 }
 
-local BlackListSpells = {
-	-- Druid, Non-Healing Talents
-	[24858] = "DRUID",	-- Moonkin Form
-	[33917] = "DRUID",	-- Mangle
-	[49376] = "DRUID",	-- Feral Charge (Cat)
-	[16979] = "DRUID",	-- Feral Charge (Bear)
-	[50516] = "DRUID",	-- Typhoon
-	[48505] = "DRUID",	-- Starfall
-	
-	-- Paladin
-	[31935] = "PALADIN", -- Avenger's Shield
-	[85256] = "PALADIN", -- Templar's Verdict
-	[20066] = "PALADIN", -- Repentance
-	[53385] = "PALADIN", -- Divine Storm
-	
-	-- Priest
-	[34914] = "PRIEST", -- Vampiric Touch
-	[15487] = "PRIEST", -- Silence
-	[15407] = "PRIEST", -- Mind Flay
-	
-	-- Shaman
-	[51490] = "SHAMAN", -- Thunder Storm
-	[51528] = "SHAMAN", -- Maelstrom Weapon
-	[17364] = "SHAMAN", -- Stormstrike
-	[60103] = "SHAMAN", -- Lava Lash
-	[60103] = "SHAMAN", -- Lava Lash
-}
-
 local SpellEvents = { 
 	["SPELL_HEAL"] = true, 
 	["SPELL_AURA_APPLIED"] = true, 
@@ -134,48 +171,45 @@ local function IsEnemyPlayer(flags)
 	end
 end
 
-local HealerListByGUID = {}
-local HealerListByName = {}
-
 local function WipeLists() 
+		RoleList = wipe(RoleList)
 		HealerListByGUID = wipe(HealerListByGUID)
 		HealerListByName = wipe(HealerListByName)
-		--HealerListByName["Zhevra Runner"] = "Just for Testing"
 end
 
-local function CombatEventHandler(frame, event, ...)	
-	if event == "PLAYER_ENTERING_WORLD" then 
-		--print(event)
-		WipeLists() 
-		return
-	end
-	
+local Events = {}
+
+function Events.PLAYER_ENTERING_WORLD()
+	WipeLists() 
+	return
+end
+
+function Events.UPDATE_BATTLEFIELD_SCORE()
+	UpdateRolesViaScoreboard() 
+	return
+end
+
+function Events.COMBAT_LOG_EVENT_UNFILTERED(...)
 	-- Combat Log Unfiltered
 	local timestamp, combatevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlag, spellid  = ...		-- WoW 4.2
-	
-	--print(sourceName, IsEnemyPlayer(sourceFlags), SpellEvents[combatevent], WhiteListSpells[spellid])
-	if IsEnemyPlayer(sourceFlags) and sourceGUID then					-- Filter for Enemy PvP
-		if SpellEvents[combatevent] then
-			if WhiteListSpells[spellid] then
-				local rawName = strsplit("-", sourceName)		-- Strip server name
-				if HealerListByGUID[sourceGUID] ~= rawName then
-					--print("Healer Detected:", rawName)
-					HealerListByGUID[sourceGUID] = rawName
-					HealerListByName[rawName] = sourceGUID
+
+	if IsEnemyPlayer(sourceFlags) and sourceGUID then					-- Filter: Only Enemy Players
+		if SpellEvents[combatevent] then								-- Filter: Specific spell events
+			if HealerSpells[spellid] then								-- Filter: Known Healing Spells
+				local rawName = strsplit("-", sourceName)				-- Strip server name
+				if RoleList[rawName] ~= "Healer" then
+					RoleList[rawName] = "Healer"
 					TidyPlates:RequestDelegateUpdate()
-				end
-			--elseif BlackListSpells[spellid] then
-				
+				end	
 			end
-			
-			
 		end
 	end
 end
 
-TidyPlatesCache = TidyPlatesCache or {}
-TidyPlatesCache.HealerListByGUID = HealerListByGUID
-TidyPlatesCache.HealerListByName = HealerListByName
+local function CombatEventHandler(frame, event, ...)
+	local handler = Events[event]
+	if handler then handler(...) end
+end
 
 local HealerTrackWatcher = CreateFrame("Frame")	
 	
@@ -183,18 +217,46 @@ local function Enable()
 	HealerTrackWatcher:SetScript("OnEvent", CombatEventHandler)
 	HealerTrackWatcher:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	HealerTrackWatcher:RegisterEvent("PLAYER_ENTERING_WORLD")
+	HealerTrackWatcher:RegisterEvent("UPDATE_BATTLEFIELD_SCORE")
 	WipeLists() 
+	--print("TidyPlatesBeta Message: Enemy Healer (PvP) Tracking is Enabled")
 end
 
 local function Disable() 
 	HealerTrackWatcher:SetScript("OnEvent", nil)
 	HealerTrackWatcher:UnregisterAllEvents()
 	WipeLists() 
+	--print("TidyPlatesBeta Message: Enemy Healer (PvP) Tracking is Disabled")
+end
+
+local HealerClasses = {
+	["DRUID"] = true,
+	["SHAMAN"] = true,
+	["PALADIN"] = true,
+	["PRIEST"] = true,
+}
+
+local function IsHealer(name, class)
+	--if class and (not HealerClasses[class]) then return false end
+	
+	if name then 
+		local Role = RoleList[name]
+		if Role == nil then
+			--print(name, "Unit not found")
+			--RequestBattlefieldScoreData()
+		else 
+			--if Role == "Healer" then print(name, "Marked as Healer") end
+			return Role == "Healer" 
+		end
+	end	
 end
 
 TidyPlatesUtility.EnableHealerTrack = Enable
 TidyPlatesUtility.DisableHealerTrack = Disable
+TidyPlatesUtility.IsHealer = IsHealer
 
+--TidyPlatesCache = TidyPlatesCache or {}
+--TidyPlatesCache.RoleList = RoleList
 
 
 			

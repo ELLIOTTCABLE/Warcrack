@@ -1,6 +1,136 @@
-6.5
+Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
+
+Tidy Plates 6.6...
+------------------------------------------------------------------------------------------
+Highlights
+
+Headline Mode
+Instead of displaying a graphical health-bar, we can display critical information using just text, reducing the surface area of the nameplate and revealing more of the game world.  The Headline style can be mixed with traditional Health Bar nameplates to improve your awareness and reduce visual clutter.
+
+Compact Debuff Widget
+In addition to numerous performance improvements, the current version of the Debuff widget now includes the option to use Square icons!
+	
+Detachable Hub Panel
+Click the minimize button to unsnap the Hub panel into it's own smaller, draggable configuration window.
+
+Speedy Configuration
+Use '/hub' to quickly enter the active Hub Panel. 
+
+Bookmarks
+In the Hub, use the 'Bookmarks' button to jump to a category.
+
+Improved Copy & Paste
+This is a simple method of transferring profiles between characters.  Clicking the Hub's 'Copy' button will save your settings to a global database.  The data persists even if your computer is turned-Off.  Clicking the 'Paste' button will replace your current settings with the Copied settings.  You can paste between characters on different servers.  
+
+Using the 'Shift' key while clicking will use a different clipboard, isolated to the Hub's Role Type, but still acessible between characters.  In other words, you've got three slots (Universal, Tank, and Damage) to copy your settings.
+
+Performance Improvements
+Refinement of the caching systems has reduced Memory and CPU usage.  Some folks have seen dramatic FPS drops.  This update should fix that stuff!
+
+------------------------------------------------------------------------------------------
+Cumulative Changes Since 6.5:
+
+	- Under the "Style" category, all references to "Text-Only Plates" or "TextPlates" have been changed to "Headline Mode".  This change is intended to distinguish the style modifier from other references to "Text".  I'm sure some of you will hate this (can you come up with something better?), but I'm hoping that less cranky folks find the new grammar to be more intuitive.
+	- To support the "Headline Mode" name change, I've added a new category.  Can you guess?  It's, "Headline".  
+	- I've grouped the "Color" and "Text" categories into "Color & Text", and moved them to the second-category position.  Why??  1: "Color & Text" controls the appearance of the default 'Health Bar' style.  2: Underneath, "Headline" controls the appearance of the 'No Bar' style.  Thus: This arrangement puts these options close to where the user selects the modes, in the "Style" category.
+	- Square Debuff Icon Option: Added a new Debuff Widget option, "Debuff Style", which allows the user to select between the traditional "Wide" debuff format, or a more squareish "Compact" style.  The column count is increased to 5 for the "Compact" style.
+	- Bookmark System: Added a "Bookmark" system to the Hub panels, which allows a user to jump directly to any of the categories
+	- On certain themes, the position of your debuffs will be adjusted to allow the combo point widget to comfortably fit (on Rogues and Druids, only).  When the combo widget is disabled, the icons will "snug" themselves closer to the plate. 
+	- Using the '/hub' command will bring you to the Hub Configuration panel for your current theme
+	- Added click sounds to the 'Copy' and 'Paste' buttons
+	- Bug fixes and Memory optimization
+	- Added a Prefilter option for the debuff widget cache
+		* The hub enables the prefilter, when you're using the 'By Prefix" mode
+		* Debuffs NOT on your list are not cached
+		* This should save a ton of memory if you're using 'By Prefix'
+	- Made some changes to the Unit Data Cache system to reduce memory use, and avoid certain 'lag' events...
+		* Pet/Companion NPC titles are no longer cached
+		* Cached unit guild and npc titles are now stored within the TidyPlatesWidgetData variable, keeping this data out of the base TidyPlates saved variables
+		* Hub/Reset button will now clear the cached unit descriptions/titles and guilds
+		* Unit descriptions (player guild name, or NPC role/title) will not be displayed while in an instance.  This is to avoid the CPU overhead that occurs when searching the database, which could be THOUSANDS of entries.  This is a direct cause for massive FPS drop, in some cases.
+		* A side-effect of these changes is the clearing of user's stored guild names and NPC titles.  This is required to get the desired performance benefits.
+	- Matched widget duration timer to default blizz interface standard (using 'floor' rather than 'ceil') 
+	- Fixed SpellId variable name in widgets\tank.lua
+	- Spell Cast Monitor: If cast time is not greater than 0, make it a minimum of 1.5s
+	- Added NameColorByEnemyClass
+	- Minimize Hub now scale to 85%
+	- Rearranged Name Color: By Friendly/Enemy class
+	- Improved HealerTrack.lua, with help from Curseforge user, dakunesu.  Improves detection of healers in battlegrounds! Rockin!
+	- Added a "Minimize" button to the /hub UI panel.  Clicking this will detach the Hub panel from the Interface Options window, and make it smaller.  Good for configuring stuff while playing.
+	- The Copy & Paste buttons for the Hub panels now work with a unified Clipboard, so you can Copy & Paste between Tank and DPS panels.  Holding down "Shift" while clicking Copy or Paste will use the original Tank/DPS-specific caches.
+	- New Hub Option: "Bring Casting Units to Spotlight Scale"
+	- Unit Cache should filter out reputation names.  This fixes an issue occuring when "Colorblind" mode is active, causing Reputation to be displayed instead of an NPC's Title.
+	- "Filter > Filter Inactive": When a unit is marked with a target/raid-icon, it's now assumed to be Active.
+	- And more (ie. stuff I've forgotten about)
+
+------------------------------------------------------------------------------------------
+
+Beta Notes:
+
+(r457 Beta6)
+	- More memory tricks/optimization for Mr. Debuff Widget.
+	- Added a few more Headline Modes
+
+(r452 Beta5)
+	- Fixed nil table index in HealerTrack.lua
+	- Added a Prefilter option for the debuff widget cache
+		* The hub enables the prefilter, when you're using the 'By Prefix" mode
+		* Debuffs NOT on your list are not cached
+		* This should save a ton of memory, if you're using 'By Prefix'
+
+(r451 Beta4)
+	- Made some changes to reduce memory use, and avoid certain 'lag' events...
+		* Pet/Companion NPC titles are no longer cached
+		* Cached unit guild and npc titles are now stored within the TidyPlatesWidgetData variable, keeping this data out of the base TidyPlates saved variables
+		* Hub/Reset button will now clear the cached unit descriptions/titles and guilds
+		* Unit descriptions (player guild name, or NPC role/title) will not be displayed while in an instance.  This is to avoid the CPU overhead that occurs when searching the database.
+		* A side-effect of these changes is the clearing of user's stored guild names and NPC titles.  This is required to get the desired performance benefits.
+	- Healer track should work again.  Expect some new graphics in the future.
+	- Matched widget duration timer to default blizz interface standard (using 'floor' rather than 'ceil') 
+	- Fixed SpellId variable name in widgets\tank.lua
+	- Spell Cast Monitor: If cast time is not greater than 0, make it a minimum of 1.5s
+
+(r447 Beta3)
+Enhancements...
+	- Added NameColorByEnemyClass
+	- Minimize Hub now scale to 85%
+	- Rearranged Name Color: By Friendly/Enemy class
+	- Made some changes to HealerTrack.lua, not quite sure if it's working properly. Please test!
+
+(r444 Beta2)
+Enhancements... 
+	- Improved HealerTrack.lua provided by Curseforge user, dakunesu.  Improves detection of healers in battlegrounds. Rockin!
+	- Added a "Minimize" button to the /hub UI panel.  Clicking this will detach the Hub panel from the Interface Options window, and make it smaller.  Good for configuring stuff while playing.
+	- The Copy & Paste buttons for the Hub panels now work with a unified Clipboard, so you can Copy & Paste between Tank and DPS panels.  Holding down "Shift" while clicking Copy or Paste will use the original Tank/DPS-specific caches.
+	- New Hub Option: "Bring Casting Units to Spotlight Scale"
+	
+(r450 Beta1)
+Enhancements... 
+	- Improved HealerTrack.lua provided by Curseforge user, dakunesu.  Improves detection of healers in battlegrounds. Rockin!
+	- Added a "Minimize" button to the /hub UI panel.  Clicking this will detach the Hub panel from the Interface Options window, and make it smaller.  Good for configuring stuff while playing.
+	- The Copy & Paste buttons for the Hub panels now work with a unified Clipboard, so you can Copy & Paste between Tank and DPS panels.  Holding down "Shift" while clicking Copy or Paste will use the original Tank/DPS-specific caches.
+	- New Hub Option: "Bring Casting Units to Spotlight Scale"
+	
+(r440 Beta)
+Quality-of-Life...
+	- Square Debuff Icons: Added a new Debuff Widget option, "Debuff Style", which allows the user to select between the traditional "Wide" debuff format, or a more squareish "Compact" style.  The column count is increased to 5 for the "Compact" style.
+	- Bookmark System: Added a "Bookmark" system to the Hub panels, which allows a user to jump directly to any of the categories
+	- On certain themes, the position of your debuffs will be adjusted to allow the combo point widget to comfortably fit (on Rogues and Druids, only).  When the combo widget is disabled, the icons will "snug" themselves closer to the plate. 
+	- Using the '/hub' command will bring you to the Hub Configuration panel for your current theme
+	- Added click sounds to the 'Copy' and 'Paste' buttons
+	- My OCD: Under the "Style" category, all references to "Text-Only Plates" or "TextPlates" have been changed to "Headline Mode".  This change is intended to distinguish the style modifier from other references to "Text".  I'm sure some of you will hate this (can you come up with something better?), but I'm hoping that less cranky folks find the new grammar to be more intuitive.
+	- To support the "Headline Mode" name change, I've added a new category.  Can you guess? "Headline".  
+	- I've grouped the "Color" and "Text" categories into "Color & Text", and moved them to the second-category position.  Why??  1: "Color & Text" controls the appearance of the default 'Health Bar' style.  2: Underneath, "Headline" controls the appearance of the 'No Bar' style.  Thus: This arrangement puts these options close to where the user selects the modes, in the "Style" category.
+	
+Bug Fixes...
+	- Unit Cache should filter out reputation names.  This fixes an issue occuring when "Colorblind" mode is active, causing Reputation to be displayed instead of an NPC's Title.
+	- "Filter > Filter Inactive": When a unit is marked with a target/raid-icon, it's now assumed to be Active.
+
+
 -----------------
-(r4  )
+6.5...
+
+(r433)
 	* The "By Class" function of Health Bar Color has been changed to, "By Enemy Class".
 	* Added a Health Bar Color function called, "By Friendly Class".
 	* Added some code to make built-in themes use the default Blizzard nameplate font when a non-latin language locale is detected
@@ -70,10 +200,9 @@
 	+ Added: "By Threat (Auto-Detect") modes to Opacity, Scale, and Warning Glows
 		+ Supported by the addition of some code to detect the current tanking state based on auras/stances/forms
 		! Not quite finished
-
-6.4
+		
 -----------------
-
+6.4...
 		
 (r363)
 - Fixed: Re-Added unit.spellIsShielded to cast color delegate

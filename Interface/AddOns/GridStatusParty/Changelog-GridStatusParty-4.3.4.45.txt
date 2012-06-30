@@ -1,0 +1,30 @@
+------------------------------------------------------------------------
+r45 | phanx | 2012-06-09 13:59:25 +0000 (Sat, 09 Jun 2012) | 1 line
+Changed paths:
+   A /tags/4.3.4.45 (from /trunk:44)
+
+Tagging as 4.3.4.45
+------------------------------------------------------------------------
+r44 | Phanx | 2012-06-09 11:07:53 +0000 (Sat, 09 Jun 2012) | 1 line
+Changed paths:
+   A /trunk/README.txt
+
+- Added README file (same as the old one, but SVN doesn't support filename capitalization changes, so deleting and re-adding is required)
+------------------------------------------------------------------------
+r43 | Phanx | 2012-06-09 11:06:47 +0000 (Sat, 09 Jun 2012) | 3 lines
+Changed paths:
+   M /trunk/GridStatusParty.lua
+   M /trunk/GridStatusParty.toc
+   M /trunk/Localization.lua
+   D /trunk/readme.txt
+
+- Rewritten.
+- Fixed issues with statuses sticking.
+- Fixed "hide in combat" options.
+------------------------------------------------------------------------
+r42 | Phanx | 2012-01-23 12:31:08 +0000 (Mon, 23 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/GridStatusParty.lua
+
+- Added options to hide each status while in combat
+------------------------------------------------------------------------

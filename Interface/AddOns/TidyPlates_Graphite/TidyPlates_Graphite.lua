@@ -216,7 +216,10 @@ WidgetConfig.ThreatLineWidget = { anchor =  "TOP", x = 0 ,y = 0 }	-- y = 20
 WidgetConfig.ThreatWheelWidget = { anchor =  "CENTER", x = 0 ,y = 16 } -- "CENTER", plate, 30, 18
 WidgetConfig.ComboWidget = { anchor = "CENTER" , x = 0 ,y = 19 }
 WidgetConfig.RangeWidget = { anchor = "CENTER" , x = 0 ,y = 12 }
-WidgetConfig.DebuffWidget = { anchor = "TOP" , x = 15 ,y = 15+12 }
+WidgetConfig.DebuffWidget = { anchor = "TOP" , x = 15 ,y = 18 }
+if (UnitClassBase("player") == "Druid") or (UnitClassBase("player") == "Rogue") then
+	WidgetConfig.DebuffWidgetPlus = { anchor = "TOP" , x = 15 ,y = 26.5 }
+end
 
 local DamageThemeName = ThemeName.."/|cFFFF4400Damage"
 local TankThemeName = ThemeName.."/|cFF3782D1Tank"

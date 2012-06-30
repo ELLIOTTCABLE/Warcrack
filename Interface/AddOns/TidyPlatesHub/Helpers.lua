@@ -75,6 +75,7 @@ local function ConvertStringToTable(source, target )
 	end		
 end
 
+
 local function ConvertDebuffListTable(source, target, order)
 	local temp = ListToTable(strsplit("\n", source))
 	target = wipe(target)
@@ -89,10 +90,12 @@ local function ConvertDebuffListTable(source, target, order)
 		if prefix then
 			if PrefixList[prefix] then
 				item = suffix
+				-- CONVERT
 				target[item] = PrefixList[prefix]
 			else -- If no prefix is listed, assume 1
 				if suffix and suffix ~= "" then item = prefix.." "..suffix
 				else item = prefix end
+				-- CONVERT
 				target[item] = 1
 			end
 			if order then order[item] = index end

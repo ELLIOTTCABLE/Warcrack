@@ -2,10 +2,9 @@
 	PhanxChat
 	Reduces chat frame clutter and enhances chat frame functionality.
 	Written by Phanx <addons@phanx.net>
-	Maintained by Akkorian <akkorian@hotmail.com>
-	Copyright © 2006–2011 Phanx. Some rights reserved. See LICENSE.txt for details.
+	Copyright © 2006–2012 Phanx. Some rights reserved. See LICENSE.txt for details.
 	http://www.wowinterface.com/downloads/info6323-PhanxChat.html
-	http://wow.curse.com/downloads/wow-addons/details/phanxchat.aspx
+	http://www.curse.com/addons/wow/phanxchat
 ------------------------------------------------------------------------
 	Localization: esES / Spanish (Europe) / Español (EU)
 	Last Updated: YYYY-MM-DD by YourName < ContactInfo >
@@ -21,12 +20,12 @@ PhanxChat.L = {
 ------------------------------------------------------------------------
 
 	["Conversation"]     = "Conversación",
-	["General"]          = GENERAL,
+	["General"]          = "General",
 --	["GuildRecruitment"] = "",
---	["LocalDefense"]     = "",
---	["LookingForGroup"]  = "",
-	["Trade"]            = TRADE,
---	["WorldDefense"]     = "",
+	["LocalDefense"]     = "DefensaLocal",
+	["LookingForGroup"]  = "BuscaGrupo",
+	["Trade"]            = "Comercio",
+	["WorldDefense"]     = "DefensaGeneral",
 
 ------------------------------------------------------------------------
 --	Abbreviated Channel Names

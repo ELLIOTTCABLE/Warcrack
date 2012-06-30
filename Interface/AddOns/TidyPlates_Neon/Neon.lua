@@ -219,6 +219,15 @@ local CopyTable = TidyPlatesUtility.copyTable
 -- No Bar
 local StyleTextOnly = CopyTable(DefaultStyle)
 StyleTextOnly.threatborder.texture = EmptyTexture
+
+-- Just testing
+--[[
+StyleTextOnly.threatborder.texture = ArtworkPath.."WarningGlowCircle"
+StyleTextOnly.threatborder.width = 40
+StyleTextOnly.threatborder.height = 40
+StyleTextOnly.threatborder.y = VerticalAdjustment
+--]]
+
 StyleTextOnly.healthborder.y = VerticalAdjustment - 24
 StyleTextOnly.healthborder.height = 64
 StyleTextOnly.healthborder.texture = EmptyTexture
@@ -250,7 +259,10 @@ WidgetConfig.ThreatLineWidget = { anchor =  "CENTER", x = 0 ,y = VerticalAdjustm
 WidgetConfig.ThreatWheelWidget = { anchor =  "CENTER", x = 36 ,y = VerticalAdjustment + 12 } -- "CENTER", plate, 30, 18
 WidgetConfig.ComboWidget = { anchor = "CENTER" , x = 0 ,y = VerticalAdjustment + 9.5 }
 WidgetConfig.RangeWidget = { anchor = "CENTER" , x = 0 ,y = VerticalAdjustment + 0 }
-WidgetConfig.DebuffWidget = { anchor = "CENTER" , x = 15 ,y = VerticalAdjustment + 22 }
+WidgetConfig.DebuffWidget = { anchor = "CENTER" , x = 15 ,y = VerticalAdjustment + 17 }
+if (UnitClassBase("player") == "Druid") or (UnitClassBase("player") == "Rogue") then
+	WidgetConfig.DebuffWidgetPlus = { anchor = "CENTER" , x = 15 ,y = VerticalAdjustment + 24 }
+end
 
 local DamageThemeName = "Neon/|cFFFF4400Damage"
 local TankThemeName = "Neon/|cFF3782D1Tank"

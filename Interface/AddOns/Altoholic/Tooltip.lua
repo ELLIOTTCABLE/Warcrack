@@ -168,7 +168,7 @@ local cachedItemID, cachedCount, cachedTotal, cachedSource
 local cachedRecipeOwners
 
 local itemCounts = {}
-local itemCountsLabels = {	L["Bags"], L["Bank"], L["AH"], L["Equipped"], L["Mail"], CURRENCY }
+local itemCountsLabels = {	L["Bags"], L["Bank"], VOID_STORAGE, L["AH"], L["Equipped"], L["Mail"], CURRENCY }
 local counterLines = {}		-- list of lines containing a counter to display in the tooltip
 
 local function AddCounterLine(owner, counters)
@@ -193,10 +193,10 @@ local function WriteTotal(tooltip)
 end
 
 local function GetCharacterItemCount(character, searchedID)
-	itemCounts[1], itemCounts[2] = DataStore:GetContainerItemCount(character, searchedID)
-	itemCounts[3] = DataStore:GetAuctionHouseItemCount(character, searchedID)
-	itemCounts[4] = DataStore:GetInventoryItemCount(character, searchedID)
-	itemCounts[5] = DataStore:GetMailItemCount(character, searchedID)
+	itemCounts[1], itemCounts[2], itemCounts[3] = DataStore:GetContainerItemCount(character, searchedID)
+	itemCounts[4] = DataStore:GetAuctionHouseItemCount(character, searchedID)
+	itemCounts[5] = DataStore:GetInventoryItemCount(character, searchedID)
+	itemCounts[6] = DataStore:GetMailItemCount(character, searchedID)
 	
 	local charCount = 0
 	for _, v in pairs(itemCounts) do

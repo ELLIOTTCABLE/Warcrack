@@ -28,7 +28,29 @@ if gframe then
 	-- posthook this into the grid button register function
 	hooksecurefunc(gframe, "InitialConfigFunction", function(frame)
 		if not frame.menu then
+			--[[
+			frame:SetAttribute("_showmenu", "print(self,'yay, menu!?'); self:SetAttribute('type1', 'focus');");
+			if not frame:GetAttribute("type2") then
+				frame:SetAttribute("type2", "showmenu");
+			end
+			if true then return; end
+			--]]
 			frame.menu = function(self)
+				if UIDROPDOWNMENU_MAXBUTTONS < 24 then
+					--print("UIDROPDOWNMENU_MAXBUTTONS < 39");
+					local toggle;
+					if not WorldMapFrame:IsVisible() then
+						ToggleFrame(WorldMapFrame);
+						toggle = true;
+					end
+					SetMapZoom(2);
+					if toggle then
+						ToggleFrame(WorldMapFrame);
+					end
+				else
+					--print("UIDROPDOWNMENU_MAXBUTTONS ==",UIDROPDOWNMENU_MAXBUTTONS);
+				end
+				
 				unit = self.unit or "player"; -- see line 11
 				if UnitIsUnit(unit, "player") then   -- this is the player himself, show own menu
 					UIDropDownMenu_Initialize(gum, init_player, "MENU");

@@ -369,6 +369,11 @@ local function _IsMailBoxOpen()
 	return addon.isOpen
 end
 
+local function _ClearMailboxEntries(character)
+	wipe(character.Mails)
+	wipe(character.MailCache)
+end
+
 local PublicMethods = {
 	GetMailboxLastVisit = _GetMailboxLastVisit,
 	GetMailItemCount = _GetMailItemCount,
@@ -382,6 +387,7 @@ local PublicMethods = {
 	SaveMailToCache = _SaveMailToCache,
 	SaveMailAttachmentToCache = _SaveMailAttachmentToCache,
 	IsMailBoxOpen = _IsMailBoxOpen,
+	ClearMailboxEntries = _ClearMailboxEntries,
 }
 
 -- *** Guild Comm ***
@@ -459,6 +465,7 @@ function addon:OnInitialize()
 	DataStore:SetCharacterBasedMethod("GetNumExpiredMails")
 	DataStore:SetCharacterBasedMethod("SaveMailToCache")
 	DataStore:SetCharacterBasedMethod("SaveMailAttachmentToCache")
+	DataStore:SetCharacterBasedMethod("ClearMailboxEntries")
 	
 	addon:RegisterComm(commPrefix, DataStore:GetGuildCommHandler())
 end

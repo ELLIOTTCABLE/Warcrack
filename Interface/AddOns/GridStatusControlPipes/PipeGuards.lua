@@ -217,7 +217,54 @@ function PipeGuard:GetName()
 end
 
 
+------------------------------------
+--         RoleGuard         --
+------------------------------------
 
+local RoleGuard = OO.NewClass(PipeGuard)
+PipeGuard:RegisterGuardType("Role guard", RoleGuard)
+
+function RoleGuard.prototype:init(pipe, id, db, options)
+    RoleGuard.super.prototype.init(self, pipe, id, db, options)
+    
+    AceEvent:Embed(self)
+
+    local roles = {"TANK", "HEALER", "DAMAGER", "NONE"}
+
+    self.db.pipeRole = self.db.pipeRole or {}
+
+    for i, role in ipairs(roles) do
+        self.options.args[role] = {
+            type = "toggle",
+            name = L[role],
+            desc = L["Opens pipe for this role."],
+            get = function() return self.db.pipeRole[role] end,
+            set = function(_, v) self.db.pipeRole[role] = v; self.pipe:UpdateAll() end,
+        }
+    end
+
+    self:RegisterEvent("PLAYER_ROLES_ASSIGNED")    
+end
+
+function RoleGuard.prototype:IsOpen(guid, color, text, value, maxValue, texture, start, duration, stack, ...)
+    local id = GridRoster:GetUnitidByGUID(guid)
+    if not id then return true end
+
+    local role = UnitGroupRolesAssigned(id)
+    if not role then 
+        role = "NONE" 
+    end
+
+    return self.db.pipeRole[role]
+end
+
+function RoleGuard.prototype:PLAYER_ROLES_ASSIGNED()
+    self.pipe:UpdateAll()
+end
+
+function RoleGuard:GetName()
+    return "Role guard"
+end
 
 ------------------------------------
 --         PercThresholdGuard         --
@@ -454,6 +501,48 @@ function ClassGuard:GetName()
     return "Class guard"
 end
 
+------------------------------------
+--         PlayerGuard            --
+------------------------------------
+
+local PlayerGuard = OO.NewClass(PipeGuard)
+PipeGuard:RegisterGuardType("Player guard", PlayerGuard)
+
+local playerGUID = UnitGUID("player")
+
+function PlayerGuard.prototype:init(pipe, id, db, options)
+    PlayerGuard.super.prototype.init(self, pipe, id, db, options)
+
+    self.db.PlayerOnly = self.db.PlayerOnly or true
+    self.options.args = {
+        ["mode"] = {
+            type = "toggle",
+            name = L["Player only piping"],
+            desc = L["If enabled, the guard is open only for the player. Otherwise the guard is open for all units except the player."],
+            get = function() return self.db.PlayerOnly end,
+            set = function(_, v) self.db.PlayerOnly = v; self.pipe:UpdateAll() end,
+        },
+    }
+end
+
+function PlayerGuard.prototype:IsOpen(guid, ...)
+    --print("is open "..tostring(guid).." vs player: "..tostring(self.PlayerGUID))
+    assert(guid)
+    return self.db.PlayerOnly == (playerGUID == guid)
+    --[[
+	if (not guid) then
+		return true
+	elseif (self.db.PlayerOnly) then
+		return self.PlayerGUID == guid
+	else
+		return self.PlayerGUID ~= guid
+	end]]
+end
+
+
+function PlayerGuard:GetName()
+    return "Player guard"
+end
 
 ------------------------------------
 --           Aura Guard           --

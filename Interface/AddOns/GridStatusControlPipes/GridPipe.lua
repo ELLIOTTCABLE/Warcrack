@@ -257,9 +257,9 @@ end
 
 function GridPipe.prototype:OnClearStatus(guid)
     self:ClearCache(guid)
-    if self:IsOpen() then
+    --if self:IsOpen() then
         self:ClearStatus(guid)
-    end
+    --end
 end
 
 function GridPipe:Init(db, options)

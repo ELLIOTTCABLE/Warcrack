@@ -231,21 +231,21 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[33878] = {
-						{
+					[18197] = {
+						[2] = {
 							["normal"] = {
-								["target"] = "Lord Godfrey",
+								["target"] = "Druid of the Fang",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 21,
-								["amount"] = 95,
+								["targetLevel"] = 19,
+								["amount"] = 8,
 							},
 							["crit"] = {
-								["target"] = "Dread Scryer",
+								["target"] = "Deviate Viper",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 20,
-								["amount"] = 194,
+								["targetLevel"] = 19,
+								["amount"] = 11,
 							},
-						}, -- [1]
+						},
 					},
 					[23922] = {
 						{
@@ -295,6 +295,16 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
+					[22568] = {
+						{
+							["normal"] = {
+								["target"] = "Forsaken Herbalist",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 20,
+								["amount"] = 166,
+							},
+						}, -- [1]
+					},
 					[94009] = {
 						[2] = {
 							["normal"] = {
@@ -310,16 +320,6 @@ CritlinePerCharDB = {
 								["amount"] = 52,
 							},
 						},
-					},
-					[22568] = {
-						{
-							["normal"] = {
-								["target"] = "Forsaken Herbalist",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 20,
-								["amount"] = 166,
-							},
-						}, -- [1]
 					},
 					[88161] = {
 						{
@@ -353,21 +353,21 @@ CritlinePerCharDB = {
 							},
 						},
 					},
-					[18197] = {
-						[2] = {
+					[33878] = {
+						{
 							["normal"] = {
-								["target"] = "Druid of the Fang",
+								["target"] = "Lord Godfrey",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 19,
-								["amount"] = 8,
+								["targetLevel"] = 21,
+								["amount"] = 95,
 							},
 							["crit"] = {
-								["target"] = "Deviate Viper",
+								["target"] = "Dread Scryer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 19,
-								["amount"] = 11,
+								["targetLevel"] = 20,
+								["amount"] = 194,
 							},
-						},
+						}, -- [1]
 					},
 				},
 				["heal"] = {

@@ -12,14 +12,17 @@ DataStore_QuestsDB = {
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
+		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -66,8 +69,8 @@ DataStore_QuestsDB = {
 					[806] = 26,
 					[808] = 256,
 					[810] = 272384,
-					[811] = 8,
 					[794] = 65601,
+					[811] = 8,
 				},
 				["QuestLinks"] = {
 					nil, -- [1]
@@ -115,6 +118,9 @@ DataStore_QuestsDB = {
 			["Default.Smolderthorn.Othercollie"] = {
 				["lastUpdate"] = 1308332289,
 			},
+			["Default.Smolderthorn.Collierape"] = {
+				["lastUpdate"] = 1341547297,
+			},
 			["Default.The Underbog.Fraycollie"] = {
 				["QuestLinks"] = {
 					nil, -- [1]
@@ -133,11 +139,11 @@ DataStore_QuestsDB = {
 					[20] = "|cffffff00|Hquest:12981:80|h[Hot and Cold]|h|r",
 					[17] = "|cffffff00|Hquest:25471:81|h[Across the Great Divide]|h|r",
 					[15] = "|cffffff00|Hquest:28805:80|h[The Eye of the Storm]|h|r",
-					[24] = "|cffffff00|Hquest:13050:80|h[Veranus]|h|r",
+					[21] = "|cffffff00|Hquest:12975:80|h[In Memoriam]|h|r",
 					[22] = "|cffffff00|Hquest:13011:80|h[Jormuttar is Soo Fat...]|h|r",
 					[19] = "|cffffff00|Hquest:12985:80|h[Forging a Head]|h|r",
 					[23] = "|cffffff00|Hquest:13001:80|h[Raising Hodir's Spear]|h|r",
-					[21] = "|cffffff00|Hquest:12975:80|h[In Memoriam]|h|r",
+					[24] = "|cffffff00|Hquest:13050:80|h[Veranus]|h|r",
 				},
 				["lastUpdate"] = 1307756258,
 				["Quests"] = {
@@ -217,10 +223,10 @@ DataStore_QuestsDB = {
 				},
 				["lastUpdate"] = 1308566353,
 				["Rewards"] = {
-					[7] = "r|22778|1|1",
-					[2] = "c|23400|1|1,c|23401|1|1,c|28160|1|0",
 					[9] = "c|23406|1|0,c|23407|1|1,c|23408|1|0",
+					[2] = "c|23400|1|1,c|23401|1|1,c|28160|1|0",
 					[4] = "r|22779|1|1",
+					[7] = "r|22778|1|1",
 				},
 				["Quests"] = {
 					"0|Ghostlands", -- [1]
@@ -264,120 +270,10 @@ DataStore_QuestsDB = {
 					[450] = 4161028099,
 					[765] = 1048576,
 					[453] = 6,
-					[769] = 196608,
 					[451] = 69754,
+					[769] = 196608,
 				},
 				["lastUpdate"] = 1315466890,
-			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["History"] = {
-					[833] = 8,
-					[818] = 28,
-					[803] = 16,
-					[867] = 134217728,
-					[806] = 1,
-					[822] = 8192,
-					[869] = 16384,
-					[10] = 201326592,
-					[808] = 65536,
-					[824] = 268435456,
-					[840] = 4231360,
-					[825] = 4096,
-					[811] = 135168,
-					[836] = 4096,
-					[874] = 1,
-					[843] = 268435456,
-					[813] = 8192,
-					[13] = 268435456,
-					[834] = 2048,
-					[823] = 536887296,
-					[873] = 131072,
-					[14] = 131072,
-					[816] = 4194304,
-					[832] = 67108864,
-					[817] = 64,
-					[837] = 2048,
-				},
-				["QuestLinks"] = {
-					nil, -- [1]
-					"|cffffff00|Hquest:26942:29|h[The G-Team]|h|r", -- [2]
-					nil, -- [3]
-					"|cffff8040|Hquest:26993:33|h[Compendium of the Fallen]|h|r", -- [4]
-					"|cffff8040|Hquest:26973:33|h[The Only True Path]|h|r", -- [5]
-				},
-				["lastUpdate"] = 1308956540,
-				["Quests"] = {
-					"0|Gnomeregan", -- [1]
-					"1|Dungeon|0|10000|1", -- [2]
-					"0|Scarlet Monastery", -- [3]
-					"1|Dungeon|0|13300|0", -- [4]
-					"1|Dungeon|0|13300|1", -- [5]
-				},
-			},
-			["Default.Hyjal.Elliottcable"] = {
-				["History"] = {
-					[440] = 148897792,
-					[835] = 16777216,
-					[442] = 67108864,
-					[766] = 12583168,
-					[768] = 8388608,
-					[797] = 2,
-					[438] = 134217728,
-					[886] = 536870912,
-					[767] = 256,
-				},
-				["QuestLinks"] = {
-					[2] = "|cffffff00|Hquest:14109:3|h[The New You]|h|r",
-				},
-				["lastUpdate"] = 1315453649,
-				["Quests"] = {
-					"0|Kezan", -- [1]
-					"1||0|50|0", -- [2]
-				},
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["History"] = {
-					[440] = 1073741824,
-					[448] = 197121,
-					[772] = 982,
-					[441] = 542720,
-					[835] = 262144,
-					[449] = 3221231617,
-					[902] = 262144,
-					[770] = 1049344,
-					[764] = 4194304,
-					[450] = 4161028099,
-					[869] = 16384,
-					[873] = 8192,
-					[443] = 33792,
-					[451] = 69714,
-					[840] = 54525952,
-					[825] = 131072,
-					[444] = 268435456,
-					[452] = 2147483648,
-					[780] = 4,
-					[765] = 17825792,
-					[445] = 9296,
-					[453] = 6,
-					[779] = 16777664,
-					[891] = 4096,
-					[892] = 32,
-					[423] = 59195392,
-					[766] = 2097160,
-					[769] = 67305476,
-					[447] = 2097408,
-					[424] = 302252032,
-					[817] = 131072,
-					[771] = 65,
-				},
-				["QuestLinks"] = {
-					[2] = "|cffffff00|Hquest:27920:19|h[Armored to the Teeth]|h|r",
-				},
-				["lastUpdate"] = 1308959680,
-				["Quests"] = {
-					"0|Shadowfang Keep", -- [1]
-					"1|Dungeon|0|4000|0", -- [2]
-				},
 			},
 			["Default.Nordrassil.Fraycollie"] = {
 				["History"] = {
@@ -397,12 +293,116 @@ DataStore_QuestsDB = {
 					[860] = 545259521,
 					[861] = 536870912,
 					[893] = 131072,
-					[892] = 2097152,
+					[880] = 131200,
 					[891] = 4194304,
 					[879] = 66048,
-					[880] = 131200,
+					[892] = 2097152,
 				},
-				["lastUpdate"] = 1315462458,
+				["lastUpdate"] = 1341538846,
+			},
+			["Default.Hyjal.Elliottcable"] = {
+				["History"] = {
+					[440] = 148897792,
+					[835] = 16777216,
+					[442] = 67108864,
+					[766] = 12583168,
+					[768] = 8388608,
+					[797] = 2,
+					[438] = 134217728,
+					[767] = 256,
+					[886] = 536870912,
+				},
+				["QuestLinks"] = {
+					[2] = "|cffffff00|Hquest:14109:3|h[The New You]|h|r",
+				},
+				["lastUpdate"] = 1315453649,
+				["Quests"] = {
+					"0|Kezan", -- [1]
+					"1||0|50|0", -- [2]
+				},
+			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["History"] = {
+					[833] = 8,
+					[818] = 28,
+					[803] = 16,
+					[867] = 134217728,
+					[806] = 1,
+					[822] = 8192,
+					[869] = 16384,
+					[10] = 201326592,
+					[808] = 65536,
+					[824] = 268435456,
+					[840] = 4231360,
+					[825] = 4096,
+					[811] = 135168,
+					[837] = 2048,
+					[874] = 1,
+					[843] = 268435456,
+					[813] = 8192,
+					[13] = 268435456,
+					[834] = 2048,
+					[823] = 536887296,
+					[873] = 131072,
+					[14] = 131072,
+					[816] = 4194304,
+					[832] = 67108864,
+					[817] = 64,
+					[836] = 4096,
+				},
+				["QuestLinks"] = {
+					[5] = "|cffff8040|Hquest:26973:33|h[The Only True Path]|h|r",
+					[2] = "|cffffff00|Hquest:26942:29|h[The G-Team]|h|r",
+					[4] = "|cffff8040|Hquest:26993:33|h[Compendium of the Fallen]|h|r",
+				},
+				["lastUpdate"] = 1341539607,
+				["Quests"] = {
+					"0|Gnomeregan", -- [1]
+					"1|Dungeon|0|10000|1", -- [2]
+					"0|Scarlet Monastery", -- [3]
+					"1|Dungeon|0|13300|0", -- [4]
+					"1|Dungeon|0|13300|1", -- [5]
+				},
+			},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["lastUpdate"] = 1341440539,
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["History"] = {
+					[440] = 1073741824,
+					[448] = 197121,
+					[772] = 982,
+					[771] = 65,
+					[835] = 262144,
+					[449] = 3221231617,
+					[840] = 54525952,
+					[424] = 302252032,
+					[452] = 2147483648,
+					[450] = 4161028099,
+					[869] = 16384,
+					[780] = 4,
+					[443] = 33792,
+					[451] = 69714,
+					[902] = 262144,
+					[825] = 131072,
+					[444] = 268435456,
+					[764] = 4194304,
+					[873] = 8192,
+					[765] = 17825792,
+					[445] = 9296,
+					[453] = 6,
+					[766] = 2097160,
+					[891] = 4096,
+					[423] = 59195392,
+					[892] = 32,
+					[779] = 16777664,
+					[769] = 67305476,
+					[447] = 2097408,
+					[770] = 1049344,
+					[817] = 131072,
+					[441] = 542720,
+				},
+				["lastUpdate"] = 1341539952,
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["History"] = {
@@ -411,15 +411,15 @@ DataStore_QuestsDB = {
 					[895] = 8,
 					[899] = 16777270,
 					[901] = 67158016,
-					[870] = 4026531840,
+					[858] = 128,
 					[787] = 4096,
 					[789] = 126,
-					[819] = 131104,
+					[864] = 126976,
 					[793] = 114688,
-					[858] = 128,
+					[795] = 2049,
 					[860] = 545259521,
 					[799] = 272632342,
-					[864] = 126976,
+					[801] = 605552640,
 					[866] = 470286336,
 					[805] = 196640785,
 					[807] = 1048577,
@@ -430,50 +430,71 @@ DataStore_QuestsDB = {
 					[817] = 2952790017,
 					[882] = 262976,
 					[884] = 3145728,
-					[883] = 67108864,
-					[412] = 128,
+					[414] = 1024,
+					[879] = 66048,
 					[764] = 65536,
 					[892] = 2097152,
-					[816] = 2222981120,
+					[412] = 128,
 					[880] = 131264,
 					[453] = 262144,
 					[900] = 2048,
-					[875] = 33554432,
-					[810] = 4038591925,
+					[812] = 2181038080,
+					[873] = 786432,
 					[850] = 524544,
-					[798] = 2147483649,
-					[863] = 264192,
+					[820] = 2048,
+					[800] = 569344,
 					[849] = 32,
 					[788] = 2147483649,
-					[865] = 2097152,
+					[802] = 235405376,
 					[792] = 4194304,
 					[794] = 20480,
 					[796] = 2147549188,
 					[861] = 538968064,
-					[800] = 569344,
-					[802] = 235405376,
+					[863] = 264192,
+					[865] = 2097152,
 					[867] = 67112976,
-					[820] = 2048,
+					[798] = 2147483649,
 					[408] = 3244032,
-					[873] = 786432,
-					[812] = 2181038080,
+					[810] = 4038591925,
+					[875] = 33554432,
 					[814] = 46,
-					[879] = 66048,
+					[816] = 2222981120,
 					[413] = 8,
-					[414] = 1024,
-					[801] = 605552640,
-					[795] = 2049,
+					[883] = 67108864,
+					[819] = 131104,
+					[870] = 4026531840,
 				},
 				["QuestLinks"] = {
-					[2] = "|cffffff00|Hquest:27899:83|h[That Gleam in his Eye]|h|r",
-					[3] = "|cffffff00|Hquest:28561:84|h[Nahom Must Hold]|h|r",
+					nil, -- [1]
+					"|cffffff00|Hquest:27899:83|h[That Gleam in his Eye]|h|r", -- [2]
+					"|cffffff00|Hquest:27755:83|h[The Curse of the Tombs]|h|r", -- [3]
+					"|cffffff00|Hquest:28623:84|h[The Push Westward]|h|r", -- [4]
 				},
-				["lastUpdate"] = 1308881584,
+				["lastUpdate"] = 1341539826,
 				["Quests"] = {
 					"0|Uldum", -- [1]
 					"1||0|0|0", -- [2]
-					"1||0|90000|0", -- [3]
+					"1||0|86000|0", -- [3]
+					"1||0|45000|0", -- [4]
 				},
+			},
+			["Default.Smolderthorn.Wattlecollie"] = {
+				["History"] = {
+					[443] = 1024,
+					[444] = 268435456,
+					[445] = 1024,
+					[770] = 256,
+					[772] = 516,
+					[779] = 256,
+					[449] = 2147489793,
+					[450] = 134496258,
+					[451] = 69634,
+					[766] = 2097152,
+					[769] = 196608,
+					[765] = 1048576,
+					[780] = 4,
+				},
+				["lastUpdate"] = 1341545773,
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["QuestLinks"] = {

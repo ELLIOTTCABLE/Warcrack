@@ -2,21 +2,24 @@
 BFactions_DB = {
 	["profileKeys"] = {
 		["Warcollie - Smolderthorn"] = "Default",
-		["Warmongrel - Ysondre"] = "Default",
-		["Fraycollie - The Underbog"] = "Default",
 		["Fraycollie - Nordrassil"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
-		["Othercollie - Smolderthorn"] = "Default",
-		["Combatcollie - The Underbog"] = "Default",
 		["Battlecollie - Ysondre"] = "Default",
-		["Hoarcollie - Smolderthorn"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Armscollie - Akama"] = "Default",
 		["Melancollie - Smolderthorn"] = "Default",
 		["Summoneer - Ysondre"] = "Default",
-		["Warcollie - Darkspear"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
+		["Othercollie - Smolderthorn"] = "Default",
+		["Fraycollie - The Underbog"] = "Default",
+		["Warmongrel - Ysondre"] = "Default",
+		["Combatcollie - The Underbog"] = "Default",
+		["Wattlecollie - Smolderthorn"] = "Default",
 		["Github - Smolderthorn"] = "Default",
+		["Collierape - Smolderthorn"] = "Default",
+		["Armscollie - Akama"] = "Default",
+		["Hoarcollie - Smolderthorn"] = "Default",
+		["Snuffleupaga - Smolderthorn"] = "Default",
+		["Warcollie - Darkspear"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
 	},
 	["factionrealm"] = {
 		["Alliance - Darkspear"] = {
@@ -194,6 +197,34 @@ BFactions_DB = {
 					},
 				},
 			},
+			["Othercollie"] = {
+				["options"] = {
+					["display"] = {
+						["showPercentage"] = false,
+						["debug"] = false,
+						["showCollapsedHeaders"] = true,
+						["showRawValues"] = true,
+						["hideExalted"] = false,
+						["tipscale"] = 1,
+						["minimap_icon"] = {
+							["hide"] = true,
+						},
+						["autoHideDelay"] = 0.1,
+						["showSessionGains"] = false,
+						["dbVersion"] = "1.5",
+						["showHintLines"] = true,
+						["showRemainingRep"] = false,
+					},
+					["text"] = {
+						["showPercentage"] = false,
+						["showText"] = false,
+						["showRawValues"] = true,
+						["watchedFaction"] = "",
+						["showSessionGains"] = false,
+						["showRemainingRep"] = false,
+					},
+				},
+			},
 			["Battlecollie"] = {
 				["options"] = {
 					["display"] = {
@@ -219,6 +250,34 @@ BFactions_DB = {
 						["watchedFaction"] = "LEAFEA",
 						["showSessionGains"] = true,
 						["showRemainingRep"] = true,
+					},
+				},
+			},
+			["Warcollie"] = {
+				["options"] = {
+					["display"] = {
+						["showPercentage"] = false,
+						["debug"] = false,
+						["showCollapsedHeaders"] = true,
+						["showRawValues"] = true,
+						["hideExalted"] = false,
+						["tipscale"] = 1,
+						["minimap_icon"] = {
+							["hide"] = true,
+						},
+						["autoHideDelay"] = 0.1,
+						["showSessionGains"] = false,
+						["dbVersion"] = "1.5",
+						["showHintLines"] = true,
+						["showRemainingRep"] = false,
+					},
+					["text"] = {
+						["showPercentage"] = false,
+						["showText"] = false,
+						["showRawValues"] = true,
+						["watchedFaction"] = "",
+						["showSessionGains"] = false,
+						["showRemainingRep"] = false,
 					},
 				},
 			},
@@ -250,31 +309,31 @@ BFactions_DB = {
 					},
 				},
 			},
-			["Othercollie"] = {
+			["Wattlecollie"] = {
 				["options"] = {
 					["display"] = {
-						["showPercentage"] = false,
+						["showPercentage"] = true,
 						["debug"] = false,
 						["showCollapsedHeaders"] = true,
 						["showRawValues"] = true,
-						["hideExalted"] = false,
+						["hideExalted"] = true,
 						["tipscale"] = 1,
 						["minimap_icon"] = {
 							["hide"] = true,
 						},
 						["autoHideDelay"] = 0.1,
-						["showSessionGains"] = false,
+						["showSessionGains"] = true,
 						["dbVersion"] = "1.5",
 						["showHintLines"] = true,
-						["showRemainingRep"] = false,
+						["showRemainingRep"] = true,
 					},
 					["text"] = {
-						["showPercentage"] = false,
-						["showText"] = false,
-						["showRawValues"] = true,
-						["watchedFaction"] = "",
-						["showSessionGains"] = false,
-						["showRemainingRep"] = false,
+						["showPercentage"] = true,
+						["showText"] = true,
+						["showRawValues"] = false,
+						["watchedFaction"] = "Stormwind",
+						["showSessionGains"] = true,
+						["showRemainingRep"] = true,
 					},
 				},
 			},
@@ -306,7 +365,7 @@ BFactions_DB = {
 					},
 				},
 			},
-			["Warcollie"] = {
+			["Collierape"] = {
 				["options"] = {
 					["display"] = {
 						["showPercentage"] = false,
@@ -396,7 +455,7 @@ BFactions_DB = {
 			},
 		},
 		["Horde - Smolderthorn"] = {
-			["Summoneer"] = {
+			["Snuffleupaga"] = {
 				["options"] = {
 					["display"] = {
 						["showPercentage"] = false,
@@ -425,6 +484,34 @@ BFactions_DB = {
 				},
 			},
 			["Fraycollie"] = {
+				["options"] = {
+					["display"] = {
+						["showPercentage"] = false,
+						["debug"] = false,
+						["showCollapsedHeaders"] = true,
+						["showRawValues"] = true,
+						["hideExalted"] = false,
+						["tipscale"] = 1,
+						["minimap_icon"] = {
+							["hide"] = true,
+						},
+						["autoHideDelay"] = 0.1,
+						["showSessionGains"] = false,
+						["dbVersion"] = "1.5",
+						["showHintLines"] = true,
+						["showRemainingRep"] = false,
+					},
+					["text"] = {
+						["showPercentage"] = false,
+						["showText"] = false,
+						["showRawValues"] = true,
+						["watchedFaction"] = "",
+						["showSessionGains"] = false,
+						["showRemainingRep"] = false,
+					},
+				},
+			},
+			["Summoneer"] = {
 				["options"] = {
 					["display"] = {
 						["showPercentage"] = false,
@@ -484,34 +571,6 @@ BFactions_DB = {
 			},
 		},
 		["Horde - Ysondre"] = {
-			["Warmongrel"] = {
-				["options"] = {
-					["display"] = {
-						["showPercentage"] = false,
-						["debug"] = false,
-						["showCollapsedHeaders"] = true,
-						["showRawValues"] = true,
-						["hideExalted"] = false,
-						["tipscale"] = 1,
-						["minimap_icon"] = {
-							["hide"] = true,
-						},
-						["autoHideDelay"] = 0.1,
-						["showSessionGains"] = false,
-						["dbVersion"] = "1.5",
-						["showHintLines"] = true,
-						["showRemainingRep"] = false,
-					},
-					["text"] = {
-						["showPercentage"] = false,
-						["showText"] = false,
-						["showRawValues"] = true,
-						["watchedFaction"] = "",
-						["showSessionGains"] = false,
-						["showRemainingRep"] = false,
-					},
-				},
-			},
 			["Battlecollie"] = {
 				["options"] = {
 					["display"] = {
@@ -537,6 +596,34 @@ BFactions_DB = {
 						["watchedFaction"] = "LEAFEA",
 						["showSessionGains"] = true,
 						["showRemainingRep"] = true,
+					},
+				},
+			},
+			["Warmongrel"] = {
+				["options"] = {
+					["display"] = {
+						["showPercentage"] = false,
+						["debug"] = false,
+						["showCollapsedHeaders"] = true,
+						["showRawValues"] = true,
+						["hideExalted"] = false,
+						["tipscale"] = 1,
+						["minimap_icon"] = {
+							["hide"] = true,
+						},
+						["autoHideDelay"] = 0.1,
+						["showSessionGains"] = false,
+						["dbVersion"] = "1.5",
+						["showHintLines"] = true,
+						["showRemainingRep"] = false,
+					},
+					["text"] = {
+						["showPercentage"] = false,
+						["showText"] = false,
+						["showRawValues"] = true,
+						["watchedFaction"] = "",
+						["showSessionGains"] = false,
+						["showRemainingRep"] = false,
 					},
 				},
 			},

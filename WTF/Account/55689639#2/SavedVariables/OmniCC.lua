@@ -1,10 +1,10 @@
 
 OmniCC4Config = {
-	["groups"] = {
-	},
 	["groupSettings"] = {
 		["base"] = {
 		},
 	},
-	["version"] = "4.2.muffins1",
+	["version"] = "4.3.0",
+	["groups"] = {
+	},
 }

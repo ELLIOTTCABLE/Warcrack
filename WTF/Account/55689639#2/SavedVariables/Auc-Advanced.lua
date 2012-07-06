@@ -76,8 +76,8 @@ AucAdvancedConfig = {
 					"TOPLEFT", -- [1]
 					nil, -- [2]
 					"TOPLEFT", -- [3]
-					6.898265361785889, -- [4]
-					-93.65528869628906, -- [5]
+					6.898260593414307, -- [4]
+					-90.65534973144531, -- [5]
 				},
 			},
 			["scanbutton"] = {
@@ -121,8 +121,8 @@ AucAdvancedData = {
 			},
 		},
 		["Global"] = {
-			["configator.left"] = 616.6666259765625,
-			["configator.top"] = 849.9998168945312,
+			["configator.left"] = 539.9999389648438,
+			["configator.top"] = 849.9998779296875,
 		},
 		["SavedSearches"] = {
 		},

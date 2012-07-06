@@ -1,0 +1,4 @@
+
+GreedBeaconDB = {
+	["frame"] = "ChatFrame1",
+}

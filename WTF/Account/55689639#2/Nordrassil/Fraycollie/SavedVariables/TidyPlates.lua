@@ -1,8 +1,8 @@
 
 TidyPlatesOptions = {
-	["WelcomeShown"] = true,
-	["primary"] = "Neon/|cFFFF4400Damage",
 	["LDB"] = {
 	},
+	["primary"] = "Neon/|cFFFF4400Damage",
+	["WelcomeShown"] = true,
 	["secondary"] = "Neon/|cFF3782D1Tank",
 }

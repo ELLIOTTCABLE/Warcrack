@@ -12,14 +12,17 @@ DataStore_InventoryDB = {
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
+		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -40,9 +43,9 @@ DataStore_InventoryDB = {
 					[7] = 53379,
 					[8] = 53362,
 					[10] = 53360,
-					[9] = 53373,
 					[16] = 2361,
 					[5] = 53396,
+					[9] = 53373,
 				},
 				["averageItemLvl"] = 3.285714285714286,
 				["lastUpdate"] = 1307756094,
@@ -100,12 +103,22 @@ DataStore_InventoryDB = {
 					[7] = 48,
 					[8] = 47,
 					[18] = 28979,
-					[5] = 58234,
-					[16] = 25,
 					[17] = 50055,
+					[16] = 25,
+					[5] = 58234,
 				},
 				["averageItemLvl"] = 1,
 				["lastUpdate"] = 1308332289,
+			},
+			["Default.Smolderthorn.Collierape"] = {
+				["Inventory"] = {
+					[5] = 6123,
+					[16] = 3661,
+					[7] = 6124,
+				},
+				["averageItemLvl"] = 0.1875,
+				["overallAIL"] = 0.1875,
+				["lastUpdate"] = 1341547297,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["Inventory"] = {
@@ -204,9 +217,9 @@ DataStore_InventoryDB = {
 					[7] = 44,
 					[15] = 11475,
 					[10] = 57255,
-					[8] = 2691,
 					[5] = 57258,
 					[16] = 5579,
+					[8] = 2691,
 				},
 				["averageItemLvl"] = 3,
 				["lastUpdate"] = 1308701057,
@@ -229,36 +242,74 @@ DataStore_InventoryDB = {
 				["averageItemLvl"] = 8,
 				["lastUpdate"] = 1315466845,
 			},
-			["Default.Smolderthorn.Melancollie"] = {
+			["Default.Nordrassil.Fraycollie"] = {
 				["Inventory"] = {
-					65914, -- [1]
-					"|cff0070dd|Hitem:51996:0:0:0:0:0:-72:1546387467:30:0|h[Tumultuous Necklace of the Battle]|h|r", -- [2]
-					7712, -- [3]
-					[7] = "|cff1eff00|Hitem:9797:0:0:0:0:0:770:-1988187264:30:0|h[Ivycloth Pants of the Owl]|h|r",
-					[15] = "|cff0070dd|Hitem:51994:0:0:0:0:0:-73:380436488:30:0|h[Tumultuous Cloak of the Elder]|h|r",
-					[8] = 9454,
-					[16] = 65941,
-					[9] = "|cff1eff00|Hitem:14166:0:0:0:0:0:757:1684076416:30:0|h[Buccaneer's Bracers of the Owl]|h|r",
-					[5] = 65911,
-					[10] = "|cff0070dd|Hitem:51973:0:0:0:0:0:-83:1848639503:30:0|h[Enumerated Handwraps of the Sun]|h|r",
-					[11] = 60895,
-					[6] = 5967,
-					[19] = 5976,
-					[18] = 65959,
+					"|cffffffff|Hitem:55031:0:4048:3984:0:0:0:1009197120:85:147|h[]|h|r", -- [1]
+					"|cffffffff|Hitem:52323:0:4005:0:0:0:0:6115917:85:161|h[]|h|r", -- [2]
+					65789, -- [3]
+					nil, -- [4]
+					"|cffffffff|Hitem:55058:4070:4005:0:0:0:0:305978112:85:161|h[]|h|r", -- [5]
+					"|cffffffff|Hitem:55059:0:4005:0:0:0:0:1132042752:85:121|h[]|h|r", -- [6]
+					"|cffffffff|Hitem:58102:4127:4026:4005:0:0:0:0:85:140|h[]|h|r", -- [7]
+					"|cffffffff|Hitem:58197:0:4005:0:0:0:0:0:85:161|h[]|h|r", -- [8]
+					65865, -- [9]
+					65773, -- [10]
+					"|cffffffff|Hitem:52320:0:3984:0:0:0:0:1219362944:85:121|h[]|h|r", -- [11]
+					"|cffffffff|Hitem:69852:0:4005:0:0:0:0:439627616:85:0|h[]|h|r", -- [12]
+					55868, -- [13]
+					55845, -- [14]
+					"|cffffffff|Hitem:56549:0:4005:0:0:0:0:580101824:85:121|h[]|h|r", -- [15]
+					55043, -- [16]
+					"|cffffffff|Hitem:55069:0:4005:0:0:0:0:49130028:85:135|h[]|h|r", -- [17]
+					"|cffffffff|Hitem:59367:4175:4005:0:0:0:0:1123429760:85:154|h[]|h|r", -- [18]
+					69209, -- [19]
 				},
-				["averageItemLvl"] = 26.84615384615385,
-				["lastUpdate"] = 1308956542,
+				["averageItemLvl"] = 338.7647094726562,
+				["overallAIL"] = 340.4117736816406,
+				["lastUpdate"] = 1341538846,
 			},
 			["Default.Hyjal.Elliottcable"] = {
 				["Inventory"] = {
 					[7] = 54300,
 					[8] = 52552,
-					[17] = 2362,
 					[5] = 54293,
 					[16] = 36,
+					[17] = 2362,
 				},
 				["averageItemLvl"] = 1.6,
 				["lastUpdate"] = 1315453649,
+			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["Inventory"] = {
+					65914, -- [1]
+					"|cffffffff|Hitem:51996:0:0:0:0:0:-72:1546387467:30:0|h[]|h|r", -- [2]
+					7712, -- [3]
+					[7] = "|cffffffff|Hitem:9797:0:0:0:0:0:770:-1988187264:30:0|h[]|h|r",
+					[15] = "|cffffffff|Hitem:51994:0:0:0:0:0:-73:380436488:30:0|h[]|h|r",
+					[8] = 9454,
+					[16] = 65941,
+					[9] = "|cffffffff|Hitem:14166:0:0:0:0:0:757:1684076416:30:0|h[]|h|r",
+					[18] = 65959,
+					[10] = "|cffffffff|Hitem:51973:0:0:0:0:0:-83:1848639503:30:0|h[]|h|r",
+					[11] = 60895,
+					[6] = 5967,
+					[5] = 65911,
+				},
+				["averageItemLvl"] = 21.8125,
+				["overallAIL"] = 25,
+				["lastUpdate"] = 1341539607,
+			},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["Inventory"] = {
+					[7] = 52,
+					[8] = 51,
+					[15] = 11847,
+					[16] = 35,
+					[5] = 6144,
+				},
+				["averageItemLvl"] = 0.5625,
+				["overallAIL"] = 1.125,
+				["lastUpdate"] = 1341440539,
 			},
 			["Default.Smolderthorn.Hoarcollie"] = {
 				["Inventory"] = {
@@ -282,33 +333,9 @@ DataStore_InventoryDB = {
 					55012, -- [18]
 					5976, -- [19]
 				},
-				["averageItemLvl"] = 13,
-				["lastUpdate"] = 1308959638,
-			},
-			["Default.Nordrassil.Fraycollie"] = {
-				["Inventory"] = {
-					"|cff1eff00|Hitem:55031:0:4048:3984:0:0:0:1009197120:85:147|h[Redsteel Helm]|h|r", -- [1]
-					"|cff0070dd|Hitem:52323:0:4005:0:0:0:0:6115917:85:161|h[Elementium Guardian]|h|r", -- [2]
-					65789, -- [3]
-					nil, -- [4]
-					"|cffa335ee|Hitem:55058:4070:4005:0:0:0:0:305978112:85:161|h[Hardened Elementium Hauberk]|h|r", -- [5]
-					"|cffa335ee|Hitem:55059:0:4005:0:0:0:0:1132042752:85:121|h[Hardened Elementium Girdle]|h|r", -- [6]
-					"|cff0070dd|Hitem:58102:4127:4026:4005:0:0:0:0:85:140|h[Greaves of Splendor]|h|r", -- [7]
-					"|cffa335ee|Hitem:58197:0:4005:0:0:0:0:0:85:161|h[Rock Furrow Boots]|h|r", -- [8]
-					65865, -- [9]
-					65773, -- [10]
-					"|cff0070dd|Hitem:52320:0:3984:0:0:0:0:1219362944:85:121|h[Elementium Moebius Band]|h|r", -- [11]
-					"|cff0070dd|Hitem:69852:0:4005:0:0:0:0:439627616:85:0|h[Punisher's Band]|h|r", -- [12]
-					55868, -- [13]
-					55845, -- [14]
-					"|cff0070dd|Hitem:56549:0:4005:0:0:0:0:580101824:85:121|h[Twilight Dragonscale Cloak]|h|r", -- [15]
-					55043, -- [16]
-					"|cffa335ee|Hitem:55069:0:4005:0:0:0:0:49130028:85:135|h[Elementium Earthguard]|h|r", -- [17]
-					"|cff0070dd|Hitem:59367:4175:4005:0:0:0:0:1123429760:85:154|h[Kickback 5000]|h|r", -- [18]
-					69209, -- [19]
-				},
-				["averageItemLvl"] = 338.7647058823529,
-				["lastUpdate"] = 1315462458,
+				["averageItemLvl"] = 8.411765098571777,
+				["overallAIL"] = 8.411765098571777,
+				["lastUpdate"] = 1341539951,
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["Inventory"] = {
@@ -318,7 +345,7 @@ DataStore_InventoryDB = {
 					nil, -- [4]
 					54475, -- [5]
 					65836, -- [6]
-					"|cff1eff00|Hitem:54483:4114:0:0:0:0:0:888022016:83:141|h[Spiritmend Leggings]|h|r", -- [7]
+					"|cffffffff|Hitem:54483:4114:0:0:0:0:0:888022016:83:141|h[]|h|r", -- [7]
 					54482, -- [8]
 					65839, -- [9]
 					54478, -- [10]
@@ -332,7 +359,19 @@ DataStore_InventoryDB = {
 					[19] = 69209,
 				},
 				["averageItemLvl"] = 315,
-				["lastUpdate"] = 1308881933,
+				["overallAIL"] = 315,
+				["lastUpdate"] = 1341539826,
+			},
+			["Default.Smolderthorn.Wattlecollie"] = {
+				["Inventory"] = {
+					[8] = 51,
+					[16] = 3661,
+					[7] = 52,
+					[5] = 6119,
+				},
+				["averageItemLvl"] = 0.25,
+				["overallAIL"] = 0.25,
+				["lastUpdate"] = 1341545773,
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["Inventory"] = {
@@ -347,26 +386,29 @@ DataStore_InventoryDB = {
 		["Guilds"] = {
 			["Default.Smolderthorn.LEAFEA"] = {
 				["Members"] = {
+					["Battlecollie"] = {
+						["averageItemLvl"] = 315,
+					},
 					["Fraycollie"] = {
 						["averageItemLvl"] = 319,
 					},
-					["Battlecollie"] = {
-						["averageItemLvl"] = 315,
+					["Zorlucky"] = {
+						["averageItemLvl"] = 2,
 					},
 					["Cathara"] = {
 						["averageItemLvl"] = 5,
 					},
 					["Melancollie"] = {
-						["averageItemLvl"] = 26,
+						["averageItemLvl"] = 21,
+					},
+					["Wattlecollie"] = {
+						["averageItemLvl"] = 5,
+					},
+					["Hoarcollie"] = {
+						["averageItemLvl"] = 8,
 					},
 					["Adlinor"] = {
 						["averageItemLvl"] = 24,
-					},
-					["Hoarcollie"] = {
-						["averageItemLvl"] = 13,
-					},
-					["Zorlucky"] = {
-						["averageItemLvl"] = 2,
 					},
 				},
 			},
@@ -423,14 +465,14 @@ DataStore_InventoryDB = {
 					["Stunmuffin"] = {
 						["averageItemLvl"] = 354,
 					},
-					["Asharu"] = {
-						["averageItemLvl"] = 7,
+					["Fizzbuzz"] = {
+						["averageItemLvl"] = 242,
 					},
 					["Jaenelle"] = {
 						["averageItemLvl"] = 260,
 					},
-					["Fizzbuzz"] = {
-						["averageItemLvl"] = 242,
+					["Asharu"] = {
+						["averageItemLvl"] = 7,
 					},
 					["Flitwick"] = {
 						["averageItemLvl"] = 73,
@@ -456,11 +498,11 @@ DataStore_InventoryDB = {
 			},
 			["Default.Ysondre.LEAFEA"] = {
 				["Members"] = {
-					["Battlecollie"] = {
-						["averageItemLvl"] = 134,
-					},
 					["Warmongrel"] = {
 						["averageItemLvl"] = 50,
+					},
+					["Battlecollie"] = {
+						["averageItemLvl"] = 134,
 					},
 					["Summoneer"] = {
 						["averageItemLvl"] = 18,

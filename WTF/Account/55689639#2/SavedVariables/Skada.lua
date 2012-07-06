@@ -12,14 +12,17 @@ SkadaDB = {
 		["Fraycollie - The Underbog"] = "Default",
 		["Warmongrel - Ysondre"] = "Default",
 		["Elliottcable - Hyjal"] = "Default",
+		["Wattlecollie - Smolderthorn"] = "Default",
 		["Github - Smolderthorn"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
+		["Collierape - Smolderthorn"] = "Default",
 		["Armscollie - Akama"] = "Default",
 		["Hoarcollie - Smolderthorn"] = "Default",
+		["Snuffleupaga - Smolderthorn"] = "Default",
 		["Warcollie - Darkspear"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -33,9 +36,6 @@ SkadaDB = {
 			["windows"] = {
 				{
 					["barheight"] = 16,
-					["reversegrowth"] = true,
-					["point"] = "LEFT",
-					["barfontsize"] = 12,
 					["background"] = {
 						["color"] = {
 							["a"] = 0.2200000286102295,
@@ -44,30 +44,34 @@ SkadaDB = {
 						["height"] = 119,
 						["texture"] = "Blizzard Dialog Background",
 					},
-					["bartexture"] = "Minimalist",
-					["barwidth"] = 325,
-					["y"] = -223.4659271240234,
-					["barfont"] = "Friz Quadrata TT",
+					["hidden"] = true,
+					["y"] = -142.4655456542969,
+					["x"] = 0,
 					["title"] = {
-						["font"] = "Friz Quadrata TT",
-						["borderthickness"] = 0,
 						["color"] = {
 							["a"] = 0.3600000143051147,
 						},
 						["menubutton"] = false,
+						["font"] = "Friz Quadrata TT",
+						["borderthickness"] = 0,
 						["texture"] = "Armory",
 					},
-					["baraltcolor"] = {
-						["b"] = 0.07450980392156863,
-						["g"] = 0,
-						["r"] = 0.7529411764705882,
-					},
 					["barcolor"] = {
-						["b"] = 0.4235294117647059,
-						["g"] = 0.4235294117647059,
 						["r"] = 0.4235294117647059,
+						["g"] = 0.4235294117647059,
+						["b"] = 0.4235294117647059,
 					},
-					["x"] = 34.17383575439453,
+					["barfont"] = "Friz Quadrata TT",
+					["bartexture"] = "Minimalist",
+					["barwidth"] = 325,
+					["reversegrowth"] = true,
+					["point"] = "LEFT",
+					["barfontsize"] = 12,
+					["baraltcolor"] = {
+						["r"] = 0.7529411764705882,
+						["g"] = 0,
+						["b"] = 0.07450980392156863,
+					},
 					["mode"] = "DPS",
 				}, -- [1]
 			},

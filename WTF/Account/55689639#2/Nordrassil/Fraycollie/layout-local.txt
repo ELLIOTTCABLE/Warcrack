@@ -9,9 +9,9 @@ H: 256
 Frame: ChannelPulloutTab
 FrameLevel: 1
 Anchor: RIGHT
-X: 799
+X: 845
 Y: 66
-W: 115
+W: 110
 H: 32
 Frame: SmartBuffOptionsFrame
 FrameLevel: 1

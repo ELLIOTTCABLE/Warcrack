@@ -6,28 +6,34 @@ HideBlizzardDB = {
 				["Fraycollie - Nordrassil"] = {
 					["party"] = true,
 				},
+				["Github - Smolderthorn"] = {
+					["party"] = true,
+				},
+				["Wattlecollie - Smolderthorn"] = {
+					["party"] = true,
+				},
 				["Fraycollie - Smolderthorn"] = {
 					["party"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Default"] = {
 					["party"] = true,
 				},
 				["Hoarcollie - Smolderthorn"] = {
-					["boss"] = true,
 					["party"] = true,
+					["boss"] = true,
 				},
-				["Battlecollie - Ysondre"] = {
-					["mirrorbar"] = false,
+				["Melancollie - Smolderthorn"] = {
 					["party"] = true,
 				},
 				["Warcollie - Darkspear"] = {
 					["party"] = true,
 				},
-				["Github - Smolderthorn"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["party"] = true,
 				},
-				["Melancollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
 					["party"] = true,
+					["mirrorbar"] = false,
 				},
 			},
 		},
@@ -36,25 +42,38 @@ HideBlizzardDB = {
 				["Fraycollie - Nordrassil"] = {
 					["playerunitframe"] = true,
 				},
+				["Github - Smolderthorn"] = {
+					["playerunitframe"] = true,
+				},
+				["Wattlecollie - Smolderthorn"] = {
+					["shardframe"] = true,
+					["totemframe"] = true,
+					["druidmanabar"] = true,
+					["runeframe"] = true,
+					["playerunitframe"] = true,
+					["eclipsebar"] = true,
+					["powerbar"] = true,
+					["playercastbar"] = true,
+				},
 				["Fraycollie - Smolderthorn"] = {
 					["playerunitframe"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Default"] = {
 					["playerunitframe"] = true,
 				},
 				["Hoarcollie - Smolderthorn"] = {
 					["playerunitframe"] = true,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Melancollie - Smolderthorn"] = {
 					["playerunitframe"] = true,
 				},
 				["Warcollie - Darkspear"] = {
 					["playerunitframe"] = true,
 				},
-				["Github - Smolderthorn"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["playerunitframe"] = true,
 				},
-				["Melancollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
 					["playerunitframe"] = true,
 				},
 			},
@@ -67,11 +86,18 @@ HideBlizzardDB = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
+				["Github - Smolderthorn"] = {
+					["targetunitframe"] = true,
+					["focusframe"] = true,
+				},
+				["Wattlecollie - Smolderthorn"] = {
+					["targetunitframe"] = true,
+				},
 				["Fraycollie - Smolderthorn"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Default"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
@@ -79,7 +105,7 @@ HideBlizzardDB = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Melancollie - Smolderthorn"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
@@ -87,11 +113,11 @@ HideBlizzardDB = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
-				["Github - Smolderthorn"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
-				["Melancollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
 					["targetunitframe"] = true,
 					["focusframe"] = true,
 				},
@@ -102,28 +128,36 @@ HideBlizzardDB = {
 				["Fraycollie - Nordrassil"] = {
 					["petunitframe"] = true,
 				},
+				["Github - Smolderthorn"] = {
+					["petunitframe"] = true,
+				},
+				["Wattlecollie - Smolderthorn"] = {
+					["petunitframe"] = true,
+					["petactionbar"] = false,
+					["petcastbar"] = false,
+				},
 				["Fraycollie - Smolderthorn"] = {
 					["petunitframe"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Default"] = {
 					["petunitframe"] = true,
 				},
 				["Hoarcollie - Smolderthorn"] = {
+					["petunitframe"] = true,
+				},
+				["Melancollie - Smolderthorn"] = {
+					["petunitframe"] = true,
+				},
+				["Warcollie - Darkspear"] = {
+					["petunitframe"] = true,
+				},
+				["Battlecollie - Smolderthorn"] = {
 					["petunitframe"] = true,
 				},
 				["Battlecollie - Ysondre"] = {
 					["petunitframe"] = true,
 					["petactionbar"] = true,
 					["petcastbar"] = false,
-				},
-				["Warcollie - Darkspear"] = {
-					["petunitframe"] = true,
-				},
-				["Github - Smolderthorn"] = {
-					["petunitframe"] = true,
-				},
-				["Melancollie - Smolderthorn"] = {
-					["petunitframe"] = true,
 				},
 			},
 		},
@@ -133,11 +167,18 @@ HideBlizzardDB = {
 					["stancebar"] = true,
 					["gryphons"] = true,
 				},
+				["Github - Smolderthorn"] = {
+					["stancebar"] = true,
+					["gryphons"] = true,
+				},
+				["Wattlecollie - Smolderthorn"] = {
+					["gryphons"] = true,
+				},
 				["Fraycollie - Smolderthorn"] = {
 					["gryphons"] = true,
 					["stancebar"] = true,
 				},
-				["Battlecollie - Smolderthorn"] = {
+				["Default"] = {
 					["stancebar"] = true,
 					["gryphons"] = true,
 				},
@@ -145,21 +186,21 @@ HideBlizzardDB = {
 					["gryphons"] = true,
 					["stancebar"] = true,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Melancollie - Smolderthorn"] = {
 					["gryphons"] = true,
-					["stancebar"] = true,
+					["stancebar"] = false,
 				},
 				["Warcollie - Darkspear"] = {
 					["gryphons"] = true,
 					["stancebar"] = true,
 				},
-				["Github - Smolderthorn"] = {
+				["Battlecollie - Smolderthorn"] = {
 					["stancebar"] = true,
 					["gryphons"] = true,
 				},
-				["Melancollie - Smolderthorn"] = {
+				["Battlecollie - Ysondre"] = {
 					["gryphons"] = true,
-					["stancebar"] = false,
+					["stancebar"] = true,
 				},
 			},
 		},
@@ -174,14 +215,17 @@ HideBlizzardDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Collierape - Smolderthorn"] = "Default",
 		["Armscollie - Akama"] = "Fraycollie - Nordrassil",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
@@ -232,12 +276,17 @@ HideBlizzardDB = {
 		["Warmongrel - Ysondre"] = {
 			["Version"] = "1.0.65",
 		},
-		["Combatcollie - The Underbog"] = {
+		["Default"] = {
+			["modules"] = {
+				["SpecialFrames"] = true,
+				["Player"] = true,
+				["Target"] = true,
+				["Pet"] = true,
+				["ActionBar"] = true,
+			},
 			["Version"] = "1.0.65",
 		},
-		["Nocollie - Smolderthorn"] = {
-		},
-		["Fraycollie - Smolderthorn"] = {
+		["Wattlecollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 			["modules"] = {
 				["SpecialFrames"] = true,
@@ -246,6 +295,24 @@ HideBlizzardDB = {
 				["Pet"] = true,
 				["ActionBar"] = true,
 			},
+		},
+		["Combatcollie - The Underbog"] = {
+			["Version"] = "1.0.65",
+		},
+		["Nocollie - Smolderthorn"] = {
+		},
+		["Github - Smolderthorn"] = {
+			["modules"] = {
+				["SpecialFrames"] = true,
+				["Player"] = true,
+				["Target"] = true,
+				["Pet"] = true,
+				["ActionBar"] = true,
+			},
+			["Version"] = "1.0.65",
+		},
+		["Collierape - Smolderthorn"] = {
+			["Version"] = "1.0.65",
 		},
 		["Armscollie - Akama"] = {
 			["Version"] = "1.0.65",
@@ -260,7 +327,20 @@ HideBlizzardDB = {
 				["ActionBar"] = true,
 			},
 		},
+		["Snuffleupaga - Smolderthorn"] = {
+			["Version"] = "1.0.65",
+		},
 		["Warcollie - Darkspear"] = {
+			["Version"] = "1.0.65",
+			["modules"] = {
+				["SpecialFrames"] = true,
+				["Player"] = true,
+				["Target"] = true,
+				["Pet"] = true,
+				["ActionBar"] = true,
+			},
+		},
+		["Fraycollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 			["modules"] = {
 				["SpecialFrames"] = true,
@@ -279,16 +359,6 @@ HideBlizzardDB = {
 				["Pet"] = true,
 				["ActionBar"] = true,
 			},
-		},
-		["Github - Smolderthorn"] = {
-			["modules"] = {
-				["SpecialFrames"] = true,
-				["Player"] = true,
-				["Target"] = true,
-				["Pet"] = true,
-				["ActionBar"] = true,
-			},
-			["Version"] = "1.0.65",
 		},
 	},
 }

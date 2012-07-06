@@ -3,41 +3,20 @@ CritlineDB = {
 	["namespaces"] = {
 		["splash"] = {
 			["profiles"] = {
-				["Battlecollie - Ysondre"] = {
+				["Armscollie - Akama"] = {
 					["enabled"] = false,
 				},
-				["Armscollie - Akama"] = {
+				["Battlecollie - Ysondre"] = {
 					["enabled"] = false,
 				},
 			},
 		},
 		["LibDualSpec-1.0"] = {
 		},
-		["minimap"] = {
+		["filters"] = {
 			["profiles"] = {
-				["Fraycollie - Nordrassil"] = {
-					["show"] = false,
-				},
 				["Battlecollie - Ysondre"] = {
-					["show"] = false,
-				},
-				["Fraycollie - Smolderthorn"] = {
-					["show"] = false,
-				},
-				["Hoarcollie - Smolderthorn"] = {
-					["show"] = false,
-				},
-				["Github - Smolderthorn"] = {
-					["show"] = false,
-				},
-				["Warcollie - Darkspear"] = {
-					["show"] = false,
-				},
-				["Battlecollie - Smolderthorn"] = {
-					["show"] = false,
-				},
-				["Melancollie - Smolderthorn"] = {
-					["show"] = false,
+					["levelFilter"] = 6,
 				},
 			},
 		},
@@ -46,14 +25,19 @@ CritlineDB = {
 				["Fraycollie - Nordrassil"] = {
 					["show"] = false,
 				},
+				["Collierape - Smolderthorn"] = {
+					["show"] = false,
+				},
 				["Github - Smolderthorn"] = {
 					["show"] = false,
 				},
-				["Battlecollie - Ysondre"] = {
+				["Wattlecollie - Smolderthorn"] = {
 					["show"] = false,
+				},
+				["Elliottcable - Hyjal"] = {
 					["pos"] = {
-						["y"] = 104.8962326049805,
-						["x"] = -408.541259765625,
+						["y"] = 139.379150390625,
+						["x"] = -182.6177825927734,
 						["point"] = "BOTTOMRIGHT",
 					},
 				},
@@ -73,6 +57,42 @@ CritlineDB = {
 						["point"] = "BOTTOMRIGHT",
 					},
 				},
+				["Hoarcollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Melancollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Warcollie - Darkspear"] = {
+					["show"] = false,
+				},
+				["Battlecollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Battlecollie - Ysondre"] = {
+					["show"] = false,
+					["pos"] = {
+						["y"] = 104.8962326049805,
+						["x"] = -408.541259765625,
+						["point"] = "BOTTOMRIGHT",
+					},
+				},
+			},
+		},
+		["minimap"] = {
+			["profiles"] = {
+				["Fraycollie - Nordrassil"] = {
+					["show"] = false,
+				},
+				["Battlecollie - Ysondre"] = {
+					["show"] = false,
+				},
+				["Fraycollie - Smolderthorn"] = {
+					["show"] = false,
+				},
+				["Wattlecollie - Smolderthorn"] = {
+					["show"] = false,
+				},
 				["Melancollie - Smolderthorn"] = {
 					["show"] = false,
 				},
@@ -85,19 +105,8 @@ CritlineDB = {
 				["Battlecollie - Smolderthorn"] = {
 					["show"] = false,
 				},
-				["Elliottcable - Hyjal"] = {
-					["pos"] = {
-						["y"] = 139.379150390625,
-						["x"] = -182.6177825927734,
-						["point"] = "BOTTOMRIGHT",
-					},
-				},
-			},
-		},
-		["filters"] = {
-			["profiles"] = {
-				["Battlecollie - Ysondre"] = {
-					["levelFilter"] = 6,
+				["Github - Smolderthorn"] = {
+					["show"] = false,
 				},
 			},
 		},
@@ -114,14 +123,17 @@ CritlineDB = {
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
+		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
@@ -151,21 +163,27 @@ CritlineDB = {
 		},
 		["Elliottcable - Hyjal"] = {
 		},
+		["Wattlecollie - Smolderthorn"] = {
+		},
 		["Github - Smolderthorn"] = {
 		},
 		["Nocollie - Smolderthorn"] = {
 		},
-		["Fraycollie - Smolderthorn"] = {
+		["Battlecollie - Smolderthorn"] = {
+		},
+		["Collierape - Smolderthorn"] = {
 		},
 		["Armscollie - Akama"] = {
 		},
 		["Hoarcollie - Smolderthorn"] = {
 		},
+		["Snuffleupaga - Smolderthorn"] = {
+		},
 		["Warcollie - Darkspear"] = {
 		},
-		["Combatcollie - The Underbog"] = {
+		["Fraycollie - Smolderthorn"] = {
 		},
-		["Battlecollie - Smolderthorn"] = {
+		["Combatcollie - The Underbog"] = {
 		},
 	},
 }

@@ -1,3 +1,0 @@
-
-TidyPlatesGreyTankSavedVariables = nil
-TidyPlatesGreyDPSSavedVariables = nil

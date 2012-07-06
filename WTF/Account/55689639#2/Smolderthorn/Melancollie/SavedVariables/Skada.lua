@@ -1,0 +1,5 @@
+
+SkadaPerCharDB = {
+	["sets"] = {
+	},
+}

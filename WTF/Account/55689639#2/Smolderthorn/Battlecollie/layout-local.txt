@@ -13,13 +13,6 @@ X: 175
 Y: 124
 W: 32
 H: 32
-Frame: SkadaBarWindowSkada
-FrameLevel: 1
-Anchor: BOTTOMLEFT
-X: 0
-Y: 165
-W: 325
-H: 16
 Frame: SmartBuffOptionsFrame
 FrameLevel: 1
 Anchor: CENTER
@@ -41,3 +34,10 @@ X: 0
 Y: 128
 W: 150
 H: 42
+Frame: CombuctorFrame1
+FrameLevel: 1
+Anchor: RIGHT
+X: 0
+Y: 0
+W: 384
+H: 512

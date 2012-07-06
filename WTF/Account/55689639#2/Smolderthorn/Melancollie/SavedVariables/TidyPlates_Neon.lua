@@ -1,3 +1,0 @@
-
-TidyPlatesNeonTankSavedVariables = nil
-TidyPlatesNeonDPSSavedVariables = nil

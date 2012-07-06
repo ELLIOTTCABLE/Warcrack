@@ -6,7 +6,7 @@ Altoholic_Characters: enabled
 Altoholic_Guild: enabled
 Altoholic_Search: enabled
 Arcana_ExperienceBroker: enabled
-Auc-Advanced: enabled
+Auc-Advanced: disabled
 Auc-Filter-Basic: enabled
 Auc-ScanData: enabled
 Auc-Stat-Histogram: enabled
@@ -144,3 +144,4 @@ WhisperTarget: enabled
 Ara_Broker_Guild_Friends: enabled
 Ara_Broker_SpecSwitcher: enabled
 Ara_Broker_Tradeskills: enabled
+TidyPlates_Stancer: enabled

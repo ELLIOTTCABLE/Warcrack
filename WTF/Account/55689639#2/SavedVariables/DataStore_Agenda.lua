@@ -12,14 +12,17 @@ DataStore_AgendaDB = {
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
+		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -151,6 +154,78 @@ DataStore_AgendaDB = {
 					"Xarleas", -- [14]
 				},
 			},
+			["Default.Smolderthorn.Collierape"] = {
+				["lastUpdate"] = 1341547802,
+				["Contacts"] = {
+					["Chrissmart"] = {
+						["note"] = "",
+					},
+					["Raethen"] = {
+						["note"] = "",
+					},
+					["Shamangirl"] = {
+						["note"] = "",
+					},
+					["Strudelface"] = {
+						["note"] = "",
+					},
+					["Saidix"] = {
+						["note"] = "",
+					},
+					["Mocharape"] = {
+						["note"] = "",
+						["class"] = "Paladin",
+						["level"] = 1,
+					},
+					["Bilz"] = {
+						["note"] = "",
+					},
+					["Leahs"] = {
+						["note"] = "",
+					},
+					["Stephany"] = {
+						["note"] = "",
+					},
+					["Loganone"] = {
+						["note"] = "",
+					},
+					["Qidran"] = {
+						["note"] = "",
+					},
+					["Battlecollie"] = {
+						["note"] = "",
+					},
+					["Modduece"] = {
+						["note"] = "",
+						["class"] = "Death Knight",
+						["level"] = 85,
+					},
+					["Wattlecollie"] = {
+						["note"] = "",
+					},
+					["Aïdenna"] = {
+						["note"] = "",
+					},
+					["Jondus"] = {
+						["note"] = "",
+					},
+					["Xarleas"] = {
+						["note"] = "",
+					},
+					["Melancollie"] = {
+						["note"] = "",
+					},
+					["Chobit"] = {
+						["note"] = "",
+					},
+					["Hoarcollie"] = {
+						["note"] = "",
+					},
+					["Grubbs"] = {
+						["note"] = "",
+					},
+				},
+			},
 			["Default.The Underbog.Fraycollie"] = {
 				["lastUpdate"] = 1307756265,
 				["Contacts"] = {
@@ -185,71 +260,8 @@ DataStore_AgendaDB = {
 			["Default.Akama.Armscollie"] = {
 				["lastUpdate"] = 1315466897,
 			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1308956563,
-				["Contacts"] = {
-					"Chrissmart", -- [1]
-					"Aïdenna", -- [2]
-					"Battlecollie", -- [3]
-					"Bilz", -- [4]
-					"Chobit", -- [5]
-					"Diggyhole", -- [6]
-					"Fraycollie", -- [7]
-					"Fylthious", -- [8]
-					"Github", -- [9]
-					"Halfevil", -- [10]
-					"Hoarcollie", -- [11]
-					"Jondus", -- [12]
-					"Leahs", -- [13]
-					"Llilandra", -- [14]
-					"Mcgrruff", -- [15]
-					"Modduece", -- [16]
-					"Othercollie", -- [17]
-					"Qidran", -- [18]
-					"Raethen", -- [19]
-					"Saidix", -- [20]
-					"Shamangirl", -- [21]
-					"Stephany", -- [22]
-					"Stôrmcrow", -- [23]
-					"Strudelface", -- [24]
-					"Xarleas", -- [25]
-				},
-			},
-			["Default.Hyjal.Elliottcable"] = {
-				["lastUpdate"] = 1315453928,
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1308959672,
-				["Contacts"] = {
-					"Chobit", -- [1]
-					"Chrissmart", -- [2]
-					"Mcgrruff", -- [3]
-					"Stephany", -- [4]
-					"Aïdenna", -- [5]
-					"Battlecollie", -- [6]
-					"Bilz", -- [7]
-					"Diggyhole", -- [8]
-					"Fraycollie", -- [9]
-					"Fylthious", -- [10]
-					"Github", -- [11]
-					"Halfevil", -- [12]
-					"Jondus", -- [13]
-					"Leahs", -- [14]
-					"Llilandra", -- [15]
-					"Melancollie", -- [16]
-					"Modduece", -- [17]
-					"Othercollie", -- [18]
-					"Qidran", -- [19]
-					"Raethen", -- [20]
-					"Saidix", -- [21]
-					"Shamangirl", -- [22]
-					"Stôrmcrow", -- [23]
-					"Strudelface", -- [24]
-					"Xarleas", -- [25]
-				},
-			},
 			["Default.Nordrassil.Fraycollie"] = {
-				["lastUpdate"] = 1315462468,
+				["lastUpdate"] = 1341538870,
 				["Contacts"] = {
 					["Ransyd"] = {
 						["note"] = "",
@@ -263,44 +275,274 @@ DataStore_AgendaDB = {
 					["Beefs"] = {
 						["note"] = "",
 					},
-					["Happyhots"] = {
-						["note"] = "",
-						["level"] = 85,
-						["class"] = "Druid",
-					},
 					["Kyrriana"] = {
 						["note"] = "",
 					},
 				},
 			},
-			["Default.Smolderthorn.Battlecollie"] = {
-				["lastUpdate"] = 1308882411,
+			["Default.Hyjal.Elliottcable"] = {
+				["lastUpdate"] = 1315453928,
+			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1341539681,
 				["Contacts"] = {
-					"Chobit", -- [1]
-					"Chrissmart", -- [2]
-					"Aïdenna", -- [3]
-					"Bilz", -- [4]
-					"Diggyhole", -- [5]
-					"Fraycollie", -- [6]
-					"Fylthious", -- [7]
-					"Github", -- [8]
-					"Halfevil", -- [9]
-					"Hoarcollie", -- [10]
-					"Jondus", -- [11]
-					"Leahs", -- [12]
-					"Llilandra", -- [13]
-					"Mcgrruff", -- [14]
-					"Melancollie", -- [15]
-					"Modduece", -- [16]
-					"Othercollie", -- [17]
-					"Qidran", -- [18]
-					"Raethen", -- [19]
-					"Saidix", -- [20]
-					"Shamangirl", -- [21]
-					"Stephany", -- [22]
-					"Stôrmcrow", -- [23]
-					"Strudelface", -- [24]
-					"Xarleas", -- [25]
+					["Chrissmart"] = {
+						["note"] = "",
+					},
+					["Raethen"] = {
+						["note"] = "",
+					},
+					["Shamangirl"] = {
+						["note"] = "",
+					},
+					["Strudelface"] = {
+						["note"] = "",
+					},
+					["Saidix"] = {
+						["note"] = "",
+					},
+					["Modduece"] = {
+						["note"] = "",
+						["class"] = "Death Knight",
+						["level"] = 85,
+					},
+					["Bilz"] = {
+						["note"] = "",
+					},
+					["Leahs"] = {
+						["note"] = "",
+					},
+					["Stephany"] = {
+						["note"] = "",
+					},
+					["Loganone"] = {
+						["note"] = "",
+					},
+					["Grubbs"] = {
+						["note"] = "",
+					},
+					["Battlecollie"] = {
+						["note"] = "",
+					},
+					["Qidran"] = {
+						["note"] = "",
+					},
+					["Jondus"] = {
+						["note"] = "",
+					},
+					["Xarleas"] = {
+						["note"] = "",
+					},
+					["Aïdenna"] = {
+						["note"] = "",
+					},
+					["Chobit"] = {
+						["note"] = "",
+					},
+					["Hoarcollie"] = {
+						["note"] = "",
+					},
+					["Wattlecollie"] = {
+						["note"] = "",
+					},
+				},
+			},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["lastUpdate"] = 1341440583,
+				["Contacts"] = {
+					["Bandersnat"] = {
+						["note"] = "",
+					},
+					["Summoneer"] = {
+						["note"] = "",
+					},
+				},
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1341540205,
+				["Contacts"] = {
+					["Chrissmart"] = {
+						["note"] = "",
+					},
+					["Raethen"] = {
+						["note"] = "",
+					},
+					["Shamangirl"] = {
+						["note"] = "",
+					},
+					["Strudelface"] = {
+						["note"] = "",
+					},
+					["Battlecollie"] = {
+						["note"] = "",
+					},
+					["Qidran"] = {
+						["note"] = "",
+					},
+					["Modduece"] = {
+						["note"] = "",
+						["level"] = 85,
+						["class"] = "Death Knight",
+					},
+					["Saidix"] = {
+						["note"] = "",
+					},
+					["Leahs"] = {
+						["note"] = "",
+					},
+					["Bilz"] = {
+						["note"] = "",
+						["level"] = 85,
+						["class"] = "Paladin",
+					},
+					["Jondus"] = {
+						["note"] = "",
+					},
+					["Xarleas"] = {
+						["note"] = "",
+					},
+					["Melancollie"] = {
+						["note"] = "",
+					},
+					["Chobit"] = {
+						["note"] = "",
+					},
+					["Stephany"] = {
+						["note"] = "",
+					},
+					["Aïdenna"] = {
+						["note"] = "",
+					},
+				},
+			},
+			["Default.Smolderthorn.Battlecollie"] = {
+				["lastUpdate"] = 1341539931,
+				["Contacts"] = {
+					["Aïdenna"] = {
+						["note"] = "",
+					},
+					["Raethen"] = {
+						["note"] = "",
+					},
+					["Shamangirl"] = {
+						["note"] = "",
+					},
+					["Strudelface"] = {
+						["note"] = "",
+					},
+					["Saidix"] = {
+						["note"] = "",
+					},
+					["Modduece"] = {
+						["note"] = "",
+						["class"] = "Death Knight",
+						["level"] = 85,
+					},
+					["Bilz"] = {
+						["note"] = "",
+						["class"] = "Paladin",
+						["level"] = 85,
+					},
+					["Leahs"] = {
+						["note"] = "",
+					},
+					["Stephany"] = {
+						["note"] = "",
+					},
+					["Loganone"] = {
+						["note"] = "",
+					},
+					["Grubbs"] = {
+						["note"] = "",
+					},
+					["Chrissmart"] = {
+						["note"] = "",
+					},
+					["Wattlecollie"] = {
+						["note"] = "",
+					},
+					["Jondus"] = {
+						["note"] = "",
+					},
+					["Xarleas"] = {
+						["note"] = "",
+					},
+					["Melancollie"] = {
+						["note"] = "",
+					},
+					["Chobit"] = {
+						["note"] = "",
+					},
+					["Hoarcollie"] = {
+						["note"] = "",
+					},
+					["Qidran"] = {
+						["note"] = "",
+					},
+				},
+			},
+			["Default.Smolderthorn.Wattlecollie"] = {
+				["lastUpdate"] = 1341546082,
+				["Contacts"] = {
+					["Aïdenna"] = {
+						["note"] = "",
+					},
+					["Raethen"] = {
+						["note"] = "",
+					},
+					["Shamangirl"] = {
+						["note"] = "",
+					},
+					["Strudelface"] = {
+						["note"] = "",
+					},
+					["Saidix"] = {
+						["note"] = "",
+					},
+					["Modduece"] = {
+						["note"] = "",
+						["class"] = "Death Knight",
+						["level"] = 85,
+					},
+					["Bilz"] = {
+						["note"] = "",
+					},
+					["Leahs"] = {
+						["note"] = "",
+					},
+					["Stephany"] = {
+						["note"] = "",
+					},
+					["Loganone"] = {
+						["note"] = "",
+					},
+					["Grubbs"] = {
+						["note"] = "",
+					},
+					["Battlecollie"] = {
+						["note"] = "",
+					},
+					["Chrissmart"] = {
+						["note"] = "",
+					},
+					["Jondus"] = {
+						["note"] = "",
+					},
+					["Xarleas"] = {
+						["note"] = "",
+					},
+					["Melancollie"] = {
+						["note"] = "",
+					},
+					["Chobit"] = {
+						["note"] = "",
+					},
+					["Hoarcollie"] = {
+						["note"] = "",
+					},
+					["Qidran"] = {
+						["note"] = "",
+					},
 				},
 			},
 			["Default.Ysondre.Summoneer"] = {

@@ -128,7 +128,7 @@ WhisperTarget: enabled
 Ara_Broker_Guild_Friends: enabled
 Ara_Broker_SpecSwitcher: enabled
 Ara_Broker_Tradeskills: enabled
-Auc-Advanced: enabled
+Auc-Advanced: disabled
 Auc-Filter-Basic: enabled
 Auc-ScanData: enabled
 Auc-Stat-Histogram: enabled
@@ -144,3 +144,4 @@ Informant: enabled
 NinjaInvite: enabled
 Stubby: enabled
 TopFit: enabled
+TidyPlates_Stancer: enabled

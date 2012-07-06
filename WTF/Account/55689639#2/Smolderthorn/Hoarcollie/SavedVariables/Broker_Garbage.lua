@@ -9,6 +9,6 @@ BG_LocalDB = {
 	["exclude"] = {
 		["Misc.Reagent.Class.Rogue"] = true,
 	},
-	["neverRepairGuildBank"] = false,
 	["moneyLostByDeleting"] = 40,
+	["neverRepairGuildBank"] = false,
 }

@@ -8,7 +8,7 @@ SMARTBUFF_Options = {
 	["IgnoreList"] = {
 	},
 	["ToggleSubGrpChanged"] = false,
-	["SplashX"] = 100,
+	["SplashX"] = 99.99999237060547,
 	["ToggleMsgNormal"] = false,
 	["AutoTimer"] = 5,
 	["ToggleGrp"] = {

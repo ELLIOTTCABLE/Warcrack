@@ -12,14 +12,17 @@ DataStore_AuctionsDB = {
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
+		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -35,17 +38,17 @@ DataStore_AuctionsDB = {
 				["lastUpdate"] = 1308566425,
 				["lastVisitDate"] = "2011/06/20 06:40",
 			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1308956695,
-				["lastVisitDate"] = "2011/06/24 19:04",
-			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["lastUpdate"] = 1308566520,
 				["lastVisitDate"] = "2011/06/20 06:42",
 			},
 			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1308069916,
-				["lastVisitDate"] = "2011/06/14 12:45",
+				["lastUpdate"] = 1341082928,
+				["lastVisitDate"] = "2012/06/30 15:02",
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1308956695,
+				["lastVisitDate"] = "2011/06/24 19:04",
 			},
 		},
 	},

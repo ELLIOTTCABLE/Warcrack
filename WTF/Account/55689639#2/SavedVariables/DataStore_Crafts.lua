@@ -11,18 +11,19 @@ DataStore_CraftsDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -97,7 +98,14 @@ DataStore_CraftsDB = {
 				["lastUpdate"] = 1308332289,
 			},
 			["Default.Smolderthorn.Collierape"] = {
-				["lastUpdate"] = 1341547297,
+				["Professions"] = {
+					["Tailoring"] = {
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
+				},
+				["lastUpdate"] = 1342123700,
+				["Prof1"] = "Tailoring",
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["lastUpdate"] = 1307756258,
@@ -448,45 +456,10 @@ DataStore_CraftsDB = {
 			["Default.Hyjal.Elliottcable"] = {
 				["lastUpdate"] = 1315452075,
 			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1341539607,
-				["Professions"] = {
-					["Archaeology"] = {
-						["MaxRank"] = 75,
-						["Rank"] = 1,
-					},
-				},
-			},
-			["Default.Smolderthorn.Snuffleupaga"] = {
-				["lastUpdate"] = 1341440539,
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["Professions"] = {
-					["Skinning"] = {
-						["MaxRank"] = 75,
-						["Rank"] = 1,
-					},
-					["Leatherworking"] = {
-						["FullLink"] = "|cffffd000|Htrade:2108:1:75:1000000048BA339:XAAAAAABADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|h[Leatherworking]|h|r",
-						["MaxRank"] = 75,
-						["Rank"] = 1,
-					},
-				},
-				["lastUpdate"] = 1341539952,
-			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["lastUpdate"] = 1341539826,
 				["Prof2"] = "Tailoring",
 				["Professions"] = {
-					["Cooking"] = {
-						["FullLink"] = "|cffffd000|Htrade:2550:53:75:10000000489EEA3:HAAAAABAEAAAAAAIAAAAAAAAAAAAAAAAAAAA|h[Cooking]|h|r",
-						["MaxRank"] = 75,
-						["Rank"] = 53,
-					},
-					["Archaeology"] = {
-						["MaxRank"] = 75,
-						["Rank"] = 1,
-					},
 					["Tailoring"] = {
 						["FullLink"] = "|cffffd000|Htrade:75156:490:525:10000000489EEA3:4////+677/vv+/v73/P59/rZ3//nNznLDEIAA4HR8vDqAAAAAoAwAACt////T4xa+/j//DGAI9PAAHA18fEAA|h[Tailoring]|h|r",
 						["NumCrafts"] = 281,
@@ -790,12 +763,17 @@ DataStore_CraftsDB = {
 						["MaxRank"] = 450,
 						["Rank"] = 450,
 					},
-					["Fishing"] = {
-						["MaxRank"] = 75,
-						["Rank"] = 6,
-					},
 					["First Aid"] = {
 						["FullLink"] = "|cffffd000|Htrade:3273:1:75:10000000489EEA3:FAAAAAA|h[First Aid]|h|r",
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
+					["Cooking"] = {
+						["FullLink"] = "|cffffd000|Htrade:2550:53:75:10000000489EEA3:HAAAAABAEAAAAAAIAAAAAAAAAAAAAAAAAAAA|h[Cooking]|h|r",
+						["MaxRank"] = 75,
+						["Rank"] = 53,
+					},
+					["Archaeology"] = {
 						["MaxRank"] = 75,
 						["Rank"] = 1,
 					},
@@ -804,11 +782,44 @@ DataStore_CraftsDB = {
 						["MaxRank"] = 75,
 						["Rank"] = 1,
 					},
+					["Fishing"] = {
+						["MaxRank"] = 75,
+						["Rank"] = 6,
+					},
 				},
 				["Prof1"] = "Alchemy",
 			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1341539607,
+				["Professions"] = {
+					["Archaeology"] = {
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
+				},
+			},
+			["Default.Smolderthorn.Collietard"] = {
+				["lastUpdate"] = 1341910468,
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["Professions"] = {
+					["Leatherworking"] = {
+						["FullLink"] = "|cffffd000|Htrade:2108:1:75:1000000048BA339:XAAAAAABADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|h[Leatherworking]|h|r",
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
+					["Skinning"] = {
+						["MaxRank"] = 75,
+						["Rank"] = 1,
+					},
+				},
+				["lastUpdate"] = 1341539952,
+			},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["lastUpdate"] = 1341440539,
+			},
 			["Default.Smolderthorn.Wattlecollie"] = {
-				["lastUpdate"] = 1341545773,
+				["lastUpdate"] = 1341910242,
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["lastUpdate"] = 1307913962,

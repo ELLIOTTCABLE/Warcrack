@@ -11,18 +11,19 @@ DataStore_TalentsDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -156,6 +157,13 @@ DataStore_TalentsDB = {
 				},
 				["ActiveTalents"] = 1,
 				["lastUpdate"] = 1308802059,
+				["Class"] = "WARRIOR",
+				["TalentTrees"] = {
+					["Arms|1"] = 41,
+					["Fury|1"] = 3,
+					["Protection|1"] = 482807989231,
+					["Fury|2"] = 470387907244,
+				},
 				["GlyphList"] = {
 					11, -- [1]
 					7898, -- [2]
@@ -195,13 +203,6 @@ DataStore_TalentsDB = {
 					12230, -- [36]
 					12246, -- [37]
 				},
-				["TalentTrees"] = {
-					["Arms|1"] = 41,
-					["Fury|1"] = 3,
-					["Protection|1"] = 482807989231,
-					["Fury|2"] = 470387907244,
-				},
-				["Class"] = "WARRIOR",
 			},
 			["Default.Ysondre.Warmongrel"] = {
 				["Glyphs"] = {
@@ -224,6 +225,8 @@ DataStore_TalentsDB = {
 					1048583, -- [17]
 					2097158, -- [18]
 				},
+				["Class"] = "DRUID",
+				["lastUpdate"] = 1308801588,
 				["GlyphList"] = {
 					11, -- [1]
 					2698, -- [2]
@@ -270,8 +273,6 @@ DataStore_TalentsDB = {
 					14998, -- [43]
 					9814, -- [44]
 				},
-				["lastUpdate"] = 1308801588,
-				["Class"] = "DRUID",
 				["ActiveTalents"] = 2,
 			},
 			["Default.Smolderthorn.Othercollie"] = {
@@ -330,63 +331,78 @@ DataStore_TalentsDB = {
 				},
 			},
 			["Default.Smolderthorn.Collierape"] = {
-				["lastUpdate"] = 1341547297,
+				["Glyphs"] = {
+					1426501227, -- [1]
+					3641118733, -- [2]
+					1048580, -- [3]
+					1048578, -- [4]
+					2097156, -- [5]
+					2097154, -- [6]
+					1409724743, -- [7]
+					1048582, -- [8]
+					2097158, -- [9]
+					3, -- [10]
+					3641118733, -- [11]
+					1048580, -- [12]
+					1048578, -- [13]
+					2097156, -- [14]
+					2097154, -- [15]
+					1468445167, -- [16]
+					1048582, -- [17]
+					2097158, -- [18]
+				},
+				["ActiveTalents"] = 1,
+				["lastUpdate"] = 1342123700,
+				["Class"] = "DRUID",
+				["TalentTrees"] = {
+					["Restoration|1"] = 13037794,
+					["Balance|2"] = 3500844,
+				},
 				["GlyphList"] = {
 					11, -- [1]
-					10738, -- [2]
-					2642, -- [3]
-					2818, -- [4]
-					14930, -- [5]
-					2786, -- [6]
-					2626, -- [7]
-					2882, -- [8]
-					2738, -- [9]
-					2754, -- [10]
-					2658, -- [11]
-					10786, -- [12]
-					2802, -- [13]
-					10770, -- [14]
-					2690, -- [15]
-					14978, -- [16]
-					2866, -- [17]
+					2826, -- [2]
+					2746, -- [3]
+					2762, -- [4]
+					2810, -- [5]
+					2698, -- [6]
+					2874, -- [7]
+					10738, -- [8]
+					2642, -- [9]
+					14930, -- [10]
+					2786, -- [11]
+					2626, -- [12]
+					2882, -- [13]
+					2658, -- [14]
+					10786, -- [15]
+					10770, -- [16]
+					14978, -- [17]
 					13, -- [18]
-					10820, -- [19]
-					2900, -- [20]
-					14948, -- [21]
-					14964, -- [22]
-					13300, -- [23]
-					10100, -- [24]
-					2580, -- [25]
-					2772, -- [26]
-					2836, -- [27]
-					2708, -- [28]
-					2596, -- [29]
-					10804, -- [30]
-					2676, -- [31]
-					2724, -- [32]
+					2732, -- [19]
+					10820, -- [20]
+					2900, -- [21]
+					14948, -- [22]
+					14964, -- [23]
+					13300, -- [24]
+					10100, -- [25]
+					2580, -- [26]
+					2772, -- [27]
+					2836, -- [28]
+					2708, -- [29]
+					2596, -- [30]
+					10804, -- [31]
+					2676, -- [32]
 					2612, -- [33]
 					2852, -- [34]
 					6964, -- [35]
 					10756, -- [36]
 					15, -- [37]
-					6902, -- [38]
-					6918, -- [39]
-					8822, -- [40]
-					6934, -- [41]
-					14998, -- [42]
-					9814, -- [43]
-					6950, -- [44]
-				},
-				["Glyphs"] = {
-					2, -- [1]
-					4, -- [2]
-					1048580, -- [3]
-					1048578, -- [4]
-					2097156, -- [5]
-					2097154, -- [6]
-					6, -- [7]
-					1048582, -- [8]
-					2097158, -- [9]
+					6910, -- [38]
+					6958, -- [39]
+					6918, -- [40]
+					8822, -- [41]
+					6934, -- [42]
+					14998, -- [43]
+					9814, -- [44]
 				},
 			},
 			["Default.The Underbog.Fraycollie"] = {
@@ -410,6 +426,8 @@ DataStore_TalentsDB = {
 					1048583, -- [17]
 					2097159, -- [18]
 				},
+				["Class"] = "WARRIOR",
+				["lastUpdate"] = 1307756258,
 				["GlyphList"] = {
 					11, -- [1]
 					7898, -- [2]
@@ -449,8 +467,6 @@ DataStore_TalentsDB = {
 					12230, -- [36]
 					12246, -- [37]
 				},
-				["lastUpdate"] = 1307756258,
-				["Class"] = "WARRIOR",
 				["TalentTrees"] = {
 					["Arms|1"] = 24,
 					["Fury|1"] = 3,
@@ -482,13 +498,6 @@ DataStore_TalentsDB = {
 				},
 				["ActiveTalents"] = 2,
 				["lastUpdate"] = 1307762090,
-				["Class"] = "PRIEST",
-				["TalentTrees"] = {
-					["Discipline|2"] = 28,
-					["Discipline|1"] = 1687431982514,
-					["Holy|1"] = 48,
-					["Shadow|2"] = 1951698807691,
-				},
 				["GlyphList"] = {
 					11, -- [1]
 					11338, -- [2]
@@ -527,6 +536,13 @@ DataStore_TalentsDB = {
 					7406, -- [35]
 					7422, -- [36]
 				},
+				["TalentTrees"] = {
+					["Discipline|2"] = 28,
+					["Discipline|1"] = 1687431982514,
+					["Holy|1"] = 48,
+					["Shadow|2"] = 1951698807691,
+				},
+				["Class"] = "PRIEST",
 			},
 			["Default.Darkspear.Warcollie"] = {
 				["Glyphs"] = {
@@ -542,10 +558,6 @@ DataStore_TalentsDB = {
 				},
 				["ActiveTalents"] = 1,
 				["lastUpdate"] = 1308164842,
-				["Class"] = "DEATHKNIGHT",
-				["TalentTrees"] = {
-					["Unholy|1"] = 44,
-				},
 				["GlyphList"] = {
 					11, -- [1]
 					8322, -- [2]
@@ -581,6 +593,10 @@ DataStore_TalentsDB = {
 					8870, -- [32]
 					8854, -- [33]
 				},
+				["TalentTrees"] = {
+					["Unholy|1"] = 44,
+				},
+				["Class"] = "DEATHKNIGHT",
 			},
 			["Default.Smolderthorn.Warcollie"] = {
 				["lastUpdate"] = 1308197707,
@@ -647,6 +663,8 @@ DataStore_TalentsDB = {
 					1048582, -- [8]
 					2097158, -- [9]
 				},
+				["Class"] = "WARLOCK",
+				["lastUpdate"] = 1308566353,
 				["GlyphList"] = {
 					11, -- [1]
 					4402, -- [2]
@@ -686,8 +704,6 @@ DataStore_TalentsDB = {
 					7718, -- [36]
 					7638, -- [37]
 				},
-				["lastUpdate"] = 1308566353,
-				["Class"] = "WARLOCK",
 				["ActiveTalents"] = 1,
 			},
 			["Default.Smolderthorn.Github"] = {
@@ -758,6 +774,7 @@ DataStore_TalentsDB = {
 				},
 				["ActiveTalents"] = 1,
 				["lastUpdate"] = 1315466430,
+				["Class"] = "DRUID",
 				["GlyphList"] = {
 					11, -- [1]
 					10738, -- [2]
@@ -804,7 +821,6 @@ DataStore_TalentsDB = {
 					9814, -- [43]
 					6950, -- [44]
 				},
-				["Class"] = "DRUID",
 			},
 			["Default.Nordrassil.Fraycollie"] = {
 				["Glyphs"] = {
@@ -829,13 +845,6 @@ DataStore_TalentsDB = {
 				},
 				["ActiveTalents"] = 1,
 				["lastUpdate"] = 1341538846,
-				["Class"] = "WARRIOR",
-				["TalentTrees"] = {
-					["Arms|1"] = 40,
-					["Fury|1"] = 3,
-					["Protection|1"] = 491263716271,
-					["Fury|2"] = 470387907244,
-				},
 				["GlyphList"] = {
 					11, -- [1]
 					12202, -- [2]
@@ -875,6 +884,13 @@ DataStore_TalentsDB = {
 					12238, -- [36]
 					12254, -- [37]
 				},
+				["TalentTrees"] = {
+					["Arms|1"] = 40,
+					["Fury|1"] = 3,
+					["Protection|1"] = 491263716271,
+					["Fury|2"] = 470387907244,
+				},
+				["Class"] = "WARRIOR",
 			},
 			["Default.Hyjal.Elliottcable"] = {
 				["lastUpdate"] = 1315452075,
@@ -931,6 +947,76 @@ DataStore_TalentsDB = {
 					2097158, -- [9]
 				},
 			},
+			["Default.Smolderthorn.Battlecollie"] = {
+				["Glyphs"] = {
+					2156317747, -- [1]
+					3842446349, -- [2]
+					3851883549, -- [3]
+					2115423211, -- [4]
+					3886488485, -- [5]
+					5966903339, -- [6]
+					2206649287, -- [7]
+					2249640983, -- [8]
+					2191969295, -- [9]
+					2273758251, -- [10]
+					3850834973, -- [11]
+					3860272333, -- [12]
+					2174143579, -- [13]
+					3886488485, -- [14]
+					2225523683, -- [15]
+					2231815127, -- [16]
+					2207697863, -- [17]
+					5950126079, -- [18]
+				},
+				["GlyphList"] = {
+					11, -- [1]
+					11338, -- [2]
+					4090, -- [3]
+					11354, -- [4]
+					4138, -- [5]
+					4314, -- [6]
+					11370, -- [7]
+					4202, -- [8]
+					4218, -- [9]
+					4234, -- [10]
+					4266, -- [11]
+					4298, -- [12]
+					4186, -- [13]
+					13, -- [14]
+					4028, -- [15]
+					11420, -- [16]
+					4044, -- [17]
+					11404, -- [18]
+					4060, -- [19]
+					4076, -- [20]
+					4108, -- [21]
+					4124, -- [22]
+					4156, -- [23]
+					4348, -- [24]
+					4172, -- [25]
+					4252, -- [26]
+					4284, -- [27]
+					4332, -- [28]
+					11388, -- [29]
+					15, -- [30]
+					7342, -- [31]
+					7374, -- [32]
+					7358, -- [33]
+					7390, -- [34]
+					7406, -- [35]
+					7422, -- [36]
+					15382, -- [37]
+				},
+				["lastUpdate"] = 1341539826,
+				["Class"] = "PRIEST",
+				["TalentTrees"] = {
+					["Discipline|2"] = 48,
+					["Shadow|1"] = 1943109397387,
+					["Holy|2"] = 1564883921470,
+					["Discipline|1"] = 440,
+				},
+				["ActiveTalents"] = 1,
+			},
 			["Default.Smolderthorn.Melancollie"] = {
 				["Glyphs"] = {
 					3, -- [1]
@@ -954,10 +1040,6 @@ DataStore_TalentsDB = {
 				},
 				["ActiveTalents"] = 1,
 				["lastUpdate"] = 1341539607,
-				["Class"] = "MAGE",
-				["TalentTrees"] = {
-					["Fire|1"] = 172,
-				},
 				["GlyphList"] = {
 					11, -- [1]
 					11170, -- [2]
@@ -996,6 +1078,121 @@ DataStore_TalentsDB = {
 					7158, -- [35]
 					7206, -- [36]
 					7222, -- [37]
+				},
+				["TalentTrees"] = {
+					["Fire|1"] = 172,
+				},
+				["Class"] = "MAGE",
+			},
+			["Default.Smolderthorn.Collietard"] = {
+				["lastUpdate"] = 1341910468,
+				["GlyphList"] = {
+					11, -- [1]
+					11170, -- [2]
+					10418, -- [3]
+					4994, -- [4]
+					5282, -- [5]
+					11138, -- [6]
+					5058, -- [7]
+					5106, -- [8]
+					9458, -- [9]
+					5154, -- [10]
+					14850, -- [11]
+					5218, -- [12]
+					5250, -- [13]
+					5122, -- [14]
+					13, -- [15]
+					5012, -- [16]
+					9780, -- [17]
+					5028, -- [18]
+					5300, -- [19]
+					5044, -- [20]
+					15172, -- [21]
+					5092, -- [22]
+					11204, -- [23]
+					5140, -- [24]
+					5172, -- [25]
+					5204, -- [26]
+					13940, -- [27]
+					5268, -- [28]
+					11156, -- [29]
+					15, -- [30]
+					7126, -- [31]
+					14774, -- [32]
+					7174, -- [33]
+					11190, -- [34]
+					7158, -- [35]
+					7206, -- [36]
+					7222, -- [37]
+				},
+				["Glyphs"] = {
+					2, -- [1]
+					4, -- [2]
+					1048580, -- [3]
+					1048578, -- [4]
+					2097156, -- [5]
+					2097154, -- [6]
+					6, -- [7]
+					1048582, -- [8]
+					2097158, -- [9]
+				},
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["Glyphs"] = {
+					2, -- [1]
+					4, -- [2]
+					1048580, -- [3]
+					1048578, -- [4]
+					2097156, -- [5]
+					2097154, -- [6]
+					6, -- [7]
+					1048582, -- [8]
+					2097158, -- [9]
+				},
+				["ActiveTalents"] = 1,
+				["lastUpdate"] = 1341539952,
+				["Class"] = "WARRIOR",
+				["TalentTrees"] = {
+					["Protection|1"] = 108,
+				},
+				["GlyphList"] = {
+					11, -- [1]
+					12194, -- [2]
+					7906, -- [3]
+					7890, -- [4]
+					7826, -- [5]
+					7986, -- [6]
+					8146, -- [7]
+					8018, -- [8]
+					8034, -- [9]
+					8002, -- [10]
+					13, -- [11]
+					7876, -- [12]
+					14836, -- [13]
+					14916, -- [14]
+					7940, -- [15]
+					14900, -- [16]
+					7956, -- [17]
+					7764, -- [18]
+					7924, -- [19]
+					7860, -- [20]
+					8116, -- [21]
+					12276, -- [22]
+					12212, -- [23]
+					12260, -- [24]
+					8068, -- [25]
+					8084, -- [26]
+					7796, -- [27]
+					8132, -- [28]
+					15, -- [29]
+					7734, -- [30]
+					7750, -- [31]
+					7846, -- [32]
+					13622, -- [33]
+					7782, -- [34]
+					7814, -- [35]
+					12230, -- [36]
+					12246, -- [37]
 				},
 			},
 			["Default.Smolderthorn.Snuffleupaga"] = {
@@ -1051,134 +1248,6 @@ DataStore_TalentsDB = {
 					2097158, -- [9]
 				},
 			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["Glyphs"] = {
-					2, -- [1]
-					4, -- [2]
-					1048580, -- [3]
-					1048578, -- [4]
-					2097156, -- [5]
-					2097154, -- [6]
-					6, -- [7]
-					1048582, -- [8]
-					2097158, -- [9]
-				},
-				["ActiveTalents"] = 1,
-				["lastUpdate"] = 1341539952,
-				["GlyphList"] = {
-					11, -- [1]
-					12194, -- [2]
-					7906, -- [3]
-					7890, -- [4]
-					7826, -- [5]
-					7986, -- [6]
-					8146, -- [7]
-					8018, -- [8]
-					8034, -- [9]
-					8002, -- [10]
-					13, -- [11]
-					7876, -- [12]
-					14836, -- [13]
-					14916, -- [14]
-					7940, -- [15]
-					14900, -- [16]
-					7956, -- [17]
-					7764, -- [18]
-					7924, -- [19]
-					7860, -- [20]
-					8116, -- [21]
-					12276, -- [22]
-					12212, -- [23]
-					12260, -- [24]
-					8068, -- [25]
-					8084, -- [26]
-					7796, -- [27]
-					8132, -- [28]
-					15, -- [29]
-					7734, -- [30]
-					7750, -- [31]
-					7846, -- [32]
-					13622, -- [33]
-					7782, -- [34]
-					7814, -- [35]
-					12230, -- [36]
-					12246, -- [37]
-				},
-				["TalentTrees"] = {
-					["Protection|1"] = 108,
-				},
-				["Class"] = "WARRIOR",
-			},
-			["Default.Smolderthorn.Battlecollie"] = {
-				["Glyphs"] = {
-					2156317747, -- [1]
-					3842446349, -- [2]
-					3851883549, -- [3]
-					2115423211, -- [4]
-					3886488485, -- [5]
-					5966903339, -- [6]
-					2206649287, -- [7]
-					2249640983, -- [8]
-					2191969295, -- [9]
-					2273758251, -- [10]
-					3850834973, -- [11]
-					3860272333, -- [12]
-					2174143579, -- [13]
-					3886488485, -- [14]
-					2225523683, -- [15]
-					2231815127, -- [16]
-					2207697863, -- [17]
-					5950126079, -- [18]
-				},
-				["Class"] = "PRIEST",
-				["lastUpdate"] = 1341539826,
-				["GlyphList"] = {
-					11, -- [1]
-					11338, -- [2]
-					4090, -- [3]
-					11354, -- [4]
-					4138, -- [5]
-					4314, -- [6]
-					11370, -- [7]
-					4202, -- [8]
-					4218, -- [9]
-					4234, -- [10]
-					4266, -- [11]
-					4298, -- [12]
-					4186, -- [13]
-					13, -- [14]
-					4028, -- [15]
-					11420, -- [16]
-					4044, -- [17]
-					11404, -- [18]
-					4060, -- [19]
-					4076, -- [20]
-					4108, -- [21]
-					4124, -- [22]
-					4156, -- [23]
-					4348, -- [24]
-					4172, -- [25]
-					4252, -- [26]
-					4284, -- [27]
-					4332, -- [28]
-					11388, -- [29]
-					15, -- [30]
-					7342, -- [31]
-					7374, -- [32]
-					7358, -- [33]
-					7390, -- [34]
-					7406, -- [35]
-					7422, -- [36]
-					15382, -- [37]
-				},
-				["TalentTrees"] = {
-					["Discipline|2"] = 48,
-					["Shadow|1"] = 1943109397387,
-					["Holy|2"] = 1564883921470,
-					["Discipline|1"] = 440,
-				},
-				["ActiveTalents"] = 1,
-			},
 			["Default.Smolderthorn.Wattlecollie"] = {
 				["Glyphs"] = {
 					2, -- [1]
@@ -1192,11 +1261,7 @@ DataStore_TalentsDB = {
 					2097158, -- [9]
 				},
 				["ActiveTalents"] = 1,
-				["lastUpdate"] = 1341545773,
-				["Class"] = "PRIEST",
-				["TalentTrees"] = {
-					["Discipline|1"] = 8,
-				},
+				["lastUpdate"] = 1341910242,
 				["GlyphList"] = {
 					11, -- [1]
 					11330, -- [2]
@@ -1236,6 +1301,10 @@ DataStore_TalentsDB = {
 					7398, -- [36]
 					7414, -- [37]
 				},
+				["TalentTrees"] = {
+					["Discipline|1"] = 8,
+				},
+				["Class"] = "PRIEST",
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["Glyphs"] = {
@@ -1251,6 +1320,7 @@ DataStore_TalentsDB = {
 				},
 				["ActiveTalents"] = 1,
 				["lastUpdate"] = 1307913962,
+				["Class"] = "WARLOCK",
 				["GlyphList"] = {
 					11, -- [1]
 					4402, -- [2]
@@ -1290,7 +1360,6 @@ DataStore_TalentsDB = {
 					7718, -- [36]
 					7638, -- [37]
 				},
-				["Class"] = "WARLOCK",
 			},
 		},
 		["Reference"] = {
@@ -1625,18 +1694,19 @@ DataStore_TalentsRefDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["DEATHKNIGHT"] = {

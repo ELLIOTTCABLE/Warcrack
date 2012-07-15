@@ -21,7 +21,7 @@ AutoBarDB = {
 						"AutoBarButtonER", -- [4]
 						"AutoBarButtonStance", -- [5]
 					},
-					["frameStrata"] = "LOW",
+					["alpha"] = 1,
 					["buttonWidth"] = 36,
 					["collapseButtons"] = true,
 					["WARRIOR"] = true,
@@ -30,7 +30,7 @@ AutoBarDB = {
 					["popupDirection"] = "1",
 					["padding"] = 0,
 					["dockShiftX"] = 0,
-					["alpha"] = 1,
+					["frameStrata"] = "LOW",
 				},
 			},
 			["buttonList"] = {
@@ -270,12 +270,11 @@ AutoBarDB = {
 					["buttonKey"] = "AutoBarButtonClassPets3",
 					["defaultButtonIndex"] = "*",
 				},
-				["AutoBarButtonTotemWater"] = {
+				["AutoBarButtonClassPets2"] = {
 					["barKey"] = "AutoBarClassBarShaman",
-					["buttonClass"] = "AutoBarButtonTotemWater",
-					["arrangeOnUse"] = true,
+					["buttonClass"] = "AutoBarButtonClassPets2",
 					["enabled"] = true,
-					["buttonKey"] = "AutoBarButtonTotemWater",
+					["buttonKey"] = "AutoBarButtonClassPets2",
 					["defaultButtonIndex"] = "*",
 				},
 				["AutoBarButtonER"] = {
@@ -286,11 +285,12 @@ AutoBarDB = {
 					["buttonKey"] = "AutoBarButtonER",
 					["noPopup"] = true,
 				},
-				["AutoBarButtonClassPets2"] = {
+				["AutoBarButtonTotemWater"] = {
 					["barKey"] = "AutoBarClassBarShaman",
-					["buttonClass"] = "AutoBarButtonClassPets2",
+					["buttonClass"] = "AutoBarButtonTotemWater",
+					["arrangeOnUse"] = true,
 					["enabled"] = true,
-					["buttonKey"] = "AutoBarButtonClassPets2",
+					["buttonKey"] = "AutoBarButtonTotemWater",
 					["defaultButtonIndex"] = "*",
 				},
 				["AutoBarButtonTravel"] = {
@@ -402,7 +402,7 @@ AutoBarDB = {
 						"AutoBarButtonClassPets3", -- [8]
 						"AutoBarButtonDebuff", -- [9]
 					},
-					["frameStrata"] = "LOW",
+					["alpha"] = 1,
 					["buttonWidth"] = 36,
 					["collapseButtons"] = true,
 					["MAGE"] = true,
@@ -411,7 +411,7 @@ AutoBarDB = {
 					["popupDirection"] = "1",
 					["padding"] = 0,
 					["dockShiftX"] = 0,
-					["alpha"] = 1,
+					["frameStrata"] = "LOW",
 				},
 			},
 			["buttonList"] = {
@@ -505,8 +505,8 @@ AutoBarDB = {
 					["hide"] = false,
 					["enabled"] = true,
 					["columns"] = 10,
-					["alpha"] = 1,
 					["frameStrata"] = "LOW",
+					["alpha"] = 1,
 					["buttonWidth"] = 36,
 					["collapseButtons"] = true,
 					["posY"] = 280,
@@ -610,8 +610,8 @@ AutoBarDB = {
 					["hide"] = false,
 					["enabled"] = true,
 					["columns"] = 10,
-					["frameStrata"] = "LOW",
 					["alpha"] = 1,
+					["frameStrata"] = "LOW",
 					["buttonWidth"] = 36,
 					["collapseButtons"] = true,
 					["DEATHKNIGHT"] = true,
@@ -700,8 +700,8 @@ AutoBarDB = {
 					["hide"] = false,
 					["enabled"] = false,
 					["columns"] = 10,
-					["alpha"] = 1,
 					["frameStrata"] = "LOW",
+					["alpha"] = 1,
 					["buttonWidth"] = 36,
 					["collapseButtons"] = true,
 					["PRIEST"] = true,
@@ -952,9 +952,9 @@ AutoBarDB = {
 			["AutoBarCustomBarCustom1"] = {
 				["popupDirection"] = "1",
 				["fadeOut"] = false,
-				["buttonHeight"] = 36,
-				["PALADIN"] = true,
 				["scale"] = 1,
+				["SHAMAN"] = true,
+				["buttonHeight"] = 36,
 				["rows"] = 1,
 				["isCustomBar"] = true,
 				["HUNTER"] = true,
@@ -965,24 +965,24 @@ AutoBarDB = {
 				["posX"] = 300,
 				["MAGE"] = true,
 				["DRUID"] = true,
-				["posY"] = 360,
-				["hide"] = true,
-				["DEATHKNIGHT"] = true,
-				["WARLOCK"] = true,
 				["columns"] = 32,
-				["PRIEST"] = true,
-				["frameStrata"] = "LOW",
+				["hide"] = true,
+				["enabled"] = true,
+				["WARLOCK"] = true,
+				["posY"] = 360,
 				["buttonWidth"] = 36,
+				["frameStrata"] = "LOW",
+				["PRIEST"] = true,
 				["alpha"] = 1,
 				["desc"] = "Custom1",
 				["collapseButtons"] = true,
 				["ROGUE"] = true,
 				["name"] = "Custom1",
-				["enabled"] = true,
+				["DEATHKNIGHT"] = true,
 				["WARRIOR"] = true,
 				["padding"] = 0,
 				["dockShiftX"] = 0,
-				["SHAMAN"] = true,
+				["PALADIN"] = true,
 			},
 			["AutoBarClassBarExtras"] = {
 				["HUNTER"] = true,
@@ -999,15 +999,15 @@ AutoBarDB = {
 				["ROGUE"] = true,
 				["hide"] = false,
 				["DEATHKNIGHT"] = true,
-				["posY"] = -14.67675016023031,
 				["columns"] = 2,
+				["posY"] = -14.67675016023031,
 				["PALADIN"] = true,
 				["enabled"] = true,
-				["alpha"] = 1,
 				["frameStrata"] = "LOW",
-				["PRIEST"] = true,
-				["collapseButtons"] = true,
+				["alpha"] = 1,
 				["buttonWidth"] = 36,
+				["collapseButtons"] = true,
+				["PRIEST"] = true,
 				["WARLOCK"] = true,
 				["buttonKeys"] = {
 					"AutoBarButtonSpeed", -- [1]
@@ -1070,15 +1070,15 @@ AutoBarDB = {
 				["HUNTER"] = true,
 				["enabled"] = true,
 				["DEATHKNIGHT"] = true,
-				["columns"] = 23,
 				["posY"] = 79.9042011535812,
+				["columns"] = 23,
 				["WARRIOR"] = true,
 				["buttonHeight"] = 36,
-				["alpha"] = 1,
 				["frameStrata"] = "HIGH",
-				["buttonWidth"] = 36,
-				["collapseButtons"] = true,
+				["alpha"] = 1,
 				["PRIEST"] = true,
+				["collapseButtons"] = true,
+				["buttonWidth"] = 36,
 				["WARLOCK"] = true,
 				["PALADIN"] = true,
 				["alignButtons"] = "3",
@@ -1507,6 +1507,16 @@ AutoBarDB = {
 			["buttonList"] = {
 			},
 		},
+		["Collietard - Smolderthorn"] = {
+			["buttonDataList"] = {
+				["AutoBarButtonMount"] = {
+				},
+			},
+			["barList"] = {
+			},
+			["buttonList"] = {
+			},
+		},
 		["Elliottcable - Hyjal"] = {
 			["buttonDataList"] = {
 				["AutoBarButtonMount"] = {
@@ -1527,7 +1537,7 @@ AutoBarDB = {
 			["buttonList"] = {
 			},
 		},
-		["Combatcollie - The Underbog"] = {
+		["Github - Smolderthorn"] = {
 			["buttonDataList"] = {
 				["AutoBarButtonMount"] = {
 				},
@@ -1563,10 +1573,15 @@ AutoBarDB = {
 			["buttonList"] = {
 			},
 		},
-		["Collierape - Smolderthorn"] = {
+		["Fraycollie - Smolderthorn"] = {
 			["buttonDataList"] = {
 				["AutoBarButtonMount"] = {
-					["SetBest"] = nil --[[ skipped inline function ]],
+					["arrangeOnUse"] = "X-53 Touring Rocket",
+					["flyingMount"] = "X-53 Touring Rocket",
+					["groundMount"] = "X-53 Touring Rocket",
+				},
+				["AutoBarButtonPets"] = {
+					["arrangeOnUse"] = "Kirin Tor Familiar",
 				},
 			},
 			["barList"] = {
@@ -1619,15 +1634,12 @@ AutoBarDB = {
 			["buttonList"] = {
 			},
 		},
-		["Fraycollie - Smolderthorn"] = {
+		["Collierape - Smolderthorn"] = {
 			["buttonDataList"] = {
 				["AutoBarButtonMount"] = {
-					["arrangeOnUse"] = "X-53 Touring Rocket",
-					["flyingMount"] = "X-53 Touring Rocket",
-					["groundMount"] = "X-53 Touring Rocket",
-				},
-				["AutoBarButtonPets"] = {
-					["arrangeOnUse"] = "Kirin Tor Familiar",
+					["arrangeOnUse"] = "Striped Frostsaber",
+					["groundMount"] = "Striped Frostsaber",
+					["SetBest"] = nil --[[ skipped inline function ]],
 				},
 			},
 			["barList"] = {
@@ -1635,7 +1647,7 @@ AutoBarDB = {
 			["buttonList"] = {
 			},
 		},
-		["Github - Smolderthorn"] = {
+		["Combatcollie - The Underbog"] = {
 			["buttonDataList"] = {
 				["AutoBarButtonMount"] = {
 				},

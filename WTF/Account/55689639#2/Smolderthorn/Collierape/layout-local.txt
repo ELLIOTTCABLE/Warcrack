@@ -32,7 +32,7 @@ FrameLevel: 0
 Anchor: BOTTOM
 X: 0
 Y: 175
-W: 201
+W: 403
 H: 39
 Frame: SmartBuffOptionsFrame
 FrameLevel: 1

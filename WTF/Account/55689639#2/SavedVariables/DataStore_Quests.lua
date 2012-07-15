@@ -11,18 +11,19 @@ DataStore_QuestsDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -119,7 +120,7 @@ DataStore_QuestsDB = {
 				["lastUpdate"] = 1308332289,
 			},
 			["Default.Smolderthorn.Collierape"] = {
-				["lastUpdate"] = 1341547297,
+				["lastUpdate"] = 1342123700,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["QuestLinks"] = {
@@ -321,6 +322,80 @@ DataStore_QuestsDB = {
 					"1||0|50|0", -- [2]
 				},
 			},
+			["Default.Smolderthorn.Battlecollie"] = {
+				["History"] = {
+					[891] = 4194304,
+					[893] = 16384,
+					[895] = 8,
+					[899] = 16777270,
+					[901] = 67158016,
+					[795] = 2049,
+					[787] = 4096,
+					[789] = 126,
+					[801] = 605552640,
+					[793] = 114688,
+					[858] = 128,
+					[860] = 545259521,
+					[799] = 272632342,
+					[864] = 126976,
+					[866] = 470286336,
+					[805] = 196640785,
+					[870] = 4026531840,
+					[809] = 939524349,
+					[811] = 2147483654,
+					[813] = 3223322632,
+					[815] = 4325633,
+					[817] = 2952790017,
+					[819] = 131104,
+					[884] = 3145728,
+					[414] = 1024,
+					[879] = 66048,
+					[764] = 65536,
+					[892] = 2097152,
+					[412] = 128,
+					[880] = 131264,
+					[453] = 262144,
+					[900] = 2048,
+					[812] = 2181038080,
+					[873] = 786432,
+					[850] = 524544,
+					[820] = 2048,
+					[800] = 569344,
+					[849] = 32,
+					[788] = 2147483649,
+					[802] = 235405376,
+					[792] = 4194304,
+					[794] = 20480,
+					[796] = 2147549188,
+					[798] = 2147483649,
+					[863] = 264192,
+					[865] = 2097152,
+					[867] = 67112976,
+					[861] = 538968064,
+					[408] = 3244032,
+					[810] = 4038591925,
+					[875] = 33554432,
+					[814] = 46,
+					[816] = 2222981120,
+					[413] = 8,
+					[883] = 67108864,
+					[882] = 262976,
+					[807] = 1048577,
+				},
+				["QuestLinks"] = {
+					nil, -- [1]
+					"|cffffff00|Hquest:27899:83|h[That Gleam in his Eye]|h|r", -- [2]
+					"|cffffff00|Hquest:27755:83|h[The Curse of the Tombs]|h|r", -- [3]
+					"|cffffff00|Hquest:28623:84|h[The Push Westward]|h|r", -- [4]
+				},
+				["lastUpdate"] = 1341539826,
+				["Quests"] = {
+					"0|Uldum", -- [1]
+					"1||0|0|0", -- [2]
+					"1||0|86000|0", -- [3]
+					"1||0|45000|0", -- [4]
+				},
+			},
 			["Default.Smolderthorn.Melancollie"] = {
 				["History"] = {
 					[833] = 8,
@@ -364,8 +439,18 @@ DataStore_QuestsDB = {
 					"1|Dungeon|0|13300|1", -- [5]
 				},
 			},
-			["Default.Smolderthorn.Snuffleupaga"] = {
-				["lastUpdate"] = 1341440539,
+			["Default.Smolderthorn.Collietard"] = {
+				["QuestLinks"] = {
+					[2] = "|cffffff00|Hquest:29078:3|h[Beating Them Back!]|h|r",
+				},
+				["lastUpdate"] = 1341910702,
+				["Rewards"] = {
+					[2] = "r|57254|1|0",
+				},
+				["Quests"] = {
+					"0|Elwynn Forest", -- [1]
+					"1||0|50|1", -- [2]
+				},
 			},
 			["Default.Smolderthorn.Hoarcollie"] = {
 				["History"] = {
@@ -373,7 +458,7 @@ DataStore_QuestsDB = {
 					[448] = 197121,
 					[772] = 982,
 					[771] = 65,
-					[835] = 262144,
+					[441] = 542720,
 					[449] = 3221231617,
 					[840] = 54525952,
 					[424] = 302252032,
@@ -400,83 +485,12 @@ DataStore_QuestsDB = {
 					[447] = 2097408,
 					[770] = 1049344,
 					[817] = 131072,
-					[441] = 542720,
+					[835] = 262144,
 				},
 				["lastUpdate"] = 1341539952,
 			},
-			["Default.Smolderthorn.Battlecollie"] = {
-				["History"] = {
-					[891] = 4194304,
-					[893] = 16384,
-					[895] = 8,
-					[899] = 16777270,
-					[901] = 67158016,
-					[858] = 128,
-					[787] = 4096,
-					[789] = 126,
-					[864] = 126976,
-					[793] = 114688,
-					[795] = 2049,
-					[860] = 545259521,
-					[799] = 272632342,
-					[801] = 605552640,
-					[866] = 470286336,
-					[805] = 196640785,
-					[807] = 1048577,
-					[809] = 939524349,
-					[811] = 2147483654,
-					[813] = 3223322632,
-					[815] = 4325633,
-					[817] = 2952790017,
-					[882] = 262976,
-					[884] = 3145728,
-					[414] = 1024,
-					[879] = 66048,
-					[764] = 65536,
-					[892] = 2097152,
-					[412] = 128,
-					[880] = 131264,
-					[453] = 262144,
-					[900] = 2048,
-					[812] = 2181038080,
-					[873] = 786432,
-					[850] = 524544,
-					[820] = 2048,
-					[800] = 569344,
-					[849] = 32,
-					[788] = 2147483649,
-					[802] = 235405376,
-					[792] = 4194304,
-					[794] = 20480,
-					[796] = 2147549188,
-					[861] = 538968064,
-					[863] = 264192,
-					[865] = 2097152,
-					[867] = 67112976,
-					[798] = 2147483649,
-					[408] = 3244032,
-					[810] = 4038591925,
-					[875] = 33554432,
-					[814] = 46,
-					[816] = 2222981120,
-					[413] = 8,
-					[883] = 67108864,
-					[819] = 131104,
-					[870] = 4026531840,
-				},
-				["QuestLinks"] = {
-					nil, -- [1]
-					"|cffffff00|Hquest:27899:83|h[That Gleam in his Eye]|h|r", -- [2]
-					"|cffffff00|Hquest:27755:83|h[The Curse of the Tombs]|h|r", -- [3]
-					"|cffffff00|Hquest:28623:84|h[The Push Westward]|h|r", -- [4]
-				},
-				["lastUpdate"] = 1341539826,
-				["Quests"] = {
-					"0|Uldum", -- [1]
-					"1||0|0|0", -- [2]
-					"1||0|86000|0", -- [3]
-					"1||0|45000|0", -- [4]
-				},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["lastUpdate"] = 1341440539,
 			},
 			["Default.Smolderthorn.Wattlecollie"] = {
 				["History"] = {
@@ -488,13 +502,13 @@ DataStore_QuestsDB = {
 					[779] = 256,
 					[449] = 2147489793,
 					[450] = 134496258,
-					[451] = 69634,
+					[780] = 4,
 					[766] = 2097152,
 					[769] = 196608,
 					[765] = 1048576,
-					[780] = 4,
+					[451] = 69634,
 				},
-				["lastUpdate"] = 1341545773,
+				["lastUpdate"] = 1341910242,
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["QuestLinks"] = {

@@ -11,18 +11,19 @@ DataStore_PetsDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["Reference"] = {
@@ -83,6 +84,7 @@ DataStore_PetsDB = {
 				[10709] = 14421,
 				[10711] = 7560,
 				[12243] = 8376,
+				[66847] = 35168,
 				[6777] = 4710,
 				[69541] = 36911,
 				[13548] = 30379,
@@ -127,32 +129,32 @@ DataStore_PetsDB = {
 				[10717] = 7567,
 				[61447] = 32640,
 				[95909] = 51649,
-				[10674] = 7384,
+				[18989] = 12149,
 				[61230] = 32336,
 				[62513] = 33198,
 				[44369] = 24753,
-				[93836] = 46898,
+				[10678] = 7381,
 				[6899] = 4779,
 				[6898] = 4777,
 				[65358] = 34364,
 				[75906] = 40703,
-				[64657] = 34155,
-				[32245] = 18365,
-				[18989] = 12149,
-				[10676] = 7382,
-				[10678] = 7381,
-				[10680] = 7390,
 				[10682] = 7391,
-				[10684] = 7389,
+				[32245] = 18365,
+				[10674] = 7384,
+				[10676] = 7382,
+				[93836] = 46898,
+				[10680] = 7390,
+				[64657] = 34155,
+				[61350] = 32592,
 				[36031] = 21056,
 				[10688] = 7395,
 				[8395] = 6075,
 				[32289] = 18376,
-				[40990] = 23274,
+				[110029] = 58163,
 				[15048] = 9656,
 				[32297] = 18379,
-				[110029] = 58163,
-				[61350] = 32592,
+				[40990] = 23274,
+				[10684] = 7389,
 				[10704] = 7549,
 				[10706] = 7555,
 				[15049] = 9657,
@@ -256,17 +258,28 @@ DataStore_PetsDB = {
 				},
 			},
 			["Default.Smolderthorn.Collierape"] = {
-				["lastUpdate"] = 1341547297,
+				["lastUpdate"] = 1342126807,
 				["CRITTER"] = {
 					99578, -- [1]
-					69535, -- [2]
-					69677, -- [3]
-					95787, -- [4]
-					75906, -- [5]
-					95786, -- [6]
-					69541, -- [7]
-					110029, -- [8]
-					69536, -- [9]
+					93838, -- [2]
+					69535, -- [3]
+					69677, -- [4]
+					95787, -- [5]
+					75906, -- [6]
+					95786, -- [7]
+					69541, -- [8]
+					110029, -- [9]
+					69536, -- [10]
+				},
+				["MOUNT"] = {
+					75614, -- [1]
+					110051, -- [2]
+					10789, -- [3]
+					66847, -- [4]
+					8394, -- [5]
+					10793, -- [6]
+					107203, -- [7]
+					98727, -- [8]
 				},
 			},
 			["Default.The Underbog.Fraycollie"] = {
@@ -500,63 +513,6 @@ DataStore_PetsDB = {
 					69536, -- [8]
 				},
 			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1341539607,
-				["MOUNT"] = {
-					10969, -- [1]
-					75614, -- [2]
-					17453, -- [3]
-					110051, -- [4]
-					10873, -- [5]
-					107203, -- [6]
-					17454, -- [7]
-					98727, -- [8]
-				},
-				["CRITTER"] = {
-					99578, -- [1]
-					69535, -- [2]
-					69677, -- [3]
-					95787, -- [4]
-					75906, -- [5]
-					95786, -- [6]
-					69541, -- [7]
-					110029, -- [8]
-					69536, -- [9]
-				},
-			},
-			["Default.Smolderthorn.Snuffleupaga"] = {
-				["lastUpdate"] = 1341440539,
-				["CRITTER"] = {
-					99578, -- [1]
-					69535, -- [2]
-					69677, -- [3]
-					95787, -- [4]
-					75906, -- [5]
-					95909, -- [6]
-					69541, -- [7]
-					110029, -- [8]
-					69536, -- [9]
-				},
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1341539952,
-				["MOUNT"] = {
-					75614, -- [1]
-					98727, -- [2]
-				},
-				["CRITTER"] = {
-					99578, -- [1]
-					10707, -- [2]
-					69535, -- [3]
-					10706, -- [4]
-					69677, -- [5]
-					95787, -- [6]
-					75906, -- [7]
-					95786, -- [8]
-					69541, -- [9]
-					69536, -- [10]
-				},
-			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["lastUpdate"] = 1341539828,
 				["CRITTER"] = {
@@ -669,8 +625,68 @@ DataStore_PetsDB = {
 					75973, -- [25]
 				},
 			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1341539607,
+				["MOUNT"] = {
+					10969, -- [1]
+					75614, -- [2]
+					17453, -- [3]
+					110051, -- [4]
+					10873, -- [5]
+					107203, -- [6]
+					17454, -- [7]
+					98727, -- [8]
+				},
+				["CRITTER"] = {
+					99578, -- [1]
+					69535, -- [2]
+					69677, -- [3]
+					95787, -- [4]
+					75906, -- [5]
+					95786, -- [6]
+					69541, -- [7]
+					110029, -- [8]
+					69536, -- [9]
+				},
+			},
+			["Default.Smolderthorn.Collietard"] = {
+				["lastUpdate"] = 1341910468,
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1341539952,
+				["MOUNT"] = {
+					75614, -- [1]
+					98727, -- [2]
+				},
+				["CRITTER"] = {
+					99578, -- [1]
+					10707, -- [2]
+					69535, -- [3]
+					10706, -- [4]
+					69677, -- [5]
+					95787, -- [6]
+					75906, -- [7]
+					95786, -- [8]
+					69541, -- [9]
+					69536, -- [10]
+				},
+			},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["lastUpdate"] = 1341440539,
+				["CRITTER"] = {
+					99578, -- [1]
+					69535, -- [2]
+					69677, -- [3]
+					95787, -- [4]
+					75906, -- [5]
+					95909, -- [6]
+					69541, -- [7]
+					110029, -- [8]
+					69536, -- [9]
+				},
+			},
 			["Default.Smolderthorn.Wattlecollie"] = {
-				["lastUpdate"] = 1341545773,
+				["lastUpdate"] = 1341910242,
 			},
 			["Default.Ysondre.Summoneer"] = {
 				["lastUpdate"] = 1307913962,

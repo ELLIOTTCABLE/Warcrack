@@ -5,18 +5,21 @@ ExplorerCoords_Config = {
 }
 ExplorerCoord = {
 	["The Hinterlands"] = {
-		["Shaol'watha"] = {
-			["y"] = 0.543413,
-			["x"] = 0.732535,
+		["Quel'Danil Lodge"] = {
+			["y"] = 0.458084,
+			["x"] = 0.332834,
 		},
-		["catid"] = 773,
+		["The Overlook Cliffs"] = {
+			["y"] = 0.6617,
+			["x"] = 0.7266,
+		},
 		["Jintha'Alor"] = {
 			["y"] = 0.743263,
 			["x"] = 0.630739,
 		},
-		["Quel'Danil Lodge"] = {
-			["y"] = 0.458084,
-			["x"] = 0.332834,
+		["Shaol'watha"] = {
+			["y"] = 0.543413,
+			["x"] = 0.732535,
 		},
 		["Plaguemist Ravine"] = {
 			["y"] = 0.336078,
@@ -58,10 +61,7 @@ ExplorerCoord = {
 			["y"] = -1,
 			["x"] = -1,
 		},
-		["The Overlook Cliffs"] = {
-			["y"] = 0.6617,
-			["x"] = 0.7266,
-		},
+		["catid"] = 773,
 	},
 	["Shimmering Expanse"] = {
 		["Nespirah"] = {
@@ -238,17 +238,17 @@ ExplorerCoord = {
 			["y"] = 0.432635,
 			["x"] = 0.466567,
 		},
-		["Bonechewer Ruins"] = {
-			["y"] = 0.523204,
-			["x"] = 0.66517,
+		["Tuurem"] = {
+			["y"] = 0.293413,
+			["x"] = 0.52994,
 		},
 		["Carrion Hill"] = {
 			["y"] = 0.51,
 			["x"] = 0.43,
 		},
-		["Tuurem"] = {
-			["y"] = 0.293413,
-			["x"] = 0.52994,
+		["Bonechewer Ruins"] = {
+			["y"] = 0.523204,
+			["x"] = 0.66517,
 		},
 		["Writhing Mound"] = {
 			["y"] = 0.66,
@@ -262,9 +262,9 @@ ExplorerCoord = {
 			["y"] = 0.72,
 			["x"] = 0.33,
 		},
-		["Allerian Stronghold"] = {
-			["y"] = 0.568114,
-			["x"] = 0.570858,
+		["Grangol'var Village"] = {
+			["y"] = 0.39521,
+			["x"] = 0.39521,
 		},
 		["Veil Rhaze"] = {
 			["y"] = 0.599,
@@ -286,9 +286,9 @@ ExplorerCoord = {
 			["y"] = 0.761,
 			["x"] = 0.439,
 		},
-		["Grangol'var Village"] = {
-			["y"] = 0.39521,
-			["x"] = 0.39521,
+		["Allerian Stronghold"] = {
+			["y"] = 0.568114,
+			["x"] = 0.570858,
 		},
 		["The Barrier Hills"] = {
 			["y"] = 0.106287,
@@ -423,9 +423,9 @@ ExplorerCoord = {
 			["y"] = 0.737275,
 			["x"] = 0.439122,
 		},
-		["Azurebreeze Coast"] = {
-			["y"] = 0.454341,
-			["x"] = 0.716068,
+		["Elrendar Falls"] = {
+			["y"] = 0.732784,
+			["x"] = 0.645709,
 		},
 		["Stillwhisper Pond"] = {
 			["y"] = 0.56512,
@@ -447,9 +447,9 @@ ExplorerCoord = {
 			["y"] = 0.750749,
 			["x"] = 0.23503,
 		},
-		["Elrendar Falls"] = {
-			["y"] = 0.732784,
-			["x"] = 0.645709,
+		["Azurebreeze Coast"] = {
+			["y"] = 0.454341,
+			["x"] = 0.716068,
 		},
 		["Zeb'Watha"] = {
 			["y"] = 0.794162,
@@ -656,13 +656,13 @@ ExplorerCoord = {
 			["y"] = 0.168413,
 			["x"] = 0.836327,
 		},
-		["Altar of Mam'toth"] = {
-			["y"] = 0.457335,
-			["x"] = 0.732535,
-		},
 		["Thrym's End"] = {
 			["y"] = 0.574102,
 			["x"] = 0.168663,
+		},
+		["Altar of Mam'toth"] = {
+			["y"] = 0.457335,
+			["x"] = 0.732535,
 		},
 		["Altar of Har'koa"] = {
 			["y"] = 0.69012,
@@ -958,13 +958,13 @@ ExplorerCoord = {
 			["y"] = 0.477545,
 			["x"] = 0.491517,
 		},
-		["The Quaking Fields"] = {
-			["y"] = 0.8038920000000001,
-			["x"] = 0.352794,
-		},
 		["Therazane's Throne"] = {
 			["y"] = 0.11003,
 			["x"] = 0.565369,
+		},
+		["The Quaking Fields"] = {
+			["y"] = 0.8038920000000001,
+			["x"] = 0.352794,
 		},
 		["Crimson Expanse"] = {
 			["y"] = 0.408683,
@@ -1026,13 +1026,13 @@ ExplorerCoord = {
 			["y"] = 0.652695,
 			["x"] = 0.26497,
 		},
-		["Silvermyst Isle"] = {
-			["y"] = 0.786677,
-			["x"] = 0.127246,
-		},
 		["Wrathscale Point"] = {
 			["y"] = 0.79491,
 			["x"] = 0.31986,
+		},
+		["Silvermyst Isle"] = {
+			["y"] = 0.786677,
+			["x"] = 0.127246,
 		},
 		["Valaar's Berth"] = {
 			["y"] = 0.541916,
@@ -1180,21 +1180,21 @@ ExplorerCoord = {
 			["y"] = 0.377246,
 			["x"] = 0.379741,
 		},
-		["The Twilight Breach"] = {
-			["y"] = 0.466317,
-			["x"] = 0.399701,
+		["Obsidian Forest"] = {
+			["y"] = 0.789671,
+			["x"] = 0.643214,
 		},
-		["Highbank"] = {
-			["y"] = 0.77021,
-			["x"] = 0.806886,
+		["Firebeard's Patrol"] = {
+			["y"] = 0.567365,
+			["x"] = 0.612275,
 		},
 		["Glopgut's Hollow"] = {
 			["y"] = 0.291916,
 			["x"] = 0.382236,
 		},
-		["Firebeard's Patrol"] = {
-			["y"] = 0.567365,
-			["x"] = 0.612275,
+		["Highbank"] = {
+			["y"] = 0.77021,
+			["x"] = 0.806886,
 		},
 		["The Krazzworks"] = {
 			["y"] = 0.146707,
@@ -1212,9 +1212,9 @@ ExplorerCoord = {
 			["y"] = 0.428892,
 			["x"] = 0.540419,
 		},
-		["Crucible of Carnage"] = {
-			["y"] = 0.569611,
-			["x"] = 0.506986,
+		["Vermillion Redoubt"] = {
+			["y"] = 0.211078,
+			["x"] = 0.252994,
 		},
 		["The Maw of Madness"] = {
 			["y"] = 0.107784,
@@ -1228,9 +1228,9 @@ ExplorerCoord = {
 			["y"] = 0.63,
 			["x"] = 0.54,
 		},
-		["Vermillion Redoubt"] = {
-			["y"] = 0.211078,
-			["x"] = 0.252994,
+		["Crucible of Carnage"] = {
+			["y"] = 0.569611,
+			["x"] = 0.506986,
 		},
 		["Humboldt Conflagration"] = {
 			["y"] = 0.2741,
@@ -1244,9 +1244,9 @@ ExplorerCoord = {
 			["y"] = 0.378743,
 			["x"] = 0.262974,
 		},
-		["Obsidian Forest"] = {
-			["y"] = 0.789671,
-			["x"] = 0.643214,
+		["The Twilight Breach"] = {
+			["y"] = 0.466317,
+			["x"] = 0.399701,
 		},
 	},
 	["Elwynn Forest"] = {
@@ -1546,13 +1546,13 @@ ExplorerCoord = {
 			["y"] = 0.407934,
 			["x"] = 0.578842,
 		},
-		["Raptor Ridge"] = {
-			["y"] = 0.349551,
-			["x"] = 0.679142,
-		},
 		["Sundown Marsh"] = {
 			["y"] = 0.2432,
 			["x"] = 0.2446,
+		},
+		["Raptor Ridge"] = {
+			["y"] = 0.349551,
+			["x"] = 0.679142,
 		},
 		["Angerfang Encampment"] = {
 			["y"] = 0.481287,
@@ -1615,9 +1615,9 @@ ExplorerCoord = {
 			["y"] = 0.125,
 			["x"] = 0.347804,
 		},
-		["Deep Elem Mine"] = {
-			["y"] = 0.45509,
-			["x"] = 0.592814,
+		["The Forsaken Front"] = {
+			["y"] = 0.667665,
+			["x"] = 0.509481,
 		},
 		["catid"] = 769,
 		["The Decrepit Fields"] = {
@@ -1628,13 +1628,13 @@ ExplorerCoord = {
 			["y"] = 0.280689,
 			["x"] = 0.373752,
 		},
-		["Olsen's Farthing"] = {
-			["y"] = 0.511228,
-			["x"] = 0.460579,
+		["Forsaken High Command"] = {
+			["y"] = 0.087575,
+			["x"] = 0.620758,
 		},
-		["The Forsaken Front"] = {
-			["y"] = 0.667665,
-			["x"] = 0.509481,
+		["Deep Elem Mine"] = {
+			["y"] = 0.45509,
+			["x"] = 0.592814,
 		},
 		["Valgan's Field"] = {
 			["y"] = 0.258234,
@@ -1668,9 +1668,9 @@ ExplorerCoord = {
 			["y"] = -1,
 			["x"] = -1,
 		},
-		["Forsaken High Command"] = {
-			["y"] = 0.087575,
-			["x"] = 0.620758,
+		["Olsen's Farthing"] = {
+			["y"] = 0.511228,
+			["x"] = 0.460579,
 		},
 	},
 	["Stonetalon Mountains"] = {
@@ -2127,13 +2127,13 @@ ExplorerCoord = {
 			["y"] = 0.788174,
 			["x"] = 0.363772,
 		},
-		["Sylvanaar"] = {
-			["y"] = 0.65494,
-			["x"] = 0.369261,
-		},
 		["Vortex Summit"] = {
 			["y"] = 0.59506,
 			["x"] = 0.304391,
+		},
+		["Sylvanaar"] = {
+			["y"] = 0.65494,
+			["x"] = 0.369261,
 		},
 		["Crystal Spine"] = {
 			["y"] = 0.109281,
@@ -2171,13 +2171,13 @@ ExplorerCoord = {
 			["y"] = 0.366018,
 			["x"] = 0.611776,
 		},
-		["Mok'Nathal Village"] = {
-			["y"] = 0.627246,
-			["x"] = 0.738523,
-		},
 		["Forge Camp: Wrath"] = {
 			["y"] = 0.411677,
 			["x"] = 0.33483,
+		},
+		["Mok'Nathal Village"] = {
+			["y"] = 0.627246,
+			["x"] = 0.738523,
 		},
 		["Forge Camp: Terror"] = {
 			["y"] = 0.811377,
@@ -2327,14 +2327,14 @@ ExplorerCoord = {
 			["y"] = 0.79,
 			["x"] = 0.32,
 		},
-		["Cenarion Hold"] = {
-			["y"] = 0.343563,
-			["x"] = 0.543912,
-		},
-		["catid"] = 856,
 		["The Crystal Vale"] = {
 			["y"] = 0.161677,
 			["x"] = 0.308882,
+		},
+		["catid"] = 856,
+		["Cenarion Hold"] = {
+			["y"] = 0.343563,
+			["x"] = 0.543912,
 		},
 	},
 	["Sholazar Basin"] = {
@@ -2417,17 +2417,17 @@ ExplorerCoord = {
 			["y"] = 0.593563,
 			["x"] = 0.7794410000000001,
 		},
-		["Amberpine Lodge"] = {
-			["y"] = 0.58009,
-			["x"] = 0.313373,
+		["Conquest Hold"] = {
+			["y"] = 0.654192,
+			["x"] = 0.213074,
 		},
 		["Drakil'jin Ruins"] = {
 			["y"] = 0.27994,
 			["x"] = 0.717565,
 		},
-		["Conquest Hold"] = {
-			["y"] = 0.654192,
-			["x"] = 0.213074,
+		["Amberpine Lodge"] = {
+			["y"] = 0.58009,
+			["x"] = 0.313373,
 		},
 		["Rage Fang Shrine"] = {
 			["y"] = 0.572605,
@@ -2540,17 +2540,17 @@ ExplorerCoord = {
 			["y"] = 0.845808,
 			["x"] = 0.487026,
 		},
-		["The Heap"] = {
-			["y"] = 0.7761980000000001,
-			["x"] = 0.283932,
-		},
-		["Forge Base: Oblivion"] = {
-			["y"] = 0.26497,
-			["x"] = 0.37525,
-		},
 		["Arklon Ruins"] = {
 			["y"] = 0.735778,
 			["x"] = 0.397705,
+		},
+		["Socrethar's Seat"] = {
+			["y"] = 0.16018,
+			["x"] = 0.299401,
+		},
+		["The Heap"] = {
+			["y"] = 0.7761980000000001,
+			["x"] = 0.283932,
 		},
 		["Kirin'Var Village"] = {
 			["y"] = 0.885479,
@@ -2560,13 +2560,13 @@ ExplorerCoord = {
 			["y"] = 0.779192,
 			["x"] = 0.559381,
 		},
-		["Ruins of Farahlon"] = {
-			["y"] = 0.21482,
-			["x"] = 0.544411,
+		["Manaforge Duro"] = {
+			["y"] = 0.682635,
+			["x"] = 0.595309,
 		},
-		["Socrethar's Seat"] = {
-			["y"] = 0.16018,
-			["x"] = 0.299401,
+		["Forge Base: Oblivion"] = {
+			["y"] = 0.26497,
+			["x"] = 0.37525,
 		},
 		["Gyro-Plank Bridge"] = {
 			["y"] = 0.560629,
@@ -2588,9 +2588,9 @@ ExplorerCoord = {
 			["y"] = 0.383234,
 			["x"] = 0.616267,
 		},
-		["Manaforge Duro"] = {
-			["y"] = 0.682635,
-			["x"] = 0.595309,
+		["Ruins of Farahlon"] = {
+			["y"] = 0.21482,
+			["x"] = 0.544411,
 		},
 		["Ethereum Staging Grounds"] = {
 			["y"] = 0.436377,
@@ -2928,13 +2928,13 @@ ExplorerCoord = {
 			["y"] = 0.519461,
 			["x"] = 0.840818,
 		},
-		["New Tinkertown"] = {
-			["y"] = 0.3764,
-			["x"] = 0.3378,
-		},
 		["The Grizzled Den"] = {
 			["y"] = 0.529192,
 			["x"] = 0.483533,
+		},
+		["New Tinkertown"] = {
+			["y"] = 0.3764,
+			["x"] = 0.3378,
 		},
 		["The Tundrid Hills"] = {
 			["y"] = 0.5407,
@@ -2994,9 +2994,9 @@ ExplorerCoord = {
 			["x"] = 0.531936,
 		},
 		["catid"] = 4825,
-		["The Clutch"] = {
-			["y"] = 0.813623,
-			["x"] = 0.587824,
+		["The Skeletal Reef"] = {
+			["y"] = -1,
+			["x"] = -1,
 		},
 		["Seafarer's Tomb"] = {
 			["y"] = 0.243263,
@@ -3006,9 +3006,9 @@ ExplorerCoord = {
 			["y"] = 0.58982,
 			["x"] = 0.614271,
 		},
-		["The Skeletal Reef"] = {
-			["y"] = -1,
-			["x"] = -1,
+		["The Clutch"] = {
+			["y"] = 0.813623,
+			["x"] = 0.587824,
 		},
 		["Legion's Fate"] = {
 			["y"] = 0.297156,
@@ -3056,25 +3056,25 @@ ExplorerCoord = {
 			["y"] = 0.644461,
 			["x"] = 0.678643,
 		},
-		["Frostwhisper Gorge"] = {
-			["y"] = 0.856287,
-			["x"] = 0.597804,
-		},
-		["The Hidden Grove"] = {
-			["y"] = 0.247754,
-			["x"] = 0.627246,
-		},
-		["Everlook"] = {
-			["y"] = 0.490269,
-			["x"] = 0.5998,
+		["Frostsaber Rock"] = {
+			["y"] = 0.156437,
+			["x"] = 0.454092,
 		},
 		["Winterfall Village"] = {
 			["y"] = 0.48503,
 			["x"] = 0.680639,
 		},
-		["Frostsaber Rock"] = {
-			["y"] = 0.156437,
-			["x"] = 0.454092,
+		["Frostwhisper Gorge"] = {
+			["y"] = 0.856287,
+			["x"] = 0.597804,
+		},
+		["Everlook"] = {
+			["y"] = 0.490269,
+			["x"] = 0.5998,
+		},
+		["The Hidden Grove"] = {
+			["y"] = 0.247754,
+			["x"] = 0.627246,
 		},
 		["Timbermaw Post"] = {
 			["y"] = 0.568862,
@@ -3190,9 +3190,9 @@ ExplorerCoord = {
 			["y"] = 0.211078,
 			["x"] = 0.734032,
 		},
-		["Tel'athion's Camp"] = {
-			["y"] = 0.413174,
-			["x"] = 0.244511,
+		["The Lost Fold"] = {
+			["y"] = 0.811377,
+			["x"] = 0.5743509999999999,
 		},
 		["Bloodcurse Isle"] = {
 			["y"] = 0.529192,
@@ -3202,9 +3202,9 @@ ExplorerCoord = {
 			["y"] = 0.30988,
 			["x"] = 0.188623,
 		},
-		["The Lost Fold"] = {
-			["y"] = 0.811377,
-			["x"] = 0.5743509999999999,
+		["Tel'athion's Camp"] = {
+			["y"] = 0.413174,
+			["x"] = 0.244511,
 		},
 		["The Foul Pool"] = {
 			["y"] = 0.369012,
@@ -3261,14 +3261,6 @@ ExplorerCoord = {
 			["y"] = 0.180389,
 			["x"] = 0.463573,
 		},
-		["Ruins of Feathermoon"] = {
-			["y"] = 0.492515,
-			["x"] = 0.285429,
-		},
-		["The Writhing Deep"] = {
-			["y"] = 0.625749,
-			["x"] = 0.758982,
-		},
 		["Darkmist Ruins"] = {
 			["y"] = 0.586078,
 			["x"] = 0.647705,
@@ -3276,6 +3268,14 @@ ExplorerCoord = {
 		["The Forgotten Coast"] = {
 			["y"] = 0.4942,
 			["x"] = 0.4976,
+		},
+		["Ruins of Feathermoon"] = {
+			["y"] = 0.492515,
+			["x"] = 0.285429,
+		},
+		["The Writhing Deep"] = {
+			["y"] = 0.625749,
+			["x"] = 0.758982,
 		},
 		["Grimtotem Compound"] = {
 			["y"] = 0.404192,
@@ -3296,9 +3296,9 @@ ExplorerCoord = {
 			["x"] = 0.472056,
 		},
 		["catid"] = 770,
-		["The Bulwark"] = {
-			["y"] = 0.577844,
-			["x"] = 0.270958,
+		["Andorhal"] = {
+			["y"] = 0.677395,
+			["x"] = 0.435629,
 		},
 		["Darrowmere Lake"] = {
 			["y"] = -1,
@@ -3308,9 +3308,9 @@ ExplorerCoord = {
 			["y"] = 0.4573,
 			["x"] = 0.4592,
 		},
-		["Andorhal"] = {
-			["y"] = 0.677395,
-			["x"] = 0.435629,
+		["The Bulwark"] = {
+			["y"] = 0.577844,
+			["x"] = 0.270958,
 		},
 		["Felstone Field"] = {
 			["y"] = 0.546407,
@@ -3324,17 +3324,17 @@ ExplorerCoord = {
 			["y"] = 0.512725,
 			["x"] = 0.451597,
 		},
-		["The Writhing Haunt"] = {
-			["y"] = 0.663922,
-			["x"] = 0.548902,
+		["The Weeping Cave"] = {
+			["y"] = 0.402695,
+			["x"] = 0.643713,
 		},
 		["Sorrow Hill"] = {
 			["y"] = 0.8561,
 			["x"] = 0.5461,
 		},
-		["The Weeping Cave"] = {
-			["y"] = 0.402695,
-			["x"] = 0.643713,
+		["The Writhing Haunt"] = {
+			["y"] = 0.663922,
+			["x"] = 0.548902,
 		},
 		["Gahrron's Withering"] = {
 			["y"] = 0.583084,
@@ -3405,17 +3405,17 @@ ExplorerCoord = {
 			["y"] = 0.52994,
 			["x"] = 0.544411,
 		},
-		["Surwich"] = {
-			["y"] = 0.861527,
-			["x"] = 0.44511,
+		["Nethergarde Supply Camps"] = {
+			["y"] = 0.14,
+			["x"] = 0.506,
 		},
 		["The Tainted Forest"] = {
 			["y"] = 0.7238019999999999,
 			["x"] = 0.342315,
 		},
-		["Nethergarde Supply Camps"] = {
-			["y"] = 0.14,
-			["x"] = 0.506,
+		["Surwich"] = {
+			["y"] = 0.861527,
+			["x"] = 0.44511,
 		},
 		["Rise of the Defiler"] = {
 			["y"] = 0.268713,
@@ -3741,9 +3741,9 @@ ExplorerCoord = {
 			["y"] = 0.141467,
 			["x"] = 0.39521,
 		},
-		["The Stagnant Oasis"] = {
-			["y"] = 0.78518,
-			["x"] = 0.556886,
+		["Grol'dom Farm"] = {
+			["y"] = 0.411677,
+			["x"] = 0.548403,
 		},
 		["The Sludge Fen"] = {
 			["y"] = 0.186377,
@@ -3753,9 +3753,9 @@ ExplorerCoord = {
 			["y"] = 0.717814,
 			["x"] = 0.663673,
 		},
-		["Grol'dom Farm"] = {
-			["y"] = 0.411677,
-			["x"] = 0.548403,
+		["The Stagnant Oasis"] = {
+			["y"] = 0.78518,
+			["x"] = 0.556886,
 		},
 		["Boulder Lode Mine"] = {
 			["y"] = 0.120509,
@@ -4031,9 +4031,9 @@ ExplorerCoord = {
 			["y"] = 0.738772,
 			["x"] = 0.33982,
 		},
-		["Nethander Stead"] = {
-			["y"] = 0.739521,
-			["x"] = 0.586327,
+		["Crushridge Hold"] = {
+			["y"] = -1,
+			["x"] = -1,
 		},
 		["Growless Cave"] = {
 			["y"] = 0.386228,
@@ -4043,7 +4043,7 @@ ExplorerCoord = {
 			["y"] = 0.331587,
 			["x"] = 0.681637,
 		},
-		["Slaughter Hollow"] = {
+		["Gallows' Corner"] = {
 			["y"] = -1,
 			["x"] = -1,
 		},
@@ -4056,7 +4056,7 @@ ExplorerCoord = {
 			["y"] = 0.636976,
 			["x"] = 0.29491,
 		},
-		["Gallows' Corner"] = {
+		["Slaughter Hollow"] = {
 			["y"] = -1,
 			["x"] = -1,
 		},
@@ -4064,9 +4064,9 @@ ExplorerCoord = {
 			["y"] = 0.485778,
 			["x"] = 0.441617,
 		},
-		["Crushridge Hold"] = {
-			["y"] = -1,
-			["x"] = -1,
+		["Nethander Stead"] = {
+			["y"] = 0.739521,
+			["x"] = 0.586327,
 		},
 		["Gavin's Naze"] = {
 			["y"] = 0.476796,

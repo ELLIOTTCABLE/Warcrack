@@ -11,18 +11,19 @@ DataStoreDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -46,6 +47,7 @@ DataStoreDB = {
 				["guildName"] = "Clan of the Skulls",
 			},
 			["Default.Smolderthorn.Collierape"] = {
+				["guildName"] = "Tailored Out",
 				["faction"] = "Alliance",
 			},
 			["Default.The Underbog.Fraycollie"] = {
@@ -77,20 +79,23 @@ DataStoreDB = {
 			["Default.Hyjal.Elliottcable"] = {
 				["faction"] = "Horde",
 			},
+			["Default.Smolderthorn.Battlecollie"] = {
+				["guildName"] = "LEAFEA",
+				["faction"] = "Alliance",
+			},
 			["Default.Smolderthorn.Melancollie"] = {
 				["faction"] = "Alliance",
 				["guildName"] = "LEAFEA",
 			},
-			["Default.Smolderthorn.Snuffleupaga"] = {
-				["faction"] = "Horde",
+			["Default.Smolderthorn.Collietard"] = {
+				["faction"] = "Alliance",
 			},
 			["Default.Smolderthorn.Hoarcollie"] = {
 				["faction"] = "Alliance",
 				["guildName"] = "LEAFEA",
 			},
-			["Default.Smolderthorn.Battlecollie"] = {
-				["guildName"] = "LEAFEA",
-				["faction"] = "Alliance",
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["faction"] = "Horde",
 			},
 			["Default.Smolderthorn.Wattlecollie"] = {
 				["faction"] = "Alliance",
@@ -101,6 +106,9 @@ DataStoreDB = {
 			},
 		},
 		["Guilds"] = {
+			["Default.Smolderthorn.Tailored Out"] = {
+				["faction"] = "Alliance",
+			},
 			["Default.Smolderthorn.LEAFEA"] = {
 				["faction"] = "Alliance",
 			},

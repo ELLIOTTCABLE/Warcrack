@@ -10,15 +10,16 @@ BFactions_DB = {
 		["Othercollie - Smolderthorn"] = "Default",
 		["Fraycollie - The Underbog"] = "Default",
 		["Warmongrel - Ysondre"] = "Default",
+		["Collietard - Smolderthorn"] = "Default",
 		["Combatcollie - The Underbog"] = "Default",
 		["Wattlecollie - Smolderthorn"] = "Default",
 		["Github - Smolderthorn"] = "Default",
-		["Collierape - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
 		["Armscollie - Akama"] = "Default",
 		["Hoarcollie - Smolderthorn"] = "Default",
 		["Snuffleupaga - Smolderthorn"] = "Default",
 		["Warcollie - Darkspear"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
+		["Collierape - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Default",
 	},
 	["factionrealm"] = {
@@ -254,6 +255,34 @@ BFactions_DB = {
 				},
 			},
 			["Warcollie"] = {
+				["options"] = {
+					["display"] = {
+						["showPercentage"] = false,
+						["debug"] = false,
+						["showCollapsedHeaders"] = true,
+						["showRawValues"] = true,
+						["hideExalted"] = false,
+						["tipscale"] = 1,
+						["minimap_icon"] = {
+							["hide"] = true,
+						},
+						["autoHideDelay"] = 0.1,
+						["showSessionGains"] = false,
+						["dbVersion"] = "1.5",
+						["showHintLines"] = true,
+						["showRemainingRep"] = false,
+					},
+					["text"] = {
+						["showPercentage"] = false,
+						["showText"] = false,
+						["showRawValues"] = true,
+						["watchedFaction"] = "",
+						["showSessionGains"] = false,
+						["showRemainingRep"] = false,
+					},
+				},
+			},
+			["Collietard"] = {
 				["options"] = {
 					["display"] = {
 						["showPercentage"] = false,

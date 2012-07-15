@@ -16,7 +16,7 @@ AsheylaLib_Settings = {
 			},
 			["mouseoverFadeTime"] = 0.25,
 			["updatedSettingsMouseover5.0"] = true,
-			["sortTarget"] = true,
+			["updatedSettings4.3"] = true,
 			["partyBuffs"] = {
 				[" spirit"] = 1,
 				["soulstone"] = 1,
@@ -24,13 +24,13 @@ AsheylaLib_Settings = {
 				["thorns"] = 1,
 				["blessing of"] = 1,
 				["fortitude"] = 1,
-				["^elixir"] = 1,
+				["arcane"] = 1,
 				["shout"] = 1,
 				["of the wild"] = 1,
-				["arcane"] = 1,
+				["^elixir"] = 1,
 				["^potion"] = 1,
 			},
-			["updatedSettings4.3"] = true,
+			["sortTarget"] = true,
 		},
 		["TimerLib"] = {
 			["timerSettings"] = {
@@ -120,8 +120,8 @@ AsheylaLib_Settings = {
 					["anchorPoint"] = "TOPLEFT",
 					["mouseoverAlpha"] = 1,
 					["positionX"] = 793.1284790039062,
-					["relativePoint"] = "BOTTOMLEFT",
 					["groupSpacing"] = 5,
+					["relativePoint"] = "BOTTOMLEFT",
 					["expectedScale"] = 0.6399999856948853,
 					["overflowDirection"] = "right",
 					["moveName"] = true,
@@ -235,15 +235,7 @@ AsheylaLib_Settings = {
 					},
 				},
 			},
-			["userAnchors-Debuffs-pet"] = {
-				["PetAuras Anchor"] = {
-					["timers"] = {
-					},
-					["default"] = true,
-					["timerSettings"] = {
-					},
-				},
-			},
+			["updatedSettings4.3.3"] = true,
 			["userAnchors-Debuffs"] = {
 				["PlayerAuras Anchor"] = {
 					["timerSettings"] = {
@@ -281,9 +273,17 @@ AsheylaLib_Settings = {
 					},
 				},
 			},
-			["blizzBuffs"] = true,
 			["updatedSettings4.3"] = true,
-			["updatedSettings4.3.3"] = true,
+			["blizzBuffs"] = true,
+			["userAnchors-Debuffs-pet"] = {
+				["PetAuras Anchor"] = {
+					["timers"] = {
+					},
+					["default"] = true,
+					["timerSettings"] = {
+					},
+				},
+			},
 		},
 	},
 	["simpleMode"] = false,

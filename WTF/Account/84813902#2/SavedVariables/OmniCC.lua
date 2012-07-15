@@ -1,0 +1,2 @@
+
+OmniCC4Config = nil

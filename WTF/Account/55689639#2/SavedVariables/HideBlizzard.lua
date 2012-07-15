@@ -50,9 +50,9 @@ HideBlizzardDB = {
 					["totemframe"] = true,
 					["druidmanabar"] = true,
 					["runeframe"] = true,
-					["playerunitframe"] = true,
-					["eclipsebar"] = true,
 					["powerbar"] = true,
+					["eclipsebar"] = true,
+					["playerunitframe"] = true,
 					["playercastbar"] = true,
 				},
 				["Fraycollie - Smolderthorn"] = {
@@ -215,16 +215,17 @@ HideBlizzardDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
-		["Collierape - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Fraycollie - Nordrassil",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Collierape - Smolderthorn"] = "Default",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 	},
 	["profiles"] = {
@@ -276,14 +277,7 @@ HideBlizzardDB = {
 		["Warmongrel - Ysondre"] = {
 			["Version"] = "1.0.65",
 		},
-		["Default"] = {
-			["modules"] = {
-				["SpecialFrames"] = true,
-				["Player"] = true,
-				["Target"] = true,
-				["Pet"] = true,
-				["ActionBar"] = true,
-			},
+		["Collietard - Smolderthorn"] = {
 			["Version"] = "1.0.65",
 		},
 		["Wattlecollie - Smolderthorn"] = {
@@ -296,11 +290,6 @@ HideBlizzardDB = {
 				["ActionBar"] = true,
 			},
 		},
-		["Combatcollie - The Underbog"] = {
-			["Version"] = "1.0.65",
-		},
-		["Nocollie - Smolderthorn"] = {
-		},
 		["Github - Smolderthorn"] = {
 			["modules"] = {
 				["SpecialFrames"] = true,
@@ -311,8 +300,30 @@ HideBlizzardDB = {
 			},
 			["Version"] = "1.0.65",
 		},
-		["Collierape - Smolderthorn"] = {
+		["Combatcollie - The Underbog"] = {
 			["Version"] = "1.0.65",
+		},
+		["Nocollie - Smolderthorn"] = {
+		},
+		["Default"] = {
+			["modules"] = {
+				["SpecialFrames"] = true,
+				["Player"] = true,
+				["Target"] = true,
+				["Pet"] = true,
+				["ActionBar"] = true,
+			},
+			["Version"] = "1.0.65",
+		},
+		["Fraycollie - Smolderthorn"] = {
+			["Version"] = "1.0.65",
+			["modules"] = {
+				["SpecialFrames"] = true,
+				["Player"] = true,
+				["Target"] = true,
+				["Pet"] = true,
+				["ActionBar"] = true,
+			},
 		},
 		["Armscollie - Akama"] = {
 			["Version"] = "1.0.65",
@@ -340,15 +351,8 @@ HideBlizzardDB = {
 				["ActionBar"] = true,
 			},
 		},
-		["Fraycollie - Smolderthorn"] = {
+		["Collierape - Smolderthorn"] = {
 			["Version"] = "1.0.65",
-			["modules"] = {
-				["SpecialFrames"] = true,
-				["Player"] = true,
-				["Target"] = true,
-				["Pet"] = true,
-				["ActionBar"] = true,
-			},
 		},
 		["Battlecollie - Smolderthorn"] = {
 			["Version"] = "1.0.65",

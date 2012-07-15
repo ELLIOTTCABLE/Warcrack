@@ -1,8 +1,9 @@
 
 IndicatorsDB = {
 	["profileKeys"] = {
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
@@ -10,9 +11,11 @@ IndicatorsDB = {
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
 	},
 	["profiles"] = {
+		["Hoarcollie - Smolderthorn"] = {
+		},
 		["Collierape - Smolderthorn"] = {
 		},
-		["Hoarcollie - Smolderthorn"] = {
+		["Collietard - Smolderthorn"] = {
 		},
 		["Melancollie - Smolderthorn"] = {
 		},

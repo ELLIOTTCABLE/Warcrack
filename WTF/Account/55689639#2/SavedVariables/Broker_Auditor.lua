@@ -16,16 +16,17 @@ BrokerAuditorDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 	},
 	["profiles"] = {
@@ -49,13 +50,15 @@ BrokerAuditorDB = {
 		},
 		["Warmongrel - Ysondre"] = {
 		},
+		["Collietard - Smolderthorn"] = {
+		},
 		["Combatcollie - The Underbog"] = {
 		},
 		["Wattlecollie - Smolderthorn"] = {
 		},
 		["Github - Smolderthorn"] = {
 		},
-		["Collierape - Smolderthorn"] = {
+		["Fraycollie - Smolderthorn"] = {
 		},
 		["Armscollie - Akama"] = {
 		},
@@ -65,7 +68,7 @@ BrokerAuditorDB = {
 		},
 		["Warcollie - Darkspear"] = {
 		},
-		["Fraycollie - Smolderthorn"] = {
+		["Collierape - Smolderthorn"] = {
 		},
 		["Battlecollie - Smolderthorn"] = {
 		},

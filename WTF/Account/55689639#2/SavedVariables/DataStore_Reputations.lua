@@ -11,18 +11,19 @@ DataStore_ReputationsDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -33,8 +34,8 @@ DataStore_ReputationsDB = {
 					[7] = 3100,
 					[8] = 3100,
 					[10] = 400,
-					[76] = 3500,
 					[9] = 500,
+					[76] = 3500,
 					[6] = 3100,
 				},
 			},
@@ -47,8 +48,8 @@ DataStore_ReputationsDB = {
 					[7] = 7087,
 					[8] = 4368,
 					[10] = 768,
-					[9] = 868,
 					[76] = 3868,
+					[9] = 868,
 					[6] = 4206,
 				},
 			},
@@ -66,12 +67,12 @@ DataStore_ReputationsDB = {
 					[61] = 20107,
 					[63] = 11017,
 					[64] = 6212,
-					[20] = 852,
+					[39] = 2389,
 					[18] = 852,
 					[21] = 1580,
 					[19] = 855,
 					[38] = 22320,
-					[39] = 2389,
+					[20] = 852,
 					[40] = 13559,
 					[80] = 6060,
 					[56] = 9015,
@@ -103,17 +104,17 @@ DataStore_ReputationsDB = {
 					[46] = 2096,
 					[7] = 12217,
 					[27] = 15,
-					[9] = 3086,
+					[17] = 1012,
 					[78] = 3100,
 					[8] = 9401,
-					[10] = 2498,
-					[17] = 1012,
-					[18] = 1012,
 					[19] = 1012,
+					[9] = 3086,
+					[18] = 1012,
+					[10] = 2498,
 					[20] = 1525,
-					[21] = 1327,
-					[6] = 9611,
 					[76] = 5598,
+					[6] = 9611,
+					[21] = 1327,
 					[24] = 5220,
 				},
 			},
@@ -130,14 +131,18 @@ DataStore_ReputationsDB = {
 				["guildName"] = "Clan of the Skulls",
 			},
 			["Default.Smolderthorn.Collierape"] = {
-				["lastUpdate"] = 1341547297,
+				["lastUpdate"] = 1342123700,
+				["guildName"] = "Tailored Out",
+				["guildRep"] = 0,
 				["Factions"] = {
-					4000, -- [1]
-					3000, -- [2]
-					3100, -- [3]
-					3100, -- [4]
-					3100, -- [5]
-					[75] = 3300,
+					8471, -- [1]
+					5596, -- [2]
+					6821, -- [3]
+					5696, -- [4]
+					10595, -- [5]
+					[24] = 3000,
+					[77] = 4096,
+					[75] = 5896,
 				},
 			},
 			["Default.The Underbog.Fraycollie"] = {
@@ -252,9 +257,9 @@ DataStore_ReputationsDB = {
 					[7] = 1490,
 					[8] = 1490,
 					[10] = 17520,
-					[76] = 4490,
-					[34] = 25250,
 					[9] = 4465,
+					[34] = 25250,
+					[76] = 4490,
 					[6] = 1565,
 				},
 			},
@@ -337,54 +342,9 @@ DataStore_ReputationsDB = {
 					[8] = 3100,
 					[10] = 400,
 					[6] = 3100,
-					[9] = 500,
 					[76] = 3500,
+					[9] = 500,
 				},
-			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1341539607,
-				["Factions"] = {
-					8999, -- [1]
-					8999, -- [2]
-					16445, -- [3]
-					18106, -- [4]
-					14466, -- [5]
-					[57] = 3000,
-					[17] = 800,
-					[75] = 10670,
-					[77] = 8870,
-					[19] = 650,
-					[18] = 650,
-					[20] = 650,
-				},
-				["guildRep"] = 58,
-				["guildName"] = "LEAFEA",
-			},
-			["Default.Smolderthorn.Snuffleupaga"] = {
-				["lastUpdate"] = 1341440539,
-				["Factions"] = {
-					[78] = 3208,
-					[7] = 2558,
-					[8] = 608,
-					[10] = 3208,
-					[6] = 877,
-					[9] = 4841,
-					[76] = 3608,
-				},
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1341539951,
-				["Factions"] = {
-					6565, -- [1]
-					6277, -- [2]
-					6377, -- [3]
-					6377, -- [4]
-					6377, -- [5]
-					[77] = 18185,
-					[75] = 6577,
-				},
-				["guildRep"] = 22,
-				["guildName"] = "LEAFEA",
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["lastUpdate"] = 1341539826,
@@ -429,8 +389,64 @@ DataStore_ReputationsDB = {
 					[59] = 8554,
 				},
 			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1341539607,
+				["Factions"] = {
+					8999, -- [1]
+					8999, -- [2]
+					16445, -- [3]
+					18106, -- [4]
+					14466, -- [5]
+					[57] = 3000,
+					[17] = 800,
+					[75] = 10670,
+					[77] = 8870,
+					[19] = 650,
+					[18] = 650,
+					[20] = 650,
+				},
+				["guildRep"] = 58,
+				["guildName"] = "LEAFEA",
+			},
+			["Default.Smolderthorn.Collietard"] = {
+				["lastUpdate"] = 1341910468,
+				["Factions"] = {
+					3100, -- [1]
+					3000, -- [2]
+					4000, -- [3]
+					3100, -- [4]
+					3100, -- [5]
+					[75] = 3300,
+				},
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1341539951,
+				["Factions"] = {
+					6565, -- [1]
+					6277, -- [2]
+					6377, -- [3]
+					6377, -- [4]
+					6377, -- [5]
+					[77] = 18185,
+					[75] = 6577,
+				},
+				["guildRep"] = 22,
+				["guildName"] = "LEAFEA",
+			},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["lastUpdate"] = 1341440539,
+				["Factions"] = {
+					[78] = 3208,
+					[7] = 2558,
+					[8] = 608,
+					[10] = 3208,
+					[6] = 877,
+					[76] = 3608,
+					[9] = 4841,
+				},
+			},
 			["Default.Smolderthorn.Wattlecollie"] = {
-				["lastUpdate"] = 1341545773,
+				["lastUpdate"] = 1341910242,
 				["guildName"] = "LEAFEA",
 				["guildRep"] = 21,
 				["Factions"] = {
@@ -451,8 +467,8 @@ DataStore_ReputationsDB = {
 					[10] = 17520,
 					[6] = 1565,
 					[34] = 25250,
-					[76] = 4490,
 					[9] = 4465,
+					[76] = 4490,
 				},
 				["guildRep"] = 0,
 				["guildName"] = "LEAFEA",

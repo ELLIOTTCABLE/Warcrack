@@ -11,18 +11,19 @@ DataStore_ContainersDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -555,31 +556,124 @@ DataStore_ContainersDB = {
 				["numBagSlots"] = 16,
 			},
 			["Default.Smolderthorn.Collierape"] = {
-				["numFreeBankSlots"] = 24,
+				["numFreeBankSlots"] = 28,
 				["numBankSlots"] = 28,
-				["lastUpdate"] = 1341547297,
-				["numFreeBagSlots"] = 15,
+				["lastUpdate"] = 1342126807,
+				["numFreeBagSlots"] = 58,
 				["Containers"] = {
-					["Bag100"] = {
-						["size"] = 28,
-						["ids"] = {
-							78924, -- [1]
-							76755, -- [2]
-							54811, -- [3]
-							69846, -- [4]
-						},
-						["freeslots"] = 24,
-					},
 					["Bag0"] = {
 						["ids"] = {
-							6948, -- [1]
+							65462, -- [1]
+							nil, -- [2]
+							14225, -- [3]
+							10769, -- [4]
+							51966, -- [5]
+							65919, -- [6]
+							51992, -- [7]
+							18314, -- [8]
+							7685, -- [9]
+							1205, -- [10]
+							[13] = 18327,
+							[15] = 9454,
 						},
-						["freeslots"] = 15,
+						["links"] = {
+							[5] = "|cff0070dd|Hitem:51966:0:0:0:0:0:-82:1069547539:45:0|h[Vigorous Spaulders of the Vision]|h|r",
+							[7] = "|cff0070dd|Hitem:51992:0:0:0:0:0:-79:-1768292338:45:0|h[Tumultuous Ring of the Moon]|h|r",
+							[3] = "|cff1eff00|Hitem:14225:0:0:0:0:0:784:1512327232:45:0|h[Geomancer's Wraps of the Owl]|h|r",
+						},
+						["freeslots"] = 5,
 						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["counts"] = {
+							[10] = 15,
+						},
+						["size"] = 16,
+					},
+					["Bag3"] = {
+						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:2025665920:45:0|h[Netherweave Bag]|h|r",
+						["freeslots"] = 14,
+						["ids"] = {
+							65926, -- [1]
+							[15] = 65966,
+						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
+						["size"] = 16,
+					},
+					["Bag4"] = {
+						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:1682283648:45:0|h[Netherweave Bag]|h|r",
+						["links"] = {
+							[13] = "|cff1eff00|Hitem:9887:0:0:0:0:0:386:1490901120:45:0|h[Huntsman's Armor of Intellect]|h|r",
+						},
+						["freeslots"] = 13,
+						["ids"] = {
+							nil, -- [1]
+							nil, -- [2]
+							nil, -- [3]
+							nil, -- [4]
+							nil, -- [5]
+							nil, -- [6]
+							nil, -- [7]
+							nil, -- [8]
+							nil, -- [9]
+							nil, -- [10]
+							nil, -- [11]
+							nil, -- [12]
+							9887, -- [13]
+							nil, -- [14]
+							6948, -- [15]
+							40110, -- [16]
+						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
+						["size"] = 16,
+					},
+					["Bag100"] = {
+						["size"] = 28,
+						["freeslots"] = 28,
+					},
+					["Bag1"] = {
+						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:1723304192:45:0|h[Netherweave Bag]|h|r",
+						["links"] = {
+							[3] = "|cff0070dd|Hitem:51994:0:0:0:0:0:-73:698941448:45:0|h[Tumultuous Cloak of the Elder]|h|r",
+							[2] = "|cff1eff00|Hitem:9803:0:0:0:0:0:2031:329498836:45:0|h[Superior Bracers of Healing]|h|r",
+						},
+						["counts"] = {
+							[16] = 5,
+						},
+						["freeslots"] = 11,
+						["ids"] = {
+							7714, -- [1]
+							9803, -- [2]
+							51994, -- [3]
+							6429, -- [4]
+							nil, -- [5]
+							nil, -- [6]
+							nil, -- [7]
+							nil, -- [8]
+							nil, -- [9]
+							nil, -- [10]
+							nil, -- [11]
+							nil, -- [12]
+							nil, -- [13]
+							nil, -- [14]
+							nil, -- [15]
+							1645, -- [16]
+						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
+						["size"] = 16,
+					},
+					["Bag2"] = {
+						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:1624354048:45:0|h[Netherweave Bag]|h|r",
+						["freeslots"] = 15,
+						["counts"] = {
+							[6] = 6,
+						},
+						["ids"] = {
+							[6] = 6149,
+						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
 						["size"] = 16,
 					},
 				},
-				["numBagSlots"] = 16,
+				["numBagSlots"] = 80,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["lastUpdate"] = 1307756259,
@@ -1287,10 +1381,10 @@ DataStore_ContainersDB = {
 						["counts"] = {
 							[15] = 20,
 							[10] = 11,
-							[9] = 4,
-							[4] = 10,
 							[5] = 5,
 							[14] = 20,
+							[9] = 4,
+							[4] = 10,
 						},
 						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
 						["size"] = 16,
@@ -1444,7 +1538,7 @@ DataStore_ContainersDB = {
 							[26] = 6948,
 							[14] = 43824,
 							[15] = 10035,
-							[23] = 58148,
+							[12] = 6367,
 							[16] = 10036,
 							[17] = 45581,
 							[18] = 40477,
@@ -1452,7 +1546,7 @@ DataStore_ContainersDB = {
 							[20] = 25539,
 							[21] = 58488,
 							[22] = 22829,
-							[12] = 6367,
+							[23] = 58148,
 							[25] = 40772,
 						},
 						["freeslots"] = 10,
@@ -1506,13 +1600,13 @@ DataStore_ContainersDB = {
 							[13] = 20,
 							[14] = 20,
 							[9] = 20,
-							[19] = 20,
 							[10] = 20,
+							[19] = 20,
 							[20] = 20,
-							[11] = 20,
+							[21] = 5,
 							[22] = 13,
 							[12] = 20,
-							[21] = 5,
+							[11] = 20,
 						},
 						["size"] = 28,
 					},
@@ -1700,275 +1794,6 @@ DataStore_ContainersDB = {
 					},
 				},
 				["numBagSlots"] = 16,
-			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["numFreeBankSlots"] = 24,
-				["numBankSlots"] = 28,
-				["lastUpdate"] = 1341539608,
-				["numBagSlots"] = 80,
-				["Containers"] = {
-					["Bag4"] = {
-						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:312876928:30:0|h[Netherweave Bag]|h|r",
-						["ids"] = {
-							[11] = 44235,
-							[15] = 6948,
-							[12] = 17031,
-						},
-						["freeslots"] = 13,
-						["counts"] = {
-							[12] = 17,
-						},
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
-						["size"] = 16,
-					},
-					["Bag100"] = {
-						["freeslots"] = 24,
-						["ids"] = {
-							6341, -- [1]
-							59053, -- [2]
-							5571, -- [3]
-							57549, -- [4]
-						},
-						["size"] = 28,
-					},
-					["Bag1"] = {
-						["ids"] = {
-							2592, -- [1]
-							7684, -- [2]
-							4338, -- [3]
-							51973, -- [4]
-							1205, -- [5]
-							9308, -- [6]
-							4364, -- [7]
-							7191, -- [8]
-							9492, -- [9]
-							51973, -- [10]
-							[13] = 51996,
-						},
-						["links"] = {
-							[10] = "|cff0070dd|Hitem:51973:0:0:0:0:0:-79:1674248207:30:0|h[Enumerated Handwraps of the Moon]|h|r",
-							[4] = "|cff0070dd|Hitem:51973:0:0:0:0:0:-69:382730255:30:0|h[Enumerated Handwraps of the Eagle]|h|r",
-							[13] = "|cff0070dd|Hitem:51996:0:0:0:0:0:-72:1957953547:30:0|h[Tumultuous Necklace of the Battle]|h|r",
-						},
-						["counts"] = {
-							9, -- [1]
-							[5] = 2,
-							[6] = 2,
-						},
-						["size"] = 16,
-						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:1096368896:30:0|h[Netherweave Bag]|h|r",
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
-						["freeslots"] = 5,
-					},
-					["Bag2"] = {
-						["ids"] = {
-							nil, -- [1]
-							858, -- [2]
-							1017, -- [3]
-							nil, -- [4]
-							4306, -- [5]
-							4306, -- [6]
-							10289, -- [7]
-							11970, -- [8]
-							1707, -- [9]
-							1708, -- [10]
-							11083, -- [11]
-							5214, -- [12]
-							9857, -- [13]
-							nil, -- [14]
-							6461, -- [15]
-						},
-						["links"] = {
-							[7] = "|cff1eff00|Hitem:10289:0:0:0:0:0:188:1954488192:30:0|h[Durable Hat of Stamina]|h|r",
-							[13] = "|cff1eff00|Hitem:9857:0:0:0:0:0:849:2139143424:30:0|h[Archer's Bracers of the Eagle]|h|r",
-						},
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
-						["size"] = 16,
-						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:1445192576:30:0|h[Netherweave Bag]|h|r",
-						["counts"] = {
-							[6] = 20,
-							[2] = 3,
-							[3] = 4,
-							[10] = 2,
-							[5] = 5,
-							[9] = 2,
-							[11] = 3,
-						},
-						["freeslots"] = 4,
-					},
-					["Bag0"] = {
-						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
-						["links"] = {
-							[15] = "|cff1eff00|Hitem:9806:0:0:0:0:0:595:1923500800:30:0|h[Superior Gloves of the Monkey]|h|r",
-						},
-						["ids"] = {
-							nil, -- [1]
-							nil, -- [2]
-							nil, -- [3]
-							nil, -- [4]
-							nil, -- [5]
-							nil, -- [6]
-							nil, -- [7]
-							nil, -- [8]
-							2589, -- [9]
-							58165, -- [10]
-							3667, -- [11]
-							12202, -- [12]
-							422, -- [13]
-							12037, -- [14]
-							9806, -- [15]
-							8186, -- [16]
-						},
-						["size"] = 16,
-						["counts"] = {
-							[11] = 5,
-							[13] = 2,
-							[12] = 6,
-							[14] = 4,
-							[9] = 4,
-						},
-						["freeslots"] = 8,
-					},
-					["Bag3"] = {
-						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:1633747456:30:0|h[Netherweave Bag]|h|r",
-						["ids"] = {
-							nil, -- [1]
-							nil, -- [2]
-							nil, -- [3]
-							nil, -- [4]
-							2863, -- [5]
-							1179, -- [6]
-							3220, -- [7]
-							2888, -- [8]
-						},
-						["size"] = 16,
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
-						["counts"] = {
-							[5] = 3,
-							[6] = 11,
-							[8] = 4,
-						},
-						["freeslots"] = 12,
-					},
-					["Bag-2"] = {
-						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
-						["size"] = 32,
-					},
-				},
-				["numFreeBagSlots"] = 42,
-			},
-			["Default.Smolderthorn.Snuffleupaga"] = {
-				["lastUpdate"] = 1341440539,
-				["numFreeBagSlots"] = 9,
-				["Containers"] = {
-					["Bag0"] = {
-						["freeslots"] = 3,
-						["ids"] = {
-							6948, -- [1]
-							117, -- [2]
-							54811, -- [3]
-							76755, -- [4]
-							53378, -- [5]
-							7099, -- [6]
-							11584, -- [7]
-							53355, -- [8]
-							78924, -- [9]
-							53394, -- [10]
-							56968, -- [11]
-							53354, -- [12]
-							[15] = 69846,
-						},
-						["counts"] = {
-							[11] = 5,
-							[6] = 4,
-							[7] = 10,
-							[2] = 3,
-						},
-						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
-						["size"] = 16,
-					},
-					["Bag1"] = {
-						["link"] = "|cffffffff|Hitem:60241:0:0:0:0:0:0:2136583424:6:0|h[]|h|r",
-						["freeslots"] = 6,
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_09_Red",
-						["size"] = 6,
-					},
-				},
-				["numBagSlots"] = 22,
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["numFreeBankSlots"] = 28,
-				["numBankSlots"] = 28,
-				["lastUpdate"] = 1341540016,
-				["Containers"] = {
-					["Bag4"] = {
-						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:823588096:21:0|h[Frostweave Bag]|h|r",
-						["freeslots"] = 19,
-						["ids"] = {
-							[20] = 6948,
-						},
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
-						["size"] = 20,
-					},
-					["Bag-2"] = {
-						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
-						["size"] = 32,
-					},
-					["Bag1"] = {
-						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:758435840:21:0|h[Frostweave Bag]|h|r",
-						["size"] = 20,
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
-						["freeslots"] = 20,
-					},
-					["Bag2"] = {
-						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:446305088:21:0|h[Frostweave Bag]|h|r",
-						["size"] = 20,
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
-						["freeslots"] = 20,
-					},
-					["Bag0"] = {
-						["ids"] = {
-							78924, -- [1]
-							76755, -- [2]
-							78916, -- [3]
-						},
-						["size"] = 16,
-						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
-						["freeslots"] = 13,
-					},
-					["Bag3"] = {
-						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:1766135424:21:0|h[Frostweave Bag]|h|r",
-						["ids"] = {
-							52039, -- [1]
-							52040, -- [2]
-							[13] = 2924,
-							[14] = 67229,
-							[15] = 774,
-							[16] = 2592,
-							[17] = 5784,
-							[18] = 2589,
-							[19] = 1210,
-							[20] = 3313,
-							[12] = 2589,
-						},
-						["freeslots"] = 9,
-						["counts"] = {
-							[13] = 3,
-							[18] = 7,
-							[12] = 20,
-							[14] = 2,
-							[16] = 8,
-						},
-						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
-						["size"] = 20,
-					},
-					["Bag100"] = {
-						["freeslots"] = 28,
-						["size"] = 28,
-					},
-				},
-				["numBagSlots"] = 96,
-				["numFreeBagSlots"] = 81,
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["numFreeBankSlots"] = 143,
@@ -2255,11 +2080,317 @@ DataStore_ContainersDB = {
 				["numFreeBagSlots"] = 57,
 				["numBagSlots"] = 112,
 			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["numFreeBankSlots"] = 24,
+				["numBankSlots"] = 28,
+				["lastUpdate"] = 1341539608,
+				["numBagSlots"] = 80,
+				["Containers"] = {
+					["Bag4"] = {
+						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:312876928:30:0|h[Netherweave Bag]|h|r",
+						["ids"] = {
+							[11] = 44235,
+							[15] = 6948,
+							[12] = 17031,
+						},
+						["freeslots"] = 13,
+						["counts"] = {
+							[12] = 17,
+						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
+						["size"] = 16,
+					},
+					["Bag100"] = {
+						["freeslots"] = 24,
+						["ids"] = {
+							6341, -- [1]
+							59053, -- [2]
+							5571, -- [3]
+							57549, -- [4]
+						},
+						["size"] = 28,
+					},
+					["Bag1"] = {
+						["ids"] = {
+							2592, -- [1]
+							7684, -- [2]
+							4338, -- [3]
+							51973, -- [4]
+							1205, -- [5]
+							9308, -- [6]
+							4364, -- [7]
+							7191, -- [8]
+							9492, -- [9]
+							51973, -- [10]
+							[13] = 51996,
+						},
+						["links"] = {
+							[10] = "|cff0070dd|Hitem:51973:0:0:0:0:0:-79:1674248207:30:0|h[Enumerated Handwraps of the Moon]|h|r",
+							[4] = "|cff0070dd|Hitem:51973:0:0:0:0:0:-69:382730255:30:0|h[Enumerated Handwraps of the Eagle]|h|r",
+							[13] = "|cff0070dd|Hitem:51996:0:0:0:0:0:-72:1957953547:30:0|h[Tumultuous Necklace of the Battle]|h|r",
+						},
+						["counts"] = {
+							9, -- [1]
+							[5] = 2,
+							[6] = 2,
+						},
+						["size"] = 16,
+						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:1096368896:30:0|h[Netherweave Bag]|h|r",
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
+						["freeslots"] = 5,
+					},
+					["Bag2"] = {
+						["ids"] = {
+							nil, -- [1]
+							858, -- [2]
+							1017, -- [3]
+							nil, -- [4]
+							4306, -- [5]
+							4306, -- [6]
+							10289, -- [7]
+							11970, -- [8]
+							1707, -- [9]
+							1708, -- [10]
+							11083, -- [11]
+							5214, -- [12]
+							9857, -- [13]
+							nil, -- [14]
+							6461, -- [15]
+						},
+						["links"] = {
+							[7] = "|cff1eff00|Hitem:10289:0:0:0:0:0:188:1954488192:30:0|h[Durable Hat of Stamina]|h|r",
+							[13] = "|cff1eff00|Hitem:9857:0:0:0:0:0:849:2139143424:30:0|h[Archer's Bracers of the Eagle]|h|r",
+						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
+						["size"] = 16,
+						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:1445192576:30:0|h[Netherweave Bag]|h|r",
+						["counts"] = {
+							[6] = 20,
+							[2] = 3,
+							[3] = 4,
+							[10] = 2,
+							[5] = 5,
+							[9] = 2,
+							[11] = 3,
+						},
+						["freeslots"] = 4,
+					},
+					["Bag0"] = {
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["links"] = {
+							[15] = "|cff1eff00|Hitem:9806:0:0:0:0:0:595:1923500800:30:0|h[Superior Gloves of the Monkey]|h|r",
+						},
+						["ids"] = {
+							nil, -- [1]
+							nil, -- [2]
+							nil, -- [3]
+							nil, -- [4]
+							nil, -- [5]
+							nil, -- [6]
+							nil, -- [7]
+							nil, -- [8]
+							2589, -- [9]
+							58165, -- [10]
+							3667, -- [11]
+							12202, -- [12]
+							422, -- [13]
+							12037, -- [14]
+							9806, -- [15]
+							8186, -- [16]
+						},
+						["size"] = 16,
+						["counts"] = {
+							[11] = 5,
+							[13] = 2,
+							[12] = 6,
+							[14] = 4,
+							[9] = 4,
+						},
+						["freeslots"] = 8,
+					},
+					["Bag3"] = {
+						["link"] = "|cff1eff00|Hitem:21841:0:0:0:0:0:0:1633747456:30:0|h[Netherweave Bag]|h|r",
+						["ids"] = {
+							nil, -- [1]
+							nil, -- [2]
+							nil, -- [3]
+							nil, -- [4]
+							2863, -- [5]
+							1179, -- [6]
+							3220, -- [7]
+							2888, -- [8]
+						},
+						["size"] = 16,
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_23_Netherweave",
+						["counts"] = {
+							[5] = 3,
+							[6] = 11,
+							[8] = 4,
+						},
+						["freeslots"] = 12,
+					},
+					["Bag-2"] = {
+						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
+						["size"] = 32,
+					},
+				},
+				["numFreeBagSlots"] = 42,
+			},
+			["Default.Smolderthorn.Collietard"] = {
+				["lastUpdate"] = 1341910720,
+				["numFreeBagSlots"] = 14,
+				["Containers"] = {
+					["Bag0"] = {
+						["ids"] = {
+							6948, -- [1]
+							62328, -- [2]
+						},
+						["freeslots"] = 14,
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["size"] = 16,
+					},
+				},
+				["numBagSlots"] = 16,
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["numFreeBankSlots"] = 28,
+				["numBankSlots"] = 28,
+				["lastUpdate"] = 1341540016,
+				["Containers"] = {
+					["Bag4"] = {
+						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:823588096:21:0|h[Frostweave Bag]|h|r",
+						["freeslots"] = 19,
+						["ids"] = {
+							[20] = 6948,
+						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
+						["size"] = 20,
+					},
+					["Bag-2"] = {
+						["icon"] = "Interface\\Icons\\INV_Misc_Key_14",
+						["size"] = 32,
+					},
+					["Bag1"] = {
+						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:758435840:21:0|h[Frostweave Bag]|h|r",
+						["size"] = 20,
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
+						["freeslots"] = 20,
+					},
+					["Bag2"] = {
+						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:446305088:21:0|h[Frostweave Bag]|h|r",
+						["size"] = 20,
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
+						["freeslots"] = 20,
+					},
+					["Bag0"] = {
+						["ids"] = {
+							78924, -- [1]
+							76755, -- [2]
+							78916, -- [3]
+						},
+						["size"] = 16,
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["freeslots"] = 13,
+					},
+					["Bag3"] = {
+						["link"] = "|cff1eff00|Hitem:41599:0:0:0:0:0:0:1766135424:21:0|h[Frostweave Bag]|h|r",
+						["ids"] = {
+							52039, -- [1]
+							52040, -- [2]
+							[13] = 2924,
+							[14] = 67229,
+							[15] = 774,
+							[16] = 2592,
+							[17] = 5784,
+							[18] = 2589,
+							[19] = 1210,
+							[20] = 3313,
+							[12] = 2589,
+						},
+						["freeslots"] = 9,
+						["counts"] = {
+							[13] = 3,
+							[18] = 7,
+							[12] = 20,
+							[14] = 2,
+							[16] = 8,
+						},
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_EnchantedMageweave",
+						["size"] = 20,
+					},
+					["Bag100"] = {
+						["freeslots"] = 28,
+						["size"] = 28,
+					},
+				},
+				["numBagSlots"] = 96,
+				["numFreeBagSlots"] = 81,
+			},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["lastUpdate"] = 1341440539,
+				["numFreeBagSlots"] = 9,
+				["Containers"] = {
+					["Bag0"] = {
+						["freeslots"] = 3,
+						["ids"] = {
+							6948, -- [1]
+							117, -- [2]
+							54811, -- [3]
+							76755, -- [4]
+							53378, -- [5]
+							7099, -- [6]
+							11584, -- [7]
+							53355, -- [8]
+							78924, -- [9]
+							53394, -- [10]
+							56968, -- [11]
+							53354, -- [12]
+							[15] = 69846,
+						},
+						["counts"] = {
+							[11] = 5,
+							[6] = 4,
+							[7] = 10,
+							[2] = 3,
+						},
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["size"] = 16,
+					},
+					["Bag1"] = {
+						["link"] = "|cffffffff|Hitem:60241:0:0:0:0:0:0:2136583424:6:0|h[]|h|r",
+						["freeslots"] = 6,
+						["icon"] = "Interface\\Icons\\INV_Misc_Bag_09_Red",
+						["size"] = 6,
+					},
+				},
+				["numBagSlots"] = 22,
+			},
 			["Default.Smolderthorn.Wattlecollie"] = {
 				["numFreeBankSlots"] = 24,
 				["numBankSlots"] = 28,
-				["lastUpdate"] = 1341545773,
+				["lastUpdate"] = 1341910242,
 				["Containers"] = {
+					["Bag0"] = {
+						["ids"] = {
+							6948, -- [1]
+							54811, -- [2]
+							78916, -- [3]
+							68618, -- [4]
+							70099, -- [5]
+							76755, -- [6]
+							68385, -- [7]
+							78924, -- [8]
+							54847, -- [9]
+							49693, -- [10]
+							49663, -- [11]
+							49665, -- [12]
+							49662, -- [13]
+							69846, -- [14]
+						},
+						["freeslots"] = 2,
+						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
+						["size"] = 16,
+					},
 					["Bag100"] = {
 						["size"] = 28,
 						["ids"] = {
@@ -2270,16 +2401,8 @@ DataStore_ContainersDB = {
 						},
 						["freeslots"] = 24,
 					},
-					["Bag0"] = {
-						["ids"] = {
-							6948, -- [1]
-						},
-						["freeslots"] = 15,
-						["icon"] = "Interface\\Buttons\\Button-Backpack-Up",
-						["size"] = 16,
-					},
 				},
-				["numFreeBagSlots"] = 15,
+				["numFreeBagSlots"] = 2,
 				["numBagSlots"] = 16,
 			},
 			["Default.Ysondre.Summoneer"] = {
@@ -2642,11 +2765,11 @@ DataStore_ContainersDB = {
 							[41] = 10,
 							[43] = 9,
 							[86] = 2,
-							[50] = 20,
-							[69] = 11,
-							[96] = 15,
 							[67] = 9,
 							[51] = 3,
+							[96] = 15,
+							[50] = 20,
+							[69] = 11,
 							[52] = 4,
 							[56] = 5,
 							[35] = 10,
@@ -2782,9 +2905,9 @@ DataStore_ContainersDB = {
 						["ClientDate"] = "06/25/2011",
 						["ids"] = {
 							[37] = 58144,
-							[29] = 58148,
 							[4] = 62654,
-							[43] = 62791,
+							[29] = 58148,
+							[30] = 58092,
 							[34] = 57099,
 							[17] = 62656,
 							[49] = 46378,
@@ -2793,7 +2916,7 @@ DataStore_ContainersDB = {
 							[3] = 23768,
 							[22] = 62659,
 							[23] = 62659,
-							[30] = 58092,
+							[43] = 62791,
 						},
 						["ClientTime"] = 1309011446,
 						["visitedBy"] = "Fraycollie",
@@ -3422,7 +3545,7 @@ DataStore_ContainersDB = {
 							[98] = 20,
 							[93] = 17,
 							[97] = 7,
-							[86] = 20,
+							[60] = 13,
 							[90] = 4,
 							[94] = 3,
 							[83] = 20,
@@ -3430,13 +3553,73 @@ DataStore_ContainersDB = {
 							[91] = 15,
 							[95] = 3,
 							[84] = 8,
-							[60] = 13,
+							[86] = 20,
 						},
 						["ClientMinute"] = 18,
 						["ServerMinute"] = 18,
 						["icon"] = "Interface\\Icons\\INV_Misc_QuestionMark",
 						["size"] = 98,
 					}, -- [6]
+				},
+				["faction"] = "Alliance",
+			},
+			["Default.Smolderthorn.Tailored Out"] = {
+				["money"] = 0,
+				["Tabs"] = {
+					{
+						["ClientDate"] = "07/12/2012",
+						["visitedBy"] = "Collierape",
+						["ids"] = {
+							2592, -- [1]
+							4306, -- [2]
+							4306, -- [3]
+							818, -- [4]
+							2589, -- [5]
+							6471, -- [6]
+							8150, -- [7]
+							4338, -- [8]
+							14256, -- [9]
+							10286, -- [10]
+							4382, -- [11]
+							4338, -- [12]
+							4306, -- [13]
+							4306, -- [14]
+							7909, -- [15]
+							774, -- [16]
+							8387, -- [17]
+							3610, -- [18]
+							2589, -- [19]
+							2589, -- [20]
+							4634, -- [21]
+							4636, -- [22]
+						},
+						["ClientTime"] = 1342126680,
+						["ClientHour"] = 16,
+						["name"] = "Tab 1",
+						["ServerHour"] = 16,
+						["ServerMinute"] = 56,
+						["icon"] = "Interface\\Icons\\INV_Misc_QuestionMark",
+						["ClientMinute"] = 58,
+						["counts"] = {
+							18, -- [1]
+							4, -- [2]
+							20, -- [3]
+							nil, -- [4]
+							4, -- [5]
+							2, -- [6]
+							2, -- [7]
+							3, -- [8]
+							nil, -- [9]
+							nil, -- [10]
+							nil, -- [11]
+							20, -- [12]
+							20, -- [13]
+							20, -- [14]
+							[19] = 20,
+							[20] = 20,
+						},
+						["size"] = 98,
+					}, -- [1]
 				},
 				["faction"] = "Alliance",
 			},

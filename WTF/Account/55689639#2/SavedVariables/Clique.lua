@@ -17,12 +17,12 @@ CliqueDB3 = {
 			["alerthidden"] = true,
 		},
 		["Wattlecollie - Smolderthorn"] = {
-			["specswap"] = false,
+			["alerthidden"] = true,
 			["sec_profileKey"] = "Wattlecollie - Smolderthorn",
 			["pri_profileKey"] = "Wattlecollie - Smolderthorn",
 			["fastooc"] = true,
+			["specswap"] = false,
 			["downclick"] = true,
-			["alerthidden"] = true,
 		},
 		["Battlecollie - Smolderthorn"] = {
 			["alerthidden"] = true,
@@ -42,18 +42,19 @@ CliqueDB3 = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Touchpad",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 	},
 	["profiles"] = {
 		["Warcollie - Smolderthorn"] = {
@@ -264,6 +265,25 @@ CliqueDB3 = {
 				}, -- [2]
 			},
 		},
+		["Collietard - Smolderthorn"] = {
+			["bindings"] = {
+				{
+					["type"] = "target",
+					["sets"] = {
+						["default"] = true,
+					},
+					["key"] = "BUTTON1",
+					["unit"] = "mouseover",
+				}, -- [1]
+				{
+					["type"] = "menu",
+					["key"] = "BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [2]
+			},
+		},
 		["Elliottcable - Hyjal"] = {
 			["bindings"] = {
 				{
@@ -320,44 +340,26 @@ CliqueDB3 = {
 				}, -- [4]
 			},
 		},
-		["Armscollie - Akama"] = {
+		["Collierape - Smolderthorn"] = {
 			["bindings"] = {
 				{
 					["type"] = "target",
 					["sets"] = {
 						["default"] = true,
 					},
-					["key"] = "CTRL-BUTTON1",
+					["key"] = "BUTTON1",
 					["unit"] = "mouseover",
 				}, -- [1]
 				{
 					["type"] = "menu",
-					["key"] = "CTRL-BUTTON2",
-					["sets"] = {
-						["default"] = true,
-					},
-				}, -- [2]
-				{
-					["spell"] = "Rejuvenation",
 					["key"] = "BUTTON2",
 					["sets"] = {
 						["default"] = true,
 					},
-					["icon"] = "Interface\\Icons\\Spell_Nature_Rejuvenation",
-					["type"] = "spell",
-				}, -- [3]
-				{
-					["spell"] = "Nourish",
-					["key"] = "SHIFT-BUTTON2",
-					["sets"] = {
-						["default"] = true,
-					},
-					["icon"] = "Interface\\Icons\\Ability_Druid_Nourish",
-					["type"] = "spell",
-				}, -- [4]
+				}, -- [2]
 			},
 		},
-		["Combatcollie - The Underbog"] = {
+		["Github - Smolderthorn"] = {
 			["bindings"] = {
 				{
 					["sets"] = {
@@ -393,6 +395,43 @@ CliqueDB3 = {
 						["default"] = true,
 					},
 				}, -- [2]
+			},
+		},
+		["Armscollie - Akama"] = {
+			["bindings"] = {
+				{
+					["type"] = "target",
+					["sets"] = {
+						["default"] = true,
+					},
+					["key"] = "CTRL-BUTTON1",
+					["unit"] = "mouseover",
+				}, -- [1]
+				{
+					["type"] = "menu",
+					["key"] = "CTRL-BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+				}, -- [2]
+				{
+					["spell"] = "Rejuvenation",
+					["key"] = "BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+					["icon"] = "Interface\\Icons\\Spell_Nature_Rejuvenation",
+					["type"] = "spell",
+				}, -- [3]
+				{
+					["spell"] = "Nourish",
+					["key"] = "SHIFT-BUTTON2",
+					["sets"] = {
+						["default"] = true,
+					},
+					["icon"] = "Interface\\Icons\\Ability_Druid_Nourish",
+					["type"] = "spell",
+				}, -- [4]
 			},
 		},
 		["Fraycollie - Smolderthorn"] = {
@@ -431,25 +470,6 @@ CliqueDB3 = {
 				}, -- [4]
 			},
 		},
-		["Collierape - Smolderthorn"] = {
-			["bindings"] = {
-				{
-					["type"] = "target",
-					["sets"] = {
-						["default"] = true,
-					},
-					["key"] = "BUTTON1",
-					["unit"] = "mouseover",
-				}, -- [1]
-				{
-					["type"] = "menu",
-					["key"] = "BUTTON2",
-					["sets"] = {
-						["default"] = true,
-					},
-				}, -- [2]
-			},
-		},
 		["Touchpad"] = {
 			["bindings"] = {
 				{
@@ -461,13 +481,6 @@ CliqueDB3 = {
 					["unit"] = "mouseover",
 				}, -- [1]
 				{
-					["type"] = "menu",
-					["key"] = "CTRL-BUTTON2",
-					["sets"] = {
-						["default"] = true,
-					},
-				}, -- [2]
-				{
 					["spell"] = "Power Word: Shield",
 					["key"] = "ALT-BUTTON1",
 					["sets"] = {
@@ -475,16 +488,14 @@ CliqueDB3 = {
 					},
 					["icon"] = "Interface\\Icons\\Spell_Holy_PowerWordShield",
 					["type"] = "spell",
-				}, -- [3]
+				}, -- [2]
 				{
-					["spell"] = "Flash Heal",
-					["key"] = "SHIFT-BUTTON1",
+					["type"] = "menu",
+					["key"] = "CTRL-BUTTON2",
 					["sets"] = {
 						["default"] = true,
 					},
-					["icon"] = "Interface\\Icons\\Spell_Holy_FlashHeal",
-					["type"] = "spell",
-				}, -- [4]
+				}, -- [3]
 				{
 					["spell"] = "Renew",
 					["key"] = "BUTTON2",
@@ -492,6 +503,15 @@ CliqueDB3 = {
 						["default"] = true,
 					},
 					["icon"] = "Interface\\Icons\\Spell_Holy_Renew",
+					["type"] = "spell",
+				}, -- [4]
+				{
+					["spell"] = "Flash Heal",
+					["key"] = "SHIFT-BUTTON1",
+					["sets"] = {
+						["default"] = true,
+					},
+					["icon"] = "Interface\\Icons\\Spell_Holy_FlashHeal",
 					["type"] = "spell",
 				}, -- [5]
 				{
@@ -597,7 +617,7 @@ CliqueDB3 = {
 				}, -- [2]
 			},
 		},
-		["Github - Smolderthorn"] = {
+		["Combatcollie - The Underbog"] = {
 			["bindings"] = {
 				{
 					["sets"] = {

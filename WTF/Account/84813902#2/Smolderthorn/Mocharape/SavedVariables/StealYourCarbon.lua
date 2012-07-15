@@ -1,0 +1,7 @@
+
+StealYourCarbonDB = {
+	["tradestocklist"] = {
+	},
+	["stocklist"] = {
+	},
+}

@@ -126,6 +126,20 @@ AraTradeskillsDB = {
 			["links"] = {
 			},
 		},
+		["Collietard"] = {
+			["show"] = {
+			},
+			["trackedSkill"] = "AUTO",
+			["maxSkills"] = {
+			},
+			["shortcuts"] = {
+			},
+			["track"] = false,
+			["curSkills"] = {
+			},
+			["links"] = {
+			},
+		},
 		["Warcollie"] = {
 			["show"] = {
 			},

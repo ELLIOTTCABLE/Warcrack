@@ -1,8 +1,9 @@
 
 ThreatPlates3DB = {
 	["profileKeys"] = {
-		["Collierape - Smolderthorn"] = "Default",
 		["Hoarcollie - Smolderthorn"] = "Default",
+		["Collierape - Smolderthorn"] = "Default",
+		["Collietard - Smolderthorn"] = "Default",
 		["Melancollie - Smolderthorn"] = "Default",
 		["Snuffleupaga - Smolderthorn"] = "Default",
 		["Wattlecollie - Smolderthorn"] = "Default",

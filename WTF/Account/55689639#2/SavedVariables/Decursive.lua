@@ -1,8 +1,9 @@
 
 DecursiveDB = {
 	["profileKeys"] = {
-		["Collierape - Smolderthorn"] = "Default",
 		["Hoarcollie - Smolderthorn"] = "Default",
+		["Collierape - Smolderthorn"] = "Default",
+		["Collietard - Smolderthorn"] = "Default",
 		["Melancollie - Smolderthorn"] = "Default",
 		["Snuffleupaga - Smolderthorn"] = "Default",
 		["Wattlecollie - Smolderthorn"] = "Default",
@@ -15,10 +16,10 @@ DecursiveDB = {
 				-13, -- [1]
 				-16, -- [2]
 				nil, -- [3]
-				1, -- [4]
+				-11, -- [4]
 				[8] = -14,
 				[16] = -15,
-				[32] = 2,
+				[32] = -12,
 			},
 		},
 		["WARRIOR"] = {
@@ -34,11 +35,11 @@ DecursiveDB = {
 		},
 		["DRUID"] = {
 			["CureOrder"] = {
-				-11, -- [1]
+				-13, -- [1]
 				-15, -- [2]
 				nil, -- [3]
-				-12, -- [4]
-				[8] = -13,
+				1, -- [4]
+				[8] = 2,
 				[16] = -14,
 				[32] = -16,
 			},

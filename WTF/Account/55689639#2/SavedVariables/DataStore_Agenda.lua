@@ -11,18 +11,19 @@ DataStore_AgendaDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["Characters"] = {
@@ -155,9 +156,9 @@ DataStore_AgendaDB = {
 				},
 			},
 			["Default.Smolderthorn.Collierape"] = {
-				["lastUpdate"] = 1341547802,
+				["lastUpdate"] = 1342126901,
 				["Contacts"] = {
-					["Chrissmart"] = {
+					["Aïdenna"] = {
 						["note"] = "",
 					},
 					["Raethen"] = {
@@ -174,8 +175,9 @@ DataStore_AgendaDB = {
 					},
 					["Mocharape"] = {
 						["note"] = "",
-						["class"] = "Paladin",
-						["level"] = 1,
+					},
+					["Jondus"] = {
+						["note"] = "",
 					},
 					["Bilz"] = {
 						["note"] = "",
@@ -183,30 +185,34 @@ DataStore_AgendaDB = {
 					["Leahs"] = {
 						["note"] = "",
 					},
-					["Stephany"] = {
-						["note"] = "",
-					},
-					["Loganone"] = {
+					["Wizkalifa"] = {
 						["note"] = "",
 					},
 					["Qidran"] = {
 						["note"] = "",
 					},
-					["Battlecollie"] = {
+					["Stephany"] = {
 						["note"] = "",
 					},
 					["Modduece"] = {
 						["note"] = "",
-						["class"] = "Death Knight",
-						["level"] = 85,
 					},
-					["Wattlecollie"] = {
+					["Chrissmart"] = {
 						["note"] = "",
 					},
-					["Aïdenna"] = {
+					["Loganone"] = {
 						["note"] = "",
 					},
-					["Jondus"] = {
+					["Grubbs"] = {
+						["note"] = "",
+					},
+					["Battlecollie"] = {
+						["note"] = "",
+					},
+					["Collietard"] = {
+						["note"] = "",
+					},
+					["Dofbag"] = {
 						["note"] = "",
 					},
 					["Xarleas"] = {
@@ -219,9 +225,6 @@ DataStore_AgendaDB = {
 						["note"] = "",
 					},
 					["Hoarcollie"] = {
-						["note"] = "",
-					},
-					["Grubbs"] = {
 						["note"] = "",
 					},
 				},
@@ -282,138 +285,6 @@ DataStore_AgendaDB = {
 			},
 			["Default.Hyjal.Elliottcable"] = {
 				["lastUpdate"] = 1315453928,
-			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["lastUpdate"] = 1341539681,
-				["Contacts"] = {
-					["Chrissmart"] = {
-						["note"] = "",
-					},
-					["Raethen"] = {
-						["note"] = "",
-					},
-					["Shamangirl"] = {
-						["note"] = "",
-					},
-					["Strudelface"] = {
-						["note"] = "",
-					},
-					["Saidix"] = {
-						["note"] = "",
-					},
-					["Modduece"] = {
-						["note"] = "",
-						["class"] = "Death Knight",
-						["level"] = 85,
-					},
-					["Bilz"] = {
-						["note"] = "",
-					},
-					["Leahs"] = {
-						["note"] = "",
-					},
-					["Stephany"] = {
-						["note"] = "",
-					},
-					["Loganone"] = {
-						["note"] = "",
-					},
-					["Grubbs"] = {
-						["note"] = "",
-					},
-					["Battlecollie"] = {
-						["note"] = "",
-					},
-					["Qidran"] = {
-						["note"] = "",
-					},
-					["Jondus"] = {
-						["note"] = "",
-					},
-					["Xarleas"] = {
-						["note"] = "",
-					},
-					["Aïdenna"] = {
-						["note"] = "",
-					},
-					["Chobit"] = {
-						["note"] = "",
-					},
-					["Hoarcollie"] = {
-						["note"] = "",
-					},
-					["Wattlecollie"] = {
-						["note"] = "",
-					},
-				},
-			},
-			["Default.Smolderthorn.Snuffleupaga"] = {
-				["lastUpdate"] = 1341440583,
-				["Contacts"] = {
-					["Bandersnat"] = {
-						["note"] = "",
-					},
-					["Summoneer"] = {
-						["note"] = "",
-					},
-				},
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1341540205,
-				["Contacts"] = {
-					["Chrissmart"] = {
-						["note"] = "",
-					},
-					["Raethen"] = {
-						["note"] = "",
-					},
-					["Shamangirl"] = {
-						["note"] = "",
-					},
-					["Strudelface"] = {
-						["note"] = "",
-					},
-					["Battlecollie"] = {
-						["note"] = "",
-					},
-					["Qidran"] = {
-						["note"] = "",
-					},
-					["Modduece"] = {
-						["note"] = "",
-						["level"] = 85,
-						["class"] = "Death Knight",
-					},
-					["Saidix"] = {
-						["note"] = "",
-					},
-					["Leahs"] = {
-						["note"] = "",
-					},
-					["Bilz"] = {
-						["note"] = "",
-						["level"] = 85,
-						["class"] = "Paladin",
-					},
-					["Jondus"] = {
-						["note"] = "",
-					},
-					["Xarleas"] = {
-						["note"] = "",
-					},
-					["Melancollie"] = {
-						["note"] = "",
-					},
-					["Chobit"] = {
-						["note"] = "",
-					},
-					["Stephany"] = {
-						["note"] = "",
-					},
-					["Aïdenna"] = {
-						["note"] = "",
-					},
-				},
 			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["lastUpdate"] = 1341539931,
@@ -481,10 +352,10 @@ DataStore_AgendaDB = {
 					},
 				},
 			},
-			["Default.Smolderthorn.Wattlecollie"] = {
-				["lastUpdate"] = 1341546082,
+			["Default.Smolderthorn.Melancollie"] = {
+				["lastUpdate"] = 1341539681,
 				["Contacts"] = {
-					["Aïdenna"] = {
+					["Chrissmart"] = {
 						["note"] = "",
 					},
 					["Raethen"] = {
@@ -522,7 +393,156 @@ DataStore_AgendaDB = {
 					["Battlecollie"] = {
 						["note"] = "",
 					},
+					["Qidran"] = {
+						["note"] = "",
+					},
+					["Jondus"] = {
+						["note"] = "",
+					},
+					["Xarleas"] = {
+						["note"] = "",
+					},
+					["Aïdenna"] = {
+						["note"] = "",
+					},
+					["Chobit"] = {
+						["note"] = "",
+					},
+					["Hoarcollie"] = {
+						["note"] = "",
+					},
+					["Wattlecollie"] = {
+						["note"] = "",
+					},
+				},
+			},
+			["Default.Smolderthorn.Collietard"] = {
+				["lastUpdate"] = 1341912568,
+				["Contacts"] = {
+					["Dofbag"] = {
+						["note"] = "",
+					},
+				},
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1341540205,
+				["Contacts"] = {
 					["Chrissmart"] = {
+						["note"] = "",
+					},
+					["Raethen"] = {
+						["note"] = "",
+					},
+					["Shamangirl"] = {
+						["note"] = "",
+					},
+					["Strudelface"] = {
+						["note"] = "",
+					},
+					["Modduece"] = {
+						["note"] = "",
+						["level"] = 85,
+						["class"] = "Death Knight",
+					},
+					["Qidran"] = {
+						["note"] = "",
+					},
+					["Battlecollie"] = {
+						["note"] = "",
+					},
+					["Saidix"] = {
+						["note"] = "",
+					},
+					["Leahs"] = {
+						["note"] = "",
+					},
+					["Bilz"] = {
+						["note"] = "",
+						["level"] = 85,
+						["class"] = "Paladin",
+					},
+					["Jondus"] = {
+						["note"] = "",
+					},
+					["Xarleas"] = {
+						["note"] = "",
+					},
+					["Melancollie"] = {
+						["note"] = "",
+					},
+					["Chobit"] = {
+						["note"] = "",
+					},
+					["Stephany"] = {
+						["note"] = "",
+					},
+					["Aïdenna"] = {
+						["note"] = "",
+					},
+				},
+			},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["lastUpdate"] = 1341440583,
+				["Contacts"] = {
+					["Bandersnat"] = {
+						["note"] = "",
+					},
+					["Summoneer"] = {
+						["note"] = "",
+					},
+				},
+			},
+			["Default.Smolderthorn.Wattlecollie"] = {
+				["lastUpdate"] = 1341910257,
+				["Contacts"] = {
+					["Aïdenna"] = {
+						["note"] = "",
+					},
+					["Raethen"] = {
+						["note"] = "",
+					},
+					["Shamangirl"] = {
+						["note"] = "",
+					},
+					["Strudelface"] = {
+						["note"] = "",
+					},
+					["Saidix"] = {
+						["note"] = "",
+					},
+					["Mocharape"] = {
+						["note"] = "",
+						["class"] = "Paladin",
+						["level"] = 44,
+					},
+					["Bilz"] = {
+						["note"] = "",
+					},
+					["Leahs"] = {
+						["note"] = "",
+					},
+					["Stephany"] = {
+						["note"] = "",
+					},
+					["Loganone"] = {
+						["note"] = "",
+					},
+					["Chrissmart"] = {
+						["note"] = "",
+					},
+					["Grubbs"] = {
+						["note"] = "",
+					},
+					["Battlecollie"] = {
+						["note"] = "",
+					},
+					["Collierape"] = {
+						["note"] = "",
+					},
+					["Wizkalifa"] = {
+						["note"] = "",
+					},
+					["Qidran"] = {
 						["note"] = "",
 					},
 					["Jondus"] = {
@@ -540,7 +560,7 @@ DataStore_AgendaDB = {
 					["Hoarcollie"] = {
 						["note"] = "",
 					},
-					["Qidran"] = {
+					["Modduece"] = {
 						["note"] = "",
 					},
 				},

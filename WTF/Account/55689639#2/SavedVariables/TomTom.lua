@@ -1,22 +1,23 @@
 
 TomTomDB = {
 	["profileKeys"] = {
-		["Warmongrel - Ysondre"] = "Default",
 		["Fraycollie - Nordrassil"] = "Default",
-		["Fraycollie - Smolderthorn"] = "Default",
-		["Elliottcable - Hyjal"] = "Default",
 		["Summoneer - Smolderthorn"] = "Default",
 		["Fraycollie - Hyjal"] = "Default",
+		["Melancollie - Smolderthorn"] = "Default",
+		["Othercollie - Smolderthorn"] = "Default",
+		["Battlecollie - Smolderthorn"] = "Default",
+		["Warmongrel - Ysondre"] = "Default",
+		["Collietard - Smolderthorn"] = "Default",
+		["Elliottcable - Hyjal"] = "Default",
 		["Github - Smolderthorn"] = "Default",
 		["Nocollie - Smolderthorn"] = "Default",
-		["Melancollie - Smolderthorn"] = "Default",
-		["Collierape - Smolderthorn"] = "Default",
+		["Fraycollie - Smolderthorn"] = "Default",
 		["Armscollie - Akama"] = "Default",
 		["Hoarcollie - Smolderthorn"] = "Default",
 		["Snuffleupaga - Smolderthorn"] = "Default",
-		["Othercollie - Smolderthorn"] = "Default",
-		["Battlecollie - Smolderthorn"] = "Default",
 		["Wattlecollie - Smolderthorn"] = "Default",
+		["Collierape - Smolderthorn"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -38,43 +39,48 @@ TomTomDB = {
 TomTomWaypoints = nil
 TomTomWaypointsMF = {
 	["profileKeys"] = {
-		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
 		["Fraycollie - Nordrassil"] = "Fraycollie - Nordrassil",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Summoneer - Smolderthorn"] = "Summoneer - Smolderthorn",
 		["Fraycollie - Hyjal"] = "Fraycollie - Hyjal",
+		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
+		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
+		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
+		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
+		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Github - Smolderthorn"] = "Github - Smolderthorn",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
-		["Melancollie - Smolderthorn"] = "Melancollie - Smolderthorn",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
-		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
-		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
 	},
 	["profiles"] = {
-		["Warmongrel - Ysondre"] = {
-		},
 		["Fraycollie - Nordrassil"] = {
-		},
-		["Fraycollie - Smolderthorn"] = {
-		},
-		["Elliottcable - Hyjal"] = {
 		},
 		["Summoneer - Smolderthorn"] = {
 		},
 		["Fraycollie - Hyjal"] = {
 		},
+		["Melancollie - Smolderthorn"] = {
+		},
+		["Othercollie - Smolderthorn"] = {
+		},
+		["Battlecollie - Smolderthorn"] = {
+		},
+		["Warmongrel - Ysondre"] = {
+		},
+		["Collietard - Smolderthorn"] = {
+		},
+		["Elliottcable - Hyjal"] = {
+		},
 		["Github - Smolderthorn"] = {
 		},
 		["Nocollie - Smolderthorn"] = {
 		},
-		["Melancollie - Smolderthorn"] = {
-		},
-		["Collierape - Smolderthorn"] = {
+		["Fraycollie - Smolderthorn"] = {
 		},
 		["Armscollie - Akama"] = {
 		},
@@ -82,11 +88,9 @@ TomTomWaypointsMF = {
 		},
 		["Snuffleupaga - Smolderthorn"] = {
 		},
-		["Othercollie - Smolderthorn"] = {
-		},
-		["Battlecollie - Smolderthorn"] = {
-		},
 		["Wattlecollie - Smolderthorn"] = {
+		},
+		["Collierape - Smolderthorn"] = {
 		},
 	},
 }

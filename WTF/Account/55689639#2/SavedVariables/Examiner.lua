@@ -11,7 +11,7 @@ Examiner_Config = {
 	["featsCat"] = 92,
 	["cacheFilter"] = "",
 	["combineAdditiveStats"] = true,
-	["alwaysShowItemLevel"] = true,
+	["prevPage"] = 5,
 	["percentRatings"] = false,
 	["autoInspect"] = true,
 	["featsSort"] = "none",
@@ -20,7 +20,7 @@ Examiner_Config = {
 	},
 	["showBackground"] = true,
 	["featsFilter"] = "",
-	["prevPage"] = 5,
+	["alwaysShowItemLevel"] = true,
 }
 Examiner_Cache = {
 }

@@ -11,18 +11,19 @@ DataStore_CurrenciesDB = {
 		["Othercollie - Smolderthorn"] = "Othercollie - Smolderthorn",
 		["Battlecollie - Smolderthorn"] = "Battlecollie - Smolderthorn",
 		["Warmongrel - Ysondre"] = "Warmongrel - Ysondre",
+		["Collietard - Smolderthorn"] = "Collietard - Smolderthorn",
 		["Elliottcable - Hyjal"] = "Elliottcable - Hyjal",
 		["Wattlecollie - Smolderthorn"] = "Wattlecollie - Smolderthorn",
-		["Github - Smolderthorn"] = "Github - Smolderthorn",
+		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
 		["Nocollie - Smolderthorn"] = "Nocollie - Smolderthorn",
 		["Fraycollie - The Underbog"] = "Fraycollie - The Underbog",
-		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
 		["Armscollie - Akama"] = "Armscollie - Akama",
 		["Hoarcollie - Smolderthorn"] = "Hoarcollie - Smolderthorn",
 		["Snuffleupaga - Smolderthorn"] = "Snuffleupaga - Smolderthorn",
 		["Warcollie - Darkspear"] = "Warcollie - Darkspear",
-		["Fraycollie - Smolderthorn"] = "Fraycollie - Smolderthorn",
-		["Combatcollie - The Underbog"] = "Combatcollie - The Underbog",
+		["Collierape - Smolderthorn"] = "Collierape - Smolderthorn",
+		["Github - Smolderthorn"] = "Github - Smolderthorn",
 	},
 	["global"] = {
 		["Reference"] = {
@@ -83,23 +84,11 @@ DataStore_CurrenciesDB = {
 				},
 			},
 			["Default.Smolderthorn.Collierape"] = {
-				["lastUpdate"] = 1341547297,
-				["Archeology"] = {
-					0, -- [1]
-					0, -- [2]
-					0, -- [3]
-					0, -- [4]
-					0, -- [5]
-					0, -- [6]
-					0, -- [7]
-					0, -- [8]
-					0, -- [9]
-					0, -- [10]
-				},
 				["Currencies"] = {
 					7, -- [1]
 					8, -- [2]
 				},
+				["lastUpdate"] = 1342123700,
 			},
 			["Default.The Underbog.Fraycollie"] = {
 				["lastUpdate"] = 1307756258,
@@ -174,41 +163,6 @@ DataStore_CurrenciesDB = {
 					8, -- [2]
 				},
 			},
-			["Default.Smolderthorn.Melancollie"] = {
-				["Currencies"] = {
-					7, -- [1]
-					8, -- [2]
-					138, -- [3]
-				},
-				["Archeology"] = {
-					0, -- [1]
-					0, -- [2]
-					0, -- [3]
-					0, -- [4]
-					0, -- [5]
-					0, -- [6]
-					0, -- [7]
-					0, -- [8]
-					0, -- [9]
-					0, -- [10]
-				},
-				["lastUpdate"] = 1341539607,
-			},
-			["Default.Smolderthorn.Snuffleupaga"] = {
-				["lastUpdate"] = 1341440539,
-				["Currencies"] = {
-					7, -- [1]
-					8, -- [2]
-				},
-			},
-			["Default.Smolderthorn.Hoarcollie"] = {
-				["lastUpdate"] = 1341539951,
-				["Currencies"] = {
-					7, -- [1]
-					8, -- [2]
-					10, -- [3]
-				},
-			},
 			["Default.Smolderthorn.Battlecollie"] = {
 				["Currencies"] = {
 					3, -- [1]
@@ -231,8 +185,50 @@ DataStore_CurrenciesDB = {
 				},
 				["lastUpdate"] = 1341539826,
 			},
+			["Default.Smolderthorn.Melancollie"] = {
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+					138, -- [3]
+				},
+				["Archeology"] = {
+					0, -- [1]
+					0, -- [2]
+					0, -- [3]
+					0, -- [4]
+					0, -- [5]
+					0, -- [6]
+					0, -- [7]
+					0, -- [8]
+					0, -- [9]
+					0, -- [10]
+				},
+				["lastUpdate"] = 1341539607,
+			},
+			["Default.Smolderthorn.Collietard"] = {
+				["lastUpdate"] = 1341910468,
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+			},
+			["Default.Smolderthorn.Hoarcollie"] = {
+				["lastUpdate"] = 1341539951,
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+					10, -- [3]
+				},
+			},
+			["Default.Smolderthorn.Snuffleupaga"] = {
+				["lastUpdate"] = 1341440539,
+				["Currencies"] = {
+					7, -- [1]
+					8, -- [2]
+				},
+			},
 			["Default.Smolderthorn.Wattlecollie"] = {
-				["lastUpdate"] = 1341545773,
+				["lastUpdate"] = 1341910242,
 				["Currencies"] = {
 					7, -- [1]
 					8, -- [2]

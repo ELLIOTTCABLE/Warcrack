@@ -317,6 +317,32 @@ BeanCounterDB = {
 			["failedBids"] = {
 			},
 		},
+		["Collietard"] = {
+			["vendorsell"] = {
+			},
+			["postedBids"] = {
+			},
+			["postedAuctions"] = {
+			},
+			["completedBidsBuyoutsNeutral"] = {
+			},
+			["vendorbuy"] = {
+			},
+			["failedAuctions"] = {
+			},
+			["failedBidsNeutral"] = {
+			},
+			["completedBidsBuyouts"] = {
+			},
+			["completedAuctions"] = {
+			},
+			["failedAuctionsNeutral"] = {
+			},
+			["completedAuctionsNeutral"] = {
+			},
+			["failedBids"] = {
+			},
+		},
 		["Warcollie"] = {
 			["vendorsell"] = {
 			},
@@ -549,6 +575,10 @@ BeanCounterDB = {
 			["vendorsell"] = {
 			},
 			["postedBids"] = {
+				["67282"] = {
+					["item:67282:0:0:0:0:0:0:935893056:80:0"] = {
+					},
+				},
 			},
 			["postedAuctions"] = {
 			},
@@ -561,6 +591,11 @@ BeanCounterDB = {
 			["failedBidsNeutral"] = {
 			},
 			["completedBidsBuyouts"] = {
+				["67282"] = {
+					["item:67282:0:0:0:0:0:0:935893056:80:0"] = {
+						"1;;;;20000000;20000000;Ròótbeard;1342126783;;A", -- [1]
+					},
+				},
 			},
 			["completedAuctions"] = {
 			},
@@ -906,9 +941,9 @@ BeanCounterDB = {
 						"1;;;;798000;798000;Faedari;1308894214;;H", -- [2]
 					},
 				},
-				["43395"] = {
-					["item:43395:0:0:0:0:0:0:0:80:0"] = {
-						"1;;;;2799995;2799995;Tesio;1308977191;;H", -- [1]
+				["8496"] = {
+					["item:8496:0:0:0:0:0:0:0:80:0"] = {
+						"1;;;;9032;9032;Gudruneita;1308870806;;A", -- [1]
 					},
 				},
 				["43419"] = {
@@ -942,9 +977,9 @@ BeanCounterDB = {
 						"1;;;;242993;242993;Teamventure;1308977108;;H", -- [1]
 					},
 				},
-				["8496"] = {
-					["item:8496:0:0:0:0:0:0:0:80:0"] = {
-						"1;;;;9032;9032;Gudruneita;1308870806;;A", -- [1]
+				["43395"] = {
+					["item:43395:0:0:0:0:0:0:0:80:0"] = {
+						"1;;;;2799995;2799995;Tesio;1308977191;;H", -- [1]
 					},
 				},
 				["45792"] = {
@@ -1050,7 +1085,7 @@ BeanCounterDBSettings = {
 		["columnsortcurSort"] = 1,
 		["columnsortcurDir"] = 1,
 		["configator.top"] = 825.0001220703125,
-		["configator.left"] = 640,
+		["configator.left"] = 563.2000122070312,
 		["util.beancounter.ButtonuseDateCheck"] = false,
 	},
 	["Smolderthorn"] = {
@@ -1113,118 +1148,118 @@ BeanCounterDBSettings = {
 			},
 			["mailbox"] = {
 				{
-					["subject"] = "Auction won: Embersilk Cloth (20)",
-					["read"] = 1,
 					["time"] = 29.99910926818848,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth (20)",
+					["read"] = 1,
 				}, -- [1]
 				{
-					["subject"] = "Auction won: Embersilk Cloth (20)",
-					["read"] = 1,
 					["time"] = 29.99909782409668,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth (20)",
+					["read"] = 1,
 				}, -- [2]
 				{
-					["subject"] = "Auction won: Embersilk Cloth (20)",
-					["read"] = 1,
 					["time"] = 29.99908638000488,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth (20)",
+					["read"] = 1,
 				}, -- [3]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99907493591309,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [4]
 				{
-					["subject"] = "Auction won: Embersilk Cloth (20)",
-					["read"] = 1,
 					["time"] = 29.99907493591309,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth (20)",
+					["read"] = 1,
 				}, -- [5]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99905014038086,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [6]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99905014038086,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [7]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99903869628906,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [8]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99903869628906,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [9]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99902725219727,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [10]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99902725219727,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [11]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99901580810547,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [12]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99900436401367,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [13]
 				{
-					["subject"] = "Auction won: Embersilk Cloth",
-					["read"] = 1,
 					["time"] = 29.99900436401367,
 					["sender"] = "Alliance Auction House",
-				}, -- [14]
-				{
 					["subject"] = "Auction won: Embersilk Cloth",
 					["read"] = 1,
+				}, -- [14]
+				{
 					["time"] = 29.99899291992188,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth",
+					["read"] = 1,
 				}, -- [15]
 				{
-					["subject"] = "Auction won: Embersilk Cloth (20)",
-					["read"] = 1,
 					["time"] = 29.99894714355469,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth (20)",
+					["read"] = 1,
 				}, -- [16]
 				{
-					["subject"] = "Auction won: Embersilk Cloth (20)",
-					["read"] = 1,
 					["time"] = 29.99894714355469,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth (20)",
+					["read"] = 1,
 				}, -- [17]
 				{
-					["subject"] = "Auction won: Embersilk Cloth (10)",
-					["read"] = 1,
 					["time"] = 29.99893569946289,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Embersilk Cloth (10)",
+					["read"] = 1,
 				}, -- [18]
 				{
-					["subject"] = "Auction won: Volatile Fire (100)",
-					["read"] = 1,
 					["time"] = 29.99976921081543,
 					["sender"] = "Alliance Auction House",
+					["subject"] = "Auction won: Volatile Fire (100)",
+					["read"] = 1,
 				}, -- [19]
 			},
 		},
@@ -1236,6 +1271,18 @@ BeanCounterDBSettings = {
 				["compactDB"] = 1341424494,
 				["sortArray"] = 1341295039,
 				["prunePostedDB"] = 1341450913,
+			},
+			["mailbox"] = {
+			},
+		},
+		["Collietard"] = {
+			["version"] = 3.02,
+			["faction"] = "Alliance",
+			["wealth"] = 0,
+			["maintenance"] = {
+				["compactDB"] = 1342183180,
+				["sortArray"] = 1342131853,
+				["prunePostedDB"] = 1342274410,
 			},
 			["mailbox"] = {
 			},
@@ -1263,136 +1310,136 @@ BeanCounterDBSettings = {
 			},
 			["mailbox"] = {
 				{
-					["read"] = 2,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.9998950958252,
+					["read"] = 2,
 					["subject"] = "Auction won: Netherweave Bag",
+					["time"] = 29.9998950958252,
 				}, -- [1]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.9998836517334,
+					["read"] = 1,
 					["subject"] = "Auction won: Netherweave Bag",
+					["time"] = 29.9998836517334,
 				}, -- [2]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.9998722076416,
+					["read"] = 1,
 					["subject"] = "Auction won: Netherweave Bag",
+					["time"] = 29.9998722076416,
 				}, -- [3]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.9998722076416,
+					["read"] = 1,
 					["subject"] = "Auction won: Netherweave Bag",
+					["time"] = 29.9998722076416,
 				}, -- [4]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99980354309082,
+					["read"] = 1,
 					["subject"] = "Auction won: Frostweave Bag",
+					["time"] = 29.99980354309082,
 				}, -- [5]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99979209899902,
+					["read"] = 1,
 					["subject"] = "Auction won: Frostweave Bag",
+					["time"] = 29.99979209899902,
 				}, -- [6]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99978065490723,
+					["read"] = 1,
 					["subject"] = "Auction won: Frostweave Bag",
+					["time"] = 29.99978065490723,
 				}, -- [7]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99978065490723,
+					["read"] = 1,
 					["subject"] = "Auction won: Frostweave Bag",
+					["time"] = 29.99978065490723,
 				}, -- [8]
 				{
-					["read"] = 1,
 					["sender"] = "Lunaclaw",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Moonkin Hatchling",
+					["time"] = 28.17788124084473,
 				}, -- [9]
 				{
-					["read"] = 1,
 					["sender"] = "Jepetto Joybuzz",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Are You Ready to Play?",
+					["time"] = 28.17788124084473,
 				}, -- [10]
 				{
-					["read"] = 1,
 					["sender"] = "Mei Francis",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Celestial Steed",
+					["time"] = 28.17788124084473,
 				}, -- [11]
 				{
-					["read"] = 1,
 					["sender"] = "Ragnaros",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Lil' Ragnaros",
+					["time"] = 28.17788124084473,
 				}, -- [12]
 				{
-					["read"] = 1,
 					["sender"] = "Breanni",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Wind Rider Cub",
+					["time"] = 28.17788124084473,
 				}, -- [13]
 				{
-					["read"] = 1,
 					["sender"] = "Kel'Thuzad",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Lil' K.T.",
+					["time"] = 28.17788124084473,
 				}, -- [14]
 				{
-					["read"] = 1,
 					["sender"] = "Breanni",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Gryphon Hatchling",
+					["time"] = 28.17788124084473,
 				}, -- [15]
 				{
-					["read"] = 1,
 					["sender"] = "Mei Francis",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Winged Guardian",
+					["time"] = 28.17788124084473,
 				}, -- [16]
 				{
-					["read"] = 1,
 					["sender"] = "Keeper Remulos",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Cenarion Hatchling",
+					["time"] = 28.17788124084473,
 				}, -- [17]
 				{
-					["read"] = 1,
 					["sender"] = "Chen Stormstout",
-					["time"] = 28.17788124084473,
+					["read"] = 1,
 					["subject"] = "Pandaren Monk",
+					["time"] = 28.17788124084473,
 				}, -- [18]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99991989135742,
+					["read"] = 1,
 					["subject"] = "Auction won: The 1 Ring",
+					["time"] = 29.99991989135742,
 				}, -- [19]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99984931945801,
+					["read"] = 1,
 					["subject"] = "Auction won: The 1 Ring",
+					["time"] = 29.99984931945801,
 				}, -- [20]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99967575073242,
+					["read"] = 1,
 					["subject"] = "Auction won: Tigerseye Band",
+					["time"] = 29.99967575073242,
 				}, -- [21]
 				{
-					["read"] = 1,
 					["sender"] = "Alliance Auction House",
-					["time"] = 29.99960708618164,
+					["read"] = 1,
 					["subject"] = "Auction won: Heavy Copper Ring",
+					["time"] = 29.99960708618164,
 				}, -- [22]
 			},
 		},
@@ -1407,10 +1454,10 @@ BeanCounterDBSettings = {
 			},
 			["mailbox"] = {
 				{
-					["time"] = 29.99982643127441,
-					["sender"] = "Alliance Auction House",
 					["subject"] = "Auction won: Netherweave Bag",
 					["read"] = 2,
+					["time"] = 29.99982643127441,
+					["sender"] = "Alliance Auction House",
 				}, -- [1]
 			},
 		},
@@ -1429,13 +1476,19 @@ BeanCounterDBSettings = {
 		["Collierape"] = {
 			["version"] = 3.02,
 			["faction"] = "Alliance",
-			["wealth"] = 0,
+			["wealth"] = 77954653,
 			["maintenance"] = {
 				["compactDB"] = 1341967144,
 				["sortArray"] = 1341903730,
 				["prunePostedDB"] = 1341829156,
 			},
 			["mailbox"] = {
+				{
+					["read"] = 1,
+					["sender"] = "Alliance Auction House",
+					["time"] = 29.9998607635498,
+					["subject"] = "Auction won: Elementium Geode",
+				}, -- [1]
 			},
 		},
 		["Snuffleupaga"] = {
@@ -1463,10 +1516,10 @@ BeanCounterDBSettings = {
 			},
 			["mailbox"] = {
 				{
-					["subject"] = "Auction won: Glyph of Intimidating Shout",
-					["read"] = 1,
 					["time"] = 29.99991989135742,
 					["sender"] = "Horde Auction House",
+					["subject"] = "Auction won: Glyph of Intimidating Shout",
+					["read"] = 1,
 				}, -- [1]
 			},
 		},
@@ -1527,46 +1580,46 @@ BeanCounterDBNames = {
 	["52242:0"] = "cff0070dd;Solid Ocean Sapphire",
 	["41599:0"] = "cff1eff00;Frostweave Bag",
 	["4339:0"] = "cffffffff;Bolt of Mageweave",
-	["21932:0"] = "cff1eff00;Heavy Copper Ring",
+	["8350:0"] = "cff1eff00;The 1 Ring",
 	["52555:0"] = "cffffffff;Hypnotic Dust",
 	["60216:0"] = "cff0070dd;De-Weaponized Mechanical Companion",
-	["8350:0"] = "cff1eff00;The 1 Ring",
-	["43400:0"] = "cffffffff;Glyph of Enduring Victory",
+	["21932:0"] = "cff1eff00;Heavy Copper Ring",
+	["43431:0"] = "cffffffff;Glyph of Victory Rush",
 	["52326:0"] = "cffffffff;Volatile Water",
 	["25439:0"] = "cff1eff00;Tigerseye Band",
 	["43421:0"] = "cffffffff;Glyph of Mortal Strike",
-	["63481:0"] = "cffffffff;Glyph of Colossus Smash",
-	["43431:0"] = "cffffffff;Glyph of Victory Rush",
+	["4777:0"] = "cff1eff00;Ironwood Maul",
+	["43400:0"] = "cffffffff;Glyph of Enduring Victory",
 	["22307:0"] = "cffffffff;Pattern: Enchanted Mageweave Pouch",
 	["8496:0"] = "cffffffff;Parrot Cage (Cockatiel)",
 	["52320:0"] = "cff0070dd;Elementium Moebius Band",
 	["7281:0"] = "cff1eff00;Light Leather Bracers",
 	["67483:0"] = "cffffffff;Glyph of Death Wish",
 	["4239:0"] = "cff1eff00;Embossed Leather Gloves",
-	["4777:0"] = "cff1eff00;Ironwood Maul",
+	["63481:0"] = "cffffffff;Glyph of Colossus Smash",
 	["43425:0"] = "cffffffff;Glyph of Shield Slam",
 	["44965:0"] = "cff0070dd;Teldrassil Sproutling",
 	["15017:1017"] = "cff1eff00;Lupine Leggings of the Whale",
-	["43416:0"] = "cffffffff;Glyph of Bloodthirst",
+	["8497:0"] = "cffffffff;Rabbit Crate (Snowshoe)",
 	["55069:0"] = "cffa335ee;Elementium Earthguard",
 	["43430:0"] = "cffffffff;Glyph of Resonating Power",
 	["52185:0"] = "cffffffff;Elementium Ore",
 	["43412:0"] = "cffffffff;Glyph of Bloody Healing",
 	["55059:0"] = "cffa335ee;Hardened Elementium Girdle",
 	["6552:135"] = "cff1eff00;Bard's Tunic of Stamina",
-	["54475:0"] = "cff0070dd;Deathsilk Robe",
-	["52325:0"] = "cffffffff;Volatile Fire",
-	["53039:0"] = "cffffffff;Hardened Elementium Bar",
 	["8495:0"] = "cffffffff;Parrot Cage (Senegal)",
-	["21841:0"] = "cff1eff00;Netherweave Bag",
+	["52325:0"] = "cffffffff;Volatile Fire",
 	["53038:0"] = "cffffffff;Obsidium Ore",
+	["54475:0"] = "cff0070dd;Deathsilk Robe",
+	["21841:0"] = "cff1eff00;Netherweave Bag",
+	["53039:0"] = "cffffffff;Hardened Elementium Bar",
 	["43398:0"] = "cffffffff;Glyph of Demoralizing Shout",
 	["58480:0"] = "cff1eff00;Truegold",
 	["43418:0"] = "cffffffff;Glyph of Heroic Throw",
 	["52210:0"] = "cff0070dd;Defender's Demonseye",
 	["52719:0"] = "cff1eff00;Greater Celestial Essence",
 	["49084:0"] = "cffffffff;Glyph of Command",
-	["8497:0"] = "cffffffff;Rabbit Crate (Snowshoe)",
+	["43416:0"] = "cffffffff;Glyph of Bloodthirst",
 	["43395:0"] = "cffffffff;Glyph of Battle",
 	["45795:0"] = "cffffffff;Glyph of Spell Reflection",
 	["4338:0"] = "cffffffff;Mageweave Cloth",

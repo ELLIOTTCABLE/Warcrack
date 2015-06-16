@@ -1,0 +1,57 @@
+------------------------------------------------------------------------
+r291 | stanzilla | 2015-03-10 19:49:24 +0000 (Tue, 10 Mar 2015) | 1 line
+Changed paths:
+   A /tags/r291-release (from /trunk:290)
+
+Tagging as r291-release
+------------------------------------------------------------------------
+r290 | funkydude | 2015-02-28 15:59:20 +0000 (Sat, 28 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/BugSack.toc
+   A /trunk/embeds.xml
+
+fix embeds
+------------------------------------------------------------------------
+r289 | funkydude | 2015-02-28 03:58:08 +0000 (Sat, 28 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   A /trunk/Libs/CallbackHandler-1.0
+   A /trunk/Libs/CallbackHandler-1.0/CallbackHandler-1.0.lua
+   A /trunk/Libs/LibDataBroker-1.1
+   A /trunk/Libs/LibDataBroker-1.1/LibDataBroker-1.1.lua
+   A /trunk/Libs/LibStub
+   A /trunk/Libs/LibStub/LibStub.lua
+   M /trunk/config.lua
+   M /trunk/core.lua
+
+cleanups
+------------------------------------------------------------------------
+r288 | funkydude | 2015-02-28 03:11:31 +0000 (Sat, 28 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/core.lua
+
+open the sack with /bugsack show
+------------------------------------------------------------------------
+r287 | funkydude | 2015-02-28 03:04:53 +0000 (Sat, 28 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/core.lua
+   M /trunk/sack.lua
+
+Revert, apparently there are people that use bug sending, who would have thought. Will simplify it later.
+------------------------------------------------------------------------
+r286 | funkydude | 2015-02-28 02:48:20 +0000 (Sat, 28 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/config.lua
+   M /trunk/core.lua
+   M /trunk/sack.lua
+
+Remove bug sending functionality.
+------------------------------------------------------------------------
+r284 | funkydude | 2015-02-25 00:21:31 +0000 (Wed, 25 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/BugSack.toc
+
+bump version
+------------------------------------------------------------------------

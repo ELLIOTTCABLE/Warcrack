@@ -1,0 +1,10 @@
+## Interface: 60100
+## Title: Bagnon Scrap
+## Notes: Makes your Scrap to glow
+## Author: Jaliborc (João Cardoso)
+## X-Category: Inventory
+## X-License: GNU General Public License Version 3
+## Dependencies: Scrap, Bagnon
+## Version: 13
+
+Bagnon_Scrap.lua

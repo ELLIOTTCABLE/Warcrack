@@ -5,6 +5,8 @@
 -- the spec exactly--it just does what it needs to for AuctionLite's purposes.
 -------------------------------------------------------------------------------
 
+local _
+
 local AceGUI = LibStub("AceGUI-3.0");
 local Version = 1;
 

@@ -4,6 +4,8 @@
 -- General utility functions.
 -------------------------------------------------------------------------------
 
+local _
+
 -- Make a printable string for a time in seconds.
 function AuctionLite:PrintTime(sec)
   local min = math.floor(sec / 60);
@@ -103,6 +105,11 @@ function AuctionLite:IsLink(str)
   return (str:find(LinkRegexp) ~= nil);
 end
 
+-- Is this link a battle pet link?
+function AuctionLite:IsBattlePetLink(link)
+  return strmatch(link, "|Hbattlepet:");
+end
+
 -- Dissect an item link or item string.
 function AuctionLite:SplitLink(link)
   -- Parse the link.
@@ -127,9 +134,13 @@ end
 -- Zero out the uniqueId field from an item link.
 function AuctionLite:RemoveUniqueId(link)
   if link ~= nil then
-    return link:gsub(":%-?%d*:%-?%d*:(%-?%d*)|h", function(reforge)
-      return ":0:0:" .. reforge .. "|h";
-    end)
+    return link:gsub(
+        -- Fields: itemID, enchant, gem1, gem2, gem3, gem4, suffixID.
+        "(Hitem:%-?%d+:%-?%d+:%-?%d+:%-?%d+:%-?%d+:%-?%d+:%-?%d+)" ..
+        -- Fields: uniqueID, level.
+        ":%-?%d+:%-?%d+",
+        -- Set uniqueID and level to 0.
+         "%1:0:0")
   else
     return nil;
   end
@@ -178,6 +189,15 @@ function AuctionLite:GetAuctionSellItemInfoAndLink()
   return name, texture, count, quality, canUse, price, link, container, slot;
 end
 
+-- Get the maximum stack size for an item.
+function AuctionLite:GetMaxStackSize(link)
+  local _, _, _, _, _, _, _, maxSize = GetItemInfo(link);
+  if maxSize == nil then
+    maxSize = 1;
+  end
+  return maxSize;
+end
+
 -- Make a money frame value negative.
 function AuctionLite:MakeNegative(frameName)
   local adjust = function(button)
@@ -220,8 +240,9 @@ function AuctionLite:GetListing(kind, i)
   -- There has *got* to be a better way to do this...
   local link = self:RemoveUniqueId(GetAuctionItemLink(kind, i));
   local name, texture, count, quality, canUse, level,
-        minBid, minIncrement, buyout, bidAmount,
-        highBidder, owner, sold = GetAuctionItemInfo(kind, i);
+        levelColHeader, minBid, minIncrement, buyout, bidAmount,
+        highBidder, bidderFullName, owner, ownerFullName, sold =
+        GetAuctionItemInfo(kind, i);
 
   -- Figure out the true minimum bid.
   local bid;
@@ -234,7 +255,7 @@ function AuctionLite:GetListing(kind, i)
     end
   end
 
-  -- Craete a listing object with all this data.
+  -- Create a listing object with all this data.
   local listing = {
     link = link, name = name, texture = texture, count = count,
     quality = quality, canUse = canUse, level = level,

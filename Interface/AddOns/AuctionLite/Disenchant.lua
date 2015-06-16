@@ -6,12 +6,18 @@
 -- based on Wowhead queries.
 -------------------------------------------------------------------------------
 
+local _
+
 -- Item ids for disenchanting materials.
 local AbyssCrystal_Id = 34057;
 local ArcaneDust_Id = 22445;
 local DreamDust_Id = 11176;
 local DreamShard_Id = 34052;
+local EtherealShard_Id = 74247;
+local HeavenlyShard_Id = 52721;
+local HypnoticDust_Id = 52555;
 local GreaterAstralEssence_Id = 11082;
+local GreaterCelestialEssence_Id = 52719;
 local GreaterCosmicEssence_Id = 34055;
 local GreaterEternalEssence_Id = 16203;
 local GreaterMagicEssence_Id = 10939;
@@ -26,20 +32,27 @@ local LargeGlowingShard_Id = 11139;
 local LargePrismaticShard_Id = 22449;
 local LargeRadiantShard_Id = 11178;
 local LesserAstralEssence_Id = 10998;
+local LesserCelestialEssence_Id = 52718;
 local LesserCosmicEssence_Id = 34056;
 local LesserEternalEssence_Id = 16202;
 local LesserMagicEssence_Id = 10938;
 local LesserMysticEssence_Id = 11134;
 local LesserNetherEssence_Id = 11174;
 local LesserPlanarEssence_Id = 22447;
+local MaelstromCrystal_Id = 72722;
+local MysteriousEssence_Id = 74250;
 local NexusCrystal_Id = 20725;
+local ShaCrystal_Id = 74248;
 local SmallBrilliantShard_Id = 14343;
 local SmallDreamShard_Id = 34053;
+local SmallEtherealShard_Id = 74252;
 local SmallGlimmeringShard_Id = 10978;
 local SmallGlowingShard_Id = 11138;
+local SmallHeavenlyShard_Id = 52720;
 local SmallPrismaticShard_Id = 22448;
 local SmallRadiantShard_Id = 11177;
 local SoulDust_Id = 11083;
+local SpiritDust_Id = 74249;
 local StrangeDust_Id = 10940;
 local VisionDust_Id = 11137;
 local VoidCrystal_Id = 22450;
@@ -188,6 +201,86 @@ local UncommonArmor = {
       { p = 0.03, min = 1, max = 1, id = DreamShard_Id, },
     },
   },
+  {
+    minlvl = 272,
+    maxlvl = 275,
+    shards = {
+      { p = 0.75, min = 1, max = 2, id = HypnoticDust_Id, },
+      { p = 0.25, min = 1, max = 2, id = LesserCelestialEssence_Id, },
+    },
+  },
+  {
+    minlvl = 276,
+    maxlvl = 290,
+    shards = {
+      { p = 0.75, min = 1, max = 3, id = HypnoticDust_Id, },
+      { p = 0.25, min = 1, max = 3, id = LesserCelestialEssence_Id, },
+    },
+  },
+  {
+    minlvl = 291,
+    maxlvl = 305,
+    shards = {
+      { p = 0.75, min = 1, max = 4, id = HypnoticDust_Id, },
+      { p = 0.25, min = 1, max = 4, id = LesserCelestialEssence_Id, },
+    },
+  },
+  {
+    minlvl = 306,
+    maxlvl = 315,
+    shards = {
+      { p = 0.75, min = 1, max = 5, id = HypnoticDust_Id, },
+      { p = 0.25, min = 1, max = 2, id = GreaterCelestialEssence_Id, },
+    },
+  },
+  {
+    minlvl = 316,
+    maxlvl = 325,
+    shards = {
+      { p = 0.75, min = 1, max = 6, id = HypnoticDust_Id, },
+      { p = 0.25, min = 1, max = 4, id = GreaterCelestialEssence_Id, },
+    },
+  },
+  {
+    minlvl = 326,
+    maxlvl = 350,
+    shards = {
+      { p = 0.75, min = 1, max = 7, id = HypnoticDust_Id, },
+      { p = 0.25, min = 1, max = 5, id = GreaterCelestialEssence_Id, },
+    },
+  },
+  {
+    minlvl = 351,
+    maxlvl = 380,
+    shards = {
+      { p = 0.85, min = 1, max = 3, id = SpiritDust_Id, },
+      { p = 0.15, min = 1, max = 1, id = MysteriousEssence_Id, },
+    },
+  },
+  {
+    minlvl = 381,
+    maxlvl = 390,
+    shards = {
+      { p = 0.85, min = 1, max = 4, id = SpiritDust_Id, },
+      { p = 0.15, min = 1, max = 1, id = MysteriousEssence_Id, },
+    },
+  },
+  {
+    minlvl = 391,
+    maxlvl = 410,
+    shards = {
+      { p = 0.85, min = 1, max = 5, id = SpiritDust_Id, },
+      { p = 0.15, min = 1, max = 2, id = MysteriousEssence_Id, },
+    },
+  },
+  {
+    minlvl = 411,
+    maxlvl = 450,
+    shards = {
+      { p = 0.85, min = 1, max = 6, id = SpiritDust_Id, },
+      { p = 0.15, min = 1, max = 3, id = MysteriousEssence_Id, },
+    },
+  },
 };
 
 local UncommonWeapon = {
@@ -325,6 +418,86 @@ local UncommonWeapon = {
       { p = 0.03, min = 1, max = 1, id = DreamShard_Id, },
     },
   },
+  {
+    minlvl = 272,
+    maxlvl = 275,
+    shards = {
+      { p = 0.75, min = 1, max = 2, id = LesserCelestialEssence_Id, },
+      { p = 0.25, min = 1, max = 2, id = HypnoticDust_Id, },
+    },
+  },
+  {
+    minlvl = 276,
+    maxlvl = 290,
+    shards = {
+      { p = 0.75, min = 1, max = 3, id = LesserCelestialEssence_Id, },
+      { p = 0.25, min = 1, max = 3, id = HypnoticDust_Id, },
+    },
+  },
+  {
+    minlvl = 291,
+    maxlvl = 305,
+    shards = {
+      { p = 0.75, min = 1, max = 4, id = LesserCelestialEssence_Id, },
+      { p = 0.25, min = 1, max = 4, id = HypnoticDust_Id, },
+    },
+  },
+  {
+    minlvl = 306,
+    maxlvl = 315,
+    shards = {
+      { p = 0.75, min = 1, max = 2, id = GreaterCelestialEssence_Id, },
+      { p = 0.25, min = 1, max = 5, id = HypnoticDust_Id, },
+    },
+  },
+  {
+    minlvl = 316,
+    maxlvl = 325,
+    shards = {
+      { p = 0.75, min = 1, max = 4, id = GreaterCelestialEssence_Id, },
+      { p = 0.25, min = 1, max = 6, id = HypnoticDust_Id, },
+    },
+  },
+  {
+    minlvl = 326,
+    maxlvl = 350,
+    shards = {
+      { p = 0.75, min = 1, max = 5, id = GreaterCelestialEssence_Id, },
+      { p = 0.25, min = 1, max = 7, id = HypnoticDust_Id, },
+    },
+  },
+  {
+    minlvl = 351,
+    maxlvl = 380,
+    shards = {
+      { p = 0.85, min = 1, max = 4, id = SpiritDust_Id, },
+      { p = 0.15, min = 1, max = 1, id = MysteriousEssence_Id, },
+    },
+  },
+  {
+    minlvl = 381,
+    maxlvl = 390,
+    shards = {
+      { p = 0.85, min = 1, max = 5, id = SpiritDust_Id, },
+      { p = 0.15, min = 1, max = 1, id = MysteriousEssence_Id, },
+    },
+  },
+  {
+    minlvl = 391,
+    maxlvl = 410,
+    shards = {
+      { p = 0.85, min = 1, max = 6, id = SpiritDust_Id, },
+      { p = 0.15, min = 1, max = 2, id = MysteriousEssence_Id, },
+    },
+  },
+  {
+    minlvl = 411,
+    maxlvl = 450,
+    shards = {
+      { p = 0.85, min = 1, max = 7, id = SpiritDust_Id, },
+      { p = 0.15, min = 1, max = 3, id = MysteriousEssence_Id, },
+    },
+  },
 };
 
 local Rare = {
@@ -417,6 +590,49 @@ local Rare = {
       { p = 0.005, min = 1, max = 1, id = AbyssCrystal_Id, },
     },
   },
+  {
+    minlvl = 201,
+    maxlvl = 316,
+    shards = {
+      { p = 1, min = 1, max = 1, id = SmallHeavenlyShard_Id, },
+    },
+  },
+  {
+    minlvl = 317,
+    maxlvl = 380,
+    shards = {
+      { p = 1, min = 1, max = 1, id = HeavenlyShard_Id, },
+    },
+  },
+  {
+    minlvl = 381,
+    maxlvl = 424,
+    shards = {
+      { p = 1, min = 1, max = 1, id = SmallEtherealShard_Id, },
+    },
+  },
+  {
+    minlvl = 425,
+    maxlvl = 449,
+    shards = {
+      { p = 1, min = 1, max = 1, id = EtherealShard_Id, },
+    },
+  },
+  {
+    minlvl = 449,
+    maxlvl = 450,
+    shards = {
+      { p = 0.8, min = 1, max = 1, id = SmallEtherealShard_Id, },
+	  { p = 0.2, min = 1, max = 1, id = EtherealShard_Id, },
+    },
+  },
+  {
+    minlvl = 451,
+    maxlvl = 500,
+    shards = {
+      { p = 1, min = 1, max = 1, id = EtherealShard_Id, },
+    },
+  },
 };
 
 local Epic = {
@@ -469,11 +685,30 @@ local Epic = {
       { p = 1.00, min = 1, max = 1, id = AbyssCrystal_Id, },
     },
   },
+  {
+    minlvl = 278,
+    maxlvl = 419,
+    shards = {
+      { p = 1.00, min = 1, max = 1, id = MaelstromCrystal_Id, },
+    },
+  },
+  {
+    minlvl = 420,
+    maxlvl = 600,
+    shards = {
+      { p = 1.00, min = 1, max = 1, id = ShaCrystal_Id, },
+    },
+  },
 };
 
 -- Constants used to build the disenchant table.
 local ITEM_TYPE_ARMOR = 1;
 local ITEM_TYPE_WEAPON = 2;
+
+-- Warlords compatibility - these constants moved to a LuaEnum.
+local ITEM_QUALITY_UNCOMMON = LE_ITEM_QUALITY_UNCOMMON or ITEM_QUALITY_UNCOMMON
+local ITEM_QUALITY_RARE = LE_ITEM_QUALITY_RARE or ITEM_QUALITY_RARE
+local ITEM_QUALITY_EPIC = LE_ITEM_QUALITY_EPIC or ITEM_QUALITY_EPIC
 
 local Qualities = {
   ITEM_QUALITY_UNCOMMON,

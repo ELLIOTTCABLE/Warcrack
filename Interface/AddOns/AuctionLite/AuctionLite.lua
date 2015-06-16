@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- AuctionLite 1.8.2
+-- AuctionLite 1.8.13
 --
 -- Lightweight addon to determine accurate market prices and to simplify
 -- the process of posting auctions.
@@ -13,9 +13,10 @@ AuctionLite = LibStub("AceAddon-3.0"):NewAddon("AuctionLite",
                                                "AceEvent-3.0",
                                                "AceHook-3.0");
 
+local _
 local L = LibStub("AceLocale-3.0"):GetLocale("AuctionLite", false)
 
-local AUCTIONLITE_VERSION = "1.8.2";
+local AUCTIONLITE_VERSION = "1.8.13";
 
 -------------------------------------------------------------------------------
 -- Hooks and boostrap code
@@ -62,9 +63,10 @@ function AuctionLite:OnInitialize()
   -- Another addon may have forced the Blizzard addons to load early.
   -- If so, just run the init code now.
   if IsAddOnLoaded("Blizzard_AuctionUI") then
-    self:ADDON_LOADED("Blizzard_AuctionUI");
-  elseif IsAddOnLoaded("Blizzard_GuildBankUI") then
-    self:ADDON_LOADED("Blizzard_GuildBankUI");
+    self:ADDON_LOADED("ADDON_LOADED", "Blizzard_AuctionUI");
+  end
+  if IsAddOnLoaded("Blizzard_GuildBankUI") then
+    self:ADDON_LOADED("ADDON_LOADED", "Blizzard_GuildBankUI");
   end
 
   -- Add any hooks that don't depend upon Blizzard addons.

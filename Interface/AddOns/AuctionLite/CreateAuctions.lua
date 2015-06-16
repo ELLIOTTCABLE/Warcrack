@@ -4,6 +4,7 @@
 -- Create a group of auctions based on input in the "Sell" tab.
 -------------------------------------------------------------------------------
 
+local _
 local L = LibStub("AceLocale-3.0"):GetLocale("AuctionLite", false)
 
 -- Flag indicating whether we're currently posting auctions.
@@ -34,6 +35,11 @@ function AuctionLite:CountItems(targetLink)
           total = total + count;
         end
       end
+    end
+
+    -- Battle pets can only be sold one at a time, so cap this count at one.
+    if total > 0 and self:IsBattlePetLink(targetLink) then
+      total = 1;
     end
   end
 
@@ -124,8 +130,7 @@ function AuctionLite:CreateAuctionsCore()
     local time = self:GetDuration();
 
     local numItems = self:CountItems(link);
-
-    local _, _, _, _, _, _, _, maxSize = GetItemInfo(link);
+    local maxSize = self:GetMaxStackSize(link);
 
     -- If we're pricing per item, then get the stack price.
     if self.db.profile.method == 1 then

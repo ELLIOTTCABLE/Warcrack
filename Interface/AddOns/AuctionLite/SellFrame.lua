@@ -4,6 +4,7 @@
 -- Implements the "Sell" tab.
 -------------------------------------------------------------------------------
 
+local _
 local L = LibStub("AceLocale-3.0"):GetLocale("AuctionLite", false)
 
 -- Constants for display elements.
@@ -200,7 +201,7 @@ function AuctionLite:UserChangedStacks()
         local newSize = math.floor(numItems / stacks);
 
         -- Make sure the stack is not too large.
-        local _, _, _, _, _, _, _, maxSize = GetItemInfo(link);
+        local maxSize = self:GetMaxStackSize(link);
         if maxSize < newSize then
           newSize = maxSize;
         end
@@ -236,7 +237,7 @@ function AuctionLite:UpdatePrices()
       bid = bid * stackSize;
       buyout = buyout * stackSize;
     end
-    
+
     MoneyInputFrame_SetCopper(SellBidPrice, math.floor(bid + 0.5));
     SellBidPrice.expectChanges = SellBidPrice.expectChanges + 1;
 
@@ -258,18 +259,17 @@ function AuctionLite:ValidateAuction()
     local buyout = MoneyInputFrame_GetCopper(SellBuyoutPrice);
 
     local stacks = SellStacks:GetNumber();
-    local size = SellSize:GetNumber();
+    local size = SellSize:GetNumber() or 1;
 
     local numItems = self:CountItems(link);
-
-    local _, _, _, _, _, _, _, maxSize = GetItemInfo(link);
+    local maxSize = self:GetMaxStackSize(link);
 
     -- If we're pricing by item, get the full stack price.
     if self.db.profile.method == METHOD_PER_ITEM then
       bid = bid * size;
       buyout = buyout * size;
     end
-    
+
     -- Now perform our checks.
     if stacks * size <= 0 then
       StatusError = true;
@@ -319,7 +319,7 @@ function AuctionLite:ClickAuctionSellItemButton_Hook()
       self:GetAuctionSellItemInfoAndLink();
 
     if name ~= nil then
-      local _, _, _, _, _, _, _, maxSize = GetItemInfo(link);
+      local maxSize = self:GetMaxStackSize(link);
 
       SellItemButton:SetNormalTexture(texture);
       SellItemButtonName:SetText(name);
@@ -381,6 +381,7 @@ function AuctionLite:ClickAuctionSellItemButton_Hook()
         -- Start the scan.
         local query = {
           link = link,
+          exact = true,
           update = function(pct) AuctionLite:UpdateProgressSell(pct) end,
           finish = function(data, link) AuctionLite:SetSellData(data, link) end,
         };
@@ -454,7 +455,7 @@ function AuctionLite:SetSellData(results, link)
   local result = results[link];
   if result ~= nil then
     local filtered = {};
-    
+
     local i;
     for _, listing in ipairs(result.data) do
       if listing.buyout > 0 then
@@ -545,7 +546,8 @@ StaticPopupDialogs["AL_VENDOR_WARNING"] = {
   showAlert = 1,
   timeout = 0,
   exclusive = 1,
-  hideOnEscape = 1
+  hideOnEscape = 1,
+  preferredIndex = 3
 };
 
 -- We've clicked the "Create" button (or pressed enter).
@@ -603,6 +605,7 @@ end
 -- Mouse has left a row in the scrolling frame.
 function AuctionLite:SellButton_OnLeave(widget)
   GameTooltip:Hide();
+  BattlePetTooltip:Hide();
 end
 
 -- Handles clicks on "Remember" button.
@@ -813,7 +816,7 @@ function AuctionLite:ApplySellSort()
   else
     assert(false);
   end
-  
+
   self:ApplySort(info, data, cmp);
 end
 

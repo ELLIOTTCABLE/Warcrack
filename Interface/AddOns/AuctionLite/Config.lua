@@ -4,6 +4,7 @@
 -- AuctionLite configuration stuff.
 -------------------------------------------------------------------------------
 
+local _
 local L = LibStub("AceLocale-3.0"):GetLocale("AuctionLite", false)
 
 local DBName = "AuctionLiteDB";
@@ -474,7 +475,8 @@ StaticPopupDialogs["AL_NEW_FAVORITES_LIST"] = {
   hasEditBox = 1,
   timeout = 0,
   exclusive = 1,
-  hideOnEscape = 1
+  hideOnEscape = 1,
+  preferredIndex = 3
 };
 
 -- Create a favorites list with a given name.

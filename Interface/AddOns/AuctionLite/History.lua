@@ -4,6 +4,7 @@
 -- Track historical information about auction prices.
 -------------------------------------------------------------------------------
 
+local _
 local L = LibStub("AceLocale-3.0"):GetLocale("AuctionLite", false)
 
 local MIN_TIME_BETWEEN_SCANS = 0;
@@ -183,7 +184,8 @@ StaticPopupDialogs["AL_CLEAR_DATA"] = {
   showAlert = 1,
   timeout = 0,
   exclusive = 1,
-  hideOnEscape = 1
+  hideOnEscape = 1,
+  preferredIndex = 3
 };
 
 -- The user requested to clear all AH data.

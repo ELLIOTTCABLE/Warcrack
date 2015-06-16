@@ -4,6 +4,8 @@
 -- UI functions for modifying the parent auction frame.
 -------------------------------------------------------------------------------
 
+local _
+
 -- Index of our tab in the auction frame.
 local BuyTabIndex = nil;
 local SellTabIndex = nil;

@@ -4,6 +4,8 @@
 -- Implement external API.
 -------------------------------------------------------------------------------
 
+local _
+
 -- External interface for vendor values.
 -- Deprecated due to addition of built-in vendor values.
 function AuctionLite:GetVendorValue()

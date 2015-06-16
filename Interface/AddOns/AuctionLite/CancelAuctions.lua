@@ -4,6 +4,7 @@
 -- Cancel a group of auctions.
 -------------------------------------------------------------------------------
 
+local _
 local L = LibStub("AceLocale-3.0"):GetLocale("AuctionLite", false)
 
 -- Static popup advertising AL's fast scan.
@@ -24,7 +25,8 @@ StaticPopupDialogs["AL_CANCEL_CONFIRM"] = {
   showAlert = 1,
   timeout = 0,
   exclusive = 1,
-  hideOnEscape = 1
+  hideOnEscape = 1,
+  preferredIndex = 3
 };
 
 -- Cancel all auctions for "name" listed in "targets".

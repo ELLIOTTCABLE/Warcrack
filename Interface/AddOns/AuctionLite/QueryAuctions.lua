@@ -4,6 +4,7 @@
 -- Queries the auction house.
 -------------------------------------------------------------------------------
 
+local _
 local L = LibStub("AceLocale-3.0"):GetLocale("AuctionLite", false)
 
 -- Maximum number of bytes in the first argument of QueryAuctionItems().
@@ -100,7 +101,8 @@ function AuctionLite:QueryUpdate()
 
       -- Submit the query.
       OurQuery = true;
-      QueryAuctionItems(name, 0, 0, 0, 0, 0, Query.page, 0, 0, getAll);
+      QueryAuctionItems(name, 0, 0, 0, 0, 0, Query.page, 0, 0, getAll,
+                        Query.exact);
       OurQuery = false;
 
       -- Wait for our result.
@@ -181,9 +183,14 @@ function AuctionLite:ComputeStats(data)
     end
   end
 
-  local avg = sum / count;
-  local stddev = math.max(0, sumSquared / count - (sum ^ 2 / count ^ 2)) ^ 0.5;
+  local avg = 0;
+  local stddev = 0;
 
+  if count ~= 0 then
+    avg = sum / count;
+    stddev = math.max(0, sumSquared / count - (sum ^ 2 / count ^ 2)) ^ 0.5;
+  end
+  
   return avg, stddev;
 end
 

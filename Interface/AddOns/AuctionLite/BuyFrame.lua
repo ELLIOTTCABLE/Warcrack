@@ -4,6 +4,7 @@
 -- Implements the "Buy" tab.
 -------------------------------------------------------------------------------
 
+local _
 local L = LibStub("AceLocale-3.0"):GetLocale("AuctionLite", false)
 
 -- Constants for display elements.
@@ -97,7 +98,8 @@ StaticPopupDialogs["AL_FAST_SCAN"] = {
   showAlert = 1,
   timeout = 0,
   exclusive = 1,
-  hideOnEscape = 1
+  hideOnEscape = 1,
+  preferredIndex = 3
 };
 
 -- Static popup explaining cancel clicks.
@@ -110,7 +112,8 @@ StaticPopupDialogs["AL_CANCEL_NOTE"] = {
   showAlert = 1,
   timeout = 0,
   exclusive = 1,
-  hideOnEscape = 1
+  hideOnEscape = 1,
+  preferredIndex = 3
 };
 
 -- Set current item to be shown in detail view, and update dependent data.
@@ -770,6 +773,7 @@ function AuctionLite:ContinuePurchase()
       local query = {
         name = order.name,
         wait = true,
+        exact = true,
         listing = order.current,
         isBuyout = order.isBuyout,
         finish = function(cancelled)
@@ -1036,6 +1040,7 @@ function AuctionLite:MultiScan(items)
     -- Start the scan.
     local query = {
       wait = true,
+      exact = true,
       update = function(pct) AuctionLite:UpdateProgressMulti(pct) end,
       finish = function(data) AuctionLite:SetMultiScanData(data) end,
     };
@@ -1130,7 +1135,7 @@ function AuctionLite:ApplyDetailSort()
   else
     assert(false);
   end
-  
+
   self:ApplySort(info, data, cmp);
 end
 
@@ -1214,7 +1219,7 @@ function AuctionLite:FavoritesButton_OnClick(id)
     else
       item = link;
     end
-    
+
     -- Toggle the favorite.
     if list[item] == nil then
       list[item] = true;
@@ -1363,6 +1368,7 @@ end
 -- Mouse has left a row in the scrolling frame.
 function AuctionLite:BuyButton_OnLeave(widget)
   GameTooltip:Hide();
+  BattlePetTooltip:Hide();
 end
 
 -- Click the advanced menu button.
@@ -1490,6 +1496,7 @@ end
 -- Hide the cancel tooltip.
 function AuctionLite:BuyCancelAuctionButton_OnLeave(widget)
   GameTooltip:Hide();
+  BattlePetTooltip:Hide();
 end
 
 -- Starts a full scan of the auction house.
@@ -1536,6 +1543,7 @@ function AuctionLite:AuctionFrameBuy_Search()
   local query = {
     name = BuyName:GetText(),
     wait = true,
+    exact = IsShiftKeyDown(),
     update = function(pct) AuctionLite:UpdateProgressSearch(pct) end,
     finish = function(data) AuctionLite:SetBuyData(data) end,
   };
@@ -1810,7 +1818,7 @@ function AuctionLite:AuctionFrameBuy_UpdateDetail()
       local bidFrame         = _G[buttonDetailName .. "BidFrame"];
       local buyoutEachFrame  = _G[buttonDetailName .. "BuyoutEachFrame"];
       local buyoutFrame      = _G[buttonDetailName .. "BuyoutFrame"];
-      
+
       local name, color = self:SplitLink(DetailLink);
 
       local countColor;

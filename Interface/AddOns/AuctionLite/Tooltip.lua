@@ -4,6 +4,7 @@
 -- Displays tooltips with vendor and auction prices.
 -------------------------------------------------------------------------------
 
+local _
 local L = LibStub("AceLocale-3.0"):GetLocale("AuctionLite", false)
 
 local MAX_BANK_COLUMNS = 7;
@@ -312,7 +313,7 @@ end
 
 -- Add data to loot item tooltips.
 function AuctionLite:LootTooltip(tooltip, id)
-  if tooltip:NumLines() > 0 and LootSlotIsItem(id) then
+  if tooltip:NumLines() > 0 and LootSlotHasItem(id) then
     local link = GetLootSlotLink(id);
     local _, _, count = GetLootSlotInfo(id);
     self:AddTooltipData(tooltip, link, count);
@@ -384,11 +385,19 @@ function AuctionLite:SetAuctionLiteTooltip(widget, shift, link, count)
     else
       assert(false);
     end
-    GameTooltip:SetHyperlink(link);
-    if GameTooltip:NumLines() > 0 then
-      self:AddTooltipData(GameTooltip, link, count);
+    if self:IsBattlePetLink(link) then
+      local _, speciesId, level, breedQuality, maxHealth, power, speed, name =
+        strsplit(":", link);
+      BattlePetToolTip_Show(tonumber(speciesId), tonumber(level),
+                            tonumber(breedQuality), tonumber(maxHealth),
+                            tonumber(power), tonumber(speed), name);
+    else
+      GameTooltip:SetHyperlink(link);
+      if GameTooltip:NumLines() > 0 then
+        self:AddTooltipData(GameTooltip, link, count);
+      end
+      self:SetHyperlinkTooltips(true);
     end
-    self:SetHyperlinkTooltips(true);
   end
 end
 

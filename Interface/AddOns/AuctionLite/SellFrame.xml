@@ -605,7 +605,10 @@
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
 						if ( GetAuctionSellItemInfo() ) then
-							GameTooltip:SetAuctionSellItem();
+							local hasCooldown, speciesID, level, breedQuality, maxHealth, power, speed, name = GameTooltip:SetAuctionSellItem();
+							if(speciesID and speciesID > 0) then
+								BattlePetToolTip_Show(speciesID, level, breedQuality, maxHealth, power, speed, name);
+							end
 						else
 							GameTooltip:SetText(AUCTION_ITEM_TEXT, 1.0, 1.0, 1.0);
 						end
@@ -791,7 +794,7 @@
 					</OnLoad>
 				</Scripts>
 			</Frame>
-			<Button name="SellCreateAuctionButton" inherits="UIPanelButtonTemplate2" text="CREATE_AUCTION">
+			<Button name="SellCreateAuctionButton" inherits="UIPanelButtonTemplate" text="CREATE_AUCTION">
 				<Size>
 					<AbsDimension x="191" y="20"/>
 				</Size>

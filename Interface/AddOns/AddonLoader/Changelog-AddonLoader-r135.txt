@@ -1,0 +1,19 @@
+------------------------------------------------------------------------
+r135 | mikk | 2014-11-02 03:12:40 +0000 (Sun, 02 Nov 2014) | 1 line
+Changed paths:
+   M /trunk/Conditions.lua
+
+Give the delayed-loading frame a name. (Yeah I'm playing with CPUThieves and it showed up as unnamed.)
+------------------------------------------------------------------------
+r133 | stanzilla | 2014-10-14 22:27:08 +0000 (Tue, 14 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/AddonLoader.toc
+
+Tic Toc
+------------------------------------------------------------------------
+r132 | nevcairiel | 2014-09-14 09:12:52 +0000 (Sun, 14 Sep 2014) | 1 line
+Changed paths:
+   M /trunk/AddonLoader.lua
+
+Fix one more indentation mistake
+------------------------------------------------------------------------

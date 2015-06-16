@@ -1,0 +1,7 @@
+<Ui>
+	<Script>
+		function UIDropDownMenu_OnUpdate()
+			-- You can have it back when it stops breaking info.minWidth
+		end
+	</Script>
+</Ui>

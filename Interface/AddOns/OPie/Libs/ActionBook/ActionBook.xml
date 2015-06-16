@@ -1,0 +1,8 @@
+<Ui>
+	<Script file="Kindred.lua" />
+	<Script file="Rewire.lua" />
+	<Script file="ActionBook.lua" />
+	<Script file="Conditionals.lua" />
+	<Script file="Handlers.lua" />
+	<Script file="Categories.lua" />
+</Ui>

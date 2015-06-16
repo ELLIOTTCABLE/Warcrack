@@ -1,0 +1,30 @@
+## Interface: 60100
+## Title: OPie
+## Version: Salmon 1
+## Notes: Group abilities into rings that appear when you hold down a binding.
+## Notes-deDE: Gruppiere Fähigkeiten in Ringen die erscheinen wenn eine Tastenbelegung ausgelöst wird.
+## Notes-esES: Agrupar habilitades en anillos que se aparecen al presionar teclados.
+## Notes-esMX: Agrupar habilitades en anillos que se aparecen al presionar teclados.
+## Notes-zhCN: 当你按下快捷键时显示一个环形的技能分组.
+## Notes-zhTW: 當你按下快捷鍵時顯示一個環形的技能分組.
+## Author: foxlit
+## SavedVariables: OneRing_Config
+## X-Update-FeedURL: http://www.townlong-yak.com/opie/rss/main
+## X-Website: http://www.townlong-yak.com/opie/
+## X-M6-AB: OneRingLib.ext.ActionBook
+Libs\Evie.lua
+Libs\Niji.lua
+Libs\Mirage.lua
+Libs\Toboe.lua
+Libs\Reverse\Reverse.xml
+Libs\ActionBook\ActionBook.xml
+Locale.lua
+OneRingLib.lua
+OPieUI.lua
+OPieConfig.lua
+OPieBindings.lua
+Meta\StanceBar.lua
+Meta\RingKeeper.lua
+Meta\RingKeeperConfig.lua
+Rings\Common.lua
+Rings\RKRings.lua

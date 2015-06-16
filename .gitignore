@@ -14,6 +14,12 @@
 /patch.html
 /*.*fil
 
+/.agent.db
+/.build.info
+/.patch.result
+
+/Launcher.db
+
 # Now, to get a little more intricate.
 
 /Interface/AddOns/Blizzard_*/

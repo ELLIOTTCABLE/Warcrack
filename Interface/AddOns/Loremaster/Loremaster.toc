@@ -1,0 +1,53 @@
+## Interface: 60100
+## Title: Loremaster
+## Notes: Identifies quests for the Loremaster achievements that haven't yet been completed and helps you find them
+## Notes-deDE: Identifiziert quests für die Loremaster Erfolge die du noch nicht fertig hat, und hilft dir diese zu finden
+## Notes-ruRU: Идентифицирует задания для достижения Хранитель мудрости, которые еще не завершены, и поможет вам найти их
+## Notes-frFR: Identifie les quêtes nécessaires aux hauts faits maître des traditions que vous n'avez pas encore complétées, et vous aide à les trouver
+## Notes-ptBR: Identifica missões para a conquista O Mestre Historiador que ainda não foram completadas e ajuda você a encontrá-las
+## Notes-itIT: Identifica missioni per i risultati LoreMaster che non sono ancora stati completati e ti aiuta a trovare
+## Notes-esES: Identifica misiones para los logros del Maestro Cultural que aún no hayas completado y te ayuda a encontrarlas
+## Author: Deepac
+## Version: 005
+## SavedVariablesPerCharacter: LoremasterDB
+## SavedVariables: LoremasterVars
+## Dependencies: Grail
+## OptionalDeps: Ace3, LibBabble-Zone-3.0, TomTom, LightHeaded
+## X-Category: Quests & Leveling
+## X-Website: http://wow.curse.com/downloads/wow-addons/details/loremasteraddon.aspx
+## X-Donate: https://www.paypal.com/cgi-bin/webscr?return=http%3A%2F%2Fwow.curseforge.com%2Faddons%2Floremasteraddon%2F&cn=Add+special+instructions+to+the+addon+author%28s%29&business=agoakley%40googlemail.com&bn=PP-DonationsBF%3Abtn_donateCC_LG.gif%3ANonHosted&cancel_return=http%3A%2F%2Fwow.curseforge.com%2Faddons%2Floremasteraddon%2F&lc=US&item_name=Loremaster+%28from+CurseForge.com%29&cmd=_donations&rm=1&no_shipping=1&currency_code=USD
+## X-Localizations: enUS, ruRU, frFR, deDE, itiT, koKR, ptBR, zhCN, zhTW, esES, esMX
+## X-Compatible-With: 50400
+## X-Curse-Packaged-Version: v5.3.0.0
+## X-Curse-Project-Name: Loremaster
+## X-Curse-Project-ID: loremasteraddon
+## X-Curse-Repository-ID: wow/loremasteraddon/mainline
+
+#@no-lib-strip@
+# Libraries
+embeds.xml
+#@end-no-lib-strip@
+
+modules\package.lua
+
+localisation\locale-enUS.lua
+localisation\locale-ruRU.lua
+localisation\locale-frFR.lua
+localisation\locale-deDE.lua
+localisation\locale-itIT.lua
+localisation\locale-esMX.lua
+localisation\locale-esES.lua
+localisation\locale-ptBR.lua
+localisation\locale-zhCN.lua
+localisation\locale-zhTW.lua
+localisation\locale-koKR.lua
+
+modules\initialise.lua
+modules\events.lua
+modules\general.lua
+modules\slashcommands.lua
+modules\options.lua
+modules\subframes.lua
+modules\poi.lua
+
+Loremaster.lua

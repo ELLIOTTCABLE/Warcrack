@@ -1,0 +1,12 @@
+﻿## Title: KillingBlow_Enhanced
+## Interface: 60000
+## Author: Choonster
+## Notes: Shows an image and plays a sound when you get a killing blow.
+## Version: 1.14
+## SavedVariables: KillingBlow_Enhanced_DB
+## X-Curse-Packaged-Version: 1.14
+## X-Curse-Project-Name: KillingBlow_Enhanced
+## X-Curse-Project-ID: killingblow_enhanced
+## X-Curse-Repository-ID: wow/killingblow_enhanced/mainline
+
+core.lua

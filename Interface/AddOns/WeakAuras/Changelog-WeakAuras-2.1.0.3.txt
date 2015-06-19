@@ -1,0 +1,62 @@
+tag 2.1.0.3
+b30fccdbb31b432cbfaf5d52d82fbd7ce4140aa8
+Benjamin Staneck <staneck@gmail.com>
+2015-05-11 22:32:20 +0200
+
+
+
+--------------------
+
+Infus:
+	- OptionsDialog: Sort the buttons delayed
+	If a event happened and the options window is hidden.
+	
+	Ticket-number: 251
+	- Combat Log trigger: Check destUnit via GUID instead of destName
+	That should be more reliable and fixes:
+	
+	Ticket-Number: 311
+	- Don't restart models on each WORLD_MAP_UPDATE
+	This breaks with NPCScan.Overlay installed. Instead hook into
+	the world map hide function. As that is where we need to reset
+	the models.
+	- ConstructFunction: Simplify interface
+	- Remove unused parameters subPrefix and subEvent
+	
+	  The function doesn't use those parameters, so remove them from all
+	  callers. Also removes some special handling for the combat log trigger.
+	
+	- Pass in the trigger table directly
+	  Instead of data, triggernum and the field.
+	- Text: Check that the font was set before SetText
+	Ticket-number: 305
+Benjamin Staneck:
+	- avoid two division by zero errors on the PTR
+	- revert font change, will now use your custom font again
+Infus:
+	- Pet Behavior trigger: Fix to changes in WoD
+	Don't stop at a empty button and active is a bool now.
+	- Auracache: Key it on the aura id and not on the auraname
+	Otherwise the count condition of two auras that check for
+	the same auraname gets confussed.
+	
+	Ticket-Number: 281
+	- Progress Bar: Add zoom option
+	Because the icon has it and it's easy to add. Not particular
+	useful..
+	- Progress Bar: Hide icon color if icon is deselected
+	- Text: Check that the font was set before SetText
+	Ticket-number: 305
+Benjamin Staneck:
+	- revert compat removal
+	- whitespace change to pull updated translations.
+	- remove some MoP compat, rename Encounter ID list translation entry and translate "Encounter ID" maybe the CurseForge translation system likes to pick up the changes this time...
+	- remove comment
+	- convert indenting to what is used in the files (spaces - sigh) and localize the encounter id tooltip values, see http://www.wowace.com/addons/weakauras-2/localization/phrases/1144-current-encounter-ids/ if you want to help translate it, not sure this is the best way to do that but it will have to do for now.
+Tercioo:
+	- Ticket #4 - Load Condition on ENCOUNTER_START
+	Add an extra option on Load panel to type the Encounter ID.
+	Tracks ENCOUNTER_START/END to load and unload the aura, also has
+	protection agaisnt disconnect and combat leave by zone change.
+Tzarc:
+	- Add aura ID to the aura_env table.

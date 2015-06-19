@@ -1,0 +1,1 @@
+select(2, ...).Mark = select(4,GetBuildInfo()) == 60100 and 50

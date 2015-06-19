@@ -1,0 +1,18 @@
+## Interface: 60100
+## Title: StatBlock_TimeInFight
+## Notes: A data broker plugin showing your longest fight and your current fight time.
+## Author: Funkydude
+## X-Category: Combat
+## X-Credits: Suran
+## SavedVariables: StatBlock_TimeInFightDB
+## X-Curse-Packaged-Version: r48-release
+## X-Curse-Project-Name: StatBlock_TimeInFight
+## X-Curse-Project-ID: stat-block_time-in-fight
+## X-Curse-Repository-ID: wow/stat-block_time-in-fight/mainline
+
+LibStub.lua
+CallbackHandler-1.0.lua
+LibDataBroker-1.1.lua
+
+StatBlock_TimeInFight.lua
+

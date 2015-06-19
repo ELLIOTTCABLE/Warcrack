@@ -1,0 +1,16 @@
+## Interface: 60100
+## Title: StatBlock_DPS
+## Notes: A DPS Data Broker plugin.
+## Author: Funkydude
+## X-Category: Combat
+## X-Credits: Silverstorm
+## X-Curse-Packaged-Version: r72-release
+## X-Curse-Project-Name: StatBlock_DPS
+## X-Curse-Project-ID: stat-block_dps
+## X-Curse-Repository-ID: wow/stat-block_dps/mainline
+
+LibStub.lua
+CallbackHandler-1.0.lua
+LibDataBroker-1.1.lua
+
+StatBlock_DPS.lua

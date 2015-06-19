@@ -1,0 +1,17 @@
+## Interface: 60100
+## Title: StatBlock_Memory
+## Notes: A Data Broker plugin to show AddOn memory usage.
+## Author: Funkydude
+## X-Category: Interface Enhancements
+## SavedVariables: SB_MEM_KILL
+## X-Curse-Packaged-Version: r59-release
+## X-Curse-Project-Name: StatBlock_Memory
+## X-Curse-Project-ID: stat-block_memory
+## X-Curse-Repository-ID: wow/stat-block_memory/mainline
+
+LibStub.lua
+CallbackHandler-1.0.lua
+LibDataBroker-1.1.lua
+
+StatBlock_Memory.lua
+

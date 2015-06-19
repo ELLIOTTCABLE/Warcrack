@@ -599,6 +599,12 @@ local function onClick(frame, btn)
 	end
 end
 
+local function onReceiveDrag(frame, btn)
+	if not frame.isMoving and frame.pluginObject.OnReceiveDrag then
+		frame.pluginObject.OnReceiveDrag(frame, btn)
+	end
+end
+
 local function onTooltipEnter(frame)
 	local name = frame.pluginName
 	frame:SetAlpha(db.plugins[name].shownAlpha)
@@ -636,7 +642,7 @@ function SBC:New(_, name, obj)
 	if obj.type == "launcher" and not db.launchers then return end
 	if _G.LibStub("AceConfigRegistry-3.0"):GetOptionsTable("SBC_"..name) then return end
 
-	_G.LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("SBC_"..name, getBlockOptions)
+	_G.LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("SBC_"..name, getBlockOptions, true)
 	_G.LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SBC_"..name, name, "StatBlockCore")
 
 	if not db.plugins[name].enabled then return end
@@ -737,6 +743,7 @@ function SBC:New(_, name, obj)
 	newBlock:SetScript("OnEnter", onTooltipEnter)
 	newBlock:SetScript("OnLeave", onTooltipLeave)
 	newBlock:SetScript("OnClick", onClick)
+	newBlock:SetScript("OnReceiveDrag", onReceiveDrag)
 
 	--Where a plugin wants a reference to the block
 	if obj.OnCreate then obj.OnCreate(obj, newBlock) end
@@ -785,7 +792,7 @@ function SBC:ADDON_LOADED(msg)
 		db = self.db.profile
 
 		local txt = "|cff33ff99StatBlockCore|r: "
-		_G.LibStub("AceConfig-3.0"):RegisterOptionsTable("StatBlockCore", getOptions)
+		_G.LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("StatBlockCore", getOptions, true)
 		_G.LibStub("AceConfigDialog-3.0"):AddToBlizOptions("StatBlockCore")
 		_G.SlashCmdList["STATBLOCKCORE_MAIN"] = function()
 			InterfaceOptionsFrame_OpenToCategory("StatBlockCore")

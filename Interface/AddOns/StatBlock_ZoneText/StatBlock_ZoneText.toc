@@ -1,0 +1,16 @@
+## Interface: 60100
+## Title: StatBlock_ZoneText
+## Notes: Zone text Data Broker plugin.
+## Author: Funkydude
+## X-Category: Interface Enhancements
+## X-Curse-Packaged-Version: r46-release
+## X-Curse-Project-Name: StatBlock_ZoneText
+## X-Curse-Project-ID: stat-block_zone-text
+## X-Curse-Repository-ID: wow/stat-block_zone-text/mainline
+
+LibStub.lua
+CallbackHandler-1.0.lua
+LibDataBroker-1.1.lua
+
+StatBlock_ZoneText.lua
+

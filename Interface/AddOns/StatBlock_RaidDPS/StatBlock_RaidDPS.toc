@@ -1,0 +1,17 @@
+## Interface: 60100
+## Title: StatBlock_RaidDPS
+## Notes: A Raid DPS Data Broker plugin.
+## Author: Funkydude
+## X-Category: Raid
+## X-Credits: Silverstorm
+## X-Curse-Packaged-Version: r60-release
+## X-Curse-Project-Name: StatBlock_RaidDPS
+## X-Curse-Project-ID: stat-block_raid-dps
+## X-Curse-Repository-ID: wow/stat-block_raid-dps/mainline
+
+LibStub.lua
+CallbackHandler-1.0.lua
+LibDataBroker-1.1.lua
+
+StatBlock_RaidDPS.lua
+

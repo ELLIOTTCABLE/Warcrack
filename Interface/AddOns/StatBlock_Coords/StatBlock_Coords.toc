@@ -1,0 +1,17 @@
+## Interface: 60100
+## Title: StatBlock_Coords
+## Notes: A Coordinates Data Broker plugin.
+## Author: Funkydude
+## X-Category: Map
+## X-Credits: Silverstorm
+## X-Curse-Packaged-Version: r54-release
+## X-Curse-Project-Name: StatBlock_Coords
+## X-Curse-Project-ID: stat-block_coords
+## X-Curse-Repository-ID: wow/stat-block_coords/mainline
+
+LibStub.lua
+CallbackHandler-1.0.lua
+LibDataBroker-1.1.lua
+
+StatBlock_Coords.lua
+

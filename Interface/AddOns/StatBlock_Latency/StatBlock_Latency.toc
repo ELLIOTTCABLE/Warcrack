@@ -1,11 +1,10 @@
-## Interface: 40300
+## Interface: 60100
 ## Title: StatBlock_Latency
 ## Notes: A Latency Data Broker plugin.
 ## Author: Funkydude
 ## X-Category: Interface Enhancements
 ## X-Credits: Suran
-## Version: 4.00
-## X-Curse-Packaged-Version: v4.00
+## X-Curse-Packaged-Version: r48-release
 ## X-Curse-Project-Name: StatBlock_Latency
 ## X-Curse-Project-ID: stat-block_latency
 ## X-Curse-Repository-ID: wow/stat-block_latency/mainline

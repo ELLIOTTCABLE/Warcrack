@@ -1,0 +1,17 @@
+## Interface: 60100
+## Title: StatBlock_FPS
+## Notes: A FPS Data Broker plugin.
+## Author: Funkydude
+## X-Category: Interface Enhancements
+## X-Credits: Suran
+## X-Curse-Packaged-Version: r56-release
+## X-Curse-Project-Name: StatBlock_FPS
+## X-Curse-Project-ID: stat-block_fps
+## X-Curse-Repository-ID: wow/stat-block_fps/mainline
+
+LibStub.lua
+CallbackHandler-1.0.lua
+LibDataBroker-1.1.lua
+
+StatBlock_FPS.lua
+

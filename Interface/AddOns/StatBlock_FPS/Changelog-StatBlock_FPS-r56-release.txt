@@ -1,13 +1,13 @@
 ------------------------------------------------------------------------
-r43 | funkydude | 2012-04-18 14:04:01 +0000 (Wed, 18 Apr 2012) | 1 line
+r56 | funkydude | 2015-02-25 02:30:06 +0000 (Wed, 25 Feb 2015) | 1 line
 Changed paths:
-   A /tags/v2.71 (from /trunk:42)
+   A /tags/r56-release (from /trunk:55)
 
-Tagging as v2.71
+Tagging as r56-release
 ------------------------------------------------------------------------
-r42 | funkydude | 2012-04-18 13:59:25 +0000 (Wed, 18 Apr 2012) | 1 line
+r55 | funkydude | 2015-02-25 02:09:27 +0000 (Wed, 25 Feb 2015) | 1 line
 Changed paths:
-   M /trunk/StatBlockCore.toc
+   M /trunk/StatBlock_FPS.toc
 
-update embeds
+bump version
 ------------------------------------------------------------------------

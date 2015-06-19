@@ -1,0 +1,12 @@
+tag v1.0
+566523767485e544630ee2821af1a78c2412420f
+Virtual <bryan@virtualbind.com>
+2014-10-16 22:00:59 -0500
+
+Tagging as v1.0
+
+
+--------------------
+
+Virtual:
+	- Updating the TOC for 6.0 release.

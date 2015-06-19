@@ -1,0 +1,16 @@
+## Interface: 60100
+## Title: Skada |r[|caaedc99fAvoidance and Mitigation|r]
+## Notes: Calculates incoming damage avoidance and mitigation
+## Author: oscarucb, immerc
+## Dependencies: Skada
+## X-Part-Of: Skada
+## Version: 1.3.2
+## X-ReleaseDate: 2015-03-30T22:13:10Z
+## X-Curse-Packaged-Version: 1.3.2
+## X-Curse-Project-Name: Skada Avoidance and Mitigation
+## X-Curse-Project-ID: skadaavoidancemitigation
+## X-Curse-Repository-ID: wow/skadaavoidancemitigation/mainline
+
+locale.lua
+
+SkadaAvoidanceMitigation.lua

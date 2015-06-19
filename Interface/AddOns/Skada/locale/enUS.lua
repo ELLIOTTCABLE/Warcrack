@@ -1,7 +1,7 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("Skada", "enUS", true)
 
-if not L then return end
-
+L["Include set"] = true
+L["Include set name in title bar"] = true
 L["Disable"] = true
 L["Profiles"] = true
 L["Hint: Left-Click to toggle Skada window."] = true
@@ -23,6 +23,9 @@ L["Skada: Modes"] = true
 L["Skada: Fights"] = true
 
 -- Options
+L["Disabled Modules"] = true
+L["This change requires a UI reload. Are you sure?"] = true
+L["Tick the modules you want to disable."] = true
 L["Bar font"] = true
 L["The font used by all bars."] = true
 L["Bar font size"] = true
@@ -52,7 +55,7 @@ L["Show minimap button"] = true
 L["Toggles showing the minimap button."] = true
 
 L["reports the active mode"] = true
-L["Skada report on %s for %s, %s to %s:"] = "Skada: %s for %s, %s - %s:"
+L["Skada: %s for %s:"] = "Skada: %s for %s:"
 L["Only keep boss fighs"] = "Only keep boss fights"
 L["Boss fights will be kept with this on, and non-boss fights are discarded."] = true
 L["Show raw threat"] = true
@@ -64,6 +67,10 @@ L["Reverse bar growth"] = "Reverse bar growth"
 L["Bars will grow up instead of down."] = "Bars will grow up instead of down."
 L["Number format"] = "Number format"
 L["Controls the way large numbers are displayed."] = "Controls the way large numbers are displayed."
+L["Number set duplicates"] = "Number set duplicates"
+L["Append a count to set names with duplicate mob names."] = "Append a count to set names with duplicate mob names."
+L["Set format"] = "Set format"
+L["Controls the way set names are displayed."] = "Controls the way set names are displayed."
 L["Reset on entering instance"] = "Reset on entering instance"
 L["Controls if data is reset when you enter an instance."] = "Controls if data is reset when you enter an instance."
 L["Reset on joining a group"] = "Reset on joining a group"
@@ -155,7 +162,7 @@ L["Raid"] = "Raid"
 L["Party"] = "Party"
 L["Guild"] = "Guild"
 L["Officer"] = "Officer"
-L["Self"] = "Self" 
+L["Self"] = "Self"
 
 L["'s Healing"] = "'s Healing"
 
@@ -191,6 +198,9 @@ L["Absorb"] = "Absorb"
 L["Last fight"] = "Last fight"
 L["Disable while hidden"] = "Disable while hidden"
 L["Skada will not collect any data when automatically hidden."] = "Skada will not collect any data when automatically hidden."
+L["Data Collection"] = "Data Collection"
+L["ENABLED"] = "ENABLED"
+L["DISABLED"] = "DISABLED"
 
 L["Rename window"] = "Rename window"
 L["Enter the name for the window."] = "Enter the name for the window."
@@ -271,6 +281,7 @@ L["Resisted"] = true
 L["Blocked"] = true
 L["Glancing"] = true
 L["Crushing"] = "Crushing"
+L["Multistrike"] = STAT_MULTISTRIKE or true -- XXX compat
 L["Absorbed"] = true
 L["Dispels"] = true
 L["Fails"] = true
@@ -280,6 +291,11 @@ L["Healing"] = true
 L["'s Healing"] = true
 L["Overhealing"] = true
 L["Threat"] = true
+L["Power"] = true
+L["Enemies"] = true
+L["Debuffs"] = true
+L["DamageTaken"] = "Damage Taken"
+L["TotalHealing"] = "Total Healing"
 
 L["Announce CC breaking to party"] = true
 L["Ignore Main Tanks"] = true
@@ -372,3 +388,37 @@ L["Outline"] = "Outline"
 L["Thick outline"] = "Thick outline"
 L["Monochrome"] = "Monochrome"
 L["Outlined monochrome"] = "Outlined monochrome"
+
+L["The height of the title frame."] = "The height of the title frame."
+L["Title height"] = "Title height"
+L["Use class icons where applicable."] = "Use class icons where applicable."
+L["Class icons"] = "Class icons"
+
+L["RealID"] = "RealID"
+L["Instance"] = "Instance"
+
+L["Enemy healing done"] = "Enemy healing done"
+L["Enemy healing taken"] = "Enemy healing taken"
+
+L["Skada has changed!"] = true
+L["All Skada functionality is now in 1 addon folder."] = true
+L["Skada will |cFFFF0000NOT|r function properly until you delete the following AddOns:"] = true
+L["Click below and configure your '|cFFFF0000Disabled Modules|r'."] = true
+
+L["Stop"] = "Stop/Resume"
+L["Autostop"] = "Stop early on wipe"
+L["Autostop description"] = "Automatically stops the current segment after a certain amount of raid members have died."
+
+L["Stop description"] = "Stops or resumes the current segment. Useful for discounting data after a wipe. Can also be set to automatically stop in the settings."
+L["Segment description"] = "Jump to a specific segment."
+L["Mode description"] = "Jump to a specific mode."
+L["Reset description"] = "Resets all fight data except those marked as kept."
+L["Report description"] = "Opens a dialog that lets you report your data to others in various ways."
+L["Configure description"] = "Lets you configure the active Skada window."
+
+L["Role icons"] = true
+L["Use role icons where applicable."] = true
+
+L["Overhealing spells"] = true
+
+L["Whisper Target"] = true

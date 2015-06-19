@@ -1,0 +1,19 @@
+## Interface: 60100
+## Title: Skada |r[|caaedc99fCC Tracker|r]
+## Notes: Adds a Crowd Control Tracker mode and data collection to Skada.
+## Author: aDd1kTeD2Ka0s
+## Version: 0.1
+## Dependencies: Skada
+## X-Part-Of: Skada
+## X-Curse-Packaged-Version: 1.4-15
+## X-Curse-Project-Name: Skada CC Tracker
+## X-Curse-Project-ID: skadacctracker
+## X-Curse-Repository-ID: wow/skadacctracker/mainline
+## X-Curse-Packaged-Version: 1.0.2
+## X-Curse-Project-Name: SkadaCCTracker
+## X-Curse-Project-ID: skadacctracker
+## X-Curse-Repository-ID: wow/skadacctracker/mainline
+
+locale.lua
+cclist.lua
+SkadaCCTracker.lua

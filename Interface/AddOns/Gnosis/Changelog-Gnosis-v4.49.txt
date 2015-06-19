@@ -1,0 +1,8 @@
+2015-05-03  elchefe  <elchefe>
+
+[77cf3796ad28] [v4.49]
+* Gnosis.lua:
+
+doh...
+
+

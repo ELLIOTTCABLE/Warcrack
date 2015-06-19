@@ -1,0 +1,629 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="EasyCopy.lua"/>
+	<Frame name="EasyCopy_core" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true" clampedToScreen="true">
+		<Size>
+			<AbsDimension x="500" y="120"/>
+		</Size>
+        <TitleRegion>
+            <Size x="340" y="20"/>
+            <Anchors><Anchor point="TOP"/></Anchors>
+        </TitleRegion>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Button name="EasyCopyclose" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="EasyCopy_core" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="1"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="EasyCopy_ClearButton" inherits="UIPanelButtonTemplate" text="Clear">
+				<Size>
+					<AbsDimension x="75" y="26" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="-1.5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EasyCopy_Edit:SetText("");
+					</OnClick>
+					<OnLoad>
+						EasyCopy_ClearButton:SetScale(0.9);
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="EasyCopy_QuoteButton" inherits="UIPanelButtonTemplate" text="Post">
+				<Size>
+					<AbsDimension x="75" y="26" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-103" y="-1.5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EasyCopy_QuoteButton_OnClick();
+					</OnClick>
+					<OnLoad>
+						EasyCopy_QuoteButton:SetScale(0.9);
+					</OnLoad>
+				</Scripts>
+			</Button>
+            <Button name="EasyCopy_ResetButton" inherits="UIPanelButtonTemplate" text="Reset">
+				<Size>
+					<AbsDimension x="75" y="26" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-176" y="-1.5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EasyCopy_ResetButton_OnClick();
+					</OnClick>
+					<OnLoad>
+						EasyCopy_ResetButton:SetScale(0.9);
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<ScrollFrame name="EasyCopyScrollFrame" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="475" y="88"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EasyCopy_core" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-3" y="-26"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ScrollChild>
+					<Frame name="EasyCopyScrollFrameChild" enableMouse="true">
+						<Size>
+							<AbsDimension x="480" y="88"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Frames>
+							<EditBox name="EasyCopy_Edit" letters="65535" multiLine="true" enableMouse="true" autoFocus="false">
+								<Size>
+									<AbsDimension x="464" y="134"/>
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset>
+											<AbsDimension x="10" y="0"/>
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnCursorChanged>
+										ScrollingEdit_OnCursorChanged(self, x, y-10, width, height);
+									</OnCursorChanged>
+									<OnEscapePressed>
+										EasyCopy_core:Hide();
+									</OnEscapePressed>
+								</Scripts>
+								<FontString inherits="GameTooltipTextSmall"/>
+							</EditBox>
+						</Frames>
+						<Scripts>
+							<OnMouseUp>
+								EasyCopy_Edit:SetFocus();
+							</OnMouseUp>
+						</Scripts>
+					</Frame>
+				</ScrollChild>
+			</ScrollFrame>
+			<Frame name="EasyCopy_QuoteDropDown" inherits="UIDropDownMenuTemplate" id="1">
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_Initialize(self, EasyCopy_QuoteDropDown_OnLoad, "MENU");
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="EasyCopyTitle" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="6" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				EasyCopy_core:RegisterEvent("PLAYER_ENTERING_WORLD");
+				EasyCopy_core:RegisterEvent("VARIABLES_LOADED");
+				--EasyCopy_core:RegisterEvent("GUILD_ROSTER_UPDATE");
+				--EasyCopy_core:RegisterEvent("FRIENDLIST_UPDATE");
+				--EasyCopy_core:RegisterEvent("WHO_LIST_UPDATE");
+				--EasyCopy_core:RegisterEvent("RAID_ROSTER_UPDATE");
+				--EasyCopy_core:RegisterEvent("PARTY_MEMBERS_CHANGED");
+				--EasyCopy_core:RegisterEvent("PLAYER_TARGET_CHANGED");
+			</OnLoad>
+			<OnDragStart>
+				if(button == "LeftButton" and IsShiftKeyDown()) then
+					EasyCopy_core:StartMoving();
+				end
+			</OnDragStart>
+			<OnHide>
+				EasyCopy_core:StopMovingOrSizing();
+			</OnHide>
+			<OnDragStop>
+				EasyCopy_core:StopMovingOrSizing();
+			</OnDragStop>
+			<OnMouseUp>
+				EasyCopy_core:StopMovingOrSizing();
+			</OnMouseUp>
+			<OnEvent>
+				EasyCopy_OnEvent(self, event, ...);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	
+	<Frame name="EasyCopy_MWheelOverlay" virtual="true" movable="true" setAllPoints="true">
+	  <Scripts>
+			<OnShow>
+				EasyCopy_MWheelOverlay_OnShow(self)
+			</OnShow>
+			<OnMouseWheel>
+				EasyCopy_MWheelOverlay_OnMWheel(self, delta)
+			</OnMouseWheel>
+		</Scripts>
+	</Frame>
+	
+	<Frame name="$parentMWheelOverlay" parent="ChatFrame1" inherits="EasyCopy_MWheelOverlay" />
+	<Frame name="$parentMWheelOverlay" parent="ChatFrame2" inherits="EasyCopy_MWheelOverlay" />
+	<Frame name="$parentMWheelOverlay" parent="ChatFrame3" inherits="EasyCopy_MWheelOverlay" />
+	<Frame name="$parentMWheelOverlay" parent="ChatFrame4" inherits="EasyCopy_MWheelOverlay" />
+	<Frame name="$parentMWheelOverlay" parent="ChatFrame5" inherits="EasyCopy_MWheelOverlay" />
+	<Frame name="$parentMWheelOverlay" parent="ChatFrame6" inherits="EasyCopy_MWheelOverlay" />
+	<Frame name="$parentMWheelOverlay" parent="ChatFrame7" inherits="EasyCopy_MWheelOverlay" />
+	
+	<FontString name="EasyCopyOptions_TitleTemplate" inherits="MasterFont" font="Fonts\FRIZQT__.TTF" virtual="true">
+		<FontHeight>
+			<AbsValue val="14"/>
+		</FontHeight>
+		<Color r="1.0" g="0.82" b="0"/>
+	</FontString>
+	
+	<FontString name="EasyCopyOptions_FrameTextTemplate" inherits="MasterFont" font="Fonts\FRIZQT__.TTF" virtual="true">
+		<FontHeight>
+			<AbsValue val="10"/>
+		</FontHeight>
+		<Color r="1.0" g="1.0" b="1.0"/>
+	</FontString>
+	
+	<Frame name="EasyCopyOptions_core" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true" clampedToScreen="true">
+		<Size>
+			<AbsDimension x="200" y="340"/>
+		</Size>
+        <TitleRegion>
+            <Size x="170" y="20"/>
+            <Anchors><Anchor point="TOP"/></Anchors>
+        </TitleRegion>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Button name="EasyCopyOptions_close" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="EasyCopyOptions_core" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="1"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<CheckButton name="EasyCopyOptions_Buttons" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="7" y="-25"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						EasyCopyOptions_ButtonsText:SetText("Hide Buttons");
+					</OnLoad>
+					<OnClick>
+						EasyCopyOptions_CheckButtonClick(self);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="EasyCopyOptions_MWheelScroll" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="7" y="-50"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						EasyCopyOptions_MWheelScrollText:SetText("Mousewheel scrolling");
+					</OnLoad>
+					<OnClick>
+						EasyCopyOptions_CheckButtonClick(self);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="EasyCopyOptions_TabFlashing" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="7" y="-75"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						EasyCopyOptions_TabFlashingText:SetText("Remove tab flashing");
+					</OnLoad>
+					<OnClick>
+						EasyCopyOptions_CheckButtonClick(self);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="EasyCopyOptions_MovableBox" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="7" y="-100" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						EasyCopyOptions_MovableBoxText:SetText("Movable Say/EditBox");
+					</OnLoad>
+					<OnClick>
+						EasyCopyOptions_CheckButtonClick(self);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<Button name="EasyCopyOptions_ResetEditBoxButton" inherits="UIPanelButtonTemplate" text="Reset">
+				<Size>
+					<AbsDimension x="75" y="26"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="30" y="-120" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EasyCopy_ResetEditBox();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<CheckButton name="EasyCopyOptions_CombatLog" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="7" y="-140" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						EasyCopyOptions_CombatLogText:SetText("Combatlog copying");
+					</OnLoad>
+					<OnClick>
+						EasyCopyOptions_CheckButtonClick(self);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="EasyCopyOptions_ShortMessages_Orig" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="17" y="-175" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						EasyCopyOptions_ShortMessages_OrigText:SetText("[2. Trade][Someguy]: ...");
+					</OnLoad>
+					<OnClick>
+						EasyCopyOptions_CheckButtonClick(self);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="EasyCopyOptions_ShortMessages_Long" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="17" y="-193" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						EasyCopyOptions_ShortMessages_LongText:SetText("[Trade][Someguy]: ...");
+					</OnLoad>
+					<OnClick>
+						EasyCopyOptions_CheckButtonClick(self);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="EasyCopyOptions_ShortMessages_Medium" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="17" y="-211" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						EasyCopyOptions_ShortMessages_MediumText:SetText("[2][Someguy]: ...");
+					</OnLoad>
+					<OnClick>
+						EasyCopyOptions_CheckButtonClick(self);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="EasyCopyOptions_ShortMessages_Short" inherits="OptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="17" y="-229" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						EasyCopyOptions_ShortMessages_ShortText:SetText("[Someguy]: ...");
+					</OnLoad>
+					<OnClick>
+						EasyCopyOptions_CheckButtonClick(self);
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<!--<Button name="EasyCopyOptions_ShortMessages" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-7" y="-127" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>-->
+			<EditBox name="EasyCopyOptions_MsgPrefix" letters="120" autoFocus="false">
+				<Size>
+					<AbsDimension x="161" y="32"></AbsDimension>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="19" y="-280" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentLeft" file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+							<Size>
+								<AbsDimension x="156" y="32"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset>
+										<AbsDimension x="-11" y="0"></AbsDimension>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+						<Texture name="$parentRight" file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+							<Size>
+								<AbsDimension x="16" y="32"/>
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT">
+									<Offset>
+										<AbsDimension x="11" y="0"></AbsDimension>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.9375" right="1.0" top="0" bottom="1.0"/>
+						</Texture>
+						<Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+							<Size>
+								<AbsDimension x="1" y="32"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+								<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.9375" top="0" bottom="1.0"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnEnterPressed>
+						EasyCopyOptions_MsgPrefix:ClearFocus();
+						ECVars.msgPrefix = EasyCopyOptions_MsgPrefix:GetText();
+					</OnEnterPressed>
+					<OnEscapePressed>
+						EasyCopyOptions_MsgPrefix:ClearFocus();
+						EasyCopyOptions_MsgPrefix:SetText(ECVars.msgPrefix);
+					</OnEscapePressed>
+				</Scripts>
+				<FontString inherits="ChatFontNormal"></FontString>
+			</EditBox>
+            <Button name="EasyCopyOptions_ResetButton" inherits="UIPanelButtonTemplate" text="Reset">
+				<Size>
+					<AbsDimension x="80" y="26"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="10" y="5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EasyCopyOptions_ResetButton_OnClick();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="EasyCopyOptions_DoneButton" inherits="UIPanelButtonTemplate" text="Close">
+				<Size>
+					<AbsDimension x="80" y="26"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-10" y="5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EasyCopyOptions_core:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="EasyCopyOptions_core_title" inherits="EasyCopyOptions_TitleTemplate" text="EasyCopy Options">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="6" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+                <FontString name="EasyCopyOptions_fontStr_shortMsg" inherits="EasyCopyOptions_FrameTextTemplate" text="v5.0.1">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="135" y="-8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="EasyCopyOptions_fontStr_shortMsg" inherits="EasyCopyOptions_FrameTextTemplate" text="Message style:">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="-166"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="EasyCopyOptions_fontStr_chatPref1" inherits="EasyCopyOptions_FrameTextTemplate" text="Clickable message prefix:">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="-260"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="EasyCopyOptions_fontStr_chatPref2" inherits="EasyCopyOptions_FrameTextTemplate" text="(leave blank to use Timestamps)">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="-270"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnDragStart>
+				if(button == "LeftButton" and IsShiftKeyDown()) then
+					EasyCopyOptions_core:StartMoving();
+				end
+			</OnDragStart>
+			<OnShow>
+				EasyCopyOptions_LoadVars();
+			</OnShow>
+			<OnHide>
+				ECVars.msgPrefix = EasyCopyOptions_MsgPrefix:GetText();
+				EasyCopyOptions_core:StopMovingOrSizing();
+			</OnHide>
+			<OnDragStop>
+				EasyCopyOptions_core:StopMovingOrSizing();
+			</OnDragStop>
+			<OnMouseUp>
+				EasyCopyOptions_core:StopMovingOrSizing();
+			</OnMouseUp>
+		</Scripts>
+	</Frame>
+</Ui>

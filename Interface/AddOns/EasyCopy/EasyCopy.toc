@@ -1,0 +1,7 @@
+## Interface: 60100
+## Title: EasyCopy
+## Notes: Lightweight chat AddOn
+## Author: bitbiter & DJScias
+## Version: 5.0.1
+## SavedVariables: ECVars
+EasyCopy.xml

@@ -1,0 +1,12 @@
+tag 6.1.0.0
+67e7120c7dc5f2f020db3839dd92cf3acb8fb976
+Hendrik Leppkes <h.leppkes@gmail.com>
+2015-02-24 15:27:44 +0100
+
+Tag as 6.1.0.0
+
+
+--------------------
+
+Hendrik Leppkes:
+	- TOC for 6.1

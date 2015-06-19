@@ -1,9 +1,12 @@
 local MAJOR_VERSION = "LibDogTag-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 219 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 245 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_MINOR_VERSION then
 	_G.DogTag_MINOR_VERSION = MINOR_VERSION
 end
+
+local math, type, tostring, select, pcall, string, table, pairs, GetTime = math, type, tostring, select, pcall, string, table, pairs, GetTime
+local IsAltKeyDown, IsControlKeyDown, IsShiftKeyDown = IsAltKeyDown, IsControlKeyDown, IsShiftKeyDown
 
 DogTag_funcs[#DogTag_funcs+1] = function(DogTag)
 
@@ -64,6 +67,16 @@ DogTag:AddTag("Base", "Alpha", {
 	ret = "nil",
 	doc = L["Set the transparency of the FontString according to argument"],
 	example = '[Alpha(1)] => "Bright"; [Alpha(0)] => "Dim"',
+	category = L["Miscellaneous"]
+})
+
+DogTag:AddTag("Base", "Monochrome", {
+	code = function(number)
+		DogTag.outline = "MONOCHROME"
+	end,
+	ret = "nil",
+	doc = L["Set the FontString to be monochrome"],
+	example = '[Monochrome "Hello"] => "Monochrome"',
 	category = L["Miscellaneous"]
 })
 
@@ -294,7 +307,7 @@ DogTag:AddTag("Base", "FormatDuration", {
 		end
 		format = format:sub(1, 1):lower()
 		if format == "e" then
-			if number == 1/0 then
+			if number == math.huge then
 				return negative .. "***"
 			end
 			
@@ -356,7 +369,7 @@ DogTag:AddTag("Base", "FormatDuration", {
 			end
 			return s
 		elseif format == "f" then
-			if number == 1/0 then
+			if number == math.huge then
 				return negative .. "***"
 			elseif number >= 60*60*24 then
 				return ("%s%.0f%s %02d%s %02d%s %02d%s"):format(negative, math.floor(number/86400), L_DAY_ONELETTER_ABBR, number/3600 % 24, L_HOUR_ONELETTER_ABBR, number/60 % 60, L_MINUTE_ONELETTER_ABBR, number % 60, L_SECOND_ONELETTER_ABBR)
@@ -368,7 +381,7 @@ DogTag:AddTag("Base", "FormatDuration", {
 				return ("%s%d%s"):format(negative, number, L_SECOND_ONELETTER_ABBR)
 			end
 		elseif format == "s" then
-			if number == 1/0 then
+			if number == math.huge then
 				return negative .. "***"
 			elseif number >= 2*60*60*24 then
 				return ("%s%.1f %s"):format(negative, number/86400, L_DAYS_ABBR)
@@ -382,7 +395,7 @@ DogTag:AddTag("Base", "FormatDuration", {
 				return ("%s%.1f %s"):format(negative, number, L_SECONDS_ABBR)
 			end
 		else
-			if number == 1/0 then
+			if number == math.huge then
 				return ("%s**%d **:**:**"):format(negative, L_DAY_ONELETTER_ABBR)
 			elseif number >= 60*60*24 then
 				return ("%s%.0f%s %d:%02d:%02d"):format(negative, math.floor(number/86400), L_DAY_ONELETTER_ABBR, number/3600 % 24, number/60 % 60, number % 60)

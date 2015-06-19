@@ -1,9 +1,11 @@
 local MAJOR_VERSION = "LibDogTag-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 203 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 240 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_MINOR_VERSION then
 	_G.DogTag_MINOR_VERSION = MINOR_VERSION
 end
+
+local _G, math = _G, math
 
 DogTag_funcs[#DogTag_funcs+1] = function(DogTag)
 

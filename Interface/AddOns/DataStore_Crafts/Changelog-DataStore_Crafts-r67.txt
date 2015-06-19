@@ -1,0 +1,25 @@
+------------------------------------------------------------------------
+r67 | thaoky | 2015-05-08 16:37:04 +0000 (Fri, 08 May 2015) | 1 line
+Changed paths:
+   M /trunk/Data/Archeology.lua
+
+Updated archeology crafts
+------------------------------------------------------------------------
+r66 | thaoky | 2015-04-07 17:15:04 +0000 (Tue, 07 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Crafts.lua
+
+Fixed return value of GetProfession1 & GetProfession2
+------------------------------------------------------------------------
+r65 | thaoky | 2015-02-25 18:24:55 +0000 (Wed, 25 Feb 2015) | 3 lines
+Changed paths:
+   M /trunk/DataStore_Crafts.lua
+   M /trunk/DataStore_Crafts.toc
+   M /trunk/Locales/repoenUS.lua
+   M /trunk/Options.lua
+   M /trunk/Options.xml
+
+6.1.001 Commit
+
+- Clean up source from old unused code.
+------------------------------------------------------------------------

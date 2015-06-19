@@ -2,35 +2,23 @@
 	<Script file="Talents.lua"></Script>
 
  	<Button name="AltoTalentIconTemplate" virtual="true">
-		<Size>
-			<AbsDimension x="30" y="30"/>
-		</Size>
+		<Size x="30" y="30" />
 		<Layers>
 			<Layer level="BORDER">
 				<Texture name="$parentIconTexture"/>
 				<FontString name="$parentCount" inherits="NumberFontNormal" justifyH="RIGHT" hidden="true">
 					<Anchors>
-						<Anchor point="BOTTOMRIGHT">
-							<Offset>
-								<AbsDimension x="-5" y="2"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="BOTTOMRIGHT" x="-5" y="2" />
 					</Anchors>
 				</FontString>
 			</Layer>
 		</Layers>
 		<Frames>
 			<Frame name="$parentShine" inherits="AutoCastShineTemplate">
+				<Size x="28" y="28" />
 				<Anchors>
-					<Anchor point="CENTER">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="CENTER" x="0" y="0" />
 				</Anchors>
-				<Size>
-					<AbsDimension x="28" y="28"/>
-				</Size>
 			</Frame>
 		</Frames>
 		<Scripts>
@@ -49,19 +37,13 @@
 	</Button>
 	
  	<Button name="AltoTalentButtonTemplate" virtual="true">
-		<Size>
-			<AbsDimension x="32" y="32"/>
-		</Size>
+		<Size x="32" y="32" />
 		<Layers>
 			<Layer level="BORDER">
 				<Texture name="$parentIconTexture"/>
 				<FontString name="$parentCount" inherits="NumberFontNormal" justifyH="RIGHT" hidden="true">
 					<Anchors>
-						<Anchor point="BOTTOMRIGHT">
-							<Offset>
-								<AbsDimension x="-5" y="2"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="BOTTOMRIGHT" x="-5" y="2" />
 					</Anchors>
 				</FontString>
 			</Layer>
@@ -82,9 +64,7 @@
 	</Button>
 	
 	<Frame name="AltoTalentTreeTemplate" virtual="true">
-		<Size>
-			<AbsDimension x="200" y="304"/>
-		</Size>
+		<Size x="200" y="304" />
 		<Layers>
 			<Layer level="BACKGROUND">
 				<Texture name="$parent_Branch1" inherits="TalentBranchTemplate"/>
@@ -189,17 +169,13 @@
 	</Frame>
 	
 	<Frame name="AltoTreeIconsTemplate" virtual="true">
-		<Size>
-			<AbsDimension x="200" y="50"/>
-		</Size>
+		<Size x="200" y="50" />
 		<Layers>
 			<Layer level="OVERLAY">
 				<FontString name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
 					<Size x="200" y="18" />
 					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset x="0" y="10" />
-						</Anchor>
+						<Anchor point="TOPLEFT" x="0" y="10" />
 					</Anchors>
 				</FontString>
 			</Layer>
@@ -207,138 +183,78 @@
 		<Frames>
 			<Button name="$parent_SpecIcon1" inherits="AltoTalentIconTemplate" id="1">
 				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset x="0" y="-15" />
-					</Anchor>
+					<Anchor point="TOPLEFT" x="0" y="-15" />
 				</Anchors>
 			</Button>
 			<Button name="$parent_SpecIcon2" inherits="AltoTalentIconTemplate" id="2">
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent_SpecIcon1" relativePoint="TOPRIGHT" >
-						<Offset x="5" y="0" />
-					</Anchor>
+					<Anchor point="TOPLEFT" relativeTo="$parent_SpecIcon1" relativePoint="TOPRIGHT" x="5" y="0" />
 				</Anchors>
 			</Button>
 			<Button name="$parent_SpecIcon3" inherits="AltoTalentIconTemplate" id="3">
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent_SpecIcon2" relativePoint="TOPRIGHT" >
-						<Offset x="5" y="0" />
-					</Anchor>
+					<Anchor point="TOPLEFT" relativeTo="$parent_SpecIcon2" relativePoint="TOPRIGHT" x="5" y="0" />
 				</Anchors>
 			</Button>
 		</Frames>
 	</Frame>
 	
 	<Frame name="AltoholicFrameTalents" parent="AltoholicTabCharacters" hidden="true">
-		<Size>
-			<AbsDimension x="615" y="306"/>
-		</Size>
+		<Size x="615" y="306" />
 		<Anchors>
-			<Anchor point="TOPRIGHT">
-				<Offset>
-					<AbsDimension x="39" y="-105"/>
-				</Offset>
-			</Anchor>
+			<Anchor point="TOPRIGHT" x="39" y="-105" />
 		</Anchors>
 		<Layers>
 			<Layer level="ARTWORK">
 				<!-- Tree 1 : left pane -->
 				<Texture name="$parent_Tree1TopLeft">
-					<Size>
-						<AbsDimension x="174" y="232"/>
-					</Size>
+					<Size x="174" y="232" />
 					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="10" y="0"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOPLEFT" x="10" y="0" />
 					</Anchors>
 				</Texture>
 				<Texture name="$parent_Tree1TopRight">
-					<Size>
-						<AbsDimension x="44" y="232"/>
-					</Size>
+					<Size x="44" y="232" />
 					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="$parent_Tree1TopLeft" relativePoint="TOPRIGHT">
-							<Offset>
-								<AbsDimension x="0" y="0"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOPLEFT" relativeTo="$parent_Tree1TopLeft" relativePoint="TOPRIGHT" x="0" y="0" />
 					</Anchors>
 				</Texture>
 				<Texture name="$parent_Tree1BottomLeft">
-					<Size>
-						<AbsDimension x="174" y="116"/>
-					</Size>
+					<Size x="174" y="116" />
 					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="$parent_Tree1TopLeft" relativePoint="BOTTOMLEFT">
-							<Offset>
-								<AbsDimension x="0" y="0"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOPLEFT" relativeTo="$parent_Tree1TopLeft" relativePoint="BOTTOMLEFT" x="0" y="0" />
 					</Anchors>
 				</Texture>
 				<Texture name="$parent_Tree1BottomRight">
-					<Size>
-						<AbsDimension x="44" y="116"/>
-					</Size>
+					<Size x="44" y="116" />
 					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="$parent_Tree1TopLeft" relativePoint="BOTTOMRIGHT">
-							<Offset>
-								<AbsDimension x="0" y="0"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOPLEFT" relativeTo="$parent_Tree1TopLeft" relativePoint="BOTTOMRIGHT" x="0" y="0" />
 					</Anchors>
 				</Texture>
 
 				<!-- Tree 2 : right pane -->
 				<Texture name="$parent_Tree2TopLeft">
-					<Size>
-						<AbsDimension x="174" y="232"/>
-					</Size>
+					<Size x="174" y="232" />
 					<Anchors>
-						<Anchor point="TOPLEFT">
-							<Offset>
-								<AbsDimension x="430" y="0"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOPLEFT" x="430" y="0" />
 					</Anchors>
 				</Texture>
 				<Texture name="$parent_Tree2TopRight">
-					<Size>
-						<AbsDimension x="44" y="232"/>
-					</Size>
+					<Size x="44" y="232" />
 					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="$parent_Tree2TopLeft" relativePoint="TOPRIGHT">
-							<Offset>
-								<AbsDimension x="0" y="0"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOPLEFT" relativeTo="$parent_Tree2TopLeft" relativePoint="TOPRIGHT" x="0" y="0" />
 					</Anchors>
 				</Texture>
 				<Texture name="$parent_Tree2BottomLeft">
-					<Size>
-						<AbsDimension x="174" y="116"/>
-					</Size>
+					<Size x="174" y="116" />
 					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="$parent_Tree2TopLeft" relativePoint="BOTTOMLEFT">
-							<Offset>
-								<AbsDimension x="0" y="0"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOPLEFT" relativeTo="$parent_Tree2TopLeft" relativePoint="BOTTOMLEFT" x="0" y="0" />
 					</Anchors>
 				</Texture>
 				<Texture name="$parent_Tree2BottomRight">
-					<Size>
-						<AbsDimension x="44" y="116"/>
-					</Size>
+					<Size x="44" y="116" />
 					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="$parent_Tree2TopLeft" relativePoint="BOTTOMRIGHT">
-							<Offset>
-								<AbsDimension x="0" y="0"/>
-							</Offset>
-						</Anchor>
+						<Anchor point="TOPLEFT" relativeTo="$parent_Tree2TopLeft" relativePoint="BOTTOMRIGHT" x="0" y="0" />
 					</Anchors>
 				</Texture>
 			</Layer>
@@ -347,70 +263,42 @@
 			<!-- Tree 1 : left pane -->
 			<Frame name="$parent_Tree1" inherits="AltoTalentTreeTemplate" id="1">
 				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="10" y="0"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="TOPLEFT" x="10" y="0" />
 				</Anchors>
 			</Frame>
 			
 			<!-- Tree 2 : right pane -->
 			<Frame name="$parent_Tree2" inherits="AltoTalentTreeTemplate" id="2">
 				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="430" y="0"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="TOPLEFT" x="430" y="0" />
 				</Anchors>
 			</Frame>
 			
 			<!-- Between both panes -->
 			<Frame name="$parent_Icons1" inherits="AltoTreeIconsTemplate" id="1">
 				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="225" y="-5"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="TOPLEFT" x="225" y="-5" />
 				</Anchors>
 			</Frame>
 			<Frame name="$parent_Icons2" inherits="AltoTreeIconsTemplate" id="2">
 				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="225" y="-70"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="TOPLEFT" x="225" y="-70" />
 				</Anchors>
 			</Frame>
 			<Frame name="$parent_Icons3" inherits="AltoTreeIconsTemplate" id="3">
 				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="225" y="-180"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="TOPLEFT" x="225" y="-180" />
 				</Anchors>
 			</Frame>
 			<Frame name="$parent_Icons4" inherits="AltoTreeIconsTemplate" id="4">
 				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="225" y="-245"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="TOPLEFT" x="225" y="-245" />
 				</Anchors>
 			</Frame>
 			
 			<Frame name="$parent_SelectMember" inherits="UIDropDownMenuTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="270" y="-140"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="TOPLEFT" x="270" y="-140" />
 				</Anchors>
 				<Scripts>
 					<OnLoad>
@@ -420,7 +308,7 @@
 						UIDropDownMenu_SetButtonWidth(self, 20)
 						-- UIDropDownMenu_SetText(self, L["Guild Members"])
 						UIDropDownMenu_SetText(self, "Compare with")
-						UIDropDownMenu_Initialize(self, Altoholic.Talents.DropDownMembers_Initialize)
+						Altoholic:DDM_Initialize(self, Altoholic.Talents.DropDownMembers_Initialize)
 					</OnLoad>
 				</Scripts>
 			</Frame>

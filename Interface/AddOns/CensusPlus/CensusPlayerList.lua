@@ -27,70 +27,126 @@
 --
 --
 ------------------------------------------------------------------------------------
+local	addon_name, addon_tableID = ...   -- Addon_name contains the Addon name which must be the same as the container folder name... addon_tableID is a common private table for all .lua files in the directory.
+local CPp = addon_tableID  --short cut name for private shared table.
 
-local g_PlayerList = {};			
-local g_PlayerLookupTable = {};				
-local CensusPlus_NumPlayerButtons = 20;
-local g_MaxNumListed = 1000;
-
+local g_PlayerList = {}		
+local g_PlayerLookupTable = {}
+local CensusPlus_NumPlayerButtons = 20
+local g_MaxNumListed = 1000
+local CPL_profiling_timerstart = 0
+local CPL_profiling_timediff = 0	
+local Name_Realm = nil
+local Char_List = nil
+local LogonrealmName = CPp.CensusPlusLocale .. GetRealmName()
+	
 function CensusPlus_ShowPlayerList()
 	CP_PlayerListWindow:Show();
 end
 
-function CensusPlus_PlayerListOnShow()
+function CensusPlus_PlayerListOnShow() -- referenced by CensusPlayerList.xml
 
-	debugprofilestart();
+--CPL_profiling_timerstart =	debugprofilestop();
 	
+	local realmKey = nil;
 	local guildKey = nil;
 	local raceKey = nil;
 	local classKey = nil;
 	local levelKey = nil;
-	
+	local guildRealmKey = nil;
 
 	--
 	--  Clear our character list
 	--
 	CensusPlus_ClearPlayerList();
-	
+	Char_List = nil;
 	--
-	-- Get realm and faction
+	-- Verify Logon realm
 	--
-	local realmName = g_CensusPlusLocale .. GetCVar("realmName");
-	if( realmName == nil ) then
-		return;
+		if( LogonrealmName == nil ) then
+		return; 
 	end
 
+
+	--
+	-- Get faction
+	--
+
 	local factionGroup = UnitFactionGroup("player");
-	if( factionGroup == nil ) then
+	if( factionGroup == nil or factionGroup == "Neutral" ) then
 		return;
 	end
 	
+	--
+	-- Has user selected a realm
+	--
+	if (CPp.ConnectedRealmsButton ~= 0) then
+		realmKey = CPp.VRealms[CPp.ConnectedRealmsButton]
+		Char_List = 2
+	else
+		Char_List = 1
+--		print("realmKey = "..realmKey)
+	end
 
 	--
 	-- Has the user made any selections?
 	--
-	if (g_GuildSelected ~= nil ) then
-		guildKey = g_GuildSelected;
+	if ((CPp.ConnectedRealmsButton ~= 0) and (CPp.GuildSelected ~= nil )) then 
+		guildKey = CPp.GuildSelected
+		guildRealmKey = CPp.VRealms[CPp.ConnectedRealmsButton]
+		Char_List = 3		
+	else
+		guildKey = nil
+		guildRealmKey = nil;
 	end
-	if (g_RaceSelected > 0) then
+	
+	if (CPp.RaceSelected > 0) then
 		local thisFactionRaces = CensusPlus_GetFactionRaces(factionGroup);
-		raceKey = thisFactionRaces[g_RaceSelected];
+		raceKey = thisFactionRaces[CPp.RaceSelected];
 	end
-	if (g_ClassSelected > 0) then
+	
+	if (CPp.ClassSelected > 0) then
 		local thisFactionClasses = CensusPlus_GetFactionClasses(factionGroup);
-		classKey = thisFactionClasses[g_ClassSelected];
+		classKey = thisFactionClasses[CPp.ClassSelected];
 	end
-	if (g_LevelSelected > 0 or g_LevelSelected < 0) then
-		levelKey = g_LevelSelected;
+	
+	if (CPp.LevelSelected > 0 or CPp.LevelSelected < 0) then
+		levelKey = CPp.LevelSelected;
 	end
 
-	debugprofilestart();
+--	CPL_profiling_timerstart =debugprofilestop();
 
-	CensusPlus_ForAllCharacters( realmName, factionGroup, raceKey, classKey, guildKey, levelKey, CensusPlus_AddPlayerToList);
-		
-	if( CensusPlus_EnableProfiling ) then
-		CensusPlus_Msg( "PROFILE: Time to do calcs 1 " .. debugprofilestop() / 1000000000 );
-		debugprofilestart();
+	if (CPp.GuildSelected ~= nil) then
+		local conmemcount = #CPp.VRealms
+		for i = 1,conmemcount,1 do
+			if ((CPp.VRealms[i] ~= nil) and (CPp.VRealms[i] ~= "")) then
+				realmName = CPp.VRealms[i];
+				CensusPlus_ForAllCharacters(realmName, factionGroup, raceKey, classKey, guildKey, levelKey, guildRealmKey, CensusPlus_AddPlayerToList);
+			end
+		end
+		local size = #g_PlayerList
+--		print ("guildkeyed playerlist size = "..size)
+	else
+		if (CPp.ConnectedRealmsButton ~= 0) then
+			CensusPlus_ForAllCharacters( realmKey, factionGroup, raceKey, classKey, nil, levelKey,nil, CensusPlus_AddPlayerToList);
+			local size = #g_PlayerList
+--			print("non-guild realm selected playerlist size = "..size)
+		else
+			local conmemcount = #CPp.VRealms
+			for i = 1,conmemcount,1 do
+				if ((CPp.VRealms[i] ~= nil) and (CPp.VRealms[i] ~= "")) then
+					realmName = CPp.VRealms[i];
+					CensusPlus_ForAllCharacters(realmName, factionGroup, raceKey, classKey, nil, levelKey, nil, CensusPlus_AddPlayerToList);
+				end
+			end
+			local size = #g_PlayerList
+--			print ("superset size = "..size)
+		end
+	end	
+	if( CPp.EnableProfiling ) then
+		CPL_profiling_timerdiff = debugprofilestop() - CPL_profiling_timerstart
+		print( "PROFILE: Time to do calcs 1 " .. CP_profiling_timerdiff / 1000000000 );
+--CPL_profiling_timerstart =	debugprofilestop();
 	end
 		
 
@@ -99,9 +155,9 @@ function CensusPlus_PlayerListOnShow()
 	--
 	CensusPlus_UpdatePlayerListButtons();
 	
-	local totalCharactersText = format(CENSUSPlus_TOTALCHAR, table.getn( g_PlayerList ) );
-	if( table.getn( g_PlayerList ) == g_MaxNumListed ) then
-		totalCharactersText = totalCharactersText .. " -- " .. CENSUSPlus_MAXXED;
+	local totalCharactersText = format(CENSUSPLUS_TOTALCHAR, #g_PlayerList );
+	if( #g_PlayerList == g_MaxNumListed ) then
+		totalCharactersText = totalCharactersText .. " -- " .. CENSUSPLUS_MAXXED;
 	end
 	
 	CensusPlayerListCount:SetText(totalCharactersText);
@@ -127,7 +183,7 @@ local function CharacterPredicate(lhs, rhs)
 		return false;
 	end
 	--
-	-- Sort by name
+	-- Sort by name -- this sorting does occur true and false.
 	--
 	if (lhs.m_name < rhs.m_name) then
 		return true;
@@ -136,7 +192,7 @@ local function CharacterPredicate(lhs, rhs)
 	end
 
 	--
-	-- Sort by level
+	-- Sort by level  -- by test this next section never gets used
 	--
 	if (lhs.m_level < rhs.m_level) then
 		return true;
@@ -150,12 +206,12 @@ local function CharacterPredicate(lhs, rhs)
 	return false;
 end
 
-local function CensusPlus_UpdatePlayerLookup( index, entry )
+-- local function CensusPlus_UpdatePlayerLookup( index, entry )
 	--
 	--  Have to update our table
 	--
-	g_PlayerLookupTable[entry.m_name] = index;
-end
+--	g_PlayerLookupTable[entry.m_name] = index;
+-- end
 		
 
 
@@ -168,18 +224,35 @@ function CensusPlus_UpdatePlayerListButtons()
 	--
 	--  Sort the list
 	--
-	local size = table.getn(g_PlayerList);
+	local size = #g_PlayerList
+--	print("size "..size)
+	local LUname = nil
+	local LUrealm = nil
 	if (size) then
 		table.sort(g_PlayerList, CharacterPredicate);
-		
-		table.foreach(g_PlayerList, CensusPlus_UpdatePlayerLookup );
-		
+--		print("sorted")
+--		table.foreach(g_PlayerList, CensusPlus_UpdatePlayerLookup )  -- note: .foreach is deprecated in Lua 5.1 (still works for now)
+		for index,entry in pairs (g_PlayerList) do
+--			print(index.."   "..entry.m_name)
+			LUname = g_PlayerList[entry.m_name]
+			LUrealm = g_PlayerList[entry.m_realm]
+--			if (LUrealm == nil) then
+--				LUrealm = LogonrealmName
+--			end
+			if ((LUname ~= nil) and (LUrealm ~= nil)) then
+				Name_Realm =LUname.."-"..LUrealm
+				g_PlayerLookupTable[Name_Realm] = index;
+			
+			end
+		end
+--		print("Lookup table built")
 	end
 	
 	--
 	-- Determine where the scroll bar is
 	--
 	local offset = FauxScrollFrame_GetOffset( CensusPlusPlayerListScrollFrame );
+--	print("offset "..offset)
 	--
 	-- Walk through all the rows in the frame
 	--
@@ -192,42 +265,63 @@ function CensusPlus_UpdatePlayerListButtons()
 		--
 		-- Get the button on this row
 		--
-		local button = getglobal("CensusPlusPlayerButton"..i);
+		local button = _G["CensusPlusPlayerButton"..i];
 		--
 		-- Is there a valid Player on this row?
 		--
 		if (iPlayer <= size) then
 			local player = g_PlayerList[iPlayer];
+--			print(iPlayer.." "..player.m_name)
 			--
 			-- Update the button text
 			--
 			button:Show();
 			local textField = "CensusPlusPlayerButton"..i.."Name";
 			if ( player.m_name == nil or player.m_name == "") then
-				getglobal(textField):SetText( "None" );
+				_G[textField]:SetText( "NONE" );
 			else
-				getglobal(textField):SetText( player.m_name );
+				_G[textField]:SetText( player.m_name );
 			end
 			
 			local textField = "CensusPlusPlayerButton"..i.."Level";
 			if ( player.m_level == nil or player.m_level == "") then
-				getglobal(textField):SetText( "n/a" );
+				_G[textField]:SetText( "n/a" );
 			else
-				getglobal(textField):SetText( player.m_level );
+				_G[textField]:SetText( player.m_level );
 			end
 			
 			local textField = "CensusPlusPlayerButton"..i.."Class";
-			if ( player.m_guild == nil or player.m_guild == "") then
-				getglobal(textField):SetText( "Unguilded" );
-			else
-				getglobal(textField):SetText( player.m_guild );
+			if (Char_List == 1) or (Char_List == 3) then -- display characters realm and last seen
+				CensusPlayerListCol3:SetText(CENSUSPLUS_REALM)
+				if (( player.m_realm == nil) or (player.m_realm == "")) then
+					_G[textField]:SetText( "Realm Bad!!" );
+				else
+					_G[textField]:SetText( player.m_realm );
+				end
+            else -- display Guild and GuildRealm
+				CensusPlayerListCol3:SetText(GUILD)
+				if ( (player.m_guild == nil) or (player.m_guild == "")) then
+					_G[textField]:SetText( "Unguilded" );
+				else
+					_G[textField]:SetText( player.m_guild );
+				end
 			end
-            
+			
 			local textField = "CensusPlusPlayerButton"..i.."Seen";
-			if ( player.m_seen == nil or player.m_seen == "") then
-				getglobal(textField):SetText( "UNK" );
-			else
-				getglobal(textField):SetText( player.m_seen );
+			if ((Char_List == 1) or (Char_List == 3)) then -- display characters realm and last seen			
+				CensusPlayerListCol4:SetText(CENSUSPLUS_LASTSEEN)
+				if ( (player.m_seen == nil) or (player.m_seen == "")) then
+					_G[textField]:SetText( "UNKNOWN" );
+				else
+					_G[textField]:SetText( player.m_seen );
+				end
+            else -- display Guild and GuildRealm
+				CensusPlayerListCol4:SetText(CENSUSPLUS_GUILDREALM)
+				if (( player.m_guildRealm == nil) or (player.guildRealm == "")) then
+					_G[textField]:SetText( "Realm Bad!!" );
+				else
+					_G[textField]:SetText( player.m_guildRealm );
+				end
 			end
 		else
 			--
@@ -251,8 +345,8 @@ end
 -- Find a characters in the g_PlayerList array by name
 --
 ---------------------------------------------------------------------------------
-function CensusPlus_PlayerButton_OnClick()
-	local id = this:GetID();
+function CensusPlus_PlayerButton_OnClick(self, button, down) -- referenced by CensusPlayerList.xml
+	local id = self:GetID();
 	local offset = FauxScrollFrame_GetOffset( CensusPlusPlayerListScrollFrame );
 	local newSelection = id + offset;
 
@@ -278,24 +372,25 @@ end
 -- Add a character to the list
 --
 ---------------------------------------------------------------------------------
-function CensusPlus_AddPlayerToList( name, level, guild, raceName, className, lastseen )
-	local size = table.getn( g_PlayerList );
-	
+function CensusPlus_AddPlayerToList( name, level, guild,raceName,className,lastseen, realmName, guildRealm)
+--	print("addPlayertoList")
+	local size = #g_PlayerList
+--	print(name.." ".. level.." ".. guild.." "..realmName.." "..guildRealm.." "..raceName.." "..className.." "..lastseen)	
 	if( size >= g_MaxNumListed ) then
 		return;
 	end
-
-	local index = g_PlayerLookupTable[name];
+	Name_Realm = name.."-"..realmName
+	local index = g_PlayerLookupTable[Name_Realm];
 	if (index == nil) then
-		local size = table.getn( g_PlayerList );
+		local size = #g_PlayerList
 		index = size + 1;
-		g_PlayerList[index] = { m_name = name, m_level = level, m_guild = guild, m_seen = lastseen };
-		g_PlayerLookupTable[name] = index;
+		g_PlayerList[index] = { m_name = name, m_level = level, m_guild = guild, m_realm = realmName, m_guildRealm = guildRealm, m_seen = lastseen}; -- add?? m_realm = guild_realm???
+		g_PlayerLookupTable[Name_Realm] = index;
 	end
 end
 
-function CensusPlus_List_OnMouseDown( self, arg1 )
-	if ( ( ( not self.isLocked ) or ( self.isLocked == 0 ) ) and ( arg1 == "LeftButton" ) ) then
+function CensusPlus_List_OnMouseDown( self, button ) -- referenced by CensusPlayerList.xml
+	if ( ( ( not self.isLocked ) or ( self.isLocked == 0 ) ) and ( button == "LeftButton" ) ) then
 		self:StartMoving();
 		self.isMoving = true;
 	end

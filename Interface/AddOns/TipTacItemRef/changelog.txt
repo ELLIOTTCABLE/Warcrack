@@ -1,3 +1,51 @@
+TipTacItemRef Changes | 2015 Mar 04
+-----------------------------------
+- TOC version updated to 60100 for the 6.1 patch.
+
+TipTacItemRef Changes | 2015 Jan 14
+-----------------------------------
+- Tried to fix a Lua error happening due to GetAchievementCriteriaInfo() being called for non existing criteria indexes.
+
+TipTacItemRef Changes | 2014 Oct 16
+-----------------------------------
+- Updated the "GetUpgradedItemLevel" library. This update will again properly find the correct itemLevel of upgraded items.
+
+TipTacItemRef Changes | 2014 Oct 15
+-----------------------------------
+- TOC version has been changed to 60000 for the Warlords of Draenor 6.0.2 patch.
+
+TipTacItemRef Changes | 2014 May 24
+-----------------------------------
+- Updated the "GetUpgradedItemLevel.lua" library, to include the new upgrade IDs.
+
+TipTacItemRef Changes | 2013 Sep 21
+-----------------------------------
+- Changed the TOC version to 50400 for the 5.4 patch.
+- GetUpgradedItemLevel: Patch 5.4: Added IDs 491 to 498 to the table.
+
+TipTacItemRef Changes | 2013 May 22
+-----------------------------------
+- Changed the TOC version to 50300 for the 5.3 patch.
+- Moved the GetUpgradedItemLevelFromItemLink() function into its own Lua file.
+- GetUpgradedItemLevel: Patch 5.3: Added the 465/466/467 IDs (0/4/8 lvls) to the table.
+- GetUpgradedItemLevel: Patch 5.2: Added the 470 ID (8 lvls) to the table.
+
+TipTacItemRef Changes | 2013 Mar 15
+-----------------------------------
+- Changed the TOC version to 50200 for the 5.2 patch.
+- Now shows currency icons again. This was broken due to a change in returned texture path from an API function.
+
+TipTacItemRef Changes | 2013 Feb 19
+-----------------------------------
+- Changed the TOC version to 50100 for the 5.1 patch.
+- Items should now show the proper item level when it has been upgraded.
+
+TipTacItemRef Changes | 2012 Aug 30
+-----------------------------------
+- Changed the TOC version to 50001 for the 5.0 Mists of Pandaria patch.
+- Fixed an error for currency tooltips, when icons were disabled.
+- Removed an error that occurred when an achievement tooltip with an uneven number of critieria was shown.
+
 TipTacItemRef Changes | 2012 May 20
 -----------------------------------
 - Changed the TOC version to 40300 for the 4.3 patch.

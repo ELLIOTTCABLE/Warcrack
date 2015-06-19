@@ -123,6 +123,9 @@ L["GATHERDESC2_DESC"] = "Réglages de la minicarte Blizzard Boutons"
 L["Collect Buttons"] = "Recueillir mini-boutons"
 L["COLLECT2_DESC"] = "Rassembler le Blizzard minicarte Boutons"
 
+L["Exclude Queue Button"] = "Exclure Bouton file d'attente"
+L["ExcludeLFG_DESC"] = "Exclure la touche État file d'attente"
+
 L["Hide Mail"] = "Masquer l'icône mail"
 L["HIDEMAIL_DESC"] = "Cacher le Blizzard New Mail Icon"
 

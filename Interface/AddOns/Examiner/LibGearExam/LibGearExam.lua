@@ -1,4 +1,4 @@
-local REVISION = 4;
+local REVISION = 7;
 if (type(LibGearExam) == "table") and (LibGearExam.revision and LibGearExam.revision >= REVISION) then
 	return;
 end
@@ -10,16 +10,24 @@ LibGearExam = LibGearExam or {};
 local LGE = LibGearExam;
 LGE.revision = REVISION;
 
--- Item Link Patterns
-LGE.ITEMLINK_PATTERN = "(item:[^|]+)";
-LGE.ITEMLINK_PATTERN_ID = "item:(%d+)";
-LGE.ITEMLINK_PATTERN_ENCHANT = "item:%d+:(%d+)";
-LGE.ITEMLINK_PATTERN_LEVEL = "(%d+)(:%-?%d+)$";
+-- Item Link Patterns -- Item strings have 11 parameters (5.1) and 14 in (WoD - 6.0.2)
+-- FORMAT  ->  item:itemId:enchantId:gemId1:gemId2:gemId3:gemId4:suffixId:uniqueId:linkLevel:reforgeId:upgradeId
+
+-- Item links data change in 6.0 (WoD):
+--	itemID:enchant:gem1:gem2:gem3:gem4:suffixID:uniqueID:level:reforgeId:upgradeId
+--	itemID:enchant:gem1:gem2:gem3:gem4:suffixID:uniqueID:level:upgradeId:instanceDifficultyID:numBonusIDs:bonusID1:bonusID2
+
+LGE.ITEMLINK_PATTERN = "(item:[^|]+)";					-- Matches the raw itemLink from the full itemString
+-- Pattern generation for itemLinks. Always match from the start of the itemLink, to ensure that any new properties added to itemLinks, wont break our patterns.
+LGE.ITEMLINK_PATTERN_ID = "item:"..("[^:]+:"):rep(0).."(%d+)";
+LGE.ITEMLINK_PATTERN_ENCHANT = "item:"..("[^:]+:"):rep(1).."(%d+)";
+LGE.ITEMLINK_PATTERN_LEVEL = "(item:"..("[^:]+:"):rep(8)..")(%d+)(.+)";		-- used in gsub, so the pattern must match the entire link, even future added properties
 
 -- Other Patterns
 LGE.ItemUseToken = "^"..ITEM_SPELL_TRIGGER_ONUSE.." ";
 LGE.SetNamePattern = "^(.+) %((%d)/(%d)%)$";
 LGE.SetBonusTokenActive = "^"..ITEM_SET_BONUS:gsub("%%s","");
+LGE.SetBonusTokenInactive = "%((%d+)%) "..ITEM_SET_BONUS:gsub("%%s","");
 
 -- Schools
 LGE.MagicSchools = { "FIRE", "NATURE", "ARCANE", "FROST", "SHADOW", "HOLY" };
@@ -28,7 +36,7 @@ LGE.MagicSchools = { "FIRE", "NATURE", "ARCANE", "FROST", "SHADOW", "HOLY" };
 LGE.Slots = {
 	"HeadSlot", "NeckSlot", "ShoulderSlot", "BackSlot", "ChestSlot", "ShirtSlot", "TabardSlot", "WristSlot",
 	"HandsSlot", "WaistSlot", "LegsSlot", "FeetSlot", "Finger0Slot", "Finger1Slot", "Trinket0Slot", "Trinket1Slot",
-	"MainHandSlot", "SecondaryHandSlot", "RangedSlot",
+	"MainHandSlot", "SecondaryHandSlot",
 };
 LGE.SlotIDs = {};
 for _, slotName in ipairs(LGE.Slots) do
@@ -59,8 +67,9 @@ LGE.StatNames = {
 	BLOCK = STAT_BLOCK,
 	BLOCKVALUE = ITEM_MOD_BLOCK_VALUE_SHORT,	-- Az: Obsolete!
 	RESILIENCE = STAT_RESILIENCE,
+	PVPPOWER = STAT_PVP_POWER,
 
-	AP = ITEM_MOD_ATTACK_POWER_SHORT,
+	AP = STAT_ATTACK_POWER,
 	RAP = ITEM_MOD_RANGED_ATTACK_POWER_SHORT,
 	CRIT = MELEE.." "..CRIT_ABBR,
 	HIT = MELEE.." "..HIT,
@@ -162,7 +171,6 @@ LGE.StatRatingBaseTable = {
 --	RESILIENCE = 28.75 * 0.75 / 2 / 1.125,
 	RESILIENCE = 7.96418,				-- Apparently, this is the value for 4.1?
 
-
 	DEFENSE = 1.5,
 	ARMORPENETRATION = 4.69512176513672 / 1.25 / .88,
 };
@@ -181,7 +189,7 @@ function LGE:ScanUnitItems(unit,statTable,setTable)
 		self.Tip:SetInventoryItem(unit,self.SlotIDs[slotName]);
 		local lastSetName;
 		local lastBonusCount = 1;
-		-- Check Lines
+		-- Check Lines -- Az: re-write this loop as two loops instead?
 		for i = 2, self.Tip:NumLines() do
 			local needScan, lineText = self:DoLineNeedScan(_G["LibGearExamTipTextLeft"..i],true);
 			if (needScan) then
@@ -202,7 +210,7 @@ function LGE:ScanUnitItems(unit,statTable,setTable)
 						-- If this item is part of a set, that we haven't scanned the setbonuses of, do it now.
 						if (lastSetName) and (not scannedSetNames[lastSetName]) then
 							self:ScanLineForPatterns(lineText,statTable);
-							setTable[lastSetName]["setBonus"..lastBonusCount] = lineText;
+							setTable[lastSetName]["setBonus"..lastBonusCount] = lineText;	-- Az: remove this as cached entries now use the new ScanArmorSetBonuses() function to get set bonus stats
 							lastBonusCount = (lastBonusCount + 1);
 						end
 					else
@@ -237,15 +245,51 @@ function LGE:ScanItemLink(itemLink,statTable)
 	end
 end
 --------------------------------------------------------------------------------------------------------
+--                    Scans set bonuses - Stats are added to the [statTable] param                    --
+--------------------------------------------------------------------------------------------------------
+-- Az: finalize testing of this? -- remove bonus text store on char gear scan @ ScanUnitItems()
+function LGE:ScanArmorSetBonuses(setName,setCount,statTable,itemTable)
+	if not (setName and setCount and statTable and itemTable) then
+		return;
+	end
+--AzMsg("|2[ScanArmorSetBonuses]");
+	for slotName, itemLink in next, itemTable do
+		-- Set Link
+		self.Tip:ClearLines();
+		self.Tip:SetHyperlink(itemLink);
+		-- Check Lines
+		for i = 2, self.Tip:NumLines() do
+			local text = _G["LibGearExamTipTextLeft"..i]:GetText();
+			local setFound = text:match(self.SetNamePattern);
+			if (setName == setFound) then
+--AzMsg("set pattern match = "..setFound);
+				for n = i + 1, self.Tip:NumLines() do
+					local text = _G["LibGearExamTipTextLeft"..n]:GetText();
+					local setBonusIndex = tonumber(text:match(self.SetBonusTokenInactive));		-- lines are always formatted as inactive when not inspecting a player directly (az: unless you're wearing exactly this set?)
+					if (setBonusIndex) then
+						if (setBonusIndex > setCount) then
+--AzMsg("  quit here as we have gone too far | |2line = "..text);
+							return;
+						end
+--AzMsg("  match on bonus "..setBonusIndex.." @ set = "..setName.." | |2line = "..text);
+						self:ScanLineForPatterns(text,statTable);
+					end
+				end
+				return;
+			end
+		end
+	end
+end
+--------------------------------------------------------------------------------------------------------
 --                         Checks if a Line Needs to be Scanned for Patterns                          --
 --------------------------------------------------------------------------------------------------------
 function LGE:DoLineNeedScan(tipLine,scanSetBonuses)
 	-- Init Line
 	local text = tipLine:GetText();
-	local color = text:match("^(|c%x%x%x%x%x%x%x%x)");
-	text = text:gsub("|c%x%x%x%x%x%x%x%x","");
+	local color = text:match("^(|c%x%x%x%x%x%x%x%x)");		-- look for color code at the start of line
+	text = text:gsub("|c%x%x%x%x%x%x%x%x",""):gsub(",","");	-- remove all color coding, to simplify pattern matching
 	local r, g, b = tipLine:GetTextColor();
-	r, g, b = ceil(r * 255), ceil(g * 255), ceil(b * 255);
+	r, g, b = ceil(r * 255), ceil(g * 255), ceil(b * 255);	-- some lines don't use color codes, but store color in the text widget itself
 	-- Always *Skip* Gray Lines
 	if (r == 128 and g == 128 and b == 128) or (color == "|cff808080") then
 		return false, text;
@@ -274,16 +318,18 @@ function LGE:ScanLineForPatterns(text,statTable)
 	for index, pattern in ipairs(self.Patterns) do
 		local pos, _, value1, value2 = text:find(pattern.p);
 		if (pos) and (value1 or pattern.v) then
--- Az: debug!
-if (pattern.alert) and (Examiner) then
-	local _, link = self.Tip:GetItem();
-	link = link:match(self.ITEMLINK_PATTERN);
-	AzMsg("|2Examiner Scan Alert:|r Please report the following to author.");
-	AzMsg(format("index = |1%d|r, unit = |1%s|r.",index,tostring(Examiner.info.name)));
-	AzMsg(format("text = |1%s|r",text));
-	AzMsg(format("pattern = |1%s|r",pattern.p));
-	AzMsg(format("link = |1%s|r",tostring(link)));
-end
+--pattern.uses = (pattern.uses or 0) + 1;
+			-- Pattern Debugging -> Find obsolete patterns put on alert
+			if (pattern.alert) and (Examiner) then
+				local _, link = self.Tip:GetItem();
+				link = link:match(self.ITEMLINK_PATTERN);
+				AzMsg("|2Examiner Scan Alert:|r Please report the following to author.");
+				AzMsg(format("index = |1%d|r, unit = |1%s|r.",index,tostring(Examiner.info.name)));
+				AzMsg(format("text = |1%s|r",text));
+				AzMsg(format("pattern = |1%s|r",pattern.p));
+				AzMsg(format("link = |1%s|r",tostring(link)));
+			end
+			-- Add to stat
 			if (type(pattern.s) == "string") then
 				statTable[pattern.s] = (statTable[pattern.s] or 0) + (value1 or pattern.v);
 			elseif (type(pattern.s) == "table") then
@@ -312,6 +358,10 @@ function LGE:GetRatingInPercent(stat,rating,level)
 	if (not base or not rating or not level) then
 		return;
 	end
+	-- Set level to max in case it's unknown; still incorrect, but better
+	if (level == -1) then
+		level = MAX_PLAYER_LEVEL;
+	end
 	-- Patch 3.1 Quote: "shamans, paladins, druids, and death knights now receive 30% more melee haste from Haste Rating."
 	-- Az: This has been disabled for cataclysm. Haven't read anything official about it being removed, but it appears to be. Tested on paladins and shamans. DKs and druids still untested.
 --	if (class and stat == "HASTE") and (class == "PALADIN" or class == "SHAMAN" or class == "DEATHKNIGHT" or class == "DRUID") then
@@ -319,8 +369,10 @@ function LGE:GetRatingInPercent(stat,rating,level)
 --	end
 	-- Calculate "scale" Depending on Level
 	local scale;
-	if (level > 80) then
-		scale = (82 / 52 * (131 / 63) * 3.9053695 ^ ((level - 80) / 5));	-- Az: not the correct Cata formula for 80-85!
+	if (level > 85) then
+		scale = (82 / 52 * (131 / 63) * 3.9053695 ^ ((level - 80) / 5));	-- Az: No idea what the MoP formula is, so just using the Cata one for now :/
+	elseif (level > 80) then
+		scale = (82 / 52 * (131 / 63) * 3.9053695 ^ ((level - 80) / 5));	-- Az: not exactly the correct Cata formula for 80-85!
 	elseif (level >= 70) then
 		scale = (82 / 52 * (131 / 63) ^ ((level - 70) / 10));
 	elseif (level >= 60) then
@@ -368,9 +420,9 @@ function LGE:GetStatValue(statToken,statTable,compareTable,level,combineAdditive
 		end
 	end
 	-- OPTION: Give Rating Values in Percent
-	local valuePct;
-	local rating = self:GetRatingInPercent(statToken,value,level);
-	if (rating) then
+	local valuePct, rating;
+	if (self.StatRatingBaseTable[statToken]) then
+		rating = self:GetRatingInPercent(statToken,value,level) or 0;
 		valuePct = tonumber(format("%.2f",rating));
 	end
 	-- Do not modify the value further if we are just getting the compare value (compareTable == true)
@@ -388,7 +440,7 @@ function LGE:GetStatValue(statToken,statTable,compareTable,level,combineAdditive
 			end
 		end
 		-- Add "%" to converted ratings (Exclude absolute stats)
-		if (self.StatRatingBaseTable[statToken]) and (not self.ABSOLUTE_STATS[statToken]) then
+		if (valuePct) and (not self.ABSOLUTE_STATS[statToken]) then
 			valuePct = valuePct.."%";
 		end
 	end
@@ -461,11 +513,17 @@ end
 
 -- Fix Item String Level -- The level number of an item string, is always the inspector's level, not the inspected, this function fixes that
 function LGE:FixItemStringLevel(link,level)
-	-- WARNING: This code will break if item strings gets another value added
-	return (link and level) and link:gsub(self.ITEMLINK_PATTERN_LEVEL,level.."%2") or link;
+	-- WARNING: This code will break if item strings gets another parameter added
+	return (link and level) and link:gsub(self.ITEMLINK_PATTERN_LEVEL,"%1"..level.."%3") or link;
 end
 
 -- Format Stat Name
 function LGE:FormatStatName(statToken,inPercent)
-	return (inPercent or not self.StatRatingBaseTable[statToken]) and self.StatNames[statToken] or self.StatNames[statToken].." "..RATING;
+	if (not self.StatNames[statToken]) then
+		return statToken.." (Invalid Stat)";
+	elseif (inPercent or not self.StatRatingBaseTable[statToken]) then
+		return self.StatNames[statToken];
+	else
+		return self.StatNames[statToken].." "..RATING;
+	end
 end

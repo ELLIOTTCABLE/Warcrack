@@ -1,17 +1,19 @@
 --[[
 Name: LibDogTag-3.0
-Revision: $Rev: 203 $
+Revision: $Rev: 250 $
 Author: Cameron Kenneth Knight (ckknight@gmail.com)
 Website: http://www.wowace.com/
 Description: A library to provide a markup syntax
 ]]
 
 local MAJOR_VERSION = "LibDogTag-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 203 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 250 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_MINOR_VERSION then
 	_G.DogTag_MINOR_VERSION = MINOR_VERSION
 end
+
+local type, error, pairs, ipairs, next, pcall, _G = type, error, pairs, ipairs, next, pcall, _G
 
 -- #AUTODOC_NAMESPACE DogTag
 
@@ -23,7 +25,9 @@ local newList, newSet, del, deepCopy = DogTag.newList, DogTag.newSet, DogTag.del
 local select2 = DogTag.select2
 local fixNamespaceList = DogTag.fixNamespaceList
 local memoizeTable = DogTag.memoizeTable
+local deepCompare = DogTag.deepCompare
 local kwargsToKwargTypes = DogTag.kwargsToKwargTypes
+local kwargsToKwargTypesWithTableCache = DogTag.kwargsToKwargTypesWithTableCache
 local fsNeedUpdate, fsNeedQuickUpdate, codeToFunction, codeToEventList, eventData, clearCodes
 local clearCodes = DogTag.clearCodes
 DogTag_funcs[#DogTag_funcs+1] = function()
@@ -272,18 +276,12 @@ function DogTag:AddTag(namespace, tag, data)
 			error("if doc is not supplied, category must be nil", 2)
 		end
 	end
+	if data.noDoc and type(data.doc) ~= "nil" then
+		error(("doc must be nil if noDoc is true, got %s"):format(type(data.doc)), 2)
+	end
+	tagData.noDoc = data.noDoc
 	del(data)
 	clearCodes(namespace)
-end
-
-local call__func, call__kwargs, call__code, call__nsList
-local function call()
-	return call__func(call__kwargs)
-end
-
-local function errorhandler(err)
-	local _, minor = LibStub(MAJOR_VERSION)
-	return geterrorhandler()(("%s.%d: Error with code %q (%s). %s"):format(MAJOR_VERSION, minor, call__code, call__nsList, err))
 end
 
 local function updateFontString(fs)
@@ -294,19 +292,25 @@ local function updateFontString(fs)
 	if code then
 		local nsList = fsToNSList[fs]
 		local kwargs = fsToKwargs[fs]
-		local kwargTypes = kwargsToKwargTypes[kwargs]
+		local kwargTypes = kwargsToKwargTypesWithTableCache[kwargs]
 		local func = codeToFunction[nsList][kwargTypes][code]
 		DogTag.__isMouseOver = DogTag.__lastMouseover == fsToFrame[fs]
-		call__func, call__kwargs, call__code, call__nsList = func, kwargs, code, nsList
-		local success, ret, alpha, outline = xpcall(call, errorhandler)
-		call__func, call__kwargs, call__code, call__nsList = nil, nil, nil, nil
+		
+		local success, text, opacity, outline = pcall(func, kwargs)
+		if not success then
+			DogTag.tagError(code, nsList, text)
+			return
+		end
+	
 		if success then
-			fs:SetText(ret)
-			if alpha then
-				fs:SetAlpha(alpha)
+			fs:SetText(text)
+			if opacity then
+				fs:SetAlpha(opacity)
 			end
-			local a, b = fs:GetFont()
-			fs:SetFont(a, b, outline or '')
+			local a, b, c = fs:GetFont()
+			if c ~= (outline or '') then
+				fs:SetFont(a, b, outline or '')
+			end
 		end
 	end
 end
@@ -374,25 +378,49 @@ function DogTag:AddFontString(fs, frame, code, nsList, kwargs)
 	end
 	nsList = fixNamespaceList[nsList]
 	
-	kwargs = memoizeTable(deepCopy(kwargs))
+	--[[ Cybeloras 7-4-2012:
+		Noticed a massive performance bottleneck in this function, and this is what I discovered:
+		
+		Using a kwargs table of {color=true,group=3,icons=108} (a pretty normal table, just 3 values),
+		the following were the results of two different methods to test if the tables are the same:
+		
+		Over 500,000 iterations:
+			memoizeTable(deepCopy(kwargs))		averaged an execution time of 0.0270833 seconds
+			deepCompare(fsToKwargs[fs], kwargs)	averaged an execution time of 0.0038213 seconds
+		
+		Giving a 608.74% speed advantage to deepCompare
+		
+		If we deepCompare first to see if we can return early (which should happen almost all the time,
+		because kwargs change very infrequently), the performance boost is massive. If deepCompare reveals that the kwargs have changed,
+		then we can go on to memoizeTable for the rest of the function.
+		
+		Code changes:
+			Moved ( kwargs = memoizeTable(deepCopy(kwargs)) ) down below the if block
+			Changed ( fsToKwargs[fs] == kwargs ) to ( deepCompare(fsToKwargs[fs], kwargs) )
+			Added function DogTag.deepCompare to Helpers.lua
+			Added deepCompare = DogTag.deepCompare upvalue to this file's header
+	]]
 	
 	if fsToCode[fs] then
-		if fsToFrame[fs] == frame and fsToCode[fs] == code and fsToNSList[fs] == nsList and fsToKwargs[fs] == kwargs then
+		if fsToFrame[fs] == frame and fsToCode[fs] == code and fsToNSList[fs] == nsList and deepCompare(fsToKwargs[fs], kwargs) then
 			fsNeedUpdate[fs] = true
 			return
 		end
 		self:RemoveFontString(fs)
 	end
+	
+	kwargs = memoizeTable(deepCopy(kwargs))
+	
 	fsToFrame[fs] = frame
 	fsToCode[fs] = code
 	fsToNSList[fs] = nsList
 	fsToKwargs[fs] = kwargs
 	
-	local kwargTypes = kwargsToKwargTypes[kwargs]
+	local kwargTypes = kwargsToKwargTypesWithTableCache[kwargs]
 	
 	local codeToEventList_nsList_kwargTypes_code = codeToEventList[nsList][kwargTypes][code]
 	if codeToEventList_nsList_kwargTypes_code == nil then
-		local _ = codeToFunction[nsList][kwargTypes][code]
+		local _ = codeToFunction[nsList][kwargTypes][code] -- i guess this is just to invoke a metamethod. everybody loves commented code!
 		codeToEventList_nsList_kwargTypes_code = codeToEventList[nsList][kwargTypes][code]
 		if codeToEventList_nsList_kwargTypes_code == nil then
 			local _, minor = LibStub(MAJOR_VERSION)
@@ -432,7 +460,7 @@ function DogTag:RemoveFontString(fs)
 	fsToCode[fs], fsToFrame[fs], fsToNSList[fs], fsToKwargs[fs] = nil, nil, nil, nil
 	fsNeedUpdate[fs], fsNeedQuickUpdate[fs] = nil, nil
 	
-	local kwargTypes = kwargsToKwargTypes[kwargs]
+	local kwargTypes = kwargsToKwargTypesWithTableCache[kwargs]
 	
 	local codeToEventList_nsList_kwargTypes_code = codeToEventList[nsList][kwargTypes][code]
 	if codeToEventList_nsList_kwargTypes_code then

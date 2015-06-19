@@ -1,9 +1,11 @@
 local L = LibStub("AceLocale-3.0"):GetLocale("IceHUD", false)
 IceCustomBar = IceCore_CreateClass(IceUnitBar)
 
+local DogTag = nil
+
 local IceHUD = _G.IceHUD
 
-local validUnits = {"player", "target", "focus", "focustarget", "pet", "pettarget", "vehicle", "targettarget", "main hand weapon", "off hand weapon"}
+local validUnits = {"player", "target", "focus", "focustarget", "pet", "pettarget", "vehicle", "targettarget", "main hand weapon", "off hand weapon", "other"}
 local buffOrDebuff = {"buff", "debuff"}
 local validBuffTimers = {"none", "seconds", "minutes:seconds", "minutes"}
 local AuraIconWidth = 20
@@ -25,6 +27,13 @@ end
 function IceCustomBar.prototype:Enable(core)
 	IceCustomBar.super.prototype.Enable(self, core)
 
+	if IceHUD.IceCore:ShouldUseDogTags() then
+		DogTag = LibStub("LibDogTag-3.0", true)
+		if DogTag then
+			LibStub("LibDogTag-Unit-3.0", true)
+		end
+	end
+
 	self:RegisterEvent("UNIT_AURA", "UpdateCustomBarEvent")
 	self:RegisterEvent("UNIT_PET", "UpdateCustomBarEvent")
 	self:RegisterEvent("PLAYER_PET_CHANGED", "UpdateCustomBarEvent")
@@ -39,8 +48,12 @@ function IceCustomBar.prototype:Enable(core)
 
 	self:Show(true)
 
-	self.unit = self.moduleSettings.myUnit
+	self.unit = self:GetUnitToTrack()
 	self:ConditionalSubscribe()
+
+	if not self.moduleSettings.usesDogTagStrings then
+		self.moduleSettings.usesDogTagStrings = true
+	end
 
 	self:UpdateCustomBar(self.unit)
 
@@ -54,6 +67,25 @@ function IceCustomBar.prototype:Enable(core)
 	self:FixupTextColors()
 	self:SetCustomTextColor(self.frame.bottomUpperText, self.moduleSettings.upperTextColor)
 	self:SetCustomTextColor(self.frame.bottomLowerText, self.moduleSettings.lowerTextColor)
+end
+
+function IceCustomBar.prototype:Disable(core)
+	self.handlesOwnUpdates = false
+	IceHUD.IceCore:RequestUpdates(self, nil)
+
+	IceCustomBar.super.prototype.Disable(self, core)
+end
+
+function IceCustomBar.prototype:GetUnitToTrack()
+	if self.moduleSettings.myUnit == "other" then
+		if self.moduleSettings.customUnit ~= nil and self.moduleSettings.customUnit ~= "" then
+			return self.moduleSettings.customUnit
+		else
+			return validUnits[1]
+		end
+	else
+		return self.moduleSettings.myUnit
+	end
 end
 
 function IceCustomBar.prototype:FixupTextColors()
@@ -102,7 +134,7 @@ function IceCustomBar.prototype:GetDefaultSettings()
 	settings["side"] = IceCore.Side.Right
 	settings["offset"] = 8
 	settings["upperText"]=""
-	settings["usesDogTagStrings"] = false
+	--settings["usesDogTagStrings"] = false
 	settings["lockLowerFontAlpha"] = false
 	settings["lowerText"] = ""
 	settings["lowerTextVisible"] = false
@@ -124,6 +156,8 @@ function IceCustomBar.prototype:GetDefaultSettings()
 	settings["exactMatch"] = false
 	settings["lowerTextColor"] = {r=1, g=1, b=1}
 	settings["upperTextColor"] = {r=1, g=1, b=1}
+	settings["customUnit"] = "player"
+	settings["minCount"] = 0
 
 	return settings
 end
@@ -232,7 +266,8 @@ function IceCustomBar.prototype:GetOptions()
 		end,
 		set = function(info, v)
 			self.moduleSettings.myUnit = info.option.values[v]
-			self.unit = info.option.values[v]
+			self.unit = self:GetUnitToTrack()
+			self:RegisterFontStrings()
 			self:ConditionalSubscribe()
 			self:Redraw()
 			self:UpdateCustomBar(self.unit)
@@ -242,6 +277,29 @@ function IceCustomBar.prototype:GetOptions()
 			return not self.moduleSettings.enabled
 		end,
 		order = 30.4,
+	}
+
+	opts["customUnitToTrack"] = {
+		type = 'input',
+		name = L["Custom unit"],
+		desc = L["Any valid unit id such as: party1, raid14, targettarget, etc. Not guaranteed to work with all unit ids.\n\nRemember to press ENTER after filling out this box with the name you want or it will not save."],
+		get = function()
+			return self.moduleSettings.customUnit
+		end,
+		set = function(info, v)
+			self.moduleSettings.customUnit = v
+			self.unit = self:GetUnitToTrack()
+			self:RegisterFontStrings()
+			self:ConditionalSubscribe()
+			self:Redraw()
+			self:UpdateCustomBar(self.unit)
+			IceHUD:NotifyOptionsChange()
+		end,
+		hidden = function()
+			return self.moduleSettings.myUnit ~= "other"
+		end,
+		usage = "<what custom unit to track when unitToTrack is set to 'other'>",
+		order = 30.45,
 	}
 
 	opts["buffOrDebuff"] = {
@@ -327,6 +385,24 @@ function IceCustomBar.prototype:GetOptions()
 			return not self.moduleSettings.enabled or self.unit == "main hand weapon" or self.unit == "off hand weapon"
 		end,
 		order = 30.7,
+	}
+
+	opts["minCount"] = {
+		type = 'input',
+		name = L["Minimum stacks to show"],
+		desc = L["Only show the bar when the number of applications of this buff or debuff exceeds this number"],
+		get = function()
+			return self.moduleSettings.minCount and tostring(self.moduleSettings.minCount) or "0"
+		end,
+		set = function(info, v)
+			self.moduleSettings.minCount = tonumber(v)
+			self:Redraw()
+			self:UpdateCustomBar(self.unit)
+		end,
+		disabled = function()
+			return not self.moduleSettings.enabled
+		end,
+		order = 30.71,
 	}
 
 	opts["barColor"] = {
@@ -562,7 +638,7 @@ function IceCustomBar.prototype:GetAuraDuration(unitName, buffName)
 	end
 
 	if unitName == "main hand weapon" or unitName == "off hand weapon" then
-		local hasMainHandEnchant, mainHandExpiration, mainHandCharges, hasOffHandEnchant, offHandExpiration, offHandCharges
+		local hasMainHandEnchant, mainHandExpiration, mainHandCharges, mainHandEnchantID, hasOffHandEnchant, offHandExpiration, offHandCharges, offHandEnchantID
 			= GetWeaponEnchantInfo()
 
 		if unitName == "main hand weapon" and hasMainHandEnchant then
@@ -659,16 +735,15 @@ function IceCustomBar.prototype:UpdateCustomBar(unit, fromUpdate)
 
 	local now = GetTime()
 	local remaining = nil
-	local count = 0
 	local auraIcon = nil
 	local endTime = 0
 
 	if not fromUpdate then
 		if tonumber(self.moduleSettings.buffToTrack) == nil then
-			self.auraDuration, remaining, count, auraIcon, endTime =
+			self.auraDuration, remaining, self.auraBuffCount, auraIcon, endTime =
 				self:GetAuraDuration(self.unit, self.moduleSettings.buffToTrack)
 		else
-			self.auraDuration, remaining, count, auraIcon, endTime =
+			self.auraDuration, remaining, self.auraBuffCount, auraIcon, endTime =
 				self:GetAuraDuration(self.unit, GetSpellInfo(self.moduleSettings.buffToTrack))
 		end
 
@@ -696,7 +771,9 @@ function IceCustomBar.prototype:UpdateCustomBar(unit, fromUpdate)
 		end
 	end
 
-	if self.auraEndTime ~= nil and (self.auraEndTime == 0 or self.auraEndTime >= now) then
+	self.auraBuffCount = self.auraBuffCount or 0
+
+	if self.auraEndTime ~= nil and (self.auraEndTime == 0 or self.auraEndTime >= now) and (not self.moduleSettings.minCount or self.auraBuffCount >= self.moduleSettings.minCount) then
 		if not self:ShouldAlwaysSubscribe() and not fromUpdate and not IceHUD.IceCore:IsUpdateSubscribed(self) then
 			if not self.UpdateCustomBarFunc then
 				self.UpdateCustomBarFunc = function() self:UpdateCustomBar(self.unit, true) end
@@ -726,6 +803,7 @@ function IceCustomBar.prototype:UpdateCustomBar(unit, fromUpdate)
 		end
 	end
 
+	local fullString = self.moduleSettings.upperText
 	if (remaining ~= nil) then
 		local buffString = ""
 		if self.moduleSettings.buffTimerDisplay == "seconds" then
@@ -744,13 +822,15 @@ function IceCustomBar.prototype:UpdateCustomBar(unit, fromUpdate)
 				end
 			end
 		end
-		self:SetBottomText1(self.moduleSettings.upperText .. (not self.bIsAura and (" " .. buffString) or ""))
-	else
-		self.auraBuffCount = 0
-		self:SetBottomText1(self.moduleSettings.upperText)
+		fullString = self.moduleSettings.upperText .. (not self.bIsAura and (" " .. buffString) or "")
 	end
 
-	self:SetBottomText2(self.moduleSettings.lowerText)
+	if DogTag ~= nil then
+		DogTag:AddFontString(self.frame.bottomUpperText, self.frame, fullString, "Unit", { unit = self.unit })
+	else
+		self:SetBottomText1(fullString)
+		self:SetBottomText2(self.moduleSettings.lowerText)
+	end
 
 	self.barFrame.bar:SetVertexColor(self:GetBarColor())
 	if self.flashFrame and self.flashFrame.flash then

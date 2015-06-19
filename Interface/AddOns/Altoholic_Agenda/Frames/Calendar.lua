@@ -1,12 +1,10 @@
 local addonName = "Altoholic"
 local addon = _G[addonName]
+local colors = addon.Colors
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 
 local parent = "AltoholicFrameCalendar"
-
-local WHITE		= "|cFFFFFFFF"
-local TEAL		= "|cFF00FF9A"
 
 -- Weekday constants
 local CALENDAR_WEEKDAY_NORMALIZED_TEX_LEFT	= 0.0;
@@ -113,7 +111,7 @@ function ns:OnLoad()
 	addon.Tabs.Agenda:RegisterChildPane(ns)
 
 	-- by default, the week starts on Sunday, adjust first day of the week if necessary
-	if addon:GetOption("WeekStartsMonday") == 1 then
+	if addon:GetOption("UI.Calendar.WeekStartsOnMonday") then
 		addon:SetFirstDayOfWeek(2)
 	end
 	
@@ -169,6 +167,8 @@ local function GetDay(fullday)
 	-- this function is actually different than the one in Blizzard_Calendar.lua, since weekday can't necessarily be determined from a UI button
 	local refDate = {}		-- let's use the 1st of current month as reference date
 	local refMonthFirstDay
+	local _
+	
 	refDate.month, refDate.year, _, refMonthFirstDay = CalendarGetMonth()
 	refDate.day = 1
 
@@ -206,7 +206,7 @@ local function SetEventLineOffset(offset)
 	elseif offset > (#view - NUM_EVENTLINES) then
 		offset = (#view - NUM_EVENTLINES)
 	end
-	FauxScrollFrame_SetOffset( AltoholicFrameCalendarScrollFrame, offset )
+	AltoholicFrameCalendarScrollFrame:SetOffset(offset)
 	AltoholicFrameCalendarScrollFrameScrollBar:SetValue(offset * 18)
 end
 
@@ -303,7 +303,8 @@ function ns:UpdateEvents()
 	local frame = "AltoholicFrameCalendar"
 	local entry = frame.."Entry"
 
-	local offset = FauxScrollFrame_GetOffset( _G[ frame.."ScrollFrame" ] );
+	local scrollFrame = _G[ frame.."ScrollFrame" ]
+	local offset = scrollFrame:GetOffset()
 
 	for i=1, VisibleLines do
 		local line = i + offset
@@ -343,7 +344,7 @@ function ns:UpdateEvents()
 	end
 	
 	local last = (#view < VisibleLines) and VisibleLines or #view
-	FauxScrollFrame_Update( _G[ frame.."ScrollFrame" ], last, VisibleLines, 18);
+	scrollFrame:Update(last, VisibleLines, 18)
 end
 
 -- *** Mouse events ***
@@ -370,12 +371,12 @@ function ns:Day_OnEnter(frame)
 	local weekday = GetWeekdayIndex(mod(frame:GetID(), 7)) 
 	weekday = (weekday == 0) and 7 or weekday
 	
-	AltoTooltip:AddLine(TEAL..format(FULLDATE, GetFullDate(weekday, frame.month, frame.day, frame.year)));
+	AltoTooltip:AddLine(colors.teal..format(FULLDATE, GetFullDate(weekday, frame.month, frame.day, frame.year)));
 
 	for k, v in pairs(addon.Events:GetList()) do
 		if v.eventDate == eventDate then
 			local char, eventTime, title = addon.Events:GetInfo(k)
-			AltoTooltip:AddDoubleLine(format("%s %s", WHITE..eventTime, char), title);
+			AltoTooltip:AddDoubleLine(format("%s %s", colors.white..eventTime, char), title);
 		end
 	end
 	AltoTooltip:Show();
@@ -389,10 +390,10 @@ function ns:Event_OnEnter(frame)
 	AltoTooltip:ClearLines();
 	-- local eventDate = format("%04d-%02d-%02d", self.year, self.month, self.day)
 	-- local weekday = GetWeekdayIndex(mod(self:GetID(), 7))
-	-- AltoTooltip:AddLine(TEAL..format(FULLDATE, GetFullDate(weekday, self.month, self.day, self.year)));
+	-- AltoTooltip:AddLine(colors.teal..format(FULLDATE, GetFullDate(weekday, self.month, self.day, self.year)));
 	
 	local char, eventTime, title, desc = addon.Events:GetInfo(s.parentID)
-	AltoTooltip:AddDoubleLine(format("%s %s", WHITE..eventTime, char), title);
+	AltoTooltip:AddDoubleLine(format("%s %s", colors.white..eventTime, char), title);
 	if desc then
 		AltoTooltip:AddLine(" ")
 		AltoTooltip:AddLine(desc)

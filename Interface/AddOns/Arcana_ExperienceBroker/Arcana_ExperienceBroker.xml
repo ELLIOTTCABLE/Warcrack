@@ -1,0 +1,59 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">	
+	<Script file="Arcana_ExperienceBroker.lua"/>
+	<Frame name="Arcana_ExperienceBroker" parent="UIParent">
+
+	</Frame>
+
+	<Frame name="Arcana_ExperienceBroker_OptionsFrame">
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Head" inherits="GameFontNormalLarge" text="Arcana's Experience Broker">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="15" y="-15" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<CheckButton name="$parent_RestShow" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Head">
+						<Offset>
+							<AbsDimension x="25" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+			</CheckButton>
+
+			<CheckButton name="$parent_PetShow" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent_RestShow">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+			</CheckButton>
+
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				Arcana_ExperienceBroker_OnLoad(self);
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

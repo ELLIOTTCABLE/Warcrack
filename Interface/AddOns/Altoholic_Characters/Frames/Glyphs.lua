@@ -6,38 +6,32 @@ addon.Glyphs = {}
 local ns = addon.Glyphs		-- ns = glyphs namespace
 
 local parent = "AltoholicFrameGlyphs"
-local currentTalentGroup
 
 -- *** GLYPHS ***
 
 local GLYPH_TYPE_MAJOR = 1;
 local GLYPH_TYPE_MINOR = 2;
-local GLYPH_TYPE_PRIME = 3;
-
+	
 local glyphSlotTexCoord = {
 	-- copied from Blizzard_GlyphUI.lua, no idea why they're not visible from here .. :/
 
 	[GLYPH_TYPE_MAJOR] = {
-		ring = { size = 66, left = 0.85839844, right = 0.92285156, top = 0.00097656, bottom = 0.06542969 },
-		highlight = { size = 80, left = 0.85839844, right = 0.93652344, top = 0.06738281, bottom = 0.14550781 }
-	},
-	[GLYPH_TYPE_MINOR] = {
-		ring = { size = 56, left = 0.92480469, right = 0.98437500, top = 0.00097656, bottom = 0.06054688 },
-		highlight = { size = 70, left = 0.85839844, right = 0.93164063, top = 0.14746094, bottom = 0.22070313 }
-	},
-	[GLYPH_TYPE_PRIME] = {
 		ring = { size = 62, left = 0.85839844, right = 0.93847656, top = 0.22265625, bottom = 0.30273438 },
 		highlight = { size = 76, left = 0.85839844, right = 0.95214844, top = 0.30468750, bottom = 0.39843750 }
 	},
+	[GLYPH_TYPE_MINOR] = {
+		ring = { size = 66, left = 0.85839844, right = 0.92285156, top = 0.00097656, bottom = 0.06542969 },
+		highlight = { size = 80, left = 0.85839844, right = 0.93652344, top = 0.06738281, bottom = 0.14550781 }
+	},
 }
 
-local function DrawGlyph(id)
-	local name = parent .. "Glyph" .. id
+local function DrawGlyph(spec, id)
+	local name = parent .. "Glyph" .. (((spec-1)*6)+id)
 	local glyph = _G[name]
 	
 	local character = addon.Tabs.Characters:GetAltKey()
-	local enabled, glyphType, spell, icon = DataStore:GetGlyphSocketInfo(character, currentTalentGroup, id)
-
+	local enabled, glyphType, spell, icon = DataStore:GetGlyphSocketInfo(character, spec, id)
+	
 	local info = glyphSlotTexCoord[glyphType]
 	if info then
 		glyph.glyphType = glyphType;
@@ -68,24 +62,19 @@ local function DrawGlyph(id)
 
 	glyph.ring:SetVertexColor(vc, vc, vc)
 	glyph.highlight:SetVertexColor(vc, vc, vc)
+	glyph:SetScale(0.80)
 end
 
 function ns:Update()
 	local character = addon.Tabs.Characters:GetAltKey()
 	
-	if currentTalentGroup == 1 then
-		AltoholicTabCharactersStatus:SetText(format("%s|r / %s", DataStore:GetColoredCharacterName(character), TALENT_SPEC_PRIMARY_GLYPH))
-	else
-		AltoholicTabCharactersStatus:SetText(format("%s|r / %s", DataStore:GetColoredCharacterName(character), TALENT_SPEC_SECONDARY_GLYPH))
-	end
+	AltoholicTabCharacters.Status:SetText(format("%s|r / %s", DataStore:GetColoredCharacterName(character), GLYPHS))
 	
-	for i = 1, 9 do
-		DrawGlyph(i)
+	for spec = 1, 2 do
+		for id = 1, 6 do
+			DrawGlyph(spec, id)
+		end
 	end
-end
-
-function ns:SetCurrentGroup(num)
-	currentTalentGroup = num
 end
 
 function ns:Button_OnLoad(frame)
@@ -116,14 +105,22 @@ end
 local glyphTypes = {
 	MAJOR_GLYPH,
 	MINOR_GLYPH,
-	PRIME_GLYPH,
 }
 
 function ns:Button_OnEnter(frame)
 	local id = frame:GetID()
+	local currentSpecGroup = 1
+	
+	if id > 6 then
+		currentSpecGroup = 2
+		id = id - 6
+	end
+
 	local character = addon.Tabs.Characters:GetAltKey()
-	local enabled, glyphType, spell, _, glyphID, tooltipIndex = DataStore:GetGlyphSocketInfo(character, currentTalentGroup, id)
+	local enabled, glyphType, spell, _, glyphID, tooltipIndex = DataStore:GetGlyphSocketInfo(character, currentSpecGroup, id)
 	if not glyphType then return end
+	
+	-- DEFAULT_CHAT_FRAME:AddMessage("spell : " .. spell .. " glyph ID : " .. glyphID)
 	
 	local glyphTypeText = "|cFF69CCF0" .. glyphTypes[tonumber(glyphType)]
 
@@ -153,8 +150,15 @@ end
 
 function ns:Button_OnClick(frame, button)
 	local id = frame:GetID()
+	local currentSpecGroup = 1
+	
+	if id > 6 then
+		currentSpecGroup = 2
+		id = id - 6
+	end
+	
 	local character = addon.Tabs.Characters:GetAltKey()
-	local enabled, glyphType, spell, _, glyphID = DataStore:GetGlyphSocketInfo(character, currentTalentGroup, id)
+	local enabled, glyphType, spell, _, glyphID = DataStore:GetGlyphSocketInfo(character, currentSpecGroup, id)
 
 	if not spell then return end
 	

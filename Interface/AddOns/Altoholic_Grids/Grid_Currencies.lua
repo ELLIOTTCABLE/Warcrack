@@ -1,16 +1,12 @@
 local addonName = "Altoholic"
 local addon = _G[addonName]
+local colors = addon.Colors
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 
-local WHITE		= "|cFFFFFFFF"
-local GREEN		= "|cFF00FF00"
-
 local view
 local isViewValid
-
-local currentTokenType
-local currentDDMText
+local OPTION_TOKEN = "UI.Tabs.Grids.Currencies.CurrentTokenType"
 
 local function HashToSortedArray(hash)
 	local array = {}		-- order them
@@ -72,37 +68,32 @@ local function GetUsedTokens(header)
 end
 
 local function BuildView()
-	view = GetUsedTokens(currentTokenType)
+	view = GetUsedTokens(addon:GetOption(OPTION_TOKEN))
 	isViewValid = true
 end
 
-local DDM_Add = addon.Helpers.DDM_AddWithArgs
-local DDM_AddCloseMenu = addon.Helpers.DDM_AddCloseMenu
-
 local function OnTokenChange(self, header)
-	currentTokenType = header
-	currentDDMText = currentTokenType
-	addon.Tabs.Grids:SetViewDDMText(currentDDMText)
+	addon:SetOption(OPTION_TOKEN, header)
+	addon.Tabs.Grids:SetViewDDMText(header)
 
 	isViewValid = nil
 	addon.Tabs.Grids:Update()
 end
 
 local function OnTokensAllInOne(self)
-	currentTokenType = nil
-	currentDDMText = L["All-in-one"]
-	addon.Tabs.Grids:SetViewDDMText(currentDDMText)
+	addon:SetOption(OPTION_TOKEN, nil)
+	addon.Tabs.Grids:SetViewDDMText(L["All-in-one"])
 
 	isViewValid = nil
 	addon.Tabs.Grids:Update()
 end
 
-local function DropDown_Initialize()
+local function DropDown_Initialize(frame)
 	for _, header in ipairs(GetUsedHeaders()) do		-- and add them to the DDM
-		DDM_Add(header, nil, OnTokenChange, header)
+		frame:AddButtonWithArgs(header, nil, OnTokenChange, header, nil, (addon:GetOption(OPTION_TOKEN) == header))
 	end
-	DDM_Add(L["All-in-one"], nil, OnTokensAllInOne)
-	DDM_AddCloseMenu()
+	frame:AddButtonWithArgs(L["All-in-one"], nil, OnTokensAllInOne, nil, nil, (addon:GetOption(OPTION_TOKEN) == nil))
+	frame:AddCloseMenu()
 end
 
 local callbacks = {
@@ -110,38 +101,35 @@ local callbacks = {
 			if not isViewValid then
 				BuildView()
 			end
+			
+			addon.Tabs.Grids:SetStatus(addon:GetOption(OPTION_TOKEN) or L["All-in-one"])
 		end,
 	GetSize = function() return #view end,
-	RowSetup = function(self, entry, row, dataRowID)
+	RowSetup = function(self, rowFrame, dataRowID)
 			local token = view[dataRowID]
 
 			if token then
-				local rowName = entry .. row
-				_G[rowName.."Name"]:SetText(WHITE .. token)
-				_G[rowName.."Name"]:SetJustifyH("LEFT")
-				_G[rowName.."Name"]:SetPoint("TOPLEFT", 15, 0)
+				rowFrame.Name.Text:SetText(colors.white .. token)
+				rowFrame.Name.Text:SetJustifyH("LEFT")
 			end
 		end,
-	ColumnSetup = function(self, entry, row, column, dataRowID, character)
-			local itemName = entry.. row .. "Item" .. column;
-			local itemTexture = _G[itemName .. "_Background"]
-			local itemButton = _G[itemName]
-			local itemText = _G[itemName .. "Name"]
-			
-			itemText:SetFontObject("NumberFontNormalSmall")
-			itemText:SetJustifyH("CENTER")
-			itemText:SetPoint("BOTTOMRIGHT", 5, 0)
-			itemTexture:SetDesaturated(0)
-			itemTexture:SetTexCoord(0, 1, 0, 1)
+	RowOnEnter = function()	end,
+	RowOnLeave = function() end,
+	ColumnSetup = function(self, button, dataRowID, character)
+			button.Name:SetFontObject("NumberFontNormalSmall")
+			button.Name:SetJustifyH("CENTER")
+			button.Name:SetPoint("BOTTOMRIGHT", 5, 0)
+			button.Background:SetDesaturated(false)
+			button.Background:SetTexCoord(0, 1, 0, 1)
 
 			local token = view[dataRowID]
 			local _, _, count, icon = DataStore:GetCurrencyInfoByName(character, token)
-			itemButton.count = count
+			button.count = count
 		
 			if count then 
-				itemTexture:SetTexture(icon)
-				itemTexture:SetVertexColor(0.5, 0.5, 0.5);	-- greyed out
-				itemButton.key = character
+				button.Background:SetTexture(icon)
+				button.Background:SetVertexColor(0.5, 0.5, 0.5);	-- greyed out
+				button.key = character
 				
 				if count >= 100000 then
 					count = format("%2.1fM", count/1000000)
@@ -151,11 +139,13 @@ local callbacks = {
 					count = format("%2.1fk", count/1000)
 				end
 				
-				itemText:SetText(GREEN..count)
-				itemButton:Show()
+				button.Name:SetText(colors.green..count)
+				button:SetID(dataRowID)
+				button:Show()
 			else
-				itemButton.key = nil
-				itemButton:Hide()
+				button.key = nil
+				button:SetID(0)
+				button:Hide()
 			end
 		end,
 	OnEnter = function(frame) 
@@ -165,8 +155,9 @@ local callbacks = {
 			AltoTooltip:SetOwner(frame, "ANCHOR_LEFT")
 			AltoTooltip:ClearLines()
 			AltoTooltip:AddLine(DataStore:GetColoredCharacterName(character))
-			AltoTooltip:AddLine(view[frame:GetParent():GetID()], 1, 1, 1)
-			AltoTooltip:AddLine(GREEN..frame.count)
+			-- AltoTooltip:AddLine(view[frame:GetParent():GetID()], 1, 1, 1)
+			AltoTooltip:AddLine(view[frame:GetID()], 1, 1, 1)
+			AltoTooltip:AddLine(colors.green..frame.count)
 			AltoTooltip:Show()
 		end,
 	OnClick = nil,
@@ -176,17 +167,14 @@ local callbacks = {
 	InitViewDDM = function(frame, title) 
 			frame:Show()
 			title:Show()
-
-			currentDDMText = currentDDMText or currentTokenType
 			
-			UIDropDownMenu_SetWidth(frame, 100) 
-			UIDropDownMenu_SetButtonWidth(frame, 20)
-			UIDropDownMenu_SetText(frame, currentDDMText)
-			UIDropDownMenu_Initialize(frame, DropDown_Initialize)
+			frame:SetMenuWidth(100) 
+			frame:SetButtonWidth(20)
+			frame:SetText(addon:GetOption(OPTION_TOKEN) or L["All-in-one"])
+			frame:Initialize(DropDown_Initialize, "MENU_NO_BORDERS")
 		end,
 }
 
 local headers = GetUsedHeaders()
-currentTokenType = headers[1]
 
 addon.Tabs.Grids:RegisterGrid(3, callbacks)

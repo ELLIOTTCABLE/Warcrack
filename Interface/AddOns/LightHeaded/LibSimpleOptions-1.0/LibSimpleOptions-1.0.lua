@@ -1,6 +1,6 @@
 --[[
 Name: LibSimpleOptions-1.0
-Revision: $Rev: 43 $
+Revision: $Rev: 46 $
 Author(s): ckknight (ckknight@gmail.com)
 Website: http://ckknight.wowinterface.com/
 Description: A library to provide a way to easily create controls for Blizzard's options system
@@ -8,7 +8,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibSimpleOptions-1.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 43 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 46 $"):match("(%d+)"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -581,7 +581,7 @@ do
 			name = self:GetName() .. "_Button" .. i
 		until not _G[name]
 	
-		local button = CreateFrame("Button", name, self, "UIPanelButtonTemplate2")
+		local button = CreateFrame("Button", name, self, "UIPanelButtonTemplate")
 		self.controls[button] = true
 		button:SetText(args.name)
 		button.tooltipText = args.description

@@ -17,6 +17,8 @@ _G[modName] = mod
 local string_find = string.find
 local string_sub = string.sub
 local string_gsub = string.gsub
+local string_match = string.match
+local math_floor = math.floor
 local GetSpellInfo = GetSpellInfo
 
 
@@ -32,13 +34,38 @@ mod.CLIENT_VERSION = tonumber((select(4, GetBuildInfo())))
 
 mod.COMMAND = "/msbt"
 
-
 -------------------------------------------------------------------------------
 -- Localization.
 -------------------------------------------------------------------------------
 
 -- Holds localized strings.
 local translations = {}
+
+
+-------------------------------------------------------------------------------
+-- Imports.
+-------------------------------------------------------------------------------
+
+-- Local references to various functions for faster access.
+local string_format = string.format
+local string_reverse = string.reverse
+
+
+-------------------------------------------------------------------------------
+-- Utility Constants.
+-------------------------------------------------------------------------------
+
+-- Use standard SI suffixes at the end of shortened numbers.
+local SI_SUFFIXES = { "k", "M", "G", "T" }
+
+-- Use Blizzard localized value to separate numbers if available.
+local LARGE_NUMBER_SEPERATOR = LARGE_NUMBER_SEPERATOR
+
+if not LARGE_NUMBER_SEPERATOR or LARGE_NUMBER_SEPERATOR == "" then
+	LARGE_NUMBER_SEPERATOR = ","
+end
+
+local SEPARATOR_REPLACE_PATTERN = "%1"..(LARGE_NUMBER_SEPERATOR or ",").."%2"
 
 
 -------------------------------------------------------------------------------
@@ -111,6 +138,41 @@ local function GetSkillName(skillID)
 end
 
 
+-- ****************************************************************************
+-- Returns an SI formatted value given a number and a precision.
+-- ****************************************************************************
+local function ShortenNumber(number, precision)
+ local precisionFormatter = string_format("%%.%df", precision or 0)
+ if (type(number) ~= "number") then number = tonumber(number) end
+ if (not number) then return 0 end
+ if (number >= 1e12) then return string_format(precisionFormatter, number / 1e12) .. SI_SUFFIXES[4] end
+ if (number >= 1e9) then return string_format(precisionFormatter, number / 1e9) .. SI_SUFFIXES[3] end
+ if (number >= 1e6) then return string_format(precisionFormatter, number / 1e6) .. SI_SUFFIXES[2] end
+ if (number >= 1000) then return string_format(precisionFormatter, number / 1000) .. SI_SUFFIXES[1] end
+ return number
+end
+
+
+-- ****************************************************************************
+-- Returns a number separated into groups of 3 according to the current
+-- locale's separator.
+-- ****************************************************************************
+
+local function SeparateNumber(number)
+ if (type(number) ~= "number") then number = tonumber(number) end
+ if (not number) then return 0 end
+
+ local formatted = number
+ while true do
+   local k
+   formatted, k = string_gsub(formatted, "^(-?%d+)(%d%d%d)", SEPARATOR_REPLACE_PATTERN)
+   if (k==0) then break end
+ end
+ return formatted
+end
+
+
+
 
 
 -------------------------------------------------------------------------------
@@ -121,8 +183,10 @@ end
 mod.translations = translations
 
 -- Protected Functions.
-mod.CopyTable		= CopyTable
-mod.EraseTable		= EraseTable
-mod.SplitString		= SplitString
-mod.Print			= Print
-mod.GetSkillName	= GetSkillName
+mod.CopyTable			= CopyTable
+mod.EraseTable			= EraseTable
+mod.SplitString			= SplitString
+mod.Print				= Print
+mod.GetSkillName		= GetSkillName
+mod.ShortenNumber		= ShortenNumber
+mod.SeparateNumber		= SeparateNumber

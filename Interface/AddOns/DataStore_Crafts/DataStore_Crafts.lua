@@ -11,20 +11,12 @@ _G[addonName] = LibStub("AceAddon-3.0"):NewAddon(addonName, "AceConsole-3.0", "A
 local addon = _G[addonName]
 
 local THIS_ACCOUNT = "Default"
--- local commPrefix = "DS_Craft"
-local BI = LibStub("LibBabble-Inventory-3.0"):GetLookupTable()
-local L = LibStub("AceLocale-3.0"):GetLocale("DataStore_Crafts")
-local PT = LibStub("LibPeriodicTable-3.1")
 
-local MSG_SEND_LOGIN								= 1	-- Sends a login message, to request crafts to other players
-local MSG_LOGIN_REPLY							= 2	-- ..reply
-local MSG_SEND_PROFESSION						= 3	-- Sends a profession link, or profession id if no full link
+local SECONDSPERDAY = 86400
+local THREEOCLOCK = 10800
 
 local AddonDB_Defaults = {
 	global = {
-		Options = {
-			BroadcastProfs = 1,					-- Broadcast professions at login or not
-		},
 		Guilds = {
 			['*'] = {			-- ["Account.Realm.Name"] 
 				Members = {
@@ -66,11 +58,11 @@ local SPELL_ID_LEATHERWORKING = 2108
 local SPELL_ID_TAILORING = 3908
 local SPELL_ID_SKINNING = 8613
 local SPELL_ID_MINING = 2575
-local SPELL_ID_HERBALISM = 9134
+local SPELL_ID_HERBALISM = 2366
 local SPELL_ID_SMELTING = 2656
 local SPELL_ID_COOKING = 2550
 local SPELL_ID_FIRSTAID = 3273
-local SPELL_ID_FISHING = 71691
+local SPELL_ID_FISHING = 131474
 local SPELL_ID_ARCHAEOLOGY = 78670
 
 local ProfessionSpellID = {
@@ -131,108 +123,6 @@ local function GetVersion()
 	return tonumber(version)
 end
 
--- local function SaveVersion(sender, version)
-	-- local thisGuild = GetThisGuild()
-	-- if thisGuild and sender and version then
-		-- thisGuild.Members[sender].Version = version
-	-- end
--- end
-
--- local function GuildBroadcast(messageType, ...)
-	-- local serializedData = addon:Serialize(messageType, ...)
-	-- addon:SendCommMessage(commPrefix, serializedData, "GUILD")
--- end
-
--- local function GuildWhisper(player, messageType, ...)
-	-- if DataStore:IsGuildMemberOnline(player) then
-		-- local serializedData = addon:Serialize(messageType, ...)
-		-- addon:SendCommMessage(commPrefix, serializedData, "WHISPER", player)
-	-- end
--- end
-
--- local professionQueue		-- queue containing the professions to send to guildmates
--- local professionTimer		-- timer used to control the pace at which professions are placed on comm channels.
-
--- local function SendProfession()
-	-- if #professionQueue == 0 then					-- nothing left in the queue ? cancel the timer & exit
-		-- addon:CancelTimer(professionTimer)
-		-- professionTimer = nil
-		-- return
-	-- end
-	
-	-- -- send the last profession found in the queue, then remove it 
-	-- local profession = professionQueue[#professionQueue]		-- last element
-	-- local alt = profession[1]
-	-- local data = profession[2]
-	-- local index = profession[3]
-	-- local recipient = profession[4]
-	-- -- DEFAULT_CHAT_FRAME:AddMessage(format("sending %s, %s to %s (size : %d)", alt, index, recipient or "guild", #professionQueue ))
-	
-	-- if profession[4] then		-- recipient found ? 
-		-- GuildWhisper(recipient, MSG_SEND_PROFESSION, alt, data, index)
-	-- else
-		-- GuildBroadcast(MSG_SEND_PROFESSION, alt, data, index)
-	-- end
-	
-	-- table.remove(professionQueue)
--- end
-
--- local function QueueCharacterProfessions(character, recipient)
-	-- local index = 1
-	-- local _, _, alt = strsplit(".", character)
-
-	-- for profName, profession in pairs(addon.db.global.Characters[character].Professions) do
-		-- local spellID = GetProfessionID(profName) or 0
-		-- local data = profession.FullLink or spellID
-
-		-- if profession.isPrimary then
-			-- table.insert(professionQueue, { alt, data, index, recipient })
-			-- index = index + 1
-		-- elseif profession.isSecondary then
-			-- if profName == GetSpellInfo(SPELL_ID_COOKING) then
-				-- table.insert(professionQueue, { alt, data, 3, recipient })			--				index = 3
-			-- end
-		-- end
-	-- end
--- end
-
--- local function SendAllProfessions(alts, recipient)
-	-- if GetOption("BroadcastProfs") == 0 then
-		-- return
-	-- end
-
-	-- professionQueue = professionQueue or {}
-	
-	-- -- sends the professions of the current character + his alts
-	-- local character = DataStore:GetCharacter()	-- this character
-	-- QueueCharacterProfessions(character, recipient)
-	
-	-- if strlen(alts) > 0 then
-		-- for _, name in pairs( { strsplit("|", alts) }) do	-- then all his alts
-			-- character = DataStore:GetCharacter(name)
-			-- if character then
-				-- QueueCharacterProfessions(character, recipient)
-			-- end
-		-- end
-	-- end
-	
-	-- -- reuse current timer if already available (may be the case if 2 players connect simultaneously)
-	-- professionTimer = professionTimer or addon:ScheduleRepeatingTimer(SendProfession, 0.5)		-- send 1 profession every half-second, max 15 seconds for 30 professions on a realm
--- end
-
--- local function SaveProfession(sender, alt, data, index)
-	-- local thisGuild = GetThisGuild()
-	-- if thisGuild and sender then
-		-- local version = thisGuild.Members[sender].Version
-		-- local member = thisGuild.Members[alt]
-		
-		-- member.Version = version
-		-- member.Professions[index] = data
-		-- member.lastUpdate = time()
-	-- end
-	-- addon:SendMessage("DATASTORE_GUILD_PROFESSION_RECEIVED", sender, alt, data, index)
--- end
-
 local function ClearExpiredProfessions()
 	-- this function will clear all the guild profession links that were saved with a build number anterior to the current one (they're invalid after a patch anyway)
 	
@@ -268,108 +158,46 @@ end
 local selectedTradeSkillIndex
 local subClasses, subClassID
 local invSlots, invSlotID
-local haveMats
-
-local function GetSubClassID()
-	-- The purpose of this function is to get the subClassID in a UI independant way
-	-- ie: without relying on UIDropDownMenu_GetSelectedID(TradeSkillSubClassDropDown), which uses a hardcoded frame name.
-	
-	if GetTradeSkillSubClassFilter(0) then		-- if "All Subclasses" is selected, GetTradeSkillSubClassFilter() will return 1 for all indexes, including 0
-		return 1				-- thus return 1 as selected id	(as would be returned by UIDropDownMenu_GetSelectedID(TradeSkillSubClassDropDown))
-	end
-
-	local filter
-	for i = 1, #subClasses do
-	   filter = GetTradeSkillSubClassFilter(i)
-	   if filter then
-	      return i+1			-- ex: 3rd element of the subClasses array, but 4th in the dropdown due to "All Subclasses", so return i+1
-	   end
-	end
-end
-
-local function GetInvSlotID()
-	-- The purpose of this function is to get the invSlotID in a UI independant way	(same as GetSubClassID)
-	-- ie: without relying on UIDropDownMenu_GetSelectedID(TradeSkillInvSlotDropDown), which uses a hardcoded frame name.
-
-	if GetTradeSkillInvSlotFilter(0) then		-- if "All Slots" is selected, GetTradeSkillInvSlotFilter() will return 1 for all indexes, including 0
-		return 1				-- thus return 1 as selected id	(as would be returned by  UIDropDownMenu_GetSelectedID(TradeSkillInvSlotDropDown))
-	end
-
-	local filter
-	for i = 1, #invSlots do
-	   filter = GetTradeSkillInvSlotFilter(i)
-	   if filter then
-	      return i+1			-- ex: 3rd element of the invSlots array, but 4th in the dropdown due to "All Slots", so return i+1
-	   end
-	end
-end
+local haveMats, hasSkillUp
 
 local function SaveActiveFilters()
 	selectedTradeSkillIndex = GetTradeSkillSelectionIndex()
 	
 	subClasses = { GetTradeSkillSubClasses() }
 	invSlots = { GetTradeSkillInvSlots() }
-	subClassID = GetSubClassID()
-	invSlotID = GetInvSlotID()
+
+	subClassID = TradeSkillFrame.filterTbl.subClassValue
+	invSlotID = TradeSkillFrame.filterTbl.slotValue
+	haveMats = TradeSkillFrame.filterTbl.hasMaterials
+	hasSkillUp = TradeSkillFrame.filterTbl.hasSkillUp
 	
-	-- Subclasses
-	SetTradeSkillSubClassFilter(0, 1, 1)	-- this checks "All subclasses"
-	if TradeSkillSubClassDropDown then
-		UIDropDownMenu_SetSelectedID(TradeSkillSubClassDropDown, 1)
-	end
-	
-	-- Inventory slots
-	SetTradeSkillInvSlotFilter(0, 1, 1)		-- this checks "All slots"
-	if TradeSkillInvSlotDropDown then
-		UIDropDownMenu_SetSelectedID(TradeSkillInvSlotDropDown, 1)
-	end
-	
-	-- Have Materials
-	if TradeSkillFrameAvailableFilterCheckButton then
-		haveMats = TradeSkillFrameAvailableFilterCheckButton:GetChecked()	-- nil or true
-		TradeSkillFrameAvailableFilterCheckButton:SetChecked(false)
-	end
+	TradeSkillSetFilter(-1, -1)
 	TradeSkillOnlyShowMakeable(false)
+	TradeSkillOnlyShowSkillUps(false)
 end
 
 local function RestoreActiveFilters()
-	-- Subclasses
-	SetTradeSkillSubClassFilter(subClassID-1, 1, 1)	-- this checks the previously checked value
-	
-	local frame = TradeSkillSubClassDropDown
-	if frame then	-- other addons might nil this frame (delayed load, etc..), so secure DDM calls
-		local text = (subClassID == 1) and ALL_SUBCLASSES or subClasses[subClassID-1]
-		UIDropDownMenu_SetSelectedID(frame, subClassID)
-		UIDropDownMenu_SetText(frame, text);
+	if (subClassID > 0) then
+		TradeSkillSetFilter(subClassID, 0, subClasses[subClassID], "")
+	elseif (invSlotID > 0) then
+		TradeSkillSetFilter(0, invSlotID, "", invSlots[invSlotID])
 	end
-	
-	subClassID = nil
-	wipe(subClasses)
-	subClasses = nil
-	
-	-- Inventory slots
-	invSlotID = invSlotID or 1
-	SetTradeSkillInvSlotFilter(invSlotID-1, 1, 1)	-- this checks the previously checked value
-	
-	frame = TradeSkillInvSlotDropDown
-	if frame then
-		local text = (invSlotID == 1) and ALL_INVENTORY_SLOTS or invSlots[invSlotID-1]
-		UIDropDownMenu_SetSelectedID(frame, invSlotID)
-		UIDropDownMenu_SetText(frame, text);
-	end
-	
-	invSlotID = nil
-	wipe(invSlots)
-	invSlots = nil
-	
-	-- Have Materials
-	if TradeSkillFrameAvailableFilterCheckButton then
-		TradeSkillFrameAvailableFilterCheckButton:SetChecked(haveMats or false)
-	end
-	TradeSkillOnlyShowMakeable(haveMats or false)
-	haveMats = nil
+
+	TradeSkillOnlyShowMakeable(haveMats)
+	TradeSkillOnlyShowSkillUps(hasSkillUp)
+	TradeSkillUpdateFilterBar()
 	
 	SelectTradeSkill(selectedTradeSkillIndex)
+	
+	wipe(subClasses)
+	wipe(invSlots)
+	
+	subClasses = nil
+	invSlots = nil
+	subClassID = nil
+	invSlotID = nil
+	haveMats = nil
+	hasSkillUp = nil
 	selectedTradeSkillIndex = nil
 end
 
@@ -404,10 +232,44 @@ local function RestoreHeaders()
 	wipe(headersState)
 end
 
+--[[
+How trade skills are scanned:
+=============================
+
+The addon registers TRADE_SKILL_SHOW, triggered when the trade skill pane is shown.
+In TRADE_SKILL_SHOW:
+- TRADE_SKILL_UPDATE is registered
+- TRADE_SKILL_CLOSE is registered
+- the updater frame is shown => enabling its "OnUpdate"
+
+After 0.5s in the OnUpdate, trade skills are scanned.
+
+In TRADE_SKILL_CLOSE
+- TRADE_SKILL_UPDATE is registered
+- the updater frame is hidden => disabling its "OnUpdate"
+
+The technique was borrowed from ARL, and adjusted here, as it was not working 100% as I wanted (some scans were missed).
+
+As of August 3rd 2014, it seems to work fine now.. 
+
+--]]
+
+local updater = CreateFrame("Frame", nil, UIParent)
+updater:Hide()
+
 local function ScanCooldowns()
+	-- Updated by RGriedel
 	local tradeskillName = GetTradeSkillLine()
 	local char = addon.ThisCharacter
 	local profession = char.Professions[tradeskillName]
+
+	local serverClock = time()
+	-- local locYear, locMonth, locDay, locHour, locMinute, locSecond = string.match(date("%Y %m %d %H %M %S"), "(%d*) (%d*) (%d*) (%d*) (%d*) (%d*)")
+	local hour, minute, second = string.match(date("%H %M %S"), "(%d*) (%d*) (%d*)")
+	local serverDate = floor ( serverClock / SECONDSPERDAY ) * SECONDSPERDAY
+	local serverTime = serverClock - serverDate
+	local localTime = second + ( minute + ( hour * 60 )) * 60
+	local timediff = localTime - serverTime
 	
 	wipe(profession.Cooldowns)
 	for i = 1, GetNumTradeSkills() do
@@ -416,7 +278,16 @@ local function ScanCooldowns()
 		if skillType ~= "header" then
 			local cooldown = GetTradeSkillCooldown(i)
 			if cooldown then
-				table.insert(profession.Cooldowns, skillName .. "|" .. cooldown .. "|" .. time())
+				local cooldownTime = localTime + cooldown
+				if math.abs (( cooldownTime < THREEOCLOCK and SECONDSPERDAY or 0 ) + cooldownTime - SECONDSPERDAY ) < 300 then
+					if serverTime > THREEOCLOCK then
+						table.insert(profession.Cooldowns, skillName .. "|" .. THREEOCLOCK .. "|" .. serverDate - timediff + SECONDSPERDAY)
+					else
+						table.insert(profession.Cooldowns, skillName .. "|" .. THREEOCLOCK .. "|" .. serverDate - timediff)
+					end
+				else
+					table.insert(profession.Cooldowns, skillName .. "|" .. cooldown .. "|" .. serverClock)
+				end
 			end
 		end
 	end
@@ -490,13 +361,13 @@ local function ScanRecipes()
 
 
 	local tradeskillName = GetTradeSkillLine()
-	if not tradeskillName or tradeskillName == "UNKNOWN" then return end		-- may happen after a patch, or under extreme lag, so do not save anything to the db !
+	if not tradeskillName or tradeskillName == "UNKNOWN" then return end	-- may happen after a patch, or under extreme lag, so do not save anything to the db !
 
 	local numTradeSkills = GetNumTradeSkills()
 	if not numTradeSkills or numTradeSkills == 0 then return end
-	
+		
 	local skillName, skillType = GetTradeSkillInfo(1)	-- test the first line
-	if skillType ~= "header" then return end				-- skip scan if first line is not a header.
+	if skillType ~= "header" and skillType ~= "subheader" then return end				-- skip scan if first line is not a header.
 	
 	local char = addon.ThisCharacter
 	local profession = char.Professions[tradeskillName]
@@ -511,11 +382,11 @@ local function ScanRecipes()
 	for i = 1, numTradeSkills do
 		skillName, skillType = GetTradeSkillInfo(i)
 		
-		if skillType == "header" then
+		if skillType == "header" or skillType == "subheader" then
 			crafts[i] = skillName or ""
 		else
 			link = GetTradeSkillRecipeLink(i)
-			craftInfo = tonumber(link:match("enchant:(%d+)"))		-- this actually extracts the spellID
+			local craftInfo = tonumber(link:match("enchant:(%d+)"))		-- this actually extracts the spellID
 			crafts[i] = SkillTypeToColor[skillType] + LShift(craftInfo, 2)
 			NumCrafts = NumCrafts + 1
 		end
@@ -523,7 +394,7 @@ local function ScanRecipes()
 	
 	profession.NumCrafts = NumCrafts
 	
-	addon:SendMessage("DATASTORE_RECIPES_SCANNED", sender, tradeskillName)
+	addon:SendMessage("DATASTORE_RECIPES_SCANNED", char, tradeskillName)
 end
 
 local function ScanTradeSkills()
@@ -543,23 +414,27 @@ local function ScanArcheologyItems()
 	
 	local names = {}
 	local spellName
-	local artifactName, completionCount
+	local numArtifactsByRace
 	
 	for raceIndex = 1, GetNumArchaeologyRaces() do
 		wipe(names)
 		
-		-- Create a table where ["Artifact Name"] = associated spell id 
-		-- this is necessary because the archaeology API does not return any other way to match artifacts with either spell ID or item ID
-		for index, artifact in pairs(addon.artifactDB[raceIndex]) do
-			spellName = GetSpellInfo(artifact.spellID)
-			names[spellName] = artifact.spellID
-		end
+		numArtifactsByRace = GetNumArtifactsByRace(raceIndex)
 		
-		for artifactIndex = 1, GetNumArtifactsByRace(raceIndex) do
-			artifactName, _, _, _, _,  _, _, _, completionCount = GetArtifactInfoByRace(raceIndex, artifactIndex)
+		if numArtifactsByRace > 0 and addon.artifactDB[raceIndex] then
+			-- Create a table where ["Artifact Name"] = associated spell id 
+			-- this is necessary because the archaeology API does not return any other way to match artifacts with either spell ID or item ID
+			for index, artifact in pairs(addon.artifactDB[raceIndex]) do
+				spellName = GetSpellInfo(artifact.spellID)
+				names[spellName] = artifact.spellID
+			end
+			
+			for artifactIndex = 1, GetNumArtifactsByRace(raceIndex) do
+				local artifactName, _, _, _, _,  _, _, _, completionCount = GetArtifactInfoByRace(raceIndex, artifactIndex)
 
-			if names[artifactName] and completionCount > 0 then
-				items[names[artifactName]] = true
+				if names[artifactName] and completionCount > 0 then
+					items[names[artifactName]] = true
+				end
 			end
 		end
 	end
@@ -571,24 +446,33 @@ local function OnPlayerAlive()
 end
 
 local function OnTradeSkillClose()
+	updater:Hide()
+	
 	addon:UnregisterEvent("TRADE_SKILL_CLOSE")
 	addon:UnregisterEvent("TRADE_SKILL_UPDATE")
 	addon.isOpen = nil
 end
 
-local function OnTradeSkillShow()
-	if IsTradeSkillLinked() or IsTradeSkillGuild() then return end
-	
-	addon.isOpen = true
-	addon:RegisterEvent("TRADE_SKILL_CLOSE", OnTradeSkillClose)
-	ScanTradeSkills()
-end
+local updateCooldowns
 
 local function OnTradeSkillUpdate()
-	-- The hook in DoTradeSkill will register this event so that we only update skills once.
-	-- unregister it before calling the update, or the event will be called recursively (due to expand/collapse)
-	addon:UnregisterEvent("TRADE_SKILL_UPDATE")
-	ScanCooldowns()	-- only cooldowns need to be refreshed
+	-- The hook in DoTradeSkill will set this flag so that we only update skills once.
+	if updateCooldowns then
+		ScanCooldowns()	-- only cooldowns need to be refreshed
+		updateCooldowns = nil
+	end
+end
+
+local function OnTradeSkillShow()
+	if IsTradeSkillLinked() or IsTradeSkillGuild() or IsNPCCrafting() then return end
+	
+	addon:RegisterEvent("TRADE_SKILL_CLOSE", OnTradeSkillClose)
+	-- we are not interested in this event if the TS pane is not shown.
+	addon:RegisterEvent("TRADE_SKILL_UPDATE", OnTradeSkillUpdate)	
+	
+	-- Show the updater to trigger its OnUpdate
+	updater:Show()							
+	addon.isOpen = true
 end
 
 local function OnArtifactHistoryReady()
@@ -598,6 +482,23 @@ end
 local function OnArtifactComplete()
 	ScanArcheologyItems()
 end
+
+local lastUpdate = 0
+
+updater:SetScript("OnUpdate", function(self, elapsed)
+	lastUpdate = lastUpdate + elapsed
+
+	if lastUpdate >= 0.5 then
+		local profession = GetTradeSkillLine()
+
+		if profession ~= "UNKNOWN" then	
+			ScanTradeSkills()
+		end
+		self:Hide()
+		lastUpdate = 0
+	end
+end)
+
 
 -- this turns
 --	"Your skill in %s has increased to %d."
@@ -664,9 +565,9 @@ local function _GetProfessionInfo(profession)
 	-- accepts either a pointer (type == table)to the profession table, as returned by addon:GetProfession()
 	-- or a link (type == string)
 	
-	local rank, maxRank, spellID
+	local rank, maxRank, spellID, _
 	local link
-	
+
 	if type(profession) == "table" then
 		rank = profession.Rank
 		maxRank = profession.MaxRank 
@@ -676,7 +577,8 @@ local function _GetProfessionInfo(profession)
 	end
 	
 	if link then
-		spellID, rank, maxRank = link:match("trade:(%d+):(%d+):(%d+):")
+		-- _, spellID, rank, maxRank = link:match("trade:(%w+):(%d+):(%d+):(%d+):")
+		_, spellID = link:match("trade:(%w+):(%d+)")		-- Fix 5.4, rank no longer in the profession link
 	end
 	
 	return tonumber(rank) or 0, tonumber(maxRank) or 0, tonumber(spellID)
@@ -723,55 +625,6 @@ local function _ClearExpiredCooldowns(profession)
 			table.remove(profession.Cooldowns, i)
 		end
 	end
-end
-
-local function _GetCraftInfo(spellID)
-	-- get the id of the item that can be crafted by this spellID
-	local itemID = PT:ItemInSet("-"..spellID, "Tradeskill.RecipeLinks")
-	local reagents
-	
-	if itemID then
-		itemID = tonumber(itemID)
-
-		-- ex: itemID 10046 is made with reagents : "2996x2;2318x1;2320x1"
-		reagents = PT:ItemInSet(itemID, "TradeskillResultMats.Forward")
-
-		if itemID == -spellID then		-- enchants that do not yield  an item will return this, ex: enchant 7420 will return itemID -7420
-			itemID = nil
-		end
-	end
-	
-	return itemID, reagents
-end
-
-local function _GetCraftLevels(spellID)
-	-- get the id of the item that can be crafted by this spellID
-	local itemID = PT:ItemInSet("-"..spellID, "Tradeskill.RecipeLinks")
-	
-	if itemID then
-		itemID = tonumber(itemID)
-
-		-- ex: itemID 10046 : levels = "20/50/67/85", the item turns yellow at 50, green at 67, grey at 85
-		local levels = PT:ItemInSet(itemID, "TradeskillLevels")
-
-		if levels then
-			local orange, yellow, green, grey = strsplit("/", levels)
-			return tonumber(orange), tonumber(yellow), tonumber(green), tonumber(grey)
-		end
-	end
-end
-
-local function _GetItemTradeSkillLevel(itemID, profession)
-	-- variant: use item level for more accurate results
-	
-	-- profession should look like : "TradeskillLevels.Cooking",
-	-- refer to LibPeriodicTable-3.1-TradeskillLevels.lua
-	local PT = LibStub("LibPeriodicTable-3.1")
-	
-	local levels = PT:ItemInSet(itemID, profession)
-	if not levels then return end
-	
-	return strsplit("/", levels)
 end
 
 local function _GetNumRecipesByColor(profession)
@@ -826,16 +679,18 @@ local function _GetProfession1(character)
 	local profession = _GetProfession(character, character.Prof1)
 	if profession then
 		local rank, maxRank, spellID = _GetProfessionInfo(profession)
-		return rank, maxRank, spellID, character.Prof1
+		return rank or 0, maxRank or 0, spellID, character.Prof1
 	end
+	return 0, 0, nil, nil
 end
 
 local function _GetProfession2(character)
 	local profession = _GetProfession(character, character.Prof2)
 	if profession then
 		local rank, maxRank, spellID = _GetProfessionInfo(profession)
-		return rank, maxRank, spellID, character.Prof2
+		return rank or 0, maxRank or 0, spellID, character.Prof2
 	end
+	return 0, 0, nil, nil
 end
 
 local function _GetFirstAidRank(character)
@@ -891,8 +746,6 @@ local PublicMethods = {
 	GetCraftCooldownInfo = _GetCraftCooldownInfo,
 	GetNumActiveCooldowns = _GetNumActiveCooldowns,
 	ClearExpiredCooldowns = _ClearExpiredCooldowns,
-	GetCraftInfo = _GetCraftInfo,
-	GetCraftLevels = _GetCraftLevels,
 	GetNumRecipesByColor = _GetNumRecipesByColor,
 	IsCraftKnown = _IsCraftKnown,
 	GetGuildCrafters = _GetGuildCrafters,
@@ -904,46 +757,16 @@ local PublicMethods = {
 	GetCookingRank = _GetCookingRank,
 	GetFishingRank = _GetFishingRank,
 	GetArchaeologyRank = _GetArchaeologyRank,
-	GetItemTradeSkillLevel = _GetItemTradeSkillLevel,
 	GetArchaeologyRaceArtifacts = _GetArchaeologyRaceArtifacts,
 	GetRaceNumArtifacts = _GetRaceNumArtifacts,
 	GetArtifactInfo = _GetArtifactInfo,
 	IsArtifactKnown = _IsArtifactKnown,
 }
 
--- *** Guild Comm ***
--- local function OnGuildAltsReceived(self, sender, alts)
-	-- if sender == UnitName("player") then				-- if I receive my own list of alts in the same guild, same realm, same account..
-		-- GuildBroadcast(MSG_SEND_LOGIN, GetVersion())
-		-- addon:ScheduleTimer(SendAllProfessions, 5, alts)	-- broadcast my crafts to the guild 5 seconds later, to decrease the load at startup
-	-- end
--- end
-
--- local GuildCommCallbacks = {
-	-- [MSG_SEND_LOGIN] = function(sender, version)
-			-- local player = UnitName("player")
-			-- if sender ~= player then						-- don't send back to self
-				-- GuildWhisper(sender, MSG_LOGIN_REPLY, GetVersion())
-				-- local alts = DataStore:GetGuildMemberAlts(player)			-- get my own alts
-				-- if alts then
-					-- SendAllProfessions(alts, sender)	-- when another player sends me his login, reply with my own crafts
-				-- end
-			-- end
-			-- SaveVersion(sender, version)
-		-- end,
-	-- [MSG_LOGIN_REPLY] = function(sender, version)
-			-- SaveVersion(sender, version)
-		-- end,
-	-- [MSG_SEND_PROFESSION] = function(sender, alt, data, index)
-			-- SaveProfession(sender, alt, data, index)
-		-- end,
--- }
-
 function addon:OnInitialize()
 	addon.db = LibStub("AceDB-3.0"):New(addonName .. "DB", AddonDB_Defaults)
 
 	DataStore:RegisterModule(addonName, addon, PublicMethods)
-	-- DataStore:SetGuildCommCallbacks(commPrefix, GuildCommCallbacks)
 	DataStore:SetCharacterBasedMethod("GetProfession")
 	DataStore:SetCharacterBasedMethod("GetProfessions")
 	
@@ -957,9 +780,6 @@ function addon:OnInitialize()
 	
 	DataStore:SetGuildBasedMethod("GetGuildCrafters")
 	DataStore:SetGuildBasedMethod("GetGuildMemberProfession")
-	
-	-- addon:RegisterMessage("DATASTORE_GUILD_ALTS_RECEIVED", OnGuildAltsReceived)
-	-- addon:RegisterComm(commPrefix, DataStore:GetGuildCommHandler())
 end
 
 function addon:OnEnable()
@@ -967,7 +787,7 @@ function addon:OnEnable()
 	addon:RegisterEvent("TRADE_SKILL_SHOW", OnTradeSkillShow)
 	addon:RegisterEvent("CHAT_MSG_SKILL", OnChatMsgSkill)
 	addon:RegisterEvent("CHAT_MSG_SYSTEM", OnChatMsgSystem)
-	
+		
 	local _, _, arch = GetProfessions()
 
 	if arch then
@@ -985,25 +805,8 @@ function addon:OnDisable()
 	addon:UnregisterEvent("PLAYER_ALIVE")
 	addon:UnregisterEvent("TRADE_SKILL_SHOW")
 	addon:UnregisterEvent("CHAT_MSG_SKILL")
+	addon:UnregisterEvent("CHAT_MSG_SYSTEM")
 end
-
-function addon:GetSource(searchedID)
-	local PT = LibStub("LibPeriodicTable-3.1")
-	
-	-- Returns "Profession, level"		ex: "Alchemy", "180"
-	local level, data = PT:ItemInSet(searchedID, "Tradeskill.Crafted")
-	if level and data then
-		local _, _, profession = strsplit(".", data)		-- ex: "Tradeskill.Crafted.Inscription"
-		local localizedProfession
-		if ProfessionSpellID[profession] then
-			localizedProfession = GetSpellInfo(ProfessionSpellID[profession])
-		end
-			
-		return localizedProfession or profession, level
-	end
-end
-
-
 
 function addon:IsTradeSkillWindowOpen()
 	-- note : maybe there's a function in the WoW API to test this, but I did not find it :(
@@ -1011,11 +814,6 @@ function addon:IsTradeSkillWindowOpen()
 end
 
 -- *** Hooks ***
--- todo : change the hooks, do them the Ace way
-local Orig_DoTradeSkill = DoTradeSkill
-
-function DoTradeSkill(index, repeatCount, ...)
-	-- this hook is necessary to get cooldown information after a craft
-	Orig_DoTradeSkill(index, repeatCount, ...)
-	addon:RegisterEvent("TRADE_SKILL_UPDATE", OnTradeSkillUpdate)
-end
+hooksecurefunc("DoTradeSkill", function(index, repeatCount, ...)
+	updateCooldowns = true
+end)

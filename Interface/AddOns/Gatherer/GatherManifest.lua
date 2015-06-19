@@ -1,7 +1,7 @@
 ﻿--[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherManifest.lua 754 2008-10-14 04:43:39Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherManifest.lua 980 2012-09-04 15:59:04Z Esamynn $
 
 	Gatherer Manifest
 	Keep track of the revision numbers for various auctioneer files
@@ -98,9 +98,10 @@ function manifest.Validate()
 		end
 	end
 	if (not matches) then
-		manifest.ShowMessage("|cffff1111Warning:|r Your Gatherer installation appears to have mismatching file versions.\n\nPlease make sure you delete the old:\n  |cffffaa11Interface\\AddOns\\Gatherer|r\ndirectory, reinstall a fresh copy from:\n  |cff44ff11http://gathereraddon.com/dl|r\nand restart WoW completely before reporting any bugs.\n\nThanks,\n  The Gatherer Dev Team.")
+		Gatherer.Locale.SECTION_HIGHLIGHT_CODE = "|cffff1111"
+		manifest.ShowMessage(Gatherer.Locale.Tr("MANIFEST_INVALID_VERSIONS_WARNING", "|cffffaa11Interface\\AddOns\\Gatherer|r", "|cff44ff11http://gathereraddon.com/dl|r"))
 	end
 	return true
 end
 
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherManifest.lua $", "$Rev: 754 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherManifest.lua $", "$Rev: 980 $")

@@ -1,3 +1,5 @@
+-- code updated by ywfn, to work with the pvp and battleground changes
+
 local ex = Examiner;
 
 -- Module
@@ -9,7 +11,6 @@ mod.canCache = true;
 
 -- Variables
 local labels = {};
-local arena = {};
 
 -- Data Variables -- Honor & Arena Data
 local hd, ad = {}, {};
@@ -20,7 +21,7 @@ local hd, ad = {}, {};
 
 -- OnInitialize
 function mod:OnInitialize()
-	for i = 1, MAX_ARENA_TEAMS do
+	for i = 1, MAX_ARENA_TEAMS+1 do
 		ad[i] = {};
 	end
 end
@@ -52,7 +53,7 @@ function mod:OnCacheLoaded(entry,unit)
 		end
 		self:UpdateHonor();
 		-- Arena
-		for i = 1, MAX_ARENA_TEAMS do
+		for i = 1, MAX_ARENA_TEAMS+1 do
 			if (entry["Arena"..i]) then
 				local at = ad[i];
 				for name, value in next, entry["Arena"..i] do
@@ -68,8 +69,8 @@ end
 function mod:OnCache(entry)
 	if (self:CanCache()) and (next(hd)) then
 		entry.Honor = CopyTable(hd);
-	 	for i = 1, MAX_ARENA_TEAMS do
-	 		if (ad[i].teamName) then
+	 	for i = 1, MAX_ARENA_TEAMS+1 do
+	 		if (ad[i]) then
 		 		entry["Arena"..i] = CopyTable(ad[i]);
 	 		end
 		end
@@ -88,51 +89,17 @@ function mod:OnClearInspect()
 	end
 	labels[9]:SetTextColor(1,1,0);
 	-- Hide Arena Teams
-	for i = 1, MAX_ARENA_TEAMS do
+	for i = 1, MAX_ARENA_TEAMS+1 do
 		wipe(ad[i]);
-		arena[i]:Hide();
 	end
-end
-
---------------------------------------------------------------------------------------------------------
---                                       Arena Point Calculator                                       --
---------------------------------------------------------------------------------------------------------
-
--- http://www.arenajunkies.com/showthread.php?t=222736
--- (-6e-13*1500)^5+(7e-9*1500)^4-(4e-5*1500)^3+(0.0863*1500)^2-98.66*1500+43743
-
--- Calculate Arena Points -- Updated Formula for 2.2 -- Now always uses 1500 rating if rating is less than that
-local function CalculateArenaPoints(teamRating,teamSize)
-	local multiplier = (teamSize == 5 and 1) or (teamSize == 3 and 0.88) or (teamSize == 2 and 0.76)
-	if (teamRating <= 1500) then
-		return multiplier * (0.22 * 1500 + 14);
-	else
-		return multiplier * (1511.26 / (1 + 1639.28 * 2.71828 ^ (-0.00412 * teamRating)));
-	end
-end
-
--- Slash Command -- Arena Calculator
-ex.slashHelp[#ex.slashHelp + 1] = " |2arena <rating>|r = Arena Point Calculator";
-ex.slashFuncs["arena"] = function(cmd)
-	cmd = tonumber(cmd);
-	if (type(cmd) == "number") then
-		AzMsg(format("|2Arena Point Calculation|r |1%d|r Rating |2=|r 2v2: |1%.1f|r, 3v3: |1%.1f|r, 5v5: |1%.1f|r.",cmd,CalculateArenaPoints(cmd,2),CalculateArenaPoints(cmd,3),CalculateArenaPoints(cmd,5)));
+	for i = 13, 24 do
+		labels[i]:SetText("---");
 	end
 end
 
 --------------------------------------------------------------------------------------------------------
 --                                             PvP Stuff                                              --
 --------------------------------------------------------------------------------------------------------
-
--- Format Numbers
-local function FormatNumbers(self,value,max)
-	local color = (value == 0 and "|cffff8080" or "|cffffff80");
-	if (max == 0) then
-		self:SetFormattedText("%s0|r (%1$s0%%|r)",color);
-	else
-		self:SetFormattedText("%s%d|r (%s%.1f%%|r)",color,value,color,value / max * 100);
-	end
-end
 
 -- Load Honor Normal
 function mod:LoadHonorNormal()
@@ -155,7 +122,8 @@ function mod:UpdateHonor()
 	if (hd.lifetimeRank ~= 0) then
 		self.rankIcon.texture:SetTexture("Interface\\PvPRankBadges\\PvPRank"..format("%.2d",hd.lifetimeRank - 4));
 		self.rankIcon.texture:SetTexCoord(0,1,0,1);
-		self.rankIcon.tip = format("%s (Rank %d)",GetPVPRankInfo(hd.lifetimeRank,ex.unit),(hd.lifetimeRank - 4));
+		--self.rankIcon.tip = format("%s (Rank %d)",GetPVPRankInfo(hd.lifetimeRank,ex.unit),(hd.lifetimeRank - 4));
+		self.rankIcon.tip = format("Rank %d",hd.lifetimeRank - 4);	-- 5.4: GetPVPRankInfo() func removed, can no longer get the rank name, not sure if lifetimeRank still returns valid?
 		self.rankIcon:Show();
 	end
 	-- Show Kills/Honor
@@ -170,47 +138,20 @@ end
 
 -- Load Arena Teams Normal
 function mod:LoadArenaTeamsNormal()
-	for i = 1, MAX_ARENA_TEAMS do
-		local at = ad[i];
-		if (ex.isSelf) then
-			at.teamName, at.teamSize, at.teamRating, at.teamPlayed, at.teamWins, at.seasonTeamPlayed, at.seasonTeamWins, at.playerPlayed, at.seasonPlayerPlayed, at.teamRank, at.playerRating, at.backR, at.backG, at.backB, at.emblem, at.emblemR, at.emblemG, at.emblemB, at.border, at.borderR, at.borderG, at.borderB = GetArenaTeam(i);
-			at.teamPlayed, at.teamWins, at.playerPlayed = at.seasonTeamPlayed, at.seasonTeamWins, at.seasonPlayerPlayed;
-		else
-			at.teamName, at.teamSize, at.teamRating, at.teamPlayed, at.teamWins, at.playerPlayed, at.playerRating, at.backR, at.backG, at.backB, at.emblem, at.emblemR, at.emblemG, at.emblemB, at.border, at.borderR, at.borderG, at.borderB = GetInspectArenaTeamData(i);
-		end
+	for i = 1, MAX_ARENA_TEAMS+1 do
+		local arenaRating, seasonPlayed, seasonWon, weeklyPlayed, weeklyWon = GetInspectArenaData(i);
+		ad[i] = { arenaRating, seasonWon, seasonPlayed };
 	end
 	self:ArenaTeamUpdate();
 end
 
 -- Arena Team Update
 function mod:ArenaTeamUpdate()
-	for i = 1, MAX_ARENA_TEAMS do
+	for i = 1, MAX_ARENA_TEAMS+1 do
 		local at = ad[i];
-		if (at.teamName) then
-			local index = (at.teamSize == 2 and 1) or (at.teamSize == 3 and 2) or (at.teamSize == 5 and 3);
-			local f = arena[index];
-			-- General
-			f.name:SetText(at.teamName);
-			f.rating:SetText(at.teamRating);
-			-- Games/Played
-			f.details[1].right:SetFormattedText("|cffffff80%d",at.teamPlayed);
-			FormatNumbers(f.details[2].right,at.playerPlayed,at.teamPlayed);
-			-- Wins/Loss
-			FormatNumbers(f.details[3].right,at.teamWins,at.teamPlayed);
-			FormatNumbers(f.details[4].right,at.teamPlayed - at.teamWins,at.teamPlayed);
-			-- Estimated Points & Personal Rating
-			f.details[5].right:SetFormattedText("|cffffff80%.1f",CalculateArenaPoints(at.teamRating,at.teamSize));
-			f.details[6].right:SetFormattedText("|cffffff80%s",tostring(at.playerRating));
-			-- Banner
-			f.banner:SetTexture("Interface\\PVPFrame\\PVP-Banner-"..at.teamSize);
-			f.banner:SetVertexColor(at.backR,at.backG,at.backB);
-			f.emblem:SetVertexColor(at.emblemR,at.emblemG,at.emblemB);
-			f.border:SetVertexColor(at.borderR,at.borderG,at.borderB);
-			f.border:SetTexture(at.border ~= -1 and "Interface\\PVPFrame\\PVP-Banner-"..at.teamSize.."-Border-"..at.border or nil);
-			f.emblem:SetTexture(at.emblem ~= -1 and "Interface\\PVPFrame\\Icons\\PVP-Banner-Emblem-"..at.emblem or nil);
-			-- Show Frame
-			f:Show();
-		end
+		labels[13+((i-1)*3)]:SetText(at[1]);
+		labels[14+((i-1)*3)]:SetText(at[2]);
+		labels[15+((i-1)*3)]:SetText(at[3]);
 	end
 end
 
@@ -265,80 +206,52 @@ t:SetJustifyH("LEFT");
 t:SetText("Honor Points");
 t:SetTextColor(0.5,0.75,1);
 
--- Detail Frame for Arena Frames
-local function MakeDetailFrame(parent)
-	local f = CreateFrame("Frame",nil,parent);
-	f:SetWidth(118);
-	f:SetHeight(12);
+-- Arena Labels
+for i = 1, 15 do
+	local l = mod.page:CreateFontString(nil,"ARTWORK","GameFontHighlightSmall");
+	l:SetWidth(70);
 
-	f.left = f:CreateFontString(nil,"ARTWORK","GameFontHighlightSmall");
-	f.left:SetPoint("LEFT");
-
-	f.right = f:CreateFontString(nil,"ARTWORK","GameFontHighlightSmall");
-	f.right:SetPoint("RIGHT");
-	f.right:SetTextColor(0.5,0.75,1);
-
-	return f;
-end
-
--- Arena
-local backdrop = { bgFile = "Interface\\Tooltips\\UI-Tooltip-Background", edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 4, right = 4, top = 4, bottom = 4 } };
-local labelNames = { "Games", "Played", "Wins", "Losses", "Calculated Points", "PR" };
-for i = 1, MAX_ARENA_TEAMS do
-	local a = CreateFrame("Frame",nil,mod.page);
-	a:SetWidth(304);
-	a:SetHeight(82);
-	a:SetBackdrop(backdrop);
-	a:SetBackdropColor(0.1,0.22,0.35,1);
-	a:SetBackdropBorderColor(0.7,0.7,0.8,1);
-
-	a.banner = a:CreateTexture(nil,"BORDER");
-	a.banner:SetPoint("TOPLEFT",6,-4);
-	a.banner:SetWidth(45);
-	a.banner:SetHeight(90);
-	a.border = a:CreateTexture(nil,"ARTWORK");
-	a.border:SetPoint("CENTER",a.banner);
-	a.border:SetWidth(45);
-	a.border:SetHeight(90);
-	a.emblem = a:CreateTexture(nil,"OVERLAY");
-	a.emblem:SetPoint("CENTER",a.border,-5,17);
-	a.emblem:SetWidth(24);
-	a.emblem:SetHeight(24);
-
-	a.name = a:CreateFontString(nil,"ARTWORK","GameFontHighlight");
-	a.name:SetPoint("TOPLEFT",50,-8)
-	a.name:SetTextColor(0.5,0.75,1);
-
-	a.rating = a:CreateFontString(nil,"ARTWORK","GameFontHighlight");
-	a.rating:SetPoint("TOPRIGHT",-8,-8)
-	a.rating:SetTextColor(0.5,0.75,1);
-
-	a.size = a:CreateFontString(nil,"ARTWORK","GameFontHighlightSmall");
-	a.size:SetPoint("BOTTOMRIGHT",-8,8)
-	a.size:SetFormattedText("%dv%1$d",floor(i + i / 2 + 0.5));
-
-	a.details = {};
-	for index, label in ipairs(labelNames) do
-		local d = MakeDetailFrame(a);
-		d.left:SetText(label);
-		d.id = index;
-
-		if (index % 2 == 1) then
-			d:SetPoint("TOPLEFT",50,-29 - (index - 1) / 2 * 12 - (index == 5 and 6 or 0));
-		else
-			d:SetPoint("LEFT",a.details[index - 1],"RIGHT",8,0);
-		end
-
-		a.details[#a.details + 1] = d;
-	end
-	a.details[#a.details - 1]:SetWidth(130);
-	a.details[#a.details]:SetWidth(50);
-
-	if (i == 1) then
-		a:SetPoint("TOPLEFT",8,-75);
+	if (i <= 3) then
+		l:SetText(i == 1 and "Rating" or i == 2 and "Won" or "Played");
+		l:SetTextColor(0.5,0.75,1);
 	else
-		a:SetPoint("TOP",arena[i - 1],"BOTTOM");
+		l:SetTextColor(1,1,0);
 	end
 
-	arena[i] = a;
+	if ((i - 1) % 3 == 0) then
+		l:SetPoint("TOP",-28,-36 - (i - 1) / 3 * 12 - 42);
+	else
+		l:SetPoint("LEFT",labels[i + 9 - 1],"RIGHT");
+	end
+
+	labels[i+9] = l;
 end
+
+-- Arena Label Side Headers
+local t = mod.page:CreateFontString(nil,"ARTWORK","GameFontHighlightSmall");
+t:SetPoint("RIGHT",labels[13],"LEFT");
+t:SetWidth(70);
+t:SetJustifyH("LEFT");
+t:SetText("2v2");
+t:SetTextColor(0.5,0.75,1);
+
+t = mod.page:CreateFontString(nil,"ARTWORK","GameFontHighlightSmall");
+t:SetPoint("RIGHT",labels[16],"LEFT");
+t:SetWidth(70);
+t:SetJustifyH("LEFT");
+t:SetText("3v3");
+t:SetTextColor(0.5,0.75,1);
+
+t = mod.page:CreateFontString(nil,"ARTWORK","GameFontHighlightSmall");
+t:SetPoint("RIGHT",labels[19],"LEFT");
+t:SetWidth(70);
+t:SetJustifyH("LEFT");
+t:SetText("5v5");
+t:SetTextColor(0.5,0.75,1);
+
+t = mod.page:CreateFontString(nil,"ARTWORK","GameFontHighlightSmall");
+t:SetPoint("RIGHT",labels[22],"LEFT");
+t:SetWidth(70);
+t:SetJustifyH("LEFT");
+t:SetText("RBGs");
+t:SetTextColor(0.5,0.75,1);

@@ -49,7 +49,7 @@ local function BoolCol(bool) return (bool and "|cff80ff80" or "|cffff8080"); end
 -- Set Texture and Text
 local function SetIconTextureAndText(self,texture,count)
 	if (texture) then
-		self.ttIcon:SetTexture(texture == "" and "Interface\\Icons\\INV_Misc_QuestionMark" or texture);
+		self.ttIcon:SetTexture(texture ~= "" and texture or "Interface\\Icons\\INV_Misc_QuestionMark");
 		self.ttCount:SetText(count);
 		self.ttIcon:Show();
 	else
@@ -144,7 +144,7 @@ local function SetHyperlink_Hook(self,refString)
 		-- Call Tip Type Func
 		if (TipTypeFuncs[linkToken]) and (self:NumLines() > 0) then
 			tipDataAdded[self] = "hyperlink";
-			TipTypeFuncs[linkToken](self,(":"):split(rawLink));
+			TipTypeFuncs[linkToken](self,rawLink,(":"):split(rawLink));
 		end
 	end
 end
@@ -154,7 +154,7 @@ local function SetUnitAura_Hook(self,unit,index,filter)
 	if (cfg.if_enable) and (cfg.if_showAuraCaster) then
 		local _, _, _, _, _, _, _, casterUnit = UnitAura(unit,index,filter);
 		if (UnitExists(casterUnit)) then
-			self:AddLine(format("<Applied by %s>",UnitName(casterUnit) or UNKNOWN),unpack(cfg.if_infoColor));
+			self:AddLine(format("<Applied by %s>",UnitName(casterUnit) or UNKNOWNOBJECT),unpack(cfg.if_infoColor));
 			self:Show();
 		end
 	end
@@ -168,7 +168,7 @@ local function OnTooltipSetItem(self,...)
 			local id = link:match("item:(%d+)");
 			if (id) then
 				tipDataAdded[self] = "item";
-				TipTypeFuncs.item(self,"item",id);
+				TipTypeFuncs.item(self,link,"item",id);
 			end
 		end
 	end
@@ -180,7 +180,7 @@ local function OnTooltipSetSpell(self,...)
 		local _, _, id = self:GetSpell();
 		if (id) then
 			tipDataAdded[self] = "spell";
-			TipTypeFuncs.spell(self,"spell",id);
+			TipTypeFuncs.spell(self,nil,"spell",id);
 		end
 	end
 end
@@ -247,7 +247,7 @@ end
 --------------------------------------------------------------------------------------------------------
 
 -- instancelock
-function TipTypeFuncs:instancelock(linkToken,guid,mapId,difficulty,encounterBits)
+function TipTypeFuncs:instancelock(link,linkToken,guid,mapId,difficulty,encounterBits)
 	--AzDump(guid,mapId,difficulty,encounterBits)
   	-- TipType Border Color -- Disable these 3 lines to color border. Az: Work into options?
 --	if (cfg.if_itemQualityBorder) then
@@ -256,8 +256,9 @@ function TipTypeFuncs:instancelock(linkToken,guid,mapId,difficulty,encounterBits
 end
 
 -- item
-function TipTypeFuncs:item(linkToken,id)
-	local _, _, itemRarity, itemLevel, _, _, _, itemStackCount, _, itemTexture = GetItemInfo(id);
+function TipTypeFuncs:item(link,linkToken,id)
+	local _, _, itemRarity, itemLevel, _, _, _, itemStackCount, _, itemTexture = GetItemInfo(link);
+	itemLevel = GetUpgradedItemLevelFromItemLink(link);
 	-- Icon
 	if (self.SetIconTextureAndText) and (not cfg.if_smartIcons or SmartIconEvaluation(self,linkToken)) then
 		local count = (itemStackCount and itemStackCount > 1 and (itemStackCount == 0x7FFFFFFF and "#" or itemStackCount) or "");
@@ -282,7 +283,7 @@ function TipTypeFuncs:item(linkToken,id)
 end
 
 -- spell
-function TipTypeFuncs:spell(linkToken,id)
+function TipTypeFuncs:spell(link,linkToken,id)
 	local name, rank, icon = GetSpellInfo(id);
 	-- Icon
 	if (self.SetIconTextureAndText) and (not cfg.if_smartIcons or SmartIconEvaluation(self,linkToken)) then
@@ -300,7 +301,7 @@ function TipTypeFuncs:spell(linkToken,id)
 end
 
 -- quest
-function TipTypeFuncs:quest(linkToken,id,level)
+function TipTypeFuncs:quest(link,linkToken,id,level)
 	if (cfg.if_showQuestLevelAndId) then
 		self:AddLine(format("QuestLevel: %d, QuestID: %d",level or 0,id or 0),unpack(cfg.if_infoColor));
 		self:Show();
@@ -312,9 +313,11 @@ function TipTypeFuncs:quest(linkToken,id,level)
 end
 
 -- currency -- Thanks to Vladinator for adding this!
-function TipTypeFuncs:currency(linkToken,id)
+function TipTypeFuncs:currency(link,linkToken,id)
 	local _, currencyCount, currencyTexture = GetCurrencyInfo(id);
-	self:SetIconTextureAndText("Interface\\Icons\\"..currencyTexture, currencyCount);
+	if (self.SetIconTextureAndText) then
+		self:SetIconTextureAndText(currencyTexture,currencyCount);	-- As of 5.2 GetCurrencyInfo() now returns full texture path. Previously you had to prefix it with "Interface\\Icons\\"
+	end
 	-- ID
 	if (cfg.if_showCurrencyId) then
 		self:AddLine(format("CurrencyID: %d",id),unpack(cfg.if_infoColor));
@@ -327,7 +330,7 @@ function TipTypeFuncs:currency(linkToken,id)
 end
 
 -- achievement
-function TipTypeFuncs:achievement(linkToken,id,guid,completed,month,day,year,unknown1,unknown2,unknown3,unknown4)
+function TipTypeFuncs:achievement(link,linkToken,id,guid,completed,month,day,year,unknown1,unknown2,unknown3,unknown4)
 	if (cfg.if_modifyAchievementTips) then
 		completed = (tonumber(completed) == 1);
 		local tipName = self:GetName();
@@ -385,10 +388,18 @@ function TipTypeFuncs:achievement(linkToken,id,guid,completed,month,day,year,unk
 					r2, g2, b2 = unpack(criteriaList[i + 1].done and COLOR_COMPLETE or COLOR_INCOMPLETE);
 				end
 				if (not isPlayer) then
-					myDone1 = select(3,GetAchievementCriteriaInfo(id,i));
-					myDone2 = select(3,GetAchievementCriteriaInfo(id,i + 1));
+					local success, _, _, completed = pcall(GetAchievementCriteriaInfo,id,i);
+					myDone1 = (success and completed);
+					--myDone1 = select(3,GetAchievementCriteriaInfo(id,i));
+					if (i + 1 <= #criteriaList) then
+						local success, _, _, completed = pcall(GetAchievementCriteriaInfo,id,i + 1);
+						myDone2 = (success and completed); 
+						--myDone2 = select(3,GetAchievementCriteriaInfo(id,i + 1));
+					end
 				end
-				self:AddDoubleLine((isPlayer and "" or BoolCol(myDone1).."*|r")..criteriaList[i].label,criteriaList[i + 1] and criteriaList[i + 1].label..(isPlayer and "" or BoolCol(myDone2).."*"),r1,g1,b1,r2,g2,b2);
+				myDone1 = (isPlayer and "" or BoolCol(myDone1).."*|r")..criteriaList[i].label;
+				myDone2 = criteriaList[i + 1] and criteriaList[i + 1].label..(isPlayer and "" or BoolCol(myDone2).."*");
+				self:AddDoubleLine(myDone1,myDone2,r1,g1,b1,r2,g2,b2);
 			end
 		end
 		-- ID + Category

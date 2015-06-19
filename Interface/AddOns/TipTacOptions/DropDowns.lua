@@ -74,7 +74,7 @@ end
 --------------------------------------------------------------------------------------------------------
 
 local layout_presets = {
-	-- TipTac Layout
+	-- TipTac Layout (New)
 	["TipTac New Style"] = {
 		showTarget = "last",
 		targetYouText = "<<YOU>>",
@@ -102,6 +102,8 @@ local layout_presets = {
 		barFontFlags = "OUTLINE",
 		barHeight = 6,
 
+		classification_minus = "-%s ",
+		classification_trivial = "~%s ",
 		classification_normal = "%s ",
 		classification_elite = "+%s ",
 		classification_worldboss = "%s|r (Boss) ",
@@ -121,7 +123,7 @@ local layout_presets = {
 		manaBar = false,
 		powerBar = false,
 	},
-	-- TipTac Layout
+	-- TipTac Layout (Old)
 	["TipTac Old Style"] = {
 		showTarget = "second",
 		targetYouText = "<<YOU>>",
@@ -148,6 +150,8 @@ local layout_presets = {
 		barFontFlags = "OUTLINE",
 		barHeight = 6,
 
+		classification_minus = "-%s ",
+		classification_trivial = "~%s ",
 		classification_normal = "%s ",
 		classification_elite = "+%s ",
 		classification_worldboss = "%s|r (Boss) ",
@@ -188,6 +192,8 @@ local layout_presets = {
 		barFontFlags = "OUTLINE",
 		barHeight = 6,
 
+		classification_minus = "-%s ",
+		classification_trivial = "~%s ",
 		classification_normal = "%s ",
 		classification_elite = "+%s ",
 		classification_worldboss = "%s|r (Boss) ",
@@ -216,6 +222,8 @@ local layout_presets = {
 		colRace = "|cffddeeaa",
 		colLevel = "|cffffcc00",
 
+		classification_minus = "Level -%s",
+		classification_trivial = "Level ~%s",
 		classification_normal = "Level %s",
 		classification_elite = "Level %s|cffffcc00 Elite",
 		classification_worldboss = "Level %s|cffff0000 Boss",
@@ -269,7 +277,8 @@ local layout_presets = {
 		fontFlags = "",
 		fontSizeDelta = 2,
 
-		classification_trivial = "|rLevel %s",
+		classification_minus = "|rLevel -%s",
+		classification_trivial = "|rLevel ~%s",
 		classification_normal = "|rLevel %s",
 		classification_elite = "|rLevel %s (Elite)",
 		classification_worldboss = "|rLevel %s (Boss)",

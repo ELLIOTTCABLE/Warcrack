@@ -21,7 +21,7 @@ local StatEntryOrder = {
 	{ [0] = HEALTH.." & "..MANA, "HP", "MP", "HP5", "MP5" },
 	{ [0] = PLAYERSTAT_SPELL_COMBAT.." "..STATS_LABEL:gsub(":",""), "SPELLDMG", "ARCANEDMG", "FIREDMG", "NATUREDMG", "FROSTDMG", "SHADOWDMG", "HOLYDMG", "SPELLCRIT", "SPELLHIT", "SPELLHASTE", "SPELLPENETRATION" },
 	{ [0] = MELEE.." & "..RANGED, "AP", "RAP", "CRIT", "HIT", "HASTE", "ARMORPENETRATION", "EXPERTISE", "WPNDMG", "RANGEDDMG" },
-	{ [0] = PLAYERSTAT_DEFENSES, "DEFENSE", "DODGE", "PARRY", "BLOCK", "BLOCKVALUE", "RESILIENCE" },
+	{ [0] = PLAYERSTAT_DEFENSES, "DEFENSE", "DODGE", "PARRY", "BLOCK", "BLOCKVALUE", "RESILIENCE", "PVPPOWER" },
 };
 
 --------------------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ local StatEntryOrder = {
 
 -- OnInitialize
 function mod:OnInitialize()
-	cfg = Examiner_Config;
+	cfg = ex.cfg;
 	cache = Examiner_Cache;
 	-- Defaults
 	cfg.statsViewType = (cfg.statsViewType or 1);
@@ -82,7 +82,7 @@ function mod:OnCacheLoaded(entry,unit)
 		local iLvlTotal = 0;
 		for slotName, link in next, entry.Items do
 			if (slotName ~= "TabardSlot") and (slotName ~= "ShirtSlot") then
-				local _, _, _, itemLevel = GetItemInfo(link);
+				local itemLevel = GetUpgradedItemLevelFromItemLink(link);
 				if (itemLevel) then
 					if (slotName == "MainHandSlot") and (not entry.Items.SecondaryHandSlot) then
 						itemLevel = (itemLevel * 2);
@@ -200,6 +200,7 @@ local function GetGemAndItemInfo()
 		-- Calculate Item Level Numbers
 		if (slotName ~= "TabardSlot") and (slotName ~= "ShirtSlot") then
 			local _, _, itemRarity, itemLevel = GetItemInfo(link);
+			itemLevel = GetUpgradedItemLevelFromItemLink(link);
 			if (itemLevel) then
 				iLvlMin = min(iLvlMin or itemLevel,itemLevel);
 				iLvlMax = max(iLvlMax or itemLevel,itemLevel);
@@ -218,7 +219,7 @@ local function GetGemAndItemInfo()
 	return iLvlTotal, iLvlMin, iLvlMax, gemCount, gemRed, gemYellow, gemBlue;
 end
 
--- Count Reforged Items
+-- Count Reforged Items -- Currently ItemLinks has 11 parameters (5.0.4)
 local function GetNumReforgedItems()
 	local count = 0;
 	for slotName, link in next, ex.info.Items do

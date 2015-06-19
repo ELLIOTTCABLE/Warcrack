@@ -4,17 +4,17 @@ _G[addonName] = LibStub("AceAddon-3.0"):NewAddon(addonName, "AceConsole-3.0", "A
 
 local addon = _G[addonName]
 
-addon.Version = "v4.3.003b"
-addon.VersionNum = 403003
+addon.Version = "v6.1.006"
+addon.VersionNum = 601006
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 local commPrefix = addonName
 
-BINDING_HEADER_ALTOHOLIC = addonName;
-BINDING_NAME_ALTOHOLIC_TOGGLE = "Toggle UI";
+BINDING_HEADER_ALTOHOLIC = addonName
+BINDING_NAME_ALTOHOLIC_TOGGLE = "Toggle UI"
 
 local options = { 
-	type= "group",
+	type = "group",
 	args = {
 		search = {
 			type = "input",
@@ -72,77 +72,139 @@ local AddonDB_Defaults = {
 		},
 		unsafeItems = {},
 		options = {
-			-- ** Misc options **
-			TabSummaryMode = 2,
-			lastContainerView = 1,			-- default container view = bags+bank
+			-- ** Summary tab options **
+			["UI.Tabs.Summary.ShowRestXP150pc"] = false,						-- display max rest xp in normal 100% mode or in level equivalent 150% mode ?
+			["UI.Tabs.Summary.CurrentMode"] = 1,								-- current mode (1 = account summary, 2 = bags, ...)
+			["UI.Tabs.Summary.CurrentColumn"] = "Name",						-- current column (default = "Name")
+			["UI.Tabs.Summary.CurrentRealms"] = 2,								-- selected realms (current/all in current/all accounts)
+			["UI.Tabs.Summary.CurrentFactions"] = 3,							-- 1 = Alliance, 2 = Horde, 3 = Both
+			["UI.Tabs.Summary.CurrentLevels"] = 1,								-- 1 = All
+			["UI.Tabs.Summary.CurrentLevelsMin"] = 1,							
+			["UI.Tabs.Summary.CurrentLevelsMax"] = 100,					
+			["UI.Tabs.Summary.CurrentClasses"] = 0,							-- 0 = All
+			["UI.Tabs.Summary.CurrentTradeSkill"] = 0,						-- 0 = All
+			["UI.Tabs.Summary.SortAscending"] = true,							-- ascending or descending sort order
 			
-			-- ** General options **
-			RestXPMode = 0, 					-- display max rest xp in normal 100% mode or in level equivalent 150% mode (1) ?
-			AccSharingHandlerEnabled = 0,	-- account sharing communication handler is disabled by default
-			GuildBankAutoUpdate = 0,		-- can the guild bank tabs update requests be answered automatically or not.
-			GuildHandlerEnabled = 1,		-- guild communication handler is enabled by default
-			UIScale = 1.0,
-			UITransparency = 1.0,
-			ClampWindowToScreen = 0,
-			
-			-- ** Search options **
+			-- ** Character tab options **
+			["UI.Tabs.Characters.ViewBags"] = true,
+			["UI.Tabs.Characters.ViewBank"] = true,
+			["UI.Tabs.Characters.ViewBagsAllInOne"] = false,
+			["UI.Tabs.Characters.ViewVoidStorage"] = true,
+			["UI.Tabs.Characters.ViewReagentBank"] = true,
+			["UI.Tabs.Characters.ViewBagsRarity"] = 0,						-- rarity level of items (not a boolean !)
+			["UI.Tabs.Characters.GarrisonMissions"] = 1,						-- available missions = 1, active missions = 2
+			["UI.Tabs.Characters.SortAscending"] = true,						-- ascending or descending sort order
+						
+			-- ** Search tab options **
+			["UI.Tabs.Search.ItemInfoAutoQuery"] = false,
+			["UI.Tabs.Search.IncludeNoMinLevel"] = true,				-- include items with no minimum level
+			["UI.Tabs.Search.IncludeMailboxItems"] = true,
+			["UI.Tabs.Search.IncludeGuildBankItems"] = true,
+			["UI.Tabs.Search.IncludeKnownRecipes"] = true,
+			["UI.Tabs.Search.SortAscending"] = true,							-- ascending or descending sort order
 			TotalLoots = 0,					-- make at least one search in the loot tables to initialize these values
 			UnknownLoots = 0,
-			SearchAutoQuery = 0,
-			SortDescending = 0, 				-- display search results in the loot table in ascending (0) or descending (1) order ?
-			IncludeNoMinLevel = 1,
-			IncludeMailbox = 1,
-			IncludeGuildBank = 1,
-			IncludeRecipes = 1,
-			IncludeGuildSkills = 1,			-- search other guild members' professions ? (via their profession links)
-
-			-- ** Mail options **
-			GuildMailWarning = 1,			-- be informed when a guildie sends a mail to one of my alts
-			NameAutoComplete = 1,
 			
-			-- ** Minimap options **
-			MinimapIconAngle = 180,
-			MinimapIconRadius = 78,
-			ShowMinimap = 1,
+			-- ** Guild Bank tab options **
+			["UI.Tabs.Guild.BankItemsRarity"] = 0,								-- rarity filter in the guild bank tab
+			["UI.Tabs.Guild.BankAutoUpdate"] = false,							-- can the guild bank tabs update requests be answered automatically or not.
+			["UI.Tabs.Guild.SortAscending"] = true,							-- ascending or descending sort order
+			
+			-- ** Grids tab options **
+			["UI.Tabs.Grids.Reputations.CurrentXPack"] = 1,					-- Current expansion pack 
+			["UI.Tabs.Grids.Reputations.CurrentFactionGroup"] = 1,		-- Current faction group in that xpack
+			["UI.Tabs.Grids.Currencies.CurrentTokenType"] = nil,			-- Current token type (default to nil = all-in-one)
+			["UI.Tabs.Grids.Companions.CurrentXPack"] = 1,					-- Current expansion pack 
+			["UI.Tabs.Grids.Mounts.CurrentFaction"] = 1,						-- Current faction 
+			["UI.Tabs.Grids.Tradeskills.CurrentXPack"] = 1,					-- Current expansion pack 
+			["UI.Tabs.Grids.Tradeskills.CurrentTradeSkill"] = 1,			-- Current tradeskill index
+			["UI.Tabs.Grids.Archaeology.CurrentRace"] = 1,					-- Current race index
+			["UI.Tabs.Grids.Dungeons.CurrentXPack"] = 1,						-- Current expansion pack 
+			["UI.Tabs.Grids.Dungeons.CurrentRaids"] = 1,						-- Current raid index
+			["UI.Tabs.Grids.Garrisons.CurrentBuildings"] = 1,				-- Current building type
+			["UI.Tabs.Grids.Garrisons.CurrentFollowers"] = 1,				-- Current follower type
+			["UI.Tabs.Grids.Garrisons.CurrentStats"] = 1,					-- Current stats (abilities = 1, traits = 2, counters = 3)
 			
 			-- ** Tooltip options **
-			TooltipSource = 1,
-			TooltipCount = 1,
-			TooltipTotal = 1,
-			TooltipRecipeInfo = 1,
-			TooltipPetInfo = 1,
-			TooltipItemID = 0,				-- display item id & item level in the tooltip (default: off)
-			TooltipGatheringNode = 1,		-- display counters when mousing over a gathering node (default:  on)
-			TooltipCrossFaction = 1,		-- display counters for both factions on a pve server
-			TooltipMultiAccount = 1,		-- display counters for all accounts on the same realm
+			["UI.Tooltip.ShowItemSource"] = true,
+			["UI.Tooltip.ShowItemCount"] = true,
+			["UI.Tooltip.ShowSimpleCount"] = false,				-- display just the counter, without details (like AH, equipped, etc..)
+			["UI.Tooltip.ShowTotalItemCount"] = true,
+			["UI.Tooltip.ShowKnownRecipes"] = true,
+			["UI.Tooltip.ShowItemID"] = false,						-- display item id & item level in the tooltip (default: off)
+			["UI.Tooltip.ShowGatheringNodesCount"] = true,		-- display counters when mousing over a gathering node (default:  on)
+			["UI.Tooltip.ShowCrossFactionCount"] = true,			-- display counters for both factions on a pve server
+			["UI.Tooltip.ShowMergedRealmsCount"] = true,			-- display counters for characters on connected realms
+			["UI.Tooltip.ShowAllAccountsCount"] = true,			-- display counters for all accounts on the same realm
+			["UI.Tooltip.ShowGuildBankCount"] = true,				-- display guild bank counters
+			["UI.Tooltip.IncludeGuildBankInTotal"] = true,		-- total count = alts + guildbank (1) or alts only (0)
+			["UI.Tooltip.ShowGuildBankCountPerTab"] = false,	-- guild count = guild:count or guild (tab 1: x, tab2: y ..)
 			
-			TooltipGuildBank = 1,
-			TooltipGuildBankCount = 1,		-- total count = alts + guildbank (1) or alts only (0)
-			TooltipGuildBankCountPerTab = 0,	-- guild count = guild:count or guild (tab 1: x, tab2: y ..)
+			-- ** Mail options **
+			["UI.Mail.GuildMailWarning"] = true,					-- be informed when a guildie sends a mail to one of my alts
+			["UI.Mail.AutoCompleteRecipient"] = true,				-- Auto complete recipient name when sending a mail
+			["UI.Mail.LastExpiryWarning"] = 0,						-- Last time a mail expiry warning was triggered
+			["UI.Mail.TimeToNextWarning"] = 3,						-- Time before the warning is repeated ('3' = no warning for 3 hours)
+			
+			-- ** Minimap options **
+			["UI.Minimap.ShowIcon"] = true,
+			["UI.Minimap.IconAngle"] = 180,
+			["UI.Minimap.IconRadius"] = 78,
 			
 			-- ** Calendar options **
-			WeekStartsMonday = 0,
-			WarningDialogBox = 0,			-- use a dialog box for warnings (1), or default chat frame (0)
-			DisableWarnings = 0,
+			["UI.Calendar.WarningsEnabled"] = true,
+			["UI.Calendar.UseDialogBoxForWarnings"] = false,	-- use a dialog box for warnings (true), or default chat frame (false)
+			["UI.Calendar.WeekStartsOnMonday"] = false,
+
 			WarningType1 = "30|15|10|5|4|3|2|1",		-- for profession cooldowns
 			WarningType2 = "30|15|10|5|4|3|2|1",		-- for dungeon resets
 			WarningType3 = "30|15|10|5|4|3|2|1",		-- for calendar events
 			WarningType4 = "30|15|10|5|4|3|2|1",		-- for item timers (like mysterious egg)
 			
-			-- ** Character tab options **
-			CharacterTabViewBags = 1,
-			CharacterTabViewBank = 1,
-			CharacterTabViewBagsAllInOne = 0,
-			CharacterTabViewBagsRarity = 0,
+			-- ** Global options **
+			["UI.AHColorCoding"] = true,					-- color coded recipes at the AH
+			["UI.VendorColorCoding"] = true,				-- color coded recipes at vendors
+			["UI.AccountSharing.IsEnabled"] = false,	-- account sharing communication handler is disabled by default
 			
-			["UI.Tabs.Guild.BankItemsRarity"] = 0,		-- rarity filter in the guild bank tab
-			
-			["UI.AHColorCoding"] = 1,						-- color coded recipes at the AH
-			["UI.VendorColorCoding"] = 1,					-- color coded recipes at vendors
-			["UI.Mail.LastExpiryWarning"] = 0,			-- Last time a mail expiry warning was triggered
-			["UI.Mail.TimeToNextWarning"] = 3,			-- Time before the warning is repeated ('3' = no warning for 3 hours)
+			["UI.Scale"] = 1.0,
+			["UI.Transparency"] = 1.0,
+			["UI.ClampWindowToScreen"] = false,
+
 		},
-}}
+	}
+}
+
+addon.Colors = {
+	white	= "|cFFFFFFFF",
+	red = "|cFFFF0000",
+	darkred = "|cFFF00000",
+	green = "|cFF00FF00",
+	orange = "|cFFFF7F00",
+	yellow = "|cFFFFFF00",
+	gold = "|cFFFFD700",
+	teal = "|cFF00FF9A",
+	cyan = "|cFF1CFAFE",
+	lightBlue = "|cFFB0B0FF",
+	battleNetBlue = "|cff82c5ff",
+	grey = "|cFF909090",
+	
+	-- classes
+	classMage = "|cFF69CCF0",
+	classHunter = "|cFFABD473",
+	
+	-- recipes
+	recipeGrey = "|cFF808080",
+	recipeGreen = "|cFF40C040",
+	recipeOrange = "|cFFFF8040",
+	
+	-- rarity : http://wow.gamepedia.com/Quality
+	common = "|cFFFFFFFF",
+	uncommon = "|cFF1EFF00",
+	rare = "|cFF0070DD",
+	epic = "|cFFA335EE",
+	legendary = "|cFFFF8000",
+	heirloom = "|cFFE6CC80",
+}
 
 -- ** LDB Launcher **
 LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject(addonName, {
@@ -154,6 +216,7 @@ LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject(addonName, {
 	text = (Broker2FuBar) and addonName or nil,		-- only for fubar,  not for ldb
 	label = addonName,
 })
+
 
 
 local guildMembersVersion = {} 	-- hash table containing guild member info
@@ -241,9 +304,34 @@ function addon:ChatCommand(input)
 	end
 end
 
-addon.TradeSkills = {}
-addon.TradeSkills.Recipes = {}
-
+addon.TradeSkills = {
+	Recipes = {},
+	-- spell IDs in alphabetical order (english), primary then secondary
+	spellIDs = { 2259, 3100, 7411, 4036, 45357, 25229, 2108, 2656, 3908, 2550, 3273 },
+	firstSecondarySkillIndex = 10, -- index of the first secondary profession in the table
+	
+	AccountSummaryFiltersSpellIDs = { 2259, 3100, 7411, 4036, 2366, 45357, 25229, 2108, 2575, 8613, 3908, 2550, 3273, 131474, 78670 },
+	AccountSummaryFirstSecondarySkillIndex = 12, -- index of the first secondary profession in the table
+		
+	Names = {
+		ALCHEMY = GetSpellInfo(2259),
+		ARCHAEOLOGY = GetSpellInfo(78670),
+		BLACKSMITHING = GetSpellInfo(3100),
+		COOKING = GetSpellInfo(2550),
+		ENCHANTING = GetSpellInfo(7411),
+		ENGINEERING = GetSpellInfo(4036),
+		FIRSTAID = GetSpellInfo(3273),
+		FISHING = GetSpellInfo(131474),
+		HERBALISM = GetSpellInfo(2366),
+		INSCRIPTION = GetSpellInfo(45357),
+		JEWELCRAFTING = GetSpellInfo(25229),
+		LEATHERWORKING = GetSpellInfo(2108),
+		MINING = GetSpellInfo(2575),
+		SKINNING = GetSpellInfo(8613),
+		SMELTING = GetSpellInfo(2656),
+		TAILORING = GetSpellInfo(3908),
+	},
+}
 
 -- ** Tabs **
 local tabList = {
@@ -297,9 +385,8 @@ function addon.Tabs:OnClick(index)
 	PanelTemplates_SetTab(_G[addonName.."Frame"], index);
 	self:HideAll()
 	self.current = index
-	self.Columns.prefix = addonName.."Tab"..tabList[index].."_Sort"
 	
-	if index >= 2 and index <= 7 then
+	if index >= 1 and index <= 7 then
 		local moduleName = format("%s_%s", addonName, tabList[index])
 		SafeLoadAddOn(moduleName)		-- make this part a bit more generic once we'll have more LoD parts
 		
@@ -322,69 +409,6 @@ function addon.Tabs:OnClick(index)
 	ShowTab(tabList[index])
 end
 
-addon.Tabs.Columns = {}
-
-function addon.Tabs.Columns:Init()
-	local i = 1
-	local prefix = self.prefix or "AltoholicTabSummary_Sort"
-	local button = _G[ prefix .. i ]
-	local arrow = _G[ prefix .. i .. "Arrow"]
-	
-	while button do
-		arrow:Hide()
-		button.ascendingSort = nil		-- not sorted by default
-		button:Hide()
-		
-		i = i + 1
-		button = _G[ prefix .. i ]
-		arrow = _G[ prefix .. i .. "Arrow"]
-	end
-	self.count = 0
-	self.prefix = prefix
-end
-
-function addon.Tabs.Columns:Add(title, width, func)
-	local prefix = self.prefix
-	self.count = self.count + 1
-	local button = _G[ prefix..self.count ]
-
-	if not title then		-- no title ? count the column, but hide it
-		button:Hide()
-		return
-	end
-	
-	button:SetText(title)
-	button:SetWidth(width)
-	button:SetScript("OnClick", function(self)
-			local prefix = addon.Tabs.Columns.prefix
-			local i = 1
-			local arrow = _G[ prefix .. i .. "Arrow"]
-			
-			while arrow do		-- hide all arrows
-				arrow:Hide()
-				i = i + 1
-				arrow = _G[ prefix .. i .. "Arrow"]
-			end
-
-			arrow = _G[ prefix .. self:GetID() .. "Arrow"]
-			arrow:Show()	-- show selected arrow
-			
-			if not self.ascendingSort then
-				self.ascendingSort = true
-				arrow:SetTexCoord(0, 0.5625, 1.0, 0);		-- arrow pointing up
-			else
-				self.ascendingSort = nil
-				arrow:SetTexCoord(0, 0.5625, 0, 1.0);		-- arrow pointing down
-			end
-	
-			if func then
-				func(self)
-			end
-		end)
-	button:Show()
-end
-
-
 -- Allow ESC to close the main frame
 tinsert(UISpecialFrames, "AltoholicFrame");
 tinsert(UISpecialFrames, "AltoMsgBox");
@@ -398,9 +422,9 @@ function addon:CmdSearchBags(arg1, arg2)
 	end
 	
 	if not (AltoholicFrame:IsVisible()) then
-		AltoholicFrame:Show();
+		AltoholicFrame:Show()
 	end
 	AltoholicFrame_SearchEditBox:SetText(strlower(arg2))
 	addon.Tabs:OnClick("Search")
-	addon.Search:FindItem();
+	addon.Search:FindItem()
 end	

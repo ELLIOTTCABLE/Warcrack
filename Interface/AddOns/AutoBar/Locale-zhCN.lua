@@ -189,6 +189,7 @@ if (GetLocale() == "zhCN") then
 		["AutoBarClassBarBasic"] = "基本",
 		["AutoBarClassBarExtras"] = "额外",
 		["AutoBarClassBarDeathKnight"] = "死亡骑士",
+		["AutoBarClassBarMonk"] = "Monk",
 		["AutoBarClassBarDruid"] = "德鲁伊",
 		["AutoBarClassBarHunter"] = "猎人",
 		["AutoBarClassBarMage"] = "法师",
@@ -205,7 +206,9 @@ if (GetLocale() == "zhCN") then
 		["AutoBarCooldownHeader"] = "药水和石头冷却",
 		["AutoBarClassBarHeader"] = "职业物品列",
 
-		["AutoBarButtonAura"] = "光环 / 守护",
+		["AutoBarButtonAspect"] = "光环 / 守护",
+		["AutoBarButtonPoisonLethal"] = "Poison: Lethal",
+		["AutoBarButtonPoisonNonlethal"] = "Poison: Nonlethal",
 		["AutoBarButtonBandages"] = "绷带",
 		["AutoBarButtonBattleStandards"] = "战斗姿势",
 		["AutoBarButtonBuff"] = "增益",
@@ -261,7 +264,6 @@ if (GetLocale() == "zhCN") then
 		["AutoBarButtonTotemAir"] = "风之图腾",
 		["AutoBarButtonTotemFire"] = "火焰图腾",
 		["AutoBarButtonTotemWater"] = "水之图腾",
-		["AutoBarButtonTrack"] = "追踪技能",
 		["AutoBarButtonTrap"] = "陷阱",
 		["AutoBarButtonTrinket1"] = "饰品1",
 		["AutoBarButtonTrinket2"] = "饰品2",
@@ -503,7 +505,9 @@ if (GetLocale() == "zhCN") then
 		["Misc.Lockboxes"] = LOCKED;
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
-		["Spell.Aura"] = "光环 / 守护";
+		["Spell.Aspect"] = "光环 / 守护";
+		["Spell.Poison.Lethal"] = "Poison: Lethal";
+		["Spell.Poison.Nonlethal"] = "Poison Nonlethal";
 		["Spell.Buff.Weapon"] = "法术增益：武器";
 		["Spell.Class.Buff"] = "增益法术";
 		["Spell.Class.Pet"] = "战斗宠物";
@@ -521,7 +525,6 @@ if (GetLocale() == "zhCN") then
 		["Spell.Totem.Fire"] = "火焰图腾";
 		["Spell.Totem.Water"] = "水之图腾";
 		["Spell.Seal"] = "圣印";
-		["Spell.Track"] = "追踪技能";
 		["Spell.Trap"] = "陷阱";
 		["Misc.Booze"] = "酒类";
 		["Misc.Hearth"] = "炉石";

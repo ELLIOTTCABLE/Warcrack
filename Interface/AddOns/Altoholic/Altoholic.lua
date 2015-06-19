@@ -4,84 +4,47 @@ Written by : Thaoky, EU-Marécages de Zangar
 
 local addonName = ...
 local addon = _G[addonName]
+local colors = addon.Colors
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
-local BI = LibStub("LibBabble-Inventory-3.0"):GetLookupTable()
+local LCI = LibStub("LibCraftInfo-1.0")
 local DS
 
-local WHITE		= "|cFFFFFFFF"
-local RED		= "|cFFFF0000"
-local GREEN		= "|cFF00FF00"
-local YELLOW	= "|cFFFFFF00"
-local ORANGE	= "|cFFFF7F00"
-local TEAL		= "|cFF00FF9A"
-local GOLD		= "|cFFFFD700"
-
 local THIS_ACCOUNT = "Default"
-
-Altoholic.ClassInfo = {
-	["MAGE"] = "|cFF69CCF0",
-	["WARRIOR"] = "|cFFC79C6E",
-	["HUNTER"] = "|cFFABD473",
-	["ROGUE"] = "|cFFFFF569",
-	["WARLOCK"] = "|cFF9482CA", 
-	["DRUID"] = "|cFFFF7D0A", 
-	["SHAMAN"] = "|cFF2459FF",
-	["PALADIN"] = "|cFFF58CBA", 
-	["PRIEST"] = WHITE,
-	["DEATHKNIGHT"] = "|cFFC41F3B"
-}
 
 local function InitLocalization()
 	-- this function's purpose is to initialize the text attribute of widgets created in XML.
 	-- in versions prior to 3.1.003, they were initialized through global constants named XML_ALTO_???
 	-- the strings stayed in memory for no reason, and could not be included in the automated localization offered by curse, hence the change of approach.
 	
-	AltoholicMinimapButton.tooltip = format("%s\n%s\n%s",	addonName, WHITE..L["Left-click to |cFF00FF00open"], WHITE..L["Right-click to |cFF00FF00drag"] )
+	AltoholicMinimapButton.tooltip = format("%s\n%s\n%s",	addonName, colors.white..L["Left-click to |cFF00FF00open"], colors.white..L["Right-click to |cFF00FF00drag"] )
 	
 	AltoAccountSharing_InfoButton.tooltip = format("%s|r\n%s\n%s\n\n%s",
-		WHITE..L["Account Name"], 
+		colors.white..L["Account Name"], 
 		L["Enter an account name that will be\nused for |cFF00FF00display|r purposes only."],
 		L["This name can be anything you like,\nit does |cFF00FF00NOT|r have to be the real account name."],
 		L["This field |cFF00FF00cannot|r be left empty."])
 
 	AltoholicFrameTab1:SetText(L["Summary"])
 	AltoholicFrameTab2:SetText(L["Characters"])
-	AltoholicTabSummaryMenuItem1:SetText(L["Account Summary"])
-	AltoholicTabSummaryMenuItem2:SetText(L["Bag Usage"])
-	AltoholicTabSummaryMenuItem4:SetText(L["Activity"])
-	AltoholicTabSummary_RequestSharing:SetText(L["Account Sharing"])
+	AltoholicFrameTab6:SetText(L["Agenda"])
+	AltoholicFrameTab7:SetText(L["Grids"])
 	
 	AltoAccountSharingName:SetText(L["Account Name"])
 	AltoAccountSharingText1:SetText(L["Send account sharing request to:"])
-	AltoAccountSharingText2:SetText(ORANGE.."Available Content")
-	AltoAccountSharingText3:SetText(ORANGE.."Size")
-	AltoAccountSharingText4:SetText(ORANGE.."Date")
+	AltoAccountSharingText2:SetText(colors.orange.."Available Content")
+	AltoAccountSharingText3:SetText(colors.orange.."Size")
+	AltoAccountSharingText4:SetText(colors.orange.."Date")
 	AltoAccountSharing_UseNameText:SetText(L["Character"])
 	
 	AltoholicFrameTotals:SetText(L["Totals"])
 	AltoholicFrameSearchLabel:SetText(L["Search Containers"])
 	AltoholicFrame_ResetButton:SetText(L["Reset"])
-	
-	-- nil strings to save memory, since they are not used later on.
-	L["Summary"] = nil
-	L["Account Summary"] = nil
-	L["Bag Usage"] = nil
-	L["Activity"] = nil
-	L["Search Containers"] = nil
 
-	L["Reset"] = nil
-	L["Send account sharing request to:"] = nil
-	L["Left-click to |cFF00FF00open"] = nil
-	L["Right-click to |cFF00FF00drag"] = nil
-	L["Enter an account name that will be\nused for |cFF00FF00display|r purposes only."] = nil
-	L["This name can be anything you like,\nit does |cFF00FF00NOT|r have to be the real account name."] = nil
-	L["This field |cFF00FF00cannot|r be left empty."] = nil
-
-	if GetLocale() == "deDE" then
+	-- if GetLocale() == "deDE" then
 		-- This is a global string from wow, for some reason the original is causing problem. DO NOT copy this line in localization files
-		ITEM_MOD_SPELL_POWER = "Erh\195\182ht die Zaubermacht um %d."; 
-	end
+		-- ITEM_MOD_SPELL_POWER = "Erh\195\182ht die Zaubermacht um %d."; 
+	-- end
 end
 
 local function BuildUnsafeItemList()
@@ -135,12 +98,6 @@ function addon:GetGuild(name, realm, account)
 	return addon.db.global.Guilds[key]
 end
 
-function Altoholic:GetGuildMembers(guild)
-	-- should be removed, only used by search guild professions, which is obsolete too
-	assert(type(guild) == "table")
-	return guild.members
-end
-
 function Altoholic:SetLastAccountSharingInfo(name, realm, account)
 	local sharing = Altoholic.db.global.Sharing.Domains[format("%s.%s", account, realm)]
 	sharing.lastSharingTimestamp = time()
@@ -172,7 +129,7 @@ end
 local Orig_SendMailNameEditBox_OnChar = SendMailNameEditBox:GetScript("OnChar")
 
 SendMailNameEditBox:SetScript("OnChar", function(self, ...)
-	if addon:GetOption("NameAutoComplete") == 1 then
+	if addon:GetOption("UI.Mail.AutoCompleteRecipient") then
 		local text = self:GetText(); 
 		local textlen = strlen(text); 
 		
@@ -196,12 +153,11 @@ local Orig_AuctionFrameBrowse_Update
 
 function AuctionFrameBrowse_UpdateHook()
 	-- Courtesy of Tirdal on WoWInterface
-
 	local AuctioneerCompactUI = false;
 
 	Orig_AuctionFrameBrowse_Update()		-- Let default stuff happen first ..
 	
-	if addon:GetOption("UI.AHColorCoding") == 0 then return end
+	if addon:GetOption("UI.AHColorCoding") == false then return end
 	
 	if IsAddOnLoaded("Auctioneer") and Auctioneer.ScanManager.IsScanning() then return end;
 
@@ -224,10 +180,10 @@ function AuctionFrameBrowse_UpdateHook()
 			trueID = button:GetID() + offset;
 		end
 		link = GetAuctionItemLink("list", trueID)
-		if link then		-- if there's a valid item link in this slot ..
+		if link and not link:match("battlepet:(%d+)") then		-- if there's a valid item link in this slot ..
 			local itemID = addon:GetIDFromLink(link)
 			local _, _, _, _, _, itemType, itemSubType = GetItemInfo(itemID)
-			if itemType == BI["Recipe"] and itemSubType ~= BI["Book"] then		-- is it a recipe ?
+			if itemType == L["ITEM_TYPE_RECIPE"] and itemSubType ~= L["ITEM_SUBTYPE_BOOK"] then		-- is it a recipe ?
 				
 				local _, couldLearn, willLearn = addon:GetRecipeOwners(itemSubType, link, addon:GetRecipeLevel(link))
 				local tex
@@ -258,13 +214,45 @@ function AuctionFrameBrowse_UpdateHook()
 	AltoTooltip:Hide()
 end
 
+local function IsBOPItemKnown(itemID)
+	-- Check if a given item is BOP and known by the current player
+	local _, link = GetItemInfo(itemID)
+	if not link then return end
+
+	-- ITEM_BIND_ON_EQUIP = "Binds when equipped";
+	-- ITEM_BIND_ON_PICKUP = "Binds when picked up";
+	-- ITEM_BIND_ON_USE = "Binds when used";
+	-- ITEM_SPELL_KNOWN = "Already known";
+	
+	AltoTooltip:SetOwner(AltoholicFrame, "ANCHOR_LEFT")
+	AltoTooltip:SetHyperlink(link)
+	
+	local tooltipLine
+	local isBOP
+	local isKnown	-- by the current character only
+	
+	for i = 1, AltoTooltip:NumLines() do
+		tooltipLine = _G[ "AltoTooltipTextLeft" .. i]:GetText()
+		if tooltipLine then
+			if tooltipLine == ITEM_BIND_ON_PICKUP and i <= 4 then	
+				-- some items will have "Binds when picked up" twice.. only care about the occurence in the first 4 lines
+				isBOP = true
+			elseif tooltipLine == ITEM_SPELL_KNOWN then
+				isKnown = true
+			end
+		end
+	end
+
+	return (isBOP and isKnown) -- only return true if both are true
+end
+
 local Orig_MerchantFrame_UpdateMerchantInfo
 
 local function MerchantFrame_UpdateMerchantInfoHook()
 	
 	Orig_MerchantFrame_UpdateMerchantInfo()		-- Let default stuff happen first ..
 	
-	if addon:GetOption("UI.VendorColorCoding") == 0 then return end
+	if addon:GetOption("UI.VendorColorCoding") == false then return end
 	
    local numItems = GetMerchantNumItems()
 	local index, link
@@ -277,51 +265,35 @@ local function MerchantFrame_UpdateMerchantInfoHook()
 			if link then		-- if there's a valid item link in this slot ..
 				local itemID = addon:GetIDFromLink(link)
 				local _, _, _, _, _, itemType, itemSubType = GetItemInfo(itemID)
-				if itemType == BI["Recipe"] and itemSubType ~= BI["Book"] then		-- is it a recipe ?
-					
+				
+				local r, g, b = 1, 1, 1
+				
+				-- also applies to garrison blueprints
+				if IsBOPItemKnown(itemID) then		-- recipe is bop and already known, useless to alts : red.
+					r, g, b = 1, 0, 0
+				elseif itemType == L["ITEM_TYPE_RECIPE"] and itemSubType ~= L["ITEM_SUBTYPE_BOOK"] then		-- is it a recipe ?
 					local _, couldLearn, willLearn = addon:GetRecipeOwners(itemSubType, link, addon:GetRecipeLevel(link))
-					local button = _G["MerchantItem" .. i .. "ItemButton"]
-					if button then
-						local r, g, b
-						
-						if #couldLearn == 0 and #willLearn == 0 then		-- nobody could learn the recipe, neither now nor later : red
-							r, g, b = 1, 0, 0
-						elseif #couldLearn > 0 then							-- at least 1 could learn it : green (priority over "will learn")
-							r, g, b = 0, 1, 0
-						elseif #willLearn > 0 then								-- nobody could learn it now, but some could later : yellow
-							r, g, b = 1, 1, 0
-						else
-							r, g, b = 1, 1, 1
-						end
-						SetItemButtonTextureVertexColor(button, r, g, b)
-						SetItemButtonNormalTextureVertexColor(button, r, g, b)
+					if #couldLearn == 0 and #willLearn == 0 then		-- nobody could learn the recipe, neither now nor later : red
+						r, g, b = 1, 0, 0
+					elseif #couldLearn > 0 then							-- at least 1 could learn it : green (priority over "will learn")
+						r, g, b = 0, 1, 0
+					elseif #willLearn > 0 then								-- nobody could learn it now, but some could later : yellow
+						r, g, b = 1, 1, 0
 					end
 				end
+				
+				local button = _G["MerchantItem" .. i .. "ItemButton"]
+				if button then
+					SetItemButtonTextureVertexColor(button, r, g, b)
+					SetItemButtonNormalTextureVertexColor(button, r, g, b)
+				end
 			end
-
 		end
 	end
 	AltoTooltip:Hide()
 end
 
 -- *** Event Handlers ***
-local function OnPlayerLogout()
-	local t = {}
-	for i = 1, 10 do
-	   t[i] = strchar(64 + random(26))
-	end
-
-	local y = (tonumber(date("%Y")) - 2000) + 64
-	local m = tonumber(date("%m")) + 64
-	local d = date("%d")
-	local h = tonumber(date("%H")) + 64
-	local M = date("%M")
-	local S = date("%S")
-	local x = t[1]..S..t[3]..t[4]..strchar(m)..t[7]..M..t[2]..t[6]..t[8]..d..t[9]..strchar(h)..t[5]..t[1]..strchar(y)..t[4]
-	
-	addon:SetOption("Lola", x)
-end
-
 local function OnAuctionHouseClosed()
 	addon:UnregisterEvent("AUCTION_HOUSE_CLOSED")
 	if addon.AuctionHouse then
@@ -349,29 +321,28 @@ function addon:OnEnable()
 
 	InitLocalization()
 	addon:SetupOptions()
+	-- Only needed in debug
+	-- addon.Profiler:Init()
 	addon.Tasks:Init()
-	addon.Profiler:Init()
 	addon.Events:Init()
 	addon:InitTooltip()
-	
-	addon:RegisterEvent("PLAYER_LOGOUT", OnPlayerLogout)
+
 	addon:RegisterEvent("AUCTION_HOUSE_SHOW", OnAuctionHouseShow)	-- must stay here for the AH hook (to manage recipe coloring)
 
 	-- hook the Merchant update function
 	Orig_MerchantFrame_UpdateMerchantInfo = MerchantFrame_UpdateMerchantInfo
 	MerchantFrame_UpdateMerchantInfo = MerchantFrame_UpdateMerchantInfoHook
 	
-	AltoholicFrameName:SetText("Altoholic |cFFFFFFFF".. addon.Version .. " by |cFF69CCF0Thaoky")
+	AltoholicFrameName:SetText(format("Altoholic %s%s by %sThaoky", colors.white, addon.Version, colors.classMage))
 
 	local realm = GetRealmName()
 	local player = UnitName("player")
 	local key = format("%s.%s.%s", THIS_ACCOUNT, realm, player)
 	addon.ThisCharacter = addon.db.global.Characters[key]
-	
-	addon.Tabs.Summary:Init()
+
 	addon:RestoreOptionsToUI()
 
-	if addon:GetOption("ShowMinimap") == 1 then
+	if addon:GetOption("UI.Minimap.ShowIcon") then
 		addon:MoveMinimapIcon()
 		AltoholicMinimapButton:Show();
 	else
@@ -398,28 +369,24 @@ end
 
 function addon:ToggleUI()
 	if (AltoholicFrame:IsVisible()) then
-		AltoholicFrame:Hide();
+		AltoholicFrame:Hide()
 	else
-		AltoholicFrame:Show();
+		AltoholicFrame:Show()
 	end
 end
 
 function addon:OnShow()
-	SetPortraitTexture(AltoholicFramePortrait, "player");	
-
-	addon.Characters:BuildList()
-	addon.Characters:BuildView()
+	SetPortraitTexture(AltoholicFramePortrait, "player")
 	
 	if not addon.Tabs.current then
-		addon.Tabs.current = 1
-		addon.Tabs.Summary:MenuItem_OnClick(1)
-	elseif addon.Tabs.current == 1 then
-		addon.Tabs.Summary:Refresh()
+		addon.Tabs:OnClick("Summary")
+		addon.Tabs.Summary:MenuItem_OnClick(addon:GetOption("UI.Tabs.Summary.CurrentMode"))
 	end
 end
 
 
 -- *** Utility functions ***
+
 function Altoholic:ScrollFrameUpdate(desc)
 	assert(type(desc) == "table")		-- desc is the table that contains a standardized description of the scrollframe
 	
@@ -432,19 +399,14 @@ function Altoholic:ScrollFrameUpdate(desc)
 		_G[ entry..i ]:Hide()
 	end
 	
-	local offset = FauxScrollFrame_GetOffset( _G[ frame.."ScrollFrame" ] )
+	local scrollFrame = _G[ frame.."ScrollFrame" ]
+	local offset = scrollFrame:GetOffset()
+
 	-- call the update handler
 	desc:Update(offset, entry, desc)
 	
 	local last = (desc:GetSize() < desc.NumLines) and desc.NumLines or desc:GetSize()
-	FauxScrollFrame_Update( _G[ frame.."ScrollFrame" ], last, desc.NumLines, desc.LineHeight);
-end
-
-function Altoholic:ClearScrollFrame(name, entry, lines, height)
-	for i=1, lines do					-- Hides all entries of the scrollframe, and updates it accordingly
-		_G[ entry..i ]:Hide()
-	end
-	FauxScrollFrame_Update( name, lines, lines, height);
+	scrollFrame:Update(last, desc.NumLines, desc.LineHeight);
 end
 
 function addon:Item_OnEnter(frame)
@@ -549,7 +511,7 @@ end
 function addon:GetSpellIDFromRecipeLink(link)
 	-- returns nil if recipe id is not in the DB, returns the spellID otherwise
 	local recipeID = addon:GetIDFromLink(link)
-	return addon.RecipeDB[recipeID]
+	return LCI:GetRecipeLearnedSpell(recipeID)
 end
 
 function addon:GetMoneyString(copper, color, noTexture)
@@ -583,19 +545,15 @@ function addon:GetTimeString(seconds)
 	local minutes = floor(seconds / 60);
 	seconds = mod(seconds, 60)
 
-	return format("%s|rd %s|rh %s|rm", WHITE..days, WHITE..hours, WHITE..minutes)
+	return format("%s|rd %s|rh %s|rm", colors.white..days, colors.white..hours, colors.white..minutes)
 end
 
 function addon:GetFactionColour(faction)
 	if faction == "Alliance" then
 		return "|cFF2459FF"
 	else
-		return RED
+		return colors.red
 	end
-end
-
-function Altoholic:GetClassColor(class)
-	return Altoholic.ClassInfo[class] or WHITE
 end
 
 function addon:GetDelayInDays(delay)
@@ -605,11 +563,11 @@ end
 function Altoholic:FormatDelay(timeStamp)
 	-- timeStamp = value when time() was last called for a given variable (ex: last time the mailbox was checked)
 	if not timeStamp then
-		return YELLOW .. NEVER
+		return colors.yellow .. NEVER
 	end
 	
 	if timeStamp == 0 then
-		return YELLOW .. "N/A"
+		return colors.yellow .. "N/A"
 	end
 	
 	local seconds = (time() - timeStamp)
@@ -635,29 +593,6 @@ function Altoholic:FormatDelay(timeStamp)
 	return RecentTimeDate(year, month, day, hour)
 end
 
-function addon:GetRestedXP(character)
-	local rate = DS:GetRestXPRate(character)
-
-	local coeff = 1
-	if addon:GetOption("RestXPMode") == 1 then
-		coeff = 1.5
-	end
-	rate = rate * coeff
-	
-	-- second return value = the actual percentage of rest xp, as a numeric value (1 to 100, not 150)
-	local color = GREEN
-	if rate >= (100 * coeff) then 
-		rate = 100 * coeff
-	else
-		if rate < (30 * coeff) then
-			color = RED
-		elseif rate < (60 * coeff) then
-			color = YELLOW
-		end
-	end
-	return format("%s%d", color, rate).."%", rate
-end
-
 function addon:GetSuggestion(index, level)
 	if addon.Suggestions[index] then 
 		for _, v in pairs( addon.Suggestions[index] ) do
@@ -669,20 +604,27 @@ function addon:GetSuggestion(index, level)
 end
 
 function addon:GetRecipeLevel(link, tooltip)
-	if not tooltip then	-- if no tooltip is provided for scanning, let's make one
-		tooltip = AltoTooltip
+	-- if not tooltip then	-- if no tooltip is provided for scanning, let's make one
+		-- tooltip = AltoTooltip
 		
-		tooltip:ClearLines();	
-		tooltip:SetOwner(AltoholicFrame, "ANCHOR_LEFT");
-		tooltip:SetHyperlink(link)
-	end
+		-- tooltip:ClearLines();	
+		-- tooltip:SetOwner(AltoholicFrame, "ANCHOR_LEFT");
+		-- tooltip:SetHyperlink(link)
+	-- end
 
+	local tooltip = AltoScanningTooltip
+	
+	tooltip:ClearLines()
+	tooltip:SetHyperlink(link)
+	
 	local tooltipName = tooltip:GetName()
-	for i = 2, tooltip:NumLines() do			-- parse all tooltip lines, one by one
+	
+	for i = tooltip:NumLines(), 2, -1 do			-- parse all tooltip lines, from last to second
 		local tooltipText = _G[tooltipName .. "TextLeft" .. i]:GetText()
 		if tooltipText then
-			if string.find(tooltipText, "%d+") then	-- try to find a numeric value .. 
-				return tonumber(string.sub(tooltipText, string.find(tooltipText, "%d+")))	-- required level found
+			local _, _, rLevel = string.find(tooltipText, "%((%d+)%)") -- find number enclosed in brackets
+			if rLevel then
+				return tonumber(rLevel)
 			end
 		end
 	end
@@ -710,7 +652,7 @@ function addon:ListCharsOnQuest(questName, player, tooltip)
 	
 	if #CharsOnQuest > 0 then
 		tooltip:AddLine(" ",1,1,1);
-		tooltip:AddLine(GREEN .. L["Are also on this quest:"],1,1,1);
+		tooltip:AddLine(colors.green .. L["Are also on this quest:"],1,1,1);
 		tooltip:AddLine(table.concat(CharsOnQuest, "\n"),1,1,1);
 	end
 end
@@ -735,50 +677,19 @@ function addon:ShowWidgetTooltip(frame)
 	AltoTooltip:Show(); 
 end
 
-function addon:CreateButtonBorder(frame)
-	if frame.border then return end
+function addon:DrawFollowerTooltip(frame)
+	local character = frame.key
+	if not character then return end
 
-	local border = frame:CreateTexture(nil, "OVERLAY")
-	border:SetWidth(67);
-	border:SetHeight(67)
-	border:SetPoint("CENTER", frame)
-	border:SetTexture("Interface\\Buttons\\UI-ActionButton-Border")
-	border:SetBlendMode("ADD")
-	border:Hide()
+	-- get the follower link
+	local link = DataStore:GetFollowerLink(character, frame.followerID)
+	if not link then return end
 	
-	frame.border = border
-end
-
-function addon:DrawCharacterTooltip(self, character)
-	local name = DS:GetColoredCharacterName(character)
-	if not name then return end
-
-	AltoTooltip:SetOwner(self, "ANCHOR_LEFT");
-	AltoTooltip:ClearLines();
-	AltoTooltip:AddDoubleLine(name, DS:GetColoredCharacterFaction(character))
-
-	AltoTooltip:AddLine(format("%s %s |r%s %s", L["Level"], 
-		GREEN..DS:GetCharacterLevel(character), DS:GetCharacterRace(character),	DS:GetCharacterClass(character)),1,1,1)
-
-	local zone, subZone = DS:GetLocation(character)
-	AltoTooltip:AddLine(format("%s: %s |r(%s|r)", L["Zone"], GOLD..zone, GOLD..subZone),1,1,1)
-	
-	local restXP = DS:GetRestXP(character)
-	if restXP and restXP > 0 then
-		AltoTooltip:AddLine(format("%s: %s", L["Rest XP"], GREEN..restXP),1,1,1)
-	end
-	
-	AltoTooltip:AddLine("Average iLevel: " .. GREEN .. format("%.1f", DS:GetAverageItemLevel(character)),1,1,1);	
-
-	if IsAddOnLoaded("DataStore_Achievements") then
-		local numAchievements = DS:GetNumCompletedAchievements(character) or 0
-		if numAchievements > 0 then
-			AltoTooltip:AddLine(ACHIEVEMENTS_COMPLETED ..": " .. GREEN .. DS:GetNumCompletedAchievements(character) .. "/"..DS:GetNumAchievements(character))
-			AltoTooltip:AddLine(ACHIEVEMENT_TITLE ..": " .. GREEN .. DS:GetNumAchievementPoints(character))
-		end
-	end
-	
-	AltoTooltip:Show();
+	-- toggle the tooltip, use blizzard's own function for that
+	local _, garrisonFollowerID, quality, level, itemLevel, ability1, ability2, ability3, ability4, trait1, trait2, trait3, trait4 = strsplit(":", link);
+	FloatingGarrisonFollowerTooltip:ClearAllPoints()
+	FloatingGarrisonFollowerTooltip:SetPoint("TOPLEFT", frame, "TOPRIGHT", 1, 1)
+	FloatingGarrisonFollower_Toggle(tonumber(garrisonFollowerID), tonumber(quality), tonumber(level), tonumber(itemLevel), tonumber(ability1), tonumber(ability2), tonumber(ability3), tonumber(ability4), tonumber(trait1), tonumber(trait2), tonumber(trait3), tonumber(trait4))
 end
 
 function addon:SetMsgBoxHandler(func, arg1, arg2)
@@ -815,6 +726,42 @@ function addon:OnTimeToNextWarningChanged(frame)
 	addon:SetOption("UI.Mail.TimeToNextWarning", timeToNext)
 end
 
+function addon:DDM_Initialize(frame, func)
+	-- This should be used instead of UIDropDownMenu_Initialize, which causes tainting.
+	frame.displayMode = "MENU" 
+	frame.initialize = func
+end
+
+local ICON_CHARACTERS_ALLIANCE = "Interface\\Icons\\Achievement_Character_Gnome_Female"
+local ICON_CHARACTERS_HORDE = "Interface\\Icons\\Achievement_Character_Orc_Male"
+-- mini easter egg icons, if you read the code using these, please don't spoil it :)
+local ICON_CHARACTERS_MIDSUMMER = "Interface\\Icons\\INV_Misc_Toy_07"
+local ICON_CHARACTERS_HALLOWSEND_ALLIANCE = "Interface\\Icons\\INV_Mask_06"
+local ICON_CHARACTERS_HALLOWSEND_HORDE = "Interface\\Icons\\INV_Mask_03"
+local ICON_CHARACTERS_DOTD_ALLIANCE = "Interface\\Icons\\INV_Misc_Bone_HumanSkull_02"
+local ICON_CHARACTERS_DOTD_HORDE = "Interface\\Icons\\INV_Misc_Bone_OrcSkull_01"
+local ICON_CHARACTERS_WINTERVEIL_ALLIANCE = "Interface\\Icons\\Achievement_WorldEvent_LittleHelper"
+local ICON_CHARACTERS_WINTERVEIL_HORDE = "Interface\\Icons\\Achievement_WorldEvent_XmasOgre"
+
+function addon:GetCharacterIcon()
+	local faction = UnitFactionGroup("player")
+	local day = (tonumber(date("%m")) * 100) + tonumber(date("%d"))	-- ex: dec 15 = 1215, for easy tests below
+	local icon = (faction == "Alliance") and ICON_CHARACTERS_ALLIANCE or ICON_CHARACTERS_HORDE
+	
+	if (day >= 1215) or (day <= 102) then				-- winter veil
+		icon = (faction == "Alliance") and ICON_CHARACTERS_WINTERVEIL_ALLIANCE or ICON_CHARACTERS_WINTERVEIL_HORDE
+	elseif (day >= 621) and (day <= 704) then			-- midsummer
+		icon = ICON_CHARACTERS_MIDSUMMER
+	elseif (day >= 1018) and (day <= 1031) then		-- hallow's end
+		icon = (faction == "Alliance") and ICON_CHARACTERS_HALLOWSEND_ALLIANCE or ICON_CHARACTERS_HALLOWSEND_HORDE
+	elseif (day >= 1101) and (day <= 1102) then		-- day of the dead
+		icon = (faction == "Alliance") and ICON_CHARACTERS_DOTD_ALLIANCE or ICON_CHARACTERS_DOTD_HORDE
+	end
+	
+	return icon
+end
+
+
 -- ** Calendar stuff **
 local calendarFirstWeekday = 1
 -- 1 = Sunday, recreated locally to avoid the problem caused by the calendar addon not being loaded at startup.
@@ -843,4 +790,105 @@ function addon:IsItemUnsafe(itemID)
 			return true
 		end
 	end
+end
+
+
+-- ** Equipment ** 
+-- 02/09/2012 : Global to the add-on, should be loaded in the core, ideally code should be in its own file. This will happen later.
+
+addon.Equipment = {}
+
+local ns = addon.Equipment		-- ns = namespace
+
+-- These two tables are necessary to find equivalences between INVTYPEs returned by GetItemInfo and the actual equipment slots.
+-- For instance, the "ranged" slot can contain bows/guns/wands/relics/thrown weapons.
+local inventoryTypes = {
+	["INVTYPE_HEAD"] = 1,		-- 1 means first entry in the EquipmentSlots table (just below this one)
+	["INVTYPE_SHOULDER"] = 2,
+	["INVTYPE_CHEST"] = 3,
+	["INVTYPE_ROBE"] = 3,
+	["INVTYPE_WRIST"] = 4,
+	["INVTYPE_HAND"] = 5,
+	["INVTYPE_WAIST"] = 6,
+	["INVTYPE_LEGS"] = 7,
+	["INVTYPE_FEET"] = 8,
+	
+	["INVTYPE_NECK"] = 9,
+	["INVTYPE_CLOAK"] = 10,
+	["INVTYPE_FINGER"] = 11,
+	["INVTYPE_TRINKET"] = 12,
+	["INVTYPE_WEAPON"] = 13,
+	["INVTYPE_2HWEAPON"] = 14,
+	["INVTYPE_WEAPONMAINHAND"] = 15,
+	["INVTYPE_WEAPONOFFHAND"] = 16,
+	["INVTYPE_HOLDABLE"] = 16,
+	["INVTYPE_SHIELD"] = 17,
+	["INVTYPE_RANGED"] = 18,
+	["INVTYPE_THROWN"] = 18,
+	["INVTYPE_RANGEDRIGHT"] = 18,
+	["INVTYPE_RELIC"] = 18
+}
+
+local slotNames = {
+	[1] = INVTYPE_HEAD,
+	[2] = INVTYPE_SHOULDER,
+	[3] = INVTYPE_CHEST,
+	[4] = INVTYPE_WRIST,
+	[5] = INVTYPE_HAND,
+	[6] = INVTYPE_WAIST,
+	[7] = INVTYPE_LEGS,
+	[8] = INVTYPE_FEET,
+	[9] = INVTYPE_NECK,
+	[10] = INVTYPE_CLOAK,
+	[11] = INVTYPE_FINGER,
+	[12] = INVTYPE_TRINKET,
+	[13] = INVTYPE_WEAPON,
+	[14] = INVTYPE_2HWEAPON,
+	[15] = INVTYPE_WEAPONMAINHAND,
+	[16] = INVTYPE_WEAPONOFFHAND,
+	[17] = INVTYPE_SHIELD,
+	[18] = INVTYPE_RANGED
+}
+
+local slotTypeInfo = {
+	{ color = colors.classMage, name = INVTYPE_HEAD },
+	{ color = colors.classHunter, name = INVTYPE_NECK },
+	{ color = colors.classMage, name = INVTYPE_SHOULDER },
+	{ color = colors.white, name = INVTYPE_BODY },
+	{ color = colors.classMage, name = INVTYPE_CHEST },
+	{ color = colors.classMage, name = INVTYPE_WAIST },
+	{ color = colors.classMage, name = INVTYPE_LEGS },
+	{ color = colors.classMage, name = INVTYPE_FEET },
+	{ color = colors.classMage, name = INVTYPE_WRIST },
+	{ color = colors.classMage, name = INVTYPE_HAND },
+	{ color = colors.orange, name = INVTYPE_FINGER .. " 1" },
+	{ color = colors.orange, name = INVTYPE_FINGER .. " 2" },
+	{ color = colors.orange, name = INVTYPE_TRINKET .. " 1" },
+	{ color = colors.orange, name = INVTYPE_TRINKET .. " 2" },
+	{ color = colors.classHunter, name = INVTYPE_CLOAK },
+	{ color = colors.yellow, name = INVTYPE_WEAPONMAINHAND },
+	{ color = colors.yellow, name = INVTYPE_WEAPONOFFHAND },
+	{ color = colors.classHunter, name = INVTYPE_RANGED },
+	{ color = colors.white, name = INVTYPE_TABARD }
+}
+
+function ns:GetSlotName(slot)
+	return slotNames[slot]
+end
+
+function ns:GetNumSlotTypes()
+	return #slotTypeInfo
+end
+
+function ns:GetSlotTypeInfo(index)
+	local item = slotTypeInfo[index]
+	return item.name, item.color
+end
+
+function ns:GetInventoryTypeIndex(inv)
+	return inventoryTypes[inv]
+end
+
+function ns:GetInventoryTypeName(inv)
+	return slotNames[ inventoryTypes[inv] ]
 end

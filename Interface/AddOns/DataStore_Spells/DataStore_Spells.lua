@@ -60,13 +60,28 @@ local function ScanSpellTab(tabID)
 			if spellType == "FUTURESPELL" then
 				attrib = GetSpellAvailableLevel(index, BOOKTYPE_SPELL)	-- 8 bits for the level
 			end
-			
-			-- bits 0-7 : level (0 if known spell)
-			-- bits 8- : spellID
-			
-			attrib = attrib + LeftShift(spellID, 8)
-			-- all info on this spell can be retrieved with GetSpellInfo()
-			table.insert(spells[tabName], attrib)
+
+			if spellType == "FLYOUT" then	-- flyout spells, like list of mage portals
+				local flyoutID = spellID
+				local _, _, numSlots, isKnown = GetFlyoutInfo(flyoutID)
+				
+				if isKnown then
+					for i = 1, numSlots do
+						local flyoutSpellID, _, isFlyoutSpellKnown = GetFlyoutSlotInfo(flyoutID, i)
+						if isFlyoutSpellKnown then
+							-- all info on this spell can be retrieved with GetSpellInfo()
+							table.insert(spells[tabName], LeftShift(flyoutSpellID, 8))
+						end
+					end
+				end
+			else
+				-- bits 0-7 : level (0 if known spell)
+				-- bits 8- : spellID
+				
+				attrib = attrib + LeftShift(spellID, 8)
+				-- all info on this spell can be retrieved with GetSpellInfo()
+				table.insert(spells[tabName], attrib)
+			end
 		end
 	end
 end

@@ -83,9 +83,9 @@ function Postal_OpenAll:OnEnable()
 		button:SetWidth(120)
 		button:SetHeight(25)
 		if GetLocale() == "frFR" then
-			button:SetPoint("CENTER", InboxFrame, "TOP", -32, -410)
+			button:SetPoint("CENTER", InboxFrame, "TOP", -46, -399)
 		else
-			button:SetPoint("CENTER", InboxFrame, "TOP", -22, -410)
+			button:SetPoint("CENTER", InboxFrame, "TOP", -36, -399)
 		end
 		button:SetText(L["Open All"])
 		button:SetScript("OnClick", function() Postal_OpenAll:OpenAll() end)
@@ -233,7 +233,12 @@ function Postal_OpenAll:ProcessNext()
 		if Postal.db.profile.OpenAll.SpamChat and attachIndex == ATTACHMENTS_MAX_RECEIVE then
 			if not invFull or msgMoney > 0 then
 				local moneyString = msgMoney > 0 and " ["..Postal:GetMoneyString(msgMoney).."]" or ""
-				Postal:Print(format("%s %d: %s%s", L["Processing Message"], mailIndex, msgSubject or "", moneyString))
+				local playerName
+				if (mailType == "AHSuccess" or mailType == "AHWon") then
+					playerName = select(3,GetInboxInvoiceInfo(mailIndex))
+					playerName = playerName and (" ("..playerName..")")
+				end
+				Postal:Print(format("%s %d: %s%s%s", L["Processing Message"], mailIndex, msgSubject or "", moneyString, (playerName or "")))
 			end
 		end
 

@@ -36,12 +36,12 @@
 			</OnClick>
 			<OnMouseDown>
 				if (button == "LeftButton") then
-					MBF:OnDragStart();
+					bachMBF:OnDragStart();
 				end
 			</OnMouseDown>
 			<OnMouseUp>
 				if (button == "LeftButton") then
-					MBF:OnDragStop();
+					bachMBF:OnDragStop();
 				end
 			</OnMouseUp>
 			<OnEnter>
@@ -107,10 +107,10 @@
   </Frames>
   <Scripts>
 	<OnDragStart>
-		MBF:OnDragStart();
+		bachMBF:OnDragStart();
 	</OnDragStart>
 	<OnDragStop>
-		MBF:OnDragStop();		
+		bachMBF:OnDragStop();		
 	</OnDragStop>
   </Scripts>
 </Frame>
@@ -158,12 +158,12 @@
 			</OnClick>
 			<OnMouseDown>
 				if (button == "LeftButton") then
-					MBF:OnDragStart();
+					bachMBF:OnDragStart();
 				end
 			</OnMouseDown>
 			<OnMouseUp>
 				if (button == "LeftButton") then
-					MBF:OnDragStop();
+					bachMBF:OnDragStop();
 				end
 			</OnMouseUp>
 			<OnEnter>

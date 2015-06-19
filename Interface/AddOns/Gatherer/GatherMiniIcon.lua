@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherMiniIcon.lua 879 2010-09-19 12:08:21Z kandoko $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherMiniIcon.lua 972 2012-09-03 02:03:15Z Esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -27,8 +27,11 @@
 
 	Minimap icon
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherMiniIcon.lua $", "$Rev: 879 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherMiniIcon.lua $", "$Rev: 972 $")
 
+local _tr = Gatherer.Locale.Tr
+local _trC = Gatherer.Locale.TrClient
+local _trL = Gatherer.Locale.TrLocale
 
 local miniIcon = CreateFrame("Button", "Gatherer_MinimapOptionsButton", Minimap);
 Gatherer.MiniIcon = miniIcon
@@ -124,6 +127,27 @@ local function update()
 	end
 end
 
+local function drawTooltip( self )
+	Gatherer.Locale.SECTION_HIGHLIGHT_CODE = "|cff1fb3ff"
+	self:AddLine("Gatherer",  1,1,0.5, 1)
+	self:AddLine(_tr("DESCRIPTION"),  1,1,0.5, 1)
+	self:AddLine(_tr("MINIICON_ACTIONS_CLICK"),  1,1,0.5, 1 )
+	self:AddLine(_tr("MINIICON_ACTIONS_SHIFT_CLICK"), 1,1,0.5, 1 )
+	self:AddLine(_tr("MINIICON_ACTIONS_RIGHT_CLICK"),  1,1,0.5, 1)
+	self:AddLine(_tr("MINIICON_ACTIONS_SHIFT_RIGHT_CLICK"),  1,1,0.5, 1)
+end
+
+local function onEnter( self )
+	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT")
+	GameTooltip:ClearLines()
+	drawTooltip(GameTooltip)
+	GameTooltip:Show()
+end
+
+local function onLeave( self )
+	GameTooltip:Hide()
+end
+
 miniIcon:RegisterForClicks("LeftButtonUp","RightButtonUp")
 miniIcon:RegisterForDrag("LeftButton")
 miniIcon:SetScript("OnMouseDown", mouseDown)
@@ -132,6 +156,8 @@ miniIcon:SetScript("OnDragStart", dragStart)
 miniIcon:SetScript("OnDragStop", dragStop)
 miniIcon:SetScript("OnClick", click)
 miniIcon:SetScript("OnUpdate", update)
+miniIcon:SetScript("OnEnter", onEnter)
+miniIcon:SetScript("OnLeave", onLeave)
 
 local sideIcon
 --moved into a function so we can delay LDB creation until after saved variables have been loaded.
@@ -149,25 +175,7 @@ function miniIcon.CreateLDB()
 						--this is a special method for slidebar. Sets the inital button saturation state. true = desaturated
 						iconDesaturated = Desaturated
 					})
-					
-			function sideIcon:OnTooltipShow()
-				self:AddLine("Gatherer",  1,1,0.5, 1)
-				self:AddLine("Gatherer is an addon that allows you to remember your gathering locations and view them on either or all of your main map, your minimap, or in an onscreen display HUD. It also allows you to share your finds with your guild, raid or your friends",  1,1,0.5, 1)
-				self:AddLine("|cff1fb3ff".."Click|r to toggle display of nodes.",  1,1,0.5, 1 )
-				self:AddLine("|cff1fb3ff".."Shift-Click|r to toggle HUD display.", 1,1,0.5, 1 )
-				self:AddLine("|cff1fb3ff".."Right-Click|r to view the gather report.",  1,1,0.5, 1)
-				self:AddLine("|cff1fb3ff".."Shift-Right-Click|r to edit the configuration.",  1,1,0.5, 1)
-			end
-			function sideIcon:OnEnter()
-				GameTooltip:SetOwner(self, "ANCHOR_NONE")
-				GameTooltip:SetPoint("TOPLEFT", self, "BOTTOMLEFT")
-				GameTooltip:ClearLines()
-				sideIcon.OnTooltipShow(GameTooltip)
-				GameTooltip:Show()
-			end
-			function sideIcon:OnLeave()
-				GameTooltip:Hide()
-			end
+			sideIcon.OnTooltipShow = drawTooltip
 		end
 	end
 end

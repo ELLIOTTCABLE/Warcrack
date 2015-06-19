@@ -1,6 +1,6 @@
-## Interface: 40300
+## Interface: 60100
 ## Title: Tidy Plates: Grey Theme
-## Notes: Use apostrophes wisely. 
+## Notes: Use apostrophes wisely.
 ## Author: Binny
 ## Dependencies: TidyPlates, TidyPlatesHub
 

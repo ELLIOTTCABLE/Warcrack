@@ -1,5 +1,5 @@
 --[[Consolid8, a World of Warcraft chat frame addon
-	Copyright 2011 Harry Cutts
+	Copyright 2015 Harry Cutts
 
 	This work by Harry Cutts is licensed under a
 	Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -220,7 +220,7 @@ local function LogLoot(link, quantity)
 	elseif countItems[name] then
 		items[name] = (items[name] or 0) + quantity
 
-	elseif rarity > ITEM_QUALITY_POOR then -- the item is not poor quality
+	elseif rarity > 0 then -- the item is not poor quality
 		local msg = (quantity ~= 1) and format("%sx%s", link, quantity) or link
 		lootString = ( lootString and (lootString .. ", " .. msg) ) or msg
 	else

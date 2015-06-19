@@ -76,7 +76,7 @@ function Postal_Select:OnEnable()
 		openButton = CreateFrame("Button", "PostalSelectOpenButton", InboxFrame, "UIPanelButtonTemplate")
 		openButton:SetWidth(120)
 		openButton:SetHeight(25)
-		openButton:SetPoint("RIGHT", InboxFrame, "TOP", 5, -53)
+		openButton:SetPoint("RIGHT", InboxFrame, "TOP", 0, -42)
 		openButton:SetText(L["Open"])
 		openButton:SetScript("OnClick", function() Postal_Select:HandleSelect(1) end)
 		openButton:SetFrameLevel(openButton:GetFrameLevel() + 1)
@@ -87,14 +87,14 @@ function Postal_Select:OnEnable()
 		returnButton = CreateFrame("Button", "PostalSelectReturnButton", InboxFrame, "UIPanelButtonTemplate")
 		returnButton:SetWidth(120)
 		returnButton:SetHeight(25)
-		returnButton:SetPoint("LEFT", InboxFrame, "TOP", 10, -53)
+		returnButton:SetPoint("LEFT", InboxFrame, "TOP", 5, -42)
 		returnButton:SetText(L["Return"])
 		returnButton:SetScript("OnClick", function() Postal_Select:HandleSelect(2) end)
 		returnButton:SetFrameLevel(returnButton:GetFrameLevel() + 1)
 	end
 
 	--indent to make room for the checkboxes
-	MailItem1:SetPoint("TOPLEFT", "InboxFrame", "TOPLEFT", 48, -80)
+	MailItem1:SetPoint("TOPLEFT", "InboxFrame", "TOPLEFT", 29, -68)
 	for i = 1, 7 do
 		_G["MailItem"..i.."ExpireTime"]:SetPoint("TOPRIGHT", "MailItem"..i, "TOPRIGHT", 10, -4)
 		_G["MailItem"..i]:SetWidth(280)
@@ -297,7 +297,13 @@ function Postal_Select:ProcessNext()
 			if Postal.db.profile.Select.SpamChat and attachIndex == ATTACHMENTS_MAX_RECEIVE then
 				if not invFull or msgMoney > 0 then
 					local moneyString = msgMoney > 0 and " ["..Postal:GetMoneyString(msgMoney).."]" or ""
-					Postal:Print(format("%s %d: %s%s", L["Open"], mailIndex, msgSubject or "", moneyString))
+					local playerName
+					local mailType = Postal:GetMailType(msgSubject)
+					if (mailType == "AHSuccess" or mailType == "AHWon") then
+						playerName = select(3,GetInboxInvoiceInfo(mailIndex))
+						playerName = playerName and (" ("..playerName..")")
+					end
+					Postal:Print(format("%s %d: %s%s%s", L["Open"], mailIndex, msgSubject or "", moneyString, (playerName or "")))
 				end
 			end
 

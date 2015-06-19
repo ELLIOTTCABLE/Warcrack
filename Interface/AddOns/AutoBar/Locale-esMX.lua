@@ -187,6 +187,7 @@ if (GetLocale() == "esMX") then
 		["AutoBarClassBarBasic"] = "Básica",
 		["AutoBarClassBarExtras"] = "Extras",
 		["AutoBarClassBarDeathKnight"] = "Death Knight",
+		["AutoBarClassBarMonk"] = "Monk",
 		["AutoBarClassBarDruid"] = "Druida",
 		["AutoBarClassBarHunter"] = "Cazador",
 		["AutoBarClassBarMage"] = "Mago",
@@ -203,7 +204,9 @@ if (GetLocale() == "esMX") then
 		["AutoBarCooldownHeader"] = "Reutilización Poción y Piedra",
 		["AutoBarClassBarHeader"] = "Barra de Clase",
 
-		["AutoBarButtonAura"] = "Aura / Aspecto",
+		["AutoBarButtonAspect"] = "Aspecto",
+		["AutoBarButtonPoisonLethal"] = "Poison: Lethal",
+		["AutoBarButtonPoisonNonlethal"] = "Poison: Nonlethal",
 		["AutoBarButtonBandages"] = "Vendas",
 		["AutoBarButtonBattleStandards"] = "Normas de Batalla",
 		["AutoBarButtonBuff"] = "Buff",
@@ -259,7 +262,6 @@ if (GetLocale() == "esMX") then
 		["AutoBarButtonTotemAir"] = "Totem de Aire",
 		["AutoBarButtonTotemFire"] = "Totem de Fuego",
 		["AutoBarButtonTotemWater"] = "Totem de Agua",
-		["AutoBarButtonTrack"] = "Pista",
 		["AutoBarButtonTrap"] = "Trampa",
 		["AutoBarButtonTrinket1"] = "Abalorio 1",
 		["AutoBarButtonTrinket2"] = "Abalorio 2",
@@ -502,7 +504,9 @@ if (GetLocale() == "esMX") then
 		["Misc.Lockboxes"] = LOCKED;
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
-		["Spell.Aura"] = "Aura / Aspecto";
+		["Spell.Aspect"] = "Aspecto";
+		["Spell.Poison.Lethal"] = "Poison: Lethal";
+		["Spell.Poison.Nonlethal"] = "Poison Nonlethal";
 		["Spell.Buff.Weapon"] = "Buff Magias: Arma";
 		["Spell.Class.Buff"] = "Buff: Clase";
 		["Spell.Class.Pet"] = "Mascota de Clase";
@@ -520,7 +524,6 @@ if (GetLocale() == "esMX") then
 		["Spell.Totem.Fire"] = "Totem de Fuego";
 		["Spell.Totem.Water"] = "Totem de Agua";
 		["Spell.Seal"] = "Sello";
-		["Spell.Track"] = "Pista";
 		["Spell.Trap"] = "Trampa";
 		["Misc.Booze"] = "Alcohol";
 		["Misc.Hearth"] = "Piedra de hogar";

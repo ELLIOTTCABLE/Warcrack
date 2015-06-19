@@ -1,0 +1,166 @@
+﻿<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Garrisons.lua"></Script>
+
+	<Button name="AltoMissionRewardTemplate" virtual="true">
+		<Size x="34" y="34" />
+		<Layers>
+			<Layer level="BACKGROUND">	
+				<Texture parentKey="Icon" file="Interface\Icons\inv_garrison_resource">
+					<Size x="34" y="34" />
+					<Anchors>
+						<Anchor point="LEFT" />
+					</Anchors>
+				</Texture>
+				<FontString parentKey="Quantity" justifyH="RIGHT" inherits="NumberFontNormal">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Icon" x="-2" y="2" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>
+				if self.id then
+					Altoholic:Item_OnEnter(self)
+					return
+				end
+				GameTooltip:SetOwner(self, "ANCHOR_LEFT")
+				GameTooltip:AddLine(self.title)
+				GameTooltip:AddLine(self.tooltip, 1, 1, 1)
+				GameTooltip:Show()
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</Button>
+	
+	<Button name="AltoMissionFollowerTemplate" virtual="true">
+		<Size x="36" y="36" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Ring" atlas="GarrMission_PortraitRing_Empty">
+					<Size x="36" y="36" />
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture parentKey="Portrait">
+					<Size x="26" y="26" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="5" y="-2" />
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>
+				Altoholic:DrawFollowerTooltip(self)
+			</OnEnter>
+			<OnLeave>
+				FloatingGarrisonFollowerTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</Button>
+	
+	<Button name="AltoGarrisonMissionEntryTemplate" virtual="true">
+		<Size x="615" y="41" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<FontString parentKey="Name" inherits="GameFontNormal" justifyH="LEFT">
+					<Size x="220" y="32" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="53" y="8" />
+					</Anchors>
+				</FontString>
+				<Texture parentKey="CostIcon" file="Interface\Icons\inv_garrison_resource" hidden="true" alphaMode="ADD">
+					<Size x="16" y="16"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Name" relativePoint="BOTTOMLEFT" x="0" y="6" />
+					</Anchors>
+				</Texture>
+				<FontString parentKey="Cost" inherits="GameFontNormal" justifyH="LEFT" hidden="true">
+					<Size x="220" y="32" />
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.CostIcon" relativePoint="TOPRIGHT" x="2" y="7" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Remaining" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size x="120" y="32" />
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Name" relativePoint="TOPRIGHT" x="110" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Success" inherits="GameFontNormal" justifyH="RIGHT">
+					<Size x="120" y="32" />
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Name" relativePoint="TOPRIGHT" x="110" y="-16" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button parentKey="Type" inherits="AltoItemButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="10" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Follower1" inherits="AltoMissionFollowerTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.Name" relativePoint="TOPRIGHT" x="5" y="-10" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Follower2" inherits="AltoMissionFollowerTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.Follower1" relativePoint="RIGHT" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Follower3" inherits="AltoMissionFollowerTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.Follower2" relativePoint="RIGHT" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Reward1" inherits="AltoMissionRewardTemplate">
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="-50" y="0" />
+				</Anchors>
+			</Button>
+			<Button parentKey="Reward2" inherits="AltoMissionRewardTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.Reward1" relativePoint="RIGHT" x="6" y="0"/>
+				</Anchors>
+			</Button>
+			
+		</Frames>
+		<HighlightTexture name="$parentHighlight" file="Interface\HelpFrame\HelpFrameButton-Highlight" alphaMode="ADD">
+			<Size x="560" y="39" />
+			<Anchors>
+				<Anchor point="TOPLEFT" x="50" y="0" />
+			</Anchors>
+			<TexCoords left="0" right="1.0" top="0" bottom="0.578125"/>
+		</HighlightTexture>
+	</Button>
+
+	<Frame name="AltoholicFrameGarrisonMissions" parent="AltoholicTabCharacters" hidden="true">
+		<Size x="615" y="306" />
+		<Anchors>
+			<Anchor point="TOPRIGHT" x="39" y="-105" />
+		</Anchors>
+		<Frames>
+			<ScrollFrame parentKey="ScrollFrame" inherits="AltoBaseScrollFrameTemplate" hidden="true">
+				<Scripts>
+					<OnVerticalScroll>
+						self:OnVerticalScroll(offset, 41, Altoholic.Garrisons.Update)
+					</OnVerticalScroll>
+				</Scripts>
+				<KeyValues>
+					<KeyValue key="numRows" value="7" type="number" />
+					<KeyValue key="rowHeight" value="41" type="number" />
+					<KeyValue key="rowTemplate" value="AltoGarrisonMissionEntryTemplate" />
+				</KeyValues>
+			</ScrollFrame>
+		</Frames>
+	</Frame>
+</Ui>

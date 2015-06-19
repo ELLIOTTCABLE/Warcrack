@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GathererNodeSearch.lua 894 2010-12-02 22:46:33Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GathererNodeSearch.lua 1114 2014-10-11 07:13:26Z ccox $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -29,7 +29,11 @@
 --]]
 
 
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GathererNodeSearch.lua $", "$Rev: 894 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GathererNodeSearch.lua $", "$Rev: 1114 $")
+
+local _tr = Gatherer.Locale.Tr
+local _trC = Gatherer.Locale.TrClient
+local _trL = Gatherer.Locale.TrLocale
 
 Gatherer.NodeSearch = {}
 local public = Gatherer.NodeSearch
@@ -92,25 +96,32 @@ frame.DragBottom:SetScript("OnMouseUp", function() frame:StopMovingOrSizing() en
 frame.Done = CreateFrame("Button", nil, frame, "OptionsButtonTemplate")
 frame.Done:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -10, 10)
 frame.Done:SetScript("OnClick", function() public.Hide() end)
-frame.Done:SetText("Done")
+frame.Done:SetText(_tr("DONE"))
 
 --Display Gathereables Report
 frame.GatherablesReport = CreateFrame("Button", nil, frame, "OptionsButtonTemplate")
-frame.GatherablesReport:SetWidth(150)
-frame.GatherablesReport:SetPoint("BOTTOM", frame, "BOTTOM", -142, 10)
+frame.GatherablesReport:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 8, 10)
 frame.GatherablesReport:SetScript("OnClick", function() frame:Hide() Gatherer.Report.Show() end)
-frame.GatherablesReport:SetText("Gatherables Report")
+frame.GatherablesReport:SetText(_tr("LABEL_REPORT"))
+local buttonWidth = frame.GatherablesReport:GetFontString():GetWidth() + 15
+if ( buttonWidth > 160 ) then buttonWidth = 160 end
+if ( buttonWidth < 90 ) then buttonWidth = 90 end
+frame.GatherablesReport:SetWidth(buttonWidth)
 
 --Display Configuration
 frame.Config = CreateFrame("Button", "", frame, "OptionsButtonTemplate")
-frame.Config:SetPoint("BOTTOM", frame, "BOTTOM", -20, 10)
+frame.Config:SetPoint("LEFT", frame.GatherablesReport, "RIGHT", 0, 0)
 frame.Config:SetScript("OnClick", function() frame:Hide() Gatherer.Config.ShowOptions() end)
-frame.Config:SetText("Config")
+frame.Config:SetText(_tr("LABEL_CONFIG"))
+buttonWidth = frame.Config:GetFontString():GetWidth() + 15
+if ( buttonWidth > 160 ) then buttonWidth = 160 end
+if ( buttonWidth < 90 ) then buttonWidth = 90 end
+frame.Config:SetWidth(buttonWidth)
 
 --Add Title to the Top
 frame.title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
 frame.title:SetPoint("CENTER", frame, "TOP", 0, -20)
-frame.title:SetText("Node Density Report")
+frame.title:SetText(_tr("DENSITY_SEARCH_TITLE"))
 
 local SelectBox = LibStub:GetLibrary("SelectBox")
 local ScrollSheet = LibStub:GetLibrary("ScrollSheet")
@@ -126,7 +137,7 @@ frame.searchBox:SetScript("OnEnterPressed", function() private.startSearch(_, _,
 --Search Button
 frame.searchButton = CreateFrame("Button", nil, frame, "OptionsButtonTemplate")
 frame.searchButton:SetPoint("TOPLEFT", frame.searchBox, "BOTTOMLEFT", -6, -1)
-frame.searchButton:SetText("Search")
+frame.searchButton:SetText(_tr("SEARCH"))
 frame.searchButton:SetScript("OnClick", function() private.startSearch(_, _, frame.searchBox:GetText() ) end)
 
 --Select Box, used to choose which Continent Stats come from
@@ -135,6 +146,23 @@ function private.ChangeControls(obj, arg1,arg2,...)
 	frame.SelectBoxSetting = {arg1, arg2}
 end
 
+
+-- convert list of zoneID1, zoneName1, zoneID2, zoneName2, etc.
+-- into just a list of zone names
+local function stripZoneIDs(...)
+	local n = select("#", ...)
+	--print("zoneList count = ", n );
+	local temp = {};
+	local index = 1;
+	for i = 2, n, 2 do
+		temp[index] = select(i, ...);
+		--print("  item = ", temp[index] );
+		index = index + 1;
+	end
+	return temp;
+end
+
+
 -- Use a callback to generate the list of continents, so that the call
 -- to GetMapContinents is deferred until it is defined. Also establish
 -- the maximum continent index here
@@ -142,11 +170,11 @@ local continents
 local maxCont
 local function vals()
 	if not continents then
-		continents = {GetMapContinents()}
+		continents = stripZoneIDs(GetMapContinents())
 		maxCont = table.maxn(continents)
 	end
 	local items = {
-		{"all", "All"},
+		{"all", _tr("ALL")},
 	}
 	for n, text in ipairs(continents) do
 		table.insert(items, {n, text})
@@ -160,7 +188,7 @@ frame.selectbox.box:SetPoint("TOPLEFT", frame, "TOPLEFT", 180,-56)
 frame.selectbox.box.element = "selectBox"
 frame.selectbox.box:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 frame.selectbox.box:SetPoint("BOTTOMLEFT", frame, "TOPLEFT", 0,-90)
-frame.selectbox.box:SetText("All")
+frame.selectbox.box:SetText(_tr("ALL"))
 
 --Create Scrollframe
 frame.resultlist = CreateFrame("Frame", nil, frame)
@@ -197,10 +225,10 @@ function private.onSelect(...)
 end
 
 frame.resultlist.sheet = ScrollSheet:Create(frame.resultlist, {
-		{ "Location", "TEXT",  123},
-		{ "Type", "TEXT",  137},
-		{ "# Nodes", "NUMBER",  67},
-		{ "Percent", "NUMBER",  67},
+		{ _tr("DENSITY_COLUMN_HEADER_LOCATION"), "TEXT",  123},
+		{ _tr("DENSITY_COLUMN_HEADER_TYPE"), "TEXT",  137},
+		{ _tr("DENSITY_COLUMN_HEADER_NUM_NODE"), "NUMBER",  67},
+		{ _tr("DENSITY_COLUMN_HEADER_PERCENT"), "NUMBER",  67},
 
 
 	},private.onEnter, private.onLeave, private.onClick, private.onResize, private.onSelect)
@@ -211,13 +239,16 @@ function private.getZonesWithNodes(start, finish, gatherName)
 	local gType = Gatherer.Nodes.Objects[gatherName]
 	if ( gType ) then
 		for continent = start, finish do
-			for _, zone in Gatherer.Storage.GetAreaIndices(continent) do
-				if Gatherer.Storage.IsGatherInZone( continent, zone, gatherName, gType ) then
-					local nodes = Gatherer.Storage.GetGatherCountsForZone( continent, zone, gatherName, gType )
-					local totalAll = Gatherer.Storage.GetNodeCounts( continent, zone )
-					local treasures, herbs, ores = Gatherer.Storage.GetNodeCountsByGatherType( continent, zone )
-					local type = Gatherer.Nodes.Objects[gatherName]
-					table.insert(Data, {["continent"] = continent, ["zone"] = zone, ["gatherName"] = gatherName, ["nodes"] = nodes, ["totalAll"] = totalAll, ["HERB"] = herbs, ["MINE"] = ores, ["OPEN"] = treasures, ["type"] = type})
+			local validTokens = Gatherer.ZoneTokens.TokensByContinent[continent]
+			for _, zone in Gatherer.Storage.GetAreaIndices() do
+				if ( validTokens[zone] ) then
+					if Gatherer.Storage.IsGatherInZone(zone, gatherName, gType) then
+						local nodes = Gatherer.Storage.GetGatherCountsForZone(zone, gatherName, gType)
+						local totalAll = Gatherer.Storage.GetNodeCounts(zone)
+						local archfinds, treasures, herbs, ores = Gatherer.Storage.GetNodeCountsByGatherType(zone)
+						local type = Gatherer.Nodes.Objects[gatherName]
+						table.insert(Data, {["continent"] = continent, ["zone"] = zone, ["gatherName"] = gatherName, ["nodes"] = nodes, ["totalAll"] = totalAll, ["HERB"] = herbs, ["MINE"] = ores, ["OPEN"] = treasures, ["ARCH"] = archfinds, ["type"] = type})
+					end
 				end
 			end
 		end
@@ -246,10 +277,10 @@ function private.nodesByPercent()
 	local data = {}
 	for i,v in pairs( Data ) do
 		local nodes = v.nodes
-		local total = v[v.type] -- We store the type as HERB, MINE, OPEN  and can then use it here to refrence Data.HERB Data.OPEN etc..
+		local total = v[v.type] -- We store the type as HERB, MINE, OPEN, ARCH and can then use it here to refrence Data.HERB Data.OPEN etc..
 		local pct =  floor(nodes*100/total + 0.5)
 
-		table.insert(data, {Gatherer.Util.ZoneNames[v.continent][v.zone], Gatherer.Util.GetNodeName(v.gatherName), nodes, pct,} )
+		table.insert(data, {Gatherer.ZoneTokens.ZoneNames[v.zone], Gatherer.Util.GetNodeName(v.gatherName), nodes, pct,} )
 	end
 	Data = {} --clear data for next round of searches
 	frame.resultlist.sheet:SetData(data, style)

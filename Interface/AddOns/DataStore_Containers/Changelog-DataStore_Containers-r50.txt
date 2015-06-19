@@ -1,0 +1,15 @@
+------------------------------------------------------------------------
+r50 | thaoky | 2015-04-06 15:42:18 +0000 (Mon, 06 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Containers.lua
+
+Added support for bag rarity
+------------------------------------------------------------------------
+r49 | thaoky | 2015-02-25 18:23:39 +0000 (Wed, 25 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/DataStore_Containers.lua
+   M /trunk/DataStore_Containers.toc
+
+6.1.001 Commit
+------------------------------------------------------------------------

@@ -1,5 +1,102 @@
-CHANGELOG (- done, = to test, + todo):
+CHANGELOG
 ---------------------------------------
+
+5.0.0
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10953
+- GATH-218: add basic WoD gatherables (Herbs/Ore/Archaeology)
+- GATH-222: correct problem with conflicts between zones with the same name
+- GATH-221: merge World Map show/hide button into default UI dropdown
+
+4.4.2
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10952
+- GATH-216: WoW 6.0.2 compatibility (not WoD)
+- GATH-219: update Astrolabe library
+
+4.4.1
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10852
+- GATH-215: Gatherer processes shared gathers sent by player
+
+4.4.0
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10755
+- GATH-208: updated for WoW v5.4
+
+4.3.1
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10754
+- GATH-206: process updated strings from Wowhead for Game Objects 
+
+4.3.0
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10753
+- GATH-204: Mantid Archaeology
+- GATH-205: test for WoW 5.3
+
+4.2.0
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10752
+- added zone tokens for new zones introduced in WoW 5.2
+
+4.1.0
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10653
+- GATH-201: update to latest version of Astrolabe which supports custom Minimaps
+
+4.0.6
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10656
+- GATH-199: fix a bug which prevented upgrading from a pre-cataclysm database
+
+4.0.5
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10655
+- GATH-195: add tracking of Onyx Egg
+- GATH-196: add tracking of Dark Soil
+- GATH-193: fix option to disable Archaeology display
+- GATH-191: node deletion now works correctly and deletes all selected objects
+- GATH-99:  improve Gathererables Report search field to accept prefix of + to require a token match and a prefix of - to exclude nodes which match a token
+
+4.0.4
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10654
+- GATH-186: fixed error thrown by HUD when displaying party memebers
+- GATH-189: support database plugins
+- GATH-185: add Runestone Treasure Chest
+
+4.0.3
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10652
+- GATH-181: added custom icons for gatherables that are missing them
+- GATH-178: updated with latest string translations, added more node names for itIT and updated two node names for frFR
+
+4.0.2
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10554
+- GATH-17:  All user visible Strings should now be available for translation (with the exception of the slash command help)
+- GATH-180: support all available Game locales, even if we don't have any translations yet
+- GATH-132: Keybinding text is now set correctly (and avaiable for translation)
+- GATH-179: node difficulties in tooltip only work in English
+
+4.0.1
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10553
+- GATH-177: fix sharing (broken by 4.0.0)
+
+4.0.0
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10552
+- GATH-167: WoW 5.0 Compatibility
++ GATH-168: MoP Ore/Herbs added.  Treasure has not yet been considered, nor have non-English translations been added yet.
+- GATH-169: Archaeology support is now completely custom from other Gathererables.  Nodes are now only displayed on the Minimap, and only for a brief time after Survey is cast.  
+
+3.3.0
+========
+Version Issue List: http://jira.norganna.org/browse/GATH/fixforversion/10532
+- GATH-160: Archaeology are now fully supported.  Display is basic and will be expanded upon.
+- GATH-163: Added difficulties for all known nodes.
 
 3.2.4
 ========
@@ -516,4 +613,4 @@ Deleted a rogue print2 statement.
 - Added giant clam treasure
 
 --------------
-Revision: $Id: ChangeLog.txt 925 2011-06-29 02:56:13Z Esamynn $
+Revision: $Id: ChangeLog.txt 1134 2014-11-14 01:27:24Z Esamynn $

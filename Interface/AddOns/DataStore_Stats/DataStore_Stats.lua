@@ -34,15 +34,16 @@ local function ScanStats()
 	
 	local t = {}
 	-- *** resistances  ***
-	for i = 1, 6 do
-		_, t[i] = UnitResistance("player", i)
+	-- Removed in MoP
+	-- for i = 1, 6 do
+		-- _, t[i] = UnitResistance("player", i)
 		-- base, total, bonus, minus = UnitResistance(unitId [, resistanceIndex])
 		-- base = base
 		-- total = total after all modifiers
 		-- bonus = positive modif total
 		-- minus = negative ...
-	end
-	stats["Resistances"] = table.concat(t, "|")	--	["Resistances"] = "holy | fire | nature | frost | shadow | arcane"
+	-- end
+	-- stats["Resistances"] = table.concat(t, "|")	--	["Resistances"] = "holy | fire | nature | frost | shadow | arcane"
 
 	-- *** base stats ***
 	for i = 1, 5 do
@@ -100,6 +101,7 @@ local function ScanStats()
 	stats["PVP"] = table.concat(t, "|")	--	["PVP"] = "honorable kills | dishonorable kills"
 	
 	-- *** Arena Teams ***
+	--[[
 	for i = 1, MAX_ARENA_TEAMS do
 		local teamName, teamSize = GetArenaTeam(i)
 		if teamName then
@@ -107,6 +109,7 @@ local function ScanStats()
 			-- more info here : http://www.wowwiki.com/API_GetArenaTeam
 		end
 	end
+	--]]
 	
 	addon.ThisCharacter.lastUpdate = time()
 end

@@ -63,7 +63,7 @@ local function createconfig()
 				order = 1,
 				type = "description",
 				name = L["TomTom provides you with a floating coordinate display that can be used to determine your current position.  These options can be used to enable or disable this display, or customize the block's display."],
-			},      
+			},
 			enable = {
 				order = 2,
 				type = "toggle",
@@ -156,7 +156,7 @@ local function createconfig()
 
 	options.args.crazytaxi = {
 		type = "group",
-		order = 3, 
+		order = 3,
 		name = L["Waypoint Arrow"],
 		get = get,
 		set = set,
@@ -165,7 +165,7 @@ local function createconfig()
 				order = 1,
 				type = "description",
 				name = L["TomTom provides an arrow that can be placed anywhere on the screen.  Similar to the arrow in \"Crazy Taxi\" it will point you towards your next waypoint"],
-			},   
+			},
 			enable = {
 				order = 2,
 				type = "toggle",
@@ -186,6 +186,7 @@ local function createconfig()
 				type = "toggle",
 				name = L["Lock waypoint arrow"],
 				desc = L["Locks the waypoint arrow, so it can't be moved accidentally"],
+				width = "double",
 				arg = "arrow.lock",
 			},
 			rightclick = {
@@ -226,6 +227,7 @@ local function createconfig()
 				name = L["\"Arrival Distance\""],
 				desc = L["This setting will control the distance at which the waypoint arrow switches to a downwards arrow, indicating you have arrived at your destination"],
 				min = 0, max = 150, step = 5,
+				width = "double",
 				arg = "arrow.arrival",
 			},
             enablePing = {
@@ -236,10 +238,26 @@ local function createconfig()
                 width = "double",
                 arg = "arrow.enablePing",
             },
+			hideDuringPetBattles = {
+				order = 13,
+				type = "toggle",
+				name = L["Hide the crazy arrow display during pet battles"],
+				desc = L["When a pet battle begins, the crazy arrow will be hidden from view. When you exit the pet battle, it will be re-shown."],
+				width = "double",
+				arg = "arrow.hideDuringPetBattles",
+			},
+			stickyCorpse = {
+				order = 14,
+				type = "toggle",
+				name = L["Allow the corpse arrow to override other waypoints"],
+				desc = L["When the player is dead and has a waypoint towards their corpse, it will prevent other waypoints from changing the crazy arrow"],
+				width = "double",
+				arg = "arrow.stickycorpse",
+			},
 			display = {
 				type = "group",
 				name = L["Arrow display"],
-				order = 13,
+				order = 15,
 				inline = true,
 				args = {
 					help = {
@@ -326,7 +344,7 @@ local function createconfig()
 			color = {
 				type = "group",
 				name = L["Arrow colors"],
-				order = 10,
+				order = 15,
 				inline = true,
 				args = {
 					help = {
@@ -358,9 +376,17 @@ local function createconfig()
 						arg = "arrow.badcolor",
 						hasAlpha = false,
 					},
+					exactcolor = {
+						order = 5,
+						type = "color",
+						name = L["Exact color"],
+						desc = L["The color to be displayed when you are moving in the exact direction of the active waypoint"],
+						arg = "arrow.exactcolor",
+						hasAlpha = false,
+					},
 				},
 			},
-		},   
+		},
 	} -- End crazy taxi options
 
 	options.args.minimap = {
@@ -385,7 +411,7 @@ local function createconfig()
 			otherzone = {
 				type = "toggle",
 				name = L["Display waypoints from other zones"],
-				desc = L["TomTom can hide waypoints in other zones, this setting toggles that functionality"],   
+				desc = L["TomTom can hide waypoints in other zones, this setting toggles that functionality"],
 				width = "double",
 				arg = "minimap.otherzone",
 				disabled = true,
@@ -430,7 +456,7 @@ local function createconfig()
 				order = 3,
 				type = "toggle",
 				name = L["Display waypoints from other zones"],
-				desc = L["TomTom can hide waypoints in other zones, this setting toggles that functionality"],   
+				desc = L["TomTom can hide waypoints in other zones, this setting toggles that functionality"],
 				width = "double",
 				arg = "worldmap.otherzone",
 				disabled = true,
@@ -631,8 +657,9 @@ local function createconfig()
 				type = "range",
 				order = 4,
 				name = L["Clear waypoint distance"],
-				desc = L["Waypoints can be automatically cleared when you reach them.  This slider allows you to customize the distance in yards that signals your \"arrival\" at the waypoint.  A setting of 0 turns off the auto-clearing feature\n\nChanging this setting only takes effect after reloading your interface."],  
+				desc = L["Waypoints can be automatically cleared when you reach them.  This slider allows you to customize the distance in yards that signals your \"arrival\" at the waypoint.  A setting of 0 turns off the auto-clearing feature\n\nChanging this setting only takes effect after reloading your interface."],
 				min = 0, max = 150, step = 1,
+				width = "double",
 				arg = "persistence.cleardistance",
 			},
 			corpse_arrow = {
@@ -642,6 +669,17 @@ local function createconfig()
 				desc = L["TomTom can automatically set a waypoint when you die, guiding you back to your corpse"],
 				width = "double",
 				arg = "general.corpse_arrow",
+			},
+			reset_waypoint_options = {
+				type = "execute",
+				order = 7,
+				name = L["Reset waypoint display options to current"],
+				desc = L["If you have changed the waypoint display settings (minimap, world), this will re-set all waypoints to the current options."],
+				func = function()
+					TomTom:ResetWaypointOptions()
+					TomTom:ReloadWaypoints()
+				end,
+				width = "double",
 			},
 		},
 	}
@@ -658,7 +696,7 @@ local function createconfig()
 				order = 1,
 				type = "description",
 				name = L["TomTom can be configured to set waypoints for the quest objectives that are shown in the watch frame and on the world map.  These options can be used to configure these options."],
-			},      
+			},
 			enable = {
 				order = 2,
 				type = "toggle",

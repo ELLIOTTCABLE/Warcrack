@@ -122,6 +122,9 @@ L["GATHERDESC2_DESC"] = "Settings for the Blizzard Minimap Buttons"
 L["Collect Buttons"] = true
 L["COLLECT2_DESC"] = "Collect the Blizzard Minimap Buttons"
 
+L["Exclude Queue Button"] = true
+L["ExcludeLFG_DESC"] = "Exclude the Queue Status Button"
+
 L["Hide Mail"] = true
 L["HIDEMAIL_DESC"] = "Hide the Blizzard New Mail Icon"
 

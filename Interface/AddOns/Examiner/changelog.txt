@@ -1,3 +1,82 @@
+Examiner Changes | 2014 Oct 16
+------------------------------
+- TOC version has been changed to 60000 for the Warlords of Draenor 6.0.2 patch.
+- Talents: Fixed for WoD. Modifed things around slightly to fit in a new tier of talents (tanks Netrox). Corrected the passed parameter to GetTalentInfo() as well as the expected returns. Now using the new/renamed constants, i.e. MAX_TALENT_TIERS.
+- Guild: Fixed for WoD. Changed to work again with the removal of guild XP and level.
+- Updated the "GetUpgradedItemLevel" library. This update will again properly find the correct itemLevel of upgraded items.
+- Stats: Player defenses will now show the "PvP Power" stat. It was being tallied by LibGearExam before, but just not shown anywhere within Examiner.
+- Localization: Updated the Korean file "koKR.lua". Thanks to fallendos.
+- LibGearExam: The "PvP Power" string is now obtained from the translated global constant STAT_PVP_POWER.
+- LibGearExam: Changed the itemLink patterns to be more robust and future-proof.
+
+Examiner Changes | 2014 May 24
+------------------------------
+- Updated the "GetUpgradedItemLevel.lua" library, to include the new upgrade IDs.
+
+Examiner Changes | 2014 Mar 01
+------------------------------
+- Removed some global namespace polution from the talents module.
+
+Examiner Changes | 2014 Feb 24
+------------------------------
+- PvP: This module has been updated by ywfn, to work with all the PvP and battleground changes.
+
+Examiner Changes | 2013 Sep 21
+------------------------------
+- Changed the TOC version to 50400 for the 5.4 patch.
+- PvP: Updated this module to work with the now removed API functions. Arena data is no longer supported by WoW. Loading a cached unit that had Arena data stored, will still show however.
+- GetUpgradedItemLevel: Patch 5.4: Added IDs 491 to 498 to the table.
+
+Examiner Changes | 2013 May 22
+------------------------------
+- Changed the TOC version to 50300 for the 5.3 patch.
+- Moved the GetUpgradedItemLevelFromItemLink() function into its own Lua file.
+- GetUpgradedItemLevel: Patch 5.3: Added the 465/466/467 IDs (0/4/8 lvls) to the table.
+- GetUpgradedItemLevel: Patch 5.2: Added the 470 ID (8 lvls) to the table.
+
+Examiner Changes | 2013 Apr 19
+------------------------------
+- Changed the TOC version to 50200 for the 5.2 patch.
+- LibGearExam: Removed a cause for a scan alert debug message. A string pattern match which had been marked obsolete, has again appeared in item tooltips from a new metagem.
+
+Examiner Changes | 2013 Feb 19
+------------------------------
+- Changed the TOC version to 50100 for the 5.1 patch.
+- Items should now show the proper item level when it has been upgraded.
+- Removed the code that allowed the "Inspect" item of the drop down unit frame menu to be available at any distance. It is believed this was causing taint. If you want to keep inspecting at any range, assign a keybinding to Examiner.
+- GearList: No longer thinks that head pieces are a viable target for enchants.
+
+Examiner Changes | 2012 Oct 30
+------------------------------
+- Added new "Delayed Scan" module. It should fix some of issues where not all items were loaded after inspecting someone.
+- Feats: Fixed an error that often occurred when an achievement tooltip was showing, with the option "Special Achievement Tooltip" enabled.
+- Talents: This module is back! It's still not perfect, and it has no glyph details yet.
+- LibGearExam: Updated the pattern matching, to catch the stats that no longer contains the word "rating" in tooltips.
+- LibGearExam: Fixes the inability to pick up numbers with thousand seperators.
+- LibGearExam: Added missing patterns "Increases [Strength/Agility/Stamina/Spirit] by X", often seen on certain set bonuses.
+- LibGearExam: Fixed the item string level replacer to work with the new parameter to item links.
+- Changed the way set bonuses are loaded and scanned from cached players. Previously, the set bonus text was stored with the cached data, now Examiner just scans the item again to retrieve this info.
+- Stats: Fixed the item reforge counter.
+
+Examiner Changes | 2012 Oct 13
+------------------------------
+- Cache: Fixed the issue with Pandaren textures.
+- Feats: Changed the bits set when constructing a completed achievement link, from 32 to 31. This could apparently cause integer overflow.
+
+Examiner Changes | 2012 Aug 30
+------------------------------
+- Changed the TOC version to 50001 for the 5.0 Mists of Pandaria patch.
+- Replaced the use of GetNumPartyMembers() and GetNumRaidMembers() with GetNumGroupMembers().
+- Talents: This module has been completely disabled. With the changes to talents in MoP, a complete rewrite would be required.
+- Readded the "Glyphs" module in hopes that someone might fix it into a working state for the MoP expansion. It is not enabled by default.
+- Feats: Removed an error that occurred when an achievement tooltip with an uneven number of critieria was shown.
+- Removed the InspectPaperDollFrame.lua @ line 23 inspect workaround.
+- Will now set the global variable "INSPECTED_UNIT" to the last inspected unit.
+- Adjusted for the change in return values from the GetInspectGuildInfo() function. This might have broken the guild achievement chat linking feature.
+- LibGearExam: The "RangedSlot" entry has been removed.
+- LibGearExam: Replaced the attack power string value "ITEM_MOD_ATTACK_POWER_SHORT" with "STAT_ATTACK_POWER".
+- LibGearExam: No longer causes Lua errors if a certain stat string is no longer found.
+
 Examiner Changes | 2011 Sep 29
 ------------------------------
 - Changed the TOC version to 40200 for the 4.2 patch.

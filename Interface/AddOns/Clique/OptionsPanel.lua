@@ -89,9 +89,14 @@ function panel:CreateOptions()
     self.profiledd = make_dropdown("CliqueOptionsProfileMgmt", self)
     UIDropDownMenu_SetWidth(self.profiledd, 200)
 
+	self.stopcastingfix = make_checkbox("CliqueOptionsStopCastingFix", self)
+    self.stopcastingfix.text:SetText(L["Attempt to fix the issue introduced in 4.3 with casting on dead targets"])
+
+
     -- Collect and anchor the bits together
     table.insert(bits, self.updown)
     table.insert(bits, self.fastooc)
+	table.insert(bits, self.stopcastingfix)
     table.insert(bits, self.specswap)
     table.insert(bits, self.prispeclabel)
     table.insert(bits, self.prispec)
@@ -123,6 +128,7 @@ function panel:CreateOptions()
 end
 
 StaticPopupDialogs["CLIQUE_CONFIRM_PROFILE_DELETE"] = {
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
     button1 = YES,
     button2 = NO,
     hideOnEscape = 1,
@@ -131,6 +137,7 @@ StaticPopupDialogs["CLIQUE_CONFIRM_PROFILE_DELETE"] = {
 }
 
 StaticPopupDialogs["CLIQUE_NEW_PROFILE"] = {
+	preferredIndex = STATICPOPUPS_NUMDIALOGS,
 	text = TEXT("Enter the name of a new profile you'd like to create"),
 	button1 = TEXT(OKAY),
 	button2 = TEXT(CANCEL),
@@ -152,13 +159,14 @@ StaticPopupDialogs["CLIQUE_NEW_PROFILE"] = {
 		_G[self:GetName().."EditBox"]:SetFocus();
 	end,
 	EditBoxOnEnterPressed = function(self)
-		if (_G[self:GetParent():GetName().."Button1"]:IsEnabled() == 1) then
-            local base = self:GetParent():GetName()
-            local editbox = _G[base .. "EditBox"]
-            local profileName = editbox:GetText()
-            addon.db:SetProfile(profileName)
-        end
-        self:GetParent():Hide();
+		local button = _G[self:GetParent():GetName().."Button1"]
+		if addon:APIIsTrue(button:IsEnabled()) then
+			local base = self:GetParent():GetName()
+			local editbox = _G[base .. "EditBox"]
+			local profileName = editbox:GetText()
+			addon.db:SetProfile(profileName)
+		end
+		self:GetParent():Hide();
 	end,
 	EditBoxOnTextChanged = function (self)
 		local editBox = _G[self:GetParent():GetName().."EditBox"];
@@ -370,6 +378,7 @@ function panel.refresh()
 
     panel.updown:SetChecked(settings.downclick)
     panel.fastooc:SetChecked(settings.fastooc)
+	panel.stopcastingfix:SetChecked(settings.stopcastingfix)
     panel.specswap:SetChecked(settings.specswap)
     panel.specswap.EnableDisable()
 end
@@ -378,8 +387,11 @@ function panel.okay()
     local settings = addon.settings
     local currentProfile = addon.db:GetCurrentProfile()
 
+	local changed = (not not panel.stopcastingfix:GetChecked()) ~= settings.stopcastingfix
+
     -- Update the saved variables
     settings.downclick = not not panel.updown:GetChecked()
+	settings.stopcastingfix = not not panel.stopcastingfix:GetChecked()
     settings.fastooc = not not panel.fastooc:GetChecked()
     settings.specswap = not not panel.specswap:GetChecked()
     settings.pri_profileKey = UIDropDownMenu_GetSelectedValue(panel.prispec)
@@ -389,6 +401,10 @@ function panel.okay()
         addon.db:SetProfile(newProfile)
     end
     addon:UpdateCombatWatch()
+
+	if changed then
+		addon:FireMessage("BINDINGS_CHANGED")
+	end
 end
 
 panel.cancel = panel.refresh

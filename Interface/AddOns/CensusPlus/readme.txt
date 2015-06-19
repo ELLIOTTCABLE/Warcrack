@@ -1,4 +1,7 @@
 CensusPlus - by Rollie of Bloodscalp aka Cooper Sellers
+    authorized modifications by Bringoutyourdead at www.warcraftrealms.com
+	
+	Wow v6.0.2 users - see USAGE below for new installation information
 
   WEBSITE
 
@@ -6,129 +9,104 @@ CensusPlus - by Rollie of Bloodscalp aka Cooper Sellers
 
   VERSION
   
-	4.2.2 - 11/13/2007 - Update
-	-  Further attempts at catching rogue who results
-	-  Modified the minimap button to be dragable anywhere, also removed the slider bar
-	-  Added an option to display the level bars logarithmically or not (on the options panel)
-	-  Added support for tracking less than 3 results while running prat
-	-  Added a simple scan progress tracker on the main UI screen/
+  6.2.0.d - 02/01/2015
+   - update libwho-2.0 and some frFR and znCN translations.
 
-	4.2.1 - 11/13/2007 - Update
-	-  Attempt at updates to fix rogue who results
-
-	4.2.0 - 11/13/2007 - Update
-	-  Updates for DK's and level 80!
-
-    4.1.4 - 06/03/2007 - Update
-	- Fixed bug when selecting guilds from the guild list
-	- Added the last seen date to the player list
-
-    4.1.3 - 5/30/2007 - Update
-	- Update for patch 2.1
-	- Put in check for WhoLib and functionality to make CensusPlus work better with WhoLib
-	- Fixed shift+click player names for this patch
-	- Made it so that guild results will be filtered if you have any filter options selected
-
-    4.1 - 3/16/2007 - Update
-	- Fixed the less than 3 problem where those characters were not processed
-	- Removed the profiling information altogether, Arena does this for us now!
-	- Changed the tooltip on Purge
-	- Added the ability to shift click a name to do a /who on it while a Census
-	    scan is in process
-
-    4.0 - 1/16/2007 - Update
-	- Updates for the Burning Crusade expansion, added Draenai and Blood Elves, allowed both 
-		Shaman and Paladin classes to be displayed, and increased the level range to 70.
-
-
-    3.6.0 - 12/05/2006 - Update
-	- Updates for the Burning Crusade expansion, added Draenai and Blood Elves, allowed both 
-		Shaman and Paladin classes to be displayed, and increased the level range to 70.
-
-
-    3.5.1 - 10/07/2006 - Update
-	- Finally put in place a way to do a normal /who while census is running
-		-  If your /who returns more than 3 results, the friends frame window 
-			will be displayed and the census will be paused
-	- Added an audible sound that can be played with the census is complete.  In addition
-		an option has been added to the options panel to disable this feature.
-	- Moved the Verbose option to be a character specific option
-	- Added Spanish Translation, props to Nekormant of EU-Zul'jin for this translation
-	
-    3.5 - 08/29/2006 - Update
-	- Updated TOC for patch 1.12
-	- New commands:
-		/census take - allows you to start a census via command line
-		/census stop - allows you to stop a census via command line
-	- Added a right click menu to the mini-map button to allow you to do common
-		census functions like Take, Stop, and Pause
-	- Added a player list feature that will show you the list of players for currently
-		selected filters in the display.  This list is capped at 1000 players.
-	- Modified the locale detection to hopefully clear up locale issues
-	- Added battleground wait time collection information which will soon start being reflected
-		on the site
-	- Removed the restriction on taking census snapshots while in battlegrounds
-	- Made efforts to removing the lag created when a census finishes.  You will likely still
-		see the lag if you have the Census window open when a census completes, but if it
-		is closed, there should be no noticable lag.
-	
-
-    3.4 - 07/03/2006 - Update
-	- Updated TOC for patch 1.11
-	- New commands:
-		/census timer ## - will set the timer for the autocensus function (in minutes)
-	- Added a confirmation box when you hit the Purge button
-	
-
-    3.3 - 03/30/2006 - Update
-	- Updated TOC for patch 1.10
-	- Added a couple of new commands:
-		/census who XXXX - will return any local data you have where a character name or guild
-				matches (partially or fully) the given term
-		/census who unguilded ## - where ## is a level, will return all unguilded characters
-				of that level
-	- Attempt at removing the extra 3 or less spam for German clients
-
-    3.1 - 1/03/2006 - Update
-	- Many fixes pertaining to profile data gathering
-	- Added method to determine regional servers (EU vs US)
-	- Added fixes for searches and battlegrounds
-	- Added pruning options, can now do the following:
-		/census prune x - prunes data older than X days
-		/census serverprune - will prune all data other than the current server
-	- Several other minor fixes and tweaks
+  6.2.0.c - 11/01/2014 
+   - reidentified new Oceanic realm servers.. moving between US and Oceanic no longer purges local database
+   - fixed tooltip problem for the STOP button
   
-    2.0 - 4/23/2005 - Update
-        -Friends panel will no longer even attempt to open if the auto-close who is selected.  This 
-            allows any other panels to be open during a census and they will not close or change your
-            view.
-        -Mini-Census button is now moveable.  You'll have to click just around the button to move it
-        -Added PVP Honor tracking.  This will be viewable on the site soon.
-        -Modified the time tracking, cool new stats on the site to follow soon.
-        -Added in some regional server detection.  Please note if you get any error messages detailing
-            that the Mod thinks your locale should be set differently and let me know about them.
-        -Auto-census will no longer start as soon as you log in and will instead wait 5 minutes.
+  6.2.0 - 10/20/2014  - valid for players using Blizzard's US, EU and TW data centers... Korea and China realms are not currently identified well enough to allow CensusPlus to run.
+  
+	- addon graphics completely overhauled.. now allows variable transparency of the addon panels in game.
+	- addon options integrated into standard Blizzard options panel.. with major changes in options
+		- mouseover tool tips for every option
+		- you can now set account wide settings for the addon
+		-  you can now set character by character overrides from the account wide settings
+		-  chat window command line settings have been demoted to immediate and very temporary option changes that go away on logout or modification via options panel.
+		- if you get confused by all the option variations there is a check box at the bottom of the options panel to turn on VERY chatty display of what options are currently valid.
+		
+	- three levels of information display normal, verbose and a new stealth mode that suppresses nearly every chat window display
+	- census button animation - gives quick glance status of active census snapshots.
+	- improved auto-start and delayed-auto census control - 2 part control enable the check box THEN set your time delay,
+		auto-start activated when time setting is between 5-15 minutes
+		delayed-start for time setting between 16-29 minutes 
+		
+	- option of 4 different end of census audio notices. none, sound 1, sound 2, sound 3 - 2 part control enable the check box THEN select your sound file number.
+		- single default sound file is provided for all 3 slots, user can create their own unique sound snippets.
+		Note: blizzard allows playing of .mp3 and .ogg sound file types. 
+			I recommend the free audio program Audacity available at http://audacity.sourceforge.net/
+			 (remember to obey any copyright rules of your country if using and sharing snippets from copyrighted works)
+			 
+   - Localization... all (I hope) text strings are now modifiable via Localization files.
+   Note: due to the major change in Localization most older translations are invalid. 
+   Help has been and continues to be requested in supplying translations via curse.com's addon author support site curseforge.com
+   If you can help translate or verify(review) translations please go to http://wow.curseforge.com/addons/census-plus/localization/
+  
+  6.1.0e - 10/23/2013
+  - reworked in game display to handle 'Connected realms'
+     upon character login opening the CensusPlus window will provide minimal information, start a census run with:
+	   chat line entry -   /census take,
+	   CensusPlus button - right click and selecting Take,
+	   or pressing the Take button in the main CensusPlus window
+	   
+	 Close, if open, the main CensusPlus window and open it back up again..
+	 by the time you have done this CensusPlus will have learned any connected member realms and will be able to display valid data.
+	 
+	 By default the data displayed is for the superset connected realm. No Guild data will be displayed as this is member realm specific,
+	 all other view limiter options continue to work as normal.
+	 Each of the learned realm names is a selector button, click on the name to enable or disable view limit to that realm.
+	 On limiting view to a realm the guild data is now valid and displays. Again all view limiter options from this point work.
+	 
+	 Selecting a guild limits the view to only guild data, and inverts some selectors.. 
+	 the realm name is now used as the guilds home realm and the total count, race,class and level values are for all members of this guild no matter which realm they log in on.
+	 
+	 Selecting a different realm will invalidate the guild display which will go blank.
+	 You will need to click the new realm selection to cycle back to superset which resets system and then click the realm to reactivate the guild info for the new member realm.
+	 
+	 Bug Fix:
+	 The Pause button in the main CensusPlus window again correctly pauses Census run in progress. Pressing the button again a second time restarts processing.
+	 
+	 Known Caveats:
+	 Character display does not work at this time.. more work is needed to keep separate characters who have the same name but log in on different realms.
+	   
+  
+  6.1.0 - 09/10/2013   -- required update if you are submitting data to www.Warcraftrealms.com.
+    -- Siege of Orgrimmar patch 5.4
+	-- reworked much of the code to be able to handle 'Connected realms' .. and when Blizzard flips the switch to effectively census multiple old realms in a single run
+	-- We now must track the realm information for Guilds (home/creation realm) instead of assuming it is the local realm, this is what triggered the mandatory update.
+	-- Blizzard hasn't been explicitly clear on how they are handling Connected realms... so some coding  for in game display hasn't been completed.. no way to test ..
+	    an update of CensusPlus is in the works for release when Blizzard flips the switch and gives us some data to work against.
+	
+	-- Modified /Census serverprune  to /Census serverprune X  making it somewhat the inverse of existing /census Prune X
+	--     Prune X  where X is the number of days you want to keep for the current realms data.
+	--     Serverprune X where X is the number of days of data you want to keep on all other realms other then the one you are currently on (which is left untouched)
+    --      the default for Prune if no number entered is X = 30 days
+	--      the default for Serverprune if no number entered is X = 0 days
+	
+	6.0.0 - 09/24/2012
+    - Mists of Pandaria release
+    - Added command  /census me 
+       this command allows you to run census on your own character... outside of a standard census run.. 
+       this is invisioned only needed when you stop and block auto-census to allow maximum resources to game mechanics
+       such as battlegrounds or raid events.  /census me allows you to record any level ups you might gain during these events without do
+       full census runs.
+    - Added Target and Mouse-over character counting, this is independent of active census runs.   
+    - Added full Cross realm tracking. Mousing over or targeted characters that are part of a different realm then your own will now get
+       added to the census rolls. 
+       
 
-    1.8 - 3/23/2005 - Update
-        -Silenced the Friends panel clicking when opening and closing during a census
-        -Implemented the new time() and date() APIs
-        -Removed /censusdate
-        -Added option to take auto-census
-        -Added option window
+  5.0.4a - 08/28/2012 - corrections
+    - corrects TOC to 50001
+    - adds updated deDE (German) translations  
 
-   1.4 - 2/4/2005 - French and German localization
-   1.3 -            - Small bug fix for error in 1.2
-   
-   1.2 - 1/19/2005 - Update
-        -Fixed a bug with a current census that is paused becoming unpaused when you close certain windows. 
-        -Added a /censusverbose command that will toggle the CensusPlus messages on/off. 
-        -Modified the way a census is taken. Instead of the divide and conquer style used that started a census 
-            with 1-60 and going from there, it will now start in 5 level increments and divide if necessary. 
-        -Added guild support. The mod will now capture guild data when viewed on the guild panel. This data 
-            is used to provide more comprehensive data on the site and is available through the guild exports. 
-        -Added a tracking feature that will allow tracking of the number of characters seen during a census. 
-            This data is displayed on the Activity Page 
-   
+  5.0.4 - 08/27/2012 - Update
+  - Updates for compatibility with Blizzard release 5.0.4 pre release before Mists of Pandaria expansion pac.
+  - finished full integration of ace - wholib library for all /who related activity. No more conflicts with any other wholib enabled addon.
+  - expanded the in game display to be able to handle new MoP class, race and levels.
+  
+  
+    
    1.0 - 1/10/2005
 
   INTRODUCTION
@@ -164,20 +142,15 @@ CensusPlus - by Rollie of Bloodscalp aka Cooper Sellers
 
   USAGE
   
+  As of V6.2.0 - 
+	CensusPlus zip now contains two addon directories that need to be copied into your /Interface/addons folder
+	Be sure to delete first any pre-existing folder and files  as new and renamed files are being used.
+		[CensusPlus] is the main folder for CensusPlus
+		[ImprovedOptionsFrame] is an optional but highly recommended as it allows you to resize and move the Blizzard Options panel.
+  
     Unzip the files into your %World of Warcraft/Interface/AddOns directory.  It
     should create a CensusPlus directory with the installed files.
     
-    If you have Cosmos installed, CensusPlus will register itself with Cosmos
-    and you can invoke the Census window by selecting the CensusPlus option from
-    the Census menu.
-    
-    You can also invoke the CensusPlus window by typing /censusplus or /census+
-    
-    You can select to not open the Friends panel when a /who is sent.
-    
-    You can select to automatically display the Mini-Census button which must be
-    visible in order for a Census to be taken while the main Census window is 
-    minimized.
     
     By selecting the Take button from the main census panel, you will initiate a
     Census snapshot.  Depending on the population of your realm and faction, this could 

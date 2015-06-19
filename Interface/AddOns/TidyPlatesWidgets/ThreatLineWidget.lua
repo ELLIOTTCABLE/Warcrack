@@ -1,5 +1,6 @@
 
 local GetRelativeThreat = TidyPlatesUtility.GetRelativeThreat
+local GetGroupInfo = TidyPlatesUtility.GetGroupInfo
 
 ----------------------
 -- FadeLater() - Registers a callback, which hides the specified frame in X seconds
@@ -83,7 +84,7 @@ do
 	local function UpdateRoster()
 		local index, size
 		if UnitInRaid("player") then
-			size = GetNumRaidMembers() - 1
+			size = TidyPlatesUtility.GetNumRaidMembers() - 1
 			for index = 1, size do
 				local raidid = "raid"..tostring(index)
 				local isAssigned = GetPartyAssignment("MAINTANK", raidid) or ("TANK" == UnitGroupRolesAssigned(raidid))
@@ -132,61 +133,42 @@ local testMode = false
 
 -- Graphics Update
 local function UpdateThreatLine(frame, unitid)
-	local maxwitdth = frame:GetWidth() / 2
-	local leaderThreat, leaderThreatDelta, leaderThreatPct	
-	local leaderThreatMax, leaderThreatMin = frame.ThreatMax, frame.ThreatMin
-	if testMode then 
-		leaderThreatPct, leaderUnitId =  180, "player"
-	else
-		leaderThreatPct, leaderUnitId, leaderThreatDelta  = GetRelativeThreat(unitid) 
-	end
+	local maxwidth = 50
+	--local maxwidth = frame._MaximumWidth
+	local length = 0
+	local anchor = "RIGHT"
+	local threat, targetOf  = GetRelativeThreat(unitid) -- ;if testMode then threat, targetOf =  .00000000000000000000000000000000001, "player" end	
 	
+	if not(threat and targetOf) then frame:_Hide(); return end
 	
-	
-	if not (leaderThreatPct) then frame:_Hide(); return end
-	if leaderThreatPct and leaderThreatPct > 0 then
-		
-		if frame.UseRawValues then
-			if leaderThreatDelta > 0 then
-				leaderThreat = min(leaderThreatDelta, leaderThreatMax)/leaderThreatMax
-			else
-				leaderThreat = (-(max(leaderThreatDelta,leaderThreatMin )))/leaderThreatMin
-			end
-		else
-			leaderThreat = leaderThreatPct
-		end
-		
-		 frame.Line:ClearAllPoints()
+	if threat >= 0 then
+
 		-- Get Positions and Size
-		if leaderThreat > 100 then
-			-- While tanking
-			frame.Line:SetWidth( maxwitdth * ((leaderThreat - 100)/100) )
+		if threat >= 100 then						-- While tanking
+			length = maxwidth * ((threat - 100)/100)
 			threatcolor = frame._HighColor
-			frame.Line:SetPoint("LEFT", frame, "CENTER")
-			--frame.TargetText:SetPoint("TOP",frame.Line,"RIGHT", 0)
-		else 
-			-- While NOT tanking
-			frame.Line:SetWidth( maxwitdth * ((100 - leaderThreat)/100) )
+			anchor = "LEFT"
+		else 										-- While NOT tanking
+			length = maxwidth * ((100 - threat)/150)
 			threatcolor = frame._LowColor
-			frame.Line:SetPoint("RIGHT", frame, "CENTER")
-			--frame.TargetText:SetPoint("CENTER",frame.Line,"LEFT", -3, 12)
 		end
 
-		if leaderUnitId and leaderUnitId ~= "player" then 
-			
-			
-			if UnitIsUnit(leaderUnitId, "pet")
-				or GetPartyAssignment("MAINTANK", leaderUnitId) 
-				or ("TANK" == UnitGroupRolesAssigned(leaderUnitId)) then
-					threatcolor = frame._TankedColor end
-			--if IsRaidTank(leaderUnitId) then threatcolor = frame._TankedColor end
-			
-			--if frame.ShowText then
-				frame.TargetText:SetText(UnitName(leaderUnitId))								-- TP 6.1
-				frame.TargetText:SetTextColor(threatcolor.r, threatcolor.g, threatcolor.b)		-- TP 6.1
-			--end
-			
+
+		frame.Line:ClearAllPoints()
+		frame.Line:SetWidth( max(1, min( maxwidth, length)))
+		frame.Line:SetPoint(anchor, frame, "CENTER")
+		
+		if targetOf and targetOf ~= "player" then 	
+			if UnitIsUnit(targetOf, "pet")
+				or GetPartyAssignment("MAINTANK", targetOf) 
+				or ("TANK" == UnitGroupRolesAssigned(targetOf)) then
+					threatcolor = frame._TankedColor 
+			end
+					
+			frame.TargetText:SetText(UnitName(targetOf))								-- TP 6.1
+			frame.TargetText:SetTextColor(threatcolor.r, threatcolor.g, threatcolor.b)		-- TP 6.1
 		else frame.TargetText:SetText("") end
+		
 		-- Set Colors
 		frame.Left:SetVertexColor(threatcolor.r, threatcolor.g, threatcolor.b)
 		frame.Line:SetVertexColor(threatcolor.r, threatcolor.g, threatcolor.b)
@@ -250,6 +232,7 @@ local updateCap = 1
 local lastUpdate = 0
 
 local function WatcherFrameHandler(frame, event)
+
 	if event == "UNIT_THREAT_LIST_UPDATE" and (lastUpdate + updateCap) > GetTime() then return end
 	
 	local widget, unitid, guid
@@ -264,11 +247,13 @@ local function WatcherFrameHandler(frame, event)
 	if guid then TargetList[guid] = "focus" end
 	
 	-- [[ This code enables full raid target watching
-	local raidsize = GetNumRaidMembers() - 1
-	for index = 1, raidsize do
-		unitid = "raid"..index.."target"
-		guid = UnitGUID(unitid)
-		if guid then TargetList[guid] = unitid end
+	local groupType, groupSize = GetGroupInfo()
+	if groupType == "raid" then
+		for index = 1, groupSize do
+			unitid = "raid"..index.."target"
+			guid = UnitGUID(unitid)
+			if guid then TargetList[guid] = unitid end
+		end
 	end
 	--]]
 	
@@ -309,8 +294,9 @@ local function CreateWidgetFrame(parent)
 		frame.Line = frame:CreateTexture(nil, "OVERLAY")
 		frame.Line:SetTexture(art)
 		frame.Line:SetTexCoord(unpack(artCoordinates["Line"]))
-		--frame.Line:SetWidth(32)
 		frame.Line:SetHeight(32)
+		frame.Line:SetWidth(50)		-- Set initial length
+		frame._MaximumWidth = 50
 		-- Left
 		frame.Left = frame:CreateTexture(nil, "OVERLAY")
 		frame.Left:SetTexture(art)

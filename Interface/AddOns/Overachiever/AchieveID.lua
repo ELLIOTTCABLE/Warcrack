@@ -4,6 +4,7 @@ OVERACHIEVER_ACHID = {
 	LoveCritters = 1206,		-- "To All The Squirrels I've Loved Before"
 	LoveCritters2 = 2557,		-- "To All The Squirrels Who Shared My Life"
 	LoveCritters3 = 5548,		-- "To All the Squirrels Who Cared for Me"
+	LoveCritters4 = 6350,		-- "To All the Squirrels I Once Caressed?"
 	PestControl = 2556,		-- "Pest Control"
 	WellRead = 1244,		-- "Well Read"
 	HigherLearning = 1956,		-- "Higher Learning"
@@ -12,7 +13,9 @@ OVERACHIEVER_ACHID = {
 	HappyHour = 1833,		-- "It's Happy Hour Somewhere"
 	CataclysmicallyDelicious = 5753,-- "Cataclysmically Delicious"
 	DrownYourSorrows = 5754,	-- "Drown Your Sorrows"
-	
+	PandarenCuisine = 7329,		-- "Pandaren Cuisine"
+	PandarenDelicacies = 7330,	-- "Pandaren Delicacies"
+
 	RightAsRain = 5779,		-- "You'll Feel Right as Rain"
 
 	Scavenger = 1257,		-- "The Scavenger"
@@ -20,16 +23,20 @@ OVERACHIEVER_ACHID = {
 	NorthrendAngler = 1517,		-- "Northrend Angler"
 	Limnologist = 5478,		-- "The Limnologist"
 	Oceanographer = 5479,		-- "The Oceanographer"
+	PandarianAngler = 7611,		-- "Pandarian Angler"
 
 	GourmetOutland = 1800,		-- "The Outland Gourmet"
 	GourmetNorthrend = 1779,	-- "The Northrend Gourmet" (last part)
 	GourmetCataclysm = 5473,	-- "The Cataclysmic Gourmet" (last part)
+	GourmetPandaren = 7327,		-- "The Pandaren Gourmet" (last part)
 	--GourmetWinter = 1688,		-- "The Winter Veil Gourmet"
 
 	MediumRare = 1311,		-- "Medium Rare"
 	BloodyRare = 1312,		-- "Bloody Rare"
 	NorthernExposure = 2256,	-- "Northern Exposure"
 	Frostbitten = 2257,		-- "Frostbitten"
+	Glorious = 7439,		-- "Glorious!"
+
 	StoodInTheFire = 5518,		-- "Stood in the Fire"
 	SurveyingTheDamage = 4827,	-- "Surveying the Damage"
 	WhaleShark = 4975,		-- "From Hell's Heart I Stab at Thee"
@@ -50,7 +57,7 @@ OVERACHIEVER_ACHID = {
 -- Using zone names alone isn't reliable because the achievement names don't always use the zone's name as given by
 -- functions like GetRealZoneText() with some localizations.
 
-local LBZ = LibStub("LibBabble-Zone-3.0");
+local LBZ = LibStub("LibBabble-SubZone-3.0");
 LBZ = LBZ:GetReverseLookupTable()
 
 OVERACHIEVER_EXPLOREZONEID = {
@@ -135,8 +142,16 @@ OVERACHIEVER_EXPLOREZONEID = {
 	["Sholazar Basin"] = 1268,
 	["The Storm Peaks"] = 1269,
 	["Zul'Drak"] = 1267,
--- Other (Cataclysm):
+-- Other Cataclysm-related:
 	["Deepholm"] = 4864,
+-- Pandaria:
+	["The Jade Forest"] = 6351,
+	["Krasarang Wilds"] = 6975,
+	["Kun-Lai Summit"] = 6976,
+	["Valley of the Four Winds"] = 6969,
+	["Townlong Steppes"] = 6977,
+	["Dread Wastes"] = 6978,
+	["Vale of Eternal Blossoms"] = 6979,
 };
 -- "Explore Cataclysm": 4868
 

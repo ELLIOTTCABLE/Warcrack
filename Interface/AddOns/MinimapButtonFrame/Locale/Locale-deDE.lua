@@ -120,6 +120,9 @@ L["COLLECT1_DESC"] = "Sammeln Sie die MBF Minimap Button."
 L["GATHERHEAD2_DESC"] = "Blizzard Minimap Button Settings"
 L["GATHERDESC2_DESC"] = "Settings for the Blizzard Minimap Buttons"
 
+L["Exclude Queue Button"] = "Ausschließen Queue Button"
+L["ExcludeLFG_DESC"] = "Schließen Sie den Queue-Status Button"
+
 L["Collect Buttons"] = "Sammeln Sie Buttons"
 L["COLLECT2_DESC"] = "Sammeln Sie die Blizzard Minimap Buttons"
 

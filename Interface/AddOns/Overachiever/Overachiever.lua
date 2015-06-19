@@ -4,8 +4,7 @@
 --    by Tuhljin
 --
 
-
--- Overachiever_Debug = true
+--Overachiever_Debug = true
 
 local THIS_VERSION = GetAddOnMetadata("Overachiever", "Version")
 local THIS_TITLE = GetAddOnMetadata("Overachiever", "Title")
@@ -35,6 +34,20 @@ do
   end
 end
 local GetAchievementInfo = Overachiever.GetAchievementInfo
+
+-- Overcome problem where GetAchievementCriteriaInfo throws an error if the achievement ID or criteria number is invalid:
+do
+  local GAI = GetAchievementCriteriaInfo
+  function Overachiever.GetAchievementCriteriaInfo(...)
+    if (pcall(GAI, ...)) then
+      return GAI(...); -- Calling it again instead of saving values from previous call seems to be better since we would have to deal with new tables, unpack, manipulating the table for unpack to actually work as expected, etc.
+      --tremove(achievementInfo, 1)
+      --achievementInfo[#achievementInfo+1] = ''; -- Inserting this on the end is necessary for unpack to work as expected if there are any nil values in the table.
+      --return unpack(achievementInfo)
+    end
+  end
+end
+local GetAchievementCriteriaInfo = Overachiever.GetAchievementCriteriaInfo
 
 
 local function copytab(from, to)
@@ -98,6 +111,8 @@ end
 
 local function isAchievementInUI(id, checkNext)
 -- Return true if the achievement should be found in the standard UI
+  local StartTime
+  if (Overachiever_Debug) then  StartTime = debugprofilestop();  end
   if (checkNext) then
     local nextID, completed = GetNextAchievement(id)
     if (nextID and completed) then
@@ -113,8 +128,13 @@ local function isAchievementInUI(id, checkNext)
   end
   local cat = GetAchievementCategory(id)
   for i=1,GetCategoryNumAchievements(cat) do
-    if (GetAchievementInfo(cat, i) == id) then  return true;  end
+    if (GetAchievementInfo(cat, i) == id) then
+      if (Overachiever_Debug) then  print("- isAchievementInUI:"..(id or "nil")..": TRUE. Took "..(debugprofilestop() - StartTime) .." ms.");  end
+      return true
+    end
   end
+  if (Overachiever_Debug) then  print("- isAchievementInUI:"..(id or "nil")..": FALSE. Took "..(debugprofilestop() - StartTime) .." ms.");  end
+  return false
 end
 
 local function openToAchievement(id, canToggleTracking)
@@ -161,7 +181,15 @@ do
     local id, ret, anyFound
     for i=1,GetCategoryNumAchievements(category) do
       id, ret = get_arg1_argN(argnum, GetAchievementInfo(category, i))
-      if (anyCase) then  ret = strlower(ret);  end
+      if (anyCase) then
+        if (not ret) then
+			chatprint("getAchievementID_cat: ret is nil.", "["..THIS_TITLE.." DEBUG]")
+			print("category:",category, "index:",i, "argnum:",argnum)
+			ret = ''
+		else
+			ret = strlower(ret)
+		end
+      end
       if ( strfind(ret, pattern, 1, true) ) then
         if (getAll) then
           found[#(found) + 1] = id;
@@ -262,7 +290,7 @@ end
 
 
 local function canTrackAchievement(id, allowCompleted)
-  if ( GetNumTrackedAchievements() < WATCHFRAME_MAXACHIEVEMENTS and
+  if (GetNumTrackedAchievements() < MAX_TRACKED_ACHIEVEMENTS and  -- WATCHFRAME_MAXACHIEVEMENTS renamed to MAX_TRACKED_ACHIEVEMENTS
        (allowCompleted or not select(4, GetAchievementInfo(id))) ) then
     return true
   end
@@ -375,7 +403,7 @@ local function BuildCriteriaLookupTab(...)
     i = 1
     repeat
       _, critType, _, _, _, _, _, assetID = GetAchievementCriteriaInfo(id, i)
-      if (critType and assetID) then
+      if (critType and assetID and assetID ~= 0) then
 
         for arg=1,num,3 do
           a, tab, savenum = select(arg, ...)
@@ -422,7 +450,6 @@ local function BuildCriteriaLookupTab_check()
     Overachiever.AchLookup_kill = AchLookup_kill
   end
 end
-
 
 -- DRAGGABLE FRAMES
 ---------------------
@@ -581,23 +608,26 @@ local function TrackerBtnOnLeave()
   GameTooltip:Hide()
 end
 
--- Hook current Watch Frame Link Buttons:
-for k, v in pairs(WATCHFRAME_LINKBUTTONS) do
-  v.OverachieverHooked = true
-  v:HookScript("OnEnter", TrackerBtnOnEnter)
-  v:HookScript("OnLeave", TrackerBtnOnLeave)
+if (WATCHFRAME_LINKBUTTONS) then --asdf stopgap solution until watch frame can be used properly
+
+	-- Hook current Watch Frame Link Buttons:
+	for k, v in pairs(WATCHFRAME_LINKBUTTONS) do
+	  v.OverachieverHooked = true
+	  v:HookScript("OnEnter", TrackerBtnOnEnter)
+	  v:HookScript("OnLeave", TrackerBtnOnLeave)
+	end
+
+	-- Hook future Watch Frame Link Buttons when they are created:
+	setmetatable(WATCHFRAME_LINKBUTTONS, { __newindex = function(t, k, v)
+	  rawset(t, k, v)
+	  if (not v.OverachieverHooked) then
+		v.OverachieverHooked = true
+		v:HookScript("OnEnter", TrackerBtnOnEnter)
+		v:HookScript("OnLeave", TrackerBtnOnLeave)
+	  end
+	end })
+
 end
-
--- Hook future Watch Frame Link Buttons when they are created:
-setmetatable(WATCHFRAME_LINKBUTTONS, { __newindex = function(t, k, v)
-  rawset(t, k, v)
-  if (not v.OverachieverHooked) then
-    v.OverachieverHooked = true
-    v:HookScript("OnEnter", TrackerBtnOnEnter)
-    v:HookScript("OnLeave", TrackerBtnOnLeave)
-  end
-end })
-
 
 local function getExplorationAch(zonesOnly, ...)
   local id, cat
@@ -635,7 +665,7 @@ local function AutoTrackCheck_Explore(noClearing)
              getAchievementID(CATEGORIES_EXPLOREZONES, ACHINFO_NAME, zone, true)
       end
     end
-    if (id) then
+    if (id and id > 0) then
       local tracked
       if (GetNumTrackedAchievements() > 0) then
         tracked = AutoTrackedAch_explore and IsTrackedAchievement(AutoTrackedAch_explore) and AutoTrackedAch_explore or
@@ -746,15 +776,39 @@ do
   end
 
   function achbtnOnEnter(self)
+    local id, tipset, guildtip = self.id, 0
     GameTooltip:SetOwner(self, "ANCHOR_NONE")
     GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", 8, 0)
     GameTooltip:SetBackdropColor(TOOLTIP_DEFAULT_BACKGROUND_COLOR.r, TOOLTIP_DEFAULT_BACKGROUND_COLOR.g, TOOLTIP_DEFAULT_BACKGROUND_COLOR.b)
+
+	-- This section based on part of AchievementShield_OnEnter:
+	if ( self.accountWide ) then
+		if ( self.completed ) then
+			GameTooltip:AddLine(ACCOUNT_WIDE_ACHIEVEMENT_COMPLETED);
+		else
+			GameTooltip:AddLine(ACCOUNT_WIDE_ACHIEVEMENT);
+		end
+		tipset = 1
+		GameTooltip:Show();
+	end
+	if ( (tipset == 0 or not self.completed) and self.shield.earnedBy ) then
+		GameTooltip:AddLine(format(ACHIEVEMENT_EARNED_BY,self.shield.earnedBy));
+		local me = UnitName("player")
+		if ( not self.shield.wasEarnedByMe ) then
+			GameTooltip:AddLine(format(ACHIEVEMENT_NOT_COMPLETED_BY, me));
+		elseif ( me ~= self.shield.earnedBy ) then
+			GameTooltip:AddLine(format(ACHIEVEMENT_COMPLETED_BY, me));
+		end
+		GameTooltip:Show();
+		tipset = 1
+	end
+
+
     checkGuildMembersTooltip(self)
 
     -- This guild data doesn't pop up as consistently as I'd like but the same thing happens with the default UI and after running tests with the relevant events and functions, it seems to be a Blizzard bug.
     -- Generally, if there's anything to display, selecting the achievement and then moving the cursor away and back will make it work for that achievement. (Same workaround goes for default UI.)
 
-    local id, tipset, guildtip = self.id, 0
     if (GameTooltip:NumLines() > 0) then  tipset, guildtip = 1, true;  end
     button = self
 
@@ -842,10 +896,11 @@ end
 -----------------------
 
 function Overachiever.OnEvent(self, event, arg1, ...)
+  --chatprint(event)
   if (event == "PLAYER_ENTERING_WORLD") then
     Overachiever.MainFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
     Overachiever.MainFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-
+    
     BuildCategoryInfo()
     BuildCategoryInfo = nil
 
@@ -869,7 +924,7 @@ function Overachiever.OnEvent(self, event, arg1, ...)
         Overachiever_CharVars_Default.Pos_AchievementWatchFrame = nil
       end
     end
-
+    
     if (Overachiever_CharVars) then
       oldver = tonumber(Overachiever_CharVars.Version)
       if (oldver < 0.40) then  Overachiever_CharVars.Pos_AchievementWatchFrame = nil;  end
@@ -903,39 +958,41 @@ function Overachiever.OnEvent(self, event, arg1, ...)
     hooksecurefunc(GameTooltip, "SetHyperlink", Overachiever.ExamineAchievementTip)
     
     local StartTime
-    if (Overachiever_Debug) then  StartTime = GetTime();  end
-
+    if (Overachiever_Debug) then  StartTime = debugprofilestop();  end
+    
     Overachiever.BuildItemLookupTab(THIS_VERSION)
     Overachiever.BuildItemLookupTab = nil
 
     if (Overachiever_Debug) then
       local prev = StartTime
-      StartTime = GetTime()
-      chatprint("Building/retrieving food/drink lookup tables took "..(StartTime - prev).." seconds.")
+      StartTime = debugprofilestop()
+      chatprint("Building/retrieving food/drink lookup tables took "..(StartTime - prev)/1000 .." seconds.")
     end
 
     BuildCriteriaLookupTab_check()
     if (Overachiever_Debug) then
-      chatprint("Building other criteria lookup tables took "..(GetTime() - StartTime).." seconds.")
+      chatprint("Building other criteria lookup tables took "..(debugprofilestop() - StartTime)/1000 .." seconds.")
     end
 
   elseif (event == "ZONE_CHANGED_NEW_AREA") then
     AutoTrackCheck_Explore()
 
   elseif (event == "TRACKED_ACHIEVEMENT_UPDATE") then
-    local criteriaID, elapsed, duration = ...
-    if (duration and elapsed < duration) then
-      Overachiever.RecentReminders[arg1] = time()
-      if (Overachiever_Settings.Tracker_AutoTimer and
-          not setTracking(arg1) and AutoTrackedAch_explore and IsTrackedAchievement(AutoTrackedAch_explore)) then
-        -- If failed to track this, remove an exploration achievement that was auto-tracked and try again:
-        RemoveTrackedAchievement(AutoTrackedAch_explore)
-        if (not setTracking(arg1)) then
-          -- If still didn't successfully track new achievement, track previous achievement again:
-          AddTrackedAchievement(AutoTrackedAch_explore)
+    if (arg1 and arg1 > 0) then  -- Attempt to work around an apparent WoW bug. May prevent errors but if the given ID is 0, we have no way of knowing what the achievement really was so we can't track it (unless there's another call with the correct data).
+      local criteriaID, elapsed, duration = ...
+      if (duration and elapsed < duration) then
+        Overachiever.RecentReminders[arg1] = time()
+        if (Overachiever_Settings.Tracker_AutoTimer and
+            not setTracking(arg1) and AutoTrackedAch_explore and IsTrackedAchievement(AutoTrackedAch_explore)) then
+          -- If failed to track this, remove an exploration achievement that was auto-tracked and try again:
+          RemoveTrackedAchievement(AutoTrackedAch_explore)
+          if (not setTracking(arg1)) then
+            -- If still didn't successfully track new achievement, track previous achievement again:
+            AddTrackedAchievement(AutoTrackedAch_explore)
+          end
         end
       end
-    end
+	end
 
   elseif (event == "ADDON_LOADED" and arg1 == "Blizzard_AchievementUI") then
     Overachiever.MainFrame:UnregisterEvent("ADDON_LOADED")
@@ -1142,6 +1199,8 @@ end
 
 local function openOptions()
   InterfaceOptionsFrame_OpenToCategory(OptionsPanel)
+  -- Working around a Blizzard bug by calling this twice:
+  InterfaceOptionsFrame_OpenToCategory(OptionsPanel)
 end
 
 SLASH_Overachiever1 = "/oa";
@@ -1161,6 +1220,33 @@ SlashCmdList["ACHIEVEMENTUI"] = slashHandler;
 
 -- LOCALIZATION ASSIST
 --------------------------
+
+function Overachiever.GetMapContinents_names()
+  local tab = {}
+  local continents = { GetMapContinents() }
+  local count = 0
+  for i,v in ipairs(continents) do
+    if (i % 2 == 0) then -- As of WoW 6.0, only the even numbered results are strings. The rest are integers (IDs for the continents).
+      count = count + 1
+      tab[count] = continents[i];
+    end
+  end
+  return unpack(tab)
+end
+
+function Overachiever.GetMapZones_names(index)
+  local tab = {}
+  local zones = { GetMapZones(index) }
+  local count = 0
+  for i,v in ipairs(zones) do
+    if (i % 2 == 0) then -- As of WoW 6.0, only the even numbered results are strings. The rest are integers (IDs for the continents).
+      count = count + 1
+      tab[count] = zones[i];
+    end
+  end
+  return unpack(tab)
+end
+
 
 if (Overachiever_Debug) then
 
@@ -1211,11 +1297,11 @@ if (Overachiever_Debug) then
     end
   end
 
-  -- Intended first call: BuildZoneIDTable(0, GetMapContinents());
+  -- Intended first call: BuildZoneIDTable(0, Overachiever.GetMapContinents_names());
   local function BuildZoneIDTable(num, conname, next, ...)
     num = num + 1
     --print("BuildZoneIDTable: "..conname.." ("..num..")")
-    BuildZoneIDTable_z(num, 0, GetMapZones(num))
+    BuildZoneIDTable_z(num, 0, Overachiever.GetMapZones_names(num))
     if (next) then
       BuildZoneIDTable(num, next, ...)
     end
@@ -1225,7 +1311,7 @@ if (Overachiever_Debug) then
   function Overachiever.Debug_GetExplorationData(testAchMatch, saveZoneIDs)
     if (not ZoneID and (testAchMatch or saveZoneIDs)) then
       ZoneID = {}
-      BuildZoneIDTable(0, GetMapContinents());
+      BuildZoneIDTable(0, Overachiever.GetMapContinents_names());
       chatprint("Zone data gathered.")
     end
     if (saveZoneIDs) then  Overachiever_Settings.Debug_ZoneData = ZoneID;  end

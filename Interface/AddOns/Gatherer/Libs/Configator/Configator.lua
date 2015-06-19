@@ -1,7 +1,7 @@
 --[[
 	Configator - A library to help you create a gui config
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: Configator.lua 312 2011-06-14 07:33:25Z brykrys $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: Configator.lua 376 2014-11-05 17:34:52Z brykrys $
 	URL: http://auctioneeraddon.com/dl/
 
 	License:
@@ -54,11 +54,11 @@ USAGE:
 ]]
 
 local LIBRARY_VERSION_MAJOR = "Configator"
-local LIBRARY_VERSION_MINOR = 26
+local LIBRARY_VERSION_MINOR = 32
 local lib = LibStub:NewLibrary(LIBRARY_VERSION_MAJOR, LIBRARY_VERSION_MINOR)
 if not lib then return end
 
-LibStub("LibRevision"):Set("$URL: http://svn.norganna.org/libs/trunk/Configator/Configator.lua $","$Rev: 312 $","5.1.DEV.", 'auctioneer', 'libs')
+LibStub("LibRevision"):Set("$URL: http://svn.norganna.org/libs/trunk/Configator/Configator.lua $","$Rev: 376 $","5.1.DEV.", 'auctioneer', 'libs')
 
 local kit = {}
 
@@ -1187,7 +1187,10 @@ function kit:AddControl(id, cType, column, ...)
 	local kids = ctrl.kids
 	local kpos = 0
 
-	local framewidth = frame:GetWidth() - 20
+	local framewidth = frame:GetWidth() - 25
+	if ( self.tabs[id].scroll ) then
+		framewidth = framewidth - 14
+	end
 	column = (column or 0) * framewidth
 	local colwidth = nil
 	if (self.scalewidth) then
@@ -1295,7 +1298,7 @@ function kit:AddControl(id, cType, column, ...)
 		control = el
 		last = el
 	elseif (cType == "Selectbox") then
-		local level, list, setting, text = ...
+		local level, list, setting, width, text, maxLabelLength = ...
 		local indent = 10 * (level or 1)
 		-- Selectbox
 		local tmpName = lib.CreateAnonName()
@@ -1309,19 +1312,36 @@ function kit:AddControl(id, cType, column, ...)
 			end
 		end
 
+		if type(width) ~= "number" then
+			if type(width) == "string" then
+				maxLabelLength = text
+				text = width
+			end
+			width = 140
+		end
+
 		local SelectBox = LibStub:GetLibrary("SelectBox")
-		el = SelectBox:Create(tmpName, content, 140, function(...) self:ChangeSetting(...) end, list, "Default")
+		el = SelectBox:Create(tmpName, content, width, function(...) self:ChangeSetting(...) end, list, "Default")
 		kpos = kpos+1 kids[kpos] = el
-		anchorPoint(content, el, last, column+indent - 5, colwidth or 140, 22, 4)
+		anchorPoint(content, el, last, column+indent - 5, colwidth or width, 22, 4)
 		el.list = list
 		el.setting = setting
 		el.stype = "SelectBox";
-		el.clearance = 10
+		el.clearance = 3
 		self.elements[setting] = el
 		self:GetSetting(el)
 		control = el
-		last = el
-
+		if ( type(text) == "string" ) then
+			-- FontString
+			el = content:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+			el:SetJustifyH("LEFT")
+			kpos = kpos+1 kids[kpos] = el
+			if (colwidth) then colwidth = colwidth - 15 end
+			anchorPoint(content, el, last, (colwidth or width)+35+column+indent, (colwidth or maxLabelLength), 14, -3)
+			el:SetText(text)
+			control.textEl = el
+		end
+		last = control
 	elseif (cType == "Button") then
 		local level, setting, text = ...
 		local indent = 10 * (level or 1)
@@ -1441,8 +1461,21 @@ function kit:AddControl(id, cType, column, ...)
 			slave:SetNumber((el:GetValue())/100)
 			el.slave = slave
 		end
-		el:SetScript("OnValueChanged", function(...)
-			self:ChangeSetting(...)
+		el:SetScript("OnValueChanged", function(element, value)
+			-- From WoW 5.4, dragging the slider's thumb results in values that are not correctly aligned to ValueStep [CNFG-107]
+			-- Values set by calling SetValue will be correctly aligned: use this to correct any erroneous values
+			-- When calling SetValue from within OnValueChanged, protect against function re-entry
+			-- Retrieve corrected value from GetValue; check it has actually changed before continuing
+			if element.isReEntering then return end
+			element.isReEntering = true
+			element:SetValue(value)
+			element.isReEntering = nil
+			value = element:GetValue()
+			if value == element.prevValue then return end
+			element.prevValue = value
+			-- (this correction code should be removed when Blizzard fixes the problem)
+
+			self:ChangeSetting(element, value)
 			if (slave) then
 				local myVal = el:GetValue()
 				if slave:GetNumber() ~= myVal/100 then
@@ -1513,11 +1546,11 @@ function kit:AddControl(id, cType, column, ...)
 		el = CreateFrame("Frame", frameName, content, "MoneyInputFrameTemplate")
 		el.isMoneyFrame = true
 
--- NOTE - ccox - 2007-11-18
--- TabLink is not working correctly, causes an error when tabbing out of copper field in money input frame
---		lib:TabLink(frame, el)
+		-- NOTE - ccox - 2007-11-18
+		-- TabLink is not working correctly, causes an error when tabbing out of copper field in money input frame
+		--     lib:TabLink(frame, el)
 
--- for the time being, set to cycle around the fields of the current money frame
+		-- for the time being, set to cycle around the fields of the current money frame
 		MoneyInputFrame_SetPreviousFocus(el, _G[frameName.."Copper"])
 		MoneyInputFrame_SetNextFocus(el, _G[frameName.."Gold"])
 
@@ -1569,9 +1602,17 @@ function kit:AddControl(id, cType, column, ...)
 			f.func = function()
 				self:ChangeSetting(obj)
 			end
+			f.cancelFunc = function(previousValues)
+				f:SetColorRGB(previousValues.r, previousValues.g, previousValues.b);
+				if ( f.hasOpacity ) then
+					OpacitySliderFrame:SetValue(previousValues.a)
+				end
+				self:ChangeSetting(obj, true)
+			end
 			f.opacityFunc = f.func
 			f:SetFrameStrata("TOOLTIP")
 			f:SetToplevel("TRUE")
+			f.previousValues = {r = obj.r, g = obj.g, b = obj.b, a=obj.a}
 			f:Show()
 		end)
 		self.elements[setting] = el
@@ -1802,7 +1843,8 @@ function kit:ChangeSetting(element, ...)
 			MoneyInputFrame_SetCopper( element, value );
 		end
 	elseif (element.stype == "ColorSelect" or element.stype == "ColorSelectAlpha") then
-		if (ColorPickerFrame:IsVisible()) then
+		local isCancel = ...
+		if (ColorPickerFrame:IsVisible() or isCancel) then
 			local r,g,b = ColorPickerFrame:GetColorRGB()
 			local a = 1
 			if element.stype == "ColorSelectAlpha" then
@@ -1836,7 +1878,9 @@ function kit:ColumnCheckboxes(id, cols, options)
 	for pos, option in ipairs(options) do
 		setting, text = unpack(option)
 		col = math.floor(row / rows)
-		el = self:AddControl(id, "Checkbox", col/cols, 1, setting, text, true, 1/cols)
+		-- the last agrument (text length) divides by a special factor to improve spacing
+		-- a hard coded number would be better, but I'm doing this as a quick fix for now
+		el = self:AddControl(id, "Checkbox", col/cols, 1, setting, text, true, 1/cols/1.03)
 		row = row + 1
 		if (row % rows == 0) then
 			if (col == 0) then

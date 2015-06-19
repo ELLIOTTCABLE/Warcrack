@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherConvert.lua 905 2010-12-05 08:43:08Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherConvert.lua 1132 2014-11-14 01:16:00Z esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Database conversion/merging code and conversion data tables
 --]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherConvert.lua $", "$Rev: 905 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherConvert.lua $", "$Rev: 1132 $")
 
 local metatable = { __index = getfenv(0) }
 setmetatable( Gatherer.Convert, metatable )
@@ -45,7 +45,7 @@ local MergeNode, NumMergeNodeArgs
 
 local nodeData = {}
 local function extractNodeInformation()
-	for index, mapping in ipairs(mappingData) do
+	for index, mapping in pairs(mappingData) do
 		if ( mapping.type == "key" ) then
 			nodeData[index] = traversalData[mapping.level].key
 		elseif ( mapping.type == "value" ) then
@@ -55,7 +55,7 @@ local function extractNodeInformation()
 			return
 		end
 	end
-	for index, data in ipairs(nodeData) do
+	for index, data in pairs(nodeData) do
 		local typeInfo = typeConversionData[index]
 		local dataType = type(data)
 		if ( typeInfo ) then
@@ -88,18 +88,18 @@ local function extractNodeInformation()
 		nodeData[index] = data
 	end
 	if ( type(conversionValidationFunc) == "function" ) then
-		local result, err = pcall(conversionValidationFunc, unpack(nodeData, 1, numMergeNodeArgs))
+		local result, err = pcall(conversionValidationFunc, unpack(nodeData, 1, NumMergeNodeArgs))
 		if ( result ) then
 			if not ( err ) then
 				return
 			end
 		else
-			Gatherer.Util.Debug("Conversion validator error", err, "Data: ("..strjoin(", ", tostringall(unpack(nodeData, 1, numMergeNodeArgs)))..")")
+			Gatherer.Util.Debug("Conversion validator error", err, "Data: ("..strjoin(", ", tostringall(unpack(nodeData, 1, NumMergeNodeArgs)))..")")
 		end
 	end
-	local result, err = pcall(MergeNode, unpack(nodeData, 1, numMergeNodeArgs))
+	local result, err = pcall(MergeNode, unpack(nodeData, 1, NumMergeNodeArgs))
 	if not ( result ) then
-		Gatherer.Util.Debug("MergeNode error", err, "Data: ("..strjoin(", ", tostringall(unpack(nodeData, 1, numMergeNodeArgs)))..")")
+		Gatherer.Util.Debug("MergeNode error", err, "Data: ("..strjoin(", ", tostringall(unpack(nodeData, 1, NumMergeNodeArgs)))..")")
 	end
 end
 
@@ -146,39 +146,6 @@ function ImportDatabase( dataToImport, nodeMergeFunction, numMergeArgs )
 	end
 end
 
-local zoneSizeShiftFunctions = {
-	["3.0-Shift"] = {
-		convertXAxis = (
-			function ( data, nodeData )
-				local continent = nodeData[3]
-				if ( continent == 2 ) then
-					local zoneToken = Gatherer.ZoneTokens.GetZoneToken(continent, nodeData[4])
-					if ( zoneToken == "EASTERN_PLAGUELANDS" ) then
-						data = (data - 0.026372737507017) * 0.96020671188279
-					elseif ( zoneToken == "STORMWIND" ) then
-						data = (data - -0.25437145166642) * 0.77368159521222
-					end
-				end
-				return data
-			end
-		),
-		convertYAxis = (
-			function( data, nodeData )
-				local continent = nodeData[3]
-				if ( continent == 2 ) then
-					local zoneToken = Gatherer.ZoneTokens.GetZoneToken(continent, nodeData[4])
-					if ( zoneToken == "EASTERN_PLAGUELANDS" ) then
-						data = (data - 0.03712658084068) * 0.96046508864265
-					elseif ( zoneToken == "STORMWIND" ) then
-						data = (data - -0.31574041623418) * 0.77383347432012
-					end
-				end
-				return data
-			end
-		),
-	}
-}
-
 ConversionInformation = {
 	[0] = false, -- DB version 0 only dealt with the old world, we can just dump it
 	[1] = false, -- DB version 1 only dealt with the old world, we can just dump it
@@ -224,9 +191,16 @@ ConversionInformation = {
 			},
 			[2] = "string",
 			[3] = "number",
-			[4] = "string",
-			[5] = { number = zoneSizeShiftFunctions["3.0-Shift"].convertXAxis },
-			[6] = { number = zoneSizeShiftFunctions["3.0-Shift"].convertYAxis },
+			[4] = {
+				string = (
+					function( data )
+						data = data:upper()
+						return Gatherer.ZoneTokens.Ver3To4TempTokens[zone] or data
+					end
+				),
+			},
+			[5] = "number",
+			[6] = "number",
 			[7] = "number",
 			[8] = "number",
 			[9] = "number",
@@ -235,7 +209,7 @@ ConversionInformation = {
 		-- returns true if import should process, false to stop import of a node
 		validator = function(gather, gatherType, continent, zone, gatherX, gatherY, count, harvested, inspected, source)
 			if ( continent == 1 or continent == 2 ) then
-				if ( Gatherer.ZoneTokens.Ver3To4TempTokens[zone] or CataclysmDoNotDeleteTokens[zone] ) then
+				if ( CataclysmDoNotDeleteTokens[zone] ) then
 					return true
 				end
 				return false
@@ -286,7 +260,14 @@ ConversionInformation = {
 			},
 			[2] = "string",
 			[3] = "number",
-			[4] = "string",
+			[4] = {
+				string = (
+					function( data )
+						data = data:upper()
+						return Gatherer.ZoneTokens.Ver3To4TempTokens[zone] or data
+					end
+				),
+			},
 			[5] = "number",
 			[6] = "number",
 			[7] = "number",
@@ -297,7 +278,7 @@ ConversionInformation = {
 		-- returns true if import should process, false to stop import of a node
 		validator = function(gather, gatherType, continent, zone, gatherX, gatherY, count, harvested, inspected, source)
 			if ( continent == 1 or continent == 2 ) then
-				if ( Gatherer.ZoneTokens.Ver3To4TempTokens[zone] or CataclysmDoNotDeleteTokens[zone] ) then
+				if ( CataclysmDoNotDeleteTokens[zone] ) then
 					return true
 				end
 				return false
@@ -320,7 +301,7 @@ ConversionInformation = {
 			[7] = { type="value", level=5, key=1, }, --count
 			[8] = { type="value", level=5, key=2, }, --harvested
 			[9] = { type="value", level=4, key=3, }, --inspected
-			[10] = { type="value", level=5, key=6, }, --source
+			[10] = { type="value", level=5, key=3, }, --source
 			[11] = { type="value", level=4, key=4, }, --indoor
 		},
 		typeConversionData = {
@@ -344,6 +325,135 @@ ConversionInformation = {
 			},
 			[2] = "string",
 			[3] = "number",
+			[4] = {
+				caseSensitive = true,
+				string = (
+					function( data )
+						return tonumber(data) or data
+					end
+				),
+				number = (
+					function( data )
+						return data
+					end
+				),
+			},
+			[5] = "number",
+			[6] = "number",
+			[7] = "number",
+			[8] = "number",
+			[9] = "number",
+			[10] = "string",
+			[11] = "boolean",
+		},
+	},
+	
+	--MergeNode argument mapping table for DB version 5 to MergeNode function arguments
+	[5] = {
+		nodeLevel = 4,
+		mappingData = {
+			[1] = { type="key", level=4, }, --gatherName
+			[2] = { type="key", level=2, }, --gatherType
+			[3] = nil, --continent
+			[4] = { type="key", level=1, }, --zone
+			[5] = { type="value", level=3, key=1, }, --x
+			[6] = { type="value", level=3, key=2, }, --y
+			[7] = { type="value", level=4, key=1, }, --count
+			[8] = { type="value", level=4, key=2, }, --harvested
+			[9] = { type="value", level=3, key=3, }, --inspected
+			[10] = { type="value", level=4, key=3, }, --source
+			[11] = { type="value", level=3, key=4, }, --indoor
+		},
+		typeConversionData = {
+			[1] = {
+				string = (
+					function( data )
+						for k, v in pairs(Gatherer.Nodes.Names) do
+							if ( strlower(k) == strlower(data) ) then
+								return v
+							end
+						end
+						--stick with the name if we don't have an id for it yet
+						return Gatherer.Nodes.ReMappings[data] or data
+					end
+				),
+				number = (
+					function( data )
+						return Gatherer.Nodes.ReMappings[data] or data
+					end
+				),
+			},
+			[2] = "string",
+			[3] = nil,
+			[4] = {
+				caseSensitive = true,
+				string = (
+					function( data )
+						-- due to a mixup, nodes from Outland got stored under Draenor zones
+						-- there were no known Draenor node types in the version with this problem
+						-- so we can safely move all of these where they belong
+						if ( data == "DRAENOR_NAGRAND" ) then
+							return "NAGRAND"
+						elseif ( data == "DRAENOR_SHADOWMOON_VALLEY" ) then
+							return "SHADOWMOON_VALLEY"
+						else
+							return data
+						end
+					end
+				),
+				number = (
+					function( data )
+						return data
+					end
+				),
+			},
+			[5] = "number",
+			[6] = "number",
+			[7] = "number",
+			[8] = "number",
+			[9] = "number",
+			[10] = "string",
+			[11] = "boolean",
+		},
+	},
+	
+	--MergeNode argument mapping table for DB version 6 to MergeNode function arguments
+	[6] = {
+		nodeLevel = 4,
+		mappingData = {
+			[1] = { type="key", level=4, }, --gatherName
+			[2] = { type="key", level=2, }, --gatherType
+			[3] = nil, --continent
+			[4] = { type="key", level=1, }, --zone
+			[5] = { type="value", level=3, key=1, }, --x
+			[6] = { type="value", level=3, key=2, }, --y
+			[7] = { type="value", level=4, key=1, }, --count
+			[8] = { type="value", level=4, key=2, }, --harvested
+			[9] = { type="value", level=3, key=3, }, --inspected
+			[10] = { type="value", level=4, key=3, }, --source
+			[11] = { type="value", level=3, key=4, }, --indoor
+		},
+		typeConversionData = {
+			[1] = {
+				string = (
+					function( data )
+						for k, v in pairs(Gatherer.Nodes.Names) do
+							if ( strlower(k) == strlower(data) ) then
+								return v
+							end
+						end
+						--stick with the name if we don't have an id for it yet
+						return Gatherer.Nodes.ReMappings[data] or data
+					end
+				),
+				number = (
+					function( data )
+						return Gatherer.Nodes.ReMappings[data] or data
+					end
+				),
+			},
+			[2] = "string",
+			[3] = nil,
 			[4] = {
 				caseSensitive = true,
 				string = (
@@ -382,3 +492,6 @@ CataclysmDoNotDeleteTokens = {
 	SILVERMOON = true,
 	QUEL_DANAS = true,
 }
+for _, token in pairs(Gatherer.ZoneTokens.Ver3To4TempTokens) do
+	CataclysmDoNotDeleteTokens[token] = true
+end

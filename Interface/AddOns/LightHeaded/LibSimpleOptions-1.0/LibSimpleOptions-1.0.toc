@@ -1,4 +1,4 @@
-## Interface: 40000
+## Interface: 50400
 ## LoadOnDemand: 1
 ## Title: Lib: SimpleOptions-1.0
 ## Notes: A library to provide a way to easily create controls for Blizzard's options system

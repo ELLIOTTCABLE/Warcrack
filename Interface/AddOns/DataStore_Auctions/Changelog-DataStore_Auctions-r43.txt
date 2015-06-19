@@ -1,0 +1,20 @@
+------------------------------------------------------------------------
+r43 | thaoky | 2015-04-06 15:40:17 +0000 (Mon, 06 Apr 2015) | 2 lines
+Changed paths:
+   M /trunk/DataStore_Auctions.lua
+
+Fixed scanning of auction house items
+Fixed clearing expired items
+------------------------------------------------------------------------
+r42 | thaoky | 2015-02-25 18:22:34 +0000 (Wed, 25 Feb 2015) | 3 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/DataStore_Auctions.toc
+   M /trunk/Locales/repoenUS.lua
+   M /trunk/Options.lua
+   M /trunk/Options.xml
+
+6.1.001 Commit
+
+- Added support for options using <KeyValue>
+------------------------------------------------------------------------

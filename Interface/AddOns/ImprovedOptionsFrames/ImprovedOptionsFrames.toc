@@ -1,0 +1,12 @@
+﻿## Interface: 60100
+## Title: Improved Options Frames
+## Version: 1.5.5
+## Author: Cybeloras of Detheroc/Mal'Ganis
+## Notes: Allows you to scale and move the Blizzard options frames.
+## SavedVariables: ImprovedOptionsFramesDB
+## X-Curse-Packaged-Version: 1.5.5
+## X-Curse-Project-Name: Improved Options Frames
+## X-Curse-Project-ID: improved-options-frames
+## X-Curse-Repository-ID: wow/improved-options-frames/mainline
+
+ImprovedOptionsFrames.lua

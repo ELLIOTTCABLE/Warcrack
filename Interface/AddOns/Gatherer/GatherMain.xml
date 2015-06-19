@@ -1,8 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 <!--
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherMain.xml 894 2010-12-02 22:46:33Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherMain.xml 955 2012-08-28 16:39:14Z Esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -26,8 +26,8 @@
 		since that is it's designated purpose as per:
 		http://www.fsf.org/licensing/licenses/gpl-faq.html#InterpreterIncompat
 -->
-	<Script>Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherMain.xml $", "$Rev: 894 $")</Script>
-	<Frame name="GathererFrame">
+	<Script>Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherMain.xml $", "$Rev: 955 $")</Script>
+	<Frame name="GathererFrame" hidden="true">
 		<Scripts>
 			<OnLoad>
 				Gatherer.Event.RegisterEvents(self)
@@ -35,6 +35,9 @@
 			<OnEvent>
 				Gatherer.Event.OnEvent(event, ...)
 			</OnEvent>
+			<OnUpdate>
+				Gatherer.Event.OnUpdate(elapsed)
+			</OnUpdate>
 		</Scripts>
 	</Frame>
 	<Font name="GameFontHighlightHuge" inherits="GameFontNormalHuge" virtual="true">

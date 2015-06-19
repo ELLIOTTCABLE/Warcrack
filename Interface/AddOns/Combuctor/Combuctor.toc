@@ -1,10 +1,19 @@
-## Interface: 40300
+## Interface: 60100
 ## Title: Combuctor
-## Author: Tuller
+## Author: Tuller and Jaliborc (João Cardoso)
 ## Notes: Pants are a dangerous foe
-## Version: 4.3.0
-## OptionalDeps: Ace3, Bagnon_Forever, BagSync, LibItemSearch-1.0
-## SavedVariables: CombuctorDB2, CombuctorVersion
+## Version: 6.1
+## OptionalDeps: BagBrother, Ace3, LibItemCache-1.0, LibItemSearch-1.2, Unfit-1.0
+## SavedVariables: CombuctorVersion, CombuctorDB2
 
-embeds.xml
-load.xml
+libs\libs.xml
+localization\localization.xml
+
+main.lua
+
+api\api.xml
+sets\sets.xml
+events\events.xml
+
+templates\templates.xml
+components\components.xml

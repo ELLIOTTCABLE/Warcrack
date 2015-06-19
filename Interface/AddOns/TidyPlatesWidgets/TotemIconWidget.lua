@@ -2,49 +2,74 @@
 -- Totem Icon Widget
 --------------------
 local classWidgetPath = "Interface\\Addons\\TidyPlatesWidgets\\ClassWidget\\"
+local TotemIcons, TotemTypes = {}, {}
 
-local function TotemName(SpellID)
-	local name = (select(1,GetSpellInfo(SpellID)))
-	return name
+local AIR_TOTEM, EARTH_TOTEM, FIRE_TOTEM, WATER_TOTEM = 1, 2, 3, 4
+
+local function SetTotemInfo(spellid, totemType)
+	local name, _, icon = GetSpellInfo(spellid)
+	if name and icon and totemType then
+		TotemIcons[name] = icon
+		TotemTypes[name] = totemType
+	end
 end
 
-local function TotemIcon(SpellID)
-	local icon = (select(3,GetSpellInfo(SpellID)))
-	return icon
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+
+if (tonumber((select(2, GetBuildInfo()))) >= 15799) then 
+	-- Mists of Pandaria 5.x Specific Totems
+
+	SetTotemInfo(120668, AIR_TOTEM) --  Stormlash
+	SetTotemInfo(108273, AIR_TOTEM) --  Windwalk
+	SetTotemInfo(98008, AIR_TOTEM)  --  Spirit Link
+	SetTotemInfo(108269, AIR_TOTEM)  --  Capacitor Totem
+
+	SetTotemInfo(51485, EARTH_TOTEM)  -- Earthgrab Totem
+	SetTotemInfo(108270, EARTH_TOTEM)  -- Stone Bulwark Totem
+
+	SetTotemInfo(108280, WATER_TOTEM)  -- Healing Tide Totem
+
+else	
+	-- Cataclysm 4.x Specific Totems
+	SetTotemInfo(8512,AIR_TOTEM) -- Windfury Totem
+	SetTotemInfo(3738,AIR_TOTEM) -- Wrath of Air Totem
+	
+	SetTotemInfo(5730,EARTH_TOTEM) -- Stoneclaw Totem
+	SetTotemInfo(8071,EARTH_TOTEM) -- Stoneskin Totem
+	SetTotemInfo(8075,EARTH_TOTEM)  -- Strength of Earth Totem
+	
+	SetTotemInfo(8227,FIRE_TOTEM) -- Flametongue Totem
+
+	SetTotemInfo(8184,WATER_TOTEM)  -- Elemental Resistance Totem
+	SetTotemInfo(5675,WATER_TOTEM) -- Mana Spring Totem
+	SetTotemInfo(87718,WATER_TOTEM) -- Totem of Tranquil Mind
 end
 
-local Totem_InfoTable = {
-	-- Air Totems
-	[TotemName(8177)] = {TotemIcon(8177), 1}, -- Grounding Totem
-	[TotemName(8512)] = {TotemIcon(8512), 1}, -- Windfury Totem
-	[TotemName(3738)] = {TotemIcon(3738), 1}, -- Wrath of Air Totem
-	-- Earth Totems
-	[TotemName(2062)] = {TotemIcon(2062), 2}, -- Earth Elemental Totem
-	[TotemName(2484)] = {TotemIcon(2484), 2}, -- Earthbind Totem
-	[TotemName(5730)] = {TotemIcon(5730), 2}, -- Stoneclaw Totem
-	[TotemName(8071)] = {TotemIcon(8071), 2}, -- Stoneskin Totem
-	[TotemName(8075)] = {TotemIcon(8075), 2}, -- Strength of Earth Totem
-	[TotemName(8143)] = {TotemIcon(8143), 2}, -- Tremor Totem
-	-- Fire Totems
-	[TotemName(2894)] = {TotemIcon(2894), 3}, -- Fire Elemental Totem
-	[TotemName(8227)] = {TotemIcon(8227), 3}, -- Flametongue Totem
-	[TotemName(8190)] = {TotemIcon(8190), 3}, -- Magma Totem
-	[TotemName(3599)] = {TotemIcon(3599), 3}, -- Searing Totem
-	-- Water Totems
-	[TotemName(8184)] = {TotemIcon(8184), 4}, -- Elemental Resistance Totem
-	[TotemName(5394)] = {TotemIcon(5394), 4}, -- Healing Stream Totem
-	[TotemName(5675)] = {TotemIcon(5675), 4}, -- Mana Spring Totem
-	[TotemName(16190)] = {TotemIcon(16190), 4}, -- Mana Tide Totem
-	[TotemName(87718)] = {TotemIcon(87718), 4} -- Totem of Tranquil Mind
-}
+	-- Common Totems
+	SetTotemInfo(8177, AIR_TOTEM) -- Grounding Totem
+	
+	SetTotemInfo(2062,EARTH_TOTEM) -- Earth Elemental Totem
+	SetTotemInfo(2484,EARTH_TOTEM) -- Earthbind Totem
+	SetTotemInfo(8143,EARTH_TOTEM) -- Tremor Totem
+	
+	SetTotemInfo(2894, FIRE_TOTEM)  -- Fire Elemental Totem
+	SetTotemInfo(8190, FIRE_TOTEM)  -- Magma Totem
+	SetTotemInfo(3599, FIRE_TOTEM)  -- Searing Totem
 
-local function IsTotem(name) if name then return (Totem_InfoTable[name] ~= nil) end end
-local function TotemSlot(name) if name then if IsTotem(name) then return Totem_InfoTable[name][2] end end end
+	SetTotemInfo(5394, WATER_TOTEM)  -- Healing Stream Totem
+	SetTotemInfo(16190, WATER_TOTEM)  -- Mana Tide Totem
+	
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------	
+
+local function IsTotem(name) if name then return (TotemIcons[name] ~= nil) end end
+local function TotemSlot(name) if name then return TotemTypes[name] end end
 
 local function UpdateTotemIconWidget(self, unit)
-	local icon = Totem_InfoTable[unit.name]
+	local icon = TotemIcons[unit.name]
 	if icon then
-		self.Icon:SetTexture(icon[1])
+		self.Icon:SetTexture(icon)
 		self:Show()
 	else 
 		self:Hide() 
@@ -58,7 +83,7 @@ local function CreateTotemIconWidget(parent)
 	frame.Overlay = frame:CreateTexture(nil, "OVERLAY")
 	frame.Overlay:SetPoint("CENTER",frame, 1, -1)
 	frame.Overlay:SetWidth(24); frame.Overlay:SetHeight(24)
-	frame.Overlay:SetTexture(classWidgetPath.."_BORDER")
+	frame.Overlay:SetTexture(classWidgetPath.."BORDER")
 	--frame.Overlay:SetAllPoints(frame)
 	
 	frame.Icon = frame:CreateTexture(nil, "ARTWORK")

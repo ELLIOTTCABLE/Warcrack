@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r21 | thaoky | 2015-02-25 18:22:17 +0000 (Wed, 25 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/DataStore_Agenda.toc
+
+6.1.001 Commit
+------------------------------------------------------------------------
+r20 | thaoky | 2015-01-09 17:01:50 +0000 (Fri, 09 Jan 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Agenda.lua
+
+- Fixed ClearExpiredDungeons()
+------------------------------------------------------------------------

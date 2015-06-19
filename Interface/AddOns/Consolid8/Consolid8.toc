@@ -1,11 +1,11 @@
 #	Consolid8, a World of Warcraft chat frame addon
-#	Copyright 2011 Harry Cutts
+#	Copyright 2015 Harry Cutts
 #
 #	This work by Harry Cutts is licensed under a
 #	Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 #	To read this license, please see http://creativecommons.org/licenses/by-nc-sa/3.0/ .
 
-## Interface: 40200
+## Interface: 60000
 ## Title: Consolid8
 ## Notes: Gets rid of reputation change and money loot messages, and counts them up to make them meaningful. Slash command: /consolid8
 ## SavedVariables: Consolid8_Settings
@@ -18,7 +18,7 @@
 #	visible		: true if the button should be visible; else false.
 #	countItems	: Table listing the items to be counted.
 
-## Version: 2.0a
+## Version: 2.0c
 ## X-Category: Chat/Communication
 # Libraries
 LibStub.lua

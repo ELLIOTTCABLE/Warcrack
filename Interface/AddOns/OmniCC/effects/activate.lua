@@ -3,33 +3,43 @@
 		mimics the default effect that shows up when an ability "procs"
 --]]
 
-local Classy = LibStub('Classy-1.0')
+
 local L = OMNICC_LOCALS
+local Activate = OmniCC:RegisterEffect {
+	id = 'activate',
+	name = L.Activate,
+	desc = L.ActivateTip,
+}
 
-local hooked = {}
-local active = {}
+function Activate:Setup(cooldown)
+	if not self:Get(cooldown) then
+		local button = cooldown:GetParent()
+		local width, height = button:GetSize()
+		local overlay = CreateFrame('Frame', '$parentOmniCCActivate', button, 'ActionBarButtonSpellActivationAlert')
 
-OmniCC:RegisterEffect({
-  id = 'activate',
-  name = L.Activate,
-  desc = L.ActivateTip,
-  Run = function(self, cooldown)
-    local button = cooldown:GetParent()
-    if button then
-      ActionButton_ShowOverlayGlow(button)
-      active[button] = true
+		overlay:SetSize(width * 1.4, height * 1.4)
+		overlay:SetFrameLevel(overlay:GetFrameLevel() + 5)
+		overlay:SetPoint('TOPLEFT', button, 'TOPLEFT', -width * 0.2, height * 0.2)
+		overlay:SetPoint('BOTTOMRIGHT', button, 'BOTTOMRIGHT', width * 0.2, -height * 0.2)
+		overlay.animIn:HookScript('OnFinished', self.OnFinish)
+		cooldown.omniccActivate = overlay
+	end
+end
 
-      local overlay = button.overlay
-      if not hooked[overlay] then
-        overlay.animIn:HookScript('OnFinished', function()
-          if active[button] then
-            ActionButton_HideOverlayGlow(button)
-            active[button] = nil
-          end
-        end)
-        
-        hooked[overlay] = true
-      end
-		end
-  end
-})
+function Activate:Run(cooldown)
+	local overlay = self:Get(cooldown)
+	if overlay.animOut:IsPlaying() then
+		overlay.animOut:Stop()
+	end
+
+	overlay.animIn:Play()
+end
+
+function Activate:OnFinish()
+	self:Stop()
+	self:GetParent().animOut:Play()
+end
+
+function Activate:Get(cooldown)
+	return cooldown.omniccActivate
+end

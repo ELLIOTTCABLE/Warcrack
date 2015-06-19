@@ -3,8 +3,6 @@ local addon = _G[addonName]
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 
-local WHITE		= "|cFFFFFFFF"
-local GREEN		= "|cFF00FF00"
 local SPELLS_PER_PAGE = 12
 
 addon.Spellbook = {}
@@ -36,7 +34,8 @@ function ns:OnClick(frame, button)
 	local chat = ChatEdit_GetLastActiveWindow()
 	if not chat:IsShown() then return end
 	
-	local link
+	local link, _
+	
 	if frame.spellID then
 		link = DataStore:GetCompanionLink(frame.spellID)
 	elseif frame.glyphID then
@@ -104,7 +103,7 @@ end
 
 function ns:Update()
 	local character = addon.Tabs.Characters:GetAltKey()
-	AltoholicTabCharactersStatus:SetText(format("%s|r / %s / %s", DataStore:GetColoredCharacterName(character), SPELLBOOK, currentSchool))
+	AltoholicTabCharacters.Status:SetText(format("%s|r / %s / %s", DataStore:GetColoredCharacterName(character), SPELLBOOK, currentSchool))
 	
 	local itemName, itemButton
 	local spellID, availableAt
@@ -135,13 +134,13 @@ function ns:Update()
 				_G[itemName .. "SpellName"]:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
 				_G[itemName .. "SubSpellName"]:SetText(info)
 				_G[itemName .. "SubSpellName"]:SetTextColor(0.50, 0.25, 0)
-				_G[itemName .. "IconTexture"]:SetDesaturated(0)
+				_G[itemName .. "IconTexture"]:SetDesaturated(false)
 				_G[itemName .. "IconTexture"]:SetVertexColor(1.0, 1.0, 1.0)
 			else
 				_G[itemName .. "SpellName"]:SetTextColor(0.4, 0.4, 0.4)
 				_G[itemName .. "SubSpellName"]:SetFormattedText(SPELLBOOK_AVAILABLE_AT, availableAt)
 				_G[itemName .. "SubSpellName"]:SetTextColor(0.4, 0.4, 0.4)
-				_G[itemName .. "IconTexture"]:SetDesaturated(1)
+				_G[itemName .. "IconTexture"]:SetDesaturated(true)
 				_G[itemName .. "IconTexture"]:SetVertexColor(0.4, 0.4, 0.4)
 			end
 			
@@ -170,20 +169,16 @@ function ns:UpdateKnownGlyphs()
 	
 	local glyphText
 	if currentGlyphType == 1 then
-		glyphText = PRIME_GLYPHS
-	elseif currentGlyphType == 2 then
 		glyphText = MAJOR_GLYPHS
-	elseif currentGlyphType == 3 then
+	elseif currentGlyphType == 2 then
 		glyphText = MINOR_GLYPHS
 	end
 	
-	AltoholicTabCharactersStatus:SetText(format("%s|r / %s / %s", DataStore:GetColoredCharacterName(character), SPELLBOOK, glyphText))
+	AltoholicTabCharacters.Status:SetText(format("%s|r / %s / %s", DataStore:GetColoredCharacterName(character), SPELLBOOK, glyphText))
 	
 	if currentGlyphType == 1 then
-		glyphText = PRIME_GLYPH
-	elseif currentGlyphType == 2 then
 		glyphText = MAJOR_GLYPH
-	elseif currentGlyphType == 3 then
+	elseif currentGlyphType == 2 then
 		glyphText = MINOR_GLYPH
 	end
 	
@@ -220,12 +215,12 @@ function ns:UpdateKnownGlyphs()
 				if isKnown then
 					_G[itemName .. "SpellName"]:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
 					_G[itemName .. "SubSpellName"]:SetTextColor(0.50, 0.25, 0)
-					_G[itemName .. "IconTexture"]:SetDesaturated(0)
+					_G[itemName .. "IconTexture"]:SetDesaturated(false)
 					_G[itemName .. "IconTexture"]:SetVertexColor(1.0, 1.0, 1.0)
 				else
 					_G[itemName .. "SpellName"]:SetTextColor(0.4, 0.4, 0.4)
 					_G[itemName .. "SubSpellName"]:SetTextColor(0.4, 0.4, 0.4)
-					_G[itemName .. "IconTexture"]:SetDesaturated(1)
+					_G[itemName .. "IconTexture"]:SetDesaturated(true)
 					_G[itemName .. "IconTexture"]:SetVertexColor(0.4, 0.4, 0.4)
 				end
 

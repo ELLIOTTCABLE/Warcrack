@@ -14,6 +14,15 @@ IceThreat.aggroBar = nil
 IceThreat.aggroBarMulti = nil
 IceThreat.prototype.scheduledEvent = nil
 
+local GetNumPartyMembers, GetNumRaidMembers = GetNumPartyMembers, GetNumRaidMembers
+local MAX_NUM_RAID_MEMBERS, MAX_NUM_PARTY_MEMBERS = MAX_NUM_RAID_MEMBERS, MAX_NUM_PARTY_MEMBERS
+if IceHUD.WowVer >= 50000 then
+	GetNumPartyMembers = GetNumGroupMembers
+	GetNumRaidMembers = GetNumGroupMembers
+	MAX_NUM_PARTY_MEMBERS = MAX_PARTY_MEMBERS
+	MAX_NUM_RAID_MEMBERS = MAX_RAID_MEMBERS
+end
+
 local MAX_NUM_RAID_MEMBERS = 40
 local MAX_NUM_PARTY_MEMBERS = 5
 
@@ -49,6 +58,7 @@ function IceThreat.prototype:GetDefaultSettings()
 	settings["displaySecondPlaceThreat"] = true
 	settings["secondPlaceThreatAlpha"] = 0.75
 	settings["bAllowExpand"] = false
+	settings["showTankName"] = true
 	return settings
 end
 
@@ -167,6 +177,23 @@ function IceThreat.prototype:GetOptions()
 		order = 27.9
 	}
 
+	opts["showTankName"] = {
+		type = 'toggle',
+		name = L["Show tank name"],
+		desc = L["Shows the name of the threat holder colorized by his or her role"],
+		get = function()
+			return self.moduleSettings.showTankName
+		end,
+		set = function(info, v)
+			self.moduleSettings.showTankName = v
+			self:Redraw()
+		end,
+		disabled = function()
+			return not self.moduleSettings.enabled
+		end,
+		order = 29.1,
+	}
+
 	return opts
 end
 
@@ -232,7 +259,8 @@ function IceThreat.prototype:Update(unit)
 		unit = self.unit
 	end
 
-	if self.moduleSettings.onlyShowInGroups and (GetNumPartyMembers() == 0 and not UnitExists("pet")) then
+	local isInGroup = GetNumPartyMembers() > 0
+	if self.moduleSettings.onlyShowInGroups and (not isInGroup and not UnitExists("pet")) then
 		self:Show(false)
 		return
 	end
@@ -250,6 +278,7 @@ function IceThreat.prototype:Update(unit)
 	local secondHighestThreat = 0
 	local rangeMulti = 1.1
 	local scaledPercentZeroToOne
+	local _
 --[[
 threatState = 1
 scaledPercent = 1
@@ -311,12 +340,27 @@ threatValue = 100
 			scaledPercentZeroToOne = rawPercent / 100
 		end
 
-		IceHUD:Debug( "isTanking="..(isTanking or "nil").." threatState="..(threatState or "nil").." scaledPercent="..(scaledPercent or "nil").." rawPercent="..(rawPercent or "nil").." threatValue="..(threatValue or "nil").." secondhighest="..(secondHighestThreat or "nil"))
+		IceHUD:Debug( "isTanking="..(tostring(isTanking) or "nil").." threatState="..(tostring(threatState) or "nil").." scaledPercent="..(tostring(scaledPercent) or "nil").." rawPercent="..(tostring(rawPercent) or "nil").." threatValue="..(tostring(threatValue) or "nil").." secondhighest="..(tostring(secondHighestThreat) or "nil"))
 	end
 
 	-- set percentage text
 	self:SetBottomText1( IceHUD:MathRound(self.moduleSettings.showScaledThreat and scaledPercent or rawPercent) .. "%" )
-	self:SetBottomText2()
+	if not self.moduleSettings.showTankName or isTanking then
+		-- nothing if we are the target
+		self:SetBottomText2()
+	else
+		-- display the name of the current threat holder
+		local name = select(1, UnitName("targettarget"))
+		local color
+		if UnitGroupRolesAssigned("targettarget") == "TANK" or GetPartyAssignment("MAINTANK", "targettarget") then
+			color = "ThreatLow"
+		elseif GetPartyAssignment("MAINASSIST", "targettarget") then
+			color = "ThreatMedium"
+		else
+			color = "ThreatHigh"
+		end
+		self:SetBottomText2(name, color)
+	end
 
 	if ( isTanking ) then
 		rangeMulti = 1

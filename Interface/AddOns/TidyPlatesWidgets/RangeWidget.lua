@@ -8,6 +8,7 @@
 		Melee Range: 4
 --]]
 
+local GetGroupInfo = TidyPlatesUtility.GetGroupInfo
 local RangesCache = {}
 local Ranges = {}
 local RangeWatcher = CreateFrame("Frame")
@@ -32,14 +33,15 @@ local function CheckRanges(self)
 	local group, size, index, unitid, inRange
 	local estRange = nil
 	-- Check Group Type
-	if UnitInRaid("player") then group = "raid"; size = GetNumRaidMembers() - 1
-	elseif UnitInParty("player") then group = "party"; size = GetNumPartyMembers()
-	else group = nil end
-
+	
+	local groupType, groupSize = GetGroupInfo()
+	
+	if groupType == 'party' then groupSize = groupSize - 1 end 
+	
 	-- Cycle through Group
-	if group then
-		for index = 1, size do
-			unitid = group..index	
+	if groupType then
+		for index = 1, groupSize do
+			unitid = groupType..index	
 			Ranges[UnitName(unitid)] = GetRange(unitid)
 		end
 	end
@@ -68,7 +70,7 @@ end
 
 RangeWatcher:SetScript("OnEvent", ActivateRangeWidget)
 RangeWatcher:RegisterEvent("PLAYER_ENTERING_WORLD")
-RangeWatcher:RegisterEvent("RAID_ROSTER_UPDATE")
+RangeWatcher:RegisterEvent("GROUP_ROSTER_UPDATE")
 RangeWatcher:RegisterEvent("PARTY_MEMBERS_CHANGED")
 RangeWatcher:RegisterEvent("PARTY_CONVERTED_TO_RAID")
 

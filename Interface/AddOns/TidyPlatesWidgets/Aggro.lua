@@ -34,10 +34,12 @@ local function Enable()
 	TidyPlatesUtility.EnableGroupWatcher()
 end
 
-local function Disable() 
+local function Disable()
+    if DangerWatcher then 
 	DangerWatcher:SetScript("OnEvent", nil)
 	DangerWatcher:UnregisterAllEvents()
 	DangerWatcher = nil
+    end
 end
 
 TidyPlatesWidgets.EnableAggroWatch = Enable

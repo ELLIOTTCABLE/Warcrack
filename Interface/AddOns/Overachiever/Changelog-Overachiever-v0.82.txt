@@ -1,0 +1,23 @@
+------------------------------------------------------------------------
+r124 | tuhljin | 2015-02-26 21:51:28 +0000 (Thu, 26 Feb 2015) | 1 line
+Changed paths:
+   A /tags/v0.82 (from /trunk:123)
+
+Tagging as v0.82
+------------------------------------------------------------------------
+r123 | tuhljin | 2015-02-26 07:30:45 +0000 (Thu, 26 Feb 2015) | 5 lines
+Changed paths:
+   M /trunk/Overachiever.lua
+   M /trunk/Overachiever.toc
+   M /trunk/Overachiever_Tabs/Overachiever_Tabs.toc
+   M /trunk/Overachiever_Tabs/Suggestions.lua
+   M /trunk/Overachiever_Trade/Overachiever_Trade.toc
+   M /trunk/libs/TjOptions.lua
+   M /trunk/readme.txt
+
+- Updated for WoW patch 6.1.
+- Suggestions Tab: Added suggestions for Ashran.
+- Attempt to fix an error that appeared upon completion of achievements and certain instances.
+- Fixed the options panels not being populated when first shown.
+- Fixed "/oa" and related slash commands not opening the correct options panel if the UI options window hadn't been opened before in that session.
+------------------------------------------------------------------------

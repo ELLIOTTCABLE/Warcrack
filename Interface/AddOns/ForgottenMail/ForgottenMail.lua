@@ -1,78 +1,57 @@
-local function SetDesaturation(texture, desaturation)
-	local shaderSupported = texture:SetDesaturated(desaturation)
-	if shaderSupported then
-		texture:SetVertexColor(1.0, 1.0, 1.0)
-	else
-		if desaturation then
-			texture:SetVertexColor(0.5, 0.5, 0.5)
-		else
-			texture:SetVertexColor(1.0, 1.0, 1.0)
-		end
-	end
-end
+local db
 
-
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("ADDON_LOADED")
-frame:RegisterEvent("MAIL_INBOX_UPDATE")
-frame:RegisterEvent("UPDATE_PENDING_MAIL")
-frame:SetScript("OnEvent", function(self, event, addon)
-	if event == "MAIL_INBOX_UPDATE" or event == "UPDATE_PENDING_MAIL" then
-		if event == "MAIL_INBOX_UPDATE" then
-			-- GetInboxNumItems returns 0 until you have checked the inbox, so we need to store it
-			ForgottenMailNumInboxItems = GetInboxNumItems()
-		end
-		if HasNewMail() then
-			-- new mail, show mail icon as usual
-			MiniMapMailFrame:Show()
-			SetDesaturation(MiniMapMailIcon, nil)
-			SetDesaturation(MiniMapMailBorder, nil)
-		elseif ForgottenMailNumInboxItems > 0 then
-			-- no new mail, but old mail, show mail icon and desaturate it
-			shaderSupported = false
-			MiniMapMailFrame:Show()
-			SetDesaturation(MiniMapMailIcon, 1)
-			SetDesaturation(MiniMapMailBorder, 1)
-		else
-			-- no mail at all, hide mail icon
-			MiniMapMailFrame:Hide()
-		end
-	elseif addon == "ForgottenMail" then
-		-- old inbox items from last session?
-		if not ForgottenMailNumInboxItems then
-			ForgottenMailNumInboxItems = 0
-		elseif ForgottenMailNumInboxItems > 0 then
-			MiniMapMailFrame:Show()
-			SetDesaturation(MiniMapMailIcon, 1)
-			SetDesaturation(MiniMapMailBorder, 1)
-		end
-		self:UnregisterEvent("ADDON_LOADED")
-	end
+local addon = CreateFrame("Frame")
+addon:RegisterEvent("ADDON_LOADED")
+addon:RegisterEvent("MAIL_INBOX_UPDATE")
+addon:RegisterEvent("UPDATE_PENDING_MAIL")
+addon:SetScript("OnEvent", function(self, event, ...)
+	self[event](self, ...)
 end)
 
+function addon:ADDON_LOADED(addon)
+	if addon ~= "ForgottenMail" then return end
+	
+	ForgottenMailDB = ForgottenMailDB or {}
+	db = ForgottenMailDB
+	if db.expiry then
+		MiniMapMailIcon:SetDesaturated(true)
+		MiniMapMailBorder:SetDesaturated(true)
+		MiniMapMailFrame:Show()
+	end
+	self:UnregisterEvent("ADDON_LOADED")
+end
+
+function addon:MAIL_INBOX_UPDATE()
+	db.expiry = nil
+	db.delete = nil
+	local nextExpiry
+	for i = 1, GetInboxNumItems() do
+		local _, _, sender, subject, money, _, daysLeft = GetInboxHeaderInfo(i)
+		if not nextExpiry or daysLeft < nextExpiry then
+			nextExpiry = daysLeft
+			db.expiry = time() + floor(daysLeft * 24 * 3600)
+			db.delete = InboxItemCanDelete(i)
+		end
+	end
+	self:UPDATE_PENDING_MAIL()
+end
+
+function addon:UPDATE_PENDING_MAIL()
+	local mail = not HasNewMail() and db.expiry
+	MiniMapMailIcon:SetDesaturated(mail)
+	MiniMapMailBorder:SetDesaturated(mail)
+	MiniMapMailFrame:SetShown(HasNewMail() or db.expiry)
+end
 
 -- hook mail icon tooltip text to reflect old inbox items if applicable
-function MinimapMailFrameUpdate()
-	local sender1, sender2, sender3 = GetLatestThreeSenders()
-	local toolText
+hooksecurefunc("MinimapMailFrameUpdate", function()
+	if not db.expiry then return end
 	
-	if (sender1 or sender2 or sender3) then
-		toolText = HAVE_MAIL_FROM
-	elseif HasNewMail() then
-		toolText = HAVE_MAIL
-	else
-		-- show amount of old inbox items
-		toolText = "You have "..ForgottenMailNumInboxItems.." inbox |4item:items;"
+	if not HasNewMail() then
+		GameTooltip:ClearLines("")
+		GameTooltip:AddLine("You have old inbox items")
 	end
-	
-	if sender1 then
-		toolText = toolText.."\n"..sender1
-	end
-	if sender2 then
-		toolText = toolText.."\n"..sender2
-	end
-	if sender3 then
-		toolText = toolText.."\n"..sender3
-	end
-	GameTooltip:SetText(toolText)
-end
+	GameTooltip:AddLine(" ")
+	GameTooltip:AddLine(format("Next item is %s in %s.", db.delete and "deleted" or "returned", SecondsToTime(db.expiry - time(), true, true)), nil, nil, nil, true)
+	GameTooltip:Show()
+end)

@@ -1,9 +1,10 @@
-## Interface: 40300
+## Interface: 60100
 ## Title: Combuctor Config
-## Author: Tuller
+## Author: Tuller and Jaliborc (João Cardoso)
 ## Notes: An options menu for Combuctor
 ## Dependencies: Combuctor
 ## LoadOnDemand: 1
+## Version: 6.1
 
 panel.lua
 main.lua

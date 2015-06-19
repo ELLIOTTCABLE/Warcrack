@@ -1,10 +1,8 @@
 local addonName = "Altoholic"
 local addon = _G[addonName]
+local colors = addon.Colors
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
-
-local WHITE		= "|cFFFFFFFF"
-local GREEN		= "|cFF00FF00"
 
 local PLAYER_TREE = "Tree1"
 local GUILD_TREE = "Tree2"
@@ -135,11 +133,11 @@ local function DrawTalent(texture, tier, column, count, id)
 	local itemTexture = _G[itemName .. "IconTexture"]
 	
 	if count and count > 0 then
-		itemCount:SetText(GREEN .. count)
+		itemCount:SetText(colors.green .. count)
 		itemCount:Show()
-		itemTexture:SetDesaturated(0)
+		itemTexture:SetDesaturated(false)
 	else
-		itemTexture:SetDesaturated(1)
+		itemTexture:SetDesaturated(true)
 		itemCount:Hide()
 	end
 	itemButton:Show()
@@ -340,12 +338,12 @@ local function DrawClassIcons(iconGroup, class, character, guildMember)
 		elseif guildMember then
 			count = DataStore:GetGuildMemberNumPointsSpent(currentGuildKey, guildMember, tree, isPrimary and 1 or 2)
 		end
-		itemCount:SetText(WHITE .. count)
+		itemCount:SetText(colors.white .. count)
 		itemCount:Show()
 		itemButton:Show()
 		
 		if not isPlayer then
-			itemTexture:SetDesaturated((character or guildMember) and 0 or 1)
+			itemTexture:SetDesaturated((character or guildMember) and false or true)
 		end
 		
 		index = index + 1
@@ -454,7 +452,7 @@ function ns:Update()
 	local character = addon.Tabs.Characters:GetAltKey()
 	if not character then return end
 	
-	_, currentClass = DataStore:GetCharacterClass(character)
+	local _, currentClass = DataStore:GetCharacterClass(character)
 	if not DataStore:IsClassKnown(currentClass) then return end
 	
 	local level = DataStore:GetCharacterLevel(character)
@@ -479,7 +477,7 @@ function ns:Update()
 
 	currentTreeName = DataStore:GetTreeNameByID(currentClass, currentTreeID or 1)
 	status = format("%s / %s", status, currentTreeName)
-	AltoholicTabCharactersStatus:SetText(status)
+	AltoholicTabCharacters.Status:SetText(status)
 	
 	-- background
 	DrawBackground(PLAYER_TREE, currentClass, currentTreeName)
@@ -518,7 +516,7 @@ local function OnRightTreePlayerChange(self, key, member)
 	if currentGuildMember then
 		currentGuildKey = DataStore:GetGuild()
 		DataStore:RequestGuildMemberTalents(currentGuildMember)
-		name = addon:GetClassColor(currentClass) .. currentGuildMember
+		name = DataStore:GetClassColor(currentClass) .. currentGuildMember
 	else
 		name = DataStore:GetColoredCharacterName(rightTreeKey)
 	end
@@ -533,7 +531,7 @@ local function OnOtherGuildMemberChange(self, guild, member)
 	currentGuildKey = guild
 	currentGuildMember = member
 	
-	local name = addon:GetClassColor(currentClass) .. currentGuildMember
+	local name = DataStore:GetClassColor(currentClass) .. currentGuildMember
 
 	local frame = _G[ parent .. "_SelectMember" ]
 	UIDropDownMenu_ClearAll(frame)
@@ -552,7 +550,7 @@ function ns:DropDownMembers_Initialize(level)
 		local guildName = GetGuildInfo("player")
 		
 		if IsInGuild() then
-			info.text = GREEN..guildName
+			info.text = colors.green..guildName
 			info.hasArrow = 1
 			info.checked = nil
 			info.value = 1
@@ -629,7 +627,7 @@ function ns:DropDownMembers_Initialize(level)
 					UIDropDownMenu_AddButton(info, level)
 				else
 					for _, member in ipairs(sortedList) do
-						info.text = addon:GetClassColor(currentClass) .. member
+						info.text = DataStore:GetClassColor(currentClass) .. member
 						info.checked = nil
 						info.func = OnRightTreePlayerChange
 						info.arg1 = nil		-- guild member, so no datastore key
@@ -649,7 +647,7 @@ function ns:DropDownMembers_Initialize(level)
 				for guildName, guild in pairs(DataStore:GetGuilds(realm)) do		-- all guilds on this realm
 					if not (realm == thisRealm and guildName == thisGuild) then
 						for _, member in pairs(DataStore:GetGuildTalentsByClass(guild, currentClass)) do
-							info.text = format("%s / %s / %s", WHITE..realm, GREEN..guildName..WHITE, addon:GetClassColor(currentClass) .. member)
+							info.text = format("%s / %s / %s", colors.white..realm, colors.green..guildName..colors.white, DataStore:GetClassColor(currentClass) .. member)
 							info.checked = nil
 							info.func = OnOtherGuildMemberChange
 							info.arg1 = guild		-- guild key
@@ -679,9 +677,9 @@ function ns:DropDownMembers_Initialize(level)
 						local _, class = DataStore:GetCharacterClass(key)
 						if class == currentClass and DataStore:GetCharacterLevel(key) >= 10 then
 							if account == "Default" then
-								info.text = format("%s / %s", WHITE..realm, DataStore:GetColoredCharacterName(key) ) 
+								info.text = format("%s / %s", colors.white..realm, DataStore:GetColoredCharacterName(key) ) 
 							else
-								info.text = format("%s / %s %s(%s)", WHITE..realm, DataStore:GetColoredCharacterName(key), GREEN, account ) 
+								info.text = format("%s / %s %s(%s)", colors.white..realm, DataStore:GetColoredCharacterName(key), colors.green, account ) 
 							end
 							info.value = name
 							info.checked = nil

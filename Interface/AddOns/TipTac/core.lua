@@ -26,6 +26,8 @@ local TT_DefaultConfig = {
 	gttScale = 1,
 	updateFreq = 0.5,
 	enableChatHoverTips = false,
+	hideFactionText = false,
+	hideRealmText = false,
 
 	colorGuildByReaction = true,
 	colGuild = "|cff0080cc",
@@ -69,6 +71,7 @@ local TT_DefaultConfig = {
 	fontFlags = "",
 	fontSizeDelta = 2,
 
+	classification_minus = "-%s ",		-- New classification in MoP; Unsure what it's used for, but apparently the units have no mana. Example of use: The "Sha Haunts" early in the Horde's quests in Thunder Hold.
 	classification_trivial = "~%s ",
 	classification_normal = "%s ",
 	classification_elite = "+%s ",
@@ -111,6 +114,7 @@ local TT_DefaultConfig = {
 	iconRaid = true,
 	iconFaction = false,
 	iconCombat = false,
+	iconClass = false,
 	iconAnchor = "TOPLEFT",
 	iconSize = 24,
 
@@ -173,9 +177,11 @@ tt.tipsToModify = TT_TipsToModify;
 
 local tipBackdrop = { tile = false, insets = {} };
 
--- Constants
-local TT_LevelMatch = "^"..TOOLTIP_UNIT_LEVEL:gsub("%%s",".+"); -- Was changed to match other localizations properly, used to match: "^"..LEVEL.." .+" -- Az: doesn't actually match the level line on the russian client!
+-- String Constants
+local TT_LevelMatch = "^"..TOOLTIP_UNIT_LEVEL:gsub("%%s",".+"); -- Was changed to match other localizations properly, used to match: "^"..LEVEL.." .+" -- Az: doesn't actually match the level line on the russian client! 14.02.24: Doesn't match for Italian client either.
+local TT_LevelMatchPet = "^"..TOOLTIP_WILDBATTLEPET_LEVEL_CLASS:gsub("%%s",".+");
 local TT_NotSpecified = "Not specified";
+local TT_Targeting = BINDING_HEADER_TARGETING;
 local TT_Reaction = {
 	"Tapped",					-- No localized string of this
 	FACTION_STANDING_LABEL2,	-- Hostile
@@ -228,6 +234,13 @@ local supportedHyperLinks = {
 	glyph = true,
 };
 
+-- GTT Control Variables
+local gtt_lastUpdate = 0;		-- time since last update
+local gtt_numLines = 0;			-- number of lines at last check, if this differs from gtt:NumLines() an update should be performed
+local gtt_newHeight;			-- the new height of the tooltip, this value accommodates the inclusion of health/power bars inside the tooltip
+local gtt_anchorType;			-- valid types: normal/mouse/parent
+local gtt_anchorPoint;          -- standard UI anchor point
+
 -- Data Variables
 local isColorBlind;
 local pLevel;
@@ -238,9 +251,10 @@ local targetedList = {};
 local auras = {};
 local bars = {};
 local tipIcon;
+local petLevelLineIndex;
 
 --------------------------------------------------------------------------------------------------------
---                                       TipTac Anchor Creation                                       --
+--                                   TipTac Anchor Creation & Events                                  --
 --------------------------------------------------------------------------------------------------------
 
 tt:SetWidth(114);
@@ -440,21 +454,13 @@ local function ModifyUnitTooltip()
 	local unit = u.token;
 	local reaction = cfg["colReactText"..u.reactionIndex];
 	local name, realm = UnitName(unit);
-	local hasGuildTitle;
+	local lineInfoIndex = 2 + (isColorBlind and UnitIsVisible(unit) and 1 or 0);
+	local isPetWild, isPetCompanion = UnitIsWildBattlePet(unit), UnitIsBattlePetCompanion(unit);
 	-- Level + Classification
-	local level = UnitLevel(unit);
-	local tttData = (TipTacTalents and TipTacTalents.current);
-	if (tttData) and (level == -1) and (u.isPlayer) and (tttData.name == name) and (tttData[3]) then -- Using TipTacTalents, estimate level of ?? players by using talent points spent
-		local points = (tttData[1] + tttData[2] + tttData[3]);
-		if (points >= 36) then
-			level = (80 + points - 36);
-		else
-			level = ((points - 1) * 2 + 10);
-		end
-	end
-	local classification = UnitClassification(unit);
+	local level = (isPetWild or isPetCompanion) and UnitBattlePetLevel(unit) or UnitLevel(unit) or -1;
+	local classification = UnitClassification(unit) or "";
 	lineInfo[#lineInfo + 1] = (UnitCanAttack(unit,"player") or UnitCanAttack("player",unit)) and GetDifficultyLevelColor(level ~= -1 and level or 500) or cfg.colLevel;
-	lineInfo[#lineInfo + 1] = (cfg["classification_"..classification] or "%d? "):format(level == -1 and "??" or level); -- Why "%d? " on the alt format? Bug?
+	lineInfo[#lineInfo + 1] = (cfg["classification_"..classification] or "%s? "):format(level == -1 and "??" or level);
 	-- Players
 	if (u.isPlayer) then
 		-- gender
@@ -471,14 +477,14 @@ local function ModifyUnitTooltip()
 		lineInfo[#lineInfo + 1] = cfg.colRace;
 		lineInfo[#lineInfo + 1] = UnitRace(unit);
 		-- class
-		local class, classEng = UnitClass(unit);
+		local class, classEng = UnitClass(unit);	-- Az: UnitClass() is called too many times in TipTac's code, cache it!
 		lineInfo[#lineInfo + 1] = " ";
 		lineInfo[#lineInfo + 1] = (TT_ClassColors[classEng] or COL_WHITE);
 		lineInfo[#lineInfo + 1] = class;
 		u.classEng = classEng;
 		-- name
 		lineOne[#lineOne + 1] = (cfg.colorNameByClass and (TT_ClassColors[classEng] or COL_WHITE) or reaction);
-		lineOne[#lineOne + 1] = (cfg.nameType == "original" and u.originalName) or (cfg.nameType == "title" and UnitPVPName(unit)) or name;
+		lineOne[#lineOne + 1] = (cfg.nameType == "marysueprot" and u.rpName) or (cfg.nameType == "original" and u.originalName) or (cfg.nameType == "title" and UnitPVPName(unit)) or name;
 		if (realm) and (realm ~= "") and (cfg.showRealm ~= "none") then
 			if (cfg.showRealm == "show") then
 				lineOne[#lineOne + 1] = " - ";
@@ -501,18 +507,46 @@ local function ModifyUnitTooltip()
 			local pGuild = GetGuildInfo("player");
 			local guildColor = (guild == pGuild and cfg.colSameGuild or cfg.colorGuildByReaction and reaction or cfg.colGuild);
 			GameTooltipTextLeft2:SetFormattedText(cfg.showGuildRank and guildRank and "%s<%s> %s%s" or "%s<%s>",guildColor,guild,COL_LIGHTGRAY,guildRank);
-			hasGuildTitle = true;
+			lineInfoIndex = (lineInfoIndex + 1);
+		end
+	-- BattlePets
+	elseif (isPetWild or isPetCompanion) then
+		lineOne[#lineOne + 1] = reaction;
+		lineOne[#lineOne + 1] = name;
+		lineInfo[#lineInfo + 1] = " ";
+		lineInfo[#lineInfo + 1] = cfg.colRace;
+		local petType = UnitBattlePetType(unit) or 5;
+		lineInfo[#lineInfo + 1] = _G["BATTLE_PET_NAME_"..petType];
+		if (isPetWild) then
+			lineInfo[#lineInfo + 1] = " ";
+			lineInfo[#lineInfo + 1] = UnitCreatureFamily(unit) or UnitCreatureType(unit);
+		else
+			if not (petLevelLineIndex) then
+				for i = 2, gtt:NumLines() do
+					local gttLineText = _G["GameTooltipTextLeft"..i]:GetText();
+					if (type(gttLineText) == "string") and (gttLineText:find(TT_LevelMatchPet)) then
+						petLevelLineIndex = i;
+						break;
+					end
+				end
+			end
+			lineInfoIndex = petLevelLineIndex or 2;
+			local expectedLine = 3 + (isColorBlind and 1 or 0);
+			if (lineInfoIndex > expectedLine) then
+				GameTooltipTextLeft2:SetFormattedText("%s<%s>",reaction,u.title);
+			end
 		end
 	-- NPCs
 	else
 		-- name
 		lineOne[#lineOne + 1] = reaction;
 		lineOne[#lineOne + 1] = name;
-		-- guild/title
-		if (u.title) then
+		-- guild/title -- since WoD, npc title can be a single space character
+		if (u.title) and (u.title ~= " ") then
 			-- Az: this doesn't work with "Mini Diablo" or "Mini Thor", which has the format: 1) Mini Diablo 2) Lord of Terror 3) Player's Pet 4) Level 1 Non-combat Pet
-			(isColorBlind and GameTooltipTextLeft3 or GameTooltipTextLeft2):SetFormattedText("%s<%s>",reaction,u.title);
-			hasGuildTitle = true;
+			local gttLine = isColorBlind and GameTooltipTextLeft3 or GameTooltipTextLeft2;
+			gttLine:SetFormattedText("%s<%s>",reaction,u.title);
+			lineInfoIndex = (lineInfoIndex + 1);
 		end
 		-- class
 		local class = UnitCreatureFamily(unit) or UnitCreatureType(unit);
@@ -527,7 +561,7 @@ local function ModifyUnitTooltip()
 	if (cfg.showTarget ~= "none") then
 		local targetUnit = unit.."target";
 		local target = UnitName(targetUnit);
-		if (target) and (target ~= UNKNOWN and target ~= "" or UnitExists(targetUnit)) then
+		if (target) and (target ~= UNKNOWNOBJECT and target ~= "" or UnitExists(targetUnit)) then
 			if (cfg.showTarget == "first") then
 				lineOne[#lineOne + 1] = COL_WHITE;
 				lineOne[#lineOne + 1] = " : |r";
@@ -536,7 +570,9 @@ local function ModifyUnitTooltip()
 				lineOne[#lineOne + 1] = "\n  ";
 				AddTarget(lineOne,target);
 			elseif (cfg.showTarget == "last") then
-				lineInfo[#lineInfo + 1] = "\n|cffffd100Targeting: ";
+				lineInfo[#lineInfo + 1] = "\n|cffffd100";
+				lineInfo[#lineInfo + 1] = TT_Targeting;
+				lineInfo[#lineInfo + 1] = ": ";
 				AddTarget(lineInfo,target);
 			end
 		end
@@ -550,32 +586,33 @@ local function ModifyUnitTooltip()
 	-- Line One
 	GameTooltipTextLeft1:SetFormattedText(("%s"):rep(#lineOne),unpack(lineOne));
 	-- Info Line
-	local lineIndex = 2 + (isColorBlind and UnitIsVisible(unit) and 1 or 0) + (hasGuildTitle and 1 or 0);
-	local gttLine = _G["GameTooltipTextLeft"..lineIndex];
+	local gttLine = _G["GameTooltipTextLeft"..lineInfoIndex];
 	gttLine:SetFormattedText(("%s"):rep(#lineInfo),unpack(lineInfo));
 	gttLine:SetTextColor(1,1,1);
 end
 
 -- Add "Targeted By" line
 local function AddTargetedBy()
-	local numParty, numRaid = GetNumPartyMembers(), GetNumRaidMembers();
-	if (numParty > 0 or numRaid > 0) then
-		for i = 1, (numRaid > 0 and numRaid or numParty) do
-			local unit = (numRaid > 0 and "raid"..i or "party"..i);
-			if (UnitIsUnit(unit.."target",u.token)) and (not UnitIsUnit(unit,"player")) then
-				local _, class = UnitClass(unit);
-				targetedList[#targetedList + 1] = TT_ClassColors[class];
-				targetedList[#targetedList + 1] = UnitName(unit);
-				targetedList[#targetedList + 1] = "|r, ";
-			end
+	local numGroup = GetNumGroupMembers();
+	if (not numGroup) or (numGroup <= 1) then
+		return;
+	end
+	local inRaid = IsInRaid();
+	for i = 1, numGroup do
+		local unit = (inRaid and "raid"..i or "party"..i);
+		if (UnitIsUnit(unit.."target",u.token)) and (not UnitIsUnit(unit,"player")) then
+			local _, class = UnitClass(unit);
+			targetedList[#targetedList + 1] = TT_ClassColors[class];
+			targetedList[#targetedList + 1] = UnitName(unit);
+			targetedList[#targetedList + 1] = "|r, ";
 		end
-		if (#targetedList > 0) then
-			targetedList[#targetedList] = nil;
-			gtt:AddLine(" ",nil,nil,nil,1);
-			local line = _G["GameTooltipTextLeft"..gtt:NumLines()];
-			line:SetFormattedText("Targeted By (|cffffffff%d|r): %s",(#targetedList + 1) / 3,table.concat(targetedList));
-			wipe(targetedList);
-		end
+	end
+	if (#targetedList > 0) then
+		targetedList[#targetedList] = nil;
+		gtt:AddLine(" ",nil,nil,nil,1);
+		local line = _G["GameTooltipTextLeft"..gtt:NumLines()];
+		line:SetFormattedText("Targeted By (|cffffffff%d|r): %s",(#targetedList + 1) / 3,table.concat(targetedList));
+		wipe(targetedList);
 	end
 end
 
@@ -659,7 +696,7 @@ end
 -- Format Number Value
 local function FormatValue(val)
 	if (not cfg.barsCondenseValues) or (val < 10000) then
-		return val;
+		return tostring(val);
 	elseif (val < 1000000) then
 		return ("%.1fk"):format(val / 1000);
 	elseif (val < 1000000000) then
@@ -680,7 +717,11 @@ local function FormatBarValues(fs,val,max,type)
 	elseif (type == "full") then
 		fs:SetFormattedText("%s / %s (%.0f%%)",FormatValue(val),FormatValue(max),val / max * 100);
 	elseif (type == "deficit") then
-		fs:SetFormattedText(val == max and "" or "-%d",FormatValue(max - val));
+		if (val ~= max) then
+			fs:SetFormattedText("-%s",FormatValue(max - val));
+		else
+			fs:SetText("");
+		end
 	elseif (type == "percent") then
 		fs:SetFormattedText("%.0f%%",val / max * 100);
 	end
@@ -723,7 +764,7 @@ local function CreateAura()
 	aura.cooldown:SetReverse(1);
 	aura.cooldown:SetAllPoints();
 	aura.cooldown:SetFrameLevel(aura:GetFrameLevel());
-	aura.cooldown.noCooldownCount = cfg.noCooldownCount;
+	aura.cooldown.noCooldownCount = cfg.noCooldownCount or nil;
 	aura.border = aura:CreateTexture(nil,"OVERLAY");
 	aura.border:SetPoint("TOPLEFT",-1,1);
 	aura.border:SetPoint("BOTTOMRIGHT",1,-1);
@@ -848,12 +889,6 @@ end
 	- Something that resizes the tip, Show() already does this, but it's also done after OnTooltipSetUnit() again. Or maybe it's just another addon's hook doing it. Tested without any addons loaded, and it still resizes after.
 --]]
 
--- GTT Control Variables
-local gtt_lastUpdate = 0;
-local gtt_newHeight;
-local gtt_anchorType;
-local gtt_anchorPoint;
-
 -- Get The Anchor Position Depending on the Tip Content and Parent Frame -- Do not depend on "u.token" here, as it might not have been cleared yet!
 -- Checking "mouseover" here isn't ideal due to actionbars, it will sometimes return true because of selfcast.
 local function GetAnchorPosition()
@@ -882,6 +917,7 @@ local gttShow = gtt.Show;
 gtt.Show = function(self,...)
 	gttShow(self,...);
 	if (bars.offset) then
+		gtt_numLines = self:NumLines();
 		gtt_newHeight = (self:GetHeight() + bars.offset);
 --		self:SetHeight(gtt_newHeight);	-- Az: Setting height here seems to cause a conflict with the XToLevel addon, which causes an empty line. But I was certain this got added to fix the very same issue, just with another addon
 	end
@@ -890,7 +926,8 @@ end
 -- HOOK: GTT OnShow -- This ensures that default anchored world frame tips have the proper color, their internal function seems to set them to a dark blue color
 local function GTTHook_OnShow(self,...)
 	gtt_anchorType, gtt_anchorPoint = GetAnchorPosition();
-	if (gtt_anchorType == "mouse") and (self:GetAnchorType() ~= "ANCHOR_CURSOR") then
+	local gttAnchor = self:GetAnchorType();
+	if (self.default) and (gtt_anchorType == "mouse") and (gttAnchor ~= "ANCHOR_CURSOR") and (gttAnchor ~= "ANCHOR_CURSOR_RIGHT") then
 		tt:AnchorFrameToMouse(self);
 	end
 	if (self:IsOwned(UIParent)) and (not self:GetUnit()) then
@@ -901,13 +938,19 @@ end
 -- HOOK: GTT OnUpdate
 local function GTTHook_OnUpdate(self,elapsed)
 	-- This ensures that mouse anchored world frame tips have the proper color, their internal function seems to set them to a dark blue color
-	if (self:GetAnchorType() == "ANCHOR_CURSOR") then
+	local gttAnchor = self:GetAnchorType();
+	if (gttAnchor == "ANCHOR_CURSOR") or (gttAnchor == "ANCHOR_CURSOR_RIGHT") then
 		self:SetBackdropColor(unpack(cfg.tipColor));
 		self:SetBackdropBorderColor(unpack(cfg.tipBorderColor));
 		return;
 	-- Anchor GTT to Mouse
 	elseif (gtt_anchorType == "mouse") and (self.default) then
 		tt:AnchorFrameToMouse(self);
+	end
+
+	-- WoD: This background color reset, from OnShow(), has been copied down here. It seems resetting the color in OnShow() wasn't enough, as the color changes after the tip is being shown
+	if (self:IsOwned(UIParent)) and (not self:GetUnit()) then
+		self:SetBackdropColor(unpack(cfg.tipColor));
 	end
 
 	-- Fadeout / Update Tip if Showing a Unit
@@ -922,18 +965,24 @@ local function GTTHook_OnUpdate(self,elapsed)
 			elseif (gtt_lastUpdate > cfg.preFadeTime) then
 				self:SetAlpha(1 - (gtt_lastUpdate - cfg.preFadeTime) / cfg.fadeTime);
 			end
-		-- This is only really useful for worldframe unit tips, when u.token == "mouseover", they do not call the GTT:FadeOut()
+		-- This is only really needed for worldframe unit tips, as when u.token == "mouseover", the GTT:FadeOut() function is not called
 		elseif (not UnitExists(u.token)) then
 			self:FadeOut();
-		elseif (cfg.updateFreq > 0) and (gtt_lastUpdate > cfg.updateFreq) then
-			gtt_lastUpdate = 0;
-			tt:ApplyGeneralAppearance();
+		else
+			local gttCurrentLines = self:NumLines();
+			-- If number of lines differ from last time, force an update. This became an issue in 5.4 as the coalesced realm text is added after the initial Show(). This might also fix some incompatibilities with other addons.
+			if (cfg.updateFreq > 0) and (gtt_lastUpdate > cfg.updateFreq) or (gttCurrentLines ~= gtt_numLines) then
+				gtt_numLines = gttCurrentLines;
+				gtt_lastUpdate = 0;
+				tt:ApplyGeneralAppearance();
+			end
 		end
 	end
 
 	-- Resize the Tooltip if it's size has changed more than 0.1 units
-	if (gtt_newHeight) and (abs(self:GetHeight() - gtt_newHeight) > 0.1) then
---		gtt_newHeight = (self:GetHeight() + bars.offset);	-- Az: recalculating the height here would fix every issue (I think), but it also adds extra cpu cycles I'd rather be without. For now just stay with the Show() recalc.
+	local gttHeight = self:GetHeight();
+	if (gtt_newHeight) and (abs(gttHeight - gtt_newHeight) > 0.1) then
+		--gtt_newHeight = (gttHeight + bars.offset);	-- Az: Recalculating the height here would possibly fix every issue (I think), but it also adds extra cpu cycles I'd rather be without. For now just stay with the Show() recalc.
 		self:SetHeight(gtt_newHeight);
 	end
 end
@@ -974,9 +1023,15 @@ end
 
 -- HOOK: GTT OnTooltipCleared -- This will clean up auras, bars, raid icon and vars for the gtt when we aren't showing a unit
 local function GTTHook_OnTooltipCleared(self,...)
+	-- WoD: resetting the back/border color seems to be a necessary action, otherwise colors may stick when showing the next tooltip thing (world object tips)
+	self:SetBackdropColor(unpack(cfg.tipColor));
+	self:SetBackdropBorderColor(unpack(cfg.tipBorderColor));
+	-- wipe the vars
 	wipe(u);
 	gtt_lastUpdate = 0;
+	gtt_numLines = 0;
 	gtt_newHeight = nil;
+	petLevelLineIndex = nil;
 	self.fadeOut = nil;
 	bars.offset = nil;
 	for i = 1, #bars do
@@ -1030,6 +1085,7 @@ function tt:HookTips()
 		-- Position Tip to Normal, Mouse or Parent anchor
 		gtt_anchorType, gtt_anchorPoint = GetAnchorPosition();
 		tooltip:SetOwner(parent,"ANCHOR_NONE");
+		tooltip:ClearAllPoints();
 		if (gtt_anchorType == "mouse") then
 			tt:AnchorFrameToMouse(tooltip);
 		elseif (gtt_anchorType == "parent") then
@@ -1136,12 +1192,13 @@ function tt:ApplySettings()
 		GameTooltipText:SetFont(cfg.fontFace,cfg.fontSize,cfg.fontFlags);
 		GameTooltipTextSmall:SetFont(cfg.fontFace,cfg.fontSize - cfg.fontSizeDelta,cfg.fontFlags);
 	end
-	-- Raid Icon
-	if (cfg.iconRaid or cfg.iconFaction or cfg.iconCombat) and (not tipIcon) then
+	-- Special Tooltip Icon
+	local isIconNeeded = (cfg.iconRaid or cfg.iconFaction or cfg.iconCombat or cfg.iconClass);
+	if (isIconNeeded) and (not tipIcon) then
 		tipIcon = gtt:CreateTexture(nil,"BACKGROUND");
 	end
 	if (tipIcon) then
-		if (cfg.iconRaid or cfg.iconFaction or cfg.iconCombat) then
+		if (isIconNeeded) then
 			tipIcon:SetWidth(cfg.iconSize);
 			tipIcon:SetHeight(cfg.iconSize);
 			tipIcon:ClearAllPoints();
@@ -1150,11 +1207,11 @@ function tt:ApplySettings()
 			tipIcon:Hide();
 		end
 	end
-	-- ChatFrame Hyperlink Hover
+	-- ChatFrame Hyperlink Hover -- Az: this may need some more testing, code seems wrong
 	if (cfg.enableChatHoverTips or self.hookedHoverHyperlinks) then
 		for i = 1, NUM_CHAT_WINDOWS do
 			local chat = _G["ChatFrame"..i];
-			if (i == 1) and (cfg.enableChatHoverTips) and (not self.hookedHoverHyperlinks) then
+			if (i == 1) and (cfg.enableChatHoverTips) and (not self.hookedHoverHyperlinks) then		-- Az: why only on first window?
 				self["oldOnHyperlinkEnter"..i] = chat:GetScript("OnHyperlinkEnter");
 				self["oldOnHyperlinkLeave"..i] = chat:GetScript("OnHyperlinkLeave");
 				self.hookedHoverHyperlinks = true;
@@ -1192,7 +1249,10 @@ function tt:AddModifiedTip(tip,noHooks)
 		if (not noHooks) then
 			tip:HookScript("OnHide",TipHook_OnHide);
 		end
-		self:ApplySettings();
+		-- Only apply settings if "cfg" has been initialised, meaning after VARIABLES_LOADED. If AddModifiedTip() is called before, settings will be applied for all tips once VARIABLES_LOADED is fired anyway.
+		if (cfg) then
+			self:ApplySettings();
+		end
 	end
 end
 
@@ -1209,6 +1269,15 @@ local function ApplyTipTacAppearance(first)
 	-- Store Original Name
 	if (first) and (cfg.nameType == "original") then
 		u.originalName = GameTooltipTextLeft1:GetText();
+	end
+	-- Az: RolePlay Explerimental (Mary Sue Protocol)
+	if (first) and (u.isPlayer) and (cfg.nameType == "marysueprot") and (msp) then
+		local field = "NA";
+		local name = UnitName(u.token);
+		msp.Request(name,field);	-- Az: does this return our request, or only storing it for later use? I'm guessing the info isn't available right away, but only after the person's roleplay addon replies.
+		if (msp.char[name]) and (msp.char[name].field[field] ~= "") then
+			u.rpName = msp.char[name].field[field] or name;
+		end
 	end
 	-- Find NPC Title -- 09.08.22: Should now work with colorblind mode
 	if (first) and (not u.isPlayer) then
@@ -1227,12 +1296,22 @@ local function ApplyTipTacAppearance(first)
 		SetupHealthAndPowerBar();
 	end
 	UpdateHealthAndPowerBar();
-	-- Remove PVP Line, which makes the tip look a bit bad
+	-- Remove PVP Line, which makes the tip look a bit bad -- MoP: Now removes alliance and horde faction text as well -- 5.4: Added removal of the coalesced realm line(s)
 	for i = 2, gtt:NumLines() do
 		local line = _G["GameTooltipTextLeft"..i];
-		if (line:GetText() == PVP_ENABLED) then
+		local text = line:GetText();
+		if (text == PVP_ENABLED) or (cfg.hideFactionText and (text == FACTION_ALLIANCE or text == FACTION_HORDE)) then
 			line:SetText(nil);
-			break;
+		end
+		if (cfg.hideRealmText) and (text == " ") then
+			local nextLine = _G["GameTooltipTextLeft"..(i + 1)];
+			if (nextLine) then
+				local nextText = nextLine:GetText();
+				if (nextText == COALESCED_REALM_TOOLTIP) or (nextText == INTERACTIVE_REALM_TOOLTIP) then
+					line:SetText(nil);
+					nextLine:SetText(nil);
+				end
+			end
 		end
 	end
 	-- Show & Adjust Height
@@ -1247,7 +1326,7 @@ function tt:ApplyGeneralAppearance(first)
 	if (cfg.reactColoredBackdrop) then
 		gtt:SetBackdropColor(unpack(cfg["colReactBack"..u.reactionIndex]));
 	end
-	if (cfg.reactColoredBorder) then
+	if (cfg.reactColoredBorder) then	-- Az: this will override the classColoredBorder config, perhaps have that option take priority instead?
 		gtt:SetBackdropBorderColor(unpack(cfg["colReactBack"..u.reactionIndex]));
 	-- Class Colored Border
 	elseif (first) and (cfg.classColoredBorder) and (u.isPlayer) then
@@ -1255,8 +1334,8 @@ function tt:ApplyGeneralAppearance(first)
 		local color = CLASS_COLORS[classEng] or CLASS_COLORS["PRIEST"];
 		gtt:SetBackdropBorderColor(color.r,color.g,color.b);
 	end
-	-- Raid Icon
-	if (cfg.iconRaid or cfg.iconFaction or cfg.iconCombat) then
+	-- Special Tooltip Icon
+	if (cfg.iconRaid or cfg.iconFaction or cfg.iconCombat or cfg.iconClass) then
 		local raidIconIndex = GetRaidTargetIndex(u.token);
 		if (cfg.iconRaid) and (raidIconIndex) then
 			tipIcon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcons");
@@ -1273,6 +1352,12 @@ function tt:ApplyGeneralAppearance(first)
 		elseif (cfg.iconCombat) and (UnitAffectingCombat(u.token)) then
 			tipIcon:SetTexture("Interface\\CharacterFrame\\UI-StateIcon");
 			tipIcon:SetTexCoord(0.5,1,0,0.5);
+			tipIcon:Show();
+		elseif (u.isPlayer) and (cfg.iconClass) then
+			local _, classEng = UnitClass(u.token);		-- Az: UnitClass() is called too many times in TipTac's code, cache it!
+			local texCoord = CLASS_ICON_TCOORDS[classEng];
+			tipIcon:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles");
+			tipIcon:SetTexCoord(unpack(texCoord));
 			tipIcon:Show();
 		else
 			tipIcon:Hide();

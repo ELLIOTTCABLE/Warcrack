@@ -34,6 +34,13 @@ IceCore.prototype.enabled = nil
 IceCore.prototype.presets = {}
 IceCore.prototype.bConfigMode = false
 
+IceCore.TextDecorationStyle = {
+	Shadow = L["Shadow"],
+	Outline = L["Outline"],
+	ThickOutline = L["Thick outline"],
+	NoDecoration = L["No decoration"],
+}
+
 local SUNDER_SPELL_ID = 7386
 local LACERATE_SPELL_ID = 33745
 local MAELSTROM_SPELL_ID = 53817
@@ -82,6 +89,10 @@ function IceCore.prototype:SetupDefaults()
 
 			updatePeriod = 0.033,
 			minimap = {},
+
+			TextDecoration = "Shadow",
+
+			bHideDuringPetBattles = true,
 		},
 		global = {
 			lastRunVersion = 0,
@@ -127,14 +138,14 @@ StaticPopupDialogs["ICEHUD_UPDATE_PERIOD_MATTERS"] =
 function IceCore.prototype:CheckDisplayUpdateMessage()
 	local thisVersion
 --@non-debug@
-	thisVersion = 870
+	thisVersion = 20150326042427
 --@end-non-debug@
 --[===[@debug@
 	thisVersion = 9999
 --@end-debug@]===]
 	if self.accountSettings.lastRunVersion < thisVersion then
 		if self.accountSettings.lastRunVersion < 549 then
-			StaticPopup_Show("ICEHUD_CONVERTED_TO_ACE3")
+			--StaticPopup_Show("ICEHUD_CONVERTED_TO_ACE3")
 		end
 		if self.accountSettings.lastRunVersion < 707 and self.accountSettings.lastRunVersion > 0 then
 			-- update from the old default that may have been saved with the user's settings
@@ -142,7 +153,7 @@ function IceCore.prototype:CheckDisplayUpdateMessage()
 				self.settings.updatePeriod = 0.033
 			end
 
-			StaticPopup_Show("ICEHUD_UPDATE_PERIOD_MATTERS")
+			--StaticPopup_Show("ICEHUD_UPDATE_PERIOD_MATTERS")
 		end
 		if self.accountSettings.lastRunVersion < 710 then
 			if self.settings.modules["MaelstromCount"] == nil then
@@ -231,17 +242,31 @@ function IceCore.prototype:Enable(userToggle)
 		IceHUD_Options:GenerateModuleOptions()
 	end
 
+	self.IceHUDFrame:RegisterEvent("PET_BATTLE_OPENING_START")
+	self.IceHUDFrame:RegisterEvent("PET_BATTLE_OVER")
+	self.IceHUDFrame:SetScript("OnEvent", function(self, event, ...)
+		if (event == "PET_BATTLE_OPENING_START") then
+			if IceHUD.IceCore.settings.bHideDuringPetBattles then
+				self:Hide()
+			end
+		elseif (event == "PET_BATTLE_OVER") then
+			if IceHUD.IceCore.settings.bHideDuringPetBattles then
+				self:Show()
+			end
+		end
+	end)
+
 	self.enabled = true
 end
 
 function IceCore.prototype:RedirectRemovedModules()
 	local _, class = UnitClass("player")
-	if class == "WARRIOR" and self.settings.modules["SunderCount"] then
+	if class == "WARRIOR" and self.settings.modules["SunderCount"] and IceHUD.WowVer < 60000 then
 		if self.settings.modules["SunderCount"].enabled or self.settings.modules["SunderCount"].enabled == nil then
 			local bFound = false
 
 			for k,v in pairs(self.elements) do
-				if v.moduleSettings.customBarType == "Counter"
+				if v.moduleSettings.customBarType == "Counter" and v.moduleSettings.auraName
 					and string.upper(v.moduleSettings.auraName) == string.upper(GetSpellInfo(SUNDER_SPELL_ID)) then
 					bFound = true
 					break
@@ -277,7 +302,7 @@ function IceCore.prototype:RedirectRemovedModules()
 		if self.settings.modules["LacerateCount"].enabled or self.settings.modules["LacerateCount"].enabled == nil then
 			local bFound = false
 			for k,v in pairs(self.elements) do
-				if v.moduleSettings.customBarType == "Counter"
+				if v.moduleSettings.customBarType == "Counter" and v.moduleSettings.auraName
 					and string.upper(v.moduleSettings.auraName) == string.upper(GetSpellInfo(LACERATE_SPELL_ID)) then
 					bFound = true
 					break
@@ -314,7 +339,7 @@ function IceCore.prototype:RedirectRemovedModules()
 		if self.settings.modules["MaelstromCount"].enabled or self.settings.modules["MaelstromCount"].enabled == nil then
 			local bFound = false
 			for k,v in pairs(self.elements) do
-				if v.moduleSettings.customBarType == "Counter"
+				if v.moduleSettings.customBarType == "Counter" and v.moduleSettings.auraName
 					and string.upper(v.moduleSettings.auraName) == string.upper(GetSpellInfo(MAELSTROM_SPELL_ID)) then
 					bFound = true
 					break
@@ -462,6 +487,10 @@ function IceCore.prototype:Disable(userToggle)
 		end
 	end
 
+	self.IceHUDFrame:UnregisterEvent("PET_BATTLE_OPENING_START")
+	self.IceHUDFrame:UnregisterEvent("PET_BATTLE_OVER")
+	self.IceHUDFrame:SetScript("OnEvent", nil)
+
 	self.enabled = false
 end
 
@@ -497,6 +526,21 @@ function IceCore.prototype:GetModuleOptions()
 		fontSize = 'large',
 		name = L["Click the + next to |cffffdc42Module Settings|r to see the available modules that you can tweak.\n\nAlso notice that some modules have a + next to them. This will open up additional settings such as text tweaks and icon tweaks on that module."],
 		order = 1
+	}
+
+	options["bbbGlobalTextSettings"] = {
+		type = 'select',
+		name = L["Text appearance"],
+		desc = L["This controls how all non-DogTag text on all modules appears.\n\nNOTE: Requires a UI reload to take effect."],
+		get = function(info)
+			return self.settings.TextDecoration
+		end,
+		set = function(info, v)
+			self.settings.TextDecoration = v
+			StaticPopup_Show("ICEHUD_CHANGED_DOGTAG")
+		end,
+		values = IceCore.TextDecorationStyle,
+		order = 2
 	}
 
 	for i = 1, table.getn(self.elements) do

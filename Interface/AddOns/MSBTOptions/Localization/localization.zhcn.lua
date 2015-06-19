@@ -27,6 +27,7 @@ L.MSG_INVALID_CUSTOM_FONT_NAME		= "无效字体名."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "字体名字已经存在."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "字体路径必须指向.ttf文件"
 L.MSG_UNABLE_TO_SET_FONT			= "无法使用指定字体." 
+--L.MSG_TESTING_FONT			= "Testing the specified font for validity..."
 L.MSG_CUSTOM_SOUNDS					= "自定义声音"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "无效声音名"
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "声音名已经存在"
@@ -38,7 +39,7 @@ L.MSG_SCROLL_AREA_ALREADY_EXISTS	= "此滚动区域已存在"
 L.MSG_INVALID_SCROLL_AREA_NAME		= "无效的滚动区名字"
 L.MSG_ACKNOWLEDGE_TEXT				= "你确定想这样做吗？"
 L.MSG_NORMAL_PREVIEW_TEXT			= "普通文字"
-L.MSG_INVALID_SOUND_FILE			= "声音必须为MP3或OGG文件"
+L.MSG_INVALID_SOUND_FILE			= "声音必须为OGG文件"
 L.MSG_NEW_TRIGGER					= "新建触发器"
 L.MSG_TRIGGER_CLASSES				= "触发种类"
 L.MSG_MAIN_EVENTS					= "主要事件"
@@ -56,23 +57,6 @@ L.MSG_ITEM_QUALITIES				= "物品品质"
 L.MSG_ITEMS							= "物品"
 L.MSG_ITEM_ALREADY_EXISTS			= "物品名已经存在."
 L.MSG_INVALID_ITEM_NAME				= "无效物品名."
-
-
-------------------------------
--- Class Names.
-------------------------------
-
-local obj = L.CLASS_NAMES
-obj["DEATHKNIGHT"]	= "死亡骑士"
-obj["DRUID"]		= "德鲁伊"
-obj["HUNTER"]		= "猎人"
-obj["MAGE"]			= "法师"
-obj["PALADIN"]		= "圣骑士"
-obj["PRIEST"]		= "牧师"
-obj["ROGUE"]		= "潜行者"
-obj["SHAMAN"]		= "萨满祭司"
-obj["WARLOCK"]		= "术士"
-obj["WARRIOR"]		= "战士"
 
 
 ------------------------------
@@ -121,6 +105,8 @@ obj["enableTrigger"]			= { tooltip="启用触发器"}
 obj["allPowerGains"]			= { label="所有能量获取", tooltip="显示所有获取的能量包括那些战斗日志中不显示的。警告：这个选项将会大量刷屏同时无视能量阈值和抑制显示设置\n不推荐"}
 obj["abbreviateSkills"]			= { label="技能简称", tooltip="简缩技能名字（仅适用于英文版）。若事件描述中加入“%sl”代码，此选项即失效"}
 obj["mergeSwings"]				= { label="合并普通攻击", tooltip="合并极短时间内的普通攻击伤害"}
+--obj["shortenNumbers"]			= { label="Shorten Numbers", tooltip="Display numbers in an abbreviated format (example: 32765 -> 33k)."}
+--obj["groupNumbers"]				= { label="Group By Thousands", tooltip="Display numbers grouped by thousands (example: 32765 -> 32,765)."}
 obj["hideSkills"]				= { label="隐藏技能", tooltip="在承受伤害和输出伤害中不显示技能名字。开启此选项将使你失去某些事件自定义功能，因为它会忽略“%s”代码"}
 obj["hideNames"]				= { label="隐藏名字", tooltip="在承受伤害和输出伤害中不显示单位名字。开启此选项将使你失去某些事件自定义功能，因为它会忽略“%n”代码"}
 obj["hideFullOverheals"]		= { label="隐藏全部过量的治疗", tooltip="不显示全部过量的治疗."}
@@ -229,7 +215,7 @@ obj = L.EDITBOXES
 obj["customFontName"]	= { label="字体名:", tooltip="用来确定字体的名字.\n\n例如: 我的字体"}
 obj["customFontPath"]	= { label="字体路径:", tooltip="字体文件的路径.\n\n注意: 如果文件在 MikScrollingBattleText\\Fonts 中的话, 只需要输入文件名就可以.\n\n例如: myFont.ttf "}
 obj["customSoundName"]	= { label="音效名:", tooltip="用来确定音效的名字.\n\nExample: 我的音效"}
-obj["customSoundPath"]	= { label="音效路径:", tooltip="音效文件的路径.\n\n注意: 如果文件在 MikScrollingBattleText\\Sounds 中的话, 只需要输入文件名就可以.\n\n例如: mySound.mp3 "}
+obj["customSoundPath"]	= { label="音效路径:", tooltip="音效文件的路径.\n\n注意: 如果文件在 MikScrollingBattleText\\Sounds 中的话, 只需要输入文件名就可以.\n\n例如: mySound.ogg "}
 obj["copyProfile"]		= { label="新建配置：", tooltip="输入新建配置的名称"}
 obj["partialEffect"]	= { tooltip="特效触发时的提示."}
 obj["scrollAreaName"]	= { label="新建滚动区域:", tooltip="新建滚动区域的名称"}
@@ -289,8 +275,10 @@ obj["HEALING_DONE"]			= "%a - 输出治疗总数.\n"
 obj["ABSORBED_AMOUNT"]		= "%a - 吸收伤害总数.\n"
 obj["AURA_AMOUNT"]			= "%a - 光环的堆叠数量.\n"
 obj["ENERGY_AMOUNT"]		= "%a - 能量总数.\n"
+--obj["CHI_AMOUNT"]			= "%a - Amount of chi you have.\n"
 obj["CP_AMOUNT"]			= "%a - 你的连击点总数.\n"
 obj["HOLY_POWER_AMOUNT"]	= "%a - Amount of holy power you have.\n"
+--obj["SHADOW_ORBS_AMOUNT"]	= "%a - Amount of shadow orbs you have.\n"
 obj["HONOR_AMOUNT"]			= "%a - 荣誉总数.\n"
 obj["REP_AMOUNT"]			= "%a - 声望总数.\n"
 obj["ITEM_AMOUNT"]			= "%a - 拾取物品的数量.\n"
@@ -477,10 +465,16 @@ obj["NOTIFICATION_COMBAT_ENTER"]		= { label="战斗开始", tooltip="显示你�
 obj["NOTIFICATION_COMBAT_LEAVE"]		= { label="战斗结束", tooltip="显示你已经结束了战斗"}
 obj["NOTIFICATION_POWER_GAIN"]			= { label="能量获得", tooltip="显示你额外获得的法力，怒气或者能量"}
 obj["NOTIFICATION_POWER_LOSS"]			= { label="能量行动", tooltip="显示你失去的法力，怒气或者能量"}
+--obj["NOTIFICATION_ALT_POWER_GAIN"]		= { label="Alternate Power Gains", tooltip="Enable when you gain alternate power such as sound level on Atramedes."}
+--obj["NOTIFICATION_ALT_POWER_LOSS"]		= { label="Alternate Power Losses", tooltip="Enable when you lose alternate power from drains."}
+--obj["NOTIFICATION_CHI_CHANGE"]			= { label="Chi Changes", tooltip="Enable when you change chi."}
+--obj["NOTIFICATION_CHI_FULL"]			= { label="Chi Full", tooltip="Enable when you attain full chi."}
 obj["NOTIFICATION_CP_GAIN"]				= { label="连击点获得", tooltip="显示你获得的连击点"}
 obj["NOTIFICATION_CP_FULL"]				= { label="连击点已满", tooltip="显示你的连击点已满"}
 obj["NOTIFICATION_HOLY_POWER_CHANGE"]	= { label="神圣能量变化", tooltip="显示你的神圣能量变化"}
 obj["NOTIFICATION_HOLY_POWER_FULL"]		= { label="神圣能量已满", tooltip="显示你的神圣能量已满"}
+--obj["NOTIFICATION_SHADOW_ORBS_CHANGE"]	= { label="Shadow Orb Changes", tooltip="Enable when you change shadow orbs."}
+--obj["NOTIFICATION_SHADOW_ORBS_FULL"]	= { label="Shadow Orbs Full", tooltip="Enable when you attain full shadow orbs."}
 obj["NOTIFICATION_HONOR_GAIN"]			= { label="获得荣誉", tooltip="显示你获得荣誉"}
 obj["NOTIFICATION_REP_GAIN"]			= { label="声望提高", tooltip="显示你的声望提高"}
 obj["NOTIFICATION_REP_LOSS"]			= { label="声望下降", tooltip="显示你的声望下降"}

@@ -3,8 +3,8 @@
     <!--
     This file is part of Decursive.
     
-    Decursive (v 2.7.0.5) add-on for World of Warcraft UI
-    Copyright (C) 2006-2007-2008-2009-2010-2011 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
+    Decursive (v 2.7.4.2) add-on for World of Warcraft UI
+    Copyright (C) 2006-2014 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
 
     Starting from 2009-10-31 and until said otherwise by its author, Decursive
     is no longer free software, all rights are reserved to its author (John Wellesz).
@@ -13,13 +13,13 @@
     To distribute Decursive through other means a special authorization is required.
     
 
-    Decursive is inspired from the original "Decursive v1.9.4" by Quu.
+    Decursive is inspired from the original "Decursive v1.9.4" by Patrick Bohnet (Quu).
     The original "Decursive 1.9.4" is in public domain ( www.quutar.com )
 
     Decursive is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY.
 
-    This file was last updated on 2011-11-06T14:08:15Z
+    This file was last updated on 2014-10-13T09:20:46Z
     -->
     <Script>
 
@@ -47,8 +47,8 @@
         DecursiveInstallCorrupted = true;
         return;
         end
+        T._LoadedFiles["Dcr_lists.xml"] = false;
 
-        -- DecursiveRootTable.Dcr:SetDateAndRevision("$Date: 2008-08-12 04:50:10 +0200 (mar., 12 août 2008) $", "$Revision: 80230 $");
     </Script>
 
     <Button name="DcrSimpleTextOnlyButton" hidden="true" virtual="true">
@@ -419,7 +419,7 @@
     <!-- DecursivePopulateListFrame {{{ -->
     <Frame name="DecursivePopulateListFrame" frameStrata="LOW" toplevel="true" enableMouse="true" movable="true" hidden="true" parent="UIParent">
         <Size>
-            <AbsDimension x="168" y="265" />
+            <AbsDimension x="168" y="285" />
         </Size>
 
         <Anchors>
@@ -881,6 +881,29 @@
                     </OnLoad>
                 </Scripts>
             </Button>
+            <Button name="$parentMonk" inherits="GameMenuButtonTemplate" text="Monk">
+                <Size>
+                    <AbsDimension x="80" y="20" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parentPaladin">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        DecursiveRootTable.Dcr:PopulateButtonPress(self);
+                    </OnClick>
+                    <OnLoad>
+                        if DecursiveInstallCorrupted then return end
+                        
+                        self.ClassType = DecursiveRootTable._C.CLASS_MONK;
+                        self:SetText(DecursiveRootTable.Dcr:ColorText(DecursiveRootTable.Dcr.LC[self.ClassType], "FF"..DecursiveRootTable.Dcr:GetClassHexColor(self.ClassType)));
+                    </OnLoad>
+                </Scripts>
+            </Button>
 
             <Button name="$parentClose" inherits="GameMenuButtonTemplate" text="Close">
                 <Size>
@@ -911,6 +934,6 @@
     <Script>
         local T = DecursiveRootTable or {};
 
-        T._LoadedFiles["Dcr_lists.xml"] = "2.7.0.5";
+        T._LoadedFiles["Dcr_lists.xml"] = "2.7.4.2";
     </Script>
 </Ui>

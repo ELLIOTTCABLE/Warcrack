@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherDropRates.lua 798 2009-02-03 23:48:25Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherDropRates.lua 1129 2014-11-13 21:02:28Z esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -25,9 +25,23 @@
 		since that is it's designated purpose as per:
 		http://www.fsf.org/licensing/licenses/gpl-faq.html#InterpreterIncompat
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherDropRates.lua $", "$Rev: 798 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherDropRates.lua $", "$Rev: 1129 $")
 
-local dbVersion = 2
+local dbVersion = 5
+
+local ArchaeologyCurrencies_DropRateConversions = {
+	["ARCH_DRAENEI"] = 398,
+	["ARCH_DWARF"] = 384,
+	["ARCH_FOSSIL"] = 393,
+	["ARCH_NERUBIAN"] = 400,
+	["ARCH_NIGHTELF"] = 394,
+	["ARCH_ORC"] = 397,
+	["ARCH_TOLVIR"] = 401,
+	["ARCH_TROLL"] = 385,
+	["ARCH_VRYKUL"] = 399,
+	["ARCH_PANDAREN"] = 676,
+	["ARCH_MOGU"] = 677,
+}
 
 function Gatherer.DropRates.Load()
 	local data = Gatherer_DropRates
@@ -36,10 +50,7 @@ function Gatherer.DropRates.Load()
 		data = { dbVersion = dbVersion }
 	elseif ( dbVersion ~= data.dbVersion ) then
 		
-		if (data.dbVersion ~= 1) then
-			-- just clear the data if version isn't current and we don't know how to convert
-			data = { dbVersion = dbVersion }
-		else
+		if (data.dbVersion == 1) then
 			local objectCategories = Gatherer.Categories.ObjectCategories
 			local objectGTypes = Gatherer.Nodes.Objects
 			
@@ -64,34 +75,103 @@ function Gatherer.DropRates.Load()
 					end
 				end
 			end
-			data.dbVersion = dbVersion
+			data.dbVersion = 2
+		end
+		
+		if (data.dbVersion == 2) then
+			local objectCategories = Gatherer.Categories.ObjectCategories
+			local objectGTypes = Gatherer.Nodes.Objects
+			
+			for cont, contData in pairs(data) do
+				if ( type(contData) == "table" ) then
+					for zone, zoneData in pairs(contData) do
+						for nodeId, nodeData in pairs(zoneData) do
+							
+							if (objectGTypes[nodeId] == "ARCH") then
+								local total = nodeData.total
+								local currencyID = ArchaeologyCurrencies_DropRateConversions[objectCategories[nodeId]]
+								if ( currencyID and not nodeData[currencyID] ) then
+									nodeData[currencyID] = nodeData.total * 7 -- magic number is 7... just because
+								end
+							end
+							
+						end
+					end
+				end
+			end
+			data.dbVersion = 3
+		end
+		
+		if (data.dbVersion == 3) then
+			data = { dbVersion = 4 }
+			for cont, contData in pairs(Gatherer_DropRates) do
+				if ( type(cont) == "number" ) then
+					for zone, zoneData in pairs(contData) do
+						local zoneToken = Gatherer.ZoneTokens.GetZoneToken(tonumber(zone) or zone)
+						if ( zoneToken ) then
+							data[zoneToken] = zoneData
+						end
+					end
+				end
+			end
+		end
+
+		if (data.dbVersion == 4) then
+			local objectGTypes = Gatherer.Nodes.Objects
+			for zoneToken, zoneData in pairs(data) do
+				if ( type(zoneData) == "table" ) then
+					for nodeId, nodeData in pairs(zoneData) do
+						if (objectGTypes[nodeId] == "ARCH") then
+							local newData = {}
+							for itemId, count in pairs(nodeData) do
+								if ( type(itemId) == "number" and itemId < 1000 ) then
+									newData[-itemId] = count
+								else
+									newData[itemId] = count
+								end
+							end
+							zoneData[nodeId] = newData
+						end
+					end
+				end
+			end
+			data.dbVersion = 5
+		end
+		
+		if ( data.dbVersion ~= dbVersion ) then
+			-- just clear the data if version isn't current and we don't know how to convert
+			data = { dbVersion = dbVersion }
 		end
 	end
 	
 	Gatherer.DropRates.Data = data
-	Gatherer.DropRates.OldData = GatherDrops
 end
 
 function Gatherer.DropRates.Save()
 	Gatherer_DropRates = Gatherer.DropRates.Data
-	GatherDrops = Gatherer.DropRates.OldData
 end
 
-function Gatherer.DropRates.ProcessDrops( objectId, continent, zone, source, coins, loot )
+function Gatherer.DropRates.ProcessDrops( objectId, zone, source, coins, loot )
 	if not ( loot ) then return end
-	local zoneToken = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
+	local zoneToken = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if not zoneToken then
+		return
+	end
 	local data = Gatherer.DropRates.Data
 	
-	if not (data[continent]) then data[continent] = { } end
-	if not (data[continent][zoneToken]) then data[continent][zoneToken] = { } end
-	if not (data[continent][zoneToken][objectId]) then data[continent][zoneToken][objectId] = { total = 0 } end
-	data = data[continent][zoneToken][objectId]
+	if not (data[zoneToken]) then data[zoneToken] = { } end
+	if not (data[zoneToken][objectId]) then data[zoneToken][objectId] = { total = 0 } end
+	data = data[zoneToken][objectId]
 	
 	local foundItem = false
 	for pos, loot in ipairs(loot) do
 		local id = loot.id
+		local lootType = loot.type
 		if (not id and loot.link) then
 			id = Gatherer.Util.BreakLink(loot.link)
+		end
+		if ( lootType == LOOT_SLOT_CURRENCY ) then
+			id = -id
 		end
 		if ( id ) then
 			local count = loot.count
@@ -107,48 +187,40 @@ function Gatherer.DropRates.ProcessDrops( objectId, continent, zone, source, coi
 end
 
 local tempData = {}
-local function GetDropsTable( objectId, cont, zone )
+local function GetDropsTable( objectId, zone )
 	local data = Gatherer.DropRates.Data
-	if ( cont and zone ) then
-		zone = Gatherer.ZoneTokens.GetZoneToken(cont, zone)
-		if ( data and data[cont] and data[cont][zone] and data[cont][zone][objectId] ) then
-			return data[cont][zone][objectId]
+	if ( zone ) then
+		zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+		if ( data and data[zone] and data[zone][objectId] ) then
+			return data[zone][objectId]
 		end
 	else
 		for k in pairs(tempData) do
 			tempData[k] = nil
 		end
 		tempData.total = 0
-		for _, zones in pairs(data) do
-			if ( type(zones) == "table" ) then
-				for _, nodes in pairs(zones) do
-					for id, node in pairs(nodes) do
-						if ( objectId == id ) then
-							for item, count in pairs(node) do
-								tempData[item] = (tempData[item] or 0) + count
-							end
+		for _, nodes in pairs(data) do
+			if ( type(nodes) == "table" ) then
+				for id, node in pairs(nodes) do
+					if ( objectId == id ) then
+						for item, count in pairs(node) do
+							tempData[item] = (tempData[item] or 0) + count
 						end
 					end
 				end
-			end
-		end
-		local oldData = Gatherer.DropRates.OldData
-		if ( oldData and oldData[objectId] ) then
-			for item, count in pairs(oldData[objectId]) do
-				tempData[item] = (tempData[item] or 0) + count
 			end
 		end
 		return tempData
 	end
 end
 
-function Gatherer.DropRates.HasDropsInfo( objectId, cont, zone )
+function Gatherer.DropRates.HasDropsInfo( objectId, zone )
 	local data = Gatherer.DropRates.GetDropsTotal(objectId, cont, zone)
 	return data and (data.total > 0)
 end
 
-function Gatherer.DropRates.GetDropsTotal( objectId, cont, zone )
-	local data = GetDropsTable(objectId, cont, zone)
+function Gatherer.DropRates.GetDropsTotal( objectId, zone )
+	local data = GetDropsTable(objectId, zone)
 	if ( data ) then
 		return data.total
 	end
@@ -243,8 +315,8 @@ do --create a new block
 	
 	local dropsCache = {}
 	
-	function Gatherer.DropRates.ObjectDrops( objectId, continent, zone, sort )
-		data = GetDropsTable(objectId, continent, zone)
+	function Gatherer.DropRates.ObjectDrops( objectId, zone, sort )
+		data = GetDropsTable(objectId, zone)
 		if not ( data and (data.total > 0) ) then
 			return EmptyIterator
 		end

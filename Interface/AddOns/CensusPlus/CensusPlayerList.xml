@@ -20,7 +20,7 @@
 				</FontString>
 				<FontString name="$parentLevel" inherits="GameFontHighlightSmall" justifyH="CENTER">
 					<Size>
-						<AbsDimension x="20" y="16"/>
+						<AbsDimension x="26" y="16"/>
 					</Size>
 					<Anchors>
 						<Anchor point="LEFT" relativeTo="$parentName" relativePoint="RIGHT">
@@ -32,7 +32,7 @@
 				</FontString>
 				<FontString name="$parentClass" inherits="GameFontHighlightSmall" justifyH="LEFT">
 					<Size>
-						<AbsDimension x="100" y="16"/>
+						<AbsDimension x="130" y="16"/>
 					</Size>
 					<Anchors>
 						<Anchor point="LEFT" relativeTo="$parentLevel" relativePoint="RIGHT">
@@ -69,18 +69,18 @@
             </Anchors>
         </HighlightTexture>
         <Scripts>
-			<OnLoad>
-				self:RegisterForClicks( "RightButtonUp");
-			</OnLoad>
-            <OnClick>
-				CensusPlus_PlayerButton_OnClick();
-				PlaySound("igMainMenuOptionCheckBoxOn");
-			</OnClick>
+						<OnLoad>
+								self:RegisterForClicks( "RightButtonUp");
+						</OnLoad>
+      			<OnClick>
+								CensusPlus_PlayerButton_OnClick(self, button, down);
+								PlaySound("igMainMenuOptionCheckBoxOn");
+						</OnClick>
         </Scripts>
     </Button>
     <Frame name="CP_PlayerListWindow" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true" frameStrata="DIALOG" >
         <Size>
-            <AbsDimension x="390" y="400" />
+            <AbsDimension x="520" y="400" />
         </Size>
         <Anchors>
 			<Anchor point="TOPRIGHT" relativeTo="CensusPlus">
@@ -89,7 +89,8 @@
 				</Offset>
 			</Anchor>
         </Anchors>
-        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+<!--        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true"> -->
+        <Backdrop  edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
             <BackgroundInsets>
                 <AbsInset left="11" right="12" top="12" bottom="11" />
             </BackgroundInsets>
@@ -101,6 +102,20 @@
             </EdgeSize>
         </Backdrop>
         <Layers>
+          <Layer level="BACKGROUND">
+				<Texture name="CensusPlayerListBackground" file="Interface\Dialogframe\UI-DialogBox-Background-Dark">
+					<Size>
+						<AbsDimension x="520" y="400" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="0" y="0" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+				</Texture>
+ 			</Layer>-->
 			<Layer level="ARTWORK">
 				<Texture name="CensusPlayerListFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
@@ -114,7 +129,7 @@
 						</Anchor>
 					</Anchors>
 				</Texture>
-				<FontString inherits="GameFontNormal" text="CENSUSPlus_Characters">
+				<FontString inherits="GameFontNormal" text="CENSUSPLUS_CHARACTERS">
 					<Anchors>
 						<Anchor point="TOP" relativeTo="CensusPlayerListFrameHeader">
 							<Offset>
@@ -123,11 +138,47 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-                <FontString name="CensusPlayerListCount" inherits="GameFontHighlight" text="TOTAL CHARS">
+                 <FontString name="CensusPlayerListCol1" inherits="GameFontHighlight" text="NAME">
                     <Anchors>
-                        <Anchor point="BOTTOMLEFT" relativeTo="CP_PlayerListWindow" relativeFrom="BOTTOMLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CP_PlayerListWindow">
                             <Offset>
-                                <AbsDimension x="20" y="25" />
+                                <AbsDimension x="25" y="-27" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                 <FontString name="CensusPlayerListCol2" inherits="GameFontHighlight" text="LEVEL">
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="CensusPlayerListCol1">
+                            <Offset>
+                                <AbsDimension x="84" y="0" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                 <FontString name="CensusPlayerListCol3" inherits="GameFontHighlight" text="GuildRealm">
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="CensusPlayerListCol2">
+                            <Offset>
+                                <AbsDimension x="50" y="0" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                 <FontString name="CensusPlayerListCol4" inherits="GameFontHighlight" text="Last Seen">
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="CensusPlayerListCol3">
+                            <Offset>
+                                <AbsDimension x="154" y="0" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+               <FontString name="CensusPlayerListCount" inherits="GameFontHighlight" text="TOTAL CHARS">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="CP_PlayerListWindow">
+                            <Offset>
+                                <AbsDimension x="22" y="20" />
                             </Offset>
                         </Anchor>
                     </Anchors>
@@ -145,9 +196,9 @@
                 </Anchors>
                 <Scripts>
                     <OnClick>
-						PlaySound("igMainMenuOptionCheckBoxOn");
-						HideUIPanel(CP_PlayerListWindow);
-					</OnClick>
+												PlaySound("igMainMenuOptionCheckBoxOn");
+												HideUIPanel(CP_PlayerListWindow);
+										</OnClick>
                 </Scripts>
             </Button>
 
@@ -155,7 +206,7 @@
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="CP_PlayerListWindow">
                         <Offset>
-                            <AbsDimension x="20" y="-30" />
+                            <AbsDimension x="20" y="-42" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -333,7 +384,7 @@
             </Button>        
             <ScrollFrame name="CensusPlusPlayerListScrollFrame" inherits="FauxScrollFrameTemplate">
                 <Size>
-                    <AbsDimension x="340" y="350" />
+                    <AbsDimension x="476" y="348" />
                 </Size>
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="CensusPlusPlayerButton1" relativePoint="TOPLEFT">
@@ -344,22 +395,24 @@
                 </Anchors>
                 <Scripts>
                     <OnVerticalScroll>
-						FauxScrollFrame_OnVerticalScroll(self, offset, CensusPlus_GUILDBUTTONSIZEY, CensusPlus_UpdatePlayerListButtons);
-					</OnVerticalScroll>
+												FauxScrollFrame_OnVerticalScroll(self, offset, CensusPlus_GUILDBUTTONSIZEY, CensusPlus_UpdatePlayerListButtons);
+										</OnVerticalScroll>
                 </Scripts>
             </ScrollFrame>
         </Frames>
         <Scripts>
             <OnShow>
-				CensusPlus_PlayerListOnShow();
-			</OnShow>
+								CensusPlus_PlayerListOnShow();
+						</OnShow>
             <OnMouseUp>
                 if ( self.isMoving ) then
                     self:StopMovingOrSizing();
                     self.isMoving = false;
                 end
             </OnMouseUp>
-            <OnMouseDown function="CensusPlus_List_OnMouseDown" />
+            <OnMouseDown>
+            		CensusPlus_List_OnMouseDown(self, button)
+            </OnMouseDown>
             <OnHide>
                 if ( self.isMoving ) then
                     self:StopMovingOrSizing();

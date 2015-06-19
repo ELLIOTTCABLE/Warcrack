@@ -1,8 +1,8 @@
 --[[
     This file is part of Decursive.
     
-    Decursive (v 2.7.0.5) add-on for World of Warcraft UI
-    Copyright (C) 2006-2007-2008-2009-2010-2011 John Wellesz (archarodim AT
+    Decursive (v 2.7.4.2) add-on for World of Warcraft UI
+    Copyright (C) 2006-2014 John Wellesz (archarodim AT
     teaser.fr) ( http://www.2072productions.com/to/decursive.php )
 
     Starting from 2009-10-31 and until said otherwise by its author, Decursive
@@ -15,13 +15,13 @@
     required.
     
 
-    Decursive is inspired from the original "Decursive v1.9.4" by Quu.
+    Decursive is inspired from the original "Decursive v1.9.4" by Patrick Bohnet (Quu).
     The original "Decursive 1.9.4" is in public domain ( www.quutar.com )
 
     Decursive is distributed in the hope that it will be useful, but WITHOUT
     ANY WARRANTY.
 
-    This file was last updated on 2011-11-06T13:34:55Z
+    This file was last updated on 2015-01-25T21:31:39Z
 --]]
 -------------------------------------------------------------------------------
 
@@ -60,6 +60,7 @@ StaticPopupDialogs["DECURSIVE_ERROR_FRAME"] = {
     whileDead = 1,
     hideOnEscape = 1,
     showAlert = 1,
+    preferredIndex = 3,
     }; -- }}}
 T._FatalError = function (TheError) StaticPopup_Show ("DECURSIVE_ERROR_FRAME", TheError); end
 end
@@ -69,6 +70,7 @@ if not T._LoadedFiles or not T._LoadedFiles["Dcr_DIAG.xml"] or not T._LoadedFile
     DecursiveInstallCorrupted = true;
     return;
 end
+T._LoadedFiles["enUS.lua"] = false;
 
 
 local L = LibStub("AceLocale-3.0"):NewLocale("Decursive", "enUS", true, false);
@@ -106,8 +108,8 @@ L["CLASS_HUNTER"] = "Hunter"
 L["CLEAR_PRIO"] = "C"
 L["CLEAR_SKIP"] = "C"
 L["COLORALERT"] = "Set the color alert when a '%s' is required."
-L["COLORCHRONOS"] = "Chronometers"
-L["COLORCHRONOS_DESC"] = "Set the chronometers' color"
+L["COLORCHRONOS"] = "Center counter"
+L["COLORCHRONOS_DESC"] = "Set the Center counter' color"
 L["COLORSTATUS"] = "Set the color for the '%s' MUF status."
 L["CTRL"] = "Ctrl"
 L["CURE_PETS"] = "Scan and cure pets"
@@ -117,6 +119,10 @@ L["DEBUG_REPORT_HEADER"] = [=[|cFF11FF33Please report the content of this window
 Also tell in your report if you noticed any strange behavior of Decursive.
 ]=]
 L["DECURSIVE_DEBUG_REPORT"] = "**** |cFFFF0000Decursive Debug Report|r ****"
+L["DECURSIVE_DEBUG_REPORT_BUT_NEW_VERSION"] = [=[|cFF11FF33Decursive crashed but fear not! A NEW version of Decursive has been detected (%s). You simply need to update. Go to curse.com and search for 'Decursive' or use Curse's client, it'll update automatically all your beloved add-ons.|r
+|cFFFF1133So don't waste your time reporting this bug as it's probably been fixed already. Just update Decursive to get rid of this problem!|r
+|cFF11FF33Thanks for reading this!|r
+]=]
 L["DECURSIVE_DEBUG_REPORT_NOTIFY"] = [=[A debug report is available!
 Type |cFFFF0000/DCRREPORT|r to see it.]=]
 L["DECURSIVE_DEBUG_REPORT_SHOW"] = "Debug report available!"
@@ -154,9 +160,8 @@ He was in life as he was in game, selfless, generous, dedicated to his friends a
 He left us at the age of 38 leaving behind him not just anonymous players in a virtual world but, a group of true friends who will miss him forever.]=]
 L["GLOR5"] = "He will always be remembered..."
 L["HANDLEHELP"] = "Drag all the Micro-UnitFrames (MUFs)"
-L["HIDE_LIVELIST"] = "Hide the live-list"
 L["HIDE_MAIN"] = "Hide Decursive Window"
-L["HIDESHOW_BUTTONS"] = "Hide/Show buttons"
+L["HIDESHOW_BUTTONS"] = "Hide/Show buttons and Lock/Unlock the \"Decursive\" bar"
 L["HLP_LEFTCLICK"] = "Left-Click"
 L["HLP_LL_ONCLICK_TEXT"] = [=[The Live-List is not meant to be clicked. Please, read the documentation to learn how to use this add-on. Just search for 'Decursive' on WoWAce.com
 (To move this list move the Decursive bar, /dcrshow and left-alt-click to move)]=]
@@ -166,7 +171,7 @@ L["HLP_RIGHTCLICK"] = "Right-Click"
 L["HLP_USEXBUTTONTOCURE"] = "Use \"%s\" to cure this affliction!"
 L["HLP_WRONGMBUTTON"] = "Wrong mouse button!"
 L["IGNORE_STEALTH"] = "Ignore cloaked Units"
-L["IS_HERE_MSG"] = "Decursive is now initialized, remember to check the options"
+L["IS_HERE_MSG"] = "Decursive is now initialized, remember to check the options (/decursive)"
 L["LIST_ENTRY_ACTIONS"] = [=[|cFF33AA33[CTRL]|r-Click: Remove this player
 |cFF33AA33LEFT|r-Click: Rise this player
 |cFF33AA33RIGHT|r-Click: Come down this player
@@ -189,8 +194,8 @@ L["NORMAL"] = "Normal"
 L["NOSPELL"] = "No spell available"
 L["OPT_ABOLISHCHECK_DESC"] = "select whether units with an active 'Abolish' spell are shown and cured"
 L["OPT_ABOUT"] = "About"
-L["OPT_ADD_A_CUSTOM_SPELL"] = "Add a custom spell"
-L["OPT_ADD_A_CUSTOM_SPELL_DESC"] = "Click here and shift-click on a spell from your spell book. You can also directly write its name or its numeric ID."
+L["OPT_ADD_A_CUSTOM_SPELL"] = "Add a custom spell / item"
+L["OPT_ADD_A_CUSTOM_SPELL_DESC"] = "Drag and drop a spell or usable item here. You can also directly write its name, its numeric ID or use shift-click."
 L["OPT_ADDDEBUFF"] = "Add a custom affliction"
 L["OPT_ADDDEBUFF_DESC"] = "Adds a new affliction to this list"
 L["OPT_ADDDEBUFFFHIST"] = "Add a recent affliction"
@@ -199,7 +204,7 @@ L["OPT_ADDDEBUFF_USAGE"] = "<Affliction name>"
 L["OPT_ADVDISP"] = "Advance display Options"
 L["OPT_ADVDISP_DESC"] = "Allow to set Transparency of the border and center separately, to set the space between each MUF"
 L["OPT_AFFLICTEDBYSKIPPED"] = "%s afflicted by %s will be skipped"
-L["OPT_ALLOWMACROEDIT"] = "Allow macro edition"
+L["OPT_ALLOWMACROEDIT"] = "Allow macro editing"
 L["OPT_ALLOWMACROEDIT_DESC"] = "Enable this to prevent Decursive from updating its macro, letting you edit it as you want."
 L["OPT_ALWAYSIGNORE"] = "Also ignore when not in combat"
 L["OPT_ALWAYSIGNORE_DESC"] = "If checked, this affliction will also be ignored when you are not in combat"
@@ -210,6 +215,17 @@ L["OPT_AUTOHIDEMFS_DESC"] = "Choose when to automatically hide the MUFs' window.
 L["OPT_BLACKLENTGH_DESC"] = "Defines how long someone stays on the blacklist"
 L["OPT_BORDERTRANSP"] = "Border transparency"
 L["OPT_BORDERTRANSP_DESC"] = "Set the transparency of the border"
+L["OPT_CENTERTEXT"] = "Center counter:"
+L["OPT_CENTERTEXT_DESC"] = [=[Displays information about the topmost (according to your priorities) affliction in each MUF's center.
+
+Either:
+- Time remaining before natural expiry
+- Time elapsed since the affliction hit
+- Number of stacks]=]
+L["OPT_CENTERTEXT_DISABLED"] = "Disabled"
+L["OPT_CENTERTEXT_ELAPSED"] = "Time elapsed"
+L["OPT_CENTERTEXT_STACKS"] = "Number of stacks"
+L["OPT_CENTERTEXT_TIMELEFT"] = "Time left"
 L["OPT_CENTERTRANSP"] = "Center transparency"
 L["OPT_CENTERTRANSP_DESC"] = "Set the transparency of the center"
 L["OPT_CHARMEDCHECK_DESC"] = "If checked you'll be able to see and deal with charmed units"
@@ -235,13 +251,18 @@ The green numbers represent the priority associated to each affliction type. Thi
 (To change the priorities, uncheck all the check boxes and then check them in order of the priority you want.)]=]
 L["OPT_CURINGORDEROPTIONS"] = "Affliction types and priorities"
 L["OPT_CURSECHECK_DESC"] = "If checked you'll be able to see and cure cursed units"
-L["OPT_CUSTOM_SPELL_ALLOW_EDITING"] = "Allow macro editing (for advanced users only)"
-L["OPT_CUSTOM_SPELL_ALLOW_EDITING_DESC"] = [=[Check this if you want to edit the internal macro Decursive will use for your custom spell.
+L["OPT_CUSTOM_SPELL_ALLOW_EDITING"] = "Allow internal macro editing for the above spell"
+L["OPT_CUSTOM_SPELL_ALLOW_EDITING_DESC"] = [=[Check this if you want to edit the internal macro Decursive will use for the custom spell being added.
 
 Note: Checking this allows you to modify spells managed by Decursive.
+
+If a spell is already listed you'll need to remove it first to enable macro editing.
+
 (---For advanced users only---)]=]
 L["OPT_CUSTOM_SPELL_CURE_TYPES"] = "Affliction types"
 L["OPT_CUSTOM_SPELL_IS_DEFAULT"] = "This spell is part of Decursive's automatic configuration. If this spell is no longer working correctly, you can remove or disable it to regain default Decursive behaviour."
+L["OPT_CUSTOM_SPELL_ISPET"] = "Pet ability"
+L["OPT_CUSTOM_SPELL_ISPET_DESC"] = "Check this if this is an ability belonging to one of your pets so Decursive can detect and cast it properly."
 L["OPT_CUSTOM_SPELL_MACRO_MISSING_NOMINAL_SPELL"] = "Warning: The spell %q is not present in your macro, range and cooldown information will not match..."
 L["OPT_CUSTOM_SPELL_MACRO_MISSING_UNITID_KEYWORD"] = "The UNITID keyword is missing."
 L["OPT_CUSTOM_SPELL_MACRO_TEXT"] = "Macro text:"
@@ -254,14 +275,16 @@ L["OPT_CUSTOM_SPELL_MACRO_TEXT_DESC"] = [=[Edit the default macro text.
 (keep that in mind if you plan on using different spells with conditionals)]=]
 L["OPT_CUSTOM_SPELL_MACRO_TOO_LONG"] = "Your macro is too long, you need to remove %d characters."
 L["OPT_CUSTOM_SPELL_PRIORITY"] = "Spell priority"
-L["OPT_CUSTOM_SPELL_PRIORITY_DESC"] = "When several spells can cure the same affliction types, those with a higher priority will be preferred."
-L["OPT_CUSTOMSPELLS"] = "Custom spells"
+L["OPT_CUSTOM_SPELL_PRIORITY_DESC"] = [=[When several spells can cure the same affliction types, those with a higher priority will be preferred.
+
+Note that default abilities managed by Decursive have a priority ranging from 0 to 9.
+
+Thus, if you give your custom spell a negative priority, it will only be chosen if the default ability is not available.]=]
+L["OPT_CUSTOMSPELLS"] = "Custom spells / items"
 L["OPT_CUSTOMSPELLS_DESC"] = [=[Here you can add spells to extend Decursive's automatic configuration.
 Your custom spells always have a higher priority and will override and replace the default spells (if and only if your character can use those spells).
 ]=]
 L["OPT_CUSTOMSPELLS_EFFECTIVE_ASSIGNMENTS"] = "Effective spells assignments:"
-L["OPT_CUSTOM_SPELL_STOPCASTING"] = "/StopCasting"
-L["OPT_CUSTOM_SPELL_STOPCASTING_DESC"] = "Using this spell will interrupt other spells in progress (uncheck that if the spell comes from a pet)"
 L["OPT_CUSTOM_SPELL_UNAVAILABLE"] = "unavailable"
 L["OPT_DEBCHECKEDBYDEF"] = [=[
 
@@ -281,11 +304,14 @@ L["OPT_ENABLE_A_CUSTOM_SPELL"] = "Enable"
 L["OPT_ENABLEDEBUG"] = "Enable Debugging"
 L["OPT_ENABLEDEBUG_DESC"] = "Enable Debugging output"
 L["OPT_ENABLEDECURSIVE"] = "Enable Decursive"
+L["OPT_ENABLE_LIVELIST"] = "Enable the live-list"
+L["OPT_ENABLE_LIVELIST_DESC"] = [=[Displays an informative list of afflicted people.
+
+You can move this list by moving the Decursive bar (type /DCRSHOW to display that bar).]=]
 L["OPT_FILTEROUTCLASSES_FOR_X"] = "%q will be ignored on the specified classes while you are in combat."
 L["OPT_GENERAL"] = "General options"
 L["OPT_GROWDIRECTION"] = "Reverse MUFs Display"
 L["OPT_GROWDIRECTION_DESC"] = "The MUFs will be displayed from bottom to top"
-L["OPT_HIDELIVELIST_DESC"] = "If not hidden, displays an informative list of cursed people"
 L["OPT_HIDEMFS_GROUP"] = "in solo or in party"
 L["OPT_HIDEMFS_GROUP_DESC"] = "Hide the MUF's window when you are not in a raid."
 L["OPT_HIDEMFS_NEVER"] = "Never auto-hide"
@@ -302,7 +328,11 @@ L["OPT_INPUT_SPELL_BAD_INPUT_ID"] = "Invalid spell ID!"
 L["OPT_INPUT_SPELL_BAD_INPUT_NOT_SPELL"] = "Spell not found in your spell book!"
 L["OPTION_MENU"] = "Decursive Options Menu"
 L["OPT_LIVELIST"] = "Live list"
-L["OPT_LIVELIST_DESC"] = "Options for the live list"
+L["OPT_LIVELIST_DESC"] = [=[These are the settings concerning the list of afflicted units displayed beneath the "Decursive" bar.
+
+To move this list you need to move the little "Decursive" frame. Some of the settings below are available only when this frame is displayed. You can display it by typing |cff20CC20/DCRSHOW|r in your chat window.
+
+Once you have set the position, scale and transparency of the live-list you can safely hide Decursive's frame by typing |cff20CC20/DCRHIDE|r.]=]
 L["OPT_LLALPHA"] = "Live-list transparency"
 L["OPT_LLALPHA_DESC"] = "Changes Decursive main bar and live-list transparency (Main bar must be displayed)"
 L["OPT_LLSCALE"] = "Scale of the Live-list"
@@ -314,7 +344,7 @@ L["OPT_MACROBIND_DESC"] = [=[Defines the key on which the 'Decursive' macro will
 
 Press the key and hit your 'Enter' keyboard key to save the new assignment (with your mouse cursor over the edit field)]=]
 L["OPT_MACROOPTIONS"] = "Macro options"
-L["OPT_MACROOPTIONS_DESC"] = "Set the behaviour of the macro created by Decursive"
+L["OPT_MACROOPTIONS_DESC"] = "Set the behaviour of the 'mouseover' macro created by Decursive"
 L["OPT_MAGICCHARMEDCHECK_DESC"] = "If checked you'll be able to see and cure magic-charmed units"
 L["OPT_MAGICCHECK_DESC"] = "If checked you'll be able to see and cure magic afflicted units"
 L["OPT_MAXMFS"] = "Max units shown"
@@ -352,7 +382,7 @@ L["OPT_NEWVERSIONBUGMENOT_DESC"] = "If a newer version of Decursive is detected,
 L["OPT_NOKEYWARN"] = "Warn if no key"
 L["OPT_NOKEYWARN_DESC"] = "Display a warning if no key is mapped."
 L["OPT_NOSTARTMESSAGES"] = "Disable welcome messages"
-L["OPT_NOSTARTMESSAGES_DESC"] = "Remove the three messages Decursive prints to the chat frame at every login."
+L["OPT_NOSTARTMESSAGES_DESC"] = "Remove the two messages Decursive prints to the chat frame at every login."
 L["OPT_OPTIONS_DISABLED_WHILE_IN_COMBAT"] = "These options are disabled while you are in combat."
 L["OPT_PERFOPTIONWARNING"] = "WARNING: Do not change those values unless you know exactly what you are doing. These settings can have a great impact on the game performances. Most users should use the default values of 0.1 and 10."
 L["OPT_PLAYSOUND_DESC"] = "Play a sound if someone get cursed"
@@ -383,10 +413,6 @@ L["OPT_REVERSE_LIVELIST_DESC"] = "The live-list fills itself from bottom to top"
 L["OPT_SCANLENGTH_DESC"] = "Defines the time between each scan"
 L["OPT_SHOWBORDER"] = "Show the class-colored borders"
 L["OPT_SHOWBORDER_DESC"] = "A colored border will be displayed around the MUFs representing the unit's class"
-L["OPT_SHOWCHRONO"] = "Show chronometers"
-L["OPT_SHOWCHRONO_DESC"] = "The number of seconds elapsed since a unit has been afflicted is displayed"
-L["OPT_SHOWCHRONOTIMElEFT"] = "Time left"
-L["OPT_SHOWCHRONOTIMElEFT_DESC"] = "Display time left instead of time elapsed."
 L["OPT_SHOWHELP"] = "Show help"
 L["OPT_SHOWHELP_DESC"] = "Shows an detailed tooltip when you mouse-over a micro-unit-frame"
 L["OPT_SHOWMFS"] = "Show the Micro Units Frame"
@@ -445,6 +471,12 @@ L["STR_QUICK_POP"] = "Quickly Populate"
 L["SUCCESSCAST"] = "|cFF22FFFF%s %s|r |cFF00AA00succeeded on|r %s"
 L["TARGETUNIT"] = "Target Unit"
 L["TIE_LIVELIST"] = "Tie live-list visibility to DCR window"
+L["TOC_VERSION_EXPIRED"] = [=[Your Decursive's version is outdated. This version of Decursive was released before the version of World of Warcraft you are using.
+You need to update Decursive to fix potential incompatibilities and runtime errors.
+
+Go to curse.com and search for 'Decursive' or use Curse's client to update all your add-ons at once.
+
+This notice will be displayed again in 2 days.]=]
 L["TOOFAR"] = "Too far"
 L["TOO_MANY_ERRORS_ALERT"] = [=[There are too many Lua errors in your User Interface (%d). Your game experience is currently degraded. Disable or update the failing add-ons to turn off this message and regain a proper frame rate.
 You may want to turn on Lua error reporting ('Help' section of World of Warcraft's interface options) to identify the problematic add-ons.]=]
@@ -455,4 +487,4 @@ L["UNSTABLERELEASE"] = "Unstable release"
 
 
 
-T._LoadedFiles["enUS.lua"] = "2.7.0.5";
+T._LoadedFiles["enUS.lua"] = "2.7.4.2";

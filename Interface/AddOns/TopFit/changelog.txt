@@ -1,6 +1,87 @@
 Changelog for TopFit
 ====================
 
+6.0v4 - 2014/12/16
+  - fixed dual-wield detection
+  - fixed problems with TopFit trying to equip two Solium Rings
+  - fixed auto-update not triggering when a new item was put in the player's backpack instead of any of the other bags
+  - fixed multistrike not being recognized correctly on gems and enchantments
+  - fixed shadow resistance not being recognized correctly on gems
+  - fixed detection and handling of unique or unique-equipped items
+  - fixed addon options only showing correctly after using slash command or options button twice
+  - import now supports importing weights from askmrrobot
+  - the option to add sets from a preset will now also be shown on left-clicking the "+"-button, instead of only when right-clicking
+  - added new options plugin for sets to config frame containing options formerly available from within the weights plugin
+  - sets can now be assigned a specialization - this affects auto-update and auto-equip and will later be used to limit calculation to gear appropriate for the selected spec
+  - auto-update and auto-equip are now configured in a set's options instead of TopFit's global options
+  - updated trinket logic to better detect and parse trinket proc effects
+  - TopFit will no longer create a "Default Set" with no weights for new characters
+  - instead, the new setup plugin will be shown, assisting the player in creating initial sets
+  - added a tutorial overlay, triggered by clicking the "i"-button in the top-left corner of the options frame
+  - updated presets with new values from askmrrobot
+  - sets created from a preset will have an appropriate icon and associated spec assigned
+
+6.0v3 - 2014/11/25
+  - fixed an error that was preventing the fix to dungeon loot in 6.0v2 from working
+  - moved import / export plugin into set dropdown and weights plugin to free some space
+  - updated import / export compatibility with Pawn
+  - show comparison tooltip be default for new users
+  - added simple LibDataBroker launcher, which will also show up as a minimap button
+
+6.0v2 - 2014/11/22
+  - updated gem and enchant data from wowhead
+  - added some enchant data manually
+  - updated presets from askmrrobot
+  - internally scaling dungeon loot should now be correctly considered by TopFit (and the Paperdoll item flyout)
+  - added Bonus Armor as a stat in the defense category
+  - fixed errors when the user had no sets defined or deleted their last set
+
+6.0v1 - 2014/10/24
+  - updated for patch 6.0.2
+  - wipe saved sets to account for numerous stat changes
+  - removed reforging
+  - added new stats
+  - updated enchant and gem data to account for item squish
+  - updated presets to current wowhead.com scales
+  - missing enchants and gems no longer generate a chat message and are instead shown in the config frame
+  - no longer show set comparison values for bags
+  - no longer use LibItemUpgradeInfo since API now provides correct stats
+
+5.3v1 - 2013/07/03
+  - fixed +80 Stats enchant
+  - removed Ace and other Libraries we were hardly using
+  - rewrote set handling and calculation to use classes for a cleaner API
+  - new configuration UI accessed through a button in the character panel
+  - updated gem data
+  - added handling for upgraded items
+  - forced items are now managed in the character frame by holding down the Alt-key while hovering an equipment slot and using the checkboxes in the resulting flyout-box
+  - when switching talent specializations, the respective auto-update set is no longer calculated, just equipped (which is usually what you want and much faster)
+  - added Lib-Unfit-1.0 to limit showing tooltips and auto-updating to items you can actually wear
+
+5.1v1 - 2012/11/28
+  - updated toc for 5.1
+  - added MoP Enchants (including Inscription, Leatherworking and Tailoring)
+  - updated presets for monks
+
+5.0v2 - 2012/11/04
+  - fixed an error with the set dropdown on classes that have no weight presets
+  - added rudimentary weight presets for monk class (based on druid weights)
+  - fixed trying to dual wield ranged weapons
+  - fixed monk dual wielding
+  - when auto-update is enabled and a new equipment item is put into the player's bags, TopFit will only do a full calculation if that item is actually relevant for the auto-update-set
+  - added MoP Cogwheel gems
+  - TopFit is now finally aware of unique-equipped items and unique gems (like jeweler's and cogwheels) and will not try to equip more than possible
+
+5.0v1 - 2012/09/04
+  - If an auto-update-set is set for your current spec, it will now automatically be selected in the ui on login
+  - added new epic gems
+  - fixed an error that occured when creating a new set
+  - fixed an error when trying to delete a set
+  - Compatible with WoW Patch 5.0.4
+  - Updated gems for WoW 5.0.4
+  - moved Set Dropdown and Calculate button in Character Frame to not collide with default UI elements
+  - When calculating a set, slots that have forced items in them are shown with a red outline on their virtual item buttons
+
 4.3v1 - 2011/12/04
   - you can now calculate all your sets at once by shift-clicking the calculate button
   - added an option to calculate auto-update sets on switching talent specs

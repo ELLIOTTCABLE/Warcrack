@@ -1,15 +1,16 @@
-## Interface: 40300
+## Interface: 60100
 ## Author: Parnic, originally created by Iceroth
 ## Name: IceHUD
 ## Title: IceHUD |cff7fff7f-Ace3-|r
 ## Notes: Another HUD addon
-## Version: 1.7.10 (Revision: 870)
+## Version: 1.9.9.1
 ## SavedVariables: IceCoreDB
 ## OptionalDeps: Ace3, LibSharedMedia-3.0, LibDogTag-3.0, LibDogTag-Unit-3.0, LibRangeCheck-2.0, LibDualSpec-1.0, LibDBIcon-1.0, AceGUI-3.0-SharedMediaWidgets
+## X-Compatible-With: 50400
 ## X-Category: HUDs
 ## X-Website: http://www.wowace.com/projects/ice-hud/
 ## X-WoWI-ID: 8149
-## X-Curse-Packaged-Version: 1.7.10
+## X-Curse-Packaged-Version: 1.9.9.1
 ## X-Curse-Project-Name: IceHUD
 ## X-Curse-Project-ID: ice-hud
 ## X-Curse-Repository-ID: wow/ice-hud/mainline
@@ -29,7 +30,6 @@ IceElement.lua
 IceBarElement.lua
 IceUnitBar.lua
 IceCastBar.lua
-
 
 # IceHUD modules
 # - Feel free to comment these out if you like
@@ -82,6 +82,14 @@ modules\HolyPower.lua
 modules\Shards.lua
 modules\EclipseBar.lua
 modules\Vengeance.lua
+modules\Resolve.lua
 modules\PlayerAlternatePower.lua
+modules\HarmonyPower.lua
+modules\MonkManaBar.lua
+modules\ShadowOrbs.lua
+modules\TargetAbsorb.lua
+modules\PlayerAbsorb.lua
+modules\FocusAbsorb.lua
+modules\Stagger.lua
 
 

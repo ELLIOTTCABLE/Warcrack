@@ -188,6 +188,7 @@ if (GetLocale() == "ptBR") then
 		["AutoBarClassBarBasic"] = "Basic",
 		["AutoBarClassBarExtras"] = "Extras",
 		["AutoBarClassBarDeathKnight"] = "Death Knight",
+		["AutoBarClassBarMonk"] = "Monk",
 		["AutoBarClassBarDruid"] = "Druid",
 		["AutoBarClassBarHunter"] = "Hunter",
 		["AutoBarClassBarMage"] = "Mage",
@@ -204,7 +205,9 @@ if (GetLocale() == "ptBR") then
 		["AutoBarCooldownHeader"] = "Potion & Stone Cooldown",
 		["AutoBarClassBarHeader"] = "Class bar",
 
-		["AutoBarButtonAura"] = "Aura / Aspect",
+		["AutoBarButtonAspect"] = "Aspect",
+		["AutoBarButtonPoisonLethal"] = "Poison: Lethal",
+		["AutoBarButtonPoisonNonlethal"] = "Poison: Nonlethal",
 		["AutoBarButtonBandages"] = "Bandages",
 		["AutoBarButtonBattleStandards"] = "Battle Standards",
 		["AutoBarButtonBuff"] = "Buff",
@@ -263,7 +266,6 @@ if (GetLocale() == "ptBR") then
 		["AutoBarButtonTotemAir"] = "Air Totem",
 		["AutoBarButtonTotemFire"] = "Fire Totem",
 		["AutoBarButtonTotemWater"] = "Water Totem",
-		["AutoBarButtonTrack"] = "Track",
 		["AutoBarButtonTrap"] = "Trap",
 		["AutoBarButtonTrinket1"] = "Trinket 1",
 		["AutoBarButtonTrinket2"] = "Trinket 2",
@@ -507,11 +509,13 @@ if (GetLocale() == "ptBR") then
 		
 		["Spell.Guild"] = "Guild Spells";
 
-		["Spell.Aura"] = "Aura / Aspect";
+		["Spell.Aspect"] = "Aspect";
+		["Spell.Poison.Lethal"] = "Poison: Lethal";
+		["Spell.Poison.Nonlethal"] = "Poison Nonlethal";
 		["Spell.Buff.Weapon"] = "Buff Spells: Weapon";
 		["Spell.Class.Buff"] = "Class Buff";
 		["Spell.Class.Pet"] = "Class Pet";
-		["Spell.Class.Pets2"] = "Call Pet";
+		["Spell.Class.Pets2"] = "Pet Combat";
 		["Spell.Class.Pets3"] = "Pet Misc";
 		["Spell.Crafting"] = "Crafting";
 		["Spell.Critter"] = "Pet Spells";
@@ -527,7 +531,6 @@ if (GetLocale() == "ptBR") then
 		["Spell.Totem.Fire"] = "Fire Totem";
 		["Spell.Totem.Water"] = "Water Totem";
 		["Spell.Seal"] = "Seal";
-		["Spell.Track"] = "Track";
 		["Spell.Trap"] = "Trap";
 		["Misc.Booze"] = "Booze";
 		["Misc.Hearth"] = "Hearthstone";

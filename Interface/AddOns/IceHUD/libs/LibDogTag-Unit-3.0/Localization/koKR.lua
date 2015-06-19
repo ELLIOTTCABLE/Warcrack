@@ -1,5 +1,5 @@
 local MAJOR_VERSION = "LibDogTag-Unit-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 193 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 258 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_Unit_MINOR_VERSION then
 	_G.DogTag_Unit_MINOR_VERSION = MINOR_VERSION
@@ -74,10 +74,11 @@ DogTag_Unit_funcs[#DogTag_Unit_funcs+1] = function(DogTag_Unit, DogTag)
 	L["Mouse-over"] = "마우스-오버"
 	L["%s's pet"] = "%s의 소환수"
 	L["%s's target"] = "%s의 대상"
-	L["%s's %s"] = "%1$s's %2$s"
+	L["%s's %s"] = "%s의 %s"
 	L["Party member #%d"] = "파티원 #%d"
 	L["Raid member #%d"] = "공격대원 #%d"
-	L["%s's %s"] = "%s의 %s"
+	L["Boss #%d"] = "Boss #%d"
+	L["Arena enemy #%d"] = "Arena enemy #%d"
 
 	-- classifications
 	L["Rare"] = "희귀"

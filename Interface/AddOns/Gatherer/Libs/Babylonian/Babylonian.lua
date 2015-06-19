@@ -1,7 +1,7 @@
 --[[
 	Babylonian - A sub-addon that manages the locales for other addons.
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: Babylonian.lua 312 2011-06-14 07:33:25Z brykrys $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: Babylonian.lua 332 2012-09-02 22:14:59Z Esamynn $
 	URL: http://auctioneeraddon.com/dl/
 
 	License:
@@ -28,17 +28,18 @@
 ]]
 
 local LIBRARY_VERSION_MAJOR = "Babylonian"
-local LIBRARY_VERSION_MINOR = 2
+local LIBRARY_VERSION_MINOR = 3
 local lib = LibStub:NewLibrary(LIBRARY_VERSION_MAJOR, LIBRARY_VERSION_MINOR)
 if not lib then return end
 
-LibStub("LibRevision"):Set("$URL: http://svn.norganna.org/libs/trunk/Babylonian/Babylonian.lua $","$Rev: 312 $","5.1.DEV.", 'auctioneer', 'libs')
+LibStub("LibRevision"):Set("$URL: http://svn.norganna.org/libs/trunk/Babylonian/Babylonian.lua $","$Rev: 332 $","5.1.DEV.", 'auctioneer', 'libs')
 
 if not lib.private then
 	lib.private = {}
 end
 local private = lib.private
 local tinsert = table.insert
+local CLIENT_LOCALE = GetLocale()
 
 function lib:SetOrder(order)
 	if (not order) then
@@ -47,7 +48,7 @@ function lib:SetOrder(order)
 		private.order = { strsplit(",", order) }
 	end
 
-	tinsert(private.order, GetLocale())
+	tinsert(private.order, CLIENT_LOCALE)
 	tinsert(private.order, "enUS")
 
 	local curOrder = SetCVar("BabylonianOrder", order)
@@ -68,6 +69,11 @@ end
 function lib:FetchString(stringTable, locale, stringKey)
 	if ((type(stringTable) == "table") and (type(stringTable[locale]) == "table") and (stringTable[locale][stringKey])) then
 		return stringTable[locale][stringKey]
+	elseif ( locale == CLIENT_LOCALE ) then
+		local defaultuiString = _G[stringKey]
+		if ( type(defaultuiString) == "string" and issecurevariable(stringKey) ) then
+			return defaultuiString
+		end
 	end
 end
 

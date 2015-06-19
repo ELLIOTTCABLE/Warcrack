@@ -1,5 +1,5 @@
 --[[-------------------------------------------------------------------------
-  LightHeaded -  Copyright 2007-2011 by Jim Whitehead
+  LightHeaded -  Copyright 2007-2014 by Jim Whitehead
 
   All Rights Reserved
 
@@ -32,9 +32,9 @@ function LightHeaded:Enable()
 	-- Database defaults
 	self.defaults = {
 		profile = {
-			attached = true,
 			open = true,
 			singlepage = false,
+            autodetails = true,
 			positions = {
 			},
 			sound = true,
@@ -55,20 +55,37 @@ function LightHeaded:Enable()
 	hooksecurefunc("SelectQuestLogEntry", function(index)
 		self:SelectQuestLogEntry(index)
 	end)
-	hooksecurefunc("QuestLogTitleButton_OnClick", function()
-		self.quest_clicked = true
-		previous_qid = nil;
-		self:SelectQuestLogEntry()
-	end)
-    hooksecurefunc("WatchFrameLinkButtonTemplate_OnClick", function(frame)
-        if frame.type == "QUEST" then
-            self.quest_clicked = true
-            previous_qid = nil
-            self:SelectQuestLogEntry()
-            LightHeadedFrameSub.forceUpdate = true
-        end
-    end)
+	if QuestLogTitleButton_OnClick then
+		hooksecurefunc("QuestLogTitleButton_OnClick", function()
+			self.quest_clicked = true
+			previous_qid = nil;
+			self:SelectQuestLogEntry()
+		end)
+	end
 
+	if WatchFrameLinkButtonTemplate_OnClick then
+		hooksecurefunc("WatchFrameLinkButtonTemplate_OnClick", function(frame)
+			if frame.type == "QUEST" then
+				self.quest_clicked = true
+				previous_qid = nil
+				self:SelectQuestLogEntry()
+				LightHeadedFrameSub.forceUpdate = true
+			end
+		end)
+	end
+
+ 	QuestLogPopupDetailFrame:HookScript("OnShow", function()
+        if self.db.profile.autodetails then
+            self:LockUnlockFrame()
+            LightHeadedFrame:Show()
+        end
+ 	end)
+
+ 	QuestLogPopupDetailFrame:HookScript("OnHide", function()
+        if self.db.profile.autodetails then
+            LightHeadedFrame:Hide()
+        end
+ 	end)
 
 	-- Create hooks for QUEST_LOG_UPDATE
 	self:RegisterEvent("QUEST_LOG_UPDATE")
@@ -83,15 +100,18 @@ function LightHeaded:Enable()
 
 	-- Create slash command
 	self.cmd = self:InitializeSlashCommand("LightHeaded config options", "LIGHTHEADED", "lh", "lightheaded", "lighthead")
-	self.cmd:RegisterSlashHandler("attach - Re-Attaches LightHeaded to the Quest Log", "^attach$", "AttachFrame")
-	self.cmd:RegisterSlashHandler("detach - Detach LightHeaded from the Quest Log", "^detach$", "DetachFrame")
 	self.cmd:RegisterSlashHandler("sound - Toggles open/close sound on or off", "^sound$", "ToggleSound")
 	self.cmd:RegisterSlashHandler("page - Toggle showing quest information on a single page, or multiple pages.", "^page$", "TogglePages")
 	self.cmd:RegisterSlashHandler("bgalpha <0.0-1.0> - Changes the alpha transparency of the LightHeaded background", "^bgalpha (%d%.?%d?)$", "ChangeBGAlpha")
 	self.cmd:RegisterSlashHandler("debug - Toggles debug mode on/off.", "^debug$", "ToggleDebug")
+    self.cmd:RegisterSlashHandler("autodetails - Toggle automatic opening of the Lightheaded window when clicking a quest in the objective tracker", "^autodetails$", "ToggleAutoDetails")
     self.cmd:RegisterSlashHandler("config - Opens the configuration GUI", "^config$", function()
         InterfaceOptionsFrame_OpenToCategory("LightHeaded")
     end)
+	self.cmd:RegisterSlashHandler("show - Opens the LightHeaded window", "^show$", function()
+		self:LockUnlockFrame()
+		LightHeadedFrame:Show()
+	end)
 
 	-- Set initial settings
 	self:ChangeBGAlpha(self.db.profile.bgalpha)
@@ -124,8 +144,8 @@ function LightHeaded:LoadNames(lower)
         -- Try to load the addon
         local addon = "LightHeaded_Data_QIDNames"
         self:Debug(1, "Loading " .. addon)
-        local succ,reason = LoadAddOn(addon)
-        if succ ~= 1 then
+        local succ, reason = LoadAddOn(addon)
+        if not succ then
             self:Debug(1, "Could not load " .. addon, reason)
             return
         end
@@ -198,8 +218,8 @@ function LightHeaded:GetQIDDescription(qid)
         -- Try to load the addon
         local addon = "LightHeaded_Data_QIDDesc"
         self:Debug(1, "Loading " .. addon)
-        local succ,reason = LoadAddOn(addon)
-        if succ ~= 1 then
+        local succ, reason = LoadAddOn(addon)
+        if not succ then
             self:Debug(1, "Could not load " .. addon, reason)
             return
         end
@@ -325,8 +345,8 @@ function LightHeaded:GetQuestData(qid)
 			if not genv[varname] then
 				-- Try to load the addon
 				self:Debug(1, "Loading " .. addon)
-				local succ,reason = LoadAddOn(addon)
-				if succ ~= 1 then
+				local succ, reason = LoadAddOn(addon)
+				if not succ then
 					self:Debug(1, "Could not load " .. addon, reason)
 					return
 				end
@@ -344,8 +364,8 @@ function LightHeaded:LoadNPCData(npc)
         local addon = "LightHeaded_Data_NPC"
         -- Try to load the stub
         self:Debug(1, "Loading " .. addon)
-        local succ,reason = LoadAddOn(addon)
-        if succ ~= 1 then
+        local succ, reason = LoadAddOn(addon)
+        if not succ then
             self:Debug(1, "Could not load " .. addon, reason)
             return
         end
@@ -1322,129 +1342,6 @@ function LightHeaded:OnHyperlinkEnter(frame, link)
 		tooltip:AddLine("Waypoint to " .. self:GetCoordText(x, y), 0x70/0xFF, 0xB8/0xFF, 0xFF/0xFF)
 		tooltip:Show()
 	end
-
-end
-
-local frame_offsets = {
-	[QuestLogFrame] = {-15, 0},
-	[QuestLogDetailFrame] = {-13, -4}
-}
-
-local npcelems = {
-   "QuestNPCModelBg",
-   "QuestNPCModelShadowOverlay",
-   "QuestNPCModelTopBg",
-   "QuestNPCModelBotLeftCorner",
-   "QuestNPCModelBotRightCorner",
-   "QuestNPCModelTopBorder",
-   "QuestNPCModelBottomBorder",
-   "QuestNPCModelLeftBorder",
-   "QuestNPCModelRightBorder",
-   "QuestNPCModelNameplate",
-   "QuestNPCModelBlankNameplate",
-   "QuestNPCModelNameText",
-   "QuestNPCCornerTopLeft",
-   "QuestNPCCornerTopRight",
-   "QuestNPCCornerBottomLeft",
-   "QuestNPCCornerBottomRight",
-   "QuestNPCModelTextFrame",
-}
-
-local npcpoints
-
--- We don't bother re-anchoring, since that will happen automatically when the
--- portrait is updated.
-function LightHeaded:ReleaseNPCModel()
-    local npc = QuestNPCModel
-    if npcpoints then
-        for idx, name in ipairs(npcelems) do
-            local elem = _G[name]
-            if elem and elem.Show then
-                elem:Show()
-            end
-        end
-        npc:ClearAllPoints()
-        for idx, point in ipairs(npcpoints) do
-            pcall(npc.SetPoint, npc, unpack(point))
-        end
-        npc:SetAlpha(1.0)
-        npcpoints = nil
-    end
-end
-
-function LightHeaded:HijackQuestNPCModel()
-    -- Check to see if the parent of the frame has been set manually
-    -- to something other than QuestLogFrame or QuestLogDetailFrame.
-    local current = LightHeadedFrame:GetParent()
-    if not frame_offsets[current] then
-        -- Some other addon is 'controlling' LightHeaded, so do nothing.
-        return
-    end
-
-    -- Are we detached?
-    if not self.db.profile.attached then
-        return
-    end
-
-    -- Check and see if the QuestNPCModel has been shown or not
-    local npc = QuestNPCModel
-
-    if npc:IsShown() and npc:GetParent() == QuestLogFrame and current:IsVisible() and self.db.profile.fixmodel and not npcpoints then
-        -- hide all the elements of the model and move it into our frame
-        for idx, name in ipairs(npcelems) do
-            local elem = _G[name]
-            if elem and elem.Hide then
-                elem:Hide()
-            end
-        end
-
-        npcpoints = {}
-        npcpoints.n = npc:GetNumPoints()
-        for idx = 1, npcpoints.n do
-            npcpoints[idx] = {npc:GetPoint(idx)}
-        end
-
-        QuestNPCModel:ClearAllPoints()
-        QuestNPCModel:SetPoint("BOTTOMLEFT", LightHeadedFrame, "BOTTOMLEFT", 40, 0)
-        QuestNPCModel:SetAlpha(0.35)
-    else
-        self:ReleaseNPCModel()
-    end
-end
-
-function LightHeaded:AdjustGUIParent()
-	if LightHeadedFrame then
-        -- Check to see if the parent of the frame has been set manually
-        -- to something other than QuestLogFrame or QuestLogDetailFrame.
-        local current = LightHeadedFrame:GetParent()
-        if not frame_offsets[current] then
-            -- Some other addon is 'controlling' LightHeaded, so do nothing.
-            return
-        end
-
-        -- Attack to the detail frame by default
-		local parent = QuestLogDetailFrame
-
-		if QuestLogFrame:IsVisible() then
-			parent = QuestLogFrame
-			LightHeaded_FrameWatchBug:SetParent(QuestLogDetailFrame)
-		else
-			LightHeaded_FrameWatchBug:SetParent(QuestLogFrame)
-		end
-
-		LightHeadedFrame:SetParent(parent)
-		LightHeadedFrame:SetFrameLevel(0)
-
-		if self.db.profile.attached then
-			local x, y = unpack(frame_offsets[parent])
-
-			if not self.db.profile.open then
-				x = x - 313
-			end
-
-			LightHeadedFrame:SetPoint("LEFT", parent, "RIGHT", x, y)
-		end
-	end
 end
 
 function LightHeaded:CreateGUI()
@@ -1453,9 +1350,6 @@ function LightHeaded:CreateGUI()
 	end
 
 	local lhframe = CreateFrame("Frame", "LightHeadedFrame", QuestLogFrame)
-
-	CreateFrame("Frame", "LightHeaded_FrameWatchBug", QuestLogDetailFrame):SetScript("OnShow", function() LightHeaded:AdjustGUIParent() end)
-	lhframe:SetScript("OnShow", function() LightHeaded:AdjustGUIParent() end)
 
 	local topleft = lhframe:CreateTexture(nil, "ARTWORK")
 	topleft:SetTexture("Interface\\WorldStateFrame\\WorldStateFinalScoreFrame-TopLeft")
@@ -1640,56 +1534,8 @@ function LightHeaded:CreateGUI()
 		self:SetPoint("LEFT", self:GetParent(), "RIGHT", offset, y)
 	end
 
-	if not lhframe.handle then
-		lhframe.handle = CreateFrame("Button", nil, lhframe)
-	end
-
-	lhframe.handle:SetWidth(8)
-	lhframe.handle:SetHeight(128)
-	lhframe.handle:SetPoint("LEFT", lhframe, "RIGHT", 0, 0)
-	lhframe.handle:SetNormalTexture("Interface\\AddOns\\LightHeaded\\images\\tabhandle")
-
-	lhframe.handle:RegisterForClicks("AnyUp")
-	lhframe.handle:SetScript("OnClick", function(self, button)
-        local offsets = frame_offsets[lhframe:GetParent()]
-        if not offsets then
-            lhframe:Hide()
-        else
-            max, y = unpack(offsets)
-            min = max-313
-
-            if LightHeaded.db.profile.open then
-                min,max = max,min
-            end
-
-            lhframe:SetScript("OnUpdate", onupdate)
-            if LightHeaded.db.profile.sound then
-                PlaySoundFile("Sound\\Doodad\\Karazahn_WoodenDoors_Close_A.wav")
-            end
-
-            LightHeaded.db.profile.lhopen = not LightHeaded.db.profile.lhopen
-        end
-    end)
-
-	lhframe.handle:SetScript("OnEnter", function(self)
-											--SetCursor("Interface\\AddOns\\LightHeaded\\images\\cursor")
-											SetCursor("INTERACT_CURSOR")
-											GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT")
-											GameTooltip:SetText("Click to open/close LightHeaded")
-											GameTooltip:Show()
-										end)
-
-	lhframe.handle:SetScript("OnLeave",function(self)
-										   SetCursor(nil)
-										   GameTooltip:Hide()
-									   end)
-
 	lhframe.close:SetScript("OnClick", function()
-		if QuestLogFrame:IsVisible() then
-			HideUIPanel(QuestLogFrame)
-		else
-			lhframe.handle:Click()
-		end
+		lhframe:Hide()
 	end)
 
 	local lhframe = CreateFrame("Frame", "LightHeadedFrameSub", LightHeadedFrame)
@@ -1745,9 +1591,6 @@ function LightHeaded:CreateGUI()
 		end
 	end)
 
-    hooksecurefunc("QuestFrame_ShowQuestPortrait", function() LightHeaded:HijackQuestNPCModel() end)
-    hooksecurefunc("QuestFrame_HideQuestPortrait", function() LightHeaded:HijackQuestNPCModel() end)
-
 	lhframe.icon = CreateFrame("Button", nil, lhframe)
 	lhframe.icon:SetHeight(64)
 	lhframe.icon:SetHeight(64)
@@ -1758,7 +1601,7 @@ function LightHeaded:CreateGUI()
 	lhframe.icon:SetPoint("BOTTOMRIGHT", -10, -10)
 
 	StaticPopupDialogs["LIGHTHEADED_ABOUT_DIALOG"] = {
-		text = "LightHeaded (C) 2007-2008 by Jim Whitehead\n\nThis add-on only provides you with the comments and some basic information on quests. For the full information, be sure to visit http://www.wowhead.com",
+		text = "LightHeaded (C) 2007-2014 by Jim Whitehead\n\nThis add-on only provides you with the comments and some basic information on quests. For the full information, be sure to visit http://www.wowhead.com",
 		button1 = TEXT(OKAY),
 		OnAccept = function()
 				   end,
@@ -1935,8 +1778,6 @@ function LightHeaded:CreateGUI()
 
 	lhframe:SetAlpha(1)
 	lhframe:Show()
-
-	self:LockUnlockFrame()
 end
 
 function LightHeaded:LockUnlockFrame()
@@ -1944,49 +1785,21 @@ function LightHeaded:LockUnlockFrame()
 
 	LightHeadedFrame:ClearAllPoints()
 
-	if self.db.profile.attached then
-		-- Lock the frame
-		LightHeadedFrame.titlereg:Hide()
-		LightHeadedFrame.resize:Hide()
-		LightHeadedFrame.handle:Show()
-		LightHeadedFrame:SetWidth(325)
-		LightHeadedFrame:SetHeight(425)
-		LightHeadedFrame.resizebg(LightHeadedFrame)
-		LightHeadedFrame:SetFrameStrata("MEDIUM")
-		LightHeadedFrame.close:Show()
+	-- Unlock the frame
+	LightHeadedFrame.titlereg:Show()
+	LightHeadedFrame.resize:Show()
+	LightHeadedFrame:SetFrameStrata("HIGH")
+	LightHeadedFrame.close:Show()
 
-		lhframe.text:UpdateSize()
+	-- Make sure we can see the frame
+	lhframe:Show()
+	lhframe:SetAlpha(1)
 
-		if self.db.profile.open then
-			lhframe:Show()
-			lhframe:SetAlpha(1)
-			lhframe.open = true
-		else
-			lhframe:Hide()
-			lhframe:SetAlpha(0)
-		end
+	-- Update the size of the scroll child
+	lhframe.text:UpdateSize()
 
-		LightHeaded:AdjustGUIParent()
-        LightHeaded:HijackQuestNPCModel()
-	else
-		-- Unlock the frame
-		LightHeadedFrame.titlereg:Show()
-		LightHeadedFrame.resize:Show()
-		LightHeadedFrame.handle:Hide()
-		LightHeadedFrame:SetFrameStrata("HIGH")
-		LightHeadedFrame.close:Hide()
-
-		-- Make sure we can see the frame
-		lhframe:Show()
-		lhframe:SetAlpha(1)
-
-		-- Update the size of the scroll child
-		lhframe.text:UpdateSize()
-
-		-- Restore the position
-		self:RestorePosition("LightHeadedFrame")
-        self:ReleaseNPCModel()
-	end
+	-- Restore the position
+	self:RestorePosition("LightHeadedFrame")
 end
 
 function LightHeaded:SavePosition(name)
@@ -2054,20 +1867,6 @@ function LightHeaded:ToggleSound()
 	self.db.profile.sound = not self.db.profile.sound
 end
 
-function LightHeaded:AttachFrame()
-	self:Print("Re-Attaching the LightHeaded Frame")
-
-	self.db.profile.attached = true
-	self:LockUnlockFrame()
-end
-
-function LightHeaded:DetachFrame()
-	self:Print("Detaching the LightHeaded Frame")
-
-	self.db.profile.attached = false
-	self:LockUnlockFrame()
-end
-
 function LightHeaded:TogglePages()
 	local lhframe = LightHeadedFrameSub
 
@@ -2085,6 +1884,17 @@ function LightHeaded:TogglePages()
 		self:UpdateFrame(lhframe.qid, 1, 0)
 	end
 end
+
+function LightHeaded:ToggleAutoDetails()
+	if self.db.profile.autodetails then
+		self:Print("Automatic opening of LightHeaded toggled off")
+	else
+		self:Print("Automatic opening of LightHeaded toggled on")
+	end
+
+	self.db.profile.autodetails = not self.db.profile.autodetails
+end
+
 
 function LightHeaded:ChangeFontSize(value)
     local lhframe = LightHeadedFrameSub
@@ -2114,7 +1924,6 @@ function LightHeaded:ChangeBGAlpha(value)
 		"bg3",
 		"resize",
 		"titlereg",
-		"handle",
 		"close",
 	}
 

@@ -1,8 +1,8 @@
 --[[
     This file is part of Decursive.
     
-    Decursive (v 2.7.0.5) add-on for World of Warcraft UI
-    Copyright (C) 2006-2007-2008-2009-2010-2011 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
+    Decursive (v 2.7.4.2) add-on for World of Warcraft UI
+    Copyright (C) 2006-2014 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
 
     Starting from 2009-10-31 and until said otherwise by its author, Decursive
     is no longer free software, all rights are reserved to its author (John
@@ -14,13 +14,13 @@
     required.
     
 
-    Decursive is inspired from the original "Decursive v1.9.4" by Quu.
+    Decursive is inspired from the original "Decursive v1.9.4" by Patrick Bohnet (Quu).
     The original "Decursive 1.9.4" is in public domain ( www.quutar.com )
 
     Decursive is distributed in the hope that it will be useful, but WITHOUT
     ANY WARRANTY.
 
-    This file was last updated on 2011-12-03T21:51:53Z
+    This file was last updated on 2014-10-13T09:20:46Z
 --]]
 -------------------------------------------------------------------------------
 
@@ -58,6 +58,7 @@ StaticPopupDialogs["DECURSIVE_ERROR_FRAME"] = {
     whileDead = 1,
     hideOnEscape = 1,
     showAlert = 1,
+    preferredIndex = 3,
     }; -- }}}
 T._FatalError = function (TheError) StaticPopup_Show ("DECURSIVE_ERROR_FRAME", TheError); end
 end
@@ -71,7 +72,7 @@ end
 local L = LibStub("AceLocale-3.0"):NewLocale("Decursive", "ptBR");
 
 if not L then 
-    T._LoadedFiles["ptBR.lua"] = "2.7.0.5";
+    T._LoadedFiles["ptBR.lua"] = "2.7.4.2";
     return;
 end
 
@@ -95,7 +96,18 @@ L["BINDING_NAME_DCRSKADD"] = "Adiciona alvo à lista de passe" -- Needs review
 L["BINDING_NAME_DCRSKCLEAR"] = "Limpar a lista de passe" -- Needs review
 L["BINDING_NAME_DCRSKLIST"] = "Mostrar a lista de passe" -- Needs review
 L["BINDING_NAME_DCRSKSHOW"] = "Mostra ou oculta a lista de passe" -- Needs review
+L["BLACK_LENGTH"] = "Segundos na lista negra" -- Needs review
+L["BLACKLISTED"] = "Lista negra" -- Needs review
+L["CHARM"] = "Encantar" -- Needs review
 L["CLASS_HUNTER"] = "Caçador"
+L["COLORCHRONOS"] = "Cronometros" -- Needs review
+L["CTRL"] = "Ctrl" -- Needs review
+L["CURSE"] = "Maldição" -- Needs review
+L["GLOR1"] = "Em memoria de Glorfindal" -- Needs review
+L["GLOR2"] = [=[Decursive é dedicado a memoria de Bertrand que nós deixou muito cedo.
+Ele sempre sera lembrado.]=] -- Needs review
+L["GLOR3"] = [=[Em memoria de Bertrand Sense
+1969-2007]=] -- Needs review
 L["HIDESHOW_BUTTONS"] = "Mostrar/Esconder Buttoes" -- Needs review
 L["OPT_NOSTARTMESSAGES"] = "Desativar mensagens de iniciar" -- Needs review
 L["SHIFT"] = "Shift" -- Needs review
@@ -107,5 +119,5 @@ L["STR_DCR_PRIO"] = "Prioridade do Decursive" -- Needs review
 
 
 
-T._LoadedFiles["ptBR.lua"] = "2.7.0.5";
+T._LoadedFiles["ptBR.lua"] = "2.7.4.2";
 

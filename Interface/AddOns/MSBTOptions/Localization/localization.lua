@@ -14,7 +14,6 @@ local L = MikSBT.translations
 -- Interface object tables
 ------------------------------
 
-L.CLASS_NAMES = {}
 L.TABS = {}
 L.CHECKBOXES = {}
 L.DROPDOWNS = {}
@@ -49,6 +48,7 @@ L.MSG_INVALID_CUSTOM_FONT_NAME		= "Invalid font name."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "Font name already exists."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "Font path must point to a .ttf file."
 L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font."
+L.MSG_TESTING_FONT			= "Testing the specified font for validity..."
 L.MSG_CUSTOM_SOUNDS					= "Custom Sounds"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "Invalid sound name."
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "Sound name already exists."
@@ -60,7 +60,7 @@ L.MSG_SCROLL_AREA_ALREADY_EXISTS	= "Scroll area name already exists."
 L.MSG_INVALID_SCROLL_AREA_NAME		= "Invalid scroll area name."
 L.MSG_ACKNOWLEDGE_TEXT				= "Are you sure you wish to perform this action?"
 L.MSG_NORMAL_PREVIEW_TEXT			= "Normal"
-L.MSG_INVALID_SOUND_FILE			= "Sound must be a .mp3 or .ogg file."
+L.MSG_INVALID_SOUND_FILE			= "Sound must be an .ogg file."
 L.MSG_NEW_TRIGGER					= "New Trigger"
 L.MSG_TRIGGER_CLASSES				= "Trigger Classes"
 L.MSG_MAIN_EVENTS					= "Main Events"
@@ -78,23 +78,6 @@ L.MSG_ITEM_QUALITIES				= "Item qualities"
 L.MSG_ITEMS							= "Items"
 L.MSG_ITEM_ALREADY_EXISTS			= "Item name already exists."
 L.MSG_INVALID_ITEM_NAME				= "Invalid item name."
-
-
-------------------------------
--- Class Names.
-------------------------------
-
-local obj = L.CLASS_NAMES
-obj["DEATHKNIGHT"]	= "Death Knight"
-obj["DRUID"]		= "Druid"
-obj["HUNTER"]		= "Hunter"
-obj["MAGE"]			= "Mage"
-obj["PALADIN"]		= "Paladin"
-obj["PRIEST"]		= "Priest"
-obj["ROGUE"]		= "Rogue"
-obj["SHAMAN"]		= "Shaman"
-obj["WARLOCK"]		= "Warlock"
-obj["WARRIOR"]		= "Warrior"
 
 
 ------------------------------
@@ -143,6 +126,8 @@ obj["enableTrigger"]			= { tooltip="Enable the trigger."}
 obj["allPowerGains"]			= { label="ALL Power Gains", tooltip="Display all power gains including those that are not reported to the combat log.\n\nWARNING: This option is very spammy and will ignore the power threshold and throttling mechanics.\n\nNOT RECOMMENDED."}
 obj["abbreviateSkills"]			= { label="Abbreviate Skills", tooltip="Abbreviates skill names (English only).\n\nThis can be overriden by each event with the %sl event code."}
 obj["mergeSwings"]				= { label="Merge Swings", tooltip="Merge regular melee swings that hit within a short time span."}
+obj["shortenNumbers"]			= { label="Shorten Numbers", tooltip="Display numbers in an abbreviated format (example: 32765 -> 33k)."}
+obj["groupNumbers"]				= { label="Group By Thousands", tooltip="Display numbers grouped by thousands (example: 32765 -> 32,765)."}
 obj["hideSkills"]				= { label="Hide Skills", tooltip="Don't display skill names for incoming and outgoing events.\n\nYou will give up some customization capability at the event level if you choose to use this option since it causes the %s event code to be ignored."}
 obj["hideNames"]				= { label="Hide Names", tooltip="Don't display unit names for incoming and outgoing events.\n\nYou will give up some customization capability at the event level if you choose to use this option since it causes the %n event code to be ignored."}
 obj["hideFullOverheals"]		= { label="Hide Full Overheals", tooltip="Don't display non periodic heals that have an effective heal amount of zero."}
@@ -251,7 +236,7 @@ obj = L.EDITBOXES
 obj["customFontName"]	= { label="Font name:", tooltip="The name used to identify the font.\n\nExample: My Super Font"}
 obj["customFontPath"]	= { label="Font path:", tooltip="The path to the font's file.\n\nNOTE: If the file is located in the recommended MikScrollingBattleText\\Fonts directory, only the filename needs to be entered here instead of th full path.\n\nExample: myFont.ttf "}
 obj["customSoundName"]	= { label="Sound name:", tooltip="The name used to identify the sound.\n\nExample: My Sound"}
-obj["customSoundPath"]	= { label="Sound path:", tooltip="The path to the sounds's file.\n\nNOTE: If the file is located in the recommended MikScrollingBattleText\\Sounds directory, only the filename needs to be entered here instead of th full path.\n\nExample: mySound.mp3 "}
+obj["customSoundPath"]	= { label="Sound path:", tooltip="The path to the sounds's file.\n\nNOTE: If the file is located in the recommended MikScrollingBattleText\\Sounds directory, only the filename needs to be entered here instead of th full path.\n\nExample: mySound.ogg "}
 obj["copyProfile"]		= { label="New profile name:", tooltip="Name of the new profile to copy the currently selected one to."}
 obj["partialEffect"]	= { tooltip="The trailer that will be appended when the partial effect occurs."}
 obj["scrollAreaName"]	= { label="New scroll area name:", tooltip="New name for the scroll area."}
@@ -311,8 +296,10 @@ obj["HEALING_DONE"]			= "%a - Amount of healing done.\n"
 obj["ABSORBED_AMOUNT"]		= "%a - Amount of damage absorbed.\n"
 obj["AURA_AMOUNT"]			= "%a - Amount of stacks for the aura.\n"
 obj["ENERGY_AMOUNT"]		= "%a - Amount of energy.\n"
+obj["CHI_AMOUNT"]			= "%a - Amount of chi you have.\n"
 obj["CP_AMOUNT"]			= "%a - Amount of combo points you have.\n"
 obj["HOLY_POWER_AMOUNT"]	= "%a - Amount of holy power you have.\n"
+obj["SHADOW_ORBS_AMOUNT"]	= "%a - Amount of shadow orbs you have.\n" -- TODO: Add to others
 obj["HONOR_AMOUNT"]			= "%a - Amount of honor.\n"
 obj["REP_AMOUNT"]			= "%a - Amount of reputation.\n"
 obj["ITEM_AMOUNT"]			= "%a - Amount of the item looted.\n"
@@ -499,10 +486,16 @@ obj["NOTIFICATION_COMBAT_ENTER"]		= { label="Enter Combat", tooltip="Enable when
 obj["NOTIFICATION_COMBAT_LEAVE"]		= { label="Leave Combat", tooltip="Enable when you have left combat."}
 obj["NOTIFICATION_POWER_GAIN"]			= { label="Power Gains", tooltip="Enable when you gain extra mana, rage, or energy."}
 obj["NOTIFICATION_POWER_LOSS"]			= { label="Power Losses", tooltip="Enable when you lose mana, rage, or energy from drains."}
+obj["NOTIFICATION_ALT_POWER_GAIN"]		= { label="Alternate Power Gains", tooltip="Enable when you gain alternate power such as sound level on Atramedes."}
+obj["NOTIFICATION_ALT_POWER_LOSS"]		= { label="Alternate Power Losses", tooltip="Enable when you lose alternate power from drains."}
+obj["NOTIFICATION_CHI_CHANGE"]			= { label="Chi Changes", tooltip="Enable when you change chi."}
+obj["NOTIFICATION_CHI_FULL"]			= { label="Chi Full", tooltip="Enable when you attain full chi."}
 obj["NOTIFICATION_CP_GAIN"]				= { label="Combo Point Gains", tooltip="Enable when you gain combo points."}
 obj["NOTIFICATION_CP_FULL"]				= { label="Combo Points Full", tooltip="Enable when you attain full combo points."}
 obj["NOTIFICATION_HOLY_POWER_CHANGE"]	= { label="Holy Power Changes", tooltip="Enable when you change holy power."}
 obj["NOTIFICATION_HOLY_POWER_FULL"]		= { label="Holy Power Full", tooltip="Enable when you attain full holy power."}
+obj["NOTIFICATION_SHADOW_ORBS_CHANGE"]	= { label="Shadow Orb Changes", tooltip="Enable when you change shadow orbs."}
+obj["NOTIFICATION_SHADOW_ORBS_FULL"]	= { label="Shadow Orbs Full", tooltip="Enable when you attain full shadow orbs."}
 obj["NOTIFICATION_HONOR_GAIN"]			= { label="Honor Gains", tooltip="Enable when you gain honor."}
 obj["NOTIFICATION_REP_GAIN"]			= { label="Reputation Gains", tooltip="Enable when you gain reputation."}
 obj["NOTIFICATION_REP_LOSS"]			= { label="Reputation Losses", tooltip="Enable when you lose reputation."}

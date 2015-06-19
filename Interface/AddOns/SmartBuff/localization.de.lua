@@ -20,14 +20,14 @@ SMARTBUFF_DEMONTYPE = "Wichtel";
 SMARTBUFF_UNDEAD    = "Untot";
 
 -- Classes
-SMARTBUFF_CLASSES = {"Druide", "J\195\164ger", "Magier", "Paladin", "Priester", "Schurke", "Schamane", "Hexenmeister", "Krieger", "Todesritter", "J\195\164ger Pet", "Hexer Pet", "Todesritter Pet", "Tank", "Heiler", "Schadensverursacher"};
+SMARTBUFF_CLASSES = {"Druide", "Jäger", "Magier", "Paladin", "Priester", "Schurke", "Schamane", "Hexenmeister", "Krieger", "Todesritter", "Mönch", "Jäger Pet", "Hexer Pet", "Todesritter Pet", "Tank", "Heiler", "Schadensverursacher"};
 
 -- Templates and Instances
 SMARTBUFF_TEMPLATES = {"Solo", "Gruppe", "Raid", "Schlachtfeld", "Arena", "ICC", "PDK", "Ulduar", "MC", "Ony", "BWL", "Naxx", "AQ", "ZG", "Custom 1", "Custom 2", "Custom 3", "Custom 4", "Custom 5"};
-SMARTBUFF_INSTANCES = {"Eiskronenzitadelle", "Pr\195\188fung des Kreuzfahrers", "Ulduar", "geschmolzene Kern", "Onyxias Hort", "Pechschwingenhort", "Naxxramas", "Ahn'Qiraj", "Zul'Gurub"};
+SMARTBUFF_INSTANCES = {"Eiskronenzitadelle", "Prüfung des Kreuzfahrers", "Ulduar", "geschmolzene Kern", "Onyxias Hort", "Pechschwingenhort", "Naxxramas", "Ahn'Qiraj", "Zul'Gurub"};
 
 -- Mount
-SMARTBUFF_MOUNT = "Erh\195\182ht Tempo um (%d+)%%.";
+SMARTBUFF_MOUNT = "Erhöht Tempo um (%d+)%%.";
 
 -- Abbreviations
 SMARTBUFF_ABBR_CHARGES_OL = "%d a";
@@ -36,7 +36,7 @@ SMARTBUFF_ABBR_CHARGES_OL = "%d a";
 BINDING_NAME_SMARTBUFF_BIND_TRIGGER = "Trigger";
 BINDING_NAME_SMARTBUFF_BIND_TARGET  = "Ziel";
 BINDING_NAME_SMARTBUFF_BIND_OPTIONS = "Optionen";
-BINDING_NAME_SMARTBUFF_BIND_RESETBUFFTIMERS = "Buff Timer l\195\182schen";
+BINDING_NAME_SMARTBUFF_BIND_RESETBUFFTIMERS = "Buff Timer löschen";
 
 -- Options Frame Text
 SMARTBUFF_OFT                = "SmartBuff An/Aus";

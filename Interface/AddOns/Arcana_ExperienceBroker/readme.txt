@@ -1,7 +1,8 @@
 Readme
 ~~~~~~
-Arcana's Experience Broker by Arcana
-October 2010
+Arcana's Experience Broker by Arcanapp[]
+
+http://www.wowinterface.com/downloads/info14690-ArcanasExperienceBroker.html
 
 
 Prerequisites:
@@ -10,6 +11,15 @@ Prerequisites:
 Installation:
 - Unzip Arcana_ExperienceBroker.zip
 - Copy the Arcana_ExperienceBroker folder into your World of Warcraft\Interface\Addons folder
+
+v60000.3.1.1: 2014-11-23
+
+- Updated TOC for compatibility with Warlords of Draenor.
+
+v50001.3.1.1: 2012-09-05
+
+- Added amount of XP remaining in the main view
+- Updated TOC for compatibility with 5.0.4
 
 v40000.3.1.0: 2010-11-20
 

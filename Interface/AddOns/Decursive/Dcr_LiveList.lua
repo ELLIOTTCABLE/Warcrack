@@ -1,8 +1,8 @@
 --[[
     This file is part of Decursive.
     
-    Decursive (v 2.7.0.5) add-on for World of Warcraft UI
-    Copyright (C) 2006-2007-2008-2009-2010-2011 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
+    Decursive (v 2.7.4.2) add-on for World of Warcraft UI
+    Copyright (C) 2006-2014 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
 
     Starting from 2009-10-31 and until said otherwise by its author, Decursive
     is no longer free software, all rights are reserved to its author (John Wellesz).
@@ -11,13 +11,13 @@
     To distribute Decursive through other means a special authorization is required.
     
 
-    Decursive is inspired from the original "Decursive v1.9.4" by Quu.
+    Decursive is inspired from the original "Decursive v1.9.4" by Patrick Bohnet (Quu).
     The original "Decursive 1.9.4" is in public domain ( www.quutar.com )
 
     Decursive is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY.
     
-    This file was last updated on 2011-05-13T08:14:12Z
+    This file was last updated on 2014-10-13T09:20:46Z
 
 --]]
 -------------------------------------------------------------------------------
@@ -36,6 +36,7 @@ StaticPopupDialogs["DECURSIVE_ERROR_FRAME"] = {
     whileDead = 1,
     hideOnEscape = 1,
     showAlert = 1,
+    preferredIndex = 3,
     }; -- }}}
 T._FatalError = function (TheError) StaticPopup_Show ("DECURSIVE_ERROR_FRAME", TheError); end
 end
@@ -45,14 +46,13 @@ if not T._LoadedFiles or not T._LoadedFiles["Dcr_DebuffsFrame.xml"] or not T._Lo
     DecursiveInstallCorrupted = true;
     return;
 end
+T._LoadedFiles["Dcr_LiveList.lua"] = false;
 
 local D   = T.Dcr;
---D:SetDateAndRevision("$Date: 2008-09-16 00:25:13 +0200 (mar., 16 sept. 2008) $", "$Revision: 81755 $");
 
 local L     = D.L;
 local LC    = D.LC;
 local DC    = T._C;
-local DS    = DC.DS;
 
 --D.LiveList = OOP.Class();
 
@@ -75,7 +75,7 @@ local MicroUnitF = D.MicroUnitF;
 LiveList.ExistingPerID      = {};
 LiveList.Number             = 0;
 LiveList.NumberShown        = 0;
-D.ForLLDebuffedUnitsNum     = 0;
+D.ForLLDebuffedUnitsNum     = 0; -- this counts the number of displayed debuffed units. Used to know if the alert sound should/has been played
 
 -- temporary variables often used in function
 local Debuff, Debuffs, IsCharmed, MF, i, Index, RangeStatus;
@@ -88,13 +88,14 @@ local select            = _G.select;
 local unpack            = _G.unpack;
 local table             = _G.table;
 local UnitExists        = _G.UnitExists;
-local IsSpellInRange    = _G.IsSpellInRange;
+local IsSpellInRange    = D.IsSpellInRange;
 local UnitClass         = _G.UnitClass;
 local UnitIsFriend      = _G.UnitIsFriend;
 local UnitGUID          = _G.UnitGUID;
 local floor             = _G.math.floor;
 local str_upper         = _G.string.upper;
 local GetRaidTargetIndex= _G.GetRaidTargetIndex;
+local t_wipe            = _G.table.wipe;
 
 
 -- defines what is printed when the object is read as a string
@@ -109,10 +110,9 @@ function LiveList:Create() -- {{{
         return false;
     end
 
+    self.ExistingPerID[self.Number + 1] = self:new(DcrLiveList, self.Number + 1);
+
     self.Number = self.Number + 1;
-
-    self.ExistingPerID[self.Number] = self:new(DcrLiveList, self.Number);
-
 
     return self.ExistingPerID[self.Number];
 
@@ -164,9 +164,6 @@ function LiveList.prototype:GiveAnchor() -- {{{
 
     local ItemHeight = self.Frame:GetHeight();
 
-    if D.profile.ReverseLiveDisplay then
-    end
-
     if self.ID == 1 then
         if D.profile.ReverseLiveDisplay then
             return "BOTTOMLEFT", DecursiveMainBar, "BOTTOMLEFT", 5, -1 * (ItemHeight + 1) * D.profile.Amount_Of_Afflicted;
@@ -177,7 +174,7 @@ function LiveList.prototype:GiveAnchor() -- {{{
         if D.profile.ReverseLiveDisplay then
             return "BOTTOMLEFT", LiveList.ExistingPerID[self.ID - 1].Frame, "TOPLEFT", 0, 1;
         else
-            return "TOPLEFT", LiveList.ExistingPerID[self.ID - 1].Frame, "BOTTOMLEFT", 0, -1;
+            return "TOPLEFT", LiveList.ExistingPerID[self.ID - 1].Frame, "BOTTOMLEFT", 0, -1; -- TODO index is nil error received in a report by mail on 2012-11-02
         end
     end
 
@@ -336,49 +333,28 @@ end -- }}}
 function LiveList:GetDebuff(UnitID) -- {{{
     --  (note that this function is only called for the mouseover and target if the MUFs are active)
 
-    --D:Debug("(LiveList) Getting Debuff for ", UnitID);
-    if (UnitID == "target" or UnitID == "mouseover") and not UnitIsFriend(UnitID, "player") then
-        if D.ManagedDebuffUnitCache[UnitID] and D.ManagedDebuffUnitCache[UnitID][1] and D.ManagedDebuffUnitCache[UnitID][1].Type then
-            D.ManagedDebuffUnitCache[UnitID][1].Type = false; -- clear target/mouseover debuff
-            D.UnitDebuffed[UnitID] = false; -- XXX changed from 'target' to UnitID on 2010-06-08
+    if (UnitID == "target" or UnitID == "mouseover") and (not UnitIsFriend(UnitID, "player") or not UnitExists(UnitID)) then
+        if D.ManagedDebuffUnitCache[UnitID] and D.ManagedDebuffUnitCache[UnitID][1] then
+            t_wipe(D.ManagedDebuffUnitCache[UnitID]); -- clear target/mouseover debufs, else it would stay on
+            if D.UnitDebuffed[UnitID] then
+                D.ForLLDebuffedUnitsNum = D.ForLLDebuffedUnitsNum - 1;
+                D.UnitDebuffed[UnitID] = false;
+            end
         end
         --D:Debug("(LiveList) GetDebuff() |cFF00DDDDcanceled|r, unit %s is hostile or gone.", UnitID);
         return false;
     end
 
-    -- decrease the total debuff number if the MUFs system isn't already doing it and if it's not the mouseover or target unit
-    if not D.profile.ShowDebuffsFrame and D.UnitDebuffed[UnitID] and UnitID ~= "mouseover" and UnitID ~= "target" then
-        D.ForLLDebuffedUnitsNum = D.ForLLDebuffedUnitsNum - 1;
-    end
-
     -- Get the unit Debuffs
     if not D.profile.ShowDebuffsFrame or not MicroUnitF.UnitToMUF[UnitID] or UnitID == "mouseover" or UnitID == "target" then
+        --D:Debug("(|cff00ff00LiveList|r) Getting Debuff for ", UnitID, Debuffs, IsCharmed);
         Debuffs, IsCharmed = D:UnitCurableDebuffs(UnitID);
         --Debuffs, IsCharmed = D:UnitCurableDebuffs(UnitID, true);
     else -- The MUFs are active and Unit is not mouseover and is not target
         MF = MicroUnitF.UnitToMUF[UnitID];
         if MF then
             Debuffs = MF.Debuffs;
-            --[=[
-        else -- (ticket #6)
-            D:AddDebugText("Sanity check failed in LiveList:GetDebuff() no MUF for unit", UnitID, "MUFs are", D.profile.ShowDebuffsFrame, "MUFnum:", MicroUnitF.Number, "MUFshown:", MicroUnitF.UnitShown, "UnitNum:", D.Status.UnitNum, "UnitExists:", UnitExists(UnitID), "Auto MUF show/hide:", D.profile.AutoHideMUFs, "InCombatLockdown():", InCombatLockdown());
-            D:AddDebugText("Stack:\n", debugstack(2));
-            --]=]
         end
-    end
-
-    if (Debuffs and Debuffs[1] and Debuffs[1].Type) then -- there is a Debuff
-
-        D.UnitDebuffed[UnitID] = true; -- register that this unit is debuffed
-
-        -- increase the total debuff number
-        if not D.profile.ShowDebuffsFrame and UnitID ~= "mouseover" and UnitID ~= "target" then
-
-            D.ForLLDebuffedUnitsNum = D.ForLLDebuffedUnitsNum + 1;
-
-        end
-    else
-        D.UnitDebuffed[UnitID] = false; -- unregister this unit
     end
 
     return D.UnitDebuffed[UnitID];
@@ -388,7 +364,7 @@ function LiveList:DelayedGetDebuff(UnitID) -- {{{
     if not D:DelayedCallExixts("Dcr_GetDebuff"..UnitID) then
         D.DebuffUpdateRequest = D.DebuffUpdateRequest + 1;
         D:Debug("LiveList: GetDebuff scheduled for, ", UnitID);
-        D:ScheduleDelayedCall("Dcr_GetDebuff"..UnitID, self.GetDebuff, (D.profile.ScanTime / 2) * (1 + floor(D.DebuffUpdateRequest / 7.5)), self, UnitID);
+        D:ScheduleDelayedCall("Dcr_GetDebuff"..UnitID, self.GetDebuff, (D.profile.ScanTime / 3) * (1 + D.DebuffUpdateRequest / 30), self, UnitID);
     end
 end -- }}}
 
@@ -400,13 +376,6 @@ function LiveList:Update_Display() -- {{{
     if not D.DcrFullyInitialized  then
         return;
     end
-
-    -- Update the unit array
-    --[[
-    if (D.Groups_datas_are_invalid) then
-        D:GetUnitArray();
-    end
-    --]]
 
     Index = 0;
 
@@ -424,7 +393,9 @@ function LiveList:Update_Display() -- {{{
         self:DisplayItem(Index, "target");
         --D:Debug("frenetic target update");
 
-        DebuffedUnitsNumber = DebuffedUnitsNumber + 1;
+        if D.profile.ShowDebuffsFrame and D.profile.LV_OnlyInRange then
+            DebuffedUnitsNumber = DebuffedUnitsNumber + 1;
+        end
 
         if not D.Status.SoundPlayed then
             D:PlaySound ("target", "LV target" );
@@ -437,7 +408,9 @@ function LiveList:Update_Display() -- {{{
         self:DisplayItem(Index, "mouseover");
         --D:Debug("frenetic mouseover update");
 
-        DebuffedUnitsNumber = DebuffedUnitsNumber + 1;
+        if D.profile.ShowDebuffsFrame and D.profile.LV_OnlyInRange then
+            DebuffedUnitsNumber = DebuffedUnitsNumber + 1;
+        end
 
         if not D.Status.SoundPlayed then
             D:PlaySound ("mouseover", "LV mouseover" );
@@ -445,8 +418,9 @@ function LiveList:Update_Display() -- {{{
     end
 
     -- the sound played status is reset here because the live list is able to display target and mouseover units and far away ones...
-    if DebuffedUnitsNumber == 0 then
+    if DebuffedUnitsNumber == 0 and D.Status.SoundPlayed then
         D.Status.SoundPlayed = false;
+        D:Debug("LiveList:Update_Display(): sound re-enabled");
     end
 
     IndexOffset = Index;
@@ -553,7 +527,9 @@ end -- }}}
 function LiveList:DisplayTestItem() -- {{{
     if not self.TestItemDisplayed and D.Status.Unit_Array[1] then
         self.TestItemDisplayed = GetTime();
-        D:DummyDebuff(D.Status.Unit_Array[1], "Test item");
+        for i,unit in ipairs(D.Status.Unit_Array) do
+            D:DummyDebuff(unit, "Test item");
+        end
     end
 end -- }}}
 
@@ -563,7 +539,7 @@ function LiveList:HideTestItem() -- {{{
 
      for UnitID, Debuffed in pairs(D.UnitDebuffed) do
          if Debuffed then
-             D:ScheduleDelayedCall("Dcr_rmt"..i, D.DummyDebuff, i * (D.profile.ScanTime / 2), D, UnitID);
+             D:ScheduleDelayedCall("Dcr_rmt"..i, D.DummyDebuff, i * (D.profile.ScanTime / 3), D, UnitID);
              i = i + 1;
          end
      end
@@ -587,4 +563,4 @@ function LiveList:Onclick() -- {{{
     D:Println(L["HLP_LL_ONCLICK_TEXT"]);
 end -- }}}
 
-T._LoadedFiles["Dcr_LiveList.lua"] = "2.7.0.5";
+T._LoadedFiles["Dcr_LiveList.lua"] = "2.7.4.2";

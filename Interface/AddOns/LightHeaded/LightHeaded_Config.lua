@@ -8,10 +8,10 @@ local function CreatePanel(panel)
 
     local function makeToggle(name, desc, varname)
         return panel:MakeToggle(
-            "name", name, 
-            "description", desc, 
-            "default", LightHeaded.defaults.profile[varname], 
-            "getFunc", function() return LightHeaded.db.profile[varname] end, 
+            "name", name,
+            "description", desc,
+            "default", LightHeaded.defaults.profile[varname],
+            "getFunc", function() return LightHeaded.db.profile[varname] end,
             "setFunc", function(value) LightHeaded.db.profile[varname] = value end
         )
     end
@@ -34,10 +34,10 @@ local function CreatePanel(panel)
 
     panel.fixmodel = makeToggle("Fix Quest Log NPC Model", "Fixes the NPC model that is shown for certain quests when they are viewed in the Quest Log.", "fixmodel")
 
-    panel.attach = panel:MakeButton("name", "Attach", "description", "Attach the LH window to the quest log", "func", function() LightHeaded:AttachFrame() end)
-
-    panel.detach = panel:MakeButton("name", "Detach", "description", "Detaches the LH window from the quest log", "func", function() LightHeaded:DetachFrame() end)
-    panel.detach:SetPoint("LEFT", panel.attach, "RIGHT", 10, 0)
+--    panel.attach = panel:MakeButton("name", "Attach", "description", "Attach the LH window to the quest log", "func", function() LightHeaded:AttachFrame() end)
+--
+--    panel.detach = panel:MakeButton("name", "Detach", "description", "Detaches the LH window from the quest log", "func", function() LightHeaded:DetachFrame() end)
+--    panel.detach:SetPoint("LEFT", panel.attach, "RIGHT", 10, 0)
 
     panel.bgalpha = panel:MakeSlider(
         "name", "Background alpha",
@@ -49,7 +49,7 @@ local function CreatePanel(panel)
         "step", 0.01,
         "default", LightHeaded.defaults.profile.bgalpha,
         "current", LightHeaded.db.profile.bgalpha,
-        "setFunc", function(value) 
+        "setFunc", function(value)
             LightHeaded.db.profile.bgalpha = value
             LightHeaded:ChangeBGAlpha(value)
         end,
@@ -66,7 +66,7 @@ local function CreatePanel(panel)
         "step", 1.0,
         "default", LightHeaded.defaults.profile.fontsize,
         "current", LightHeaded.db.profile.fontsize,
-        "setFunc", function(value) 
+        "setFunc", function(value)
             LightHeaded.db.profile.fontsize = value
             LightHeaded:ChangeFontSize(value)
         end,
@@ -82,7 +82,6 @@ local function CreatePanel(panel)
     table.insert(options, panel.page)
     table.insert(options, panel.debug)
     table.insert(options, panel.fixmodel)
-    table.insert(options, panel.attach)
 
     for idx,frame in ipairs(options) do
         if idx == 1 then

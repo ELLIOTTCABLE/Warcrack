@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherLocale.lua 754 2008-10-14 04:43:39Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherLocale.lua 970 2012-09-03 00:18:31Z Esamynn $
 
 	Localization routines
 
@@ -27,25 +27,30 @@
 		since that is it's designated purpose as per:
 		http://www.fsf.org/licensing/licenses/gpl-faq.html#InterpreterIncompat
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherLocale.lua $", "$Rev: 754 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherLocale.lua $", "$Rev: 970 $")
 
 local Babylonian = LibStub("Babylonian")
 assert(Babylonian, "Babylonian is not installed")
-
 local babylonian = Babylonian(GathererLocalizations)
 
-function Gatherer.Locale.Tr(key, ...)
+local metatable = { __index = getfenv(0) }
+setmetatable( Gatherer.Locale, metatable )
+setfenv(1, Gatherer.Locale)
+
+SECTION_HIGHLIGHT_CODE = HIGHLIGHT_FONT_COLOR_CODE
+
+function Tr(key, ...)
 	local localization = babylonian[key] or key
-	return Gatherer.Locale.Translate(localization, ...)
+	return Translate(localization, ...)
 end
-function Gatherer.Locale.TrClient(key)
+function TrClient(key)
 	return babylonian(GetLocale(), key)
 end
-function Gatherer.Locale.TrLocale(key)
+function TrLocale(key)
 	return babylonian[key] or key
 end
 
-function Gatherer.Locale.Translate(localization, ...)
+function Translate(localization, ...)
 	if (not localization) then return "" end
 	local newloc = ""
 
@@ -67,12 +72,19 @@ function Gatherer.Locale.Translate(localization, ...)
 		localization = newloc
 		newloc = ""
 	end
+	for highlightSection in localization:gmatch("%b{}") do
+		local highlight = highlightSection:gsub("^{{(.+)}}$", SECTION_HIGHLIGHT_CODE.."%1".."|r")
+		if ( highlight ~= highlightSection ) then
+			local s, f = localization:find(highlightSection, 1, true)
+			localization = localization:sub(1,s-1)..highlight..localization:sub(f+1)
+		end
+	end
 	return localization
 end
 
-function Gatherer.Locale.GetText( token, ordinal )
+function GetText( token, ordinal )
 	if ( ordinal and ordinal > 1 ) then
 		token = token.."_P1"
 	end
-	return Gatherer.Locale.TrLocale(token)
+	return TrLocale(token)
 end

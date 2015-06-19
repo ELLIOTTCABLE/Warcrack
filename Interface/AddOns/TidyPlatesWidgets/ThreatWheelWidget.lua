@@ -1,5 +1,7 @@
-
+	
+local GetGroupInfo = TidyPlatesUtility.GetGroupInfo
 local threatfont =					"FONTS\\arialn.ttf"
+
 ---------------
 -- General Functions
 ---------------
@@ -39,10 +41,10 @@ local GetRelativeThreat = TidyPlatesUtility.GetRelativeThreat
 ---------------
 do
 	local function UpdateRoster()
-		local index, size
 		if UnitInRaid("player") then
-			size = GetNumRaidMembers() - 1
-			for index = 1, size do
+			local index
+			local groupType, groupSize = GetGroupInfo()
+			for index = 1, groupSize do
 				local raidid = "raid"..tostring(index)
 				local isAssigned = GetPartyAssignment("MAINTANK", raidid)
 				if isAssigned then RaidTankList[UnitName(raidid)] = true 

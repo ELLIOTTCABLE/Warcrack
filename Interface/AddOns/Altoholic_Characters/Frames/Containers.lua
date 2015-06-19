@@ -3,15 +3,6 @@ local addon = _G[addonName]
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 
-local GREEN		= "|cFF00FF00"
-
-local BAGSBANK					= 1
-local BAGSBANK_ALLINONE		= 2
-local BAGSONLY					= 3
-local BAGSONLY_ALLINONE		= 4
-local BANKONLY					= 5
-local BANKONLY_ALLINONE		= 6
-
 addon.Containers = {}
 
 local ns = addon.Containers		-- ns = namespace
@@ -39,23 +30,34 @@ end
 
 local function UpdateSpread()
 
-	local rarity = addon:GetOption("CharacterTabViewBagsRarity")
-	local VisibleLines = 7
-	local frame = "AltoholicFrameContainers"
-	local entry = frame.."Entry"
+	local rarity = addon:GetOption("UI.Tabs.Characters.ViewBagsRarity")
+	
+	local frame = AltoholicFrameContainers
+	local scrollFrame = frame.ScrollFrame
+	local numRows = scrollFrame.numRows
 	
 	if #bagIndices == 0 then
-		addon:ClearScrollFrame( _G[ frame.."ScrollFrame" ], entry, VisibleLines, 41)
+		for rowIndex = 1, numRows do
+			local rowFrame = scrollFrame:GetRow(rowIndex) 
+			rowFrame:Hide()
+		end
+		
+		scrollFrame:Update(numRows)
 		return
 	end
 	
 	local character = Altoholic.Tabs.Characters:GetAltKey()
 	local DS = DataStore
-	local offset = FauxScrollFrame_GetOffset( _G[ frame.."ScrollFrame" ] );
+	local offset = scrollFrame:GetOffset()
 	
-	AltoholicTabCharactersStatus:SetText(format("%s|r / %s", DataStore:GetColoredCharacterName(character), L["Containers"]))
+	AltoholicTabCharacters.Status:SetText(format("%s|r / %s", DataStore:GetColoredCharacterName(character), L["Containers"]))
 	
-	for i=1, VisibleLines do
+	local rowFrame
+	local itemButton
+	
+	for i=1, numRows do
+		rowFrame = scrollFrame:GetRow(i)
+		
 		local line = i + offset
 		
 		if line <= #bagIndices then
@@ -64,18 +66,24 @@ local function UpdateSpread()
 			local container = DS:GetContainer(character, containerID)
 			local containerIcon, _, containerSize = DS:GetContainerInfo(character, containerID)
 			
-			local itemName = entry..i .. "Item1";
+			-- Column 1 : the bag
+			itemButton = rowFrame.Item1
 			
 			if bagIndices[line].from == 1 then		-- if this is the first line for this bag .. draw bag icon
-				local itemButton = _G[itemName];	
-				if containerIcon then
-					Altoholic:SetItemButtonTexture(itemName, containerIcon);
-				else		-- will be nill for bag 100
-					Altoholic:SetItemButtonTexture(itemName, "Interface\\Icons\\INV_Box_03");
+				itemButton.Icon:SetDesaturated(false)
+				
+				-- 15/10/2014: note, find a better way for this than this ugly hack
+				if containerID == "VoidStorage.Tab1" then
+					itemButton:SetID(201)	-- use id 201 for void storage, only required a few lines below
+				elseif containerID == "VoidStorage.Tab2" then
+					itemButton:SetID(202)	-- use id 202 for void storage, only required a few lines below
+				elseif containerID == REAGENTBANK_CONTAINER then
+					itemButton:SetID(300)
+				else
+					itemButton:SetID(containerID)
 				end
-
-				itemButton:SetID(containerID)
-
+				
+				itemButton.Icon:SetTexture(containerIcon)
 				itemButton:SetScript("OnEnter", function(self)
 					local id = self:GetID()
 					GameTooltip:SetOwner(self, "ANCHOR_LEFT");
@@ -86,6 +94,10 @@ local function UpdateSpread()
 					elseif id == 100 then
 						GameTooltip:AddLine(L["Bank"],0.5,0.5,1);
 						GameTooltip:AddLine(L["28 Slot"],1,1,1);
+					elseif id >= 201 and id <= 202 then
+						GameTooltip:AddLine(VOID_STORAGE,0.5,0.5,1);
+					elseif id == 300 then
+						GameTooltip:AddLine(REAGENT_BANK,0.5,0.5,1);
 					else
 						local character = Altoholic.Tabs.Characters:GetAltKey()
 						local _, link = DS:GetContainerInfo(character, id)
@@ -96,45 +108,43 @@ local function UpdateSpread()
 					end
 					GameTooltip:Show();
 				end)
-				_G[itemName .. "Count"]:Hide()
-				
-				_G[ itemName ]:Show()
+				itemButton.Count:Hide()
+				itemButton:Show()
 			else
-				_G[ itemName ]:Hide()
+				itemButton:Hide()
 			end
 			
-			_G[ entry..i .. "Item2" ]:Hide()
-			_G[ entry..i .. "Item2" ].id = nil
-			_G[ entry..i .. "Item2" ].link = nil
+			-- Column 2 : empty
+			itemButton = rowFrame.Item2
+			itemButton:Hide()
+			itemButton.id = nil
+			itemButton.link = nil
 			
+			-- Columns 3 to 14 : bag content
 			for j=3, 14 do
-				local itemName = entry..i .. "Item" .. j;
-				local itemButton = _G[itemName];
-				local itemTexture = _G[itemName.."IconTexture"]
-						
-				Altoholic:CreateButtonBorder(itemButton)
-				itemButton.border:Hide()
-				itemTexture:SetDesaturated(0)
+				itemButton = rowFrame["Item"..j]
+				itemButton.IconBorder:Hide()
+				itemButton.Icon:SetDesaturated(false)
 				
 				local slotID = bagIndices[line].from - 3 + j
 				local itemID, itemLink, itemCount = DS:GetSlotInfo(container, slotID)
 				
 				if (slotID <= containerSize) then 
 					if itemID then
-						Altoholic:SetItemButtonTexture(itemName, GetItemIcon(itemID));
+						itemButton.Icon:SetTexture(GetItemIcon(itemID))
 						
-						if rarity ~= 0 then
+						if rarity ~= 0 then	
 							local _, _, itemRarity = GetItemInfo(itemID)
 							if itemRarity and itemRarity == rarity then
 								local r, g, b = GetItemQualityColor(itemRarity)
-								itemButton.border:SetVertexColor(r, g, b, 0.5)
-								itemButton.border:Show()
+								itemButton.IconBorder:SetVertexColor(r, g, b, 0.5)
+								itemButton.IconBorder:Show()
 							else
-								itemTexture:SetDesaturated(1)
+								itemButton.Icon:SetDesaturated(true)
 							end
 						end
 					else
-						Altoholic:SetItemButtonTexture(itemName, "Interface\\PaperDoll\\UI-Backpack-EmptySlot");
+						itemButton.Icon:SetTexture("Interface\\PaperDoll\\UI-Backpack-EmptySlot")
 					end
 				
 					itemButton.id = itemID
@@ -143,12 +153,11 @@ local function UpdateSpread()
 							Altoholic:Item_OnEnter(self)
 						end)
 					
-					local countWidget = _G[itemName .. "Count"]
 					if not itemCount or (itemCount < 2) then
-						countWidget:Hide();
+						itemButton.Count:Hide();
 					else
-						countWidget:SetText(itemCount);
-						countWidget:Show();
+						itemButton.Count:SetText(itemCount);
+						itemButton.Count:Show();
 					end
 					
 					local startTime, duration, isEnabled = DS:GetContainerCooldownInfo(container, slotID)
@@ -156,69 +165,74 @@ local function UpdateSpread()
 					itemButton.startTime = startTime
 					itemButton.duration = duration
 					
-					CooldownFrame_SetTimer(_G[itemName .. "Cooldown"], startTime or 0, duration or 0, isEnabled)
+					CooldownFrame_SetTimer(itemButton.Cooldown, startTime or 0, duration or 0, isEnabled)
 				
 					itemButton:Show()
 				else
-					_G[ itemName ]:Hide()
+					itemButton:Hide()
 					itemButton.id = nil
 					itemButton.link = nil
 					itemButton.startTime = nil
 					itemButton.duration = nil
 				end
 			end
-			_G[ entry..i ]:Show()
+			rowFrame:Show()
 		else
-			_G[ entry..i ]:Hide()
+			rowFrame:Hide()
 		end
 	end
 	
-	if #bagIndices < VisibleLines then
-		FauxScrollFrame_Update( _G[ frame.."ScrollFrame" ], VisibleLines, VisibleLines, 41);
+	if #bagIndices < numRows then
+		scrollFrame:Update(numRows)
 	else
-		FauxScrollFrame_Update( _G[ frame.."ScrollFrame" ], #bagIndices, VisibleLines, 41);
+		scrollFrame:Update(#bagIndices)
 	end	
 end	
 
 local function UpdateAllInOne()
-	local viewBags = (addon:GetOption("CharacterTabViewBags") == 1)
-	local viewBank = (addon:GetOption("CharacterTabViewBank") == 1)
-	
-	local bagsOnly = (viewBags and not viewBank)
-	local bankOnly = (viewBank and not viewBags)
-
-	local rarity = addon:GetOption("CharacterTabViewBagsRarity")
-	local VisibleLines = 7
-	local frame = "AltoholicFrameContainers"
-	local entry = frame.."Entry"
+	local rarity = addon:GetOption("UI.Tabs.Characters.ViewBagsRarity")
+	local frame = AltoholicFrameContainers
+	local scrollFrame = frame.ScrollFrame
+	local numRows = scrollFrame.numRows
 	
 	local character = Altoholic.Tabs.Characters:GetAltKey()
-	AltoholicTabCharactersStatus:SetText(format("%s|r / %s / %s", DataStore:GetColoredCharacterName(character), L["Containers"], L["All-in-one"]))
+	AltoholicTabCharacters.Status:SetText(format("%s|r / %s / %s", DataStore:GetColoredCharacterName(character), L["Containers"], L["All-in-one"]))
 
-	local offset = FauxScrollFrame_GetOffset( _G[ frame.."ScrollFrame" ] );
+	local offset = scrollFrame:GetOffset()
 	
 	local minSlotIndex = offset * 14
 	local currentSlotIndex = 0		-- this indexes the non-empty slots
-	local i = 1
-	local j = 1
+	local rowIndex = 1
+	local colIndex = 1
 	
 	local containerList = {}
-	
-	if not bankOnly then		-- if it's not a bank only view, add the normal bags
+
+	if addon:GetOption("UI.Tabs.Characters.ViewBags") then
 		for i = 0, 4 do
 			table.insert(containerList, i)
 		end
 	end
 	
-	if not bagsOnly then		-- if it's not a bag only view, add bank bags
+	if addon:GetOption("UI.Tabs.Characters.ViewBank") then
 		for i = 5, 11 do
 			table.insert(containerList, i)
 		end
 		table.insert(containerList, 100)
 	end
-
-	local DS = DataStore
-	if viewBags or viewBank then
+	
+	if addon:GetOption("UI.Tabs.Characters.ViewVoidStorage") then
+		table.insert(containerList, "VoidStorage.Tab1")
+		table.insert(containerList, "VoidStorage.Tab2")
+	end
+	
+	if addon:GetOption("UI.Tabs.Characters.ViewReagentBank") then
+		table.insert(containerList, REAGENTBANK_CONTAINER)
+	end
+	
+	local itemButton
+	if #containerList > 0 then
+		local DS = DataStore
+		
 		for _, containerID in pairs(containerList) do
 			local container = DS:GetContainer(character, containerID)
 			local _, _, containerSize = DS:GetContainerInfo(character, containerID)
@@ -227,25 +241,20 @@ local function UpdateAllInOne()
 				local itemID, itemLink, itemCount = DS:GetSlotInfo(container, slotID)
 				if itemID then
 					currentSlotIndex = currentSlotIndex + 1
-					if (currentSlotIndex > minSlotIndex) and (i <= VisibleLines) then
-						local itemName = entry..i .. "Item" .. j;
-						local itemButton = _G[itemName];
-						local itemTexture = _G[itemName.."IconTexture"]
-						
-						Altoholic:CreateButtonBorder(itemButton)
-						itemButton.border:Hide()
-						
-						Altoholic:SetItemButtonTexture(itemName, GetItemIcon(itemID));
-						itemTexture:SetDesaturated(0)
+					if (currentSlotIndex > minSlotIndex) and (rowIndex <= numRows) then
+						itemButton = frame["Entry"..rowIndex]["Item"..colIndex]
+						itemButton.IconBorder:Hide()
+						itemButton.Icon:SetTexture(GetItemIcon(itemID))
+						itemButton.Icon:SetDesaturated(false)
 						
 						if rarity ~= 0 then
 							local _, _, itemRarity = GetItemInfo(itemID)
 							if itemRarity and itemRarity == rarity then
 								local r, g, b = GetItemQualityColor(itemRarity)
-								itemButton.border:SetVertexColor(r, g, b, 0.5)
-								itemButton.border:Show()
+								itemButton.IconBorder:SetVertexColor(r, g, b, 0.5)
+								itemButton.IconBorder:Show()
 							else
-								itemTexture:SetDesaturated(1)
+								itemButton.Icon:SetDesaturated(true)
 							end
 						end
 						
@@ -255,12 +264,11 @@ local function UpdateAllInOne()
 								Altoholic:Item_OnEnter(self)
 							end)
 					
-						local countWidget = _G[itemName .. "Count"]
 						if not itemCount or (itemCount < 2) then
-							countWidget:Hide();
+							itemButton.Count:Hide();
 						else
-							countWidget:SetText(itemCount);
-							countWidget:Show();
+							itemButton.Count:SetText(itemCount);
+							itemButton.Count:Show();
 						end
 						
 						local startTime, duration, isEnabled = DS:GetContainerCooldownInfo(container, slotID)
@@ -268,14 +276,14 @@ local function UpdateAllInOne()
 						itemButton.startTime = startTime
 						itemButton.duration = duration
 						
-						CooldownFrame_SetTimer(_G[itemName .. "Cooldown"], startTime or 0, duration or 0, isEnabled)
+						CooldownFrame_SetTimer(itemButton.Cooldown, startTime or 0, duration or 0, isEnabled)
 				
-						_G[ itemName ]:Show()
+						itemButton:Show()
 						
-						j = j + 1
-						if j > 14 then
-							j = 1
-							i = i + 1
+						colIndex = colIndex + 1
+						if colIndex > 14 then
+							colIndex = 1
+							rowIndex = rowIndex + 1
 						end
 					end				
 				end
@@ -283,25 +291,26 @@ local function UpdateAllInOne()
 		end
 	end
 		
-	while i <= VisibleLines do
-		while j <= 14 do
-			_G[ entry..i .. "Item" .. j ]:Hide()
-			_G[ entry..i .. "Item" .. j ].id = nil
-			_G[ entry..i .. "Item" .. j ].link = nil
-			_G[ entry..i .. "Item" .. j ].startTime = nil
-			_G[ entry..i .. "Item" .. j ].duration = nil
-			j = j + 1
+	while rowIndex <= numRows do
+		while colIndex <= 14 do
+			itemButton = frame["Entry"..rowIndex]["Item"..colIndex]
+			itemButton:Hide()
+			itemButton.id = nil
+			itemButton.link = nil
+			itemButton.startTime = nil
+			itemButton.duration = nil
+			colIndex = colIndex + 1
 		end
 	
-		j = 1
-		i = i + 1
+		colIndex = 1
+		rowIndex = rowIndex + 1
 	end
 	
-	for i=1, VisibleLines do
-		_G[ entry..i ]:Show()
+	for i = 1, numRows do
+		frame["Entry"..i]:Show()
 	end
 
-	FauxScrollFrame_Update( _G[ frame.."ScrollFrame" ], ceil(currentSlotIndex / 14), VisibleLines, 41);
+	scrollFrame:Update(ceil(currentSlotIndex / 14))
 end
 
 
@@ -309,7 +318,7 @@ function ns:SetView(isAllInOne)
 	if not isAllInOne then	-- not an all-in-one view
 		ns.Update = UpdateSpread
 		ns:UpdateCache()
-		FauxScrollFrame_SetOffset( AltoholicFrameContainersScrollFrame, 0)
+		AltoholicFrameContainers.ScrollFrame:SetOffset(0)
 	else
 		ns.Update = UpdateAllInOne
 	end
@@ -318,37 +327,39 @@ end
 function ns:UpdateCache()
 	bagIndices = bagIndices or {}
 	wipe(bagIndices)
-	
-	local viewBags = (addon:GetOption("CharacterTabViewBags") == 1)
-	local viewBank = (addon:GetOption("CharacterTabViewBank") == 1)
-	if not viewBags and not viewBank then return end
-	
-	local bagsOnly = (viewBags and not viewBank)
-	local bankOnly = (viewBank and not viewBags)
 
-	local bagMin = 0
-	local bagMax = 11
-	
-	-- bags : 0 to 4
-	-- bank: 5 to 11 and 100
-	if bagsOnly then
-		bagMax = 4			-- 0 to 4
-	elseif bankOnly then
-		bagMin = 5			-- 5 to 11
-	end
-	
 	local character = addon.Tabs.Characters:GetAltKey()
-	for bagID = bagMin, bagMax do
-		if DataStore:GetContainer(character, bagID) then
-			local _, _, size = DataStore:GetContainerInfo(character, bagID)
-			UpdateBagIndices(bagID, size)
-		end
+	
+	if addon:GetOption("UI.Tabs.Characters.ViewBags") then
+		for bagID = 0, 4 do
+			if DataStore:GetContainer(character, bagID) then
+				local _, _, size = DataStore:GetContainerInfo(character, bagID)
+				UpdateBagIndices(bagID, size)
+			end
+		end	
 	end
 	
-	if not bagsOnly then
-		if DataStore:GetContainer(character, 100) then 	-- if bank hasn't been visited yet, exit
+	if addon:GetOption("UI.Tabs.Characters.ViewBank") then
+		for bagID = 5, 11 do
+			if DataStore:GetContainer(character, bagID) then
+				local _, _, size = DataStore:GetContainerInfo(character, bagID)
+				UpdateBagIndices(bagID, size)
+			end
+		end
+		
+		if DataStore:GetContainer(character, 100) then 	-- if bank has been visited, add it
 			UpdateBagIndices(100, 28)
 		end
+	end
+	
+	if addon:GetOption("UI.Tabs.Characters.ViewVoidStorage") then
+		UpdateBagIndices("VoidStorage.Tab1", 80)
+		UpdateBagIndices("VoidStorage.Tab2", 80)
+	end
+	
+	if addon:GetOption("UI.Tabs.Characters.ViewReagentBank") then
+		local _, _, size = DataStore:GetContainerInfo(character, REAGENTBANK_CONTAINER)
+		UpdateBagIndices(REAGENTBANK_CONTAINER, size)
 	end
 end
 

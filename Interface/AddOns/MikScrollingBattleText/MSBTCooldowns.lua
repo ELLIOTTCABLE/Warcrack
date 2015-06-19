@@ -54,6 +54,9 @@ local ITEM_INFO_TEXTURE_POSITION = 10
 -- Private variables.
 -------------------------------------------------------------------------------
 
+-- Prevent tainting global _.
+local _
+
 -- Dynamically created frame for receiving events.
 local eventFrame = CreateFrame("Frame")
 
@@ -429,6 +432,7 @@ local function UseItemByNameHook(itemName)
  -- Get item link for the name and extract item id from item link.
  if (not itemName) then return end
  local _, itemLink = GetItemInfo(itemName)
+ local itemID
  if (itemLink) then itemID = string_match(itemLink, "item:(%d+)") end
  if (itemID) then OnItemUse(itemID) end
 end

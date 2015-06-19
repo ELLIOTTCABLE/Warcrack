@@ -1,8 +1,8 @@
 --[[
     This file is part of Decursive.
     
-    Decursive (v 2.7.0.5) add-on for World of Warcraft UI
-    Copyright (C) 2006-2007-2008-2009-2010-2011 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
+    Decursive (v 2.7.4.2) add-on for World of Warcraft UI
+    Copyright (C) 2006-2014 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
 
     Starting from 2009-10-31 and until said otherwise by its author, Decursive
     is no longer free software, all rights are reserved to its author (John Wellesz).
@@ -11,13 +11,13 @@
     To distribute Decursive through other means a special authorization is required.
     
 
-    Decursive is inspired from the original "Decursive v1.9.4" by Quu.
+    Decursive is inspired from the original "Decursive v1.9.4" by Patrick Bohnet (Quu).
     The original "Decursive 1.9.4" is in public domain ( www.quutar.com )
 
     Decursive is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY.
     
-    This file was last updated on 2011-04-19T20:42:07Z
+    This file was last updated on 2014-10-13T09:20:46Z
 --]]
 -------------------------------------------------------------------------------
 
@@ -35,6 +35,7 @@ StaticPopupDialogs["DECURSIVE_ERROR_FRAME"] = {
     whileDead = 1,
     hideOnEscape = 1,
     showAlert = 1,
+    preferredIndex = 3,
     }; -- }}}
 T._FatalError = function (TheError) StaticPopup_Show ("DECURSIVE_ERROR_FRAME", TheError); end
 end
@@ -44,15 +45,14 @@ if not T._LoadedFiles or not T._LoadedFiles["Dcr_Events.lua"] then
     DecursiveInstallCorrupted = true;
     return;
 end
+T._LoadedFiles["Dcr_Raid.lua"] = false;
 
 local D = T.Dcr;
---D:SetDateAndRevision("$Date: 2008-09-16 00:25:13 +0200 (mar., 16 sept. 2008) $", "$Revision: 81755 $");
 
 
 local L     = D.L;
 local LC    = D.LC;
 local DC    = T._C;
-local DS    = DC.DS;
 
 local RaidRosterCache           = { };
 local SortingTable              = { };
@@ -69,8 +69,9 @@ local type                  = _G.type;
 local select                = _G.select;
 local UnitIsFriend          = _G.UnitIsFriend;
 local UnitCanAttack         = _G.UnitCanAttack;
-local GetNumRaidMembers     = _G.GetNumRaidMembers;
-local GetNumPartyMembers    = _G.GetNumPartyMembers;
+local GetNumRaidMembers     = DC.GetNumRaidMembers;
+local GetNumPartyMembers    = _G.GetNumSubgroupMembers;
+
 local GetRaidRosterInfo     = _G.GetRaidRosterInfo;
 local random                = _G.random;
 local UnitIsUnit            = _G.UnitIsUnit;
@@ -121,6 +122,7 @@ DC.ClassNumToLName = {
     [18]        = LC[DC.CLASS_WARLOCK],
     [19]        = LC[DC.CLASS_WARRIOR],
     [20]        = LC[DC.CLASS_DEATHKNIGHT],
+    [21]        = LC[DC.CLASS_MONK],
 }
 
 DC.ClassLNameToNum = D:tReverse(DC.ClassNumToLName);
@@ -136,6 +138,7 @@ DC.ClassNumToUName = {
     [18]        = DC.CLASS_WARLOCK,
     [19]        = DC.CLASS_WARRIOR,
     [20]        = DC.CLASS_DEATHKNIGHT,
+    [21]        = DC.CLASS_MONK,
 }
 
 DC.ClassUNameToNum = D:tReverse(DC.ClassNumToUName);
@@ -311,29 +314,29 @@ do
           0 --> PriorityList
           1 --> Group
           2 --> Class
-          3 --> Default (Decursive "natural" order: our group, groups after, groups before)
-          4 --> Pets
+          3 --> Default (Decursive "natural" order: current player, our group, groups after, groups before)
+          4 --> our pet, Pets
 
           - 8 groups with 5 persons maximum per group
-          - 10 classes with 80 persons max for each class (Pets may be counted)
+          - 11 classes with 80 persons max for each class (Pets may be counted)
           - 80 persons for default (including possible pets)
 
-          Priority list:    1,000,000 till 100,000,000
-          Group indexes:    10,000, 20,000, 30,000, till 80,000
-          class indexes:    1,000, 2,000, 3,000, till 10,000
-          default indexes:  100 to 800 (player's index will be 900)
+          default indexes:  100 to 840 (player's index will be 900)
+          class indexes:    1,000, 2,000, 3,000, till 11,000
+          Group indexes:    12,000, 24,000, 36,000, till 96,000
+          Priority list:    10^5 till 10^7
           pet indexes:      Same as above but * -1
 
-          We make additions, exemple:
-            - Our current group is the group 7
+          We make additions, example:
+            - Our current group is group 7
             - The resulting default groups priorities are:
                 7:800 8: 700, 1:600, 2: 500, 3: 400, 4: 300, 5: 200, 6:100
             - Archarodim, Mage from Group 5 (23rd unit of the raid)
-            - Unit Archarodim priority is 223
+            - Unit Archarodim default priority is 223
             - Class Mage priority is 4000
-            - Group 5 priority is 20000
+            - Group 5 priority is 24000
 
-            --> Archarodim priority is 200 + 23 + 4000 + 20000 = 24223
+            --> Archarodim priority is 200 + 23 + 4000 + 24000 = 28223
         **************************************************************************** }}} ]=]
 
         -- Get Decursive's natural default priority of the unit
@@ -341,12 +344,12 @@ do
 
         -- Get the class priority if available
         if ( UNClass and ClassPrio[ DC.ClassUNameToNum [UNClass] ] ) then
-            UnitPriority = UnitPriority + ( 10 + 1 - ClassPrio[DC.ClassUNameToNum [UNClass]]) * 1000; -- XXX 10 (Deathknight) is no good
+            UnitPriority = UnitPriority + ( 11 + 1 - ClassPrio[DC.ClassUNameToNum [UNClass]]) * 1000; -- previous max is 900
         end
 
         -- Get the group priority if available
         if (UnitGroup and GroupsPrio[UnitGroup]) then
-            UnitPriority = UnitPriority + (8 + 1 - GroupsPrio[UnitGroup]) * 10000;
+            UnitPriority = UnitPriority + (8 + 1 - GroupsPrio[UnitGroup]) * 12000; -- previous max is 11,840
         end
 
         -- Get the priority list index if available
@@ -369,8 +372,8 @@ do
             end
 
 
-            if ( PrioListIndex < 100) then
-                UnitPriority = UnitPriority + (100 + 1 - PrioListIndex) * 1000000;
+            if ( PrioListIndex ~= 100) then
+                UnitPriority = UnitPriority + (100 + 1 - PrioListIndex) * 100000; -- previous max is 96,840
             end
         end
 
@@ -694,7 +697,7 @@ end
 --}}}
 
 -------------------------------------------------------------------------------
-T._LoadedFiles["Dcr_Raid.lua"] = "2.7.0.5";
+T._LoadedFiles["Dcr_Raid.lua"] = "2.7.4.2";
 
 -- "Your God is dead and no one cares"
 -- "If there is a Hell I'll see you there"

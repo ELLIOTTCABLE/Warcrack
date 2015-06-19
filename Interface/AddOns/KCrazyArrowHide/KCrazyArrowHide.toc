@@ -1,0 +1,12 @@
+## Interface: 60000
+## Title: Crazy Arrow Hide
+## Notes: Hides the TomTom Crazy Arrow automatically while in combat
+## Version: 1.21
+## Author: Kipp Gremillion
+## SavedVariablesPerCharacter: KCrazyArrowHide_Settings
+## X-Curse-Packaged-Version: r7
+## X-Curse-Project-Name: TomTom Crazy Arrow Hide
+## X-Curse-Project-ID: kcrazyarrowhide
+## X-Curse-Repository-ID: wow/kcrazyarrowhide/mainline
+
+KCrazyArrowHide.lua

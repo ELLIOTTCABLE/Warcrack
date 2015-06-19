@@ -1,39 +1,12 @@
---[[
-Name: DBIcon-1.0
-Revision: $Rev: 24 $
-Author(s): Rabbit (rabbit.magtheridon@gmail.com)
-Description: Allows addons to register to recieve a lightweight minimap icon as an alternative to more heavy LDB displays.
-Dependencies: LibStub
-License: GPL v2 or later.
-]]
-
---[[
-Copyright (C) 2008-2011 Rabbit
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-]]
 
 -----------------------------------------------------------------------
--- DBIcon-1.0
+-- LibDBIcon-1.0
 --
--- Disclaimer: Most of this code was ripped from Barrel but fixed, streamlined
---             and cleaned up a lot so that it no longer sucks.
+-- Allows addons to easily create a lightweight minimap icon as an alternative to heavier LDB displays.
 --
 
 local DBICON10 = "LibDBIcon-1.0"
-local DBICON10_MINOR = tonumber(("$Rev: 24 $"):match("(%d+)"))
+local DBICON10_MINOR = 34 -- Bump on changes
 if not LibStub then error(DBICON10 .. " requires LibStub.") end
 local ldb = LibStub("LibDataBroker-1.1", true)
 if not ldb then error(DBICON10 .. " requires LibDataBroker-1.1.") end
@@ -43,6 +16,7 @@ if not lib then return end
 lib.disabled = lib.disabled or nil
 lib.objects = lib.objects or {}
 lib.callbackRegistered = lib.callbackRegistered or nil
+lib.callbacks = lib.callbacks or LibStub("CallbackHandler-1.0"):New(lib)
 lib.notCreated = lib.notCreated or {}
 
 function lib:IconCallback(event, name, key, value, dataobj)
@@ -51,16 +25,27 @@ function lib:IconCallback(event, name, key, value, dataobj)
 			lib.objects[name].icon:SetTexture(value)
 		elseif key == "iconCoords" then
 			lib.objects[name].icon:UpdateCoord()
+		elseif key == "iconR" then
+			local _, g, b = lib.objects[name].icon:GetVertexColor()
+			lib.objects[name].icon:SetVertexColor(value, g, b)
+		elseif key == "iconG" then
+			local r, _, b = lib.objects[name].icon:GetVertexColor()
+			lib.objects[name].icon:SetVertexColor(r, value, b)
+		elseif key == "iconB" then
+			local r, g = lib.objects[name].icon:GetVertexColor()
+			lib.objects[name].icon:SetVertexColor(r, g, value)
 		end
 	end
 end
 if not lib.callbackRegistered then
 	ldb.RegisterCallback(lib, "LibDataBroker_AttributeChanged__icon", "IconCallback")
 	ldb.RegisterCallback(lib, "LibDataBroker_AttributeChanged__iconCoords", "IconCallback")
+	ldb.RegisterCallback(lib, "LibDataBroker_AttributeChanged__iconR", "IconCallback")
+	ldb.RegisterCallback(lib, "LibDataBroker_AttributeChanged__iconG", "IconCallback")
+	ldb.RegisterCallback(lib, "LibDataBroker_AttributeChanged__iconB", "IconCallback")
 	lib.callbackRegistered = true
 end
 
--- Tooltip code ripped from StatBlockCore by Funkydude
 local function getAnchors(frame)
 	local x, y = frame:GetCenter()
 	if not x or not y then return "CENTER" end
@@ -90,67 +75,73 @@ end
 
 --------------------------------------------------------------------------------
 
-local minimapShapes = {
-	["ROUND"] = {true, true, true, true},
-	["SQUARE"] = {false, false, false, false},
-	["CORNER-TOPLEFT"] = {false, false, false, true},
-	["CORNER-TOPRIGHT"] = {false, false, true, false},
-	["CORNER-BOTTOMLEFT"] = {false, true, false, false},
-	["CORNER-BOTTOMRIGHT"] = {true, false, false, false},
-	["SIDE-LEFT"] = {false, true, false, true},
-	["SIDE-RIGHT"] = {true, false, true, false},
-	["SIDE-TOP"] = {false, false, true, true},
-	["SIDE-BOTTOM"] = {true, true, false, false},
-	["TRICORNER-TOPLEFT"] = {false, true, true, true},
-	["TRICORNER-TOPRIGHT"] = {true, false, true, true},
-	["TRICORNER-BOTTOMLEFT"] = {true, true, false, true},
-	["TRICORNER-BOTTOMRIGHT"] = {true, true, true, false},
-}
+local onClick, onMouseUp, onMouseDown, onDragStart, onDragStop, onDragEnd, updatePosition
 
-local function updatePosition(button)
-	local angle = math.rad(button.db and button.db.minimapPos or button.minimapPos or 225)
-	local x, y, q = math.cos(angle), math.sin(angle), 1
-	if x < 0 then q = q + 1 end
-	if y > 0 then q = q + 2 end
-	local minimapShape = GetMinimapShape and GetMinimapShape() or "ROUND"
-	local quadTable = minimapShapes[minimapShape]
-	if quadTable[q] then
-		x, y = x*80, y*80
-	else
-		local diagRadius = 103.13708498985 --math.sqrt(2*(80)^2)-10
-		x = math.max(-80, math.min(x*diagRadius, 80))
-		y = math.max(-80, math.min(y*diagRadius, 80))
+do
+	local minimapShapes = {
+		["ROUND"] = {true, true, true, true},
+		["SQUARE"] = {false, false, false, false},
+		["CORNER-TOPLEFT"] = {false, false, false, true},
+		["CORNER-TOPRIGHT"] = {false, false, true, false},
+		["CORNER-BOTTOMLEFT"] = {false, true, false, false},
+		["CORNER-BOTTOMRIGHT"] = {true, false, false, false},
+		["SIDE-LEFT"] = {false, true, false, true},
+		["SIDE-RIGHT"] = {true, false, true, false},
+		["SIDE-TOP"] = {false, false, true, true},
+		["SIDE-BOTTOM"] = {true, true, false, false},
+		["TRICORNER-TOPLEFT"] = {false, true, true, true},
+		["TRICORNER-TOPRIGHT"] = {true, false, true, true},
+		["TRICORNER-BOTTOMLEFT"] = {true, true, false, true},
+		["TRICORNER-BOTTOMRIGHT"] = {true, true, true, false},
+	}
+
+	function updatePosition(button)
+		local angle = math.rad(button.db and button.db.minimapPos or button.minimapPos or 225)
+		local x, y, q = math.cos(angle), math.sin(angle), 1
+		if x < 0 then q = q + 1 end
+		if y > 0 then q = q + 2 end
+		local minimapShape = GetMinimapShape and GetMinimapShape() or "ROUND"
+		local quadTable = minimapShapes[minimapShape]
+		if quadTable[q] then
+			x, y = x*80, y*80
+		else
+			local diagRadius = 103.13708498985 --math.sqrt(2*(80)^2)-10
+			x = math.max(-80, math.min(x*diagRadius, 80))
+			y = math.max(-80, math.min(y*diagRadius, 80))
+		end
+		button:SetPoint("CENTER", Minimap, "CENTER", x, y)
 	end
-	button:SetPoint("CENTER", Minimap, "CENTER", x, y)
 end
 
-local function onClick(self, b) if self.dataObject.OnClick then self.dataObject.OnClick(self, b) end end
-local function onMouseDown(self) self.isMouseDown = true; self.icon:UpdateCoord() end
-local function onMouseUp(self) self.isMouseDown = false; self.icon:UpdateCoord() end
+function onClick(self, b) if self.dataObject.OnClick then self.dataObject.OnClick(self, b) end end
+function onMouseDown(self) self.isMouseDown = true; self.icon:UpdateCoord() end
+function onMouseUp(self) self.isMouseDown = false; self.icon:UpdateCoord() end
 
-local function onUpdate(self)
-	local mx, my = Minimap:GetCenter()
-	local px, py = GetCursorPosition()
-	local scale = Minimap:GetEffectiveScale()
-	px, py = px / scale, py / scale
-	if self.db then
-		self.db.minimapPos = math.deg(math.atan2(py - my, px - mx)) % 360
-	else
-		self.minimapPos = math.deg(math.atan2(py - my, px - mx)) % 360
+do
+	local function onUpdate(self)
+		local mx, my = Minimap:GetCenter()
+		local px, py = GetCursorPosition()
+		local scale = Minimap:GetEffectiveScale()
+		px, py = px / scale, py / scale
+		if self.db then
+			self.db.minimapPos = math.deg(math.atan2(py - my, px - mx)) % 360
+		else
+			self.minimapPos = math.deg(math.atan2(py - my, px - mx)) % 360
+		end
+		updatePosition(self)
 	end
-	updatePosition(self)
+
+	function onDragStart(self)
+		self:LockHighlight()
+		self.isMouseDown = true
+		self.icon:UpdateCoord()
+		self:SetScript("OnUpdate", onUpdate)
+		self.isMoving = true
+		GameTooltip:Hide()
+	end
 end
 
-local function onDragStart(self)
-	self:LockHighlight()
-	self.isMouseDown = true
-	self.icon:UpdateCoord()
-	self:SetScript("OnUpdate", onUpdate)
-	self.isMoving = true
-	GameTooltip:Hide()
-end
-
-local function onDragStop(self)
+function onDragStop(self)
 	self:SetScript("OnUpdate", nil)
 	self.isMouseDown = false
 	self.icon:UpdateCoord()
@@ -174,25 +165,28 @@ local function createButton(name, object, db)
 	button.dataObject = object
 	button.db = db
 	button:SetFrameStrata("MEDIUM")
-	button:SetWidth(31); button:SetHeight(31)
+	button:SetSize(31, 31)
 	button:SetFrameLevel(8)
 	button:RegisterForClicks("anyUp")
 	button:RegisterForDrag("LeftButton")
 	button:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
 	local overlay = button:CreateTexture(nil, "OVERLAY")
-	overlay:SetWidth(53); overlay:SetHeight(53)
+	overlay:SetSize(53, 53)
 	overlay:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
 	overlay:SetPoint("TOPLEFT")
 	local background = button:CreateTexture(nil, "BACKGROUND")
-	background:SetWidth(20); background:SetHeight(20)
+	background:SetSize(20, 20)
 	background:SetTexture("Interface\\Minimap\\UI-Minimap-Background")
 	background:SetPoint("TOPLEFT", 7, -5)
 	local icon = button:CreateTexture(nil, "ARTWORK")
-	icon:SetWidth(17); icon:SetHeight(17)
+	icon:SetSize(17, 17)
 	icon:SetTexture(object.icon)
 	icon:SetPoint("TOPLEFT", 7, -6)
 	button.icon = icon
 	button.isMouseDown = false
+
+	local r, g, b = icon:GetVertexColor()
+	icon:SetVertexColor(object.iconR or r, object.iconG or g, object.iconB or b)
 
 	icon.UpdateCoord = updateCoord
 	icon:UpdateCoord()
@@ -200,8 +194,10 @@ local function createButton(name, object, db)
 	button:SetScript("OnEnter", onEnter)
 	button:SetScript("OnLeave", onLeave)
 	button:SetScript("OnClick", onClick)
-	button:SetScript("OnDragStart", onDragStart)
-	button:SetScript("OnDragStop", onDragStop)
+	if not db or not db.lock then
+		button:SetScript("OnDragStart", onDragStart)
+		button:SetScript("OnDragStop", onDragStop)
+	end
 	button:SetScript("OnMouseDown", onMouseDown)
 	button:SetScript("OnMouseUp", onMouseUp)
 
@@ -212,6 +208,7 @@ local function createButton(name, object, db)
 		if not db or not db.hide then button:Show()
 		else button:Hide() end
 	end
+	lib.callbacks:Fire("LibDBIcon_IconCreated", button, name) -- Fire 'Icon Created' callback
 end
 
 -- We could use a metatable.__index on lib.objects, but then we'd create
@@ -241,6 +238,10 @@ if not lib.loggedIn then
 	f:RegisterEvent("PLAYER_LOGIN")
 end
 
+local function getDatabase(name)
+	return lib.notCreated[name] and lib.notCreated[name][2] or lib.objects[name].db
+end
+
 function lib:Register(name, object, db)
 	if not object.icon then error("Can't register LDB objects without icons set!") end
 	if lib.objects[name] or lib.notCreated[name] then error("Already registered, nubcake.") end
@@ -249,6 +250,26 @@ function lib:Register(name, object, db)
 	else
 		lib.notCreated[name] = {object, db}
 	end
+end
+
+function lib:Lock(name)
+	if not lib:IsRegistered(name) then return end
+	if lib.objects[name] then
+		lib.objects[name]:SetScript("OnDragStart", nil)
+		lib.objects[name]:SetScript("OnDragStop", nil)
+	end
+	local db = getDatabase(name)
+	if db then db.lock = true end
+end
+
+function lib:Unlock(name)
+	if not lib:IsRegistered(name) then return end
+	if lib.objects[name] then
+		lib.objects[name]:SetScript("OnDragStart", onDragStart)
+		lib.objects[name]:SetScript("OnDragStop", onDragStop)
+	end
+	local db = getDatabase(name)
+	if db then db.lock = nil end
 end
 
 function lib:Hide(name)
@@ -274,6 +295,13 @@ function lib:Refresh(name, db)
 		button:Show()
 	else
 		button:Hide()
+	end
+	if not button.db or not button.db.lock then
+		button:SetScript("OnDragStart", onDragStart)
+		button:SetScript("OnDragStop", onDragStop)
+	else
+		button:SetScript("OnDragStart", nil)
+		button:SetScript("OnDragStop", nil)
 	end
 end
 function lib:GetMinimapButton(name)

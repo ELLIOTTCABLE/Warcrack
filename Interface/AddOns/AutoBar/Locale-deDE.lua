@@ -189,6 +189,7 @@ if (GetLocale() == "deDE") then
 		["AutoBarClassBarBasic"] = "Basic",
 		["AutoBarClassBarExtras"] = "Extras",
 		["AutoBarClassBarDeathKnight"] = "Death Knight",
+		["AutoBarClassBarMonk"] = "Monk",
 		["AutoBarClassBarDruid"] = "Druide",
 		["AutoBarClassBarHunter"] = "Jäger",
 		["AutoBarClassBarMage"] = "Magier",
@@ -205,7 +206,9 @@ if (GetLocale() == "deDE") then
 		["AutoBarCooldownHeader"] = "Potion & Stone Cooldown",
 		["AutoBarClassBarHeader"] = "Class bar",
 
-		["AutoBarButtonAura"] = "Aura / Aspect",
+		["AutoBarButtonAspect"] = "Aspect",
+		["AutoBarButtonPoisonLethal"] = "Poison: Lethal",
+		["AutoBarButtonPoisonNonlethal"] = "Poison: Nonlethal",
 		["AutoBarButtonBandages"] = "Verbände",
 		["AutoBarButtonBattleStandards"] = "Kampf Standards",
 		["AutoBarButtonBuff"] = "Buffs",
@@ -261,7 +264,6 @@ if (GetLocale() == "deDE") then
 		["AutoBarButtonTotemAir"] = "Luft Totem",
 		["AutoBarButtonTotemFire"] = "Feuer Totem",
 		["AutoBarButtonTotemWater"] = "Wasser Totem",
-		["AutoBarButtonTrack"] = "Aufspüren",
 		["AutoBarButtonTrap"] = "Falle",
 		["AutoBarButtonTrinket1"] = "Schmuck 1",
 		["AutoBarButtonTrinket2"] = "Schmuck 2",
@@ -504,7 +506,9 @@ if (GetLocale() == "deDE") then
 		["Misc.Lockboxes"] = LOCKED;
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
-		["Spell.Aura"] = "Aura / Aspekt",
+		["Spell.Aspect"] = "Aspekt",
+		["Spell.Poison.Lethal"] = "Poison: Lethal";
+		["Spell.Poison.Nonlethal"] = "Poison Nonlethal";
 		["Spell.Buff.Weapon"] = "Buff Zauber: Waffen",
 		["Spell.Class.Buff"] = "Klassen Buff",
 		["Spell.Class.Pet"] = "Klassen Begleiter",
@@ -523,7 +527,6 @@ if (GetLocale() == "deDE") then
 		["Spell.Totem.Water"] = "Wasser Totem",
 		["Spell.Seal"] = "Siegel",
 		["Spell.Track"] = "Aufspüren",
-		["Spell.Trap"] = "Falle",
 		["Misc.Booze"] = "Alkoholische Getränke",
 		["Misc.Hearth"] = "Ruhestein",
 		["Misc.Openable"] = "Openable",

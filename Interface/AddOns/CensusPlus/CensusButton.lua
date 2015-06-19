@@ -1,5 +1,4 @@
---[[
-	CensusPlus for World of Warcraft(tm).
+--[[	CensusPlus for World of Warcraft(tm).
 	
 	Copyright 2005 - 2006 Cooper Sellers and WarcraftRealms.com
 
@@ -18,91 +17,111 @@
 		along with this program(see GLP.txt); if not, write to the Free Software
 		Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ]]
+local	addon_name, addon_tableID = ...   -- Addon_name contains the Addon name which must be the same as the container folder name... addon_tableID is a common private table for all .lua files in the directory.
+local CPp = addon_tableID  --short cut name for private shared table.
 
 
 local init = false;
+local PetBat_CPWin = false;
 
-function CensusButton_OnClick()
-	CensusPlus_Toggle();
+function CensusButton_OnLoad(self)	-- referenced by CensusButton.xml
+
+self:RegisterEvent("ADDON_LOADED")
+self:RegisterEvent("PET_BATTLE_OPENING_START")
+self:RegisterEvent("PET_BATTLE_CLOSE")
+
 end
 
-function CensusButton_Init()
-	if(CensusPlus_Database["Info"]["CensusButtonShown"] == 1 ) then
-		CensusButtonFrame:Show();
-	else
-		CensusButtonFrame:Hide();
+function CensusButton_OnEvent(self, event, ...)	-- referenced by CensusButton.xml
+
+  local arg1,arg2,arg3,arg4 = ...;
+	if( arg1 == nil ) then
+		arg1 = "nil"
+	end
+	if( arg2 == nil ) then
+		arg2 = "nil"
+	end
+	if( arg3 == nil ) then
+		arg3 = "nil"
+	end
+	if( arg4 == nil ) then
+		arg4 = "nil"
+	end
+
+	if (( event == "ADDON_LOADED") and (string.upper(arg1) == "CENSUSPLUS")) then  -- need to add code to make sure CensusPlus_Database exists first.
+--	    if(CensusPlus_Database["Info"]["CensusButtonShown"] == nil ) then
+--			CensusPlus_InitializeVariables();
+--		end	
+if(((CensusPlus_PerCharInfo["CensusButtonShown"] == nil)and (CensusPlus_Database["Info"]["CensusButtonShown"] == true )) or CensusPlus_PerCharInfo["CensusButtonShown"] == true)then
+--			if(CensusPlus_Database["Info"]["CensusButtonShown"] == true) then
+				CensusButtonFrame:Show()
+				CensusButton:SetText("C+")
+			else
+				CensusButtonFrame:Hide()
+			end
+		init = true;
+      self:UnregisterEvent("ADDON_LOADED")
+	end
+
+    if ( event =="PET_BATTLE_OPENING_START") then
+		if(CensusPlus_Database["Info"]["CensusButtonShown"] == true ) then
+			CensusButtonFrame:Hide()
+		end
+		if ( CensusPlus:IsVisible()) then
+		    PetBat_CPWin = True;
+			CensusPlus_Toggle();
+		end
+	end
+	if ( event =="PET_BATTLE_CLOSE") then
+		if(CensusPlus_Database["Info"]["CensusButtonShown"] == true ) then
+			CensusButtonFrame:Show()
+		end
+		if (PetBat_CPWin == True) then
+		    PetBat_CPWin = False;
+			CensusPlus_Toggle();
+		end
 	end
 	
-	init = true;	
 end
 
-function CensusButton_Toggle()
-	if(CensusButtonFrame:IsVisible()) then
-		CensusButtonFrame:Hide();
-		CensusPlus_Database["Info"]["CensusButtonShown"] = false;
-	else
-		CensusButtonFrame:Show();
-		CensusPlus_Database["Info"]["CensusButtonShown"] = true;
-	end
-end
-
-function CensusButton_UpdatePosition()
-	CensusButtonFrame:SetPoint(
-		"TOPLEFT",
-		"Minimap",
-		"TOPLEFT",
-		54 - (78 * cos(CensusPlus_Database["Info"]["CensusButtonPosition"])),
-		(78 * sin(CensusPlus_Database["Info"]["CensusButtonPosition"])) - 55
-	);
-end
-
-function CensusButton_OnUpdate()
-	if( init ) then
-		CensusPlus_OnUpdate();
-	end
-end
-
-function CensusPlusButton_OnClick( arg1 )
-	if ( arg1 == "LeftButton" ) then
-		CensusButton_OnClick();
-	else
-        ToggleDropDownMenu( 1, nil, CP_ButtonDropDown, "CensusButtonFrame", 20, 20 ); 					
-	end
-
-end
-
-function CensusPlus_ButtonDropDown_Initialize()
+function CensusPlus_ButtonDropDown_Initialize()	-- referenced for Blizzard code
 		
 		local info;
 
-		if (g_IsCensusPlusInProgress == true) then
-			if( g_CensusPlusManuallyPaused == true ) then
+		if (CPp.IsCensusPlusInProgress == true) then
+			if( CPp.CensusPlusManuallyPaused == true ) then
 				info = {
-					text = CENSUSPlus_UNPAUSE;
-					func = CensusPlus_Take_OnClick;
+					text = CENSUSPLUS_UNPAUSE;
+					func = CENSUSPLUS_TAKE_OnClick;
 				};
 			else
 				info = {
-					text = CENSUSPlus_PAUSE;
-					func = CensusPlus_Take_OnClick;
+					text = CENSUSPLUS_PAUSE;
+					func = CENSUSPLUS_TAKE_OnClick;
 				};
 			end
 		else
 			info = {
-				text = CENSUSPlus_TAKE;
-				func = CensusPlus_Take_OnClick;
+				text = CENSUSPLUS_TAKE;
+				func = CENSUSPLUS_TAKE_OnClick;
 			};
 		end
 		UIDropDownMenu_AddButton(info, 1);
 
 		info = {
-			text = CENSUSPlus_STOP;
-			func = CensusPlus_StopCensus;
+			text = CENSUSPLUS_STOP;
+			func = CENSUSPLUS_STOPCENSUS;
 		};
 		UIDropDownMenu_AddButton(info, 1);
 		
 		info = {
-			text = CENSUSPlus_CANCEL;
+			text = CENSUSPLUS_BUTTON_OPTIONS;
+			func = CensusPlus_ToggleOptions;
+		};
+		UIDropDownMenu_AddButton(info, 1);		
+		
+		info = {
+			text = CANCEL;
 			func = CensusPlus_CloseDropDown;
 		};
 		UIDropDownMenu_AddButton(info, 1);		
@@ -113,15 +132,20 @@ end
 function CensusPlus_CloseDropDown()
 	CloseDropDownMenus();
 end
-function CensusPlus_Button_OnMouseDown( self, arg1 )
-	if ( ( ( not CensusButtonFrame.isLocked ) or ( CensusButtonFrame.isLocked == 0 ) ) and ( arg1 == "LeftButton" ) ) then
+
+function CensusPlus_Button_OnClick(self, CPB_button)	-- referenced by CensusButton.xml
+	  if ( CPB_button == "LeftButton") then
+			CensusPlus_Toggle();
+			PlaySound("igMainMenuOptionCheckBoxOn");
+		else
+    	ToggleDropDownMenu( 1, nil, CP_ButtonDropDown, "CensusButtonFrame", 20, 20 ); 					
+		end
+end
+
+function CensusPlus_Button_OnMouseDown( self, arg1 )	-- referenced by CensusButton.xml
+	if ( ( ( not CensusButtonFrame.isLocked ) or ( CensusButtonFrame.isLocked == false ) ) and ( arg1 == "LeftButton" ) ) then
+--	  print("Moving frame-CensusButtonFrame");
 		CensusButtonFrame:StartMoving();
 		CensusButtonFrame.isMoving = true;
-	end
-end
-function CensusPlus_Button_OnClick( self, arg1, arg2 )
-	if( not CensusButtonFrame.isMoving ) then
-		CensusPlusButton_OnClick(arg1, arg2);
-		PlaySound("igMainMenuOptionCheckBoxOn");
 	end
 end

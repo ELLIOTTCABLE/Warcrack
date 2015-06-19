@@ -1,6 +1,8 @@
-## Interface: 40300
+## Interface: 60100
 ## Title: Combuctor Basic Sets
-## Author: Tuller
+## Author: Tuller and Jaliborc (João Cardoso)
 ## Notes: Basic sets for Combuctor
 ## Dependencies: Combuctor
+## Version: 6.1
+
 sets.lua

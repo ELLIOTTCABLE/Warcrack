@@ -1,4 +1,5 @@
 local ex = Examiner;
+local cfg;
 
 -- Module
 local mod = ex:CreateModule("Config","Configurations");
@@ -13,7 +14,6 @@ vers:SetText(modName.." |cffffff80"..GetAddOnMetadata(modName,"Version"));
 vers:SetPoint("BOTTOM",0,14);
 
 -- Variables
-local cfg;
 local checkBtns = {};
 
 --------------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ end
 
 -- OnInitialize
 function mod:OnInitialize()
-	cfg = Examiner_Config;
+	cfg = ex.cfg;
 	-- DropDown
 	local dropDown = AzDropDown.CreateDropDown(self.page,190,false,MenuInit,MenuSelect);
 	dropDown:SetPoint("TOP",0,-40);
@@ -112,7 +112,7 @@ function mod:OnInitialize()
 		if (index == 1) then
 			chk:SetPoint("TOPLEFT",20,-70);
 		else
-			chk:SetPoint("TOP",checkBtns[index - 1],"BOTTOM");
+			chk:SetPoint("TOP",checkBtns[index - 1],"BOTTOM",0,2);
 		end
 
 		checkBtns[index] = chk;

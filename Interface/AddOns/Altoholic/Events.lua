@@ -2,11 +2,9 @@
 
 local addonName = ...
 local addon = _G[addonName]
+local colors = addon.Colors
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
-
-local WHITE		= "|cFFFFFFFF"
-local GREEN		= "|cFF00FF00"
 
 addon.Events = {}
 
@@ -30,7 +28,12 @@ local function GetEventExpiry(event)
 	timeTable.hour = tonumber(hour)
 	timeTable.min = tonumber(minute)
 
-	return difftime(time(timeTable), time() + DataStore:GetClientServerTimeGap())	-- in seconds
+	local gap = 0
+	if DataStore_Agenda then
+		gap = DataStore:GetClientServerTimeGap()
+	end
+	
+	return difftime(time(timeTable), time() + gap)	-- in seconds
 end
 
 -- ** Event Types **
@@ -84,7 +87,7 @@ local eventTypes = {
 				local instanceName, raidID = strsplit("|", event.parentID)
 		
 				--	CALENDAR_EVENTNAME_FORMAT_RAID_LOCKOUT = "%s Unlocks"; -- %s = Raid Name
-				return instanceName, format("%s%s\nID: %s%s", WHITE,	format(CALENDAR_EVENTNAME_FORMAT_RAID_LOCKOUT, instanceName), GREEN, raidID)
+				return instanceName, format("%s%s\nID: %s%s", colors.white,	format(CALENDAR_EVENTNAME_FORMAT_RAID_LOCKOUT, instanceName), colors.green, raidID)
 			end,
 	},
 	[CALENDAR_LINE] = {
@@ -117,7 +120,7 @@ local eventTypes = {
 						CALENDAR_STATUS_NOT_SIGNEDUP	-- CALENDAR_INVITESTATUS_NOT_SIGNEDUP = 8
 					}
 				
-					desc = format("%s: %s", STATUS, WHITE..StatusText[inviteStatus]) 
+					desc = format("%s: %s", STATUS, colors.white..StatusText[inviteStatus]) 
 				else 
 					desc = format("%s", STATUS) 
 				end
@@ -143,22 +146,22 @@ local eventTypes = {
 				local numPlayers, minLvl, maxLvl, privateToFriends, privateToGuild = strsplit(",", eventDesc)
 				local eventTable = {}
 			
-				table.insert(eventTable, WHITE .. format(L["Number of players: %s"], GREEN .. numPlayers))
-				table.insert(eventTable, WHITE .. format(L["Minimum Level: %s"], GREEN .. minLvl))
-				table.insert(eventTable, WHITE .. format(L["Maximum Level: %s"], GREEN .. maxLvl))
-				table.insert(eventTable, WHITE .. format(L["Private to friends: %s"], GREEN .. (tonumber(privateToFriends) == 1 and YES or NO)))
-				table.insert(eventTable, WHITE .. format(L["Private to guild: %s"], GREEN .. (tonumber(privateToGuild) == 1 and YES or NO)))
+				table.insert(eventTable, colors.white .. format(L["Number of players: %s"], colors.green .. numPlayers))
+				table.insert(eventTable, colors.white .. format(L["Minimum Level: %s"], colors.green .. minLvl))
+				table.insert(eventTable, colors.white .. format(L["Maximum Level: %s"], colors.green .. maxLvl))
+				table.insert(eventTable, colors.white .. format(L["Private to friends: %s"], colors.green .. (tonumber(privateToFriends) == 1 and YES or NO)))
+				table.insert(eventTable, colors.white .. format(L["Private to guild: %s"], colors.green .. (tonumber(privateToGuild) == 1 and YES or NO)))
 
 				local attendeesTable = { strsplit(",", attendees) }
 				
 				if #attendeesTable > 0 then
 					table.insert(eventTable, "")
-					table.insert(eventTable, WHITE..L["Attendees: "].."|r")
+					table.insert(eventTable, colors.white..L["Attendees: "].."|r")
 					for _, name in pairs(attendeesTable) do
 						table.insert(eventTable, " " .. name )
 					end
 					table.insert(eventTable, "")
-					table.insert(eventTable, GREEN .. L["Left-click to invite attendees"])
+					table.insert(eventTable, colors.green .. L["Left-click to invite attendees"])
 				end
 				
 				return title, table.concat(eventTable, "\n")
@@ -168,12 +171,16 @@ local eventTypes = {
 		GetReadyNowWarning = function(self, event)
 				local character = DataStore:GetCharacter(event.char, event.realm)
 				local item = DataStore:GetItemCooldownInfo(character, event.parentID)
-				return format(L["%s is now ready (%s on %s)"], item, event.char, event.realm)
+				if item then
+					return format(L["%s is now ready (%s on %s)"], item, event.char, event.realm)
+				end
 			end,
 		GetReadySoonWarning = function(self, event, minutes)
 				local character = DataStore:GetCharacter(event.char, event.realm)
 				local item = DataStore:GetItemCooldownInfo(character, event.parentID)
-				return format(L["%s will be ready in %d minutes (%s on %s)"], item, minutes, event.char, event.realm)
+				if item then
+					return format(L["%s will be ready in %d minutes (%s on %s)"], item, minutes, event.char, event.realm)
+				end
 			end,
 		GetInfo = function(self, event)
 				local character = DataStore:GetCharacter(event.char, event.realm)
@@ -285,9 +292,9 @@ local function ShowExpiryWarning(index, minutes)
 	if not warning then return end
 	
 	-- print instead of dialog box if player is in combat
-	if addon:GetOption("WarningDialogBox") == 1 and not UnitAffectingCombat("player") then
+	if addon:GetOption("UI.Calendar.UseDialogBoxForWarnings") and not UnitAffectingCombat("player") then
 		addon:SetMsgBoxHandler(Warning_MsgBox_Handler)
-		AltoMsgBox_Text:SetText(format("%s\n%s", WHITE..warning, L["Do you want to open Altoholic's calendar for details ?"]))
+		AltoMsgBox_Text:SetText(format("%s\n%s", colors.white..warning, L["Do you want to open Altoholic's calendar for details ?"]))
 		AltoMsgBox:Show()
 	else
 		addon:Print(warning)
@@ -331,6 +338,27 @@ local function ToggleWarningThreshold(self)
 	addon:SetOption("WarningType"..id, table.concat(t, "|"))		-- Sets something like "15|5|10|1"
 end
 
+local function GetTimeToCooldownExpiry()
+	-- returns the amount of seconds to profession cooldown expiry 
+	-- now set at 3am since 5.1, but wrongly returned by the game's API
+	local timeTable = {}
+	
+	timeTable.year = date("%Y")
+	timeTable.month = date("%m")
+	timeTable.day = date("%d")
+	timeTable.hour = 3
+	timeTable.min = 0
+
+	local now = time()
+	local resetTime = time(timeTable)
+
+	if now >= resetTime then				-- it's now 9am, reset was earlier ..
+		return resetTime + 86400			-- so add 1 day
+	else											-- it's now 1am, reset to happen in 2 hours
+		return resetTime
+	end
+end
+
 
 function ns:Get(index)
 	return eventList[index]
@@ -348,7 +376,7 @@ function ns:GetInfo(index)
 	local char = DataStore:GetColoredCharacterName(character)
 	
 	if event.realm ~= GetRealmName() then	-- different realm ?
-		char = format("%s %s(%s)", char, GREEN, event.realm)
+		char = format("%s %s(%s)", char, colors.green, event.realm)
 	end
 	
 	local title, desc = eventTypes[event.eventType]:GetInfo(event)
@@ -370,7 +398,7 @@ function ns:GetDayCount(year, month, day)
 end
 
 function ns:CheckExpiries(elapsed)
-	if addon:GetOption("DisableWarnings") == 1 then	-- warnings disabled ? do nothing
+	if addon:GetOption("UI.Calendar.WarningsEnabled") == false then	-- warnings disabled ? do nothing
 		return
 	end
 
@@ -400,12 +428,12 @@ function ns:CheckExpiries(elapsed)
 		end
 	end
 	
-	if hasEventExpired then		-- if at least one event has expired, rebuild the list & refresh
+	if hasEventExpired then		-- if at least one event has expired, rebuild the list & Update
 		ClearExpiredEvents()
 		
 		-- should be removed, nothing to do here
 		-- nsEvents:BuildView()
-		-- Altoholic.Tabs.Summary:Refresh()
+		-- Altoholic.Summary:Update()
 	end
 end
 
@@ -428,12 +456,12 @@ function ns:BuildList()
 	eventList = eventList or {}
 	wipe(eventList)
 
-	local timeGap = DataStore:GetClientServerTimeGap()
+	local timeGap = DataStore:GetClientServerTimeGap() or 0
 	
 	for realm in pairs(DataStore:GetRealms()) do
 		for characterName, character in pairs(DataStore:GetCharacters(realm)) do
 			-- add all timers, even expired ones. Expiries will be handled elsewhere.
-
+			
 			-- Profession Cooldowns
 			local professions = DataStore:GetProfessions(character)
 			if professions then
@@ -448,8 +476,9 @@ function ns:BuildList()
 					if supportsSharedCD then
 						local sharedCDFound		-- is there a shared cd for this profession ?
 						for i = 1, DataStore:GetNumActiveCooldowns(profession) do
-							local name, _, reset, lastCheck = DataStore:GetCraftCooldownInfo(profession, i)
-							local expires = reset + lastCheck + timeGap
+							-- local name, _, reset, lastCheck = DataStore:GetCraftCooldownInfo(profession, i)
+							-- local expires = reset + lastCheck + timeGap
+							local expires = GetTimeToCooldownExpiry()
 
 							if not sharedCDFound then
 								sharedCDFound = true
@@ -458,8 +487,9 @@ function ns:BuildList()
 						end
 					else
 						for i = 1, DataStore:GetNumActiveCooldowns(profession) do
-							local name, _, reset, lastCheck = DataStore:GetCraftCooldownInfo(profession, i)
-							local expires = reset + lastCheck + timeGap
+							-- local name, _, reset, lastCheck = DataStore:GetCraftCooldownInfo(profession, i)
+							-- local expires = reset + lastCheck + timeGap
+							local expires = GetTimeToCooldownExpiry()
 
 							AddEvent(COOLDOWN_LINE, date("%Y-%m-%d",expires), date("%H:%M",expires), characterName, realm, i, profession)
 						end
@@ -498,6 +528,12 @@ function ns:BuildList()
 			num = DataStore:GetNumItemCooldowns(character) or 0
 			for i = 1, num do
 				local _, lastCheck, duration = DataStore:GetItemCooldownInfo(character, key)
+				if duration == nil then
+					duration = 0
+				end
+				if lastCheck == nil then
+					lastCheck = 0
+				end
 				local expires = duration + lastCheck + timeGap
 				AddEvent(TIMER_LINE, date("%Y-%m-%d",expires), date("%H:%M",expires), characterName, realm, k)
 			end

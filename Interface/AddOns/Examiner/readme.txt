@@ -13,7 +13,7 @@ To set this up, open the Key Bindings dialog and look under "Examiner".
 
 Examiner does not use that much memory by itself, but once you start caching a lot of people, memory usage can grow quite quickly.
 
-You can always find the latest release of this addon on WoWInterface.com.
+You can always find the latest release of this addon on Curse or WoWInterface.
 Post your comments, questions and suggestions for this addon on the addons comment page.
 Or in this thread: http://forums.curseforge.com/showthread.php?t=18999
 
@@ -81,18 +81,6 @@ Resets the position in case it was moved off screen.
 /ex clearcache
 Clears the entire cache of Examiner.
 
-Lacking Features, Ideas & Problems
-----------------------------------
-- Always listen for INSPECT_READY, and invalidate the current unit if an event is recieved that is not "our" unit.
-- PvP: The arena calculator needs to be updated.
-- Cache: Modify the function that builds a list of players from the filter, to take a table parameter, so external code can request a filterd list, without modifying the cache list. 
-- Postpone the OnCache() event, currently, the OnAchievementsReady() happens after caching is done, so it doesn't actually get cached! 
-- Module's OnInitialize() shouldn't run until first time Examiner is opened. This would allow for much more optimization.
-- Achievement tooltips should adhere to the smarttooltip option.
-- mod:HasData() should be posting an event. It messes with the modlist module.
-- Locked frames seem to have moved a bit up as of 4.0, change this in Examiner to so it will align with other frames.
-- Bring back the ability, as a new module, to send an inspected player to another person with Examiner.
-
 Special Thanks
 --------------
 - Chester, the original author of SuperInspect, who gave me the idea to make this mod.
@@ -109,4 +97,20 @@ Special Thanks
 - Thorakon (aka Pulgrim of EU-Alexstrasza), for the patch 3.0.3 update of the German translation.
 - chkid, for Korean translation update for the 3.1 patch.
 - ericyen, for the Taiwan translation for the 3.1 release.
+- eusi, for the updated talent module in Mists of Pandaria.
+- ywfn, for making the PvP module work with all pvp and battleground changes.
+- fallendos, for an update to the Korean patterns.
+- Netrox, for the help in updaing the talents module for WoD.
 - All the people using Examiner!
+
+Lacking Features, Ideas & Problems
+----------------------------------
+- Always listen for INSPECT_READY, and invalidate the current unit if an event is recieved that is not "our" unit.
+- PvP: The arena calculator needs to be updated.
+- Cache: Modify the function that builds a list of players from the filter, to take a table parameter, so external code can request a filterd list, without modifying the cache list.
+- Postpone the OnCache() event, currently, the OnAchievementsReady() happens after caching is done, so it doesn't actually get cached!
+- Module's OnInitialize() shouldn't run until first time Examiner is opened. This would allow for much more optimization.
+- Achievement tooltips should adhere to the smarttooltip option.
+- mod:HasData() should be posting an event. It messes with the modlist module.
+- Locked frames seem to have moved a bit up as of 4.0, change this in Examiner to so it will align with other frames.
+- Bring back the ability, as a new module, to send an inspected player to another person with Examiner.

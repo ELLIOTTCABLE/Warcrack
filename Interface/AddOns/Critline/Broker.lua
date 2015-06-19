@@ -1,22 +1,16 @@
 local addonName, addon = ...
-
+local L = addon.L
 local LDB = LibStub("LibDataBroker-1.1")
-local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 
-
-local feeds = {
-	dmg  = L["Damage"],
-	heal = L["Healing"],
-	pet  = L["Pet"],
-}
+local feeds = addon:NewModule("DataBroker")
 
 local msgFormat = format("%s: %%s - %s: %%s", L["Normal"], L["Crit"])
 
-for k, v in pairs(feeds) do
-	feeds[k] = LDB:NewDataObject("Critline "..addon.treeNames[k], {
+for k, v in pairs(addon.trees) do
+	feeds[k] = LDB:NewDataObject("Critline "..v.label, {
 		type = "data source",
-		label = v,
-		icon = addon.icons[k],
+		label = v.title,
+		icon = addon.trees[k].icon,
 		OnClick = function()
 			if IsShiftKeyDown() then
 				local normalRecord, critRecord = addon:GetHighest(k)
@@ -26,18 +20,18 @@ for k, v in pairs(feeds) do
 					local v = spells[i]
 					local normal = v.normal
 					if normal and normal.amount == normalRecord then
-						normalSpell = v.spellName
+						normalSpell = v.name
 					end
 					local crit = v.crit
 					if crit and crit.amount == critRecord then
-						critSpell = v.spellName
+						critSpell = v.name
 					end
 					if (normalSpell or not normalRecord) and (critSpell or not normalRecord) then
 						break
 					end
 				end
-				local normal = normalSpell and format("%s (%s)", addon:ShortenNumber(normalRecord), normalSpell) or L["n/a"]
-				local crit   = critSpell   and format("%s (%s)", addon:ShortenNumber(critRecord),   critSpell)   or L["n/a"]
+				local normal = normalSpell and format("%s (%s)", addon:ShortenNumber(normalRecord), normalSpell) or "-"
+				local crit   = critSpell   and format("%s (%s)", addon:ShortenNumber(critRecord),   critSpell)   or "-"
 				ChatFrame_OpenChat(format(msgFormat, normal, crit))
 			else
 				addon:OpenConfig()
@@ -48,7 +42,6 @@ for k, v in pairs(feeds) do
 		end
 	})
 end
-
 
 local function updateRecords(event, tree)
 	if not tree then
@@ -64,19 +57,24 @@ local function updateRecords(event, tree)
 	end
 end
 
-
 local function onTreeStateChanged(event, tree, enabled)
-	if enabled then
-		updateRecords(event, tree)
+	if tree then
+		if enabled then
+			updateRecords(event, tree)
+		else
+			feeds[tree].text = L["n/a"]
+		end
 	else
-		feeds[tree].text = L["n/a"]
+		for k in pairs(Critline.trees) do
+			onTreeStateChanged(nil, k, Critline.percharDB.profile[k])
+		end
 	end
 end
 
-
-local function addonLoaded()
+function feeds:OnInitialize()
 	addon.RegisterCallback(feeds, "OnNewTopRecord", updateRecords)
+	addon.RegisterCallback(feeds, "FormatChanged", updateRecords)
 	addon.RegisterCallback(feeds, "OnTreeStateChanged", onTreeStateChanged)
+	updateRecords()
+	onTreeStateChanged()
 end
-
-addon.RegisterCallback(feeds, "AddonLoaded", addonLoaded)

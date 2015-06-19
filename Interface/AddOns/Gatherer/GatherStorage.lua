@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherStorage.lua 923 2010-12-23 08:54:58Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherStorage.lua 1132 2014-11-14 01:16:00Z esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -27,16 +27,19 @@
 
 	Library for accessing and updating the database
 --]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherStorage.lua $", "$Rev: 923 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherStorage.lua $", "$Rev: 1132 $")
+
 
 --------------------------------------------------------------------------
 -- Constants
 --------------------------------------------------------------------------
+-- Note: These indexing constants need to be kept in sync with those in GatherClosestNodes.lua
+
 -- Node Indexing
 local POS_X = 1
 local POS_Y = 2
 local INSPECTED = 3
-local INDOORS = 4
+local FLOOR = 4
 
 -- Gather Indexing
 local COUNT = 1
@@ -44,7 +47,7 @@ local HARVESTED = 2
 local SOURCE = 3
 
 -- Current Database Version
-local dbVersion = 4
+local dbVersion = 6
 
 --------------------------------------------------------------------------
 -- Data Table
@@ -61,15 +64,51 @@ local corruptData = false
 
 local lib = Gatherer.Storage
 
+lib.MassImportMode = false
+
 -- reference to the Astrolabe mapping library
 local Astrolabe = DongleStub(Gatherer.AstrolabeVersion)
 
+
+-- convert list of zoneID1, zoneName1, zoneID2, zoneName2, etc.
+-- into just a list of zone names
+local function stripZoneIDs(...)
+	local n = select("#", ...)
+	--print("zoneList count = ", n );
+	local temp = {};
+	local index = 1;
+	for i = 2, n, 2 do
+		temp[index] = select(i, ...);
+		--print("  item = ", temp[index] );
+		index = index + 1;
+	end
+	return temp;
+end
+
+
 local ZoneData = {}
-local continents = {GetMapContinents()}
+local continents = stripZoneIDs(GetMapContinents())
 for index, name in ipairs(continents) do
-	ZoneData[index] = {GetMapZones(index)}
+	ZoneData[index] = stripZoneIDs(GetMapZones(index))
 	ZoneData[index].name = name
 end
+
+local function argcheck(value, num, ...)
+	assert(1, type(num) == "number", "Bad argument #2 to 'argcheck' (number expected, got " .. type(level) .. ")")
+	
+	for i=1,select("#", ...) do
+		if type(value) == select(i, ...) then return end
+	end
+	
+	local types = strjoin(", ", ...)
+	local name = string.match(debugstack(2,2,0), ": in function [`<](.-)['>]")
+	error(string.format("Bad argument #%d to 'Gatherer.Storage.%s' (%s expected, got %s)", num, name, types, type(value)), 3)
+end
+
+-- references to localization functions
+local _tr = Gatherer.Locale.Tr
+local _trC = Gatherer.Locale.TrClient
+local _trL = Gatherer.Locale.TrLocale
 
 --[[
 ##########################################################################
@@ -101,18 +140,23 @@ local validGatherTypes = {
 	OPEN = "OPEN",
 	ARCH = "ARCH",
 }
-function lib.AddNode(nodeName, gatherType, continent, zone, gatherX, gatherY, source, incrementCount, indoorNode)
-	if not (continent and zone and gatherX and gatherY) then return end
-	local zoneToken = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
+function lib.AddNode(nodeName, gatherType, zoneToken, gatherX, gatherY, source, incrementCount, indoorFloor)
+	argcheck(nodeName, 1, "number", "string");
+	argcheck(gatherType, 2, "string", "nil");
+	argcheck(zoneToken, 3, "number", "string");
+	argcheck(gatherX, 4, "number");
+	argcheck(gatherY, 5, "number");
+	argcheck(source, 6, "string", "nil");
+	argcheck(incrementCount, 7, "boolean", "nil");
+	argcheck(indoorFloor, 8, "boolean", "nil");
+	
+	zoneToken = Gatherer.ZoneTokens.GetZoneToken(zoneToken)
 	local mapID, mapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(zoneToken)
 	-- check for invalid location information
 	
-	-- insure a boolean value
-	indoorNode = indoorNode and true or false
-	
 	-- ccox - we should handle negative X and Y, see gatherer ticket #139
 	-- Swamp of Sorrows has stranglekelp at a negative Y position (northeast corner, off in the water)
-	if not ( (continent > 0) and zoneToken and (gatherX > 0) and (gatherY > 0) ) then return end
+	if not ( zoneToken and (0 < gatherX) and (gatherX < 1) and (0 < gatherY) and (gatherY < 1) ) then return end
 	
 	local gatherType = validGatherTypes[gatherType]
 	if not ( gatherType ) then
@@ -123,10 +167,9 @@ function lib.AddNode(nodeName, gatherType, continent, zone, gatherX, gatherY, so
 		return
 	end
 
-	if not (data[continent]) then data[continent] = { }; end
-	if not (data[continent][zoneToken]) then data[continent][zoneToken] = { }; end
-	if not (data[continent][zoneToken][gatherType]) then data[continent][zoneToken][gatherType] = { }; end
-	local gtypeTable = data[continent][zoneToken][gatherType]
+	if not (data[zoneToken]) then data[zoneToken] = { }; end
+	if not (data[zoneToken][gatherType]) then data[zoneToken][gatherType] = { }; end
+	local gtypeTable = data[zoneToken][gatherType]
 	
 	-- standard interact distance for objects is 5 yards
 	local matchDist = 10 -- radius of 5 yards
@@ -141,13 +184,13 @@ function lib.AddNode(nodeName, gatherType, continent, zone, gatherX, gatherY, so
 	local index, node
 	
 	for i, nodeData in ipairs(gtypeTable) do
-		if ( nodeData[INDOORS] == indoorNode ) then
+		if ( nodeData[FLOOR] == indoorFloor ) then
 			local dist = Astrolabe:ComputeDistance(mapID, mapFloor, gatherX, gatherY, mapID, mapFloor, nodeData[POS_X], nodeData[POS_Y])
 			if ( dist < matchDist ) then
 				
-				-- don't combine Treasure gathers into a common node unless they share a category
+				-- don't combine Treasure or Archaeology gathers into a common node unless they share a category
 				local allowByCategory = true
-				if ( gatherType == "OPEN" ) then
+				if ( gatherType == "OPEN" ) or ( gatherType == "ARCH" ) then
 					allowByCategory = false
 					local nodeCategory
 					local gatherCategory = Gatherer.Categories.ObjectCategories[nodeName]
@@ -201,7 +244,7 @@ function lib.AddNode(nodeName, gatherType, continent, zone, gatherX, gatherY, so
 
 	-- Else, we didn't find it in the current list, time to create a new node!
 	else
-		node = { [POS_X]=0, [POS_Y]=0, [INSPECTED]=0, [INDOORS]=indoorNode }
+		node = { [POS_X]=0, [POS_Y]=0, [INSPECTED]=0, [FLOOR]=indoorFloor }
 		table.insert(gtypeTable, node)
 		index = table.getn(gtypeTable)
 	end
@@ -245,20 +288,24 @@ function lib.AddNode(nodeName, gatherType, continent, zone, gatherX, gatherY, so
 	if ( incrementCount ) then
 		gatherData[COUNT] = gatherData[COUNT] + 1
 	end
-
-	local now = time()
-
+	
+	local previousInspected = node[INSPECTED]
+	local previousHarvested = gatherData[HARVESTED]
+	
 	-- Update last harvested time (and inspected time as well)
-	gatherData[HARVESTED] = now
-	if (not gatherData[SOURCE]) then
+	local now = time()
+	if not ( lib.MassImportMode ) then
 		node[INSPECTED] = now
+	end
+	if not ( source ) then
+		gatherData[HARVESTED] = now
 	end
 
 	-- Notify the reporting subsystem that something has changed
 	Gatherer.Report.NeedsUpdate()
 
 	-- Return the indexed position
-	return index
+	return index, previousInspected, previousHarvested
 end
 
 --************************************************************************
@@ -273,7 +320,7 @@ function lib.ClearDatabase()
 end
 
 local function removeNode( gtypeData, index, gatherName, playerName )
-	local removeNode = true
+	local shouldRemoveNode = true
 	local gatherRemoved = true
 	local nodeData = gtypeData[index]
 	if ( playerName ) then
@@ -283,7 +330,7 @@ local function removeNode( gtypeData, index, gatherName, playerName )
 					local newSource = (gatherData[SOURCE]..","):gsub(playerName..",", ""):sub(1, -2)
 					if ( newSource ~= "" ) then
 						-- don't remove the node if source string is not empty after removing the specified name
-						removeNode = false
+						shouldRemoveNode = false
 						gatherRemoved = false
 						gatherData[SOURCE] = newSource
 					else
@@ -291,7 +338,7 @@ local function removeNode( gtypeData, index, gatherName, playerName )
 					end
 				
 				else  -- don't remove the node if a name was specified, but the node is "confirmed"
-					removeNode = false
+					shouldRemoveNode = false
 					gatherRemoved = false
 				
 				end
@@ -299,7 +346,7 @@ local function removeNode( gtypeData, index, gatherName, playerName )
 		end
 		for _, v in pairs(nodeData) do
 			if ( type(v) == "table" ) then
-				removeNode = false
+				shouldRemoveNode = false
 				break
 			end
 		end
@@ -307,19 +354,19 @@ local function removeNode( gtypeData, index, gatherName, playerName )
 		nodeData[gatherName] = nil
 		for _, v in pairs(nodeData) do
 			if ( type(v) == "table" ) then
-				removeNode = false
+				shouldRemoveNode = false
 				break
 			end
 		end
 	end
-	if ( removeNode ) then
+	if ( shouldRemoveNode ) then
 		table.remove(gtypeData, index)
 	end
 
 	-- Notify the reporting subsystem that something has changed
 	Gatherer.Report.NeedsUpdate()
 
-	return removeNode, gatherRemoved
+	return shouldRemoveNode, gatherRemoved
 end
 
 function lib.RemoveNode( continent, zone, gType, index )
@@ -327,15 +374,15 @@ function lib.RemoveNode( continent, zone, gType, index )
 end
 
 -- returns true if the gather was removed from the node
-function lib.RemoveGatherFromNode( continent, zone, gatherName, gType, index, playerName )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( lib.IsGatherInZone(continent, zone, gatherName, gType) ) then
-		local gtypeData = data[continent][zone][gType]
+function lib.RemoveGatherFromNode( zone, gatherName, gType, index, playerName )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( lib.IsGatherInZone(zone, gatherName, gType) ) then
+		local gtypeData = data[zone][gType]
 		if ( gtypeData[index] ) then
 			local nodeRemoved, gatherRemoved = removeNode(gtypeData, index, gatherName, playerName)
 			if not ( gtypeData[1] ) then
 				-- if the gather table is now empty, remove it from the DB table
-				data[continent][zone][gType] = nil
+				data[zone][gType] = nil
 			end
 			return (nodeRemoved or gatherRemoved)
 		end
@@ -347,35 +394,32 @@ end
 -- -1 if the gather was not removed from any nodes
 --  0 if the gather was removed from the zone
 --  1 if the gather was removed from some, but not all, nodes in this zone
-function lib.RemoveGather( continent, zone, gatherName, gType, playerName )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
+function lib.RemoveGather( zone, gatherName, gType, playerName )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
 	local result
 	local gathersRemoved, nodesRemoved = 0, 0
-	if ( lib.IsGatherInZone(continent, zone, gatherName, gType) ) then
-		local gtypeData = data[continent][zone][gType]
-		local oldCount = lib.GetGatherCountsForZone(continent, zone, gatherName, gType)
+	if ( lib.IsGatherInZone(zone, gatherName, gType) ) then
+		local gtypeData = data[zone][gType]
+		local oldCount = lib.GetGatherCountsForZone(zone, gatherName, gType)
 		local numNodes = #gtypeData
 		for i = numNodes, 1, -1 do
 			local nodeRemoved = removeNode(gtypeData, i, gatherName, playerName)
 			if ( nodeRemoved ) then nodesRemoved = nodesRemoved + 1 end
 		end
 		if ( gtypeData[1] ) then
-			gathersRemoved = oldCount - lib.GetGatherCountsForZone(continent, zone, gatherName, gType)
+			gathersRemoved = oldCount - lib.GetGatherCountsForZone(zone, gatherName, gType)
 			if ( gathersRemoved <= 0 ) then result = -1 end
 			if ( gathersRemoved >= 1 ) then result = 1 end
 			if ( gathersRemoved >= oldCount ) then result = 0 end
 		else
-			data[continent][zone][gType] = nil
+			data[zone][gType] = nil
 			gathersRemoved = nodesRemoved
 			result = 0
 		end
 		
 		-- check for empty ancestors
-		if not ( next(data[continent][zone]) ) then
-			data[continent][zone] = nil
-		end
-		if not ( next(data[continent]) ) then
-			data[continent] = nil
+		if not ( next(data[zone]) ) then
+			data[zone] = nil
 		end
 		
 		return result, gathersRemoved, nodesRemoved
@@ -388,27 +432,19 @@ end
 -- Node Information
 --************************************************************************
 
-function lib.HasDataOnZone( continent, zone )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( lib.HasDataOnContinent(continent) and data[continent][zone] ) then
+function lib.HasDataOnZone( zone )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( data[zone] ) then
 		return true
 	else
 		return false
 	end
 end
 
-function lib.HasDataOnContinent( continent )
-	if ( data[continent] ) then
-		return true
-	else
-		return false
-	end
-end
-
-function lib.IsGatherInZone( continent, zone, gatherName, gType )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( lib.HasDataOnZone(continent, zone) ) then
-		local gtypeData = data[continent][zone][gType]
+function lib.IsGatherInZone( zone, gatherName, gType )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( lib.HasDataOnZone(zone) ) then
+		local gtypeData = data[zone][gType]
 		if ( gtypeData ) then
 			for index, nodeData in ipairs(gtypeData) do
 				if ( nodeData[gatherName] ) then
@@ -420,10 +456,10 @@ function lib.IsGatherInZone( continent, zone, gatherName, gType )
 	return false
 end
 
-function lib.IsNodeInZone( continent, zone, gType, index )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( lib.HasDataOnZone(continent, zone) ) then
-		local gtypeData = data[continent][zone][gType]
+function lib.IsNodeInZone( zone, gType, index )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( lib.HasDataOnZone(zone) ) then
+		local gtypeData = data[zone][gType]
 		if ( gtypeData ) then
 			return gtypeData[index] and true or false
 		end
@@ -431,10 +467,10 @@ function lib.IsNodeInZone( continent, zone, gType, index )
 	return false
 end
 
-function lib.IsGatherTypeInZone( continent, zone, gType )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( lib.HasDataOnZone(continent, zone) ) then
-		if ( data[continent][zone][gType] ) then
+function lib.IsGatherTypeInZone( zone, gType )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( lib.HasDataOnZone(zone) ) then
+		if ( data[zone][gType] ) then
 			return true
 		end
 	end
@@ -445,13 +481,13 @@ end
 -- 1) the number of gathers in a zone
 -- 2) the total number of nodes in a zone
 --------------------------------------------------------------------------
-function lib.GetNodeCounts( continent, zone )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
+function lib.GetNodeCounts( zone )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
 	local gatherCount = 0
 	local nodeCount = 0
 
-	if ( data[continent] and data[continent][zone] ) then
-		for gtype, nodes in pairs(data[continent][zone]) do
+	if (  data[zone] ) then
+		for gtype, nodes in pairs(data[zone]) do
 			for index, nodeData in ipairs(nodes) do
 				nodeCount = nodeCount + 1
 				for key, gather in pairs(nodeData) do
@@ -469,11 +505,11 @@ end
 
 -- Returns the number of nodes of the given gather name in the specified zone
 --------------------------------------------------------------------------
-function lib.GetGatherCountsForZone( continent, zone, gatherName, gType )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( data[continent] and data[continent][zone] and data[continent][zone][gType] ) then
+function lib.GetGatherCountsForZone( zone, gatherName, gType )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( data[zone] and data[zone][gType] ) then
 		local gatherCount = 0
-		for index, nodeData in ipairs(data[continent][zone][gType]) do
+		for index, nodeData in ipairs(data[zone][gType]) do
 			if ( nodeData[gatherName] ) then
 				gatherCount = gatherCount + 1
 			end
@@ -488,16 +524,16 @@ end
 -- Returns the count of nodes for each "Gather Type" in the zone specified
 -- the return order is
 --------------------------------------------------------------------------
-local nodeCountsByType = { OPEN=0, HERB=0, MINE=0, unknown=0, }
+local nodeCountsByType = { ARCH=0, OPEN=0, HERB=0, MINE=0, unknown=0, }
 
-function lib.GetNodeCountsByGatherType( continent, zone )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
+function lib.GetNodeCountsByGatherType( zone )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
 	for k, v in pairs(nodeCountsByType) do
 		nodeCountsByType[k] = 0
 	end
 
-	if ( lib.HasDataOnZone(continent, zone) ) then
-		for gtype, nodes in pairs(data[continent][zone]) do
+	if ( lib.HasDataOnZone(zone) ) then
+		for gtype, nodes in pairs(data[zone]) do
 			for index, nodeData in ipairs(nodes) do
 				if ( nodeCountsByType[gtype] ) then
 				nodeCountsByType[gtype] = nodeCountsByType[gtype] + 1
@@ -507,7 +543,8 @@ function lib.GetNodeCountsByGatherType( continent, zone )
 			end
 		end
 	end
-	return nodeCountsByType.OPEN,
+	return nodeCountsByType.ARCH,
+	       nodeCountsByType.OPEN,
 	       nodeCountsByType.HERB,
 	       nodeCountsByType.MINE,
 	       nodeCountsByType.unknown
@@ -520,22 +557,22 @@ end
 -- x - the node's x coordinate value
 -- y - the node's y coordinate value
 -- count - the node's count value
--- gtype - gather type of this node
+-- indoors - true if this gather is located indoors
 -- lastHarvested - time at which the node was last harvested
 -- lastInspected - time at which the node was last inspected
 -- source - the source of this node
 --------------------------------------------------------------------------
-function lib.GetGatherInfo( continent, zone, gatherName, gType, index )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( lib.IsGatherInZone(continent, zone, gatherName, gType) ) then
-		local nodeInfo = data[continent][zone][gType][index]
+function lib.GetGatherInfo( zone, gatherName, gType, index )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( lib.IsGatherInZone(zone, gatherName, gType) ) then
+		local nodeInfo = data[zone][gType][index]
 		if ( nodeInfo ) then
 			local gatherInfo = nodeInfo[gatherName]
 			if ( gatherInfo ) then
 				return nodeInfo[POS_X],
 				       nodeInfo[POS_Y],
 				       gatherInfo[COUNT],
-				       nodeInfo[INDOORS],
+				       nodeInfo[FLOOR],
 				       gatherInfo[HARVESTED] or 0,
 				       nodeInfo[INSPECTED] or 0,
 				       gatherInfo[SOURCE]
@@ -552,38 +589,39 @@ end
 -- indoors - true if the node is flagged as an indoor node
 -- lastInspected - time at which the node was last inspected
 --------------------------------------------------------------------------
-function lib.GetNodeInfo( continent, zone, gType, index )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( lib.IsGatherTypeInZone(continent, zone, gType) ) then
-		local nodeInfo = data[continent][zone][gType][index]
+function lib.GetNodeInfo( zone, gType, index )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( lib.IsGatherTypeInZone(zone, gType) ) then
+		local nodeInfo = data[zone][gType][index]
 		if ( nodeInfo ) then
 			return nodeInfo[POS_X],
 			       nodeInfo[POS_Y],
-			       nodeInfo[INDOORS],
+			       nodeInfo[FLOOR],
 			       nodeInfo[INSPECTED] or 0
 		end
 	end
 end
 
-function lib.SetNodeInspected( continent, zone, gType, index )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( lib.IsGatherTypeInZone(continent, zone, gType) ) then
-		local node = data[continent][zone][gType][index]
+function lib.SetNodeInspected( zone, gType, index )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( lib.IsGatherTypeInZone(zone, gType) ) then
+		local node = data[zone][gType][index]
 		if ( node ) then
 			node[INSPECTED] = time()
 		end
 	end
 end
 
-function lib.GetNodeInspected( continent, zone, gType, index )
-	zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	if ( lib.IsGatherTypeInZone(continent, zone, gType) ) then
-		local node = data[continent][zone][gType][index]
+function lib.GetNodeInspected( zone, gType, index )
+	zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+	if ( lib.IsGatherTypeInZone(zone, gType) ) then
+		local node = data[zone][gType][index]
 		if ( node ) then
 			return node[INSPECTED]
 		end
 	end
 end
+
 
 --[[
 ##########################################################################
@@ -667,31 +705,23 @@ do --create a new block
 
 
 	function lib.GetAreaIndices( continent )
-		local dataTable
-
-		if ( continent and lib.HasDataOnContinent(continent) ) then
-			dataTable = data[continent]
-		else
-			dataTable = data
-		end
-		if not ( dataTable ) then return EmptyIterator; end -- no data
+		local contTokens = Gatherer.ZoneTokens.TokensByContinent[continent]
+		if ( continent and not contTokens ) then return EmptyIterator; end -- no data
 		
 		local iteratorData = getWorkTable()
 		if ( continent ) then
-			local GetZoneIndex = Gatherer.ZoneTokens.GetZoneIndex
-			for i in pairs(dataTable) do
-				if ( lib.HasDataOnZone(continent,i) ) then
-					tinsert(iteratorData, GetZoneIndex(continent, i))
+			for i in pairs(data) do
+				if ( contTokens[i] ) then
+					tinsert(iteratorData, i)
 				end
 			end
 		else
-			for i in pairs(dataTable) do
-				if (type(i) == "number") and (lib.HasDataOnContinent(i)) then
+			for i in pairs(data) do
+				if ( i ~= "dbVersion" ) then
 					tinsert(iteratorData, i)
 				end
 			end
 		end
-		table.sort(iteratorData)
 		return iterator, iteratorData, 0
 	end
 
@@ -721,11 +751,11 @@ do --create a new block
 	end
 
 
-	function lib.ZoneGatherNames( continent, zone )
-		zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-		if ( lib.HasDataOnZone(continent, zone) ) then
+	function lib.ZoneGatherNames( zone )
+		zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+		if ( lib.HasDataOnZone(zone) ) then
 			local iteratorData = getWorkTable()
-			for gtype, nodes in pairs(data[continent][zone]) do
+			for gtype, nodes in pairs(data[zone]) do
 				local namesSeen = {}
 				for index, nodeData in ipairs(nodes) do
 					for gatherName, gather in pairs(nodeData) do
@@ -765,15 +795,15 @@ do --create a new block
 			releaseWorkTablePair(stateIndex)
 			return; --no data left
 		end
-		return nodeIndex, info[POS_X], info[POS_Y], info[INSPECTED], info[INDOORS]
+		return nodeIndex, info[POS_X], info[POS_Y], info[INSPECTED], info[FLOOR]
 	end
 
 
-	function lib.ZoneGatherNodes( continent, zone, gType )
-		zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-		if ( lib.IsGatherTypeInZone(continent, zone, gType) ) then
+	function lib.ZoneGatherNodes( zone, gType )
+		zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+		if ( lib.IsGatherTypeInZone(zone, gType) ) then
 			local stateIndex, state = getWorkTablePair()
-			state.iterator, state.stateInfo = ipairs(data[continent][zone][gType])
+			state.iterator, state.stateInfo = ipairs(data[zone][gType])
 
 			return iterator, stateIndex, 0
 		end
@@ -812,10 +842,10 @@ do --create a new block
 	local nodeIndex = {}
 	local distances = {}
 
-	function lib.ClosestNodes( continent, zone, xPos, yPos, num, maxDist, filter )
-		local zoneToken = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
+	function lib.ClosestNodes( zone, xPos, yPos, num, maxDist, filter )
+		local zoneToken = Gatherer.ZoneTokens.GetZoneToken(zone)
 		-- return if the position is invalid or we have no data on the specified zone
-		if not ( lib.HasDataOnZone(continent, zone) and xPos > 0 and yPos > 0 ) then
+		if not ( lib.HasDataOnZone(zone) and xPos > 0 and yPos > 0 ) then
 			return EmptyIterator
 		end
 
@@ -861,7 +891,7 @@ do --create a new block
 		
 		local mapID, mapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(zoneToken)
 		
-		local zoneData = data[continent][zoneToken]
+		local zoneData = data[zoneToken]
 		xPos = xPos
 		yPos = yPos
 		for gType, nodesList in pairs(zoneData) do
@@ -938,8 +968,7 @@ do --create a new block
 		local nodeIndex = lastIndex * 3
 		if ( iteratorData[nodeIndex] ) then
 			local zoneToken, gType, index, dist = iteratorData.zoneToken, iteratorData[nodeIndex - 2], iteratorData[nodeIndex - 1], iteratorData[nodeIndex]
-			local continent, zone = Gatherer.ZoneTokens.GetContinentAndZone(zoneToken)
-			return lastIndex, zoneToken, gType, index, dist, lib.GetNodeInfo(continent, zone, gType, index)
+			return lastIndex, zoneToken, gType, index, dist, lib.GetNodeInfo(zoneToken, gType, index)
 		else
 			releaseWorkTable(iteratorData)
 			return; --no data left
@@ -947,8 +976,8 @@ do --create a new block
 	end
 
 
-	function lib.ClosestNodesInfo( continent, zone, xPos, yPos, num, maxDist, filter )
-		local f, iteratorData, var = lib.ClosestNodes(continent, zone, xPos, yPos, num, maxDist, filter)
+	function lib.ClosestNodesInfo( zone, xPos, yPos, num, maxDist, filter )
+		local f, iteratorData, var = lib.ClosestNodes(zone, xPos, yPos, num, maxDist, filter)
 
 		if ( f == EmptyIterator ) then
 			return f
@@ -986,12 +1015,12 @@ do --create a new block
 	end
 
 
-	function lib.GetNodeGatherNames( continent, zone, gType, nodeIndex )
-		zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-		if ( lib.IsNodeInZone(continent, zone, gType, nodeIndex) ) then
+	function lib.GetNodeGatherNames( zone, gType, nodeIndex )
+		zone = Gatherer.ZoneTokens.GetZoneToken(zone)
+		if ( lib.IsNodeInZone(zone, gType, nodeIndex) ) then
 			local iteratorData = getWorkTable()
 				local index = 0
-				for gatherName, gatherData in pairs(data[continent][zone][gType][nodeIndex]) do
+				for gatherName, gatherData in pairs(data[zone][gType][nodeIndex]) do
 					if ( type(gatherData) == "table" ) then
 						index = index + 1
 						local nodeIndex = index * 4
@@ -1042,45 +1071,12 @@ eventFrame:SetScript("OnEvent", function( frame, event, arg1 )
 					local dataToImport = { dbVersion = dbVersion }
 					
 					-- check for map File names that were used as a zone token and merge them if we now have a token
-					local checkToken = Gatherer.ZoneTokens.GetTokenFromMapID
-					for continent, contData in pairs(data) do
-						if ( type(contData) == "table" ) then
-							for zoneToken, zoneData in pairs(contData) do
-								local token = checkToken(continent, zoneToken)
-								if ( token ) then
-									needImport = true
-									if not (dataToImport[continent]) then dataToImport[continent] = { }; end
-									dataToImport[continent][token] = data[continent][zoneToken]
-									data[continent][zoneToken] = nil
-								end
-							end
-						end
-					end
-					
-					-- perform any needed node id re-mappings
-					if ( Gatherer.Nodes.ReMappings ) then
-						local remap = Gatherer.Nodes.ReMappings
-						for continent, contData in pairs(data) do
-							if ( type(contData)=="table" and type(continent)=="number" ) then
-								for zoneToken, zoneData in pairs(contData) do
-									for gType, gtypeData in pairs(zoneData) do
-										for nodeId, nodeData in pairs(gtypeData) do
-											for gatherName, gather in pairs(nodeData) do
-												if ( type(gather) == "table" ) then
-													if ( remap[gatherName] ) then
-														needImport = true
-														if not (dataToImport[continent]) then dataToImport[continent] = { }; end
-														if not (dataToImport[continent][zoneToken]) then dataToImport[continent][zoneToken] = { }; end
-														if not (dataToImport[continent][zoneToken][gType]) then dataToImport[continent][zoneToken][gType] = { }; end
-														dataToImport[continent][zoneToken][gType][nodeId] = nodeData
-														table.remove(data[continent][zoneToken][gType], nodeId)
-													end
-												end
-											end
-										end
-									end
-								end
-							end
+					for zoneToken, zoneData in pairs(data) do
+						if ( type(zoneToken) == "number" and type(zoneData) == "table" ) then
+							needImport = true
+							if not (dataToImport) then dataToImport = { }; end
+							dataToImport[zoneToken] = data[zoneToken]
+							data[zoneToken] = nil
 						end
 					end
 					
@@ -1094,7 +1090,7 @@ eventFrame:SetScript("OnEvent", function( frame, event, arg1 )
 				elseif ( savedData.dbVersion < dbVersion ) then --old database, conversion needed
 					-- data wipe notification
 					if ( savedData.dbVersion < 4 ) then
-						Gatherer.Notifications.AddInfo("Being the mean super-villan that he is, Deathwing's return has burned all the herbs, melted all the ore deposits and obliterated all of the chests.  Now they all have to regrow, be recrystallized or be re-hidden by pirates and they're probably all in new locations.  Treasure Hunt!!!  \n(Old World data has been wiped due to widespread geography changes.)")
+						Gatherer.Notifications.AddInfo(_tr("STORAGE_DB_CATACLYSMIC"))
 					end
 					
 					-- check for, and import any set aside DBs that we can now process
@@ -1192,26 +1188,26 @@ end
 
 local numMergeNodeArgs = 11
 local function MergeNode(gather, gatherType, continent, zone, gatherX, gatherY, count, harvested, inspected, source, indoorNode)
-	if not ( gather and gatherType and continent and zone and gatherX and gatherY ) then
+	if not ( gather and gatherType and zone and gatherX and gatherY ) then
 		return -- not enough data
 	end
-	local index = lib.AddNode(gather, gatherType, continent, zone, gatherX, gatherY, source, false, indoorNode)
+	zone = Gatherer.ZoneTokens.GetZoneTokenByContZone(continent, zone) or Gatherer.ZoneTokens.GetZoneToken(zone)
+	local index, previousInspected, previousHarvested = lib.AddNode(gather, gatherType, zone, gatherX, gatherY, source, false, indoorNode)
 	if not ( index ) then return end -- node was not added for some reason, abort
-	local zone = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
-	local node = data[continent][zone][gatherType][index]
+	local node = data[zone][gatherType][index]
 	local gather = node[gather]
 	if ( count ) then
 		gather[COUNT] = gather[COUNT] + count
 	end
 	if ( harvested ) then
-		gather[HARVESTED] = harvested
-	else
-		gather[HARVESTED] = 0
+		if ( harvested > gather[HARVESTED] ) then
+			gather[HARVESTED] = harvested
+		end
 	end
 	if ( inspected ) then
-		node[INSPECTED] = inspected
-	else
-		node[INSPECTED] = 0
+		if ( inspected > node[INSPECTED] ) then
+			node[INSPECTED] = inspected
+		end
 	end
 	if ( gather[SOURCE] and gather[SOURCE] ~= "IMPORTED" and gather[SOURCE] ~= "REQUIRE" ) then
 		gather[SOURCE] = processImportedSourceField(string.split(",", gather[SOURCE]))
@@ -1222,7 +1218,9 @@ function lib.ImportDatabase( database )
 	if not ( data ) then
 		lib.ClearDatabase();
 	end
+	lib.MassImportMode = true
 	Gatherer.Convert.ImportDatabase(database, MergeNode, numMergeNodeArgs)
+	lib.MassImportMode = false
 end
 
 
@@ -1230,13 +1228,8 @@ end
 -- Warning Dialogs
 --------------------------------------------------------------------------
 
--- references to localization functions
-local _tr = Gatherer.Locale.Tr
-local _trC = Gatherer.Locale.TrClient
-local _trL = Gatherer.Locale.TrLocale
-
 StaticPopupDialogs["GATHERER_INVALID_DATABASE_VERSION"] = {
-	text = _trL("WARNING!!!\nGatherer has detected that your database version is invalid.  Please press accept to clear your database, or select ignore if you want to try to repair your database manually."),
+	text = _trL("STORAGE_DB_VERSION_INVALID"),
 	button1 = _trL("ACCEPT"),
 	button2 = _trL("IGNORE"),
 	OnAccept = function()
@@ -1247,8 +1240,8 @@ StaticPopupDialogs["GATHERER_INVALID_DATABASE_VERSION"] = {
 }
 
 StaticPopupDialogs["GATHERER_DATABASE_TOO_NEW"] = {
-	text = _trL("Your saved Gatherer database is too new.  Your current database has been set aside until you upgrade Gatherer.  "),
-	button1 = _trL("OK"),
+	text = _trL("STORAGE_DB_VERSION_NEWER"),
+	button1 = _trL("OKAY"),
 	timeout = 0,
 	whileDead = 1,
 }

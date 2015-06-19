@@ -1,8 +1,8 @@
 --[[
     This file is part of Decursive.
     
-    Decursive (v 2.7.0.5) add-on for World of Warcraft UI
-    Copyright (C) 2006-2007-2008-2009-2010-2011 John Wellesz (archarodim AT
+    Decursive (v 2.7.4.2) add-on for World of Warcraft UI
+    Copyright (C) 2006-2014 John Wellesz (archarodim AT
     teaser.fr) ( http://www.2072productions.com/to/decursive.php )
 
     Starting from 2009-10-31 and until said otherwise by its author, Decursive
@@ -15,13 +15,13 @@
     required.
     
 
-    Decursive is inspired from the original "Decursive v1.9.4" by Quu.
+    Decursive is inspired from the original "Decursive v1.9.4" by Patrick Bohnet (Quu).
     The original "Decursive 1.9.4" is in public domain ( www.quutar.com )
 
     Decursive is distributed in the hope that it will be useful, but WITHOUT
     ANY WARRANTY.
 
-    This file was last updated on 2011-11-06T13:34:55Z
+    This file was last updated on 2014-10-13T09:20:46Z
 --]]
 -------------------------------------------------------------------------------
 
@@ -59,6 +59,7 @@ StaticPopupDialogs["DECURSIVE_ERROR_FRAME"] = {
     whileDead = 1,
     hideOnEscape = 1,
     showAlert = 1,
+    preferredIndex = 3,
     }; -- }}}
 T._FatalError = function (TheError) StaticPopup_Show ("DECURSIVE_ERROR_FRAME", TheError); end
 end
@@ -68,11 +69,12 @@ if not T._LoadedFiles or not T._LoadedFiles["enUS.lua"] then
     DecursiveInstallCorrupted = true;
     return;
 end
+T._LoadedFiles["deDE.lua"] = false;
 
 local L = LibStub("AceLocale-3.0"):NewLocale("Decursive", "deDE");
 
 if not L then
-    T._LoadedFiles["deDE.lua"] = "2.7.0.5";
+    T._LoadedFiles["deDE.lua"] = "2.7.4.2";
     return;
 end;
 
@@ -103,13 +105,13 @@ L["BINDING_NAME_DCRSKLIST"] = "Ignorierliste ausgeben"
 L["BINDING_NAME_DCRSKSHOW"] = "Die Ignorierliste anzeigen/verbergen"
 L["BLACK_LENGTH"] = "Sekunden auf der schwarzen Liste: "
 L["BLACKLISTED"] = "Auf schwarzer Liste"
-L["CHARM"] = "Bezauberung" -- Needs review
+L["CHARM"] = "Gedankenkontrolle"
 L["CLASS_HUNTER"] = "Jäger"
 L["CLEAR_PRIO"] = "C"
 L["CLEAR_SKIP"] = "C"
 L["COLORALERT"] = "Warnfarbe einstellen, wenn ein '%s' benötigt wird."
-L["COLORCHRONOS"] = "Chronometer"
-L["COLORCHRONOS_DESC"] = "Chronometer-Farbe einstellen"
+L["COLORCHRONOS"] = "Counter zentriert" -- Needs review
+L["COLORCHRONOS_DESC"] = "Einstellung der Farbe für den zentrierten Counter" -- Needs review
 L["COLORSTATUS"] = "Farbe für '%s' MUF-Status einstellen."
 L["CTRL"] = "Strg"
 L["CURE_PETS"] = "Begleiter scannen und reinigen"
@@ -140,7 +142,7 @@ L["DISEASE"] = "Krankheit"
 L["DONOT_BL_PRIO"] = "Namen der Prioritätenliste nicht auf schwarze Liste setzen"
 L["FAILEDCAST"] = [=[|cFF22FFFF%s %s|r |cFFAA0000gescheitert bei|r %s
 |cFF00AAAA%s|r]=]
-L["FOCUSUNIT"] = "Fokuseinheit" -- Needs review
+L["FOCUSUNIT"] = "Focus Einheit"
 L["FUBARMENU"] = "FuBar-Menü"
 L["FUBARMENU_DESC"] = "Optionen relativ zum FuBar-Symbol einstellen"
 L["GLOR1"] = "In Gedenken an Glorfindal"
@@ -155,12 +157,11 @@ In seinem Leben war er wie im Spiel - selbstlos, großzügig, treu und hingebung
 Er verließ uns im Alter von 38 Jahren; er ließ nicht bloß anonyme Spieler in einer virtuellen Welt zurück, sondern eine Gruppe treuer Freunde, die ihn für immer vermissen werden.]=]
 L["GLOR5"] = "Er wird immer in Erinnerung bleiben..."
 L["HANDLEHELP"] = "Alle Mikro-Einheiten-Rahmen (MUFs) bewegen"
-L["HIDE_LIVELIST"] = "Aktuelle Liste verbergen"
 L["HIDE_MAIN"] = "Decursive-Fenster verbergen"
-L["HIDESHOW_BUTTONS"] = "Verbergen-/Anzeigen-Schaltflächen"
+L["HIDESHOW_BUTTONS"] = "Verbergen/Anzeigen-Schaltflächen und (ent)sperre die \"Decursive\" Leiste."
 L["HLP_LEFTCLICK"] = "Linksklick"
 L["HLP_LL_ONCLICK_TEXT"] = [=[Lies bitte die Dokumentation, um den Umgang mit diesem Addon zu lernen. Suche nach "Decursive" auf WoWAce.com
-(Um diese Liste zu bewegen, bewege die Decursive-Leiste, /dcrshow und Links-Alt-Klick zum Bewegen)]=] -- Needs review
+(Um diese Liste zu bewegen, bewege die Decursive-Leiste, /dcrshow und Links-Alt-Klick zum Bewegen)]=]
 L["HLP_MIDDLECLICK"] = "Mittlere Maustaste"
 L["HLP_NOTHINGTOCURE"] = "Es gibt nichts zu heilen!"
 L["HLP_RIGHTCLICK"] = "Rechtsklick"
@@ -190,6 +191,8 @@ L["NORMAL"] = "Normal"
 L["NOSPELL"] = "Kein Zauber verfügbar"
 L["OPT_ABOLISHCHECK_DESC"] = "Wähle, ob Einheiten mit einem aktiven \"Aufheben\"-Zauber angezeigt und geheilt werden sollen."
 L["OPT_ABOUT"] = "Über"
+L["OPT_ADD_A_CUSTOM_SPELL"] = "Füge eigenen Spell/Item hinzu" -- Needs review
+L["OPT_ADD_A_CUSTOM_SPELL_DESC"] = "Spell oder benutzbares Item per Ziehen und Ablegen hier hinzufügen. Du kannst auch direkt seinen Namen rein schreiben, seine ID, oder Shift-Klick verwenden." -- Needs review
 L["OPT_ADDDEBUFF"] = "Ein Gebrechen manuell hinzufügen"
 L["OPT_ADDDEBUFF_DESC"] = "Ein neues Gebrechen wird der Liste hinzugefügt"
 L["OPT_ADDDEBUFFFHIST"] = "Erneuertes Gebrechen hinzufügen."
@@ -209,17 +212,24 @@ L["OPT_AUTOHIDEMFS_DESC"] = "Wähle, wann das MUF-Fenster automatisch verborgen 
 L["OPT_BLACKLENTGH_DESC"] = "Definiert, wie lange jemand auf der schwarzen Liste verbleibt."
 L["OPT_BORDERTRANSP"] = "Transparenz der Umrandung"
 L["OPT_BORDERTRANSP_DESC"] = "Transparenz der Umrandung einstellen"
+L["OPT_CENTERTEXT_DISABLED"] = "Deaktiviert" -- Needs review
+L["OPT_CENTERTEXT_ELAPSED"] = "Verstrichene Zeit" -- Needs review
+L["OPT_CENTERTEXT_STACKS"] = "Anzahl Stacks" -- Needs review
+L["OPT_CENTERTEXT_TIMELEFT"] = "Verbleibende Zeit" -- Needs review
 L["OPT_CENTERTRANSP"] = "Transparenz Mitte"
 L["OPT_CENTERTRANSP_DESC"] = "Transparenz der Mitte einstellen"
 L["OPT_CHARMEDCHECK_DESC"] = "Wenn markiert, bist du in der Lage, bezauberte Einheiten zu sehen und zu behandeln."
 L["OPT_CHATFRAME_DESC"] = "Decursive-Mitteilungen werden im Standard-Chat-Rahmen ausgegeben."
 L["OPT_CHECKOTHERPLAYERS"] = "Andere Spieler überprüfen"
 L["OPT_CHECKOTHERPLAYERS_DESC"] = "Zeigt Decursive-Version den Spielern in deiner aktuellen Gruppe oder Gilde an (kann nicht Versionen vor Decursive 2.4.6 anzeigen)."
+L["OPT_CMD_DISBLED"] = "Deaktiviert" -- Needs review
+L["OPT_CMD_ENABLED"] = "Aktiviert" -- Needs review
 L["OPT_CREATE_VIRTUAL_DEBUFF"] = "Ein virtuelles Gebrechen zum Testen erzeugen."
-L["OPT_CREATE_VIRTUAL_DEBUFF_DESC"] = "Lässt dich sehen, wie es aussieht, wenn ein Gebrechen gefunden wurde." -- Needs review
+L["OPT_CREATE_VIRTUAL_DEBUFF_DESC"] = "Lässt dich sehen, wie es aussieht, wenn ein Gebrechen gefunden wurde."
 L["OPT_CUREPETS_DESC"] = "Begleiter werden bearbeitet und geheilt"
-L["OPT_CURINGOPTIONS"] = "Optionen zur Heilung" -- Needs review
-L["OPT_CURINGOPTIONS_DESC"] = "Verschiedene Aspekte des Heilungsprozesses einstellen" -- Needs review
+L["OPT_CURE_PRIORITY_NUM"] = "Priorität #%d" -- Needs review
+L["OPT_CURINGOPTIONS"] = "Optionen zur Heilung"
+L["OPT_CURINGOPTIONS_DESC"] = "Verschiedene Aspekte des Heilungsprozesses einstellen"
 L["OPT_CURINGOPTIONS_EXPLANATION"] = [=[Wähle die Arten von Gebrechen, die du heilen möchtest. Nicht markierte Typen werden komplett von Decursive ignoriert.
 
 Die grüne Zahl legt die Priorität des Gebrechens fest. Diese Priorität beeinflußt mehrere Aspekte:
@@ -229,14 +239,21 @@ Die grüne Zahl legt die Priorität des Gebrechens fest. Diese Priorität beeinf
 All dies wird in der Dokumentation genau erklärt (muß gelesen werden):
 http://www.wowace.com/addons/decursive/
 ]=] -- Needs review
-L["OPT_CURINGORDEROPTIONS"] = "Optionen zur Rehenfolge der Heilungen" -- Needs review
+L["OPT_CURINGORDEROPTIONS"] = "Optionen zur Rehenfolge der Heilungen"
 L["OPT_CURSECHECK_DESC"] = "Falls markiert, bist du in der Lage, verfluchte Einheiten zu sehen und zu heilen."
+L["OPT_CUSTOM_SPELL_ISPET"] = "Pet-Fähigkeit" -- Needs review
+L["OPT_CUSTOM_SPELL_MACRO_TEXT"] = "Macro Text:" -- Needs review
+L["OPT_CUSTOM_SPELL_MACRO_TOO_LONG"] = "Dein Macro ist zu lang, du musst %d Zeichen entfernen." -- Needs review
+L["OPT_CUSTOM_SPELL_PRIORITY"] = "Zauber-Priorität" -- Needs review
+L["OPT_CUSTOMSPELLS"] = "Eigene Zauber/Items" -- Needs review
+L["OPT_CUSTOM_SPELL_UNAVAILABLE"] = "Nicht verfügbar" -- Needs review
 L["OPT_DEBCHECKEDBYDEF"] = [=[
 
 Standardmäßig markiert]=]
 L["OPT_DEBUFFENTRY_DESC"] = "Wähle welche Klasse im Kampf ignoriert werden soll,  wenn jemand von diesem Leiden betroffen ist."
 L["OPT_DEBUFFFILTER"] = "Gebrechen-Filter"
 L["OPT_DEBUFFFILTER_DESC"] = "Gebrechen wählen, die nach Name und Klasse gefiltert werden sollen, während du dich im Kampf befindest."
+L["OPT_DELETE_A_CUSTOM_SPELL"] = "Entfernen" -- Needs review
 L["OPT_DISABLEABOLISH"] = "\"Aufheben\"-Zauber nicht verwenden"
 L["OPT_DISABLEABOLISH_DESC"] = "Wenn aktiviert, bevorzugt Decursive \"Krankheit heilen\" und \"Gift heilen\" gegenüber den entsprechenden \"Aufheben\"-Zaubern."
 L["OPT_DISABLEMACROCREATION"] = "Makro-Erstellung ausschalten"
@@ -244,6 +261,7 @@ L["OPT_DISABLEMACROCREATION_DESC"] = "Decursive-Makro wird nicht mehr kreiert od
 L["OPT_DISEASECHECK_DESC"] = "Falls markiert, wirst du in der Lage sein, erkrankte Einheiten zu sehen und zu heilen."
 L["OPT_DISPLAYOPTIONS"] = "Anzeigeoptionen"
 L["OPT_DONOTBLPRIO_DESC"] = "Priorisierte Einheiten werden nicht auf die schwarze Liste gesetzt."
+L["OPT_ENABLE_A_CUSTOM_SPELL"] = "Aktivieren" -- Needs review
 L["OPT_ENABLEDEBUG"] = "Fehlersuche zulassen"
 L["OPT_ENABLEDEBUG_DESC"] = "Ausgabe der Fehlersuche zulassen"
 L["OPT_ENABLEDECURSIVE"] = "Decursive aktivieren"
@@ -251,7 +269,6 @@ L["OPT_FILTEROUTCLASSES_FOR_X"] = "%q wird bei den spezifizierten Klassen ignori
 L["OPT_GENERAL"] = "Allgemeine Optionen"
 L["OPT_GROWDIRECTION"] = "Anzeige der MUFs umkehren"
 L["OPT_GROWDIRECTION_DESC"] = "Die MUFs werden von unten nach oben angezeigt."
-L["OPT_HIDELIVELIST_DESC"] = "Wenn nicht verborgen, wird eine informative Liste der verfluchten Personen angezeigt."
 L["OPT_HIDEMFS_GROUP"] = "im Solo- oder Gruppenspiel"
 L["OPT_HIDEMFS_GROUP_DESC"] = "Das MUF-Fenster verbergen, wenn du nicht in einem Schlachtzug bist."
 L["OPT_HIDEMFS_NEVER"] = "Niemals autom. verbergen"
@@ -262,9 +279,13 @@ L["OPT_HIDEMUFSHANDLE"] = "MUF-Handhabung verbergen"
 L["OPT_HIDEMUFSHANDLE_DESC"] = [=[Verbirgt die Handhabung der Mikro-Einheiten-Rahmen und schaltet die Möglichkeit aus, diese zu bewegen.
 Benutze denselben Befehl, um diese wiederherzustellen.]=]
 L["OPT_IGNORESTEALTHED_DESC"] = "Getarnte Einheiten werden ignoriert"
+L["OPT_INPUT_SPELL_BAD_INPUT_ALREADY_HERE"] = "Zauber bereits gelistet!" -- Needs review
+L["OPT_INPUT_SPELL_BAD_INPUT_DEFAULT_SPELL"] = "Decursive managed diesen Zauber bereits. Shift-Klick auf diesen Zauber, oder gebe seine ID ein, um einen speziellen Rang hinzuzufügen." -- Needs review
+L["OPT_INPUT_SPELL_BAD_INPUT_ID"] = "Ungültige Zauber-ID!" -- Needs review
+L["OPT_INPUT_SPELL_BAD_INPUT_NOT_SPELL"] = "Zauber wurde in deinem Zauberbuch nicht gefunden!" -- Needs review
 L["OPTION_MENU"] = "Decursive-Optionsmenü"
 L["OPT_LIVELIST"] = "Aktuelle Liste"
-L["OPT_LIVELIST_DESC"] = "Optionen für die aktuelle Liste"
+L["OPT_LIVELIST_DESC"] = "Optionen für die aktuelle Liste" -- Needs review
 L["OPT_LLALPHA"] = "Transparenz Lder aktuellen Liste"
 L["OPT_LLALPHA_DESC"] = "Verändert die Transparenz der Decursive-Hauptleiste und der aktuellen Liste (Haupotleiste muß dabei angezeigt werden)"
 L["OPT_LLSCALE"] = "Skalierung der aktuellen Liste"
@@ -276,7 +297,7 @@ L["OPT_MACROBIND_DESC"] = [=[Definiert die Taste, mit der das "Decursive"-Makro 
 
 Drücke die Taste und bestätige die Eingabe mit "Enter", um die neue Zuweisung zu speichern (mit deinem Mauszeiger über dem Bearbeitungsfeld)]=]
 L["OPT_MACROOPTIONS"] = "Makro-Optionen"
-L["OPT_MACROOPTIONS_DESC"] = "Das Verhalten des von Decursive erstellten Makros festlegen."
+L["OPT_MACROOPTIONS_DESC"] = "Das Verhalten des von Decursive erstellten Mouseover-Makros festlegen."
 L["OPT_MAGICCHARMEDCHECK_DESC"] = "Falls markiert, wirst du in der Lage sein, magisch verzauberte Einheiten zu sehen und zu heilen."
 L["OPT_MAGICCHECK_DESC"] = "Falls markiert, wirst du in der Lage sein, mit magischen Gebrechen behaftete Einheiten zu sehen und zu heilen."
 L["OPT_MAXMFS"] = "Maximale Anzahl der Einheiten, die angezeigt werden sollen"
@@ -292,20 +313,24 @@ L["OPT_MFREFRESHSPEED"] = "Aktualisierungsgeschwindigkeit"
 L["OPT_MFREFRESHSPEED_DESC"] = "Anzahl der Mikro-Einheiten-Rahmen, die bei jedem Aktualisierungsabruf auf einmal erneuert werden sollen."
 L["OPT_MFSCALE"] = "Skalierung der Mikro-Einheiten-Rahmen (MUFs)"
 L["OPT_MFSCALE_DESC"] = "Die Größe der Mikro-Einheiten-Rahmen (MUFs) festlegen"
-L["OPT_MFSETTINGS"] = "Einstellungen der Mikro-Einheiten-Rahmen (MUFs)" -- Needs review
+L["OPT_MFSETTINGS"] = "Einstellungen der Mikro-Einheiten-Rahmen (MUFs)"
 L["OPT_MFSETTINGS_DESC"] = "Die Fenster-Optionen der Mikro-Einheiten-Rahmen (MUF) deinen Bedürfnissen anpassen." -- Needs review
 L["OPT_MUFFOCUSBUTTON"] = "Fokus-Schaltfläche:"
-L["OPT_MUFMOUSEBUTTONS"] = "Maus-Schaltflächen" -- Needs review
+L["OPT_MUFHANDLE_HINT"] = "Um die Micro-Unit-Frames zu bewegen: ALT-Klick auf das unsichtbare Icon über dem ersten Micro-Unit-Frame Icon." -- Needs review
+L["OPT_MUFMOUSEBUTTONS"] = "Maus-Schaltflächen"
 L["OPT_MUFMOUSEBUTTONS_DESC"] = "Bestimme die Maustasten, die Du für die verschiedenen Warnfarben der Mikroeinheiten Anzeige (MUF) benutzen möchtest. " -- Needs review
 L["OPT_MUFSCOLORS"] = "Farben"
 L["OPT_MUFSCOLORS_DESC"] = "Die Farben der Mikro-Einheiten-Rahmen verändern" -- Needs review
+L["OPT_MUFSVERTICALDISPLAY"] = "Vertikale Anzeige" -- Needs review
+L["OPT_MUFSVERTICALDISPLAY_DESC"] = "MUF's Fenster wächst senkrecht an" -- Needs review
 L["OPT_MUFTARGETBUTTON"] = "Tiel-Schaltfläche:"
 L["OPT_NEWVERSIONBUGMENOT"] = "Warnung bei neuer Version"
 L["OPT_NEWVERSIONBUGMENOT_DESC"] = "Falls eine neuere Version von Decursive ermittelt wird, erscheint einmal alle sieben Tage eine Pop-Up-Meldung dazu."
 L["OPT_NOKEYWARN"] = "Warnen, falls keine Tastenbelegung vorhanden"
 L["OPT_NOKEYWARN_DESC"] = "Eine Warnmeldung ausgeben, wenn keine Taste zugeordnet wurde."
 L["OPT_NOSTARTMESSAGES"] = "Begrüssungsmitteilungen ausschalten"
-L["OPT_NOSTARTMESSAGES_DESC"] = "Die drei Mitteilungen entfernen, die Decursive bei jedem Einloggen im Chat-Rahmen ausgibt."
+L["OPT_NOSTARTMESSAGES_DESC"] = "Die Mitteilungen entfernen, die Decursive bei jedem Einloggen im Chat-Fenster ausgibt."
+L["OPT_OPTIONS_DISABLED_WHILE_IN_COMBAT"] = "Während du dich im Kampf befindest, sind diese Optionen gesperrt." -- Needs review
 L["OPT_PERFOPTIONWARNING"] = "WANUNG: Verändere niemals diese Werte, ausser Du weißt genau was Du machst! Diese Einstellung können massive Auswirkungen auf die Lesitungsfähigkeit des Spiels haben. Für die meisten Spieler genügen die Grundeinstellungen von 0.1 und 10."
 L["OPT_PLAYSOUND_DESC"] = "Einen Ton abspielen, wenn jemand mit einem Fluch belegt worden ist."
 L["OPT_POISONCHECK_DESC"] = "Falls markiert, wirst du in der Lage sein, vergiftete Einheiten zu sehen und zu heilen."
@@ -335,10 +360,6 @@ L["OPT_REVERSE_LIVELIST_DESC"] = "Die aktuelle Liste wird von unten nach oben au
 L["OPT_SCANLENGTH_DESC"] = "Definiert den Zeitabstand zwischen jedem Scanvorgang"
 L["OPT_SHOWBORDER"] = "Umrandung in Klassenfarben anzeigen"
 L["OPT_SHOWBORDER_DESC"] = "Eine farbige Umrandung wird um die MUFs angezeigt, die der Klasse der Einheiten entspricht."
-L["OPT_SHOWCHRONO"] = "Zeitmesser anzeigen"
-L["OPT_SHOWCHRONO_DESC"] = "Die Anzahl der Sekunden, die verstrichen sind, seit eine Einheit von einem Gebrechen belegt worden ist, wird angezeigt."
-L["OPT_SHOWCHRONOTIMElEFT"] = "Zeit verbleibend"
-L["OPT_SHOWCHRONOTIMElEFT_DESC"] = "Zeige verbleibende Zeit an anstatt bereits verstrichener Zeit."
 L["OPT_SHOWHELP"] = "Hilfe anzeigen"
 L["OPT_SHOWHELP_DESC"] = "Zeigt einen detaillierten Tooltip an, wenn du die Maus über einen Mikro-Einheiten-Rahmen legst."
 L["OPT_SHOWMFS"] = "Mikro-Einheiten-Rahmen anzeigen"
@@ -360,7 +381,7 @@ L["OPT_TIECENTERANDBORDER_OPT"] = "Falls markiert, ist die Transparenz des Rands
 L["OPT_TIE_LIVELIST_DESC"] = "Die Anzeige der aktuellen Liste ist verbunden mit der Anzeige der Decursive-Leisten."
 L["OPT_TIEXYSPACING"] = "Horizontalen und vertikalen Abstand an einander binden"
 L["OPT_TIEXYSPACING_DESC"] = "Der horizontale und vertikale Abstand zwischen MUFs sind gleich."
-L["OPT_UNITPERLINES"] = "Anzahl der Einheiten pro Zeile" -- Needs review
+L["OPT_UNITPERLINES"] = "Anzahl der Einheiten pro Zeile"
 L["OPT_UNITPERLINES_DESC"] = "Definiert die max. Anzahl an Mikro-Einheitenrahmen, die pro Zeile angezeigt werden sollen." -- Needs review
 L["OPT_USERDEBUFF"] = "Dieses Leiden gehört nicht zu Decursives standardmässigen Leiden."
 L["OPT_XSPACING"] = "Horizontaler Abstand"
@@ -403,4 +424,4 @@ L["UNSTABLERELEASE"] = "Instabile Veröffentlichung"
 
 
 
-T._LoadedFiles["deDE.lua"] = "2.7.0.5";
+T._LoadedFiles["deDE.lua"] = "2.7.4.2";

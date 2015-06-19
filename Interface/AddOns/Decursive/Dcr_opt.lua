@@ -1,8 +1,8 @@
 --[[
     This file is part of Decursive.
     
-    Decursive (v 2.7.0.5) add-on for World of Warcraft UI
-    Copyright (C) 2006-2007-2008-2009-2010-2011 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
+    Decursive (v 2.7.4.2) add-on for World of Warcraft UI
+    Copyright (C) 2006-2014 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
 
     Starting from 2009-10-31 and until said otherwise by its author, Decursive
     is no longer free software, all rights are reserved to its author (John Wellesz).
@@ -11,13 +11,13 @@
     To distribute Decursive through other means a special authorization is required.
     
 
-    Decursive is inspired from the original "Decursive v1.9.4" by Quu.
+    Decursive is inspired from the original "Decursive v1.9.4" by Patrick Bohnet (Quu).
     The original "Decursive 1.9.4" is in public domain ( www.quutar.com )
 
     Decursive is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY.
     
-    This file was last updated on 2012-01-15T18:56:52Z
+    This file was last updated on 2015-01-25T21:31:39Z
 --]]
 -------------------------------------------------------------------------------
 
@@ -35,6 +35,7 @@ StaticPopupDialogs["DECURSIVE_ERROR_FRAME"] = {
     whileDead = 1,
     hideOnEscape = 1,
     showAlert = 1,
+    preferredIndex = 3,
     }; -- }}}
 T._FatalError = function (TheError) StaticPopup_Show ("DECURSIVE_ERROR_FRAME", TheError); end
 end
@@ -44,14 +45,16 @@ if not T._LoadedFiles or not T._LoadedFiles["Dcr_utils.lua"] then
     DecursiveInstallCorrupted = true;
     return;
 end
+T._LoadedFiles["Dcr_opt.lua"] = false;
 
 local D = T.Dcr;
 
 local L  = D.L;
 local LC = D.LC;
 local DC = T._C;
-local DS = DC.DS;
+T._CatchAllErrors = "LibDBIcon";
 local icon = LibStub("LibDBIcon-1.0", true)
+T._CatchAllErrors = false;
 
 local pairs             = _G.pairs;
 local ipairs            = _G.ipairs;
@@ -61,15 +64,18 @@ local str_format        = _G.string.format;
 local str_gsub          = _G.string.gsub;
 local str_sub           = _G.string.sub;
 local abs               = _G.math.abs;
-local GetNumRaidMembers         = _G.GetNumRaidMembers;
-local GetNumPartyMembers        = _G.GetNumPartyMembers;
+local GetNumRaidMembers = DC.GetNumRaidMembers;
+local GetNumPartyMembers= _G.GetNumSubgroupMembers;
 local InCombatLockdown  = _G.InCombatLockdown;
+local GetSpellBookItemInfo = _G.GetSpellBookItemInfo;
+local GetSpellInfo      = _G.GetSpellInfo;
 local _;
 -- Default values for the option
 
-D:GetSpellsTranslations(false); -- Register spell translations
 
 function D:GetDefaultsSettings()
+    local DS = DC.DS;
+
     return {
         -- default settings {{{
         class = {
@@ -85,28 +91,28 @@ function D:GetDefaultsSettings()
 
             UserSpells = {
                 --Exemple / defaults
-                [DS["SPELL_COUNTERSPELL"]] = {
+                [T._C.DSI["SPELL_COUNTERSPELL"]] = {
                     Types = {DC.CHARMED},
                     Better = 10,
                     Pet = false,
                     Disabled = true,
                     IsDefault = true,
+                    IsItem = false,
                 },
             },
         },
 
         global = {
             debug = false,
-            NonRealease = false,
+            NonRelease = false,
+            TocExpiredDetection = false,
             LastExpirationAlert = 0,
             NewerVersionDetected = D.VersionTimeStamp,
             NewerVersionName = false,
             NewerVersionAlert = 0,
             NewVersionsBugMeNot = false,
             LastVersionAnnounce = 0,
-            --[===[@debug@
-            LastChekOutAlert = 0,
-            --@end-debug@]===]
+            LastUnpackagedAlert = 0,
 
             -- the key to bind the macro to
             MacroBind = false,
@@ -189,10 +195,8 @@ function D:GetDefaultsSettings()
 
             DebuffsFrameVerticalDisplay = false,
 
-            -- display chronometer on MUFs
-            DebuffsFrameChrono = true,
-
-            DebuffsFrameTimeLeft = true,
+            -- Center text displayed on MUFs, defaults to time left
+            CenterTextDisplay = '1_TLEFT',
 
             -- this is wether or not to show the live-list  
             HideLiveList = false,
@@ -323,7 +327,6 @@ function D:GetDefaultsSettings()
                 DS["CRIPLES"],
                 DS["DUSTCLOUD"],
                 DS["WIDOWSEMBRACE"],
-                DS["CURSEOFTONGUES"],
                 DS["SONICBURST"],
                 DS["DELUSIONOFJINDO"]
             },
@@ -334,7 +337,6 @@ function D:GetDefaultsSettings()
                     [DS["IGNITE"]]              = true,
                     [DS["TAINTEDMIND"]]         = true,
                     [DS["WIDOWSEMBRACE"]]       = true,
-                    [DS["CURSEOFTONGUES"]]      = true,
                     [DS["DELUSIONOFJINDO"]]     = true,
                 },
                 ["ROGUE"] = {
@@ -343,7 +345,6 @@ function D:GetDefaultsSettings()
                     [DS["IGNITE"]]              = true,
                     [DS["TAINTEDMIND"]]         = true,
                     [DS["WIDOWSEMBRACE"]]       = true,
-                    [DS["CURSEOFTONGUES"]]      = true,
                     [DS["SONICBURST"]]          = true,
                     [DS["DELUSIONOFJINDO"]]     = true,
                 },
@@ -383,6 +384,8 @@ function D:GetDefaultsSettings()
                     [DS["DELUSIONOFJINDO"]]     = true,
                 },
                 ["DEATHKNIGHT"] = {
+                },
+                ["MONK"] = {
                 }
             },
             -- }}}
@@ -482,39 +485,42 @@ local function GetStaticOptions ()
 
         local error = function (m) D:ColorPrint(1, 0, 0, m); return m; end;
 
+        local isItem = nil;
+
         -- We got a spell ID directly
         if tonumber(v) then
-            if GetSpellInfo(v) then
-                local spellName, spellRank = GetSpellInfo(v);
-
-                if spellRank ~= "" then
-                    v = ("%s(%s)"):format(spellName, spellRank);
-                else
-                    v = spellName;
-                end
-            else
+            v = tonumber(v);
+            -- test if it's valid
+            if not (GetSpellInfo(v)) and not (GetItemInfo(v)) then
                 return error(L["OPT_INPUT_SPELL_BAD_INPUT_ID"]);
             end
 
+            isItem = not (GetSpellInfo(v));
+
         elseif v:find('|Hspell:%d+') then
             -- We got a spell link!
-            v = D:GetSpellFromLink(v)
-        end
-
-        -- Not a string or not a known spell
-        if type(v) ~= 'string' or not GetSpellInfo(v) then
-            D:Debug(v, GetSpellInfo(v));
+            v = D:GetSpellFromLink(v);
+        elseif v:find('|Hitem:%d+') then
+            -- We got a item link!
+            isItem = true;
+            v = D:GetItemFromLink(v);
+        elseif type(v) == 'string' and (GetSpellBookItemInfo(v)) then -- not a number, not a spell link, then a spell name?
+            -- We got a spell name!
+            v = select(2, GetSpellBookItemInfo(v));
+        elseif type(v) == 'string' and (GetItemInfo(v)) then
+            -- We got an item name!
+            isItem = true;
+            v = D:GetItemFromLink(select(2, GetItemInfo(v)));
+        else
             return error(L["OPT_INPUT_SPELL_BAD_INPUT_NOT_SPELL"]);
         end
 
-        -- Normalize the name since spells are not case sensitive
-        if select(2, GetSpellInfo(v)) ~= "" then -- it as a rank!!
-            v = ("%s(%s)"):format(GetSpellInfo(v)); 
-        else
-            v = (GetSpellInfo(v));
+        -- avoid spellID/itemID collisions
+        if isItem then
+            v = -1 * v;
         end
 
-        -- The user is stupid or it's a deleted default spell
+        -- It's a deleted default spell
         if D.classprofile.UserSpells[v] and not D.classprofile.UserSpells[v].Hidden then
             D:Debug(v);
             return error(L["OPT_INPUT_SPELL_BAD_INPUT_ALREADY_HERE"]);
@@ -525,7 +531,7 @@ local function GetStaticOptions ()
             return error(L["OPT_INPUT_SPELL_BAD_INPUT_DEFAULT_SPELL"]);
         end
 
-        return 0, v;
+        return 0, v, isItem;
     end -- }}}
 
     return {
@@ -562,9 +568,8 @@ local function GetStaticOptions ()
                 type = 'toggle',
                 name = L["OPT_HIDEMUFSHANDLE"],
                 desc = L["OPT_HIDEMUFSHANDLE_DESC"],
-                guiHidden   = true,
-                disabled = function() return not D:IsEnabled() or not D.profile.ShowDebuffsFrame; end,
-                
+                guiHidden = true,
+                disabled = function() return not D:IsEnabled() or not D.profile.ShowDebuffsFrame and D.profile.AutoHideMUFs == 1; end,
                 get = function(info) return not D.MFContainerHandle:IsMouseEnabled(); end,
                 order = -4,
             },
@@ -603,6 +608,10 @@ local function GetStaticOptions ()
                         desc = L["OPT_SHOWMFS_DESC"],
                         set = function()
                             D:ShowHideDebuffsFrame ();
+                            if D.profile.AutoHideMUFs ~= 1 then
+                                D.profile.AutoHideMUFs = 1;
+                                D:ColorPrint(1, 0, 0, L["OPT_AUTOHIDEMFS"] .. " -> " .. L["OPT_HIDEMFS_NEVER"]);
+                            end
                         end,
                         disabled = function() return D.Status.Combat end,
                         order = 5,
@@ -617,8 +626,8 @@ local function GetStaticOptions ()
                     },
                     HideLiveList = {
                         type = "toggle",
-                        name = L["HIDE_LIVELIST"],
-                        desc = L["OPT_HIDELIVELIST_DESC"],
+                        name = L["OPT_ENABLE_LIVELIST"],
+                        desc = L["OPT_ENABLE_LIVELIST_DESC"],
                         set = function()
                             D:ShowHideLiveList()
                             if D.profile.HideLiveList and not D.profile.ShowDebuffsFrame or not D.Status.HasSpell then
@@ -627,11 +636,12 @@ local function GetStaticOptions ()
                                 D:SetIcon(DC.IconON);
                             end
                         end,
+                        get = function () return not D.profile.HideLiveList end,
                         order = 7,
                     },
                     PlaySound = {
                         type = "toggle",
-                        disabled = function() return D.profile.HideLiveList and not D.profile.ShowDebuffsFrame or not D:IsEnabled(); end,
+                        disabled = function() return D.profile.HideLiveList and not D.profile.ShowDebuffsFrame and D.profile.AutoHideMUFs == 1 or not D:IsEnabled(); end,
                         name = L["PLAY_SOUND"],
                         desc = L["OPT_PLAYSOUND_DESC"],
                         
@@ -639,7 +649,7 @@ local function GetStaticOptions ()
                     },
                     AfflictionTooltips = {
                         type = "toggle",
-                        disabled = function() return D.profile.HideLiveList and not D.profile.ShowDebuffsFrame or not D:IsEnabled(); end,
+                        disabled = function() return D.profile.HideLiveList and not D.profile.ShowDebuffsFrame and D.profile.AutoHideMUFs == 1 or not D:IsEnabled(); end,
                         name = L["SHOW_TOOLTIP"],
                         desc = L["OPT_SHOWTOOLTIP_DESC"],
                         order = 20,
@@ -712,7 +722,7 @@ local function GetStaticOptions ()
                         func = function ()
                             LibStub("AceConfigDialog-3.0"):Close(D.name);
                             GameTooltip:Hide();
-                            D:ShowDebugReport();
+                            T._ShowDebugReport();
                         end,
                         hidden = function() return  #T._DebugTextTable < 1 end,
                         order = 1000
@@ -887,9 +897,12 @@ local function GetStaticOptions ()
                 -- {{{
                 type = "group",
                 name = D:ColorText(L["OPT_LIVELIST"], "FF22EE33"),
-                desc = L["OPT_LIVELIST_DESC"],
-                hidden = function () return not D:IsEnabled() or D.profile.HideLiveList; end,
-                disabled = function () return not D:IsEnabled() or D.profile.HideLiveList; end,
+                desc = L["OPT_LIVELIST_DESC"] .. "\n",
+                hidden = function () return not D:IsEnabled(); end,
+                disabled = function () return not D:IsEnabled(); end,
+                handler = {
+                    ["disabled"] = function() return D.profile.HideLiveList; end,
+                },
                 order = 10,
 
                 args = {
@@ -898,10 +911,26 @@ local function GetStaticOptions ()
                         name = L["OPT_LIVELIST_DESC"],
                         order = 0,
                     },
+                    TestItemDisplayed = {
+                        type = "toggle",
+                        name = L["OPT_CREATE_VIRTUAL_DEBUFF"],
+                        desc = L["OPT_CREATE_VIRTUAL_DEBUFF_DESC"],
+                        get = function() return  D.LiveList.TestItemDisplayed end,
+                        set = function()
+                            if not D.LiveList.TestItemDisplayed then
+                                D.LiveList:DisplayTestItem();
+                            else
+                                D.LiveList:HideTestItem();
+                            end
+                        end,
+                        disabled = function() return D.profile.HideLiveList and not D.profile.ShowDebuffsFrame or not D.Status.HasSpell or not D.Status.Enabled end,
+                        order = -1
+                    },
                     LV_OnlyInRange = {
                         type = "toggle",
                         name = L["OPT_LVONLYINRANGE"],
                         desc = L["OPT_LVONLYINRANGE_DESC"],
+                        disabled = "disabled",
                         order = 100
                     },
                     Amount_Of_Afflicted = {
@@ -911,6 +940,7 @@ local function GetStaticOptions ()
                         min = 1,
                         max = D.CONF.MAX_LIVE_SLOTS,
                         step = 1,
+                        disabled = "disabled",
                         order = 104,
                     },
                     ScanTime = {
@@ -920,12 +950,14 @@ local function GetStaticOptions ()
                         min = 0.1,
                         max = 1,
                         step = 0.1,
+                        disabled = "disabled",
                         order = 106,
                     },
                     ReverseLiveDisplay = {
                         type = "toggle",
                         name = L["REVERSE_LIVELIST"],
                         desc = L["OPT_REVERSE_LIVELIST_DESC"],
+                        disabled = "disabled",
                         order = 107
                     },
                     LiveListScale = {
@@ -1011,8 +1043,8 @@ local function GetStaticOptions ()
                 childGroups = "tab",
                 name = D:ColorText(L["OPT_MFSETTINGS"], "FFBBCC33"),
                 desc = L["OPT_MFSETTINGS_DESC"],
-                disabled = function () return not D:IsEnabled() or not D.profile.ShowDebuffsFrame; end,
-                hidden = function () return not D:IsEnabled() or not D.profile.ShowDebuffsFrame; end,
+                disabled = function () return not D:IsEnabled(); end,
+                hidden = function () return not D:IsEnabled() end,
                 order = 30,
                 args = {
                     hint = {
@@ -1025,9 +1057,10 @@ local function GetStaticOptions ()
                         name = L["OPT_DISPLAYOPTIONS"],
                         desc = L["OPT_MFSETTINGS_DESC"],
                         handler = {
-                            ["disabled"] = function () return D.Status.Combat or not D:IsEnabled() or not D.profile.ShowDebuffsFrame; end,
+                            ["disabled"] = function () return D.Status.Combat; end,
                         },
                         order = 1,
+                        disabled = function () return not D.profile.ShowDebuffsFrame and D.profile.AutoHideMUFs == 1; end,
                         args = {
                             -- {{{
                             DebuffsFrameGrowToTop = {
@@ -1057,19 +1090,13 @@ local function GetStaticOptions ()
                                 desc = L["OPT_SHOWBORDER_DESC"],
                                 order = 1350,
                             },
-                            DebuffsFrameChrono = {
-                                type = "toggle",
-                                name = L["OPT_SHOWCHRONO"],
-                                desc = L["OPT_SHOWCHRONO_DESC"],
+                            CenterTextDisplay = {
+                                type = "select",
+                                style = "dropdown",
+                                name = L["OPT_CENTERTEXT"],
+                                desc = L["OPT_CENTERTEXT_DESC"],
+                                values = {["1_TLEFT"] = L["OPT_CENTERTEXT_TIMELEFT"], ["2_TELAPSED"] = L["OPT_CENTERTEXT_ELAPSED"], ["3_STACKS"] = L["OPT_CENTERTEXT_STACKS"], ["4_NONE"] = L["OPT_CENTERTEXT_DISABLED"]},
                                 order = 1360,
-                                disabled = false,
-                            },
-                            DebuffsFrameTimeLeft = {
-                                type = "toggle",
-                                disabled = function () return not D.profile.DebuffsFrameChrono end,
-                                name = L["OPT_SHOWCHRONOTIMElEFT"],
-                                desc = L["OPT_SHOWCHRONOTIMElEFT_DESC"],
-                                order = 1365,
                             },
                             Show_Stealthed_Status = {
                                 type = "toggle",
@@ -1082,7 +1109,7 @@ local function GetStaticOptions ()
                                 type = "toggle",
                                 name = L["SHOW_TOOLTIP"],
                                 desc = L["OPT_SHOWTOOLTIP_DESC"],
-                                disabled = function() return D.profile.HideLiveList and not D.profile.ShowDebuffsFrame end,
+                                disabled = function() return D.profile.HideLiveList and not D.profile.ShowDebuffsFrame and D.profile.AutoHideMUFs == 1 end,
                                 order = 1400,
                             },
                             DebuffsFrameShowHelp = {
@@ -1132,7 +1159,7 @@ local function GetStaticOptions ()
                                     D.SetHandler(info, 1 - v);
                                     D.profile.DebuffsFrameElemBorderAlpha = (1 - v) / 2;
                                 end,
-                                disabled = function() return D.Status.Combat or not D.profile.ShowDebuffsFrame or not D.profile.DebuffsFrameElemTieTransparency end,
+                                disabled = function() return D.Status.Combat or not D.profile.DebuffsFrameElemTieTransparency end,
                                 min = 0,
                                 max = 1,
                                 step = 0.01,
@@ -1148,7 +1175,7 @@ local function GetStaticOptions ()
                                     D.Status.TestLayout = v;
                                     D:GroupChanged("Test Layout");
                                 end,
-                                disabled = "disabled",
+                                disabled = function() return D.Status.Combat or not D.profile.ShowDebuffsFrame end,
                                 order = 1950,
                             },
                             TestLayoutUNum = {
@@ -1175,6 +1202,7 @@ local function GetStaticOptions ()
                         name = L["OPT_ADVDISP"],
                         desc = L["OPT_ADVDISP_DESC"],
                         order = 2,
+                        disabled = function () return not D.profile.ShowDebuffsFrame and D.profile.AutoHideMUFs == 1; end,
                         args = {
                             -- {{{
                             TransparencyOpts = {
@@ -1292,7 +1320,7 @@ local function GetStaticOptions ()
                         name = L["OPT_MUFMOUSEBUTTONS"],
                         desc = L["OPT_MUFMOUSEBUTTONS_DESC"],
                         order = 3,
-                        disabled = function() return D.Status.Combat or not D.profile.ShowDebuffsFrame or not D:IsEnabled() end,
+                        disabled = function() return D.Status.Combat or not D.profile.ShowDebuffsFrame and D.profile.AutoHideMUFs == 1;end,
                         hidden = function () return not D:IsEnabled(); end,
                         args = {},
                     },
@@ -1302,7 +1330,7 @@ local function GetStaticOptions ()
                         name = L["OPT_MUFSCOLORS"],
                         desc = L["OPT_MUFSCOLORS_DESC"],
                         order = 4,
-                        disabled = function() return D.Status.Combat or not D.profile.ShowDebuffsFrame or not D:IsEnabled() end,
+                        disabled = function() return D.Status.Combat or not D.profile.ShowDebuffsFrame and D.profile.AutoHideMUFs == 1;end,
                         hidden = function () return not D:IsEnabled(); end,
                         args = {
                             description = {
@@ -1321,9 +1349,8 @@ local function GetStaticOptions ()
                     PerfOptions = {
                         type = "group",
                         name = L["OPT_MFPERFOPT"],
-                        --desc = L["OPT_ADVDISP_DESC"],
                         order = 5,
-                        --disabled = function() return D.Status.Combat or not D.profile.ShowDebuffsFrame end,
+                        disabled = function () return not D.profile.ShowDebuffsFrame and D.profile.AutoHideMUFs == 1; end,
                         args = {
                             -- {{{
                             Warning = {
@@ -1536,22 +1563,26 @@ local function GetStaticOptions ()
                         width = 'double',
                         set = function(info, v)
 
-                            local errorn;
-                            errorn, v = validateSpellInput(info, v);
+                            local errorn, isItem;
+                            errorn, v, isItem = validateSpellInput(info, v);
                             if errorn ~= 0 then D:Debug("XXXX AHHHHHHHHHHHHHHH!!!!!", errorn); return false end
 
-                            if not D.classprofile.UserSpells[v] then
+                            if not D.classprofile.UserSpells[v] or D.classprofile.UserSpells[v].Hidden and CustomSpellMacroEditingAllowed then
                                 D:Debug("Adding", v);
                                 D.classprofile.UserSpells[v] = {
                                     Types = {},
                                     Better = 10,
                                     Pet = false,
                                     Disabled = false,
+                                    IsItem = isItem,
                                 };
 
                                 if CustomSpellMacroEditingAllowed then
 
-                                    D.classprofile.UserSpells[v].MacroText = "/stopcasting\n/cast [@UNITID,help][@UNITID,harm]" .. v;
+                                    D.classprofile.UserSpells[v].MacroText = ("/stopcasting\n/%s [@UNITID,help][@UNITID,harm]%s"):format(
+                                        isItem and "use" or "cast",
+                                        D.GetSpellOrItemInfo(v)
+                                    );
 
                                     -- If it's a default spell, then copy the spell settings
                                     if DC.SpellsToUse[v] then
@@ -1567,6 +1598,7 @@ local function GetStaticOptions ()
                             elseif D.classprofile.UserSpells[v].IsDefault and D.classprofile.UserSpells[v].Hidden then
                                 D:Debug("Reactivating", v);
                                 D.classprofile.UserSpells[v].Hidden = false;
+                                D.classprofile.UserSpells[v].MacroText = nil;
                             end
 
                             CustomSpellMacroEditingAllowed = false; -- reset macro check box
@@ -1613,7 +1645,7 @@ local function GetStaticOptions ()
                 name = D:ColorText(L["OPT_MACROOPTIONS"], "FFCC99BB"),
                 desc = L["OPT_MACROOPTIONS_DESC"],
                 order = 70,
-                disabled = function() return  not D.Status.Enabled or D.Status.Combat end,
+                disabled = function() return not D.Status.Enabled or D.Status.Combat end,
                 args = {
                     description = {name = L["OPT_MACROOPTIONS_DESC"], order = 1, type = "description"},
                     SetKey = {
@@ -1672,15 +1704,17 @@ local function GetStaticOptions ()
                                     "\n\n|cFFDDDD00 %s|r:\n   %s"..
                                     "\n\n|cFFDDDD00 %s|r:\n   %s"..
                                     "\n\n|cFFDDDD00 %s|r:\n   %s"..
-                                    "\n\n|cFFDDDD00 %s|r:\n   %s"
+                                    "\n\n|cFFDDDD00 %s|r:\n   %s\n\n   %s"
                                 ):format(
-                                    "2.7.0.5", "John Wellesz", ("2012-02-05T17:48:12Z"):sub(1,10),
+                                    "2.7.4.2", "John Wellesz", ("2015-04-05T04:33:42Z"):sub(1,10),
                                     L["ABOUT_NOTES"],
-                                    L["ABOUT_LICENSE"],         GetAddOnMetadata("Decursive", "X-License"),
-                                    L["ABOUT_SHAREDLIBS"],      GetAddOnMetadata("Decursive", "X-Embeds"),
-                                    L["ABOUT_OFFICIALWEBSITE"], GetAddOnMetadata("Decursive", "X-Website"),
-                                    L["ABOUT_AUTHOREMAIL"],     GetAddOnMetadata("Decursive", "X-eMail"),
-                                    L["ABOUT_CREDITS"],         GetAddOnMetadata("Decursive", "X-Credits")
+                                    L["ABOUT_LICENSE"],         GetAddOnMetadata("Decursive", "X-License") or 'All Rights Reserved',
+                                    L["ABOUT_SHAREDLIBS"],      GetAddOnMetadata("Decursive", "X-Embeds")  or 'GetAddOnMetadata() failure',
+                                    L["ABOUT_OFFICIALWEBSITE"], GetAddOnMetadata("Decursive", "X-Website") or 'GetAddOnMetadata() failure',
+                                    L["ABOUT_AUTHOREMAIL"],     GetAddOnMetadata("Decursive", "X-eMail")   or 'GetAddOnMetadata() failure',
+                                    L["ABOUT_CREDITS"]
+                                    ,    "Decursive is inspired from the original \"Decursive v1.9.4\" released in 2006 by Patrick Bohnet (Quutar of Earthen Ring (US))"
+                                    ,    GetAddOnMetadata("Decursive", "X-Credits") or 'GetAddOnMetadata() failure'
                                 ),
                         order = 0,
                     },
@@ -1693,7 +1727,6 @@ local function GetStaticOptions ()
                         type = "execute",
                         name = L["OPT_CHECKOTHERPLAYERS"],
                         desc = L["OPT_CHECKOTHERPLAYERS_DESC"],
-                        hidden = function () return not DC.COMMAVAILABLE; end,
                         disabled = function () return InCombatLockdown() or GetTime() - T.LastVCheck < 60; end,
                         func = function () if D:AskVersion() then D.versions = false; end GameTooltip:Hide(); end,
                         order = 10,
@@ -1752,10 +1785,13 @@ end
 function D:ExportOptions ()
     -- Export the option table to Blizz option UI and to Ace3 option UI
 
+    T._CatchAllErrors = "ExportOptions"; 
     LibStub("AceConfig-3.0"):RegisterOptionsTable(D.name,  GetOptions, 'dcr');
+    T._CatchAllErrors = false; 
 
     
-    
+    -- Don't feed the interface option panel until Blizz fixes the taint issue...
+    --[=[ 
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(D.name, D.name, nil, "general");
 
     local SubGroups_ToBlizzOptions = {
@@ -1772,6 +1808,7 @@ function D:ExportOptions ()
     for key,values in ipairs(SubGroups_ToBlizzOptions) do
         LibStub("AceConfigDialog-3.0"):AddToBlizOptions(D.name, values[1], D.name, values[2]);
     end
+    --]=]
 end
 
 
@@ -1957,7 +1994,7 @@ end
 
 function D:ShowHideDebuffsFrame ()
 
-    if InCombatLockdown() or not D.DcrFullyInitialized then
+    if InCombatLockdown() or not D.DcrFullyInitialized or D.Status.TestLayout then
         return
     end
 
@@ -1972,8 +2009,15 @@ function D:ShowHideDebuffsFrame ()
 
     if (not D.profile.ShowDebuffsFrame) then
         D:CancelDelayedCall("Dcr_MUFupdate");
+        D:CancelDelayedCall("Dcr_ScanEverybody");
+        if D.profile.HideLiveList then
+            D.Status.SoundPlayed = false;
+            D:Debug("ShowHideDebuffsFrame(): sound re-enabled");
+        end
     else
         D:ScheduleRepeatedCall("Dcr_MUFupdate", D.DebuffsFrame_Update, D.profile.DebuffsFrameRefreshRate, D);
+        self:ScheduleRepeatedCall("Dcr_ScanEverybody", D.ScanEveryBody, 1, D);
+        D.MicroUnitF:Force_FullUpdate();
     end
 
     -- set Icon
@@ -2579,28 +2623,50 @@ end
 
 do
 
+    local t_insert      = _G.table.insert;
+    local tonumber      = _G.tonumber;
+    local IsSpellKnown  = _G.IsSpellKnown;
+    local TN            = function(string) return tonumber(string) or nil; end;
+
     local order = 160;
-    local t_insert = _G.table.insert;
+
+    local function isSpellUSable (spellID)
+
+        local spell = D.classprofile.UserSpells[spellID];
+
+        if not spell.IsItem then
+            return IsSpellKnown(spellID, spell.Pet)
+        else
+            return D:isItemUsable(spellID * -1)
+        end
+    end
 
 
-    local function GetColoredName(spellname)
-        local spell = D.classprofile.UserSpells[spellname];
+    local function GetColoredName(spellID)
+        local spell = D.classprofile.UserSpells[spellID];
+
+        if not spell then
+            D:AddDebugText('GetColoredName(): invalid spellID:', spellID);
+            return tostring(spellID);
+        end
+
+        local name = D.GetSpellOrItemInfo(spellID);
         local color = 'FFFFFFFF';
 
         if spell.Disabled then
             color = 'FFAA0000';
-        elseif not D.Status.CuringSpellsPrio[spellname] then
+        elseif not D.Status.CuringSpellsPrio[name] then
             color = 'FF909090';
         else
             color = 'FF00D000';
         end
 
-        if not GetSpellInfo(spellname) then
-            spellname = ("(%s) %s"):format(L["OPT_CUSTOM_SPELL_UNAVAILABLE"], spellname);
+        if not isSpellUSable(spellID) then
+            name = ("(%s) %s"):format(L["OPT_CUSTOM_SPELL_UNAVAILABLE"], name);
             color = 'FF606060';
         end
 
-        return D:ColorText(spellname .. ((D.classprofile.UserSpells[spellname] and D.classprofile.UserSpells[spellname].MacroText) and "|cFFFF0000*|r" or ""), color);
+        return D:ColorText(name .. ((spell and spell.MacroText) and "|cFFFF0000*|r" or ""), color);
 
     end
 
@@ -2608,10 +2674,10 @@ do
         type = "toggle",
         name = function(info) return L[info[#info]] end,
         get = function(info)
-            return D:tcheckforval(D.classprofile.UserSpells[info[#info-2]].Types,  DC.LocalizableTypeNamesToTypes[info[#info]])
+            return D:tcheckforval(D.classprofile.UserSpells[TN(info[#info-2])].Types,  DC.LocalizableTypeNamesToTypes[info[#info]])
         end,
         set = function(info, v)
-            local spellTableTypes = D.classprofile.UserSpells[info[#info-2]].Types
+            local spellTableTypes = D.classprofile.UserSpells[TN(info[#info-2])].Types
             local curetype = DC.LocalizableTypeNamesToTypes[info[#info]]
             D:Debug("TypeOption: checkingtable named:", info[#info-2], "for", info[#info], "CureType:", curetype);
 
@@ -2620,17 +2686,17 @@ do
             elseif not v then
                 D:tremovebyval(spellTableTypes, curetype);
             end
-            if not D.classprofile.UserSpells[info[#info-2]].Disabled and GetSpellInfo(info[#info-2]) then
+            if not D.classprofile.UserSpells[TN(info[#info-2])].Disabled and isSpellUSable(TN(info[#info-2])) then
                 D:ScheduleDelayedCall("Dcr_Delayed_Configure", D.Configure, 2, D);
             end
         end,
         disabled = function (info) -- disable types edition if an enhancement is active (default types are not used in that case)
-            if D.classprofile.UserSpells[info[#info-2]] and D.classprofile.UserSpells[info[#info-2]].EnhancedByCheck then
+            if D.classprofile.UserSpells[TN(info[#info-2])] and D.classprofile.UserSpells[TN(info[#info-2])].EnhancedByCheck then
 
-                return D.classprofile.UserSpells[info[#info-2]].EnhancedByCheck();
+                return D.classprofile.UserSpells[TN(info[#info-2])].EnhancedByCheck();
             end
 
-            if DC.SpellsToUse[info[#info-2]] and D:tcheckforval(DC.SpellsToUse[info[#info-2]].Types, DC.LocalizableTypeNamesToTypes[info[#info]]) then
+            if DC.SpellsToUse[TN(info[#info-2])] and D:tcheckforval(DC.SpellsToUse[TN(info[#info-2])].Types, DC.LocalizableTypeNamesToTypes[info[#info]]) then
                 return true;
             end
 
@@ -2641,9 +2707,9 @@ do
 
     local SpellSubOptions = {
         type = 'group',
-        name = function(info) return GetColoredName(info[#info]) end,
+        name = function(info) return GetColoredName(TN(info[#info])) end,
         desc = function(info)
-            if DC.SpellsToUse[info[#info]] then
+            if DC.SpellsToUse[TN(info[#info])] then
                 return L["OPT_CUSTOM_SPELL_IS_DEFAULT"];
             end
             return "";
@@ -2653,25 +2719,25 @@ do
             -- an enable checkbox
             header = {
                 type = 'header',
-                name = function (info) return GetColoredName(info[#info - 1]); end,
+                name = function (info) return GetColoredName(TN(info[#info - 1])); end,
                 order = 0,
             },
             enable = {
                 type = "toggle",
                 name = L["OPT_ENABLE_A_CUSTOM_SPELL"],
                 set = function(info,v)
-                    D.classprofile.UserSpells[info[#info-1]].Disabled = not v;
-                    if v and DC.SpellsToUse[info[#info-1]] then
+                    D.classprofile.UserSpells[TN(info[#info-1])].Disabled = not v;
+                    if v and DC.SpellsToUse[TN(info[#info-1])] then
                         D:Configure();
                         return;
                     end
 
-                    if GetSpellInfo(info[#info-1]) then
+                    if isSpellUSable(TN(info[#info-1])) then
                         D:ReConfigure();
                     end
                 end,
                 get = function(info,v)
-                    return not D.classprofile.UserSpells[info[#info-1]].Disabled;
+                    return not D.classprofile.UserSpells[TN(info[#info-1])].Disabled;
                 end,
                 order = 100
             },
@@ -2687,33 +2753,36 @@ do
                 type = 'range',
                 name = L["OPT_CUSTOM_SPELL_PRIORITY"],
                 desc = L["OPT_CUSTOM_SPELL_PRIORITY_DESC"],
-                get = function (info) return D.classprofile.UserSpells[info[#info-1]].Better end,
+                get = function (info) return D.classprofile.UserSpells[TN(info[#info-1])].Better end,
                 set = function (info, v)
-                    D.classprofile.UserSpells[info[#info-1]].Better = v;
-                    if not D.classprofile.UserSpells[info[#info-1]].Disabled then
+                    D.classprofile.UserSpells[TN(info[#info-1])].Better = v;
+                    if not D.classprofile.UserSpells[TN(info[#info-1])].Disabled then
                         D:ScheduleDelayedCall("Dcr_Delayed_Configure", D.Configure, 2, D);
                     end
                 end,
-                min = 10,
+                min = -10,
                 max = 30,
                 step = 1,
                 order = 110,
             },
-            stopcasting = {
+            
+            isPet = {
                 type = "toggle",
-                name = L["OPT_CUSTOM_SPELL_STOPCASTING"],
-                desc = L["OPT_CUSTOM_SPELL_STOPCASTING_DESC"];
+                name = L["OPT_CUSTOM_SPELL_ISPET"],
+                desc = L["OPT_CUSTOM_SPELL_ISPET_DESC"];
                 set = function(info,v)
-                    D.classprofile.UserSpells[info[#info-1]].Pet = not v;
-                    if GetSpellInfo(info[#info-1]) then
+
+                    D.classprofile.UserSpells[TN(info[#info-1])].Pet = v;
+
+                    if isSpellUSable(TN(info[#info-1])) then
                         D:ScheduleDelayedCall("Dcr_Delayed_Configure", D.Configure, 2, D);
                     end
                 end,
                 get = function(info,v)
-                    return not D.classprofile.UserSpells[info[#info-1]].Pet;
+                    return D.classprofile.UserSpells[TN(info[#info-1])].Pet;
                 end,
-                hidden = function(info,v) return D.classprofile.UserSpells[info[#info-1]].MacroText end,
-                order = 115
+                hidden = function (info) return D.classprofile.UserSpells[TN(info[#info-1])].IsItem end,
+                order = 112
             },
             MacroEdition = {
                 type = 'input',
@@ -2721,18 +2790,18 @@ do
                 usage = L["OPT_CUSTOM_SPELL_MACRO_TEXT_DESC"],
                 multiline = true,
                 width = 'full',
-                hidden = function(info,v) return not D.classprofile.UserSpells[info[#info-1]].MacroText end,
+                hidden = function(info,v) return not D.classprofile.UserSpells[TN(info[#info-1])].MacroText end,
 
                 get = function(info,v)
-                    return D.classprofile.UserSpells[info[#info-1]].MacroText;
+                    return D.classprofile.UserSpells[TN(info[#info-1])].MacroText;
                 end,
 
                 set = function (info,v)
                     if v:find("UNITID") and (v:gsub("UNITID", "PARTYPET5")):len() < 256 then
-                        D.classprofile.UserSpells[info[#info-1]].MacroText = v;
+                        D.classprofile.UserSpells[TN(info[#info-1])].MacroText = v;
 
-                        if D.Status.FoundSpells[info[#info - 1]] then
-                            D.Status.FoundSpells[info[#info-1]][5] = v;
+                        if D.Status.FoundSpells[D.GetSpellOrItemInfo(TN(info[#info - 1]))] then
+                            D.Status.FoundSpells[D.GetSpellOrItemInfo(TN(info[#info-1]))][5] = v;
                             D.Status.SpellsChanged = GetTime(); -- will force an update of all MUFs attributes
                             D:Debug("Attribute update triggered");
                         end
@@ -2756,8 +2825,8 @@ do
                         return error(L["OPT_CUSTOM_SPELL_MACRO_MISSING_UNITID_KEYWORD"]);
                     end
 
-                    if not v:find(info[#info-1], 0, true) then
-                        StaticPopup_Show("Decursive_Notice_Frame", error((L["OPT_CUSTOM_SPELL_MACRO_MISSING_NOMINAL_SPELL"]):format(info[#info-1])));
+                    if not v:find(D.GetSpellOrItemInfo(TN(info[#info-1])), 0, true) then
+                        T._ShowNotice(error((L["OPT_CUSTOM_SPELL_MACRO_MISSING_NOMINAL_SPELL"]):format((D.GetSpellOrItemInfo(TN(info[#info-1]))))));
                     end
 
                     return 0;
@@ -2768,20 +2837,20 @@ do
             -- a delete button
             delete = {
                 type = 'execute',
-                name = function(info) return ("%s %q"):format(L["OPT_DELETE_A_CUSTOM_SPELL"], info[#info - 1]) end,
+                name = function(info) return ("%s %q"):format(L["OPT_DELETE_A_CUSTOM_SPELL"], D.GetSpellOrItemInfo(TN(info[#info - 1]))) end,
                 confirm = true,
                 width = 'double',
                 func = function (info)
 
                     if (#info ~= 0) then -- prevent a bug from Ace3 when someone pushes several times on the delete without confirming
-                        if D.classprofile.UserSpells[info[#info - 1]].IsDefault then
-                            D.classprofile.UserSpells[info[#info - 1]].Types = {};
-                            D.classprofile.UserSpells[info[#info - 1]].Hidden = true;
+                        if D.classprofile.UserSpells[TN(info[#info - 1])].IsDefault then
+                            D.classprofile.UserSpells[TN(info[#info - 1])].Types = {};
+                            D.classprofile.UserSpells[TN(info[#info - 1])].Hidden = true;
                         else
-                            D.classprofile.UserSpells[info[#info - 1]] = nil;
+                            D.classprofile.UserSpells[TN(info[#info - 1])] = nil;
                         end
 
-                        if D.Status.FoundSpells[info[#info - 1]] then
+                        if D.Status.FoundSpells[D.GetSpellOrItemInfo(TN(info[#info - 1]))] then
                             D:Configure();
                         end
                     end
@@ -2804,9 +2873,9 @@ do
 
         SpellSubOptions.args.cureTypes.args = TypesSelector;
 
-        for spellName, spellTable in pairs(self.classprofile.UserSpells) do
+        for spellID, spellTable in pairs(self.classprofile.UserSpells) do
             if not spellTable.Hidden then
-                where[spellName] = SpellSubOptions;
+                where[tostring(spellID)] = SpellSubOptions;
                 order = order + 1;
             end
         end
@@ -2942,33 +3011,6 @@ function D:QuickAccess (CallingObject, button) -- {{{
 end -- }}}
 
 
-local DebugHeader = false;
-function D:ShowDebugReport()
-
-    if DC.DevVersionExpired then
-        self:VersionWarnings();
-        return;
-    end
-
-    D:Debug(GetLocale());
-
-    if not DebugHeader then
-        DebugHeader = ("%s\n2.7.0.5  %s(%s)  CT: %0.4f D: %s %s %s BDTHFAd: %s nDrE: %d Embeded: %s (%s, %s, %s, %s)"):format((self.L) and self.L["DEBUG_REPORT_HEADER"] or "X|cFF11FF33Please report the content of this window to Archarodim@teaser.fr|r\n|cFF009999(Use CTRL+A to select all and then CTRL+C to put the text in your clip-board)|r\n", -- "%s\n
-        DC.MyClass, tostring(UnitLevel("player") or "??"), D:NiceTime(), date(), GetLocale(), -- %s(%s)  CT: %0.4f D: %s %s
-        BugGrabber and "BG" .. (T.BugGrabber and "e" or "") or "NBG", -- %s
-        tostring(T._BDT_HotFix1_applyed), -- BDTHFAd: %s
-        T._NonDecursiveErrors, -- nDrE: %d
-        tostring(T._EmbeddedMode), -- Embeded: %s
-        GetBuildInfo()); --  (%s, %s, %s, %s)
-    end
-
-    T._DebugText = DebugHeader .. table.concat(T._DebugTextTable, "");
-    _G.DecursiveDebuggingFrameText:SetText(T._DebugText);
-
-    _G.DecursiveDEBUGtext:SetText(L["DECURSIVE_DEBUG_REPORT"]);
-    _G.DecursiveDebuggingFrame:Show();
-end
-
-T._LoadedFiles["Dcr_opt.lua"] = "2.7.0.5";
+T._LoadedFiles["Dcr_opt.lua"] = "2.7.4.2";
 
 -- Closer

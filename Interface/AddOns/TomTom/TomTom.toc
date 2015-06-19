@@ -1,15 +1,20 @@
-## Interface: 40300
+## Interface: 60100
 ## Title: TomTom
 ## Author: jnwhiteh
-## Version: v40300-1.4.4-541092e
+## Version: v60100-1.0.0
 ## License: All Rights Reserved
 ## Notes: Acts as your portable navigation assistant
+## Notes-frFR: Agit comme un assistant de navigation portable
 ## Notes-zhCN:一个简单的导航助手。
 ## Notes-ruRU: Удобный портативный навигатор по игровой карте
 ## Author: Cladhaire
 ## SavedVariables: TomTomDB, TomTomWaypoints, TomTomWaypointsMF
+## X-Curse-Packaged-Version: v60100-1.0.0
+## X-Curse-Project-Name: TomTom
+## X-Curse-Project-ID: tomtom
+## X-Curse-Repository-ID: wow/tomtom/mainline
 
-## X-Localizations: enUS, enGB, deDE, zhCN, ruRU, zhTW
+## X-Localizations: enUS, enGB, deDE, frFR, zhCN, ruRU, zhTW
 ## X-CompatibleLocales: enUS, enGB, deDE, frFR, esES, esMX, zhCN, zhTW, koKR, ruRU
 
 libs\Astrolabe\Load.xml
@@ -27,6 +32,7 @@ AddonCore.lua
 
 Localization.enUS.lua
 Localization.deDE.lua
+Localization.frFR.lua
 Localization.zhCN.lua
 Localization.ruRU.lua
 Localization.zhTW.lua

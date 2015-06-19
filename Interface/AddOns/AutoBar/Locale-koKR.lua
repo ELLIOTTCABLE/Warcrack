@@ -189,6 +189,7 @@ if (GetLocale() == "koKR") then
 		["AutoBarClassBarBasic"] = "기본",
 		["AutoBarClassBarExtras"] = "추가",
 		["AutoBarClassBarDeathKnight"] = "죽음의 기사",
+		["AutoBarClassBarMonk"] = "Monk",
 		["AutoBarClassBarDruid"] = "드루이드",
 		["AutoBarClassBarHunter"] = "사냥꾼",
 		["AutoBarClassBarMage"] = "마법사",
@@ -205,7 +206,9 @@ if (GetLocale() == "koKR") then
 		["AutoBarCooldownHeader"] = "물약 & 석 대기시간",
 		["AutoBarClassBarHeader"] = "직업 바",
 
-		["AutoBarButtonAura"] = "오라 / 상",
+		["AutoBarButtonAspect"] = "오라 / 상",
+		["AutoBarButtonPoisonLethal"] = "Poison: Lethal",
+		["AutoBarButtonPoisonNonlethal"] = "Poison: Nonlethal",
 		["AutoBarButtonBandages"] = "붕대",
 		["AutoBarButtonBattleStandards"] = "전투 깃발",
 		["AutoBarButtonBuff"] = "버프",
@@ -261,7 +264,6 @@ if (GetLocale() == "koKR") then
 		["AutoBarButtonTotemAir"] = "바람의 토템",
 		["AutoBarButtonTotemFire"] = "불의 토템",
 		["AutoBarButtonTotemWater"] = "물의 토템",
-		["AutoBarButtonTrack"] = "추적",
 		["AutoBarButtonTrap"] = "덫",
 		["AutoBarButtonTrinket1"] = "장신구 1",
 		["AutoBarButtonTrinket2"] = "장신구 2",
@@ -503,7 +505,9 @@ if (GetLocale() == "koKR") then
 		["Misc.Lockboxes"] = LOCKED;
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
-		["Spell.Aura"] = "오라 / 상";
+		["Spell.Aspect"] = "오라 / 상";
+		["Spell.Poison.Lethal"] = "Poison: Lethal";
+		["Spell.Poison.Nonlethal"] = "Poison Nonlethal";
 		["Spell.Buff.Weapon"] = "버프 주문: 무기";
 		["Spell.Class.Buff"] = "직업 버프";
 		["Spell.Class.Pet"] = "직업 소환수";
@@ -521,7 +525,6 @@ if (GetLocale() == "koKR") then
 		["Spell.Totem.Fire"] = "불의 토템";
 		["Spell.Totem.Water"] = "물의 토템";
 		["Spell.Seal"] = "문장";
-		["Spell.Track"] = "추적";
 		["Spell.Trap"] = "덫";
 		["Misc.Booze"] = "술";
 		["Misc.Hearth"] = "귀환석";

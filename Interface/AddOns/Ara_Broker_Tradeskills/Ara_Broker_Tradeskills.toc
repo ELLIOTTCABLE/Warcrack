@@ -1,7 +1,7 @@
-## Interface: 40000
+## Interface: 61300
 ## Title: |cFFFFB366Ara|r - Broker - Tradeskills
-## Version: r43
-## Author: Ara
+## Version: r613.15
+## Author: Aranarth, Alyred, Griffin224
 ## Notes: Provides easy access to tradeskills and tracked tradeskill CDs. Can also display combat skills and shortcuts.
 ## OptionalDeps: 
 ## SavedVariables: AraTradeskillsDB

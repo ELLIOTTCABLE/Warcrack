@@ -4,9 +4,9 @@
 
 ]]
 
-local filterName = "By Source"
+local filterName = Gatherer.Locale.Tr("REPORT_SEARCH_BY_SOURCE")
 
-function findSource(source, ...)
+local function findSource(source, ...)
 	local value, found
 	for i = 1, select("#", ...) do
 		value = select(i, ...)
@@ -16,7 +16,7 @@ function findSource(source, ...)
 	return false
 end
 
-function filterFunction(parameter, continent, zone, nodeid, index, x,y, count, harvest, inspect, source, gtype)
+function filterFunction(parameter, zone, nodeid, index, x,y, count, harvest, inspect, source, gtype)
 	if (findSource(parameter:lower(), strsplit(",", source:lower())) ~= false) then return true end
 	return false
 end

@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherNotifications.lua 907 2010-12-05 23:54:28Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherNotifications.lua 979 2012-09-04 07:38:10Z Esamynn $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -30,7 +30,7 @@
 		such as warnings about Gatherer not recognizing all of the client's maps
 
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherNotifications.lua $", "$Rev: 907 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherNotifications.lua $", "$Rev: 979 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
@@ -50,7 +50,7 @@ local function DisplayNotification()
 			Tooltip:SetOwner(UIParent, "ANCHOR_PRESERVE")
 		end
 		local C = HIGHLIGHT_FONT_COLOR
-		Tooltip:SetText(_trL("Gatherer: Warnings"), C.r, C.g, C.b)
+		Tooltip:SetText(_tr("NOTIFICATIONS_TITLE"), C.r, C.g, C.b)
 		for _, text in ipairs(Messages) do
 			Tooltip:AddLine("———————————————————————————————————————————————————") -- I'd perfer if this produced a solid line :/
 			Tooltip:AddLine(text, nil, nil, nil, true)

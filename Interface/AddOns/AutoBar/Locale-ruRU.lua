@@ -189,6 +189,7 @@ if (GetLocale() == "ruRU") then
 		["AutoBarClassBarBasic"] = "Основной",
 		["AutoBarClassBarExtras"] = "Дополнительные",
 		["AutoBarClassBarDeathKnight"] = "Рыцарь смерти",
+		["AutoBarClassBarMonk"] = "Monk",
 		["AutoBarClassBarDruid"] = "Друид",
 		["AutoBarClassBarHunter"] = "Охотник",
 		["AutoBarClassBarMage"] = "Маг",
@@ -205,7 +206,9 @@ if (GetLocale() == "ruRU") then
 		["AutoBarCooldownHeader"] = "Перезарядка Зелья & Камней",
 		["AutoBarClassBarHeader"] = "Классовые панели",
 
-		["AutoBarButtonAura"] = "Ауры / Духи",
+		["AutoBarButtonAspect"] = "Ауры / Духи",
+		["AutoBarButtonPoisonLethal"] = "Poison: Lethal",
+		["AutoBarButtonPoisonNonlethal"] = "Poison: Nonlethal",
 		["AutoBarButtonBandages"] = "Бинты",
 		["AutoBarButtonBattleStandards"] = "Боевые Стандарты",
 		["AutoBarButtonBuff"] = "Баффы",
@@ -261,7 +264,6 @@ if (GetLocale() == "ruRU") then
 		["AutoBarButtonTotemAir"] = "Тотемы воздуха",
 		["AutoBarButtonTotemFire"] = "Тотемы огня",
 		["AutoBarButtonTotemWater"] = "Тотемы воды",
-		["AutoBarButtonTrack"] = "Выслеживание",
 		["AutoBarButtonTrap"] = "Ловушки",
 		["AutoBarButtonTrinket1"] = "Аксессуар 1",
 		["AutoBarButtonTrinket2"] = "Аксессуар 2",
@@ -503,7 +505,9 @@ if (GetLocale() == "ruRU") then
 		["Misc.Lockboxes"] = LOCKED;
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 
-		["Spell.Aura"] = "Аура / Дух";
+		["Spell.Aspect"] = "Аура / Дух";
+		["Spell.Poison.Lethal"] = "Poison: Lethal";
+		["Spell.Poison.Nonlethal"] = "Poison Nonlethal";
 		["Spell.Buff.Weapon"] = "Бафф способности: Оружие";
 		["Spell.Class.Buff"] = "Классовые Баффы";
 		["Spell.Class.Pet"] = "Классовые питомцы";
@@ -521,7 +525,6 @@ if (GetLocale() == "ruRU") then
 		["Spell.Totem.Fire"] = "Тотемы огня";
 		["Spell.Totem.Water"] = "Тотемы воды";
 		["Spell.Seal"] = "Печати";
-		["Spell.Track"] = "Выслеживание";
 		["Spell.Trap"] = "Ловушки";
 		["Misc.Booze"] = "Выпивка";
 		["Misc.Hearth"] = "Камень возвращения";

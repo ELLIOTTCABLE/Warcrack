@@ -24,6 +24,7 @@ L.MSG_INVALID_CUSTOM_FONT_NAME		= "Ungültiger Schriftname."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "Schriftname existiert bereits."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "Schriftpfad muss zu einer .ttf-Datei führen."
 L.MSG_UNABLE_TO_SET_FONT			= "Die ausgewählte Schrift kann nicht verwendet werden." 
+--L.MSG_TESTING_FONT			= "Testing the specified font for validity..."
 L.MSG_CUSTOM_SOUNDS					= "Benutzerdefinierte Sounds"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "Ungültiger Sound-Name."
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "Sound-Name existiert bereits."
@@ -35,7 +36,7 @@ L.MSG_SCROLL_AREA_ALREADY_EXISTS	= "Name für Scroll-Bereich existiert bereits."
 L.MSG_INVALID_SCROLL_AREA_NAME		= "Ungültiger Name für Scroll-Bereich."
 L.MSG_ACKNOWLEDGE_TEXT				= "Bist du sicher, dass du diese Aktion durchführen willst?"
 L.MSG_NORMAL_PREVIEW_TEXT			= "Normal"
-L.MSG_INVALID_SOUND_FILE			= "Sound muss eine .mp3 oder .ogg Datei sein."
+L.MSG_INVALID_SOUND_FILE			= "Sound muss eine .ogg Datei sein."
 L.MSG_NEW_TRIGGER					= "Neuer Auslöser"
 L.MSG_TRIGGER_CLASSES				= "Klassen Auslöser"
 L.MSG_MAIN_EVENTS					= "Hauptereignisse"
@@ -53,23 +54,6 @@ L.MSG_ITEM_QUALITIES				= "Gegenstandsqualitäten"
 L.MSG_ITEMS							= "Gegenstände"
 L.MSG_ITEM_ALREADY_EXISTS			= "Gegenstandsname exisiert bereits."
 L.MSG_INVALID_ITEM_NAME				= "Ungültiger Gegenstandsname."
-
-
-------------------------------
--- Class Names.
-------------------------------
-
-local obj = L.CLASS_NAMES
-obj["DEATHKNIGHT"]	= "Todesritter"
-obj["DRUID"]		= "Druide"
-obj["HUNTER"]		= "Jäger"
-obj["MAGE"]			= "Magier"
-obj["PALADIN"]		= "Paladin"
-obj["PRIEST"]		= "Priester"
-obj["ROGUE"]		= "Schurke"
-obj["SHAMAN"]		= "Schamane"
-obj["WARLOCK"]		= "Hexenmeister"
-obj["WARRIOR"]		= "Krieger"
 
 
 ------------------------------
@@ -118,6 +102,8 @@ obj["enableTrigger"]			= { tooltip="Auslöser aktivieren."}
 obj["allPowerGains"]			= { label="ALLE Regenerationen", tooltip="Zeigt alle Ressourcenregenerationen einschließlich derjenigen, die nicht im Kampflog gemeldet werden.\n\nWARNUNG: Diese Einstellung führt zu viel Spam, da sie alle Grenzwerte und Drosselfunktionen ignoriert.\n\nNICHT EMPFOHLEN."}
 obj["abbreviateSkills"]			= { label="Fähigkeiten abkürzen", tooltip="Fähigkeiten abkürzen (nur Englisch).\n\nDies kann von jedem Ereignis mit dem %sl Code überschrieben werden."}
 obj["mergeSwings"]				= { label="Schwünge verbinden", tooltip="Verbindet normale Meleetreffer, die in einer kurzen Zeitspanne erfolgen."}
+--obj["shortenNumbers"]			= { label="Shorten Numbers", tooltip="Display numbers in an abbreviated format (example: 32765 -> 33k)."}
+--obj["groupNumbers"]				= { label="Group By Thousands", tooltip="Display numbers grouped by thousands (example: 32765 -> 32,765)."}
 obj["hideSkills"]				= { label="Fähigkeiten verstecken", tooltip="Keine Fähigkeitsnamen für eingehende und ausgehende Ereignisse anzeigen.\n\nDu gibst ein wenig Anpassungsmöglichkeit auf Ereignisebene auf, da der Ereigniscode %s nun ignoriert wird."}
 obj["hideNames"]				= { label="Namen verstecken", tooltip="Keine Namen für eingehende und ausgehende Ereignisse anzeigen.\n\nDu gibst ein wenig Anpassungsmöglichkeit auf Ereignisebene auf, da der Ereigniscode %n nun ignoriert wird."}
 obj["hideFullOverheals"]		= { label="Überheilungen verstecken", tooltip="Heilungen, die eine effektive Heilung von null haben, werden nicht angezeigt."}
@@ -226,7 +212,7 @@ obj = L.EDITBOXES
 obj["customFontName"]	= { label="Schriftname:", tooltip="Der Name wird benutzt um die Schrift zu identifizieren.\n\nBeispiel: Meine Super Schrift"}
 obj["customFontPath"]	= { label="Schrift Pfad:", tooltip="Der Pfad zu der Schrift Datei.\n\nNOTIZ: Wenn die Datei in dem empfohlenen MikScrollingBattleText\\Fonts Ordner ist, muss nur der Dateiname hier eingegeben werden anstatt der ganze Pfad.\n\nBeispiel: meineSchrift.ttf "}
 obj["customSoundName"]	= { label="Sound Name:", tooltip="Der Name wird benutzt um den Sound zu identifizieren.\n\nBeispiel: Mein Sound"}
-obj["customSoundPath"]	= { label="Sound Pfad:", tooltip="Der Pfad zu der Sound Datei.\n\nNOTIZ: Wenn die Datei in dem empfohlenen MikScrollingBattleText\\Sounds Ordner ist, muss nur der Dateiname hier eingegeben werden anstatt der ganze Pfad.\n\nBeispiel: mySound.mp3 "}
+obj["customSoundPath"]	= { label="Sound Pfad:", tooltip="Der Pfad zu der Sound Datei.\n\nNOTIZ: Wenn die Datei in dem empfohlenen MikScrollingBattleText\\Sounds Ordner ist, muss nur der Dateiname hier eingegeben werden anstatt der ganze Pfad.\n\nBeispiel: mySound.ogg "}
 obj["copyProfile"]		= { label="Neuer Profilname:", tooltip="Der Name des neuen Profils auf den das eben gewählte Profil kopiert werden soll."}
 obj["partialEffect"]	= { tooltip="Der Trailer, der angehängt wird wenn der Partielle Effekte erscheint."}
 obj["scrollAreaName"]	= { label="Neuen Scroll-Bereich-Namen eingeben:", tooltip="Neuer Name für den Scroll-Bereich."}
@@ -285,8 +271,10 @@ obj["HEALING_DONE"]			= "%a - Geheilte Menge.\n"
 obj["ABSORBED_AMOUNT"]		= "%a - Menge des absobierten Schadens.\n"
 obj["AURA_AMOUNT"]			= "%a - Menge der Stapel für eine Aura.\n"
 obj["ENERGY_AMOUNT"]		= "%a - Menge der Energie.\n"
+--obj["CHI_AMOUNT"]			= "%a - Amount of chi you have.\n"
 obj["CP_AMOUNT"]			= "%a - Menge der momentanen Combo-Punkte.\n"
 obj["HOLY_POWER_AMOUNT"]	= "%a - Menge der heiligen Kraft.\n"
+--obj["SHADOW_ORBS_AMOUNT"]	= "%a - Amount of shadow orbs you have.\n"
 obj["HONOR_AMOUNT"]			= "%a - Menge der Ehre.\n"
 obj["REP_AMOUNT"]			= "%a - Menge des Rufs.\n"
 obj["ITEM_AMOUNT"]			= "%a - Menge des geplünderten Gegenstands.\n"
@@ -473,10 +461,16 @@ obj["NOTIFICATION_COMBAT_ENTER"]		= { label="Kampfeintritt", tooltip="Aktiviert,
 obj["NOTIFICATION_COMBAT_LEAVE"]		= { label="Kampfaustritt", tooltip="Aktiviert, wenn du in den Kampf verlässt."}
 obj["NOTIFICATION_POWER_GAIN"]			= { label="Energie erhalten", tooltip="Aktiviert, wenn du zusätzliches Mana, Wut oder Energie erhälst."}
 obj["NOTIFICATION_POWER_LOSS"]			= { label="Energie verloren", tooltip="Aktiviert, wenn du durch Abzug Mana, Wut oder Energie verlierst."}
+--obj["NOTIFICATION_ALT_POWER_GAIN"]		= { label="Alternate Power Gains", tooltip="Enable when you gain alternate power such as sound level on Atramedes."}
+--obj["NOTIFICATION_ALT_POWER_LOSS"]		= { label="Alternate Power Losses", tooltip="Enable when you lose alternate power from drains."}
+--obj["NOTIFICATION_CHI_CHANGE"]			= { label="Chi Changes", tooltip="Enable when you change chi."}
+--obj["NOTIFICATION_CHI_FULL"]			= { label="Chi Full", tooltip="Enable when you attain full chi."}
 obj["NOTIFICATION_CP_GAIN"]				= { label="Combo-Punkte erhalten", tooltip="Aktiviert, wenn du Combo-Punkte bekommst."}
 obj["NOTIFICATION_CP_FULL"]				= { label="Combo-Punkte komplett", tooltip="Aktiviert, wenn du alle Combo-Punkte erreicht hast."}
 obj["NOTIFICATION_HOLY_POWER_CHANGE"]	= { label="Heilige Kraft verändert", tooltip="Aktiviert, wenn sich deine Heilige Kraft verändert."}
 obj["NOTIFICATION_HOLY_POWER_FULL"]		= { label="Heilige Kraft komplett", tooltip="Aktiviert, wenn deine Heilige Kraft voll ist."}
+--obj["NOTIFICATION_SHADOW_ORBS_CHANGE"]	= { label="Shadow Orb Changes", tooltip="Enable when you change shadow orbs."}
+--obj["NOTIFICATION_SHADOW_ORBS_FULL"]	= { label="Shadow Orbs Full", tooltip="Enable when you attain full shadow orbs."}
 obj["NOTIFICATION_HONOR_GAIN"]			= { label="Ehre erhalten", tooltip="Aktiviert, wenn du Ehre erhälst."}
 obj["NOTIFICATION_REP_GAIN"]			= { label="Ruf erhalten", tooltip="Aktiviert, wenn du Ruf erhälst."}
 obj["NOTIFICATION_REP_LOSS"]			= { label="Ruf verloren", tooltip="Aktiviert, wenn du Ruf verlierst."}

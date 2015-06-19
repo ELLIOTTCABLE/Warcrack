@@ -1,10 +1,10 @@
 TipTac - An Advanced Tooltip Addon
 ----------------------------------
-TipTac is a tooltip enchancement addon, it allows you to configure various aspects of the tooltip, such as moving where it's shown, the font, the scale of tips, plus a lot more.
+TipTac is a tooltip enchancement addon, it allows you to configure various aspects of the tooltip, such as moving where it's shown, the font, the scale of tips, plus many more features.
 
 To open the option dialog, just use "/tip" without any parameters. Use "/tip anchor" to show the anchor frame and position it as you want.
 
-You can always get the latest release of this addon on WoWInterface or Curse.
+You can always get the latest release of this addon on Curse or WoWInterface.
 Please post your comments, questions and suggestions for this addon there.
 
 Current Features
@@ -43,9 +43,22 @@ Saving Settings Per Character
 If you prefer to have TipTac configured differently on each of your characters, you will have to manually edit the "TipTac.toc" file.
 In this file, you will have to locate "SavedVariables", and change it into "SavedVariablesPerCharacter". You must restart WoW for it to take effect, and it will wipe your current settings.
 
+Upgraded Item Does Not Show the Correct ItemLevel
+-------------------------------------------------
+Preface: It's possible to avoid this issue alltogether by turning off the TipTacItemRef feature to "Show Item Level & ID".
+Unfortunately there is no API function to request the upgraded itemLevel of an item, the base itemLevel is always returned.
+This is an issue that I've tried to mend, by detecting the upgradeID on the item, and adding the upgraded levels manually.
+As new patches gets developed and items are added, new upgrades are introduced, which causes this detection to require an update as well.
+If you find an upgraded item that does not show the correct itemLevel, please do the following and report the chat output as well as the correct itemLevel.
+	/dump <shift click item into chat> <enter>
+Notice: It's possible that you do not have an addon installed which adds the /dump function to your interface. In such case, it becomes too complicated to explain here how to obtain the upgradeID.
+
 Lacking Features, Ideas & Problems
 ----------------------------------
-- ItemRefTooltip: Does not support "archaeology". "currency" should be supported now, but need verification.
+- Add glyph and npc support for the TipTacItemRef addon.
+- Look into scaling the tooltip height by adding texture lines like "|T:1:30|t". Only issue is that it needs to remain the last line, if another addon adds more lines, it will cause issues.
+- Colorblind mode does not work properly with owned combat pets with a custom name.
+- ItemRefTooltip: Does not support "archaeology". The "currency" type should be supported now, but need verification.
 - ItemRefTooltip does not position well if scaled below 1.
 - Remove font size delta, add slider for each font size.
 - Add hover tips to "GuildBankMessageFrame".

@@ -984,7 +984,7 @@ local function activate(self, oldLib, oldDeactivate)
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self:RegisterEvent("LOOT_OPENED", function()
-		if GetRealNumRaidMembers() > 0 or GetRealNumPartyMembers() > 0 then SendAddonMessage("LOOT_OPENED", "", "RAID") end
+		if GetNumGroupMembers() > 0 then SendAddonMessage("LOOT_OPENED", "", "RAID") end
 	end)
 	inCombat = InCombatLockdown()
 	registeringFromAceEvent = nil

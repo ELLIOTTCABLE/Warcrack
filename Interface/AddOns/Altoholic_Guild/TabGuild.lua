@@ -1,20 +1,16 @@
 local addonName = "Altoholic"
 local addon = _G[addonName]
+local colors = addon.Colors
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 
-local WHITE		= "|cFFFFFFFF"
-local TEAL		= "|cFF00FF9A"
-local GREEN		= "|cFF00FF00"
-local YELLOW	= "|cFFFFFF00"
-
-
-local parent = "AltoholicTabGuild"
+local parentName = "AltoholicTabGuild"
+local parent
 local currentMode
 local childrenObjects		-- these are the tables that actually contain the BuildView & Update methods. Not really OOP, but enough for our needs
 local childrenFrames = {
-	"GuildMembers",
-	"GuildBank",
+	"Members",
+	"Bank",
 }
 
 addon.Guild = {}
@@ -24,18 +20,19 @@ local ns = addon.Tabs.Guild		-- ns = namespace
 
 local function OnRosterUpdate()
 	local _, onlineMembers = GetNumGuildMembers()
-	_G[parent .. "MenuItem1"]:SetText(format("%s %s(%d)", L["Guild Members"], GREEN, onlineMembers))
+	parent.MenuItem1.Text:SetText(format("%s %s(%d)", L["Guild Members"], colors.green, onlineMembers))
 	
 	addon.Guild.Members:InvalidateView()
 end
 
 function ns:OnLoad()
-
+	parent = _G[parentName]
+	
 	-- localization stuff
-	_G[parent .. "MenuItem1"]:SetText(L["Guild Members"])
-	_G[parent .. "MenuItem1"]:Show()
-	_G[parent .. "MenuItem2"]:SetText(GUILD_BANK)
-	_G[parent .. "MenuItem2"]:Show()
+	parent.MenuItem1:SetText(L["Guild Members"])
+	parent.MenuItem1:Show()
+	parent.MenuItem2:SetText(GUILD_BANK)
+	parent.MenuItem2:Show()
 	
 	-- register datastore events
 	addon:RegisterMessage("DATASTORE_GUILD_ALTS_RECEIVED")
@@ -63,35 +60,33 @@ end
 
 function ns:SetMode(mode)
 	currentMode = mode
-
-	local Columns = addon.Tabs.Columns
-	Columns:Init()
 	
 	if mode == 1 then
-		Columns:Add(NAME, 100, function(self) addon.Guild.Members:Sort(self, "name") end)
-		Columns:Add(LEVEL, 60, function(self) addon.Guild.Members:Sort(self, "level") end)
-		Columns:Add("AiL", 65, function(self) addon.Guild.Members:Sort(self, "averageItemLvl") end)
-		Columns:Add(GAME_VERSION_LABEL, 80, function(self) addon.Guild.Members:Sort(self, "version") end)
-		Columns:Add(CLASS, 100, function(self) addon.Guild.Members:Sort(self, "englishClass") end)
-		return
+		parent.SortButtons:ShowChildFrames()
+		parent.SortButtons:SetButton(1, NAME, 100, function(self) addon.Guild.Members:Sort(self, "name") end)
+		parent.SortButtons:SetButton(2, LEVEL, 60, function(self) addon.Guild.Members:Sort(self, "level") end)
+		parent.SortButtons:SetButton(3, "AiL", 65, function(self) addon.Guild.Members:Sort(self, "averageItemLvl") end)
+		parent.SortButtons:SetButton(4, GAME_VERSION_LABEL, 80, function(self) addon.Guild.Members:Sort(self, "version") end)
+		parent.SortButtons:SetButton(5, CLASS, 100, function(self) addon.Guild.Members:Sort(self, "englishClass") end)
+	else
+		parent.SortButtons:HideChildFrames()
 	end
-
 end
 
 function ns:MenuItem_OnClick(id)
 	for _, v in pairs(childrenFrames) do			-- hide all frames
-		_G[ "AltoholicFrame" .. v]:Hide()
+		parent[v]:Hide()
 	end
 
 	ns:SetMode(id)
 	
-	_G[ "AltoholicFrame" .. childrenFrames[id]]:Show()
+	parent[childrenFrames[id]]:Show()
 	childrenObjects[id]:Update()
-
+	
 	for i = 1, 2 do 
-		_G[ parent .. "MenuItem"..i ]:UnlockHighlight();
+		parent["MenuItem"..i]:UnlockHighlight()
 	end
-	_G[ parent .. "MenuItem"..id ]:LockHighlight();
+	parent["MenuItem"..id]:LockHighlight()
 end
 
 -- *** DataStore Event Handlers ***

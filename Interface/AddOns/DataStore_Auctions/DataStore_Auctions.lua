@@ -15,7 +15,7 @@ local THIS_ACCOUNT = "Default"
 local AddonDB_Defaults = {
 	global = {
 		Options = {
-			AutoClearExpiredItems = 1,		-- Automatically clear expired auctions and bids
+			AutoClearExpiredItems = true,		-- Automatically clear expired auctions and bids
 		},
 		Characters = {
 			['*'] = {				-- ["Account.Realm.Name"] 
@@ -74,6 +74,7 @@ local function _ClearAuctionEntries(character, AHType, AHZone)
 	-- AHType = "Auctions" or "Bids" (the name of the table in the DB)
 	-- AHZone = 0 for player faction, or 1 for goblin
 	local ah = character[AHType]
+	if not ah then return end
 	
 	for i = #ah, 1, -1 do			-- parse backwards to avoid messing up the index
 		local faction = strsplit("|", ah[i])
@@ -135,7 +136,7 @@ function addon:OnEnable()
 	addon:RegisterEvent("AUCTION_HOUSE_SHOW")
 	addon:SetupOptions()
 	
-	if GetOption("AutoClearExpiredItems") == 1 then
+	if GetOption("AutoClearExpiredItems") then
 		addon:ScheduleTimer(CheckExpiries, 3)	-- check AH expiries 3 seconds later, to decrease the load at startup
 	end
 end
@@ -159,17 +160,25 @@ local function ScanAuctions()
 	
 	for i = 1, GetNumAuctionItems("owner") do
 		local itemName, _, count, _, _, _, _, startPrice, 
-			_, buyoutPrice, _,	highBidder = GetAuctionItemInfo("owner", i);
-
-		if itemName then
+			_, buyoutPrice, _, highBidder, _, _, _, saleStatus, itemID =  GetAuctionItemInfo("owner", i)
+			
+		-- do not list sold items, they're supposed to be in the mailbox
+		if saleStatus and saleStatus == 1 then		-- just to be sure, in case Bliz ever returns nil
+			saleStatus = true
+		else
+			saleStatus = false
+		end
+			
+		if itemName and itemID and not saleStatus then
 			local link = GetAuctionItemLink("owner", i)
-			local id = tonumber(link:match("item:(%d+)"))
 			local timeLeft = GetAuctionItemTimeLeft("owner", i)
-		
+			
 			table.insert(character.Auctions, format("%s|%s|%s|%s|%s|%s|%s", 
-				AHZone, id, count, highBidder or "", startPrice, buyoutPrice, timeLeft))
+				AHZone, itemID, count, highBidder or "", startPrice, buyoutPrice, timeLeft))
 		end
 	end
+	
+	addon:SendMessage("DATASTORE_AUCTIONS_UPDATED")
 end
 
 local function ScanBids()
@@ -191,11 +200,13 @@ local function ScanBids()
 			
 		if itemName then
 			local link = GetAuctionItemLink("bidder", i)
-			local id = tonumber(link:match("item:(%d+)"))
-			local timeLeft = GetAuctionItemTimeLeft("bidder", i)
-		
-			table.insert(character.Bids, format("%s|%s|%s|%s|%s|%s|%s", 
-				AHZone, id, count, ownerName or "", bidPrice, buyoutPrice, timeLeft))
+			if not link:match("battlepet:(%d+)") then		-- temporarily skip battle pets
+				local id = tonumber(link:match("item:(%d+)"))
+				local timeLeft = GetAuctionItemTimeLeft("bidder", i)
+			
+				table.insert(character.Bids, format("%s|%s|%s|%s|%s|%s|%s", 
+					AHZone, id, count, ownerName or "", bidPrice, buyoutPrice, timeLeft))
+			end
 		end
 	end
 end

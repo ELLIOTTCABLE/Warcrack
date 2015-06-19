@@ -1,0 +1,19 @@
+------------------------------------------------------------------------
+r34 | thaoky | 2015-05-08 16:36:42 +0000 (Fri, 08 May 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Characters.lua
+
+Minor code cleanup
+------------------------------------------------------------------------
+r33 | thaoky | 2015-04-11 17:33:38 +0000 (Sat, 11 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Characters.lua
+
+Modified tracking of last logout time
+------------------------------------------------------------------------
+r32 | thaoky | 2015-04-06 15:41:18 +0000 (Mon, 06 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Characters.lua
+
+Fixed GetXPRate for Pandarens
+------------------------------------------------------------------------

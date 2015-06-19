@@ -35,7 +35,7 @@ local DROPDOWN_BARTEXTFORMAT = {
 	["Deficit"] = "deficit",
 };
 
--- Options
+-- Options -- The "y" value of a category subtable, will further increase the vertical position of the *next* item
 local activePage = 1;
 local frames = {};
 local options = {
@@ -47,7 +47,7 @@ local options = {
 		{ type = "Check", var = "showGuildRank", label = "Show Player Guild Rank Title", tip = "In addition to the guild name, with this option on, you will also see their guild rank by title" },
 		{ type = "Check", var = "showTargetedBy", label = "Show Who Targets the Unit", tip = "When in a raid or party, the tip will show who from your group is targeting the unit" },
 		{ type = "Check", var = "showPlayerGender", label = "Show Player Gender", tip = "This will show the gender of the player. E.g. \"85 Female Blood Elf Paladin\".", y = 16 },
-		{ type = "DropDown", var = "nameType", label = "Name Type", list = { ["Name only"] = "normal", ["Use player titles"] = "title", ["Copy from original tip"] = "original" } },
+		{ type = "DropDown", var = "nameType", label = "Name Type", list = { ["Name only"] = "normal", ["Use player titles"] = "title", ["Copy from original tip"] = "original", ["Mary Sue Protocol"] = "marysueprot" } },
 		{ type = "DropDown", var = "showRealm", label = "Show Unit Realm", list = { ["Do not show realm"] = "none", ["Show realm"] = "show", ["Show (*) instead"] = "asterisk" } },
 		{ type = "DropDown", var = "showTarget", label = "Show Unit Target", list = { ["Do not show target"] = "none", ["First line"] = "first", ["Second line"] = "second", ["Last line"] = "last" }, y = 16 },
 		{ type = "Text", var = "targetYouText", label = "Targeting You Text" },
@@ -55,9 +55,11 @@ local options = {
 	-- Special
 	{
 		[0] = "Special",
-		{ type = "Slider", var = "gttScale", label = "GameTooltip Scale", min = 0.2, max = 4, step = 0.05 },
+		{ type = "Slider", var = "gttScale", label = "Tooltip Scale", min = 0.2, max = 4, step = 0.05 },
 		{ type = "Slider", var = "updateFreq", label = "Tip Update Frequency", min = 0, max = 5, step = 0.05, y = 24 },
 		{ type = "Check", var = "enableChatHoverTips", label = "Enable ChatFrame Hover Hyperlinks", tip = "When hovering the mouse over a link in the chatframe, show the tooltip without having to click on it" },
+		{ type = "Check", var = "hideFactionText", label = "Hide Faction Text", tip = "Strips the Alliance or Horde faction text from the tooltip" },
+		{ type = "Check", var = "hideRealmText", label = "Hide Coalesced Realm Text", tip = "Strips the Coalesced Realm text from the tooltip" },
  	},
 	-- Colors
 	{
@@ -68,7 +70,7 @@ local options = {
 		{ type = "Color", subType = 2, var = "colRace", label = "Race & Creature Type Color", tip = "The color of the race and creature type text" },
 		{ type = "Color", subType = 2, var = "colLevel", label = "Neutral Level Color", tip = "Units you cannot attack will have their level text shown in this color", y = 12 },
 		{ type = "Check", var = "colorNameByClass", label = "Color Player Names by Class Color", tip = "With this option on, player names are colored by their class color, otherwise they will be colored by reaction" },
-		{ type = "Check", var = "classColoredBorder", label = "Color Tip Border by Class Color", tip = "For players, the border color will be colored to match the color of their class", y = 12 },
+		{ type = "Check", var = "classColoredBorder", label = "Color Tip Border by Class Color", tip = "For players, the border color will be colored to match the color of their class" },
 	},
 	-- Reactions
 	{
@@ -119,6 +121,7 @@ local options = {
 	-- Classify
 	{
 		[0] = "Classify",
+		{ type = "Text", var = "classification_minus", label = "Minus" },
 		{ type = "Text", var = "classification_trivial", label = "Trivial" },
 		{ type = "Text", var = "classification_normal", label = "Normal" },
 		{ type = "Text", var = "classification_elite", label = "Elite" },
@@ -175,7 +178,8 @@ local options = {
 		[0] = "Icon",
 		{ type = "Check", var = "iconRaid", label = "Show Raid Icon", tip = "Shows the raid icon next to the tip" },
 		{ type = "Check", var = "iconFaction", label = "Show Faction Icon", tip = "Shows the faction icon next to the tip" },
-		{ type = "Check", var = "iconCombat", label = "Show Combat Icon", tip = "Shows a combat icon next to the tip, if the unit is in combat", y = 12 },
+		{ type = "Check", var = "iconCombat", label = "Show Combat Icon", tip = "Shows a combat icon next to the tip, if the unit is in combat" },
+		{ type = "Check", var = "iconClass", label = "Show Class Icon", tip = "For players, this will display the class icon next to the tooltip", y = 12 },
 		{ type = "DropDown", var = "iconAnchor", label = "Icon Anchor", list = DROPDOWN_ANCHORPOS },
 		{ type = "Slider", var = "iconSize", label = "Icon Dimension", min = 8, max = 60, step = 1 },
 	},
@@ -218,9 +222,9 @@ local options = {
 if (TipTacTalents) then
 	options[#options + 1] = {
 		[0] = "Talents",
-		{ type = "Check", var = "showTalents", label = "Enable TipTacTalents", tip = "This options makes the tip show the talents of other players" },
+		{ type = "Check", var = "showTalents", label = "Enable TipTacTalents", tip = "This option makes the tip show the talent specialization of other players" },
 		{ type = "Check", var = "talentOnlyInParty", label = "Only Show Talents for Players in Party or Raid", tip = "When you enable this, only talents of players in your party or raid will be requested and shown", y = 12 },
-		{ type = "DropDown", var = "talentFormat", label = "Talent Format", list = { ["Elemental (57/14/00)"] = 1, ["Elemental"] = 2, ["57/14/00"] = 3,}, y = 8 },
+--		{ type = "DropDown", var = "talentFormat", label = "Talent Format", list = { ["Elemental (57/14/00)"] = 1, ["Elemental"] = 2, ["57/14/00"] = 3,}, y = 8 },	-- not supported with MoP changes
 		{ type = "Slider", var = "talentCacheSize", label = "Talent Cache Size", min = 0, max = 50, step = 1 },
 	};
 end
@@ -251,6 +255,8 @@ end
 --------------------------------------------------------------------------------------------------------
 
 local f = CreateFrame("Frame",modName.."Options",UIParent);
+
+f.options = options;
 
 f:SetWidth(424);
 f:SetHeight(378);	-- "18" per category entry

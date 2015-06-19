@@ -63,10 +63,10 @@ function CliqueConfig:SetupGUI()
         self.rows[i]:SetPoint("RIGHT", CliqueConfigPage1Column2, "RIGHT", 0, 0)
     end
 
-    _G[self:GetName() .. "TitleText"]:SetText(L["Clique Binding Configuration"])
+	self.TitleText:SetText(L["Clique Binding Configuration"])
 
     self.dialog = _G["CliqueDialog"]
-    self.dialog.title = _G["CliqueDialogTitleText"]
+    self.dialog.title = self.dialog.TitleText
     self.dialog:SetUserPlaced(false)
     self.dialog:ClearAllPoints()
     self.dialog:SetPoint("CENTER", self, "CENTER", 30, 0)
@@ -148,7 +148,7 @@ function CliqueConfig:EnableSpellbookButtons()
 
     if self.spellbookButtons then
         for idx, button in ipairs(self.spellbookButtons) do
-            if enabled and button.spellbutton:IsEnabled() == 1 then
+            if enabled and addon:APIIsTrue(button.spellbutton:IsEnabled()) then
                 button:Show()
             else
                 button:Hide()

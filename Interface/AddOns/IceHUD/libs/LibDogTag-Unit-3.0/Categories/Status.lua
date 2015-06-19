@@ -1,9 +1,19 @@
 local MAJOR_VERSION = "LibDogTag-Unit-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 216 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 273 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_Unit_MINOR_VERSION then
 	_G.DogTag_Unit_MINOR_VERSION = MINOR_VERSION
 end
+
+local _G, table, next, pairs, ipairs, unpack, select, GetTime = _G, table, next, pairs, ipairs, unpack, select, GetTime
+local UnitIsPartyLeader, UnitIsFeignDeath, UnitIsTappedByPlayer, UnitIsUnit, UnitIsCharmed, UnitIsVisible, UnitHasVehicleUI, UnitIsConnected =
+	  UnitIsPartyLeader, UnitIsFeignDeath, UnitIsTappedByPlayer, UnitIsUnit, UnitIsCharmed, UnitIsVisible, UnitHasVehicleUI, UnitIsConnected
+local UnitExists, UnitGUID, UnitAffectingCombat, UnitIsAFK, UnitIsDeadOrGhost, UnitIsGhost, UnitIsDead, UnitIsDND, UnitIsPVP, UnitIsPVPFreeForAll =
+	  UnitExists, UnitGUID, UnitAffectingCombat, UnitIsAFK, UnitIsDeadOrGhost, UnitIsGhost, UnitIsDead, UnitIsDND, UnitIsPVP, UnitIsPVPFreeForAll
+local GetNumRaidMembers, GetNumPartyMembers, GetPetHappiness, GetRaidTargetIndex, UnitIsTapped, GetBindingText, GetBindingKey, GetRaidRosterInfo =
+	  GetNumRaidMembers, GetNumPartyMembers, GetPetHappiness, GetRaidTargetIndex, UnitIsTapped, GetBindingText, GetBindingKey, GetRaidRosterInfo
+local UnitName, UnitInRaid, UnitFactionGroup, GetPVPTimer, IsPVPTimerRunning, GetSpellInfo, IsResting =
+	  UnitName, UnitInRaid, UnitFactionGroup, GetPVPTimer, IsPVPTimerRunning, GetSpellInfo, IsResting
 
 DogTag_Unit_funcs[#DogTag_Unit_funcs+1] = function(DogTag_Unit, DogTag)
 
@@ -17,13 +27,26 @@ local deadTimes = {}
 -- Parnic: support for cataclysm; Divine Intervention was removed
 local wow_ver = select(4, GetBuildInfo())
 local wow_400 = wow_ver >= 40000
+local wow_500 = wow_ver >= 50000
+local wow_600 = wow_ver >= 60000
 local petHappinessEvent = "UNIT_HAPPINESS"
 if wow_400 then
 	petHappinessEvent = "UNIT_POWER"
 end
+local partyChangedEvent = "PARTY_MEMBERS_CHANGED"
+if wow_500 then
+	UnitIsPartyLeader = UnitIsGroupLeader
+	partyChangedEvent = "GROUP_ROSTER_UPDATE"
+end
 
 -- Parnic: pet happiness removed in 4.1
 local wow_401 = wow_ver >= 40100
+
+-- Parnic: GetNumRaidMembers/GetNumPartyMembers removed in 6.0
+if wow_600 then
+	GetNumRaidMembers = GetNumGroupMembers
+	GetNumPartyMembers = GetNumGroupMembers
+end
 
 local iterateGroupMembers
 local iterateGroupMembers__t = {}
@@ -36,9 +59,17 @@ _G.iterateGroupMembers = iterateGroupMembers
 
 local tmp = {}
 local function PARTY_MEMBERS_CHANGED(event)
-	local prefix, min, max = "raid", 1, GetNumRaidMembers()
-	if max == 0 then
-		prefix, min, max = "party", 0, GetNumPartyMembers()
+	local prefix, min, max = "raid", 1, 0
+	if wow_500 then
+		max = GetNumGroupMembers()
+	else
+		max = GetNumRaidMembers()
+	end
+	if wow_500 and max <= 5 or (not wow_500 and max == 0) then
+		prefix, min = "party", 0
+		if not wow_500 then
+			max = GetNumPartyMembers()
+		end
 	end
 
 	for k in pairs(iterateGroupMembers__t) do
@@ -106,19 +137,19 @@ local function PARTY_MEMBERS_CHANGED(event)
 		tmp[guid] = nil
 	end
 end
-DogTag:AddEventHandler("Unit", "PARTY_MEMBERS_CHANGED", PARTY_MEMBERS_CHANGED)
+DogTag:AddEventHandler("Unit", partyChangedEvent, PARTY_MEMBERS_CHANGED)
 
 DogTag:AddAddonFinder("Unit", "_G", "oRA", function(v)
 	if AceLibrary and AceLibrary:HasInstance("AceEvent-2.0") then
 		AceLibrary("AceEvent-2.0"):RegisterEvent("oRA_MainTankUpdate", function()
-			DogTag:FireEvent("PARTY_MEMBERS_CHANGED")
+			DogTag:FireEvent(partyChangedEvent)
 		end)
 	end
 end)
 
 DogTag:AddAddonFinder("Unit", "_G", "CT_RAOptions_UpdateMTs", function(v)
 	hooksecurefunc("CT_RAOptions_UpdateMTs", function()
-		DogTag:FireEvent("PARTY_MEMBERS_CHANGED")
+		DogTag:FireEvent(partyChangedEvent)
 	end)
 end)
 
@@ -335,6 +366,9 @@ DogTag:AddTag("Unit", "PvPIcon", {
 			has = UnitFactionGroup(unit)
 		end
 		if has then
+			if has == "Neutral" then
+				has = "FFA"
+			end
 			return "|TInterface\\TargetingFrame\\UI-PVP-" .. has .. ":" .. size .. ":".. size .. ":0:0:64:64:3:38:1:36|t"
 		else
 			return nil
@@ -348,6 +382,43 @@ DogTag:AddTag("Unit", "PvPIcon", {
 	events = "UNIT_FACTION#$unit",
 	doc = L["Display the appropriate PvP icon if the unit is PvP flagged"],
 	example = '[PvPIcon] => "|TInterface\\TargetingFrame\\UI-PVP-Horde:24:24:0:0:64:64:3:38:1:36|t"; [PvPIcon] => ""',
+	category = L["Status"]
+})
+
+DogTag:AddTag("Unit", "CombatIcon", {
+	code = function(size, unit)
+		if UnitAffectingCombat(unit) then
+			return ("|TInterface\\CharacterFrame\\UI-StateIcon:%d:%d:0:0:64:64:32:64:0:32|t"):format(size, size)
+		else
+			return nil
+		end
+	end,
+	arg = {
+		'size', 'number', 32,
+		'unit', 'string;undef', 'player'
+	},
+	ret = "string;nil",
+	events = "Update",
+	doc = L["Display the combat icon if the unit is in combat"],
+	example = '[CombatIcon] => "|TInterface\\CharacterFrame\\UI-StateIcon:32:32:0:0:64:64:32:64:0:32|t"; [CombatIcon] => ""',
+	category = L["Status"]
+})
+
+DogTag:AddTag("Unit", "RestingIcon", {
+	code = function(size)
+		if IsResting() then
+			return ("|TInterface\\CharacterFrame\\UI-StateIcon:%d:%d:0:0:64:64:0:32:0:32|t"):format(size, size)
+		else
+			return nil
+		end
+	end,
+	arg = {
+		'size', 'number', 32,
+	},
+	ret = "string;nil",
+	events = "PLAYER_UPDATE_RESTING",
+	doc = L["Display the resting icon if the player is resting"],
+	example = '[RestingIcon] => "|TInterface\\CharacterFrame\\UI-StateIcon:32:32:0:0:64:64:0:32:0:32|t"; [RestingIcon] => ""',
 	category = L["Status"]
 })
 
@@ -516,7 +587,7 @@ DogTag:AddTag("Unit", "FKey", {
 })
 
 local raidGroups = {}
-DogTag:AddEventHandler("Unit", "PARTY_MEMBERS_CHANGED", function()
+DogTag:AddEventHandler("Unit", partyChangedEvent, function()
 	for k in pairs(raidGroups) do
 		raidGroups[k] = nil
 	end
@@ -588,14 +659,14 @@ DogTag:AddTag("Unit", "IsMainTank", {
 		end
 		if maintanktable then
 			for i = 1, 10 do
-				if maintanktable[i] == name then
+				if maintanktable[i] == n then
 					return true
 				end
-				i = i + 1
+			--	i = i + 1 -- what the fuck is this shit?
 			end
 		else
 			for i = 1, GetNumRaidMembers() do
-				local name, rank, subgroup, level, class, fileName, zone, online, isDead, role, isML = GetRaidRosterInfo(i)
+				local name, _, _, _, _, _, _, _, _, role = GetRaidRosterInfo(i)
 				if name == n then
 				 	return role == 'MAINTANK'
 				end

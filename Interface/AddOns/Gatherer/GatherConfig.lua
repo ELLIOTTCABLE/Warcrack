@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherConfig.lua 923 2010-12-23 08:54:58Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherConfig.lua 1039 2012-10-06 16:28:36Z Esamynn $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Saved Variables Configuration and management code
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherConfig.lua $", "$Rev: 923 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherConfig.lua $", "$Rev: 1039 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
@@ -52,7 +52,7 @@ local function getDefault(setting)
 	if (setting == "inspect.enable")    then return false   end
 	local a,b,c,d = strsplit(".", setting)
 	if (a == "show") then 
-		if (c == "arch") then return false end
+		if ( b == "arch" ) then return false end
 		if (c == "all" or d == "all") then return false end
 		if (d == "onlyiftracked") then return false end
 		return true
@@ -81,7 +81,7 @@ local function getDefault(setting)
 	if (setting == "inspect.distance")  then return 25      end
 	if (setting == "inspect.percent")   then return 80      end
 	if (setting == "inspect.time")      then return 120     end
-	if (setting == "anon.tint")         then return true    end
+	if (setting == "anon.tint")         then return false   end
 	if (setting == "anon.opacity")      then return 60      end
 	if (setting == "guild.receive")     then return true    end
 	if (setting == "guild.print.send")  then return false   end
@@ -94,6 +94,9 @@ local function getDefault(setting)
 	if (setting == "track.colour.HERB") then return "0.250,0.750,0.250" end
 	if (setting == "track.colour.MINE") then return "1.000,0.500,0.250" end
 	if (setting == "track.colour.FISH") then return "0.100,0.100,1.000" end
+	if (setting == "arch.enable")       then return true    end
+	if (setting == "arch.minimap.count")then return 20      end
+	if (setting == "arch.duration")     then return 60     end
 
 	-- check for a plugin default
 	for _, data in pairs(Gatherer.Plugins.Registrations) do
@@ -126,18 +129,30 @@ end
 function ConvertOldSettings( conversions )
 	local Settings = Gatherer.Settings
 	for pat, repl in pairs(conversions) do
-		for name, profileData in pairs(Settings) do
-			if ( name:sub(1, 8) == "profile." ) then
-				local newSettings = {}
-				for setting, value in pairs(profileData) do
-					local new, count = setting:gsub(pat, repl)
-					if ( count >= 1 ) then
-						newSettings[new] = value
-						profileData[setting] = nil
+		if ( type(repl) == "string" ) then
+			for name, profileData in pairs(Settings) do
+				if ( name:sub(1, 8) == "profile." ) then
+					local newSettings = {}
+					for setting, value in pairs(profileData) do
+						local new, count = setting:gsub(pat, repl)
+						if ( count >= 1 ) then
+							newSettings[new] = value
+							profileData[setting] = nil
+						end
+					end
+					for setting, value in pairs(newSettings) do
+						profileData[setting] = value
 					end
 				end
-				for setting, value in pairs(newSettings) do
-					profileData[setting] = value
+			end
+		elseif ( repl == false ) then
+			for name, profileData in pairs(Settings) do
+				if ( name:sub(1, 8) == "profile." ) then
+					for setting, value in pairs(profileData) do
+						if ( setting:find(pat) ) then
+							profileData[setting] = nil
+						end
+					end
 				end
 			end
 		end
@@ -146,6 +161,9 @@ end
 
 local oldSettingsConversions = {
 	["^hud%.(.*)$"] = "plugin.gatherer_hud.%1", -- convert old non-plugin HUD settings
+	["^track.colour.ARCH$"] = false,
+	["^show.+arch"] = false,
+	
 }
 
 --Load settings from the SavedVariables tables
@@ -343,7 +361,7 @@ local function setter(setting, value)
 
 			-- Change the user's current profile to this new one
 			SETTINGS[getUserSig()] = value
-			DEFAULT_CHAT_FRAME:AddMessage("Changing profile: "..value)
+			DEFAULT_CHAT_FRAME:AddMessage(_tr("CONFIG_PROFILE_CHANGE_NOTIFICATION", value))
 		end
 
 		-- Refresh all values to reflect current data
@@ -505,142 +523,166 @@ function MakeGuiConfig()
 	local gui = Configator:Create(setter, getter)
 	Gui = gui
 
-	gui:AddCat( _trL("Core Options"), nil, false, true)
+	gui:AddCat( _trL("CONFIG_SECTION_HEADER_CORE"), nil, false, true)
+
+	----------------------------------------------------------------------
+	-- Profiles
+	----------------------------------------------------------------------
 	
-	id = gui:AddTab( _trL("Profiles"))
-	gui:AddControl(id, "Header",     0,    _trL("Setup, configure and edit profiles"))
-	gui:AddControl(id, "Subhead",    0,    _trL("Activate a current profile"))
-	gui:AddControl(id, "Selectbox",  0, 1, "profile.profiles", "profile", _trL("Switch to given profile"))
-	gui:AddControl(id, "Button",     0, 1, "profile.delete", _trL("Delete"))
-	gui:AddControl(id, "Subhead",    0,    _trL("Create or replace a profile"))
-	gui:AddControl(id, "Text",       0, 1, "profile.name", _trL("New profile name:"))
-	gui:AddControl(id, "Button",     0, 1, "profile.save", _trL("Create new"))
-	gui:AddControl(id, "Button",     0, 1, "profile.copy", _trL("Create copy"))
+	id = gui:AddTab( _trL("CONFIG_SECTION_PROFILES"))
+	gui:AddControl(id, "Header",     0,    _trL("CONFIG_SECTION_TITLE_PROFILES"))
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_PROFILE_CURRENT_LABEL"))
+	gui:AddControl(id, "Selectbox",  0, 1, "profile.profiles", "profile")
+	gui:AddControl(id, "Button",     0, 1, "profile.delete", _trL("DELETE"))
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_PROFILE_NEW"))
+	gui:AddControl(id, "Text",       0, 1, "profile.name", _trL("CONFIG_PROFILE_NEW_LABEL"))
+	gui:AddControl(id, "Button",     0, 1, "profile.save", _trL("CONFIG_PROFILE_CREATE_NEW"))
+	gui:AddControl(id, "Button",     0, 1, "profile.copy", _trL("CONFIG_PROFILE_CREATE_COPY"))
 	
-	id = gui:AddTab(_trL("General"))
-	gui:AddControl(id, "Header",     0,    _trL("Main Gatherer options"))
+	----------------------------------------------------------------------
+	-- General
+	----------------------------------------------------------------------
+	
+	id = gui:AddTab(_trL("CONFIG_SECTION_GENERAL"))
+	gui:AddControl(id, "Header",     0,    _trL("CONFIG_SECTION_TITLE_GENERAL"))
 	last = gui:GetLast(id) -- Get the current position so we can return here for the second column
 
-	gui:AddControl(id, "Subhead",    0,    _trL("WorldMap options"))
-	gui:AddControl(id, "Checkbox",   0, 1, "mainmap.enable", _trL("Display nodes on WorldMap"))
-	gui:AddControl(id, "Slider",     0, 2, "mainmap.count", 10, 2500, 10, _trL("Display: %d nodes"))
-	gui:AddControl(id, "Slider",     0, 2, "mainmap.opacity", 10, 100, 2, _trL("Opacity: %d%%"))
-	gui:AddControl(id, "Slider",     0, 2, "mainmap.iconsize", 4, 64, 1, _trL("Icon size: %d"))
-	gui:AddControl(id, "Checkbox",   0, 1, "mainmap.tooltip.enable", _trL("Display tooltips"))
-	gui:AddControl(id, "Checkbox",   0, 2, "mainmap.tooltip.count", _trL("Display harvest counts"))
-	gui:AddControl(id, "Checkbox",   0, 2, "mainmap.tooltip.source", _trL("Display note source"))
-	gui:AddControl(id, "Checkbox",   0, 2, "mainmap.tooltip.seen", _trL("Display last seen time"))
-	gui:AddControl(id, "Checkbox",   0, 2, "mainmap.tooltip.rate", _trL("Display drop rates"))
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_GENERAL_WORLDMAP_LABEL"))
+	gui:AddControl(id, "Checkbox",   0, 1, "mainmap.enable", _trL("CONFIG_WORLDMAP_ENABLE"))
+	gui:AddControl(id, "Slider",     0, 2, "mainmap.count", 10, 2500, 10, _trL("CONFIG_WORLDMAP_MAX_NOTES"))
+	gui:AddControl(id, "Slider",     0, 2, "mainmap.opacity", 10, 100, 2, _trL("CONFIG_WORLDMAP_NOTE_OPACITY"))
+	gui:AddControl(id, "Slider",     0, 2, "mainmap.iconsize", 4, 64, 1, _trL("CONFIG_WORLDMAP_ICON_SIZE"))
+	gui:AddControl(id, "Checkbox",   0, 1, "mainmap.tooltip.enable", _trL("CONFIG_TOOLTIP_ENABLE"))
+	gui:AddControl(id, "Checkbox",   0, 2, "mainmap.tooltip.count", _trL("CONFIG_TOOLTIP_COUNTS"))
+	gui:AddControl(id, "Checkbox",   0, 2, "mainmap.tooltip.source", _trL("CONFIG_TOOLTIP_SOURCE"))
+	gui:AddControl(id, "Checkbox",   0, 2, "mainmap.tooltip.seen", _trL("CONFIG_TOOLTIP_LAST_SEEN"))
+	gui:AddControl(id, "Checkbox",   0, 2, "mainmap.tooltip.rate", _trL("CONFIG_TOOLTIP_DROP_RATES"))
 
-	gui:AddControl(id, "Subhead",  0,    _trL("Note:"))
-	gui:AddControl(id, "Note",     0, 1, 290, 60, _trL("The \"All\" options cause the current filters to be ignored and force all nodes in that category to be shown."))
+	gui:AddControl(id, "Subhead",  0,    _trL("LABEL_NOTE"))
+	gui:AddControl(id, "Note",     0, 1, 290, 40, _tr("CONFIG_ALL_FILTER_NOTE", _tr("ALL")))
+
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_GENERAL_MINIICON_LABEL"))
+	gui:AddControl(id, "Checkbox",   0, 1, "miniicon.enable", _trL("CONFIG_MINIICON_ENABLE"))
+	gui:AddControl(id, "Slider",     0, 2, "miniicon.angle", 0, 360, 1, _trL("CONFIG_MINIICON_ANGLE"))
+	gui:AddControl(id, "Slider",     0, 2, "miniicon.distance", -80, 80, 1, _trL("CONFIG_MINIICON_DISTANCE"))
 
 	gui:SetLast(id, last) -- Return to the saved position
-	gui:AddControl(id, "Subhead",  0.5,    _trL("Minimap tracking options"))
+	gui:AddControl(id, "Subhead",  0.5,    _trL("CONFIG_GENERAL_MINIMAP_TRACKING_LABEL"))
 	local curpos = gui:GetLast(id)
-	gui:AddControl(id, "Checkbox", 0.5, 1, "show.minimap.mine", _trL("Show mining nodes"))
+	gui:AddControl(id, "Checkbox", 0.5, 1, "show.minimap.mine", _trL("CONFIG_ENABLE_MINE"))
 	gui:SetLast(id, curpos)
-	gui:AddControl(id, "Checkbox", 0.85, 1, "show.minimap.mine.all", _trL("All"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.mine.onlyifskilled", _trL("Miners Only"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.mine.onlyiftracked", _trL("Only if tracking"))
+	gui:AddControl(id, "Checkbox", 0.85, 1, "show.minimap.mine.all", _trL("ALL"))
+	gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.mine.onlyifskilled", _trL("CONFIG_ENABLE_MINE_MINER_ONLY"))
+	gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.mine.onlyiftracked", _trL("CONFIG_ENABLE_ONLY_IF_TRACKING"))
 	curpos = gui:GetLast(id)
-	gui:AddControl(id, "Checkbox", 0.5, 1, "show.minimap.herb", _trL("Show herbalism nodes"))
+	gui:AddControl(id, "Checkbox", 0.5, 1, "show.minimap.herb", _trL("CONFIG_ENABLE_HERB"))
 	gui:SetLast(id, curpos)
-	gui:AddControl(id, "Checkbox", 0.85, 1, "show.minimap.herb.all", _trL("All"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.herb.onlyifskilled", _trL("Herbalists Only"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.herb.onlyiftracked", _trL("Only if tracking"))
+	gui:AddControl(id, "Checkbox", 0.85, 1, "show.minimap.herb.all", _trL("ALL"))
+	gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.herb.onlyifskilled", _trL("CONFIG_ENABLE_HERB_HERBALIST_ONLY"))
+	gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.herb.onlyiftracked", _trL("CONFIG_ENABLE_ONLY_IF_TRACKING"))
 	curpos = gui:GetLast(id)
-	gui:AddControl(id, "Checkbox", 0.5, 1, "show.minimap.open", _trL("Show treasure nodes"))
+	gui:AddControl(id, "Checkbox", 0.5, 1, "show.minimap.open", _trL("ENABLE_OPEN"))
 	gui:SetLast(id, curpos)
-	gui:AddControl(id, "Checkbox", 0.85, 1, "show.minimap.open.all", _trL("All"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.open.onlyiftracked", _trL("Only if tracking"))
+	gui:AddControl(id, "Checkbox", 0.85, 1, "show.minimap.open.all", _trL("ALL"))
+	--gui:AddControl(id, "Checkbox", 0.5, 2, "show.minimap.open.onlyiftracked", _trL("CONFIG_ENABLE_ONLY_IF_TRACKING"))
 
-	gui:AddControl(id, "Subhead",  0.5,    _trL("WorldMap tracking options"))
+	gui:AddControl(id, "Subhead",  0.5,    _trL("CONFIG_GENERAL_WORLDMAP_TRACKING_LABEL"))
 	curpos = gui:GetLast(id)
-	gui:AddControl(id, "Checkbox", 0.5, 1, "show.mainmap.mine", _trL("Show mining nodes"))
+	gui:AddControl(id, "Checkbox", 0.5, 1, "show.mainmap.mine", _trL("CONFIG_ENABLE_MINE"))
 	gui:SetLast(id, curpos)
-	gui:AddControl(id, "Checkbox", 0.85, 1, "show.mainmap.mine.all", _trL("All"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.mine.onlyifskilled", _trL("Miners Only"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.mine.onlyiftracked", _trL("Only if tracking"))
+	gui:AddControl(id, "Checkbox", 0.85, 1, "show.mainmap.mine.all", _trL("ALL"))
+	gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.mine.onlyifskilled", _trL("CONFIG_ENABLE_MINE_MINER_ONLY"))
+	gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.mine.onlyiftracked", _trL("CONFIG_ENABLE_ONLY_IF_TRACKING"))
 	curpos = gui:GetLast(id)
-	gui:AddControl(id, "Checkbox", 0.5, 1, "show.mainmap.herb", _trL("Show herbalism nodes"))
+	gui:AddControl(id, "Checkbox", 0.5, 1, "show.mainmap.herb", _trL("CONFIG_ENABLE_HERB"))
 	gui:SetLast(id, curpos)
-	gui:AddControl(id, "Checkbox", 0.85, 1, "show.mainmap.herb.all", _trL("All"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.herb.onlyifskilled", _trL("Herbalists Only"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.herb.onlyiftracked", _trL("Only if tracking"))
+	gui:AddControl(id, "Checkbox", 0.85, 1, "show.mainmap.herb.all", _trL("ALL"))
+	gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.herb.onlyifskilled", _trL("CONFIG_ENABLE_HERB_HERBALIST_ONLY"))
+	gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.herb.onlyiftracked", _trL("CONFIG_ENABLE_ONLY_IF_TRACKING"))
 	curpos = gui:GetLast(id)
-	gui:AddControl(id, "Checkbox", 0.5, 1, "show.mainmap.open", _trL("Show treasure nodes"))
+	gui:AddControl(id, "Checkbox", 0.5, 1, "show.mainmap.open", _trL("ENABLE_OPEN"))
 	gui:SetLast(id, curpos)
-	gui:AddControl(id, "Checkbox", 0.85, 1, "show.mainmap.open.all", _trL("All"))
-	gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.open.onlyiftracked", _trL("Only if tracking"))
+	gui:AddControl(id, "Checkbox", 0.85, 1, "show.mainmap.open.all", _trL("ALL"))
+	--gui:AddControl(id, "Checkbox", 0.5, 2, "show.mainmap.open.onlyiftracked", _trL("CONFIG_ENABLE_ONLY_IF_TRACKING"))
 
-	id = gui:AddTab(_trL("Minimap"))
-	gui:AddControl(id, "Header",     0,    _trL("Minimap Gatherer options"))
+	----------------------------------------------------------------------
+	-- Minimap
+	----------------------------------------------------------------------
+	
+	id = gui:AddTab(_trL("CONFIG_SECTION_MINIMAP"))
+	gui:AddControl(id, "Header",     0,    _trL("CONFIG_SECTION_TITLE_MINIMAP"))
 	last = gui:GetLast(id) -- Get the current position so we can return here for the second column
+	local headerPosition = gui:GetLast(id):GetBottom()
 
-	gui:AddControl(id, "Subhead",    0,    _trL("Minimap options"))
-	gui:AddControl(id, "Checkbox",   0, 1, "minimap.enable", _trL("Display nodes on Minimap"))
-	gui:AddControl(id, "Slider",     0, 2, "minimap.count", 1, 50, 1, _trL("Display: %d closest"))
-	gui:AddControl(id, "Slider",     0, 2, "minimap.opacity", 0, 100, 1, _trL("Default opacity: %d%%"))
-	gui:AddControl(id, "Slider",     0, 2, "minimap.iconsize", 4, 64, 1, _trL("Icon size: %d"))
-	gui:AddControl(id, "Slider",     0, 2, "minimap.distance", 100, 5000, 50, _trL("Distance: %d yards"))
-	gui:AddControl(id, "Checkbox",   0, 1, "miniicon.enable", _trL("Display Minimap button"))
-	gui:AddControl(id, "Slider",     0, 2, "miniicon.angle", 0, 360, 1, _trL("Button angle: %d"))
-	gui:AddControl(id, "Slider",     0, 2, "miniicon.distance", -80, 80, 1, _trL("Distance: %d"))
-	gui:AddControl(id, "Checkbox",   0, 1, "minimap.tooltip.enable", _trL("Display tooltips"))
-	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.count", _trL("Display harvest counts"))
-	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.source", _trL("Display note source"))
-	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.seen", _trL("Display last seen time"))
-	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.distance", _trL("Display node distance"))
-	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.rate", _trL("Display drop rates"))
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_MINIMAP_LABEL"))
+	gui:AddControl(id, "Checkbox",   0, 1, "minimap.enable", _trL("CONFIG_MINIMAP_ENABLE"))
+	gui:AddControl(id, "Slider",     0, 2, "minimap.count", 1, 50, 1, _trL("CONFIG_MINIMAP_MAX_NOTES"))
+	gui:AddControl(id, "Slider",     0, 2, "minimap.opacity", 0, 100, 1, _trL("CONFIG_MINIMAP_NOTE_OPACITY"))
+	gui:AddControl(id, "Slider",     0, 2, "minimap.iconsize", 4, 64, 1, _trL("CONFIG_MINIMAP_ICON_SIZE"))
+	gui:AddControl(id, "Slider",     0, 2, "minimap.distance", 100, 5000, 50, _trL("CONFIG_MINIMAP_DISTANCE"))
+	gui:AddControl(id, "Checkbox",   0, 1, "minimap.tooltip.enable", _trL("CONFIG_TOOLTIP_ENABLE"))
+	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.count", _trL("CONFIG_TOOLTIP_COUNTS"))
+	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.source", _trL("CONFIG_TOOLTIP_SOURCE"))
+	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.seen", _trL("CONFIG_TOOLTIP_LAST_SEEN"))
+	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.distance", _trL("CONFIG_TOOLTIP_DISTANCE"))
+	gui:AddControl(id, "Checkbox",   0, 2, "minimap.tooltip.rate", _trL("CONFIG_TOOLTIP_DROP_RATES"))
 
 	gui:SetLast(id, last) -- Return to the saved position
-	gui:AddControl(id, "Subhead",   0.5,    _trL("Minimap additional"))
-	gui:AddControl(id, "Checkbox",  0.5, 1, "fade.enable", _trL("Fade out mininotes"));
-	gui:AddControl(id, "Slider",    0.5, 2, "fade.distance", 10, 1000, 10, _trL("Fade at: %d yards"))
-	gui:AddControl(id, "Slider",    0.5, 2, "fade.percent", 0, 100, 1, _trL("Distance fading: %d%%"))
-	gui:AddControl(id, "Checkbox",  0.5, 1, "track.enable", _trL("Enable tracking skill feature"));
-	gui:AddControl(id, "Checkbox",  0.5, 2, "track.circle", _trL("Convert to tracking icon when close"));
+	gui:AddControl(id, "Subhead",   0.49,    _trL("CONFIG_MINIMAP_ADD_LABEL"))
+	gui:AddControl(id, "Checkbox",  0.49, 1, "fade.enable", _trL("CONFIG_MINIMAP_FADE_ENABLE"));
+	gui:AddControl(id, "Slider",    0.49, 2, "fade.distance", 10, 1000, 10, _trL("CONFIG_MINIMAP_FADE_DIST"))
+	gui:AddControl(id, "Slider",    0.49, 2, "fade.percent", 0, 100, 1, _trL("CONFIG_MINIMAP_FADE_PERCENT"))
+	gui:AddControl(id, "Checkbox",  0.49, 1, "track.enable", _trL("CONFIG_MINIMAP_TRACKING_ENABLE"));
+	gui:AddControl(id, "Checkbox",  0.49, 2, "track.circle", _trL("CONFIG_MINIMAP_TRACKING_CIRCLE_ENABLE"))
 	for _, type in pairs(Gatherer.Constants.ProfessionTextures) do
-		if ( type ~= "FISH" ) then
+		if ( type ~= "FISH" and type ~= "ARCH" ) then
 			local nameKey = { MINE = "TRADE_MINING", HERB = "TRADE_HERBALISM"}
-			gui:AddControl(id, "ColorSelect", 0.5, 3, "track.colour."..type, _trC(nameKey[type]) or type);
+			gui:AddControl(id, "ColorSelect", 0.49, 3, "track.colour."..type, _trC(nameKey[type]) or type);
 		end
 	end
-	gui:AddControl(id, "Checkbox",  0.5, 2, "track.current", _trL("Only for active tracking skill"));
-	gui:AddControl(id, "Slider",    0.5, 2, "track.distance", 50, 150, 1, _trL("Track at: %d yards"))
-	gui:AddControl(id, "Slider",    0.5, 2, "track.opacity", 0, 100, 1, _trL("Icon opacity: %d%%"))
-	gui:AddControl(id, "Checkbox",  0.5, 1, "inspect.enable", _trL("Mark nodes as inspected"));
-	gui:AddControl(id, "Checkbox",  0.5, 2, "inspect.tint", _trL("Tint green while inspecting"));
-	gui:AddControl(id, "Slider",    0.5, 2, "inspect.distance", 1, 100, 1, _trL("Inspect at: %d yards"))
-	gui:AddControl(id, "Slider",    0.5, 2, "inspect.percent", 0, 100, 1, _trL("Inspected fading: %d%%"))
-	gui:AddControl(id, "Slider",    0.5, 2, "inspect.time", 10, 900, 10, _trL("Reinspect: %d seconds"))
-	gui:AddControl(id, "Checkbox",  0.5, 1, "anon.enable", _trL("Display anonymous nodes"));
-	gui:AddControl(id, "Checkbox",  0.5, 2, "anon.tint", _trL("Tint anonymous nodes red"));
-	gui:AddControl(id, "Slider",    0.5, 2, "anon.opacity", 0, 100, 1, _trL("Anon opacity: %d%%"));
-
-	id = gui:AddTab(_trL("Sharing"))
-	gui:AddControl(id, "Header",     0,    _trL("Synchronization options"))
+	gui:AddControl(id, "Checkbox",  0.49, 2, "track.current", _trL("CONFIG_MINIMAP_TRACKING_ACTIVE_ONLY"));
+	gui:AddControl(id, "Slider",    0.49, 2, "track.distance", 50, 150, 1, _trL("CONFIG_MINIMAP_TRACKING_DISTANCE"))
+	gui:AddControl(id, "Slider",    0.49, 2, "track.opacity", 0, 100, 1, _trL("CONFIG_MINIMAP_TRACKING_OPACITY"))
+	gui:AddControl(id, "Checkbox",  0.49, 1, "inspect.enable", _trL("CONFIG_MINIMAP_INSPECT_ENABLE"))
+	gui:AddControl(id, "Checkbox",  0.49, 2, "inspect.tint", _trL("CONFIG_MINIMAP_INSPECT_TINT_ENABLE"))
+	gui:AddControl(id, "Slider",    0.49, 2, "inspect.distance", 1, 100, 1, _trL("CONFIG_MINIMAP_INSPECT_DIST"))
+	gui:AddControl(id, "Slider",    0.49, 2, "inspect.percent", 0, 100, 1, _trL("CONFIG_MINIMAP_INSPECT_FADING"))
+	gui:AddControl(id, "Slider",    0.49, 2, "inspect.time", 10, 900, 10, _trL("CONFIG_MINIMAP_INSPECT_TIMEOUT"))
+	gui:AddControl(id, "Checkbox",  0.49, 1, "anon.enable", _trL("CONFIG_MINIMAP_ANON_ENABLE"));
+	gui:AddControl(id, "Checkbox",  0.49, 2, "anon.tint", _trL("CONFIG_MINIMAP_ANON_TINT"));
+	gui:AddControl(id, "Slider",    0.49, 2, "anon.opacity", 0, 100, 1, _trL("CONFIG_MINIMAP_ANON_OPACITY"));
+	
+	if ( headerPosition - gui:GetLast(id):GetBottom() > 375 ) then
+		gui:MakeScrollable(id)
+	end
+	----------------------------------------------------------------------
+	-- Sharing
+	----------------------------------------------------------------------
+	
+	id = gui:AddTab(_trL("CONFIG_SECTION_SHARING"))
+	gui:AddControl(id, "Header",     0,    _trL("CONFIG_SECTION_TITLE_SHARING"))
 	last = gui:GetLast(id) -- Get the current position so we can return here for the second column
 
-	gui:AddControl(id, "Subhead",    0,    _trL("Guild sharing"))
-	gui:AddControl(id, "Checkbox",   0, 1, "guild.enable", _trL("Enable guild synchronization"))
-	gui:AddControl(id, "Checkbox",   0, 2, "guild.receive", _trL("Add received guild gathers to my database"))
-	gui:AddControl(id, "Checkbox",   0, 2, "guild.print.send", _trL("Print a message when sending a guild gather"))
-	gui:AddControl(id, "Checkbox",   0, 2, "guild.print.recv", _trL("Print a message when receiving a guild gather"))
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_SHARING_GUILD_LABEL"))
+	gui:AddControl(id, "Checkbox",   0, 1, "guild.enable", _trL("CONFIG_SHARING_GUILD_ENABLE"), true, 290)
+	gui:AddControl(id, "Checkbox",   0, 2, "guild.receive", _trL("CONFIG_SHARING_GUILD_DATABASE"), true, 290)
+	gui:AddControl(id, "Checkbox",   0, 2, "guild.print.send", _trL("CONFIG_SHARING_GUILD_MESSAGE_SENT"), true, 290)
+	gui:AddControl(id, "Checkbox",   0, 2, "guild.print.recv", _trL("CONFIG_SHARING_GUILD_MESSAGE_RECV"), true, 290)
 
-	gui:AddControl(id, "Subhead",    0,    _trL("Raid/Party sharing"))
-	gui:AddControl(id, "Checkbox",   0, 1, "raid.enable", _trL("Enable raid synchronization"))
-	gui:AddControl(id, "Checkbox",   0, 2, "raid.receive", _trL("Add received raid gathers to my database"))
-	gui:AddControl(id, "Checkbox",   0, 2, "raid.print.send", _trL("Print a message when sending a raid gather"))
-	gui:AddControl(id, "Checkbox",   0, 2, "raid.print.recv", _trL("Print a message when receiving a raid gather"))
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_SHARING_GROUP_LABEL"))
+	gui:AddControl(id, "Checkbox",   0, 1, "raid.enable", _trL("CONFIG_SHARING_GROUP_ENABLE"), true, 290)
+	gui:AddControl(id, "Checkbox",   0, 2, "raid.receive", _trL("CONFIG_SHARING_GROUP_DATABASE"), true, 290)
+	gui:AddControl(id, "Checkbox",   0, 2, "raid.print.send", _trL("CONFIG_SHARING_GROUP_MESSAGE_SENT"), true, 290)
+	gui:AddControl(id, "Checkbox",   0, 2, "raid.print.recv", _trL("CONFIG_SHARING_GROUP_MESSAGE_RECV"), true, 290)
 	
-	gui:AddControl(id, "Subhead",    0,    _trL("Personal Alert"))
-	gui:AddControl(id, "Checkbox",   0, 1, "personal.print", _trL("Print a message when adding own gather to DB"))
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_SHARING_PERSONAL_LABEL"))
+	gui:AddControl(id, "Checkbox",   0, 1, "personal.print", _trL("CONFIG_SHARING_PERSONAL_ENABLE"), true, 290)
 
 	gui:SetLast(id, last) -- Return to the saved position
-	gui:AddControl(id, "Subhead", 0.55,    _trL("Sharing Blacklist"))
+	gui:AddControl(id, "Subhead", 0.55,    _trL("CONFIG_SHARING_BLACKLIST_LABEL"))
 	gui:AddControl(id, "Custom",  0.55, 0, Gatherer_SharingBlacklistFrame); Gatherer_SharingBlacklistFrame:SetParent(gui.tabs[id][3])
+	Gatherer_SharingBlacklist_IgnorePlayerButton:SetText(_trL("IGNORE_PLAYER"))
+	Gatherer_SharingBlacklist_StopIgnoreButton:SetText(_trL("STOP_IGNORE"))
 
 	-- Get all objects and insert them into the appropriate subtable
 	local itemLists = {}
@@ -685,11 +727,15 @@ function MakeGuiConfig()
 		return comp
 	end
 
+	----------------------------------------------------------------------
+	-- Mining
+	----------------------------------------------------------------------
+	
 	-- Print out tabs and checkboxes for the above list
-	id = gui:AddTab(_trL("Mining"))
+	id = gui:AddTab(_trL("TRADE_MINING"))
 	gui:MakeScrollable(id)
-	gui:AddControl(id, "Header",     0,    _trL("Mining filter options"))
-	gui:AddControl(id, "Subhead",    0,    _trL("Mineral nodes to track"))
+	gui:AddControl(id, "Header",     0,    _trL("CONFIG_SECTION_TITLE_MINE"))
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_MINE_FILTER_LABEL"))
 	local options = {}
 	local list = itemLists.mine
 	table.sort(list, entrySort)
@@ -699,10 +745,14 @@ function MakeGuiConfig()
 	gui:ColumnCheckboxes(id, 1, options)
 
 
-	id = gui:AddTab(_trL("Herbalism"))
+	----------------------------------------------------------------------
+	-- Herbalism
+	----------------------------------------------------------------------
+	
+	id = gui:AddTab(_trL("TRADE_HERBALISM"))
 	gui:MakeScrollable(id)
-	gui:AddControl(id, "Header",     0,    _trL("Herbalism filter options"))
-	gui:AddControl(id, "Subhead",    0,    _trL("Herbal nodes to track"))
+	gui:AddControl(id, "Header",     0,    _trL("CONFIG_SECTION_TITLE_HERB"))
+	gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_HERB_FILTER_LABEL"))
 	local options = {}
 	local list = itemLists.herb
 	table.sort(list, entrySort)
@@ -711,10 +761,14 @@ function MakeGuiConfig()
 	end
 	gui:ColumnCheckboxes(id, 1, options)
 
-	id = gui:AddTab(_trL("Treasure"))
+	----------------------------------------------------------------------
+	-- Treasure
+	----------------------------------------------------------------------
+	
+	id = gui:AddTab(_trL("CONFIG_SECTION_OPEN"))
 	gui:MakeScrollable(id)
-	gui:AddControl(id, "Header",     0,    _trL("Treasure filter options"))
-	last = gui:AddControl(id, "Subhead",    0,    _trL("Treasure nodes to track"))
+	gui:AddControl(id, "Header",     0,    _trL("CONFIG_SECTION_TITLE_OPEN"))
+	last = gui:AddControl(id, "Subhead",    0,    _trL("CONFIG_OPEN_FILTER_LABEL"))
 	local options = {}
 	local list = itemLists.open
 	table.sort(list, entrySort)
@@ -723,24 +777,60 @@ function MakeGuiConfig()
 	end
 	gui:ColumnCheckboxes(id, 1, options)
 
-	id = gui:AddTab(_trL("About"))
-	gui:AddControl(id, "Header",   0,           _trL("About Gatherer"))
-	gui:AddControl(id, "Checkbox", 0, 0, "about.loaded", _trL("Show Loaded Message"))
-	gui:AddControl(id, "Subhead",  0,            _tr("This is Gatherer v%1.", Gatherer.Var.Version))
-	gui:AddControl(id, "Note", 0,  1, 600, nil, _trL("Gatherer is open source software and is licensed under the GNU General Public License v2.  Please see gpl.txt, included with this AddOn, for the full license."))
+	----------------------------------------------------------------------
+	-- Archaeology
+	----------------------------------------------------------------------
+	
+	id = gui:AddTab(_trL("PROFESSIONS_ARCHAEOLOGY"))
+	gui:AddControl(id, "Header",     0,    _trL("CONFIG_SECTION_TITLE_ARCH"))
+	gui:AddControl(id, "Checkbox",   0, 1, "arch.enable", _trL("ENABLE"))
+	gui:AddControl(id, "Slider",     0, 2, "arch.minimap.count", 1, 50, 1, _trL("CONFIG_ARCH_MAX_NOTES"))
+
+	----------------------------------------------------------------------
+	-- About
+	----------------------------------------------------------------------
+	
+	id = gui:AddTab(_trL("CONFIG_SECTION_ABOUT"))
+	gui:AddControl(id, "Header",   0,           _trL("CONFIG_SECTION_TITLE_ABOUT"))
+	gui:AddControl(id, "Checkbox", 0, 0, "about.loaded", _trL("CONFIG_ABOUT_LOADED_ENABLE"))
+	gui:AddControl(id, "Subhead",  0,            _tr("VERSION_MESSAGE", Gatherer.Var.Version))
+	gui:AddControl(id, "Note", 0,  1, 590, nil, _trL("DESCRIPTION"))
+	gui:AddControl(id, "Note", 0,  1, 590, nil, _trL("DESCRIPTION_LICENSE"))
 
 	-- Create Plugins Section
-	gui:AddCat("PLUGINS", _trL("Plugins"), true, true)
+	gui:AddCat("PLUGINS", _trL("CONFIG_SECTION_HEADER_PLUGINS"), true, true)
 	for name, data in pairs(Gatherer.Plugins.Data) do
 		local id = gui:AddTab(data.tabName)
 		name = name:lower()
-		gui:AddControl(id, "Checkbox",   0, 1, "plugin."..name..".enable", _trL("Enable"))
+		if ( data.type ~= "DATABASE" ) then
+			gui:AddControl(id, "Checkbox",   0, 1, "plugin."..name..".enable", _trL("ENABLE"))
+		end
 		gui:AddControl(id, "Header",     0,    data.title)
-		gui:AddControl(id, "Note",       0, 1, 580, nil, data.notes)
+		gui:AddControl(id, "Note",       0, 1, 565, nil, data.notes)
 		if ( Gatherer.Plugins.Registrations[name] ) then
 			Gatherer.Plugins.Registrations[name].makeConfig(gui)
 		end
 	end
+
+	--Show Node Density search frame
+	local NodeSearch = CreateFrame("Button", nil, gui.Backdrop, "OptionsButtonTemplate")
+	NodeSearch:SetPoint("RIGHT", gui.Done, "LEFT", -100, 0)
+	NodeSearch:SetScript("OnClick", function() gui:Hide() Gatherer.NodeSearch.Show() end)
+	NodeSearch:SetText(_tr("LABEL_DENSITY_REPORT"))
+	local buttonWidth = NodeSearch:GetFontString():GetWidth() + 15
+	if ( buttonWidth > 160 ) then buttonWidth = 160 end
+	if ( buttonWidth < 90 ) then buttonWidth = 90 end
+	NodeSearch:SetWidth(buttonWidth)
+	
+	-- Show Gatherables Report
+	local GatherablesReport = CreateFrame("Button", "", gui.Backdrop, "OptionsButtonTemplate")
+	GatherablesReport:SetPoint("RIGHT", NodeSearch, "LEFT", 0, 0)
+	GatherablesReport:SetScript("OnClick", function() gui:Hide() Gatherer.Report.Show() end)
+	GatherablesReport:SetText(_tr("LABEL_REPORT"))
+	buttonWidth = GatherablesReport:GetFontString():GetWidth() + 15
+	if ( buttonWidth > 160 ) then buttonWidth = 160 end
+	if ( buttonWidth < 90 ) then buttonWidth = 90 end
+	GatherablesReport:SetWidth(buttonWidth)
 
 	-- Any callbacks?
 	for name, callback in pairs(GuiHook) do
@@ -884,14 +974,10 @@ end
 function SharingBlacklist_RemoveBlacklistedNodes()
 	if ( LastIgnoredPlayer ) then
 		local numRemoved = 0
-		for i, continent in Gatherer.Storage.GetAreaIndices() do
-			for i, zone in Gatherer.Storage.GetAreaIndices(continent) do
-				for _, gatherId in Gatherer.Storage.ZoneGatherNames(continent, zone) do
-					for _, gatherType in pairs(Gatherer.Constants.SupportedGatherTypes) do
-						local result, _, count = Gatherer.Storage.RemoveGather(continent, zone, gatherId, gatherType, LastIgnoredPlayer)
-						numRemoved = numRemoved + count
-					end
-				end
+		for i, zone in Gatherer.Storage.GetAreaIndices() do
+			for _, gatherId, gatherType in Gatherer.Storage.ZoneGatherNames(zone) do
+				local result, _, count = Gatherer.Storage.RemoveGather(zone, gatherId, gatherType, LastIgnoredPlayer)
+				numRemoved = numRemoved + count
 			end
 		end
 		if ( numRemoved > 0 ) then
@@ -907,18 +993,15 @@ function SharingBlacklist_CountBlacklistedNodes()
 	local count = 0
 	if ( LastIgnoredPlayer ) then
 		local storage = Gatherer.Storage
-		for i, continent in storage.GetAreaIndices() do
-			for i, zone in storage.GetAreaIndices(continent) do
-				for _, gatherType in pairs(Gatherer.Constants.SupportedGatherTypes) do
-					for nodeIndex in storage.ZoneGatherNodes(continent, zone, gatherType) do
-						for _, _, _, _, source in storage.GetNodeGatherNames(continent, zone, gatherType, nodeIndex) do
-							if ( source == LastIgnoredPlayer ) then
-								count = count + 1
-							end
+		for i, zone in storage.GetAreaIndices() do
+			for _, gatherType in pairs(Gatherer.Constants.SupportedGatherTypes) do
+				for nodeIndex in storage.ZoneGatherNodes(zone, gatherType) do
+					for _, _, _, _, source in storage.GetNodeGatherNames(zone, gatherType, nodeIndex) do
+						if ( source == LastIgnoredPlayer ) then
+							count = count + 1
 						end
 					end
 				end
-				
 			end
 		end
 	end
@@ -957,7 +1040,7 @@ StaticPopupDialogs["GATHERER_ADD_SHARING_IGNORE"] = {
 };
 
 StaticPopupDialogs["GATHERER_REMOVE_BLACKLISTED_NODES"] = {
-	text = _trL("Do you wish to remove all nodes that have been shared by this player?"),
+	text = _trL("CONFIG_IGNORE_PURGE_QUESTION"),
 	button1 = _trL("YES"),
 	button2 = _trL("NO"),
 	OnAccept = function( self )
@@ -970,7 +1053,7 @@ StaticPopupDialogs["GATHERER_REMOVE_BLACKLISTED_NODES"] = {
 };
 
 StaticPopupDialogs["GATHERER_CONFIRM_REMOVE_BLACKLISTED_NODES"] = {
-	text = _trL("Are you sure you wish to purge all shares from this player from your database?  This operation CANNOT be undone and will remove %d node(s) from your Gatherer database."),
+	text = _trL("CONFIG_IGNORE_PURGE_CONFIRM"),
 	button1 = _trL("YES"),
 	button2 = _trL("NO"),
 	OnAccept = function( self )
@@ -983,7 +1066,7 @@ StaticPopupDialogs["GATHERER_CONFIRM_REMOVE_BLACKLISTED_NODES"] = {
 };
 
 StaticPopupDialogs["GATHERER_REMOVED_NODE_COUNT"] = {
-	text = _trL("%d node(s) have been permenently removed from your Gatherer database."),
+	text = _trL("CONFIG_IGNORE_PURGE_DONE"),
 	button1 = _trL("ACCEPT"),
 	timeout = 0,
 	whileDead = 1,

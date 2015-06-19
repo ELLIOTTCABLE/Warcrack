@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherZoneTokens.lua 894 2010-12-02 22:46:33Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherZoneTokens.lua 1130 2014-11-13 21:02:57Z esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Functions for converting to and from the locale independent zone tokens
 --]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherZoneTokens.lua $", "$Rev: 894 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherZoneTokens.lua $", "$Rev: 1130 $")
 
 -- reference to the Astrolabe mapping library
 local Astrolabe = DongleStub(Gatherer.AstrolabeVersion)
@@ -42,43 +42,50 @@ setfenv(1, Gatherer.ZoneTokens)
 
 local MapIdToTokenMap = {
 	-- Kalimdor
-	{
+		[772] = "AHNQIRAJ_THE_FALLEN_KINGDOM",
+		[894] = "AMMEN_VALE",
 		[43]  = "ASHENVALE",
 		[181] = "AZSHARA",
 		[464] = "AZUREMYST_ISLE",
 		[476] = "BLOODMYST_ISLE",
+		[890] = "CAMP_NARACHE",
 		[42]  = "DARKSHORE",
 		[381] = "DARNASSUS",
 		[101] = "DESOLACE",
 		[4]   = "DUROTAR",
 		[141] = "DUSTWALLOW_MARSH",
+		[891] = "ECHO_ISLES",
+		[471] = "EXODAR",
 		[182] = "FELWOOD",
 		[121] = "FERALAS",
 		[241] = "MOONGLADE",
+		[606] = "MOUNT_HYJAL",
 		[9]   = "MULGORE",
+		[11]  = "NORTHERN_BARRENS",
 		[321] = "ORGRIMMAR",
+		[888] = "SHADOWGLEN",
 		[261] = "SILITHUS",
+		[607] = "SOUTHERN_BARRENS",
 		[81]  = "STONETALON_MOUNTAINS",
 		[161] = "TANARIS",
 		[41]  = "TELDRASSIL",
-		[471] = "EXODAR",
 		[61]  = "THOUSAND_NEEDLES",
 		[362] = "THUNDER_BLUFF",
-		[201] = "UNGORO_CRATER",
-		[281] = "WINTERSPRING",
-		[772] = "AHNQIRAJ_THE_FALLEN_KINGDOM",
-		[606] = "MOUNT_HYJAL",
-		[607] = "SOUTHERN_BARRENS",
-		[11]  = "NORTHERN_BARRENS",
 		[720] = "ULDUM",
-	},
+		[201] = "UNGORO_CRATER",
+		[889] = "VALLEY_OF_TRIALS",
+		[281] = "WINTERSPRING",
+
 	-- Eastern Kingdoms
-	{
+		[614] = "ABYSSAL_DEPTHS",
 		[16]  = "ARATHI_HIGHLANDS",
 		[17]  = "BADLANDS",
 		[19]  = "BLASTED_LANDS",
 		[29]  = "BURNING_STEPPES",
+		[673] = "CAPE_OF_STRANGLETHORN",
+		[866] = "COLDRIDGE_VALLEY",
 		[32]  = "DEADWIND_PASS",
+		[892] = "DEATHKNELL",
 		[27]  = "DUN_MOROGH",
 		[34]  = "DUSKWOOD",
 		[23]  = "EASTERN_PLAGUELANDS",
@@ -88,34 +95,34 @@ local MapIdToTokenMap = {
 		[24]  = "HILLSBRAD_FOOTHILLS",
 		[26]  = "HINTERLANDS",
 		[341] = "IRONFORGE",
+		[610] = "KELPTHAR_FOREST",
 		[35]  = "LOCH_MODAN",
+		[895] = "NEW_TINKERTOWN",
+		[37]  = "NORTHERN_STRANGLETHORN",
+		[864] = "NORTHSHIRE",
+		[499] = "QUEL_DANAS",
 		[36]  = "REDRIDGE_MOUNTAINS",
+		[684] = "RUINS_OF_GILNEAS",
+		[685] = "RUINS_OF_GILNEAS_CITY",
 		[28]  = "SEARING_GORGE",
+		[615] = "SHIMMERING_EXPANSE",
 		[480] = "SILVERMOON",
 		[21]  = "SILVERPINE_FOREST",
 		[301] = "STORMWIND",
 		[689] = "STRANGLETHORN_VALE",
-		[499] = "QUEL_DANAS",
+		[893] = "SUNSTRIDER_ISLE",
 		[38]  = "SWAMP_OF_SORROWS",
 		[20]  = "TIRISFAL_GLADES",
+		[708] = "TOL_BARAD",
+		[709] = "TOL_BARAD_PENINSULA",
+		[700] = "TWILIGHT_HIGHLANDS",
 		[382] = "UNDERCITY",
+		[613] = "VASHJIR",
 		[22]  = "WESTERN_PLAGUELANDS",
 		[39]  = "WESTFALL",
 		[40]  = "WETLANDS",
-		[708] = "TOL_BARAD",
-		[610] = "KELPTHAR_FOREST",
-		[614] = "ABYSSAL_DEPTHS",
-		[685] = "RUINS_OF_GILNEAS_CITY",
-		[709] = "TOL_BARAD_PENINSULA",
-		[613] = "VASHJIR",
-		[615] = "SHIMMERING_EXPANSE",
-		[684] = "RUINS_OF_GILNEAS",
-		[37]  = "NORTHERN_STRANGLETHORN",
-		[700] = "TWILIGHT_HIGHLANDS",
-		[673] = "CAPE_OF_STRANGLETHORN",
-	},
+
 	-- Outland
-	{
 		[475] = "BLADES_EDGE_MOUNTAINS",
 		[465] = "HELLFIRE_PENINSULA",
 		[477] = "NAGRAND",
@@ -124,34 +131,74 @@ local MapIdToTokenMap = {
 		[481] = "SHATTRATH",
 		[478] = "TEROKKAR_FOREST",
 		[467] = "ZANGARMARSH",
-	},
+
 	-- Northrend
-	{
 		[486] = "BOREAN_TUNDRA",
 		[510] = "CRYSTALSONG_FOREST",
-		[504] = "DALARAN", 
+		[504] = "DALARAN",
 		[488] = "DRAGONBLIGHT",
 		[490] = "GRIZZLY_HILLS",
-		[541] = "HROTHGARS_LANDING",
 		[491] = "HOWLING_FJORD",
+		[541] = "HROTHGARS_LANDING",
 		[492] = "ICECROWN_GLACIER",
+		[501] = "LAKE_WINTERGRASP",
 		[493] = "SHOLAZAR_BASIN",
 		[495] = "STORM_PEAKS",
-		[501] = "LAKE_WINTERGRASP",
 		[496] = "ZULDRAK",
-	},
-	-- Maelstrom Continent
-	{
-		[605] = "KEZAN",
+
+	-- The Maelstrom
 		[640] = "DEEPHOLM",
-		[737] = "MAELSTROM",
+		[605] = "KEZAN",
 		[544] = "LOST_ISLES",
-	},
+		[737] = "MAELSTROM",
+
+	-- Pandaria
+		[858] = "DREAD_WASTES",
+		[806] = "JADE_FOREST",
+		[857] = "KRASARANG_WILDS",
+		[809] = "KUNLAI_SUMMIT",
+		[905] = "SHRINE_OF_SEVEN_STARS",
+		[903] = "SHRINE_OF_TWO_MOONS",
+		[810] = "TOWNLONG_STEPPES",
+		[811] = "VALE_OF_ETERNAL_BLOSSOMS",
+		[807] = "VALLEY_OF_THE_FOUR_WINDS",
+		[873] = "VEILED_STAIR",
+		[928] = "ISLE_THUNDER",
+		[929] = "ISLE_GIANTS",
+		[951] = "TIMELESS_ISLE",
+	
+	-- Draenor
+		[978] = "DRAENOR_ASHRAN",
+		[941] = "DRAENOR_FROSTFIRE_RIDGE",
+		[949] = "DRAENOR_GORGROND",
+		[950] = "DRAENOR_NAGRAND",
+		[947] = "DRAENOR_SHADOWMOON_VALLEY",
+		[948] = "DRAENOR_SPIRES_OF_ARAK",
+		[946] = "DRAENOR_TALADOR",
+		[945] = "DRAENOR_TANAAN_JUNGLE",
 }
 
+
+-- convert list of zoneID1, zoneName1, zoneID2, zoneName2, etc.
+-- into just a list of zone names
+local function stripZoneIDs(...)
+	local n = select("#", ...)
+	--print("zoneList count = ", n );
+	local temp = {};
+	local index = 1;
+	for i = 2, n, 2 do
+		temp[index] = select(i, ...);
+		--print("  item = ", temp[index] );
+		index = index + 1;
+	end
+	return temp;
+end
+
+
 Tokens = {}
+TokensByContinent = {}
 TokenToMapID = {}
-TempTokens = {}
+ZoneNames = stripZoneIDs(GetMapContinents())
 
 unrecognizedZones = {}
 
@@ -182,42 +229,61 @@ Ver3To4TempTokens = {
 	["TheMaelstrom"] = "MAELSTROM",
 }
 
+local continentWorldMapIDs = {}
+for i, id in pairs(GetContinentMaps()) do
+	continentWorldMapIDs[i] = GetContinentMapInfo(id)
+end
+
 for continent, zones in pairs(Astrolabe.ContinentList) do
-	local fileTokenMap = MapIdToTokenMap[continent];
+	local continentZoneNames = stripZoneIDs(GetMapZones(continent));
+	ZoneNames[continent] = { CONTINENT = ZoneNames[continent] }
 	local tokenMap = {}
 	for index, mapID in pairs(zones) do
 		if ( index > 0 ) then
 			local zoneToken
-			if not ( fileTokenMap and fileTokenMap[mapID] ) then
-				-- use the map name as a temporary token and 
-				-- mark the map name as such
-				zoneToken = tostring(mapID)
-				TempTokens[zoneToken] = 1;
-				table.insert(unrecognizedZones, (select(index, GetMapZones(continent))))
+			if not ( MapIdToTokenMap[mapID] ) then
+				-- use the mapID as a temporary token and 
+				zoneToken = mapID;
+				table.insert(unrecognizedZones, continentZoneNames[index].." ("..mapID..")")
 			else
-				zoneToken = fileTokenMap[mapID]
+				zoneToken = MapIdToTokenMap[mapID]
 			end
+			Tokens[zoneToken] = zoneToken
+			Tokens[mapID] = zoneToken
 			tokenMap[index] = zoneToken
 			tokenMap[zoneToken] = index
 			TokenToMapID[zoneToken] = mapID
-			TokenToMapID[mapID] = zoneToken
+			
+			ZoneNames[continent][zoneToken] = continentZoneNames[index]
+			ZoneNames[zoneToken] = continentZoneNames[index]
+			if not ( ZoneNames[continentZoneNames[index]] ) then
+				ZoneNames[continentZoneNames[index]] = zoneToken
+			else
+				if not ( type(ZoneNames[continentZoneNames[index]]) == "table" ) then
+					local origZoneToken = ZoneNames[continentZoneNames[index]]
+					ZoneNames[continentZoneNames[index]] = {}
+					ZoneNames[continentZoneNames[index]][""] = origZoneToken
+				end
+				ZoneNames[continentZoneNames[index]][continentWorldMapIDs[continent]] = zoneToken
+			end
 		end
 	end
-	Tokens[continent] = tokenMap
+	TokensByContinent[continent] = tokenMap
 end
 
 if ( next(unrecognizedZones) ) then
 	-- some zones were unrecognized, warn user
 	local zoneList = string.join(", ", unpack(unrecognizedZones))
-	Gatherer.Notifications.AddInfo(_tr("Gatherer was unable to identify the following zones: "..HIGHLIGHT_FONT_COLOR_CODE.."%1|r.  \nIf these are new zones, then this is not a problem, and you can continue as normal.  \nIf these are not new zones, then remain calm, "..HIGHLIGHT_FONT_COLOR_CODE.."your data IS NOT LOST!|r  Your data for these zones is still intact, but you will need to update Gatherer in order to access it.  Until then you can continue as normal and any new data you collect will be merged with your old data once you upgrade.  \n\n"..HIGHLIGHT_FONT_COLOR_CODE.."Please upgrade Gatherer when convenient.  |r", zoneList))
+	Gatherer.Locale.SECTION_HIGHLIGHT_CODE = HIGHLIGHT_FONT_COLOR_CODE
+	Gatherer.Notifications.AddInfo(_tr("ZONETOKENS_UNIDENTIFIED_ZONES_WARNING", zoneList))
 end
 unrecognizedZones = nil
 
-function GetZoneToken( continent, zone )
-	if not ( Tokens[continent] ) then
+function GetZoneTokenByContZone( continent, zone )
+	if not ( TokensByContinent[continent] ) then
 		return nil
 	end
-	local val = Tokens[continent][zone]
+	local val = TokensByContinent[continent][zone]
 	if ( val ) then
 		if ( type(zone) == "number" ) then
 			return val
@@ -234,7 +300,7 @@ function GetZoneToken( continent, zone )
 end
 
 function GetContinentAndZone( token )
-	for continent, zoneTokens in pairs(Tokens) do
+	for continent, zoneTokens in pairs(TokensByContinent) do
 		if ( zoneTokens[token] ) then
 			return continent, zoneTokens[token]
 		end
@@ -273,26 +339,6 @@ function GetZoneMapIDAndFloor( mapToken )
 	end
 end
 
-function GetZoneTokenFromMapID( mapID )
-	return TokenToMapID[mapID]
-end
-
-function IsTempZoneToken( continent, token )
-	if ( Gatherer.ZoneTokens.Tokens[continent][token] == nil or Gatherer.ZoneTokens.TempTokens[token] ) then
-		return true
-	else
-		return false
-	end
-end
-
-function GetTokenFromMapID( continent, zone )
-	if ( MapIdToTokenMap[continent] ) then
-		return MapIdToTokenMap[continent][zone]
-	else
-		for i, contData in pairs(MapIdToTokenMap) do
-			if ( contData[zone] ) then
-				return contData[zone]
-			end
-		end
-	end
+function GetZoneToken( mapID )
+	return Tokens[mapID]
 end

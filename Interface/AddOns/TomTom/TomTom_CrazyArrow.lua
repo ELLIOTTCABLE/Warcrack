@@ -83,6 +83,11 @@ wayframe.arrow:SetAllPoints()
 local active_point, arrive_distance, showDownArrow, point_title
 
 function TomTom:SetCrazyArrow(uid, dist, title)
+	if active_point and active_point.corpse and self.db.profile.arrow.stickycorpse then
+		-- do not change the waypoint arrow from corpse
+		return
+	end
+
 	active_point = uid
 	arrive_distance = dist
 	point_title = title
@@ -90,6 +95,9 @@ function TomTom:SetCrazyArrow(uid, dist, title)
 	if self.profile.arrow.enable then
 		wayframe.title:SetText(title or L["Unknown waypoint"])
 		wayframe:Show()
+		if wayframe.crazyFeedFrame then
+			wayframe.crazyFeedFrame:Show()
+		end
 	end
 end
 
@@ -177,6 +185,13 @@ local function OnUpdate(self, elapsed)
 		local mr,mg,mb = unpack(TomTom.db.profile.arrow.middlecolor)
 		local br,bg,bb = unpack(TomTom.db.profile.arrow.badcolor)
 		local r,g,b = ColorGradient(perc, br, bg, bb, mr, mg, mb, gr, gg, gb)
+
+		-- If we're 98% heading in the right direction, then use the exact
+		-- color instead of the gradient. This allows us to distinguish 'good'
+		-- from 'on target'. Thanks to Gregor_Curse for the suggestion.
+		if perc > 0.98 then
+			r,g,b = unpack(TomTom.db.profile.arrow.exactcolor)
+		end
 		arrow:SetVertexColor(r,g,b)
 
 		local cell = floor(angle / twopi * 108 + 0.5) % 108
@@ -212,7 +227,7 @@ local function OnUpdate(self, elapsed)
 
 		if speed > 0 then
 			local eta = math.abs(dist / speed)
-			tta:SetFormattedText("%01d:%02d", eta / 60, eta % 60)
+			tta:SetFormattedText("%s:%02d", math.floor(eta / 60), math.floor(eta % 60))
 		else
 			tta:SetText("***")
 		end
@@ -224,6 +239,11 @@ end
 
 function TomTom:ShowHideCrazyArrow()
 	if self.profile.arrow.enable then
+		if self.profile.arrow.hideDuringPetBattles and C_PetBattles.IsInBattle() then
+			wayframe:Hide()
+			return
+		end
+
 		wayframe:Show()
 
 		if self.profile.arrow.noclick then
@@ -418,6 +438,7 @@ local function wayframe_OnEvent(self, event, arg1, ...)
 				throttle = TomTom.db.profile.feeds.arrow_throttle
 			end
 
+			wayframe.crazyFeedFrame = crazyFeedFrame
 			crazyFeedFrame:SetScript("OnUpdate", function(self, elapsed)
 				counter = counter + elapsed
 				if counter < throttle then
@@ -425,7 +446,9 @@ local function wayframe_OnEvent(self, event, arg1, ...)
 				end
 
 				counter = 0
-
+				if not active_point then
+					self:Hide()
+				end
 				local angle = TomTom:GetDirectionToWaypoint(active_point)
 				local player = GetPlayerFacing()
 				if not angle or not player then
@@ -445,6 +468,14 @@ local function wayframe_OnEvent(self, event, arg1, ...)
 				local mr,mg,mb = unpack(TomTom.db.profile.arrow.middlecolor)
 				local br,bg,bb = unpack(TomTom.db.profile.arrow.badcolor)
 				local r,g,b = ColorGradient(perc, br, bg, bb, mr, mg, mb, gr, gg, gb)
+
+				-- If we're 98% heading in the right direction, then use the exact
+				-- color instead of the gradient. This allows us to distinguish 'good'
+				-- from 'on target'. Thanks to Gregor_Curse for the suggestion.
+				if perc > 0.98 then
+					r,g,b = unpack(TomTom.db.profile.arrow.exactcolor)
+				end
+
 				feed_crazy.iconR = r
 				feed_crazy.iconG = g
 				feed_crazy.iconB = b

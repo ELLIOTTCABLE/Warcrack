@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherEvent.lua 924 2011-04-27 02:37:42Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherEvent.lua 972 2012-09-03 02:03:15Z Esamynn $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -27,11 +27,13 @@
 
 	Event handling routines
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherEvent.lua $", "$Rev: 924 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherEvent.lua $", "$Rev: 972 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
 local _trL = Gatherer.Locale.TrLocale
+
+local ArchTimer = 0
 
 function Gatherer.Event.RegisterEvents( frame )
 	frame:RegisterEvent("WORLD_MAP_UPDATE")
@@ -54,6 +56,9 @@ function Gatherer.Event.RegisterEvents( frame )
 
 	-- Communications
 	frame:RegisterEvent("CHAT_MSG_ADDON")
+
+	-- Archaeology
+	frame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 end
 
 function Gatherer.Event.OnLoad()
@@ -79,8 +84,12 @@ function Gatherer.Event.OnLoad()
 	--Gatherer.Plugins.LoadPluginData()
 	
 	if ( Gatherer.Config.GetSetting("about.loaded") ) then
-		Gatherer.Util.ChatPrint("Gatherer v"..Gatherer.Var.Version.." -- Loaded!")
+		Gatherer.Util.ChatPrint(_tr("LOADED_NOTIFICATION", Gatherer.Var.Version))
 	end
+
+	-- load key Bindings Strings
+	BINDING_HEADER_GATHERER = _trC("BINDING_HEADER_GATHERER")
+	BINDING_NAME_GATHERER_TOGGLE_OPTIONS_DIALOG = _trC("BINDING_NAME_GATHERER_TOGGLE_OPTIONS_DIALOG")
 end
 
 function Gatherer.Event.OnEvent( event, ... )
@@ -160,8 +169,26 @@ function Gatherer.Event.OnEvent( event, ... )
 			end
 		end
 	
+	elseif ( event == "UNIT_SPELLCAST_SUCCEEDED" ) then
+		local unit, spellName = ...
+		if ( unit == "player" and spellName == Gatherer.Constants.SurveySpellName ) then
+			GathererFrame:Show()
+			ArchTimer = Gatherer.Config.GetSetting("arch.duration")
+			Gatherer.Var.ArchaeologyActive = true
+			Gatherer.MiniNotes.ForceUpdate()
+		end
+	
 	elseif ( event ) then
 		Gatherer.Util.Debug("Gatherer Unknown event: "..event)
+	end
+end
+
+function Gatherer.Event.OnUpdate(elapsed)
+	-- update timers
+	ArchTimer = ArchTimer - elapsed
+	if ( ArchTimer <= 0 ) then
+		GathererFrame:Hide()
+		Gatherer.Var.ArchaeologyActive = false
 	end
 end
 
@@ -178,6 +205,6 @@ function Gatherer.Event.OnSwag(lootType, lootTable, coinAmount, extraData)
 		if (objectType ~= lootType) then return end
 		
 		-- increments only if both lootTable and coinAmount are non-nil
-		Gatherer.Api.AddGather(object, lootType, nil, nil, coinAmount, lootTable, (lootTable and coinAmount))
+		Gatherer.Api.AddGather(object, lootType, nil, nil, coinAmount, lootTable, (lootTable and coinAmount) and true or false)
 	end
 end

@@ -24,6 +24,7 @@ L.MSG_INVALID_CUSTOM_FONT_NAME		= "Nom de Police incorrect."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "Le nom de la Police existe déjà."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "Le chemin de la Police doit pointé vers un fichier .ttf."
 --L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font." 
+--L.MSG_TESTING_FONT			= "Testing the specified font for validity..."
 L.MSG_CUSTOM_SOUNDS					= "Sons Personnalisés"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "Nom du Son incorrect."
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "Le nom du son existe déjà."
@@ -35,7 +36,7 @@ L.MSG_SCROLL_AREA_ALREADY_EXISTS	= "Une zone de défilement portant ce nom exist
 L.MSG_INVALID_SCROLL_AREA_NAME		= "Nom de zone de défilement invalide."
 L.MSG_ACKNOWLEDGE_TEXT				= "Etes-vous certain de vouloir effectuer cette action?"
 L.MSG_NORMAL_PREVIEW_TEXT			= "Normal"
-L.MSG_INVALID_SOUND_FILE			= "Le fichier son doit être au format .mp3 ou .ogg."
+L.MSG_INVALID_SOUND_FILE			= "Le fichier son doit être au format .ogg."
 L.MSG_NEW_TRIGGER					= "Nouveau déclencheur"
 L.MSG_TRIGGER_CLASSES				= "Classes du déclencheur"
 L.MSG_MAIN_EVENTS					= "Evènements principaux"
@@ -53,23 +54,6 @@ L.MSG_ITEM_QUALITIES				= "Qualité des Items"
 L.MSG_ITEMS							= "Items"
 L.MSG_ITEM_ALREADY_EXISTS			= "Le nom de l'item existe déjà."
 L.MSG_INVALID_ITEM_NAME				= "Nom de l'item incorrect."
-
-
-------------------------------
--- Class Names.
-------------------------------
-
-local obj = L.CLASS_NAMES
-obj["DEATHKNIGHT"]	= "Chevalier de la mort"
-obj["DRUID"]		= "Druide"
-obj["HUNTER"]		= "Chasseur"
-obj["MAGE"]			= "Mage"
-obj["PALADIN"]		= "Paladin"
-obj["PRIEST"]		= "Prêtre"
-obj["ROGUE"]		= "Voleur"
-obj["SHAMAN"]		= "Chaman"
-obj["WARLOCK"]		= "Démoniste"
-obj["WARRIOR"]		= "Guerrier"
 
 
 ------------------------------
@@ -118,6 +102,8 @@ obj["enableTrigger"]		= { tooltip="Activer le déclencheur."}
 obj["allPowerGains"]		= { label="Tous les gains d'énergie", tooltip="Affiche tous les gains d'énergie même ceux qui ne sont pas affichés dans le journal ce combat.\n\nATTENTION: Cette option est source de spam et ignorera les réglages de seuil de spam et de son contrôle.\n\nNON RECOMMANDE."}
 obj["abbreviateSkills"]		= { label="Compétences Abrégées", tooltip="Nom des compétences abrégées (client anglais seulement).\n\nCela peut être contourné pour chaque évènement en utilisant le code %sl."}
 --obj["mergeSwings"]				= { label="Merge Swings", tooltip="Merge regular melee swings that hit within a short time span."}
+--obj["shortenNumbers"]			= { label="Shorten Numbers", tooltip="Display numbers in an abbreviated format (example: 32765 -> 33k)."}
+--obj["groupNumbers"]				= { label="Group By Thousands", tooltip="Display numbers grouped by thousands (example: 32765 -> 32,765)."}
 obj["hideSkills"]			= { label="Cacher les Noms des Compétences", tooltip="Ne pas afficher les noms de compétences pour les évènements entrants et sortants.\n\nVous abandonnerez quelques possibilités de personnalisation de l'évènement si vous utilisez cette option car le code %s sera ignoré."}
 obj["hideNames"]			= { label="Cacher les Noms des Unités", tooltip="Ne pas afficher les noms des unités pour les évènements entrants et sortants.\n\nVous abandonnerez quelques possibilités de personnalisation de l'évènement si vous utilisez cette option car le code %n sera ignoré."}
 obj["hideFullOverheals"]	= { label="Cacher les Soins en Excès Total", tooltip="Ne pas afficher les soins qui ont un soin effectif égal à zéro."}
@@ -226,7 +212,7 @@ obj = L.EDITBOXES
 obj["customFontName"]	= { label="Nom de la Police:", tooltip="Le nom utilisé pour identifier la police.\n\nExemple: Ma Super Police"}
 obj["customFontPath"]	= { label="Chemin de la police:", tooltip="Le chemin du fichier de la police.\n\nNOTE: Si le fichier est situé dans le répertoire recommandé MikScrollingBattleText\\Fonts, seul le nom de fichier doit être entré ici, au lieu du chemin complet.\n\nExemple: maPolice.ttf"}
 obj["customSoundName"]	= { label="Nom du Son:", tooltip="Le nom utilisé pour identifier le son.\n\nExemple: Mon Son"}
-obj["customSoundPath"]	= { label="Chemin du Son:", tooltip="Le chemin qui pointe vers le fichier du son.\n\nNOTE: Si le fichier est situé dans le répertoire rcommandé MikScrollingBattleText\\Sounds, seul le nom de fichier doit être entré ici, au lieu du chemin complet.\n\nExemple: monSon.mp3"}
+obj["customSoundPath"]	= { label="Chemin du Son:", tooltip="Le chemin qui pointe vers le fichier du son.\n\nNOTE: Si le fichier est situé dans le répertoire rcommandé MikScrollingBattleText\\Sounds, seul le nom de fichier doit être entré ici, au lieu du chemin complet.\n\nExemple: monSon.ogg"}
 obj["copyProfile"]		= { label="Nom du nouveau profil:", tooltip="Nom du nouveau profil vers lequel copier le profil courant."}
 --obj["partialEffect"]	= { tooltip="The trailer that will be appended when the partial effect occurs."}
 obj["scrollAreaName"]	= { label="Nouveau nom pour la zone de défilement:", tooltip="Nouveau nom pour la zone de défilement."}
@@ -238,6 +224,7 @@ obj["iconSkill"]		= { label="Icône de la compétence:", tooltip="Le nom ou le n
 obj["skillName"]		= { label="Nom de la compétence:", tooltip="Le nom de la compétence à ajouter."}
 obj["substitutionText"]	= { label="Texte de substitution:", tooltip="Le texte à substituer pour le nom de la compétence."}
 obj["itemName"]			= { label="Nom de l'item:", tooltip="Le nom de l'item à ajouter."}
+
 
 ------------------------------
 -- Interface sliders
@@ -260,6 +247,7 @@ obj["hotThrottleTime"]		= { label="Temps de spam des HoT", tooltip="Le nombre de
 obj["powerThrottleTime"]	= { label="Temps de spam des Gains", tooltip="Le nombre de secondes à prendre en compte pour afficher les gains de puissance."}
 obj["skillThrottleTime"]	= { label="Contrôle du temps", tooltip="Le nombre de secondes à prendre en compte pour afficher la compétence."}
 obj["cooldownThreshold"]	= { label="Contrôle du cooldown", tooltip="Les compétences avec un cooldown inférieur au nombre de secondes spécifié ne seront pas affichées."}
+
 
 ------------------------------
 -- Event categories
@@ -284,8 +272,10 @@ obj["HEALING_DONE"]			= "%a - Quantité de soins.\n"
 obj["ABSORBED_AMOUNT"]		= "%a - Quantité de dommages absorbés.\n"
 obj["AURA_AMOUNT"]			= "%a - Nombre de la pile pour cet aura.\n"
 obj["ENERGY_AMOUNT"]		= "%a - Quantité de pouvoir.\n"
+--obj["CHI_AMOUNT"]			= "%a - Amount of chi you have.\n"
 obj["CP_AMOUNT"]			= "%a - Nombre de points de combo.\n"
 obj["HOLY_POWER_AMOUNT"]	= "%a - Amount of holy power you have.\n"
+--obj["SHADOW_ORBS_AMOUNT"]	= "%a - Amount of shadow orbs you have.\n"
 obj["HONOR_AMOUNT"]			= "%a - Quantité d'honneur.\n"
 obj["REP_AMOUNT"]			= "%a - Quantité de réputation.\n"
 obj["ITEM_AMOUNT"]			= "%a - Quantité de l'item ramassé.\n"
@@ -472,10 +462,16 @@ obj["NOTIFICATION_COMBAT_ENTER"]		= { label="Début combat", tooltip="Afficher l
 obj["NOTIFICATION_COMBAT_LEAVE"]		= { label="Sortie combat", tooltip="Afficher la fin du combat."}
 obj["NOTIFICATION_POWER_GAIN"]			= { label="Gains de puissance", tooltip="Afficher les gains de mana, rage et énergie."}
 obj["NOTIFICATION_POWER_LOSS"]			= { label="Pertes de puissance", tooltip="Afficher les pertes de mana, rage et énergie par des drains."}
+--obj["NOTIFICATION_ALT_POWER_GAIN"]		= { label="Alternate Power Gains", tooltip="Enable when you gain alternate power such as sound level on Atramedes."}
+--obj["NOTIFICATION_ALT_POWER_LOSS"]		= { label="Alternate Power Losses", tooltip="Enable when you lose alternate power from drains."}
+--obj["NOTIFICATION_CHI_CHANGE"]			= { label="Chi Changes", tooltip="Enable when you change chi."}
+--obj["NOTIFICATION_CHI_FULL"]			= { label="Chi Full", tooltip="Enable when you attain full chi."}
 obj["NOTIFICATION_CP_GAIN"]				= { label="Gain de points de combo", tooltip="Afficher les points de combo."}
 obj["NOTIFICATION_CP_FULL"]				= { label="5 points de combo", tooltip="Afficher quand vous avez atteint 5 points de combo."}
-obj["NOTIFICATION_HOLY_POWER_CHANGE"]	= { label="Holy Power Changes", tooltip="Enable when you change holy power."}
-obj["NOTIFICATION_HOLY_POWER_FULL"]		= { label="Holy Power Full", tooltip="Enable when you attain full holy power."}
+--obj["NOTIFICATION_HOLY_POWER_CHANGE"]	= { label="Holy Power Changes", tooltip="Enable when you change holy power."}
+--obj["NOTIFICATION_HOLY_POWER_FULL"]		= { label="Holy Power Full", tooltip="Enable when you attain full holy power."}
+--obj["NOTIFICATION_SHADOW_ORBS_CHANGE"]	= { label="Shadow Orb Changes", tooltip="Enable when you change shadow orbs."}
+--obj["NOTIFICATION_SHADOW_ORBS_FULL"]	= { label="Shadow Orbs Full", tooltip="Enable when you attain full shadow orbs."}
 obj["NOTIFICATION_HONOR_GAIN"]			= { label="Gains d'honneur", tooltip="Afficher les gains d'honneur."}
 obj["NOTIFICATION_REP_GAIN"]			= { label="Gains de réputation", tooltip="Afficher les gains de réputation."}
 obj["NOTIFICATION_REP_LOSS"]			= { label="Pertes de réputation", tooltip="Afficher les pertes de réputation."}

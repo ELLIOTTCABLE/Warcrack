@@ -1,7 +1,6 @@
-## Interface: 40300
+## Interface: 60100
 ## Title: Tidy Plates Widgets
-## Version: R458
-## Notes: Library of Widgets 
+## Notes: Library of Widgets
 ## Dependencies: TidyPlates
 ## SavedVariables: TidyPlatesWidgetData
 

@@ -19,6 +19,7 @@ local addon = _G[addonName]
 local THIS_ACCOUNT = "Default"
 local commPrefix = "DS_Cont"		-- let's keep it a bit shorter than the addon name, this goes on a comm channel, a byte is a byte ffs :p
 local BI = LibStub("LibBabble-Inventory-3.0"):GetLookupTable()
+local MAIN_BANK_SLOTS = 100		-- bag id of the 28 main bank slots
 
 local guildMembers = {} 	-- hash table containing guild member info (tab timestamps)
 
@@ -29,6 +30,8 @@ local MSG_BANKTAB_REQUEST						= 3	-- request bank tab data ..
 local MSG_BANKTAB_REQUEST_ACK					= 4	-- .. ack the request, tell the requester to wait
 local MSG_BANKTAB_REQUEST_REJECTED			= 5	-- .. refuse the request
 local MSG_BANKTAB_TRANSFER						= 6	-- .. or send the data
+
+local VOID_STORAGE_TAB = "VoidStorage.Tab"
 
 local AddonDB_Defaults = {
 	global = {
@@ -137,6 +140,12 @@ local function GetThisGuild()
 		local key = format("%s.%s.%s", THIS_ACCOUNT, GetRealmName(), guild)
 		return addon.db.global.Guilds[key]
 	end
+
+	-- tentative fix, to review after 6.1
+	-- local guildKey = DataStore:GetGuild()
+	-- if guildKey then
+		-- return addon.db.global.Guilds[guildKey]
+	-- end
 end
 
 local function GetBankTimestamps(guild)
@@ -192,7 +201,7 @@ end
 local function IsEnchanted(link)
 	if not link then return end
 	
-	if not string.find(link, "0:0:0:0:0:0") then	-- only check 6 zeroes, 7th is the UniqueID, which is irrelevant for us
+	if not string.find(link, "item:%d+:0:0:0:0:0:0:%d+:%d+:0:0") then	-- 7th is the UniqueID, 8th LinkLevel which are irrelevant
 		-- enchants/jewels store values instead of zeroes in the link, if this string can't be found, there's at least one enchant/jewel
 		return true
 	end
@@ -314,6 +323,7 @@ local function ScanContainer(bagID, containerType)
 	end
 	
 	addon.ThisCharacter.lastUpdate = time()
+	addon:SendMessage("DATASTORE_CONTAINER_UPDATED", bagID, containerType)
 end
 
 local function ScanBagSlotsInfo()
@@ -336,7 +346,7 @@ local function ScanBankSlotsInfo()
 	local char = addon.ThisCharacter
 	
 	local numBankSlots = NUM_BANKGENERIC_SLOTS
-	local numFreeBankSlots = char.Containers["Bag100"].freeslots
+	local numFreeBankSlots = char.Containers["Bag"..MAIN_BANK_SLOTS].freeslots
 
 	for bagID = NUM_BAG_SLOTS + 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS do		-- 5 to 11
 		local bag = char.Containers["Bag" .. bagID]
@@ -382,20 +392,38 @@ local function ScanBag(bagID)
 	else						-- Bags 1 through 11
 		bag.icon = GetInventoryItemTexture("player", ContainerIDToInventoryID(bagID))
 		bag.link = GetInventoryItemLink("player", ContainerIDToInventoryID(bagID))
+		if bag.link then
+			local _, _, rarity = GetItemInfo(bag.link)
+			if rarity then	-- in case rarity was known from a previous scan, and GetItemInfo returns nil for some reason .. don't overwrite
+				bag.rarity = rarity
+			end
+		end
 	end
 	ScanContainer(bagID, BAGS)
 	ScanBagSlotsInfo()
 end
 
 local function ScanVoidStorage()
-	local bag = addon.ThisCharacter.Containers["VoidStorage"]
-	bag.size = 80
-	
+	-- delete the old data from the "VoidStorage" container, now stored in .Tab1, .Tab2 (since they'll likely add more later on)
+	wipe(addon.ThisCharacter.Containers["VoidStorage"])
+
+	local bag
 	local itemID
-	for i = 1, bag.size do
-		itemID = GetVoidItemInfo(i)
-		bag.ids[i] = itemID
+	
+	for tab = 1, 2 do
+		bag = addon.ThisCharacter.Containers[VOID_STORAGE_TAB .. tab]
+		bag.size = 80
+	
+		for slot = 1, bag.size do
+			itemID = GetVoidItemInfo(tab, slot)
+			bag.ids[slot] = itemID
+		end
 	end
+	addon:SendMessage("DATASTORE_VOIDSTORAGE_UPDATED")
+end
+
+local function ScanReagentBank()
+	ScanContainer(REAGENTBANK_CONTAINER, BAGS)
 end
 
 -- *** Event Handlers ***
@@ -422,9 +450,13 @@ local function OnPlayerBankSlotsChanged(event, slotID)
 	if (slotID >= 29) and (slotID <= 35) then
 		ScanBag(slotID - 24)		-- bagID for bank bags goes from 5 to 11, so slotID - 24
 	else
-		ScanContainer(100, BANK)
+		ScanContainer(MAIN_BANK_SLOTS, BANK)
 		ScanBankSlotsInfo()
 	end
+end
+
+local function OnPlayerReagentBankSlotsChanged(event)
+	ScanReagentBank()
 end
 
 local function OnBankFrameOpened()
@@ -432,7 +464,7 @@ local function OnBankFrameOpened()
 	for bagID = NUM_BAG_SLOTS + 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS do		-- 5 to 11
 		ScanBag(bagID)
 	end
-	ScanContainer(100, BANK)
+	ScanContainer(MAIN_BANK_SLOTS, BANK)
 	ScanBankSlotsInfo()
 	addon:RegisterEvent("BANKFRAME_CLOSED", OnBankFrameClosed)
 	addon:RegisterEvent("PLAYERBANKSLOTS_CHANGED", OnPlayerBankSlotsChanged)
@@ -440,6 +472,7 @@ end
 
 local function OnGuildBankFrameClosed()
 	addon:UnregisterEvent("GUILDBANKFRAME_CLOSED")
+	addon:UnregisterEvent("GUILDBANKBAGSLOTS_CHANGED")
 	addon:UnregisterEvent("GUILDBANKBAGSLOTS_CHANGED")
 	
 	local guildName = GetGuildInfo("player")
@@ -492,6 +525,8 @@ end
 
 local function OnVoidStorageClosed()
 	addon:UnregisterEvent("VOID_STORAGE_CLOSE")
+	addon:UnregisterEvent("VOID_STORAGE_UPDATE")
+	addon:UnregisterEvent("VOID_STORAGE_CONTENTS_UPDATE")
 	addon:UnregisterEvent("VOID_TRANSFER_DONE")
 end
 
@@ -502,6 +537,8 @@ end
 local function OnVoidStorageOpened()
 	ScanVoidStorage()
 	addon:RegisterEvent("VOID_STORAGE_CLOSE", OnVoidStorageClosed)
+	addon:RegisterEvent("VOID_STORAGE_UPDATE", ScanVoidStorage)
+	addon:RegisterEvent("VOID_STORAGE_CONTENTS_UPDATE", ScanVoidStorage)
 	addon:RegisterEvent("VOID_TRANSFER_DONE", OnVoidStorageTransferDone)
 end
 
@@ -509,7 +546,10 @@ end
 -- ** Mixins **
 local function _GetContainer(character, containerID)
 	-- containerID can be number or string
-	return character.Containers["Bag" .. containerID]
+	if type(containerID) == "number" then
+		return character.Containers["Bag" .. containerID]
+	end
+	return character.Containers[containerID]
 end
 
 local function _GetContainers(character)
@@ -531,12 +571,45 @@ local BagTypeStrings = {
 
 local function _GetContainerInfo(character, containerID)
 	local bag = _GetContainer(character, containerID)
-	return bag.icon, bag.link, bag.size, bag.freeslots, BagTypeStrings[bag.bagtype]
+	
+	local icon = bag.icon
+	local size = bag.size
+	
+	if containerID == MAIN_BANK_SLOTS then	-- main bank slots
+		icon = "Interface\\Icons\\inv_misc_enggizmos_17"
+	elseif containerID == REAGENTBANK_CONTAINER then
+		icon = "Interface\\Icons\\inv_misc_bag_satchelofcenarius"
+	elseif string.sub(containerID, 1, string.len(VOID_STORAGE_TAB)) == VOID_STORAGE_TAB then
+		icon = "Interface\\Icons\\spell_nature_astralrecalgroup"
+		size = 80
+	end
+	
+	return icon, bag.link, size, bag.freeslots, BagTypeStrings[bag.bagtype]
 end
 
 local function _GetContainerSize(character, containerID)
 	-- containerID can be number or string
-	return character.Containers["Bag" .. containerID].size
+	if type(containerID) == "number" then
+		return character.Containers["Bag" .. containerID].size
+	end
+	return character.Containers[containerID].size
+end
+
+local rarityColors = {
+	[2] = "|cFF1EFF00",
+	[3] = "|cFF0070DD",
+	[4] = "|cFFA335EE"
+}
+
+local function _GetColoredContainerSize(character, containerID)
+	local bag = _GetContainer(character, containerID)
+	local size = _GetContainerSize(character, containerID)
+	
+	if bag.rarity and rarityColors[bag.rarity] then
+		return format("%s%s", rarityColors[bag.rarity], size)
+	end
+	
+	return format("%s%s", "|cFFFFFFFF", size)
 end
 
 local function _GetSlotInfo(bag, slotID)
@@ -568,21 +641,26 @@ local function _GetContainerItemCount(character, searchedID)
 	local bagCount = 0
 	local bankCount = 0
 	local voidCount = 0
+	local reagentBankCount = 0
 	local id
 	
+	-- old voidstorage, simply delete it, might still be listed if players haven't logged on all their alts					
+	character.Containers["VoidStorage"] = nil
+		
 	for containerName, container in pairs(character.Containers) do
 		for slotID = 1, container.size do
 			id = container.ids[slotID]
 			
 			if (id) and (id == searchedID) then
 				local itemCount = container.counts[slotID] or 1
-				
-				if (containerName == "VoidStorage") then
+				if (containerName == "VoidStorage.Tab1") or (containerName == "VoidStorage.Tab2") then
 					voidCount = voidCount + 1
-				elseif (containerName == "Bag100") then
+				elseif (containerName == "Bag"..MAIN_BANK_SLOTS) then
 					bankCount = bankCount + itemCount
 				elseif (containerName == "Bag-2") then
 					bagCount = bagCount + itemCount
+				elseif (containerName == "Bag-3") then
+					reagentBankCount = reagentBankCount + itemCount
 				else
 					local bagNum = tonumber(string.sub(containerName, 4))
 					if (bagNum >= 0) and (bagNum <= 4) then
@@ -595,7 +673,7 @@ local function _GetContainerItemCount(character, searchedID)
 		end
 	end
 
-	return bagCount, bankCount, voidCount
+	return bagCount, bankCount, voidCount, reagentBankCount
 end
 
 local function _GetNumBagSlots(character)
@@ -723,6 +801,7 @@ local PublicMethods = {
 	GetContainers = _GetContainers,
 	GetContainerInfo = _GetContainerInfo,
 	GetContainerSize = _GetContainerSize,
+	GetColoredContainerSize = _GetColoredContainerSize,
 	GetSlotInfo = _GetSlotInfo,
 	GetContainerCooldownInfo = _GetContainerCooldownInfo,
 	GetContainerItemCount = _GetContainerItemCount,
@@ -829,6 +908,7 @@ function addon:OnInitialize()
 	DataStore:SetCharacterBasedMethod("GetContainers")
 	DataStore:SetCharacterBasedMethod("GetContainerInfo")
 	DataStore:SetCharacterBasedMethod("GetContainerSize")
+	DataStore:SetCharacterBasedMethod("GetColoredContainerSize")
 	DataStore:SetCharacterBasedMethod("GetContainerItemCount")
 	DataStore:SetCharacterBasedMethod("GetNumBagSlots")
 	DataStore:SetCharacterBasedMethod("GetNumFreeBagSlots")
@@ -857,10 +937,13 @@ function addon:OnEnable()
 		ScanBag(bagID)
 	end
 	
+	ScanReagentBank()
+	
 	addon:RegisterEvent("BAG_UPDATE", OnBagUpdate)
 	addon:RegisterEvent("BANKFRAME_OPENED", OnBankFrameOpened)
 	addon:RegisterEvent("GUILDBANKFRAME_OPENED", OnGuildBankFrameOpened)
 	addon:RegisterEvent("VOID_STORAGE_OPEN", OnVoidStorageOpened)
+	addon:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED", OnPlayerReagentBankSlotsChanged)
 	
 	-- disable bag updates during multi sell at the AH
 	addon:RegisterEvent("AUCTION_HOUSE_SHOW", OnAuctionHouseShow)
@@ -871,4 +954,6 @@ function addon:OnDisable()
 	addon:UnregisterEvent("BANKFRAME_OPENED")
 	addon:UnregisterEvent("GUILDBANKFRAME_OPENED")
 	addon:UnregisterEvent("AUCTION_HOUSE_SHOW")
+	addon:UnregisterEvent("VOID_STORAGE_OPEN")
+	addon:UnregisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 end

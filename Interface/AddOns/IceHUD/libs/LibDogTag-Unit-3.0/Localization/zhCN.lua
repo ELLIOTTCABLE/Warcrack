@@ -1,5 +1,5 @@
 ﻿local MAJOR_VERSION = "LibDogTag-Unit-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 182 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 258 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_Unit_MINOR_VERSION then
 	_G.DogTag_Unit_MINOR_VERSION = MINOR_VERSION
@@ -67,6 +67,8 @@ DogTag_Unit_funcs[#DogTag_Unit_funcs+1] = function(DogTag_Unit, DogTag)
 	L["%s's %s"] = "%1$s's %2$s"
 	L["Party member #%d"] = "队伍成员#%d"
 	L["Raid member #%d"] = "团队成员#%d"
+	L["Boss #%d"] = "Boss #%d"
+	L["Arena enemy #%d"] = "Arena enemy #%d"
 
 	-- classifications
 	L["Rare"] = "稀有"

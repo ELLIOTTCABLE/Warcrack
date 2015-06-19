@@ -1,0 +1,34 @@
+------------------------------------------------------------------------
+r7 | kippg | 2014-10-15 10:52:27 +0000 (Wed, 15 Oct 2014) | 4 lines
+Changed paths:
+   M /trunk/KCrazyArrowHide.lua
+   M /trunk/KCrazyArrowHide.toc
+
+v1.21
+10/15/2014
+- Updated the TOC for v6
+
+------------------------------------------------------------------------
+r6 | kippg | 2014-10-05 04:21:08 +0000 (Sun, 05 Oct 2014) | 6 lines
+Changed paths:
+   A /trunk/.pkgmeta
+   M /trunk/KCrazyArrowHide.lua
+   M /trunk/KCrazyArrowHide.toc
+
+v1.2
+10/4/2014
+- Updated the TOC for v5.4
+- Added option to restore defaults.
+- Added option to not hide the crazy arrow when mounted. 
+
+------------------------------------------------------------------------
+r5 | kippg | 2013-07-04 20:53:38 +0000 (Thu, 04 Jul 2013) | 4 lines
+Changed paths:
+   M /trunk/KCrazyArrowHide.lua
+   M /trunk/KCrazyArrowHide.toc
+
+v1.1
+- Updated the TOC for v5.3
+- Added "sleep" option.  When combat ends the crazy arrow will sleep x seconds before restoring.
+
+------------------------------------------------------------------------

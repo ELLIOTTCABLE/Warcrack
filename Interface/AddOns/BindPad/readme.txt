@@ -109,7 +109,7 @@ Druid example: /cast [stance:1] Bash; [nostance:1] Healing Touch
 4.  "You want to convert this icon into a BINDPAD MACRO?"... What?
 -------------------------------------------------------------------------
 
-"BindPad Macro" is a new feature from BidPad version 1.8.0 ;
+"BindPad Macro" is a new feature from BindPad version 1.8.0 ;
 which allow you to make almost unlimited number of virtual macro icons.
 
 Older versions of BindPad just let you save your limited action bar slots.
@@ -179,13 +179,200 @@ http://www.wowinterface.com/downloads/fileinfo.php?id=6385
 
 Or from Curse:
 
-http://wow.curse.com/downloads/wow-addons/details/bind-pad.aspx
+http://www.curse.com/addons/wow/bind-pad
 
 
 
 -------------------------------------------------------------------------
 7.  CHANGES
 -------------------------------------------------------------------------
+
+Version 2.7.12
+- Fixed a bug which spills over new keybindings to another profiles.
+  (Ex. If you put PvP Medallion in Profile1 and there was no PvP Medallion
+   icon in Profile2, keybindings for PvP Medallion sometimes mistakenly 
+   copied over to Profile2.)
+
+
+Version 2.7.11
+- Removed SaveBindings() as a fix to random frequent crash at /reload.
+  (It never happened before WoD, so something is changed Blizard side.)
+
+- Fixed old bug which caused BindPadMacro disabled when very same icon
+  is placed on a BindPadMacro icon.
+  (It happened when you drop same Mount or pet action twice on a same slot.)
+
+
+Version 2.7.10
+- Fixed bug which breaks keybinds when players login in combat.
+
+
+Version 2.7.9
+- Tried to fix ShowHotkeys option for active telents on Russian client.
+- Fixed a rare bug which may cause BindPadMacro to stop working.
+- Added workaround to avoid canceling Priest's Shadowform when 
+  keybind of "Summon Random Favorite Mount" is used.
+
+
+Version 2.7.8
+- Fixed bug of "Summon Random Favorite Mount" again.
+
+
+Version 2.7.7
+- Keybind for "Summon Random Favorite Mount" can be used while in shapeshift form.
+
+
+Version 2.7.6
+- Fixed bug of SaveAllKeys option
+  by updating for API change of GetBinding function.
+
+
+Version 2.7.5
+- Added support for Shift-Clicking of any hyperlink in chatframe;
+  which was previously only supported for spellLinks and itemLinks.
+  Now we can insert tradeskill links and enchant links into BindPadMacro.
+- Added support for "Summon Random Favorite Mount" icon on Pet Journal.
+
+
+Version 2.7.4
+- Changed 1023 letters limit to 1024 bytes limit for BindPad Macro text.
+  (There are mysterious 1024 bytes limit on Blizzard's side, 
+   and longer texts will be ignored when running a macro.)
+- Changed behavior of "For All Characters" to fix bug;
+  which caused some keybindings to be removed.
+
+
+Version 2.7.3
+- Added new option "For All Characters" on keybinding frame;
+  which makes a keybind to carry over to all other characters.
+- Fixed bug which made option checkboxes not working.
+- Fixed mount support for WoD beta.
+- Removed the workaround as build 18663 fixed Serializer.
+
+
+Version 2.7.2
+- Added workaround for WoD beta bug of Serializer for SavedVariables.
+
+
+Version 2.7.1
+- Updated for Revision 18645.
+
+
+Version 2.7.0
+- Updated for Warlords of Draenor
+
+
+Version 2.6.7
+- Fixed a Lua error introduced on 2.6.6. when player class has flyout spells.
+
+
+Version 2.6.6
+- Fixed Show Hotkey option for morhping spells such as Eternal Flame.
+
+
+Version 2.6.5
+- ToC update for patch 5.4
+
+
+Version 2.6.4
+- ToC update for patch 5.2
+- Attempted to fix possible issue caused by invalid return value from GetCurrentBindingSet().
+
+
+Version 2.6.3
+- Fixed battlepet support which was broken since 5.1 .
+
+
+Version 2.6.2
+- TOC update for 5.1
+- Introduced letter limit of 1023 for BindPad macro as a workaround of a bug
+  where letters over 1023 was simply ignored when using BindPadMacro.
+  (It seems it's limitation of Blizzard's API.)
+
+
+Version 2.6.1
+- Added optional support for AdvancedIconSelector (or LibAdvancedIconSelector-1.0)
+  when choosing an icon for BindPadMacro.
+  (You can get AdvancedIconSelector from:
+   http://www.curse.com/addons/wow/advancediconselector)
+- Re-adjusted hotkey size and position.
+- Replaced text font for BindPad Macro editbox
+  from GameFontHighlightSmall to ChatFontNormal.
+
+
+Version 2.6.0
+- Added "Show more slots" button, "Show less slots" button and a scroll bar
+  on both General tab and each character specific tabs.
+  Now BindPad can hold unlimited number of icons.
+  (as long as you have enough memory to hold.)
+- Fixed bug related to savefile conversion:
+  If you had enabled "Show Keys in Tooltip" option with 2.5.6, 
+  you couldn't disable "Show Hotkeys" option (it keeped re-enabling itself at login).
+- Corrected behavier of scrollbar when editting long BindPad Macro text.
+
+
+Version 2.5.8
+- Fixed potensial lua error "attempt to call method 'GetAction' (a nil value)"
+  which happened with Lunarsphere and ButtonForge.
+  (Still, Show Hotkeys won't support them, but Show-Keys-in-Tooltip works.)
+
+
+Version 2.5.7
+- Added 0.1 second delay when updating hotkey display to avoid race condition
+  and to improve efficiency.
+- Fixed lua error which occures on riding or leaving vehicle while using Bartendar4.
+- Fixed lua error related with tooltip of a deleted macro.
+- Fixed bug which makes redundant keybinding display on a talent tooltip.
+- Adjusted position and size of hotkey text so that a few more characters are visible.
+
+
+Version 2.5.6
+- Show Hotkeys option is back and now more efficient.
+- Show Hotkeys now supports every actionbar addons as far as I know.
+- "Show Keys in Tooltip" is included in Show HotKeys option for now.
+
+
+Version 2.5.5
+- Fixed a display bug: "Show Keys in Tooltip" toggle option was
+  going to be unchecked at login. 
+
+
+Version 2.5.4
+- Fixed Lua error related to AddSpellByID at Mastery tooltip.
+- Internal change: replaced StaticPopup_Show with BindPad's own function.
+
+
+Version 2.5.3
+- Added new feature: Show Keys in Tooltip option;
+  which adds a text to describe keybindings in tooltip
+  for spells, items, and macros on ActionBar and Spellbook.
+  (to compensate removal of Show HotKey option.)
+
+
+Version 2.5.2
+- Added new feature: SaveAllKeys option;
+  which automatically saves all keys of Blizzard's Key Bindings Interface
+  for current BindPad Profile and restore them when switching Profiles.
+- Reduced memory consumption by removing empty tables.
+
+
+Version 2.5.1
+- Fixed "script run too long" error.
+- Removed broken Show-Hotkeys option which was pertially broken from long before.
+- Added support for "Assist" pet skill.
+- Added support for battlepet icon.
+- Fixed bug: Was unable to pick up class spells from BindPad slot.
+- Fixed bug: shift-clicking an icon no longer insert itemlink to BindPad Macro frame
+  when you meant to insert the itemlink into an active Chat Frame instead.
+
+
+Version 2.5.0
+- Updated for Mist of Pandaria beta 15799.
+
+
+Version 2.4.1
+- Updated for patch 4.3 .
+
 
 Version 2.4.0
 - Fixed bug: Tooltip for Fishing and First Aid was not correctly shown.

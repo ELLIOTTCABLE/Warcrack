@@ -1,8 +1,8 @@
 --[[
     This file is part of Decursive.
     
-    Decursive (v 2.7.0.5) add-on for World of Warcraft UI
-    Copyright (C) 2006-2007-2008-2009 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
+    Decursive (v 2.7.4.2) add-on for World of Warcraft UI
+    Copyright (C) 2006-2014 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
 
     Starting from 2009-10-31 and until said otherwise by its author, Decursive
     is no longer free software, all rights are reserved to its author (John Wellesz).
@@ -11,7 +11,7 @@
     To distribute Decursive through other means a special authorization is required.
     
 
-    Decursive is inspired from the original "Decursive v1.9.4" by Quu.
+    Decursive is inspired from the original "Decursive v1.9.4" by Patrick Bohnet (Quu).
     The original "Decursive 1.9.4" is in public domain ( www.quutar.com )
 
     Decursive is distributed in the hope that it will be useful,
@@ -33,6 +33,7 @@ StaticPopupDialogs["DECURSIVE_ERROR_FRAME"] = {
     whileDead = 1,
     hideOnEscape = 1,
     showAlert = 1,
+    preferredIndex = 3,
     }; -- }}}
 T._FatalError = function (TheError) StaticPopup_Show ("DECURSIVE_ERROR_FRAME", TheError); end
 end
@@ -42,15 +43,14 @@ if not T._LoadedFiles or not T._LoadedFiles["Decursive.xml"] or not T._LoadedFil
     DecursiveInstallCorrupted = true;
     return;
 end
+T._LoadedFiles["Dcr_lists.lua"] = false;
 
 local D = T.Dcr;
---D:SetDateAndRevision("$Date: 2008-08-12 04:50:10 +0200 (mar., 12 août 2008) $", "$Revision: 80230 $");
 
 
 local L = D.L;
 local LC = D.LC;
 local DC = T._C;
-local DS = DC.DS;
 local _;
 local _G = _G;
 
@@ -59,7 +59,6 @@ local ipairs            = _G.ipairs;
 local UnitGUID          = _G.UnitGUID;
 local table             = _G.table;
 local str_format        = _G.string.format;
-local str_sub           = _G.string.gsub;
 local t_insert          = _G.table.insert;
 
 -- Dcr_ListFrameTemplate specific internal functions {{{
@@ -573,10 +572,10 @@ function D:PopulateButtonPress(frame) --{{{
     end
 
 
-    local max = GetNumRaidMembers();
+    local max = DC.GetNumRaidMembers();
 
     if (IsShiftKeyDown() and frame.GroupNumber and max > 0) then
-        D:Debug("Finding raid units with a macthing group number");
+        D:Debug("Finding raid units with a matching group number");
         for i = 1, max do
             _, _, pgroup, _, _, pclass = GetRaidRosterInfo(i);
 
@@ -591,4 +590,4 @@ function D:PopulateButtonPress(frame) --{{{
 
 end --}}}
 
-T._LoadedFiles["Dcr_lists.lua"] = "2.7.0.5";
+T._LoadedFiles["Dcr_lists.lua"] = "2.7.4.2";

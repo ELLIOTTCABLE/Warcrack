@@ -1,16 +1,23 @@
-## Interface: 40300
+## Interface: 60100
 ## Title: Tidy Plates Hub
 ## Notes: Provides a common configuration panel for supported themes.
-## Version: R458
 ## Author: Daniel/Binbwen
 ## Dependencies: TidyPlates, TidyPlatesWidgets
-## SavedVariables: TidyPlatesHubCache
+## OptionalDeps: TidyPlatesHubDE, TidyPlatesHubES, TidyPlatesHubMX, TidyPlatesHubFR, TidyPlatesHubKR, TidyPlatesHubRU, TidyPlatesHubCN, TidyPlatesHubTW
+## SavedVariables: TidyPlatesHubCache, TidyPlatesHubGlobal
 ## SavedVariablesPerCharacter: TidyPlatesHubSettings
 
-
-ModeLists.lua
 Defaults.lua
 Helpers.lua
 Templates.lua
+
+functions\Core.lua
+functions\Filter.lua
+functions\Style.lua
+functions\Alpha.lua
+functions\Scale.lua
+functions\Color.lua
+functions\Text.lua
+functions\Widgets.lua
+
 Hub.lua
-Functions.lua

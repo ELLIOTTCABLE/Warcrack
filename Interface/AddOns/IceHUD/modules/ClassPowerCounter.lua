@@ -6,6 +6,7 @@ local IceHUD = _G.IceHUD
 IceClassPowerCounter.prototype.runeHeight = 22
 IceClassPowerCounter.prototype.runeWidth = 36
 IceClassPowerCounter.prototype.numRunes = 3
+IceClassPowerCounter.prototype.numConsideredFull = 99
 IceClassPowerCounter.prototype.lastNumReady = 0
 IceClassPowerCounter.prototype.runeCoords = {}
 IceClassPowerCounter.prototype.runeShineFadeSpeed = 0.4
@@ -13,6 +14,12 @@ IceClassPowerCounter.prototype.minLevel = 9
 IceClassPowerCounter.prototype.DesiredAnimDuration = 0.6
 IceClassPowerCounter.prototype.DesiredScaleMod = .4
 IceClassPowerCounter.prototype.DesiredAnimPause = 0.5
+IceClassPowerCounter.prototype.requiredSpec = nil
+IceClassPowerCounter.prototype.shouldShowUnmodified = false
+IceClassPowerCounter.prototype.unmodifiedMaxPerRune = 10
+
+IceClassPowerCounter.prototype.growModes = { width = 1, height = 2 }
+IceClassPowerCounter.prototype.currentGrowMode = nil
 
 -- Constructor --
 function IceClassPowerCounter.prototype:init(name)
@@ -107,6 +114,50 @@ function IceClassPowerCounter.prototype:GetOptions()
 			return not self.moduleSettings.enabled
 		end,
 		order = 34
+	}
+
+	opts["alsoShowNumeric"] = {
+		type = 'toggle',
+		name = L["Also show numeric"],
+		desc = L["If this is set, the numeric value of the current rune count will show on top of the runes display."],
+		get = function(info)
+			return self.moduleSettings.alsoShowNumeric
+		end,
+		set = function(info, v)
+			self.moduleSettings.alsoShowNumeric = v
+			self:SetDisplayMode()
+			self:UpdateRunePower()
+		end,
+		disabled = function()
+			return not self.moduleSettings.enabled
+		end,
+		hidden = function()
+			return self.moduleSettings.runeMode == "Numeric"
+		end,
+		order = 34.01,
+	}
+
+	opts["numericVerticalOffset"] = {
+		type = 'range',
+		min = -500,
+		max = 500,
+		step = 1,
+		name = L["Numeric vertical offset"],
+		desc = L["How far to offset the numeric display up or down."],
+		get = function(info)
+			return self.moduleSettings.numericVerticalOffset
+		end,
+		set = function(info, v)
+			self.moduleSettings.numericVerticalOffset = v
+			self:Redraw()
+		end,
+		disabled = function()
+			return not self.moduleSettings.enabled
+		end,
+		hidden = function()
+			return self.moduleSettings.runeMode == "Numeric" or not self.moduleSettings.alsoShowNumeric
+		end,
+		order = 34.02,
 	}
 
 	opts["runeGap"] = {
@@ -323,7 +374,7 @@ function IceClassPowerCounter.prototype:GetDefaultSettings()
 	local defaults =  IceClassPowerCounter.super.prototype.GetDefaultSettings(self)
 
 	defaults["vpos"] = 0
-	defaults["hpos"] = 10
+	defaults["hpos"] = 0
 	defaults["runeFontSize"] = 20
 	defaults["runeMode"] = "Graphical"
 	defaults["usesDogTagStrings"] = false
@@ -339,6 +390,8 @@ function IceClassPowerCounter.prototype:GetDefaultSettings()
 	defaults["hideFriendly"] = false
 	defaults["pulseWhenFull"] = true
 	defaults["overrideAlpha"] = true
+	defaults["numericVerticalOffset"] = 0
+	defaults["alwaysShowNumeric"] = false
 
 	return defaults
 end
@@ -370,15 +423,36 @@ end
 
 function IceClassPowerCounter.prototype:CheckValidLevel(event, level)
 	if not level then
-		return
+		if event == "PLAYER_TALENT_UPDATE" then
+			level = UnitLevel("player")
+		else
+			return
+		end
 	end
 
-	if level < self.minLevel then
+	if self.minLevel and level < self.minLevel then
 		self:RegisterEvent("PLAYER_LEVEL_UP", "CheckValidLevel")
 		self:Show(false)
 	else
+		self:CheckValidSpec()
+	end
+end
+
+function IceClassPowerCounter.prototype:CheckValidSpec()
+	if self.requiredSpec == nil then
 		self:DisplayCounter()
 		self:Show(true)
+		return
+	end
+
+	self:RegisterEvent("PLAYER_TALENT_UPDATE", "CheckValidLevel")
+
+	local spec = GetSpecialization()
+	if spec == self.requiredSpec then
+		self:DisplayCounter()
+		self:Show(true)
+	else
+		self:Show(false)
 	end
 end
 
@@ -404,16 +478,23 @@ function IceClassPowerCounter.prototype:Disable(core)
 	end
 end
 
-function IceClassPowerCounter.prototype:UpdateRunePower()
-	local numReady = UnitPower("player", self.unitPower)
+function IceClassPowerCounter.prototype:UpdateRunePower(event, arg1, arg2)
+	if event and (event == "UNIT_POWER" or event == "UNIT_POWER_FREQUENT") and arg1 ~= "player" and arg1 ~= "vehicle" then
+		return
+	end
 
-	if self.moduleSettings.runeMode == "Numeric" then
-		self.frame.numeric:SetText(tostring(numReady))
+	local numReady = UnitPower("player", self.unitPower)
+	local percentReady = self.shouldShowUnmodified and (UnitPower("player", self.unitPower, true) / self.unmodifiedMaxPerRune) or numReady
+
+	if self:GetRuneMode() == "Numeric" or self.moduleSettings.alsoShowNumeric then
+		self.frame.numeric:SetText(tostring(percentReady))
 		self.frame.numeric:SetTextColor(self:GetColor(self.numericColor))
-	else
+	end
+
+	if self:GetRuneMode() ~= "Numeric" then
 		for i=1, self.numRunes do
-			if i <= numReady then
-				if self.moduleSettings.runeMode == "Graphical" then
+			if i <= ceil(percentReady) then
+				if self:GetRuneMode() == "Graphical" then
 					self.frame.graphical[i].rune:SetVertexColor(1, 1, 1)
 				else
 					self:SetCustomColor(i)
@@ -423,14 +504,44 @@ function IceClassPowerCounter.prototype:UpdateRunePower()
 					self.frame.graphical[i]:Show()
 				end
 
-				if i > self.lastNumReady and self.moduleSettings.flashWhenBecomingReady then
-					local fadeInfo={
-						mode = "IN",
-						timeToFade = self.runeShineFadeSpeed,
-						finishedFunc = function() self:ShineFinished(i) end,
-						finishedArg1 = i
-					}
-					UIFrameFade(self.frame.graphical[i].shine, fadeInfo);
+				if i > numReady or self.numRunes == 1 then
+					local left, right, top, bottom = 0, 1, 0, 1
+					if self:GetRuneMode() == "Graphical" then
+						left, right, top, bottom = unpack(self.runeCoords[i])
+					end
+
+					local currPercent = percentReady - numReady
+					if self.numRunes == 1 then
+						currPercent = numReady / UnitPowerMax("player", self.unitPower)
+					end
+
+					if self.currentGrowMode == self.growModes["height"] then
+						top = bottom - (currPercent * (bottom - top))
+						self.frame.graphical[i].rune:SetHeight(currPercent * self.runeHeight)
+					elseif self.currentGrowMode == self.growModes["width"] then
+						right = left + (currPercent * (right - left))
+						self.frame.graphical[i].rune:SetWidth(currPercent * self.runeWidth)
+					end
+					self.frame.graphical[i].rune:SetTexCoord(left, right, top, bottom)
+				elseif i > self.lastNumReady then
+					if self.runeCoords ~= nil and #self.runeCoords >= i then
+						local left, right, top, bottom = 0, 1, 0, 1
+						if self:GetRuneMode() == "Graphical" then
+							left, right, top, bottom = unpack(self.runeCoords[i])
+						end
+						self.frame.graphical[i].rune:SetTexCoord(left, right, top, bottom)
+						self.frame.graphical[i].rune:SetHeight(self.runeHeight)
+					end
+
+					if self.moduleSettings.flashWhenBecomingReady then
+						local fadeInfo={
+							mode = "IN",
+							timeToFade = self.runeShineFadeSpeed,
+							finishedFunc = function() self:ShineFinished(i) end,
+							finishedArg1 = i
+						}
+						UIFrameFade(self.frame.graphical[i].shine, fadeInfo);
+					end
 				end
 			else
 				if self.moduleSettings.inactiveDisplayMode == "Darkened" then
@@ -443,9 +554,9 @@ function IceClassPowerCounter.prototype:UpdateRunePower()
 	end
 
 	if self.moduleSettings.pulseWhenFull then
-		if numReady > self.lastNumReady and numReady == self.numRunes then
+		if numReady > self.lastNumReady and (numReady == self.numRunes or numReady >= self.numConsideredFull) then
 			self:StartRunesFullAnimation()
-		elseif numReady < self.numRunes then
+		elseif numReady < self.numRunes and numReady < self.numConsideredFull then
 			self:StopRunesFullAnimation()
 		end
 	end
@@ -494,12 +605,18 @@ function IceClassPowerCounter.prototype:UpdateRuneAnimation(frame, elapsed)
 		end
 	end
 
-	self.frame:SetScale(scale)
+	for i=1, #self.frame.graphical do
+		self.frame.graphical[i]:SetScale(scale)
+	end
+	self.frame.numericParent:SetScale(scale)
 end
 
 function IceClassPowerCounter.prototype:StopRunesFullAnimation()
 	self.frame:SetScript("OnUpdate", nil)
-	self.frame:SetScale(1)
+	for i=1, #self.frame.graphical do
+		self.frame.graphical[i]:SetScale(1)
+	end
+	self.frame.numericParent:SetScale(1)
 end
 
 function IceClassPowerCounter.prototype:ShineFinished(rune)
@@ -514,7 +631,7 @@ end
 function IceClassPowerCounter.prototype:CreateFrame()
 	IceClassPowerCounter.super.prototype.CreateFrame(self)
 
-	self.frame:SetFrameStrata("BACKGROUND")
+	self.frame:SetFrameStrata("LOW")
 	self.frame:SetHeight(self.runeHeight)
 	self.frame:ClearAllPoints()
 	self.frame:SetPoint("TOP", self.parent, "BOTTOM", self.moduleSettings.hpos, self.moduleSettings.vpos)
@@ -524,29 +641,44 @@ function IceClassPowerCounter.prototype:CreateFrame()
 	self:SetDisplayMode()
 end
 
+function IceClassPowerCounter.prototype:GetRuneMode()
+	return self.moduleSettings.runeMode
+end
+
 function IceClassPowerCounter.prototype:SetDisplayMode()
-	if self.moduleSettings.runeMode == "Numeric" then
+	if self:GetRuneMode() == "Numeric" or self.moduleSettings.alsoShowNumeric then
 		self.frame.numeric:Show()
 		for i=1, self.numRunes do
 			self.frame.graphical[i]:Hide()
 		end
 	else
 		self.frame.numeric:Hide()
+	end
+
+	if self:GetRuneMode() ~= "Numeric" then
 		for i=1, self.numRunes do
 			self:SetupRuneTexture(i)
 			self.frame.graphical[i]:Show()
+			if self.moduleSettings.inactiveDisplayMode == "Darkened" then
+				self.frame.graphical[i].runebg:Show()
+			else
+				self.frame.graphical[i].runebg:Hide()
+			end
 		end
 	end
 end
 
 function IceClassPowerCounter.prototype:CreateRuneFrame()
 	-- create numeric runes
-	self.frame.numeric = self:FontFactory(self.moduleSettings.runeFontSize, self.frame, self.frame.numeric)
+	if self.frame.numericParent == nil then
+		self.frame.numericParent = CreateFrame("Frame", nil, self.frame)
+	end
+	self.frame.numericParent:SetAllPoints(self.frame)
+	self.frame.numeric = self:FontFactory(self.moduleSettings.runeFontSize, self.frame.numericParent, self.frame.numeric)
 
-	self.frame.numeric:SetWidth(50)
 	self.frame.numeric:SetJustifyH("CENTER")
 
-	self.frame.numeric:SetAllPoints(self.frame)
+	self.frame.numeric:SetPoint("CENTER", self.frame.numericParent, "CENTER", 0, self.moduleSettings.numericVerticalOffset)
 	self.frame.numeric:Hide()
 
 	if (not self.frame.graphical) then
@@ -563,12 +695,11 @@ function IceClassPowerCounter.prototype:CreateRune(i)
 	if (not self.frame.graphical[i]) then
 		self.frame.graphical[i] = CreateFrame("Frame", nil, self.frame)
 		self.frame.graphical[i]:SetFrameStrata("BACKGROUND")
-		self.frame.graphical[i]:SetWidth(self.runeWidth)
-		self.frame.graphical[i]:SetHeight(self.runeHeight)
 
-		self.frame.graphical[i].rune = self.frame.graphical[i]:CreateTexture(nil, "LOW")
-		self.frame.graphical[i].rune:SetAllPoints(self.frame.graphical[i])
+		self.frame.graphical[i].rune = self.frame.graphical[i]:CreateTexture(nil, "ARTWORK")
 		self.frame.graphical[i].rune:SetVertexColor(0, 0, 0)
+		self.frame.graphical[i].runebg = self.frame.graphical[i]:CreateTexture(nil, "BACKGROUND")
+		self.frame.graphical[i].runebg:SetVertexColor(0, 0, 0)
 		self:SetupRuneTexture(i)
 
 		self.frame.graphical[i].shine = self.frame.graphical[i]:CreateTexture(nil, "OVERLAY")
@@ -584,6 +715,20 @@ function IceClassPowerCounter.prototype:CreateRune(i)
 
 		self.frame.graphical[i]:Hide()
 	end
+
+	self.frame.graphical[i]:SetWidth(self.runeWidth)
+	self.frame.graphical[i]:SetHeight(self.runeHeight)
+	self.frame.graphical[i].rune:SetWidth(self.runeWidth)
+	self.frame.graphical[i].rune:SetHeight(self.runeHeight)
+	self.frame.graphical[i].runebg:SetWidth(self.runeWidth)
+	self.frame.graphical[i].runebg:SetHeight(self.runeHeight)
+	if self.currentGrowMode == self.growModes["width"] then
+		self.frame.graphical[i].rune:SetPoint("LEFT", self.frame.graphical[i], "LEFT")
+		self.frame.graphical[i].runebg:SetPoint("LEFT", self.frame.graphical[i], "LEFT")
+	else
+		self.frame.graphical[i].rune:SetPoint("BOTTOM", self.frame.graphical[i], "BOTTOM")
+		self.frame.graphical[i].runebg:SetPoint("BOTTOM", self.frame.graphical[i], "BOTTOM")
+	end
 end
 
 function IceClassPowerCounter.prototype:SetupRuneTexture(rune)
@@ -593,32 +738,35 @@ function IceClassPowerCounter.prototype:SetupRuneTexture(rune)
 
 	local width = self.runeHeight
 	local a,b,c,d = 0, 1, 0, 1
-	if self.moduleSettings.runeMode == "Graphical" then
+	if self:GetRuneMode() == "Graphical" then
 		width = self.runeWidth
 		a,b,c,d = unpack(self.runeCoords[rune])
 	end
 
 	-- make sure any texture aside from the special one is square and has the proper coordinates
 	self.frame.graphical[rune].rune:SetTexCoord(a, b, c, d)
+	self.frame.graphical[rune].runebg:SetTexCoord(a, b, c, d)
 	self.frame.graphical[rune]:SetWidth(width)
 	self.frame:SetWidth(width*self.numRunes)
+	local runeAdjust = rune - (self.numRunes / 2) - 0.5
 	if self.moduleSettings.displayMode == "Horizontal" then
-		self.frame.graphical[rune]:SetPoint("TOPLEFT", (rune-1) * (width-5) + (rune-1) + ((rune-1) * self.moduleSettings.runeGap), 0)
+		self.frame.graphical[rune]:SetPoint("CENTER", runeAdjust * (width-5) + runeAdjust + (runeAdjust * self.moduleSettings.runeGap), 0)
 	else
-		self.frame.graphical[rune]:SetPoint("TOPLEFT", 0, -1 * ((rune-1) * (self.runeHeight-5) + (rune-1) + ((rune-1) * self.moduleSettings.runeGap)))
+		self.frame.graphical[rune]:SetPoint("CENTER", 0, -1 * (runeAdjust * (self.runeHeight-5) + runeAdjust + (runeAdjust * self.moduleSettings.runeGap)))
 	end
 
-	if self.moduleSettings.runeMode == "Graphical" then
+	if self:GetRuneMode() == "Graphical" then
 		self.frame.graphical[rune].rune:SetTexture(self:GetRuneTexture(rune))
-	elseif self.moduleSettings.runeMode == "Graphical Bar" then
+	elseif self:GetRuneMode() == "Graphical Bar" then
 		self.frame.graphical[rune].rune:SetTexture(IceElement.TexturePath .. "Combo")
-	elseif self.moduleSettings.runeMode == "Graphical Circle" then
+	elseif self:GetRuneMode() == "Graphical Circle" then
 		self.frame.graphical[rune].rune:SetTexture(IceElement.TexturePath .. "ComboRound")
-	elseif self.moduleSettings.runeMode == "Graphical Glow" then
+	elseif self:GetRuneMode() == "Graphical Glow" then
 		self.frame.graphical[rune].rune:SetTexture(IceElement.TexturePath .. "ComboGlow")
-	elseif self.moduleSettings.runeMode == "Graphical Clean Circle" then
+	elseif self:GetRuneMode() == "Graphical Clean Circle" then
 		self.frame.graphical[rune].rune:SetTexture(IceElement.TexturePath .. "ComboCleanCurves")
 	end
+	self.frame.graphical[rune].runebg:SetTexture(self.frame.graphical[rune].rune:GetTexture())
 end
 
 function IceClassPowerCounter.prototype:GetAlphaAdd()
@@ -636,7 +784,7 @@ end
 function IceClassPowerCounter.prototype:GetGradientColor(curr)
 	local r, g, b = self:GetCustomColor()
 	local mr, mg, mb = self:GetCustomMinColor()
-	local scale = (curr-1)/(self.numRunes-1)
+	local scale = self.numRunes == 1 and 0 or ((curr-1)/(self.numRunes-1))
 
 	if r < mr then
 		r = ((r-mr)*scale) + mr
@@ -686,7 +834,7 @@ function IceClassPowerCounter.prototype:AlphaPassThroughTarget()
 end
 
 function IceClassPowerCounter.prototype:HideBlizz()
-	assert(true, "Must override HideBlizz in child classes.")
+	assert(false, "Must override HideBlizz in child classes.")
 end
 
 function IceClassPowerCounter.prototype:UseTargetAlpha()

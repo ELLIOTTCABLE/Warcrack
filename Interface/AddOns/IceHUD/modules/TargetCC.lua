@@ -6,6 +6,12 @@ TargetCC.prototype.debuffName = nil
 TargetCC.prototype.debuffRemaining = 0
 TargetCC.prototype.debuffDuration = 0
 
+local GetNumPartyMembers, GetNumRaidMembers = GetNumPartyMembers, GetNumRaidMembers
+if IceHUD.WowVer >= 50000 then
+	GetNumPartyMembers = GetNumGroupMembers
+	GetNumRaidMembers = GetNumGroupMembers
+end
+
 -- list of spell ID's for each CC type so we can avoid localization issues
 local StunCCList = {
 	-- kidney shot
@@ -40,6 +46,10 @@ local StunCCList = {
 	46968,
 	-- Gnaw
 	47481,
+    -- Fists of Fury
+    113656,
+    -- Fist of Justice
+    105593,
 }
 
 local IncapacitateCCList = {
@@ -83,6 +93,8 @@ local IncapacitateCCList = {
 	6358,
 	-- Turn Evil
 	10326,
+    -- Paralysis
+    115078,
 }
 
 local FearCCList = {
@@ -137,6 +149,8 @@ local SilenceCCList = {
 	64058,
 	-- Elemental Disruption (weapon enchant)
 	74208,
+    -- Grapple Weapon
+    117368,
 }
 
 local RootCCList = {
@@ -166,6 +180,8 @@ local RootCCList = {
 	54706,
 	-- Chains of Ice
 	45524,
+    -- Disable
+    116095,
 }
 
 
@@ -199,6 +215,8 @@ function TargetCC.prototype:init(moduleName, unit)
 	self.previousDebuff = nil
 	self.previousDebuffTarget = nil
 	self.previousDebuffTime = nil
+
+	self.bTreatEmptyAsFull = true
 end
 
 -- grabs the list of CC's and pulls the localized spell name using the wow api
@@ -328,7 +346,7 @@ end
 function TargetCC.prototype:UpdateTargetDebuffs(event, unit, isUpdate)
 	local name, duration, remaining
 
-	if not isUpdate then
+	if not isUpdate or not self.lastUpdateTime then
 		self.debuffName, self.debuffDuration, self.debuffRemaining = self:GetMaxDebuffDuration(self.unit, self.debuffList)
 	else
 		self.debuffRemaining = math.max(0, self.debuffRemaining - (GetTime() - self.lastUpdateTime))

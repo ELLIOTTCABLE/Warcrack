@@ -6,9 +6,9 @@ Translator              :
 Revision                : $Rev: 1 $
 ********************************************************************* ]]
 
-local MODNAME   = "TomTomPing"
+local ADDON = ...
 
-local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale(MODNAME, "enUS", true, true)
+local L = LibStub:GetLibrary("AceLocale-3.0"):NewLocale(ADDON, "enUS", true, true)
 if not L then return end
 
 L["Target as destination"] = true
@@ -18,12 +18,12 @@ L["Release CrazyArrow"] = true
 L["Set waypoint on current position"] = true
 L["Clear waypoint"] = true
 
-L["None"] = true 
-L["Target"] = true 
-L["Focus"] = true 
-L["Mouseover"] = true 
-L["Mouseover-Click"] = true 
-L["Waypoint"] = true 
+L["none"] = "None" 
+L["target"] = "Target"
+L["focus"] = "Focus" 
+L["mouseover"] = "Mouseover"
+L["mouseoverclick"] = "Mouseover-Click"
+L["waypoint"] = "Waypoint"
 
 L["Messages"] = true
 L["Listen to remote TTP messages"] = true
@@ -48,7 +48,9 @@ L["Show arrow on ping"] = true
 L["Duration"] = true
 L["Duration before fade out"] = true
 L["Arrival Range"] = true
-L["Fade out when within distance"] = true
+L["Arrow points down to indicate arrival when within this distance"] = true
+L["Hide on arrival"] = true
+L["Hide arrow when within distance"] = true
 
 L["Targeting"] = true
 L["Target Settings"] = true
@@ -58,6 +60,53 @@ L["Range Check"] = true
 L["Range check for healing"] = true
 L["Show Empty Destination"] = true
 L["Show arrow when no destination is set"] = true
+L["Mouse Button"] = true
+L["Select mouse button to use for mouseover-click setting."] = true
+L["Modificator keys"] = true
+L["Modificator keys for mouse-over settings."] = true
+L["In Combat"] = true
+L["Show mouse-over target in combat."] = true
+L["Out of Combat"] = true
+L["Show mouse-over target out of combat."] = true
+L["Target Alive"] = true
+L["Show mouse-over target when target is alive."] = true
+L["Target Dead"] = true
+L["Show mouse-over target when target is dead."] = true
+L["In Range"] = true
+L["Show mouse-over target when target is in healing range."] = true
+L["Out of Range"] = true
+L["Show mouse-over target when target is out of healing range."] = true
+L["Unit is Player"] = true
+L["Show mouse-over target when target is yourself."] = true
+L["Unit is Pet"] = true
+L["Show mouse-over target when target is pet."] = true
+
+L["Icon"] = true
+L["Icon Settings"] = true
+L["Compass"] = true
+L["Use compass icon that shows player direction."] = true
+L["Compass Icon"] = true
+L["Select Compass Icon"] = true
+
+L["AnyButton"] = "Any Button"
+L["LeftButton"] = "Left Button"
+L["RightButton"] = "Right Button"
+L["MiddleButton"] = "Middle Button"
+L["Button4"] = "Button 4"
+L["Button5"] = "Button 5"
+
+L["never"] = "Never"
+L["always"] = "Always"
+L["alt"] = "Alt"
+L["ctrl"] = "Ctrl"
+L["shift"] = "Shift"
+L["alt-ctrl"] = "Alt-Ctrl"
+L["alt-shift"] = "Alt-Shift"
+L["ctrl-shift"] = "Ctrl-Shift"
+L["alt-ctrl-shift"] = "Alt-Ctrl-Shift"
+
+L["arrow"] = "Arrow"
+L["compass"] = "Compass"
 
 L["Destination"] = true
 L["Type"] = true
@@ -108,8 +157,10 @@ L["Sticky"] = true
 L["no target"] = true
 L["no coords"] = true
 L["other zone"] = true
+L["no path"] = true
+L["missing map data"] = true
 
-L["NO RANGE DATA FOUND\nType '/ttp measure' and then move 20 yards"] = true 
+L["Type '/ttp measure' and then move 20 yards"] = true 
 L["No map coordinates present for this instance! Aborting measurement."] = true
 L["No reference point set. Please retry measurement."] = true
 L["No range calculation. You have to move first!"] = true

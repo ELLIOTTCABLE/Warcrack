@@ -73,7 +73,7 @@ local sliderValue, hasSlider, UpdateTablet, extraHeight = 0
 local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
 local info, buttons, toasts, playerRealm = {}
 local totalFriends, onlineFriends, nbRealFriends, realFriendsHeight, nbBroadcast = 0, 0, 0
-local WOW, SC2, D3 = 1, 2, 3
+local WOW, SC2, D3, HS, BND, HOTS = 1, 2, 3, 4, 5, 6
 local configMenu, options, c, cname, SetOption, UpdateColor, ColorPickerChange, ColorPickerCancel, OpenColorPicker, ColorPickerOpacity, colors
 local preformatedStatusText, sortIndexes
 
@@ -83,8 +83,8 @@ local backdrop =  {
 	edgeSize=16, tile = false, tileSize=0,
 	insets = { left=3, right=3, top=3, bottom=3 } }
 
-local wipe, next, GetGuildRosterInfo, GetFriendInfo, IsInGuild, GuildRoster, ShowFriends, CLASS_BUTTONS, BNGetFriendToonInfo, BNGetFriendInfoByID, BNGetFriendInfo, BNGetNumFriends, GetDifficultyColor =
-	wipe, next, GetGuildRosterInfo, GetFriendInfo, IsInGuild, GuildRoster, ShowFriends, CLASS_BUTTONS, BNGetFriendToonInfo, BNGetFriendInfoByID, BNGetFriendInfo, BNGetNumFriends, GetQuestDifficultyColor
+local wipe, next, GetGuildRosterInfo, GetGuildRosterShowOffline, GetFriendInfo, IsInGuild, GuildRoster, ShowFriends, CLASS_BUTTONS, BNGetFriendToonInfo, BNGetFriendInfoByID, BNGetFriendInfo, BNGetNumFriends, GetDifficultyColor, Ambiguate =
+	wipe, next, GetGuildRosterInfo, GetGuildRosterShowOffline, GetFriendInfo, IsInGuild, GuildRoster, ShowFriends, CLASS_BUTTONS, BNGetFriendToonInfo, BNGetFriendInfoByID, BNGetFriendInfo, BNGetNumFriends, GetQuestDifficultyColor, Ambiguate
 
 local colpairs = { ["class"] = 1, ["name"] = 2, ["level"] = 3, ["zone"] = 4, ["note"] = 5, ["status"] = 6, ["rank"] = 7 }
 
@@ -146,18 +146,22 @@ function f:GUILD_ROSTER_UPDATE()
 	for k, v in next, guildEntries do del(v) guildEntries[k]=nil end
 	local r,g,b = unpack(colors.officerNote)
 	local officerColor = ("\124cff%.2x%.2x%.2x"):format( r*255, g*255, b*255 )
-	for i=1, (GetNumGuildMembers()) do
+	local totalMembers, _, numOnlineAndMobileMembers = GetNumGuildMembers()
+	local scanTotal = GetGuildRosterShowOffline() and totalMembers or numOnlineAndMobileMembers--Attempt CPU saving, if "show offline" is unchecked, we can reliably scan only online members instead of whole roster
+	for i=1, scanTotal do
 		local name, rank, rankIndex, level, class, zone, note, offnote, connected, status, engClass, achPoints, achRank, isMobile = GetGuildRosterInfo(i)
+		if not name then break end
 		if connected or isMobile then
-			local notes = note ~= "" and (offnote == "" and note or ("%s |cffffcc00-|r %s%s"):format(note, officerColor, offnote)) or
-				offnote == "" and "|cffffcc00-" or officerColor..offnote
-				if status == 0 then status = ""
-				elseif status == 1 then status = CHAT_FLAG_AFK
-				elseif status == 2 then status = CHAT_FLAG_DND
-				end
-			guildEntries[#guildEntries+1] = new( L[class] or "", name or "", level or 0, zone or UNKNOWN, notes, isMobile and "<Mobile>" or status or "", rankIndex or 0, rank or 0, i, isMobile )
-		end
-	end
+		name = Ambiguate(name, "none")
+		local notes = note ~= "" and (offnote == "" and note or ("%s |cffffcc00-|r %s%s"):format(note, officerColor, offnote)) or
+			offnote == "" and "|cffffcc00-" or officerColor..offnote
+			if status == 0 then status = ""
+			elseif status == 1 then status = CHAT_FLAG_AFK
+			elseif status == 2 then status = CHAT_FLAG_DND
+			end
+		if(isMobile and not connected) then zone = REMOTE_CHAT; end;--They are mobile only.
+		guildEntries[#guildEntries+1] = new( L[class] or "", name or "", level or 0, zone or UNKNOWN, notes, isMobile and "<Mobile>" or status or "", rankIndex or 0, rank or 0, i, isMobile )
+	end end
 	UpdateGuildBlockText()
 	if isGuild and f:IsShown() then UpdateTablet() end
 end
@@ -167,8 +171,8 @@ function f:PLAYER_GUILD_UPDATE(unit)
 	if IsInGuild() then GuildRoster() end
 end
 
-local hordeZones = "Orgrimmar,Undercity,Thunder Bluff,Silvermoon City,Durotar,Tirisfal Glades,Mulgore,Eversong Woods,Northern Barrens,Silverpine Forest,Ghostlands,Lost Isles,Kezan,Azshara,"
-local allianceZones = "Ironforge,Stormwind City,Darnassus,The Exodar,Redridge Mountains,Azuremyst Isle,Bloodmyst Isle,Darkshore,Deeprun Tram,Dun Morogh,Elwynn Forest,Loch Modan,Teldrassil,Westfall,Gilneas City,Gilneas,"
+local hordeZones = "Orgrimmar,Undercity,Thunder Bluff,Silvermoon City,Durotar,Tirisfal Glades,Mulgore,Eversong Woods,Northern Barrens,Silverpine Forest,Ghostlands,Lost Isles,Kezan,Azshara,Shrine of Two Moons,Frostfire Ridge,Warspear,"
+local allianceZones = "Ironforge,Stormwind City,Darnassus,The Exodar,Redridge Mountains,Azuremyst Isle,Bloodmyst Isle,Darkshore,Deeprun Tram,Dun Morogh,Elwynn Forest,Loch Modan,Teldrassil,Westfall,Gilneas City,Gilneas,Shrine of Seven Stars,Shadowmoon Valley,Stormshield,"
 
 local function GetZoneColor(zone)
 	return unpack( colors[
@@ -310,8 +314,12 @@ local function OnGuildmateClick( self, button )
 			RemoveFriend( self.unit )
 		end
 	elseif IsAltKeyDown() then
-		if self.presenceID and not self.sameRealm then return end
-		InviteUnit( self.unit )
+		if self.presenceID and self.unitrealm ~= "" then
+			local name = self.unit.."-"..self.unitrealm
+			InviteUnit(name)
+		else
+			InviteUnit( self.unit )
+		end
 	elseif IsControlKeyDown() then
 		if not isGuild then
 			FriendsFrame.NotesID = self.presenceID or self.realIndex
@@ -325,8 +333,12 @@ local function OnGuildmateClick( self, button )
 			StaticPopup_Show( button == "LeftButton" and "SET_GUILDPLAYERNOTE" or "SET_GUILDOFFICERNOTE" )
 		end
 	else
-		local name = self.presenceID and self.realID or self.unit
-		SetItemRef( "player:"..name, ("|Hplayer:%1$s|h[%1$s]|h"):format(name), "LeftButton" )
+		if self.presenceID then
+			local name = self.realID..":"..self.presenceID
+			SetItemRef( "BNplayer:"..name, ("|HBNplayer:%1$s|h[%1$s]|h"):format(name), "LeftButton" )           
+		else
+			SetItemRef( "player:"..self.unit, ("|Hplayer:%1$s|h[%1$s]|h"):format(self.unit), "LeftButton" )
+		end
 	end
 end
 
@@ -488,15 +500,17 @@ local function SetButtonData( index, inGroup )
 	button.unit = name
 	button.realIndex = realIndex
 	button.name:SetFormattedText( (status and preformatedStatusText or "")..(name or""), status )
-	if name then
+	if name and class and class ~= "" then
 		local color = RAID_CLASS_COLORS[class]
-		button.name:SetTextColor( color.r, color.g, color.b )
-		SetClassOrCheckIcon( button.class, inGroup, name, class )
-	--	SetStatusLayout( random() > .5, random() > 2/3, random() > .5, button.status, button.name ) -- DEBUG
-		SetStatusLayout( isMobile, status == CHAT_FLAG_AFK, status == CHAT_FLAG_DND, button.status, button.name )
-		color = GetDifficultyColor(level)
-		button.level:SetTextColor( color.r, color.g, color.b )
-		button.zone:SetTextColor( GetZoneColor(zone) )
+		if color then--Check if this is nil, in case some mod or user corrupted RAID_CLASS_COLORS or CUSTOM_CLASS_COLORS
+			button.name:SetTextColor( color.r, color.g, color.b )
+			SetClassOrCheckIcon( button.class, inGroup, name, class )
+	--		SetStatusLayout( random() > .5, random() > 2/3, random() > .5, button.status, button.name ) -- DEBUG
+			SetStatusLayout( isMobile, status == CHAT_FLAG_AFK, status == CHAT_FLAG_DND, button.status, button.name )
+			color = GetDifficultyColor(level)
+			button.level:SetTextColor( color.r, color.g, color.b )
+			button.zone:SetTextColor( GetZoneColor(zone) )
+		end
 	end
 
 	button.level:SetText( level or "" )
@@ -515,7 +529,7 @@ end
 
 local function SetToastData( index, inGroup )
 	local toast, bc, color = toasts[index]
-	local presenceID, givenName, surname, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, broadcast, notes = BNGetFriendInfo(index)
+	local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, broadcast, notes = BNGetFriendInfo(index)
 	local _, _, game, realm, realmID, faction, race, class, guild, zone, level, gameText = BNGetToonInfo(toonID or 0)
 	local statusText = config.statusMode ~= "icon" and (isAFK or isDND) and (preformatedStatusText):format(isAFK and CHAT_FLAG_AFK or isDND and CHAT_FLAG_DND) or ""
 
@@ -528,15 +542,15 @@ local function SetToastData( index, inGroup )
 
 	toast.presenceID = presenceID
 	toast.unit = toonName
-	toast.realID = BATTLENET_NAME_FORMAT:format(givenName, surname)
+	toast.realID = presenceName
+	toast.unitrealm = realm
 
 	SetStatusLayout( --[[isMobile]]false, isAFK, isDND, toast.status, toast.name )
-	client = client == BNET_CLIENT_WOW and WOW or client == BNET_CLIENT_SC2 and SC2 or client == BNET_CLIENT_D3 and D3 or 0
+	client = client == BNET_CLIENT_WOW and WOW or client == BNET_CLIENT_SC2 and SC2 or client == BNET_CLIENT_D3 and D3 or client == BNET_CLIENT_WTCG and HS or client == BNET_CLIENT_HEROES and HOTS or BND
 	toast.client = client
-
 	if client == WOW then
 		toast.faction:SetTexture"Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Factions"
-		toast.faction:SetTexCoord( faction == 1 and 0.03 or 0.53, faction == 1 and 0.47 or 0.97, 0.03, 0.97 )
+		toast.faction:SetTexCoord( faction == "Alliance" and 0.03 or 0.53, faction == "Alliance" and 0.47 or 0.97, 0.03, 0.97 )
 		zone = (not zone or zone == "") and UNKNOWN or zone
 		toast.zone:SetPoint("TOPLEFT", toast.faction, "TOPRIGHT", TEXT_OFFSET, 0)
 		toast.zone:SetTextColor( GetZoneColor(zone) )
@@ -573,6 +587,30 @@ local function SetToastData( index, inGroup )
 		zone = gameText
 		toast.zone:SetPoint("TOPLEFT", toast.name, "TOPRIGHT", GAP, 0)
 		toast.zone:SetTextColor( 1, .77, 0 )
+	elseif client == HS then
+		toast.class:SetTexture"Interface\\FriendsFrame\\Battlenet-WTCGicon"
+		toast.class:SetTexCoord( .2, .8, .2, .8 )
+		toast.name:SetTextColor( .8, .8, .8 )
+		toast.faction:SetTexture""
+		zone = gameText
+		toast.zone:SetPoint("TOPLEFT", toast.name, "TOPRIGHT", GAP, 0)
+		toast.zone:SetTextColor( 1, .77, 0 )
+	elseif client == HOTS then
+		toast.class:SetTexture"Interface\\FriendsFrame\\Battlenet-HotSicon"
+		toast.class:SetTexCoord( .2, .8, .2, .8 )
+		toast.name:SetTextColor( .8, .8, .8 )
+		toast.faction:SetTexture""
+		zone = gameText
+		toast.zone:SetPoint("TOPLEFT", toast.name, "TOPRIGHT", GAP, 0)
+		toast.zone:SetTextColor( 1, .77, 0 )
+	elseif client == BND then
+		toast.class:SetTexture"Interface\\FriendsFrame\\Battlenet-Battleneticon"
+		toast.class:SetTexCoord( .2, .8, .2, .8 )
+		toast.name:SetTextColor( .8, .8, .8 )
+		toast.faction:SetTexture""
+		zone = "Battle.net Desktop App"--Will switch to global string when added
+		toast.zone:SetPoint("TOPLEFT", toast.name, "TOPRIGHT", GAP, 0)
+		toast.zone:SetTextColor( 1, .77, 0 )
 	end
 
 	if config.realID == "none" then
@@ -599,7 +637,7 @@ local function SetToastData( index, inGroup )
 
 	return	toast, client,
 		toast.name:GetStringWidth(),
-		client == (SC2 or D3) and -GAP or toast.level:GetStringWidth(),
+		client == (SC2 or D3 or HS or BND or HOTS) and -GAP or toast.level:GetStringWidth(),
 		toast.zone:GetStringWidth(),
 		toast.note:GetStringWidth()
 end
@@ -639,6 +677,7 @@ end
 
 local function AnchorTablet(frame)
 	CloseDropDownMenus()
+--	f:GUILD_ROSTER_UPDATE()
 	f:Show()
 	f.isTop, f.onBlock = select(2, frame:GetCenter()) > UIParent:GetHeight() / 2, true
 	f:ClearAllPoints()
@@ -696,78 +735,7 @@ local function si(value)
 	return ("%%.%if%s"):format(2-l%3, l<6 and"k"or"m"):format( value/10^(floor(l/3)*3) ):gsub('%.?0+([km])$', '%1')
 end
 
-
-local xpbar
 local baseFont = GameFontNormal:GetFont()
-
-function f:CreateXPBar()
-	LoadBlizzardAddons()
-
-	xpbar = CreateFrame("Button", nil, f)
-	xpbar:SetHeight(INFO_HEIGHT)
-
-	xpbar.icon = xpbar:CreateTexture(nil, "ARTWORK", nil, 1)
-	xpbar.icon:SetSize(INFO_HEIGHT+3, INFO_HEIGHT+3) -- x
-	xpbar.icon:SetPoint("LEFT", 2, -1)
-
-	local iconBG = xpbar:CreateTexture(nil, "ARTWORK")
-	iconBG:SetSize(INFO_HEIGHT-2, INFO_HEIGHT-2) -- x-5
-	iconBG:SetPoint("CENTER", xpbar.icon)
-	iconBG:SetTexture("Interface\\GuildFrame\\GuildFrame")
-	iconBG:SetTexCoord(0.63183594, 0.69238281, 0.61914063, 0.74023438)
-	xpbar.iconBG = iconBG
-
-	local border = xpbar:CreateTexture(nil, "ARTWORK", nil, -1)
-	border:SetSize(INFO_HEIGHT+2, INFO_HEIGHT+2) -- x-1
-	border:SetPoint("CENTER", xpbar.icon)
-	border:SetTexture("Interface\\GuildFrame\\GuildFrame")
-	border:SetTexCoord(0.63183594, 0.69238281, 0.74414063, 0.86523438)
-	xpbar.border = border
-
-	local lv = xpbar:CreateFontString(nil, "OVERLAY", "SystemFont_Shadow_Med1")-- "GameFontNormal" "SystemFont_Shadow_Med1"
-	lv:SetTextColor(1,.82,0)
-	lv:SetFont( baseFont, FONT_SIZE )
-	lv:SetJustifyH"LEFT"
-	lv:SetPoint("LEFT", xpbar.icon, "RIGHT", GAP, 0)
-	xpbar.lv = lv
-
-	local bar = CreateFrame("Frame", "ABGF_XPBar", xpbar, "GuildProgressBarTemplate")
-	bar:SetPoint("TOPLEFT", lv, "RIGHT", GAP, 2)
-	bar:SetPoint("BOTTOMRIGHT", xpbar, -2, 2)
-	bar.cap:SetVertexColor(.839, .396, .224, 1)
-	-- GetWidth doesn't work with 2 anchors but is used by GuildBar_SetProgress, so here's a quick fix
-	bar.GetWidth = function(b) return b:GetRight()-b:GetLeft() end
-	xpbar.bar = bar
-
-	local text = ABGF_XPBarText
-	text:SetFont(baseFont, FONT_SIZE)
-	text:SetTextColor(1,.82,0)
-	text:ClearAllPoints()
-	text:SetPoint("BOTTOM", 0, 3)
-	xpbar.text = text
-
-	xpbar:SetPoint("TOPLEFT", GAP, -GAP)
-	xpbar:SetPoint("TOPRIGHT", -GAP, -GAP)
-	xpbar:SetScript("OnEnter", function() if config.showGuildXPTooltip then GuildXPBar_OnEnter(xpbar) end end)
-	xpbar:SetScript("OnLeave", Menu_OnLeave)
-
---	if Skinner then Skinner:glazeStatusBar(bar) end
-	f.CreateXPBar = nil
-end
-
-local function UpdateXPBar(includeTabard)
-	if not (isGuild and config.showGuildXP and f:IsShown()) then return end
-	if not xpbar then f:CreateXPBar() end
-	if includeTabard then SetLargeGuildTabardTextures("player", xpbar.icon, xpbar.iconBG, xpbar.border) end
-
-	xpbar.lv:SetFormattedText("Lv %i", GetGuildLevel())
-	local currentXP, nextLevelXP, dailyXP, maxDailyXP = UnitGetGuildXP("player")
-	xpbar.text:SetFormattedText("%s / %s  (%i%%)", si(currentXP), si(currentXP+nextLevelXP), currentXP/(currentXP+nextLevelXP)*100)
-
-	f:Hide() f:Show() -- fixes wrong positions
-	GuildBar_SetProgress(xpbar.bar, currentXP, currentXP+nextLevelXP, maxDailyXP-dailyXP )
-	xpbar.bar.capMarker:Hide()
-end
 
 
 UpdateTablet = function()
@@ -792,8 +760,7 @@ UpdateTablet = function()
 	local nameC, levelC, zoneC, notesC, rankC = 0, 0, 0, 0, -GAP
 	local nameW, levelW, zoneW, notesW, rankW
 	local hideNotes = isGuild and not config.showGuildNotes or not (isGuild or config.showFriendNotes)
-
-	local inGroup = GetNumRaidMembers()>0 and UnitInRaid or GetNumPartyMembers()>0 and UnitInParty or nil
+	inGroup = GetNumGroupMembers()>0 and (IsInRaid() and UnitInRaid or UnitInParty or nil)
 	local tnC, lC, zC, nC = 0, -GAP, -GAP, 0
 	local spanZoneC = 0
 
@@ -801,16 +768,13 @@ UpdateTablet = function()
 		nbBroadcast = 0
 		for i=1, nbRealFriends do
 			local button, client, tnW, lW, zW, nW, spanZoneW = SetToastData(i,inGroup)
-			--print(button, client, tnW, lW, zW, nW, spanZoneW)
 
 			if tnW>tnC then tnC=tnW end
 
 			if client == WOW then
 				if lW>lC then lC=lW end
 				if zW>zC then zC=zW end
-			elseif client == SC2 then
-				if zW > spanZoneC then spanZoneC = zW end
-			elseif client == D3 then
+			elseif (client == SC2) or (client == D3) or (client == HS) or (client == BND) or (client == HOTS) then
 				if zW > spanZoneC then spanZoneC = zW end
 			end
 
@@ -851,8 +815,6 @@ UpdateTablet = function()
 	local maxWidth = max( rid_width, ICON_SIZE + TEXT_OFFSET + nameC + levelC + zoneC + notesC + rankC + GAP * 4 )
 	if config.statusMode=="icon" then maxWidth = maxWidth + ICON_SIZE + TEXT_OFFSET end
 
-	local showXPBar
-	if xpbar then xpbar:Hide() end
 	-- guild xp / motd / broadcast
 	local canEditMOTD = CanEditMOTD()
 	motd:SetPoint("TOPLEFT", GAP, -GAP)
@@ -864,15 +826,6 @@ UpdateTablet = function()
 		local r, g, b = unpack(colors.motd)
 		local motdText = ("%%s:  |cff%.2x%.2x%.2x%%s"):format(r*255, g*255, b*255)
 		if isGuild then
-			if config.showGuildXP and nbTotalEntries > 0 and GetGuildLevel() < MAX_GUILD_LEVEL then
-				showXPBar = true
-				motd:SetPoint("TOPLEFT", f, "TOPLEFT", GAP, -GAP-INFO_HEIGHT-BUTTON_HEIGHT)
-				sep2:SetPoint("TOPLEFT", motd, 0, BUTTON_HEIGHT+1)
-				sep2:SetPoint("TOPRIGHT", motd, 0, BUTTON_HEIGHT+1)
-				sep2:Show()
-			elseif xpbar then
-				xpbar:Hide()
-			end
 			SetButtonData( 0, nbTotalEntries>0 and motdText:format("MOTD", guildMOTD) or "     |cffff2020"..ERR_GUILD_PLAYER_NOT_IN_GUILD )
 			if nbTotalEntries>0 and canEditMOTD then motd:SetScript( "OnClick", EditMOTD ) end
 		else
@@ -882,7 +835,7 @@ UpdateTablet = function()
 				motd.name:SetJustifyH"CENTER"
 				SetButtonData( 0, "|cffff2020"..BATTLENET_UNAVAILABLE )
 			else
-				SetButtonData( 0, motdText:format("Broadcast", select(3, BNGetInfo()) or "") )
+				SetButtonData( 0, motdText:format("Broadcast", select(4, BNGetInfo()) or "") )
 				motd:SetScript("OnClick", EditBroadcast)
 			end
 		end
@@ -897,7 +850,6 @@ UpdateTablet = function()
 		extraHeight = extraHeight + motd.name:GetHeight()
 
 		motd:SetSize( maxWidth, extraHeight )
-		if showXPBar then extraHeight = extraHeight + INFO_HEIGHT + BUTTON_HEIGHT end
 
 		buttons[1]:SetPoint("TOPLEFT", motd, "BOTTOMLEFT", 0, -realFriendsHeight)
 	else
@@ -945,9 +897,7 @@ UpdateTablet = function()
 		button = toasts[i]
 		button:SetWidth( maxWidth )
 		button.name:SetWidth(tnC)
-		if button.client == SC2 then
-			button.zone:SetWidth(spanZoneC)
-		elseif button.client == D3 then
+		if (button.client == SC2) or (button.client == D3) or (button.client == HS) or (button.client == BND) or (button.client == HOTS) then
 			button.zone:SetWidth(spanZoneC)
 		elseif button.client == WOW then
 			button.level:SetWidth(lC)
@@ -996,10 +946,6 @@ UpdateTablet = function()
 	f:SetSize( maxWidth + GAP*2 + (hasSlider and 16 + TEXT_OFFSET*2 or 0),
 		   extraHeight + realFriendsHeight + BUTTON_HEIGHT * nbEntries + GAP*2 )
 
-	if showXPBar then
-		UpdateXPBar(true)
-		xpbar:Show()
-	end
 
 	if not (f.onBlock or f:IsMouseOver()) then f:Hide() end
 end
@@ -1048,6 +994,7 @@ function f:SetupConfigMenu()
 	end
 
 	StaticPopupDialogs.SET_ABGF_SCALE = {
+		preferredIndex = STATICPOPUP_NUMDIALOGS,
 		text = "Set a custom tooltip scale.\nEnter a value between 70 and 200 (%%).",
 		button1 = ACCEPT,
 		button2 = CANCEL,
@@ -1194,14 +1141,19 @@ function f:SetupConfigMenu()
 			else
 				info.func = v.func
 				info.notCheckable = true
-				if level == 1 then info.text, adjust = ("|Tx:%i|t%s"):format(18/self.scale, info.text), v.submenu end
+				if level == 1 then adjust = true end
 			end
 			info.hasArrow, info.value = v.submenu, v.submenu
 			UIDropDownMenu_AddButton( info, level )
 			if adjust then
-				local frame = _G[("DropDownList1Button%i"):format(DropDownList1.numButtons)]
-				local framePoint, relativeFrame, framePoint, offsetX, offsetY =  frame:GetPoint()
-				frame:SetPoint(framePoint, relativeFrame, framePoint, offsetX - 4, offsetY)
+				local button = _G[("DropDownList1Button%i"):format(DropDownList1.numButtons)]
+				local normalText = _G[("DropDownList1Button%iNormalText"):format(DropDownList1.numButtons)]
+    
+				normalText:ClearAllPoints()
+				normalText:SetPoint("LEFT", button, "LEFT", 20, 0)
+    
+				local framePoint, relativeFrame, framePoint, _, offsetY =  button:GetPoint()
+				button:SetPoint(framePoint, relativeFrame, framePoint, 11, offsetY)
 			end
 		end
 	end
@@ -1296,6 +1248,7 @@ f.GuildBlock = ldb:NewDataObject( "|cFFFFB366Ara|r Guild", {
 	OnEnter = function(self)
 		isGuild = true
 		if IsInGuild() then GuildRoster() end
+		f:GUILD_ROSTER_UPDATE()--Force update in case user changed checkbox option for "show offline"
 		AnchorTablet(self)
 	end,
 	OnLeave = Block_OnLeave,
@@ -1382,9 +1335,6 @@ f.BN_FRIEND_ACCOUNT_OFFLINE = UpdateFriendBlockText
 f.BN_CONNECTED = UpdateFriendBlockText
 f.BN_DISCONNECTED = UpdateFriendBlockText
 
-f.GUILD_XP_UPDATE = UpdateXPBar
-f.GUILD_PERK_UPDATE = UpdateXPBar
-
 -- add/remove new/obsolete config var
 local function UpdateConfig( baseConfig, currentConfig, deep, remove )
 	for var, defaultValue in next, baseConfig do
@@ -1427,6 +1377,7 @@ function f:ADDON_LOADED( addon )
 	f:EnableMouse(true)
 
 	StaticPopupDialogs.SET_BN_BROADCAST = {
+		preferredIndex = STATICPOPUP_NUMDIALOGS,
 		text = BN_BROADCAST_TOOLTIP,
 		button1 = ACCEPT,
 		button2 = CANCEL,
@@ -1434,14 +1385,14 @@ function f:ADDON_LOADED( addon )
 		editBoxWidth = 350,
 		maxLetters = 127,
 		OnAccept = function(self) BNSetCustomMessage(self.editBox:GetText()) end,
-		OnShow = function(self) self.editBox:SetText( select(3, BNGetInfo()) ) self.editBox:SetFocus() end,
+		OnShow = function(self) self.editBox:SetText( select(4, BNGetInfo()) ) self.editBox:SetFocus() end,
 		OnHide = ChatEdit_FocusActiveWindow,
 		EditBoxOnEnterPressed = function(self) BNSetCustomMessage(self:GetText()) self:GetParent():Hide() end,
 		EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
 		timeout = 0,
 		exclusive = 1,
 		whileDead = 1,
-		hideOnEscape = 1
+		hideOnEscape = 1,
 	}
 
 	t:SetScript( "OnUpdate", OnUpdate )
@@ -1460,9 +1411,6 @@ function f:ADDON_LOADED( addon )
 	f:RegisterEvent"BN_CUSTOM_MESSAGE_CHANGED"
 	f:RegisterEvent"BN_CONNECTED"
 	f:RegisterEvent"BN_DISCONNECTED"
-
-	f:RegisterEvent"GUILD_XP_UPDATE"
-	f:RegisterEvent"GUILD_PERK_UPDATE"
 
 	slider = CreateFrame("Slider", nil, f)
 	slider:SetWidth(16)

@@ -123,6 +123,9 @@ L["GATHERDESC2_DESC"] = "Configuración para el minimapa Blizzard Botones"
 L["Collect Buttons"] = "Recoger Botones"
 L["COLLECT2_DESC"] = "Recoger el minimapa Blizzard Botones" 
 
+L["Exclude Queue Button"] = "Excluir botón Cola"
+L["ExcludeLFG_DESC"] = "Excluir el botón de estado de la cola"
+
 L["Hide Mail"] = "Ocultar Icono de Correo"
 L["HIDEMAIL_DESC"] = "Ocultar el icono de correo nuevo de Blizzard" 
 

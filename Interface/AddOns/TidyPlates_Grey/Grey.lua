@@ -15,8 +15,8 @@ local castBar_verticalOffset = -6 -- Adjust Cast Bar distance
 local EmptyTexture = "Interface\\Addons\\TidyPlatesHub\\shared\\Empty"
 
 -- Non-Latin Font Bypass
-local NonLatinLocales = { ["ruRU"] = true, ["koKR"] = true, ["zhCN"] = true, ["zhTW"] = true, }
-if NonLatinLocales[GetLocale()] == true then font = NAMEPLATE_FONT end
+local NonLatinLocales = { ["koKR"] = true, ["zhCN"] = true, ["zhTW"] = true, }
+if NonLatinLocales[GetLocale()] == true then font = STANDARD_TEXT_FONT end
 
 local StyleDefault = {}
 
@@ -180,6 +180,12 @@ StyleDefault.raidicon = {
 	x = -35,
 	y = 12+nameplate_verticalOffset,
 	anchor = "TOP",
+		-- Texture Coordinates
+	left = 0,
+	right = 1,
+	top = 0,
+	bottom = 1,
+	--show = false,
 }
 
 StyleDefault.skullicon = {
@@ -203,7 +209,7 @@ StyleDefault.threatcolor = {
 	MEDIUM = {r = .6, g = 1, b = 0, a = 1,},
 	HIGH = {r = 1, g = 0, b = 0, a= 1,},  }
 
-	
+
 -- No-Bar Style		(6.2)
 local StyleTextOnly = CopyTable(StyleDefault)
 StyleTextOnly.threatborder.texture = EmptyTexture
@@ -232,6 +238,10 @@ StyleTextOnly.target.texture = "Interface\\Addons\\TidyPlatesHub\\shared\\Target
 StyleTextOnly.target.y = nameplate_verticalOffset - 8
 StyleTextOnly.target.height = 66
 
+-- Active Styles
+Theme["Default"] = StyleDefault
+Theme["NameOnly"] = StyleTextOnly
+
 local WidgetConfig = {}
 WidgetConfig.ClassIcon = { anchor = "TOP" , x = -32 ,y = 7 }
 --WidgetConfig.TotemIcon = { anchor = "TOP" , x = -28 ,y = 12 }
@@ -245,76 +255,13 @@ if (UnitClassBase("player") == "Druid") or (UnitClassBase("player") == "Rogue") 
 	WidgetConfig.DebuffWidgetPlus = { anchor = "CENTER" , x = 15 ,y = 38 }
 end
 
-local DamageThemeName = "Grey/|cFFFF4400Damage"
-local TankThemeName = "Grey/|cFF3782D1Tank"
-
-Theme["Default"] = StyleDefault
-Theme["NameOnly"] = StyleTextOnly			
-
-SLASH_GREYTANK1 = '/greytank'
-SlashCmdList['GREYTANK'] = ShowTidyPlatesHubTankPanel
-
-SLASH_GREYDPS1 = '/greydps'
-SlashCmdList['GREYDPS'] = ShowTidyPlatesHubDamagePanel
-
+WidgetConfig._meta = true		-- tells the parser to ignore this table; ie. don't convert to "style" template
+Theme.WidgetConfig = WidgetConfig
+local ThemeName = "Grey"
 
 ---------------------------------------------
 -- Tidy Plates Hub Integration
 ---------------------------------------------
 
-TidyPlatesThemeList[DamageThemeName] = Theme
-local LocalVars = TidyPlatesHubDamageVariables
-
-local ApplyThemeCustomization = TidyPlatesHubFunctions.ApplyThemeCustomization
-
-local function ApplyDamageCustomization()
-	ApplyThemeCustomization(Theme)
-end
-
-local function OnInitialize(plate)
-	TidyPlatesHubFunctions.OnInitializeWidgets(plate, WidgetConfig)
-end
-
-local function OnActivateTheme(themeTable)
-		if Theme == themeTable then
-			LocalVars = TidyPlatesHubFunctions:UseDamageVariables()
-			ApplyDamageCustomization()
-		end
-end
-
-Theme.SetNameColor = TidyPlatesHubFunctions.SetNameColor
-Theme.SetScale = TidyPlatesHubFunctions.SetScale
-Theme.SetAlpha = TidyPlatesHubFunctions.SetAlpha
-Theme.SetHealthbarColor = TidyPlatesHubFunctions.SetHealthbarColor
-Theme.SetThreatColor = TidyPlatesHubFunctions.SetThreatColor
-Theme.SetCastbarColor = TidyPlatesHubFunctions.SetCastbarColor
-Theme.SetCustomText = TidyPlatesHubFunctions.SetCustomText
-Theme.OnUpdate = TidyPlatesHubFunctions.OnUpdate
-Theme.OnContextUpdate = TidyPlatesHubFunctions.OnContextUpdate
-Theme.ShowConfigPanel = ShowTidyPlatesHubDamagePanel
-Theme.SetStyle = TidyPlatesHubFunctions.SetStyleBinary
-Theme.SetCustomText = TidyPlatesHubFunctions.SetCustomTextBinary
-Theme.OnInitialize = OnInitialize		-- Need to provide widget positions
-Theme.OnActivateTheme = OnActivateTheme -- called by Tidy Plates Core, Theme Loader
-Theme.OnApplyThemeCustomization = ApplyDamageCustomization -- Called By Hub Panel
-
-do
-	local TankTheme = CopyTable(Theme)
-	TidyPlatesThemeList[TankThemeName] = TankTheme
-	
-	local function ApplyTankCustomization()
-		ApplyThemeCustomization(TankTheme)
-	end
-
-	local function OnActivateTheme(themeTable)
-		if TankTheme == themeTable then
-			LocalVars = TidyPlatesHubFunctions:UseTankVariables()
-			ApplyTankCustomization()
-		end
-	end
-	
-	TankTheme.OnActivateTheme = OnActivateTheme -- called by Tidy Plates Core, Theme Loader
-	TankTheme.OnApplyThemeCustomization = ApplyTankCustomization -- Called By Hub Panel
-	TankTheme.ShowConfigPanel = ShowTidyPlatesHubTankPanel
-end
-
+TidyPlatesThemeList[ThemeName] = Theme
+TidyPlatesHubFunctions.ApplyHubFunctions(Theme)

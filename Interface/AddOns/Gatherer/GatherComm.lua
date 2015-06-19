@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherComm.lua 924 2011-04-27 02:37:42Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherComm.lua 1114 2014-10-11 07:13:26Z ccox $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherComm.lua $", "$Rev: 924 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherComm.lua $", "$Rev: 1114 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
@@ -47,12 +47,12 @@ local acceptFrom = {}
 local commVersion = 2
 
 local lastHarvest = {}
-function Gatherer.Comm.Send( objectId, gatherType, indoorNode, gatherC, gatherZ, gatherX, gatherY, nodeIndex )
+function Gatherer.Comm.Send( objectId, gatherType, indoorNode, gatherZ, gatherX, gatherY, nodeIndex )
 	if ( type(objectId) == "number" ) then
-		local zoneToken = Gatherer.ZoneTokens.GetZoneToken(gatherC, gatherZ)
+		local zoneToken = Gatherer.ZoneTokens.GetZoneToken(gatherZ)
 		
 		-- Check if this node has been just broadcast by us
-		if not (lastHarvest and lastHarvest.c == gatherC and lastHarvest.z == gatherZ and lastHarvest.o == objectId and lastHarvest.i == nodeIndex) then
+		if not (lastHarvest and lastHarvest.z == zoneToken and lastHarvest.o == objectId and lastHarvest.i == nodeIndex) then
 			-- Ok, so lets broadcast this node
 			local guildAlert, raidAlert, raidType
 			local sendMessage = strjoin(";", objectId, zoneToken, tostring(indoorNode and true or false), gatherX, gatherY)
@@ -64,10 +64,8 @@ function Gatherer.Comm.Send( objectId, gatherType, indoorNode, gatherC, gatherZ,
 				end
 			end
 			if (Gatherer.Config.GetSetting("raid.enable")) then
-				if GetNumRaidMembers() > 0 then
-					raidType = "raid"
-				elseif GetNumPartyMembers() > 0 then
-					raidType = "party"
+				if GetNumGroupMembers() > 0 then
+					raidType = "GROUP"
 				end
 				SendAddonMessage("GathX", sendMessage, "RAID")
 				if (raidType and Gatherer.Config.GetSetting("raid.print.send")) then raidAlert = true end
@@ -75,37 +73,38 @@ function Gatherer.Comm.Send( objectId, gatherType, indoorNode, gatherC, gatherZ,
 			
 			if Gatherer.Config.GetSetting("personal.print") then
 				local objName = Gatherer.Util.GetNodeName(objectId);
-				Gatherer.Util.ChatPrint(_tr("Added gather of %1", objName))
+				Gatherer.Util.ChatPrint(_tr("NODE_ADD", objName))
 			end
 			if (guildAlert or raidAlert) then
 				local objName = Gatherer.Util.GetNodeName(objectId);
 				local whom
-				if guildAlert and raidAlert then
-					whom = "guild and "..raidType
-				elseif guildAlert then
-					whom = "guild"
+				if guildAlert then
+					whom = "GUILD"
 				else
 					whom = raidType
 				end
-				Gatherer.Util.ChatPrint(_tr("Sent gather of %1 to %2", objName, _tr(whom)))
+				if (guildAlert and raidAlert) then
+					Gatherer.Util.ChatPrint(_tr("COMM_NODE_SEND_TWO", objName, _tr("GUILD"), _tr("GROUP")))
+				else
+					Gatherer.Util.ChatPrint(_tr("COMM_NODE_SEND", objName, _tr(whom)))
+				end
 			end
 		end
-		lastHarvest.c = gatherC
-		lastHarvest.z = gatherZ
+		lastHarvest.z = zoneToken
 		lastHarvest.o = objectId
 		lastHarvest.i = nodeIndex
 	end
 end
 
-function Gatherer.Comm.SendMsg( sendType, target, objectId, gatherType, indoorNode, gatherC, gatherZ, gatherX, gatherY )
-	local zoneToken = Gatherer.ZoneTokens.GetZoneToken(gatherC, gatherZ)
+function Gatherer.Comm.SendMsg( sendType, target, objectId, gatherType, indoorNode, gatherZ, gatherX, gatherY )
+	local zoneToken = Gatherer.ZoneTokens.GetZoneToken(gatherZ)
 	local sendMessage = strjoin(";", objectId, zoneToken, tostring(indoorNode and true or false), gatherX, gatherY)
 	sendMessage = strjoin(":", commVersion, sendMessage)
 	SendAddonMessage("GathX", sendMessage, sendType, target)
 end
 
 local lastMessage = ""
-local playerName = UnitName("player")
+local playerNameFull = UnitName("player").."-"..((GetRealmName()):gsub(" ", ""))
 function Gatherer.Comm.Receive( message, how, who )
 	local setting = Gatherer.Config.GetSetting
 	local msgtype = "raid"
@@ -116,13 +115,17 @@ function Gatherer.Comm.Receive( message, how, who )
 		return
 	end
 
-	if ( message ~= lastMessage and who ~= playerName ) then
-		if (how:lower() == "guild") then msgtype = "guild" end
-		if (how:lower() == "whisper") then
+	if ( message ~= lastMessage and who ~= playerNameFull ) then
+		if (how == "GUILD") then msgtype = "guild" end
+		if (how == "WHISPER") then
 			msgtype = "whisper"
-			if not acceptFrom[who:lower()] then return end
-		elseif not (setting(msgtype..".enable") and setting(msgtype..".receive")) then return end
-
+			if not ( acceptFrom[who:lower()] ) then
+				return
+			end
+		elseif ( not (setting(msgtype..".enable") and setting(msgtype..".receive")) ) then
+			return
+		end
+		
 		lastMessage = message
 		local commVersion, data = strsplit(":", message, 2)
 		commVersion = tonumber(commVersion)
@@ -134,28 +137,36 @@ function Gatherer.Comm.Receive( message, how, who )
 			indoorNode = (indoorNode == "true" and true or false)
 			gatherX = tonumber(gatherX)
 			gatherY = tonumber(gatherY)
+		elseif ( commVersion == 3 ) then
+			objectID, zoneToken, indoorNode, gatherX, gatherY = strsplit(";", data)
+			objectID = tonumber(objectID)
+			indoorNode = (indoorNode == "true" and true or false)
+			gatherX = tonumber(gatherX)
+			gatherY = tonumber(gatherY)
 		end
 		local gatherType = Gatherer.Nodes.Objects[objectID]
+		zoneToken = Gatherer.ZoneTokens.GetZoneToken(zoneToken)
 		if ( objectID and gatherType and zoneToken and gatherX and gatherY ) then
-			local gatherC, gatherZ = Gatherer.ZoneTokens.GetContinentAndZone(zoneToken)
-			if ( gatherType and gatherC and gatherZ ) then
-				Gatherer.Api.AddGather(objectID, gatherType, indoorNode, who, nil, nil, false, gatherC, gatherZ, gatherX, gatherY)
-				local objName = Gatherer.Util.GetNodeName(objectID);
-				if msgtype == "whisper" then
-					Gatherer.Report.SendFeedback(who, "RECV", objectID)
-				elseif setting(msgtype..".print.recv") then
-					local localizedZoneName = select(gatherZ, GetMapZones(gatherC))
-					Gatherer.Util.ChatPrint(_tr("Received gather of %1 in %2 from %3 (%4)", objName, localizedZoneName, who, _tr(how:lower())))
-				end
+			Gatherer.Storage.MassImportMode = (how == "WHISPER")
+			Gatherer.Api.AddGather(objectID, gatherType, indoorNode, who, nil, nil, false, nil, zoneToken, gatherX, gatherY)
+			Gatherer.Storage.MassImportMode = false
+			local objName = Gatherer.Util.GetNodeName(objectID);
+			if ( how == "WHISPER" ) then
+				Gatherer.Report.SendFeedback(who, "RECV", objectID)
+			elseif ( setting(msgtype..".print.recv") ) then
+				local gatherC, gatherZ = Gatherer.ZoneTokens.GetContinentAndZone(zoneToken)
+				local localizedZoneName = select(2*gatherZ, GetMapZones(gatherC))
+				Gatherer.Util.ChatPrint(_tr("COMM_RECEIVE_NODE", objName, localizedZoneName, who, _tr(how)))
 			end
 		end
+		
 	end
 end
 
 StaticPopupDialogs["GATHERER_COMM_REQUESTSEND"] = {
-	text = "%s wants to send you %d Gatherer nodes. Accept?",
-	button1 = TEXT(YES),
-	button2 = TEXT(NO),
+	text = _trL("MASS_SHARING_GATHERER_COMM_REQUESTSEND"),
+	button1 = _trL("YES"),
+	button2 = _trL("NO"),
 	OnAccept = function()
 			StaticPopupDialogs["GATHERER_COMM_REQUESTSEND"].accepted = 1
 			Gatherer.Comm.SendFeedback("ACCEPT")
@@ -173,7 +184,7 @@ StaticPopupDialogs["GATHERER_COMM_REQUESTSEND"] = {
 			StaticPopupDialogs["GATHERER_COMM_REQUESTSEND"].accepted = -1
 		end
 	end,
-	timeout = 15,
+	timeout = 60,
 	whileDead = 1,
 	exclusive = 1,
 	showAlert = 1,
@@ -198,7 +209,7 @@ function Gatherer.Comm.General( msg, how, who )
 	end
 	local cmd, a,b,c,d = strsplit(":", msg)
 	if ( msg == "VER" ) then
-		SendAddonMessage("Gatherer", "VER:"..Gatherer.Var.Version, how)
+		SendAddonMessage("Gatherer", "VER:"..Gatherer.Var.Version, how, who)
 	elseif ( cmd == "SENDNODES" ) then
 		-- check if the player is on our sharing blacklist
 		local blacklisted = Gatherer.Config.SharingBlacklist_IsPlayerIgnored(who)

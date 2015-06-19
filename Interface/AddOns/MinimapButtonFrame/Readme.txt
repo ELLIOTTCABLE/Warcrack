@@ -1,4 +1,4 @@
-﻿Minimap Button Frame v3.0 Readme.txt
+﻿Minimap Button Frame v3.1.10d Readme.txt
 
 Installation is the same as it is for most other WoW addons.  
 Unpack the files to your  Worldofwarcraft/Interface/Addons   directory.
@@ -215,11 +215,10 @@ History
 	Update - Added exceptions for Archy and EveryQuest Quest Givers.
 	Update - New zhTW translation.  Thank you scars377!
 	Change - Scanning now paused during combat lockdown.
-3.1.6	Update - TOC to 40200
-	Update - Added exceptions for ElvUI
-3.1.7	Update - TOC to 40300	
-	Fixed  - Breadcrumbs exception moved to the proper location
-	
+3.1.10d Update - Toc updated for Warlords
+	Update - Updated Libraries	
+
+
 Known Incompatibilities / Bugs
 
 	The MetaMap minimap button is incompatable because of the continual reseting of its position by the MetaMap addon.

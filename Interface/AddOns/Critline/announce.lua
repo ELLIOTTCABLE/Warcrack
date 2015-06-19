@@ -1,22 +1,32 @@
 local addonName, addon = ...
+local L = addon.L
 
-local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
-local templates = addon.templates
+assert(addon.spellList, "Announce module requires spellList module.")
 
+local lastTarget = ""
 
-local module = templates:CreateList("CritlineAnnounce", L["Announce"], "Announce")
+local announceFormat = format("%%s - %s: %%s %s: %%s", L["Normal"], L["Crit"])
 
-addon.RegisterCallback(module, "SpellsChanged", "Update")
+local function announce(data, channel, target)
+	local normal = data.normal and addon:ShortenNumber(data.normal.amount)
+	local crit = data.crit and addon:ShortenNumber(data.crit.amount)
+	local text = format(announceFormat, addon:GetFullSpellName(data.name, data.periodic, true), (normal or "-"), (crit or "-"))
+	SendChatMessage(text, channel, nil, target)
+end
 
-local function onClick(self)
-	self.owner:SetSelectedValue(self.value)
-	local target = module.target
-	if self.value == "WHISPER" or self.value == "CHANNEL" then
-		target:Show()
-		target:SetFocus()
+local targetChannels = {
+	WHISPER = "CRITLINE_ANNOUNCE_WHISPER",
+	CHANNEL = "CRITLINE_ANNOUNCE_CHANNEL",
+}
+
+local function onClick(self, tree, channel)
+	local popup = targetChannels[channel]
+	if popup then
+		StaticPopup_Show(popup, nil, nil, self.value)
 	else
-		target:Hide()
+		announce(self.value, channel)
 	end
+	CloseDropDownMenus()
 end
 
 local channels = {
@@ -28,54 +38,48 @@ local channels = {
 	"CHANNEL",
 }
 
-local channel = templates:CreateDropDownMenu("CritlineAnnounceChannel", module, nil, _G)
-channel:SetFrameWidth(120)
-channel:SetPoint("TOPLEFT", module.tree, "BOTTOMLEFT")
-channel:SetSelectedValue("SAY")
-channel.initialize = function(self)
-	for i, v in ipairs(channels) do
-		local info = UIDropDownMenu_CreateInfo()
-		info.text = _G[v]
-		info.value = v
-		info.func = onClick
-		info.owner = self
-		UIDropDownMenu_AddButton(info)
-	end
+for i, v in ipairs(channels) do
+	channels[i] = {
+		text = _G[v],
+		func = onClick,
+		notCheckable = true,
+		arg2 = v,
+	}
 end
-module.channel = channel
 
-local target = templates:CreateEditBox(module)
-target:SetWidth(144)
-target:SetPoint("LEFT", channel, "RIGHT", 0, 2)
-target:SetScript("OnEnterPressed", target.ClearFocus)
-target:SetScript("OnEscapePressed", target.ClearFocus)
-target:Hide()
-module.target = target
+addon.spellList:AddSpellOption({
+	text = L["Announce"],
+	hasArrow = true,
+	notCheckable = true,
+	menuList = channels,
+})
 
+local function onShow(self)
+	self.button1:Disable()
+	self.editBox:SetText(lastTarget)
+	self.editBox:HighlightText()
+end
 
-local announceFormat = format("%%s - %s: %%s %s: %%s", L["Normal"], L["Crit"])
+addon:CreatePopup("CRITLINE_ANNOUNCE_WHISPER", {
+	text = L["Enter whisper target"],
+	OnAccept = function(self, data)
+		lastTarget = self.editBox:GetText()
+		announce(data, "WHISPER", lastTarget:trim())
+	end,
+	OnShow = onShow,
+}, true)
 
-function module:Announce(data)
-	local channel = self.channel:GetSelectedValue()
-	local target = self.target:GetText():trim()
-	
-	if channel == "WHISPER" then
-		if target == "" then
-			addon:Message(L["Invalid player name."])
-			return
-		end
-	elseif channel == "CHANNEL" then
-		target = GetChannelName(target)
+addon:CreatePopup("CRITLINE_ANNOUNCE_CHANNEL", {
+	text = ADD_CHANNEL,
+	OnAccept = function(self, data)
+		lastTarget = self.editBox:GetText()
+		local target = GetChannelName(lastTarget:trim())
 		if target == 0 then
 			addon:Message(L["Invalid channel. Please enter a valid channel name or ID."])
 			return
+		else
+			announce(data, "CHANNEL", target)
 		end
-	end
-	
-	local normal = data.normal and addon:ShortenNumber(data.normal.amount)
-	local crit = data.crit and addon:ShortenNumber(data.crit.amount)
-	local text = format(announceFormat, addon:GetFullSpellName(data.spellID, data.periodic, true), (normal or L["n/a"]), (crit or L["n/a"]))
-	SendChatMessage(text, channel, nil, target)
-
-	self.target:SetText("")
-end
+	end,
+	OnShow = onShow,
+}, true)

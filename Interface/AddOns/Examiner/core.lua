@@ -20,6 +20,7 @@ ex.unitStats = unitStats;
 ex.info = info;
 
 -- Misc Constants
+local HOOK_DEFAULT_INSPECT = true;	-- Hook Default Inspect Frame -- Az: Disable for debugging
 local DELAYED_INSPECT_TIME = 1;
 local CLASSIFICATION_NAMES = {
 	worldboss = BOSS,
@@ -29,8 +30,8 @@ local CLASSIFICATION_NAMES = {
 };
 
 -- Colors
-local CACHE_VERTEX_COLOR = { 1, 1, 0.4 };
-local LOADING_VERTEX_COLOR = { 0.5, 1, 0.5 };
+local VERTEX_COLOR_CACHED = { 1, 1, 0.4 };
+local VERTEX_COLOR_LOADING = { 0.5, 1, 0.5 };
 local CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS;
 
 -- Texture Mapping
@@ -63,6 +64,13 @@ BINDING_HEADER_EXAMINER = modName;
 BINDING_NAME_EXAMINER_OPEN = "Open "..modName;
 BINDING_NAME_EXAMINER_TARGET = INSPECT.." "..TARGET;
 BINDING_NAME_EXAMINER_MOUSEOVER = INSPECT.." Mouseover";
+
+-- Allow Inspect from Any Range -- This was apparently causing TAINT, so it has now been disabled.
+--UnitPopupButtons.INSPECT.dist = 0;
+-- UIPanelWindow Entry  -- Az: Can this cause TAINT?
+UIPanelWindows[modName] = { area = "left", pushable = 1, whileDead = 1 };
+-- Allows the use of Esc to close the window -- Az: Can this cause TAINT? Many other addons uses this, so probably no?
+UISpecialFrames[#UISpecialFrames + 1] = modName;
 
 --------------------------------------------------------------------------------------------------------
 --                                          Examiner Scripts                                          --
@@ -139,7 +147,9 @@ function ex:VARIABLES_LOADED(event)
 		self:SetPoint("BOTTOMLEFT",cfg.left,cfg.bottom);
 	end
 	-- HOOK: InspectUnit
-	InspectUnit = function(...) ex:DoInspect(...); end	-- Az: Disable for debugging
+	if (HOOK_DEFAULT_INSPECT) then
+		InspectUnit = function(...) ex:DoInspect(...); end
+	end
 	-- Init Modules
 	for index, mod in ipairs(self.modules) do
 		if (mod.OnInitialize) then
@@ -213,6 +223,21 @@ function ex:INSPECT_READY(event,guid)
 	self:InspectReady(guid);
 end
 
+-- INSPECT_HONOR_UPDATE
+function ex:INSPECT_HONOR_UPDATE(event)
+	self:RequestHonorData();
+	self:SendModuleEvent("OnHonorReady");
+end
+
+-- Achievement Inspection Ready
+function ex:INSPECT_ACHIEVEMENT_READY(event,guid)
+	if (AchievementFrameComparison) then
+		AchievementFrameComparison:RegisterEvent("INSPECT_ACHIEVEMENT_READY");
+	end
+	self:UnregisterEvent("INSPECT_ACHIEVEMENT_READY");
+	self:SendModuleEvent("OnAchievementReady",self.unit,guid);
+end
+
 --------------------------------------------------------------------------------------------------------
 --                                         Model Frame Scripts                                        --
 --------------------------------------------------------------------------------------------------------
@@ -275,13 +300,6 @@ end
 --                                            Init Examiner                                           --
 --------------------------------------------------------------------------------------------------------
 
--- Allow Inspect from Any Range
-UnitPopupButtons.INSPECT.dist = 0;
--- UIPanelWindow Entry
-UIPanelWindows[modName] = { area = "left", pushable = 1, whileDead = 1 };
--- Allows the use of Esc to close the window
-UISpecialFrames[#UISpecialFrames + 1] = modName;
-
 -- Examiner Main Frame
 ex:SetWidth(384);
 ex:SetHeight(440);
@@ -300,7 +318,7 @@ ex:SetScript("OnMouseUp",function(self,button) if (self:IsMovable()) then self:S
 ex:RegisterEvent("VARIABLES_LOADED");
 
 -- Close Button
-CreateFrame("Button",nil,ex,"UIPanelCloseButton"):SetPoint("TOPRIGHT",-30,-8);
+ex.close = CreateFrame("Button",nil,ex,"UIPanelCloseButton"):SetPoint("TOPRIGHT",-30,-8);
 
 -- Portrait
 ex.portrait = ex:CreateTexture(nil,"BACKGROUND");
@@ -395,7 +413,8 @@ function ex:SetUnitDetailString()
 			uDetails[#uDetails + 1] = format("|cff%.2x%.2x%.2x%s|r",color.r * 255,color.g * 255,color.b * 255,info.class);
 		end
 		if (info.realm) then
-			uDetails[#uDetails + 1] = "of "..info.realm
+			uDetails[#uDetails + 1] = "of";
+			uDetails[#uDetails + 1] = info.realm;
 		end
 	end
 	-- Set Result
@@ -464,7 +483,9 @@ function ex:LoadPlayerFromCache(entryName)
 	if (not self.unit or not UnitIsVisible(self.unit)) then
 		info.pvpName = entry.pvpName;
 		info.guild, info.guildRank, info.guildIndex = entry.guild, entry.guildRank, entry.guildIndex;
-		info.guildID, info.guildLevel, info.guildXP, info.guildMembers = entry.guildID, entry.guildLevel, entry.guildXP, entry.guildMembers;
+		--info.guildID, info.guildLevel, info.guildXP, info.guildMembers = entry.guildID, entry.guildLevel, entry.guildXP, entry.guildMembers; -- Old Pre-MoP
+		--info.guildLevel, info.guildXP, info.guildMembers = entry.guildLevel, entry.guildXP, entry.guildMembers;	-- Old Pre-WoD
+		info.guildPoints, info.guildMembers = entry.guildPoints, entry.guildMembers;	-- Az: move to guild module
 		if (not self.unit) then
 			info.name, info.realm = entry.name, entry.realm;
 			info.level = entry.level;
@@ -479,21 +500,26 @@ function ex:LoadPlayerFromCache(entryName)
 		info.Items[slotName] = link;
 		LibGearExam:ScanItemLink(link,unitStats);
 	end
-	-- Sets + Set Bonuses
+	-- Sets + Set Bonuses [NEW]
 	for setName, setEntry in next, entry.Sets do
 		info.Sets[setName] = { count = setEntry.count, max = setEntry.max };
-		local idx = 1;
-		while (setEntry["setBonus"..idx]) do
-			info.Sets[setName]["setBonus"..idx] = setEntry["setBonus"..idx];
-			LibGearExam:ScanLineForPatterns(setEntry["setBonus"..idx],unitStats);
-			idx = (idx + 1);
-		end
+		LibGearExam:ScanArmorSetBonuses(setName,setEntry.count,unitStats,info.Items);
 	end
+	-- Sets + Set Bonuses [OLD]
+--	for setName, setEntry in next, entry.Sets do
+--		info.Sets[setName] = { count = setEntry.count, max = setEntry.max };
+--		local idx = 1;
+--		while (setEntry["setBonus"..idx]) do
+--			info.Sets[setName]["setBonus"..idx] = setEntry["setBonus"..idx];
+--			LibGearExam:ScanLineForPatterns(setEntry["setBonus"..idx],unitStats);
+--			idx = (idx + 1);
+--		end
+--	end
 	-- Finalize
 	self.isCacheEntry = true;
 	self.itemsLoaded = true;
 	-- Update UI
-	self:SetBackgroundVertex(unpack(CACHE_VERTEX_COLOR));
+	self:SetBackgroundVertex(unpack(VERTEX_COLOR_CACHED));
 	self:UpdateObjects();
 	self:ShowModulePage();
 	-- Modules: OnCacheLoaded
@@ -542,6 +568,7 @@ end
 
 -- ClearInspect -- Clears all work variables. Always called before a new inspect request!
 function ex:ClearInspect()
+	INSPECTED_UNIT = nil;
 	-- unit specific
 	self.unit = nil;
 	self.guid = nil;
@@ -581,7 +608,9 @@ function ex:InspectReady(guid)
 		-- Guild Vars -- Returns zeros for unguilded people
 		local info = self.info;
 		if (info.guild) then
-			info.guildID, info.guildLevel, info.guildXP, info.guildMembers = GetInspectGuildInfo(unit);	-- Az: move this into guild.lua?
+			--info.guildID, info.guildLevel, info.guildXP, info.guildMembers = GetInspectGuildInfo(unit);	-- Az: move this into guild.lua? -- Old Pre-MoP
+			--info.guildLevel, info.guildXP, info.guildMembers = GetInspectGuildInfo(unit);	-- MoP: No more guildID as first return -- Az: move this into guild.lua?
+			info.guildPoints, info.guildMembers = GetInspectGuildInfo(unit);		-- WoD: Guild leveling removed. Az: What are guildPoints?
 		end
 		-- Scan Gear & Post InspectReady
 		self:ScanGear(unit);
@@ -605,17 +634,13 @@ function ex:DoInspect(unit,openFlag)
 		unit = "player";
 	-- Convert "mouseover" and "target" units to party/raid unit
 	elseif (unit == "mouseover") or (unit == "target") then
-		if (GetNumRaidMembers() > 0) then
-			for i = 1, GetNumRaidMembers() do
-				if (UnitIsUnit(unit,"raid"..i)) then
-					unit = "raid"..i;
-					break;
-				end
-			end
-		elseif (GetNumPartyMembers() > 0) then
-			for i = 1, GetNumPartyMembers() do
-				if (UnitIsUnit(unit,"party"..i)) then
-					unit = "party"..i;
+		local count = GetNumGroupMembers();
+		if (count) and (count > 0) then
+			local isRaid = IsInRaid();
+			for i = 1, count do
+				local token = (isRaid and "raid" or "party")..i;
+				if (UnitIsUnit(unit,token)) then
+					unit = token;
 					break;
 				end
 			end
@@ -628,6 +653,7 @@ function ex:DoInspect(unit,openFlag)
 		self:UnregisterEvent("UPDATE_MOUSEOVER_UNIT");
 	end
 	-- Set Work Variables
+	INSPECTED_UNIT = unit;
 	self.unit = unit;
 	self.guid = UnitGUID(unit);
 	self.isSelf = UnitIsUnit(unit,"player");
@@ -642,7 +668,7 @@ function ex:DoInspect(unit,openFlag)
 	info.pvpName = UnitPVPName(unit);
 	info.level = (UnitLevel(unit) or 0);
 	info.sex = (UnitSex(unit) or 1);
-	info.class, info.classFixed = UnitClass(unit);
+	info.class, info.classFixed, info.classID = UnitClass(unit);
 	info.race, info.raceFixed = UnitRace(unit);
 	if (not info.race) then
 		info.race = UnitCreatureFamily(unit) or UnitCreatureType(unit);
@@ -656,12 +682,8 @@ function ex:DoInspect(unit,openFlag)
 	end
 	-- Players we can Inspect
 	if (self.canInspect) then
-		-- Az: Fix the blizzard inspect error (Blizzard_InspectUI\InspectPaperDollFrame.lua @ line 23)
-		if (InspectFrame) then
-			InspectFrame.unit = "player";
-		end
 		-- Vertex Color = LOADING
-		self:SetBackgroundVertex(unpack(LOADING_VERTEX_COLOR));
+		self:SetBackgroundVertex(unpack(VERTEX_COLOR_LOADING));
 		-- Magic Inspect Supernova
 		self:RegisterEvent("INSPECT_READY");
 		NotifyInspect(unit);
@@ -717,12 +739,6 @@ end
 --                                        Additional Inspection                                       --
 --------------------------------------------------------------------------------------------------------
 
--- INSPECT_HONOR_UPDATE
-function ex:INSPECT_HONOR_UPDATE(event)
-	self:RequestHonorData();
-	self:SendModuleEvent("OnHonorReady");
-end
-
 -- Requests Honor Data
 function ex:RequestHonorData()
 	if (self.requestedHonorData) then
@@ -735,15 +751,6 @@ function ex:RequestHonorData()
 		self:RegisterEvent("INSPECT_HONOR_UPDATE");
 		RequestInspectHonorData();
 	end
-end
-
--- Achievement Inspection Ready
-function ex:INSPECT_ACHIEVEMENT_READY(event,guid)
-	if (AchievementFrameComparison) then
-		AchievementFrameComparison:RegisterEvent("INSPECT_ACHIEVEMENT_READY");
-	end
-	self:UnregisterEvent("INSPECT_ACHIEVEMENT_READY");
-	self:SendModuleEvent("OnAchievementReady",self.unit,guid);
 end
 
 -- Requests Achievement Data
@@ -961,7 +968,7 @@ function ex.ItemButton_OnEnter(self,motion)
 	else
 		ResetCursor();
 	end
-	-- Anchor
+	-- Anchor -- Az: add new option here to anchor it to the default anchor?
 	ex.showingTooltip = true;
 	gtt:SetOwner(self,"ANCHOR_NONE");
 	if (cfg.tooltipSmartAnchor) then
@@ -1019,7 +1026,7 @@ end
 --                                           Slash Handling                                           --
 --------------------------------------------------------------------------------------------------------
 
--- Slash Help
+-- Slash Help -- Az: merge into slashFuncs table
 ex.slashHelp = {
 	" |2inspect <unit>|r = Inspects the given unit ('target' if no unit given)",
 	" |2si <itemlink>|r = Scans one item and shows the total sum of its stats combined",
@@ -1030,7 +1037,7 @@ ex.slashHelp = {
 	" |2clearcache|r = Clears the entire Examiner cache",
 };
 
--- Slash Functions
+-- Slash Functions -- Commands starting with underscore are meant for debugging
 ex.slashFuncs = {
 	-- Inspect Unit
 	inspect = function(cmd)
@@ -1109,19 +1116,34 @@ ex.slashFuncs = {
 	clearcache = function(cmd)
 		wipe(cache);
 	end,
-	-- Az: TEST
-	test = function(cmd)
+	-- Scans all cached entries
+	_scanall = function(cmd)
+		local count = 0;
 		for name, entry in next, cache do
+			ex:ClearInspect();
 			ex:LoadPlayerFromCache(name);
+			count = (count + 1);
+		end
+		AzMsg("Scanned |1"..count.."|r cached entries.");
+	end,
+	-- Reports patterns with no uses. Use "_scanall" first to find uses
+	_uses = function(cmd)
+		for index, tbl in ipairs(LibGearExam.Patterns) do
+			if (not tbl.uses) then
+				AzMsg("|2"..tostring(tbl.s).."|r = |1"..tostring(tbl.p));
+			end
 		end
 	end,
-	-- Az: Test: Load all items, so they are cached locally
-	loaditems = function(cmd)
+	-- Load all items, so they are cached locally
+	_loaditems = function(cmd)
+		local count = 0;
 		for name, entry in next, cache do
 			for slotName, link in next, entry.Items do
 				GetItemInfo(link);
+				count = (count + 1);
 			end
 		end
+		AzMsg("Went through |1"..count.."|r items, including duplicates.");
 	end,
 };
 

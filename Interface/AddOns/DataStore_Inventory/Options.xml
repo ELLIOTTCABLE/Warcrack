@@ -1,63 +1,48 @@
 ﻿<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Options.lua"></Script>
 
-	<Frame name="DataStoreInventoryOptions" hidden="true">
-		<Size>
-			<AbsDimension x="615" y="306"/>
-		</Size>
+	<Frame parentKey="InventoryOptions" parent="DataStoreFrames" hidden="true">
+		<Size x="615" y="306" />
+		<KeyValues>
+			<KeyValue key="module" value="DataStore_Inventory" />
+		</KeyValues>
 		<Frames>
-			<CheckButton name="$parent_AutoClearGuildInventory" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
+			<CheckButton parentKey="AutoClearGuildInventory" inherits="DataStoreToggleableOptionTemplate">
 				<Anchors> 
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="40" y="-40" />
-						</Offset>
-					</Anchor>
-				</Anchors>      
-				<Scripts>
-					<OnClick>
-						DataStore:ToggleOption(self, "DataStore_Inventory", "AutoClearGuildInventory")
-					</OnClick>
-				</Scripts>
-			</CheckButton>
-			<CheckButton name="$parent_BroadcastAiL" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors> 
-					<Anchor point="TOP" relativeTo="$parent_AutoClearGuildInventory" relativePoint="BOTTOM" >
-						<Offset>
-							<AbsDimension  x="0" y="-10"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="TOPLEFT" x="40" y="-40" />
 				</Anchors>
-				<Scripts>
-					<OnClick>
-						DataStore:ToggleOption(self, "DataStore_Inventory", "BroadcastAiL")
-					</OnClick>
-				</Scripts>
+				<KeyValues>
+					<KeyValue key="option" value="AutoClearGuildInventory" />
+					<KeyValue key="locLabel" value="CLEAR_INVENTORY_TEXT" />
+					<KeyValue key="locTitle" value="CLEAR_INVENTORY_TITLE" />
+					<KeyValue key="locEnabled" value="CLEAR_INVENTORY_ENABLED" />
+					<KeyValue key="locDisabled" value="CLEAR_INVENTORY_DISABLED" />
+				</KeyValues>
 			</CheckButton>
-			<CheckButton name="$parent_EquipmentRequestNotification" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
+			<CheckButton parentKey="BroadcastAiL" inherits="DataStoreToggleableOptionTemplate">
 				<Anchors> 
-					<Anchor point="TOP" relativeTo="$parent_BroadcastAiL" relativePoint="BOTTOM" >
-						<Offset>
-							<AbsDimension  x="0" y="-10"/>
-						</Offset>
-					</Anchor>
+					<Anchor point="TOP" relativeKey="$parent.AutoClearGuildInventory" relativePoint="BOTTOM" x="0" y="-10" />
 				</Anchors>
-				<Scripts>
-					<OnClick>
-						DataStore:ToggleOption(self, "DataStore_Inventory", "EquipmentRequestNotification")
-					</OnClick>
-				</Scripts>
+				<KeyValues>
+					<KeyValue key="option" value="BroadcastAiL" />
+					<KeyValue key="locLabel" value="BROADCAST_AIL_TEXT" />
+					<KeyValue key="locTitle" value="BROADCAST_AIL_TITLE" />
+					<KeyValue key="locEnabled" value="BROADCAST_AIL_ENABLED" />
+					<KeyValue key="locDisabled" value="BROADCAST_AIL_DISABLED" />
+				</KeyValues>
+			</CheckButton>
+			<CheckButton parentKey="EquipmentRequestNotification" inherits="DataStoreToggleableOptionTemplate">
+				<Anchors> 
+					<Anchor point="TOP" relativeKey="$parent.BroadcastAiL" relativePoint="BOTTOM" x="0" y="-10" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="option" value="EquipmentRequestNotification" />
+					<KeyValue key="locLabel" value="EQUIP_REQ_TEXT" />
+					<KeyValue key="locTitle" value="EQUIP_REQ_TITLE" />
+					<KeyValue key="locEnabled" value="EQUIP_REQ_ENABLED" />
+					<KeyValue key="locDisabled" value="EQUIP_REQ_DISABLED" />
+				</KeyValues>
 			</CheckButton>
 		</Frames>
 	</Frame>
-	
 </Ui>

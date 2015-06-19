@@ -1,8 +1,8 @@
 --[[
     This file is part of Decursive.
     
-    Decursive (v 2.7.0.5) add-on for World of Warcraft UI
-    Copyright (C) 2006-2007-2008-2009-2010-2011 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
+    Decursive (v 2.7.4.2) add-on for World of Warcraft UI
+    Copyright (C) 2006-2014 John Wellesz (archarodim AT teaser.fr) ( http://www.2072productions.com/to/decursive.php )
 
     Starting from 2009-10-31 and until said otherwise by its author, Decursive
     is no longer free software, all rights are reserved to its author (John Wellesz).
@@ -11,13 +11,13 @@
     To distribute Decursive through other means a special authorization is required.
     
 
-    Decursive is inspired from the original "Decursive v1.9.4" by Quu.
+    Decursive is inspired from the original "Decursive v1.9.4" by Patrick Bohnet (Quu).
     The original "Decursive 1.9.4" is in public domain ( www.quutar.com )
 
     Decursive is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY.
 
-    This file was last updated on 2011-06-06T21:10:50Z
+    This file was last updated on 2015-01-25T21:31:39Z
 --]]
 -------------------------------------------------------------------------------
 
@@ -35,6 +35,7 @@ StaticPopupDialogs["DECURSIVE_ERROR_FRAME"] = {
     whileDead = 1,
     hideOnEscape = 1,
     showAlert = 1,
+    preferredIndex = 3,
     }; -- }}}
 T._FatalError = function (TheError) StaticPopup_Show ("DECURSIVE_ERROR_FRAME", TheError); end
 end
@@ -44,15 +45,14 @@ if not T._LoadedFiles or not T._LoadedFiles["Dcr_LDB.lua"] then
     DecursiveInstallCorrupted = true;
     return;
 end
+T._LoadedFiles["Dcr_utils.lua"] = false;
 
 local D = T.Dcr;
---D:SetDateAndRevision("$Date: 2008-09-16 00:48:59 +0200 (mar., 16 sept. 2008) $", "$Revision: 81756 $");
 
 local L = D.L;
 local LC = D.LC;
 local DC = T._C;
-local DS = DC.DS;
-
+local _G                = _G;
 local pairs             = _G.pairs;
 local ipairs            = _G.ipairs;
 local type              = _G.type;
@@ -62,6 +62,7 @@ local str_sub           = _G.string.sub;
 local str_upper         = _G.string.upper;
 local str_lower         = _G.string.lower;
 local str_format        = _G.string.format;
+local str_split         = _G.strsplit;
 local table             = _G.table;
 local t_remove          = _G.table.remove;
 local t_insert          = _G.table.insert;
@@ -72,6 +73,29 @@ local tonumber          = _G.tonumber;
 local UnitGUID          = _G.UnitGUID;
 local band              = _G.bit.band;
 local GetTime           = _G.GetTime;
+local IsSpellInRange    = _G.IsSpellInRange;
+local UnitInRange       = _G.UnitInRange;
+local debugprofilestop  = _G.debugprofilestop;
+local GetSpellInfo      = _G.GetSpellInfo;
+
+-- replacement for the default function as it is bugged in WoW5 (it returns nil for some spells such as resto shamans' 'Purify Spirit')
+D.IsSpellInRange = function (spellName, unit)
+    local range = IsSpellInRange(spellName, unit);
+
+    if range ~= nil then
+        return range;
+    else
+        --[===[@debug@
+        D:Debug('IsSpellInRange() returned nil for', spellName, unit);
+        --@end-debug@]===]
+        if unit == 'player' or unit == 'pet' then
+            return 1;
+        else
+            return (UnitInRange(unit)) and 1 or 0;
+        end
+    end
+
+end
 
 
 function D:ColorText (text, color) --{{{
@@ -88,15 +112,7 @@ function D:MakePlayerName (name) --{{{
 end --}}}
 
 function D:UnitIsPet (Unit)
-    local GUID = UnitGUID(Unit);
-
-    if not GUID then return end
-
-    if band(tonumber(GUID:sub(0,5), 16), 0x00f)==0x004 then
-        return true;
-    end
-    return false;
-
+    return (Unit:find('pet')) ~= nil;
 end
 
 function D:PetUnitName (Unit, Check) -- {{{
@@ -107,8 +123,8 @@ function D:PetUnitName (Unit, Check) -- {{{
         D:Debug("PetUnitName(): Name of %s is unknown", Unit);
     end
 
-    if not Check or (self:UnitIsPet(Unit)) then
-        Name =  ("%s-%s"):format (DC.PET,Name);
+    if not Check or self:UnitIsPet(Unit) then
+        Name = ("%s-%s"):format(DC.PET, Name);
     end
     
     return Name;
@@ -145,9 +161,7 @@ function D:NumToHexStr(number)
 end
 
 
-local function debugStyle(...)
-    return "|cFF00AAAADebug:("..D:NiceTime()..")|r", ...;
-end
+
 
 function D:Println( ... ) --{{{
 
@@ -189,10 +203,17 @@ function D:errln( ... ) --{{{
     end
 end --}}}
 
+do
+    local timerStart = debugprofilestop();
 
-function D:Debug(...)
-    if self.debug then
-        self:Print(debugStyle(UseFormatIfPresent(...)));
+    local function debugStyle(...)
+        return ("|cFF00AAAADebug:(%0.3f)|r"):format((debugprofilestop() - timerStart) / 1000), ...;
+    end
+
+    function D:Debug(...)
+        if self.debug then
+            self:Print(debugStyle(UseFormatIfPresent(...)));
+        end
     end
 end
 
@@ -210,8 +231,7 @@ function D:tremovebyval(tab, val) -- {{{
 end -- }}}
 
 function D:tcheckforval(tab, val) -- {{{
-    local k;
-    local v;
+    local k, v;
     if tab then
         for k,v in pairs(tab) do
             if v==val then
@@ -303,14 +323,6 @@ function D:tReverse(tab)
     end
 
     return ReversedTable;
-end
-
-function D:Pack(...)
-    local args = {};
-    for i=1,select("#",...), 1 do
-        args[i]=select(i, ...);
-    end
-    return args;
 end
 
 function D:tSwap(t, i1, i2)
@@ -437,7 +449,7 @@ function D:GetSpellFromLink(link)
 
     if link:find('|Hspell:%d+') then
         local spellID;
-        spellID = link:match('|Hspell:(%d+)');
+        spellID = tonumber(link:match('|Hspell:(%d+)'));
 
         local spellName, spellRank = GetSpellInfo(spellID);
 
@@ -450,14 +462,60 @@ function D:GetSpellFromLink(link)
         end
         D:Debug('Spell link detected:', spellID, spellName, spellRank);
 
-        return spellName;
+        --return spellName;
+        return spellID;
     end
 
     return nil;
 end
 
+
+local IsUsableItem      = _G.IsUsableItem;
+local IsEquippableItem  = _G.IsEquippableItem;
+local IsEquippedItem    = _G.IsEquippedItem;
+function D:isItemUsable(itemIDorName)
+    if IsEquippableItem(itemIDorName) and not IsEquippedItem(itemIDorName) then
+        return false;
+    end
+
+    return IsUsableItem(itemIDorName);
+end
+
+function D:GetItemFromLink(link)
+    -- GetItemInfo (only if item seen)
+    -- GetItemCooldown
+    -- IsUsableItem (ignores cooldowms and petty conditions)
+    -- IsItemInRange(itemID, "unit")
+    -- GetItemCount(itemId, includeBank, includeCharges)
+
+    if link:find('|Hitem:%d+') then
+        local itemID;
+        itemID = tonumber(link:match('|Hitem:(%d+)'));
+
+        local name = GetItemInfo(itemID);
+
+        if not name then
+            return nil;
+        end
+
+        D:Debug('Item link detected:', itemID, name);
+
+        return itemID;
+    end
+
+    return nil;
+end
+
+function D.GetSpellOrItemInfo(spellID)
+    if spellID > 0 then
+        return GetSpellInfo(spellID);
+    else
+        return GetItemInfo(spellID * -1);
+    end
+end
+
 local function BadLocalTest (localtest)
-        D:Print(L[localtest]);
+    D:Print(L[localtest]);
 end
 
 function D:MakeError(something)
@@ -483,137 +541,263 @@ function D:NiceTime()
     return tonumber(("%.4f"):format(GetTime() - DC.StartTime));
 end
 
-local DcrTimers = {};
-function D:TimerExixts(RefName)
-    return DcrTimers[RefName] and DcrTimers[RefName][1] or false;
-end
+do
+    local DcrTimers = {};
+    local argCount = 0;
 
-function D:DelayedCallExixts(RefName)
-    return DcrTimers[RefName] and DcrTimers[RefName][1] or false;
-end
+    local Yields = 0;
+    local CurrentRefreshID = 0;
+    local CurrentRefreshElapsed = 0;
+    local CurrentRefreshStart = 0;
+    local CurrentNumInARow = 0;
 
-local ObjectWithArgs = {["obj"]=false, ["arg"]=false,};
-local argCount = 0;
-function D:ScheduleDelayedCall(RefName, FunctionRef, Delay, arg1, ...)
+    local LongestExecBesidesYields = 0;
+    local LargestBatch = 0;
 
-    if DcrTimers[RefName] and DcrTimers[RefName][1] then -- a timer with the same refname still exists
+    local TimersTotalExecs = 0;
+
+    local Time = 0;
+
+    local function Yielding ()
+        Time = GetTime(); -- get an ID of the current refresg we're in. (GetTime() value is cached on OnUpdate)
+
+        TimersTotalExecs = TimersTotalExecs + 1;
+
+        if Time == CurrentRefreshID then -- if we are still in the same OnUpdate
+            CurrentNumInARow = CurrentNumInARow + 1;
+
+            -- do some stats to display when debugging
+            if CurrentNumInARow > LargestBatch then
+                LargestBatch = CurrentNumInARow;
+            end
+
+            CurrentRefreshElapsed = CurrentRefreshElapsed + (debugprofilestop() - CurrentRefreshStart); -- compute how much time has elapsed
+
+            if CurrentRefreshElapsed > 50 then -- if we've been doing things for more than 50ms then yield
+                Yields = Yields + 1;
+                return true;
+            end
+
+            -- do some stats to display when debugging
+            if CurrentRefreshElapsed > LongestExecBesidesYields then
+                LongestExecBesidesYields = CurrentRefreshElapsed;
+            end
+
+        else -- it's the first time we do something on this OnUpdate so initialize our status
+            CurrentRefreshID = Time; -- set the RefreshID
+            CurrentRefreshElapsed = 0;
+            CurrentNumInARow    = 0;
+            CurrentRefreshStart = debugprofilestop();
+        end
+
+        return false;
+    end
+
+    function D:TimerExixts(RefName)
+        return DcrTimers[RefName] and DcrTimers[RefName][1] or false;
+    end
+
+    function D:DelayedCallExixts(RefName)
+        return DcrTimers[RefName] and DcrTimers[RefName][1] or false;
+    end
+
+
+    function D:ScheduleDelayedCall(RefName, FunctionRef, Delay, arg1, ...)
+        --[===[@debug@
+    --  D:Debug('|cFFFF0000SDC:|r|cFF00FFAA', RefName, Delay, arg1, unpack({...}));
+        --@end-debug@]===]
+
         argCount = select('#', ...);
-        -- we test up to two arguments to avoid the cancellation->re-creation of the timer (AceTimers doesn't remove them right away)
-        if (argCount == 0 or argCount == 1 and  select(1, ...) == DcrTimers[RefName][2][2]) and arg1 == DcrTimers[RefName][2][1] then
-            --[===[@debug@
-            D:Debug("Timer |cFF0000DDcancellation-creation canceled|r for", RefName, "Arg:", arg1, "indargcount:", argCount);
-            --@end-debug@]===]
-            return;
-            --[===[@debug@
+
+        if DcrTimers[RefName] and DcrTimers[RefName][1] then -- a timer with the same refname still exists
+            -- we test up to two arguments to avoid the cancellation->re-creation of the timer (AceTimers doesn't remove them right away)
+            if (argCount == 0 or argCount == 1 and  select(1, ...) == DcrTimers[RefName][2][2]) and arg1 == DcrTimers[RefName][2][1] then
+                --[===[@debug@
+                D:Debug("Timer |cFF0000DDcancellation-creation canceled|r for", RefName, "Arg:", arg1, "indargcount:", argCount);
+                --@end-debug@]===]
+                return;
+                --[===[@debug@
+            else
+                D:Debug("Timer |cFF0066DD-replaced-|r for", RefName, "argcount:", argCount);
+                --@end-debug@]===]
+            end
+            if not self:CancelTimer(DcrTimers[RefName][1]) then
+                self:AddDebugText("Timer cancellation failed in ScheduleDelayedCall() for", RefName);
+            end
+        end
+
+
+        if Delay > 30 then
+            self:AddDebugText("A delayed call for", RefName, "was requested with a very large timer:", Delay);
+        end
+
+        if not DcrTimers[RefName] then
+            DcrTimers[RefName] = {};
+        end
+
+        -- arg table
+        DcrTimers[RefName][2] = {arg1};
+
+        if argCount > 0 then
+
+            local i;
+            for i = 1, argCount do
+                DcrTimers[RefName][2][i + 1] = (select(i, ...));
+            end
+
+            DcrTimers[RefName][1] = self:ScheduleTimer (
+            function(arg)
+                T._DebugTimerRefName = RefName;
+                DcrTimers[RefName][1] = false;
+
+                if not Yielding() then -- check if we still got time to run this call
+                    FunctionRef(unpack(arg));
+                else -- we reschedule the event ASAP
+                    self:ScheduleDelayedCall(RefName, FunctionRef, 0.01, unpack(arg));
+                end
+
+                T._DebugTimerRefName = "";
+            end
+            , Delay, DcrTimers[RefName][2]
+            );
         else
-            D:Debug("Timer |cFF0066DD-replaced-|r for", RefName, "argcount:", argCount);
-            --@end-debug@]===]
+            DcrTimers[RefName][1] = self:ScheduleTimer (
+            function(arg)
+                T._DebugTimerRefName = RefName;
+                DcrTimers[RefName][1] = false;
+
+                if not Yielding() then -- check if we still got time to run this call
+                    FunctionRef(arg);
+                else -- we reschedule the event ASAP
+                    self:ScheduleDelayedCall(RefName, FunctionRef, 0.01, arg1);
+                end
+
+                T._DebugTimerRefName = "";
+            end
+            , Delay, arg1
+            );
         end
-        if not self:CancelTimer(DcrTimers[RefName][1]) then
-            self:AddDebugText("Timer cancellation failed in ScheduleDelayedCall() for", RefName);
+
+        --[===[@debug@
+    --  D:Debug('|cFFFF0000SDC:|r ACEID:|cFF00FFAA', DcrTimers[RefName][1]);
+        --@end-debug@]===]
+        return DcrTimers[RefName][1];
+    end
+
+    function D:ScheduleRepeatedCall(RefName, FunctionRef, Delay, arg)
+        if DcrTimers[RefName] and DcrTimers[RefName][1] then
+            if not self:CancelTimer(DcrTimers[RefName][1]) then
+                self:AddDebugText("Timer cancellation failed in ScheduleRepeatedCall() for", RefName);
+            end
+        end
+
+        if not DcrTimers[RefName] then
+            DcrTimers[RefName] = {};
+        end
+
+        DcrTimers[RefName][1] = self:ScheduleRepeatingTimer(FunctionRef, Delay, arg);
+
+        return DcrTimers[RefName][1];
+    end
+
+    function D:CancelDelayedCall(RefName)
+        local success = false;
+        if DcrTimers[RefName] and DcrTimers[RefName][1] then
+            local cancelHandle = DcrTimers[RefName][1];
+            success = self:CancelTimer(cancelHandle);
+
+            if success then
+                DcrTimers[RefName][1] = false;
+            else
+                self:AddDebugText("Timer cancellation failed in CancelDelayedCall() for", RefName);
+            end
+
+            return success;
+        end
+        return 0;
+    end
+
+    function D:CancelAllTimedCalls()
+        for RefName in pairs(DcrTimers) do
+            self:CancelDelayedCall(RefName);
         end
     end
 
+    function D:GetTimersInfo()
+        local AceTimer = LibStub("AceTimer-3.0");
 
-    if Delay > 30 then
-        self:AddDebugText("A delayed call for", RefName, "was requested with a very large timer:", Delay);
+        local dcrCount = 0;
+        for RefName, timer in pairs(DcrTimers) do
+            if timer[1] then
+                dcrCount = dcrCount + 1;
+                --[===[@debug@
+                self:Debug("|cff00AA00TimerRef:|r ", RefName, "ARGS:",timer[2] and unpack (timer[2]) or 'NONE', 'ACEID: |cffaa8833', timer[1], '|r', AceTimer.activeTimers[timer[1]] and 'active' or 'UNKNOWN');
+                --@end-debug@]===]
+            end
+        end
+        local libTimerCount = 0;
+        for id,timer in pairs(AceTimer.activeTimers) do
+            if timer.object == D then
+                libTimerCount = libTimerCount + 1;
+                --[===[@debug@
+                self:Debug("|cff00AA00AceRef:", id,'|r');
+                --@end-debug@]===]
+            end
+        end
+        return dcrCount, libTimerCount, Yields, LongestExecBesidesYields, LargestBatch, TimersTotalExecs;
     end
 
-    if not DcrTimers[RefName] then
-        DcrTimers[RefName] = {};
-    end
-
-    -- arg table
-    DcrTimers[RefName][2] = {arg1};
-
-    if select('#', ...) > 0 then
-
-        local i;
-        for i = 1, select('#', ...) do
-            DcrTimers[RefName][2][i + 1] = (select(i, ...));
-        end
-
-        DcrTimers[RefName][1] = self:ScheduleTimer (
-        function(arg)
-            DcrTimers[RefName][1] = false;
-            FunctionRef(unpack(arg));
-        end
-        , Delay, DcrTimers[RefName][2]
-        );
-    else
-        DcrTimers[RefName][1] = self:ScheduleTimer (
-        function(arg)
-            DcrTimers[RefName][1] = false;
-            FunctionRef(arg);
-        end
-        , Delay, arg1
-        );
-    end
-
-    return DcrTimers[RefName][1];
 end
-
-function D:ScheduleRepeatedCall(RefName, FunctionRef, Delay, arg)
-    if DcrTimers[RefName] and DcrTimers[RefName][1] then
-        if not self:CancelTimer(DcrTimers[RefName][1]) then
-            self:AddDebugText("Timer cancellation failed in ScheduleRepeatedCall() for", RefName);
-        end
-    end
-
-    if not DcrTimers[RefName] then
-        DcrTimers[RefName] = {};
-    end
-
-    DcrTimers[RefName][1] = self:ScheduleRepeatingTimer(FunctionRef, Delay, arg);
-
-    return DcrTimers[RefName][1];
-end
-
-function D:CancelDelayedCall(RefName)
-    local success = false;
-    if DcrTimers[RefName] and DcrTimers[RefName][1] then
-        local cancelHandle = DcrTimers[RefName][1];
-        success = self:CancelTimer(cancelHandle);
-
-        if success then
-            DcrTimers[RefName][1] = false;
-        else
-            self:AddDebugText("Timer cancellation failed in CancelDelayedCall() for", RefName);
-        end
-
-        return success;
-    end
-    return 0;
-end
-
-function D:CancelAllTimedCalls()
-    for RefName in pairs(DcrTimers) do
-        self:CancelDelayedCall(RefName);
-    end
-end
-
-function D:GetTimersNumber()
-    local dcrcount = 0;
-    for RefName, timer in pairs(DcrTimers) do
-        if timer[1] then
-            dcrcount = dcrcount + 1;
-        end
-    end
-    local acetimercount = 0;
-    local Acetimer = LibStub("AceTimer-3.0");
-    for table in pairs(Acetimer.selfs[D]) do
-        acetimercount = acetimercount + 1;
-    end
-    return "Dcr says: " .. dcrcount .. ", AceTimers says: " .. acetimercount;
-end
-
--- /echo LibStub("AceTimer-3.0").selfs[Dcr]
-
 
 -- function D:GetOPtionPath(info) {{{
 function D:GetOPtionPath(info)
     return table.concat(info, "->");
 end -- }}}
 
+do
+    local PlaySoundFile = _G.PlaySoundFile;
+    T._PlayingASound = false;
 
-T._LoadedFiles["Dcr_utils.lua"] = "2.7.0.5";
+    --[===[@debug@
+    local function CrashTest(path, chanel)
+        local start = debugprofilestop();
+
+        repeat
+        until debugprofilestop() - start == 1000;
+
+        return 'blah1', 'blah2';
+
+    end
+    --@end-debug@]===]
+
+    -- Play sounda on a special update execution context to avoid
+    -- crashing and leaving the program in an unknown state if WoW fails
+    -- to play the sound fast enough... ('script ran too long' add-on
+    -- breaker thingy of which I had a few report failing on the
+    -- PlaySoundFile() call)
+
+    local testTime;
+
+    local function SafePlaySoundFile(path)
+
+        if D.debug then
+            testTime = debugprofilestop();
+        end
+
+        T._PlayingASound = GetTime();
+        -- local r1, r2 = CrashTest(path, "Master");
+        local r1, r2 = PlaySoundFile(path, "Master");
+        T._PlayingASound = false;
+
+        if D.debug then
+            D:Debug('Sound played:', path, r1, r2, 'it took:', ('%0.3fms'):format(debugprofilestop() - testTime));
+        end
+    end
+
+    function D:SafePlaySoundFile(path)
+        self:ScheduleDelayedCall('PlaySoundFile', SafePlaySoundFile, 0.1, path);
+    end
+end
+
+
+T._LoadedFiles["Dcr_utils.lua"] = "2.7.4.2";

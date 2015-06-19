@@ -1,8 +1,8 @@
 --[[
 --	Gatherer Addon for World of Warcraft(tm).
 --	HUD Plugin Module
---	Version: 3.2.4 (<%codename%>)
---	Revision: $Id: GatherHUD.lua 899 2010-12-04 23:44:52Z Esamynn $
+--	Version: 5.0.0 (<%codename%>)
+--	Revision: $Id: GatherHUD.lua 1057 2012-12-10 04:13:52Z Esamynn $
 --
 --	License:
 --	This program is free software; you can redistribute it and/or
@@ -214,8 +214,8 @@ end
 
 local Gatherer_GetNodeTexture = Gatherer.Util.GetNodeTexture
 
-function lib.PlaceIcon(nodeC, nodeZ, gType, nodeIndex, x, y)
-	local tex, trim = Gatherer_GetNodeTexture(nodeC, nodeZ, gType, nodeIndex) -- Gatherer.Util.GetNodeTexture
+function lib.PlaceIcon(nodeZoneToken, gType, nodeIndex, x, y)
+	local tex, trim = Gatherer_GetNodeTexture(nodeZoneToken, gType, nodeIndex) -- Gatherer.Util.GetNodeTexture
 	
 	local nodeId = private.curNode+1
 	private.curNode = nodeId
@@ -224,6 +224,7 @@ function lib.PlaceIcon(nodeC, nodeZ, gType, nodeIndex, x, y)
 	if (not node) then
 		node = {}
 		node.tex = frame:CreateTexture("GatherHudNode"..nodeId)
+		node.tex:SetNonBlocking(true)
 		node.tex:SetWidth(get("plugin.gatherer_hud.iconsize"))
 		node.tex:SetHeight(get("plugin.gatherer_hud.iconsize"))
 		node.tex:Show();
@@ -235,8 +236,7 @@ function lib.PlaceIcon(nodeC, nodeZ, gType, nodeIndex, x, y)
 	end
 	
 	node.tex:SetTexture(tex)
-	node.c = nodeC
-	node.z = nodeZ
+	node.z = nodeZoneToken
 	node.x = x
 	node.y = y
 end
@@ -398,8 +398,8 @@ function lib.Render()
 		node:Hide()
 	end
 	if (get("plugin.gatherer_hud.party.enable")) then
-		local n_members = GetNumPartyMembers()
-		if n_members > 0 then
+		local n_members = GetNumGroupMembers()
+		if n_members > 0 and not IsInRaid() then
 			local color = get("plugin.gatherer_hud.party.color")
 			local r, g, b, a = strsplit(",", tostring(color) or "0,0,0,1")
 			r = tonumber(r) or 0
@@ -408,8 +408,8 @@ function lib.Render()
 			local partysize = get("plugin.gatherer_hud.party.size")
 		
 			local n
-			for n = 1, n_members do
-				local member_c, member_z, member_x, member_y = Astrolabe:GetUnitPosition("party"..n, false)
+			for n = 1, n_members-1 do
+				local member_c, member_z, member_x, member_y = Astrolabe:GetUnitPosition("party"..n, true)
 		
 				if member_x and member_y then
 					dx = (member_x - px) * xScale

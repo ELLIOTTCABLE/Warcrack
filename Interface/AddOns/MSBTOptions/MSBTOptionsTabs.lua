@@ -36,6 +36,9 @@ local fonts = MSBTMedia.fonts
 -- Private constants.
 -------------------------------------------------------------------------------
 
+-- Prevent tainting global _.
+local _
+
 local DEFAULT_PROFILE_NAME = "Default"
 local DEFAULT_FONT_NAME = L.DEFAULT_FONT_NAME
 local DEFAULT_SCROLL_AREA = "Notification"
@@ -167,7 +170,7 @@ end
 -- ****************************************************************************
 -- Validates the passed custom font path.
 -- ****************************************************************************
-local function MediaTab_ValidateCustomFontPath(fontPath)
+local function MediaTab_ValidateCustomFontPath(fontPath, _, callback)
  if (not fontPath or fontPath == "") then return L.MSG_INVALID_CUSTOM_FONT_PATH end
  local fontPathLower = string.lower(fontPath)
  if (not string.find(fontPathLower, ".ttf")) then return L.MSG_INVALID_CUSTOM_FONT_PATH end
@@ -176,24 +179,44 @@ local function MediaTab_ValidateCustomFontPath(fontPath)
  local normalFontPath, normalFontSize = GameFontNormal:GetFont()
  if (fontPathLower == string.lower(normalFontPath)) then return end
 
+ -- This section is a bit hacky.  First, it seems that in order for a new font
+ -- instance to take effect the text must be changed after setting it.  This
+ -- was not always case, but appears to be now.  Next, the SetFont function now
+ -- returns before the font is actually set.  It appears to be loaded async now.
+ -- So, when a failing ttf is provided, setup a callback to give the font a
+ -- chance to load before checking it again.
  validationFontString:SetFont(normalFontPath, normalFontSize)
+ validationFontString:SetText("")
  if (not string.find(fontPath, "\\", 1, true)) then fontPath = DEFAULT_FONT_PATH .. fontPath end
- validationFontString:SetFont(fontPath, normalFontSize, "MONOCHROME")
- if (validationFontString:GetFont() == normalFontPath) then return L.MSG_UNABLE_TO_SET_FONT end
+ validationFontString:SetFont(fontPath, normalFontSize, "")
+ validationFontString:SetText("Test")
+ if (validationFontString:GetFont() == normalFontPath) then
+  -- Setup a callback which checks the font path again after half a second and
+  -- in turn calls the validate callback which updates the input box's error
+  -- label and OK button.
+  MSBTOptions.Main.ScheduleCallback(0.5,
+   function ()
+    local message
+    if (validationFontString:GetFont() == normalFontPath) then message = L.MSG_UNABLE_TO_SET_FONT end
+    callback(message)
+   end
+  )
+  return L.MSG_TESTING_FONT
+ end
 end
 
 
 -- ****************************************************************************
 -- Validates the passed custom font name and path.
 -- ****************************************************************************
-local function MediaTab_ValidateCustomFont(fontName, fontPath)
+local function MediaTab_ValidateCustomFont(fontName, fontPath, callback)
  if (not fontName or fontName == "") then return L.MSG_INVALID_CUSTOM_FONT_NAME end
 
  for name in pairs(MSBTMedia.fonts) do
   if (name == fontName) then return L.MSG_FONT_NAME_ALREADY_EXISTS end
  end
  
- return MediaTab_ValidateCustomFontPath(fontPath)
+ return MediaTab_ValidateCustomFontPath(fontPath, nil, callback)
 end
 
 
@@ -259,7 +282,7 @@ local function MediaTab_EditCustomFontSettingsButtonOnClick(this)
   local fontPath = MSBTProfiles.savedMedia.fonts[fontKey]
   fontPath = string.gsub(fontPath, DEFAULT_FONT_PATH, "")
 
-  objLocale = L.EDITBOXES["customFontPath"]
+  local objLocale = L.EDITBOXES["customFontPath"]
   EraseTable(configTable)
   configTable.defaultText = fontPath
   configTable.editboxLabel = objLocale.label
@@ -285,8 +308,8 @@ local function MediaTab_CreateCustomFontLine(this)
  frame:EnableMouse(false)
  
  -- Delete custom font button. 
- button = MSBTControls.CreateIconButton(frame, "Delete")
- objLocale = L.BUTTONS["deleteCustomFont"]
+ local button = MSBTControls.CreateIconButton(frame, "Delete")
+ local objLocale = L.BUTTONS["deleteCustomFont"]
  button:SetTooltip(objLocale.tooltip)
  button:SetPoint("RIGHT", frame, "RIGHT", -10, 0)
  button:SetClickHandler(MediaTab_DeleteCustomFontButtonOnClick)
@@ -302,7 +325,7 @@ local function MediaTab_CreateCustomFontLine(this)
  controls[#controls+1] = button
 
  -- Font name font string.
- fontString = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+ local fontString = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
  fontString:SetPoint("LEFT", frame, "LEFT", 10, 0)
  fontString:SetJustifyH("LEFT")
  fontString:SetWidth(130)
@@ -427,7 +450,7 @@ local function MediaTab_EditCustomSoundSettingsButtonOnClick(this)
   local soundPath = MSBTProfiles.savedMedia.sounds[soundKey]
   soundPath = string.gsub(soundPath, DEFAULT_SOUND_PATH, "")
 
-  objLocale = L.EDITBOXES["customSoundPath"]
+  local objLocale = L.EDITBOXES["customSoundPath"]
   EraseTable(configTable)
   configTable.defaultText = soundPath
   configTable.editboxLabel = objLocale.label
@@ -453,8 +476,8 @@ local function MediaTab_CreateCustomSoundLine(this)
  frame:EnableMouse(false)
  
  -- Delete custom sound button. 
- button = MSBTControls.CreateIconButton(frame, "Delete")
- objLocale = L.BUTTONS["deleteCustomSound"]
+ local button = MSBTControls.CreateIconButton(frame, "Delete")
+ local objLocale = L.BUTTONS["deleteCustomSound"]
  button:SetTooltip(objLocale.tooltip)
  button:SetPoint("RIGHT", frame, "RIGHT", -10, 0)
  button:SetClickHandler(MediaTab_DeleteCustomSoundButtonOnClick)
@@ -605,6 +628,9 @@ local function MediaTab_Create()
 
  -- Font path validation font string.
  local fontString = tabFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+ fontString:SetPoint("BOTTOMRIGHT", tabFrame, "BOTTOMRIGHT", 0, 0)
+ fontString:SetText("Test")
+ fontString:SetAlpha(0)
  tabFrame.fontPathValidationFontString = fontString
  
  tabFrame.created = true
@@ -1238,7 +1264,7 @@ local function ScrollAreasTab_CreateLine(this)
  controls[#controls+1] = checkbox
 
  -- Delete scroll area button. 
- button = MSBTControls.CreateIconButton(frame, "Delete")
+ local button = MSBTControls.CreateIconButton(frame, "Delete")
  objLocale = L.BUTTONS["deleteScrollArea"]
  button:SetTooltip(objLocale.tooltip)
  button:SetPoint("RIGHT", frame, "RIGHT", -10, 0)
@@ -1546,10 +1572,16 @@ local function EventsTab_SetupEvents()
  EventsTab_AddEvent(category, "NOTIFICATION_COMBAT_LEAVE", "")
  EventsTab_AddEvent(category, "NOTIFICATION_POWER_GAIN", c.ENERGY_AMOUNT .. c.POWER_TYPE .. c.SKILL_NAME .. c.SKILL_LONG)
  EventsTab_AddEvent(category, "NOTIFICATION_POWER_LOSS", c.ENERGY_AMOUNT .. c.POWER_TYPE .. c.SKILL_NAME .. c.SKILL_LONG)
+ EventsTab_AddEvent(category, "NOTIFICATION_ALT_POWER_GAIN", c.ENERGY_AMOUNT .. c.POWER_TYPE .. c.SKILL_NAME .. c.SKILL_LONG)
+ EventsTab_AddEvent(category, "NOTIFICATION_ALT_POWER_LOSS", c.ENERGY_AMOUNT .. c.POWER_TYPE .. c.SKILL_NAME .. c.SKILL_LONG)
+ EventsTab_AddEvent(category, "NOTIFICATION_CHI_CHANGE", c.CHI_AMOUNT)
+ EventsTab_AddEvent(category, "NOTIFICATION_CHI_FULL", c.CHI_AMOUNT)
  EventsTab_AddEvent(category, "NOTIFICATION_CP_GAIN", c.CP_AMOUNT)
  EventsTab_AddEvent(category, "NOTIFICATION_CP_FULL", c.CP_AMOUNT)
  EventsTab_AddEvent(category, "NOTIFICATION_HOLY_POWER_CHANGE", c.HOLY_POWER_AMOUNT)
- EventsTab_AddEvent(category, "NOTIFICATION_HOLY_POWER_FULL", c.HOLY_POWER__AMOUNT)
+ EventsTab_AddEvent(category, "NOTIFICATION_HOLY_POWER_FULL", c.HOLY_POWER_AMOUNT)
+ EventsTab_AddEvent(category, "NOTIFICATION_SHADOW_ORBS_CHANGE", c.SHADOW_ORBS_AMOUNT)
+ EventsTab_AddEvent(category, "NOTIFICATION_SHADOW_ORBS_FULL", c.SHADOW_ORBS_AMOUNT)
  EventsTab_AddEvent(category, "NOTIFICATION_HONOR_GAIN", c.HONOR_AMOUNT)
  EventsTab_AddEvent(category, "NOTIFICATION_REP_GAIN", c.REP_AMOUNT)
  EventsTab_AddEvent(category, "NOTIFICATION_REP_LOSS", c.REP_AMOUNT)
@@ -1762,8 +1794,8 @@ local function EventsTab_CreateLine(this)
  controls[#controls+1] = checkbox
  
  -- Event settings button. 
- button = MSBTControls.CreateIconButton(frame, "Configure")
- objLocale = L.BUTTONS["eventSettings"]
+ local button = MSBTControls.CreateIconButton(frame, "Configure")
+ local objLocale = L.BUTTONS["eventSettings"]
  button:SetTooltip(objLocale.tooltip)
  button:SetPoint("RIGHT", frame, "RIGHT", -10, 0)
  button:SetClickHandler(EventsTab_SettingsButtonOnClick)
@@ -1826,7 +1858,7 @@ local function EventsTab_Create()
 
  -- Move all button.
  local button = MSBTControls.CreateOptionButton(tabFrame)
- objLocale = L.BUTTONS["moveAll"]
+ local objLocale = L.BUTTONS["moveAll"]
  button:Configure(15, objLocale.label, objLocale.tooltip)
  button:SetPoint("BOTTOMLEFT", texture, "TOPLEFT", 5, 5)
  button:SetClickHandler(
@@ -2161,7 +2193,7 @@ local function TriggersTab_CreateLine(this)
  controls[#controls+1] = checkbox
  
  -- Delete trigger button. 
- button = MSBTControls.CreateIconButton(frame, "Delete")
+ local button = MSBTControls.CreateIconButton(frame, "Delete")
  objLocale = L.BUTTONS["deleteTrigger"]
  button:SetTooltip(objLocale.tooltip)
  button:SetPoint("RIGHT", frame, "RIGHT", -10, 0)
@@ -2327,10 +2359,10 @@ local function SpamTab_Create()
 
  -- Heal threshold slider.
  local slider = MSBTControls.CreateSlider(tabFrame)
- objLocale = L.SLIDERS["healThreshold"]
+ local objLocale = L.SLIDERS["healThreshold"]
  slider:Configure(150, objLocale.label, objLocale.tooltip)
  slider:SetPoint("TOPLEFT", tabFrame, "TOPLEFT", 5, -10)
- slider:SetMinMaxValues(0, 10000)
+ slider:SetMinMaxValues(0, 100000)
  slider:SetValueStep(100)
  slider:SetValueChangedHandler(
    function(this, value)
@@ -2344,7 +2376,7 @@ local function SpamTab_Create()
  objLocale = L.SLIDERS["damageThreshold"]
  slider:Configure(150, objLocale.label, objLocale.tooltip)
  slider:SetPoint("TOPLEFT", controls.healSlider, "BOTTOMLEFT", 0, -10)
- slider:SetMinMaxValues(0, 10000)
+ slider:SetMinMaxValues(0, 100000)
  slider:SetValueStep(100)
  slider:SetValueChangedHandler(
    function(this, value)
@@ -2410,7 +2442,7 @@ local function SpamTab_Create()
  controls.powerThrottlingSlider = slider
  
  -- Hide skills checkbox.
- checkbox = MSBTControls.CreateCheckbox(tabFrame)
+ local checkbox = MSBTControls.CreateCheckbox(tabFrame)
  objLocale = L.CHECKBOXES["hideSkills"]
  checkbox:Configure(28, objLocale.label, objLocale.tooltip)
  checkbox:SetPoint("TOPLEFT", tabFrame, "TOPLEFT", 5, -130)
@@ -2505,9 +2537,33 @@ local function SpamTab_Create()
    end
  )
  controls.mergeSwingsCheckbox = checkbox
- 
+
+ -- Shorten numbers checkbox
+ checkbox = MSBTControls.CreateCheckbox(tabFrame)
+ objLocale = L.CHECKBOXES["shortenNumbers"]
+ checkbox:Configure(28, objLocale.label, objLocale.tooltip)
+ checkbox:SetPoint("TOPLEFT", controls.mergeSwingsCheckbox, "BOTTOMLEFT", 0, 0)
+ checkbox:SetClickHandler(
+   function (this, isChecked)
+    MSBTProfiles.SetOption(nil, "shortenNumbers", isChecked)
+   end
+ )
+ controls.shortenNumbersCheckbox = checkbox
+
+ -- Group numbers by thousands checkbox
+ checkbox = MSBTControls.CreateCheckbox(tabFrame)
+ objLocale = L.CHECKBOXES["groupNumbers"]
+ checkbox:Configure(28, objLocale.label, objLocale.tooltip)
+ checkbox:SetPoint("TOPLEFT", controls.shortenNumbersCheckbox, "BOTTOMLEFT", 0, 0)
+ checkbox:SetClickHandler(
+   function (this, isChecked)
+    MSBTProfiles.SetOption(nil, "groupNumbers", isChecked)
+   end
+ )
+ controls.groupNumbersCheckbox = checkbox
+
  -- Merge exclusions button.
- button = MSBTControls.CreateOptionButton(tabFrame)
+ local button = MSBTControls.CreateOptionButton(tabFrame)
  objLocale = L.BUTTONS["mergeExclusions"]
  button:Configure(20, objLocale.label, objLocale.tooltip)
  button:SetPoint("BOTTOMLEFT", tabFrame, "BOTTOMLEFT", 5, 15)
@@ -2630,6 +2686,8 @@ local function SpamTab_OnShow()
  controls.allPowerCheckbox:SetChecked(currentProfile.showAllPowerGains)
  controls.abbreviateCheckbox:SetChecked(currentProfile.abbreviateAbilities)
  controls.mergeSwingsCheckbox:SetChecked(not currentProfile.mergeSwingsDisabled)
+ controls.shortenNumbersCheckbox:SetChecked(currentProfile.shortenNumbers)
+ controls.groupNumbersCheckbox:SetChecked(currentProfile.groupNumbers)
  controls.hideSkillsCheckbox:SetChecked(currentProfile.hideSkills)
  controls.hideNamesCheckbox:SetChecked(currentProfile.hideNames)
  controls.hideFullOverhealsCheckbox:SetChecked(currentProfile.hideFullOverheals)
@@ -3408,7 +3466,7 @@ local function LootAlertsTab_Create()
 
  -- Item quality checkboxes.
  local anchor = fontString
- for quality = ITEM_QUALITY_POOR, ITEM_QUALITY_EPIC do
+ for quality = LE_ITEM_QUALITY_POOR, LE_ITEM_QUALITY_EPIC do
   local checkbox = MSBTControls.CreateCheckbox(tabFrame)
   local label = _G["ITEM_QUALITY" .. quality .. "_DESC"]
   local color = ITEM_QUALITY_COLORS[quality]
@@ -3513,7 +3571,7 @@ local function LootAlertsTab_OnShow()
  tabFrame.moneyGainsFontString:SetText(eventSettings.message)
 
  -- Item qualities.
- for quality = ITEM_QUALITY_POOR, ITEM_QUALITY_EPIC do
+ for quality = LE_ITEM_QUALITY_POOR, LE_ITEM_QUALITY_EPIC do
   controls["quality" .. quality .. "Checkbox"]:SetChecked(not currentProfile.qualityExclusions[quality])
  end
  

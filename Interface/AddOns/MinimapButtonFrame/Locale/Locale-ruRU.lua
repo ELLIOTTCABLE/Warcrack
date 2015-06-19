@@ -124,6 +124,9 @@ L["GATHERDESC2_DESC"] = "Настройки кнопок Blizzard у мини-к
 L["Collect Buttons"] = "Собрать кнопки Blizzard"
 L["COLLECT2_DESC"] = "Собирает кнопки Blizzard у мини-карты."
 
+L["Exclude Queue Button"] = "Исключить очереди кнопки"
+L["ExcludeLFG_DESC"] = "Исключить кнопки состояния очереди"
+
 L["Hide Mail"] = "Скрыть иконку почты"
 L["HIDEMAIL_DESC"] = "Скрыть иконку почты."
 

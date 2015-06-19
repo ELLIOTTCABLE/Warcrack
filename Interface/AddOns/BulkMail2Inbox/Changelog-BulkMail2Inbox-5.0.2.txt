@@ -1,0 +1,27 @@
+------------------------------------------------------------------------
+r140 | dhedbor | 2014-10-18 18:52:46 +0000 (Sat, 18 Oct 2014) | 1 line
+Changed paths:
+   A /tags/5.0.2 (from /trunk:139)
+
+Tagging as 5.0.2
+------------------------------------------------------------------------
+r139 | dhedbor | 2014-10-18 18:52:32 +0000 (Sat, 18 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/BulkMail2Inbox.toc
+   M /trunk/BulkMailInbox.lua
+
+Fixed bug with 'take all money'.
+------------------------------------------------------------------------
+r137 | dhedbor | 2014-10-17 06:07:57 +0000 (Fri, 17 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/BulkMail2Inbox.toc
+   M /trunk/BulkMailInbox.lua
+
+Toc update, remove empty 'postmaster' mails.
+------------------------------------------------------------------------
+r135 | dhedbor | 2014-07-08 18:42:55 +0000 (Tue, 08 Jul 2014) | 1 line
+Changed paths:
+   M /trunk/BulkMail2Inbox.toc
+
+Toc bump
+------------------------------------------------------------------------

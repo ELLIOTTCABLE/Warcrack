@@ -1,0 +1,166 @@
+------------------------------------------------------------------------
+r160 | thaoky | 2015-05-08 16:43:25 +0000 (Fri, 08 May 2015) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Altoholic.lua
+   M /trunk/Altoholic.toc
+   M /trunk/Altoholic.xml
+   D /trunk/AltoholicTemplates.lua
+   D /trunk/AltoholicTemplates.xml
+   M /trunk/Core.lua
+   M /trunk/Frames/TabOptions.lua
+   M /trunk/Locales/repoenUS.lua
+   M /trunk/Modules/Altoholic_Achievements/Achievements.lua
+   M /trunk/Modules/Altoholic_Achievements/TabAchievements.lua
+   M /trunk/Modules/Altoholic_Achievements/TabAchievements.xml
+   M /trunk/Modules/Altoholic_Agenda/TabAgenda.lua
+   M /trunk/Modules/Altoholic_Characters/TabCharacters.lua
+   M /trunk/Modules/Altoholic_Characters/TabCharacters.xml
+   M /trunk/Modules/Altoholic_Grids/Grid_Archeology.lua
+   M /trunk/Modules/Altoholic_Grids/Grid_Currencies.lua
+   M /trunk/Modules/Altoholic_Grids/Grid_Dungeons.lua
+   M /trunk/Modules/Altoholic_Grids/Grid_FollowerAbilities.lua
+   M /trunk/Modules/Altoholic_Grids/Grid_GarrisonArchitect.lua
+   M /trunk/Modules/Altoholic_Grids/Grid_GarrisonFollowers.lua
+   M /trunk/Modules/Altoholic_Grids/Grid_Mounts.lua
+   M /trunk/Modules/Altoholic_Grids/Grid_Reputations.lua
+   M /trunk/Modules/Altoholic_Grids/Grid_Tradeskills.lua
+   M /trunk/Modules/Altoholic_Grids/TabGrids.lua
+   M /trunk/Modules/Altoholic_Grids/TabGrids.xml
+   M /trunk/Modules/Altoholic_Guild/Frames/GuildBank.lua
+   M /trunk/Modules/Altoholic_Summary/AccountSummary.lua
+   M /trunk/Modules/Altoholic_Summary/AccountSummary.xml
+   M /trunk/Modules/Altoholic_Summary/Characters.lua
+   M /trunk/Modules/Altoholic_Summary/TabSummary.lua
+   M /trunk/Modules/Altoholic_Summary/TabSummary.xml
+   D /trunk/ScrollFrames.lua
+   D /trunk/ScrollFrames.xml
+   A /trunk/Templates
+   A /trunk/Templates/Button.xml
+   A /trunk/Templates/ClassExtensions.lua
+   A /trunk/Templates/ClassIcon.lua
+   A /trunk/Templates/ClassIcon.xml
+   A /trunk/Templates/ClassIconsContainer.lua
+   A /trunk/Templates/ClassIconsContainer.xml
+   A /trunk/Templates/DropDownMenu.lua
+   A /trunk/Templates/DropDownMenu.xml
+   A /trunk/Templates/Frame.lua
+   A /trunk/Templates/ScrollFrames.lua
+   A /trunk/Templates/ScrollFrames.xml
+   A /trunk/Templates/SortButton.lua
+   A /trunk/Templates/SortButton.xml
+   A /trunk/Templates/SortButtonsContainer.lua
+   A /trunk/Templates/SortButtonsContainer.xml
+   A /trunk/Templates/ToggleButton.lua
+   A /trunk/Templates/ToggleButton.xml
+   A /trunk/Templates/UITemplates.xml
+   M /trunk/changelog.txt
+
+6.1.006 Commit
+------------------------------------------------------------------------
+r159 | thaoky | 2015-04-20 08:38:04 +0000 (Mon, 20 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/Altoholic.lua
+   M /trunk/Altoholic.toc
+   M /trunk/Altoholic.xml
+   A /trunk/AltoholicTemplates.lua
+   M /trunk/AltoholicTemplates.xml
+   M /trunk/Core.lua
+   M /trunk/Frames/AccountSharing.xml
+   M /trunk/Frames/TabOptions.lua
+   M /trunk/Frames/TabOptions.xml
+   M /trunk/Modules/Altoholic_Achievements/Achievements.lua
+   M /trunk/Modules/Altoholic_Achievements/Achievements.xml
+   M /trunk/Modules/Altoholic_Achievements/TabAchievements.lua
+   M /trunk/Modules/Altoholic_Achievements/TabAchievements.xml
+   M /trunk/Modules/Altoholic_Agenda/Frames/Calendar.lua
+   M /trunk/Modules/Altoholic_Agenda/Frames/Calendar.xml
+   M /trunk/Modules/Altoholic_Agenda/Frames/Contacts.xml
+   M /trunk/Modules/Altoholic_Characters/Frames/AuctionHouse.lua
+   M /trunk/Modules/Altoholic_Characters/Frames/AuctionHouse.xml
+   M /trunk/Modules/Altoholic_Characters/Frames/Containers.lua
+   M /trunk/Modules/Altoholic_Characters/Frames/Containers.xml
+   M /trunk/Modules/Altoholic_Characters/Frames/Garrisons.lua
+   M /trunk/Modules/Altoholic_Characters/Frames/Garrisons.xml
+   M /trunk/Modules/Altoholic_Characters/Frames/Mails.lua
+   M /trunk/Modules/Altoholic_Characters/Frames/Mails.xml
+   M /trunk/Modules/Altoholic_Characters/Frames/Quests.lua
+   M /trunk/Modules/Altoholic_Characters/Frames/Quests.xml
+   M /trunk/Modules/Altoholic_Characters/Frames/Recipes.lua
+   M /trunk/Modules/Altoholic_Characters/Frames/Recipes.xml
+   M /trunk/Modules/Altoholic_Characters/TabCharacters.lua
+   M /trunk/Modules/Altoholic_Characters/TabCharacters.xml
+   M /trunk/Modules/Altoholic_Grids/Grids.xml
+   M /trunk/Modules/Altoholic_Grids/TabGrids.lua
+   M /trunk/Modules/Altoholic_Grids/TabGrids.xml
+   M /trunk/Modules/Altoholic_Guild/Frames/GuildMembers.lua
+   M /trunk/Modules/Altoholic_Guild/Frames/GuildMembers.xml
+   M /trunk/Modules/Altoholic_Guild/TabGuild.lua
+   M /trunk/Modules/Altoholic_Guild/TabGuild.xml
+   M /trunk/Modules/Altoholic_Search/Search.lua
+   M /trunk/Modules/Altoholic_Search/Search.xml
+   M /trunk/Modules/Altoholic_Search/TabSearch.lua
+   M /trunk/Modules/Altoholic_Search/TabSearch.xml
+   M /trunk/Modules/Altoholic_Summary/AccountSummary.lua
+   M /trunk/Modules/Altoholic_Summary/AccountSummary.xml
+   M /trunk/Modules/Altoholic_Summary/Characters.lua
+   M /trunk/Modules/Altoholic_Summary/TabSummary.lua
+   M /trunk/Modules/Altoholic_Summary/TabSummary.xml
+   M /trunk/ScrollFrames.lua
+   M /trunk/ScrollFrames.xml
+   M /trunk/changelog.txt
+
+6.1.005 Commit
+------------------------------------------------------------------------
+r158 | thaoky | 2015-04-11 17:35:51 +0000 (Sat, 11 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/Frames/TabOptions.lua
+   M /trunk/Frames/TabOptions.xml
+   M /trunk/Locales/repoenUS.lua
+   M /trunk/Modules/Altoholic_Search/Search.lua
+   M /trunk/Modules/Altoholic_Summary/AccountSummary.lua
+   M /trunk/Tooltip.lua
+   M /trunk/changelog.txt
+
+6.1.004 Commit
+------------------------------------------------------------------------
+r157 | thaoky | 2015-04-07 17:16:23 +0000 (Tue, 07 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/Modules/Altoholic_Grids/Grid_Dungeons.lua
+   M /trunk/Modules/Altoholic_Summary/AccountSummary.lua
+   M /trunk/changelog.txt
+
+6.1.003 Commit
+------------------------------------------------------------------------
+r156 | thaoky | 2015-04-06 15:50:21 +0000 (Mon, 06 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/Altoholic.lua
+   M /trunk/Altoholic.xml
+   M /trunk/AltoholicTemplates.xml
+   M /trunk/Comm.lua
+   M /trunk/Core.lua
+   M /trunk/Events.lua
+   M /trunk/Modules/Altoholic_Characters/TabCharacters.lua
+   M /trunk/Modules/Altoholic_Grids/Grids.xml
+   M /trunk/Modules/Altoholic_Summary/AccountSummary.lua
+   M /trunk/Modules/Altoholic_Summary/AccountSummary.xml
+   D /trunk/Modules/Altoholic_Summary/Activity.lua
+   D /trunk/Modules/Altoholic_Summary/Activity.xml
+   M /trunk/Modules/Altoholic_Summary/Altoholic_Summary.toc
+   D /trunk/Modules/Altoholic_Summary/BagUsage.lua
+   D /trunk/Modules/Altoholic_Summary/BagUsage.xml
+   M /trunk/Modules/Altoholic_Summary/Characters.lua
+   D /trunk/Modules/Altoholic_Summary/Currencies.lua
+   D /trunk/Modules/Altoholic_Summary/Currencies.xml
+   D /trunk/Modules/Altoholic_Summary/GarrisonFollowers.lua
+   D /trunk/Modules/Altoholic_Summary/GarrisonFollowers.xml
+   D /trunk/Modules/Altoholic_Summary/Skills.lua
+   D /trunk/Modules/Altoholic_Summary/Skills.xml
+   M /trunk/Modules/Altoholic_Summary/TabSummary.lua
+   M /trunk/Modules/Altoholic_Summary/TabSummary.xml
+   M /trunk/changelog.txt
+
+6.1.002 Commit
+------------------------------------------------------------------------

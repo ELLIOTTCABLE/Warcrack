@@ -3,10 +3,386 @@ Altoholic Changelog (dates in dd/mm/yyyy)
 
 Join the #altoholic IRC channel on Freenode : irc://irc.freenode.net:6667/
 
-IMPORTANT NOTE: If you're upgrading from 3.x :
+IMPORTANT NOTE: As with every new expansion, many things have changed in the API, and it is REQUIRED to clear your Saved Variables for the addon.
+This means cleaning the following files in \WTF\Account\<your_account>\SavedVariables : Altoholic.lua & All DataStore*.lua
 
-- Make sure you delete the addon's databases in SavedVariables. ie: Altoholic.lua and all DataStore*.lua.
-- Make sure to delete the old addon directories (Altoholic & all DataStore modules) as many files have changed/moved. A patch like this one is always a good opportunity for a fresh install.
+There WILL be bugs if you use your old files without cleaning them first. 
+Some fixes to work around API changes are too time consuming, so cleaning is required. A meager price to pay once per expansion.
+
+6.1.006 (08/05/2015)
+
+- Updated list of archaeology projects with WoD projects. I apparently messed up and lost the file that contained the update in 6.1.001, it's now ok.
+- Moved several UI templates to their own folder.
+- Completely rewrote the Blizzard's DropDownMenu widget to use my own version. 
+I was tired of some of the constraints of their implementation, and of the loss of time it caused me every time I wanted to use one.
+So I invested some time in making it my way.
+- Account Summary -> The amount of uncollected garrison resources now appears in yellow when resources exceed 300, and in red when they exceed 450.
+- Account Summary -> Added icons with drop-down menus to filter your list of alts by faction, level, profession and class.
+- Account Summary -> Fixed the expand/collapse button that did not work anymore after the complete rewrite of the pane.
+- Achievements lists updated ! (Thanks Bluemage29 for your help !!)
+- Fixed a Lua error when viewing the Guild tab with an character not in a guild.
+
+6.1.005 (20/04/2015)
+
+- The garrison mission tooltip now shows a red exclamation mark '!' when no missions are active.
+- In the account summary, the last column used to sort the view is now remembered, and is restored when you log in again.
+- Character's tab: fixed a lua error when mousing over the professions' icon of a character that does not have 2 professions.
+- Account Summary: modified the garrison followers pane to show followers at iLvl 675 and a column for their weapon/armor iLvl.
+
+6.1.004 (11/04/2015)
+
+- Fixed sorting the account summary by "Last Online" where the order was sometimes incorrect.
+- Added an option to show the tooltip counters without details (no 'equipped', 'bank', ..). Disabled by default.
+- No longer wiping the list of followers before scanning them.
+- Added a tooltip to the garrison resources in the account summary, it now shows when resources were last collected, and when you will reach the maximum of uncollected resources.
+- Fixed incorrect tooltip after multiple searches in the search tab.
+- DataStore_Garrisons: Some clean-up to properly report active missions.
+- The garrison mission tooltip that shows a '*' when missions are complete now shows it in red if all active missions are complete.
+
+6.1.003 (07/04/2015)
+
+REMINDER: If you are looking for a free Heroes of the Storm Beta key for the European Region, you should check the comments section on Curse & WoW Inteface.. I still have a few keys to give away.
+
+- Fixed a few lua errors in the account summary tab.
+- Added Draenor LFR dungeons to the Grids->Dungeon Finder pane.
+
+6.1.002 (06/04/2015)
+
+- Updated scanning of currencies (honor points), total no longer needs to be divided by 100 since 6.1.
+- Updated the garrison followers pane in the account summary to show followers with an iLvl greater than 660.
+- DataStore Characters: updated GetRestXPRate() to account for Pandaren extra rest xp.
+- Fixed Auction House scanning, and cleaning of expired auctions.
+- The summary tab has been fully rewritten so that all 6 panes use the same frames. 
+This will make the addition of future content much easier. 
+Some new features here and there while I was at it (quality of life improvements mostly), I'll let you discover them :)
+This is an update I wanted to do for a long time, and there are more things planned (more filters).. the other tabs will get an update too.
+
+
+6.1.001 (25/02/2015)
+
+- Added support for Garrison missions ! Warnings are not in yet, but available and active missions are now visible in the characters' tab.
+Note: Active missions can only be correctly tracked if the mission is started with this version of Altoholic, so currently active missions will be visible, but their expiration will not. Sorry, this info is not provided by the game, I have to "manually" keep track of it.
+- Fixed the spam of mail expiry warnings, this time for good (hopefully ! feedback appreciated on this one!).
+- Now refreshing the follower's pane immediately when the followers' list is updated.
+- Updated list of followers not recruited at the inn.
+- Updated list of archaeology projects with WoD projects.
+- Cleaned up the .pkgmeta of DataStore modules, my sources tell me this should prevent some problems with the Curse Client :) (Thanks Myrroddin !)
+- Removed "already known/could be learned by" information from tooltips for companions, as they have been account-wide for a while.
+- More code cleanup.
+
+Note: I made several attempts at fixing the double guild bank counters in the tooltip, thanks to all of you who sent me their SV files, the issue is now clear.
+Nevertheless, a complete perfect fix is not yet possible, as Blizzard does not provide the real/full realm name to which the guild actually belongs.
+The best I can get in my case is "MarécagedeZangar" when I actually expect "Marécage de Zangar", and that value is nowhere to be found in the API.
+Long story short, I have to come up with a way to work around this that does not force you guys to respect weird conditions to make it work..
+
+
+6.0.004 (09/01/2015)
+
+A massive code cleanup was performed, it should be mostly transparent for all of you, but code maintenance will be greatly improved for me.
+I also simplified a lot of XML frames with new conventions that Blizzard had activated certainly a while ago, but that I never had time to change.
+It's not finished, but it's a step in the right direction :)
+
+- Many options were not saved correctly, this has been fixed, as a result, these options have been reset (tooltip options, etc..)
+This options bug had, among others, impact on the account sharing feature that couldn't be launched anymore, Thanks Elfana for helping me on this !
+- DataStore_Garrisons: Fixed scanning collection of garrison cache resources. It could occasionally be wrongly reset when getting resources from other sources.
+- DataStore_Garrisons: Followers are now stored based on their id's, instead of their names. You will have to check your missions' table again with your alts to update follower information.
+- DataStore_Garrisons: added a slider to configure when the reporting for uncollected resources should happen (350 -> 475)
+- Grids -> Garrison Followers: added a drop down list to filter followers on whether they are collected, not collected, and if they were recruited at the inn or not.
+- Garrison blueprints now appear in red if already known, I applied the same rule as for BOP recipes from Garrison trainers, thus any BOP item with "Already known" will appear red in a merchant frame.
+- DataStore_Agenda: fixed another Lua error at logon introduced with previous fix. (Thanks again SpareSimian!)
+- DataStore_Mails: added an option to report mails about to expire to the chat frame, in addition to the already existing dialog box. This will allow you to see on which alt the mail can be found. Please keep me informed if you detect real bugs thanks to this.
+
+6.0.003 (27/12/2014)
+
+- DataStore_Garrisons: fixed a bug where saved buildings are deleted from the DB.
+- Added tracking of uncollected garrison resources. They can be seen in the currency pane of the account summary.
+- Added a warning when uncollected garrison resources are >400 on a given alt. There is an option to disable this warning if you want to.
+- Added Garrison-related achievements, now listed in a proper way in the achievements' tab.
+- Checked recipes that kept appearing in green at garrison trainers.. there was no bug actually, recipes stayed green because they could be learned by other alts.
+What I did instead is to check if a recipe is BOP. If it is BOP, and already known, it will appear in red.
+- Removed mounts from the addon, as they have been account-wide for a while now. The icon is still there as a placeholder in the grids tab though.
+- DataStore_Pets: removed all mount-related functions and data tables.
+- DataStore_Mails: fixed a bug where the addon kept complaining about old mails about to expire. This one is long overdue, thanks to Wispor and Elfana for helping me on this one !
+- Fixed "Player not found" message. (Bug 779 / Thanks Phinar !)
+- DataStore_Achievements: fixed an error caused by achievements with invalid id (as returned by the game's API). (Bug 792 / Thanks SpareSimian)
+- DataStore_Agenda: fixed a Lua error at logon. (Bug 792 also / Thanks SpareSimian)
+
+6.0.002 (24/12/2014)
+
+Seven Year Anniversary Edition.
+
+Today is the seventh birthday of Altoholic, and I wanted to take a moment to thank the community for its patience and support.
+2013 was a difficult year on a personal level, and 2014 was extremely busy at work. 
+As you have all seen, the amount and the pace of releases was not the best in these last 2 years, nevertheless, I remain committed to keep the addon alive, even if it will sometimes be on a "best effort" basis.
+
+I had originally planned to make a release a bit earlier, but life came in the way, and truth be told, it's not a bad thing that the release happens today, as the last time I actually made a release close to the addon's birthday was for the 2-year anniversary.
+
+To celebrate this wonderful day, I am releasing the first garrison-related features, it's not much, but it's a step in the right direction. I hope you'll enjoy it.
+
+I will be peacefully resting at home for the next 2-3 weeks with some spare time on my hands though, and I intend to work on garrison missions + resources, and also on several fixes that are long overdue.
+
+Enough said.. let me finish by wishing you all the best for 2015, for you and your families, and of course for all your alts :)
+
+.. on to the changelog !
+
+- New DataStore module : DataStore_Garrisons ! 
+Note: You have to visit the missions table to scan followers, it doesn't work otherwise.
+- Grids tab: added a pane for Garrison followers.
+- Grids tab: added a pane for Garrison buildings.
+- DataStore_Containers: now scanning the reagent bank at logon.
+- Account Summary : updated the "currency" pane to remove valor and justice tokens, and replace them with garrison resources, apexis crystals, and seals of tempered fate.
+- Account Summary : added a pane for Garrison followers.
+- Fixed a Lua error when talking to an enchanting follower in the garrison.
+- Fixed professions not being scanned entirely since 6.0 (Thanks Myrrodin & CKaotic), I did revert the part about followers though, to use IsNPCCrafting() instead.
+- A lot of minor fixes.
+
+Notes:
+- Garrison missions/resource tracking are coming, no need to ask, it's high on the priority list :)
+- I have a few weeks off, so I'll have time to work on the add-on, there will be releases in the coming 2-3 weeks, with several bug fixes (hell, the list has grown quite long..)
+
+
+6.0.001 (17/10/2014)
+
+- Added a pane in the Grids tab to track LFR lockouts across alts.
+- Added support for the new void storage tab + reagent bank.
+- Updated achievement lists.
+- Updated tradeskills data (Grids tab)
+- Fixed WoD related issues.
+- DataStore_Reputations: fixed WoD compatibility.
+- DataStore_Reputations: LibBabble-Factions is back.
+Note : seriously Blizzard why on earth is GetFactionInfoByID no longer returning data for the opposite faction's reputations?
+- DataStore_Talents: talents & glyph scanning is temporarily fully disabled. UI is still missing too, sorry about that.
+- DataStore_Quests: fixed WoD compatibility.
+- DataStore_Containers: Added support for the new void storage tab.
+- DataStore_Containers: Added support for the new reagent bank.
+- LibCraftInfo: updated for WoD.
+- LibCraftLevels: updated for WoD.
+- LibCraftReagent: updated for WoD.
+- Currencies pane: removed unrequired tooltip.
+
+5.4.009 (08/08/2014)
+
+- Uncommented the code that actually deletes linked realms.. silly me !
+- DataStore_Crafts: reworked the processing of events that actually trigger profession scanning. 
+Note: The current implementation is based (not 100%) on how professions are scanned in Ackis Recipe List (thanks Ackis :D).
+So far the tests I have made show a serious improvement, but the way events are triggered may not be 100% consistent, especially with regards to the TRADE_SKILL_UPDATE event.
+The addon should no longer miss scans (please report if you notice problems).
+- DataStore_Mails: fixed some problems related to merged realms, it should now work without problems anymore.
+- DataStore_Mails: fixed issues where mail attachments (sent or returned) could be saved twice in the recipient's mailbox.
+
+Changes by ckaotik (Huge thanks !)
+- DataStore : Read addon version from .toc
+- DataStore : Current character/guild key can now be used by character/guild based methods
+- DataStore : added a few methods to support overriding methods
+- Many minor fixes in DataStore_Achievements, Agenda, Containers, Crafts, Inventory, Mails, Talents
+- DataStore_Quests : fixed tracking of completed quests
+
+5.4.008 (27/07/2014)
+
+- Fixed MoP factions showing up as numbers.
+- Suggested leveling zones are back in the account summary. 
+- Added an option to reset links between merged realms (some realms were marked as linked though they were not)
+	=> DataStore dropdown in the Account Summary
+- Added an option to completely reset the DataStore databases, without having to manually delete the files in the SavedVariables folder
+	=> DataStore dropdown in the Account Summary
+
+- Added an option to remember the faction filter across sessions. (Grids -> Reputations)
+- Added an option to remember the currency filter across sessions. (Grids -> Currencies)
+- Added an option to remember the companion filter across sessions. (Grids -> Companions)
+- Added an option to remember the mount filter across sessions. (Grids -> Mounts)
+- Added an option to remember the tradeskills filter across sessions. (Grids -> Tradeskills)
+- Added an option to remember the archaeology filter across sessions. (Grids -> Archaeology)
+- Item counts for guilds on merged realms should now be visible too (sorry can't test this myself).
+
+5.4.007 (24/07/2014)
+
+- Added missing faction "Emperor Shaohao".
+- Altoholic: removed LibBabble-Faction
+- DataStore_Reputations: removed LibBabble-Faction.
+- Fixed lua error when using the search function.
+
+5.4.006 (22/07/2014)
+
+- Fixed double item counts in the tooltip.
+- Improved the search functionality to be less restrictive.
+- DataStore_Containers now triggers extra events for client addons.
+- DataStore_Inventory now triggers extra events for client addons.
+- DataStore_Auctions now triggers extra events for client addons.
+- DataStore_Mails now triggers extra events for client addons.
+
+5.4.005 (21/07/2014)
+
+- Fixed bugs related to full names (name+realm) in the Guild tab.
+- Added a pane in the account summary to show the PVE & PVP currencies.
+- Added tooltip support for connected realms.
+Note: DataStore needs to learn about connected realms, to do so, send 1 mail to an alt on a connected realm.
+The connection is understood both ways (realm A to B, and B to A) with a single mail.
+If you are connected to more than 1 realm, send 1 mail per link.
+Ex: for 3 realms, send 1 mail from realm A to B, one from A to C, and one from B to C.
+The mail can consist of just text, no attachment or gold required.
+- Added an option to show/hide item count from connected realms.
+- Added support for mails sent to/returned from alts on connected realms. 
+Note: Realm names are packed ("Marécage de Zangar" => "MarécagedeZangar") by Blizzard, this is supported.
+If you notice something weird with your realm, please report it.
+- Altoholic: removed LibBabble-Zone
+- Updated the internal loot table and removed duplicate entries also found in LPT.
+- DataStore_Inventory: removed LibBabble-Zone.
+- DataStore_Reputations: removed LibBabble-Zone.
+- Removed leveling suggestions from the character level tooltip in the account summary, as this information is now part of the game's world map.
+- Updated the AiL tooltip, level 60 & 70 dungeons are now commented (tooltip was getting long), and level 90 was added. (Thanks Pseudopath on WoWinterface)
+- Fixed issues related to scanning void storage (Thanks Lombra !)
+- Several minor fixes (Thanks Lombra again !!)
+
+5.4.004 (07/10/2013)
+
+- Fixed showing the item source for crafts in the tooltip.
+- Fixed LibCraftInfo.
+
+5.4.003 (06/10/2013)
+
+- Created and added support for 3 new libraries : LibCraftInfo, LibCraftLevels, LibCraftReagents.
+These libraries intend to replace the lost functionality caused by tables reset to zero in LibPeriodicTable.
+I now have my own dataminer, so these tables should be easier to maintain when a patch hits.
+I also cleaned up some hard coded tables to now use the libraries instead.
+Overall, the addon now consumes a little bit more memory, but the data sources are way more complete than before.
+- Replaced the internal list of recipes by LibCraftInfo.
+- Fixed the Characters -> Profession pane no longer showing reagents due to LPT changes.
+- Fixed the Grids -> Tradeskills pane no longer correct due to LPT changes.
+
+
+5.4.002 (17/09/2013)
+
+- Fixed profession levels reported as 0.
+
+5.4.001 (11/09/2013)
+
+- Added new 5.4 achievements.
+- Removed a call to GetArenaTeam in DataStore_Stats.
+
+
+5.3.003 (01/08/2013)
+
+- Added missing reputations (Thanks Daovan !)
+- The source of an item is no longer read/displayed in the tooltip if combat lockdown is active.
+- Fixed a risk of profile reset when DataStore_Agenda is disabled.
+- Updated glyphs (Thanks Zartsoft)
+- Implemented RGriedel's fix for profession cooldown, hopefully they should be correct for both US & EU now (Thanks RGriedel!)
+- Fixed a tainting issue in DataStore_Talents. (Thanks Warloxx!)
+
+
+5.3.002 (29/05/2013)
+
+- Fixed skill levels reported as 0.
+
+Note: The problems does not fix itself with this new version. To fully fix it, you need to populate the database with new profession links.
+To do this, log all your alts one by one, open their tradeskills, and ONLY THEN, open the skills pane in Altoholic to see that this character's
+skill levels are ok. If not, it is merely a refresh issue.
+
+As I said, the problem comes from the format of the profession links which has been changed by Blizzard, reload the whole thing, and you will be fine.
+
+5.3.001 (28/05/2013)
+
+- Fixed recipe colors at the Auction House (Thanks Elandril !).
+- Fixed a lua error when DataStore_Agenda is disabled.
+- Fixed profession cooldowns warnings, they are now hardcoded at 3 am (the game sometimes still returns midnight).
+- Added a total AiL per realm in the account summary.
+
+5.2.001 (12/03/2013)
+
+- Added new pane in the 'Grids' tab to track dailies across all alts. Dailies are stored in DataStore_Quests and reset at 3am.
+- Added 5.2 achievements.
+- Added 5.2 pets.
+- Fixed a bug while scanning reputations (Thanks Sylvannis !).
+- Fixed a Lua error in the tabards pane.
+- Added a safeguard to prevent tooltip errors when mousing over a recipe, this seems to be caused by other tooltip addons/libs.
+- Added the Mantid archaeology race.
+- Fixed scanning quest history.
+
+
+Note: I have tried to look into an issue where profession cooldowns are announced at the wrong time, mostly for people playing on US realms.
+Unfortunately, I could not make any solid tests (UK realms return me the same realm time as other EU realms .. weird).
+If anyone can provide me with more info, I would gladly help.
+
+Places to check in the code:
+Altoholic\Events.lua: as of line 427
+DataStore_Agenda\DataStore_Agenda.lua: look at how I set the variable clientServerTimeGap, see if results are consistent.
+
+
+5.1.002 (24/02/2013)
+
+- Updated both Achievements & Grids tab to show 11 characters per realm.
+- Support for tabards is back.
+
+5.1.001 (29/11/2012)
+
+- Fixed 5.0.003 archive, DataStore_Achievements was missing.
+- Fixed .Toc files not updated for 5.1 in previous release.
+
+5.0.003 (28/11/2012)
+
+- Re-fixed searching for heirlooms (Thanks JCinDE !).
+- Scanning tabards is temporarily disabled, as it triggers an error I cannot fix right now.
+
+5.0.002 (06/10/2012)
+
+- Integrated the Void Storage to the container's UI (Characters -> Containers).
+- Added Mists of Pandaria factions (Grids -> Reputations).
+- Added Mists of Pandaria archaeology artefacts (Grids -> Archaeology).
+- Added Mists of Pandaria crafts for each professions (Grids -> Tradeskills).
+- Fixed a few Lua errors related to Battle Pets. They are temporarily NOT scanned at the Auction House.
+
+Some features related to Battle Pets are not fully working, this is on my (neverending) to-do-list.
+
+5.0.001d (13/09/2012)
+
+- Fixed tooltips sometime being incorrect in Grids -> reputations & currencies.
+- Fixed potential tainting issues due to the usage of the underscore in the code.
+- Cleared a few source files that were no longer used.
+- Fixed scanning of partially completed achievements.
+- Fixed Lua errors that appeared in 5.0.5 due to a wrong spell ID for fishing.
+
+Note about achievements:
+
+Achievements partially completed on one alt. They will now appear a bit differently in the UI (especially when part of a series).
+This is due to the values the game is returning. 
+Sometimes, the results may seem weird, BUT THERE IS NOTHING I CAN DO TO FIX THAT !
+
+It also makes no sense for me that some achievements in a series are character based, while some others are account based.
+Ex: 100 HK is character based, but 25000 HK is account based ? 
+If you too think there is a problem here, then complain about it to Blizzard, as I will not write code to work around those inconsistencies.
+
+
+5.0.001c (03/09/2012)
+
+- Fixed tooltip showing "No data" for herbalism in the Skills pane.. for good this time !
+- Fixed a Lua error when scanning glyphs.. for good this time too ! (Thanks Sylvannis)
+- Fixed a Lua error when clicking on glyphs, blaming DataStore_Crafts and/or DataStore_Achievements.
+
+- Note: About pets & mounts. I know that they are now account wide, but I will leave things as they are for a little while, that is at least until the expansion launches.
+I want to see how things actually turn out to see what has value or not, or what could be modified to remain useful.
+
+5.0.001b (02/09/2012)
+
+- Fixed a Lua error when trying to scan glyphs on a low level character.
+- Fixed a Lua error when scanning Inscription.
+- Fixed invalid profession spell id's for Fishing & Herbalism.
+- Fixed version number in .TOC
+- Fixed a Lua error when mousing over a specific cell in the guild members pane.
+
+5.0.001 (02/09/2012)
+
+- Added support for itIT. If you can help with the translations, please go here: http://wow.curseforge.com/addons/altoholic/localization/
+- Updated Achievement lists, please advise if you notice errors (especially for horde players).
+- Fixed many issues related to changes in MoP. Too much to list.
+- Talent pane is temporarily disabled. It will be back soon.
+- Changed all drop down definitions to prevent tainting (Thanks ckaotik !)
+- Fixed a Lua error in Grids->Reputations when selecting guild reputation.
+- Added missing Tol Barad achievement : Occu'thar (Thanks Daveo77)
+- Fixed a few UI issues related to account sharing.
+- Fixed searching item upgrades based on iLevel
+- Moved the sumary tab into its own module, this is in preparation of future new features. If you encounter a problem due to this, please roll back to 4.3.003b. (Should be ok though)
+- Fixed pets not sorted alphabetically in Grids->Pets.
+- Added back the All-in-one view in Grids->Pets.
 
 4.3.003b (05/05/2012)
 

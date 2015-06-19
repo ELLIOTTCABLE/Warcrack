@@ -1,0 +1,13 @@
+tag v60100-1.0.0
+132ec713d545c109aefc155a6f84829b7bf7a1dc
+Jim Whitehead <jnwhiteh@gmail.com>
+2015-03-15 11:46:41 +0100
+
+Tagging version v60100-1.0.0
+
+
+--------------------
+
+Jim Whitehead:
+	- Update TOC for 6.1.x
+	- Add explicit function for adding waypoint to current zone

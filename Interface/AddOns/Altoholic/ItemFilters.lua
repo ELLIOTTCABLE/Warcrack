@@ -53,7 +53,7 @@ end
 local function FilterMinimumLevel()
 	local minLevel = searchedItem["itemMinLevel"]
 	if minLevel == 0 then
-		if (addon:GetOption("IncludeNoMinLevel") == 1) then
+		if addon:GetOption("UI.Tabs.Search.IncludeNoMinLevel") then
 			return true		-- include items with no minimum requireement
 		end
 	else
@@ -128,7 +128,8 @@ end
 -- currently searched item
 function ns:SetSearchedItem(itemID, itemLink)
 	local s = searchedItem
-	
+	local _
+
 	s.itemID = itemID
 	s.itemName, s.itemLink, s.itemRarity, s.itemLevel,	s.itemMinLevel, s.itemType, s.itemSubType, _, s.itemEquipLoc = GetItemInfo(itemLink or itemID)
 end

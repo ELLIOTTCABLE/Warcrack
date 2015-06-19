@@ -7,15 +7,11 @@ Website: http://www.wowace.com/
 -- http://muffinmangames.com
 
 local AutoBar = AutoBar
-local REVISION = tonumber(("$Revision: 1.1 $"):match("%d+"))
-if AutoBar.revision < REVISION then
-	AutoBar.revision = REVISION
-	AutoBar.date = ('$Date: 2010/11/13 03:23:25 $'):match('%d%d%d%d%-%d%d%-%d%d')
-end
 
+
+local _
 
 local AceOO = AceLibrary("AceOO-2.0")
-local BZ = LibStub("LibBabble-Zone-3.0"):GetLookupTable()
 
 AutoBarSearch = {}
 AutoBarSearch.spells = {}
@@ -25,29 +21,29 @@ AutoBarSearch.dirtyBags = {}
 local searchSpace, items, playerLevel
 
 AutoBarSearch.zoneGroup = {}
-AutoBarSearch.zoneGroup[BZ["Serpentshrine Cavern"]] = "Coilfang"
-AutoBarSearch.zoneGroup[BZ["The Slave Pens"]] = "Coilfang"
-AutoBarSearch.zoneGroup[BZ["The Steamvault"]] = "Coilfang"
-AutoBarSearch.zoneGroup[BZ["The Underbog"]] = "Coilfang"
-AutoBarSearch.zoneGroup[BZ["The Arcatraz"]] = "Tempest Keep"
-AutoBarSearch.zoneGroup[BZ["The Botanica"]] = "Tempest Keep"
-AutoBarSearch.zoneGroup[BZ["The Eye"]] = "Tempest Keep"
-AutoBarSearch.zoneGroup[BZ["The Mechanar"]] = "Tempest Keep"
+AutoBarSearch.zoneGroup[GetMapNameByID(780)] = "Coilfang"
+AutoBarSearch.zoneGroup[GetMapNameByID(728)] = "Coilfang"
+AutoBarSearch.zoneGroup[GetMapNameByID(727)] = "Coilfang"
+AutoBarSearch.zoneGroup[GetMapNameByID(726)] = "Coilfang"
+AutoBarSearch.zoneGroup[GetMapNameByID(731)] = "Tempest Keep"
+AutoBarSearch.zoneGroup[GetMapNameByID(729)] = "Tempest Keep"
+AutoBarSearch.zoneGroup[GetMapNameByID(782)] = "Tempest Keep"
+AutoBarSearch.zoneGroup[GetMapNameByID(730)] = "Tempest Keep"
 
 AutoBarSearch.subZoneGroup = {}
-AutoBarSearch.subZoneGroup[BZ["Serpentshrine Cavern"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Forge Camp: Terror"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["The Vortex Pinnacle"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Rivendark's Perch"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Ogri'la"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Obsidia's Perch"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Skyguard Outpost"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Shartuul's Transporter"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Forge Camp: Wrath"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Bash'ir Landing"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Crystal Spine"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Insidion's Perch"]] = "BE Plateaus"
-AutoBarSearch.subZoneGroup[BZ["Furywing's Perch"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[GetMapNameByID(780)] = "BE Plateaus"  --Really? this looks like a copy/paste error
+--AutoBarSearch.subZoneGroup[BZ["Forge Camp: Terror"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["The Vortex Pinnacle"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Rivendark's Perch"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Ogri'la"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Obsidia's Perch"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Skyguard Outpost"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Shartuul's Transporter"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Forge Camp: Wrath"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Bash'ir Landing"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Crystal Spine"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Insidion's Perch"]] = "BE Plateaus"
+--AutoBarSearch.subZoneGroup[BZ["Furywing's Perch"]] = "BE Plateaus"
 
 -- Recycle lists will avoid garbage collection and memory thrashing but potentially grow over time
 -- A simple 2 list aproach that recycles objects specific to that type of list so the bulk of operations should be only initing recycled objects.
@@ -303,8 +299,9 @@ function Stuff.prototype:Add(itemId, bag, slot, spell)
 --AutoBar:Print("Stuff.prototype:Add    itemId " .. tostring(itemId) .. " bag " .. tostring(bag) .. " slot " .. tostring(slot) .. " spell " .. tostring(spell))
 	if (bag or slot) then
 		-- Filter out too high level items
-		_, _, _, _, itemMinLevel = GetItemInfo(itemId);
-		if (itemMinLevel or 0 <= playerLevel) then
+		local itemMinLevel
+		itemMinLevel = select(5,GetItemInfo(itemId));
+		if ((itemMinLevel or 0) <= playerLevel) then
 			AutoBarSearch.found:Add(itemId, bag, slot)
 		end
 	else
@@ -1232,13 +1229,13 @@ end
 
 -- Testing & Debug function only
 function AutoBarSearch:DumpSlot(buttonKey)
-	AutoBar:Print("\n\n   AutoBarSearch:DumpSlot " .. tostring(buttonKey))
-	AutoBar:Print("items ")
-	DevTools_Dump(AutoBarSearch.items:GetList(buttonKey))
-	AutoBar:Print("current ")
-	DevTools_Dump(AutoBarSearch.current:GetList(buttonKey))
-	AutoBar:Print("sorted ")
-	DevTools_Dump(AutoBarSearch.sorted:GetList(buttonKey))
+	print("\n\n   AutoBarSearch:DumpSlot " .. tostring(buttonKey))
+	print("items ")
+	dump(AutoBarSearch.items:GetList(buttonKey))
+	print("current ")
+	dump(AutoBarSearch.current:GetList(buttonKey))
+	print("sorted ")
+	dump(AutoBarSearch.sorted:GetList(buttonKey))
 end
 
 
@@ -1246,13 +1243,13 @@ end
 function AutoBarSearch:Test()
 	if (false and DevTools_Dump) then
 		AutoBarSearch.trace = true
-		AutoBar:Print("\nAutoBarSearch:Test start")
+		print("\nAutoBarSearch:Test start")
 		AutoBarSearch:Empty()
 		playerLevel = UnitLevel("player")
 
 		UpdateAddOnMemoryUsage()
 		local usedKB = GetAddOnMemoryUsage("AutoBar")
-		AutoBar:Print("usedKB = " .. usedKB)
+		print("usedKB = " .. usedKB)
 
 		AutoBarSearch.items:Add({4536}, 1, nil, 1)
 		assert(AutoBarSearch.items:Contains(4536), "AutoBarSearch.items:Add failed")

@@ -1,15 +1,15 @@
 --
--- $Id: BugGrabber.lua 179 2011-05-07 23:47:39Z rabbit $
+-- $Id: BugGrabber.lua 207 2014-11-30 01:36:45Z funkydude $
 --
 -- The BugSack and !BugGrabber team is:
--- Current Developer: Rabbit
--- Past Developers: Rowne, Ramble, industrial, Fritti, kergoth, ckknight
+-- Current Developer: Funkydude
+-- Past Developers: Rowne, Ramble, industrial, Fritti, kergoth, ckknight, Rabbit
 -- Testers: Ramble, Sariash
 --
 --[[
 
 !BugGrabber, World of Warcraft addon that catches errors and formats them with a debug stack.
-Copyright (C) 2011 The !BugGrabber Team
+Copyright (C) 2015 The !BugGrabber Team
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -28,6 +28,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ]]
 
 -----------------------------------------------------------------------
+-- local-ization, mostly for use with the FindGlobals script to catch
+-- misnamed variable names. We're not hugely concerned with performance.
+
+local _G = _G
+local type, table, next, tostring, tonumber, print =
+      type, table, next, tostring, tonumber, print
+local debuglocals, debugstack, wipe, InCombatLockdown, UnitAffectingCombat, GetTime =
+      debuglocals, debugstack, wipe, InCombatLockdown, UnitAffectingCombat, GetTime
+-- GLOBALS: LibStub, GetLocale, GetBuildInfo, DisableAddOn, Swatter, GetAddOnInfo
+-- GLOBALS: BugGrabberDB, ItemRefTooltip, date
+-- GLOBALS: seterrorhandler, IsAddOnLoaded, GetAddOnMetadata
+-- GLOBALS: MAX_BUGGRABBER_ERRORS, BUGGRABBER_ERRORS_PER_SEC_BEFORE_THROTTLE
+-- GLOBALS: SlashCmdList, SLASH_SWATTER1, SLASH_SWATTER2
+
+-----------------------------------------------------------------------
 -- Check if we already exist in the global space
 -- If we do - bail out early, there's no version checks.
 if _G.BugGrabber then return end
@@ -39,8 +54,9 @@ if _G.BugGrabber then return end
 local bugGrabberParentAddon, parentAddonTable = ...
 local STANDALONE_NAME = "!BugGrabber"
 if bugGrabberParentAddon ~= STANDALONE_NAME then
-	for i, handler in next, { STANDALONE_NAME, "!Swatter", "!ImprovedErrorFrame" } do
-		local enabled = select(4, GetAddOnInfo(handler))
+	local tbl = { STANDALONE_NAME, "!Swatter", "!ImprovedErrorFrame" }
+	for i = 1, 3 do
+		local _, _, _, enabled = GetAddOnInfo(tbl[i])
 		if enabled then return end -- Bail out
 	end
 end
@@ -52,6 +68,7 @@ local real_seterrorhandler = seterrorhandler
 -----------------------------------------------------------------------
 -- Global config variables
 --
+
 MAX_BUGGRABBER_ERRORS = 1000
 
 -- If we get more errors than this per second, we stop all capturing
@@ -60,19 +77,21 @@ BUGGRABBER_ERRORS_PER_SEC_BEFORE_THROTTLE = 10
 -----------------------------------------------------------------------
 -- Localization
 --
+
 local L = {
 	ADDON_CALL_PROTECTED = "[%s] AddOn '%s' tried to call the protected function '%s'.",
 	ADDON_CALL_PROTECTED_MATCH = "^%[(.*)%] (AddOn '.*' tried to call the protected function '.*'.)$",
 	ADDON_DISABLED = "|cffffff00!BugGrabber and %s cannot coexist; %s has been forcefully disabled. If you want to, you may log out, disable !BugGrabber, and enable %s.|r",
 	BUGGRABBER_STOPPED = "|cffffff00There are too many errors in your UI. As a result, your game experience may be degraded. Disable or update the failing addons if you don't want to see this message again.|r",
-	ERROR_UNABLE = "|cffffff00!BugGrabber is unable to retrieve errors from other players by itself. Please install BugSack or a similar display addon that might give you this functionality.|r",
 	ERROR_DETECTED = "%s |cffffff00captured, click the link for more information.|r",
+	ERROR_UNABLE = "|cffffff00!BugGrabber is unable to retrieve errors from other players by itself. Please install BugSack or a similar display addon that might give you this functionality.|r",
 	NO_DISPLAY_1 = "|cffffff00You seem to be running !BugGrabber with no display addon to go along with it. Although a slash command is provided for accessing error reports, a display can help you manage these errors in a more convenient way.|r",
 	NO_DISPLAY_2 = "|cffffff00The standard display is called BugSack, and can probably be found on the same site where you found !BugGrabber.|r",
 	NO_DISPLAY_STOP = "|cffffff00If you don't want to be reminded about this again, run /stopnag.|r",
 	STOP_NAG = "|cffffff00!BugGrabber will not nag about missing a display addon again until next patch.|r",
 	USAGE = "|cffffff00Usage: /buggrabber <1-%d>.|r",
 }
+
 -----------------------------------------------------------------------
 -- Locals
 --
@@ -84,7 +103,7 @@ local displayObjectName = nil
 for i = 1, GetNumAddOns() do
 	local meta = GetAddOnMetadata(i, "X-BugGrabber-Display")
 	if meta then
-		local enabled = select(4, GetAddOnInfo(i))
+		local _, _, _, enabled = GetAddOnInfo(i)
 		if enabled then
 			displayObjectName = meta
 			break
@@ -123,7 +142,7 @@ local function setupCallbacks()
 		setupCallbacks = nil
 	end
 end
-setupCallbacks()
+addon.setupCallbacks = setupCallbacks; -- make it accessible from the outside for add-ons relying on BugGrabber events so they can make BugGrabber.RegisterCallback appear when they need it (CallbackHandler-1.0 is not embedded in BugGrabber)
 
 local function triggerEvent(...)
 	if not callbacks then setupCallbacks() end
@@ -162,15 +181,15 @@ local function printErrorObject(err)
 	end
 end
 
--- XXX Disabled until someone complains and demands that they return.
+-- Re-enabled until someone complains and demands that they go away again.
 local function registerAddonActionEvents()
-	--frame:RegisterEvent("ADDON_ACTION_BLOCKED")
-	--frame:RegisterEvent("ADDON_ACTION_FORBIDDEN")
+	frame:RegisterEvent("ADDON_ACTION_BLOCKED")
+	frame:RegisterEvent("ADDON_ACTION_FORBIDDEN")
 end
 
 local function unregisterAddonActionEvents()
-	--frame:UnregisterEvent("ADDON_ACTION_BLOCKED")
-	--frame:UnregisterEvent("ADDON_ACTION_FORBIDDEN")
+	frame:UnregisterEvent("ADDON_ACTION_BLOCKED")
+	frame:UnregisterEvent("ADDON_ACTION_FORBIDDEN")
 end
 
 -----------------------------------------------------------------------
@@ -192,11 +211,11 @@ end
 -- Error catching
 --
 
-local sanitizeStack, sanitizeLocals, findVersions = nil, nil, nil
+local findVersions = nil
 do
 	local function scanObject(o)
 		local version, revision = nil, nil
-		for k, v in pairs(o) do
+		for k, v in next, o do
 			if type(k) == "string" and (type(v) == "string" or type(v) == "number") then
 				local low = k:lower()
 				if not version and low:find("version") then
@@ -259,7 +278,7 @@ do
 		local found = matchCache[object]
 		if found then
 			tmp[object] = true
-			return (start ~= 1 and start or "") .. object .. "-" .. found .. (type(tail) == "string" and tail or "")
+			return (type(start) == "string" and start or "") .. object .. "-" .. found .. (type(tail) == "string" and tail or "")
 		end
 	end
 
@@ -271,37 +290,11 @@ do
 	}
 	function findVersions(line)
 		if not line or line:find("FrameXML\\") then return line end
-		for i, m in next, matchers do
-			line = line:gsub(m, replacer)
+		for i = 1, 4 do
+			line = line:gsub(matchers[i], replacer)
 		end
 		wipe(tmp)
 		return line
-	end
-
-	function sanitizeStack(dump)
-		if not dump then return end
-		dump = dump:gsub("Interface\\", "")
-		dump = dump:gsub("AddOns\\", "")
-		dump = dump:gsub("%.%.%.[^\\]+\\", "")
-		dump = dump:gsub("%[C%]:.-\n", "<in C code>\n")
-		dump = dump:gsub("%<?%[string (\".-\")%](:%d+)%>?", "<string>:%1%2")
-		dump = dump:gsub("[`']", "\"")
-		return dump
-	end
-
-	function sanitizeLocals(dump)
-		if not dump then return end
-		dump = dump:gsub("Interface\\", "")
-		dump = dump:gsub("AddOns\\", "")
-		-- Reduce Foo\\Bar-3.0\\Bar-3.0.lua to Foo\\..\\Bar-3.0.lua to save room
-		-- since wow crashes with strings > 983 chars and I don't want to split
-		-- stuff, it's so hacky :/
-		for token in dump:gmatch("\\([^\\]+)%.lua") do
-			dump = dump:gsub(escapeCache[token] .. "\\", "..\\")
-		end
-		dump = dump:gsub("<function> defined", "<func>")
-		dump = dump:gsub("{%s+}", "{}")
-		return dump
 	end
 end
 
@@ -309,8 +302,33 @@ end
 local grabError
 do
 	local tmp = {}
+	local msgsAllowed = BUGGRABBER_ERRORS_PER_SEC_BEFORE_THROTTLE
+	local msgsAllowedLastTime = GetTime()
+	local lastWarningTime = 0
 	function grabError(errorMessage)
-		if paused then return end
+		-- Flood protection --
+		msgsAllowed = msgsAllowed + (GetTime()-msgsAllowedLastTime)*BUGGRABBER_ERRORS_PER_SEC_BEFORE_THROTTLE
+		msgsAllowedLastTime = GetTime()
+		if msgsAllowed < 1 then
+			if not paused then
+				if bugGrabberParentAddon == STANDALONE_NAME then
+					if GetTime() > lastWarningTime + 10 then
+						print(L.BUGGRABBER_STOPPED)
+						lastWarningTime = GetTime()
+					end
+				end
+				paused=true
+				triggerEvent("BugGrabber_CapturePaused")
+			end
+			return
+		end
+		paused=false
+		if msgsAllowed > BUGGRABBER_ERRORS_PER_SEC_BEFORE_THROTTLE then
+			msgsAllowed = BUGGRABBER_ERRORS_PER_SEC_BEFORE_THROTTLE
+		end
+		msgsAllowed = msgsAllowed - 1
+
+		-- Grab it --
 		errorMessage = tostring(errorMessage)
 
 		local looping = errorMessage:find("BugGrabber") and true or nil
@@ -319,7 +337,7 @@ do
 			return
 		end
 
-		local sanitizedMessage = findVersions(sanitizeStack(errorMessage))
+		local sanitizedMessage = findVersions(errorMessage)
 
 		-- Insert the error into the correct database if it's not there
 		-- already. If it is, just increment the counter.
@@ -329,13 +347,16 @@ do
 		else
 			found = fetchFromDatabase(loadErrors, sanitizedMessage)
 		end
-
-		frame.count = frame.count + 1
+		-- XXX Note that fetchFromDatabase will set the error objects
+		-- XXX session ID to the current one, if found - and it will also
+		-- XXX increment the counter on it. This is probably wrong, it should
+		-- XXX be done here instead, as "fetchFromDatabase" implies a simple
+		-- XXX :Get procedure.
 
 		local errorObject = found
 
 		if not errorObject then
-			local stack = sanitizeStack(debugstack(3))
+			local stack = debugstack(3)
 
 			-- Scan for version numbers in the stack
 			for line in stack:gmatch("(.-)\n") do
@@ -343,10 +364,11 @@ do
 			end
 
 			-- Store the error
+			local inCombat = InCombatLockdown() or UnitAffectingCombat("player")
 			errorObject = {
 				message = sanitizedMessage,
 				stack = table.concat(tmp, "\n"),
-				locals = sanitizeLocals(debuglocals(4)),
+				locals = inCombat and "" or debuglocals(4),
 				session = addon:GetSessionId(),
 				time = date("%Y/%m/%d %H:%M:%S"),
 				counter = 1,
@@ -355,13 +377,13 @@ do
 			wipe(tmp)
 		end
 
-		addon:StoreError(errorObject)
-
-		triggerEvent("BugGrabber_BugGrabbed", errorObject)
-
 		if not isBugGrabbedRegistered then
 			print(L.ERROR_DETECTED:format(addon:GetChatLink(errorObject)))
 		end
+
+		addon:StoreError(errorObject)
+
+		triggerEvent("BugGrabber_BugGrabbed", errorObject)
 	end
 end
 
@@ -381,9 +403,28 @@ function addon:StoreError(errorObject)
 	end
 end
 
-function addon:GetChatLink(errorObject)
-	local tableId = tostring(errorObject):sub(8)
-	return chatLinkFormat:format(playerName, tableId, tableId)
+do
+	local function createChatHook()
+		-- Set up the ItemRef hook that allow us to link bugs.
+		local SetHyperlink = ItemRefTooltip.SetHyperlink
+		function ItemRefTooltip:SetHyperlink(link, ...)
+			local player, tableId = link:match("^buggrabber:([^:]+):(%x+)")
+			if player then
+				addon:HandleBugLink(player, tableId, link)
+			else
+				SetHyperlink(self, link, ...)
+			end
+		end
+	end
+
+	-- We need to hook the chat frame when anyone requests a chat link from us,
+	-- in case some other addon has hooked :HandleBugLink to process it. If not,
+	-- we could've just created the hook in grabError when we do the print.
+	function addon:GetChatLink(errorObject)
+		if createChatHook then createChatHook() createChatHook = nil end
+		local tableId = tostring(errorObject):sub(8)
+		return chatLinkFormat:format(playerName, tableId, tableId)
+	end
 end
 
 function addon:GetErrorByPlayerAndID(player, id)
@@ -461,7 +502,7 @@ local function initDatabase()
 
 	-- Only warn about missing display if we're running standalone.
 	if not displayObjectName and bugGrabberParentAddon == STANDALONE_NAME then
-		local currentInterface = select(4, GetBuildInfo())
+		local _, _, _, currentInterface = GetBuildInfo()
 		if type(currentInterface) ~= "number" then currentInterface = 0 end
 		if not sv.stopnag or sv.stopnag < currentInterface then
 			print(L.NO_DISPLAY_1)
@@ -506,11 +547,13 @@ do
 
 		if not swatterDisabled and _G.Swatter and not _G.Swatter.isFake then
 			swatterDisabled = true
-			print(L.ADDON_DISABLED:format("Swatter", "Swatter", "Swatter"))
+			if bugGrabberParentAddon == STANDALONE_NAME then
+				print(L.ADDON_DISABLED:format("Swatter", "Swatter", "Swatter"))
+			end
 			DisableAddOn("!Swatter")
 			SlashCmdList.SWATTER = nil
 			SLASH_SWATTER1, SLASH_SWATTER2 = nil, nil
-			for k, v in pairs(Swatter) do
+			for k, v in next, Swatter do
 				if type(v) == "table" then
 					if v.UnregisterAllEvents then
 						v:UnregisterAllEvents()
@@ -522,7 +565,7 @@ do
 			end
 			Swatter = nil
 
-			local enabled = select(4, GetAddOnInfo("Stubby"))
+			local _, _, _, enabled = GetAddOnInfo("Stubby")
 			if enabled then createSwatter() end
 
 			real_seterrorhandler(grabError)
@@ -534,8 +577,13 @@ function frame:PLAYER_LOGIN()
 	if not callbacks then setupCallbacks() end
 	real_seterrorhandler(grabError)
 end
+local badAddons = {}
 function frame:ADDON_ACTION_FORBIDDEN(event, addonName, addonFunc)
-	grabError(L.ADDON_CALL_PROTECTED:format(event, addonName or "<name>", addonFunc or "<func>"))
+	local name = addonName or "<name>"
+	if not badAddons[name] then
+		badAddons[name] = true
+		grabError(L.ADDON_CALL_PROTECTED:format(event, name or "<name>", addonFunc or "<func>"))
+	end
 end
 frame.ADDON_ACTION_BLOCKED = frame.ADDON_ACTION_FORBIDDEN -- XXX Unused?
 frame:SetScript("OnEvent", function(self, event, ...) self[event](self, event, ...) end)
@@ -545,43 +593,6 @@ registerAddonActionEvents()
 
 real_seterrorhandler(grabError)
 function seterrorhandler() --[[ noop ]] end
-
-do
-	-- Flood protection
-	local totalElapsed = 0
-	frame.count = 0
-	frame:SetScript("OnUpdate", function(self, elapsed)
-		totalElapsed = totalElapsed + elapsed
-		if totalElapsed > 1 then
-			-- Seems like we're getting more errors/sec than we want.
-			if self.count > BUGGRABBER_ERRORS_PER_SEC_BEFORE_THROTTLE then
-				print(L.BUGGRABBER_STOPPED)
-				unregisterAddonActionEvents()
-				real_seterrorhandler(function() --[[ noop ]] end)
-				paused = true
-				triggerEvent("BugGrabber_CapturePaused")
-				self:SetScript("OnUpdate", nil)
-				self:Hide()
-			end
-			self.count = 0
-			totalElapsed = 0
-		end
-	end)
-end
-
-do
-	-- Set up the ItemRef hook that allow us to link bugs.
-	local origHandler = _G.ChatFrame_OnHyperlinkShow
-	_G.ChatFrame_OnHyperlinkShow = function(chatFrame, link, ...)
-		local player, tableId = link:match("^buggrabber:(%a+):(%x+)")
-		if not player or not tableId then return origHandler(chatFrame, link, ...) end
-		if IsModifiedClick("CHATLINK") then
-			ChatEdit_InsertLink(link)
-		else
-			addon:HandleBugLink(player, tableId, link, chatFrame, ...)
-		end
-	end
-end
 
 -- Set up slash command
 _G.SlashCmdList.BugGrabber = slashHandler

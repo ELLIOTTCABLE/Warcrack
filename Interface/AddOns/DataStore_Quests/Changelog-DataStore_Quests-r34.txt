@@ -1,0 +1,26 @@
+------------------------------------------------------------------------
+r34 | thaoky | 2015-02-25 19:04:20 +0000 (Wed, 25 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Quests.toc
+
+ToC update (silly me !)
+------------------------------------------------------------------------
+r33 | thaoky | 2015-02-25 18:27:59 +0000 (Wed, 25 Feb 2015) | 3 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Locales/repoenUS.lua
+   M /trunk/Options.lua
+   M /trunk/Options.xml
+
+6.1.001 Commit
+
+- Added support for options using <KeyValue>
+------------------------------------------------------------------------
+r32 | thaoky | 2015-01-09 17:17:00 +0000 (Fri, 09 Jan 2015) | 2 lines
+Changed paths:
+   M /trunk/DataStore_Quests.lua
+   M /trunk/Options.xml
+
+- Fixed usage of options
+- XML frames cleanup
+------------------------------------------------------------------------

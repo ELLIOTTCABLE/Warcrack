@@ -1,9 +1,14 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.blizzard.com/wow/ui/
-    ..\FrameXML\UI.xsd">
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
     <Script file="localization.lua" />
+	<Script file="localization.ptBR.lua" />
+ 	<Script file="localization.frFR.lua" />
+	<Script file="localization.deDE.lua" />
+	<Script file="localization.koKR.lua" />
+	<Script file="localization.zhCN.lua" />
+	<Script file="localization.ruRU.lua" />
+   <Script file="realmlist_US.lua" />
+    <Script file="realmlist_EU.lua" />
     <Script file="CensusPlus.lua" />
-    <Script file="CensusPlusPVP.lua" />
     <Button name="CensusPlusLegendTemplate" virtual="true">
         <Size>
             <AbsDimension x="32" y="32" />
@@ -23,8 +28,8 @@
         </HighlightTexture>
         <Scripts>
             <OnLeave>
-				 GameTooltip:Hide();
-			</OnLeave>
+				 				GameTooltip:Hide();
+						</OnLeave>
         </Scripts>
     </Button>
     <Button name="CensusPlusRaceLegendTemplate" virtual="true" inherits="CensusPlusLegendTemplate">
@@ -46,8 +51,8 @@
         <NormalTexture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Bar" />
         <Scripts>
             <OnLeave>
-				 GameTooltip:Hide();
-			</OnLeave>
+				 				GameTooltip:Hide();
+						</OnLeave>
         </Scripts>
     </Button>
     <Button name="CensusPlusRaceBarTemplate" virtual="true" inherits="CensusPlusBarTemplate">
@@ -62,21 +67,21 @@
     </Button>
     <Button name="CensusPlusLevelBarTemplate" virtual="true">
         <Size>
-            <AbsDimension x="7" y="128" />
+            <AbsDimension x="6" y="128" />
         </Size>
-        <NormalTexture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_LevelBar" />
+        <NormalTexture file="Interface\AddOns\CensusPlus\Skin\CENSUSPLUS_LEVELBar" />
         <Scripts>
     		<OnClick function="CensusPlus_OnClickLevel" />
     		<OnLoad function="CensusPlus_OnLoadLevel"/>    
             <OnLeave>
-				 GameTooltip:Hide();
-			</OnLeave>
+				 				GameTooltip:Hide();
+						</OnLeave>
             <OnEnter function="CensusPlus_OnEnterLevel" />
         </Scripts>
     </Button>
     <Button name="CensusPlusLevelBarEmptyTemplate" virtual="true">
         <Size>
-            <AbsDimension x="7" y="128" />
+            <AbsDimension x="6" y="128" />
         </Size>
         <Scripts>
     		<OnClick function="CensusPlus_OnClickLevel" />
@@ -85,18 +90,54 @@
     </Button>
     <Button name="CensusPlusGuildButtonTemplate" virtual="true">
         <Size>
-            <AbsDimension x="160" y="16" />
+            <AbsDimension x="250" y="16" />
         </Size>
         <Layers>
             <Layer level="BORDER">
                 <FontString name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
                     <Size>
-                        <AbsDimension x="160" y="14" />
+                        <AbsDimension x="250" y="14" />
                     </Size>
                     <Anchors>
                         <Anchor point="TOPLEFT">
                             <Offset>
-                                <AbsDimension x="2" y="-1" />
+                                <AbsDimension x="0" y="0" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD">
+            <Size>
+                <AbsDimension x="250" y="16" />
+            </Size>
+            <Anchors>
+                <Anchor point="TOP">
+                    <Offset>
+                        <AbsDimension x="0" y="0" />
+                    </Offset>
+                </Anchor>
+            </Anchors>
+        </HighlightTexture>
+        <Scripts>
+            <OnClick function="CensusPlus_GuildButton_OnClick" />
+        </Scripts>
+    </Button>
+    <Button name="CensusPlusConnectedRealmsTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="160" y="16" />
+        </Size>
+        <Layers>
+            <Layer level="BORDER">
+                <FontString name="$parentText" inherits="GameFontHighlight" justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="160" y="14" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="2" y="2" />
                             </Offset>
                         </Anchor>
                     </Anchors>
@@ -116,11 +157,11 @@
             </Anchors>
         </HighlightTexture>
         <Scripts>
-            <OnClick function="CensusPlus_GuildButton_OnClick" />
+			<OnLoad function="CENSUSPLUS_CONNECTEDRealmsButton_OnLoad" />
+            <OnClick function="CENSUSPLUS_CONNECTEDRealmsButton_OnClick" />
         </Scripts>
     </Button>
-    <Frame name="MiniCensusPlus" parent="UIParent" hidden="true" enableMouse="true" movable="true"
-        resizable="true" toplevel="true">
+    <Frame name="MiniCensusPlus" parent="UIParent" hidden="true" enableMouse="true" movable="true" toplevel="true">
         <Size>
             <AbsDimension x="130" y="30" />
         </Size>
@@ -137,7 +178,7 @@
                     <AbsDimension x="100" y="21" />
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="MiniCensusPlus" relativeFrom="TOPLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="MiniCensusPlus">
                         <Offset>
                             <AbsDimension x="5" y="-4" />
                         </Offset>
@@ -146,13 +187,13 @@
                 <Scripts>
                     <OnClick function="CensusPlus_OnClickMaximize" />
                     <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPlus_MAXIMIZE, 1.0, 1.0, 1.0);
-						GameTooltip:Show();
-					</OnEnter>
+												GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+												GameTooltip:SetText(CENSUSPlus_MAXIMIZE, 1.0, 1.0, 1.0);
+												GameTooltip:Show();
+										</OnEnter>
                     <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
+												GameTooltip:Hide();
+										</OnLeave>
                 </Scripts>
             </Button>
             <Button name="MiniCensusPlusCloseButton" inherits="UIPanelCloseButton">
@@ -182,10 +223,9 @@
         </Scripts>
     </Frame>
     
-    
     <Frame name="CensusPlus" parent="UIParent" hidden="true" enableMouse="true" toplevel="true" movable="true">
         <Size>
-            <AbsDimension x="846" y="512" />
+            <AbsDimension x="1024" y="512" />
         </Size>
         <Anchors>
             <Anchor point="TOPLEFT">
@@ -196,37 +236,545 @@
         </Anchors>
         <Layers>
             <Layer level="BACKGROUND">
-                <Texture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Window_Left">
-                    <Size>
-                        <AbsDimension x="592" y="512" />
-                    </Size>
-                    <Anchors>
-                        <Anchor point="TOPLEFT">
+<!--				<Texture name="CensusPlusBackground" file="Interface\Dialogframe\UI-DialogBox-Background"> -->
+				<Texture name="CensusPlusBackground" file="Interface\Dialogframe\UI-DialogBox-Background-Dark">
+					<Size>
+						<AbsDimension x="1024" y="512" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
                             <Offset>
                                 <AbsDimension x="0" y="0" />
                             </Offset>
                         </Anchor>
                     </Anchors>
+				</Texture>
+ 			</Layer>
+			<Layer level="BORDER">
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Left Outer Border Corner -->
+					<TexCoords  top = "0" left = "0" bottom = ".5" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="-5" y="7" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
                 </Texture>
-                <Texture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Window_Right">
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Right Outer Box Corner -->
+					<TexCoords  top = "0" left = ".5" bottom = ".5" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="998" y="7" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Left Outer Boarder Corner -->
+					<TexCoords  top = ".5" left = "0" bottom = "1" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="-5" y="-488" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Right Outer Boarder Corner -->
+					<TexCoords  top = ".5" left = ".5" bottom = "1" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="998" y="-488" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Left">  <!-- Left Outer Border -->
+<!--                <Texture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Window_UltraLeft" alphaMode="ADD"> -->
                     <Size>
-                        <AbsDimension x="334" y="512" />
+                        <AbsDimension x="16" y="488" />
                     </Size>
                     <Anchors>
                         <Anchor point="TOPLEFT">
                             <Offset>
-                                <AbsDimension x="592" y="0" />
+                                <AbsDimension x="-4" y="-8" />
                             </Offset>
                         </Anchor>
                     </Anchors>
-					<TexCoords left="0" right="0.65" top="0" bottom="1.0">
-					</TexCoords>					
                 </Texture>
-            </Layer>
-            <Layer level="ARTWORK">
-                <FontString name="CensusPlusText" inherits="GameFontHighlight" text="CENSUSPlus_BUTTON_TEXT">
+				<Texture file = "Interface\Dialogframe\Dialogframe-Right">  <!-- Right Outer Border -->
+                    <Size>
+                        <AbsDimension x="16" y="474" />
+                    </Size>
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="1014" y="-18" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Top">  <!-- Top Outer Border -->
+                    <Size>
+                        <AbsDimension x="996" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="8" y="6" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Bot">  <!-- Bottom Outer Border -->
+<!--                <Texture file="Interface\AddOns\CensusPlus\Skin\CensusPlus_Window_UltraLeft" alphaMode="ADD"> -->
+                    <Size>
+                        <AbsDimension x="996" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="8" y="-504" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\AddOns\CensusPlus\Skin\CensusPlus_Window_Top_Shader" >  <!-- Top Shader -->
+                    <Size>
+                        <AbsDimension x="1012" y="64" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="6" y="-6" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+<!-- 					<TexCoords  top = "0" left = "0" bottom = ".25" right = "1" />  -->
+               </Texture>
+	
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Left Levels Box Corner -->
+					<TexCoords  top = "0" left = "0" bottom = ".5" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="8" y="-309" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Right Levels Box Corner -->
+					<TexCoords  top = "0" left = ".5" bottom = ".5" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="986" y="-309" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Left Levels Box Corner -->
+					<TexCoords  top = ".5" left = "0" bottom = "1" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="8" y="-432" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Right Levels Box Corner -->
+					<TexCoords  top = ".5" left = ".5" bottom = "1" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="986" y="-432" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Left">  <!-- Left Levels Box -->
+                    <Size>
+                        <AbsDimension x="16" y="114" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="9" y="-322" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Right">  <!-- Right Levels Box -->
+                    <Size>
+                        <AbsDimension x="16" y="114" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="1002" y="-322" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Top">  <!-- Top Levels Box -->
+                    <Size>
+                        <AbsDimension x="988" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="19" y="-310" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Bot">  <!-- Bottom Levels Box -->
+                    <Size>
+                        <AbsDimension x="980" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="20" y="-448" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+	
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Left Race Box Corner -->
+					<TexCoords  top = "0" left = "0" bottom = ".5" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="8" y="-107" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Right Race Box Corner -->
+					<TexCoords  top = "0" left = ".5" bottom = ".5" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="258" y="-107" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Left Race Box Corner -->
+					<TexCoords  top = ".5" left = "0" bottom = "1" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="8" y="-228" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Right Race Box Corner -->
+					<TexCoords  top = ".5" left = ".5" bottom = "1" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="258" y="-228" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Left">  <!-- Left Race Box -->
+                    <Size>
+                        <AbsDimension x="16" y="110" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="9" y="-122" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Right">  <!-- Right Race Box -->
+                    <Size>
+                        <AbsDimension x="16" y="110" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="274" y="-122" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Top">  <!-- Top Race Box -->
+                    <Size>
+                        <AbsDimension x="258" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="20" y="-108" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Bot">  <!-- Bottom Race Box -->
+                    <Size>
+                        <AbsDimension x="258" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="20" y="-244" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+	
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Left Class Box Corner -->
+					<TexCoords  top = "0" left = "0" bottom = ".5" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="292" y="-107" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Right Class Box Corner -->
+					<TexCoords  top = "0" left = ".5" bottom = ".5" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="696" y="-107" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Left Class Box Corner -->
+					<TexCoords  top = ".5" left = "0" bottom = "1" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="292" y="-228" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Right Class Box Corner -->
+					<TexCoords  top = ".5" left = ".5" bottom = "1" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="696" y="-228" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Left">  <!-- Left Class Box -->
+                    <Size>
+                        <AbsDimension x="16" y="126" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="293" y="-122" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Right">  <!-- Right Class Box -->
+                    <Size>
+                        <AbsDimension x="16" y="126" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="712" y="-122" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Top">  <!-- Top Class Box -->
+                    <Size>
+                        <AbsDimension x="410" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="306" y="-108" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Bot">  <!-- Bottom Class Box -->
+                    <Size>
+                        <AbsDimension x="410" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="306" y="-244" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+			
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Left GuildData Box Corner -->
+					<TexCoords  top = "0" left = "0" bottom = ".5" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="727" y="-107" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Top Right GuildData Box Corner -->
+					<TexCoords  top = "0" left = ".5" bottom = ".5" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="986" y="-107" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Left GuildData Box Corner -->
+					<TexCoords  top = ".5" left = "0" bottom = "1" right = ".5" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="727" y="-260" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Corners">  <!-- Bottom Right GuildData Box Corner -->
+					<TexCoords  top = ".5" left = ".5" bottom = "1" right = "1" />
+					<Size>
+						<AbsDimension x = "32" y = "32" />
+					</Size>
+					<Anchors>
+						<Anchor point = "TOPLEFT">
+							<Offset>
+                                <AbsDimension x="986" y="-260" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Left">  <!-- Left GuildData Box -->
+                    <Size>
+                        <AbsDimension x="16" y="156" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="728" y="-122" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Right">  <!-- Right GuildData Box -->
+                    <Size>
+                        <AbsDimension x="16" y="156" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="1002" y="-122" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Top">  <!-- Top GuildData Box -->
+                    <Size>
+                        <AbsDimension x="258" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="744" y="-108" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+				<Texture file = "Interface\Dialogframe\Dialogframe-Bot">  <!-- Bottom GuildData Box -->
+                    <Size>
+                        <AbsDimension x="258" y="16" />
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="744" y="-276" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+           </Layer>
+            <Layer level="ARTWORK">
+                <FontString name="CensusPlusText" inherits="GameFontHighlight" text="CENSUSPLUS_TEXT">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
                                 <AbsDimension x="16" y="-12" />
                             </Offset>
@@ -236,99 +784,126 @@
                 <FontString name="CensusPlusText2" inherits="GameFontHighlight" text="WarcraftRealms.com">
                     <Color r="0.4" g="0.8" b="1.0" />
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
-                                <AbsDimension x="140" y="-12" />
+                                <AbsDimension x="240" y="-12" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusRealmName" inherits="GameFontHighlight" text="CENSUSPlus_BUTTON_REALMUNK">
+                <FontString name="CensusPlusRealmName" inherits="GameFontHighlight" text="CENSUSPlus_BUTTON_REALMUNKNOWN">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
                                 <AbsDimension x="16" y="-32" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusFactionName" inherits="GameFontHighlight" text="CENSUSPlus_FACTIONUNKNOWN">
+                <FontString name="CensusPlusConnected" inherits="GameFontHighlight" text="CENSUSPlus_BUTTON_REALMUNKNOWN">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
+                            <Offset>
+                                <AbsDimension x="240" y="-32" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="CensusPlusConnected2" inherits="GameFontHighlight" text="CENSUSPlus_BUTTON_REALMUNKNOWN">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
+                            <Offset>
+                                <AbsDimension x="16" y="-460" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="CensusPlusConnected3" inherits="GameFontHighlight" text="CENSUSPlus_BUTTON_REALMUNKNOWN">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
+                            <Offset>
+                                <AbsDimension x="16" y="-480" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+				<FontString name="CensusPlusFactionName" inherits="GameFontHighlight" text="CENSUSPLUS_FACTIONUNKNOWN">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
                                 <AbsDimension x="16" y="-48" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusLocaleName" inherits="GameFontHighlight" text="CENSUSPlus_LOCALEUNKNOWN">
+                <FontString name="CensusPlusLocaleName" inherits="GameFontHighlight" text="CENSUSPLUS_LOCALEUNKNOWN">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
                                 <AbsDimension x="16" y="-64" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusTotalCharacters" inherits="GameFontHighlight" text="CENSUSPlus_TOTALCHAR_0">
+                <FontString name="CensusPlusTotalCharacters" inherits="GameFontHighlight" text="CENSUSPLUS_TOTALCHAR_0">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
-                                <AbsDimension x="256" y="-32" />
+                                <AbsDimension x="240" y="-64" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusTotalCharacterXP" inherits="GameFontHighlight" text="CENSUSPlus_TOTALCHARXP_0">
+                <FontString name="CensusPlusScanProgress" inherits="GameFontHighlight" text="CENSUSPLUS_SCAN_PROGRESS_0">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
-                                <AbsDimension x="256" y="-48" />
+                                <AbsDimension x="240" y="-48" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusScanProgress" inherits="GameFontHighlight" text="CENSUSPlus_SCAN_PROGRESS_0">
+                <FontString name="CensusPlusTotalCharacterXP" inherits="GameFontHighlight" text="CENSUSPLUS_TOTALCHARXP_0">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
-                                <AbsDimension x="256" y="-64" />
+                                <AbsDimension x="540" y="-64" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusTopGuildsTitle" inherits="GameFontHighlight" text="CENSUSPlus_TOPGUILD">
+                <FontString name="CensusPlusTopGuildsTitle" inherits="GameFontHighlight" text="CENSUSPLUS_TOPGUILD">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
-                                <AbsDimension x="732" y="-90" />
+                                <AbsDimension x="800" y="-90" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusRacesTitle" inherits="GameFontHighlight" text="CENSUSPlus_RACE">
+                <FontString name="CensusPlusRacesTitle" inherits="GameFontHighlight" text="CENSUSPLUS_RACE">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
                                 <AbsDimension x="76" y="-90" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusClassesTitle" inherits="GameFontHighlight" text="CENSUSPlus_CLASS">
+                <FontString name="CensusPlusClassesTitle" inherits="GameFontHighlight" text="CENSUSPLUS_CLASS">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
-                                <AbsDimension x="384" y="-90" />
+                                <AbsDimension x="484" y="-90" />
                             </Offset>
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="CensusPlusLevelsTitle" inherits="GameFontHighlight" text="CENSUSPlus_LEVEL">
+                <FontString name="CensusPlusLevelsTitle" inherits="GameFontHighlight" text="CENSUSPLUS_LEVEL">
                     <Anchors>
-                        <Anchor point="TOPLEFT" relativeTo="CensusPlus" relativeFrom="TOPLEFT">
+                        <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                             <Offset>
-                                <AbsDimension x="384" y="-300" />
+                                <AbsDimension x="400" y="-300" />
                             </Offset>
                         </Anchor>
                     </Anchors>
@@ -336,29 +911,161 @@
             </Layer>
         </Layers>
         <Frames>
-            <Button name="CP_DisplayOptionsButton" inherits="UIPanelButtonTemplate" text="CENSUSPlus_BUTTON_OPTIONS">
+            <Button name="CensusPlusConnectedRealmButton1" inherits="CensusPlusConnectedRealmsTemplate" id="1">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="CensusPlus">
+                        <Offset>
+                            <AbsDimension x="68" y="-32" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusConnectedRealmButton2" inherits="CensusPlusConnectedRealmsTemplate" id="2">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="CensusPlus">
+                        <Offset>
+                            <AbsDimension x="314" y="-32" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusConnectedRealmButton3" inherits="CensusPlusConnectedRealmsTemplate" id="3">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton2" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusConnectedRealmButton4" inherits="CensusPlusConnectedRealmsTemplate" id="4">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton3" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusConnectedRealmButton5" inherits="CensusPlusConnectedRealmsTemplate" id="5">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton4" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusConnectedRealmButton6" inherits="CensusPlusConnectedRealmsTemplate" id="6">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="CensusPlus">
+                        <Offset>
+                            <AbsDimension x="156" y="-460" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusConnectedRealmButton7" inherits="CensusPlusConnectedRealmsTemplate" id="7">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton6" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusConnectedRealmButton8" inherits="CensusPlusConnectedRealmsTemplate" id="8">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton7" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusConnectedRealmButton9" inherits="CensusPlusConnectedRealmsTemplate" id="9">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton8" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+             <Button name="CensusPlusConnectedRealmButton10" inherits="CensusPlusConnectedRealmsTemplate" id="10">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton9" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+             <Button name="CensusPlusConnectedRealmButton11" inherits="CensusPlusConnectedRealmsTemplate" id="11">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="CensusPlus">
+                        <Offset>
+                            <AbsDimension x="156" y="-480" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+              <Button name="CensusPlusConnectedRealmButton12" inherits="CensusPlusConnectedRealmsTemplate" id="12">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton11" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+              <Button name="CensusPlusConnectedRealmButton13" inherits="CensusPlusConnectedRealmsTemplate" id="13">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton12" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+             <Button name="CensusPlusConnectedRealmButton14" inherits="CensusPlusConnectedRealmsTemplate" id="14">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton13" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+             <Button name="CensusPlusConnectedRealmButton15" inherits="CensusPlusConnectedRealmsTemplate" id="15">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusConnectedRealmButton14" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="0" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+			<Button name="CP_DisplayOptionsButton" inherits="UIPanelButtonTemplate" text="CENSUSPLUS_BUTTON_OPTIONS">
                 <Size>
                     <AbsDimension x="128" y="21" />
                 </Size>
                 <Anchors>
                     <Anchor point="TOPRIGHT" relativeTo="CensusPlus" relativePoint="TOPRIGHT">
                         <Offset>
-                            <AbsDimension x="50" y="-40" />
+                            <AbsDimension x="-20" y="-60" />
                         </Offset>
                     </Anchor>
                 </Anchors>
                 <Scripts>
-                    <OnClick>
-						PlaySound("igMainMenuOptionCheckBoxOn");
-						CensusPlus_ToggleOptions(arg1);
-					</OnClick>
+                    <OnClick function="CensusPlus_ToggleOptions" />
                 </Scripts>
             </Button>
             <Button name="CensusPlusCloseButton" inherits="UIPanelCloseButton">
                 <Anchors>
                     <Anchor point="TOPRIGHT" relativeTo="CensusPlus" relativePoint="TOPRIGHT">
                         <Offset>
-                            <AbsDimension x="84" y="1" />
+                            <AbsDimension x="0" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -377,114 +1084,106 @@
                 <Scripts>
                     <OnClick function="CensusPlus_OnClickMinimize" />
                     <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPlus_MINIMIZE, 1.0, 1.0, 1.0);
-						GameTooltip:Show();
-					</OnEnter>
+												GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+												GameTooltip:SetText(CENSUSPlus_MINIMIZE, 1.0, 1.0, 1.0);
+												GameTooltip:Show();
+										</OnEnter>
                     <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
+												GameTooltip:Hide();
+										</OnLeave>
                 </Scripts>
             </Button>
-            <Button name="CensusPlusTakeButton" inherits="UIPanelButtonTemplate" text="CENSUSPlus_TAKE">
+            <Button name="CensusPlusTakeButton" inherits="UIPanelButtonTemplate" text="CENSUSPLUS_TAKE">
                 <Size>
                     <AbsDimension x="128" y="21" />
                 </Size>
                 <Anchors>
                     <Anchor point="TOPLEFT">
                         <Offset>
-                            <AbsDimension x="100" y="-470" />
+                            <AbsDimension x="20" y="-292" />
                         </Offset>
                     </Anchor>
                 </Anchors>
                 <Scripts>
-                    <OnClick function="CensusPlus_Take_OnClick" />
-                    <OnEnter function="CensusPlus_Take_OnEnter" />
+                    <OnClick function="CENSUSPLUS_TAKE_OnClick" />
+                    <OnEnter function="CENSUSPLUS_TAKE_OnEnter" />
                     <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
+												GameTooltip:Hide();
+										</OnLeave>
                 </Scripts>
             </Button>
-            <Button name="CensusPlusStopButton" inherits="UIPanelButtonTemplate" text="CENSUSPlus_STOP">
+            <Button name="CensusPlusStopButton" inherits="UIPanelButtonTemplate" text="CENSUSPLUS_STOP">
                 <Size>
                     <AbsDimension x="128" y="21" />
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="CensusPlusTakeButton" >
                         <Offset>
-                            <AbsDimension x="250" y="-470" />
+                            <AbsDimension x="134" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
                 <Scripts>
-                    <OnClick>
-						CensusPlus_StopCensus( );
-					</OnClick>
-                    <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPlus_STOPCENSUS, 1.0, 1.0, 1.0);
-						GameTooltip:Show();					
-					</OnEnter>
+                    <OnClick function="CENSUSPLUS_STOPCENSUS" />
+                    <OnEnter function="CENSUSPLUS_STOP_OnEnter" />
                     <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
+												GameTooltip:Hide();
+										</OnLeave>
                 </Scripts>
             </Button>
-            <Button name="CensusPlusPruneButton" inherits="UIPanelButtonTemplate" text="CENSUSPlus_PRUNE">
+            <Button name="CensusPlusPruneButton" inherits="UIPanelButtonTemplate" text="CENSUSPLUS_PRUNE">
                 <Size>
                     <AbsDimension x="128" y="21" />
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="CensusPlusStopButton">
                         <Offset>
-                            <AbsDimension x="400" y="-470" />
+                            <AbsDimension x="300" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
                 <Scripts>
                     <OnClick>
-						CensusPlus_PruneData(30);
-					</OnClick>
+												CENSUSPLUS_PRUNEData(30,false);
+										</OnClick>
                     <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPlus_PRUNECENSUS, 1.0, 1.0, 1.0);
-						GameTooltip:Show();					
-					</OnEnter>
+												GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+												GameTooltip:SetText(CENSUSPLUS_PRUNECENSUS, 1.0, 1.0, 1.0);
+												GameTooltip:Show();					
+										</OnEnter>
                     <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
+												GameTooltip:Hide();
+										</OnLeave>
                 </Scripts>
             </Button>
-            <Button name="CensusPlusPurgeButton" inherits="UIPanelButtonTemplate" text="CENSUSPlus_PURGE">
+            <Button name="CensusPlusPurgeButton" inherits="UIPanelButtonTemplate" text="CENSUSPLUS_PURGE">
                 <Size>
                     <AbsDimension x="128" y="21" />
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="CensusPlusPruneButton">
                         <Offset>
-                            <AbsDimension x="550" y="-470" />
+                            <AbsDimension x="136" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
                 <Scripts>
-                    <OnClick>
-						CensusPlus_Purge();
-					</OnClick>
+                    <OnClick function="CENSUSPLUS_PURGE_OnClick" />
                     <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPlus_PURGEDATABASE, 1.0, 1.0, 1.0);
-						GameTooltip:Show();					
-					</OnEnter>
+												GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+												GameTooltip:SetText(CENSUSPLUS_PURGEDATABASE, 1.0, 1.0, 1.0);
+												GameTooltip:Show();					
+										</OnEnter>
                     <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
+												GameTooltip:Hide();
+										</OnLeave>
                 </Scripts>
             </Button>
             <Button name="CensusPlusGuildButton1" inherits="CensusPlusGuildButtonTemplate" id="1">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="CensusPlus">
                         <Offset>
-                            <AbsDimension x="729" y="-120" />
+                            <AbsDimension x="740" y="-120" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -572,7 +1271,7 @@
             </Button>
             <ScrollFrame name="CensusPlusGuildScrollFrame" inherits="FauxScrollFrameTemplate">
                 <Size>
-                    <AbsDimension x="160" y="160" />
+                    <AbsDimension x="244" y="160" />
                 </Size>
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="CensusPlusGuildButton1" relativePoint="TOPLEFT">
@@ -583,37 +1282,37 @@
                 </Anchors>
                 <Scripts>
                     <OnVerticalScroll>
-						FauxScrollFrame_OnVerticalScroll(self, offset, CensusPlus_GUILDBUTTONSIZEY, CensusPlus_UpdateGuildButtons);
-					</OnVerticalScroll>
+												FauxScrollFrame_OnVerticalScroll(self, offset, CensusPlus_GUILDBUTTONSIZEY, CensusPlus_UpdateGuildButtons);
+										</OnVerticalScroll>
                 </Scripts>
             </ScrollFrame>
-            <Button name="CP_DisplayCharactersButton" inherits="UIPanelButtonTemplate" text="CENSUSPlus_BUTTON_CHARACTERS">
+            <Button name="CP_DisplayCharactersButton" inherits="UIPanelButtonTemplate" text="CENSUSPLUS_BUTTON_CHARACTERS">
                 <Size>
                     <AbsDimension x="128" y="21" />
                 </Size>
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="CensusPlusGuildButton10" relativePoint="BOTTOMLEFT">
                         <Offset>
-                            <AbsDimension x="20" y="-10" />
+                            <AbsDimension x="44" y="-12" />
                         </Offset>
                     </Anchor>
                 </Anchors>
                 <Scripts>
                     <OnClick>
-						PlaySound("igMainMenuOptionCheckBoxOn");
-						if( CP_PlayerListWindow:IsVisible() ) then
-    						HideUIPanel( CP_PlayerListWindow );
-						else
-    						CensusPlus_ShowPlayerList();
-						end
-					</OnClick>
+												PlaySound("igMainMenuOptionCheckBoxOn");
+												if( CP_PlayerListWindow:IsVisible() ) then
+    												HideUIPanel( CP_PlayerListWindow );
+												else
+    												CensusPlus_ShowPlayerList();
+												end
+										</OnClick>
                 </Scripts>
             </Button>
             <Button name="CensusPlusRaceLegend1" inherits="CensusPlusRaceLegendTemplate" id="1">
                 <Anchors>
                     <Anchor point="TOPLEFT">
                         <Offset>
-                            <AbsDimension x="32" y="-256" />
+                            <AbsDimension x="20" y="-256" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -631,7 +1330,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusRaceLegend1" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -649,7 +1348,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusRaceLegend2" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -667,7 +1366,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusRaceLegend3" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -685,7 +1384,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusRaceLegend4" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -703,7 +1402,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusRaceLegend5" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -717,11 +1416,29 @@
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="CensusPlusClassLegend1" inherits="CensusPlusClassLegendTemplate" id="1">
+            <Button name="CensusPlusRaceLegend7" inherits="CensusPlusRaceLegendTemplate" id="7">
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusRaceLegend6" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="49" y="0" />
+                            <AbsDimension x="6" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusRaceBar7" inherits="CensusPlusRaceBarTemplate" id="7">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="CensusPlusRaceLegend7" relativePoint="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="8" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusClassLegend1" inherits="CensusPlusClassLegendTemplate" id="1">
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="CensusPlusRaceLegend7" relativePoint="RIGHT">
+                        <Offset>
+                            <AbsDimension x="24" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -739,7 +1456,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusClassLegend1" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -757,7 +1474,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusClassLegend2" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -775,7 +1492,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusClassLegend3" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -793,7 +1510,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusClassLegend4" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -811,7 +1528,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusClassLegend5" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -829,7 +1546,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusClassLegend6" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -847,7 +1564,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusClassLegend7" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -865,7 +1582,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusClassLegend8" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -883,7 +1600,7 @@
                 <Anchors>
                     <Anchor point="LEFT" relativeTo="CensusPlusClassLegend9" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="8" y="0" />
+                            <AbsDimension x="6" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -897,23 +1614,41 @@
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="CensusPlusLevelBar1" inherits="CensusPlusLevelBarTemplate" id="1">
-        <Size>
-            <AbsDimension x="0" y="0" />
-        </Size>
-			
+            <Button name="CensusPlusClassLegend11" inherits="CensusPlusClassLegendTemplate" id="11">
                 <Anchors>
-                    <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+                    <Anchor point="LEFT" relativeTo="CensusPlusClassLegend10" relativePoint="RIGHT">
                         <Offset>
-                            <AbsDimension x="32" y="-450" />
+                            <AbsDimension x="6" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusClassBar11" inherits="CensusPlusClassBarTemplate" id="11">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="CensusPlusClassLegend11" relativePoint="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="8" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+<!-- the following buttons level 1 through level 3 are set to ZERO Dimension so they don't display in window -->
+            <Button name="CensusPlusLevelBar1" inherits="CensusPlusLevelBarTemplate" id="1">
+ <!--       				<Size>
+           				 	<AbsDimension x="4" y="0" />
+       					 </Size>  -->
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlus" relativePoint="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-452" />
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
             <Button name="CensusPlusLevelBar2" inherits="CensusPlusLevelBarTemplate" id="2">
-        <Size>
-            <AbsDimension x="0" y="0" />
-        </Size>
+ <!--       				<Size>
+            				<AbsDimension x="4" y="0" />
+        				</Size>  -->
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar1" relativePoint="BOTTOMRIGHT">
                         <Offset>
@@ -923,9 +1658,9 @@
                 </Anchors>
             </Button>
             <Button name="CensusPlusLevelBar3" inherits="CensusPlusLevelBarTemplate" id="3">
-        <Size>
-            <AbsDimension x="0" y="0" />
-        </Size>
+ <!--       				<Size>
+            				<AbsDimension x="4" y="0" />
+        				</Size> -->
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar2" relativePoint="BOTTOMRIGHT">
                         <Offset>
@@ -934,12 +1669,14 @@
                     </Anchor>
                 </Anchors>
             </Button>
+<!--  end of omitted level buttons from display -->
             <Button name="CensusPlusLevelBar4" inherits="CensusPlusLevelBarTemplate" id="4">
-        <Size>
-            <AbsDimension x="0" y="0" />
-        </Size>
+ <!--        				<Size>
+            				<AbsDimension x="0" y="0" />
+        				</Size>  -->
                 <Anchors>
-                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar3" relativePoint="BOTTOMRIGHT">
+ <!--                   <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">  -->
+					<Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar3" relativePoint="BOTTOMRIGHT">
                         <Offset>
                             <AbsDimension x="4" y="0" />
                         </Offset>
@@ -947,9 +1684,9 @@
                 </Anchors>
             </Button>
             <Button name="CensusPlusLevelBar5" inherits="CensusPlusLevelBarTemplate" id="5">
-        <Size>
-            <AbsDimension x="0" y="0" />
-        </Size>
+ <!--       				<Size>
+          				  <AbsDimension x="0" y="0" />
+        				</Size>  -->
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar4" relativePoint="BOTTOMRIGHT">
                         <Offset>
@@ -960,9 +1697,10 @@
             </Button>
             <Button name="CensusPlusLevelBar6" inherits="CensusPlusLevelBarTemplate" id="6">
                 <Anchors>
-                    <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar5" relativePoint="BOTTOMRIGHT">
+ <!--                   <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">  -->
                         <Offset>
-                            <AbsDimension x="32" y="-450" />
+                            <AbsDimension x="4" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -1678,16 +2416,158 @@
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="CensusPlusLevelBarEmpty1" inherits="CensusPlusLevelBarEmptyTemplate" id="1">
+            <Button name="CensusPlusLevelBar86" inherits="CensusPlusLevelBarTemplate" id="86">
                 <Anchors>
-                    <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar85" relativePoint="BOTTOMRIGHT">
                         <Offset>
-                            <AbsDimension x="32" y="-450" />
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar87" inherits="CensusPlusLevelBarTemplate" id="87">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar86" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar88" inherits="CensusPlusLevelBarTemplate" id="88">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar87" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar89" inherits="CensusPlusLevelBarTemplate" id="89">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar88" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar90" inherits="CensusPlusLevelBarTemplate" id="90">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar89" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar91" inherits="CensusPlusLevelBarTemplate" id="91">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar90" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar92" inherits="CensusPlusLevelBarTemplate" id="92">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar91" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar93" inherits="CensusPlusLevelBarTemplate" id="93">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar92" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar94" inherits="CensusPlusLevelBarTemplate" id="94">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar93" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar95" inherits="CensusPlusLevelBarTemplate" id="95">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar94" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar96" inherits="CensusPlusLevelBarTemplate" id="96">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar95" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar97" inherits="CensusPlusLevelBarTemplate" id="97">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar96" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar98" inherits="CensusPlusLevelBarTemplate" id="98">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar97" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar99" inherits="CensusPlusLevelBarTemplate" id="99">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar98" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBar100" inherits="CensusPlusLevelBarTemplate" id="100">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBar99" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+<!-- the following buttons level 1 through level 3 are set to ZERO Dimension so they don't display in window -->
+            <Button name="CensusPlusLevelBarEmpty1" inherits="CensusPlusLevelBarEmptyTemplate" id="1">
+ <!--       				<Size>
+           				 	<AbsDimension x="0" y="0" />
+       					 </Size>  -->
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlus" relativePoint="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="20" y="-450" />
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
             <Button name="CensusPlusLevelBarEmpty2" inherits="CensusPlusLevelBarEmptyTemplate" id="2">
+ <!--       				<Size>
+           				 	<AbsDimension x="0" y="0" />
+       					 </Size>  -->
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty1" relativePoint="BOTTOMRIGHT">
                         <Offset>
@@ -1697,6 +2577,9 @@
                 </Anchors>
             </Button>
             <Button name="CensusPlusLevelBarEmpty3" inherits="CensusPlusLevelBarEmptyTemplate" id="3">
+ <!--       				<Size>
+           				 	<AbsDimension x="0" y="0" />
+       					 </Size>  -->
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty2" relativePoint="BOTTOMRIGHT">
                         <Offset>
@@ -1705,11 +2588,13 @@
                     </Anchor>
                 </Anchors>
             </Button>
+<!--  end of omitted level buttons from display -->
             <Button name="CensusPlusLevelBarEmpty4" inherits="CensusPlusLevelBarEmptyTemplate" id="4">
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty3" relativePoint="BOTTOMRIGHT">
                         <Offset>
-                            <AbsDimension x="4" y="0" />
+    <!--                        <AbsDimension x="13" y="-452" />  -->
+                           <AbsDimension x="4" y="0" />
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -2443,14 +3328,147 @@
                     </Anchor>
                 </Anchors>
             </Button>
-        </Frames>
+            <Button name="CensusPlusLevelBarEmpty86" inherits="CensusPlusLevelBarEmptyTemplate" id="86">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty85" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty87" inherits="CensusPlusLevelBarEmptyTemplate" id="87">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty86" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty88" inherits="CensusPlusLevelBarEmptyTemplate" id="88">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty87" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty89" inherits="CensusPlusLevelBarEmptyTemplate" id="89">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty88" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty90" inherits="CensusPlusLevelBarEmptyTemplate" id="90">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty89" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="4" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+			<Button name="CensusPlusLevelBarEmpty91" inherits="CensusPlusLevelBarEmptyTemplate" id="91">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty90" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty92" inherits="CensusPlusLevelBarEmptyTemplate" id="92">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty91" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty93" inherits="CensusPlusLevelBarEmptyTemplate" id="93">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty92" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty94" inherits="CensusPlusLevelBarEmptyTemplate" id="94">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty93" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty95" inherits="CensusPlusLevelBarEmptyTemplate" id="95">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty94" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty96" inherits="CensusPlusLevelBarEmptyTemplate" id="96">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty95" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty97" inherits="CensusPlusLevelBarEmptyTemplate" id="97">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty96" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty98" inherits="CensusPlusLevelBarEmptyTemplate" id="98">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty97" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty99" inherits="CensusPlusLevelBarEmptyTemplate" id="99">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty98" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="CensusPlusLevelBarEmpty100" inherits="CensusPlusLevelBarEmptyTemplate" id="100">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="CensusPlusLevelBarEmpty99" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="3" y="0" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+       </Frames>
         <Scripts>
-    		<OnLoad function="CensusPlus_OnLoad"/>    
+    				<OnLoad function="CensusPlus_OnLoad" />   
             <OnShow function="CensusPlus_OnShow" />
             <OnUpdate function="CensusPlus_OnUpdate" />
-            <OnEvent>
-				CensusPlus_OnEvent(event,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
-			</OnEvent>			
+            <OnEvent function="CensusPlus_OnEvent" />			
             <OnMouseUp>
                 if ( self.isMoving ) then
                     self:StopMovingOrSizing();
@@ -2466,16 +3484,14 @@
             </OnHide>
         </Scripts>
     </Frame>
-    <Frame name="CP_EU_US_Version" toplevel="true" enableMouse="true" movable="true" parent="UIParent"
-        hidden="true">
+    <Frame name="CP_EU_US_Version" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true">
         <Size>
             <AbsDimension x="300" y="100" />
         </Size>
         <Anchors>
             <Anchor point="CENTER" />
         </Anchors>
-        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border"
-            tile="true">
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
             <BackgroundInsets>
                 <AbsInset left="11" right="12" top="12" bottom="11" />
             </BackgroundInsets>
@@ -2508,7 +3524,7 @@
                     <AbsDimension x="125" y="21" />
                 </Size>
                 <Anchors>
-                    <Anchor point="TOP" relativeTo="CP_EU_US_Version" relativeFrom="TOPLEFT">
+                    <Anchor point="TOP" relativeTo="CP_EU_US_Version">
                         <Offset>
                             <AbsDimension x="-75" y="-45" />
                         </Offset>
@@ -2516,16 +3532,16 @@
                 </Anchors>
                 <Scripts>
                     <OnClick>
-						CensusPlus_SelectLocale("US");
-					</OnClick>
+												CensusPlus_SelectLocale("US");
+										</OnClick>
                     <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPLUS_US_LOCALE, 1.0, 1.0, 1.0);
-						GameTooltip:Show();
-					</OnEnter>
+												GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+												GameTooltip:SetText(CENSUSPLUS_US_LOCALE, 1.0, 1.0, 1.0);
+												GameTooltip:Show();
+										</OnEnter>
                     <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
+												GameTooltip:Hide();
+										</OnLeave>
                 </Scripts>
             </Button>
             <Button name="CP_EU" inherits="UIPanelButtonTemplate" text="EURO SERVERS">
@@ -2533,7 +3549,7 @@
                     <AbsDimension x="125" y="21" />
                 </Size>
                 <Anchors>
-                    <Anchor point="TOP" relativeTo="CP_EU_US_Version" relativeFrom="TOPLEFT">
+                    <Anchor point="TOP" relativeTo="CP_EU_US_Version">
                         <Offset>
                             <AbsDimension x="75" y="-45" />
                         </Offset>
@@ -2541,479 +3557,19 @@
                 </Anchors>
                 <Scripts>
                     <OnClick>
-						CensusPlus_SelectLocale("EU");
-					</OnClick>
+												CensusPlus_SelectLocale("EU");
+										</OnClick>
                     <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPLUS_EU_LOCALE, 1.0, 1.0, 1.0);
-						GameTooltip:Show();
-					</OnEnter>
+												GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+												GameTooltip:SetText(CENSUSPLUS_EU_LOCALE, 1.0, 1.0, 1.0);
+												GameTooltip:Show();
+										</OnEnter>
                     <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
+												GameTooltip:Hide();
+										</OnLeave>
                 </Scripts>
             </Button>
         </Frames>
     </Frame>
-    <Frame name="CP_OptionsWindow" toplevel="true" enableMouse="true" movable="true" parent="UIParent"
-        hidden="true">
-        <Size>
-            <AbsDimension x="250" y="300" />
-        </Size>
-        <Anchors>
-            <Anchor point="CENTER">
-                <Offset>
-                    <AbsDimension x="0" y="0" />
-                </Offset>
-            </Anchor>
-        </Anchors>
-        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border"
-            tile="true">
-            <BackgroundInsets>
-                <AbsInset left="11" right="12" top="12" bottom="11" />
-            </BackgroundInsets>
-            <TileSize>
-                <AbsValue val="32" />
-            </TileSize>
-            <EdgeSize>
-                <AbsValue val="32" />
-            </EdgeSize>
-        </Backdrop>
-        <Layers>
-			<Layer level="ARTWORK">
-				<Texture name="CensusOptionsFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
-					<Size>
-						<AbsDimension x="256" y="64"/>
-					</Size>
-					<Anchors>
-						<Anchor point="TOP">
-							<Offset>
-								<AbsDimension x="0" y="12"/>
-							</Offset>
-						</Anchor>
-					</Anchors>
-				</Texture>
-				<FontString inherits="GameFontNormal" text="CENSUSPlus_OPTIONS_HEADER">
-					<Anchors>
-						<Anchor point="TOP" relativeTo="CensusOptionsFrameHeader">
-							<Offset>
-								<AbsDimension x="0" y="-14"/>
-							</Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-			</Layer>            
-        </Layers>
-        <Frames>
-            <CheckButton name="CP_OptionAutoClose" id="0">
-                <Size>
-                    <AbsDimension x="20" y="20" />
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPLEFT">
-                        <Offset>
-                            <AbsDimension x="200" y="-40" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Layers>
-                    <Layer name="CP_AutoCloseLabel">
-                        <FontString name="CP_OptionAutoCloseTitle" inherits="GameFontHighlight" text="CENSUSPlus_AUTOCLOSEWHO">
-                            <Anchors>
-                                <Anchor point="RIGHT" relativePoint="LEFT">
-                                    <Offset>
-                                        <AbsDimension x="-5" y="2" />
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Scripts>
-                    <OnLoad>
-						self:SetFrameLevel(10);
-					</OnLoad>
-                    <OnClick>
-						if ( self:GetChecked() ) then
-							PlaySound("igMainMenuOptionCheckBoxOff");
-                            CensusPlus_AutoCloseWho(1);
-						else
-							PlaySound("igMainMenuOptionCheckBoxOn");
-                            CensusPlus_AutoCloseWho(0);
-						end
-					</OnClick>
-                </Scripts>
-                <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
-                <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
-                <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
-                <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
-                <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
-            </CheckButton>
-            <CheckButton name="CP_OptionAutoStartButton" id="1">
-                <Size>
-                    <AbsDimension x="20" y="20" />
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPLEFT">
-                        <Offset>
-                            <AbsDimension x="200" y="-60" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Layers>
-                    <Layer name="CP_OptionAutoStartLayer">
-                        <FontString name="CP_OptionAutoStartText" inherits="GameFontHighlight" text="CENSUS_OPTIONS_AUTOSTART">
-                            <Size>
-                                <AbsDimension x="100" y="15" />
-                            </Size>
-                            <Anchors>
-                                <Anchor point="RIGHT" relativePoint="LEFT">
-                                    <Offset>
-                                        <AbsDimension x="-5" y="2" />
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Scripts>
-                    <OnLoad>
-						self:SetFrameLevel(10);
-					</OnLoad>
-                    <OnClick>
-						if ( self:GetChecked() ) then
-							PlaySound("igMainMenuOptionCheckBoxOff");
-                            CensusPlus_AutoStart(1);
-						else
-							PlaySound("igMainMenuOptionCheckBoxOn");
-                            CensusPlus_AutoStart(0);
-						end
-					</OnClick>
-                    <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPlus_AUTOSTART_TOOLTIP, 1.0, 1.0, 1.0);
-						GameTooltip:Show();					
-					</OnEnter>
-                    <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>					
-                </Scripts>
-                <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
-                <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
-                <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
-                <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
-                <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
-            </CheckButton>
-            <CheckButton name="CP_OptionVerboseButton" id="2">
-                <Size>
-                    <AbsDimension x="20" y="20" />
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPLEFT">
-                        <Offset>
-                            <AbsDimension x="200" y="-80" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Layers>
-                    <Layer name="CP_OptionVerboseLayer">
-                        <FontString name="CP_OptionVerboseText" inherits="GameFontHighlight" text="CENSUS_OPTIONS_VERBOSE">
-                            <Size>
-                                <AbsDimension x="100" y="15" />
-                            </Size>
-                            <Anchors>
-                                <Anchor point="RIGHT" relativePoint="LEFT">
-                                    <Offset>
-                                        <AbsDimension x="-5" y="2" />
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Scripts>
-                    <OnLoad>
-						self:SetFrameLevel(10);
-					</OnLoad>
-                    <OnClick>
-						if ( self:GetChecked() ) then
-							PlaySound("igMainMenuOptionCheckBoxOff");
-							CensusPlus_Verbose();
-						else
-							PlaySound("igMainMenuOptionCheckBoxOn");
-							CensusPlus_Verbose();
-						end
-					</OnClick>
-                    <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPlus_VERBOSE_TOOLTIP, 1.0, 1.0, 1.0);
-						GameTooltip:Show();					
-					</OnEnter>
-                    <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>					
-                </Scripts>
-                <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
-                <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
-                <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
-                <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
-                <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
-            </CheckButton>
-            <CheckButton name="CP_OptionAutoCensusButton" id="2">
-                <Size>
-                    <AbsDimension x="20" y="20" />
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPLEFT">
-                        <Offset>
-                            <AbsDimension x="200" y="-100" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Layers>
-                    <Layer name="CP_OptionAutoCensusLayer">
-                        <FontString name="CP_OptionAutoCensusText" inherits="GameFontHighlight" text="CENSUS_OPTIONS_AUTOCENSUS">
-                            <Size>
-                                <AbsDimension x="100" y="15" />
-                            </Size>
-                            <Anchors>
-                                <Anchor point="RIGHT" relativePoint="LEFT">
-                                    <Offset>
-                                        <AbsDimension x="-5" y="2" />
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Scripts>
-                    <OnLoad>
-						self:SetFrameLevel(10);
-					</OnLoad>
-                    <OnClick>
-						if ( self:GetChecked() ) then
-							PlaySound("igMainMenuOptionCheckBoxOff");
-							CensusPlus_SetAutoCensus(1);
-						else
-							PlaySound("igMainMenuOptionCheckBoxOn");
-							CensusPlus_SetAutoCensus(0);
-						end
-					</OnClick>
-                    <OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-						GameTooltip:SetText(CENSUSPlus_AUTOCENSUS_TOOLTIP, 1.0, 1.0, 1.0);
-						GameTooltip:Show();					
-					</OnEnter>
-                    <OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>					
-                </Scripts>
-                <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
-                <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
-                <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
-                <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
-                <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
-            </CheckButton>
-            <CheckButton name="CP_OptionAutoShowMinimapButton" id="1">
-                <Size>
-                    <AbsDimension x="20" y="20" />
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPLEFT">
-                        <Offset>
-                            <AbsDimension x="200" y="-140" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Layers>
-                    <Layer name="CP_OptionAutoShowMinimapButtonLayer">
-                        <FontString name="CP_OptionAutoShowMinimapButtonText" inherits="GameFontHighlight" >
-                            <Size>
-                                <AbsDimension x="150" y="15" />
-                            </Size>
-                            <Anchors>
-                                <Anchor point="RIGHT" relativePoint="LEFT">
-                                    <Offset>
-                                        <AbsDimension x="-5" y="2" />
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Scripts>
-                    <OnLoad>
-						self:SetFrameLevel(10);
-					</OnLoad>
-                    <OnClick>
-						if ( self:GetChecked() ) then
-							PlaySound("igMainMenuOptionCheckBoxOff");
-                            CensusPlus_Database["Info"]["CensusButtonShown"] = 1;
-                            CensusButtonFrame:Show();
-						else
-							PlaySound("igMainMenuOptionCheckBoxOn");
-                            CensusPlus_Database["Info"]["CensusButtonShown"] = 0;
-                            CensusButtonFrame:Hide();
-						end
-					</OnClick>
-					<OnLoad>
-						getglobal(self:GetName().."Text"):SetText(CENSUS_OPTIONS_BUTSHOW);
-					</OnLoad>
-                </Scripts>
-                <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
-                <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
-                <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
-                <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
-                <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
-            </CheckButton>
-            <CheckButton name="CP_OptionPlaySoundOnCompleteButton" id="1">
-                <Size>
-                    <AbsDimension x="20" y="20" />
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPLEFT">
-                        <Offset>
-                            <AbsDimension x="200" y="-160" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Layers>
-                    <Layer name="CP_OptionPlaySoundOnCompleteButtonLayer">
-                        <FontString name="CP_OptionPlaySoundOnCompleteButtonText" inherits="GameFontHighlight" >
-                            <Size>
-                                <AbsDimension x="150" y="15" />
-                            </Size>
-                            <Anchors>
-                                <Anchor point="RIGHT" relativePoint="LEFT">
-                                    <Offset>
-                                        <AbsDimension x="-5" y="2" />
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Scripts>
-                    <OnLoad>
-						self:SetFrameLevel(10);
-						getglobal(self:GetName().."Text"):SetText(CENSUS_OPTIONS_SOUND_ON_COMPLETE);
-					</OnLoad>
-                    <OnClick>
-						if ( self:GetChecked() ) then
-							PlaySound("igMainMenuOptionCheckBoxOff");
-                            CensusPlus_PerCharInfo["PlayFinishSound"] = true;
-						else
-							PlaySound("igMainMenuOptionCheckBoxOn");
-                            CensusPlus_PerCharInfo["PlayFinishSound"] = false;
-						end
-					</OnClick>
-                </Scripts>
-                <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
-                <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
-                <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
-                <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
-                <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
-            </CheckButton>
-			
-            <CheckButton name="CP_OptionUseLogarithmicBars" id="1">
-                <Size>
-                    <AbsDimension x="20" y="20" />
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPLEFT">
-                        <Offset>
-                            <AbsDimension x="200" y="-180" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Layers>
-                    <Layer name="CP_OptionUseLogarithmicBarsLayer">
-                        <FontString name="CP_OptionUseLogarithmicBarsText" inherits="GameFontHighlight" >
-                            <Size>
-                                <AbsDimension x="150" y="15" />
-                            </Size>
-                            <Anchors>
-                                <Anchor point="RIGHT" relativePoint="LEFT">
-                                    <Offset>
-                                        <AbsDimension x="-5" y="2" />
-                                    </Offset>
-                                </Anchor>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Scripts>
-                    <OnLoad>
-						self:SetFrameLevel(10);
-					</OnLoad>
-                    <OnClick>
-						if ( self:GetChecked() ) then
-							PlaySound("igMainMenuOptionCheckBoxOff");
-                            CensusPlus_Database["Info"]["UseLogBars"] = 1;
-							CensusPlus_UpdateView();
-						else
-							PlaySound("igMainMenuOptionCheckBoxOn");
-                            CensusPlus_Database["Info"]["UseLogBars"] = 0;
-							CensusPlus_UpdateView();
-						end
-					</OnClick>
-					<OnLoad>
-						getglobal(self:GetName().."Text"):SetText(CENSUS_OPTIONS_LOG_BARS);
-					</OnLoad>
-                </Scripts>
-                <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
-                <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
-                <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD" />
-                <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
-                <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
-            </CheckButton>			
 
-            <Button name="CP_OptionCloseButton" inherits="UIPanelCloseButton">
-                <Anchors>
-                    <Anchor point="TOPRIGHT">
-                        <Offset>
-                            <AbsDimension x="-5" y="-5" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Scripts>
-                    <OnClick>
-						PlaySound("igMainMenuOptionCheckBoxOn");
-						HideUIPanel(CP_OptionsWindow);
-					</OnClick>
-                </Scripts>
-            </Button>
-            <Button name="CP_OptionExitButton" inherits="UIPanelButtonTemplate" text="Exit">
-                <Size>
-                    <AbsDimension x="77" y="21" />
-                </Size>
-                <Anchors>
-                    <Anchor point="LEFT" relativePoint="BOTTOMLEFT">
-                        <Offset>
-                            <AbsDimension x="86" y="25" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Scripts>
-                    <OnClick>
-						PlaySound("igMainMenuOptionCheckBoxOn");
-						HideUIPanel(CP_OptionsWindow);
-					</OnClick>
-                </Scripts>
-            </Button>
-        </Frames>
-        <Scripts>
-            <OnShow>
-				CP_OptionsOnShow();
-			</OnShow>
-            <OnMouseUp function="CensusPlus_Options_OnMouseUp" />
-            <OnMouseDown function="CensusPlus_Options_OnMouseDown" />
-            <OnHide>
-                if ( self.isMoving ) then
-                    self:StopMovingOrSizing();
-                    self.isMoving = false;
-                end
-            </OnHide>
-        </Scripts>
-    </Frame>
 </Ui>

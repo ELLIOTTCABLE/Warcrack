@@ -1,10 +1,10 @@
 --[[--------------------------------------------------------------------
 	PhanxChat
 	Reduces chat frame clutter and enhances chat frame functionality.
-	Written by Phanx <addons@phanx.net>
-	Copyright © 2006–2012 Phanx. Some rights reserved. See LICENSE.txt for details.
+	Copyright (c) 2006-2014 Phanx <addons@phanx.net>. All rights reserved.
 	http://www.wowinterface.com/downloads/info6323-PhanxChat.html
 	http://www.curse.com/addons/wow/phanxchat
+	https://github.com/Phanx/PhanxChat
 ----------------------------------------------------------------------]]
 
 local NUM_HISTORY_LINES = 15
@@ -68,5 +68,3 @@ function PhanxChat:SetHideRepeats(v)
 end
 
 table.insert(PhanxChat.RunOnLoad, PhanxChat.SetHideRepeats)
-
-------------------------------------------------------------------------

@@ -124,6 +124,9 @@ L["GATHERDESC2_DESC"] = "블리자드 미니맵 버튼에 대해 설정합니다
 L["Collect Buttons"] = "버튼 수집"
 L["COLLECT2_DESC"] = "블리자드 미니맵 버튼을 수집합니다."
 
+L["Exclude Queue Button"] = "대기열 버튼을 제외"
+L["ExcludeLFG_DESC"] = "대기열 상태 버튼을 제외"
+
 L["Hide Mail"] = "우편 숨김"
 L["HIDEMAIL_DESC"] = "블리자드 새로운 우편 아이콘을 숨김"
 

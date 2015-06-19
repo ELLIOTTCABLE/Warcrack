@@ -1,9 +1,12 @@
 local MAJOR_VERSION = "LibDogTag-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 203 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 250 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_MINOR_VERSION then
 	_G.DogTag_MINOR_VERSION = MINOR_VERSION
 end
+
+local _G, pairs, ipairs, type, table, tostring, rawget, assert, next, select, error, setmetatable, unpack, next =
+	  _G, pairs, ipairs, type, table, tostring, rawget, assert, next, select, error, setmetatable, unpack, next
 
 -- #AUTODOC_NAMESPACE DogTag
 
@@ -308,7 +311,7 @@ do
 		keys = del(keys)
 	end
 	
-	pool = setmetatable({}, {__mode='v'})
+	local pool = setmetatable({}, {__mode='v'})
 	function memoizeTable(tab)
 		if type(tab) ~= "table" then
 			return tab
@@ -329,54 +332,95 @@ do
 end
 DogTag.memoizeTable = memoizeTable
 
-local kwargsToKwargTypes = setmetatable({}, { __index = function(self, kwargs)
-	if not kwargs then
-		return self[""]
-	elseif kwargs == "" then
-		local t = {}
-		self[false] = t
-		self[""] = t
-		return t
+local function deepCompare(t1,t2)
+	local ty1 = type(t1)
+	local ty2 = type(t2)
+	if ty1 ~= ty2 then return false end
+	-- non-table types can be directly compared
+	if ty1 ~= 'table' and ty2 ~= 'table' then return t1 == t2 end
+	for k1,v1 in pairs(t1) do
+		local v2 = t2[k1]
+		if v2 == nil or not deepCompare(v1,v2) then return false end
 	end
+	for k2,v2 in pairs(t2) do
+		local v1 = t1[k2]
+		if v1 == nil or not deepCompare(v1,v2) then return false end
+	end
+	return true
+end
+DogTag.deepCompare = deepCompare
+
+local kwargsToKwargTypes, kwargsToKwargTypesWithTableCache
+do
 	
-	local kwargTypes = newList()
-	local keys = newList()
-	for k in pairs(kwargs) do
-		keys[#keys+1] = k
-	end
-	table.sort(keys)
-	local t = newList()
-	for i,k in ipairs(keys) do
-		if i > 1 then
-			t[#t+1] = ";"
+	kwargsToKwargTypes = setmetatable({}, { __index = function(self, kwargs)
+		if not kwargs then
+			return self[""]
+		elseif kwargs == "" then
+			local t = {}
+			self[false] = t
+			self[""] = t
+			return t
 		end
-		local v = kwargs[k]
-		t[#t+1] = k
-		t[#t+1] = "="
-		local type_v = type(v)
-		t[#t+1] = type_v
-		kwargTypes[k] = type_v
-	end
-	keys = del(keys)
-	local s = table.concat(t)
-	t = del(t)
-	local self_s = rawget(self, s)
-	if self_s then
+		
+		local kwargTypes = newList()
+		local keys = newList()
+		for k in pairs(kwargs) do
+			keys[#keys+1] = k
+		end
+		table.sort(keys)
+		local t = newList()
+		for i,k in ipairs(keys) do
+			if i > 1 then
+				t[#t+1] = ";"
+			end
+			local v = kwargs[k]
+			t[#t+1] = k
+			t[#t+1] = "="
+			local type_v = type(v)
+			t[#t+1] = type_v
+			kwargTypes[k] = type_v
+		end
+		keys = del(keys)
+		local s = table.concat(t)
+		t = del(t)
+		local self_s = rawget(self, s)
+		if self_s then
+			kwargTypes = del(kwargTypes)
+			
+			return self_s
+		end
+		local t = {}
+		for k, v in pairs(kwargTypes) do
+			t[k] = v
+		end
 		kwargTypes = del(kwargTypes)
-		self[kwargs] = self_s
-		return self_s
-	end
-	local t = {}
-	for k, v in pairs(kwargTypes) do
-		t[k] = v
-	end
-	kwargTypes = del(kwargTypes)
-	kwargTypes = t
-	self[s] = kwargTypes
-	self[kwargs] = kwargTypes
-	return kwargTypes
-end, __mode='kv' })
+		kwargTypes = t
+		self[s] = kwargTypes
+		
+		return kwargTypes
+	end, __mode='kv' })
+	
+	-- This is separate from kwargsToKwargTypes because in some cases,
+	-- a reused kwargs (reused by the addon providing it to DogTag)
+	-- will cause a possibly incorrect kwargTypes table to be returned.
+	-- This cache should only be used in places where we are certain that the kwargs
+	-- table is not being reused - this is usually true if:
+	-- 		We memoizeTable(deepCopy(kwargs))
+	-- 		Or if kwargs is obtained from fsToKwargs[fs] or callbackToKwargs[uid]
+	--			(because all kwargs in these tables have had memoizeTable(deepCopy(kwargs)) performed)
+	
+	kwargsToKwargTypesWithTableCache = setmetatable({}, { __index = function(self, kwargs)
+		local kwargTypes = kwargsToKwargTypes[kwargs]
+		if not kwargs then
+			return kwargTypes
+		end
+		self[kwargs] = kwargTypes
+		return kwargTypes
+	end, __mode='kv' })
+end
 DogTag.kwargsToKwargTypes = kwargsToKwargTypes
+DogTag.kwargsToKwargTypesWithTableCache = kwargsToKwargTypesWithTableCache
 
 local codeToFunction, codeToEventList, callbackToNSList, callbackToCode, callbackToKwargTypes, eventData
 local fsToNSList, fsToKwargs, fsToCode, fsNeedQuickUpdate
@@ -448,7 +492,7 @@ local function _clearCodes()
 		local kwargs = fsToKwargs[fs]
 		local code = fsToCode[fs]
 		
-		local kwargTypes = kwargsToKwargTypes[kwargs]
+		local kwargTypes = kwargsToKwargTypesWithTableCache[kwargs]
 		
 		local codeToEventList_nsList_kwargTypes_code = codeToEventList[nsList][kwargTypes][code]
 		if codeToEventList_nsList_kwargTypes_code == nil then
@@ -473,4 +517,10 @@ local function clearCodes(namespace)
 end
 DogTag.clearCodes = clearCodes
 
+function DogTag.tagError(code, nsList, err)
+	local _, minor = LibStub(MAJOR_VERSION)
+	local message = ("%s.%d: Error with code %q (%s). %s"):format(MAJOR_VERSION, minor, code, nsList, err)
+	geterrorhandler()(message)
+	return message, code, nsList, err
+end
 end

@@ -124,6 +124,9 @@ L["GATHERDESC2_DESC"] = "设置为暴雪迷你按钮"
 L["Collect Buttons"] = "收纳小地图系统按钮"
 L["COLLECT2_DESC"] = "收集的暴雪迷你按钮"
 
+L["Exclude Queue Button"] = "排除队列按钮"
+L["ExcludeLFG_DESC"] = "排除队列状态按钮"
+
 L["Hide Mail"] = "隐藏系统邮件图标"
 L["HIDEMAIL_DESC"] = "隐藏的暴雪新邮件图标"
 

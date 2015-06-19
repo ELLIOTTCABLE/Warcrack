@@ -1,14 +1,14 @@
-﻿## Interface: 40300
+﻿## Interface: 60100
 ## Title: DataStore_Agenda
 ## Notes: Stores information about a character's friends, calendar, notes, etc..
 ## Author: Thaoky (EU-Marécages de Zangar)
-## Version: 4.3.001
+## Version: r21
 ## Dependencies: DataStore
 ## OptionalDeps: Ace3
 ## SavedVariables: DataStore_AgendaDB
 ## X-Category: Interface Enhancements
 ## X-Embeds: Ace3
-## X-Curse-Packaged-Version: r7
+## X-Curse-Packaged-Version: r21
 ## X-Curse-Project-Name: DataStore_Agenda
 ## X-Curse-Project-ID: datastore_agenda
 ## X-Curse-Repository-ID: wow/datastore_agenda/mainline

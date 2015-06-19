@@ -1,0 +1,12 @@
+## Interface: 60000
+## Title: Critline: AuraMonitor
+## Version: 4.6.4
+## Notes: Aura monitoring module for Critline.
+## Author: Lombra
+## RequiredDeps: Critline
+## X-Curse-Packaged-Version: 4.6.4
+## X-Curse-Project-Name: Critline
+## X-Curse-Project-ID: critline
+## X-Curse-Repository-ID: wow/critline/mainline
+
+Core.lua

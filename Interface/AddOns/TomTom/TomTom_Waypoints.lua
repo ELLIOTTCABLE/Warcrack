@@ -8,7 +8,8 @@
 --  TomTom:AddZWaypoint() and TomTom:RemoveWaypoint() instead.
 ----------------------------------------------------------------------------]]
 
-local astrolabe = DongleStub("TTAstrolabe-1.0")
+local addon_name, addon = ...
+local astrolabe = addon.astrolabe
 
 -- Create a tooltip to be used when mousing over waypoints
 local tooltip = CreateFrame("GameTooltip", "TomTomTooltip", UIParent, "GameTooltipTemplate")
@@ -149,6 +150,10 @@ function TomTom:SetWaypoint(waypoint, callbacks, show_minimap, show_world)
 
         table.sort(point.dlist)
     end
+
+	-- Clear the state for callbacks
+	point.state = nil
+	point.lastdist = nil
 
     -- Link the actual frames back to the waypoint object
     point.minimap.point = point

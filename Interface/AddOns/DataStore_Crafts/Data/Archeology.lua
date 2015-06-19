@@ -3,7 +3,7 @@ local addon = _G[addonName]
 
 addon.artifactDB = {}
 
-for i = 1, 10 do
+for i = 1, 15 do
 	addon.artifactDB[i] = {}
 end
 
@@ -185,3 +185,100 @@ AddArtifact(64462, 91012, 0,  45)  -- Flint Striker
 AddArtifact(64459, 90988, 0,  45)  -- Intricate Treasure Chest Key
 AddArtifact(64461, 91008, 0,  45)  -- Scramseax
 AddArtifact(64467, 91084, 0,  45)  -- Thorned Necklace
+
+currentRace = 10	-- Mantid
+AddArtifact(95391, 139786, 3, 180)	-- Mantid Sky Reaver
+AddArtifact(95392, 139787, 3, 180)	-- Sonic Pulse Generator
+
+AddArtifact(95375, 139776, 0, 50)	-- Banner of the Mantid Empire
+AddArtifact(95376, 139779, 0, 50)	-- Ancient Sap Feeder
+AddArtifact(95377, 139780, 0, 50)	-- The Praying Mantid
+AddArtifact(95378, 139781, 0, 50)	-- Inert Sound Beacon
+AddArtifact(95379, 139782, 0, 50)	-- Remains of a Paragon
+AddArtifact(95380, 139783, 0, 50)	-- Mantid Lamp
+AddArtifact(95381, 139784, 0, 50)	-- Pollen Collector
+AddArtifact(95382, 139785, 0, 50)	-- Kypari Sap Container
+
+currentRace = 11	-- Pandaren
+AddArtifact(89685, 113981, 3, 180)  -- Spear of Xuen
+AddArtifact(89684, 113980, 3, 180)  -- Umbrella of Chi-Ji
+
+AddArtifact(79903, 113977, 0,  50)  -- Apothecary Tins
+AddArtifact(79901, 113975, 0,  50)  -- Carved Bronze Mirror
+AddArtifact(79897, 113971, 0,  50)  -- Panderan Game Board
+AddArtifact(79900, 113974, 0,  50)  -- Empty Keg of Brewfather Xin Wo Yin
+AddArtifact(79902, 113976, 0,  50)  -- Gold-Inlaid Porecelain Funerary Figurine
+AddArtifact(79904, 113978, 0,  50)  -- Pearl of Yu'lon
+AddArtifact(79905, 113979, 0,  50)  -- Standard  of Niuzao
+AddArtifact(79898, 113972, 0,  50)  -- Twin Stein Set of Brewfather Quan Tou Kuo
+AddArtifact(79899, 113973, 0,  50)  -- Walking Cane of Brewfather Ren Yun
+AddArtifact(79896, 113968, 0,  50)  -- Pandaren Tea Set
+
+
+currentRace = 12	-- Mogu
+AddArtifact(89614, 113993, 3, 180)  -- Anatomical Dummy
+AddArtifact(89611, 113992, 3, 180)  -- Quilen Statuette
+
+AddArtifact(79909, 113983, 0,  50)  -- Cracked Mogu Runestone
+AddArtifact(79913, 113987, 0,  50)  -- Edicts of the Thunder King
+AddArtifact(79914, 113988, 0,  50)  -- Iron Amulet
+AddArtifact(79908, 113982, 0,  50)  -- Manacles of Rebellion
+AddArtifact(79916, 113990, 0,  50)  -- Mogu Coin
+AddArtifact(79911, 113985, 0,  50)  -- Petrified Bone Whip
+AddArtifact(79910, 113984, 0,  50)  -- Terracotta Arm
+AddArtifact(79912, 113986, 0,  50)  -- Thunder King Insignia
+AddArtifact(79915, 113989, 0,  50)  -- Warlord's Branding Iron
+AddArtifact(79917, 113991, 0,  50)  -- Worn Monument Ledger
+
+currentRace = 13	-- Arakkoa
+AddArtifact(117382, 168331, 3, 190)  -- Beakbreaker of Terokk
+AddArtifact(117354, 172460, 2, 250)  -- Ancient Nest Guardian
+
+AddArtifact(114197, 168321, 0, 45)  -- Dreamcatcher
+AddArtifact(114198, 168322, 0, 55)  -- Burial Urn
+AddArtifact(114199, 168323, 0, 50)  -- Decree Scrolls
+AddArtifact(114200, 168324, 0, 45)  -- Solar Orb
+AddArtifact(114201, 168325, 0, 60)  -- Sundial
+AddArtifact(114202, 168326, 0, 50)  -- Talonpriest Mask
+AddArtifact(114203, 168327, 0, 45)  -- Outcast Dreamcatcher
+AddArtifact(114204, 168328, 0, 70)  -- Apexis Crystal
+AddArtifact(114205, 168329, 0, 65)  -- Apexis Hieroglyph
+AddArtifact(114206, 168330, 0, 50)  -- Apexis Scroll
+
+currentRace = 14	-- Draenor Clans
+AddArtifact(117380, 172466, 3, 175)  -- Ancient Frostwolf Fang
+AddArtifact(116985, 172459, 3, 180)  -- Headdress of the First Shaman
+
+AddArtifact(114141, 168290, 0, 50)  -- Fang-Scarred Frostwolf Axe
+AddArtifact(114143, 168291, 0, 60)  -- Frostwolf Ancestry Scrimshaw
+AddArtifact(114145, 168292, 0, 45)  -- Wolfskin Snowshoes
+AddArtifact(114147, 168293, 0, 45)  -- Warsinger's Drums
+AddArtifact(114149, 168294, 0, 55)  -- Screaming Bullroarer
+AddArtifact(114151, 168295, 0, 60)  -- Warsong Ceremonial Pike
+AddArtifact(114153, 168296, 0, 50)  -- Metalworker's Hammer
+AddArtifact(114155, 168297, 0, 65)  -- Elemental Bellows
+AddArtifact(114157, 168298, 0, 50)  -- Blackrock Razor
+AddArtifact(114159, 168299, 0, 45)  -- Weighted Chopping Axe
+AddArtifact(114161, 168300, 0, 60)  -- Hooked Dagger
+AddArtifact(114163, 168301, 0, 45)  -- Barbed Fishing Hook
+AddArtifact(114167, 168303, 0, 40)  -- Ceremonial Tattoo Needles
+AddArtifact(114169, 168304, 0, 45)  -- Cracked Ivory Idol
+AddArtifact(114171, 168305, 0, 55)  -- Ancestral Talisman
+AddArtifact(114173, 168306, 0, 50)  -- Flask of Blazegrease
+AddArtifact(114175, 168307, 0, 55)  -- Gronn-Tooth Necklace
+AddArtifact(114177, 168308, 0, 40)  -- Doomsday Prophecy
+
+currentRace = 15	-- Ogre
+AddArtifact(117384, 168320, 3, 200)  -- Warmaul of the Warmaul Chieftain
+AddArtifact(117385, 168319, 3, 150)  -- Sorcerer-King Toe Ring
+
+AddArtifact(114181, 168309, 0, 40)  -- Stonemaul Succession Stone
+AddArtifact(114183, 168310, 0, 55)  -- Stone Manacles
+AddArtifact(114185, 168311, 0, 45)  -- Ogre Figurine
+AddArtifact(114187, 168312, 0, 55)  -- Pictogram Carving
+AddArtifact(114189, 168313, 0, 50)  -- Gladiator's Shield
+AddArtifact(114190, 168314, 0, 55)  -- Mortar and Pestle
+AddArtifact(114191, 168315, 0, 70)  -- Eye of Har'gunn the Blind
+AddArtifact(114192, 168316, 0, 50)  -- Stone Dentures
+AddArtifact(114193, 168317, 0, 55)  -- Rylak Riding Harness
+AddArtifact(114194, 168318, 0, 45)  -- Imperial Decree Stele

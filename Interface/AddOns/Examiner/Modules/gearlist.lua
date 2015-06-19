@@ -25,7 +25,7 @@ local IGNORED_SLOTS = {
 
 -- List of item slots that can be enchanted. The value is at what itemLevel we find the first valid enchant.
 local ENCHANT_SLOT_LEVEL = {
-	INVTYPE_HEAD = 60;		-- TBC faction head enchants or Vanilla Librams
+	INVTYPE_HEAD = nil;		-- MoP: Head enchants removed :( -- Used to be TBC faction head enchants or Vanilla Librams @ lvl60
 	INVTYPE_NECK = nil;
 	INVTYPE_SHOULDER = 60;	-- Argent Dawn & ZG enchants?
 	INVTYPE_CLOAK = 1;
@@ -48,7 +48,7 @@ local ENCHANT_SLOT_LEVEL = {
 	INVTYPE_2HWEAPON = 1;
 	INVTYPE_SHIELD = 1;
 	INVTYPE_HOLDABLE = 300;
-	INVTYPE_RANGED = 1;
+	INVTYPE_RANGED = 1;			-- Az: Removed?
 	INVTYPE_RANGEDRIGHT = 1,	-- Not sure what is different with the "right" version
 	INVTYPE_THROWN = nil;
 	INVTYPE_RELIC = nil;
@@ -125,6 +125,8 @@ function UpdateShownItems()
 		local link = items[slotName];
 		if (link) then
 			local itemName, _, itemRarity, itemLevel, _, _, _, _, itemEquipLoc, itemTexture = GetItemInfo(link);
+			itemLevel = GetUpgradedItemLevelFromItemLink(link);
+
 			btn.link = link;
 --			btn.name:SetText(itemName);
 --			btn.name:SetTextColor(GetItemQualityColor(itemRarity or 0));

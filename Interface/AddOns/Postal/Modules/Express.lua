@@ -4,8 +4,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Postal")
 Postal_Express.description = L["Mouse click short cuts for mail."]
 Postal_Express.description2 = L[ [[|cFFFFCC00*|r Shift-Click to take item/money from mail.
 |cFFFFCC00*|r Ctrl-Click to return mail.
-|cFFFFCC00*|r Alt-Click to move an item from your inventory to the current outgoing mail (same as right click in default UI).
-|cFFFFCC00*|r Mousewheel to scroll the inbox.]] ]
+|cFFFFCC00*|r Alt-Click to move an item from your inventory to the current outgoing mail (same as right click in default UI).]] ]
 
 local _G = getfenv(0)
 
@@ -32,11 +31,7 @@ function Postal_Express:OnEnable()
 	self:RawHook("InboxFrame_OnModifiedClick", "InboxFrame_OnClick", true) -- Eat all modified clicks too
 	self:RawHook("InboxFrameItem_OnEnter", true)
 
-	self:RegisterEvent("MAIL_SHOW")
-	if Postal.db.profile.Express.MouseWheel then
-		MailFrame:EnableMouseWheel(true)
-		self:HookScript(MailFrame, "OnMouseWheel")
-	end
+	self:RegisterEvent("MAIL_SHOW")	
 end
 
 -- Disabling modules unregisters all events/hook automatically
@@ -93,6 +88,9 @@ function Postal_Express:OnTooltipSetItem(tooltip, ...)
 	if Postal.db.profile.Express.AutoSend and recipient ~= "" and SendMailFrame:IsVisible() and not CursorHasItem() then
 		tooltip:AddLine(string.format(L["|cffeda55fAlt-Click|r to send this item to %s."], recipient))
 	end
+	if Postal.db.profile.Express.BulkSend and SendMailFrame:IsVisible() and not CursorHasItem() then
+		tooltip:AddLine(L["|cffeda55fControl-Click|r to attach similar items."])
+	end
 end
 
 function Postal_Express:ContainerFrameItemButton_OnModifiedClick(this, button, ...)
@@ -110,18 +108,53 @@ function Postal_Express:ContainerFrameItemButton_OnModifiedClick(this, button, .
 				end
 			end
 		end
+	elseif button == "LeftButton" and IsControlKeyDown() and SendMailFrame:IsVisible() and not CursorHasItem() then
+		local bag, slot = this:GetParent():GetID(), this:GetID()
+		local itemid = GetContainerItemID(bag, slot)
+		if not itemid then return end
+		local itemlocked = select(3,GetContainerItemInfo(bag,slot))
+		local itemq, _,_, itemc, itemsc, _, itemes = select(3,GetItemInfo(itemid))
+		itemes = itemes and #itemes > 0
+		if Postal.db.profile.Express.BulkSend and itemq and itemc then
+			-- itemc = itemq.."."..itemc
+			itemsc = itemc.."."..(itemsc or "")
+			local added = (itemlocked and 0) or -1
+			for pass = 0,4 do
+				for b = 0,4 do
+					for s = 1, GetContainerNumSlots(b) do
+						local tid = GetContainerItemID(b, s)
+						if not tid or select(3,GetContainerItemInfo(b,s)) then
+							-- item locked, already attached
+						else
+							local tq, _,_, tc, tsc, _, tes = select(3,GetItemInfo(tid))
+							-- tc = (tq or "").."."..(tc or "")
+							tsc = (tc or "").."."..(tsc or "")
+							tes = tes and #tes > 0
+							if (pass == 0 and itemq == 0 and tq == 0) -- vendor trash
+							or (pass == 0 and itemq == 2 and tq == 2 and itemes and tes) -- green boe gear
+							or (pass == 1 and tid == itemid) -- identical items
+							or (pass == 2 and tsc == itemsc) -- same subtype
+							or (pass == 3 and tc == itemc)   -- same type
+							or (pass == 4 and tq == itemq)   -- same quality
+							then
+								ClearCursor()
+								PickupContainerItem(b, s)
+								ClickSendMailItemButton()
+								if select(3,GetContainerItemInfo(b,s)) then -- now locked => added
+									added = added + 1
+								else -- failed
+									ClearCursor()
+								end
+							end
+						end
+					end
+				end
+				if added >= 1 then break end
+			end
+			ClearCursor()
+		end
 	else
 		return self.hooks["ContainerFrameItemButton_OnModifiedClick"](this, button, ...)
-	end
-end
-
-function Postal_Express:OnMouseWheel(frame, direction)
-	if direction == -1 then
-		if math.ceil(GetInboxNumItems() / 7) > InboxFrame.pageNum then
-			InboxNextPage()
-		end
-	elseif InboxFrame.pageNum ~= 1 then
-		InboxPrevPage()
 	end
 end
 
@@ -155,19 +188,8 @@ function Postal_Express.SetAutoSend(dropdownbutton, arg1, arg2, checked)
 	Postal.db.profile.Express.AutoSend = checked
 end
 
-function Postal_Express.SetMouseWheel(dropdownbutton, arg1, arg2, checked)
-	local self = Postal_Express
-	Postal.db.profile.Express.MouseWheel = checked
-	if checked then
-		if not self:IsHooked(MailFrame, "OnMouseWheel") then
-			MailFrame:EnableMouseWheel(true)
-			self:HookScript(MailFrame, "OnMouseWheel")
-		end
-	else
-		if self:IsHooked(MailFrame, "OnMouseWheel") then
-			self:Unhook(MailFrame, "OnMouseWheel")
-		end
-	end
+function Postal_Express.SetBulkSend(dropdownbutton, arg1, arg2, checked)
+	Postal.db.profile.Express.BulkSend = checked
 end
 
 function Postal_Express.ModuleMenu(self, level)
@@ -190,9 +212,9 @@ function Postal_Express.ModuleMenu(self, level)
 		info.disabled = not Postal.db.profile.Express.EnableAltClick
 		UIDropDownMenu_AddButton(info, level)
 
-		info.text = L["Mousewheel to scroll Inbox"]
-		info.func = Postal_Express.SetMouseWheel
-		info.checked = db.MouseWheel
+		info.text = L["Auto-Attach similar items on Control-Click"]
+		info.func = Postal_Express.SetBulkSend
+		info.checked = db.BulkSend
 		info.disabled = nil
 		UIDropDownMenu_AddButton(info, level)
 

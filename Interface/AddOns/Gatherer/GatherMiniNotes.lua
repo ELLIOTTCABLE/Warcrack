@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherMiniNotes.lua 901 2010-12-05 02:00:06Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherMiniNotes.lua 1056 2012-12-10 04:10:54Z Esamynn $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Minimap Drawing Routines
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherMiniNotes.lua $", "$Rev: 901 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherMiniNotes.lua $", "$Rev: 1056 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
@@ -39,11 +39,25 @@ local Astrolabe = DongleStub(Gatherer.AstrolabeVersion)
 local timeDiff = 0
 local checkDiff = 0
 local numNotesUsed = 0
+local numArchNotesUsed = 0
 
 local SHADED_TEXTURE = "Interface\\AddOns\\Gatherer\\Shaded\\White"
 
 -- table to store current active Minimap Notes objects
 Gatherer.MiniNotes.Notes = {}
+Gatherer.MiniNotes.ArchNotes = {}
+
+function Gatherer.MiniNotes.OnLoad( frame )
+	local function updateProcessingFrameParent()
+		frame:SetParent(DongleStub(Gatherer.AstrolabeVersion).processingFrame:GetParent())
+	end
+	updateProcessingFrameParent()
+	Astrolabe:Register_TargetMinimapChanged_Callback(updateProcessingFrameParent , "GathererMinimapNotes")
+end
+
+function Gatherer.MiniNotes.OnNoteCreation( self )
+	Astrolabe:AssociateIcon(self, "Gatherer")
+end
 
 function Gatherer.MiniNotes.Show()
 	if ( Gatherer.Config.GetSetting("minimap.enable") ) then
@@ -67,6 +81,10 @@ function Gatherer.MiniNotes.Hide()
 	for i, note in pairs(Gatherer.MiniNotes.Notes) do
 		Astrolabe:RemoveIconFromMinimap(note)
 	end
+	numArchNotesUsed = 0
+	for i, note in pairs(Gatherer.MiniNotes.ArchNotes) do
+		Astrolabe:RemoveIconFromMinimap(note)
+	end
 end
 
 local function GetMinimapNote( index )
@@ -77,6 +95,24 @@ local function GetMinimapNote( index )
 		note:SetID(index)
 	end
 	return note
+end
+
+local function GetArchMinimapNote( index )
+	local note = Gatherer.MiniNotes.ArchNotes[index]
+	if not ( note ) then
+		note = CreateFrame("Button", "GatherArchNote"..index, Minimap, "GatherArchNoteTemplate")
+		Gatherer.MiniNotes.ArchNotes[index] = note
+		note:SetID(index)
+	end
+	return note
+end
+
+local function ArchFilter( nodeId, gType )
+	if ( gType == "ARCH" ) then
+		return true
+	else
+		return false
+	end
 end
 
 function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
@@ -114,8 +150,8 @@ function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
 	end
 	
 	if ( updateNodes ) then
-		local c, z, px, py = Gatherer.Util.GetPositionInCurrentZone()
-		if ( not (c and z and px and py) ) or ( c <= 0 ) or ( z <= 0 ) then
+		local zoneToken, px, py = Gatherer.Util.GetPositionInCurrentZone()
+		if not (zoneToken and px and py) then
 			Gatherer.MiniNotes.Hide()
 			return
 		end
@@ -133,37 +169,64 @@ function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
 		end
 	
 		numNotesUsed = 0
-		local mapID, mapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(Gatherer.ZoneTokens.GetZoneToken(c, z))
+		local mapID, mapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(zoneToken)
 		for i, nodeZoneToken, gType, nodeIndex, nodeDist, nodeX, nodeY, nodeIndoors, nodeInspected
-		in Gatherer.Storage.ClosestNodesInfo(c, z, px, py, getNumber, getDist, Gatherer.Config.DisplayFilter_MiniMap) do
-			local nodeC, nodeZ = Gatherer.ZoneTokens.GetContinentAndZone(nodeZoneToken)
+		in Gatherer.Storage.ClosestNodesInfo(zoneToken, px, py, getNumber, getDist, Gatherer.Config.DisplayFilter_MiniMap) do
 			if ( numNotesUsed < displayNumber ) then
-				local nodeMapID, nodeMapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(nodeZoneToken)
-				local nodeDist = Astrolabe:ComputeDistance(mapID,mapFloor,px,py,nodeMapID,nodeMapFloor,nodeX,nodeY)
-				if (nodeDist <= maxDist) then
-					numNotesUsed = numNotesUsed + 1
-					-- need to position and label the corresponding button
-					local gatherNote = GetMinimapNote(numNotesUsed)
-					gatherNote.gType = gType
-					gatherNote.continent = nodeC
-					gatherNote.zone = nodeZ
-					gatherNote.index = nodeIndex
-					gatherNote.dist = nodeDist
+				numNotesUsed = numNotesUsed + 1
+				-- need to position and label the corresponding button
+				local gatherNote = GetMinimapNote(numNotesUsed)
+				gatherNote.gType = gType
+				gatherNote.zone = nodeZoneToken
+				gatherNote.index = nodeIndex
+				gatherNote.dist = nodeDist
 				
-					local result = Astrolabe:PlaceIconOnMinimap(gatherNote, nodeMapID, nodeMapFloor, nodeX, nodeY)
-					-- a non-zero results some failure when adding the icon to the Minimap
-					if ( result ~= 0 ) then
-						numNotesUsed = numNotesUsed - 1
-					end
+				local nodeMapID, nodeMapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(nodeZoneToken)
+				local result = Astrolabe:PlaceIconOnMinimap(gatherNote, nodeMapID, nodeMapFloor, nodeX, nodeY)
+				-- a non-zero results some failure when adding the icon to the Minimap
+				if ( result ~= 0 ) then
+					numNotesUsed = numNotesUsed - 1
 				end
 			end
 			if ( Gatherer_HUD and nodeDist <= setting("plugin.gatherer_hud.yards") ) then
-				Gatherer_HUD.PlaceIcon(nodeC, nodeZ, gType, nodeIndex, nodeX, nodeY)
+				Gatherer_HUD.PlaceIcon(zoneToken, gType, nodeIndex, nodeX, nodeY)
 			end
 		end
 		
 		local notes = Gatherer.MiniNotes.Notes
-		for i = (numNotesUsed + 1), #(Gatherer.MiniNotes.Notes) do
+		for i = (numNotesUsed + 1), #(notes) do
+			Astrolabe:RemoveIconFromMinimap(notes[i]);
+		end
+
+		-- Archaeology
+		numArchNotesUsed = 0
+		if ( Gatherer.Var.ArchaeologyActive and setting("arch.enable")) then
+			local displayNumber = setting("arch.minimap.count")
+			local maxDist = 500
+			
+			for i, nodeZoneToken, gType, nodeIndex, nodeDist, nodeX, nodeY, nodeIndoors, nodeInspected
+			in Gatherer.Storage.ClosestNodesInfo(zoneToken, px, py, displayNumber, maxDist, ArchFilter) do
+				if ( numArchNotesUsed < displayNumber ) then
+					numArchNotesUsed = numArchNotesUsed + 1
+					-- need to position and label the corresponding button
+					local gatherNote = GetArchMinimapNote(numArchNotesUsed)
+					gatherNote.gType = gType
+					gatherNote.zone = nodeZoneToken
+					gatherNote.index = nodeIndex
+					gatherNote.dist = nodeDist
+					
+					local nodeMapID, nodeMapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(nodeZoneToken)
+					local result = Astrolabe:PlaceIconOnMinimap(gatherNote, nodeMapID, nodeMapFloor, nodeX, nodeY)
+					-- a non-zero results some failure when adding the icon to the Minimap
+					if ( result ~= 0 ) then
+						numArchNotesUsed = numArchNotesUsed - 1
+					end
+				end
+			end
+		end
+
+		notes = Gatherer.MiniNotes.ArchNotes
+		for i = (numArchNotesUsed + 1), #(notes) do
 			Astrolabe:RemoveIconFromMinimap(notes[i]);
 		end
 	end
@@ -195,8 +258,7 @@ function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
 		for i = 1, numNotesUsed do
 			local gatherNote = GetMinimapNote(i)
 			local gType = gatherNote.gType
-			local nodeC = gatherNote.continent
-			local nodeZ= gatherNote.zone
+			local nodeZone= gatherNote.zone
 			local nodeIndex = gatherNote.index
 			
 			local iconColor = "normal"
@@ -204,15 +266,14 @@ function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
 			local nodeDist = Astrolabe:GetDistanceToIcon(gatherNote)
 			
 			if ( nodeDist ) then
-				local selectedTexture, trimTexture = Gatherer.Util.GetNodeTexture(nodeC, nodeZ, gType, nodeIndex)
+				local selectedTexture, trimTexture = Gatherer.Util.GetNodeTexture(nodeZone, gType, nodeIndex)
 				
 				if ( anonEnab ) then
 					local nodeVerified = false
-					for _, gatherID, count, harvested, nodeSource in Gatherer.Storage.GetNodeGatherNames(nodeC, nodeZ, gType, nodeIndex) do
+					for _, gatherID, count, harvested, nodeSource in Gatherer.Storage.GetNodeGatherNames(nodeZone, gType, nodeIndex) do
 						-- If this icon has not been verified
-						if ( not nodeSource or (nodeSource == 'REQUIRE') or (nodeSource == "IMPORTED") ) then
+						if ( not nodeSource or (nodeSource == "REQUIRE") or (nodeSource == "IMPORTED") ) then
 							nodeVerified = true
-							break
 						end
 					end
 					if not ( nodeVerified ) then
@@ -225,7 +286,7 @@ function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
 				
 				-- If node is within tracking distance
 				if ( tracEnab and (nodeDist <= tracDist) ) then
-					if ( (not tracCurr) or Gatherer.Util.IsNodeTracked(nodeC, nodeZ, gType, nodeIndex) ) then
+					if ( (not tracCurr) or Gatherer.Util.IsNodeTracked(nodeZone, gType, nodeIndex) ) then
 						if (tracCirc) then
 							selectedTexture = SHADED_TEXTURE
 							trimTexture = false
@@ -251,7 +312,7 @@ function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
 				if (inspEnab) then
 					-- If we are within inspect distance of this item, mark it as inspected
 					if (nodeDist < inspDist) then
-						Gatherer.Storage.SetNodeInspected(nodeC, nodeZ, gType, nodeIndex)
+						Gatherer.Storage.SetNodeInspected(nodeZone, gType, nodeIndex)
 						if (inspTint) then
 							iconColor = "green"
 						end
@@ -259,7 +320,7 @@ function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
 				
 					-- If we've recently seen this node, set its transparency
 					else
-						local nodeInspected = Gatherer.Storage.GetNodeInspected(nodeC, nodeZ, gType, nodeIndex)
+						local nodeInspected = Gatherer.Storage.GetNodeInspected(nodeZone, gType, nodeIndex)
 						if (nodeInspected) then
 							local delta = math.max(now - nodeInspected, 0)
 							if (inspTime > 0) and (delta < inspTime) then
@@ -274,16 +335,16 @@ function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
 				gatherNote:SetWidth(normSize)
 				gatherNote:SetHeight(normSize)
 				
-				if (tooltip and not gatherNote:IsMouseEnabled()) then
+				if ( tooltip ) then
 					gatherNote:EnableMouse(true)
-				elseif (not tooltip and gatherNote:IsMouseEnabled()) then
+				else
 					gatherNote:EnableMouse(false)
 				end
 				
 				local gatherNoteTexture = gatherNote:GetNormalTexture()
 				
 				-- Check to see if we need to trim the border off
-				if (trimTexture) then
+				if ( trimTexture ) then
 					gatherNoteTexture:SetTexCoord(0.08,0.92,0.08,0.92)
 				else
 					gatherNoteTexture:SetTexCoord(0,1,0,1)
@@ -305,6 +366,23 @@ function Gatherer.MiniNotes.UpdateMinimapNotes(timeDelta, force)
 					gatherNoteTexture:SetVertexColor(r, g, b);
 				end
 				gatherNoteTexture:SetAlpha(opacity)
+			end
+		end
+		
+		-- Archaeology Nodes
+		for i = 1, numArchNotesUsed do
+			local gatherNote = GetArchMinimapNote(i)
+			local nodeDist = Astrolabe:GetDistanceToIcon(gatherNote)
+			if ( nodeDist ) then
+				local gatherNoteTexture = gatherNote:GetNormalTexture()
+				if ( nodeDist < 40 ) then
+					gatherNoteTexture:SetVertexColor(0,1,0);
+				elseif ( nodeDist < 80 ) then
+					gatherNoteTexture:SetVertexColor(1,1,0);
+				else
+					gatherNoteTexture:SetVertexColor(1,0,0);
+				end
+				gatherNoteTexture:SetAlpha(normOpac)
 			end
 		end
 	end
@@ -331,10 +409,10 @@ function Gatherer.MiniNotes.MiniNoteOnEnter(frame)
 
 	local gType = frame.gType
 	local dist = Astrolabe:GetDistanceToIcon(frame)
-	local _, _, indoors, inspected = Gatherer.Storage.GetNodeInfo(frame.continent, frame.zone, gType, frame.index)
+	local _, _, indoors, inspected = Gatherer.Storage.GetNodeInfo(frame.zone, gType, frame.index)
 	
 	local numTooltips = 0
-	for id, gatherID, count, harvested, who in Gatherer.Storage.GetNodeGatherNames(frame.continent, frame.zone, gType, frame.index) do
+	for id, gatherID, count, harvested, who in Gatherer.Storage.GetNodeGatherNames(frame.zone, gType, frame.index) do
 		local tooltip = Gatherer.Tooltip.GetTooltip(id)
 		tooltip:ClearLines()
 		tooltip:SetParent(UIParent)
@@ -371,7 +449,11 @@ function Gatherer.MiniNotes.MiniNoteOnEnter(frame)
 		
 		if ( showrate ) then
 			local num = Gatherer.Config.GetSetting("minimap.tooltip.rate.num")
-			Gatherer.Tooltip.AddDropRates(tooltip, gatherID, frame.continent, frame.zone, num)
+			local zone = frame.zone
+			if ( gType ~= "OPEN" and gatherID ~= 190175 ) then
+				zone = nil
+			end
+			Gatherer.Tooltip.AddDropRates(tooltip, gatherID, zone, num)
 		end
 		tooltip:Show()
 		numTooltips = id

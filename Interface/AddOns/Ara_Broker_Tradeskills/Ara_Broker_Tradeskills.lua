@@ -39,12 +39,12 @@ local skills = {
 	[L.Enchanting]=		PROFESSION +  7411*SPELL_ID + PANEL + LINK, -- d/e
 	[L.Engineering]=	PROFESSION +  4036*SPELL_ID + PANEL + LINK,
 	[L["First Aid"]]=	PROFESSION +  3273*SPELL_ID + PANEL + LINK + SECONDARY,
-	[L.Fishing]=		PROFESSION +  7620*SPELL_ID + SECONDARY,
-	[L.Herbalism]=		PROFESSION +  2366*SPELL_ID, -- track herbs
+	[L.Fishing]=		PROFESSION +  131474*SPELL_ID + SECONDARY, -- changed from 7620, 131490
+	[L.Herbalism]=		PROFESSION +  2366*SPELL_ID, -- track herbs changed from 2366
 	[L.Inscription]=	PROFESSION + 45357*SPELL_ID + PANEL + LINK, -- mill
 	[L.Jewelcrafting]=	PROFESSION + 25229*SPELL_ID + PANEL + LINK, -- prospect
 	[L.Leatherworking]=	PROFESSION +  2108*SPELL_ID + PANEL + LINK,
---	[L.Lockpicking]=	PROFESSION +  1804*SPELL_ID + SECONDARY,
+	[L.Lockpicking]=	PROFESSION + 1809*SPELL_ID + SECONDARY,
 	[L.Runeforging]=	PROFESSION + 53428*SPELL_ID + PANEL + SECONDARY,
 	[L.Skinning]=		PROFESSION +  8613*SPELL_ID,
 	[L.Smelting]=		PROFESSION +  2580*SPELL_ID + PANEL, -- track minerals (icons: 2575=mining, 2580=smelting)
@@ -60,12 +60,16 @@ local revAlt = setmetatable( {}, meta )
 for k,v in next, altNames do revAlt[v] = k end
 
 local groupIcons = {
-	["Transmutes"] = "Interface\\Icons\\Spell_Nature_ElementalPrecision_2"
+	["Transmutes"] = "Interface\\Icons\\Spell_Nature_ElementalPrecision_2",
+  ["Facets of Research"] = "Interface\\Icons\\inv_misc_gem_variety_02",
+	["Magnificient Hide"] = "Interface\\Icons\\inv_misc_pelt_08",
 }
 
-local HOUR, DAY, MIDNIGHT = 3600, 86400, -1
-local TRANSMUTE_G1 = { skill= L.Alchemy, CD= MIDNIGHT, group= "Transmutes" }
-
+local HOUR, DAY, MIDNIGHT, DAWN = 3600, 86400, -1, -2
+local TRANSMUTE_G1 = { skill= L.Alchemy, CD= DAWN, group= "Transmutes" }
+local JCRESEARCH_G1 = { skill= L.Jewelcrafting, CD=DAWN, group="Facets of Research" } -- (Thanks for the research name, Uggers!)
+local LWHIDE_G1 = {skill= L.Leatherworking, CD=DAWN, group= "Magnificent Hide" } -- (Thanks, Griffin224!)
+	
 local watchedCDs = {
 	[11479]= TRANSMUTE_G1, -- Iron to Gold
 	[11480]= TRANSMUTE_G1, -- Mithril to Truesilver
@@ -108,14 +112,14 @@ local watchedCDs = {
 	[66660]= TRANSMUTE_G1, -- King's Amber
 	[66663]= TRANSMUTE_G1, -- Majestic Zircon
 
-	[28027]= { skill= L.Enchanting,		CD= 2*DAY },		-- Prismatic Sphere
-	[28028]= { skill= L.Enchanting,		CD= 2*DAY },		-- Void Sphere
-	[47280]= { skill= L.Jewelcrafting,	CD=   MIDNIGHT },	-- Brilliant Glass
-	[62242]= { skill= L.Jewelcrafting,	CD=   MIDNIGHT },	-- Icy Prism
-	[56005]= { skill= L.Tailoring,		CD= 6*DAY+20*HOUR },	-- Glacial Bag
-	[61288]= { skill= L.Inscription,	CD=   MIDNIGHT },	-- Minor Glyph RS
-	[61177]= { skill= L.Inscription,	CD=   MIDNIGHT },	-- Major Glyph RS
-	[60893]= { skill= L.Alchemy,		CD= 3*MIDNIGHT },	-- Alchemy Research
+	-- [28027]= { skill= L.Enchanting,		CD= 2*DAY },		-- Prismatic Sphere
+	-- [28028]= { skill= L.Enchanting,		CD= 2*DAY },		-- Void Sphere
+	[47280]= { skill= L.Jewelcrafting,	CD=   DAWN },	-- Brilliant Glass
+	[62242]= { skill= L.Jewelcrafting,	CD=   DAWN },	-- Icy Prism
+--	[56005]= { skill= L.Tailoring,		CD= 6*DAY+20*HOUR },	-- Glacial Bag
+	[61288]= { skill= L.Inscription,	CD=   DAWN },	-- Minor Glyph RS
+	[61177]= { skill= L.Inscription,	CD=   DAWN },	-- Major Glyph RS
+	[60893]= { skill= L.Alchemy,		CD= 3*DAWN },	-- Alchemy Research
 	[44717]= { skill= "Item",		CD= 3*DAY },		-- Disgusting Jar (ripe jar: 44718)
 	[39878]= { skill= "Item",		CD= 3*DAY },		-- Mysterious Egg (cracked egg: 39883)
 
@@ -134,30 +138,88 @@ local watchedCDs = {
 
 	[80243]= TRANSMUTE_G1, -- Truegold
 	[80244]= TRANSMUTE_G1, -- Pyrium Bar
-
-	[73478]= { skill= L.Jewelcrafting,	CD=	  20*HOUR },	-- Fire Prism
-	[89244]= { skill= L.Inscription,	CD=   MIDNIGHT },	-- Forged Documents (alliance)
-	[86654]= { skill= L.Inscription,	CD=   MIDNIGHT },	-- Forged Documents (horde)
-	[75141]= { skill= L.Tailoring,		CD= 6*DAY+20*HOUR },	-- Dream of Skywall
-	[75142]= { skill= L.Tailoring,		CD= 6*DAY+20*HOUR },	-- Dream of Deepholm
+	
+	[73478]= { skill= L.Jewelcrafting,	CD=		20*HOUR },	-- Fire Prism
+	[89244]= { skill= L.Inscription,		CD=		DAWN },	-- Forged Documents (alliance)
+	[86654]= { skill= L.Inscription,		CD=		DAWN },	-- Forged Documents (horde)
+	[75141]= { skill= L.Tailoring,			CD=	6*DAY+20*HOUR },	-- Dream of Skywall
+	[75142]= { skill= L.Tailoring,			CD=	6*DAY+20*HOUR },	-- Dream of Deepholm
 --	[94743]= { skill= L.Tailoring,		CD=  },		-- Dream of Destruction
-	[75144]= { skill= L.Tailoring,		CD= 6*DAY+20*HOUR },	-- Dream of Hyjal
-	[75145]= { skill= L.Tailoring,		CD= 6*DAY+20*HOUR },	-- Dream of Ragnaros
-	[75146]= { skill= L.Tailoring,		CD= 6*DAY+20*HOUR },	-- Dream of Azshara
+	[75144]= { skill= L.Tailoring,			CD= 6*DAY+20*HOUR },	-- Dream of Hyjal
+	[75145]= { skill= L.Tailoring,			CD= 6*DAY+20*HOUR },	-- Dream of Ragnaros
+	[75146]= { skill= L.Tailoring,			CD= 6*DAY+20*HOUR },	-- Dream of Azshara
+	
+	-------------------------------------- PANDARIA ---------------------------------
+	-- Jewelcrafting
+	[131593]= JCRESEARCH_G1, --{ skill= L.Jewelcrafting,	CD=   MIDNIGHT }, -- River's Heart (Blue)
+	[131695]= JCRESEARCH_G1, --{ skill= L.Jewelcrafting,	CD=   MIDNIGHT }, -- Sun's Radiance (Yellow)
+	[131690]= JCRESEARCH_G1, --{ skill= L.Jewelcrafting,	CD=   MIDNIGHT }, -- Vermilion Onyx (Orange)
+	[131686]= JCRESEARCH_G1, --{ skill= L.Jewelcrafting,	CD=   MIDNIGHT }, -- Primordial Ruby (Red)
+	[131691]= JCRESEARCH_G1, --{ skill= L.Jewelcrafting,	CD=   MIDNIGHT }, -- Imperial Amethyst (Purple)
+	[131688]= JCRESEARCH_G1, --{ skill= L.Jewelcrafting,	CD=   MIDNIGHT }, -- Wild Jade (Green)
+	[140050]= { skill= L.Jewelcrafting, CD=	DAWN }, -- Serpent's Heart, suggested by Anteract
+	-- Alchemy
+	[114780]= TRANSMUTE_G1, -- Transmute: Living Steel (Thanks Xanatandor!)
+	-- Enchanting
+	[116499]= { skill= L.Enchanting,		CD=	DAWN }, -- Sha Crystal
+	--Tailoring
+	[125557]= { skill= L.Tailoring,			CD=	DAWN }, -- Imperial Silk
+	[143011]= { skill= L.Tailoring,			CD= DAWN }, -- Celestial Cloth
+	--Inscription
+	[112996]= { skill= L.Inscription,		CD=	DAWN }, -- Scroll of Wisdom
+	--Blacksmithing
+	[138646]= { skill= L.Blacksmithing,	CD=	DAWN }, -- Lightning Steel Ingot
+	[143255]= { skill= L.Blacksmithing, CD= DAWN }, -- Balanced Trillium Ingot
+	--Leatherworking
+	[140040]= LWHIDE_G1, -- Magnificence of Leather
+	[140041]= LWHIDE_G1, -- Magnificence of Scales
+	[142976]= { skill= L.Leatherworking, CD= DAWN }, -- Hardened Magnificent Hide
+	--Engineering
+  [139176]= { skill= L.Engineering, CD= DAWN }, -- Jard's Peculiar Energy Source
+  
+  ------------------------ Draenor ------------------------------
+	--Blacksmithing
+	[176090]= { skill= L.Blacksmithing,	CD=	DAWN }, -- Secrets of Draenor Blacksmithing
+	[171690]= { skill= L.Blacksmithing,	CD=	DAWN }, -- Truesteel Ingot
+	--Enchanting
+	[177043]= { skill= L.Enchanting,	CD=	DAWN }, -- Secrets of Draenor Enchanting
+	[169092]= { skill= L.Enchanting,	CD=	DAWN }, -- Temporal Crystal
+	--Engineering
+	[177054]= { skill= L.Engineering,	CD=	DAWN }, -- Secrets of Draenor Engineering
+	[169080]= { skill= L.Engineering,	CD=	DAWN }, -- Gearspring Parts
+	--Jewelcrafting
+	[176087]= { skill= L.Jewelcrafting,	CD=	DAWN }, -- Secrets of Draenor Jewelcrafting
+	[170700]= { skill= L.Jewelcrafting,	CD=	DAWN }, -- Taladite Crystal
+	--Tailoring
+	[176058]= { skill= L.Tailoring,	CD=	DAWN }, -- Secrets of Draenor Tailoring
+	[168835]= { skill= L.Tailoring,	CD=	DAWN }, -- Hexweave Cloth
+	--Inscription
+	[177045]= { skill= L.Inscription,	CD=	DAWN }, -- Secrets of Draenor Inscription
+	[169081]= { skill= L.Inscription,	CD=	DAWN }, -- War Paints
+	--Alchemy
+	[175880]= { skill= L.Alchemy,	CD=	DAWN }, -- Secrets of Draenor Alchemy
+	[156587]= { skill= L.Alchemy,	CD=	DAWN }, -- Alchemical Catalyst
+	[181643]= { skill= L.Alchemy,   CD= DAWN }, -- Transmute: Savage Blood
+	--Leatherworking
+	[176089]= { skill= L.Leatherworking,	CD=	DAWN }, -- Secrets of Draenor Leatherworking
+	[171391]= { skill= L.Leatherworking,	CD=	DAWN }, -- Burnished Leather
 }
 
 local watchedIndex, watchedSpell, watchedID, watchedIcon
-local orgDoTradeSkill = _G.DoTradeSkill
+--local orgDoTradeSkill = _G.DoTradeSkill
 
-function DoTradeSkill(index, ...)
+function abtDoTradeSkill(index, ...)
+  if not GetTradeSkillRecipeLink(index) then return end
 	watchedID = tonumber( (GetTradeSkillRecipeLink(index)):match"enchant:(%d+)" )
 	if watchedCDs[watchedID] then
 		watchedIndex, watchedSpell, watchedIcon = index, GetTradeSkillInfo(index), GetTradeSkillIcon(index)
 		f:RegisterEvent"UNIT_SPELLCAST_SUCCEEDED"
 		f:RegisterEvent"UNIT_SPELLCAST_STOP"
 	end
-	return orgDoTradeSkill(index, ...)
+	--return orgDoTradeSkill(index, ...)
 end
+
+hooksecurefunc("DoTradeSkill", abtDoTradeSkill)
 
 
 local function CheckReagents(...)
@@ -166,7 +228,7 @@ local function CheckReagents(...)
 		local reagent = select(i,...)
 		local item, count = reagent:match"(.+).%((%d+)%)$" --TEXT_MODE_A_STRING_VALUE_TYPE "%s (%s)"
 		if not count then item, count = reagent, 1 end
-		local quantity = GetItemCount(item) / count
+		local quantity = GetItemCount(item,true) / count
 		if quantity < maxQuantity then maxQuantity = quantity end
 		if maxQuantity == 0 then return 0 end
 	end
@@ -188,18 +250,81 @@ local function GetMaxFeasible(spellID)
 	return quantity
 end
 
+-- function GetTimeUnits(str)
+--	t = {}
+--	print(str)
+	-- Strip out color code (wtf blizzard?)
+	-- str=string.sub(str, 11)
+	-- print(str)
+--	str=SecondsToTime(GetQuestResetTime())
+--	print("Before match: "..str)
+--	for k,v in string.gmatch(str, "(%d?%d)(%a?%a?%a)") do
+--		print("V="..v.." K="..k)
+--		t[v]=k
+--	end
+--	return t
+-- end
+
+--/script str=SecondsToTime(GetQuestResetTime());print("Before match: "..str);for k,v in string.gmatch(str, "(%d?%d)(%a?%a?%a)") do print("V="..v.." K="..k) end
+
+-- function FindRealmResetTime(timeLeft)
+  -- *********************************************************************
+	-- * THIS IS WHERE WE NEED TO FOCUS TO GET THAT COOLDOWN TIMER WORKING *
+	-- Hints at http://us.battle.net/wow/en/forum/topic/7392649782?page=1#8
+	
+	-- local hours,minutes = GetGameTime()
+	-- print("Before function: "..SecondsToTime(timeLeft, false, false,5))
+	-- local RealmTimeTable = GetTimeUnits(SecondsToTime(GetQuestResetTime(), false, false, 5))
+	--Put check for hours being 0.
+	-- local ResetHours = RealmTimeTable["h"]
+	-- if not ResetHours then
+		-- ResetHours = 0
+	-- end
+	-- local ResetMinute = RealmTimeTable["m"]
+	-- local MinuteOffset = 1
+	-- if minutes==0 then
+	--	MinuteOffset=0
+	-- end
+	-- print("ResetHours= "..ResetHours)
+	-- local HourReset = hours+tonumber(ResetHours)+MinuteOffset
+	-- if HourReset>=24 then
+	-- 	HourReset=HourReset-24
+	-- end
+	--print("Dawn Cooldown, ResetHours="..ResetHours.." ResetMinute="..ResetMinute)
+	-- print("Time="..hours..":"..minutes..", CD="..SecondsToTime(timeLeft, false, false, 5)..", Realm Reset Time="..HourReset)
+	-- return HourReset
+	-- *********************************************************************
+	-- * After all this, need to turn it into a time value and add to the
+	-- * current time value, so that it can be saved in the settings file
+	-- * as a "future cooldown date".
+-- end
+
 function f:UNIT_SPELLCAST_STOP(event, unit, spell)
 	if unit ~= "player" or spell ~= watchedSpell then return end
 	f:UnregisterEvent"UNIT_SPELLCAST_SUCCEEDED"
 	f:UnregisterEvent"UNIT_SPELLCAST_STOP"
 	if event ~= "UNIT_SPELLCAST_SUCCEEDED" then return end
 	local cd, ownGroup = watchedCDs[watchedID]
+	-- local start, dur, enabled = GetSpellCooldown(watchedID)
+	-- print ("Start:"..start.." Duration: "..dur.." Enabled?: "..enabled)
+	-- if duration then
 	local duration = cd.CD
-	if duration < 0 then -- reset after X midnight
-		local hours, minutes = GetGameTime()
-		duration = (-duration-1)*DAY + (24-hours)*HOUR - minutes*60 - 30
+	if duration < 0 then -- reset after Dawn
+	--	print("Midnight cooldown detected!")
+	--	local hours, minutes = GetGameTime()
+	--	duration = (-duration-1)*DAY + (24-hours)*HOUR - minutes*60 - 30
+	-- elseif duration ==-2 then -- reset after dawn
+	-- print("After dawn cooldown detected!")
+	--	local hours, minutes = GetGameTime()
+	--	if hours<=3 then
+	--		duration = (3-hours)*HOUR - minutes*60 - 30
+	--	else
+	--		duration = (27-hours)*HOUR - minutes*60 - 30
+	-- 	end
+		char[watchedID] = time() + GetQuestResetTime()
+	else
+		char[watchedID] = time() + duration
 	end
-	char[watchedID] = time() + duration
 	if cd.group then
 		ownGroup = cd.group .. "-" .. playerName
 		config.names[ownGroup] = watchedID
@@ -207,6 +332,7 @@ function f:UNIT_SPELLCAST_STOP(event, unit, spell)
 	config.icons[ownGroup or watchedID] = watchedIcon
 	if config.displayCDs then e.timer = 0 end
 	if f:IsShown() then UpdateTablet() end
+	-- end
 end
 f.UNIT_SPELLCAST_SUCCEEDED = f.UNIT_SPELLCAST_STOP
 
@@ -214,7 +340,6 @@ local new, del
 
 do
 	local tables = setmetatable( {}, { __mode = "k" } )
-
 	new = function(...)
 		local t = next(tables)
 		if t then tables[t] = nil else t = {} end
@@ -224,7 +349,6 @@ do
 		end
 		return t
 	end
-
 	new1 = function(...)
 		local t = next(tables)
 		if t then tables[t] = nil else t = {} end
@@ -257,12 +381,18 @@ local function SecondsToTime(s)
 		floor(s/xx[i]), dd[i], floor((s%xx[i])/xx[i+1]), dd[i+1] )
 end
 
-local function ColorCurMax(cur,max,isProfession)
+local function ColorCurMax(cur,max,isProfession,NonTrainable)
 	local pMax = isProfession and min(max/MAX_SKILL_VALUE,1) or 1
 	local pCur = isProfession and 1-min(sqrt(max-cur)/10,1) or 2/sqrt(max-cur+4)
-	return ("|cff%.2x%.2x00%.3i|r / |cff%.2x%.2x00%.3i|r"):format(
+	if not NonTrainable then
+		return ("|cff%.2x%.2x00%.3i|r / |cff%.2x%.2x00%.3i|r"):format(
 		pCur<.5 and 255 or 510-pCur*510, pCur<.5 and pCur*510 or 255, cur,
 		pMax<.5 and 255 or 510-pMax*510, pMax<.5 and pMax*510 or 255, max )
+	else
+		return ("      |cff%.2x%.2x00%.3i|r"):format(
+		pCur<.5 and 255 or 510-pCur*510, pCur<.5 and pCur*510 or 255, cur,
+		pMax<.5 and 255 or 510-pMax*510, pMax<.5 and pMax*510 or 255, max )
+	end
 end
 
 local function SortSkills(a, b)
@@ -297,12 +427,15 @@ local function SortAlts(a, b)
 	return a.name < b.name
 end
 
-
 local function UpdateText()
 	local skill = char.track and char.trackedSkill ~= AUTO and char.trackedSkill or char.skill
 	f.block.icon = skill and select(3, GetSpellInfo( skills[ altNames[skill] ] / SPELL_ID ) ) or "Interface\\Minimap\\Tracking\\Profession"
 	if char.track and skill then
-		f.block.text = ColorCurMax( char.curSkills[skill], char.maxSkills[skill], bit_band( skills[skill], PROFESSION ) > 0 )
+	  if not char.maxSkills[skill] then
+			f.block.text = char.skill or _G.TRADE_SKILLS
+		else
+			f.block.text = ColorCurMax( char.curSkills[skill], char.maxSkills[skill], bit_band( skills[skill], PROFESSION ) > 0 )
+		end
 	elseif not config.displayCDs then
 		f.block.text = char.skill or _G.TRADE_SKILLS
 	end
@@ -318,8 +451,8 @@ function AbandonSkill(...)
 end
 
 local highlight = g:CreateTexture()
-highlight:SetTexture"Interface\\QuestFrame\\UI-QuestLogTitleHighlight"
-highlight:SetBlendMode"ADD"
+highlight:SetTexture("Interface\\QuestFrame\\UI-QuestLogTitleHighlight")
+highlight:SetBlendMode("ADD")
 highlight:SetAlpha(0)
 
 local function ShowBlockHints()
@@ -395,7 +528,6 @@ local function CastSpellByName(skillName)
 	prevAltSkill, f.action, f.spellID, f.craftAll, f.keepOpen = nil
 --	ToggleSFX()
 end
-
 
 local function Tradeskill_OnClick(button, click)
 	if IsShiftKeyDown() and bit_band( skills[button.skill], LINK ) > 0 then
@@ -513,7 +645,6 @@ local function Alt_OnEnter(self)
 	end
 end
 
-
 local function Alt_OnLeave(self)
 	highlight:ClearAllPoints()
 	if self and self.light then
@@ -614,7 +745,6 @@ local function AddEntry( buttons, icon, leftText, leftTextColor, rightText, righ
 	return button, ICON_SIZE + TEXT_OFFSET + (leftText and button.fontLeft:GetStringWidth() or 0), rightText and button.fontRight:GetStringWidth() or 0
 end
 
-
 local function UpdateCDs()
 	local readyCDs = 0
 	local temp = new()
@@ -636,7 +766,7 @@ local function UpdateCDs()
 							config.aliases[spellID] or
 							config.names[spellID] or
 							GetSpellInfo(spellID),
-						"timeLeft", expireTime-now,
+						"timeLeft", expireTime-now, -- Check for server time - local time here?
 						"char", char,
 						"spellID", spellID,
 						"skill", cd.skill,
@@ -646,7 +776,7 @@ local function UpdateCDs()
 			end
 		end
 	end
-	sort(temp, SortCooldowns)
+	--sort(temp, SortCooldowns)
 
 	for i=1, #temp do
 		local cd = temp[i]
@@ -690,7 +820,6 @@ SetTracking = function (self, name, dontUpdate)
 	end
 end
 
-
 local function ShowAlts()
 	workingFrame = g
 	local buttons = altButtons
@@ -699,7 +828,7 @@ local function ShowAlts()
 	local itemLeftWidth, itemRightWidth, colRightWidth, colLeftWidth = 0, 0, 0, 0
 	local list, subList = new(), new()
 
-	for charName, charData in next, realm do
+	for charName, charData in next, realm do -- Check for rogue somehow here to input the Lockpicking?
 		if charName ~= playerName and charData.curSkills and next(charData.curSkills) then
 			list[#list+1] = new("name",charName,"curSkills",charData.curSkills,"maxSkills",charData.maxSkills,"links",charData.links)
 		end
@@ -781,7 +910,6 @@ local function ShowAlts()
 	if nbEntries == 0 then g:Hide() end
 end
 
-
 UpdateTablet = function(self)
 	workingFrame = f
 
@@ -800,11 +928,16 @@ UpdateTablet = function(self)
 	for _, i in next, getProfessions() do
 		local displayName, icon, value, valueMax = GetProfessionInfo(i)
 		if displayName then
+			-- print("DisplayName: "..displayName)
 			local skillName = altNames[displayName]
+			-- print("SkillName: "..skillName)
 			local skill = skills[skillName]
+			-- print("Skill: "..skill)
 			if skill then
 				local hasPanel, isProfession = bit_band(skill,PANEL)>0, bit_band(skill,PROFESSION)>0
-				if char.show[skillName] == nil then char.show[skillName] = hasPanel end
+				if char.show[skillName] == nil then 
+					char.show[skillName] = hasPanel
+				end
 				local show = (not isProfession or not char.hideProfessions) and char.show[skillName]
 				if show then if isProfession then showProfessions=1 else showCombatSkills=1 end end
 				f.skills[#f.skills+1] = new(
@@ -833,7 +966,22 @@ UpdateTablet = function(self)
 			"show",		not char.hideProfessions and char.show[skillName],
 			"primary",	false)
 	end
-
+	if UnitClass("player")==L["Rogue"] then
+		local skillName = L.Lockpicking
+		local skill = skills[skillName]
+		local hasPanel, isProfession = bit_band(skill,PANEL)>0, bit_band(skill,PROFESSION)>0
+		if char.show[skillName] == nil then char.show[skillName] = true end
+		f.skills[#f.skills+1] = new(
+			"displayName",	altNames[L.Lockpicking] or skillName,
+			"skillName",	skillName,
+			"isProfession",	isProfession and floor(skill/SPELL_ID),
+			"hasPanel",	false,
+			"color",	skillName==char.skill and colors.selected or hasPanel and colors.activeName or colors.infoName,
+			"strValue",	ColorCurMax(UnitLevel("player")*5,UnitLevel("player")*5,isProfession,true),
+			"show",		not char.hideProfessions and char.show[skillName],
+			"primary",	false)
+	end
+	
 	local nbHeaders = showProfessions + showCombatSkills + showCDs + showShortcuts
 
 	sort(f.skills, SortSkills)
@@ -861,7 +1009,7 @@ UpdateTablet = function(self)
 		local group = data.group
 		if index == 1 then
 			if nbEntries>0 then AddEntry(buttons) end
-			if nbHeaders>1 then AddEntry(buttons, "", L.Cooldowns, colors.header) end
+			if nbHeaders>1 then AddEntry(buttons, "", L.Cooldowns, colors.header, "(Reset: "..SecondsToTime(GetQuestResetTime())..")",colors.header) end
 		end
 
 		local missingReagents = data.char == playerName and GetMaxFeasible(data.spellID) == 0
@@ -871,8 +1019,7 @@ UpdateTablet = function(self)
 			config.names[data.ownGroup] and select(3,GetSpellInfo(config.names[data.ownGroup])) or
 			groupIcons[group], data.name,
 			data.char == playerName and colors.ownCD or colors.foreignCD,
-			data.timeLeft<=0 and (missingReagents and L["|cffff4040Reagents!|r"] or L["|cff20ff20Ready!|r"]) or SecondsToTime(data.timeLeft),
-			nil, true )
+			data.timeLeft<=0 and (missingReagents and L["|cffff4040Reagents!|r"] or L["|cff20ff20Ready!|r"]) or SecondsToTime(GetQuestResetTime()), nil, true ) -- SecondsToTime(data.timeLeft),
 		button:SetScript("OnClick", Cooldown_OnClick)
 		button.skill, button.spellID, button.ready, button.owner, button.hasReagents, button.shortcut = data.skill, group and config.names[data.ownGroup] or data.spellID, data.timeLeft<=0, data.char, not missingReagents
 		if itemLeftWidth > colLeftWidth then colLeftWidth = itemLeftWidth end
@@ -960,7 +1107,6 @@ f.block = LibStub("LibDataBroker-1.1"):NewDataObject("|cFFFFB366Ara|r Tradeskill
 	OnClick = Block_OnClick,
 } )
 
-
 function f:TRADE_SKILL_SHOW()
 	f:UnregisterEvent"TRADE_SKILL_SHOW"
 	if f.SetHooks then f:SetHooks() end
@@ -981,13 +1127,14 @@ function f:TRADE_SKILL_SHOW()
 	end
 
 	ExpandTradeSkillSubClass(0)
-	SetTradeSkillSubClassFilter(0,1,1)
+	SetTradeSkillCategoryFilter(0,1,1)
 	SetTradeSkillInvSlotFilter(0,1,1)
 	TradeSkillOnlyShowMakeable(false)
 	for i=1, GetNumTradeSkills() do
 		local itemName, itemType, quantity = GetTradeSkillInfo(i)
-		if itemType ~= "header" then
-			local spellID = tonumber( GetTradeSkillRecipeLink(i):match"enchant:(%d+)")
+		-- print (itemType)
+		if itemType ~= "header" and itemType ~= "subheader" then
+			local spellID = tonumber(GetTradeSkillRecipeLink(i):match"enchant:(%d+)")
 			if spellID == f.spellID and (f.action == "point" or f.action == "craft") then
 				TradeSkillFrame_SetSelection(i)
 				if f.action == "craft" and not GetTradeSkillCooldown(i) then
@@ -995,7 +1142,7 @@ function f:TRADE_SKILL_SHOW()
 						TradeSkillInputBox:SetNumber(quantity)
 						TradeSkillCreateButton:Click()
 					else
-						DoTradeSkill(i)
+						abtDoTradeSkill(i)
 					end
 				end
 				TradeSkillListScrollFrame:SetVerticalScroll(max(i-5,0)*TradeSkillSkill1:GetHeight())
@@ -1007,7 +1154,11 @@ function f:TRADE_SKILL_SHOW()
 			if cd and f.action == "scan" then
 				local timeLeft = GetTradeSkillCooldown(i) or 0
 				if timeLeft>0 or config.addReadyCD then
-					char[spellID] = time() + timeLeft
+					-- if cd.CD < 0 then
+					-- FindRealmResetTime(timeLeft)
+					-- System time offset from hours left 
+					-- end
+					char[spellID] = time() + GetQuestResetTime() -- time() + timeLeft
 					if not cd.group then
 						config.icons[spellID] = GetTradeSkillIcon(i)
 						config.names[spellID] = itemName
@@ -1037,6 +1188,12 @@ function f:PLAYER_LOGOUT()
 				char.curSkills[skillName], char.maxSkills[skillName] = value, valueMax
 			end
 		end
+	end
+	if UnitClass("player") == L["Rogue"] then
+	  -- print("Rogue Detected...")
+		skillName = L.Lockpicking
+		skill = skills[skillName]
+		char.curSkills[skillName], char.maxSkills[skillName] = UnitLevel("player")*5,UnitLevel("player")*5
 	end
 end
 
@@ -1089,8 +1246,11 @@ function f:SetupConfigMenu()
 	end
 
 	options = {
-		{ text = ("|cFFFFB366Ara|r Broker Tradeskills (%s)"):format( GetAddOnMetadata(addonName, "Version") ), isTitle = true },
+		--{ text = ("|cFFFFB366Ara|r Broker Tradeskills (%s)"):format( GetAddOnMetadata(addonName, "Version") ), isTitle = true },
+		{ text = ("Ara Broker Tradeskills (%s)"):format(GetAddOnMetadata(addonName, "Version")), isTitle = true },
 		{ text = _G.TRADE_SKILLS, submenu = "isProfession", scope=char, var="hideProfessions", inv=true },
+		-- SEARCH STOP
+		-- Following lines control the checkbox when a different skill to track is chosen.
 		{ text = L["Tracking..."], submenu = "track", checked=function() return char.track end, func=
 			function()
 				char.track = not char.track
@@ -1105,19 +1265,22 @@ function f:SetupConfigMenu()
 			end, checked=function() return config.displayCDs end },
 		{ text = L["Include |cff20ff20Ready!|r CDs when scanning"], scope=config, var="addReadyCD" },
 	--	{ text = L["Silently open/close panels"], scope=config, var="silent" },
-		{ text = L["Show alt. skills"], scope=config, var="hideAlts", inv=true, submenu = {
+		{ text = L["Show alt skills"], scope=config, var="hideAlts", inv=true, submenu = {
 			{ text = L["Primary only"], scope=config, var="primaryOnly" },
-			{ text = L["With a craft window only"], scope=config, var="panelOnly" }, } },
+			{ text = L["With a craft window only"], scope=config, var="panelOnly" },
+		} },
 		{ text = L["Alt list break mode"], submenu = {
 			{ text = L.Auto, radio="breakMode", val="auto" },
-			{ text = L["After 5th"], radio="breakMode", val=5 }, } },
-		{ text = L["Remove an alt."], submenu="alts" },
+			{ text = L["After 5th"], radio="breakMode", val=5 },
+		} },
+		{ text = L["Remove an alt"], submenu="alts" },
 		{ text = L["Tooltip size"], submenu = {
 			{ text =  "90%", radio="scale", val = .9 },
 			{ text = "100%", radio="scale", val = 1 },
 			{ text = "110%", radio="scale", val = 1.1 },
 			{ text = "120%", radio="scale", val = 1.2 },
-			{ text = L["Custom..."], radio="scaleX", func=function() StaticPopup_Show"ABTS_SET_SCALE" end }, } },
+			{ text = L["Custom..."], radio="scaleX", func=function() StaticPopup_Show"ABTS_SET_SCALE" end },
+			}	},
 		{ text = L.Colors, submenu = {
 			{ text = L["Header"], color = "header" },
 			{ text = L["Interactive skill name"], color = "activeName" },
@@ -1126,7 +1289,8 @@ function f:SetupConfigMenu()
 			{ text = L["Player CD"], color = "ownCD" },
 			{ text = L["Other player CD"], color = "foreignCD" },
 			{ text = L["Highlight"], color = "highlight" },
-			{ text = "|cffaaaaff"..L["Restore default colors"], func=function() CloseDropDownMenus() for k, v in next, defaultColors do colors[k][1], colors[k][2], colors[k][3] = v[1], v[2], v[3] end end }, } },
+			{ text = "|cffaaaaff"..L["Restore default colors"], func=function() CloseDropDownMenus() for k, v in next, defaultColors do colors[k][1], colors[k][2], colors[k][3] = v[1], v[2], v[3] end end },
+			} },
 		{ text = L["Show hints"], scope=config, var="hideTips", inv=true },
 	}
 	configMenu.initialize = function(self, level)
@@ -1200,10 +1364,12 @@ function f:SetupConfigMenu()
 						info.isNotRadio = true
 					end
 				end
-
 				info.keepShownOnClick = info.func
+				-- print(info.text)
+				-- print(self.scale)
 				if level==1 and info.notCheckable then
-					info.text = ("|Tx:%i|t%s"):format(25/self.scale, info.text)
+					info.text = ("%s"):format(info.text)
+					-- info.text = ("|Tx:%i|t%s"):format(25/self.scale, info.text) -- Original line from Above, causes green squares to appear.
 				end
 				UIDropDownMenu_AddButton( info, level )
 				if level==1 and info.notCheckable and info.hasArrow then
@@ -1370,7 +1536,8 @@ function f:CHAT_MSG_SKILL(event,msg)
 	end
 end
 
-
+-- I believe the following function might be the ones needed to store information in the file on logout.
+-- SEARCH STOP
 local function UpdateTrackedSkill(self, elapsed)
 	ex.timer = ex.timer - elapsed
 	if ex.timer > 0 then return else ex:SetScript("OnUpdate", nil) end
@@ -1392,6 +1559,11 @@ function f:CHAT_MSG_SYSTEM(event,msg)
 	ex:SetScript("OnUpdate", UpdateTrackedSkill)
 end
 
+-- Insert PLAYER_LEVEL_UP function here to scan for rogue lockpicking skills.
+--[[function f:PLAYER_LEVEL_UP
+
+end
+--]]
 
 local matchPushedItem = LOOT_ITEM_PUSHED_SELF:gsub("(%%s)", "(.+)") -- LOOT_ITEM_SELF for corpse loot
 
@@ -1399,10 +1571,15 @@ function f:CHAT_MSG_LOOT(event, msg)
 	local item = msg:match(matchPushedItem)
 	if not item then return end
 	local name, id, cd, _, _, _, _, _, _, texture = GetItemInfo(item)
+	if not name or not id then return end
 	id = tonumber( id:match"(%d+):" )
 	cd = watchedCDs[id]
 	if not cd or cd.skill ~= "Item" then return end
-	char[id] = time() + cd.CD
+	if cd.CD < 0 then
+		char[id] = time() + GetQuestResetTime()
+	else
+		char[id] = time() + cd.CD
+	end
 	config.names[id] = name
 	config.icons[id] = texture
 	UpdateCDs()

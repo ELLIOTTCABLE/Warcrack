@@ -1,0 +1,25 @@
+------------------------------------------------------------------------
+r13 | thaoky | 2015-05-08 16:37:50 +0000 (Fri, 08 May 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Garrisons.lua
+
+Disabled ScanFollowers() in OnAddonLoaded()
+------------------------------------------------------------------------
+r12 | thaoky | 2015-04-20 08:37:36 +0000 (Mon, 20 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Garrisons.lua
+
+Added support for follower weapon & armor iLvl
+------------------------------------------------------------------------
+r11 | thaoky | 2015-04-11 17:35:14 +0000 (Sat, 11 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Garrisons.lua
+
+Clean-up to properly report active missions
+------------------------------------------------------------------------
+r10 | thaoky | 2015-04-06 15:45:25 +0000 (Mon, 06 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/DataStore_Garrisons.lua
+
+Improved support of missions
+------------------------------------------------------------------------

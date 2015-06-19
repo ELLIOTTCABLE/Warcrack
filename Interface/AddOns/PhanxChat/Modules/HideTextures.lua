@@ -1,10 +1,10 @@
 --[[--------------------------------------------------------------------
 	PhanxChat
 	Reduces chat frame clutter and enhances chat frame functionality.
-	Written by Phanx <addons@phanx.net>
-	Copyright © 2006–2012 Phanx. Some rights reserved. See LICENSE.txt for details.
+	Copyright (c) 2006-2014 Phanx <addons@phanx.net>. All rights reserved.
 	http://www.wowinterface.com/downloads/info6323-PhanxChat.html
 	http://www.curse.com/addons/wow/phanxchat
+	https://github.com/Phanx/PhanxChat
 ----------------------------------------------------------------------]]
 
 local _, PhanxChat = ...
@@ -58,6 +58,14 @@ local function Tab_UpdateColors(tab, selected)
 	end
 end
 
+local function Tab_Text_GetWidth(text)
+	local tab = text:GetParent()
+	if tab.conversationIcon then
+		return text:GetStringWidth() + 18
+	end
+	return text:GetStringWidth()
+end
+
 function PhanxChat:HideTextures(frame)
 	local selected = frame == SELECTED_CHAT_FRAME
 	frame.selected = selected
@@ -67,16 +75,16 @@ function PhanxChat:HideTextures(frame)
 
 		local tab =  _G[name .. "Tab"]
 		tab.frame = frame
-		tab.left = _G[name .. "TabLeft"]
+		tab.left  = _G[name .. "TabLeft"]
 		tab.right = _G[name .. "TabRight"]
-		tab.mid = _G[name .. "TabMiddle"]
-		tab.text = _G[name .. "TabText"]
+		tab.mid   = _G[name .. "TabMiddle"]
+		tab.text  = _G[name .. "TabText"]
 		frame.tab = tab
 
 		local editBox = frame.editBox
-		editBox.left = _G[name .. "EditBoxLeft"]
+		editBox.left  = _G[name .. "EditBoxLeft"]
 		editBox.right = _G[name .. "EditBoxRight"]
-		editBox.mid = _G[name .. "EditBoxMid"]
+		editBox.mid   = _G[name .. "EditBoxMid"]
 
 		local highlight = tab:CreateTexture(nil, "HIGHLIGHT")
 		highlight:SetTexture([[Interface\PaperDollInfoFrame\UI-Character-Tab-Highlight]])
@@ -120,12 +128,22 @@ function PhanxChat:HideTextures(frame)
 		tab.fullHighlightTexture:SetAlpha(selected and 0 or 1)
 
 		local tabText = tab.text
+		local tabIcon = tab.conversationIcon
+
+		if tabIcon then
+			tabIcon:ClearAllPoints()
+			tabIcon:SetPoint("LEFT", tab, 16, -7)
+		end
 
 		tabText:ClearAllPoints()
-		tabText:SetPoint("BOTTOMLEFT", tab, 16, 5)
-		tabText:SetPoint("BOTTOMRIGHT", tab, -16, 5)
+		if tabIcon then
+			tabText:SetPoint("LEFT", tabIcon, "RIGHT", 2, 0)
+		else
+			tabText:SetPoint("LEFT", tab, 16, -7)
+		end
+		tabText:SetPoint("RIGHT", tab, -16, -7)
 		tabText:SetJustifyH("LEFT")
-		tabText.GetWidth = tabText.GetStringWidth
+		tabText.GetWidth = Tab_Text_GetWidth
 
 		if selected then
 			tabText:SetTextColor(1, 1, 1)
@@ -143,7 +161,7 @@ function PhanxChat:HideTextures(frame)
 		end
 		if not hooks[tab].OnEnter then
 			hooks[tab].OnEnter = tab:GetScript("OnEnter")
-			tab:SetScript("OnLeave", Tab_OnEnter)
+			tab:SetScript("OnEnter", Tab_OnEnter)
 		end
 		if not hooks[tab].OnLeave then
 			hooks[tab].OnLeave = tab:GetScript("OnLeave")
@@ -181,10 +199,18 @@ function PhanxChat:HideTextures(frame)
 		tab.fullHighlightTexture:SetAlpha(0)
 
 		local tabText = tab.text
+		local tabIcon = tab.conversationIcon
 
-		tabText:ClearAllPoints()
-		tabText:SetPoint("LEFT", tab.left, "RIGHT", 0, -5)
 		tabText.GetWidth = nil
+		tabText:ClearAllPoints()
+		if tabIcon then
+			tabText:SetPoint("RIGHT", tab.leftTexture, "RIGHT", 10, -6)
+
+			tabIcon:ClearAllPoints()
+			tabIcon:SetPoint("RIGHT", tabText, "LEFT", 0, -2)
+		else
+			tabText:SetPoint("LEFT", tab.left, "RIGHT", 0, -5)
+		end
 
 		tabText:SetTextColor(1, 0.8, 0)
 
@@ -208,7 +234,16 @@ function PhanxChat:HideTextures(frame)
 			hooks[tab].OnLeave = nil
 		end
 	end
+
+	PanelTemplates_TabResize(frame.tab, frame.tab.sizePadding or 0)
+	frame.tab.textWidth = frame.tab.text:GetWidth()
 end
+
+hooksecurefunc("PanelTemplates_TabResize", function(tab, padding, dynTabSize)
+	if dynTabSize and tab.conversationIcon and PhanxChat.db.HideTextures then
+		PanelTemplates_TabResize(tab, tab.sizePadding or 0)
+	end
+end)
 
 function PhanxChat:SetHideTextures(v)
 	if self.debug then print("PhanxChat: SetHideTextures", v) end

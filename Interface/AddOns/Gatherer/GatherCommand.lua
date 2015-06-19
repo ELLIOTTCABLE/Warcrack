@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherCommand.lua 891 2010-10-18 05:06:32Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherCommand.lua 927 2011-10-05 01:25:05Z kjasi $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Command parsing and processing
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherCommand.lua $", "$Rev: 891 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherCommand.lua $", "$Rev: 927 $")
 
 SLASH_GATHERER1 = "/gather"
 SLASH_GATHERER2 = "/gatherer"
@@ -62,6 +62,8 @@ local function parseGatherType( str )
 		return "herb"
 	elseif ( str == "ore" ) then
 		return "mine"
+	elseif ( str == "archaeology" ) then
+		return "arch"
 	end
 end
 

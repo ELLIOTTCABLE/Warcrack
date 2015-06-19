@@ -1,7 +1,7 @@
-## Interface: 40200
+## Interface: 60000
 ## Author: jnwhiteh
 ## Title: LightHeaded_Data_QIDNames
-## Version: 344
+## Version: wowi:revision
 ## Notes: Load on demand data addon for LightHeaded containing a mapping between names and QIDs
 ## License: All Rights Reserved
 ## LoadOnDemand: 1

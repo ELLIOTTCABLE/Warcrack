@@ -1,9 +1,9 @@
-## Interface: 40300
+## Interface: 60100
 ## Title: Tidy Plates: Graphite
 ## Notes: Minimalisty
-## Author: Binny 
+## Author: Binny
 ## Dependencies: TidyPlates, TidyPlatesHub
 
-TidyPlates_Graphite.lua
+Graphite.lua
 
 

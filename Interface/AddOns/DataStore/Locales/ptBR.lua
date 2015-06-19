@@ -2,7 +2,7 @@
 
 if not L then return end
 
-L["Disabled"] = "Desativado" -- Needs review
-L["Enabled"] = "Ativado" -- Needs review
-L["Memory used for %d |4character:characters;:"] = "Memória usada para %d |4personagem:personagens;:" -- Needs review
+L["Disabled"] = "Desativado"
+L["Enabled"] = "Ativado"
+L["Memory used for %d |4character:characters;:"] = "Memória usada para %d |4personagem:personagens;:"
 

@@ -107,6 +107,7 @@ end
 function IceTargetInfo.prototype:Enable(core)
 	IceTargetInfo.super.prototype.Enable(self, core)
 
+	local _
 	_, self.playerClass = UnitClass("player")
 
 	if IceHUD.IceCore:ShouldUseDogTags() then
@@ -1389,7 +1390,7 @@ function IceTargetInfo.prototype:UpdateBuffType(aura)
 				icon = [[Interface\Icons\Spell_Frost_Frost]]
 				duration = 60
 				expirationTime = GetTime() + 59
-				count = 1
+				count = math.random(5)
 			end
 
 			if icon then
@@ -1552,7 +1553,11 @@ function IceTargetInfo.prototype:TargetName(event, unit)
 		end
 
 
-		self.leader = UnitIsPartyLeader(self.unit) and " |cffcccc11Leader|r" or ""
+		if IceHUD.WowVer < 50000 then
+			self.leader = UnitIsPartyLeader(self.unit) and " |cffcccc11Leader|r" or ""
+		else
+			self.leader = UnitIsGroupLeader(self.unit) and " |cffcccc11Leader|r" or ""
+		end
 		self:Update(unit)
 	end
 end
@@ -1664,6 +1669,19 @@ function IceTargetInfo.prototype:Update(unit)
 	self:UpdateAlpha()
 end
 
+function IceTargetInfo.prototype:UpdateAlpha()
+	IceTargetInfo.super.prototype.UpdateAlpha(self)
+
+	-- Temp until Blizzard fixes their cooldown wipes. http://www.wowinterface.com/forums/showthread.php?t=49950
+	for i = 1, #self.frame["buffFrame"].iconFrames do
+		self.frame["buffFrame"].iconFrames[i].cd:SetSwipeColor(0, 0, 0, self.alpha)
+		self.frame["buffFrame"].iconFrames[i].cd:SetDrawEdge(false)
+	end
+	for i = 1, #self.frame["debuffFrame"].iconFrames do
+		self.frame["debuffFrame"].iconFrames[i].cd:SetSwipeColor(0, 0, 0, self.alpha)
+		self.frame["debuffFrame"].iconFrames[i].cd:SetDrawEdge(false)
+	end
+end
 
 function IceTargetInfo.prototype:OnEnter(frame)
 	if self.moduleSettings.mouseTooltip then
@@ -1680,9 +1698,24 @@ function IceTargetInfo.prototype:OnLeave(frame)
 	self.frame.highLight:Hide()
 end
 
+function IceTargetInfo.prototype:AllowMouseBuffInteraction(id)
+	if (not self:IsVisible()) then
+		return false
+	end
+
+	if not self.unit or not id then
+		return false
+	end
+
+	if self.alpha == 0 then
+		return false
+	end
+
+	return true
+end
 
 function IceTargetInfo.prototype:BuffOnEnter(this)
-	if (not self:IsVisible()) then
+	if not self:AllowMouseBuffInteraction(this.id) then
 		return
 	end
 

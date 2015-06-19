@@ -20,7 +20,7 @@ IceHUD.WowVer = select(4, GetBuildInfo())
 
 IceHUD.validBarList = { "Bar", "HiBar", "RoundBar", "ColorBar", "RivetBar", "RivetBar2", "CleanCurves", "GlowArc",
 	"BloodGlaives", "ArcHUD", "FangRune", "DHUD", "CleanCurvesOut", "CleanTank", "PillTank", "GemTank" }
-IceHUD.validCustomModules = {Bar="Buff/Debuff watcher", Counter="Buff/Debuff stack counter", CD="Ability cooldown bar", Health="Health bar", Mana="Mana bar"}
+IceHUD.validCustomModules = {Bar="Buff/Debuff watcher", Counter="Buff/Debuff stack counter", CD="Cooldown bar", Health="Health bar", Mana="Mana bar"}
 
 --[===[@debug@
 IceHUD.optionsLoaded = true
@@ -297,7 +297,7 @@ function IceHUD:InitLDB()
 
 		if ldbButton then
 			function ldbButton:OnTooltipShow()
-				self:AddLine(L["IceHUD"] .. " 1.7.10")
+				self:AddLine(L["IceHUD"] .. " 1.9.9.1")
 				self:AddLine(L["Click to open IceHUD options."], 1, 1, 1)
 			end
 		end
@@ -307,7 +307,7 @@ end
 -- blizzard interface options
 local blizOptionsPanel = CreateFrame("FRAME", "IceHUDConfigPanel", UIParent)
 blizOptionsPanel.name = "IceHUD"
-blizOptionsPanel.button = CreateFrame("BUTTON", "IceHUDOpenConfigButton", blizOptionsPanel, "UIPanelButtonTemplate2")
+blizOptionsPanel.button = CreateFrame("BUTTON", "IceHUDOpenConfigButton", blizOptionsPanel, IceHUD.WowVer >= 50000 and "UIPanelButtonTemplate" or "UIPanelButtonTemplate2")
 blizOptionsPanel.button:SetText("Open IceHUD configuration")
 blizOptionsPanel.button:SetWidth(240)
 blizOptionsPanel.button:SetHeight(30)
@@ -372,12 +372,12 @@ function IceHUD:GetDebuffCount(unit, ability, onlyMine, matchByName)
 end
 
 function IceHUD:GetAuraCount(auraType, unit, ability, onlyMine, matchByName)
-	if not unit then
+	if not unit or not ability then
 		return 0
 	end
 
 	if unit == "main hand weapon" or unit == "off hand weapon" then
-		local hasMainHandEnchant, mainHandExpiration, mainHandCharges, hasOffHandEnchant, offHandExpiration, offHandCharges
+		local hasMainHandEnchant, mainHandExpiration, mainHandCharges, mainHandEnchantID, hasOffHandEnchant, offHandExpiration, offHandCharges, offHandEnchantID
 			= GetWeaponEnchantInfo()
 
 		if unit == "main hand weapon" and hasMainHandEnchant then
@@ -554,9 +554,43 @@ function IceHUD:CreateCustomModuleAndNotify(moduleKey, settings)
 	end
 end
 
+local function CheckLFGMode(mode)
+	return (mode ~= nil and mode ~= "abandonedInDungeon" and mode ~= "queued")
+end
+
+function IceHUD:GetIsInLFGGroup()
+	local mode, submode
+	if IceHUD.WowVer >= 50000 then
+		mode, submode = GetLFGMode(LE_LFG_CATEGORY_LFD)
+	else
+		mode, submode = GetLFGMode()
+	end
+	local IsInLFGGroup = CheckLFGMode(mode)
+
+	if IceHUD.WowVer < 50000 then
+		return IsInLFGGroup
+	end
+
+	if not IsInLFGGroup then
+		mode, submode = GetLFGMode(LE_LFG_CATEGORY_RF)
+		IsInLFGGroup = CheckLFGMode(mode)
+	end
+	if not IsInLFGGroup then
+		mode, submode = GetLFGMode(LE_LFG_CATEGORY_SCENARIO)
+		IsInLFGGroup = CheckLFGMode(mode)
+	end
+	if not IsInLFGGroup then
+		mode, submode = GetLFGMode(LE_LFG_CATEGORY_LFR)
+		IsInLFGGroup = CheckLFGMode(mode)
+	end
+
+	return IsInLFGGroup
+end
+
 local BLACKLISTED_UNIT_MENU_OPTIONS = {
 	SET_FOCUS = "ICEHUD_SET_FOCUS",
 	CLEAR_FOCUS = "ICEHUD_CLEAR_FOCUS",
+    PET_DISMISS = "ICEHUD_PET_DISMISS",
 	LOCK_FOCUS_FRAME = true,
 	UNLOCK_FOCUS_FRAME = true,
 }
@@ -570,6 +604,12 @@ UnitPopupButtons["ICEHUD_SET_FOCUS"] = {
 UnitPopupButtons["ICEHUD_CLEAR_FOCUS"] = {
 	text = L["Type %s to clear focus"]:format(SLASH_CLEARFOCUS1),
 	tooltipText = L["Blizzard currently does not provide a proper way to right-click focus with custom unit frames."],
+	dist = 0,
+}
+
+UnitPopupButtons["ICEHUD_PET_DISMISS"] = {
+	text = L["Use your Dismiss Pet spell to dismiss a pet"],
+	tooltipText = L["Blizzard currently does not provide a proper way to right-click dismiss a pet with custom unit frames."],
 	dist = 0,
 }
 
@@ -592,6 +632,7 @@ local function munge_unit_menu(menu)
 	end
 
 	local found = false
+	local _, v
 	for _, v in ipairs(data) do
 		if BLACKLISTED_UNIT_MENU_OPTIONS[v] then
 			found = true
@@ -608,6 +649,9 @@ local function munge_unit_menu(menu)
 	local new_data = {}
 	for _, v in ipairs(data) do
 		local blacklisted = BLACKLISTED_UNIT_MENU_OPTIONS[v]
+		if v == "PET_DISMISS" and select(2, UnitClass("player")) == "WARLOCK" then
+			blacklisted = false
+		end
 		if not blacklisted then
 			new_data[#new_data+1] = v
 		elseif blacklisted ~= true then

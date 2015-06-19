@@ -1,9 +1,11 @@
 local MAJOR_VERSION = "LibDogTag-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 223 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 266 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_MINOR_VERSION then
 	_G.DogTag_MINOR_VERSION = MINOR_VERSION
 end
+
+local _G, pairs, table, ipairs, type, tostring, math, GetTime = _G, pairs, table, ipairs, type, tostring, math, GetTime
 
 -- #AUTODOC_NAMESPACE DogTag
 
@@ -84,6 +86,7 @@ function DogTag:OpenHelp()
 	end)
 	closeButton:SetPoint("TOPRIGHT", helpFrame, "TOPRIGHT", -5, -5)
 	
+	local isDragging
 	header:EnableMouse(true)
 	header:RegisterForDrag("LeftButton")
 	header:SetScript("OnDragStart", function(this)
@@ -303,7 +306,7 @@ function DogTag:OpenHelp()
 	
 	local selectedTreeLine
 	local function TreeLine_OnEnter(this)
-		if this:IsEnabled() == 1 then
+		if this:IsEnabled() then
 			this.highlight:SetAlpha(1)
 			this.highlight:Show()
 		end
@@ -358,7 +361,7 @@ function DogTag:OpenHelp()
 	end
 	
 	local function TreeLine_OnClick(this)
-		if this:IsEnabled() ~= 1 then
+		if not this:IsEnabled() then
 			return
 		end
 		
@@ -393,7 +396,7 @@ function DogTag:OpenHelp()
 	local treeLineNum = 0
 	local function getTreeLine(hasExpand, parent, name, htmlFunc)
 		treeLineNum = treeLineNum + 1
-		frame = CreateFrame("Button", treeView:GetName() .. "_TreeLine" .. treeLineNum, parent == treeView and treeView.scrollChild or parent)
+		local frame = CreateFrame("Button", treeView:GetName() .. "_TreeLine" .. treeLineNum, parent == treeView and treeView.scrollChild or parent)
 		table.insert(parent.children, frame)
 		local text = frame:CreateFontString(frame:GetName() .. "_Text", "OVERLAY", "GameFontHighlight")
 		frame.text = text
@@ -481,7 +484,7 @@ function DogTag:OpenHelp()
 			return
 		end
 
-		nextFreeScroll = GetTime() + 1
+		-- nextFreeScroll = GetTime() + 1 -- unused
 
 		local diff = childHeight - frameHeight
 
@@ -1057,91 +1060,93 @@ function DogTag:OpenHelp()
 		tagCache[ns] = tagCache_ns
 		for i, tag in ipairs(tags) do
 			local tagData = Tags[ns][tag]
-			local tagCache_ns_tag = {}
-			tagCache_ns[tag] = tagCache_ns_tag
-			tagCache_ns_tag.category = tagData.category
-			local u = newList()
-			u[#u+1] = "<h3>"
-			local t = newList()
-			t[#t+1] = "["
-			if tagData.category ~= L["Operators"] then
-				t[#t+1] = tag
-				local arg = tagData.arg
-				if arg then
-					t[#t+1] = "("
-					for i = 1, #arg, 3 do
-						if i > 1 then
-							t[#t+1] = ", "
-						end
-						local argName, argTypes, argDefault = arg[i], arg[i+1], arg[i+2]
-						t[#t+1] = argName
-						if argName ~= "..." and argDefault ~= "@req" then
-							t[#t+1] = "="
-							if argDefault == "@undef" then
-								t[#t+1] = "undef"
-							elseif argDefault == false then
-								if argTypes:match("boolean") then
-									t[#t+1] = "false"
+			if not tagData.noDoc then
+				local tagCache_ns_tag = {}
+				tagCache_ns[tag] = tagCache_ns_tag
+				tagCache_ns_tag.category = tagData.category
+				local u = newList()
+				u[#u+1] = "<h3>"
+				local t = newList()
+				t[#t+1] = "["
+				if tagData.category ~= L["Operators"] then
+					t[#t+1] = tag
+					local arg = tagData.arg
+					if arg then
+						t[#t+1] = "("
+						for i = 1, #arg, 3 do
+							if i > 1 then
+								t[#t+1] = ", "
+							end
+							local argName, argTypes, argDefault = arg[i], arg[i+1], arg[i+2]
+							t[#t+1] = argName
+							if argName ~= "..." and argDefault ~= "@req" then
+								t[#t+1] = "="
+								if argDefault == "@undef" then
+									t[#t+1] = "undef"
+								elseif argDefault == false then
+									if argTypes:match("boolean") then
+										t[#t+1] = "false"
+									else
+										t[#t+1] = "nil"
+									end
+								elseif type(argDefault) == "string" then
+									t[#t+1] = ("%q"):format(argDefault)
 								else
-									t[#t+1] = "nil"
+									t[#t+1] = tostring(argDefault)
 								end
-							elseif type(argDefault) == "string" then
-								t[#t+1] = ("%q"):format(argDefault)
-							else
-								t[#t+1] = tostring(argDefault)
 							end
 						end
+						t[#t+1] = ")"
 					end
-					t[#t+1] = ")"
-				end
-			else
-				local arg = tagData.arg
-				local operator = tag
-				if operator == "unm" then
-					operator = "-"
-				end
-				if #arg == 3 then
-					t[#t+1] = operator
-				end
-				for i = 1, #arg, 3 do
-					local argName, argTypes, argDefault = arg[i], arg[i+1], arg[i+2]
-					if i > 1 then
-						t[#t+1] = " "
+				else
+					local arg = tagData.arg
+					local operator = tag
+					if operator == "unm" then
+						operator = "-"
+					end
+					if #arg == 3 then
 						t[#t+1] = operator
-						t[#t+1] = " "
 					end
-					t[#t+1] = argName
+					for i = 1, #arg, 3 do
+						local argName, argTypes, argDefault = arg[i], arg[i+1], arg[i+2]
+						if i > 1 then
+							t[#t+1] = " "
+							t[#t+1] = operator
+							t[#t+1] = " "
+						end
+						t[#t+1] = argName
+					end
 				end
-			end
-			t[#t+1] = "]"
-			u[#u+1] = escapeHTML(DogTag:ColorizeCode(table.concat(t)))
-			u[#u+1] = "</h3>"
-			t = del(t)
-			u[#u+1] = "<p>"
-			u[#u+1] = "|r |r |r |r "
-			u[#u+1] = escapeHTML(tagData.doc)
-			if tagData.alias then
-				u[#u+1] = "<br/>"
+				t[#t+1] = "]"
+				u[#u+1] = escapeHTML(DogTag:ColorizeCode(table.concat(t)))
+				u[#u+1] = "</h3>"
+				t = del(t)
+				u[#u+1] = "<p>"
 				u[#u+1] = "|r |r |r |r "
-				u[#u+1] = L["alias for "]
-				u[#u+1] = escapeHTML(DogTag:ColorizeCode("[" .. tagData.alias .. "]"))
-			end	
-			u[#u+1] = "<br/>"
-			local examples = newList((";"):split(tagData.example))
-			for i, v in ipairs(examples) do
-				local tag, result = v:trim():match("^(.*) => \"(.*)\"$")
-				u[#u+1] = "|r |r |r |r • "
-				u[#u+1] = escapeHTML(DogTag:ColorizeCode(tag))
-				u[#u+1] = " => \"|cffffffff"
-				u[#u+1] = escapeHTML(result)
-				u[#u+1] = "|r\""
+				u[#u+1] = escapeHTML(tagData.doc)
+				if tagData.alias then
+					u[#u+1] = "<br/>"
+					u[#u+1] = "|r |r |r |r "
+					u[#u+1] = L["alias for "]
+					u[#u+1] = escapeHTML(DogTag:ColorizeCode("[" .. tagData.alias .. "]"))
+				end	
 				u[#u+1] = "<br/>"
+				local examples = newList((";"):split(tagData.example))
+				for i, v in ipairs(examples) do
+					local tag, result = v:trim():match("^(.*) => \"(.*)\"$")
+					u[#u+1] = "|r |r |r |r • "
+					u[#u+1] = escapeHTML(DogTag:ColorizeCode(tag))
+					u[#u+1] = " => \"|cffffffff"
+					u[#u+1] = escapeHTML(result)
+					u[#u+1] = "|r\""
+					u[#u+1] = "<br/>"
+				end
+				examples = del(examples)
+				u[#u+1] = "<br/>"
+				u[#u+1] = "</p>"
+				tagCache_ns_tag.html = table.concat(u)
+				u = del(u)
 			end
-			examples = del(examples)
-			u[#u+1] = "<br/>"
-			u[#u+1] = "</p>"
-			tagCache_ns_tag.html = table.concat(u)
-			u = del(u)
 		end
 		
 		local tmp = {}

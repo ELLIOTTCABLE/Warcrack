@@ -35,6 +35,7 @@ local defaults = {
 		Express = {
 			EnableAltClick = true,
 			AutoSend = true,
+			BulkSend = true,
 			MouseWheel = true,
 			MultiItemTooltip = true,
 		},
@@ -43,6 +44,7 @@ local defaults = {
 			contacts = {},
 			recent = {},
 			AutoCompleteAlts = true,
+			AutoCompleteAllAlts = true,
 			AutoCompleteRecent = true,
 			AutoCompleteContacts = true,
 			AutoCompleteFriends = true,
@@ -122,7 +124,7 @@ function Postal:OnInitialize()
 	local Postal_ModuleMenuButton = CreateFrame("Button", "Postal_ModuleMenuButton", MailFrame)
 	Postal_ModuleMenuButton:SetWidth(25)
 	Postal_ModuleMenuButton:SetHeight(25)
-	Postal_ModuleMenuButton:SetPoint("TOPRIGHT", -53, -12)
+	Postal_ModuleMenuButton:SetPoint("TOPRIGHT", -22, 2)
 	Postal_ModuleMenuButton:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
 	Postal_ModuleMenuButton:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Round")
 	Postal_ModuleMenuButton:SetDisabledTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Disabled")
@@ -144,12 +146,6 @@ function Postal:OnInitialize()
 		b:SetScript("OnEnter", subjectHoverIn)
 		b:SetScript("OnLeave", subjectHoverOut)
 	end
-
-	-- To fix Blizzard's bug caused by the new "self:SetFrameLevel(2);"
-	if TOC < 40000 and not IsAddOnLoaded("!BlizzBugsSuck") then
-		hooksecurefunc("UIDropDownMenu_CreateFrames", Postal.FixMenuFrameLevels)
-	end
-
 	self.OnInitialize = nil
 end
 
@@ -238,32 +234,18 @@ StaticPopupDialogs["POSTAL_NEW_PROFILE"] = {
 	button2 = CANCEL,
 	hasEditBox = 1,
 	maxLetters = 128,
-	hasWideEditBox = 1,  -- Not needed in Cata
 	editBoxWidth = 350,  -- Needed in Cata
 	OnAccept = function(self)
-		if TOC < 40000 then
-			Postal.db:SetProfile(strtrim(self.wideEditBox:GetText()))
-		else
-			Postal.db:SetProfile(strtrim(self.editBox:GetText()))
-		end
+		Postal.db:SetProfile(strtrim(self.editBox:GetText()))
 	end,
 	OnShow = function(self)
-		if TOC < 40000 then
-			self.wideEditBox:SetText(Postal.db:GetCurrentProfile())
-			self.wideEditBox:SetFocus()
-		else
-			self.editBox:SetText(Postal.db:GetCurrentProfile())
-			self.editBox:SetFocus()
-		end
+		self.editBox:SetText(Postal.db:GetCurrentProfile())
+		self.editBox:SetFocus()
 	end,
 	OnHide = StaticPopupDialogs[TOC < 40000 and "SET_GUILDMOTD" or "SET_GUILDPLAYERNOTE"].OnHide,
 	EditBoxOnEnterPressed = function(self)
 		local parent = self:GetParent()
-		if TOC < 40000 then
-			Postal.db:SetProfile(strtrim(parent.wideEditBox:GetText()))
-		else
-			Postal.db:SetProfile(strtrim(parent.editBox:GetText()))
-		end
+		Postal.db:SetProfile(strtrim(parent.editBox:GetText()))
 		parent:Hide()
 	end,
 	EditBoxOnEscapePressed = StaticPopupDialogs[TOC < 40000 and "SET_GUILDMOTD" or "SET_GUILDPLAYERNOTE"].EditBoxOnEscapePressed,
@@ -537,25 +519,6 @@ function Postal.About()
 	wipe(t) -- For garbage collection
 end
 
-if TOC < 40000 and not IsAddOnLoaded("!BlizzBugsSuck") then
-	-- To fix Blizzard's bug caused by the new "self:SetFrameLevel(2);"
-	local function FixFrameLevel(level, ...)
-		for i = 1, select("#", ...) do
-			local button = select(i, ...)
-			button:SetFrameLevel(level)
-		end
-	end
-	function Postal.FixMenuFrameLevels()
-		-- Postal only uses up to 4 levels of menus
-		for i = 1, 4 do
-			local f = _G["DropDownList"..i]
-			if f then
-				FixFrameLevel(f:GetFrameLevel() + 2, f:GetChildren())
-			end
-		end
-	end
-end
-
 ---------------------------
 -- Common Mail Functions --
 ---------------------------
@@ -567,14 +530,14 @@ function Postal:DisableInbox(disable)
 		if not self:IsHooked("InboxFrame_OnClick") then
 			self:RawHook("InboxFrame_OnClick", noop, true)
 			for i = 1, 7 do
-				_G["MailItem" .. i .. "ButtonIcon"]:SetDesaturated(1)
+				_G["MailItem" .. i .. "ButtonIcon"]:SetDesaturated(true)
 			end
 		end
 	else
 		if self:IsHooked("InboxFrame_OnClick") then
 			self:Unhook("InboxFrame_OnClick")
 			for i = 1, 7 do
-				_G["MailItem" .. i .. "ButtonIcon"]:SetDesaturated(nil)
+				_G["MailItem" .. i .. "ButtonIcon"]:SetDesaturated(false)
 			end
 		end
 	end

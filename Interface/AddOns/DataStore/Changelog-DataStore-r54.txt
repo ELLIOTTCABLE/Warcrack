@@ -1,0 +1,21 @@
+------------------------------------------------------------------------
+r54 | thaoky | 2015-04-06 15:38:45 +0000 (Mon, 06 Apr 2015) | 3 lines
+Changed paths:
+   M /trunk/DataStore.lua
+   M /trunk/Options.lua
+
+- Added GetGuild()
+- Updated guild scanning
+- Modified Options to use booleans instead of numbers, where applicable
+------------------------------------------------------------------------
+r53 | thaoky | 2015-02-25 18:21:34 +0000 (Wed, 25 Feb 2015) | 3 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/DataStore.lua
+   M /trunk/DataStore.toc
+   M /trunk/Options.xml
+
+6.1.001 Commit
+
+- Added support for options using <KeyValue>
+------------------------------------------------------------------------

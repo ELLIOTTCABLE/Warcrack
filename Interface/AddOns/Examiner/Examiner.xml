@@ -4,6 +4,7 @@
 	<Script file="Libs\AzDialog.lua"/>
 	<Script file="Libs\AzDropDown.lua"/>
 	<Script file="Libs\LibTableRecycler.lua"/>
+	<Script file="Libs\GetUpgradedItemLevel.lua"/>
 
 	<!--  Core -->
 	<Script file="core.lua"/>
@@ -21,5 +22,7 @@
 	<Script file="Modules\gearlist.lua"/>
 	<Script file="Modules\itemusage.lua"/>
 	<Script file="Modules\guild.lua"/>
+	<Script file="Modules\delayedscan.lua"/>
+	<!--Script file="Modules\glyphs.lua"/-->
 
 </Ui>

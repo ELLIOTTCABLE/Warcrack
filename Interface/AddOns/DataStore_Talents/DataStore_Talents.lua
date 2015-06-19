@@ -21,7 +21,7 @@ local MSG_TALENTS_TRANSFER					= 2	-- .. and send the data
 -- TODO: 
 	-- add support for hunter pets' talent trees
 
-local NUM_GLYPH_SLOTS = 9
+local NUM_GLYPH_SLOTS = 6
 
 local AddonDB_Defaults = {
 	global = {
@@ -160,33 +160,30 @@ local function ScanTalents()
 	local char = addon.ThisCharacter
 	local _, englishClass = UnitClass("player")
 	
-	char.ActiveTalents = GetActiveTalentGroup()		-- returns 1 or 2
+	char.ActiveTalents = GetActiveSpecGroup()			-- returns 1 or 2
 	char.Class = englishClass
 	
 	wipe(char.TalentTrees)
 	
-	local name, attrib, offset, rank
-	for specNum = 1, 2 do												-- primary and secondary specs
-		for tabNum = 1, GetNumTalentTabs() do						-- all tabs
-			_, name = GetTalentTabInfo( tabNum, nil, nil, specNum );
-			attrib = 0
-			offset = 0
-			
-			-- bits 0-1 = talent 1
-			-- bits 2-3 = talent 2
-			-- etc..
-			
-			for talentNum = 1, GetNumTalents(tabNum) do			-- all talents
-				_, _, _, _, rank = GetTalentInfo( tabNum, talentNum, nil, nil, specNum )
-				attrib = attrib + LeftShift(rank, offset)
-				offset = offset + 2		-- each rank takes 2 bits (values 0 to 3)
-			end
-			
-			if attrib ~= 0 then
-				char.TalentTrees[name .."|" .. specNum] = attrib
-			end
-		end
-	end
+	-- local attrib, offset
+	-- for specNum = 1, 2 do												-- primary and secondary specs
+		-- attrib = 0
+		-- offset = 0
+		
+		-- bits 0-1 = talent 1
+		-- bits 2-3 = talent 2
+		-- etc..
+		
+		-- for talentNum = 1, GetNumTalents() do			-- all talents
+			-- local _, _, _, column, isSelected = GetTalentInfo(talentNum, nil, specNum)
+			-- if isSelected then
+				-- attrib = attrib + LeftShift(column, offset)
+			-- end
+			-- offset = offset + 2		-- each rank takes 2 bits (values 0 to 3)
+		-- end
+		
+		-- char["Talents" .. specNum] = attrib
+	-- end
 
 	char.lastUpdate = time()
 end
@@ -195,64 +192,26 @@ local function ScanTalentReference(ref)
 	-- ref : address of the reference table in which we're saving scanned data
 
 	local level = UnitLevel("player")
-	if not level or level < 10 then return end		-- don't scan anything for low level characters
-
-	local order = {}									-- order of the talent tabs
+	if not level or level < 15 then return end		-- don't scan anything for low level characters
 	
-	-- first talent tree, gather reference + user specific
-	for tabNum = 1, GetNumTalentTabs() do
-		local _, talentTabName, _, _, _, fileName = GetTalentTabInfo( tabNum, nil, nil, 1 );
-		order[tabNum] = talentTabName
-		
-		local ti = ref.Trees[talentTabName]		-- ti for talent info
-
-		ti.background = fileName
+	-- ref.Talents = {}
+	
 			
-		for talentNum = 1, GetNumTalents(tabNum) do
-			local nameTalent, iconPath, tier, column, _, maximumRank = GetTalentInfo(tabNum, talentNum, nil, nil, 1 )
+	-- for talentNum = 1, GetNumTalents() do
+		-- local nameTalent, iconPath, tier, column = GetTalentInfo(talentNum)
 
-			if nameTalent then
-				-- all paths start with this prefix, let's hope blue does not change this :)
-				-- saves a lot of memory not to keep the full path for each talent (about 16k in total for all classes)
-				iconPath = string.gsub(iconPath, UI_ICONS_PATH, "")
-				iconPath = string.gsub(iconPath, string.upper(UI_ICONS_PATH), "")
-				
-				local link = GetTalentLink(tabNum, talentNum)
-				local id = tonumber(link:match("talent:(%d+)"))
-				
-				ti.talents[talentNum] = id .. "|" .. nameTalent .. "|" .. iconPath .. "|" .. tier .. "|" ..  column .. "|" .. maximumRank
-				
-				prereqTier, prereqColumn = GetTalentPrereqs(tabNum, talentNum)		-- talent prerequisites
-				if prereqTier and prereqColumn then
-					ti.prereqs[talentNum] = prereqTier .. "|" .. prereqColumn
-				end
-			end
-		end
-	end
-	
-	-- save the order of talent tabs, this is necessary because the order of talent tabs is not the same as that of spell tabs in all languages/classes
-	-- it is fine in enUS, but not in frFR (druid at least did not match)
-	ref["Order"] = table.concat(order, ",")
-	
-	for i = 2, 4 do
-		local name, icon = GetSpellTabInfo(i)		-- skip spell tab 1, it's the general tab
-		
-		-- the icon may be nil on a low level char. 
-		-- Example : rogue lv 2
-			-- GetSpellTabInfo(1) returns the General tab
-			-- GetSpellTabInfo(2) returns the Assassination tab
-			-- GetSpellTabInfo(3) returns the Combat tab
-			-- GetSpellTabInfo(4) returns nil, instead of Subtelty
-		if name and icon then
-			-- in addition to having different order between spell tabs & talent tabs, the names may not match. Most of the time they do, but in case they don't, use the excpetion table
-			name = LocaleExceptions[name] or name
-		
-		
-			local ti = ref.Trees[name]		-- ti for talent info
-			ti.icon = string.gsub(icon, UI_ICONS_PATH, "")
-			ti.icon = string.gsub(ti.icon, string.upper(UI_ICONS_PATH), "")
-		end
-	end
+		-- if nameTalent then
+			-- all paths start with this prefix, let's hope blue does not change this :)
+			-- saves a lot of memory not to keep the full path for each talent (about 16k in total for all classes)
+			-- iconPath = string.gsub(iconPath, UI_ICONS_PATH, "")
+			-- iconPath = string.gsub(iconPath, string.upper(UI_ICONS_PATH), "")
+			
+			-- local link = GetTalentLink(talentNum)
+			-- local id = tonumber(link:match("talent:(%d+)"))
+			
+			-- ref.Talents[talentNum] = id .. "|" .. nameTalent .. "|" .. iconPath .. "|" .. tier .. "|" ..  column
+		-- end
+	-- end
 end
 
 local function ScanGlyphSockets()
@@ -264,18 +223,21 @@ local function ScanGlyphSockets()
 	--	6		4
 	--		2
 
+	local level = UnitLevel("player")
+	if not level or level < 15 then return end		-- don't scan anything for low level characters
+	
 	local glyphs = addon.ThisCharacter.Glyphs
 	wipe(glyphs)
 	
-	local enabled, glyphType, spell, glyphID
-	local link, index
-	local attrib
-	
-	for specNum = 1, GetNumTalentGroups() do
-		for i = 1, NUM_GLYPH_SLOTS do
-			index = ((specNum - 1) * NUM_GLYPH_SLOTS) + i
+	-- local enabled, glyphType, spell, glyphID, tooltipIndex
+	-- local link, index
+	-- local attrib
+
+	-- for specNum = 1, GetNumSpecGroups() do
+		-- for i = 1, NUM_GLYPH_SLOTS do
+			-- index = ((specNum - 1) * NUM_GLYPH_SLOTS) + i
 	      
-		   enabled, glyphType, tooltipIndex, spell = GetGlyphSocketInfo(i, specNum)
+		   -- enabled, glyphType, tooltipIndex, spell = GetGlyphSocketInfo(i, specNum)
 			
 			-- bit 0 : enabled
 			-- bits 1-2 : glyphType
@@ -284,36 +246,36 @@ local function ScanGlyphSockets()
 			-- bits 23- : glyphID
 			-- deprecated: icon : returned by GetSpellInfo()
 			
-			attrib = enabled or 0
-			attrib = attrib + LeftShift(glyphType or 0, 1)
-			if spell then
-				attrib = attrib + LeftShift(spell, 3)
-			end
+			-- attrib = enabled or 0
+			-- attrib = attrib + LeftShift(glyphType or 0, 1)
+			-- if spell then
+				-- attrib = attrib + LeftShift(spell, 3)
+			-- end
+
+			-- attrib = attrib + LeftShift(tooltipIndex, 20)
 			
-			attrib = attrib + LeftShift(tooltipIndex, 20)
+			-- if enabled then
+				-- link = GetGlyphLink(i, specNum)
+				-- if link then
+					-- glyphID = link:match("glyph:(%d+)")
+					-- if glyphID then
+						-- attrib = attrib + LeftShift(glyphID, 23)
+					-- end
+				-- end
+			-- end
 			
-			if enabled then
-				link = GetGlyphLink(i, specNum)
-				if link then
-					glyphID = link:match("glyph:(%d+)")
-					if glyphID then
-						attrib = attrib + LeftShift(glyphID, 23)
-					end
-				end
-			end
-			
-			if attrib > 0 then
-				glyphs[index] = attrib
-			end
-		end
-	end
+			-- if attrib > 0 then
+				-- glyphs[index] = attrib
+			-- end
+		-- end
+	-- end
 	
 	addon.ThisCharacter.lastUpdate = time()
 end
 
 local function ScanGlyphList()
 	ToggleGlyphFilter(7)		-- this will attempt to open all categories
-	if GetNumGlyphs() == 3 then	-- if 1 was closed, all we be closed after toggling the filter, and there will be exactly 3 lines (the headers)
+	if GetNumGlyphs() == 2 then	-- if 1 was closed, all we be closed after toggling the filter, and there will be exactly 3 lines (the headers)
 		ToggleGlyphFilter(7)			-- so toggle again to make sure all categories are expanded
 	end
 	
@@ -335,6 +297,11 @@ local function ScanGlyphList()
 			isKnown = 1
 			glyphID = 0
 		else
+		
+			-- if not addon.GlyphIDToSpellID[glyphID] then
+				-- DEFAULT_CHAT_FRAME:AddMessage("glyph id " .. glyphID .. " missing : " .. name)
+			-- end
+		
 			attrib = 0
 			isKnown = (isKnown == true) and 1 or 0
 			NamesRef[glyphID] = name
@@ -447,7 +414,8 @@ local function _GetTalentInfo(class, tree, index)
 	
 	if not talentInfo then return end
 	
-	local id, name, icon, tier, column, maximumRank	= strsplit("|", talentInfo)
+	local id, name, icon, tier, column = strsplit("|", talentInfo)
+	local maximumRank = 1
 	
 	return tonumber(id), name, UI_ICONS_PATH..icon, tonumber(tier), tonumber(column), tonumber(maximumRank)
 end
@@ -462,18 +430,6 @@ end
 
 local function _GetActiveTalents(character)
 	return character.ActiveTalents
-end
-
-local function _GetNumPointsSpent(character, tree, specNum)
-	local attrib = character.TalentTrees[format("%s|%s", tree, specNum)] 	-- ex: "Arcane|1"
-	if not attrib then return 0 end	-- not in the DB ? 0 points spent
-	
-	local points = 0
-	while attrib ~= 0 do
-		points = points + bAnd(attrib, 3)	-- add the lowest 2 bits ..
-		attrib = RightShift(attrib, 2)		-- shift 2 bits to the right
-	end
-	return points
 end
 	
 local function _GetTalentPrereqs(class, tree, index)
@@ -548,9 +504,9 @@ local function _GetGlyphInfoByID(glyphID)
 	local NamesRef = addon.db.global.Reference.GlyphNames
 
 	local spellID = addon.GlyphIDToSpellID[glyphID]
-	local name, icon, link
+	local name, rank, icon, link
 	if spellID then
-		name, _, icon = GetSpellInfo(spellID)
+		name, rank, icon = GetSpellInfo(spellID)
 		
 		if name then
 			link = format("|cff66bbff|Hglyph:%s|h[%s]|h|r", glyphID, name)
@@ -667,7 +623,6 @@ local PublicMethods = {
 	GetTreeInfo = _GetTreeInfo,
 	GetTreeNameByID = _GetTreeNameByID,
 	GetTalentLink = _GetTalentLink,
-	GetNumTalents = _GetNumTalents,
 	GetTalentInfo = _GetTalentInfo,
 	GetTalentRank = _GetTalentRank,
 	GetActiveTalents = _GetActiveTalents,
@@ -743,7 +698,6 @@ function addon:OnInitialize()
 	
 	DataStore:SetCharacterBasedMethod("GetTalentRank")
 	DataStore:SetCharacterBasedMethod("GetActiveTalents")
-	DataStore:SetCharacterBasedMethod("GetNumPointsSpent")
 	DataStore:SetCharacterBasedMethod("GetGlyphSocketInfo")
 	DataStore:SetCharacterBasedMethod("GetNumGlyphs")
 	DataStore:SetCharacterBasedMethod("GetGlyphInfo")
@@ -771,5 +725,5 @@ function addon:OnDisable()
 	addon:UnregisterEvent("GLYPH_ADDED")
 	addon:UnregisterEvent("GLYPH_REMOVED")
 	addon:UnregisterEvent("GLYPH_UPDATED")
-	addon:UnregisterEvent("USE_GLYPH")
+	-- addon:UnregisterEvent("USE_GLYPH")
 end

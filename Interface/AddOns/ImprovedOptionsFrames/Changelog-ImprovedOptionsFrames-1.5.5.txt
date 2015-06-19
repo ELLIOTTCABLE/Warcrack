@@ -1,0 +1,27 @@
+------------------------------------------------------------------------
+r18 | cybeloras | 2014-10-19 22:21:46 +0000 (Sun, 19 Oct 2014) | 1 line
+Changed paths:
+   A /tags/1.5.5 (from /trunk:17)
+
+Tagging as 1.5.5
+------------------------------------------------------------------------
+r17 | cybeloras | 2014-10-19 22:20:32 +0000 (Sun, 19 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/ImprovedOptionsFrames.lua
+   M /trunk/ImprovedOptionsFrames.toc
+
+I managed to remove the lines the modified HelpFrame...
+------------------------------------------------------------------------
+r15 | cybeloras | 2014-10-14 04:35:25 +0000 (Tue, 14 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/ImprovedOptionsFrames.lua
+   M /trunk/ImprovedOptionsFrames.toc
+
+Added support for Warlords of Draenor
+------------------------------------------------------------------------
+r14 | cybeloras | 2013-07-22 10:35:07 +0000 (Mon, 22 Jul 2013) | 1 line
+Changed paths:
+   M /trunk/ImprovedOptionsFrames.toc
+
+Bumped version to WoW 50300
+------------------------------------------------------------------------

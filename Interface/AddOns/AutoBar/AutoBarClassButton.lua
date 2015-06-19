@@ -11,15 +11,9 @@
 local AutoBar = AutoBar
 local spellIconList = AutoBar.spellIconList
 
-local REVISION = tonumber(("$Revision: 1.1 $"):match("%d+"))
-if AutoBar.revision < REVISION then
-	AutoBar.revision = REVISION
-	AutoBar.date = ('$Date: 2010/11/13 03:23:25 $'):match('%d%d%d%d%-%d%d%-%d%d')
-end
-
 local AceOO = AceLibrary("AceOO-2.0")
 local L = AutoBar.locale
-local LBF = LibStub("LibButtonFacade", true)
+local Masque = LibStub("Masque", true)
 local LibKeyBound = LibStub("LibKeyBound-1.0")
 local dewdrop = AceLibrary("Dewdrop-2.0")
 local _G = getfenv(0)
@@ -271,6 +265,8 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 
 	frame:SetScript("OnEnter", funcOnEnter)
 	frame:SetScript("OnLeave", funcOnLeave)
+	
+	RegisterStateDriver(frame, "visibility", AutoBar.visibility_driver_string)
 
 ---	frame:SetScript("OnAttributeChanged", onAttributeChangedFunc)
 	frame:SetScript("OnDragStart", onDragStartFunc)
@@ -284,9 +280,9 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 	frame.hotKey = _G[("%sHotKey"):format(name)]
 	frame.count = _G[("%sCount"):format(name)]
 	frame.flash = _G[("%sFlash"):format(name)]
-	if (LBF) then
-		local group = self.parentBar.frame.LBFGroup
-		frame.LBFButtonData = {
+	if (Masque) then
+		local group = self.parentBar.frame.MasqueGroup
+		frame.MasqueButtonData = {
 			Border = frame.border,
 			Cooldown = frame.cooldown,
 			Count = frame.count,
@@ -295,7 +291,7 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 			Icon = frame.icon,
 			Name = frame.macroName,
 		}
-		group:AddButton(frame, frame.LBFButtonData)
+		group:AddButton(frame, frame.MasqueButtonData)
 	end
 	frame.normalTexture = frame:GetNormalTexture()
 
@@ -311,7 +307,6 @@ function AutoBar.Class.Button.prototype:CreateButtonFrame()
 	self:UpdateButton()
 	self:EventsEnable()
 
---	self:RegisterBarEvents()
 end
 
 -- Handle a click on a popped up button
@@ -382,12 +377,12 @@ end
 function AutoBar.Class.Button.prototype:SwitchItem(buttonItemId, targetBag, targetSlot)
 	local popupHeader = self.frame.popupHeader
 	if (popupHeader) then
-		for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+		for _, popupButton in pairs(popupHeader.popupButtonList) do
 			local frame = popupButton.frame
 			local itemType = self.frame:GetAttribute("type")
 			if (itemType == "item") then
 				local itemId = frame:GetAttribute("itemId")
-				local isUsable, notEnoughMana = IsUsableItem(itemId)
+				local isUsable = IsUsableItem(itemId)
 				if (isUsable) then
 					-- It is usable so we have some in inventory so switch
 					local didShuffle = AutoBar.Class.Button:ShuffleItem(itemId, targetBag, targetSlot, true)
@@ -423,7 +418,7 @@ function AutoBar.Class.Button.prototype:PostClick(mouseButton, down)
 				if (not didShuffle) then
 --AutoBar:Print("\nAutoBar.Class.PopupButton.prototype:PostClick did not shuffle, switchItem itemId " .. tostring(itemId) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
 					-- Switch to next item
-					local didSwitch = self:SwitchItem(itemId, targetBag, targetSlot)
+					--[[local didSwitch = ]] self:SwitchItem(itemId, targetBag, targetSlot)
 --AutoBar:Print("\nAutoBar.Class.PopupButton.prototype:PostClick didSwitch " .. tostring(didSwitch) .. " targetBag " .. tostring(targetBag) .. " targetSlot " .. tostring(targetSlot))
 				end
 			end
@@ -501,17 +496,14 @@ function AutoBar.Class.Button.prototype:UpdateButton()
 	self:UpdateHotkeys()
 	local itemType = frame:GetAttribute("type")
 	if (AutoBar.moveButtonsMode) then
---		self:UnregisterButtonEvents()
 		self:ShowButton()
 	elseif (itemType) then
---		self:RegisterButtonEvents()
 		self:UpdateUsable()
 		self:UpdateCooldown()
 		self:ShowButton()
 		frame:SetScript("OnUpdate", OnUpdateFunc)
 	else
 		frame:SetScript("OnUpdate", nil)
---		self:UnregisterButtonEvents()
 
 		frame.cooldown:Hide()
 		self:HideButton()
@@ -564,7 +556,7 @@ function AutoBar.Class.Button.prototype:UpdateCooldown()
 
 	local popupHeader = self.frame.popupHeader
 	if (popupHeader) then
-		for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+		for _, popupButton in pairs(popupHeader.popupButtonList) do
 			popupButton:UpdateCooldown()
 		end
 	end
@@ -577,7 +569,7 @@ function AutoBar.Class.Button.prototype:UpdateCount()
 	if (AutoBar.db.account.showCount) then
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				popupButton:UpdateCount()
 			end
 		end
@@ -592,7 +584,7 @@ function AutoBar.Class.Button.prototype:UpdateUsable()
 
 		local popupHeader = self.frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				popupButton:UpdateUsable()
 			end
 		end
@@ -648,8 +640,6 @@ function AutoBar.Class.Button.prototype:IsActive()
 				count = 1
 			end
 		elseif (itemType == "spell") then
-			--ToDo: Reagent based count
---			local spellName = self.frame:GetAttribute("spell")
 			count = 1
 		end
 		return count > 0
@@ -662,15 +652,15 @@ end
 
 
 local function FindSpell(spellName, bookType)
-	local i, s
+	local s
 	local found = false;
 	for i = 1, MAX_SKILLLINE_TABS do
-		local name, texture, offset, numSpells = GetSpellTabInfo(i)
+		local name, _, offset, numSpells = GetSpellTabInfo(i)
 		if (not name) then
 			break
 		end
 		for s = offset + 1, offset + numSpells do
-			local	spell, rank = GetSpellBookItemName(s, bookType)
+			local	spell = GetSpellBookItemName(s, bookType)
 			if (spell == spellName) then
 				found = true
 			end
@@ -747,8 +737,6 @@ function AutoBar.Class.Button.prototype:OnUpdate(elapsed)
 		end
 	end
 
-	local spellName = frame:GetAttribute("spell")
-
 	if (frame.outOfRange ~= (inRange == 0)) then
 		frame.outOfRange = not frame.outOfRange
 print(frame:GetName(), frame.outOfRange)
@@ -777,11 +765,10 @@ function AutoBar.Class.Button.prototype:StopFlash()
 end
 
 function AutoBar.Class.Button.prototype:ShowButton()
-	local frame = self.frame
 
-	if (LBF) then
+	if (Masque) then
 		local frame = self.frame
-		local backdrop, gloss = LBF:GetBackdropLayer(frame), LBF:GetGlossLayer(frame)
+		local backdrop, gloss = Masque:GetBackdrop(frame), Masque:GetGloss(frame)
 		if (backdrop) then
 			backdrop:Show()
 		end
@@ -790,9 +777,9 @@ function AutoBar.Class.Button.prototype:ShowButton()
 		end
 		local popupHeader = frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				frame = popupButton.frame
-				local backdrop, gloss = LBF:GetBackdropLayer(frame), LBF:GetGlossLayer(frame)
+				local backdrop, gloss = Masque:GetBackdrop(frame), Masque:GetGloss(frame)
 				if (backdrop) then
 					backdrop:Show()
 				end
@@ -808,8 +795,8 @@ function AutoBar.Class.Button.prototype:HideButton()
 	local frame = self.frame
 
 
-	if (LBF) then
-		local backdrop, gloss = LBF:GetBackdropLayer(self), LBF:GetGlossLayer(self)
+	if (Masque) then
+		local backdrop, gloss = Masque:GetBackdrop(self), Masque:GetGloss(self)
 		if (backdrop) then
 			backdrop:Hide()
 		end
@@ -818,9 +805,9 @@ function AutoBar.Class.Button.prototype:HideButton()
 		end
 		local popupHeader = frame.popupHeader
 		if (popupHeader) then
-			for popupButtonIndex, popupButton in pairs(popupHeader.popupButtonList) do
+			for _, popupButton in pairs(popupHeader.popupButtonList) do
 				frame = popupButton.frame
-				local backdrop, gloss = LBF:GetBackdropLayer(frame), LBF:GetGlossLayer(frame)
+				local backdrop, gloss = Masque:GetBackdrop(frame), Masque:GetGloss(frame)
 				if (backdrop) then
 					backdrop:Hide()
 				end
@@ -891,76 +878,6 @@ function AutoBar.Class.Button.prototype:ShowButtonOptions()
 end
 
 
-function AutoBar.Class.Button.prototype:RegisterBarEvents()
-	self:RegisterEvent("PLAYER_ENTERING_WORLD", "BaseEventHandler")
-	self:RegisterEvent("ACTIONBAR_PAGE_CHANGED", "BaseEventHandler")
-	self:RegisterEvent("ACTIONBAR_SLOT_CHANGED", "BaseEventHandler")
-	self:RegisterEvent("UPDATE_BINDINGS", "BaseEventHandler")
-	self:RegisterEvent("UPDATE_SHAPESHIFT_FORM", "BaseEventHandler")
-end
-
-function AutoBar.Class.Button.prototype:RegisterButtonEvents()
-	if self.eventsregistered then return end
-	self.eventsregistered = true
-	self:RegisterEvent("PLAYER_TARGET_CHANGED", "ButtonEventHandler")
-	self:RegisterEvent("PLAYER_AURAS_CHANGED", "ButtonEventHandler")
-	self:RegisterEvent("UNIT_INVENTORY_CHANGED", "ButtonEventHandler")
-	self:RegisterEvent("ACTIONBAR_UPDATE_USABLE", "ButtonEventHandler")
-	self:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN", "ButtonEventHandler")
-	self:RegisterEvent("ACTIONBAR_UPDATE_STATE", "ButtonEventHandler")
-	self:RegisterEvent("UPDATE_INVENTORY_ALERTS", "ButtonEventHandler")
-	self:RegisterEvent("PLAYER_ENTER_COMBAT", "ButtonEventHandler")
-	self:RegisterEvent("PLAYER_LEAVE_COMBAT", "ButtonEventHandler")
-	self:RegisterEvent("START_AUTOREPEAT_SPELL", "ButtonEventHandler")
-	self:RegisterEvent("STOP_AUTOREPEAT_SPELL", "ButtonEventHandler")
---[[
-	self:RegisterEvent("CRAFT_SHOW", "ButtonEventHandler")
-	self:RegisterEvent("CRAFT_CLOSE", "ButtonEventHandler")
-	self:RegisterEvent("TRADE_SKILL_SHOW", "ButtonEventHandler")
-	self:RegisterEvent("TRADE_SKILL_CLOSE", "ButtonEventHandler")
---]]
-end
-
-function AutoBar.Class.Button.prototype:UnregisterButtonEvents()
-	if not self.eventsregistered then return end
-	self.eventsregistered = nil
-	self:UnregisterEvent("PLAYER_TARGET_CHANGED")
-	self:UnregisterEvent("PLAYER_AURAS_CHANGED")
-	self:UnregisterEvent("UNIT_INVENTORY_CHANGED")
-	self:UnregisterEvent("ACTIONBAR_UPDATE_USABLE")
-	self:UnregisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
-	self:UnregisterEvent("ACTIONBAR_UPDATE_STATE")
-	self:UnregisterEvent("UPDATE_INVENTORY_ALERTS")
-	self:UnregisterEvent("PLAYER_ENTER_COMBAT")
-	self:UnregisterEvent("PLAYER_LEAVE_COMBAT")
-	self:UnregisterEvent("START_AUTOREPEAT_SPELL")
-	self:UnregisterEvent("STOP_AUTOREPEAT_SPELL")
---[[
-	self:UnregisterEvent("CRAFT_SHOW")
-	self:UnregisterEvent("CRAFT_CLOSE")
-	self:UnregisterEvent("TRADE_SKILL_SHOW")
-	self:UnregisterEvent("TRADE_SKILL_CLOSE")
---]]
-end
-
---[[
-	Following Events are always set and will always be called - i call them the base events
-]]
-function AutoBar.Class.Button.prototype:BaseEventHandler(e)
-	if (not self.parentBar.sharedLayoutDB.enabled or self.parentBar.sharedLayoutDB.hide) then
-		return
-	end
-	local e = event
-
-	if ( e == "PLAYER_ENTERING_WORLD" or e == "ACTIONBAR_PAGE_CHANGED") then
-		self:UpdateButton()
-	elseif ( e == "UPDATE_BINDINGS" ) then
-		self:UpdateHotkeys()
-	elseif ( e == "UPDATE_SHAPESHIFT_FORM" ) then
-		self:UpdateButton()
-	end
-end
-
 -- Show grid feedback for droppable buttons
 function AutoBar.Class.Button.prototype:ACTIONBAR_SHOWGRID()
 --print(self.frame:GetName(), "ShowGrid")
@@ -978,51 +895,6 @@ function AutoBar.Class.Button.prototype:ACTIONBAR_HIDEGRID()
 end
 
 
---[[
-	Following Events are only set when the Button in question has a valid action - i call them the button events
-]]
-function AutoBar.Class.Button.prototype:ButtonEventHandler(e)
-	if (not self.parentBar.sharedLayoutDB.enabled or self.parentBar.sharedLayoutDB.hide) then
-		return
-	end
-	local e = event
-	local actionId = self.action
-
-	if ( event == "PLAYER_TARGET_CHANGED" or event == "PLAYER_AURAS_CHANGED" ) then
-		self:UpdateUsable()
-		self:UpdateHotkeys()
-	elseif ( event == "UNIT_INVENTORY_CHANGED" ) then
-		if ( arg1 == "player" ) then
-			self:UpdateButton()
-		end
-	elseif ( event == "ACTIONBAR_UPDATE_USABLE" or event == "UPDATE_INVENTORY_ALERTS" or event == "ACTIONBAR_UPDATE_COOLDOWN" ) then
-		self:UpdateUsable()
-		self:UpdateCooldown()
----	elseif ( event == "CRAFT_SHOW" or event == "CRAFT_CLOSE" or event == "TRADE_SKILL_SHOW" or event == "TRADE_SKILL_CLOSE" ) then
----		self:UpdateState()
----	elseif ( event == "ACTIONBAR_UPDATE_STATE" ) then
----		self:UpdateState()
-	elseif ( event == "PLAYER_ENTER_COMBAT" ) then
-		if ( IsAttackAction(actionId) ) then
-			self:StartFlash()
-		end
-	elseif ( event == "PLAYER_LEAVE_COMBAT" ) then
-		if ( IsAttackAction(actionId) ) then
-			self:StopFlash()
-		end
-	elseif ( event == "START_AUTOREPEAT_SPELL" ) then
-		if ( IsAutoRepeatAction(actionId) ) then
-			self:StartFlash()
-		end
-	elseif ( event == "STOP_AUTOREPEAT_SPELL" ) then
-		if ( self.flashing == 1 and not IsAttackAction(actionId) ) then
-			self:StopFlash()
-		end
-	end
-end
-
-
-
 -- Return a unique key to use
 function AutoBar.Class.Button:GetCustomKey(customButtonName)
 	local barKey = "AutoBarCustomButton" .. customButtonName
@@ -1036,12 +908,12 @@ function AutoBar.Class.Button:NameExists(newName)
 	if (AutoBar.db.account.buttonList[newKey]) then
 		return true
 	end
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		if (classDB.buttonList[newKey]) then
 			return true
 		end
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		if (charDB.buttonList[newKey]) then
 			return true
 		end
@@ -1067,19 +939,19 @@ end
 
 function AutoBar.Class.Button:Delete(buttonKey)
 	AutoBar.db.account.buttonList[buttonKey] = nil
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		classDB.buttonList[buttonKey] = nil
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		charDB.buttonList[buttonKey] = nil
 	end
 
 	-- Delete ButtonKeys on Bars
 	AutoBar.Class.Bar:DeleteButtonKey(AutoBar.db.account.barList, buttonKey)
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		AutoBar.Class.Bar:DeleteButtonKey(classDB.barList, buttonKey)
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		AutoBar.Class.Bar:DeleteButtonKey(charDB.barList, buttonKey)
 	end
 
@@ -1089,7 +961,7 @@ function AutoBar.Class.Button:Delete(buttonKey)
 end
 
 function AutoBar.Class.Button:RenameCategoryKey(dbList, oldKey, newKey)
-	for buttonKey, buttonDB in pairs(dbList) do
+	for _, buttonDB in pairs(dbList) do
 		for index, categoryKey in ipairs(buttonDB) do
 			if (categoryKey == oldKey) then
 				buttonDB[index] = newKey
@@ -1101,10 +973,10 @@ end
 function AutoBar.Class.Button:RenameCategory(oldKey, newKey)
 	-- Change all db instances
 	AutoBar.Class.Button:RenameCategoryKey(AutoBar.db.account.buttonList, oldKey, newKey)
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		AutoBar.Class.Button:RenameCategoryKey(classDB.buttonList, oldKey, newKey)
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		AutoBar.Class.Button:RenameCategoryKey(charDB.buttonList, oldKey, newKey)
 	end
 end
@@ -1126,10 +998,10 @@ function AutoBar.Class.Button:Rename(oldKey, newName)
 
 	-- Change all db instances
 	AutoBar.Class.Button:RenameKey(AutoBar.db.account.buttonList, oldKey, newKey, newName)
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		AutoBar.Class.Button:RenameKey(classDB.buttonList, oldKey, newKey, newName)
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		AutoBar.Class.Button:RenameKey(charDB.buttonList, oldKey, newKey, newName)
 	end
 
@@ -1145,10 +1017,10 @@ function AutoBar.Class.Button:Rename(oldKey, newName)
 
 	-- Change ButtonKeys on Bars
 	AutoBar.Class.Bar:RenameButtonKey(AutoBar.db.account.barList, oldKey, newKey)
-	for classKey, classDB in pairs (AutoBarDB.classes) do
+	for _, classDB in pairs (AutoBarDB.classes) do
 		AutoBar.Class.Bar:RenameButtonKey(classDB.barList, oldKey, newKey)
 	end
-	for charKey, charDB in pairs (AutoBarDB.chars) do
+	for _, charDB in pairs (AutoBarDB.chars) do
 		AutoBar.Class.Bar:RenameButtonKey(charDB.barList, oldKey, newKey)
 	end
 end

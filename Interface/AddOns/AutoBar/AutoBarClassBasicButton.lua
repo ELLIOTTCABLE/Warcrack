@@ -10,17 +10,10 @@
 local AutoBar = AutoBar
 local spellIconList = AutoBar.spellIconList
 
-local REVISION = tonumber(("$Revision: 1.1 $"):match("%d+"))
-if AutoBar.revision < REVISION then
-	AutoBar.revision = REVISION
-	AutoBar.date = ('$Date: 2010/11/13 03:23:25 $'):match('%d%d%d%d%-%d%d%-%d%d')
-end
 
 local AceOO = AceLibrary("AceOO-2.0")
 local L = AutoBar.locale
-local LBF = LibStub("LibButtonFacade", true)
 local LibKeyBound = LibStub("LibKeyBound-1.0")
-local dewdrop = AceLibrary("Dewdrop-2.0")
 local _G = getfenv(0)
 local _
 
@@ -274,7 +267,7 @@ function AutoBar.Class.BasicButton.prototype:UpdateUsable()
 			isUsable, notEnoughMana = IsUsableItem(itemId)
 			if (isUsable) then
 				-- Single use in combat potion hack
-				local start, duration, enabled = GetItemCooldown(itemId)
+				local _, _, enabled = GetItemCooldown(itemId)
 				if (not enabled) then
 					isUsable = false
 				end

@@ -1,10 +1,12 @@
 local MAJOR_VERSION = "LibDogTag-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 203 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 250 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_MINOR_VERSION then
 	_G.DogTag_MINOR_VERSION = MINOR_VERSION
 end
 
+local type, error, rawget, next, pairs, ipairs, setmetatable, loadstring, pcall, table, tonumber, tostring, math, assert, unpack =
+	  type, error, rawget, next, pairs, ipairs, setmetatable, loadstring, pcall, table, tonumber, tostring, math, assert, unpack
 -- #AUTODOC_NAMESPACE DogTag
 
 DogTag_funcs[#DogTag_funcs+1] = function(DogTag)
@@ -20,6 +22,7 @@ local joinSet = DogTag.joinSet
 local unpackNamespaceList = DogTag.unpackNamespaceList
 local getASTType = DogTag.getASTType
 local kwargsToKwargTypes = DogTag.kwargsToKwargTypes
+local kwargsToKwargTypesWithTableCache = DogTag.kwargsToKwargTypesWithTableCache
 local memoizeTable = DogTag.memoizeTable
 local unparse, parse, standardize, codeToEventList, clearCodes
 DogTag_funcs[#DogTag_funcs+1] = function()
@@ -320,10 +323,10 @@ end
 local function numberToString(num)
 	if type(num) ~= "number" then
 		return tostring(num)
-	elseif num == 1/0 then
-		return "1/0"
-	elseif num == -1/0 then
-		return "-1/0"
+	elseif num == math.huge then
+		return "NaN"
+	elseif num == -math.huge then
+		return "-NaN"
 	elseif math.floor(num) == num then
 		return tostring(num)
 	else
@@ -833,12 +836,12 @@ local function compile(ast, nsList, t, cachedTags, events, functions, extraKwarg
 					local returns = newSet((";"):split(types))
 					if v == "@undef" then
 						firstAndNonNil = nil
-						firstAndNonNil_t_num = nil
+					--	firstAndNonNil_t_num = nil	-- unused
 					elseif not returns["nil"] then
 						firstAndNonNil = nil
-						firstAndNonNil_t_num = nil
+					--	firstAndNonNil_t_num = nil	-- unused
 					elseif returns["string"] or returns["number"] then
-						firstAndNonNil_t_num = nil
+					--	firstAndNonNil_t_num = nil	-- unused
 					end
 					returns = del(returns)
 				end
@@ -1885,24 +1888,6 @@ local function readjustKwargs(ast, nsList, kwargTypes)
 	return ast
 end
 
-local safeCompile__code
-local safeCompile__ast
-local safeCompile__nsList
-local safeCompile__u
-local safeCompile__cachedTags
-local safeCompile__events
-local safeCompile__functions
-local safeCompile__extraKwargs
-local function safeCompile()
-	return compile(safeCompile__ast, safeCompile__nsList, safeCompile__u, safeCompile__cachedTags, safeCompile__events, safeCompile__functions, safeCompile__extraKwargs, 'nil;number;string', 'result')
-end
-
-local function errorhandler(err)
-	local _, minor = LibStub(MAJOR_VERSION)
-	geterrorhandler()(("%s.%d: Error with code %q (%s). %s"):format(MAJOR_VERSION, minor, safeCompile__code, safeCompile__nsList, err))
-	return err
-end
-
 --[[
 Notes:
 	This is mostly used for debugging purposes
@@ -1927,7 +1912,7 @@ function DogTag:CreateFunctionFromCode(code, nsList, kwargs, notDebug)
 	if notDebug then
 		kwargTypes = kwargs
 	else
-		kwargTypes = kwargsToKwargTypes[kwargs]
+		kwargTypes = kwargsToKwargTypes[kwargs] -- NOT safe for kwargsToKwargTypesWithTableCache
 		kwargs = nil
 		nsList = fixNamespaceList[nsList]
 	end
@@ -2008,9 +1993,12 @@ function DogTag:CreateFunctionFromCode(code, nsList, kwargs, notDebug)
 	local w = newList()
 	local events = newList()
 	local functions = newList()
-	safeCompile__code, safeCompile__ast, safeCompile__nsList, safeCompile__u, safeCompile__cachedTags, safeCompile__events, safeCompile__functions, safeCompile__extraKwargs = code, ast, nsList, w, cachedTags, events, functions, extraKwargs
-	local good, ret, types, static = xpcall(safeCompile, errorhandler)
-	safeCompile__code, safeCompile__ast, safeCompile__nsList, safeCompile__u, safeCompile__cachedTags, safeCompile__events, safeCompile__functions, safeCompile__extraKwargs = nil
+	
+	local good, ret, types, static = pcall(compile, ast, nsList, w, cachedTags, events, functions, extraKwargs, 'nil;number;string', 'result')
+	if not good then
+		DogTag.tagError(code, nsList, ret)
+	end	
+	
 	for i, v in ipairs(w) do
 		u[#u+1] = v
 	end
@@ -2150,16 +2138,6 @@ function DogTag:CreateFunctionFromCode(code, nsList, kwargs, notDebug)
 	end
 end
 
-local call__func, call__kwargs, call__code, call__nsList
-local function call()
-	return call__func(call__kwargs)
-end
-
-local function errorhandler(err)
-	local _, minor = LibStub(MAJOR_VERSION)
-	return geterrorhandler()(("%s.%d: Error with code %q (%s). %s"):format(MAJOR_VERSION, minor, call__code, call__nsList, err))
-end
-
 local codeEvaluationTime_mt = {__index = function(self, kwargTypes)
 	local t = newList()
 	self[kwargTypes] = t
@@ -2172,8 +2150,13 @@ local codeEvaluationTime = setmetatable({}, {__index = function(self, nsList)
 end})
 DogTag.codeEvaluationTime = codeEvaluationTime
 
-local function evaluate(code, nsList, kwargs)
-	local kwargTypes = kwargsToKwargTypes[kwargs]
+local function evaluate(code, nsList, kwargs, kwargTypes)
+
+	-- kwargTypes is passed in if calling from DogTag:Evaluate() because it cannot be cached,
+	-- but otherwise we should be able to safely get from the table cached version of kwargsToKwargTypes.
+	-- Just make sure that where ever evaluate() is called, a 'safe' kwargs table is passed in
+	-- (one that DogTag generated from memoizeTable, not one that was passed in externally from another addon)
+	kwargTypes = kwargTypes or kwargsToKwargTypesWithTableCache[kwargs]
 
 	DogTag.__isMouseOver = false
 	
@@ -2184,9 +2167,13 @@ local function evaluate(code, nsList, kwargs)
 	if madeKwargs then
 		kwargs = newList()
 	end
-	call__func, call__kwargs, call__code, call__nsList = func, kwargs, code, nsList
-	local success, text, opacity, outline = xpcall(call, errorhandler)
-	call__func, call__kwargs, call__code, call__nsList = nil, nil, nil, nil
+	
+	local success, text, opacity, outline = pcall(func, kwargs)
+	if not success then
+		DogTag.tagError(code, nsList, text)
+		return
+	end
+	
 	if madeKwargs then
 		kwargs = del(kwargs)
 	end
@@ -2217,7 +2204,16 @@ function DogTag:Evaluate(code, nsList, kwargs)
 		error(("Bad argument #4 to `Evaluate'. Expected %q, got %q"):format("table", type(kwargs)), 2)
 	end
 	nsList = fixNamespaceList[nsList]
-	return evaluate(code, nsList, kwargs)
+	
+	
+	-- kwargTypes is passed into evaluate() instead of determined inside of evaluate() because
+	-- evaluate will obtain kwargTypes from kwargsToKwargTypesWithTableCache if it is not passed in.
+	-- This function's kwargs are not 'secure' and so there is no guarentee that the table isn't being
+	-- reused with different values and types. (see definition of kwargsToKwargTypesWithTableCache in Helpers.lua for an explanation)
+	
+	local kwargTypes = kwargsToKwargTypes[kwargs]
+	
+	return evaluate(code, nsList, kwargs, kwargTypes)
 end
 
 --[[

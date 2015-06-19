@@ -1,19 +1,24 @@
-## Interface: 40000
-## Version: 5.0.2
-## Title: CensusPlus (WhoLib Compatible)
+## Interface: 60100
+## Version: 6.3.0
+## X-SubVersion: >=WoD6.1.2
+## Title: CensusPlus
 ## Notes: Collects and displays census information. This AddOn is licenced under the GNU GPL, see GPL.txt for details.
+## Notes: release - d - updated libwho-2.0
 ## Original Author: Ian Pieragostini
 ## Modified By: Cooper Sellers - www.warcraftrealms.com 
-## Modified By: sylvanaar
+## Modified By: sylvanaar - LibWho integration
+## Modified By: Bringoutyourdead with support from Balgair both at www.warcraftrealms.com 
+## Modified By: Bringoutyourdead with support from Padanfain both at www.warcraftrealms.com 
 ## OptionalDeps: LibWho-2.0, LibStub, CallbackHandler-1.0
-## SavedVariables: CensusPlus_Database,CensusPlus_BGInfo,CensusPlus_Unhandled
-## SavedVariablesPerCharacter: CensusPlus_DoThisCharacter,CensusPlus_PerCharInfo
+## SavedVariables: CensusPlus_Database, CensusPlus_CRealms, CensusPlus_Guilds
+## SavedVariablesPerCharacter: CensusPlus_PerCharInfo
 ## X-Website: http://www.warcraftrealms.com
 
 #@no-lib-strip@
 libs\LibStub\LibStub.lua
 libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
 libs\LibWho-2.0\LibWho-2.0.lua
+libs\LibRealmID\LibRealmID.lua
 #@end-no-lib-strip@
 
 CensusPlus.xml

@@ -25,6 +25,7 @@ L.MSG_INVALID_CUSTOM_FONT_NAME		= "잘못된 글꼴 이름."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "글꼴 이름이 이미 존재합니다."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "글꼴 경로가 .ttf 파일을 가리켜야 합니다."
 --L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font." 
+--L.MSG_TESTING_FONT			= "Testing the specified font for validity..."
 L.MSG_CUSTOM_SOUNDS					= "사용자 소리"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "잘못된 소리 이름."
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "소리 이름이 이미 존재합니다."
@@ -36,7 +37,7 @@ L.MSG_SCROLL_AREA_ALREADY_EXISTS	= "스크롤 영역 이름이 이미 존재합�
 L.MSG_INVALID_SCROLL_AREA_NAME		= "허용되지 않는 스크롤 영역 이름입니다."
 L.MSG_ACKNOWLEDGE_TEXT				= "이 동작을 수행 하시겠습니까?"
 L.MSG_NORMAL_PREVIEW_TEXT			= "기본"
-L.MSG_INVALID_SOUND_FILE			= "효과음은 .mp3 혹은 .ogg 파일이어야 합니다."
+L.MSG_INVALID_SOUND_FILE			= "효과음은 .ogg 파일이어야 합니다."
 L.MSG_NEW_TRIGGER					= "새로운 트리거"
 L.MSG_TRIGGER_CLASSES				= "직업 트리거"
 L.MSG_MAIN_EVENTS					= "메인 이벤트"
@@ -54,23 +55,6 @@ L.MSG_ITEM_QUALITIES				= "아이템 품질"
 L.MSG_ITEMS							= "아이템"
 L.MSG_ITEM_ALREADY_EXISTS			= "아이템 이름이 이미 존재합니다."
 L.MSG_INVALID_ITEM_NAME				= "잘못된 아이템 이름."
-
-
-------------------------------
--- Class Names.
-------------------------------
-
-local obj = L.CLASS_NAMES
-obj["DEATHKNIGHT"]	= "죽음의 기사"
-obj["DRUID"]		= "드루이드"
-obj["HUNTER"]		= "사냥꾼"
-obj["MAGE"]			= "마법사"
-obj["PALADIN"]		= "성기사"
-obj["PRIEST"]		= "사제"
-obj["ROGUE"]		= "도적"
-obj["SHAMAN"]		= "주술사"
-obj["WARLOCK"]		= "흑마법사"
-obj["WARRIOR"]		= "전사"
 
 
 ------------------------------
@@ -119,6 +103,8 @@ obj["enableTrigger"]			= { tooltip="트리거를 활성화합니다."}
 obj["allPowerGains"]			= { label="모든 마력 (마나/분노 등) 획득", tooltip="전투 로그로 나타나지 않는 것을 포함한 모든 마력 (마나, 분노, 기력, 룬 마력) 획득을 표시합니다..\n\n주의: 이 옵션은 마력 표시 기준 및 출력시간 설정을 무시하므로 원치 않는 메시지를 많이 표시할수 있습니다.\n\n[비 추천]"}
 obj["abbreviateSkills"]			= { label="짧은 기술 이름", tooltip="기술 이름을 짧게 표시해줍니다(영문).\n\n이 설정은 %sl 이벤트 코드를 사용한 이벤트에서 무시되어집니다."}
 obj["mergeSwings"]				= { label="타격 병합", tooltip="짧은 시간 내에 가한 일반 근접딜러 타격을 병합합니다."}
+--obj["shortenNumbers"]			= { label="Shorten Numbers", tooltip="Display numbers in an abbreviated format (example: 32765 -> 33k)."}
+--obj["groupNumbers"]				= { label="Group By Thousands", tooltip="Display numbers grouped by thousands (example: 32765 -> 32,765)."}
 obj["hideSkills"]				= { label="기술 이름 숨김", tooltip="받은, 대상이 받은 이벤트에서 기술 이름을 표시하지 않습니다.\n\n이 옵션을 사용하면 %s 이벤트 코드를 무시하므로 이벤트에 대한 사용자 설정이 무시되어질 것입니다."}
 obj["hideNames"]				= { label="유닛 이름 숨김", tooltip="받은, 대상이 받은 이벤트에서 유닛 이름을 표시하지 않는다.\n\n이 옵션을 사용하면 %n 이벤트 코드를 무시하므로 이벤트에 대한 사용자 설정이 무시되어질 것입니다."}
 obj["hideFullOverheals"]		= { label="최대 초과치유 숨김", tooltip="0의 치유량 효과를 가진 치유는 표시하지 않습니다."}
@@ -227,7 +213,7 @@ obj = L.EDITBOXES
 obj["customFontName"]	= { label="글꼴 이름:", tooltip="이름은 글꼴을 식별하는데 사용합니다.\n\n사용예: 나의 최강 글꼴"}
 obj["customFontPath"]	= { label="글꼴 경로:", tooltip="글꼴 파일이 있는 경로.\n\n노트: 만약 파일이 권장하는 MikScrollingBattleText\\Fonts 폴더 위치에 있으면, 여기엔 오로지 전체 경로 대신 파일 이름을 입력해야 됩니다.\n\n사용예: myFont.ttf "}
 obj["customSoundName"]	= { label="소리 이름:", tooltip="이름은 소리를 식별하는데 사용합니다.\n\n사용예: 나의 소리"}
-obj["customSoundPath"]	= { label="소리 경로:", tooltip="소리 파일이 있는 경로.\n\n노트: 만약 파일이 권장하는 MikScrollingBattleText\\Sounds 폴더 위치에 있으면, 여기엔 오로지 전체 경로 대신 파일 이름을 입력해야 됩니다.\n\n사용예: mySound.mp3 "}
+obj["customSoundPath"]	= { label="소리 경로:", tooltip="소리 파일이 있는 경로.\n\n노트: 만약 파일이 권장하는 MikScrollingBattleText\\Sounds 폴더 위치에 있으면, 여기엔 오로지 전체 경로 대신 파일 이름을 입력해야 됩니다.\n\n사용예: mySound.ogg "}
 obj["copyProfile"]		= { label="새 프로필 이름 입력:", tooltip="선택된 프로필로부터 복사될 새로운 프로필의 이름."}
 obj["partialEffect"]	= { tooltip="부분 효과 발생 시 추가될 메세지."}
 obj["scrollAreaName"]	= { label="새 스크롤 영역 이름 입력:", tooltip="새로운 스크롤 영역의 이름."}
@@ -287,8 +273,10 @@ obj["HEALING_DONE"]			= "%a - 치유량.\n"
 obj["ABSORBED_AMOUNT"]		= "%a - 피해 흡수량.\n"
 obj["AURA_AMOUNT"]			= "%a - 오라에 대한 중첩량.\n"
 obj["ENERGY_AMOUNT"]		= "%a - 기력.\n"
+--obj["CHI_AMOUNT"]			= "%a - Amount of chi you have.\n"
 obj["CP_AMOUNT"]			= "%a - 연계 점수.\n"
 obj["HOLY_POWER_AMOUNT"]	= "%a - 보유한 신성한 힘.\n"
+--obj["SHADOW_ORBS_AMOUNT"]	= "%a - Amount of shadow orbs you have.\n"
 obj["HONOR_AMOUNT"]			= "%a - 명예 점수.\n"
 obj["REP_AMOUNT"]			= "%a - 평판 수치.\n"
 obj["ITEM_AMOUNT"]			= "%a - 획득한 아이템 수량.\n"
@@ -475,10 +463,16 @@ obj["NOTIFICATION_COMBAT_ENTER"]		= { label="전투 시작", tooltip="전투 상
 obj["NOTIFICATION_COMBAT_LEAVE"]		= { label="전투 종료", tooltip="전투 상태 종료를 알려줍니다."}
 obj["NOTIFICATION_POWER_GAIN"]			= { label="마력 (마나/분노 등) 획득", tooltip="추가적인 마나, 분노, 기력, 룬 마력 획득을 알려줍니다."}
 obj["NOTIFICATION_POWER_LOSS"]			= { label="마력 (마나/분노 등) 손실", tooltip="유출에 의한 마나, 분노, 기력, 룬 마력 손실을 알려줍니다."}
+--obj["NOTIFICATION_ALT_POWER_GAIN"]		= { label="Alternate Power Gains", tooltip="Enable when you gain alternate power such as sound level on Atramedes."}
+--obj["NOTIFICATION_ALT_POWER_LOSS"]		= { label="Alternate Power Losses", tooltip="Enable when you lose alternate power from drains."}
+--obj["NOTIFICATION_CHI_CHANGE"]			= { label="Chi Changes", tooltip="Enable when you change chi."}
+--obj["NOTIFICATION_CHI_FULL"]			= { label="Chi Full", tooltip="Enable when you attain full chi."}
 obj["NOTIFICATION_CP_GAIN"]				= { label="연계 점수 획득", tooltip="연계 점수 획득을 알려줍니다."}
 obj["NOTIFICATION_CP_FULL"]				= { label="연계 점수 마무리", tooltip="연계 점수가 절정 (5 포인트)에 도달했음을 알려줍니다."}
 obj["NOTIFICATION_HOLY_POWER_CHANGE"]	= { label="신성한 힘 변환", tooltip="신성한 힘이 변환되면 알려줍니다."}
 obj["NOTIFICATION_HOLY_POWER_FULL"]		= { label="신성한 힘 최대", tooltip="최대 신성한 힘에 도달하면 알려줍니다."}
+--obj["NOTIFICATION_SHADOW_ORBS_CHANGE"]	= { label="Shadow Orb Changes", tooltip="Enable when you change shadow orbs."}
+--obj["NOTIFICATION_SHADOW_ORBS_FULL"]	= { label="Shadow Orbs Full", tooltip="Enable when you attain full shadow orbs."}
 obj["NOTIFICATION_HONOR_GAIN"]			= { label="명예 획득", tooltip="명예 점수 획득을 알려줍니다.."}
 obj["NOTIFICATION_REP_GAIN"]			= { label="평판 상승", tooltip="평판 수치 획득을 알려줍니다.."}
 obj["NOTIFICATION_REP_LOSS"]			= { label="평판 하락", tooltip="평판 수치 감소를 알려줍니다."}

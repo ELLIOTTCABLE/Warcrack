@@ -1,12 +1,8 @@
 local addonName = "Altoholic"
 local addon = _G[addonName]
+local colors = addon.Colors
 
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
-local BI = LibStub("LibBabble-Inventory-3.0"):GetLookupTable()
-
-local WHITE		= "|cFFFFFFFF"
-local GREEN		= "|cFF00FF00"
-local ORANGE	= "|cFFFF7F00"
 
 -- Class constants, for readability, these values match the ones in Altoholic.Classes (altoholic.lua)
 local CLASS_MAGE			= "MAGE"
@@ -76,7 +72,7 @@ local STAT_PRIEST_ONLY = L["Classes: Priest"] .. "$"
 local STAT_DK_ONLY = L["Classes: Death Knight"] .. "$"
 local STAT_RESIST = L["Resistance"]
 
-addon.Equipment = {}
+-- addon.Equipment = {}		-- table created globally, no longer here
 
 local ns = addon.Equipment		-- ns = namespace
 
@@ -324,103 +320,13 @@ ns.FormatStats = {
 	[CLASS_DEATHKNIGHT.."DPS"]	= SPELL_STAT3_NAME .."|".. SPELL_STAT1_NAME .."|".. SPELL_STAT2_NAME .."|".. COMBAT_RATING_NAME9 .."|".. COMBAT_RATING_NAME6 .."|" .. ATTACK_POWER_TOOLTIP
 }
 
--- These two tables are necessary to find equivalences between INVTYPEs returned by GetItemInfo and the actual equipment slots.
--- For instance, the "ranged" slot can contain bows/guns/wans/relics/thrown weapons.
-local inventoryTypes = {
-	["INVTYPE_HEAD"] = 1,		-- 1 means first entry in the EquipmentSlots table (just below this one)
-	["INVTYPE_SHOULDER"] = 2,
-	["INVTYPE_CHEST"] = 3,
-	["INVTYPE_ROBE"] = 3,
-	["INVTYPE_WRIST"] = 4,
-	["INVTYPE_HAND"] = 5,
-	["INVTYPE_WAIST"] = 6,
-	["INVTYPE_LEGS"] = 7,
-	["INVTYPE_FEET"] = 8,
-	
-	["INVTYPE_NECK"] = 9,
-	["INVTYPE_CLOAK"] = 10,
-	["INVTYPE_FINGER"] = 11,
-	["INVTYPE_TRINKET"] = 12,
-	["INVTYPE_WEAPON"] = 13,
-	["INVTYPE_2HWEAPON"] = 14,
-	["INVTYPE_WEAPONMAINHAND"] = 15,
-	["INVTYPE_WEAPONOFFHAND"] = 16,
-	["INVTYPE_HOLDABLE"] = 16,
-	["INVTYPE_SHIELD"] = 17,
-	["INVTYPE_RANGED"] = 18,
-	["INVTYPE_THROWN"] = 18,
-	["INVTYPE_RANGEDRIGHT"] = 18,
-	["INVTYPE_RELIC"] = 18
-}
-
-local slotNames = {
-	[1] = BI["Head"],			-- "INVTYPE_HEAD" 
-	[2] = BI["Shoulder"],	-- "INVTYPE_SHOULDER"
-	[3] = BI["Chest"],		-- "INVTYPE_CHEST",  "INVTYPE_ROBE"
-	[4] = BI["Wrist"],		-- "INVTYPE_WRIST"
-	[5] = BI["Hands"],		-- "INVTYPE_HAND"
-	[6] = BI["Waist"],		-- "INVTYPE_WAIST"
-	[7] = BI["Legs"],			-- "INVTYPE_LEGS"
-	[8] = BI["Feet"],			-- "INVTYPE_FEET"
-	
-	[9] = BI["Neck"],			-- "INVTYPE_NECK"
-	[10] = BI["Back"],		-- "INVTYPE_CLOAK"
-	[11] = BI["Ring"],		-- "INVTYPE_FINGER"
-	[12] = BI["Trinket"],	-- "INVTYPE_TRINKET"
-	[13] = BI["One-Hand"],	-- "INVTYPE_WEAPON"
-	[14] = BI["Two-Hand"],	-- "INVTYPE_2HWEAPON"
-	[15] = BI["Main Hand"],	-- "INVTYPE_WEAPONMAINHAND"
-	[16] = BI["Off Hand"],	-- "INVTYPE_WEAPONOFFHAND", "INVTYPE_HOLDABLE"
-	[17] = BI["Shield"],		-- "INVTYPE_SHIELD"
-	[18] = BI["Ranged"]		-- "INVTYPE_RANGED",  "INVTYPE_THROWN", "INVTYPE_RANGEDRIGHT", "INVTYPE_RELIC"
-}
-
-local slotTypeInfo = {
-	{ color = "|cFF69CCF0", name = BI["Head"] },
-	{ color = "|cFFABD473", name = BI["Neck"] },
-	{ color = "|cFF69CCF0", name = BI["Shoulder"] },
-	{ color = WHITE, name = BI["Shirt"] },
-	{ color = "|cFF69CCF0", name = BI["Chest"] },
-	{ color = "|cFF69CCF0", name = BI["Waist"] },
-	{ color = "|cFF69CCF0", name = BI["Legs"] },
-	{ color = "|cFF69CCF0", name = BI["Feet"] },
-	{ color = "|cFF69CCF0", name = BI["Wrist"] },
-	{ color = "|cFF69CCF0", name = BI["Hands"] },
-	{ color = ORANGE, name = BI["Ring"] .. " 1" },
-	{ color = ORANGE, name = BI["Ring"] .. " 2" },
-	{ color = ORANGE, name = BI["Trinket"] .. " 1" },
-	{ color = ORANGE, name = BI["Trinket"] .. " 2" },
-	{ color = "|cFFABD473", name = BI["Back"] },
-	{ color = "|cFFFFFF00", name = BI["Main Hand"] },
-	{ color = "|cFFFFFF00", name = BI["Off Hand"] },
-	{ color = "|cFFABD473", name = BI["Ranged"] },
-	{ color = WHITE, name = BI["Tabard"] }
-}
-
-function ns:GetSlotTexture(slot)
-	return slotTypeInfo[slot].icon
-end
-
-function ns:GetSlotName(slot)
-	return slotNames[slot]
-end
-
-function ns:GetInventoryTypeIndex(inv)
-	return inventoryTypes[inv]
-end
-
-function ns:GetInventoryTypeName(inv)
-	return slotNames[ inventoryTypes[inv] ]
-end
-
-
 local DDM_Add = addon.Helpers.DDM_Add
 local DDM_AddCloseMenu = addon.Helpers.DDM_AddCloseMenu
 
 local function RightClickMenu_Initialize()
 	local searchCB = addon.Search.FindEquipmentUpgrade		-- search callback
 
-	DDM_Add(format("%s %s", L["Find Upgrade"], GREEN .. L["(based on iLvl)"]), -1, searchCB)
+	DDM_Add(format("%s %s", L["Find Upgrade"], colors.green .. L["(based on iLvl)"]), -1, searchCB)
 	
 	local class = addon.Search:GetClass()
 
@@ -430,18 +336,18 @@ local function RightClickMenu_Initialize()
 		(class == CLASS_DEATHKNIGHT) or
 		(class == CLASS_PALADIN) then
 		
-		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], GREEN, L["Tank"]), class .. "Tank", searchCB)
+		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], colors.green, L["Tank"]), class .. "Tank", searchCB)
 	end
 	
 	-- DPS upgrade
 	if class then
-		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], GREEN, L["DPS"]), class .. "DPS", searchCB)
+		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], colors.green, L["DPS"]), class .. "DPS", searchCB)
 	end
 		
 	if class == CLASS_DRUID then
-		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], GREEN, L["Balance"]), class .. "Balance", searchCB)
+		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], colors.green, L["Balance"]), class .. "Balance", searchCB)
 	elseif class == CLASS_SHAMAN then
-		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], GREEN, L["Elemental Shaman"]), class .. "Elemental", searchCB)
+		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], colors.green, L["Elemental Shaman"]), class .. "Elemental", searchCB)
 	end
 		
 	-- Heal upgrade
@@ -450,61 +356,54 @@ local function RightClickMenu_Initialize()
 		(class == CLASS_DRUID) or
 		(class == CLASS_PALADIN) then
 		
-		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], GREEN, L["Heal"]), class .. "Heal", searchCB)
+		DDM_Add(format("%s %s(%s)", L["Find Upgrade"], colors.green, L["Heal"]), class .. "Heal", searchCB)
 	end
 	
 	DDM_AddCloseMenu()
 end
 
-
 local callbacks = {
 	OnUpdate = function() end,
-	GetSize = function() return #slotTypeInfo end,
-	RowSetup = function(self, entry, row, dataRowID)
-			local e = slotTypeInfo[dataRowID]
-			
-			local rowName = entry .. row
-			_G[rowName.."Name"]:SetText(e.color .. e.name)
-			_G[rowName.."Name"]:SetJustifyH("RIGHT")
-			_G[rowName.."Name"]:SetPoint("TOPLEFT", 15, 0)
+	GetSize = function() return ns:GetNumSlotTypes() end,
+	RowSetup = function(self, rowFrame, dataRowID)
+			local name, color = ns:GetSlotTypeInfo(dataRowID)
+
+			rowFrame.Name.Text:SetText(color .. name)
+			rowFrame.Name.Text:SetJustifyH("RIGHT")
 		end,
-	ColumnSetup = function(self, entry, row, column, dataRowID, character)
-			local itemName = entry.. row .. "Item" .. column;
-			local itemTexture = _G[itemName .. "_Background"]
-			local itemButton = _G[itemName]
-			local itemText = _G[itemName .. "Name"]
+	RowOnEnter = function()	end,
+	RowOnLeave = function() end,
+	ColumnSetup = function(self, button, dataRowID, character)
+			button.Background:SetDesaturated(false)
+			button.Background:SetVertexColor(1.0, 1.0, 1.0)
+			button.Background:SetTexCoord(0, 1, 0, 1)
 			
-			itemTexture:SetDesaturated(0)
-			itemTexture:SetVertexColor(1.0, 1.0, 1.0)
-			itemTexture:SetTexCoord(0, 1, 0, 1)
-			
-			itemText:SetFontObject("NumberFontNormalSmall")
-			itemText:SetJustifyH("RIGHT")
-			itemText:SetPoint("BOTTOMRIGHT", 0, 0)
+			button.Name:SetFontObject("NumberFontNormalSmall")
+			button.Name:SetJustifyH("RIGHT")
+			button.Name:SetPoint("BOTTOMRIGHT", 0, 0)
 			
 			local item = DataStore:GetInventoryItem(character, dataRowID)
 			if item then
-				itemButton.key = character
+				button.key = character
 				
-				itemTexture:SetTexture(GetItemIcon(item))
+				button.Background:SetTexture(GetItemIcon(item))
 				
 				-- display the coloured border
 				local _, _, itemRarity, itemLevel = GetItemInfo(item)
 				if itemRarity and itemRarity >= 2 then
 					local r, g, b = GetItemQualityColor(itemRarity)
-					itemButton.border:SetVertexColor(r, g, b, 0.5)
-					itemButton.border:Show()
+					button.IconBorder:SetVertexColor(r, g, b, 0.5)
+					button.IconBorder:Show()
 				end
-				
 
-				_G[itemName .. "Name"]:SetText(itemLevel)
+				button.Name:SetText(itemLevel)
 			else
-				itemButton.key = nil
-				itemTexture:SetTexture(addon:GetEquipmentSlotIcon(dataRowID))
-				_G[itemName .. "Name"]:SetText("")
+				button.key = nil
+				button.Background:SetTexture(addon:GetEquipmentSlotIcon(dataRowID))
+				button.Name:SetText("")
 			end
 			
-			itemButton.id = dataRowID
+			button.id = dataRowID
 		end,
 		
 	OnEnter = function(frame) 
@@ -530,14 +429,14 @@ local callbacks = {
 			
 			GameTooltip:SetHyperlink(link)
 			GameTooltip:AddLine(" ")
-			GameTooltip:AddLine(GREEN .. L["Right-Click to find an upgrade"])
+			GameTooltip:AddLine(colors.green .. L["Right-Click to find an upgrade"])
 			GameTooltip:Show()
 		end,
 	OnClick = function(frame, button)
 			local character = frame.key
 			if not character then return end
 
-			local slotID = frame:GetParent():GetID()
+			local slotID = frame.id
 			if slotID == 0 then return end		-- class icon
 
 			local item = DataStore:GetInventoryItem(character, slotID)
@@ -555,7 +454,7 @@ local callbacks = {
 			if button == "RightButton" then
 				if not IsAddOnLoaded("Altoholic_Search") then
 					LoadAddOn("Altoholic_Search")
-					UIDropDownMenu_Initialize(AltoholicFrameGridsRightClickMenu, RightClickMenu_Initialize, "MENU");
+					addon:DDM_Initialize(AltoholicFrameGridsRightClickMenu, RightClickMenu_Initialize)
 				end
 				
 				addon.Search:SetCurrentItem( addon:GetIDFromLink(link) ) 		-- item ID of the item to find an upgrade for

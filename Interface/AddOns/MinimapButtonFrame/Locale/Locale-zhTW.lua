@@ -125,6 +125,9 @@ L["GATHERDESC2_DESC"] = "系統小地圖按鈕設定"
 L["Collect Buttons"] = "收納系統的小地圖按鈕"
 L["COLLECT2_DESC"] = "收納系統的小地圖按鈕"
 
+L["Exclude Queue Button"] = "排除隊列按鈕"
+L["ExcludeLFG_DESC"] = "排除隊列狀態按鈕"
+
 L["Hide Mail"] = "隱藏新郵件圖示"
 L["HIDEMAIL_DESC"] = "隱藏新郵件圖示"
 

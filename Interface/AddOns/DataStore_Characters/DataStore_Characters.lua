@@ -11,12 +11,13 @@ _G[addonName] = LibStub("AceAddon-3.0"):NewAddon(addonName, "AceConsole-3.0", "A
 local addon = _G[addonName]
 
 local THIS_ACCOUNT = "Default"
+local MAX_LOGOUT_TIMESTAMP = 5000000000	-- 5 billion, current values are at ~1.4 billion, in seconds, that leaves us 110+ years, I think we're covered..
 
 local AddonDB_Defaults = {
 	global = {
 		Options = {
-			RequestPlayTime = 1,		-- Request play time at logon
-			HideRealPlayTime = 0,	-- Hide real play time to client addons (= return 0 instead of real value)
+			RequestPlayTime = true,		-- Request play time at logon
+			HideRealPlayTime = false,	-- Hide real play time to client addons (= return 0 instead of real value)
 		},
 		Characters = {
 			['*'] = {				-- ["Account.Realm.Name"] 
@@ -41,6 +42,7 @@ local AddonDB_Defaults = {
 				XPMax = nil,			-- max xp at current level 
 				RestXP = nil,
 				isResting = nil,		-- nil = out of an inn
+				isXPDisabled = nil,
 				
 				-- ** Guild  **
 				guildName = nil,		-- nil = not in a guild, as returned by GetGuildInfo("player")
@@ -79,8 +81,12 @@ local function OnPlayerGuildUpdate()
 	end
 end
 
+local function ScanXPDisabled()
+	addon.ThisCharacter.isXPDisabled = IsXPUserDisabled() or nil
+end
+
 local function OnPlayerUpdateResting()
-	addon.ThisCharacter.isResting = IsResting();
+	addon.ThisCharacter.isResting = IsResting()
 end
 
 local function OnPlayerXPUpdate()
@@ -92,7 +98,7 @@ local function OnPlayerXPUpdate()
 end
 
 local function OnPlayerMoney()
-	addon.ThisCharacter.money = GetMoney();
+	addon.ThisCharacter.money = GetMoney()
 end
 
 local function OnPlayerAlive()
@@ -104,13 +110,14 @@ local function OnPlayerAlive()
 	character.class, character.englishClass = UnitClass("player")
 	character.gender = UnitSex("player")
 	character.faction = UnitFactionGroup("player")
-	character.lastLogoutTimestamp = 0
+	character.lastLogoutTimestamp = MAX_LOGOUT_TIMESTAMP
 	character.lastUpdate = time()
 	
 	OnPlayerMoney()
 	OnPlayerXPUpdate()
 	OnPlayerUpdateResting()
 	OnPlayerGuildUpdate()
+	ScanXPDisabled()
 end
 
 local function OnPlayerLogout()
@@ -143,26 +150,18 @@ local function _GetCharacterClass(character)
 	return character.class or "", character.englishClass or ""
 end
 
-local ClassColors = {
-	["MAGE"] = "|cFF69CCF0",
-	["WARRIOR"] = "|cFFC79C6E",
-	["HUNTER"] = "|cFFABD473",
-	["ROGUE"] = "|cFFFFF569",
-	["WARLOCK"] = "|cFF9482CA", 
-	["DRUID"] = "|cFFFF7D0A", 
-	["SHAMAN"] = "|cFF2459FF",
-	["PALADIN"] = "|cFFF58CBA", 
-	["PRIEST"] = "|cFFFFFFFF",
-	["DEATHKNIGHT"] = "|cFFC41F3B"
-}
-
 local function _GetColoredCharacterName(character)
-	return ClassColors[character.englishClass] .. character.name
+	return format("|c%s%s", RAID_CLASS_COLORS[character.englishClass].colorStr, character.name)
 end
 	
-local function _GetClassColor(character)
-	-- return just the color of this character's class
-	return ClassColors[character.englishClass]
+local function _GetCharacterClassColor(character)
+	-- return just the color of this character's class (based on the character key)
+	return format("|c%s", RAID_CLASS_COLORS[character.englishClass].colorStr)
+end
+
+local function _GetClassColor(class)
+	-- return just the color of for any english class 	
+	return format("|c%s", RAID_CLASS_COLORS[class].colorStr) or "|cFFFFFFFF"
 end
 
 local function _GetCharacterFaction(character)
@@ -222,15 +221,22 @@ local function _GetRestXPRate(character)
 		-- divide rest xp by this value	20400 / 204 = 100	==> rest xp rate
 	
 	local rate = 0
+	local multiplier = 1.5
+	
+	if character.englishRace == "Pandaren" then
+		multiplier = 3
+	end
+	
 	if character.RestXP then
-		rate = (character.RestXP / ((character.XPMax / 100) * 1.5))
+		rate = (character.RestXP / ((character.XPMax / 100) * multiplier))
 	end
 	
 	-- get the known rate of rest xp (the one saved at last logout) + the rate represented by the elapsed time since last logout
 	-- (elapsed time / 3600) * 0.625 * (2/3)  simplifies to elapsed time / 8640
 	-- 0.625 comes from 8 hours rested = 5% of a level, *2/3 because 100% rested = 150% of xp (1.5 level)
 
-	if character.lastLogoutTimestamp ~= 0 then		-- time since last logout, 0 for current char, <> for all others
+	-- time since last logout, MAX_LOGOUT_TIMESTAMP for current char, <> for all others
+	if character.lastLogoutTimestamp ~= MAX_LOGOUT_TIMESTAMP then	
 		if character.isResting then
 			rate = rate + ((time() - character.lastLogoutTimestamp) / 8640)
 		else
@@ -243,13 +249,17 @@ end
 local function _IsResting(character)
 	return character.isResting
 end
+
+local function _IsXPDisabled(character)
+	return character.isXPDisabled
+end
 	
 local function _GetGuildInfo(character)
 	return character.guildName, character.guildRankName, character.guildRankIndex
 end
 
 local function _GetPlayTime(character)
-	return (GetOption("HideRealPlayTime") == 1) and 0 or character.played
+	return (GetOption("HideRealPlayTime")) and 0 or character.played
 end
 
 local function _GetLocation(character)
@@ -262,6 +272,7 @@ local PublicMethods = {
 	GetCharacterRace = _GetCharacterRace,
 	GetCharacterClass = _GetCharacterClass,
 	GetColoredCharacterName = _GetColoredCharacterName,
+	GetCharacterClassColor = _GetCharacterClassColor,
 	GetClassColor = _GetClassColor,
 	GetCharacterFaction = _GetCharacterFaction,
 	GetColoredCharacterFaction = _GetColoredCharacterFaction,
@@ -274,6 +285,7 @@ local PublicMethods = {
 	GetRestXP = _GetRestXP,
 	GetRestXPRate = _GetRestXPRate,
 	IsResting = _IsResting,
+	IsXPDisabled = _IsXPDisabled,
 	GetGuildInfo = _GetGuildInfo,
 	GetPlayTime = _GetPlayTime,
 	GetLocation = _GetLocation,
@@ -288,7 +300,7 @@ function addon:OnInitialize()
 	DataStore:SetCharacterBasedMethod("GetCharacterRace")
 	DataStore:SetCharacterBasedMethod("GetCharacterClass")
 	DataStore:SetCharacterBasedMethod("GetColoredCharacterName")
-	DataStore:SetCharacterBasedMethod("GetClassColor")
+	DataStore:SetCharacterBasedMethod("GetCharacterClassColor")
 	DataStore:SetCharacterBasedMethod("GetCharacterFaction")
 	DataStore:SetCharacterBasedMethod("GetColoredCharacterFaction")
 	DataStore:SetCharacterBasedMethod("GetCharacterGender")
@@ -300,6 +312,7 @@ function addon:OnInitialize()
 	DataStore:SetCharacterBasedMethod("GetRestXP")
 	DataStore:SetCharacterBasedMethod("GetRestXPRate")
 	DataStore:SetCharacterBasedMethod("IsResting")
+	DataStore:SetCharacterBasedMethod("IsXPDisabled")
 	DataStore:SetCharacterBasedMethod("GetGuildInfo")
 	DataStore:SetCharacterBasedMethod("GetPlayTime")
 	DataStore:SetCharacterBasedMethod("GetLocation")
@@ -312,6 +325,8 @@ function addon:OnEnable()
 	addon:RegisterEvent("PLAYER_MONEY", OnPlayerMoney)
 	addon:RegisterEvent("PLAYER_XP_UPDATE", OnPlayerXPUpdate)
 	addon:RegisterEvent("PLAYER_UPDATE_RESTING", OnPlayerUpdateResting)
+	addon:RegisterEvent("ENABLE_XP_GAIN", ScanXPDisabled)
+	addon:RegisterEvent("DISABLE_XP_GAIN", ScanXPDisabled)
 	addon:RegisterEvent("PLAYER_GUILD_UPDATE", OnPlayerGuildUpdate)				-- for gkick, gquit, etc..
 	addon:RegisterEvent("ZONE_CHANGED", ScanPlayerLocation)
 	addon:RegisterEvent("ZONE_CHANGED_NEW_AREA", ScanPlayerLocation)
@@ -320,7 +335,7 @@ function addon:OnEnable()
 	
 	addon:SetupOptions()
 	
-	if GetOption("RequestPlayTime") == 1 then
+	if GetOption("RequestPlayTime") then
 		RequestTimePlayed()	-- trigger a TIME_PLAYED_MSG event
 	end
 end
@@ -332,6 +347,8 @@ function addon:OnDisable()
 	addon:UnregisterEvent("PLAYER_MONEY")
 	addon:UnregisterEvent("PLAYER_XP_UPDATE")
 	addon:UnregisterEvent("PLAYER_UPDATE_RESTING")
+	addon:UnregisterEvent("ENABLE_XP_GAIN")
+	addon:UnregisterEvent("DISABLE_XP_GAIN")
 	addon:UnregisterEvent("PLAYER_GUILD_UPDATE")
 	addon:UnregisterEvent("ZONE_CHANGED")
 	addon:UnregisterEvent("ZONE_CHANGED_NEW_AREA")

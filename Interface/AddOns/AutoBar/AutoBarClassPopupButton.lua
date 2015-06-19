@@ -8,15 +8,10 @@
 --
 
 local AutoBar = AutoBar
-local REVISION = tonumber(("$Revision: 1.1 $"):match("%d+"))
-if AutoBar.revision < REVISION then
-	AutoBar.revision = REVISION
-	AutoBar.date = ('$Date: 2010/11/13 03:23:25 $'):match('%d%d%d%d%-%d%d%-%d%d')
-end
 
 local AceOO = AceLibrary("AceOO-2.0")
 local L = AutoBar.locale
-local LBF = LibStub("LibButtonFacade", true)
+local Masque = LibStub("Masque", true)
 local _G = getfenv(0)
 local _
 
@@ -109,9 +104,9 @@ function AutoBar.Class.PopupButton.prototype:CreateButtonFrame()
 	frame.hotKey = _G[("%sHotKey"):format(popupButtonName)]
 	frame.count = _G[("%sCount"):format(popupButtonName)]
 	frame.flash = _G[("%sFlash"):format(popupButtonName)]
-	if (LBF) then
-		local group = self.parentBar.frame.LBFGroup
-		frame.LBFButtonData = {
+	if (Masque) then
+		local group = self.parentBar.frame.MasqueGroup
+		frame.MasqueButtonData = {
 			Border = frame.border,
 			Cooldown = frame.cooldown,
 			Count = frame.count,
@@ -120,7 +115,7 @@ function AutoBar.Class.PopupButton.prototype:CreateButtonFrame()
 			Icon = frame.icon,
 			Name = frame.macroName,
 		}
-		group:AddButton(frame, frame.LBFButtonData)
+		group:AddButton(frame, frame.MasqueButtonData)
 	end
 
 	frame.border = _G[("%sBorder"):format(popupButtonName)]

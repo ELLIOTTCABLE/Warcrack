@@ -1,11 +1,14 @@
 local gtt = GameTooltip;
-local GetTalentTabInfo = GetTalentTabInfo;
 
--- Constants
-local TALENTS_PREFIX = TALENTS..":|cffffffff ";
+-- String Constants
+local TALENTS_PREFIX = TALENTS..":|cffffffff ";	-- MoP: Could be changed from TALENTS to SPECIALIZATION
+local TALENTS_NA = NOT_APPLICABLE:lower();
+local TALENTS_NONE = NO.." "..TALENTS;
+
+-- Option Constants
 local CACHE_SIZE = 25;		-- Change cache size here (Default 25)
-local INSPECT_DELAY = 0.2;
-local INSPECT_FREQ = 2;
+local INSPECT_DELAY = 0.2;	-- The time delay for the scheduled inspection
+local INSPECT_FREQ = 2;		-- How often after an inspection are we allowed to inspect again?
 
 -- Variables
 local ttt = CreateFrame("Frame","TipTacTalents");
@@ -15,40 +18,33 @@ local current = {};
 -- Time of the last inspect reuqest. Init this to zero, just to make sure. This is a global so other addons could use this variable as well
 lastInspectRequest = 0;
 
--- Allow these to be accessed through other addons
+-- Allow these to be accessed externally from other addons
 ttt.cache = cache;
 ttt.current = current;
 
 ttt:Hide();
+
+-- Helper function to determine if an "Inspect Frame" is open. Native Inspect as well as Examiner is supported.
+local function IsInspectFrameOpen() return (InspectFrame and InspectFrame:IsShown()) or (Examiner and Examiner:IsShown()); end
 
 --------------------------------------------------------------------------------------------------------
 --                                           Gather Talents                                           --
 --------------------------------------------------------------------------------------------------------
 
 local function GatherTalents(isInspect)
-	-- Inspect functions will always use the active spec when not inspecting
-	local group = GetActiveTalentGroup(isInspect);
-	-- Get points per tree, and set "primaryTree" to the tree with most points
-	local primaryTree = 1;
-	for i = 1, 3 do
-		local _, _, _, _, pointsSpent = GetTalentTabInfo(i,isInspect,nil,group);
-		current[i] = pointsSpent;
-		if (current[i] > current[primaryTree]) then
-			primaryTree = i;
-		end
-	end
-	local _, tabName = GetTalentTabInfo(primaryTree,isInspect,nil,group);
-	current.tree = tabName;
-	-- Customise output. Use TipTac setting if it exists, otherwise just use formatting style one.
-	local talentFormat = (TipTac_Config and TipTac_Config.talentFormat or 1);
-	if (current[primaryTree] == 0) then
-		current.format = "No Talents";
-	elseif (talentFormat == 1) then
-		current.format = current.tree.." ("..current[1].."/"..current[2].."/"..current[3]..")";
-	elseif (talentFormat == 2) then
-		current.format = current.tree;
-	elseif (talentFormat == 3) then
-		current.format = current[1].."/"..current[2].."/"..current[3];
+	-- New MoP Code
+	local spec = isInspect and GetInspectSpecialization(current.unit) or GetSpecialization();
+	if (not spec or spec == 0) then
+		current.format = TALENTS_NONE;
+	elseif (isInspect) then
+		local _, specName = GetSpecializationInfoByID(spec);
+		--local _, specName = GetSpecializationInfoForClassID(spec,current.classID);
+		current.format = specName or TALENTS_NA;
+	else
+		-- MoP Note: Is it no longer possible to query the different talent spec groups anymore?
+--		local group = GetActiveSpecGroup(isInspect) or 1;	-- Az: replaced with GetActiveSpecGroup(), but that does not support inspect?
+		local _, specName = GetSpecializationInfo(spec);
+		current.format = specName or TALENTS_NA;
 	end
 	-- Set the tips line output, for inspect, only update if the tip is still showing a unit!
 	if (not isInspect) then
@@ -100,13 +96,10 @@ ttt:SetScript("OnUpdate",function(self,elapsed)
 	if (self.nextUpdate <= 0) then
 		self:Hide();
 		-- Make sure the mouseover unit is still our unit
-		if (UnitGUID("mouseover") == current.guid) then
+		-- Check IsInspectFrameOpen() again: Since if the user right-clicks a unit frame, and clicks inspect, it could cause TTT to schedule an inspect, while the inspection window is open
+		if (UnitGUID("mouseover") == current.guid) and (not IsInspectFrameOpen()) then
 			lastInspectRequest = GetTime();
 			self:RegisterEvent("INSPECT_READY");
-			-- Az: Fix the blizzard inspect copypasta code (Blizzard_InspectUI\InspectPaperDollFrame.lua @ line 23)
-			if (InspectFrame) then
-				InspectFrame.unit = "player";
-			end
 			NotifyInspect(current.unit);
 		end
 	end
@@ -153,16 +146,13 @@ gtt:HookScript("OnTooltipSetUnit",function(self,...)
 		for _, entry in ipairs(cache) do
 			if (current.name == entry.name) then
 				self:AddLine(TALENTS_PREFIX..entry.format);
-				current.tree = entry.tree;
 				current.format = entry.format;
-				current[1], current[2], current[3] = entry[1], entry[2], entry[3];
 				cacheLoaded = true;
 				break;
 			end
 		end
 		-- Queue an inspect request
-		local isInspectOpen = (InspectFrame and InspectFrame:IsShown()) or (Examiner and Examiner:IsShown());
-		if (CanInspect(unit)) and (not isInspectOpen) then
+		if (CanInspect(unit)) and (not IsInspectFrameOpen()) then
 			local lastInspectTime = (GetTime() - lastInspectRequest);
 			ttt.nextUpdate = (lastInspectTime > INSPECT_FREQ) and INSPECT_DELAY or (INSPECT_FREQ - lastInspectTime + INSPECT_DELAY);
 			ttt:Show();

@@ -16,8 +16,22 @@ local ClassIconTable = {
 	PALADIN = "Interface\\AddOns\\addon\\UI-CharacterCreate-Classes_Paladin",
 	ROGUE = "Interface\\AddOns\\addon\\UI-CharacterCreate-Classes_Rogue",
 }
+
+myframe.icon = myframe:CreateTexture(nil,"CENTER"); -- create texture as child of myframe
+
+myframe.icon:SetAllPoints(myframe); -- copy dimensions of myframe to icon
+
+local _,class = UnitClass("player"); -- get non-localized class name
+
+myframe.icon:SetTexture("Interface\\GLUES\\CHARACTERCREATE\\UI-CHARACTERCREATE-CLASSES"); -- this is the image containing all class icons
+
+local coords = CLASS_ICON_TCOORDS[class]; -- get the coordinates of the class icon we want
+
+myframe.icon:SetTexCoord(unpack(coords)); -- cut out the region with our class icon according to coords
+
 --]]
 
+local CachedUnitClass = TidyPlatesUtility.CachedUnitClass
 
 local function UpdateClassWidget(self, unit, showFriendly)
 	local class
@@ -25,20 +39,21 @@ local function UpdateClassWidget(self, unit, showFriendly)
 
 
 		if showFriendly and unit.reaction == "FRIENDLY" and unit.type == "PLAYER" then
-			class = TidyPlatesUtility.GroupMembers.Class[unit.name]
+			--class = TidyPlatesUtility.GroupMembers.Class[unit.name]
+			class = CachedUnitClass(unit.name) or TidyPlatesUtility.GroupMembers.Class[unit.name]
 		elseif unit.type == "PLAYER" then class = unit.class end
 
 		--class = "DRUID"
-		
+
 		if class and class ~= "UNKNOWN" then
-			--self.Icon:SetTexture(ClassIconTable[class]) 
-			self.Icon:SetTexture(classWidgetPath..class) 
+			--self.Icon:SetTexture(ClassIconTable[class])
+			self.Icon:SetTexture(classWidgetPath..class)
 			self:Show()
 		else self:Hide() end
 	end
-	
+
 	--[[ Testing
-	self.Icon:SetTexture(classWidgetPath.."WARRIOR") 
+	self.Icon:SetTexture(classWidgetPath.."WARRIOR")
 	self:Show()
 	--]]
 end

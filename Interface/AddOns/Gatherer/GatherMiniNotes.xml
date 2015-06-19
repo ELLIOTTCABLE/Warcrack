@@ -1,8 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 <!--
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherMiniNotes.xml 894 2010-12-02 22:46:33Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherMiniNotes.xml 1056 2012-12-10 04:10:54Z Esamynn $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -26,11 +26,14 @@
 		since that is it's designated purpose as per:
 		http://www.fsf.org/licensing/licenses/gpl-faq.html#InterpreterIncompat
 -->
-	<Script>Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherMiniNotes.xml $", "$Rev: 894 $")</Script>
+	<Script>Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherMiniNotes.xml $", "$Rev: 1056 $")</Script>
 	<Script file = "GatherMiniNotes.lua"/>
 	
 	<Frame name="GatherMiniNoteUpdateFrame" hidden="true" parent="Minimap">
 		<Scripts>
+			<OnLoad>
+				Gatherer.MiniNotes.OnLoad(self)
+			</OnLoad>
 			<OnUpdate>
 				Gatherer.MiniNotes.UpdateMinimapNotes(elapsed)
 			</OnUpdate>
@@ -45,16 +48,9 @@
 		<Size>
 			<AbsDimension x="12" y="12"/>
 		</Size>
-		<Anchors>
-			<Anchor point="CENTER" relativeTo="MinimapBackdrop" relativePoint="TOPLEFT">
-				<Offset>
-					<AbsDimension x="-51" y="60"/>
-				</Offset>
-			</Anchor>
-		</Anchors>
 		<Scripts>
 			<OnLoad>
-				
+				Gatherer.MiniNotes.OnNoteCreation(self)
 			</OnLoad>
 			<OnEnter>
 				Gatherer.MiniNotes.MiniNoteOnEnter(self)
@@ -66,7 +62,13 @@
 				Gatherer.MiniNotes.MiniNoteOnClick()
 			</OnMouseUp>
 		</Scripts>
-		<NormalTexture file="Interface\AddOns\Gatherer\Original\Test"/>
+		<NormalTexture file="Interface/AddOns/Gatherer/Original/Test"/>
+	</Button>
+	<Button name="GatherArchNoteTemplate" inherits="GatherNoteTemplate" hidden="true"  parent="Minimap" virtual="true">
+		<NormalTexture file="Interface/MINIMAP/TRACKING/OBJECTICONS">
+			<!--                5/256             29/256           3/64              27/64 -->
+			<TexCoords left="0.01953125" right="0.11328125" top="0.046875" bottom="0.421875" />
+		</NormalTexture>
 	</Button>
 </Ui>
 

@@ -1,9 +1,17 @@
 local MAJOR_VERSION = "LibDogTag-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 204 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 235 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_Unit_MINOR_VERSION then
 	_G.DogTag_Unit_MINOR_VERSION = MINOR_VERSION
 end
+
+local _G, unpack, select, tonumber = _G, unpack, select, tonumber
+local UnitClass, UnitRace, UnitIsPlayer, UnitIsFriend, UnitIsUnit, UnitClassBase, UnitName, UnitExists, GetRealmName, UnitLevel = 
+	  UnitClass, UnitRace, UnitIsPlayer, UnitIsFriend, UnitIsUnit, UnitClassBase, UnitName, UnitExists, GetRealmName, UnitLevel
+local UnitCanAttack, UnitCreatureFamily, UnitCreatureType, UnitClassification, UnitGUID, UnitSex, UnitPlayerControlled, UnitPlayerOrPetInRaid = 
+	  UnitCanAttack, UnitCreatureFamily, UnitCreatureType, UnitClassification, UnitGUID, UnitSex, UnitPlayerControlled, UnitPlayerOrPetInRaid
+local GetGuildInfo, UnitIsPVP, UnitIsTapped, UnitIsTappedByPlayer, UnitIsDead, UnitReaction, UnitSelectionColor, UnitPVPName = 
+	  GetGuildInfo, UnitIsPVP, UnitIsTapped, UnitIsTappedByPlayer, UnitIsDead, UnitReaction, UnitSelectionColor, UnitPVPName
 
 DogTag_Unit_funcs[#DogTag_Unit_funcs+1] = function(DogTag_Unit, DogTag)
 
@@ -80,7 +88,7 @@ DogTag:AddTag("Unit", "Name", {
 		elseif unit:match("%d*vehicle%d*$") then
 			return VehicleName(unit)
 		end
-		return UnitName(unit)
+		return UnitName(unit) or DogTag.UnitToLocale[unit]
 	end,
 	arg = {
 		'unit', 'string;undef', 'player'

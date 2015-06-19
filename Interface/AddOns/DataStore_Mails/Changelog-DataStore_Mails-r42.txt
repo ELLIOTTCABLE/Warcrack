@@ -1,0 +1,33 @@
+------------------------------------------------------------------------
+r42 | thaoky | 2015-02-25 19:10:39 +0000 (Wed, 25 Feb 2015) | 1 line
+Changed paths:
+   M /trunk/Options.lua
+   M /trunk/Options.xml
+
+Fixed EXPIRY_CHECK_LABEL
+------------------------------------------------------------------------
+r41 | thaoky | 2015-02-25 18:27:24 +0000 (Wed, 25 Feb 2015) | 4 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/DataStore_Mails.lua
+   M /trunk/DataStore_Mails.toc
+   M /trunk/Locales/repoenUS.lua
+   M /trunk/Options.lua
+   M /trunk/Options.xml
+
+6.1.001 Commit
+
+- Added support for options using <KeyValue>
+- Fixed reporting of mails about to expire on invalid character keys.
+------------------------------------------------------------------------
+r40 | thaoky | 2015-01-09 17:14:31 +0000 (Fri, 09 Jan 2015) | 4 lines
+Changed paths:
+   M /trunk/DataStore_Mails.lua
+   M /trunk/Options.lua
+   M /trunk/Options.xml
+
+- Added an option to report expired mails to the chat frame
+- Fixed usage of options
+- XML frames cleanup
+
+------------------------------------------------------------------------

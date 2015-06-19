@@ -68,6 +68,12 @@ function addon:Initialize()
     ]])
     RegisterAttributeDriver(self.header, "hasunit", "[@mouseover, exists] true; false")
 
+	-- Create a secure action button that's sole purpose is to cancel a
+	-- pending spellcast (the targeting hand)
+	self.stopbutton = CreateFrame("Button", addonName .. "StopButton", nil, "SecureActionButtonTemplate")
+	self.stopbutton.name = self.stopbutton:GetName()
+	self.stopbutton:SetAttribute("type", "stop")
+
     -- Create a secure action button that can be used for 'hovercast' and 'global'
     self.globutton = CreateFrame("Button", addonName .. "SABButton", UIParent, "SecureActionButtonTemplate, SecureHandlerBaseTemplate")
 
@@ -275,6 +281,7 @@ function addon:OnNewProfile(event, db, profile)
             default = true
         },
     })
+
     table.insert(db.profile.bindings, {
         key = "BUTTON2",
         type = "menu",
@@ -348,6 +355,20 @@ local function correctSpec(entry, currentSpec)
 	return true
 end
 
+local function getEntryString(entry)
+	local bits = {}
+	bits[#bits+1] = "type"
+	bits[#bits+1] = tostring(entry.type)
+
+	if entry.type == "spell" then
+		bits[#bits+1] = tostring(entry.spell)
+	elseif entry.type == "macro" and entry.macrotext then
+		bits[#bits+1] = tostring(entry.macrotext)
+	end
+
+	return table.concat(bits, ":")
+end
+
 -- This function takes a single argument indicating if the attributes being
 -- computed are for the special 'global' button used by Clique.  It then
 -- computes the set of attributes necessary for the player's bindings to be
@@ -397,7 +418,7 @@ function addon:GetClickAttributes(global)
         -- non-global bindings are only applied on non-global frames. handle
         -- this logic here.
 
-        if shouldApply(global, entry) and correctSpec(entry, GetActiveTalentGroup()) and entry.key then
+        if shouldApply(global, entry) and correctSpec(entry, GetActiveSpecGroup()) and entry.key then
             -- Check to see if this is a 'friend' or an 'enemy' binding, and
             -- check if it would mask an 'ooc' binding with the same key. If
             -- so, we need to add code that prevents this from happening, by
@@ -476,14 +497,37 @@ function addon:GetClickAttributes(global)
             end
 
             -- Build any needed SetAttribute() calls
-            if entry.type == "target" or entry.type == "menu" then
+            if entry.type == "target" then
                 bits[#bits + 1] = ATTR(indent, prefix, "type", suffix, entry.type)
                 rembits[#rembits + 1] = REMATTR(prefix, "type", suffix)
-            elseif entry.type == "spell" then
+            elseif entry.type == "menu" then
+                set_text = ATTR(indent, prefix, "type", suffix, "togglemenu")
+                bits[#bits + 1] = string.gsub(set_text, '"togglemenu"', 'button:GetAttribute("*type2") == "menu" and "menu" or "togglemenu"')
+                rembits[#rembits + 1] = REMATTR(prefix, "type", suffix)
+			elseif entry.type == "spell" and self.settings.stopcastingfix then
+				-- Implement the 'stop casting'f ix
+				local macrotext
+				if entry.sets.global then
+					-- Do not include @mouseover
+					macrotext = string.format("/click %s\n/cast %s", self.stopbutton.name, entry.spell)
+				else
+					macrotext = string.format("/click %s\n/cast [@mouseover] %s", self.stopbutton.name, entry.spell)
+				end
+                bits[#bits + 1] = ATTR(indent, prefix, "type", suffix, "macro")
+                bits[#bits + 1] = ATTR(indent, prefix, "macrotext", suffix, macrotext)
+                rembits[#rembits + 1] = REMATTR(prefix, "type", suffix)
+                rembits[#rembits + 1] = REMATTR(prefix, "macrotext", suffix)
+           elseif entry.type == "spell" then
                 bits[#bits + 1] = ATTR(indent, prefix, "type", suffix, entry.type)
                 bits[#bits + 1] = ATTR(indent, prefix, "spell", suffix, entry.spell)
                 rembits[#rembits + 1] = REMATTR(prefix, "type", suffix)
                 rembits[#rembits + 1] = REMATTR(prefix, "spell", suffix)
+			elseif entry.type == "macro" and self.settings.stopcastingfix then
+				local macrotext = string.format("/click %s\n%s", self.stopbutton.name, entry.macrotext)
+                bits[#bits + 1] = ATTR(indent, prefix, "type", suffix, entry.type)
+                bits[#bits + 1] = ATTR(indent, prefix, "macrotext", suffix, macrotext)
+                rembits[#rembits + 1] = REMATTR(prefix, "type", suffix)
+                rembits[#rembits + 1] = REMATTR(prefix, "macrotext", suffix)
             elseif entry.type == "macro" then
                 bits[#bits + 1] = ATTR(indent, prefix, "type", suffix, entry.type)
                 bits[#bits + 1] = ATTR(indent, prefix, "macrotext", suffix, entry.macrotext)
@@ -560,7 +604,7 @@ function addon:GetBindingAttributes(global)
 
     for idx, entry in ipairs(self.bindings) do
 		if entry.key then
-			if shouldApply(global, entry) then
+			if shouldApply(global, entry) and correctSpec(entry, GetActiveSpecGroup()) then
 				if global then
 					-- Allow for the re-binding of clicks and keys, except for
 					-- unmodified left/right-click
@@ -740,7 +784,7 @@ function addon:TalentGroupChanged()
     local newProfile
 
 	if self.settings.specswap then
-		self.talentGroup = GetActiveTalentGroup()
+		self.talentGroup = GetActiveSpecGroup()
         -- Determine which profile to set, based on talent group
         if self.talentGroup == 1 and self.settings.pri_profileKey then
             newProfile = self.settings.pri_profileKey

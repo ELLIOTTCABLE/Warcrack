@@ -1,3 +1,79 @@
+TipTac Changes | 2015 Mar 04
+----------------------------
+- TOC version updated to 60100 for the 6.1 patch.
+- The "Targeting" text is now using a localized string (BINDING_HEADER_TARGETING). It may not be entirely correct for all locales though.
+- Fixed an anchoring issue for mouse anchored tooltips. It was especially noticeable together with Titan Panel.
+
+TipTac Changes | 2015 Jan 14
+----------------------------
+- If you had your tooltip anchored to the mouse, you may have had some issues with a few UI frames, especially the Garrison UI. An exception for "ANCHOR_CURSOR_RIGHT" was added, which should fix this (thanks ywfn).
+- Added some fixes which should resolve the issues where the tooltip background color changes into navy blue.
+- No longer shows empty title for certain NPCs.
+
+TipTac Changes | 2014 Oct 16
+----------------------------
+- Options: Fixed the issue that caused checkboxes not to save their state when checked.
+- TipTacItemRef: Updated the "GetUpgradedItemLevel" library. This update will again properly find the correct itemLevel of upgraded items.
+
+TipTac Changes | 2014 Oct 15
+----------------------------
+- TOC version has been changed to 60000 for the Warlords of Draenor 6.0.2 patch.
+- WoD Issue: Fixed an anchoring issue with the GameTooltip.
+- Added Class Icon option. This will display the class icon of players next to the tooltip. Find the checkbox toggle under the option dialog's "Icon" category.
+
+TipTac Changes | 2014 May 24
+----------------------------
+- TipTacItemRef: Updated the "GetUpgradedItemLevel.lua" library, to include the new upgrade IDs.
+
+TipTac Changes | 2013 Sep 21
+----------------------------
+- Changed the TOC version to 50400 for the 5.4 patch.
+- Tooltip height is now updated when a new line is added or removed. Before updates only occured on the configured update frequency. This should hopefully fix some issues where the health/power bars could overlap text in the tooltip.
+- Added option to hide the new realm text "Coalesced Realm (*)\nGroup, Whisper" as well as the future "Interactive Realm" text.
+
+TipTac Changes | 2013 May 22
+----------------------------
+- Changed the TOC version to 50300 for the 5.3 patch.
+- Updated TipTacItemRef addon.
+
+TipTac Changes | 2013 Apr 17
+----------------------------
+- Changed the TOC version to 50200 for the 5.2 patch.
+- Added experimental code to support the "Mary Sue Protocol", used by roleplaying addons. To enable, go options and set the "General -> Name Type" to "Mary Sue Protocol". As this is experimental, it will not work properly or maybe not at all, but I am interested in the initial feedback and help in how to get it working optimally.
+- Added a check for proper data when constructing battle pet tooltips, which could previously cause Lua errors in some cases.
+
+TipTac Changes | 2013 Feb 19
+----------------------------
+- Changed the TOC version to 50100 for the 5.1 patch.
+- Fixed an error for the health/power bar text when set to "Deficit", with the "Condensed Bar Values" option on.
+- The options configurations table is now accessible through Lua via "TipTacOptions.options".
+
+TipTac Changes | 2012 Oct 30
+----------------------------
+- Added proper support for battle pet tooltips, such as pet type, as well as their actual combat level instead of critter level.
+- Layout profiles are now consistent with the formatting of their classification.
+- Fixed a very rare error that could occur if both classification and level would be undefined.
+
+TipTac Changes | 2012 Sep 29
+----------------------------
+- Fixed a Lua error that could occur, if another addon used TipTac's AddModifiedTip() function before the saved variables had been loaded.
+- Added support for the new classification "minus" used for certain units.
+
+TipTac Changes | 2012 Sep 05
+----------------------------
+- Added an option for the removal of the Alliance and Horde faction text from the tooltip. It can currently be found under the Special category. Turned off by default.
+- Updated TipTacTalents, with a fix to allow talent spec to show for yourself.
+
+TipTac Changes | 2012 Sep 01
+----------------------------
+- Now removes the Alliance and Horde faction text from the tooltip.
+
+TipTac Changes | 2012 Aug 30
+----------------------------
+- Changed the TOC version to 50001 for the 5.0 Mists of Pandaria patch.
+- Fixed the "Show Who Targets the Unit" feature, so it now works with the changed API.
+- Removed the level estimator that was used for units returning -1 as level, those more than 10 levels above the player. This estimation was determined by the number of talent points they had spent.
+
 TipTac Changes | 2012 May 20
 ----------------------------
 - Changed the TOC version to 40300 for the 4.3 patch.

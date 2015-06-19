@@ -1,9 +1,12 @@
 local MAJOR_VERSION = "LibDogTag-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 215 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 259$"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_MINOR_VERSION then
 	_G.DogTag_MINOR_VERSION = MINOR_VERSION
 end
+
+local type, error, math, next, pairs, ipairs, select, rawget, setmetatable, _G, assert =
+	  type, error, math, next, pairs, ipairs, select, rawget, setmetatable, _G, assert
 
 -- #AUTODOC_NAMESPACE DogTag
 
@@ -14,6 +17,7 @@ local fixNamespaceList = DogTag.fixNamespaceList
 local memoizeTable = DogTag.memoizeTable
 local select2 = DogTag.select2
 local kwargsToKwargTypes = DogTag.kwargsToKwargTypes
+local kwargsToKwargTypesWithTableCache = DogTag.kwargsToKwargTypesWithTableCache
 local codeToFunction, codeEvaluationTime, evaluate, fsToKwargs, fsToFrame, fsToNSList, fsToCode,  updateFontString, updateFontStrings
 local fsNeedUpdate, fsNeedQuickUpdate
 local _clearCodes
@@ -33,7 +37,7 @@ DogTag_funcs[#DogTag_funcs+1] = function()
 	_clearCodes = DogTag._clearCodes
 end
 
-local EventHandlers
+local EventHandlers, TimerHandlers
 
 if DogTag.oldLib then
 	fsNeedUpdate = DogTag.oldLib.fsNeedUpdate
@@ -87,7 +91,7 @@ end
 DogTag.codeToEventList = codeToEventList
 
 DogTag.callback_num = 0
-local callbackToNSList, callbackToKwargs, callbackToFunction, callbackToCode
+local callbackToNSList, callbackToKwargs, callbackToFunction, callbackToCode, callbackToExtraArg
 if DogTag.oldLib and DogTag.oldLib.callbackToNSList then
 	local oldLib = DogTag.oldLib
 	DogTag.callback_num = oldLib.callback_num
@@ -135,7 +139,7 @@ else
 end
 local callbackToKwargTypes = {}
 for uid, kwargs in pairs(callbackToKwargs) do
-	callbackToKwargTypes[uid] = kwargsToKwargTypes[kwargs]
+	callbackToKwargTypes[uid] = kwargsToKwargTypesWithTableCache[kwargs]
 end
 
 DogTag.callbackToNSList = callbackToNSList
@@ -197,8 +201,10 @@ function DogTag:AddCallback(code, callback, nsList, kwargs, extraArg)
 		error(("Bad argument #5 to `AddCallback'. Expected %q, got %q."):format("table", type(kwargs)), 2)
 	end
 	
+	kwargs = memoizeTable(deepCopy(kwargs or false))
+	
 	nsList = fixNamespaceList[nsList]
-	local kwargTypes = kwargsToKwargTypes[kwargs]
+	local kwargTypes = kwargsToKwargTypesWithTableCache[kwargs]
 	local codeToEventList_nsList_kwargTypes = codeToEventList[nsList][kwargTypes]
 	local eventList = codeToEventList_nsList_kwargTypes[code]
 	if eventList == nil then
@@ -209,8 +215,6 @@ function DogTag:AddCallback(code, callback, nsList, kwargs, extraArg)
 	
 	local uid = DogTag.callback_num + 1
 	DogTag.callback_num = uid
-	
-	kwargs = memoizeTable(deepCopy(kwargs or false))
 	
 	callbackToNSList[uid] = nsList
 	callbackToKwargs[uid] = kwargs
@@ -411,7 +415,6 @@ local function OnEvent(this, event, ...)
 			end
 		end
 		if good then
-			good = true
 			if multiArg then
 				good = false
 				for i, v in ipairs(multiArg) do
@@ -420,6 +423,8 @@ local function OnEvent(this, event, ...)
 						good = false
 					elseif v == arg then
 						good = true
+					elseif tonumber(v) and type(arg) == "number" then
+						good = tonumber(v) == arg
 					elseif v:match("^%$") then
 						good = kwargs[v:sub(2)] == arg
 					elseif v:match("^%[.*%]$") then
@@ -445,6 +450,8 @@ local function OnEvent(this, event, ...)
 								good = false
 							elseif v == arg then
 								good = true
+							elseif tonumber(v) and type(arg) == "number" then
+								good = tonumber(v) == arg
 							elseif v:match("^%$") then
 								good = kwargs[v:sub(2)] == arg
 							elseif v:match("^%[.*%]$") then
@@ -475,8 +482,10 @@ local function OnEvent(this, event, ...)
 end
 frame:SetScript("OnEvent", OnEvent)
 
-local GetMilliseconds
 local GetTime = _G.GetTime
+--[[
+-- I'm sorry, but this shit is just stupidly wasteful of CPU time.
+local GetMilliseconds
 if DogTag_DEBUG then
 	function GetMilliseconds()
 		return math.floor(GetTime() * 1000 + 0.5)
@@ -485,107 +494,195 @@ else
 	function GetMilliseconds()
 		return GetTime() * 1000
 	end
-end
+end]]
 
-local nextTime = 0
-local nextUpdateTime = 0
-local nextSlowUpdateTime = 0
-local nextCacheInvalidationTime = 0
-local num = 0
-local function OnUpdate(this, elapsed)
-	_clearCodes()
-	num = num + 1
-	local currentTime = GetMilliseconds()
-	local oldMouseover = DogTag.__lastMouseover
-	local newMouseover = GetMouseFocus()
-	DogTag.__lastMouseover = newMouseover
-	if oldMouseover ~= DogTag.__lastMouseover then
-		for fs, frame in pairs(fsToFrame) do
-			if frame == oldMouseover or frame == newMouseover then
-				-- TODO: only update if has a mouseover event
-				fsNeedQuickUpdate[fs] = true
-			end
+do	-- OnUpdate
+	local nextTime = 0
+	local nextUpdateTime = 0
+	local nextSlowUpdateTime = 0
+	local nextCacheInvalidationTime = 0
+	local num = 0
+
+	local start -- start time of each cycle
+
+	-- Limit in milliseconds for each OnUpdate cycle.
+	-- Under max load, this will let FPS drop no lower than 33 FPS (1000/30)
+	-- as a result of the code in this function.
+	local CoroutineLimit = 30
+
+	-- Checks to see if we need to yield because the CoroutineLimit was exceeded.
+	-- Call this after every significant call
+	-- (especially external calls that will take an unknown amount of time)
+	-- You can also call this externally through DogTag.checkYield()
+	-- if you have an event handler that might take particularly long.
+	local function checkYield()
+		if running and InCombatLockdown() and debugprofilestop() - start > CoroutineLimit then
+			coroutine.yield()
 		end
 	end
-	if currentTime >= nextTime then
-		local currentTime_1000 = currentTime/1000
-		DogTag:FireEvent("FastUpdate")
-		if currentTime >= nextUpdateTime then
-			nextUpdateTime = currentTime + 150
-			DogTag:FireEvent("Update")
-		end
-		if currentTime >= nextSlowUpdateTime then
-			nextSlowUpdateTime = currentTime + 10000
-			DogTag:FireEvent("SlowUpdate")
-		end
-		if currentTime >= nextCacheInvalidationTime then
-			nextCacheInvalidationTime = currentTime + 15000
-			if not InCombatLockdown() then
-				local oldTime = currentTime_1000 - 180
-				for nsList, codeToFunction_nsList in pairs(codeToFunction) do
-					for kwargTypes, codeToFunction_nsList_kwargTypes in pairs(codeToFunction_nsList) do
-						if kwargTypes ~= 1 then
-							for code in pairs(codeToFunction_nsList_kwargTypes) do
-								if code ~= 1 and code ~= 2 then
-									local x = codeEvaluationTime[nsList][kwargTypes][code]
-									local good = false
-									if x and x > oldTime then
-										good = true
-									else
-										for fs, c in pairs(fsToCode) do
-											if c == code and fsToNSList[fs] == nsList then
+	DogTag.checkYield = checkYield
+
+	local function OnUpdate_Coroutine()
+		while true do
+			running = true
+
+			_clearCodes()
+			num = num + 1
+
+			local currentTime = GetTime()
+
+			local oldMouseover = DogTag.__lastMouseover
+			local newMouseover = GetMouseFocus()
+			DogTag.__lastMouseover = newMouseover
+			if oldMouseover ~= DogTag.__lastMouseover then
+				for fs, frame in pairs(fsToFrame) do
+					if frame == oldMouseover or frame == newMouseover then
+						-- TODO: only update if has a mouseover event
+						fsNeedQuickUpdate[fs] = true
+					end
+				end
+			end
+
+			if currentTime >= nextTime then
+				DogTag:FireEvent("FastUpdate")
+				checkYield()
+
+				if currentTime >= nextUpdateTime then
+					nextUpdateTime = currentTime + 0.15
+					DogTag:FireEvent("Update")
+					checkYield()
+				end
+
+				if currentTime >= nextSlowUpdateTime then
+					nextSlowUpdateTime = currentTime + 10
+					DogTag:FireEvent("SlowUpdate")
+					checkYield()
+				end
+
+				if currentTime >= nextCacheInvalidationTime then
+					nextCacheInvalidationTime = currentTime + 15
+
+					-- The following code only happens out of combat,
+					-- so there is no need to check for yields here.
+					if not InCombatLockdown() then
+						local oldTime = currentTime - 180
+						for nsList, codeToFunction_nsList in pairs(codeToFunction) do
+							for kwargTypes, codeToFunction_nsList_kwargTypes in pairs(codeToFunction_nsList) do
+								if kwargTypes ~= 1 then
+									for code in pairs(codeToFunction_nsList_kwargTypes) do
+										if code ~= 1 and code ~= 2 then
+											local x = codeEvaluationTime[nsList][kwargTypes][code]
+											local good = false
+											if x and x > oldTime then
 												good = true
-												break
-											end
-										end
-										if not good then
-											for uid, c in pairs(callbackToCode) do
-												if c == code and callbackToNSList[uid] == nsList then
-													good = true
-													break
+											else
+												for fs, c in pairs(fsToCode) do
+													if c == code and fsToNSList[fs] == nsList then
+														good = true
+														break
+													end
+												end
+												if not good then
+													for uid, c in pairs(callbackToCode) do
+														if c == code and callbackToNSList[uid] == nsList then
+															good = true
+															break
+														end
+													end
 												end
 											end
+											if not good then
+												codeToFunction_nsList_kwargTypes[code] = nil
+												codeToEventList[nsList][kwargTypes][code] = nil
+											end
 										end
-									end
-									if not good then
-										codeToFunction_nsList_kwargTypes[code] = nil
-										codeToEventList[nsList][kwargTypes][code] = nil
 									end
 								end
 							end
 						end
 					end
 				end
-			end
-		end
-		nextTime = currentTime + 50
-		for i = 1, 9 do
-			for ns, data in pairs(TimerHandlers) do
-				local data_i = data[i]
-				if data_i then
-					for func in pairs(data_i) do
-						func(num, currentTime_1000)
+
+				nextTime = currentTime + 0.05
+
+				for i = 1, 9 do
+					for ns, data in pairs(TimerHandlers) do
+						local data_i = data[i]
+						if data_i then
+							for func in pairs(data_i) do
+								func(num, currentTime)
+
+								checkYield()
+							end
+						end
 					end
 				end
+				
+				for fs in pairs(fsNeedUpdate) do
+					fsNeedQuickUpdate[fs] = true
+					fsNeedUpdate[fs] = nil
+				end
 			end
-		end
-		
-		for fs in pairs(fsNeedUpdate) do
-			fsNeedQuickUpdate[fs] = true
-			fsNeedUpdate[fs] = nil
+			
+			-- debugprofilestop is used now instead of GetTime because
+			-- GetTime isn't updated until each frame is drawn. (recent change, WoW 4.3.0 i think?)
+			-- Since this whole process takes place within one frame,
+			-- GetTime will have the same value throughout.
+			-- debugprofilestop is always updated (unless some jerkface resets it with debugprofilestart), so we have to use it instead
+			
+			-- Addendum to this explanation 8/1/2013 (r251):
+			-- This part of the code now yields out of the coroutine instead of breaking the loop
+			-- It still uses its own execution cap because the time spent updating font strings should be more tightly limited
+			-- By yielding out instead of breaking the loop,
+			-- we prevent the problem of only having the front strings that are in the top of the table get updated 
+			-- while some sit in the bottom and never get seen.
+
+
+			-- Don't define this until we loop through at least one frame
+			-- so that we don't call debugprofilestop unless we need to:
+			local finish_time --= debugprofilestop() + 10
+			local n = 0
+			
+			for fs in pairs(fsNeedQuickUpdate) do
+				n = n + 1
+				if not finish_time then
+					finish_time = debugprofilestop() + 10 -- 10 as in 10 miliseconds
+
+				elseif n%20 == 0 and debugprofilestop() >= finish_time then
+
+					-- Set finish_time to nil so that it will be recalculated when we resume.
+					finish_time = nil
+
+					coroutine.yield()
+				end
+				updateFontString(fs)
+			end
+
+			running = false
+
+			-- Since this function is one continual while(true) loop,
+			-- yield at the end each time and wait for the next resume
+			-- triggered by the script handler.
+			coroutine.yield()
+
 		end
 	end
-	local finish_time = GetTime() + 1/1000
-	local num = 0
-	for fs in pairs(fsNeedQuickUpdate) do
-		num = num + 1
-		if num%10 == 0 and GetTime() >= finish_time then
-			break
+
+	local Coroutine
+	local function OnUpdate()
+		start = debugprofilestop()
+
+		-- Recreate the coroutine if it is dead (or create it if we haven't yet)
+		-- (It will die if there was an error thrown in the middle of the last cycle).
+		if not Coroutine or coroutine.status(Coroutine) == "dead" then
+			Coroutine = coroutine.create(OnUpdate_Coroutine)
 		end
-		updateFontString(fs)
+
+		assert(coroutine.resume(Coroutine))
 	end
+
+	frame:SetScript("OnUpdate", OnUpdate)
 end
-frame:SetScript("OnUpdate", OnUpdate)
 
 --[[
 Notes:

@@ -1,3 +1,99 @@
+4.6.4
+- Fixed adding targets to mob filter.
+- Added various filtered auras.
+
+4.6.3
+- Set Highmaul and Blackrock Foundry bosses to level 103 so they can be properly registered.
+- Added a bunch of WoD filtered auras.
+- Fix visual bug in aura monitor search box.
+
+4.6.2
+- Update ToC interface version for aura monitor.
+- Boss level creatures inside of raid instances are now treated as their true level. (exp cap + 3)
+- Added option to ignore boss creatures outside of raids. Defaults to enabled.
+- Removed option to avoid filter magical spells on low level targets, as it's hardly useful any longer.
+
+4.6.1
+- Updated for 6.0.
+
+4.6.0
+- The aura tracker is now its own addon and was reworked heavily.
+- Add many filtered auras.
+- Remove custom filtered auras on login that exists in default filter.
+- Properly update all scroll frames on login.
+- Implement .pkgmeta and externals.
+- ToC 5.4.
+
+4.5.3
+- Fixed error in filter module.
+- Added more new (and some old) filtered auras.
+
+4.5.2
+- Fixed error in aura tracker.
+- Added some filtered auras from Isle and Throne of Thunder.
+
+4.5.1
+- Added a bunch of bad MoP auras.
+- Added button to the spell list for reverting all recent records.
+- Make sure tooltip info is not added twice in the spell list when tooltip info is enabled.
+- Adding custom auras to the filter should now also work for target auras.
+
+4.5.0
+- 5.0 update. Not backwards compatible.
+- Remove all types of hardcoded spell exceptions.
+- "Known spells" now works off of spell names rather than IDs.
+- Added advanced module as replacement for the spell exceptions. It allows for custom spell ID, tooltip, name and icon mappings. These are stored globally. (as opposed to profile specific)
+- Added include filter to force spells to count as player spells, and exclude filter that completely ignores spells. Both accept spell IDs and names.
+- Add a brief description to each filter type, explaining their purpose.
+- Popup dialogs with editbox now won't let you accept if the input is invalid.
+- Spells that no longer exist in the game are now removed on load.
+- Make sure minimap button is not overlapped by minimap.
+
+4.4.0
+* Introducing the spell list module. This is a centralised spell database manager which implements the features of the spell filter, reset module and announce module via a single menu. The latter are still modular, their functionality only added to said menu if loaded. spellList.lua is required for filter, reset and announce modules.
+- Add Korean and traditional Chinese localisation.
+- Removed pre-4.0 upgrade code. If upgrading from a version < 4.0, either remove your per char saved variables, or first upgrade to a version < 4.4.
+- Spell tooltip info is now enabled by default.
+- Added monk tree defaults.
+- Slightly increased the width of the display when using tree text labels.
+- Add option to change the opacity of the display border.
+- Fix custom aura filter.
+- Now using tabbed navigation rather than dropdown in a few places.
+- Resetting a record now also clears any previous record it had.
+- Removed 'Play sound' option. You can just select 'None' on the dropdown.
+- Sound is now off by default.
+- 'Ignore aura filter' should now work properly when toggled.
+- Add a texture to the splash frame indicating its hit box that's shown when unlocking the splash frame.
+- Add an option to control the fade duration of the splash frame.
+- Aura tracker is no longer localised as it's considered merely a development tool.
+
+4.3.0
+- Now using more aggressive aura filtering; once a filtered aura is applied, no more records will be registered for the remainder of the encounter. (both player and target auras)
+- ToC bump.
+- Use static icon for wand shoot spell.
+- Added a bunch of filtered auras from Hour of Twilight dungeons and Dragon Soul as well as some older instances.
+- Recognise a bunch of druid, priest and shaman spells as player spells.
+
+4.2.0
+- Give the minimap button a name to work better with certain third party addons.
+- Tweak the config frames to adapt to the increased size of the interface options frame.
+- Add option to set the opacity of the display backdrop.
+- Implemented (somewhat experimental) system to properly filter killing blows delivered to targets affected by filtered auras.
+- Add exceptions for a bunch of spells to be recognised as player spells.
+- Merge spell ID mapping into a single table where all spell effect IDs are mapped to its corresponding tooltip ID. All spells are now registered using their tooltip ID.
+- Stacking periodic effects can now properly be filtered by filtered auras and mobs.
+- Use more appropriate global strings to find the target's level. Should now work on all locales.
+- Warlocks' infernal damage can now be registered.
+- Add spell ID to tooltips when debugging is enabled.
+- Pet auto attacks will now work with the player spells only-option.
+- Revert change that enabled periodic effects on vulnerable targets that were applied before the vulnerability to be registered. (too unreliable)
+- Split filter engine and GUI into two different files. They remain dependent of each other.
+- Resetting spells should now be reflected in the filter list.
+- Add Erudax back into the mob filter. Shadow Gale cannot be tracked.
+- Added more tooltip exceptions.
+- Added a bunch more spells to filters. (see filtersCore.lua for more info)
+- Add frFR localisation.
+
 4.1.1
 - Add tooltip exceptions for Arcane Missiles, Slam, Feed Pet, Wyvern Sting, Intercept, Bloodthirst and Chimera Shot.
 - All custom fonts should now work properly for the splash messages.

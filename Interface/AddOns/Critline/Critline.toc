@@ -1,38 +1,37 @@
-## Interface: 40200
+## Interface: 60100
 ## Title: Critline
-## Version: 4.1.1
+## Version: 4.6.4
 ## Notes: Saves your normal and critical records and flashes a message if you break the record.
-## Author: L'ombra
+## Author: Lombra
 ## SavedVariables: CritlineDB
 ## SavedVariablesPerCharacter: CritlinePerCharDB
-## X-Curse-Packaged-Version: 4.1.1
+## X-Curse-Packaged-Version: 4.6.4
 ## X-Curse-Project-Name: Critline
 ## X-Curse-Project-ID: critline
 ## X-Curse-Repository-ID: wow/critline/mainline
 
-libs\LibStub.lua
-libs\CallbackHandler-1.0.lua
-libs\AceDB-3.0.lua
-libs\AceLocale-3.0.lua
-libs\LibDataBroker-1.1.lua
-libs\LibDualSpec-1.0.lua
-libs\LibSharedMedia-3.0.lua
+embeds.xml
 
-locales\enUS.lua
-locales\deDE.lua
-locales\esES.lua
-locales\ruRU.lua
-locales\zhTW.lua
+Locales\enUS.lua
+Locales\deDE.lua
+Locales\esES.lua
+Locales\frFR.lua
+Locales\koKR.lua
+Locales\ruRU.lua
+Locales\zhCN.lua
+Locales\zhTW.lua
 
-templates.lua
-core.lua
+Templates.lua
+Core.lua
 
-filters.lua
-splash.lua
-display.lua
-minimap.lua
-announce.lua
-reset.lua
+SpellList.lua
+FilterCore.lua
+FilterGUI.lua
+Splash.lua
+Display.lua
+Minimap.lua
+Reset.lua
+Announce.lua
+Advanced.lua
 Broker.lua
-profiles.lua
-AuraTracker.lua
+Profiles.lua

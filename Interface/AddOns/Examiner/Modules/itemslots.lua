@@ -1,4 +1,5 @@
 local ex = Examiner;
+local cfg;
 local gtt = GameTooltip;
 
 -- Module
@@ -6,7 +7,6 @@ local mod = ex:CreateModule("ItemSlots");
 mod.slotBtns = {};
 
 -- Variables
-local cfg, cache;
 local statTipStats1, statTipStats2 = {}, {};
 local ITEM_ICON_UNKNOWN = "Interface\\Icons\\INV_Misc_QuestionMark";
 
@@ -19,8 +19,7 @@ ex.options[#ex.options + 1] = { var = "alwaysShowItemLevel", default = true, lab
 
 -- OnInitialize
 function mod:OnInitialize()
-	cfg = Examiner_Config;
-	cache = Examiner_Cache;
+	cfg = ex.cfg;
 end
 
 -- OnInspectReady
@@ -91,6 +90,7 @@ function mod:UpdateItemSlots()
 				local r,g,b = GetItemQualityColor(itemRarity and itemRarity > 0 and itemRarity or 0);
 				button.border:SetVertexColor(r,g,b);
 				button.border:Show();
+				itemLevel = GetUpgradedItemLevelFromItemLink(link);
 				button.level:SetText(itemLevel);
 			else
 				button.realLink = link;
@@ -221,7 +221,7 @@ for index, slot in ipairs(LibGearExam.Slots) do
 	elseif (index == 9) then
 		btn:SetPoint("TOPRIGHT",-4,-3);
 	elseif (index == 17) then
-		btn:SetPoint("BOTTOM",-41.5,27);
+		btn:SetPoint("BOTTOM",-20,27);
 	elseif (index <= 16) then
 		btn:SetPoint("TOP",mod.slotBtns[index - 1],"BOTTOM",0,-4);
 	else

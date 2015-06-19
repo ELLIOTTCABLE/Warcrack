@@ -4,9 +4,22 @@
 
 -- Whats new info
 SMARTBUFF_WHATSNEW = "|cffffffffWhats new:|r\n\n"
-  .."- Added buffs: Paladin (Beacon of Light)\n\n"
-  .."- Added items: Fortune Cookie, Celebration Package, Warts-B-Gone Lip Balm\n\n"
-  .."- Updated TOC\n\n"
+  .."- Added buffs: Hunter (Munitions, Lone Wolf), Rogue (Instant Poison), Hunter (Camouflage), Warrior (Gladiator Stance)\n\n"
+  .."- Added items: WoD flasks, Oralius' Whispering Crystal, Fire-Watcher's Oath, Blazing Wings\n\n"
+  .."- Fix for LUA error: script ran too long\n\n"
+  --.."- This release will restore basic functionality, but unfortunately it does not contain all the new aura changes, sorry.\n\n"
+  .."- Due to I am not playing WoD atm, please report any missing auras and be patient, thanks!\n\n"
+  
+  --[[
+  .."- Thanks for donation:\n"
+  .."  Maik M.\n"
+  .."  Chris S.\n"
+  .."  Glenn J.\n"
+  .."  Jennyfer H.\n"
+  .."  Jon B.\n"
+  .."  Michael Z.\n"
+  .."  :)"
+  --]]
   ;
 
 
@@ -26,7 +39,7 @@ SMARTBUFF_DEMONTYPE = "Imp";
 SMARTBUFF_UNDEAD    = "Undead";
 
 -- Classes
-SMARTBUFF_CLASSES = {"Druid", "Hunter", "Mage", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior", "Death Knight", "Hunter Pet", "Warlock Pet", "Death Knight Pet", "Tank", "Healer", "Damage Dealer"};
+SMARTBUFF_CLASSES = {"Druid", "Hunter", "Mage", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior", "Death Knight", "Monk", "Hunter Pet", "Warlock Pet", "Death Knight Pet", "Tank", "Healer", "Damage Dealer"};
 
 -- Templates and Instances
 SMARTBUFF_TEMPLATES = {"Solo", "Party", "Raid", "Battleground", "Arena", "ICC", "TOC", "Ulduar", "MC", "Ony", "BWL", "Naxx", "AQ", "ZG", "Custom 1", "Custom 2", "Custom 3", "Custom 4", "Custom 5"};
@@ -57,13 +70,10 @@ SMARTBUFF_OFT_AUTOREST       = "Disable in cities";
 SMARTBUFF_OFT_HUNTERPETS     = "Buff Hunter pets";
 SMARTBUFF_OFT_WARLOCKPETS    = "Buff Warlock pets";
 SMARTBUFF_OFT_ARULES         = "Advance rules";
-SMARTBUFF_OFT_GRP            = "Raid Subgroups to buff";
-SMARTBUFF_OFT_SUBGRPCHANGED  = "Open options menu";
 SMARTBUFF_OFT_BUFFS          = "Buffs/Abilities";
 SMARTBUFF_OFT_TARGET         = "Buffs the selected target";
 SMARTBUFF_OFT_DONE           = "Done";
 SMARTBUFF_OFT_APPLY          = "Apply";
-SMARTBUFF_OFT_GRPBUFFSIZE    = "Grp/Raid size";
 SMARTBUFF_OFT_CLASSBUFFSIZE  = "Class size";
 SMARTBUFF_OFT_MESSAGES       = "Disable messages";
 SMARTBUFF_OFT_MSGNORMAL      = "normal";
@@ -82,10 +92,7 @@ SMARTBUFF_OFT_AUTOSWITCHTMPINST = "Instances";
 SMARTBUFF_OFT_CHECKCHARGES   = "Check charges";
 SMARTBUFF_OFT_RBT            = "Reset BT";
 SMARTBUFF_OFT_BUFFINCITIES   = "Buff in cities";
-SMARTBUFF_OFT_UISYNC         = "UI sync";
 SMARTBUFF_OFT_BLDURATION     = "Blacklisted";
-SMARTBUFF_OFT_COMPMODE       = "Comp. mode";
-SMARTBUFF_OFT_MINIGRP        = "Mini group";
 SMARTBUFF_OFT_ANTIDAZE       = "Anti daze";
 SMARTBUFF_OFT_HIDESABUTTON   = "Hide action button";
 SMARTBUFF_OFT_INCOMBAT       = "in combat";
@@ -100,6 +107,10 @@ SMARTBUFF_OFT_NO             = "No";
 SMARTBUFF_OFT_PURGE_DATA     = "Are you sure you want to reset ALL SmartBuff data?\nThis action will force a reload of the UI!";
 SMARTBUFF_OFT_SPLASHICON     = "Show Icon";
 SMARTBUFF_OFT_SPLASHMSGSHORT = "Short Message";
+SMARTBUFF_OFT_FONTSTYLE      = "Font";
+SMARTBUFF_OFT_FONTSIZE       = "Font Size";
+SMARTBUFF_OFT_ICONSIZE       = "Icon Size";
+
 
 -- Options Frame Tooltip Text
 SMARTBUFF_OFTT               = "Toggles SmartBuff On/Off";
@@ -113,8 +124,6 @@ SMARTBUFF_OFTT_AUTOREST      = "Disable reminder in capital cities";
 SMARTBUFF_OFTT_HUNTERPETS    = "Buff the Hunter pets as well.";
 SMARTBUFF_OFTT_WARLOCKPETS   = "Buff the Warlock pets as well, except the " .. SMARTBUFF_DEMONTYPE .. ".";
 SMARTBUFF_OFTT_ARULES        = "Does not cast:\n- Thorns on Mages, Priests and Warlocks\n- Arcane Intellect on units without Mana\n- Divine Spirit on units without Mana";
-SMARTBUFF_OFTT_SUBGRPCHANGED = "Automatically opens the SmartBuff options menu,\nwhen you have changed the subgroup.";
-SMARTBUFF_OFTT_GRPBUFFSIZE   = "How many players missing the groupbuff and have to be in\nthe group/raid, that the groupbuff will be casted.";
 SMARTBUFF_OFTT_HIDEMMBUTTON  = "Hides the SmartBuff minimap button.";
 SMARTBUFF_OFTT_REBUFFTIMER   = "How many seconds before a buff expires,\nthe reminder should alert you.\n0 = Deactivated";
 SMARTBUFF_OFTT_SELFFIRST     = "Buffs your character first of all others.";
@@ -127,10 +136,7 @@ SMARTBUFF_OFTT_AUTOSWITCHTMP = "Automatically switches the template,\nif the gro
 SMARTBUFF_OFTT_AUTOSWITCHTMPINST = "Automatically switches the template,\nif the instance changes.";
 SMARTBUFF_OFTT_CHECKCHARGES  = "Displays low amount of\ncharges on a buff.\n0 = Deactivated";
 SMARTBUFF_OFTT_BUFFINCITIES  = "Buffs also if you are in capital cities.\nIf you are PvP flagged, it buffs in any case.";
-SMARTBUFF_OFTT_UISYNC        = "Activate syncronisation with the UI\nto retrive the timeleft of your buffs\nfrom other players.";
-SMARTBUFF_OFTT_BLDURATION    = "How many seconds, players will be blacklistet.\n0 = Deactivated";
-SMARTBUFF_OFTT_COMPMODE      = "Compatibility mode\nAttention!!!\nUses this mode only, if you are\nfacing problems to cast buffs on yourself.";
-SMARTBUFF_OFTT_MINIGRP       = "Show raid subgoup settings in an\nown movable mini group frame.";
+SMARTBUFF_OFTT_BLDURATION    = "How many seconds, players will be blacklisted.\n0 = Deactivated";
 SMARTBUFF_OFTT_ANTIDAZE      = "Automatically cancels the\naspect of the cheetah/pack\nif someone gets dazed\n(self or group).";
 SMARTBUFF_OFTT_SPLASHSTYLE   = "Changes the fontstyle of\nthe buff messages.";
 SMARTBUFF_OFTT_HIDESABUTTON  = "Hides the SmartBuff action button.";
@@ -142,8 +148,8 @@ SMARTBUFF_OFTT_LINKGRPBUFFCHECK  = "Checks if a buff of an other\nclass with sim
 SMARTBUFF_OFTT_LINKSELFBUFFCHECK = "Checks if a self buff is active,\nwhose only one can be\nactive at a time.";
 
 -- Buffsetup Frame Text
-SMARTBUFF_BST_SELFONLY       = "Oneself only";
-SMARTBUFF_BST_SELFNOT        = "Oneself not";
+SMARTBUFF_BST_SELFONLY       = "Myself only";
+SMARTBUFF_BST_SELFNOT        = "Myself not";
 SMARTBUFF_BST_COMBATIN       = "In combat";
 SMARTBUFF_BST_COMBATOUT      = "Out of combat";
 SMARTBUFF_BST_MAINHAND       = "Main Hand";

@@ -1,15 +1,22 @@
 -- For enchant and gem IDs, check out the following link: http://www.wowwiki.com/EnchantId
+-- Pattern entries marked with an "alert" value will cause Examiner to show a warning message,
+-- telling that the pattern is thought of as no longer in use. These patterns should eventually be deleted.
 
 LibGearExam.Patterns = {
 	--  Base Stats  --
+	{ p = "+?(%d+) Armor", s = "ARMOR" }, -- Should catch all armor: Base armor, Armor enchants, Armor kits
+
 	{ p = "([+-]%d+) Strength", s = "STR" },
 	{ p = "([+-]%d+) Agility", s = "AGI" },
 	{ p = "([+-]%d+) Stamina", s = "STA" },
 	{ p = "([+-]%d+) Intellect", s = "INT" },
 	{ p = "([+-]%d+) Spirit", s = "SPI" },
-	{ p = "(%d+) Armor", s = "ARMOR" }, -- Should catch all armor: Base armor, Armor enchants, Armor kits
 
-	{ p = "Increases Intellect by (%d+)", s = "INT" },	-- Found on old set bonuses which used to have spellpower. For example item:23304
+	{ p = "Increases Strength by (%d+)", s = "STR" },
+	{ p = "Increases Agility by (%d+)", s = "AGI" },
+	{ p = "Increases Stamina by (%d+)", s = "STA" },
+	{ p = "Increases Intellect by (%d+)", s = "INT" },
+	{ p = "Increases Spirit by (%d+)", s = "SPI" },
 
 	--  Resistances (Exclude the Resist-"ance" then it picks up armor patches as well)  --
 	{ p = "%+(%d+) Arcane Resist", s = "ARCANERESIST" },
@@ -21,16 +28,22 @@ LibGearExam.Patterns = {
 	{ p = "%+(%d+) Resist All", s = { "ARCANERESIST", "FIRERESIST", "NATURERESIST", "FROSTRESIST", "SHADOWRESIST" } }, -- Void Sphere
 
 	--  Equip: Mastery  --
-	{ p = "Increases your mastery rating by (%d+)%.", s = "MASTERY" },
-	{ p = "(%d+) Mastery [Rr]ating", s = "MASTERY" },	-- Lower caps found on head enchant, capitalised string found on Gems & Enchants
+	{ p = "Increases your mastery rating by (%d+)%.", s = "MASTERY", alert = 1 },
+	{ p = "Increases your mastery by (%d+)%.", s = "MASTERY" },
+	{ p = "(%d+) Mastery [Rr]ating", s = "MASTERY", alert = 1 },	-- Lower caps found on head enchant, capitalised string found on Gems & Enchants
+	{ p = "(%d+) Mastery", s = "MASTERY" },
 
 	--  Equip: Other  --
 	{ p = "Improves your resilience rating by (%d+)%.", s = "RESILIENCE", alert = 1 },
-	{ p = "Increases your resilience rating by (%d+)%.", s = "RESILIENCE" },
+	{ p = "Increases your resilience rating by (%d+)%.", s = "RESILIENCE", alert = 1 },
+	{ p = "Increases your resilience by (%d+)%.", s = "RESILIENCE", alert = 2 },
+	{ p = "Increases your PvP Resilience by (%d+)%.", s = "RESILIENCE" },	-- added 14.03.08
 
 	{ p = "Increases defense rating by (%d+)%.", s = "DEFENSE", alert = 1 },
-	{ p = "Increases your dodge rating by (%d+)%.", s = "DODGE" },
-	{ p = "Increases your parry rating by (%d+)%.", s = "PARRY" },
+	{ p = "Increases your dodge rating by (%d+)%.", s = "DODGE", alert = 1 },
+	{ p = "Increases your dodge by (%d+)%.", s = "DODGE" },
+	{ p = "Increases your parry rating by (%d+)%.", s = "PARRY", alert = 1 },
+	{ p = "Increases your parry by (%d+)%.", s = "PARRY" },
 	{ p = "Increases your s?h?i?e?l?d? ?block rating by (%d+)%.", s = "BLOCK", alert = 1 }, -- Should catch both new and old style
 
 	{ p = "Increases the block value of your shield by (%d+)%.", s = "BLOCKVALUE", alert = 1 },
@@ -40,11 +53,12 @@ LibGearExam.Patterns = {
 	{ p = "Increases attack power by (%d+)%.", s = "AP" },
 	{ p = "Increases ranged attack power by (%d+)%.", s = "RAP" },	-- (4.0) This stat is still found on some items, 19361 is one of them
 
-	{ p = "Increases your expertise rating by (%d+)%.", s = "EXPERTISE" }, -- New 2.3 Stat
+	{ p = "Increases your expertise rating by (%d+)%.", s = "EXPERTISE", alert = 1 }, -- New 2.3 Stat
+	{ p = "Increases your expertise by (%d+)%.", s = "EXPERTISE" }, -- New 2.3 Stat
 	{ p = "Increases y?o?u?r? ?armor penetration rating by (%d+)%.", s = "ARMORPENETRATION", alert = 1 }, -- Armor Penetration in 3.0
 
 	--  Equip: Spell Power  --
-	{ p = "Increases your spell penetration by (%d+)%.", s = "SPELLPENETRATION", alert = 1 },
+	{ p = "Increases your spell penetration by (%d+)%.", s = "SPELLPENETRATION", alert = 1 },	-- Still exists on "Don Rodrigo's Band" (21563) -- Fixed in MoP or earlier
 
 	{ p = "Increases spell power by (%d+)%.", s = "SPELLDMG" },
 	{ p = "Increases spell power slightly%.", s = "SPELLDMG", v = 6, alert = 1 }, -- Bronze Band of Force
@@ -60,12 +74,17 @@ LibGearExam.Patterns = {
 	{ p = "Increases holy spell power by (%d+)%.", s = "HOLYDMG", alert = 1 },
 
 	--  Equip: Stats Which Improves Both Spells & Melee  --
-	{ p = "Increases your critical strike rating by (%d+)%.", s = { "CRIT", "SPELLCRIT" } },
 	{ p = "Improves critical strike rating by (%d+)%.", s = { "CRIT", "SPELLCRIT" }, alert = 1 },
-	{ p = "Increases your hit rating by (%d+)%.", s = { "HIT", "SPELLHIT" } },
+	{ p = "Increases your critical strike rating by (%d+)%.", s = { "CRIT", "SPELLCRIT" }, alert = 1 },
+	{ p = "Increases your critical strike by (%d+)%.", s = { "CRIT", "SPELLCRIT" } },
+
 	{ p = "Improves hit rating by (%d+)%.", s = { "HIT", "SPELLHIT" }, alert = 1 },
-	{ p = "Increases your haste rating by (%d+)%.", s = { "HASTE", "SPELLHASTE" } },
+	{ p = "Increases your hit rating by (%d+)%.", s = { "HIT", "SPELLHIT" }, alert = 1 },
+	{ p = "Increases your hit by (%d+)%.", s = { "HIT", "SPELLHIT" } },
+
 	{ p = "Improves haste rating by (%d+)%.", s = { "HASTE", "SPELLHASTE" }, alert = 1 },
+	{ p = "Increases your haste rating by (%d+)%.", s = { "HASTE", "SPELLHASTE" }, alert = 1 },
+	{ p = "Increases your haste by (%d+)%.", s = { "HASTE", "SPELLHASTE" } },
 
 	--  Health & Mana Per 5 Sec  --
 	{ p = "(%d+) health every 5 sec%.", s = "HP5", alert = 1 },
@@ -103,22 +122,33 @@ LibGearExam.Patterns = {
 	{ p = "%+(%d+) Holy S?p?e?l?l? ?Damage", s = "HOLYDMG" },
 
 	{ p = "%+(%d+) Defense", s = "DEFENSE", alert = 1 }, -- Exclude "Rating" from this pattern due to Paladin ZG Enchant
-	{ p = "%+(%d+) Dodge Rating", s = "DODGE" },
-	{ p = "(%d+) Parry Rating", s = "PARRY" }, -- Az: plus sign no longer needed for a match
-	{ p = "%+(%d+) Block Rating", s = "BLOCK" }, -- Combined Pattern: Covers [Shield Enchant] [Socket Bonus]
+	{ p = "%+(%d+) Dodge Rating", s = "DODGE", alert = 1 },
+	{ p = "%+(%d+) Dodge", s = "DODGE" },
+	{ p = "(%d+) Parry Rating", s = "PARRY", alert = 1 }, -- Az: plus sign no longer needed for a match
+	{ p = "(%d+) Parry", s = "PARRY" }, -- Az: plus sign no longer needed for a match
+	{ p = "%+(%d+) Block Rating", s = "BLOCK", alert = 1 }, -- Combined Pattern: Covers [Shield Enchant] [Socket Bonus]
+	{ p = "%+(%d+) Block", s = "BLOCK" }, -- Combined Pattern: Covers [Shield Enchant] [Socket Bonus]
 	{ p = "%+(%d+) Shield Block Rating", s = "BLOCK", alert = 1 }, -- Combined Pattern: Covers [Shield Enchant] [Socket Bonus]
 
 	{ p = "%+(%d+) Block Value", s = "BLOCKVALUE", alert = 1 },
 
 	{ p = "%+(%d+) Attack Power", s = "AP" },	-- Found on enchants
 	{ p = "%+(%d+) Ranged Attack Power", s = "RAP" },	-- Still exists on the hunter ZG enchant (2586)
-	{ p = "%+(%d+) Hit Rating", s = { "HIT", "SPELLHIT" } },
-	{ p = "%+(%d+) Crit Rating", s = { "CRIT", "SPELLCRIT" } },
-	{ p = "%+(%d+) Critical S?t?r?i?k?e? ?Rating", s = { "CRIT", "SPELLCRIT" } }, -- Matches two versions, with/without "Strike". No "Strike" on "Unstable Citrine"
-	{ p = "(%d+) Critical strike rating%.", s = { "CRIT", "SPELLCRIT" } }, -- Kirin Tor head enchant, no "+" sign, lower case "s" and "r"
-	{ p = "%+(%d+) [Rr]esilience", s = "RESILIENCE" },	-- PvP Set bonus uses "resilience" so match lower case "r" as well.
-	{ p = "%+(%d+) Haste Rating", s = { "HASTE", "SPELLHASTE" } },
-	{ p = "%+(%d+) Expertise Rating", s = "EXPERTISE" },
+	{ p = "%+(%d+) Hit Rating", s = { "HIT", "SPELLHIT" }, alert = 1 },
+	{ p = "%+(%d+) Hit", s = { "HIT", "SPELLHIT" } },
+	{ p = "%+(%d+) Crit Rating", s = { "CRIT", "SPELLCRIT" } },	-- Exists on two new legendary metagems (http://www.wowhead.com/quest=32595)
+	{ p = "%+(%d+) Crit$", s = { "CRIT", "SPELLCRIT" }, alert = 1 },	-- Put on alert, and forced to match end of string as well as it was matching regular "+Critical Strike" line.
+	{ p = "%+(%d+) Critical S?t?r?i?k?e? ?Rating", s = { "CRIT", "SPELLCRIT" }, alert = 1 }, -- Matches two versions, with/without "Strike". No "Strike" on "Unstable Citrine"
+	{ p = "%+(%d+) Critical S?t?r?i?k?e?", s = { "CRIT", "SPELLCRIT" } }, -- Matches two versions, with/without "Strike". No "Strike" on "Unstable Citrine"
+	{ p = "(%d+) Critical strike rating%.", s = { "CRIT", "SPELLCRIT" }, alert = 1 }, -- Kirin Tor head enchant, no "+" sign, lower case "s" and "r"
+	{ p = "(%d+) Critical strike%.", s = { "CRIT", "SPELLCRIT" }, alert = 1 }, -- Kirin Tor head enchant, no "+" sign, lower case "s" and "r"
+	{ p = "%+(%d+) [Rr]esilience", s = "RESILIENCE", alert = 2 },	-- PvP Set bonus uses "resilience" so match lower case "r" as well.
+	{ p = "%+(%d+) PvP Resilience", s = "RESILIENCE" },	-- added 14.03.08
+	{ p = "%+(%d+) PvP Power", s = "PVPPOWER" },	-- added 14.03.08
+	{ p = "%+(%d+) Haste Rating", s = { "HASTE", "SPELLHASTE" }, alert = 1 },
+	{ p = "%+(%d+) Haste", s = { "HASTE", "SPELLHASTE" } },
+	{ p = "%+(%d+) Expertise Rating", s = "EXPERTISE", alert = 1 },
+	{ p = "%+(%d+) Expertise", s = "EXPERTISE" },
 	{ p = "%+(%d+) Armor Penetration Rating", s = "ARMORPENETRATION", alert = 1 },
 
 	{ p = "%+(%d+) Spell Power", s = "SPELLDMG" }, -- Was used in a few items/gems before WotLK, but is now the permanent spell pattern
@@ -132,5 +162,5 @@ LibGearExam.Patterns = {
 	{ p = "^Scope %(%+(%d+) Damage%)$", s = "RANGEDDMG" },
 
 	-- Void Star Talisman (Warlock T5 Class Trinket)
-	{ p = "Increases your pet's resistances by 130 and increases your spell power by 48%.", s = "SPELLDMG", v = 48 },
+	{ p = "Increases your pet's resistances by 130 and increases your spell power by 48%.", s = "SPELLDMG", v = 48, alert = 2 },
 };

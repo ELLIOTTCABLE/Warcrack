@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherUtil.lua 894 2010-12-02 22:46:33Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherUtil.lua 1130 2014-11-13 21:02:57Z esamynn $
 
 	License:
 	This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Utility functions
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherUtil.lua $", "$Rev: 894 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherUtil.lua $", "$Rev: 1130 $")
 
 -- reference to the Astrolabe mapping library
 local Astrolabe = DongleStub(Gatherer.AstrolabeVersion)
@@ -62,59 +62,11 @@ function Gatherer.Util.BreakLink(link)
 		name, itype
 end
 
---[[
-function Gatherer.Util.GetMenuName(inputName, specificType)
-	local name, info
-	if (inputName) then
-		local firstLetter = string.sub(inputName, 1, 2)
-		local carReplace = {
-			["à"] = "a", ["á"] = "a", ["â"] = "a", ["ä"] = "a", ["ã"] = "a",
-			["è"] = "e", ["é"] = "e", ["ê"] = "e", ["ë"] = "e",
-			["ì"] = "i", ["í"] = "i", ["î"] = "i", ["ï"] = "i",
-			["ò"] = "o", ["ó"] = "o", ["ô"] = "o", ["ö"] = "o", ["õ"] = "o",
-			["ù"] = "u", ["ú"] = "u", ["û"] = "u", ["ü"] = "u"
-		}
-
-		local found
-		for code, repl in pairs(carReplace) do
-			firstLetter, found = string.gsub(firstLetter, code, repl)
-			if (found > 0) then
-				break
-			end
-		end
-		if (found > 0) then
-			name = string.upper(firstLetter)..(string.sub(inputName, 3) or "")
-		else
-			name = string.upper(string.sub(inputName, 1, 1))..(string.sub(inputName, 2) or "")
-		end
-
-		if not ( specificType ) then
-			specificType = Gatherer_GetDB_IconByGatherName(inputName)
-		end
-		specificType = specificType or inputName
-		for _, rareMatch in pairs(Gatherer_RareMatches) do
-			if (specificType == rareMatch) then
-				name = name.." ["..TYPE_RARE.."]"
-				break
-			end
-		end
-		if (Gather_SkillLevel[specificType]) then
-			name = name.." ["..Gather_SkillLevel[specificType].."]"
-		end
-	end
-	return name, info
-end
-]]
-
 function Gatherer.Util.DumpAll()
-	local gatherCont, gatherZone, gatherName, contData, zoneData, nameData, gatherPos, gatherItem
-
-	for _, continent in Gatherer.Storage.GetAreaIndices() do --continents
-		for _, zone in Gatherer.Storage.GetAreaIndices(continent) do
-			for gatherName, gtype in Gatherer.Storage.ZoneGatherNames(continent, zone) do
-				for index, x, y, count in Gatherer.Storage.ZoneGatherNodes(continent, zone, gatherName) do
-					Gatherer.Util.Print(gtype.." "..gatherName.." was found in zone "..continent..":"..zone.." at "..x..","..y.."  ("..count.." times)")
-				end
+	for _, zone in Gatherer.Storage.GetAreaIndices() do
+		for gatherName, gtype in Gatherer.Storage.ZoneGatherNames(zone) do
+			for index, x, y, count in Gatherer.Storage.ZoneGatherNodes(zone, gatherName) do
+				Gatherer.Util.Print(gtype.." "..gatherName.." was found in zone "..zone.." at "..x..","..y.."  ("..count.." times)")
 			end
 		end
 	end
@@ -134,8 +86,8 @@ function Gatherer.Util.Print(str, add)
 	if (add) then
 		str = str..": "..add
 	end
-	if(ChatFrame2) then
-		ChatFrame2:AddMessage(str, 1.0, 1.0, 0.0)
+	if(ChatFrame5) then
+		ChatFrame5:AddMessage(str, 1.0, 1.0, 0.0)
 	end
 end
 
@@ -247,10 +199,10 @@ function Gatherer.Util.IsGatherTracked( nodeId )
 	return currentTracks[trackType]
 end
 
-function Gatherer.Util.IsNodeTracked( mapContinent, mapZone, gatherType, index )
-	if ( gatherType == "OPEN" ) then
-		-- tracking overrides only happen for OPEN items
-		for _, gatherID, count in Gatherer.Storage.GetNodeGatherNames(mapContinent, mapZone, gatherType, index) do
+function Gatherer.Util.IsNodeTracked( mapZone, gatherType, index )
+	if ( gatherType == "OPEN" ) or ( gatherType == "ARCH" ) then
+		-- tracking overrides only happen for OPEN or ARCH items
+		for _, gatherID, count in Gatherer.Storage.GetNodeGatherNames(mapZone, gatherType, index) do
 			if ( Gatherer.Util.IsGatherTracked(gatherID) ) then
 				return ture
 			end
@@ -353,10 +305,10 @@ function Gatherer.Util.ParseFormattedMessage(format, message)
 	return processMatches(format, string.match(message, parser))
 end
 
-function Gatherer.Util.GetNodeTexture( mapContinent, mapZone, gatherType, index )
-	local texture, trimTexture
+function Gatherer.Util.GetNodeTexture( mapZone, gatherType, index )
+	local texture, trimTexture = "Interface\\AddOns\\Gatherer\\Original\\Test", false
 	local maxCount = -1
-	for _, gatherID, count in Gatherer.Storage.GetNodeGatherNames(mapContinent, mapZone, gatherType, index) do
+	for _, gatherID, count in Gatherer.Storage.GetNodeGatherNames(mapZone, gatherType, index) do
 		if ( count > maxCount ) then
 			texture, trimTexture = Gatherer.Util.GetGatherTexture(gatherID)
 			maxCount = count
@@ -381,7 +333,12 @@ function Gatherer.Util.GetGatherTexture( nodeID )
 	if not ( selectedTexture ) then
 		local prime, pcount = Gatherer.DropRates.GetPrimaryItem(nodeID)
 		if ( prime ) then
-			local primaryName, _, _, _, _, _, _, _, _, nodeTexture = GetItemInfo(prime)
+			local primaryName, nodeTexture, _
+			if ( prime < 0 ) then
+				primaryName, _, nodeTexture = GetCurrencyInfo(-prime)
+			else
+				primaryName, _, _, _, _, _, _, _, _, nodeTexture = GetItemInfo(prime)
+			end
 			selectedTexture = nodeTexture
 			trimTexture = true
 		end
@@ -396,31 +353,31 @@ function Gatherer.Util.GetGatherTexture( nodeID )
 	return selectedTexture, trimTexture
 end
 
-Gatherer.Util.ZoneNames = {GetMapContinents()}
-for index, cname in pairs(Gatherer.Util.ZoneNames) do
-	local zones = {GetMapZones(index)}
-	Gatherer.Util.ZoneNames[index] = zones
-	for index, name in ipairs(zones) do
-		zones[name] = index
+-- convert list of zoneID1, zoneName1, zoneID2, zoneName2, etc.
+-- into just a list of zone names
+local function stripZoneIDs(...)
+	local n = select("#", ...)
+	--print("zoneList count = ", n );
+	local temp = {};
+	local index = 1;
+	for i = 2, n, 2 do
+		temp[index] = select(i, ...);
+		--print("  item = ", temp[index] );
+		index = index + 1;
 	end
-	zones[0] = cname
+	return temp;
 end
 
 function Gatherer.Util.GetPositionInCurrentZone()
 	local realZoneText = GetRealZoneText()
-	local continent, zone
+	local zoneToken = Gatherer.ZoneTokens.ZoneNames[realZoneText]
+	if ( type(zoneToken) == "table" ) then
+		local _, _, _, worldMapID = UnitPosition("player")
+		zoneToken = zoneToken[worldMapID] or zoneToken[""]
+	end
 	local mapID, mapFloor, px, py = Astrolabe:GetCurrentPlayerPosition()
 	if not ( mapID ) then return end
-	for cont, zones in pairs(Gatherer.Util.ZoneNames) do
-		zone = zones[realZoneText]
-		if ( zone ) then
-			continent = cont
-			break
-		end
-	end
-	local zoneToken
-	if ( continent and zone ) then
-		zoneToken = Gatherer.ZoneTokens.GetZoneToken(continent, zone)
+	if ( zoneToken ) then
 		local realMapID, realMapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(zoneToken)
 		if ( realMapID ) then
 			px, py = Astrolabe:TranslateWorldMapPosition(mapID, mapFloor, px, py, realMapID, realMapFloor)
@@ -428,12 +385,11 @@ function Gatherer.Util.GetPositionInCurrentZone()
 			return
 		end
 	else
-		zoneToken = Gatherer.ZoneTokens.GetZoneTokenFromMapID(mapID)
+		zoneToken = Gatherer.ZoneTokens.GetZoneToken(mapID)
 	end
 	
 	if ( zoneToken ) then
-		local c, z = Gatherer.ZoneTokens.GetContinentAndZone(zoneToken)
-		return c, z, px, py
+		return zoneToken, px, py
 	end
 end
 

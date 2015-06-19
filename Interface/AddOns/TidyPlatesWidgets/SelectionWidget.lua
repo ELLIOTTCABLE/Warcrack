@@ -5,11 +5,11 @@
 local CurrentTargetFrame = nil
 
 local function UpdateSelectionWidget(self, unit)
-	if unit.isTarget then 
+	if unit.isTarget then
 		CurrentTargetFrame = self
-		self:Show() 
-	else 
-		self:Hide() 
+		self:Show()
+	else
+		self:Hide()
 	end
 end
 

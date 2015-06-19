@@ -1,4 +1,7 @@
 local ex = Examiner;
+local cfg;
+
+-- Localize often used global functions
 local gtt = GameTooltip;
 local GetAchievementInfo = GetAchievementInfo;
 local GetAchievementComparisonInfo = GetAchievementComparisonInfo;
@@ -17,8 +20,6 @@ mod.details = ex:CreateDetailObject();
 mod.canCache = true;
 
 -- Work Variables
-local cfg;
-local cache;
 local feats = LibTableRecycler:New();
 local catList = {};
 local buttons = {};
@@ -28,7 +29,7 @@ local UpdateShownItems;
 -- Constants
 local NUM_BUTTONS = 8;
 local BUTTON_HEIGHT = (252 / NUM_BUTTONS);
-local GUILD_GUID_MASK_UPPER = 0x1FF20000;	-- Az: not sure this is ideal?
+local GUILD_GUID_MASK_UPPER = 0x1FF20000;	-- Az: not sure this is ideal? -- Not actually used anymore since guildID is unobtainable
 local professionFeatIds = { 1527, 1532, 1535, 1536, 1537, 1538, 1539, 1540, 1541, 1542, 1544 };
 local featsSortMethods = { "none", "name", "category", "reward", "id", "value", "completed", "points" };
 
@@ -58,8 +59,7 @@ mod.page:SetScript("OnShow",function(self) if (#feats == 0) then mod:QueryFeats(
 
 -- OnInitialize
 function mod:OnInitialize()
-	cfg = Examiner_Config;
-	cache = Examiner_Cache;
+	cfg = ex.cfg;
 	-- Defaults
 	cfg.featsCat = cfg.featsCat or 92;	-- 92 is the General category
 	cfg.featsStub = cfg.featsStub or -1;
@@ -126,7 +126,7 @@ function mod:OnCacheLoaded(entry,unit)
 	end
 end
 
--- OnCache
+-- OnCache -- Az: Is this fired before OnAchievementReady()?
 function mod:OnCache(entry,unit)
 	if (self:CanCache()) and (self.hasData) then
 		entry.achievementPoints = GetComparisonAchievementPoints();
@@ -155,10 +155,11 @@ local function ConstructAchievementLink(guid,name,id,completed,day,month,year)
 	elseif (not guid) then
 		local _, _, _, _, _, _, _, _, flags = GetAchievementInfo(id);
 		local notGuildAchievement = (bit.band(flags,ACHIEVEMENT_FLAGS_GUILD) ~= ACHIEVEMENT_FLAGS_GUILD);
-		guid = (notGuildAchievement and ex.guid) or (ex.info.guildID and format("0x%.8x%.8x",GUILD_GUID_MASK_UPPER,ex.info.guildID) or 0);
+		--guid = (notGuildAchievement and ex.guid) or (ex.info.guildID and format("0x%.8x%.8x",GUILD_GUID_MASK_UPPER,ex.info.guildID) or 0); -- Old Pre-MoP
+		guid = (notGuildAchievement and ex.guid or 0);
 	end
 	completed = (completed and 1 or 0);
-	local bits = (completed * 0xffffffff);
+	local bits = (completed * 0x7fffffff);
 	return format("|cffffff00|Hachievement:%d:%s:%d:%d:%d:%d:%u:%u:%u:%u|h[%s]|h|r",id,tostring(guid):gsub("0x",""),completed,month or 0,day or 0,year or 0,bits,bits,bits,bits,name);
 end
 
@@ -295,17 +296,20 @@ local function FeatsEntry_OnEnter(self,motion)
 		gtt:AddDoubleLine("Cat / Achievement ID",entry.catId.." / "..entry.id,0.25,0.75,0.25,1,1,1);
 	end
 	-- Criteria
- 	local nCriteria = GetAchievementNumCriteria(entry.id);
- 	if (nCriteria and nCriteria > 0) then
+ 	local numCriteria = GetAchievementNumCriteria(entry.id);
+ 	if (numCriteria and numCriteria > 0) then
 		gtt:AddLine(" ");
-		gtt:AddLine("Achievement Criteria |cffffffff"..nCriteria);
+		gtt:AddLine("Achievement Criteria |cffffffff"..numCriteria);
 		local index = 1;
-		while (true) do
-			--criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString, unknown = GetAchievementCriteriaInfo(achievementID, criteriaNum)
+		while (index <= numCriteria) do
+			--description, type, completed, quantity, reqQuantity, charName, flags, assetID, quantityString, criteriaID = GetAchievementCriteriaInfo(achievementID, criteriaNum)
 			--local criteriaName, completed, month, day, year, charName, unknown = GetCriteriaComparisonInfo(entry.id,i,1);
 			--gtt:AddDoubleLine(criteriaName and criteriaName ~= "" and (criteriaName.." ") or "n/a",criteriaNameOld,1,1,1);
 			local criteriaName1, _, criteriaComplete1 = GetAchievementCriteriaInfo(entry.id,index);
-			local criteriaName2, _, criteriaComplete2 = GetAchievementCriteriaInfo(entry.id,index + 1);
+			local criteriaName2, _, criteriaComplete2;
+			if (index + 1 <= numCriteria) then
+				criteriaName2, _, criteriaComplete2 = GetAchievementCriteriaInfo(entry.id,index + 1);
+			end
 --			criteriaComplete1 = (GetCriteriaComparisonInfo(entry.id,i,1) ~= nil);
 --			if (criteriaName2) then
 --				criteriaComplete2 = (GetCriteriaComparisonInfo(entry.id,i + 1,1) ~= nil);

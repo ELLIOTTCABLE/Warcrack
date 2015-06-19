@@ -32,10 +32,10 @@
 "Highlight",			"",
 
 -- ADDED in r6:
-"Show alt. skills",	"",
+"Show alt skills",	"",
 
 -- ADDED in r7-14:
-"Remove an alt.",				"",
+"Remove an alt",				"",
 "|cff8080ff%s|r has been removed.",		"", -- %s: character's name
 "Display number of Ready CD",			"",
 "Shortcuts",					"",
@@ -91,6 +91,24 @@ local function SetTranslations(...)
 	end
 end
 
+--For Languages that have separate genders for some words.
+local function FindGender(male,female,neuter) -- (Thanks for the testing, JohnDoe03!)
+	if UnitSex("player") == 2 then
+		-- print("Male detected!")
+		return male
+		else if UnitSex("player") == 3 then
+			-- print("Female detected!")
+			return female
+			else if neuter then
+				return neuter
+				else
+				return 0
+			end
+		end
+	end
+end
+
+
 SetTranslations(
 	"Alchemy",		GetSpellInfo(2259),
 	"Archaeology",		GetSpellInfo(78670),
@@ -99,25 +117,65 @@ SetTranslations(
 	"Enchanting",		GetSpellInfo(7411),
 	"Engineering",		GetSpellInfo(4036),
 	"First Aid",		GetSpellInfo(3273),
-	"Fishing",		GetSpellInfo(7620),
-	"Herbalism",		GetSpellInfo(13614),
+	"Fishing",		GetSpellInfo(131490),
 	"Inscription",		GetSpellInfo(45357),
 	"Jewelcrafting",	GetSpellInfo(25229),
 	"Leatherworking",	GetSpellInfo(2108),
---	"Lockpicking",		GetSpellInfo(1809),
+	"Lockpicking",		GetSpellInfo(1809),
 	"Mining",		GetSpellInfo(2575),
 	"Runeforging",		GetSpellInfo(53428),
 	"Skinning",		GetSpellInfo(8613),
 	"Smelting",		GetSpellInfo(2656),
-	"Tailoring",		(GetSpellInfo(3908))
+	"Tailoring",		GetSpellInfo(3908)
+--	"Herbalism",		string.sub(GetSpellInfo(13614),4) -- 13614
 )
 
 local l = GetLocale()
-if l == "frFR" then
+
+if l == "enUS" then
+	SetTranslations(
+	"Rogue",			FindGender("Rogue","Rogue")
+		-- "Herbalism",		"Herbalism" -- string.sub(GetSpellInfo(13614),4) -- 13614,
+		-- "Rogue",			"Rogue" -- Seeing if it works English-wise without a table entry first.
+	)
+
+elseif l == "esES" then
+	SetTranslations(
+		"Herbalism",		"Hebalismo",
+		"Rogue",			"Pícaro"
+	)
+
+elseif l == "ruRU" then
+	SetTranslations(
+		"Herbalism",		"Травничество",
+		"Rogue",			"Разбойник"
+	)
+
+elseif l == "esMX" then
+	SetTranslations(
+		"Herbalism",		"herboristería",
+		"Rogue",			"Pícaro"
+	)
+
+elseif l == "itIT" then
+	SetTranslations(
+		"Herbalism",		"Erbalismo",
+		"Rogue",			"Ladro"
+	)
+
+elseif l == "ptBR" then
+	SetTranslations(
+		"Herbalism",		"Herborismo",
+		"Rogue",			"Ladino"
+	)
+
+elseif l == "frFR" then
 	SetTranslations(
 	-- Special case where names doesnt match (like Mining --> Smelting):
 	-- The skill window display "Runeforger" whereas the spell returned by GetSpellInfo is "Runeforge".
 	--	"SmeltingDN",		"Mining",	***SAMPLE***
+		"Herbalism",	"Herboristerie",
+		"Rogue",		"Voleur",
 		"RuneforgingDN",	"Runeforger",
 
 		"Cooldowns",		nil,
@@ -148,9 +206,9 @@ if l == "frFR" then
 		"Highlight",			"Surbrillance",
 
 		-- ADDED in r6:
-		"Show alt. skills",		"Afficher les compétences des rerolls.",
+		"Show alt skills",		"Afficher les compétences des rerolls.",
 		-- ADDED in r7-14:
-		"Remove an alt.",		"Supprimer les info d'un reroll.",
+		"Remove an alt",		"Supprimer les info d'un reroll",
 		"|cff8080ff%s|r has been removed.",		"|cff8080ff%s|r a été supprimé.",
 		"Display number of Ready CD",			"Afficher le nombre de CD prêt.",
 		"Shortcuts",					"Raccourcis",
@@ -158,15 +216,59 @@ if l == "frFR" then
 		"|cff8080ff%s|r|cffffff00 added to shortcuts.",	"Raccourcis |cff8080ff%s|cffffff00 ajouté.",
 		"|cffff8020Right-Click|r to show in panel.",	"|cffff8020Click-Droit|r pour y aller."
 	)
---elseif l == "deDE" then
---	SetTranslations(
---	)
---elseif l == "zhCN" then
---	SetTranslations(  )
+elseif l == "deDE" then
+	SetTranslations(
+		"Herbalism",		"Kräuterkunde",
+		"Rogue",			FindGender("Schurke","Schurkin"),
+		
+		"|cff20ff20Ready!|r",	"|cff20ff20Bereit!|r",
+		"d",			"t",
+		"h",			"s",
+
+		"Hints",		"Hinweise",
+		"Belongs to:",		"Gehört zu:",
+		"Set an alias for \"%s\".\nLeave blank to reset.", "Alias setzen für \"%s\".\nLeer lassen um zurückzusetzen.",
+
+		"|cffff8020Click|r to craft.",			"|cffff8020Klick|r um herzustellen.",
+		"|cffff8020Right-Click|r to show CD in panel.",	"|cffff8020Rechtsklick|r um CD im Fenster anzuzeigen.",
+		"|cffff8020Click|r to show CD in panel.",	"|cffff8020Klick|r um alle CDs im Fenster anzuzeigen.",
+		"|cffff8020Control+Click|r to set an alias.",	"|cffff8020Strg+Klick|r um ein Alias zu setzen.",
+		"|cffff8020Click|r to toggle panel.",		"|cffff8020Klick|r um das Fenster zu wechseln.",
+		"|cffff8020Right-Click|r to scan for CDs.",	"|cffff8020Rechtsklick|r um nach einem CD zu suchen.",
+		"|cffff8020Middle-Click|r to remove from list.","|cffff8020Mitteltaste-Klick|r um von der Liste zu entfernen.",
+
+		"Include |cff20ff20Ready!|r CDs when scanning",	"|cff20ff20Bereit!|r CDs bei der Suche einbeziehen",
+		"Show hints",			"Hinweise anzeigen",
+		"Tracking...",		"Verfolgen...",
+		"Alt list break mode",		"Seitenumbruch für alternative charaktere",
+		"Tooltip size",		"Tooltip größe",
+		"Colors",			"Farben",
+		"Header",			"Überschrift",
+		"Interactive skill name",	"Interaktive Fertigkeit",
+		"Last selected skill",		"Zuletzt ausgewählte Fertigkeit",
+		"Informative skill name",	"Informative Fertigkeit",
+		"Player CD",			"Spieler CD",
+		"Other player CD",		"CD eines anderen Charakters",
+		"Highlight",			"Hervorheben",
+		"Show alt skills",		"Fertigkeiten von anderen Charakteren anzeigen.",
+		"Remove an alt",		"Anderen Charakter entfernen",
+		"|cff8080ff%s|r has been removed.",		"|cff8080ff%s|r wurde entfernt.",
+		"Display number of Ready CD",			"Anzahl bereiter CDs anzeigen.",
+		"Shortcuts",					"Verknüpfungen",
+		"|cffff8040Click|r to create a shortcut.",	"|cffff8040Klick|r um eine Verknüpfung herzustellen.",
+		"|cff8080ff%s|r|cffffff00 added to shortcuts.",	"|cff8080ff%s|r|cffffff00 zu den Verknüpfungen hinzugefügt.",
+		"|cffff8020Right-Click|r to show in panel.",	"|cffff8020Rechtsklick|r um im Fenster anzuzeigen."
+	)
+elseif l == "zhCN" then
+	SetTranslations(
+		"Herbalism",		"草药学",
+		"Rogue",			"潜行者"
+	)
 elseif l == "zhTW" then
--- weapon skills
 	SetTranslations(
 -- misc / UI
+		"Herbalism",		"草藥學",
+		"Rogue",			"盜賊",
 		"Cooldowns",		"冷卻狀態",
 		"|cff20ff20Ready!|r",	"|cff20ff20已就緒!|r",
 		"d",			"天",
@@ -199,10 +301,10 @@ elseif l == "zhTW" then
 		"Highlight",			"高亮",
 
 		-- ADDED in r6:
-		"Show alt. skills",	"顯示分身專業技能",
+		"Show alt skills",	"顯示分身專業技能",
 
 		-- ADDED in r7-14:
-		"Remove an alt.",				"移除分身",
+		"Remove an alt",				"移除分身",
 		"|cff8080ff%s|r has been removed.",		"|cff8080ff%s|r 已移除", -- %s: character's name
 		"Display number of Ready CD",			"冷卻計數顯示",
 		"Shortcuts",					"製作捷徑",
@@ -225,11 +327,10 @@ elseif l == "zhTW" then
 		"|cffff8020Shift+Click|r to craft all.",	"|cffff8020Shift+點擊|r 全部製造。"
 	)
 elseif l == "koKR" then
--- KOREA by shwy73
--- Modified by mrgyver(강호미인 of KR-윈드러너) for WotLK, 09.05.24
--- weapon skills
 	SetTranslations(
 -- misc / UI
+		"Herbalism",		"약초채집",
+		"Rogue",			"도적",
 		"Cooldowns",		"재사용 대기시간",
 		"|cff20ff20Ready!|r",	"|cff20ff20준비 완료!|r",
 		"d",			"일",
@@ -261,10 +362,10 @@ elseif l == "koKR" then
 		"Highlight",			"강조",
 
 	-- ADDED in r6:
-		"Show alt. skills",	"다른 케릭 전문(보조)기술 보기",
+		"Show alt skills",	"다른 케릭 전문(보조)기술 보기",
 
 	-- ADDED in r7-14:
-		"Remove an alt.",				"다른 케릭 제거하기",
+		"Remove an alt",				"다른 케릭 제거하기",
 		"|cff8080ff%s|r has been removed.",		"|cff8080ff%s|r 제거하기", -- %s: character's name
 		"Display number of Ready CD",			"준비완료된 쿨다운의 갯수 표시",
 		"Shortcuts",					"간단하게",

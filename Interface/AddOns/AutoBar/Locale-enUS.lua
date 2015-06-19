@@ -189,6 +189,7 @@ if (GetLocale() == "enUS") then
 		["AutoBarClassBarBasic"] = "Basic",
 		["AutoBarClassBarExtras"] = "Extras",
 		["AutoBarClassBarDeathKnight"] = "Death Knight",
+		["AutoBarClassBarMonk"] = "Monk",
 		["AutoBarClassBarDruid"] = "Druid",
 		["AutoBarClassBarHunter"] = "Hunter",
 		["AutoBarClassBarMage"] = "Mage",
@@ -205,7 +206,9 @@ if (GetLocale() == "enUS") then
 		["AutoBarCooldownHeader"] = "Potion & Stone Cooldown",
 		["AutoBarClassBarHeader"] = "Class bar",
 
-		["AutoBarButtonAura"] = "Aura / Aspect",
+		["AutoBarButtonAspect"] = "Aspect",
+		["AutoBarButtonPoisonLethal"] = "Poison: Lethal",
+		["AutoBarButtonPoisonNonlethal"] = "Poison: Nonlethal",
 		["AutoBarButtonBandages"] = "Bandages",
 		["AutoBarButtonBattleStandards"] = "Battle Standards",
 		["AutoBarButtonBuff"] = "Buff",
@@ -248,6 +251,7 @@ if (GetLocale() == "enUS") then
 		["AutoBarButtonQuest"] = "Quest",
 		["AutoBarButtonMiscFun"] = "Misc, Fun",
 		["AutoBarButtonGuildSpell"] = "Guild Spells",
+		["AutobarSunsongRanch"] = "Sunsong Ranch",
 		["AutoBarButtonRecovery"] = "Mana / Rage / Energy",
 		["AutoBarButtonRotationDrums"] = "Rotation: Drums",
 		["AutoBarButtonShields"] = "Shields",
@@ -264,13 +268,13 @@ if (GetLocale() == "enUS") then
 		["AutoBarButtonTotemAir"] = "Air Totem",
 		["AutoBarButtonTotemFire"] = "Fire Totem",
 		["AutoBarButtonTotemWater"] = "Water Totem",
-		["AutoBarButtonTrack"] = "Track",
 		["AutoBarButtonTrap"] = "Trap",
 		["AutoBarButtonTrinket1"] = "Trinket 1",
 		["AutoBarButtonTrinket2"] = "Trinket 2",
 		["AutoBarButtonWarlockStones"] = "Warlock Stones",
 		["AutoBarButtonWater"] = "Water",
 		["AutoBarButtonWaterBuff"] = "Water Buff",
+
 
 		["AutoBarButtonBear"] = "Bear",
 		["AutoBarButtonBoomkinTree"] = "Tree of Life / Boomkin",
@@ -507,12 +511,15 @@ if (GetLocale() == "enUS") then
 		["AutoBar.Trinket"] = INVTYPE_TRINKET;
 		
 		["Spell.Guild"] = "Guild Spells";
+		["Autobar.SunsongRanch"] = "Sunsong Ranch";
 
-		["Spell.Aura"] = "Aura / Aspect";
+		["Spell.Aspect"] = "Aspect";
+		["Spell.Poison.Lethal"] = "Poison: Lethal";
+		["Spell.Poison.Nonlethal"] = "Poison Nonlethal";
 		["Spell.Buff.Weapon"] = "Buff Spells: Weapon";
 		["Spell.Class.Buff"] = "Class Buff";
 		["Spell.Class.Pet"] = "Class Pet";
-		["Spell.Class.Pets2"] = "Call Pet";
+		["Spell.Class.Pets2"] = "Pet Combat";
 		["Spell.Class.Pets3"] = "Pet Misc";
 		["Spell.Crafting"] = "Crafting";
 		["Spell.Critter"] = "Pet Spells";
@@ -528,7 +535,6 @@ if (GetLocale() == "enUS") then
 		["Spell.Totem.Fire"] = "Fire Totem";
 		["Spell.Totem.Water"] = "Water Totem";
 		["Spell.Seal"] = "Seal";
-		["Spell.Track"] = "Track";
 		["Spell.Trap"] = "Trap";
 		["Misc.Booze"] = "Booze";
 		["Misc.Hearth"] = "Hearthstone";

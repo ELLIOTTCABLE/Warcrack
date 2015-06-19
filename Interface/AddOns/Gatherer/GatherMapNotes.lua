@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherMapNotes.lua 894 2010-12-02 22:46:33Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherMapNotes.lua 1125 2014-10-25 20:29:48Z Esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	World Map Drawing Functions
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherMapNotes.lua $", "$Rev: 894 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherMapNotes.lua $", "$Rev: 1125 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
@@ -56,13 +56,24 @@ end
 
 function Gatherer.MapNotes.Update()
 	if ( Gatherer.Config.GetSetting("mainmap.enable") ) then
-		Gatherer_WorldMapDisplay:SetText(_tr("Hide Items"))
 		GathererMapOverlayParent:Show()
 	else
-		Gatherer_WorldMapDisplay:SetText(_tr("Show Items"))
 		GathererMapOverlayParent:Hide()
 	end
 end
+
+hooksecurefunc(WorldMapFrame.UIElementsFrame.TrackingOptionsButton.DropDown, "initialize", function()
+	UnitPopup_AddDropDownButton({}, UnitPopupButtons["SUBSECTION_SEPARATOR"], "SUBSECTION_SEPARATOR", UIDROPDOWNMENU_MENU_LEVEL);
+	local info = {}
+	info.text = _tr("BINDING_HEADER_GATHERER")..": ".._tr("MAP_NOTES_SHOW")
+	info.value = "gatherer.mainmap.enable"
+	info.func = Gatherer.MapNotes.ToggleDisplay
+	info.checked = Gatherer.Config.GetSetting("mainmap.enable")
+	info.isNotRadio = true;
+	info.keepShownOnClick = 1
+	UIDropDownMenu_AddButton(info)
+end)
+
 
 function Gatherer.MapNotes.GetNoteObject( noteNumber )
 	local button = _G["GatherMain"..noteNumber]
@@ -93,20 +104,26 @@ function Gatherer.MapNotes.MapDraw()
 	-- prevent the function from running twice at the same time.
 	if (Gatherer.Var.UpdateWorldMap == 0 ) then return; end
 	Gatherer.Var.UpdateWorldMap = 0
+
+	local GetNodeInfo = Gatherer.Storage.GetNodeInfo
+	local GetNodeGatherNames = Gatherer.Storage.GetNodeGatherNames
 	
 	local showType, showObject
-	local mapContinent = GetCurrentMapContinent()
-	local mapZone = GetCurrentMapZone()
-	local mapID, mapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(Gatherer.ZoneTokens.GetZoneToken(mapContinent, mapZone))
-	if ( Gatherer.Storage.HasDataOnZone(mapContinent, mapZone) ) then
+	local mapID, mapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(Gatherer.ZoneTokens.GetZoneToken(GetCurrentMapAreaID()))
+	if ( Gatherer.Storage.HasDataOnZone(mapID) ) then
 		for _, gatherType in pairs(Gatherer.Constants.SupportedGatherTypes) do
-			for index, xPos, yPos in Gatherer.Storage.ZoneGatherNodes(mapContinent, mapZone, gatherType) do
+			for index, xPos, yPos in Gatherer.Storage.ZoneGatherNodes(mapID, gatherType) do
 				local displayNode = false
-				for _, gatherID, count in Gatherer.Storage.GetNodeGatherNames(mapContinent, mapZone, gatherType, index) do
+				for _, gatherID, count in GetNodeGatherNames(mapID, gatherType, index) do
 					if ( Gatherer.Config.DisplayFilter_MainMap(gatherID) ) then
 						displayNode = true
 						break
 					end
+				end
+				local _, _, _, isMicroDungeon = GetMapInfo();
+				if ( displayNode and isMicroDungeon ) then
+					local _, _, indoors = GetNodeInfo(mapID, gatherType, index)
+					displayNode = indoors
 				end
 				if ( displayNode ) then
 					if ( noteCount < maxNotes ) then
@@ -115,15 +132,14 @@ function Gatherer.MapNotes.MapDraw()
 						
 						mainNote:SetAlpha(setting("mainmap.opacity", 80) / 100)
 						
-						local texture = Gatherer.Util.GetNodeTexture(mapContinent, mapZone, gatherType, index)
+						local texture = Gatherer.Util.GetNodeTexture(mapID, gatherType, index)
 						_G[mainNote:GetName().."Texture"]:SetTexture(texture)
 						
 						local iconsize = setting("mainmap.iconsize", 16)
 						mainNote:SetWidth(iconsize)
 						mainNote:SetHeight(iconsize)
 						
-						mainNote.continent = mapContinent
-						mainNote.zone = mapZone
+						mainNote.mapID = mapID
 						mainNote.index = index
 						mainNote.gType = gatherType
 						
@@ -183,13 +199,13 @@ function Gatherer.MapNotes.MapNoteOnEnter(frame)
 	local showrate = setting("mainmap.tooltip.rate")
 	
 	local cont = frame.continent
-	local zone = frame.zone
+	local zone = Gatherer.ZoneTokens.GetZoneToken(frame.mapID)
 	local index = frame.index
 	local gType = frame.gType
-	local inspected = Gatherer.Storage.GetNodeInspected(cont, zone, gType, index)
+	local inspected = Gatherer.Storage.GetNodeInspected(zone, gType, index)
 	
 	local numTooltips = 0
-	for id, gatherID, count, harvested, who in Gatherer.Storage.GetNodeGatherNames(cont, zone, gType, index) do
+	for id, gatherID, count, harvested, who in Gatherer.Storage.GetNodeGatherNames(zone, gType, index) do
 		local tooltip = Gatherer.Tooltip.GetTooltip(id)
 		tooltip:ClearLines()
 		tooltip:SetParent(WorldMapFrame)
@@ -223,7 +239,10 @@ function Gatherer.MapNotes.MapNoteOnEnter(frame)
 		
 		if ( showrate ) then
 			local num = Gatherer.Config.GetSetting("mainmap.tooltip.rate.num")
-			Gatherer.Tooltip.AddDropRates(tooltip, gatherID, frame.continent, frame.zone, num)
+			if ( gType ~= "OPEN" and gatherID ~= 190175 ) then
+				zone = nil
+			end
+			Gatherer.Tooltip.AddDropRates(tooltip, gatherID, zone, num)
 		end
 		tooltip:Show()
 		numTooltips = id

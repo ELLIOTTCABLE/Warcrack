@@ -36,11 +36,6 @@
 
 
 local AutoBar = AutoBar
-local REVISION = tonumber(("$Revision: 1.1 $"):match("%d+"))
-if AutoBar.revision < REVISION then
-	AutoBar.revision = REVISION
-	AutoBar.date = ('$Date: 2010/11/13 03:23:25 $'):match('%d%d%d%d%-%d%d%-%d%d')
-end
 
 local L = AutoBar.locale
 local LibKeyBound = LibStub:GetLibrary("LibKeyBound-1.0")
@@ -59,20 +54,17 @@ local hintString = "|cffffffff%s:|r %s"
 local hintText = {
 	L["AutoBar"],
 	hintString:format(L["Left-Click"], L["Options GUI"]),
---	hintString:format(L["Right-Click"], L["Dropdown UI"]),
+	hintString:format(L["Right-Click"], L["Dropdown UI"]),
 	hintString:format(L["Alt-Click"], L["Key Bindings"]),
 	hintString:format(L["Ctrl-Click"], L["Move the Buttons"]),
 	hintString:format(L["Shift-Click"], L["Move the Bars"]),
-	hintString:format(L["Ctrl-Shift-Click"], L["Skin the Buttons"]),
 }
 function LDBOnClick(clickedFrame, button)
 	if (button == "LeftButton") then
 		if (dewdrop and dewdrop:GetOpenedParent()) then
 			dewdrop:Close()
 		end
-		if (IsControlKeyDown() and IsShiftKeyDown()) then
-			AutoBar:SkinModeToggle()
-		elseif (IsShiftKeyDown()) then
+		if (IsShiftKeyDown()) then
 			AutoBar:MoveBarModeToggle()
 		elseif (IsControlKeyDown()) then
 			AutoBar:MoveButtonsModeToggle()
@@ -640,6 +632,17 @@ local function setCustomButtonName(info, value)
 	end
 end
 
+local function getMonk(info)
+	local barKey = info.arg.barKey
+	return AutoBar.barLayoutDBList[barKey].MONK
+end
+
+local function setMonk(info, value)
+	local barKey = info.arg.barKey
+	AutoBar.barLayoutDBList[barKey].MONK = value
+	AutoBar:BarsChanged()
+end
+
 local function getDeathKnight(info)
 	local barKey = info.arg.barKey
 	return AutoBar.barLayoutDBList[barKey].DEATHKNIGHT
@@ -900,6 +903,7 @@ local function BarNew()
 		DRUID = true,
 		HUNTER = true,
 		MAGE = true,
+		MONK = true,
 		PALADIN = true,
 		PRIEST = true,
 		ROGUE = true,
@@ -1210,7 +1214,7 @@ function AutoBar:CreateOptionsAce3()
 						header0 = {
 							type = "header",
 							order = 0,
-							name = L["AutoBar"] .. " " .. AutoBar.version .. " (" .. AutoBar.revision .. ")",
+							name = L["AutoBar"] .. " " .. AutoBar.version,
 						},
 						moveBarsMode = {
 							type = "execute",
@@ -1234,14 +1238,6 @@ function AutoBar:CreateOptionsAce3()
 							name = L["Key Bindings"],
 							desc = L["Assign Bindings for Buttons on your Bars."],
 							func = LibKeyBound.Toggle,
-							disabled = getCombatLockdown,
-						},
-						skinButtons = {
-							type = "execute",
-							order = 4,
-							name = L["Skin the Buttons"],
-							desc = L["ButtonFacade is required to Skin the Buttons"],
-							func = AutoBar.SkinModeToggle,
 							disabled = getCombatLockdown,
 						},
 						header1 = {
@@ -1282,6 +1278,19 @@ function AutoBar:CreateOptionsAce3()
 							order = 173,
 							name = L["Log Memory"],
 						},
+						log_throttled_events = {
+							type = "toggle",
+							order = 174,
+							name = "Log Throttled Events" --L["Log Memory"], TODO: Localize
+						},
+						throttle_event_limit = {
+							type = "range",
+							order = 175,
+							name = "Throttle Event Limit", --L["Alpha"],
+							desc = "Events happening faster than this limit are ignored (in seconds)", --L["Change the alpha of the bar."],
+							min = 0, max = 10, step = 0.1, bigStep = 0.5,
+						},
+
 						header2 = {
 							type = "header",
 							order = 200,
@@ -1344,7 +1353,7 @@ function AutoBar:CreateOptionsAce3()
 							desc = L["Popup while Shift key is pressed for %s"]:format(name),
 							arg = passValue,
 							tristate = true,
-							disabled = true,
+							--disabled = true,
 						},
 						fadeOutSpacer = {
 							type = "header",
@@ -1805,7 +1814,7 @@ function AutoBar:CreateBarOptions(barKey, existingOptions)
 				layoutSpacer = {
 					type = "header",
 					order = 30,
-					name = L["FadeOut"],
+					name = L["General"],
 				},
 				rows = {
 					type = "range",
@@ -1944,6 +1953,17 @@ function AutoBar:CreateCustomBarOptions(barKey, barOptions, passValue)
 			usage = L["<Any String>"],
 			get = getCustomBarName,
 			set = setCustomBarName,
+			arg = passValue,
+			disabled = getCombatLockdown,
+		}
+	end
+		if (not barOptions.args.monk) then
+		barOptions.args.monk = {
+			type = "toggle",
+			order = 109,
+			name = L["AutoBarClassBarMonk"],
+			get = getMonk,
+			set = setMonk,
 			arg = passValue,
 			disabled = getCombatLockdown,
 		}
@@ -2242,7 +2262,7 @@ function AutoBar:CreateBarButtonOptions(barKey, buttonIndex, buttonKey, existing
 					name = L["Popup on Shift Key"],
 					desc = L["Popup while Shift key is pressed for %s"]:format(name),
 					arg = passValue,
-					disabled = true, --getCombatLockdown,
+					disabled = getCombatLockdown,
 				},
 				noPopup = {
 					type = "toggle",
@@ -2879,14 +2899,6 @@ function AutoBar:CreateSmallOptions()
 					set = LibKeyBound.Toggle,
 					disabled = getCombatLockdown,
 				},
-				skinButtons = {
-					type = "execute",
-					order = 4,
-					name = L["Skin the Buttons"],
-					desc = L["ButtonFacade is required to Skin the Buttons"],
-					func = AutoBar.SkinModeToggle,
-					disabled = getCombatLockdown,
-				},
 				bars = {
 					type = "group",
 					order = 9,
@@ -3070,6 +3082,16 @@ function AutoBar:CreateSmallOptions()
 					get = function() return AutoBar.db.account.performance end,
 					set = function(value)
 						AutoBar.db.account.performance = value
+					end,
+				},
+				log_throttled_events = {
+					type = "toggle",
+					order = 72,
+					name = "Log Throttled Events", --"L["Log Performance"], TODO Localize
+					desc = "Log Throttled Events", --"L["Log Performance"], TODO Localize
+					get = function() return AutoBar.db.account.log_throttled_events end,
+					set = function(value)
+						AutoBar.db.account.log_throttled_events = value
 					end,
 				},
 				logEvents = {

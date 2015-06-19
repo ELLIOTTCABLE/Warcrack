@@ -11,7 +11,7 @@ local BUTTON_SPACING = 0
 local SLIDER_SPACING = 24
 
 local function groupIdToGroup(groupId)
-	for i, group in pairs(OmniCC.db.groups) do
+	for i, group in pairs(OmniCC.sets.groups) do
 		if group.id == groupId then
 			return group
 		end
@@ -33,9 +33,10 @@ end
 
 function RuleOptions:AddWidgets()
 	self.rules = self:AddRulesEditor()
-	self.rules:SetPoint('TOPLEFT', 12, -24)
-	self.rules:SetPoint('TOPRIGHT', -12, -24)
+	self.rules:SetPoint('TOPLEFT', 12, -12)
+	self.rules:SetPoint('TOPRIGHT', -12, -12)
 	self.rules:SetHeight(332)
+	self.rules:Load()
 end
 
 function RuleOptions:UpdateValues()
@@ -44,11 +45,11 @@ end
 
 function RuleOptions:AddRulesEditor()
 	local parent = self
-	local editor = OmniCCOptions.ListEditor:New('Adjust Group Rules', parent)
+	local editor = OmniCCOptions.ListEditor:New('List', parent)
 
 	editor.OnAddItem = function(self, ruleToAdd)
 		table.insert(parent:GetGroupRules(), ruleToAdd)
-		OmniCC:RecalculateCachedGroups()
+		OmniCC:UpdateGroups()
 		return true
 	end
 
@@ -57,7 +58,7 @@ function RuleOptions:AddRulesEditor()
 		for i, rule in pairs(rules) do
 			if rule == ruleToRemove then
 				table.remove(rules, i)
-				OmniCC:RecalculateCachedGroups()
+				OmniCC:UpdateGroups()
 				return true
 			end
 		end

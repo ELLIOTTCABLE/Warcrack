@@ -2,6 +2,5 @@
 
 if not L then return end
 
-L["Professions"] = "Profesiones"
 L["Secondary Skills"] = "Habilidades secundarias"
 

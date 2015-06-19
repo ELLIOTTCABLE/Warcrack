@@ -1,4 +1,4 @@
----
+﻿---
 --- check for an already loaded old WhoLib
 ---
 
@@ -16,7 +16,7 @@ assert(LibStub, "LibWho-2.0 requires LibStub")
 
 
 local major_version = 'LibWho-2.0'
-local minor_version = tonumber("117") or 99999
+local minor_version = tonumber("143") or 99999
 
 local lib = LibStub:NewLibrary(major_version, minor_version)
 
@@ -74,7 +74,7 @@ lib.Quiet = nil
 lib.Debug = false
 lib.Cache = {}
 lib.CacheQueue = {}
-lib.SetWhoToUIState = 0
+lib.SetWhoToUIState = false
 
 
 lib.MinInterval = 2.5
@@ -150,7 +150,7 @@ function lib.Who(defhandler, query, opts)
 	args.query = self:CheckArgument(usage, 'query', 'string', query)
 	opts = self:CheckArgument(usage, 'opts', 'table', opts, {})
 	args.queue = self:CheckPreset(usage, 'opts.queue', queue_all, opts.queue, self.WHOLIB_QUEUE_SCANNING)
-	args.flags = self:CheckArgument(usage, 'opts.flags', 'number', flags, 0)
+	args.flags = self:CheckArgument(usage, 'opts.flags', 'number', opts.flags, 0)
 	args.callback, args.handler = self:CheckCallback(usage, 'opts.', opts.callback, opts.handler, defhandler)	
 	-- now args - copied and verified from opts
 	
@@ -165,14 +165,27 @@ function lib.Who(defhandler, query, opts)
 	end
 end
 
+local function ignoreRealm(name)
+	local _, realm = string.split("-", name)
+ 	local connectedServers = GetAutoCompleteRealms()
+ 	if connectedServers then
+		for i = 1, #connectedServers do
+ 	 		if realm == connectedServers[i] then return false end
+		end
+ 	end
+    return true
+end
+
 function lib.UserInfo(defhandler, name, opts)
 	local self, args, usage = lib, {}, 'UserInfo(name, [opts])'
 	local now = time()
 	
     name = self:CheckArgument(usage, 'name', 'string', name)
     if name:len() == 0 then return end
-
-    if name:find("%-") then --[[dbg("ignoring xrealm: "..name)]] return end
+    
+    --There is no api to tell connected realms from cross realm by name. As such, we check known connections table before excluding who inquiry
+    --UnitRealmRelationship and UnitIsSameServer don't work with "name". They require unitID so they are useless here
+    if name:find("%-") and ignoreRealm(name) then return end
 
 	args.name = self:CapitalizeInitial(name)
 	opts = self:CheckArgument(usage, 'opts', 'table', opts, {})
@@ -455,10 +468,10 @@ function lib:AskWhoNext()
 			if args.whotoui then
     			self.hooked.SetWhoToUI(args.whotoui)
     		else
-    			self.hooked.SetWhoToUI(args.gui and 1 or 0)
+    			self.hooked.SetWhoToUI(args.gui and true or false)
 			end
 		else
-			self.hooked.SetWhoToUI(1)
+			self.hooked.SetWhoToUI(true)
 			self.Quiet = true		
 		end
 
@@ -504,7 +517,7 @@ function lib:ReturnWho()
 	dbg("RESULT: "..self.Args.query)
 	dbg('[' .. self.Args.queue .. '] returned "' .. self.Args.query .. '", total=' .. self.Total ..' , queues=' .. #self.Queue[1] .. '/'.. #self.Queue[2] .. '/'.. #self.Queue[3])
 	local now = time()
-	local complete = self.Total == #self.Result
+	local complete = (self.Total == #self.Result) and (self.Total < MAX_WHOS_FROM_SERVER)
 	for _,v in pairs(self.Result)do
 		if(self.Cache[v.Name] == nil)then
 			self.Cache[v.Name] = { inqueue = false, callback = {} }
@@ -562,7 +575,7 @@ function lib:ReturnWho()
 		end
 		dbg('Info(' .. name ..') returned: ' .. (cachedName.data.Online == false and 'off' or 'unkn'))
 		for _,v in pairs(cachedName.callback) do
-			self:RaiseCallback(v, self:ReturnUserInfo(v.Name))
+			self:RaiseCallback(v, self:ReturnUserInfo(name))
 		end
 		cachedName.callback = {}
 		self.CacheQueue[self.Args.query] = nil

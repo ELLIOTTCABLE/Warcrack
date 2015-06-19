@@ -1,4 +1,5 @@
 local ex = Examiner;
+local cfg, cache;
 
 -- Module
 local mod = ex:CreateModule("Cache","Cached Players");
@@ -10,7 +11,6 @@ mod:HasButton(true);
 local cacheSortMethods = { "none", "name", "realm", "level", "guild", "race", "class", "time" };
 local NUM_BUTTONS = 10;
 local BUTTON_HEIGHT = (240 / NUM_BUTTONS);
-local cfg, cache;
 local activeCacheList = {};
 local buttons = {};
 
@@ -28,7 +28,7 @@ local filterList = {};
 local CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS;
 
 -- RaceCoords. For females, add 0.5 to "top" and "bottom".
--- Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Races
+-- http://i.imgur.com/VR5Xy.png -- Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Races
 local RACE_COORD = {
 	Human		= { left = 0/8, right = 1/8, top = 0/4, bottom = 1/4 },
 	Dwarf		= { left = 1/8, right = 2/8, top = 0/4, bottom = 1/4 },
@@ -36,12 +36,15 @@ local RACE_COORD = {
 	NightElf	= { left = 3/8, right = 4/8, top = 0/4, bottom = 1/4 },
 	Draenei		= { left = 4/8, right = 5/8, top = 0/4, bottom = 1/4 },
 	Worgen		= { left = 5/8, right = 6/8, top = 0/4, bottom = 1/4 },
+
 	Tauren		= { left = 0/8, right = 1/8, top = 1/4, bottom = 2/4 },
 	Scourge		= { left = 1/8, right = 2/8, top = 1/4, bottom = 2/4 },
 	Troll		= { left = 2/8, right = 3/8, top = 1/4, bottom = 2/4 },
 	Orc			= { left = 3/8, right = 4/8, top = 1/4, bottom = 2/4 },
 	BloodElf	= { left = 4/8, right = 5/8, top = 1/4, bottom = 2/4 },
 	Goblin		= { left = 5/8, right = 6/8, top = 1/4, bottom = 2/4 },
+
+	Pandaren	= { left = 6/8, right = 7/8, top = 0/4, bottom = 1/4 },	-- This uses the alliance images; the horde ones are just mirrored.
 };
 
 -- Dialog Func
@@ -60,7 +63,7 @@ ex.slashFuncs.clearcache = function(cmd) oldClearCacheFunc(cmd); mod:BuildCacheL
 
 -- OnInitialize
 function mod:OnInitialize()
-	cfg = Examiner_Config;
+	cfg = ex.cfg;
 	cache = Examiner_Cache;
 	-- Defaults
 	cfg.cacheSort = cfg.cacheSort or "class";
@@ -283,7 +286,7 @@ local function UpdateShownItems()
 			end
 			button.value:SetText(valueText);
 
-			local coords = RACE_COORD[entry.raceFixed];
+			local coords = RACE_COORD[entry.raceFixed] or RACE_COORD.Human;	-- Default to Human to avoid error in case of new race in the future
 			local iconOffset = (entry.sex == 3 and 0.5 or 0);
 			button.race:SetTexCoord(coords.left + 0.01,coords.right - 0.006,coords.top + iconOffset + 0.014,coords.bottom + iconOffset - 0.013);
 

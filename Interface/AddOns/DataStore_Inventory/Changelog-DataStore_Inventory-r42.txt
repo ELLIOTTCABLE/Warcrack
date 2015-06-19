@@ -1,0 +1,20 @@
+------------------------------------------------------------------------
+r42 | thaoky | 2015-02-25 18:26:15 +0000 (Wed, 25 Feb 2015) | 3 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/DataStore_Inventory.toc
+   M /trunk/Options.lua
+   M /trunk/Options.xml
+
+6.1.001 Commit
+
+- Added support for options using <KeyValue>
+------------------------------------------------------------------------
+r41 | thaoky | 2015-01-09 17:11:55 +0000 (Fri, 09 Jan 2015) | 2 lines
+Changed paths:
+   M /trunk/DataStore_Inventory.lua
+   M /trunk/Options.xml
+
+- Fixed usage of options
+- XML frames cleanup
+------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 --[[
 	ScrollSheet
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: ScrollSheet.lua 312 2011-06-14 07:33:25Z brykrys $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: ScrollSheet.lua 335 2012-09-05 06:08:16Z Esamynn $
 	URL: http://auctioneeraddon.com/dl/
 
 	License:
@@ -26,11 +26,11 @@
 --]]
 
 local LIBRARY_VERSION_MAJOR = "ScrollSheet"
-local LIBRARY_VERSION_MINOR = 19
+local LIBRARY_VERSION_MINOR = 21
 local lib = LibStub:NewLibrary(LIBRARY_VERSION_MAJOR, LIBRARY_VERSION_MINOR)
 if not lib then return end
 
-LibStub("LibRevision"):Set("$URL: http://svn.norganna.org/libs/trunk/Configator/ScrollSheet.lua $","$Rev: 312 $","5.1.DEV.", 'auctioneer', 'libs')
+LibStub("LibRevision"):Set("$URL: http://svn.norganna.org/libs/trunk/Configator/ScrollSheet.lua $","$Rev: 335 $","5.1.DEV.", 'auctioneer', 'libs')
 
 local GSC_GOLD="ffd100"
 local GSC_SILVER="e6e6e6"
@@ -95,6 +95,24 @@ local function coins(money, graphic)
 			return coppericon:format("%d"):format(c)
 		end
 	end
+end
+
+local function calculateMaxScroll(self, w, height)
+	-- calculate max scroll, based on current number of items in list, and current height of viewport panel (self)
+	local sheet = self.sheet
+
+	-- calculate visible rows: each row is height 14, label row is height 16
+	local viewRows = floor((height - 16) / 14)
+	if viewRows > sheet.maxRows then
+		viewRows = sheet.maxRows
+	end
+
+	-- allow to scroll 1 beyond the last item, as a visual indicator of reaching the end
+	local scroll = sheet.curRows - viewRows + 1
+	if scroll < 0 then
+		scroll = 0
+	end
+	self.vSize = scroll
 end
 
 local kit = {}
@@ -184,12 +202,14 @@ function kit:SetData(input, instyle)
 	end
 	--flag for column rearrangement code to know when we have a fresh data table. Needs to be before self:PerformSort() or the flag is set to late
 	self.newdata = true
-	--reset to top
+	--reset to top, if requested
 	if self.vScrollReset then
-		self.panel.vScroll:SetValue(0)--always reset scroll to vertical home position when new data is set.
+		self.panel.vScroll:SetValue(0)
 	end
+	-- set vertical scroll limits
+	self.curRows = nRows
+	calculateMaxScroll(self.panel, nil, self.panel:GetHeight())
 
-	self.panel.vSize = nRows
 	self:PerformSort()
 end
 
@@ -421,7 +441,7 @@ end
 local empty = {}
 function kit:Render()
 	local vPos = math.floor(self.panel.vPos)
-	local vSize = self.panel.vSize
+	--local vSize = self.panel.vSize
 	local hSize = self.hSize
 
 	local rows = self.rows
@@ -493,7 +513,7 @@ function lib:Create(frame, layout, onEnter, onLeave, onClick, onResize, onSelect
 	local panel = PanelScroller:Create(name.."ScrollPanel", frame)
 	panel:SetPoint("TOPLEFT", frame, "TOPLEFT", 5,-5)
 	panel:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -25,25)
-	panel:SetScrollChild(name.."Content")
+	panel:SetScrollChild(content)
 	panel:SetScrollBarVisible("VERTICAL","FAUX")
 	panel.vSize = 0
 
@@ -674,16 +694,21 @@ function lib:Create(frame, layout, onEnter, onLeave, onClick, onResize, onSelect
 		labels = labels,
 		rows = rows,
 		hSize = #labels,
+		maxRows = #rows,
 		data = {},
 		style = {},
 		sort = {},
 		vScrollReset = true,
 		compatibility = compatibility,
+		curRows = 0,
 	}
 	for k,v in pairs(kit) do
 		sheet[k] = v
 	end
 	panel.callback = function() sheet:Render() end
+	panel.sheet = sheet -- panel needs access to sheet values, particularly for vSize calculations
+	panel:SetScript("OnSizeChanged", calculateMaxScroll)
+	panel:ScrollSync()
 
 	_G[name] = sheet
 

@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherTooltip.lua 894 2010-12-02 22:46:33Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherTooltip.lua 1129 2014-11-13 21:02:28Z esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@
 
 	Tooltip functions
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherTooltip.lua $", "$Rev: 894 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherTooltip.lua $", "$Rev: 1129 $")
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
@@ -36,26 +36,20 @@ local _trL = Gatherer.Locale.TrLocale
 setmetatable(Gatherer.Tooltip, {__index = getfenv(0)})
 setfenv(1, Gatherer.Tooltip)
 
-function AddDropRates( tooltip, nodeId, cont, zone, maxDropsToShow )
+function AddDropRates( tooltip, nodeId, zone, maxDropsToShow )
 	if not ( maxDropsToShow ) then maxDropsToShow = 5 end
--- the following lines replace the commented out section for the momment so that all
--- drop rates are shown with worldwide data
 	local total = Gatherer.DropRates.GetDropsTotal(nodeId)
-	cont = nil
-	zone = nil
---[[
-	local total = Gatherer.DropRates.GetDropsTotal(nodeId, cont, zone)
-	if not ( total and (total > 0) ) then
-		total = Gatherer.DropRates.GetDropsTotal(nodeId)
-		cont = nil
-		zone = nil
-	end
-]]
 	if ( total and (total > 0) ) then
 		tooltip:AddLine(_tr("NOTE_OVERALLDROPS"))
 		local numLeft = 0
-		for i, item, count in Gatherer.DropRates.ObjectDrops(nodeId, cont, zone, "DESC") do
-			local itemName, itemLink, itemRarity, _, _, _, _, _, _, invTexture = GetItemInfo(item)
+		for i, item, count in Gatherer.DropRates.ObjectDrops(nodeId, zone, "DESC") do
+			local itemName, itemLink, invTexture, _
+			if ( item < 0 ) then
+				itemName, _, invTexture = GetCurrencyInfo(-item)
+				itemLink = "|cff00aa00["..itemName.."]|r"
+			else
+				itemName, itemLink, _, _, _, _, _, _, _, invTexture = GetItemInfo(item)
+			end
 			if ( itemName and (i <= maxDropsToShow) ) then
 				tooltip:AddDoubleLine(itemLink, string.format("x%0.2f", count/total))
 				tooltip:AddTexture(invTexture)
@@ -73,23 +67,44 @@ end
 -- Hijack the game tooltips for ore and herb nodes so that we can add the
 -- required skill level to the information displayed
 
+local reqHERB1 = LOCKED_WITH_SPELL and LOCKED_WITH_SPELL:format(_trC("TRADE_HERBALISM")) or "LOCKED_WITH_SPELL"
+local reqHERB2 = LOCKED_WITH_SPELL_KNOWN and LOCKED_WITH_SPELL_KNOWN:format(_trC("TRADE_HERBALISM")) or "LOCKED_WITH_SPELL_KNOWN"
+local reqMINE1 = LOCKED_WITH_SPELL and LOCKED_WITH_SPELL:format(_trC("TRADE_MINING")) or "LOCKED_WITH_SPELL"
+local reqMINE2 = LOCKED_WITH_SPELL_KNOWN and LOCKED_WITH_SPELL_KNOWN:format(_trC("TRADE_MINING")) or "LOCKED_WITH_SPELL_KNOWN"
+local GAME_OBJECT_REQUIRES_REWRITE = _trC("GAME_OBJECT_REQUIRES_REWRITE") or _trL("GAME_OBJECT_REQUIRES_REWRITE")
+
 function Gatherer.GameTooltip_OnShow()
-
 		if GameTooltip:NumLines() ~= 2 then return end
-
+		
 		local line = {}
 		for n = 1, 2 do
-		  local left = _G["GameTooltipTextLeft"..n]
-		  local right = _G["GameTooltipTextRight"..n]
-		  if not left or not left:IsShown() then return end
-		  if right and right:IsShown() then return end
-		  table.insert(line, left)
+			local left = _G["GameTooltipTextLeft"..n]
+			local right = _G["GameTooltipTextRight"..n]
+			if not left or not left:IsShown() then return end
+			if right and right:IsShown() then return end
+			table.insert(line, left)
 		end
 		
+		local profession, locked_format_string;
 		local requires = line[2]:GetText()
-		local profession = requires:match("^Requires%s(%a+)$")
-		if not profession
-		or profession ~= "Mining" and profession ~= "Herbalism" then return end
+		if ( requires == reqHERB1 ) then
+			profession = _trC("TRADE_HERBALISM")
+			locked_format_string = LOCKED_WITH_SPELL
+		
+		elseif ( requires == reqMINE1 ) then
+			profession = _trC("TRADE_MINING")
+			locked_format_string = LOCKED_WITH_SPELL
+		
+		elseif ( requires == reqHERB2 ) then
+			profession = _trC("TRADE_HERBALISM")
+			locked_format_string = LOCKED_WITH_SPELL_KNOWN
+			
+		elseif ( requires == reqMINE2 ) then
+			profession = _trC("TRADE_MINING")
+			locked_format_string = LOCKED_WITH_SPELL_KNOWN
+		
+		end
+		if not profession then return end
 		
 		local nodeName = line[1]:GetText()
 		local nodeID = Gatherer.Nodes.Names[nodeName]
@@ -101,11 +116,8 @@ function Gatherer.GameTooltip_OnShow()
 		local skill = Gatherer.Constants.SkillLevel[category]
 		if not skill then return end
 		
-		local width = line[2]:GetStringWidth()
-		line[2]:SetText(requires.." "..skill)
-		width = line[2]:GetStringWidth() - width
-		if width > 0 then GameTooltip:SetWidth(GameTooltip:GetWidth() + width) end
-
+		line[2]:SetText(locked_format_string:format(GAME_OBJECT_REQUIRES_REWRITE:format(profession, skill)))
+		GameTooltip:Show()
 end
 
 GameTooltip:HookScript("OnShow", Gatherer.GameTooltip_OnShow)

@@ -1,13 +1,14 @@
 --[[--------------------------------------------------------------------
 	PhanxChat
 	Reduces chat frame clutter and enhances chat frame functionality.
-	Written by Phanx <addons@phanx.net>
-	Copyright © 2006–2012 Phanx. Some rights reserved. See LICENSE.txt for details.
+	Copyright (c) 2006-2014 Phanx <addons@phanx.net>. All rights reserved.
 	http://www.wowinterface.com/downloads/info6323-PhanxChat.html
 	http://www.curse.com/addons/wow/phanxchat
+	https://github.com/Phanx/PhanxChat
 ----------------------------------------------------------------------]]
 
 local _, PhanxChat = ...
+local L = PhanxChat.L
 
 local noop = function() end
 
@@ -65,6 +66,17 @@ function PhanxChat:HideButtons(frame)
 			self.hooks[bottomButton].OnClick = bottomButton:GetScript("OnClick")
 			bottomButton:SetScript("OnClick", BottomButton_OnClick)
 		end
+
+		if not InterfaceOptionsSocialPanelChatStyle.orig_value then
+			InterfaceOptionsSocialPanelChatStyle.orig_value = GetCVar("chatMouseScroll")
+			InterfaceOptionsSocialPanelChatStyle.orig_tooltip = InterfaceOptionsSocialPanelChatStyle.tooltip
+
+			SetCVar("chatMouseScroll", "1")
+			InterfaceOptionsSocialPanelChatMouseScroll_SetScrolling("1")
+			InterfaceOptionsSocialPanelChatMouseScroll:Disable()
+			InterfaceOptionsSocialPanelChatMouseScrollText:SetAlpha(0.5)
+			InterfaceOptionsSocialPanelChatStyle.tooltip = format(L.OptionLockedConditional, L.HideButtons)
+		end
 	else
 		buttonFrame.Show = nil
 		buttonFrame:Show()
@@ -84,6 +96,17 @@ function PhanxChat:HideButtons(frame)
 		if self.hooks[bottomButton] and self.hooks[bottomButton].OnClick then
 			bottomButton:SetScript("OnClick", self.hooks[bottomButton].OnClick)
 			self.hooks[bottomButton].OnClick = nil
+		end
+
+		if InterfaceOptionsSocialPanelChatStyle.value_orig then
+			SetCVar("chatMouseScroll", InterfaceOptionsSocialPanelChatStyle.value_orig)
+			InterfaceOptionsSocialPanelChatMouseScroll_SetScrolling(InterfaceOptionsSocialPanelChatStyle.value_orig)
+			InterfaceOptionsSocialPanelChatMouseScroll:Enable()
+			InterfaceOptionsSocialPanelChatMouseScrollText:SetAlpha(1)
+			InterfaceOptionsSocialPanelChatStyle.tooltip = InterfaceOptionsSocialPanelChatStyle.tooltip_orig
+
+			InterfaceOptionsSocialPanelChatStyle.value_orig = nil
+			InterfaceOptionsSocialPanelChatStyle.tooltip_orig = nil
 		end
 
 		FCF_UpdateButtonSide(frame)
@@ -128,8 +151,6 @@ function PhanxChat:SetHideButtons(v)
 end
 
 BNToastFrame:SetClampedToScreen(true)
-
-------------------------------------------------------------------------
 
 table.insert(PhanxChat.RunOnLoad, PhanxChat.SetHideButtons)
 table.insert(PhanxChat.RunOnProcessFrame, PhanxChat.HideButtons)

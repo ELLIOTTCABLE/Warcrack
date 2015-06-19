@@ -9,6 +9,7 @@
 
 local L = OVERACHIEVER_STRINGS
 local GetAchievementInfo = Overachiever.GetAchievementInfo
+local GetAchievementCriteriaInfo = Overachiever.GetAchievementCriteriaInfo
 
 local categories_sel = Overachiever.UI_GetValidCategories(1)
 local EditBoxes = {}
@@ -145,7 +146,7 @@ local function OnLoad(v)
   VARS = v
   sortdrop:SetSelectedValue(VARS.SearchSort or 0)
   typedrop:SetSelectedValue(VARS.SearchType or 1)
-  if (VARS.SearchFullList) then  FullListCheckbox:SetChecked(1);  end
+  if (VARS.SearchFullList) then  FullListCheckbox:SetChecked(true);  end
 end
 
 frame, panel = Overachiever.BuildNewTab("Overachiever_SearchFrame", L.SEARCH_TAB,

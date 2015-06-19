@@ -1,97 +1,134 @@
 --[[--------------------------------------------------------------------
 	PhanxConfig-Slider
-	Simple slider widget generator.
+	Simple slider widget generator. Requires LibStub.
 	Based on tekKonfig-Slider and AceGUI-3.0-Slider.
-	Requires LibStub.
+	https://github.com/Phanx/PhanxConfig-Slider
 
-	This library is not intended for use by other authors. Absolutely no
-	support of any kind will be provided for other authors using it, and
-	its internals may change at any time without notice.
+	Copyright (c) 2009-2014 Phanx <addons@phanx.net>. All rights reserved.
+	Feel free to include copies of this file WITHOUT CHANGES inside World of
+	Warcraft addons that make use of it as a library, and feel free to use code
+	from this file in other projects as long as you DO NOT use my name or the
+	original name of this library anywhere in your project outside of an optional
+	credits line -- any modified versions must be renamed to avoid conflicts and
+	confusion. If you wish to do something else, or have questions about whether
+	you can do something, email me at the address listed above.
 ----------------------------------------------------------------------]]
 
-local MINOR_VERSION = tonumber(("$Revision: 85 $"):match("%d+"))
+local MINOR_VERSION = 20141201
 
 local lib, oldminor = LibStub:NewLibrary("PhanxConfig-Slider", MINOR_VERSION)
 if not lib then return end
 
-local function OnEnter(self)
-	local text = self:GetParent().desc
+------------------------------------------------------------------------
+
+local methods = {}
+
+function methods:GetValue()
+	return self.slider:GetValue()
+end
+
+function methods:SetValue(value)
+	value = tonumber(value or nil)
+	return value and self.slider:SetValue(value)
+end
+
+function methods:GetLabel()
+	return self.labelText:GetText()
+end
+
+function methods:SetLabel(text)
+	self.labelText:SetText(tostring(text or ""))
+end
+
+function methods:GetTooltip()
+	return self.tooltipText
+end
+
+function methods:SetTooltip(text)
+	self.tooltipText = text and tostring(text) or nil
+end
+
+------------------------------------------------------------------------
+
+local function Slider_OnEnter(self)
+	local container = self:GetParent()
+	local text = container.tooltipText
 	if text then
-		GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-		GameTooltip:SetText(text, nil, nil, nil, nil, true)
+		GameTooltip:SetOwner(container, "ANCHOR_RIGHT")
+		GameTooltip:SetText(container.tooltipText, nil, nil, nil, nil, true)
 	end
 end
 
-local function OnLeave()
+local function Slider_OnLeave(self)
 	GameTooltip:Hide()
 end
 
-local function OnMouseWheel(self, delta)
-	local step = self:GetValueStep() * delta
+local function Slider_OnMouseWheel(self, delta)
+	local parent = self:GetParent()
 	local minValue, maxValue = self:GetMinMaxValues()
+	local step = self:GetValueStep() * delta
+
 	if step > 0 then
-		self:SetValue(min(self:GetValue() + step, maxValue))
+		value = min(self:GetValue() + step, maxValue)
 	else
-		self:SetValue(max(self:GetValue() + step, minValue))
+		value = max(self:GetValue() + step, minValue)
+	end
+
+	self:SetValue(value)
+
+	local callback = parent.OnValueChanged
+	if callback then
+		callback(parent, value)
 	end
 end
 
-local function OnValueChanged(self)
+local function Slider_OnValueChanged(self, value, userInput)
 	local parent = self:GetParent()
-	local value = self:GetValue()
-
-	if self.valueFactor then
-		value = value / self.valueFactor
-	end
-
-	if parent.OnValueChanged then
-		value = parent:OnValueChanged(value) or value
-	end
+	if parent.lastValue == value then return end
 
 	if parent.isPercent then
 		parent.valueText:SetFormattedText("%.0f%%", value * 100)
 	else
 		parent.valueText:SetText(value)
 	end
-end
 
-local function SetText(self, text)
-	return self.valueText:SetText(text)
-end
-
-local function SetValue(self, value)
-	if self.isPercent then
-		self.valueText:SetFormattedText("%.0f%%", value * 100)
-	else
-		self.valueText:SetText(value)
+	local callback = parent.OnValueChanged
+	if callback and parent.lastValue then
+		callback(parent, value)
 	end
 
-	if self.slider.valueFactor then
-		value = value * self.slider.valueFactor
-	end
-
-	return self.slider:SetValue(value)
+	parent.lastValue = value
 end
 
-local function EditBox_OnEnterPressed(self) -- print("OnEnterPressed SLIDER")
+------------------------------------------------------------------------
+
+local function EditBox_OnEnter(self)
+	local parent = self:GetParent():GetParent()
+	return Slider_OnEnter(parent.slider)
+end
+
+local function EditBox_OnLeave(self)
+	local parent = self:GetParent():GetParent()
+	return Slider_OnLeave(parent.slider)
+end
+
+local function EditBox_OnEnterPressed(self)
 	local parent = self:GetParent():GetParent()
 	local text = self:GetText()
 	self:ClearFocus()
 
 	local value
 	if parent.isPercent then
-		value = tonumber(text:match("%d+")) / 100
+		value = tonumber(strmatch(text, "%d+")) / 100
 	else
 		value = tonumber(text)
 	end
 	if value then
-		SetValue(parent, value)
+		parent:SetValue(value)
 	end
 end
 
-local function EditBoxContainer_SetFormattedText(self, text, ...)
-	return self.editbox:SetText(text:format(...))
-end
+------------------------------------------------------------------------
 
 local sliderBG = {
 	bgFile = "Interface\\Buttons\\UI-SliderBar-Background",
@@ -100,19 +137,17 @@ local sliderBG = {
 	insets = { left = 3, right = 3, top = 6, bottom = 6 }
 }
 
-function lib.CreateSlider(parent, name, lowvalue, highvalue, valuestep, percent, desc)
-	assert( type(parent) == "table" and parent.CreateFontString, "PhanxConfig-Slider: Parent is not a valid frame!" )
+function lib:New(parent, name, tooltipText, minValue, maxValue, valueStep, percent, noEditBox)
+	assert(type(parent) == "table" and type(rawget(parent, 0)) == "userdata", "PhanxConfig-Slider: parent must be a frame")
 	if type(name) ~= "string" then name = nil end
-	if type(desc) ~= "string" then desc = nil end
-	if type(lowvalue) ~= "number" then lowvalue = 0 end
-	if type(highvalue) ~= "number" then highvalue = 100 end
-	if type(valuestep) ~= "number" then valuestep = 1 end
+	if type(tooltipText) ~= "string" then tooltipText = nil end
+	if type(minValue) ~= "number" then minValue = 0 end
+	if type(maxValue) ~= "number" then maxValue = 100 end
+	if type(valueStep) ~= "number" then valueStep = 1 end
 
 	local frame = CreateFrame("Frame", nil, parent)
 	frame:SetWidth(186)
 	frame:SetHeight(42)
-
-	frame.desc = desc
 
 	frame.bg = frame:CreateTexture(nil, "BACKGROUND")
 	frame.bg:SetAllPoints(true)
@@ -126,75 +161,69 @@ function lib.CreateSlider(parent, name, lowvalue, highvalue, valuestep, percent,
 	slider:SetOrientation("HORIZONTAL")
 	slider:SetThumbTexture("Interface\\Buttons\\UI-SliderBar-Button-Horizontal")
 	slider:SetBackdrop(sliderBG)
+	frame.slider = slider
 
 	local label = slider:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 	label:SetPoint("TOPLEFT", frame, 5, 0)
 	label:SetPoint("TOPRIGHT", frame, -5, 0)
 	label:SetJustifyH("LEFT")
-	label:SetText(name)
+	frame.labelText = label
 
-	local low = slider:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-	low:SetPoint("TOPLEFT", slider, "BOTTOMLEFT", 0, 3)
+	local minText = slider:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+	minText:SetPoint("TOPLEFT", slider, "BOTTOMLEFT", 0, 3)
+	frame.minText = minText
+
 	if percent then
-		low:SetFormattedText("%.0f%%", lowvalue * 100)
+		minText:SetFormattedText("%.0f%%", minValue * 100)
 	else
-		low:SetText(lowvalue)
+		minText:SetText(minValue)
 	end
 
-	local high = slider:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-	high:SetPoint("TOPRIGHT", slider, "BOTTOMRIGHT", 0, 3)
+	local maxText = slider:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+	maxText:SetPoint("TOPRIGHT", slider, "BOTTOMRIGHT", 0, 3)
+	frame.maxText = high
+
 	if percent then
-		high:SetFormattedText("%.0f%%", highvalue * 100)
+		maxText:SetFormattedText("%.0f%%", maxValue * 100)
 	else
-		high:SetText(highvalue)
+		maxText:SetText(maxValue)
 	end
 
-	local value
-	if LibStub("PhanxConfig-EditBox", true) then
-		value = LibStub("PhanxConfig-EditBox").CreateEditBox(frame, nil, desc, 5)
-		value:SetPoint("TOP", slider, "BOTTOM", 0, 13)
-		value:SetWidth(100)
-		value.editbox:SetScript("OnEnter", OnEnter)
-		value.editbox:SetScript("OnLeave", OnLeave)
-		value.editbox:SetScript("OnEnterPressed", EditBox_OnEnterPressed)
-		value.editbox:SetScript("OnTabPressed", EditBox_OnEnterPressed)
-		value.editbox:SetFontObject(GameFontHighlightSmall)
-		value.editbox:SetJustifyH("CENTER")
-		value.SetFormattedText = EditBoxContainer_SetFormattedText
+	local valueText
+	if not noEditBox and LibStub("PhanxConfig-EditBox", true) then
+		valueText = LibStub("PhanxConfig-EditBox"):New(frame, nil, tooltipText, 5)
+		valueText:SetPoint("TOP", slider, "BOTTOM", 0, 13)
+		valueText:SetWidth(100)
+		valueText.editbox:SetFontObject(GameFontHighlightSmall)
+		valueText.editbox:SetJustifyH("CENTER")
+		valueText.editbox:SetScript("OnEnter", EditBox_OnEnter)
+		valueText.editbox:SetScript("OnLeave", EditBox_OnLeave)
+		valueText.editbox:SetScript("OnEnterPressed", EditBox_OnEnterPressed)
+		valueText.editbox:SetScript("OnTabPressed", EditBox_OnEnterPressed)
 	else
-		value = slider:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-		value:SetPoint("TOP", slider, "BOTTOM", 0, 3)
-		value:SetTextColor(1, 0.8, 0)
+		valueText = slider:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+		valueText:SetPoint("TOP", slider, "BOTTOM", 0, 3)
 	end
-
-	local factor = 10 ^ math.max(string.len(tostring(valuestep):match("%.(%d+)") or ""),
-		string.len(tostring(minvalue):match("%.(%d+)") or ""),
-		string.len(tostring(maxvalue):match("%.(%d+)") or ""))
-	if factor > 1 then
-		slider.valueFactor = factor
-		slider:SetMinMaxValues(lowvalue * factor, highvalue * factor)
-		slider:SetValueStep(valuestep * factor)
-	else
-		slider:SetMinMaxValues(lowvalue, highvalue)
-		slider:SetValueStep(valuestep)
-	end
+	frame.valueText = valueText
 
 	slider:EnableMouseWheel(true)
-	slider:SetScript("OnEnter", OnEnter)
-	slider:SetScript("OnLeave", OnLeave)
-	slider:SetScript("OnMouseWheel", OnMouseWheel)
-	slider:SetScript("OnValueChanged", OnValueChanged)
+	slider:SetObeyStepOnDrag(true)
+	slider:SetScript("OnEnter", Slider_OnEnter)
+	slider:SetScript("OnLeave", Slider_OnLeave)
+	slider:SetScript("OnMouseWheel", Slider_OnMouseWheel)
+	slider:SetScript("OnValueChanged", Slider_OnValueChanged)
 
-	frame.slider = slider
-	frame.labelText = label
-	frame.lowText = low
-	frame.highText = high
-	frame.valueText = value
+	for name, func in pairs(methods) do
+		frame[name] = func
+	end
 
+	label:SetText(name)
+	slider:SetMinMaxValues(minValue, maxValue)
+	slider:SetValueStep(valueStep)
+	frame.tooltipText = tooltipText
 	frame.isPercent = percent
-
-	frame.SetText = SetText
-	frame.SetValue = SetValue
 
 	return frame
 end
+
+function lib.CreateSlider(...) return lib:New(...) end

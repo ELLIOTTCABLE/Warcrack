@@ -5,8 +5,6 @@ Credits: Saien the original author.  Sayclub (Korean), PDI175 (Chinese tradition
 Website: http://www.wowace.com/
 Description: Dynamic 24 button bar automatically adds potions, water, food and other items you specify into a button for use. Does not use action slots so you can save those for spells and abilities.
 --]]
-local REVISION = tonumber(("$Revision: 1.2 $"):match("%d+"))
-local DATE = ("$Date: 2010/12/14 01:12:09 $"):match("%d%d%d%d%-%d%d%-%d%d")
 --
 -- Copyright 2004, 2005, 2006 original author.
 -- New Stuff Copyright 2006+ Toadkiller of Proudmoore.
@@ -42,19 +40,14 @@ local LibKeyBound = LibStub("LibKeyBound-1.0")
 local LibStickyFrames = LibStub("LibStickyFrames-2.0")
 local AceOO = AceLibrary("AceOO-2.0")
 local AceEvent = AceLibrary("AceEvent-2.0")
-local LBF = LibStub("LibButtonFacade", true)
+local Masque = LibStub("Masque", true)
 local AceCfgDlg = LibStub("AceConfigDialog-3.0")
 local L
+local _
 
--- If the Debug library is available then use it
-if AceLibrary:HasInstance("AceDebug-2.0") then
-	AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceHook-2.1", "AceDebug-2.0");
-else
-	AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceHook-2.1");
-end
+AutoBar = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceHook-2.1");
+
 local AutoBar = AutoBar
-AutoBar.revision = REVISION
-AutoBar.date = DATE
 
 -- List of [spellName] = <GetSpellInfo Name>
 AutoBar.spellNameList = {}
@@ -66,6 +59,16 @@ AutoBar.events = {}
 AutoBar.delay = {}
 
 AutoBarMountFilter = {[25953] = 1;[26056] = 1;[26054] = 1; [26055] = 1}
+
+AutoBar.warning_log = {}
+
+AutoBar.visibility_driver_string = "[vehicleui] hide; [petbattle] hide; [possessbar] hide; show"
+
+
+WHATSNEW_TEXT = " - Updated libs|n" ..
+" - TOC bump for Patch 6.1|n" ..
+" - What's New dialog kept popping"
+
 
 
 function AutoBar:ConfigToggle()
@@ -112,6 +115,8 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonStance_X = L["AutoBarButtonStance"]
 	BINDING_NAME_AutoBarButtonStealth_X = L["AutoBarButtonStealth"]
 	BINDING_NAME_AutoBarButtonWater_X = L["AutoBarButtonWater"]
+	BINDING_NAME_AutoBarButtonSunsongRanch_X = L["AutoBarButtonSunsongRanch"]
+	BINDING_NAME_AutoBarButtonGarrison_X = L["AutoBarButtonGarrison"]
 
 	BINDING_HEADER_AutoBarClassBarExtras = L["AutoBarClassBarExtras"]
 
@@ -125,12 +130,12 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonCooldownStoneMana_X = L["AutoBarButtonCooldownStoneMana"]
 	BINDING_NAME_AutoBarButtonCooldownPotionRejuvenation_X = L["AutoBarButtonCooldownPotionRejuvenation"]
 	BINDING_NAME_AutoBarButtonCooldownStoneRejuvenation_X = L["AutoBarButtonCooldownStoneRejuvenation"]
-	BINDING_NAME_AutoBarButtonRotationDrums_X = L["AutoBarButtonRotationDrums"]
 
 	BINDING_HEADER_AutoBarClassBarHeader = L["AutoBarClassBarHeader"]
 	BINDING_NAME_AutoBarButtonDebuff_X = L["AutoBarButtonDebuff"]
 
 	BINDING_HEADER_AutoBarClassBarDeathKnight = L["AutoBarClassBarDeathKnight"]
+	BINDING_HEADER_AutoBarClassBarMonk = L["AutoBarClassBarMonk"]
 
 	BINDING_HEADER_AutoBarClassBarDruid = L["AutoBarClassBarDruid"]
 	BINDING_NAME_AutoBarButtonBear_X = L["AutoBarButtonBear"]
@@ -141,7 +146,6 @@ function AutoBar:OnInitialize()
 
 	BINDING_HEADER_AutoBarClassBarHunter = L["AutoBarClassBarHunter"]
 	BINDING_NAME_AutoBarButtonFoodPet_X = L["AutoBarButtonFoodPet"]
-	BINDING_NAME_AutoBarButtonSting_X = L["AutoBarButtonSting"]
 	BINDING_NAME_AutoBarButtonSeal_X = L["AutoBarButtonSeal"]
 	BINDING_NAME_AutoBarButtonTrap_X = L["AutoBarButtonTrap"]
 
@@ -161,7 +165,6 @@ function AutoBar:OnInitialize()
 	BINDING_NAME_AutoBarButtonTotemWater_X = L["AutoBarButtonTotemWater"]
 
 	BINDING_HEADER_AutoBarClassBarWarlock = L["AutoBarClassBarWarlock"]
-	BINDING_NAME_AutoBarButtonWarlockStones_X = L["AutoBarButtonWarlockStones"]
 
 	BINDING_HEADER_AutoBarClassBarWarrior = L["AutoBarClassBarWarrior"]
 
@@ -231,7 +234,7 @@ function AutoBar:OnInitialize()
 		},
 	}
 
-	AutoBar.currentPlayer = UnitName("player") .. " - " .. GetCVar("realmName");
+	AutoBar.currentPlayer = UnitName("player") .. " - " .. GetRealmName();
 	_, AutoBar.CLASS = UnitClass("player")
 	AutoBar.CLASSPROFILE = "_" .. AutoBar.CLASS;
 
@@ -243,9 +246,26 @@ function AutoBar:OnInitialize()
 	AutoBar.flyable = SecureCmdOptionParse("[flyable]1")
 
 	-- Single parent for key binding overides, and event handling
-	AutoBar.frame = CreateFrame("Frame", nil, UIParent)
+	AutoBar.frame = CreateFrame("Frame", "AutoBarEventFrame", UIParent)
 	AutoBar.frame:SetScript("OnEvent",
 		function(self, event, ...)
+		
+			-- The BAG_UPDATE event is now trivial in its execution; it just sets a boolean so don't throttle it
+			if(event == "BAG_UPDATE") then
+				AutoBar.events[event](AutoBar, ...)
+				return
+			end
+			
+			local timer_name = event .. "_last_tick"
+			local now = GetTime()
+			AutoBar[timer_name] = AutoBar[timer_name] or 0
+			
+			if ((now - AutoBar[timer_name]) < AutoBar.db.account.throttle_event_limit) then
+				if (AutoBar.db.account.log_throttled_events) then print ("Skipping " .. event .. "(" .. AutoBar[timer_name] .. ", " .. now .. ")") end
+				return
+			end
+			AutoBar[timer_name] = now
+
 			AutoBar.events[event](AutoBar, ...)
 		end)
 
@@ -294,9 +314,11 @@ function AutoBar:OnEnable(first)
 	AutoBar.frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 	AutoBar.frame:RegisterEvent("PLAYER_LEAVING_WORLD")
 	AutoBar.frame:RegisterEvent("BAG_UPDATE")
+	AutoBar.frame:RegisterEvent("BAG_UPDATE_DELAYED")
 	AutoBar.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
 	AutoBar.frame:RegisterEvent("SPELLS_CHANGED")
 	AutoBar.frame:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
+	
 
 	-- For item use restrictions
 	AutoBar.frame:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
@@ -341,7 +363,8 @@ function AutoBar:LogEvent(eventName, arg1)
 		local memory = GetAddOnMemoryUsage("AutoBar")
 		print(eventName, "memory" , memory)
 	end
-	if (AutoBar.db.account.performance or AutoBar.db.account.logEvents) then
+--	if (AutoBar.db.account.performance or AutoBar.db.account.logEvents) then
+	if (AutoBar.db.account.logEvents) then
 		if (arg1) then
 			print(eventName, "arg1" , arg1, "time:", GetTime(), memString, memory)
 		else
@@ -359,10 +382,10 @@ function AutoBar:LogEventStart(eventName)
 	end
 	if (AutoBar.db.account.performance) then
 		if (logItems[eventName]) then
-			print(eventName, "restarted before previous completion")
+			--print(eventName, "restarted before previous completion")
 		else
 			logItems[eventName] = GetTime()
-			print(eventName, "started time:", logItems[eventName])
+			--print(eventName, "started time:", logItems[eventName])
 		end
 	end
 end
@@ -372,13 +395,15 @@ function AutoBar:LogEventEnd(eventName, arg1)
 		if (logItems[eventName]) then
 			local elapsed = GetTime() - logItems[eventName]
 			logItems[eventName] = nil
-			if (arg1) then
-				print(eventName, arg1, "time:", elapsed)
-			else
-				print(eventName, "time:", elapsed)
+			if (elapsed > 0.005) then
+				if (arg1) then
+					print(eventName, arg1, "time:", elapsed)
+				else
+					print(eventName, "time:", elapsed)
+				end
 			end
 		else
-			print(eventName, "restarted before previous completion")
+			--print(eventName, "restarted before previous completion")
 		end
 	end
 	if (AutoBar.db.account.logMemory) then
@@ -468,6 +493,12 @@ function Delayed.prototype:Start(arg1, customDelay)
 	local function MyCallback()
 		local myself = self
 		local arg1 = arg1
+		-- If in combat delay call till after combat
+		if (InCombatLockdown()) then
+			self.timerInfo.runPostCombat = true
+			return
+		end
+
 --print("***MyCallback "..myself.name.." at  " .. tostring(GetTime()).." arg1  " .. tostring(arg1))
 		myself:Callback(arg1)
 	end
@@ -526,6 +557,76 @@ function AutoBar.events:PLAYER_ENTERING_WORLD()
 --print("   PLAYER_ENTERING_WORLD")
 		AutoBar.delay["UpdateCategories"]:Start()
 	end
+	
+	AutoBar:DumpWarningLog()
+	
+	local this_version = GetAddOnMetadata("AutoBar", "Version")
+	
+	--only mark the dialog as seen if the frame was found. This protects against someone
+	--updating the addon while in-game
+	if(this_version ~= AutoBarDB.whatsnew_version) then
+		 AutoBarDB.whatsnew_version = this_version
+		 
+		WHATSNEW_TITLE = "What's New in AutoBar"
+
+		local frame = CreateFrame("Frame", "AutoBarWhatsNewFrame", UIParent)
+		frame:SetBackdrop({
+			bgFile = "Interface\\ChatFrame\\ChatFrameBackground", 
+		 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		 	tile = true,
+		 	tileSize = 32,
+		 	edgeSize = 32,
+		 	insets = { left = 11, right = 11, top = 11, bottom = 10 }
+		})
+		frame:SetBackdropColor(0, 0, 0, 0.9);
+		frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+
+		local header_frame = CreateFrame("Frame", "AutoBarWhatsNewHeaderFrame", frame)
+		header_frame:SetBackdrop({
+			bgFile = "Interface\\ChatFrame\\ChatFrameBackground", 
+		 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		 	tile = true,
+		 	tileSize = 28,
+		 	edgeSize = 28,
+		 	insets = { left = 5, right = 5, top = 5, bottom = 5 }
+		})
+		header_frame:SetBackdropColor(0, 0, 0, 0.9);
+		header_frame:SetPoint("CENTER", frame, "TOP", 0, 0)
+
+		local title_text = header_frame:CreateFontString("AutoBarWhatsNewTitleText", "ARTWORK", "GameFontNormal")
+		title_text:SetText(WHATSNEW_TITLE .. "|n" .. this_version)
+		title_text:SetJustifyH("CENTER")
+
+		local title_string_width = title_text:GetStringWidth()
+		local title_string_height = title_text:GetStringHeight()
+
+		header_frame:SetSize(title_string_width * 1.4, title_string_height * 1.9)
+		title_text:SetSize(title_string_width, title_string_height)
+
+		title_text:SetPoint("CENTER", header_frame, "CENTER", 0, 0)
+
+
+		local text = frame:CreateFontString("AutoBarWhatsNewFrameText", "ARTWORK", "GameFontNormal")
+		text:SetTextColor(0, 1, 0, 0.9)
+		text:SetText(WHATSNEW_TEXT)
+		text:SetPoint("LEFT", frame, "LEFT", 20, 0)
+		text:SetJustifyH("LEFT")
+		
+		local string_width = text:GetStringWidth() 
+		local string_height = text:GetStringHeight()
+		
+		local ok_button = CreateFrame("Button", "AutoBarWhatsNewFrameOkButton", frame, "UIPanelButtonTemplate")
+		ok_button:SetText(OKAY)
+		 
+		frame:SetSize(math.max(string_width * 1.2, 300), math.max(string_height * 1.5, 100) + ok_button:GetHeight())
+		text:SetSize(string_width, string_height)
+		
+		ok_button:SetPoint("BOTTOM", frame, "BOTTOM", 0, 15)
+		ok_button:SetScript("OnClick", function(self, button, down) frame:Hide() end)
+
+		frame:Show()
+	end
+
 end
 
 
@@ -536,38 +637,48 @@ end
 
 function AutoBar.events:BAG_UPDATE(arg1)
 	AutoBar:LogEvent("BAG_UPDATE", arg1)
+	
 	if (AutoBar.inWorld and arg1 <= NUM_BAG_FRAMES) then
 		AutoBarSearch.dirtyBags[arg1] = true
-		if (InCombatLockdown()) then
-			for buttonName, button in pairs(AutoBar.buttonList) do
-				button:UpdateCount()
-			end
-		else
-			AutoBar.delay["UpdateScan"]:Start()
+	end
+	
+end
+
+function AutoBar.events:BAG_UPDATE_DELAYED()
+	AutoBar:LogEvent("BAG_UPDATE_DELAYED")
+
+	if (InCombatLockdown()) then
+		for buttonName, button in pairs(AutoBar.buttonList) do
+			button:UpdateCount()
 		end
+	else
+		AutoBar.delay["UpdateScan"]:Start()
+
 	end
 end
 
-
 function AutoBar.events:BAG_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEvent("BAG_UPDATE_COOLDOWN", arg1)
---print("   BAG_UPDATE_COOLDOWN arg1 " .. tostring(arg1))
-	if (not InCombatLockdown()) then
+
+	if (not InCombatLockdown() and not C_PetBattles.IsInBattle()) then
 		AutoBar.delay["UpdateScan"]:Start(arg1)
 	end
+		
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
+	
 end
 
 
 function AutoBar.events:SPELL_UPDATE_COOLDOWN(arg1)
 	AutoBar:LogEvent("SPELL_UPDATE_COOLDOWN", arg1)
---print("   SPELL_UPDATE_COOLDOWN arg1 " .. tostring(arg1))
+
 	for buttonName, button in pairs(AutoBar.buttonList) do
 		button:UpdateCooldown()
 	end
 end
+
 
 
 function AutoBar.events:ACTIONBAR_UPDATE_USABLE(arg1)
@@ -668,11 +779,6 @@ function AutoBar.events:SPELLS_CHANGED(arg1)
 	end
 end
 
-local BZ = LibStub("LibBabble-Zone-3.0"):GetLookupTable()
-local zoneDalaran = BZ["Dalaran"]
-local zoneKrasusLanding = BZ["Krasus' Landing"]
-local zoneWintergrasp = BZ["Wintergrasp"]
-
 function AutoBar:UpdateZone(event)
 --[[
 	print(tostring(event) .. " GetZoneText()" .. GetZoneText())
@@ -694,12 +800,6 @@ function AutoBar:UpdateZone(event)
 	end
 
 	local flyable = IsFlyableArea()
-	if (zone == zoneWintergrasp or (zone == zoneDalaran and GetSubZoneText() ~= zoneKrasusLanding)) then
---print("zoneWintergrasp or zoneDalaran. no fly for u!", newZone, flyable)
-		flyable = nil
-	else
---print("whatever", newZone, flyable)
-	end
 	if (AutoBar.flyable ~= flyable) then
 		AutoBar.flyable = flyable
 		if (AutoBar.buttonList["AutoBarButtonMount"]) then
@@ -713,27 +813,27 @@ end
 function AutoBar.events:MINIMAP_ZONE_CHANGED(arg1)
 	AutoBar:LogEvent("MINIMAP_ZONE_CHANGED", arg1)
 	AutoBar:UpdateZone("MINIMAP_ZONE_CHANGED")
-	if (not InCombatLockdown()) then
+--	if (not InCombatLockdown()) then
 --		AutoBar.delay["UpdateActive"]:Start()
-	end
+--	end
 end
 
 function AutoBar.events:ZONE_CHANGED(arg1)
 	AutoBar:LogEvent("ZONE_CHANGED", arg1)
 	AutoBar:UpdateZone("ZONE_CHANGED")
-	if (not InCombatLockdown()) then
+--	if (not InCombatLockdown()) then
 --		AutoBar.delay["UpdateActive"]:Start()
-	end
+--	end
 end
--- GetSubZoneText();
 
-function AutoBar.events:ZONE_CHANGED_INDOORS(arg1)
-	AutoBar:LogEvent("ZONE_CHANGED_INDOORS", arg1)
-	AutoBar:UpdateZone("ZONE_CHANGED_INDOORS")
-	if (not InCombatLockdown()) then
---		AutoBar.delay["UpdateActive"]:Start()
-	end
-end
+-- Apparently this is never used
+--function AutoBar.events:ZONE_CHANGED_INDOORS(arg1)
+--	AutoBar:LogEvent("ZONE_CHANGED_INDOORS", arg1)
+--	AutoBar:UpdateZone("ZONE_CHANGED_INDOORS")
+--	if (not InCombatLockdown()) then
+----		AutoBar.delay["UpdateActive"]:Start()
+--	end
+--end
 
 
 function AutoBar.events:ZONE_CHANGED_NEW_AREA(arg1)
@@ -752,6 +852,8 @@ function AutoBar.events:PLAYER_CONTROL_GAINED()
 		AutoBar.delay["UpdateButtons"]:Start()
 	end
 end
+
+
 
 local regenEnableUpdate = "UpdateRescan"
 function AutoBar:SetRegenEnableUpdate(scanType)
@@ -940,9 +1042,9 @@ function AutoBar:Initialize()
 	self:LogEventStart("AutoBar:Initialize")
 
 	-- Set AutoBar Skin
-	if (LBF and not AutoBar.LBFGroup) then
-		local group = LBF:Group("AutoBar")
-		AutoBar.LBFGroup = group
+	if (Masque and not AutoBar.MasqueGroup) then
+		local group = Masque:Group("AutoBar")
+		AutoBar.MasqueGroup = group
 		group.SkinID = AutoBar.db.account.SkinID or "Blizzard"
 		group.Gloss = AutoBar.db.account.Gloss
 		group.Backdrop = AutoBar.db.account.Backdrop
@@ -1026,9 +1128,9 @@ end
 -- Update shared state
 function AutoBar:UpdateCustomBars()
 	self:LogEventStart("AutoBar:UpdateCustomBars")
+	self:UpdateCustomButtons()
 
 	self:LogEventEnd("AutoBar:UpdateCustomBars")
-	self:UpdateCustomButtons()
 end
 
 local DelayedUpdateCustomBars = AceOO.Class(Delayed)
@@ -1164,8 +1266,8 @@ end
 function AutoBar:UpdateScan()
 	self:LogEventStart("AutoBar:UpdateScan")
 	AutoBarSearch:UpdateScan()
-	self:LogEventEnd("AutoBar:UpdateScan")
 	self:UpdateAttributes()
+	self:LogEventEnd("AutoBar:UpdateScan")
 end
 
 local DelayedUpdateScan = AceOO.Class(Delayed)
@@ -1189,8 +1291,8 @@ function AutoBar:UpdateAttributes()
 	for barKey, bar in pairs(AutoBar.barList) do
 		bar:UpdateAttributes()
 	end
-	self:LogEventEnd("AutoBar:UpdateAttributes")
 	self:UpdateActive()
+	self:LogEventEnd("AutoBar:UpdateAttributes")
 end
 
 local DelayedUpdateAttributes = AceOO.Class(Delayed)
@@ -1238,11 +1340,12 @@ function AutoBar:UpdateButtons()
 	for buttonName, button in pairs(self.buttonListDisabled) do
 --print("   AutoBar:UpdateButtons Disabled " .. buttonName);
 		button:Disable()
-		button:UpdateCooldown()
-		button:UpdateCount()
-		button:UpdateHotkeys()
-		button:UpdateIcon()
-		button:UpdateUsable()
+		--I don't see why we should update all of these if they're disabled.
+		--button:UpdateCooldown()
+		--button:UpdateCount()
+		--button:UpdateHotkeys()
+		--button:UpdateIcon()
+		--button:UpdateUsable()
 	end
 	for buttonKey, button in pairs(self.buttonList) do
 --print("   AutoBar:UpdateButtons Enabled " .. buttonName);
@@ -1364,7 +1467,7 @@ function AutoBar:OnClick(event, frame, button)
 	if (bar and bar.sharedLayoutDB) then
 		if (button == "RightButton") then
 	--print("AutoBar.Class.Bar.OnClick ShowBarOptions frame " .. tostring(frame) .. " button " .. tostring(button))
-			bar:ShowBarOptions()
+			--bar:ShowBarOptions()
 		elseif (button == "LeftButton") then
 	--print("AutoBar.Class.Bar.OnClick ToggleVisibilty frame " .. tostring(frame) .. " button " .. tostring(button))
 			bar:ToggleVisibilty()
@@ -1433,23 +1536,6 @@ function AutoBar:MoveButtonsModeOff()
 	end
 end
 
-function AutoBar:SkinModeToggle()
-	local ace3 = LibStub("AceAddon-3.0")
-	local BF = ace3 and ace3:GetAddon("ButtonFacade", true)
-	if (BF) then
-		AutoBar:MoveBarModeOff()
-		AutoBar:MoveButtonsModeOff()
-		LibKeyBound:Deactivate()
-		if (BF:OpenOptions()) then
---			BF:OpenMenu()
-		else
---			BF:CloseMenu()
-		end
-	else
-		print(L["ButtonFacade is required to Skin the Buttons"])
-	end
-end
-
  
 --
 -- ConfigMode support
@@ -1490,3 +1576,93 @@ end
 --/script LibStub("LibKeyBound-1.0"):SetColorKeyBoundMode(0.75, 1, 0, 0.5)
 --/script DEFAULT_CHAT_FRAME:AddMessage("" .. tostring())
 --/print GetMouseFocus():GetName()
+
+function AutoBar:Print(p_stuff)
+	print(p_stuff)
+end
+
+function AutoBar:Dump(o)
+	if type(o) == 'table' then
+		local s = '{ '
+		for k,v in pairs(o) do
+			if type(k) ~= 'number' then
+				k = '"'..k..'"'
+			end
+			s = s .. '['..k..'] = ' .. AutoBar:Dump(v) .. ','
+		end
+		return s .. '} '
+	else
+		return tostring(o)
+	end
+end
+
+local StupidLogEnabled = false
+
+function AutoBar:StupidLogEnable(p_toggle)
+	StupidLogEnabled = p_toggle
+end
+
+function AutoBar:StupidLog(p_text)
+
+	if (StupidLogEnabled) then
+		AutoBar.db.account.stupidlog = AutoBar.db.account.stupidlog .. p_text
+	end
+
+end
+
+function AutoBar:MakeSet(list)
+   local set = {}
+   for _, l in ipairs(list) do set[l] = true end
+   return set
+ end
+
+AutoBar.set_mana_users = AutoBar:MakeSet{"DRUID","MAGE","PRIEST","PALADIN","SHAMAN","WARLOCK"}
+
+function AutoBar:ClassUsesMana(class_name)
+
+	return AutoBar.set_mana_users[class_name]
+
+end
+
+local function table_pack(...)
+  return { n = select("#", ...), ... }
+end
+
+function AutoBar:LogWarning(...)
+
+	local message = "";
+	local args = table_pack(...)
+	for i=1,args.n do
+		message = message .. tostring(args[i]) .. " "
+	end
+	table.insert(AutoBar.warning_log, message)
+
+end
+
+function AutoBar:DumpWarningLog()
+
+	if next(AutoBar.warning_log) == nil then --Empty log
+		return
+	end
+
+	AutoBar:Print("Warnings/Errors occured in AutoBar:")
+
+	for i,v in ipairs(AutoBar.warning_log) do
+		AutoBar:Print(v)
+	end
+
+end
+
+function AutoBar:LoggedGetSpellInfo(p_spell_id)
+
+	local ret_val = {GetSpellInfo(p_spell_id)} --table-ify
+
+	if next(ret_val) == nil then
+		AutoBar:LogWarning("Invalid Spell ID:" .. p_spell_id)
+	end
+
+	return unpack(ret_val)
+
+end
+
+

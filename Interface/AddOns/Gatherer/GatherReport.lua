@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherReport.lua 904 2010-12-05 05:24:01Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherReport.lua 1031 2012-09-28 04:54:31Z Esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -27,10 +27,23 @@
 
 	Reporting and data management subsystem
 --]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherReport.lua $", "$Rev: 904 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherReport.lua $", "$Rev: 1031 $")
 
-local THROTTLE_COUNT = 25
-local THROTTLE_RATE = 1
+local THROTTLE_COUNT = 10
+local THROTTLE_RATE = .25
+
+-- indicies
+local ZONE      = 1
+local ID        = 2
+local INDEX     = 3
+local POSX      = 4
+local POSY      = 5
+local COUNT     = 6
+local HARVESTED = 7
+local INSPECTED = 8
+local SOURCE    = 9
+local GTYPE     = 10
+local INDOORS   = 11
 
 local _tr = Gatherer.Locale.Tr
 local _trC = Gatherer.Locale.TrClient
@@ -120,24 +133,32 @@ frame.Drag:SetNormalTexture("Interface\\FriendsFrame\\UI-FriendsFrame-HighlightB
 frame.Drag:SetHighlightTexture("Interface\\FriendsFrame\\UI-FriendsFrame-HighlightBar")
 frame.Drag:SetScript("OnMouseDown", function() frame:StartMoving() end)
 frame.Drag:SetScript("OnMouseUp", function() frame:StopMovingOrSizing() Gatherer.Config.SetSetting("report.left", frame:GetLeft()) Gatherer.Config.SetSetting("report.top", frame:GetTop()) end)
-frame.Drag:SetText("Gatherables Report")
+frame.Drag:SetText(_tr("REPORT_TITLE"))
 frame.Drag:SetNormalFontObject("GameFontHighlightHuge")
 
 frame.Done = CreateFrame("Button", "", frame, "OptionsButtonTemplate")
 frame.Done:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -10, 10)
 frame.Done:SetScript("OnClick", function() public.Hide() end)
-frame.Done:SetText(DONE)
+frame.Done:SetText(_tr("DONE"))
 
 frame.Config = CreateFrame("Button", "", frame, "OptionsButtonTemplate")
-frame.Config:SetPoint("BOTTOM", frame, "BOTTOM", 0, 10)
+frame.Config:SetPoint("BOTTOMLEFT", frame, "BOTTOM", 0, 10)
 frame.Config:SetScript("OnClick", function() public.Hide() Gatherer.Config.Show() end)
-frame.Config:SetText("Config")
+frame.Config:SetText(_tr("LABEL_CONFIG"))
+local buttonWidth = frame.Config:GetFontString():GetWidth() + 15
+if ( buttonWidth > 160 ) then buttonWidth = 160 end
+if ( buttonWidth < 90 ) then buttonWidth = 90 end
+frame.Config:SetWidth(buttonWidth)
 
 --Show Node Density search frame
 frame.NodeSearch = CreateFrame("Button", nil, frame, "OptionsButtonTemplate")
-frame.NodeSearch:SetPoint("BOTTOM", frame, "BOTTOM", -100, 10)
+frame.NodeSearch:SetPoint("BOTTOMRIGHT", frame, "BOTTOM", 0, 10)
 frame.NodeSearch:SetScript("OnClick", function() frame:Hide() Gatherer.NodeSearch.Show() end)
-frame.NodeSearch:SetText("Node Search")
+frame.NodeSearch:SetText(_tr("LABEL_DENSITY_REPORT"))
+buttonWidth = frame.NodeSearch:GetFontString():GetWidth() + 15
+if ( buttonWidth > 160 ) then buttonWidth = 160 end
+if ( buttonWidth < 90 ) then buttonWidth = 90 end
+frame.NodeSearch:SetWidth(buttonWidth)
 
 frame.SearchBox = CreateFrame("EditBox", "", frame)
 frame.SearchBox:SetPoint("TOP", frame.Drag, "BOTTOM", 0, -5)
@@ -159,18 +180,19 @@ frame.SearchBox:SetScript("OnTextChanged", function() public.NeedsUpdate(0.5) en
 frame.SearchBox:SetScript("OnEscapePressed", public.Hide)
 frame.SearchBox:SetScript("OnEnterPressed", function(self) self:ClearFocus() end)
 
-function private.AddText(obj, name, x, ftype)
+function private.AddText(obj, name, displayName, x, ftype)
 	if (not ftype) then ftype = "GameFontHighlight" end
 	if (obj.lastName) then
 		local lastobj = obj[obj.lastName]
 		lastobj:SetWidth(x-lastobj.left)
 	end
 	obj[name] = obj:CreateFontString("", "OVERLAY", ftype)
+	obj[name]:SetHeight(13)
 	obj[name]:SetPoint("TOPLEFT", obj, "TOPLEFT", x,0)
 	obj[name]:SetJustifyH("LEFT")
 	obj[name]:Show()
 	obj[name].left = x
-	if (ftype ~= "GameFontHighlight") then obj[name]:SetText(name)
+	if (ftype ~= "GameFontHighlight") then obj[name]:SetText(displayName and displayName or name)
 	else obj[name]:SetText("") end
 	obj.lastName = name
 end
@@ -180,7 +202,7 @@ blank:SetTexture(0,0,0,0)
 
 function private.AddTexts(obj, ftype, icon)
 	if (icon) then
-		private.AddText(obj, "Type", 15, ftype)
+		private.AddText(obj, "Type", nil, 15, ftype)
 		obj.Type.Icon = obj:CreateTexture("", "OVERLAY")
 		obj.Type.Icon:SetPoint("TOPLEFT", obj, "TOPLEFT")
 		obj.Type.Icon:SetWidth(13)
@@ -197,8 +219,9 @@ function private.AddTexts(obj, ftype, icon)
 		obj.Highlight:SetScript("OnClick", function (me)
 			local pos = me.parent.pos
 			if (pos) then
-				local c,z,n,i,x,y,_,_,_,s,g,indoor = unpack(private.results.data[pos])
-				local sig = strjoin(":", c,z,n,i,g,tostring(indoor))
+				local resultsData = private.results.data[pos]
+				local z,n,i,x,y,s,g,indoor = resultsData[ZONE], resultsData[ID], resultsData[INDEX], resultsData[POSX], resultsData[POSY], resultsData[SOURCE], resultsData[GTYPE], resultsData[INDOORS]
+				local sig = strjoin(":", z,n,i,g,tostring(indoor))
 				if (private.results.mark[sig]) then
 					private.results.mark[sig] = nil
 				else
@@ -210,14 +233,14 @@ function private.AddTexts(obj, ftype, icon)
 		obj.Highlight:Hide()
 		obj.Highlight.parent = obj
 	else
-		private.AddText(obj, "Type", 0, ftype)
+		private.AddText(obj, "Type", _tr("REPORT_COLUMN_HEADER_TYPE"), 0, ftype)
 	end
-	private.AddText(obj, "Region", 240, ftype)
-	private.AddText(obj, "X", 420, ftype)
-	private.AddText(obj, "Y", 460, ftype)
-	private.AddText(obj, "Dist", 500, ftype)
-	--private.AddText(obj, "Value", 500, ftype)
-	private.AddText(obj, "Source", 560, ftype)
+	private.AddText(obj, "Region", _tr("REPORT_COLUMN_HEADER_REGION"), 240, ftype)
+	private.AddText(obj, "X", _tr("REPORT_COLUMN_HEADER_X"), 420, ftype)
+	private.AddText(obj, "Y", _tr("REPORT_COLUMN_HEADER_Y"), 460, ftype)
+	private.AddText(obj, "Dist", _tr("REPORT_COLUMN_HEADER_DIST"), 500, ftype)
+	private.AddText(obj, "Source", _tr("REPORT_COLUMN_HEADER_SOURCE"), 560, ftype)
+	obj.Source:SetWidth(150)
 	obj:Show()
 end
 
@@ -275,11 +298,12 @@ frame.Actions:SetPoint("RIGHT", frame, "RIGHT", -10, 0)
 frame.Actions.SelectAll = CreateFrame("Button", "", frame.Actions, "OptionsButtonTemplate")
 frame.Actions.SelectAll:SetPoint("TOPLEFT", frame.Actions, "TOPLEFT")
 frame.Actions.SelectAll:SetPoint("RIGHT", frame.Actions, "RIGHT")
-frame.Actions.SelectAll:SetText("Mark these")
+frame.Actions.SelectAll:SetText(_tr("REPORT_MARK_THESE"))
 frame.Actions.SelectAll:SetScript("OnClick", function (me)
 	for pos = 1, private.results.size do
-		local c,z,n,i,x,y,_,_,_,s,g,indoor = unpack(private.results.data[pos])
-		local sig = strjoin(":", c,z,n,i,g,tostring(indoor))
+		local resultsData = private.results.data[pos]
+		local z,n,i,x,y,s,g,indoor = resultsData[ZONE], resultsData[ID], resultsData[INDEX], resultsData[POSX], resultsData[POSY], resultsData[SOURCE], resultsData[GTYPE], resultsData[INDOORS]
+		local sig = strjoin(":", z,n,i,g,tostring(indoor))
 		private.results.mark[sig] = strjoin(":", x,y)
 	end
 	private.UpdateResults()
@@ -288,11 +312,12 @@ end)
 frame.Actions.SelectNone = CreateFrame("Button", "", frame.Actions, "OptionsButtonTemplate")
 frame.Actions.SelectNone:SetPoint("TOPLEFT", frame.Actions.SelectAll, "BOTTOMLEFT")
 frame.Actions.SelectNone:SetPoint("RIGHT", frame.Actions, "RIGHT")
-frame.Actions.SelectNone:SetText("Unmark these")
+frame.Actions.SelectNone:SetText(_tr("REPORT_UNMARK_THESE"))
 frame.Actions.SelectNone:SetScript("OnClick", function (me)
 	for pos = 1, private.results.size do
-		local c,z,n,i,x,y,_,_,_,s,g,indoor = unpack(private.results.data[pos])
-		local sig = strjoin(":", c,z,n,i,g,tostring(indoor))
+		local resultsData = private.results.data[pos]
+		local z,n,i,x,y,s,g,indoor = resultsData[ZONE], resultsData[ID], resultsData[INDEX], resultsData[POSX], resultsData[POSY], resultsData[SOURCE], resultsData[GTYPE], resultsData[INDOORS]
+		local sig = strjoin(":", z,n,i,g,tostring(indoor))
 		private.results.mark[sig] = nil
 	end
 	private.UpdateResults()
@@ -301,7 +326,7 @@ end)
 frame.Actions.SelectClear = CreateFrame("Button", "", frame.Actions, "OptionsButtonTemplate")
 frame.Actions.SelectClear:SetPoint("TOPLEFT", frame.Actions.SelectNone, "BOTTOMLEFT", 0, -10)
 frame.Actions.SelectClear:SetPoint("RIGHT", frame.Actions, "RIGHT")
-frame.Actions.SelectClear:SetText("Unmark all")
+frame.Actions.SelectClear:SetText(_tr("REPORT_UNMARK_ALL"))
 frame.Actions.SelectClear:SetScript("OnClick", function (me)
 	for sig, data in pairs(private.results.mark) do
 		private.results.mark[sig] = nil
@@ -314,13 +339,13 @@ frame.Actions.SelectCount = frame.Actions:CreateFontString("", "OVERLAY", "GameF
 frame.Actions.SelectCount:SetPoint("TOPLEFT", frame.Actions.SelectClear, "BOTTOMLEFT", 0, 0)
 frame.Actions.SelectCount:SetPoint("RIGHT", frame.Actions, "RIGHT")
 frame.Actions.SelectCount:SetHeight(16)
-frame.Actions.SelectCount:SetText("Marked nodes: 0")
+frame.Actions.SelectCount:SetText(_tr("REPORT_MARKED_NODES_COUNT", 0))
 
 frame.Actions.SendEdit = CreateFrame("EditBox", "", frame)
 frame.Actions.SendEdit:SetPoint("TOPLEFT", frame.Actions.SelectCount, "BOTTOMLEFT", 0, -10)
 frame.Actions.SendEdit:SetPoint("RIGHT", frame.Actions, "RIGHT")
 frame.Actions.SendEdit.Uninitialized = true
-frame.Actions.SendEdit:SetText("Player")
+frame.Actions.SendEdit:SetText(_tr("PLAYER"))
 frame.Actions.SendEdit:SetTextColor(0.5, 0.5, 0.5)
 frame.Actions.SendEdit:SetAutoFocus(false)
 frame.Actions.SendEdit:SetMultiLine(false)
@@ -345,9 +370,9 @@ frame.Actions.SendEdit:SetScript("OnEditFocusGained", function(self)
 end)
 
 StaticPopupDialogs["GATHERER_REPORT_TRANSMIT"] = {
-	text = "Do you wish to send %s nodes to %s?\n(Remember, they need to have the Gatherables Report window open.)",
-	button1 = TEXT(YES),
-	button2 = TEXT(NO),
+	text = _trL("MASS_SHARING_GATHERER_REPORT_TRANSMIT"),
+	button1 = _trL("YES"),
+	button2 = _trL("NO"),
 	OnAccept = function()
 		local dialog = StaticPopupDialogs["GATHERER_REPORT_TRANSMIT"]
 		Gatherer.Report.ConfirmNodeTransmit(dialog.who, dialog.howmany)
@@ -370,7 +395,7 @@ end
 frame.Actions.SendSelected = CreateFrame("Button", "", frame.Actions, "OptionsButtonTemplate")
 frame.Actions.SendSelected:SetPoint("TOPLEFT", frame.Actions.SendEdit, "BOTTOMLEFT", 0, 3)
 frame.Actions.SendSelected:SetPoint("RIGHT", frame.Actions, "RIGHT")
-frame.Actions.SendSelected:SetText("Send marked")
+frame.Actions.SendSelected:SetText(_tr("REPORT_SEND_MARKED"))
 frame.Actions.SendSelected:SetScript("OnClick", function (me)
 	local who = frame.Actions.SendEdit:GetText()
 	if (who and who ~= "" and not frame.Actions.SendEdit.Uninitialized) then
@@ -398,9 +423,9 @@ frame.Actions.SendStatus:SetText("")
 
 
 StaticPopupDialogs["GATHERER_REPORT_DELETE"] = {
-	text = TEXT(DELETE_ITEM),
-	button1 = TEXT(YES),
-	button2 = TEXT(NO),
+	text = _trL("REPORT_DELETE_CONFIRMATION"),
+	button1 = _trL("YES"),
+	button2 = _trL("NO"),
 	OnAccept = function()
 		Gatherer.Report.ConfirmNodeDeletes();
 	end,
@@ -415,20 +440,17 @@ StaticPopupDialogs["GATHERER_REPORT_DELETE"] = {
 function public.ConfirmNodeDeletes()
 	local deleteList = {}
 	for sig, data in pairs(private.results.mark) do
-		local c,z,n,i,g,indoor = strsplit(":", sig)
+		local z,n,i,g,indoor = strsplit(":", sig)
 		local x,y = strsplit(":", data)
-		c=tonumber(c); z=tonumber(z); n=tonumber(n)or n; i=tonumber(i); x=tonumber(x); y=tonumber(y); indoor=(indoor=="true") and true or false
-		local px, py = Gatherer.Storage.GetNodeInfo(c,z,g,i)
+		z=tonumber(z) or z; n=tonumber(n)or n; i=tonumber(i); x=tonumber(x); y=tonumber(y); indoor=(indoor=="true") and true or false
+		local px, py = Gatherer.Storage.GetNodeInfo(z,g,i)
 		if (px and py and math.abs(x-px)<0.001 and math.abs(y-py)<0.001) then
 			-- This node is in the correct location
-			table.insert(deleteList, { c,z,n,g,i })
+			table.insert(deleteList, { z,n,g,i })
 		end
 	end
 
 	table.sort(deleteList, function(a,b)
-		if a[1] ~= b[1] then return a[1] < b[1] end
-		if a[2] ~= b[2] then return a[2] < b[2] end
-		if a[3] ~= b[3] then return a[3] < b[3] end
 		return a[4] > b[4]
 	end)
 
@@ -440,9 +462,9 @@ end
 frame.Actions.DeleteSelected = CreateFrame("Button", "", frame.Actions, "OptionsButtonTemplate")
 frame.Actions.DeleteSelected:SetPoint("TOPLEFT", frame.Actions.SendSelected, "BOTTOMLEFT", 0, -14)
 frame.Actions.DeleteSelected:SetPoint("RIGHT", frame.Actions, "RIGHT")
-frame.Actions.DeleteSelected:SetText("Delete marked")
+frame.Actions.DeleteSelected:SetText(_tr("REPORT_DELETE_MARKED"))
 frame.Actions.DeleteSelected:SetScript("OnClick", function (me)
-	StaticPopup_Show("GATHERER_REPORT_DELETE", ("%d gatherer nodes"):format(me.count))
+	StaticPopup_Show("GATHERER_REPORT_DELETE", me.count)
 end)
 frame.Actions.DeleteSelected:Disable()
 
@@ -452,7 +474,7 @@ frame.Actions.MarkTip:SetPoint("RIGHT", frame.Actions)
 frame.Actions.MarkTip:SetPoint("BOTTOM", frame.Actions)
 frame.Actions.MarkTip:SetJustifyV("TOP")
 frame.Actions.MarkTip:SetJustifyH("LEFT")
-frame.Actions.MarkTip:SetText("Note: When you mark nodes, they will remain marked until you unmark them by either clicking the line item in the report, using the Unmark buttons above or reloading the game.");
+frame.Actions.MarkTip:SetText(_tr("REPORT_MARKING_NOTE"));
 
 private.LastButton = nil
 private.SearchButtons = {}
@@ -506,25 +528,24 @@ function private.UpdateResults()
 			result.X:SetText("")
 			result.Y:SetText("")
 			result.Dist:SetText("")
-			--result.Value:SetText("")
 			result.Source:SetText("")
 			result.Type.Icon:SetTexture(blank)
 			result.Highlight:SetChecked(false)
 			result.Highlight:Hide()
 		else
-			local c,z,n,i,x,y,_,_,_,s,g,indoor = unpack(private.results.data[pos])
-			local mapID, mapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(Gatherer.ZoneTokens.GetZoneToken(c,z))
+			local resultsData = private.results.data[pos]
+			local z,n,i,x,y,s,g,indoor = resultsData[ZONE], resultsData[ID], resultsData[INDEX], resultsData[POSX], resultsData[POSY], resultsData[SOURCE], resultsData[GTYPE], resultsData[INDOORS]
+			local mapID, mapFloor = Gatherer.ZoneTokens.GetZoneMapIDAndFloor(z)
 			local d = Astrolabe:ComputeDistance(mapID, mapFloor,x,y, Astrolabe:GetCurrentPlayerPosition())
 			local t = Gatherer.Util.GetGatherTexture(n)
 			result.Type:SetText(Gatherer.Util.GetNodeName(n))
-			result.Region:SetText(Gatherer.Util.ZoneNames[c][z])
+			result.Region:SetText(Gatherer.ZoneTokens.ZoneNames[z])
 			result.X:SetText(string.format("%0.01f", x*100))
 			result.Y:SetText(string.format("%0.01f", y*100))
 			result.Dist:SetText(d and string.format("%d", d) or "∞")
-			--result.Value:SetText("")
 			result.Source:SetText(s)
 			result.Type.Icon:SetTexture(t)
-			if (private.results.mark[strjoin(":", c,z,n,i,g,tostring(indoor))]) then
+			if (private.results.mark[strjoin(":", z,n,i,g,tostring(indoor))]) then
 				result.Highlight:SetChecked(true)
 			else
 				result.Highlight:SetChecked(false)
@@ -536,10 +557,10 @@ function private.UpdateResults()
 
 	local markcount = 0
 	for sig,loc in pairs(private.results.mark) do
-		local c,z,n,i,g,indoor = strsplit(":", sig)
+		local z,n,i,g,indoor = strsplit(":", sig)
 		local x,y = strsplit(":", loc)
-		c=tonumber(c); z=tonumber(z); n=tonumber(n)or n; i=tonumber(i); x=tonumber(x); y=tonumber(y); indoor=(indoor=="true") and true or false
-		local px, py = Gatherer.Storage.GetNodeInfo(c, z, g, i)
+		z=tonumber(z) or z; n=tonumber(n)or n; i=tonumber(i); x=tonumber(x); y=tonumber(y); indoor=(indoor=="true") and true or false
+		local px, py = Gatherer.Storage.GetNodeInfo(z, g, i)
 		if (px and py and math.abs(x-px)<0.001 and math.abs(y-py)<0.001) then
 			markcount = markcount + 1
 		else
@@ -557,7 +578,7 @@ function private.UpdateResults()
 	frame.Actions.SendSelected.count = markcount
 	frame.Actions.DeleteSelected.count = markcount
 		
-	frame.Actions.SelectCount:SetText("Marked nodes: "..markcount)
+	frame.Actions.SelectCount:SetText(_tr("REPORT_MARKED_NODES_COUNT", markcount))
 end
 
 function GathererResultsScroll()
@@ -566,12 +587,22 @@ end
 
 local function filter(searchString, ...)
 	local show = false
-	local f, s, var = string.gmatch(searchString, "[%p%w]+")
+	local f, s, var = string.gmatch(searchString, "%S+")
 	while true do
 		local match = f(s, var)
 		var = match
 		if ( var == nil ) then
 			break
+		end
+		
+		local firstChar = match:sub(1, 1)
+		local mustMatch, mustNotMatch = false, false
+		if ( firstChar == '+' ) then
+			mustMatch = true
+			match = match:sub(2)
+		elseif ( firstChar == '-' ) then
+			mustNotMatch = true
+			match = match:sub(2)
 		end
 		
 		if ( match:sub(1, 1) == '"' ) then
@@ -586,14 +617,19 @@ local function filter(searchString, ...)
 			match = match:sub(2, #match - 1)
 		end
 		
+		local tokenShow = false
 		for filterName, button in pairs(private.SearchButtons) do
 			if ( button.active and button.filter(match, ...) ) then
+				if ( mustNotMatch ) then
+					return false
+				end
 				show = true
+				tokenShow = true
 				break
 			end
 		end
-		if ( show ) then
-			break
+		if ( mustMatch and not tokenShow ) then
+			return false
 		end
 	end
 	return show
@@ -604,34 +640,31 @@ function public.UpdateDisplay()
 	
 	private.results.size = 0
 	local storage = Gatherer.Storage
-	for i, continent in storage.GetAreaIndices() do
-		for i, zone in storage.GetAreaIndices(continent) do
-			for _, gType in pairs(Gatherer.Constants.SupportedGatherTypes) do
-				for index, posX, posY, inspected, indoors in storage.ZoneGatherNodes(continent, zone, gType) do
-					for _, id, count, harvested, source in storage.GetNodeGatherNames(continent, zone, gType, index) do
-						if (source == "REQUIRE") then source = _tr("NOTE_UNSKILLED")
-						elseif (source == "IMPORTED") then source = _tr("NOTE_IMPORTED")
-						elseif (not source) then source = ""
-						end
-						
-						if ( (parameter == "") or filter(parameter, continent, zone, id, index, posX, posY, count, harvested, inspected, source, gType) ) then
-							local size = private.results.size + 1
-							if not private.results.data[size] then private.results.data[size] = {} end
-							local data = private.results.data[size]
-							data[1]  = continent
-							data[2]  = zone
-							data[3]  = id
-							data[4]  = index
-							data[5]  = posX
-							data[6]  = posY
-							data[7]  = count
-							data[8]  = harvested
-							data[9]  = inspected
-							data[10] = source
-							data[11] = gType
-							data[12] = indoors
-							private.results.size = size
-						end
+	for i, zone in storage.GetAreaIndices() do
+		for _, gType in pairs(Gatherer.Constants.SupportedGatherTypes) do
+			for index, posX, posY, inspected, indoors in storage.ZoneGatherNodes(zone, gType) do
+				for _, id, count, harvested, source in storage.GetNodeGatherNames(zone, gType, index) do
+					if (source == "REQUIRE") then source = _tr("NOTE_UNSKILLED")
+					elseif (source == "IMPORTED") then source = _tr("NOTE_IMPORTED")
+					elseif (not source) then source = ""
+					end
+					
+					if ( (parameter == "") or filter(parameter, zone, id, index, posX, posY, count, harvested, inspected, source, gType) ) then
+						local size = private.results.size + 1
+						if not private.results.data[size] then private.results.data[size] = {[1]=1,[2]=2,[3]=3,[4]=4,[5]=5,[6]=6,[7]=7,[8]=8,[9]=9,[10]=10,[11]=11} end
+						local data = private.results.data[size]
+						data[ZONE]  = zone
+						data[ID]  = id
+						data[INDEX]  = index
+						data[POSX]  = posX
+						data[POSY]  = posY
+						data[COUNT]  = count
+						data[HARVESTED]  = harvested
+						data[INSPECTED]  = inspected
+						data[SOURCE] = source
+						data[GTYPE] = gType
+						data[INDOORS] = indoors
+						private.results.size = size
 					end
 				end
 			end
@@ -672,24 +705,24 @@ function public.SendFeedback(who, action, result)
 
 	if (private.sendingTo and who:lower() == private.sendingTo) then
 		if (action == "PROMPT") then
-			setStatus("Asking...")
+			setStatus(_tr("MASS_SHARING_ASKING"))
 		elseif (action == "ACCEPT") then
-			setStatus("Sending...")
+			setStatus(_tr("MASS_SHARING_SENDING"))
 			local list = {}
 			for sig, data in pairs(private.results.mark) do
 				table.insert(list, sig..":"..data)
 			end
 			table.insert(private.queue, { to = who, list = list, pos = 1 })
 		elseif (action == "REJECT") then
-			setStatus("Rejected!")
+			setStatus(_tr("MASS_SHARING_REJECT"))
 		elseif (action == "TIMEOUT") then
-			setStatus("Timed out.")
+			setStatus(_tr("MASS_SHARING_TIMEOUT"))
 		elseif (action == "BUSY") then
-			setStatus("User busy.")
+			setStatus(_tr("MASS_SHARING_BUSY"))
 		elseif (action == "CLOSED") then
-			setStatus("Is closed.")
+			setStatus(_tr("MASS_SHARING_CLOSED"))
 		elseif (action == "COMPLETE") then
-			setStatus("Success!")
+			setStatus(_tr("MASS_SHARING_COMPLETE"))
 		elseif (action == "CONTINUE") then
 			if (private.queue and private.queue[1] and private.queue[1].paused) then
 				private.queue[1].paused = nil
@@ -698,21 +731,21 @@ function public.SendFeedback(who, action, result)
 	end
 	if (private.recvFrom and who:lower() == private.recvFrom:lower()) then
 		if (action == "RECV") then
-			setStatus("Received "..private.recvCount, true)
+			setStatus(_tr("MASS_SHARING_RECEIVED_COUNT", private.recvCount), true)
 			private.recvCount = private.recvCount + 1
 		elseif (action == "DONE") then
-			setStatus("Finished "..private.recvCount)
+			setStatus(_tr("MASS_SHARING_DONE", private.recvCount))
 			private.recvFrom = nil
 			private.recvCount = 0
 		elseif (action == "ABORTED") then
-			setStatus("Aborted at "..private.recvCount)
+			setStatus(_tr("MASS_SHARING_ABORTED", private.recvCount))
 			private.recvFrom = nil
 			private.recvCount = 0
 		end
 		private.UpdateResults()
 	end
 	if (action == "ACCEPTED") then
-		setStatus("Beginning...")
+		setStatus(_tr("MASS_SHARING_ACCEPTED"))
 		private.recvFrom = who
 		private.recvCount = 0
 	end
@@ -727,7 +760,7 @@ function private.SendNodes()
 			if (time() - q.paused > 30) then
 				table.remove(private.queue, 1)
 				SendAddonMessage("Gatherer", "SENDNODES:ABORTED", "WHISPER", who)
-				setStatus("Aborted upload.")
+				setStatus(_tr("MASS_SHARING_ABORT"))
 			end
 			return
 		end
@@ -735,15 +768,15 @@ function private.SendNodes()
 		local start = q.pos
 		local limit = math.min(size,start+THROTTLE_COUNT)
 		for pos=start, limit do
-			local c,z,n,i,g,indoor,x,y = strsplit(":", q.list[pos])
-			c=tonumber(c); z=tonumber(z); n=tonumber(n)or n; i=tonumber(i); x=tonumber(x); y=tonumber(y); indoor=(indoor=="true") and true or false
-			local t = Gatherer.ZoneTokens.GetZoneToken(c,z)
-			local px, py = Gatherer.Storage.GetNodeInfo(c,z,g,i)
+			local z,n,i,g,indoor,x,y = strsplit(":", q.list[pos])
+			z=tonumber(z) or z; n=tonumber(n)or n; i=tonumber(i); x=tonumber(x); y=tonumber(y); indoor=(indoor=="true") and true or false
+			local t = Gatherer.ZoneTokens.GetZoneToken(z)
+			local px, py = Gatherer.Storage.GetNodeInfo(z,g,i)
 			if (px and py and math.abs(x-px)<0.001 and math.abs(y-py)<0.001) then
 				-- This node is in the correct location
-				Gatherer.Comm.SendMsg("WHISPER", who, n, g, indoor, c, z, x, y)
+				Gatherer.Comm.SendMsg("WHISPER", who, n, g, indoor, z, x, y)
 			end
-			setStatus("Sent "..(pos-1), true)
+			setStatus(_tr("MASS_SHARING_SENT", pos-1), true)
 			q.pos = pos
 		end
 		if (limit == size) then

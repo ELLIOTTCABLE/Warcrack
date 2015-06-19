@@ -2,7 +2,7 @@
 
 if not L then return end
 
-L["Mail Expiry Warning"] = "邮件过期警告"
-L["Scan mail body (marks it as read)"] = "扫描邮件内容(标记为已读)"
+L["EXPIRY_CHECK_LABEL"] = "邮件过期警告" -- Needs review
+L["SCAN_MAIL_BODY_LABEL"] = "扫描邮件内容(标记为已读)" -- Needs review
 L["Warn when mail expires in less days than this value"] = "在邮件过期前多少天进行警告"
 

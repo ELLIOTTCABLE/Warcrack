@@ -74,7 +74,11 @@ function PlayerHealth.prototype:Enable(core)
 	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckCombat")
 
 	self:RegisterEvent("PARTY_LEADER_CHANGED", "CheckLeader")
-	self:RegisterEvent("PARTY_MEMBERS_CHANGED", "CheckLeader")
+	if IceHUD.WowVer >= 50000 then
+		self:RegisterEvent("GROUP_ROSTER_UPDATE", "CheckLeader")
+	else
+		self:RegisterEvent("PARTY_MEMBERS_CHANGED", "CheckLeader")
+	end
 	self:RegisterEvent("LFG_PROPOSAL_UPDATE", "CheckPartyRole")
 	self:RegisterEvent("LFG_PROPOSAL_FAILED", "CheckPartyRole")
 	self:RegisterEvent("LFG_ROLE_UPDATE", "CheckPartyRole")
@@ -423,8 +427,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["Status Icon Horizontal Offset"],
 				desc = L["How much to offset the status icon (resting/combat) from the bar horizontally"],
-				min = 0,
-				max = 250,
+				min = -700,
+				max = 900,
 				step = 1,
 				get = function()
 					return self.moduleSettings.statusIconOffset['x']
@@ -442,8 +446,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["Status Icon Vertical Offset"],
 				desc = L["How much to offset the status icon (resting/combat) from the bar vertically"],
-				min = -300,
-				max = 50,
+				min = -700,
+				max = 550,
 				step = 1,
 				get = function()
 					return self.moduleSettings.statusIconOffset['y']
@@ -502,8 +506,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["Leader Icon Horizontal Offset"],
 				desc = L["How much to offset the leader icon from the bar horizontally"],
-				min = 0,
-				max = 250,
+				min = -700,
+				max = 900,
 				step = 1,
 				get = function()
 					return self.moduleSettings.leaderIconOffset['x']
@@ -521,8 +525,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["Leader Icon Vertical Offset"],
 				desc = L["How much to offset the leader icon from the bar vertically"],
-				min = -300,
-				max = 50,
+				min = -700,
+				max = 550,
 				step = 1,
 				get = function()
 					return self.moduleSettings.leaderIconOffset['y']
@@ -581,8 +585,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["Loot Master Icon Horizontal Offset"],
 				desc = L["How much to offset the loot master icon from the bar horizontally"],
-				min = 0,
-				max = 250,
+				min = -700,
+				max = 900,
 				step = 1,
 				get = function()
 					return self.moduleSettings.lootMasterIconOffset['x']
@@ -600,8 +604,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["Loot Master Icon Vertical Offset"],
 				desc = L["How much to offset the loot master icon from the bar vertically"],
-				min = -300,
-				max = 50,
+				min = -700,
+				max = 550,
 				step = 1,
 				get = function()
 					return self.moduleSettings.lootMasterIconOffset['y']
@@ -660,8 +664,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["PvP Icon Horizontal Offset"],
 				desc = L["How much to offset the PvP icon from the bar horizontally"],
-				min = 0,
-				max = 250,
+				min = -700,
+				max = 900,
 				step = 1,
 				get = function()
 					return self.moduleSettings.PvPIconOffset['x']
@@ -679,8 +683,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["PvP Icon Vertical Offset"],
 				desc = L["How much to offset the PvP icon from the bar vertically"],
-				min = -300,
-				max = 50,
+				min = -700,
+				max = 550,
 				step = 1,
 				get = function()
 					return self.moduleSettings.PvPIconOffset['y']
@@ -738,8 +742,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["Party Role Icon Horizontal Offset"],
 				desc = L["How much to offset the Party Role icon from the bar horizontally"],
-				min = 0,
-				max = 250,
+				min = -700,
+				max = 900,
 				step = 1,
 				get = function()
 					return self.moduleSettings.PartyRoleIconOffset['x']
@@ -757,8 +761,8 @@ function PlayerHealth.prototype:GetOptions()
 				type = "range",
 				name = L["Party Role Icon Vertical Offset"],
 				desc = L["How much to offset the Party Role icon from the bar vertically"],
-				min = -300,
-				max = 50,
+				min = -700,
+				max = 550,
 				step = 1,
 				get = function()
 					return self.moduleSettings.PartyRoleIconOffset['y']
@@ -1001,13 +1005,7 @@ function PlayerHealth.prototype:CheckCombat()
 end
 
 function PlayerHealth.prototype:CheckPartyRole()
-	local IsLFGParty
-	local mode, submode
-
-	mode, submode= GetLFGMode()
-	IsLFGParty = (mode ~= nil and mode ~= "abandonedInDungeon" and mode ~= "queued")
-
-	if configMode or IsLFGParty then
+	if configMode or IceHUD:GetIsInLFGGroup() then
 		if (configMode or self.moduleSettings.showPartyRoleIcon) and not self.frame.PartyRoleIcon then
 			local isTank, isHeal, isDPS
 			local proposalExists, typeID, id, name
@@ -1091,7 +1089,13 @@ function PlayerHealth.prototype:CheckPartyRole()
 end
 
 function PlayerHealth.prototype:CheckLeader()
-	if configMode or IsPartyLeader() then
+	local isLeader
+	if IceHUD.WowVer >= 50000 then
+		isLeader = UnitIsGroupLeader("player")
+	else
+		isLeader = IsPartyLeader()
+	end
+	if configMode or isLeader then
 		if (configMode or self.moduleSettings.showLeaderIcon) and not self.frame.leaderIcon then
 			self.frame.leaderIcon = self:CreateTexCoord(self.frame.leaderIcon, "Interface\\GroupFrame\\UI-Group-LeaderIcon", 20, 20,
 						self.moduleSettings.leaderIconScale, 0, 1, 0, 1)
@@ -1147,6 +1151,10 @@ function PlayerHealth.prototype:CheckPvP()
 		minx, maxx, miny, maxy = 0.05, 0.605, 0.015, 0.57
 	elseif UnitIsPVP(self.unit) then
 		pvpMode = UnitFactionGroup(self.unit)
+		
+		if pvpMode == "Neutral" then
+			pvpMode = "FFA"
+		end
 
 		if pvpMode == "Alliance" then
 			minx, maxx, miny, maxy = 0.07, 0.58, 0.06, 0.57
@@ -1208,7 +1216,7 @@ function PlayerHealth.prototype:Update(unit)
 		local percent
 
 		if incomingHealAmt > 0 then
-			percent = ((self.health + incomingHealAmt) / self.maxHealth)
+			percent = self.maxHealth ~= 0 and ((self.health + incomingHealAmt) / self.maxHealth) or 0
 			if self.moduleSettings.reverse then
 				percent = 1 - percent
 				-- Rokiyo: I'm thinking the frama strata should also to be set to medium if we're in reverse.
@@ -1338,7 +1346,11 @@ function PlayerHealth.prototype:ShowBlizzardParty()
 		if frame then
 			frame.Show = nil
 			frame:GetScript("OnLoad")(frame)
-			frame:GetScript("OnEvent")(frame, "PARTY_MEMBERS_CHANGED")
+			if IceHUD.WowVer >= 50000 then
+				frame:GetScript("OnEvent")(frame, "GROUP_ROSTER_UPDATE")
+			else
+				frame:GetScript("OnEvent")(frame, "PARTY_MEMBERS_CHANGED")
+			end
 
 			PartyMemberFrame_UpdateMember(frame)
 		end

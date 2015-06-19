@@ -1,7 +1,7 @@
 --[[
 	Gatherer Addon for World of Warcraft(tm).
-	Version: 3.2.4 (<%codename%>)
-	Revision: $Id: GatherMain.lua 894 2010-12-02 22:46:33Z Esamynn $
+	Version: 5.0.0 (<%codename%>)
+	Revision: $Id: GatherMain.lua 967 2012-09-02 21:37:21Z Esamynn $
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -25,11 +25,12 @@
 		since that is it's designated purpose as per:
 		http://www.fsf.org/licensing/licenses/gpl-faq.html#InterpreterIncompat
 ]]
-Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherMain.lua $", "$Rev: 894 $")
+Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/tags/REL_5.0.0/Gatherer/GatherMain.lua $", "$Rev: 967 $")
 
-Gatherer.Var.Version="3.2.4"
+
+Gatherer.Var.Version="5.0.0"
 if (Gatherer.Var.Version == "<%".."version%>") then
-	Gatherer.Var.Version = "3.2-DEV"
+	Gatherer.Var.Version = "4.0-DEV"
 end
 Gatherer.Version = Gatherer.Var.Version
 
@@ -46,13 +47,3 @@ Gatherer.Var.UpdateWorldMap = -1
 Gatherer.Var.Skills = { }
 Gatherer.Var.ZoneData = { }
 Gatherer.Var.MainMapItem = { }
-
-StaticPopupDialogs["GATHERER_VERSION_DIALOG"] = {
-	text = TEXT(GATHERER_VERSION_WARNING),
-	button1 = TEXT(OKAY),
-	showAlert = 1,
-	timeout = 0,
-}
-
-
-

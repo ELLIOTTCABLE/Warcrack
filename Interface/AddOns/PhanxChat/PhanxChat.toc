@@ -1,27 +1,32 @@
-## Interface: 40300
-## Version: 4.3.3.147
+## Interface: 60000
+## Version: 6.0.3.87
+## X-Curse-Packaged-Version: 6.0.3.88
+## X-Curse-Project-Name: PhanxChat
+## X-Curse-Project-ID: phanxchat
+## X-Curse-Repository-ID: wow/phanxchat/mainline
 
 ## Title: PhanxChat
 ## Notes: Removes chat frame clutter and adds some functionality.
+## Notes-deDE: Entfernt das Durcheinander des Chat-Fensters und fügt einige Funktionen hinzu.
 ## Notes-esES: Eliminar desorden de la ventana de chat y añadir algunas funciones.
 ## Notes-esMX: Eliminar desorden de la ventana de chat y añadir algunas funciones.
+## Notes-frFR: Retire les restrictions du chat et ajoute quelques fonctionnalités.
 ## Notes-ptBR: Remover a desordem da janela de bate-papo e adicionar algumas funcionalidades.
 ## Notes-ruRU: Удаляет беспорядок в окне чата и добавляет новые возможности.
+## Notes-zhCN: 移除聊天框的杂物并加入一些功能。
+## Notes-zhTW: 移除聊天框架的雜亂並新增一些功能。
+
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright © 2006–2012 Phanx.
-## X-License: Some rights reserved. See LICENSE.txt for details.
-## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW
-## X-Localizations: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN
-## X-Website: http://www.wowinterface.com/downloads/info6323-PhanxChat.html
-## X-Curse-Project-ID: phanxchat
-## X-WoWI-ID: 6323
+## X-Copyright: Copyright (c) 2006-2014 Phanx. All rights reserved.
+## X-Website: https://github.com/Phanx/PhanxChat
 
-## OptionalDependencies: LibAboutPanel, PhanxConfigWidgets
+## OptionalDependencies: LibAboutPanel, PhanxConfigWidgets, LibChatAnims
 ## SavedVariables: PhanxChatDB
 
 Libs\LibStub\LibStub.lua
 Libs\LibAboutPanel\LibAboutPanel.lua
+Libs\LibChatAnims\LibChatAnims.lua
 Libs\PhanxConfig-Checkbox\PhanxConfig-Checkbox.lua
 Libs\PhanxConfig-Dropdown\PhanxConfig-Dropdown.lua
 Libs\PhanxConfig-EditBox\PhanxConfig-EditBox.lua
@@ -29,15 +34,7 @@ Libs\PhanxConfig-Header\PhanxConfig-Header.lua
 Libs\PhanxConfig-OptionsPanel\PhanxConfig-OptionsPanel.lua
 Libs\PhanxConfig-Slider\PhanxConfig-Slider.lua
 
-Locales\Locale-deDE.lua
-Locales\Locale-esES.lua
-Locales\Locale-frFR.lua
-Locales\Locale-ptBR.lua
-Locales\Locale-koKR.lua
-Locales\Locale-ruRU.lua
-Locales\Locale-zhCN.lua
-Locales\Locale-zhTW.lua
-
+Localization.lua
 Core.lua
 Options.lua
 
@@ -55,3 +52,4 @@ Modules\LockTabs.lua
 Modules\MoveEditBox.lua
 Modules\ReplaceRealNames.lua
 Modules\ShortenChannelNames.lua
+Modules\ShowClassColors.lua

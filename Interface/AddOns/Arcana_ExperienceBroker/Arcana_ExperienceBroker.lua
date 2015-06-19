@@ -1,9 +1,14 @@
+-- LibDataBroker Initialization
+local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
+local dataobj = ldb:NewDataObject("Arcana_ExperienceBroker", {
+	type = "data source",
+	icon = "Interface\\AddOns\\Arcana_ExperienceBroker\\icons\\icon",
+	text = "0",
+	label = "Arcana's Experience Broker",
+})
+
 local UPDATEPERIOD = 5
 local elapsed = 0
-
-local icons = {
-	icon = "Interface\\AddOns\\Arcana_ExperienceBroker\\icons\\icon",
-}
 
 local xp = {
 	initial = 0, -- XP at the start of the session
@@ -28,12 +33,13 @@ local MAX_LEVEL = nil
 
 local displayOptions = {
 	percent = 1,
-	amount = 2,
-	bars = 3,
-	timeToLevel = 4,
-	remaining = 5,
+	remainingPercent = 2,
+	amount = 3,
+	remaining = 4,
+	bars = 5,
+	timeToLevel = 6,
 }
-local displayOptionsSize = 5 -- until I figure out why #displayOptions doesn't work
+local displayOptionsSize = 6 -- until I figure out why #displayOptions doesn't work
 
 local function cycleDisplayOption(displayText, size)
 	return displayText % size + 1
@@ -51,6 +57,10 @@ local function getAccountMaxLevel()
 			MAX_LEVEL = 80
 		elseif expansionlevel == 3 then -- Cataclysm
 			MAX_LEVEL = 85
+		elseif expansionlevel == 4 then -- Mists of Pandaria
+			MAX_LEVEL = 90
+		elseif expansionlevel == 5 then -- 
+			MAX_LEVEL = 100
 		else  --unknown expansionlevel so no idea but we don't want ppl to hit it
 			MAX_LEVEL = 255
 		end
@@ -77,22 +87,6 @@ local function fmttime(timeval)
 	
 	return result
 end
-
-
-local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
-local dataobj = ldb:NewDataObject("Arcana_ExperienceBroker", {
-	type = "data source",
-	icon = icons.icon,
-	text = "0",
-	label = "Arcana's Experience Broker",
-})
-
-local f = CreateFrame("frame")
-f:RegisterEvent("PLAYER_XP_UPDATE")
-f:RegisterEvent("PLAYER_LEVEL_UP")
-f:RegisterEvent("TIME_PLAYED_MSG")
-f:RegisterEvent("PLAYER_LOGIN")
-f:RegisterEvent("ADDON_LOADED")
 
 function initialize()
 	xp.current = UnitXP("player")
@@ -203,43 +197,50 @@ function updateText()
 	local restText = ""
 	
 	if not MAX_LEVEL then
-		local restSpec
-		if ArcanaExperience_DisplayOptions == displayOptions.percent then
+		local restSpec = nil
+		if ArcanaExperience_DisplayOptions.labelview == displayOptions.percent then
 			local percentXP = xp.current/xp.total * 100
 			local percentRest = xp.rest/xp.total * 100
 			levelText = string.format("|cffffffff%.1f%%|r", percentXP)
 			restSpec = string.format(" |cffffee99R:|r |cffffffff%.1f%%|r", percentRest)
+
 			
-		elseif ArcanaExperience_DisplayOptions == displayOptions.amount then
+		elseif ArcanaExperience_DisplayOptions.labelview == displayOptions.amount then
 			levelText = string.format("|cffffffff%d|r", xp.total - xpToLevel())
 			restSpec = string.format(" |cffffee99R:|r |cffffffff%d|r", xp.rest)
+
 			
-		elseif ArcanaExperience_DisplayOptions == displayOptions.bars then
+		elseif ArcanaExperience_DisplayOptions.labelview == displayOptions.bars then
 			local barsXP = xp.current/xp.total * 20
 			local barsRest = xp.rest/xp.total
 			levelText = string.format("|cffffffff%.1f bars|r", barsXP)
 			restSpec = string.format(" |cffffee99R:|r |cffffffff%.1f levels|r", barsRest)
 			
-		elseif ArcanaExperience_DisplayOptions == displayOptions.timeToLevel then
+		elseif ArcanaExperience_DisplayOptions.labelview == displayOptions.timeToLevel then
 			
 			local levelTime = timeToLevelForSession_asStr()
 			if levelTime == "unknown" then
 				levelTime = "Unknown time"
 			end
 			levelText =  string.format("|cffffffff%s to level |r", levelTime)
-			
+
 			local restTime = timeToRestForSession_asStr()
 			if restTime ~= '' then
 				restTime = restTime .." of rest"
 			end
 			restSpec = string.format(" |cffffee99R:|r |cffffffff%s|r", restTime)
+
 			
-		elseif ArcanaExperience_DisplayOptions == displayOptions.remaining then
+		elseif ArcanaExperience_DisplayOptions.labelview == displayOptions.remainingPercent then
 			levelText = string.format("|cffffffff(%.1f%%)|r", xpToLevel()/xp.total*100)
 			restSpec = string.format(" |cffffee99R:|r |cffffffff%.1f%%|r", xp.rest/xp.total * 100)
+
+		elseif ArcanaExperience_DisplayOptions.labelview == displayOptions.remaining then
+			levelText = string.format("|cffffffff(%d)|r", xpToLevel())
+			restSpec = string.format(" |cffffee99R:|r |cffffffff%d|r", xp.rest)
 		end
 		
-		if xp.rest ~= 0 then
+		if xp.rest ~= 0 and restSpec ~= nil then
 			restText = restSpec
 		else
 			restText = ""
@@ -250,49 +251,23 @@ function updateText()
 
 end
 
-
-
-f:SetScript("OnEvent", function(self, event, ...)
-	local arg1, arg2 = ...
-
-	if event == "ADDON_LOADED" and arg1 == "Arcana_ExperienceBroker" then
-		self:UnregisterEvent("ADDON_LOADED")
-		if ArcanaExperience_DisplayOptions == nil then
-			ArcanaExperience_DisplayOptions = displayOptions.percent
-		end
-	end
+function initDisplayOptions(textview)
+	textview = textview or displayOptions.percent
+	options = {
+		labelview = textview,
+		petview = false,
+	}
 	
-	if event == "PLAYER_LOGIN" then
-		initialize()
-		RequestTimePlayed()
-	elseif event == "PLAYER_XP_UPDATE" then
-		updateLastMob()
-	elseif event == "PLAYER_LEVEL_UP" then
-		newLevel()
-	elseif event == "TIME_PLAYED_MSG" then
-		times.total = arg1
-		times.levelUp = time() - arg2
-	end
-	updateExperience()	
-	updateText()
-end)
+	return options
+end
 
--- Update every 5 seconds
---[[f:SetScript("OnUpdate", function(self, elap)
-	elapsed = elapsed + elap
-	if elapsed < UPDATEPERIOD then
-		return
-	end
-	elapsed = 0
-	updateExperience()
-	updateText()
-end)]]
+
 
 function dataobj:OnClick(button)
 	if IsControlKeyDown() and button == "LeftButton" then
 		resetSession()
 	elseif button == "LeftButton" then
-		ArcanaExperience_DisplayOptions = cycleDisplayOption(ArcanaExperience_DisplayOptions, displayOptionsSize)
+		ArcanaExperience_DisplayOptions.labelview = cycleDisplayOption(ArcanaExperience_DisplayOptions.labelview, displayOptionsSize)
 		updateText()
 	end
 end
@@ -347,3 +322,47 @@ end
 function dataobj:OnLeave()
     GameTooltip:Hide();
 end
+
+local f = CreateFrame("frame")
+
+-- Main Event Loop
+f:SetScript("OnEvent", function(self, event, ...)
+	local arg1, arg2 = ...
+
+	if event == "ADDON_LOADED" and arg1 == "Arcana_ExperienceBroker" then
+		self:UnregisterEvent("ADDON_LOADED")
+		
+		if ArcanaExperience_DisplayOptions == nil then
+			print("Reset options!")
+			ArcanaExperience_DisplayOptions = initDisplayOptions()
+		elseif type(ArcanaExperience_DisplayOptions) == "number" then
+			print("Reset options with previous view!")
+			-- Convert configuration variable from previous Arcana_ExperienceBroker 40000.3.1
+			ArcanaExperience_DisplayOptions = initDisplayOptions(ArcanaExperience_DisplayOptions)
+		end
+		
+	end
+	
+	if event == "PLAYER_LOGIN" then
+		initialize()
+		RequestTimePlayed()
+	elseif event == "PLAYER_XP_UPDATE" then
+		updateLastMob()
+	elseif event == "PLAYER_LEVEL_UP" then
+		newLevel()
+	end
+	
+	if event == "TIME_PLAYED_MSG" then
+		times.total = arg1
+		times.levelUp = time() - arg2
+	end
+	
+	updateExperience()	
+	updateText()
+end)
+
+f:RegisterEvent("PLAYER_XP_UPDATE")
+f:RegisterEvent("PLAYER_LEVEL_UP")
+f:RegisterEvent("TIME_PLAYED_MSG")
+f:RegisterEvent("PLAYER_LOGIN")
+f:RegisterEvent("ADDON_LOADED")

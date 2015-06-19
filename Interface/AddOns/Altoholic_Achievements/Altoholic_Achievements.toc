@@ -1,12 +1,12 @@
-﻿## Interface: 40300
+﻿## Interface: 60100
 ## Title: Altoholic_Achievements
 ## Notes: Altoholic's Achievements UI
 ## Author: Thaoky (EU-Marécages de Zangar)
-## Version: 4.3.003
+## Version: r160
 ## Dependencies: Altoholic, DataStore, DataStore_Achievements, DataStore_Characters
 ## LoadOnDemand: 1
 ## X-Category: Interface Enhancements
-## X-Curse-Packaged-Version: r119
+## X-Curse-Packaged-Version: r160
 ## X-Curse-Project-Name: Altoholic
 ## X-Curse-Project-ID: altoholic
 ## X-Curse-Repository-ID: wow/altoholic/mainline

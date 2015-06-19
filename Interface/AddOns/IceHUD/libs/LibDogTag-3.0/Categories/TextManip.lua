@@ -1,9 +1,11 @@
 local MAJOR_VERSION = "LibDogTag-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 203 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 237 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_MINOR_VERSION then
 	_G.DogTag_MINOR_VERSION = MINOR_VERSION
 end
+
+local _G, math, type, tostring, tonumber, ipairs, table, select = _G, math, type, tostring, tonumber, ipairs, table, select
 
 DogTag_funcs[#DogTag_funcs+1] = function(DogTag)
 
@@ -205,7 +207,6 @@ DogTag:AddTag("Base", "Truncate", {
 		for i = 1, number do
 			local b = value:byte(len+1)
 			if not b then
-				shortened = false
 				break
 			elseif b <= 127 then
 				len = len + 1
@@ -273,7 +274,6 @@ DogTag:AddTag("Base", "Substring", {
 				end
 				local b = value:byte(finishByte+1)
 				if not b then
-					shortened = false
 					break
 				elseif b <= 127 then
 					finishByte = finishByte + 1

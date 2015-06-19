@@ -1,0 +1,12 @@
+tag 1.9.9.1
+b533ad4b0496cd4fdbac27ba51fc66e1be41f0f0
+Parnic <parnic@parnic.com>
+2015-03-25 23:27:45 -0500
+
+Tagging as 1.9.9.1
+
+
+--------------------
+
+Parnic:
+	- Fixed a bug causing buff/debuff watchers to not display for (de)buffs that didn't stack.

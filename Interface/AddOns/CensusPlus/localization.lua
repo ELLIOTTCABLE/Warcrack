@@ -1,7 +1,7 @@
 --[[
 	CensusPlus for World of Warcraft(tm).
 	
-	Copyright 2005 - 2006 Cooper Sellers and WarcraftRealms.com
+	Copyright 2005 - 2012 Cooper Sellers and WarcraftRealms.com
 
 	License:
 		This program is free software; you can redistribute it and/or
@@ -18,604 +18,884 @@
 		along with this program(see GLP.txt); if not, write to the Free Software
 		Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ]]
+--print("English localization loading")
+CENSUS_OPTIONS_SOUNDFILEDEFAULT = "CensusPlus\\Sounds\\CensusComplete" -- "Select default SoundFile number "; - DO NOT LOCALIZE
 CENSUSPlusFemale = { };
+-- Blizzard provided translations .. right or wrong it must match what Blizzard provides
+--frFR
+if ( GetLocale() == "frFR" ) then
+--    CENSUSPLUS_DRUID            = "Druide";
+    CENSUSPlusFemale["Druidesse"] = "Druide"; 
+--    CENSUSPLUS_HUNTER           = "Chasseur";
+    CENSUSPlusFemale["Chasseresse"] = "Chasseur"; 
+--    CENSUSPLUS_MAGE             = "Mage";
+--    CENSUSPLUS_PRIEST           = "Prêtre";
+    CENSUSPlusFemale["Prêtresse"] = "Prêtre"; 
+--    CENSUSPLUS_ROGUE            = "Voleur";
+    CENSUSPlusFemale["Voleuse"] = "Voleur"; 
+--    CENSUSPLUS_WARLOCK          = "Démoniste";
+--    CENSUSPLUS_WARRIOR          = "Guerrier";
+    CENSUSPlusFemale["Guerrière"] = "Guerrier"; 
+--    CENSUSPLUS_SHAMAN           = "Chaman";
+    CENSUSPlusFemale["Chamane"] = "Chaman"; 
+--    CENSUSPLUS_PALADIN          = "Paladin";
+	CENSUSPLUS_DEATHKNIGHT		= "Chevalier de la mort";	
+--  CENSUSPLUS_MONK             = "Moine";
+     CENSUSPlusFemale["Moniale"] = "Moine"; 
+ 
+ --   CENSUSPLUS_DWARF            = "Nain";
+    CENSUSPlusFemale["Naine"]   = "Nain";
+--    CENSUSPLUS_GNOME            = "Gnome";
+ --   CENSUSPLUS_HUMAN            = "Humain";
+    CENSUSPlusFemale["Humaine"]   = "Humain";
+--    CENSUSPLUS_NIGHTELF         = "Elfe de la nuit";
+-- 	  CENSUSPLUS_DRAENEI          = "Draeneï";
+--		CENSUSPLUS_WORGEN			= "Worgen";
+--		CENSUSPLUS_APANDAREN        = "Pandaren";
+    CENSUSPlusFemale["Pandarène"] = "Pandaren"; 
 
-CENSUSPlus_BUTTON_TEXT      = "Census+";
-CENSUSPlus_BUTTON_SUBTEXT   = "Realm Census";
-CENSUSPlus_BUTTON_TIP       = "Click here to show or hide Census+.";
-CENSUSPlus_HELP             = " Use /censusplus to open and close the Census+ UI.";
+--   CENSUSPLUS_ORC              = "Orc";
+    CENSUSPlusFemale["Orque"]   = "Orc";
+--    CENSUSPLUS_TAUREN           = "Tauren";
+    CENSUSPlusFemale["Taurène"] = "Tauren";
+ --   CENSUSPLUS_TROLL            = "Troll";
+    CENSUSPlusFemale["Trollesse"] = "Troll";
+ --   CENSUSPLUS_UNDEAD           = "Mort-vivant";
+    CENSUSPlusFemale["Morte-vivante"] = "Mort-vivant";
+--	  CENSUSPLUS_BLOODELF         = "Elfe de sang";
+--    CENSUSPLUS_GOBLIN           = "Gobelin";
+    CENSUSPlusFemale["Gobeline"] = "Gobelin"; 
+--		CENSUSPLUS_HPANDAREN        = "Pandaren";  
+    CENSUSPlusFemale["Pandarène"] = "Pandaren"; 
+end
+--
+--deDE
+--
+if ( GetLocale() == "deDE" ) then
+--	CENSUSPLUS_DRUID            = "Druide";
+	CENSUSPlusFemale["Druidin"] = "Druide";
+--	CENSUSPLUS_HUNTER           = "Jäger";
+	CENSUSPlusFemale["Jägerin"] = "Jäger";
+--	CENSUSPLUS_MAGE             = "Magier";
+	CENSUSPlusFemale["Magierin"] = "Magier";
+--	CENSUSPLUS_PRIEST           = "Priester";
+	CENSUSPlusFemale["Priesterin"] = "Priester";
+--	CENSUSPLUS_ROGUE            = "Schurke";
+	CENSUSPlusFemale["Schurkin"] = "Schurke";
+--	CENSUSPLUS_WARLOCK          = "Hexenmeister";
+	CENSUSPlusFemale["Hexenmeisterin"] = "Hexenmeister";
+--	CENSUSPLUS_WARRIOR          = "Krieger";
+	CENSUSPlusFemale["Kriegerin"] = "Krieger";
+--	CENSUSPLUS_SHAMAN           = "Schamane";
+	CENSUSPlusFemale["Schamanin"] = "Schamane";
+--	CENSUSPLUS_PALADIN          = "Paladin"; 
+	CENSUSPLUS_DEATHKNIGHT		= "Todesritter";
+--  CENSUSPLUS_MONK             = "Mönch";
 
-CENSUSPlus_MSG1             = " Loaded - type /censusplus or /census+ to open main window";
-CENSUSPlus_MSG2             = "Use /censusdate to set today's date in the format of MM-DD-YYYY, ie. 12-25-2004";
+--	CENSUSPLUS_DWARF            = "Zwerg"; 
+--	CENSUSPLUS_GNOME            = "Gnom"; 
+--	CENSUSPLUS_HUMAN            = "Mensch"; 
+--	CENSUSPLUS_NIGHTELF         = "Nachtelf"; 
+    CENSUSPlusFemale["Nachtelfe"]  = "Nachtelf"; 	
+--	CENSUSPLUS_DRAENEI          = "Draenei";
+--  CENSUSPLUS_APANDAREN        = "Pandaren";
 
-CENSUSPlus_UPLOAD           = "Be sure to upload your CensusPlus data to www.WarcraftRealms.com!";
-CENSUSPlus_SETTINGDATE      = "Setting date to => ";
-CENSUSPlus_PAUSE            = "Pause";
-CENSUSPlus_UNPAUSE          = "Un-Pause";
-CENSUSPlus_STOP             = "Stop";
-CENSUSPlus_PRUNE			= "Prune";
+--	CENSUSPLUS_ORC              = "Orc"; 
+--	CENSUSPLUS_TAUREN           = "Tauren"; 
+--	CENSUSPLUS_TROLL            = "Troll"; 
+--	CENSUSPLUS_UNDEAD           = "Untoter";   
+    CENSUSPlusFemale["Untote"]  = "Untoter"; 	
+--	CENSUSPLUS_BLOODELF         = "Blutelf";
+    CENSUSPlusFemale["Blutelfe"]  = "Blutelf";
+--  CENSUSPLUS_GOBLIN			= "Goblin";
+-- CENSUSPLUS_HPANDAREN        = "Pandaren"; 	
+end
+--
+--ptBR
+--
+if ( GetLocale() == "ptBR" ) then
+--CENSUSPLUS_DRUID = "Druida";
+CENSUSPlusFemale["Druidesa"] = "Druida"
+--CENSUSPLUS_HUNTER = "Caçador";
+CENSUSPlusFemale["Caçadora"] = "Caçador";
+--CENSUSPLUS_MAGE = "Mago";
+CENSUSPlusFemale["Maga"] = "Mago"
+--CENSUSPLUS_PRIEST = "Sacerdote";
+CENSUSPlusFemale["Sacerdotisa"] = "Sacerdote"
+--CENSUSPLUS_ROGUE = "Ladino";
+CENSUSPlusFemale["Ladina"] = "Ladino"
+--CENSUSPLUS_WARLOCK = "Bruxo";
+CENSUSPlusFemale["Bruxa"] = "Bruxo"
+--CENSUSPLUS_WARRIOR = "Guerreiro";
+CENSUSPlusFemale["Guerreira"] = "Guerreiro";
+--CENSUSPLUS_SHAMAN = "Xamã";
+--CENSUSPLUS_PALADIN = "Paladino";
+CENSUSPlusFemale["Paladina"] = "Paladino"
+--CENSUSPLUS_DEATHKNIGHT = "Cavaleiro da Morte";
+CENSUSPlusFemale["Cavaleira da Morte"] = "Cavaleiro da Morte"
+--CENSUSPLUS_MONK   = "Monge";
+CENSUSPlusFemale["Monja"] = "Monge"; 
 
-CENSUSPlus_TAKECENSUS       = "Take a census of players \ncurrently online on this server \nand in this faction";
-CENSUSPlus_PURGEDATABASE    = "Purge the database of all data";
-CENSUSPlus_PAUSECENSUS      = "Pause the current census";
-CENSUSPlus_UNPAUSECENSUS    = "Un-Pause the current census";
-CENSUSPlus_STOPCENSUS       = "Stop the currently active CensusPlus";
-CENSUSPlus_PRUNECENSUS		= "Prune the database by removing characters not seen in 30 days.";
 
-CENSUSPlus_PRUNEINFO		= "Pruned %d characters.";
+--CENSUSPLUS_DWARF = "Anão";
+CENSUSPlusFemale["Anã"] = "Anão";
+--CENSUSPLUS_GNOME = "Gnomo";
+CENSUSPlusFemale["Gnoma"] = "Gnomo";
+--CENSUSPLUS_HUMAN = "Humano";
+CENSUSPlusFemale["Humana"] = "Humano";
+--CENSUSPLUS_NIGHTELF = "Elfo noturno";
+CENSUSPlusFemale["Elfa noturna"] = "Elfo noturno";
+-- CENSUSPLUS_DRAENEI = "Draenei";
+CENSUSPlusFemale["Draenaia"] = "Draenei";
+--CENSUSPLUS_WORGEN			= "Worgen/Worgenin";
+CENSUSPlusFemale["Worgenin"] = "Worgen"
+-- CENSUSPLUS_APANDAREN        = "Pandaren";  
+CENSUSPlusFemale["Pandarena"] = "Pandaren"; 
 
-CENSUSPlus_PURGEMSG         = "Purged character database.";
-CENSUSPlus_ISINPROGRESS     = "A CensusPlus is in progress, try again later";
-CENSUSPlus_TAKINGONLINE     = "Taking census of characters online...";
-CENSUSPlus_PLZUPDATEDATE    = "Please use /censusdate to set today's date for more more accurate data.  Format /censusdate MM-DD-YYYY, example, /censusdate 12-25-2004";
-CENSUSPlus_NOCENSUS         = "A Census is not currently in progress";
-CENSUSPlus_FINISHED         = "Finished Taking data. Found %s new characters and saw %s. Took %s.";
-CENSUSPlus_TOOMANY          = "WARNING: Too many characters matching: %s";
-CENSUSPlus_WAITING          = "Waiting to send who request...";
-CENSUSPlus_SENDING          = "Sending /who %s";
-CENSUSPlus_PROCESSING       = "Processing %s characters.";
+-- CENSUSPLUS_ORC = "Orc";
+CENSUSPlusFemale["Orquisa"] = "Orc";
+-- CENSUSPLUS_TROLL = "Troll";
+CENSUSPlusFemale["Trolesa"] = "Troll";
+-- CENSUSPLUS_TAUREN = "Tauren";
+CENSUSPlusFemale["Taurena"] = "Tauren";
+--CENSUSPLUS_UNDEAD = "Morto-vivo";
+CENSUSPlusFemale["Morta-viva"] = "Morto-vivo";
+--CENSUSPLUS_BLOODELF = "Elfo sangrento";
+CENSUSPlusFemale["Elfa de sangre"] = "Elfo sangrento";
+-- CENSUSPLUS_GOBLIN   = "Goblin";
+CENSUSPlusFemale["Goblina"] = "Gobelin"; 
+-- CENSUSPLUS_HPANDAREN        = "Pandaren";  
+CENSUSPlusFemale["Pandarena"] = "Pandaren"; 
+end	
+	
+--
+--itIT
+--
+if ( GetLocale() == "itIT" ) then
+CENSUSPLUS_DRUID            = "Druido";
+CENSUSPlusFemale["Druida"] = "Druido";
+CENSUSPLUS_HUNTER           = "Cacciatore";
+CENSUSPlusFemale["Cacciatrice"] = "Cacciatore";
+CENSUSPLUS_MAGE             = "Mago";
+CENSUSPlusFemale["Maga"] = "Mago";
+CENSUSPLUS_PRIEST           = "Sacerdote";
+CENSUSPlusFemale["Sacerdotessa"] = "Sacerdote";
+CENSUSPLUS_ROGUE            = "Ladro";
+CENSUSPlusFemale["Ladra"] = "Ladro";
+CENSUSPLUS_WARLOCK          = "Stregone";
+CENSUSPlusFemale["Strega"] = "Stregone";
+CENSUSPLUS_WARRIOR          = "Guerriero";
+CENSUSPlusFemale["Guerriera"] = "Guerriero";
+CENSUSPLUS_SHAMAN           = "Sciamano";
+CENSUSPlusFemale["Sciamana"] = "Sciamano";
+CENSUSPLUS_PALADIN          = "Paladino";
+CENSUSPlusFemale["Paladina"] = "Paladino";
+CENSUSPLUS_DEATHKNIGHT		= "Cavaliere della Morte";
+CENSUSPLUS_MONK             = "Monaco";
+CENSUSPlusFemale["Monaca"] = "Monaco";
 
-CENSUSPlus_REALMNAME        = "Realm: %s";
-CENSUSPlus_REALMUNKNOWN     = "Realm: Unknown";
-CENSUSPlus_FACTION          = "Faction: %s";
-CENSUSPlus_FACTIONUNKNOWN   = "Faction: Unknown";
-CENSUSPlus_LOCALE           = "Locale : %s";
-CENSUSPlus_LOCALEUNKNOWN    = "Locale : Unknown";
-CENSUSPlus_TOTALCHAR        = "Total Characters: %d";
-CENSUSPlus_TOTALCHAR_0      = "Total Characters: 0";
-CENSUSPlus_TOTALCHARXP      = "XP Factor: %d";
-CENSUSPlus_TOTALCHARXP_0    = "XP Factor: 0";
-CENSUSPlus_SCAN_PROGRESS    = "Scan Progress: %d queries in the queue - %s";
-CENSUSPlus_SCAN_PROGRESS_0  = "No Scan In Progress";
-CENSUSPlus_AUTOCLOSEWHO     = "Automatically Close Who";
-CENSUSPlus_SHOWMINI         = "Show Mini On Start";
-CENSUSPlus_UNGUILDED        = "(Unguilded)";
-CENSUSPlus_TAKE             = "Take";
-CENSUSPlus_TOPGUILD         = "Top Guilds By XP";
-CENSUSPlus_RACE             = "Races";
-CENSUSPlus_CLASS            = "Classes";
-CENSUSPlus_LEVEL            = "Levels";
-CENSUSPlus_PURGE            = "Purge";
-CENSUSPlus_MAXXED			= "MAXXED!";
+CENSUSPLUS_DWARF            = "Nano";
+CENSUSPlusFemale["Nana"] = "Nano";
+CENSUSPLUS_GNOME            = "Gnomo";
+CENSUSPlusFemale["Gnoma"] = "Gnomo";
+CENSUSPLUS_HUMAN            = "Umano";
+CENSUSPlusFemale["Umana"] = "Umano";
+CENSUSPLUS_NIGHTELF         = "Elfo della Notte";
+CENSUSPlusFemale["Elfa della Notte"] = "Elfo della Notte";
+CENSUSPLUS_WORGEN			= "Worgen";
+CENSUSPLUS_APANDAREN        = "Pandaren";
 
-CENSUSPlus_MAXIMIZE         = "Maximize the CensusPlus Window";
-CENSUSPlus_MINIMIZE         = "Minimize the CensusPlus Window";
-CENSUSPlus_BUTTON_MINIMIZE  = "Minimize";
+CENSUSPLUS_ORC              = "Orco";
+CENSUSPlusFemale["Orchessa"] = "Orco";
+CENSUSPLUS_TAUREN           = "Tauren";
+CENSUSPLUS_TROLL            = "Troll";
+CENSUSPLUS_UNDEAD           = "Non Morto";
+CENSUSPlusFemale["Non Morta"] = "Non Morto";
+CENSUSPLUS_DRAENEI          = "Draenei";
+CENSUSPLUS_BLOODELF         = "Elfo del sangue";
+CENSUSPlusFemale["Elfa del Sangue"] = "Elfo del sangue";
+CENSUSPLUS_GOBLIN			= "Goblin";
+CENSUSPLUS_HPANDAREN        = "Pandaren";
+end
+--
+--esES
+--
+if ( GetLocale() == "esES" ) then
+  CENSUSPLUS_DRUID            = "Druida";
+   CENSUSPLUS_HUNTER           = "Cazador";
+   CENSUSPlusFemale["Cazadora"] = "Cazador"; 
+   CENSUSPLUS_MAGE             = "Mago"; 
+   CENSUSPlusFemale["Maga"] = "Mago"; 
+   CENSUSPLUS_PRIEST           = "Sacerdote"; 
+   CENSUSPlusFemale["Sacerdotisa"] = "Sacerdote"; 
+   CENSUSPLUS_ROGUE            = "Pícaro"; 
+   CENSUSPlusFemale["Pícara"] = "Pícaro"; 
+   CENSUSPLUS_WARLOCK          = "Brujo"; 
+   CENSUSPlusFemale["Bruja"] = "Brujo"; 
+   CENSUSPLUS_WARRIOR          = "Guerrero"; 
+   CENSUSPlusFemale["Guerrera"] = "Guerrero"; 
+   CENSUSPLUS_SHAMAN           = "Chamán";
+   CENSUSPLUS_PALADIN          = "Paladín";
+	 CENSUSPLUS_DEATHKNIGHT		= "Caballero de la Muerte";
+		CENSUSPLUS_MONK             = "Monje";
 
-CENSUSPlus_DRUID            = "Druid";
-CENSUSPlus_HUNTER           = "Hunter";
-CENSUSPlus_MAGE             = "Mage";
-CENSUSPlus_PRIEST           = "Priest";
-CENSUSPlus_ROGUE            = "Rogue";
-CENSUSPlus_WARLOCK          = "Warlock";
-CENSUSPlus_WARRIOR          = "Warrior";
-CENSUSPlus_SHAMAN           = "Shaman";
-CENSUSPlus_PALADIN          = "Paladin";
-CENSUSPlus_DEATHKNIGHT		= "Death Knight";
+   CENSUSPLUS_DWARF            = "Enano"; 
+   CENSUSPlusFemale["Enana"] = "Enano"; 
+   CENSUSPLUS_GNOME            = "Gnomo"; 
+   CENSUSPlusFemale["Gnoma"] = "Gnomo"; 
+   CENSUSPLUS_HUMAN            = "Humano"; 
+   CENSUSPlusFemale["Humana"] = "Humano"; 
+   CENSUSPLUS_NIGHTELF         = "Elfo de la noche"; 
+   CENSUSPlusFemale["Elfa de la noche"] = "Elfo de la noche"; 
+--   CENSUSPLUS_DRAENEI          = "Draenei";
+   CENSUSPLUS_WORGEN              = "Huargen";
+--   CENSUSPLUS_APANDAREN        = "Pandaren";
 
-CENSUSPlus_DWARF            = "Dwarf";
-CENSUSPlus_GNOME            = "Gnome";
-CENSUSPlus_HUMAN            = "Human";
-CENSUSPlus_NIGHTELF         = "Night Elf";
-CENSUSPlus_ORC              = "Orc";
-CENSUSPlus_TAUREN           = "Tauren";
-CENSUSPlus_TROLL            = "Troll";
-CENSUSPlus_UNDEAD           = "Undead";
-CENSUSPlus_DRAENEI          = "Draenei";
-CENSUSPlus_BLOODELF         = "Blood Elf";
-CENSUSPlus_WORGEN			= "Worgen";
-CENSUSPlus_GOBLIN			= "Goblin";
+   CENSUSPLUS_ORC              = "Orco";
+--   CENSUSPLUS_TAUREN           = "Tauren"; 
+   CENSUSPLUS_TROLL            = "Trol";
+   CENSUSPLUS_UNDEAD           = "No-muerto"; 
+   CENSUSPlusFemale["No-muerta"] = "No-muerto"; 
+   CENSUSPLUS_BLOODELF         = "Elfo de sangre";
+   CENSUSPlusFemale["Elfa de sangre"] = "Elfo de sangre"; 
+--   CENSUSPLUS_GOBLIN              = "Goblin";
+--   CENSUSPLUS_HPANDAREN        = "Pandaren";
+end
 
-CENSUSPlus_WarsongGulch     = "Warsong Gulch";  
-CENSUSPlus_AlteracValley    = "Alterac Valley";
-CENSUSPlus_ArathiBasin		= "Arathi Basin";
-CENSUSPlus_EyeOfTheStorm    = "Eye of the Storm";
+	-- Translations start below
+
+CENSUSPLUS_TEXT     			 = "Census+";
+
+CENSUSPLUS_MSG1             = " Loaded - type /censusplus or /census+  or /census for valid commands";
+CENSUSPLUS_UPLOAD           = "Be sure to upload your CensusPlus data to www.WarcraftRealms.com!";
+CENSUSPLUS_PAUSE            = "Pause";
+CENSUSPLUS_UNPAUSE          = "Resume";
+CENSUSPLUS_STOP             = "Stop";
+
+CENSUSPLUS_PRUNE			= "Prune";
+CENSUSPLUS_PRUNECENSUS		= "Prune the database by removing characters not seen in 30 days.";
+CENSUSPLUS_PRUNEINFO		= "Pruned %d characters.";
+CENSUSPLUS_PURGEDATABASE    = "Purge the database of all data";
+CENSUSPLUS_PURGE            = "Purge";
+CENSUSPLUS_PURGEMSG         = "Purged character database.";
+CENSUSPLUS_PURGE_LOCAL_CONFIRM = "Are you sure you wish to PURGE your local database?";
+
+CENSUSPLUS_TAKECENSUS       = "Take a census of players \ncurrently online on this server \nand in this faction";
+CENSUSPLUS_PAUSECENSUS      = "Pause the current census";
+CENSUSPLUS_UNPAUSECENSUS    = "Resume the current census";
+CENSUSPLUS_STOPCENSUS_TOOLTIP       = "Stop the currently active CensusPlus";
+CENSUSPLUS_ISINPROGRESS     = "A CensusPlus is in progress, try again later";
+CENSUSPLUS_TAKINGONLINE     = "Taking census of characters online...";
+CENSUSPLUS_NOCENSUS         = "A Census is not currently in progress";
+CENSUSPLUS_NOTINFACTION     = "Neutral faction - census not allowed"; 
+CENSUSPLUS_FINISHED         = "Finished Taking data. Found %s new characters and saw %s. Took %s.";
+CENSUSPLUS_TOOMANY          = "WARNING: Too many characters matching: %s";
+CENSUSPLUS_WAITING          = "Waiting to send who request...";
+CENSUSPLUS_SENDING          = "Sending /who %s";
+CENSUSPLUS_WHOQUERY			= "Who query:"
+CENSUSPLUS_FOUND					= "found"
+
+CENSUSPLUS_PROCESSING       = "Processing %s characters.";
+CENSUSPLUS_REALM			= "Realm";
+CENSUSPLUS_REALMNAME        = "Realm: ";
+CENSUSPLUS_CONNECTED		= "Connected:";
+CENSUSPLUS_CONNECTED2		= "Additional Connected:";
+CENSUSPLUS_REALMUNKNOWN     = "Realm: Unknown";
+CENSUSPLUS_FACTION          = "Faction: %s";
+CENSUSPLUS_FACTIONUNKNOWN   = "Faction: Unknown"; -- replace this text with notinfaction above?
+CENSUSPLUS_LOCALE           = "Locale : %s";
+CENSUSPLUS_LOCALEUNKNOWN    = "Locale : Unknown";
+CENSUSPLUS_TOTALCHAR        = "Total Characters: %d";
+CENSUSPLUS_TOTALCHAR_0      = "Total Characters: 0";
+CENSUSPLUS_TOTALCHARXP      = "XP Factor: %d";
+CENSUSPLUS_TOTALCHARXP_0    = "XP Factor: 0";
+CENSUSPLUS_SCAN_PROGRESS    = "Scan Progress: %d queries in the queue - %s";
+CENSUSPLUS_SCAN_PROGRESS_0  = "No Scan In Progress";
+CENSUSPLUS_AUTOCLOSEWHO     = "Automatically Close Who";
+CENSUSPLUS_UNGUILDED        = "(Unguilded)";
+CENSUSPLUS_TAKE             = "Take";
+CENSUSPLUS_GETGUILD			= "Click Realm for Guild data";
+CENSUSPLUS_TOPGUILD         = "Top Guilds By XP";
+CENSUSPLUS_RACE             = "Races";
+CENSUSPLUS_CLASS            = "Classes";
+CENSUSPLUS_LEVEL            = "Levels";
+CENSUSPLUS_MAXXED			= "MAXXED!";
+CENSUSPLUS_GUILDREALM		= "Guild's Realm";
+CENSUSPLUS_LASTSEEN			= "Last Seen";
+
+CENSUSPLUS_DRUID            = "Druid";
+CENSUSPLUS_HUNTER           = "Hunter";
+CENSUSPLUS_MAGE             = "Mage";
+CENSUSPLUS_PRIEST           = "Priest";
+CENSUSPLUS_ROGUE            = "Rogue";
+CENSUSPLUS_WARLOCK          = "Warlock";
+CENSUSPLUS_WARRIOR          = "Warrior";
+CENSUSPLUS_SHAMAN           = "Shaman";
+CENSUSPLUS_PALADIN          = "Paladin";
+CENSUSPLUS_DEATHKNIGHT		= "Death Knight";
+CENSUSPLUS_MONK             = "Monk";
+
+CENSUSPLUS_DWARF            = "Dwarf";
+CENSUSPLUS_GNOME            = "Gnome";
+CENSUSPLUS_HUMAN            = "Human";
+CENSUSPLUS_NIGHTELF         = "Night Elf";
+CENSUSPLUS_DRAENEI          = "Draenei";
+CENSUSPLUS_WORGEN			= "Worgen";
+CENSUSPLUS_APANDAREN        = "Pandaren";
+
+CENSUSPLUS_ORC              = "Orc";
+CENSUSPLUS_TAUREN           = "Tauren";
+CENSUSPLUS_TROLL            = "Troll";
+CENSUSPLUS_UNDEAD           = "Undead";
+CENSUSPLUS_BLOODELF         = "Blood Elf";
+CENSUSPLUS_GOBLIN			= "Goblin";
+CENSUSPLUS_HPANDAREN        = "Pandaren";
+
+
+CENSUSPLUS_US_LOCALE		= "Select if you play on US Servers";
+CENSUSPLUS_EU_LOCALE		= "Select if you play on EURO Servers";
+CENSUSPLUS_LOCALE_SELECT	= "Select if you play on US or EURO servers";
+CENSUSPLUS_OPTIONS_OVERRIDE	= "Override"
+CENSUSPLUS_BUTTON_OPTIONS	= "Options";
+CENSUSPLUS_OPTIONS_HEADER	= "Census+ Options";
+CENSUSPLUS_ACCOUNT_WIDE		= "Account wide"
+CENSUSPLUS_ACCOUNT_WIDE_ONLY_OPTIONS		= "Account Wide Only options"
+CENSUSPLUS_CCO_OPTIONOVERRIDES = "Option overrides for this character only"
+CENSUSPLUS_ISINBG			= "You are currently in a Battleground so a Census cannot be taken";
+CENSUS_OPTIONS_BUTSHOW      = "Show Census Button";
+CENSUS_OPTIONS_AUTOCENSUS   = "Auto-Census";
+CENSUS_OPTIONS_AUTOSTART    = "Auto-Start";
+CENSUS_OPTIONS_VERBOSE      = "Verbose";
+CENSUS_OPTIONS_VERBOSE_TOOLTIP	= "Enables verbose text in chat window, disables Stealth mode"
+CENSUS_OPTIONS_STEALTH = "Stealth"
+CENSUS_OPTIONS_STEALTH_TOOLTIP	= "Stealth mode - no chat messages, disables Verbose"
+CENSUS_OPTIONS_SOUND_ON_COMPLETE = "Play Sound When Done";
+CENSUS_OPTIONS_SOUND_TOOLTIP = "Enable Sound then select Sound File";
+CENSUS_OPTIONS_SOUNDFILE = "Select User provided SoundFile number ";
+CENSUS_OPTIONS_SOUNDFILETEXT = "Select desired .mp3 or .OGG sound file"
+CENSUS_OPTIONS_TIMER_TOOLTIP = "Sets delay in minutes from the last Census ending."
+CENSUS_OPTIONS_LOG_BARS		= "Logarithmic Level Bars";
+CENSUS_OPTIONS_LOG_BARSTEXT		= "Enables Logarithmic scaling on display bars"
+CENSUS_OPTIONS_BACKGROUND_TRANSPARENCY_TOOLTIP = "Background transparency - ten steps"
+CENSUSPLUS_VERBOSE_TOOLTIP  = "Deselect to stop the spam!";
+CENSUSPlus_AUTOCENSUS_TOOLTIP = "Enable Census+ to run automatically while playing";
+CENSUSPLUS_OPTIONS_CHATTYCONFIRM = "Chatty Option confirmation - check to enable"
+CENSUSPLUS_OPTIONS_CHATTY_TOOLTIP = "Enable chat to show current options settings - displays on interface options window opening and many CensusPlus option changes"
+
+CENSUSPLUS_BUTTON_CHARACTERS = "Show Chars";
+CENSUSPLUS_CHARACTERS		= "Characters";
+
+CENSUS_BUTTON_TOOLTIP		= "Open CensusPlus";
+-- >6.1.2
+-- CensusPlus_
+CENSUSPLUS_PROBLEMNAME  = "This name is problematic => ";
+CENSUSPLUS_PROBLEMNAME_ACTION	= ", name skipped.  This message will only be shown once.";
+CENSUSPLUS_BADLOCAL_1	= "You appear to have a US Census version, yet your localization is set to French or German or Italian.";
+CENSUSPLUS_BADLOCAL_2	= "Please do not upload data to WarcraftRealms until this has been resolved.";
+CENSUSPLUS_BADLOCAL_3	= "If this is incorrect, please let Bringoutyourdead know at www.WarcraftRealms.com about your situation so he can make corrections.";
+CENSUSPLUS_WRONGLOCAL_PURGE	= "Locale differs from previous setting, purging database.";
+CENSUSPLUS_WAS	= " was ";
+CENSUSPLUS_NOW	= " now ";
+CENSUSPLUS_USING_WHOLIB	= "Using WhoLib";
+CENSUSPLUS_LASTSEEN_COLON	= " Last Seen: ";
+CENSUSPLUS_FOUND_CAP	= "Found ";
+CENSUSPLUS_PLAYERS	= " players.";
+CENSUSPLUS_AND	= " and ";
+CENSUSPLUS_OR	= " or ";
+CENSUSPLUS_USAGE	= "Usage:";
+CENSUSPLUS_STEALTHON	= "Stealth Mode : ON";
+CENSUSPLUS_STEALTHOFF	= "Stealth Mode : OFF";
+CENSUSPLUS_VERBOSEON	= "Verbose Mode : ON";
+CENSUSPLUS_VERBOSEOFF	= "Verbose Mode : OFF";
+CENSUSPLUS_CENSUSBUTTONSHOWNON = "CensusButton Mode : ON";
+CENSUSPLUS_CENSUSBUTTONSHOWNOFF = "CensusButton Mode : OFF";
+CENSUSPLUS_CENSUSBUTTONANIMION = "CensusButton Animation : ON";
+CENSUSPLUS_CENSUSBUTTONANIMIOFF = "CensusButton Animation : OFF";
+CENSUSPLUS_CENSUSBUTTONANIMITEXT = "Census button animation"
+CENSUSPLUS_AUTOCENSUSON		= "AutoCensus Mode : ON";
+CENSUSPLUS_AUTOCENSUSOFF	= "AutoCensus Mode : OFF";
+CENSUSPLUS_AUTOCENSUSTEXT	= "Start Census after initial delay"
+CENSUSPLUS_AUTOCENSUS_DELAYTIME		= "Delay in minutes";
+CENSUSPLUS_AUTOSTARTTEXT	= "Auto Start on login when timer less then "
+CENSUSPLUS_PLAYFINISHSOUNDON	= "PlayFinishSound Mode : ON";
+CENSUSPLUS_PLAYFINISHSOUNDOFF	= "PlayFinishSound Mode : OFF";
+CENSUSPLUS_PLAYFINISHSOUNDNUM	= "FinishSound number "
+CENSUS_OPTIONS_CCO_REMOVE_OVERRIDE	= "Remove Override"
+CENSUSPLUS_UNKNOWNRACE	= "Found an unknown race ( ";
+CENSUSPLUS_UNKNOWNRACE_ACTION	= " ), please tell Bringoutyourdead at WarcraftRealms.com";
+CENSUSPLUS_TOOSLOW	= "Update too slow! Computer overloaded?Connection problems?";
+CENSUSPLUS_LANGUAGECHANGED	= "Client Language changed, Database purged.";
+CENSUSPLUS_CONNECTEDREALMSFOUND	= "CensusPlus found the following Connected Realms";
+CENSUSPLUS_OBSOLETEDATAFORMATTEXT	= "Old Database format found, Database purged."
+CENSUSPLUS_TRANSPARENCY = "Census window transparency"
+CENSUSPLUS_PURGEDALL	= "All Census Data Purged";
+CENSUSPLUS_HELP_0	= " following command as shown below";
+CENSUSPLUS_HELP_1	= " _ Toggle verbose mode off/on";
+CENSUSPLUS_HELP_2	= " _ Brings up the Option window";
+CENSUSPLUS_HELP_3	= " _ Start a Census snapshot";
+CENSUSPLUS_HELP_4	= " _ Stop a Census snapshot";
+CENSUSPLUS_HELP_5	= " X  _ Prune the database by removing characters not seen in X days - default X = 30";
+CENSUSPLUS_HELP_6	= " X _ Prune the database by removing all characters not seen in X days from servers other than the one you are currently on. - default X = 0";
+CENSUSPLUS_HELP_7	= " _  Will display info that matches names.";
+CENSUSPLUS_HELP_8	= " _  Will list unguilded characters of that level.";
+CENSUSPLUS_HELP_9	= " _  Will set the autocensus timer (to X minutes).";
+CENSUSPLUS_HELP_10	= " _ Does Census update of player only.. this is done automatically when /CensusPlus take finishes.";
+CENSUSPLUS_HELP_11	= " _ Toggles stealth mode off/on - disables Verbose and all CensusPlus chat messages.";
+CENSUSPLUS_CMDERR_WHO2NUM	= "Who commands can be: who name  _ no numbers in name";
+CENSUSPLUS_CMDERR_WHO2	= "Who commands should be:  who name level  _ no name found, level is optional";
+-- CensusPlus_
+--playerlist.lua
+
+--[[ obsolete
+
+i.f ( GetLocale() == "frFR" ) th.en
+	
+
+if ( GetLocale() == "esES" ) then
+	--  Thanks to NeKRoMaNT  EU-Zul'jin   < contacto@nekromant.com> for the Spanish Translation
+
+	CENSUSPLUS_TEXT      = "Census+";
+
+	CENSUSPLUS_MSG1             = " operativo - Escribe /censusplus o /census+ para abrir la ventana principal";
+	CENSUSPLUS_UPLOAD           = "¡Asegúrate de enviar tus datos a www.WarcraftRealms.com!";
+	CENSUSPLUS_PAUSE            = "Pausa";
+	CENSUSPLUS_UNPAUSE          = "Continuar";
+	CENSUSPLUS_STOP             = "Detener";
+
+	CENSUSPLUS_PRUNE            = "Resetear";
+	CENSUSPLUS_PRUNECENSUS      = "Optimiza la base de datos borrando personajes sin censar en los últimos 30 días";
+--CENSUSPLUS_PRUNEINFO		= "Pruned %d characters.";
+	CENSUSPLUS_PURGEDATABASE    = "Purgar la base de datos.";
+	CENSUSPLUS_PURGE            = "Purgar";
+	CENSUSPLUS_PURGEMSG         = "Base de datos de personajes purgada.";
+--CENSUSPLUS_PURGE_LOCAL_CONFIRM = "Are you sure you wish to PURGE your local database?";
+
+	CENSUSPLUS_TAKECENSUS       = "Realizar un censo de jugadores \nconectados en este servidor \ny en esta facción";
+	CENSUSPLUS_PAUSECENSUS      = "Pausar el censo actual";
+	CENSUSPLUS_UNPAUSECENSUS    = "Continuar el censo actual";
+	CENSUSPLUS_STOPCENSUS       = "Detener el censo actual";
+	CENSUSPLUS_ISINPROGRESS     = "Censo en progreso, vuelve a intentarlo mas tarde";
+	CENSUSPLUS_TAKINGONLINE     = "Realizando censo de personajes conectados...";
+	CENSUSPLUS_NOCENSUS         = "No hay ningún censo activo";
+CENSUSPLUS_NOTINFACTION     = "Facción neutral - no permitió censo"; 
+	CENSUSPLUS_FINISHED         = "Se ha terminado de recoger datos. Encontrados %s nuevos personajes y %s actualizados. Duración %s.";
+	CENSUSPLUS_TOOMANY          = "AVISO: Demasiadas coincidencias: %s";
+	CENSUSPLUS_WAITING          = "Esperando a enviar petición /quien...";
+	CENSUSPLUS_SENDING          = "Enviando /quien %s";
+CENSUSPLUS_WHOQUERY			= "Who query:"
+CensusPlus_FOUND					= "found"
+
+	CENSUSPLUS_PROCESSING       = "Procesando %s personajes.";
+
+	CENSUSPLUS_REALMNAME        = "Servidor: ";
+	CENSUSPLUS_REALMUNKNOWN     = "ServidorReino: Desconocido";
+	CENSUSPLUS_CONNECTED		= "Conectados: ";
+	CENSUSPLUS_FACTION          = "Facción: %s";
+	CENSUSPLUS_FACTIONUNKNOWN   = "Facción: Desconocida";
+	CENSUSPLUS_LOCALE           = "Región : %s";
+	CENSUSPLUS_LOCALEUNKNOWN    = "Región : Desconocida";
+	CENSUSPLUS_TOTALCHAR        = "Personajes Totales: %d";
+	CENSUSPLUS_TOTALCHAR_0      = "Personajes Totales: 0";
+--CENSUSPLUS_TOTALCHARXP      = "XP Factor: %d";
+--CENSUSPLUS_TOTALCHARXP_0    = "XP Factor: 0";
+	CENSUSPLUS_AUTOCLOSEWHO     = "Cerrar Quien Automático";
+	CENSUSPLUS_UNGUILDED        = "(Sin Hermandad)";
+	CENSUSPLUS_TAKE             = "Comenzar";
+	CENSUSPLUS_TOPGUILD         = "Clanes por Experiencia";
+	CENSUSPLUS_RACE             = "Razas";
+	CENSUSPLUS_CLASS            = "Clases";
+	CENSUSPLUS_LEVEL            = "Niveles";
+	
+   CENSUSPLUS_DRUID            = "Druida";
+   CENSUSPLUS_HUNTER           = "Cazador";
+   CENSUSPlusFemale["Cazadora"] = "Cazador"; 
+   CENSUSPLUS_MAGE             = "Mago"; 
+   CENSUSPlusFemale["Maga"] = "Mago"; 
+   CENSUSPLUS_PRIEST           = "Sacerdote"; 
+   CENSUSPlusFemale["Sacerdotisa"] = "Sacerdote"; 
+   CENSUSPLUS_ROGUE            = "Pícaro"; 
+   CENSUSPlusFemale["Pícara"] = "Pícaro"; 
+   CENSUSPLUS_WARLOCK          = "Brujo"; 
+   CENSUSPlusFemale["Bruja"] = "Brujo"; 
+   CENSUSPLUS_WARRIOR          = "Guerrero"; 
+   CENSUSPlusFemale["Guerrera"] = "Guerrero"; 
+   CENSUSPLUS_SHAMAN           = "Chamán";
+   CENSUSPLUS_PALADIN          = "Paladín";
+	 CENSUSPLUS_DEATHKNIGHT		= "Caballero de la Muerte";
+		CENSUSPLUS_MONK             = "Monje";
+
+   CENSUSPLUS_DWARF            = "Enano"; 
+   CENSUSPlusFemale["Enana"] = "Enano"; 
+   CENSUSPLUS_GNOME            = "Gnomo"; 
+   CENSUSPlusFemale["Gnoma"] = "Gnomo"; 
+   CENSUSPLUS_HUMAN            = "Humano"; 
+   CENSUSPlusFemale["Humana"] = "Humano"; 
+   CENSUSPLUS_NIGHTELF         = "Elfo de la noche"; 
+   CENSUSPlusFemale["Elfa de la noche"] = "Elfo de la noche"; 
+--   CENSUSPLUS_DRAENEI          = "Draenei";
+   CENSUSPLUS_WORGEN              = "Huargen";
+--   CENSUSPLUS_APANDAREN        = "Pandaren";
+
+   CENSUSPLUS_ORC              = "Orco";
+--   CENSUSPLUS_TAUREN           = "Tauren"; 
+   CENSUSPLUS_TROLL            = "Trol";
+   CENSUSPLUS_UNDEAD           = "No-muerto"; 
+   CENSUSPlusFemale["No-muerta"] = "No-muerto"; 
+   CENSUSPLUS_BLOODELF         = "Elfo de sangre";
+   CENSUSPlusFemale["Elfa de sangre"] = "Elfo de sangre"; 
+--   CENSUSPLUS_GOBLIN              = "Goblin";
+--   CENSUSPLUS_HPANDAREN        = "Pandaren";
+
+	
+	CENSUSPLUS_BUTTON_OPTIONS   = "Opciones";
+	CENSUSPLUS_OPTIONS_HEADER   = "Opciones Census+";
+--CENSUSPLUS_ISINBG			= "You are currently in a Battleground so a Census cannot be taken";
+	CENSUS_OPTIONS_BUTSHOW      = "Mostrar botón";
+--CENSUS_OPTIONS_AUTOCENSUS   = "Auto-Census";
+--CENSUS_OPTIONS_AUTOSTART    = "Auto-Start";
+--CENSUS_OPTIONS_VERBOSE      = "Verbose";
+--CENSUS_OPTIONS_SOUND_ON_COMPLETE = "Play Sound When Done";
+--CENSUS_OPTIONS_LOG_BARS		= "Logarithmic Level Bars";
+
+--CENSUSPLUS_VERBOSE_TOOLTIP  = "Deselect to stop the spam!";
+--CENSUSPlus_AUTOCENSUS_TOOLTIP = "Enable Census+ to run automatically while playing";
+
+	CENSUSPLUS_BUTTON_CHARACTERS = "Mostrar personajes";
+	CENSUSPLUS_CHARACTERS      = "Personajes";
+
+	CENSUS_BUTTON_TOOLTIP      = "Abrir CensusPlus";
+
+
+
+end
+--]]
+	
+	--[[ older translations.. now using curseforge translation support
+els.eif ( GetLocale() == "ptBR" ) th.en
+-- Thanks to Riggz US-Tol Barad <contato> for the Portuguese Translation
+
+CENSUSPLUS_DRUID = "Druida";
+CENSUSPlusFemale["Druidesa"] = "Druida"
+CENSUSPLUS_HUNTER = "Caçador";
+CENSUSPlusFemale["Caçadora"] = "Caçador";
+CENSUSPLUS_MAGE = "Mago";
+CENSUSPlusFemale["Maga"] = "Mago"
+CENSUSPLUS_PRIEST = "Sacerdote";
+CENSUSPlusFemale["Sacerdotisa"] = "Sacerdote"
+CENSUSPLUS_ROGUE = "Ladino";
+CENSUSPlusFemale["Ladina"] = "Ladino"
+CENSUSPLUS_WARLOCK = "Bruxo";
+CENSUSPlusFemale["Bruxa"] = "Bruxo"
+CENSUSPLUS_WARRIOR = "Guerreiro";
+CENSUSPlusFemale["Guerreira"] = "Guerreiro";
+CENSUSPLUS_SHAMAN = "Xamã";
+CENSUSPLUS_PALADIN = "Paladino";
+CENSUSPlusFemale["Paladina"] = "Paladino"
+CENSUSPLUS_DEATHKNIGHT = "Cavaleiro da Morte";
+CENSUSPlusFemale["Cavaleira da Morte"] = "Cavaleiro da Morte"
+CENSUSPLUS_MONK   = "Monge";
+CENSUSPlusFemale["Monja"] = "Monge"; 
+
+
+CENSUSPLUS_DWARF = "Anão";
+CENSUSPlusFemale["Anã"] = "Anão";
+CENSUSPLUS_GNOME = "Gnomo";
+CENSUSPlusFemale["Gnoma"] = "Gnomo";
+CENSUSPLUS_HUMAN = "Humano";
+CENSUSPlusFemale["Humana"] = "Humano";
+CENSUSPLUS_NIGHTELF = "Elfo noturno";
+CENSUSPlusFemale["Elfa noturna"] = "Elfo noturno";
+-- CENSUSPLUS_DRAENEI = "Draenei";
+CENSUSPlusFemale["Draenaia"] = "Draenei";
+CENSUSPLUS_WORGEN			= "Worgen/Worgenin";
+CENSUSPlusFemale["Worgenin"] = "Worgen"
+-- CENSUSPLUS_APANDAREN        = "Pandaren";  
+CENSUSPlusFemale["Pandarena"] = "Pandaren"; 
+
+-- CENSUSPLUS_ORC = "Orc";
+CENSUSPlusFemale["Orquisa"] = "Orc";
+-- CENSUSPLUS_TROLL = "Troll";
+CENSUSPlusFemale["Trolesa"] = "Troll";
+-- CENSUSPLUS_TAUREN = "Tauren";
+CENSUSPlusFemale["Taurena"] = "Tauren";
+CENSUSPLUS_UNDEAD = "Morto-vivo";
+CENSUSPlusFemale["Morta-viva"] = "Morto-vivo";
+CENSUSPLUS_BLOODELF = "Elfo sangrento";
+CENSUSPlusFemale["Elfa de sangre"] = "Elfo sangrento";
+-- CENSUSPLUS_GOBLIN   = "Goblin";
+CENSUSPlusFemale["Goblina"] = "Gobelin"; 
+-- CENSUSPLUS_HPANDAREN        = "Pandaren";  
+CENSUSPlusFemale["Pandarena"] = "Pandaren"; 
+
+
+
+
+
+CENSUSPLUS_BUTTON_OPTIONS = "Opções";
+CENSUSPLUS_OPTIONS_HEADER = "Opções Census+";
+--CENSUSPLUS_ISINBG			= "You are currently in a Battleground so a Census cannot be taken";
+CENSUS_OPTIONS_BUTSHOW = "Mostrar botão";
+
+
+--CENSUS_OPTIONS_AUTOCENSUS   = "Auto-Census";
+--CENSUS_OPTIONS_AUTOSTART    = "Auto-Start";
+--CENSUS_OPTIONS_VERBOSE      = "Verbose";
+--CENSUS_OPTIONS_SOUND_ON_COMPLETE = "Play Sound When Done";
+--CENSUS_OPTIONS_LOG_BARS		= "Logarithmic Level Bars";
+
+CENSUSPLUS_VERBOSE_TOOLTIP  = "Deselect to stop the spam!";
+CENSUSPlus_AUTOCENSUS_TOOLTIP = "Enable Census+ to run automatically while playing";
+
+CENSUSPLUS_BUTTON_CHARACTERS = "Mostrar personagens";
+CENSUSPLUS_CHARACTERS = "Personagens";
+
+CENSUS_BUTTON_TOOLTIP = "Abrir CensusPlus";
+
+-- -- -- Não utilizado
+
+-- CENSUSPlus_BUTTON_SUBTEXT = "Estatísticas do Servidor";
+-- CENSUSPlus_BUTTON_TIP = "Clique aqui para mostrar ou ocultar o Census+.";
+-- CENSUSPLUS_HELP = " Usar /censusplus para abrir e fechar a interface do Census+.";
+-- CENSUSPlus_SHOWMINI = "Iniciar Minimizado";
+-- CENSUSPlus_MAXIMIZE = "Maximizar a janela do CensusPlus";
+-- CENSUSPlus_MINIMIZE = "Minimizar a janela do CensusPlus";
+-- CENSUSPlus_BUTTON_MINIMIZE = "Minimizar";
+-- CENSUS_OPTIONS_BUTPOS = "Posição do botão";
+-- CENSUS_LEVEL_NO_GUILD = "(.+): Nível (%d+) (.+) (.+) - (.+)";
+-- CENSUS_LEVEL_W_GUILD = "(.+): Nível (%d+) (.+) (.+) <(.+)> - (.+)";
+]]
+--[[
+if ( GetLocale() == "itIT" ) then
+
+CENSUSPLUS_TEXT      = "Census+";
+
+CENSUSPLUS_MSG1             = " Loaded - - tipo /censusplus o /census+ o /census per aprire la finestra principale";
+CENSUSPLUS_UPLOAD           = "Assicurarsi di caricare i dati CensusPlus a www.WarcraftRealms.com!";
+CENSUSPLUS_PAUSE            = "Sospendi";
+CENSUSPLUS_UNPAUSE          = "Riattiva";
+CENSUSPLUS_STOP             = "Arresto";
+
+CENSUSPLUS_PRUNE						= "Potare";
+CENSUSPLUS_PRUNECENSUS		= "Prune the database by removing characters not seen in 30 days.";
+CENSUSPLUS_PRUNEINFO		= "Pruned %d characters.";
+CENSUSPLUS_PURGEDATABASE    = "Spurgare il database di tutti i dati";
+CENSUSPLUS_PURGE            = "Purge";
+CENSUSPLUS_PURGEMSG         = "Purged character database.";
+CENSUSPLUS_PURGE_LOCAL_CONFIRM = "Are you sure you wish to PURGE your local database?";
+
+CENSUSPLUS_TAKECENSUS       = "Prendete un censimento dei giocatori \nattualmente online su questo server \ne in questa fazione";
+CENSUSPLUS_PAUSECENSUS      = "Sospendi il censimento in corso";
+CENSUSPLUS_UNPAUSECENSUS    = "Riattiva il censimento in corso";
+CENSUSPLUS_STOPCENSUS       = "Stop the currently active CensusPlus";
+CENSUSPLUS_ISINPROGRESS     = "A CensusPlus is in progress, try again later";
+CENSUSPLUS_TAKINGONLINE     = "Taking census of characters online...";
+CENSUSPLUS_NOCENSUS         = "A Census is not currently in progress";
+CENSUSPLUS_NOTINFACTION     = "Fazione neutrale - non consentito censimento"; 
+CENSUSPLUS_FINISHED         = "Finished Taking data. Found %s new characters and saw %s. Took %s.";
+CENSUSPLUS_TOOMANY          = "WARNING: Too many characters matching: %s";
+CENSUSPLUS_WAITING          = "Waiting to send who request...";
+CENSUSPLUS_SENDING          = "Sending /who %s";
+CENSUSPLUS_WHOQUERY			= "Who query:"
+CensusPlus_FOUND					= "found"
+CENSUSPLUS_PROCESSING       = "Processing %s characters.";
+
+CENSUSPLUS_REALMNAME        = "Realm: ";
+CENSUSPLUS_REALMUNKNOWN     = "Realm: Unknown";
+CENSUSPLUS_CONNECTED		= "I server collegati: ";
+CENSUSPLUS_FACTION          = "Faction: %s";
+CENSUSPLUS_FACTIONUNKNOWN   = "Faction: Unknown"; -- replace this text with notinfaction above?
+CENSUSPLUS_LOCALE           = "Locale : %s";
+CENSUSPLUS_LOCALEUNKNOWN    = "Locale : Unknown";
+CENSUSPLUS_TOTALCHAR        = "Total Characters: %d";
+CENSUSPLUS_TOTALCHAR_0      = "Total Characters: 0";
+CENSUSPLUS_TOTALCHARXP      = "XP Factor: %d";
+CENSUSPLUS_TOTALCHARXP_0    = "XP Factor: 0";
+CENSUSPLUS_SCAN_PROGRESS    = "Scan Progress: %d queries in the queue - %s";
+CENSUSPLUS_SCAN_PROGRESS_0  = "No Scan In Progress";
+CENSUSPLUS_AUTOCLOSEWHO     = "Automatically Close Who";
+CENSUSPLUS_UNGUILDED        = "(Unguilded)";
+CENSUSPLUS_TAKE             = "Take";
+CENSUSPLUS_TOPGUILD         = "Top Guilds By XP";
+CENSUSPLUS_RACE             = "Races";
+CENSUSPLUS_CLASS            = "Classes";
+CENSUSPLUS_LEVEL            = "Levels";
+CENSUSPLUS_MAXXED			= "MAXXED!";
+
+CENSUSPLUS_DRUID            = "Druido";
+CENSUSPlusFemale["Druida"] = "Druido";
+CENSUSPLUS_HUNTER           = "Cacciatore";
+CENSUSPlusFemale["Cacciatrice"] = "Cacciatore";
+CENSUSPLUS_MAGE             = "Mago";
+CENSUSPlusFemale["Maga"] = "Mago";
+CENSUSPLUS_PRIEST           = "Sacerdote";
+CENSUSPlusFemale["Sacerdotessa"] = "Sacerdote";
+CENSUSPLUS_ROGUE            = "Ladro";
+CENSUSPlusFemale["Ladra"] = "Ladro";
+CENSUSPLUS_WARLOCK          = "Stregone";
+CENSUSPlusFemale["Strega"] = "Stregone";
+CENSUSPLUS_WARRIOR          = "Guerriero";
+CENSUSPlusFemale["Guerriera"] = "Guerriero";
+CENSUSPLUS_SHAMAN           = "Sciamano";
+CENSUSPlusFemale["Sciamana"] = "Sciamano";
+CENSUSPLUS_PALADIN          = "Paladino";
+CENSUSPlusFemale["Paladina"] = "Paladino";
+CENSUSPLUS_DEATHKNIGHT		= "Cavaliere della Morte";
+CENSUSPLUS_MONK             = "Monaco";
+CENSUSPlusFemale["Monaca"] = "Monaco";
+
+CENSUSPLUS_DWARF            = "Nano";
+CENSUSPlusFemale["Nana"] = "Nano";
+CENSUSPLUS_GNOME            = "Gnomo";
+CENSUSPlusFemale["Gnoma"] = "Gnomo";
+CENSUSPLUS_HUMAN            = "Umano";
+CENSUSPlusFemale["Umana"] = "Umano";
+CENSUSPLUS_NIGHTELF         = "Elfo della Notte";
+CENSUSPlusFemale["Elfa della Notte"] = "Elfo della Notte";
+CENSUSPLUS_WORGEN			= "Worgen";
+CENSUSPLUS_APANDAREN        = "Pandaren";
+
+CENSUSPLUS_ORC              = "Orco";
+CENSUSPlusFemale["Orchessa"] = "Orco";
+CENSUSPLUS_TAUREN           = "Tauren";
+CENSUSPLUS_TROLL            = "Troll";
+CENSUSPLUS_UNDEAD           = "Non Morto";
+CENSUSPlusFemale["Non Morta"] = "Non Morto";
+CENSUSPLUS_DRAENEI          = "Draenei";
+CENSUSPLUS_BLOODELF         = "Elfo del sangue";
+CENSUSPlusFemale["Elfa del Sangue"] = "Elfo del sangue";
+CENSUSPLUS_GOBLIN			= "Goblin";
+CENSUSPLUS_HPANDAREN        = "Pandaren";
 
 CENSUSPLUS_US_LOCALE		= "Select if you play on US Servers";
 CENSUSPLUS_EU_LOCALE		= "Select if you play on EURO Servers";
 CENSUSPLUS_LOCALE_SELECT	= "Select if you play on US or EURO servers";
 
-CENSUSPlus_BUTTON_OPTIONS	= "Options";
-CENSUSPlus_OPTIONS_HEADER	= "Census+ Options";
-CENSUSPlus_ISINBG			= "You are currently in a Battleground so a Census cannot be taken";
-CENSUS_OPTIONS_BUTPOS		= "Button Position";
+CENSUSPLUS_BUTTON_OPTIONS	= "Options";
+CENSUSPLUS_OPTIONS_HEADER	= "Census+ Options";
+CENSUSPLUS_ISINBG			= "You are currently in a Battleground so a Census cannot be taken";
 CENSUS_OPTIONS_BUTSHOW      = "Show Minimap Button";
 CENSUS_OPTIONS_AUTOCENSUS   = "Auto-Census";
-CENSUS_OPTIONS_THISPROFILE  = "Collect Profile for this Char";
 CENSUS_OPTIONS_AUTOSTART    = "Auto-Start";
 CENSUS_OPTIONS_VERBOSE      = "Verbose";
 CENSUS_OPTIONS_SOUND_ON_COMPLETE = "Play Sound When Done";
 CENSUS_OPTIONS_LOG_BARS		= "Logarithmic Level Bars";
 
 CENSUSPlus_AUTOSTART_TOOLTIP = "Enable Census+ to start automatically";
-CENSUSPlus_VERBOSE_TOOLTIP  = "Deselect to stop the spam!";
+CENSUSPLUS_VERBOSE_TOOLTIP  = "Deselect to stop the spam!";
 CENSUSPlus_AUTOCENSUS_TOOLTIP = "Enable Census+ to run automatically while playing";
-CENSUSPlus_THISPROFILE_TOOLTIP = "Collect profile data for this character to upload to WarcraftRealms.com";
 
-CENSUSPlus_BUTTON_CHARACTERS = "Show Chars";
-CENSUSPlus_Characters		= "Characters";
+CENSUSPLUS_BUTTON_CHARACTERS = "Show Chars";
+CENSUSPLUS_CHARACTERS		= "Characters";
 
 CENSUS_BUTTON_TOOLTIP		= "Open CensusPlus";
 
 
---|cff979797[11:19:12]|r|c00000000|r |cffd8d8d8[|r|Hplayer:Rollee:93|h|cffd8d83f1|r:|cfffff468Rollee|r|h|cffd8d8d8]|r: Level 1 Troll Rogue - Durotar
---|Hplayer:Rollee|h[Rollee]|h: Level 1 Troll Rogue - Durotar
-CENSUS_SINGLE_MATCH_PATTERN = "(.+)%: (%a+) (%d+) (.+) %- (.+)";
 
-CENSUS_LEVEL_NO_GUILD = "%[(.+)%: Level (%d+) (%a+) (%a+) %- (.+)";
-CENSUS_LEVEL_W_GUILD  = "%[(.+)%: Level (%d+) (%a+) (%a+) %<(.+)%> %- (.+)";
-CENSUS_LEVEL_W_GUILD_2  = "%[(.+)%: Level (%d+) (%a+) (%a+) (%a+) %<(.+)%> %- (.+)";
-CENSUS_LEVEL_NO_GUILD_2  = "%[(.+)%: Level (%d+) (%a+) (%a+) (%a+) %- (.+)";
-
-CENSUSPlus_CANCEL			= "Cancel";
-
-CENSUSPlus_OVERRIDE			 = "Census in progress, submitting override";
-CENSUSPlus_OVERRIDE_COMPLETE = "Override complete resuming census";
-CENSUSPlus_OVERRIDE_COMPLETE_BUT_PAUSED = "Override complete, but census has been paused";
-
-CENSUSPlus_PURGE_LOCAL_CONFIRM = "Are you sure you wish to PURGE your local database?";
-CENSUSPlus_OVERRIDE_COMPLET_PAUSED = "Override complete but Census has been paused, Click to Continue";
-
-CENSUSPlus_YES			= "Yes";
-CENSUSPlus_NO			= "No";
-CENSUSPlus_CONTINUE		= "Continue";
-
-if ( GetLocale() == "frFR" ) then
-    -- Traduit par Juki <Unskilled>
-    
-    CENSUSPlus_BUTTON_TEXT      = "Census+";
-    CENSUSPlus_BUTTON_SUBTEXT   = "Stats serveur";
-    CENSUSPlus_BUTTON_TIP       = "Cliquez ici pour montrer ou masquer Census+.";
-    CENSUSPlus_HELP             = " Utilisez /censusplus pour ouvrir et fermer Census+.";
-    
-    CENSUSPlus_MSG1             = " Chargée - Tapez /censusplus ou /census+ pour ouvrir la fenêtre principale";
-    CENSUSPlus_MSG2             = "Utilisez /censusdate pour configurer la date du jour dans le format MM-DD-YYYY, ie.12-25-2004";
-
-    CENSUSPlus_UPLOAD           = "";
-    CENSUSPlus_UPLOAD2          = "";
-    CENSUSPlus_SETTINGDATE      = "Mise à jour de la date => ";
-    CENSUSPlus_PAUSE            = "Pause";
-    CENSUSPlus_UNPAUSE          = "Reprendre";
-    CENSUSPlus_STOP             = "Stop";
-    
-    CENSUSPlus_TAKECENSUS       = "Faire un recensement des joueurs \nactuellement en ligne sur ce serveur \net dans cette faction";
-    CENSUSPlus_PURGEDATABASE    = "Supprime la base de donnée concernant.";
-    CENSUSPlus_PAUSECENSUS      = "Mettre en pause le recensement en cours";
-    CENSUSPlus_STOPCENSUS       = "Arrêter le recensement en cours"
-    
-    CENSUSPlus_PURGEMSG         = "Base de donnée supprimée.";
-    CENSUSPlus_ISINPROGRESS     = "Un recensement est en cours, veuillez patienter";
-    CENSUSPlus_TAKINGONLINE     = "Recensement des joueurs en cours ...";
-    CENSUSPlus_PLZUPDATEDATE    = "SVP utilisez /censusdate pour configurer la date du jour pour des données plus précises. Format /censusdate MM-DD-YYYY, exemple, /censusdate 12-25-2004";
-    CENSUSPlus_NOCENSUS         = "Aucun recensement en cours";
-    CENSUSPlus_FINISHED         = "Recensement terminé. %s nouveaux personnages et %s mis à jour.";
-    CENSUSPlus_TOOMANY          = "ERREUR: Trop de joueurs correspondants à : %s";
-    CENSUSPlus_WAITING          = "En attente de lancement de requête /who ...";
-    CENSUSPlus_SENDING          = "Envoi de requête /who %s";
-    CENSUSPlus_PROCESSING       = "Analyse de %s personnages.";
-    
-    CENSUSPlus_REALMNAME        = "Serveur : %s";
-    CENSUSPlus_REALMUNKNOWN     = "Serveur : Inconnu";
-    CENSUSPlus_FACTION          = "Faction : %s";
-    CENSUSPlus_FACTIONUNKNOWN   = "Faction : Inconnu";
-    CENSUSPlus_TOTALCHAR        = "Nombre de personnages : %d";
-    CENSUSPlus_TOTALCHAR_0      = "Nombre de personnages : 0";
-    CENSUSPlus_AUTOCLOSEWHO     = "Fermeture auto du /Who";
-    CENSUSPlus_SHOWMINI         = "Montrer Mini au démarrage";
-    CENSUSPlus_UNGUILDED        = "(Sans Guilde)";
-    CENSUSPlus_TAKE             = "Recenser";
-    CENSUSPlus_TOPGUILD         = "Meilleures guildes par XP";
-    CENSUSPlus_RACE             = "Races";
-    CENSUSPlus_CLASS            = "Classes";
-    CENSUSPlus_LEVEL            = "Niveaux";
-    CENSUSPlus_PURGE            = "Mettre à Zero"; 
-    
-    CENSUSPlus_MAXIMIZE         = "Agrandir la fenêtre CensusPlus";
-    CENSUSPlus_MINIMIZE         = "Réduire la fenêtre CensusPlus";
-    CENSUSPlus_BUTTON_MINIMIZE  = "Réduire";
-        
-    CENSUSPlus_HORDE            = "Horde";
-    CENSUSPlus_ALLIANCE         = "Alliance";
-
-    CENSUSPlus_DRUID            = "Druide";
-    CENSUSPlusFemale["Druidesse"] = "Druide"; 
-    CENSUSPlus_HUNTER           = "Chasseur";
-    CENSUSPlusFemale["Chasseresse"] = "Chasseur"; 
-    CENSUSPlus_MAGE             = "Mage";
-    CENSUSPlus_PRIEST           = "Prêtre";
-    CENSUSPlusFemale["Prêtresse"] = "Prêtre"; 
-    CENSUSPlus_ROGUE            = "Voleur";
-    CENSUSPlusFemale["Voleuse"] = "Voleur"; 
-    CENSUSPlus_WARLOCK          = "Démoniste";
-    CENSUSPlus_WARRIOR          = "Guerrier";
-    CENSUSPlusFemale["Guerrière"] = "Guerrier"; 
-    CENSUSPlus_SHAMAN           = "Chaman";
-    CENSUSPlusFemale["Chamane"] = "Chaman"; 
-    CENSUSPlus_PALADIN          = "Paladin";
-	CENSUSPlus_DEATHKNIGHT		= "Chevalier de la mort";	
-
- 
-    CENSUSPlus_DWARF            = "Nain";
-    CENSUSPlusFemale["Naine"]   = "Nain";
-    CENSUSPlus_GNOME            = "Gnome";
-    CENSUSPlus_HUMAN            = "Humain";
-    CENSUSPlus_NIGHTELF         = "Elfe de la nuit";
-    CENSUSPlus_ORC              = "Orc";
-    CENSUSPlusFemale["Orque"]   = "Orc";
-    CENSUSPlus_TAUREN           = "Tauren";
-    CENSUSPlusFemale["Taurène"] = "Tauren";
-    CENSUSPlus_TROLL            = "Troll";
-    CENSUSPlusFemale["Trollesse"] = "Troll";
-    CENSUSPlus_UNDEAD           = "Mort-vivant";
-    CENSUSPlusFemale["Morte-vivante"] = "Mort-vivant";
-	CENSUSPlus_DRAENEI          = "Draeneï";
-	CENSUSPlus_BLOODELF         = "Elfe de sang";
-    
-	CENSUSPlus_WarsongGulch     = "Goulet des Warsong";  
-	CENSUSPlus_AlteracValley    = "Vallée d'Alterac";
-	CENSUSPlus_ArathiBasin		= "Bassin d'Arathi";
-	CENSUSPlus_EyeOfTheStorm    = "Oeil du cyclone";
-    
-	CENSUSPLUS_US_LOCALE		= "Choisissez si vous jouez sur un serveur US";
-	CENSUSPLUS_EU_LOCALE		= "Choisissez si vous jouez sur un serveur EURO";
-    CENSUSPLUS_LOCALE_SELECT    = "Choisissez la localité de votre serveur";
-
-	CENSUS_LEVEL_NO_GUILD = "%[(.+)%: Niveau (%d+) (%a+) (%a+) %- (.+)";
-	CENSUS_LEVEL_W_GUILD  = "%[(.+)%: Niveau (%d+) (%a+) (%a+) %<(.+)%> %- (.+)";
-	CENSUS_LEVEL_W_GUILD_2  = "%[(.+)%: Niveau (%d+) (%a+) (%a+) (%a+) %<(.+)%> %- (.+)";
-	CENSUS_LEVEL_NO_GUILD_2  = "%[(.+)%: Niveau (%d+) (%a+) (%a+) (%a+) %- (.+)";
-	
-	
-    
-    
-elseif ( GetLocale() == "deDE" ) then
-    --  Thanks to MadMax-X for this German translation 
-	CENSUSPlus_BUTTON_TEXT      = "Census+"; 
-	CENSUSPlus_BUTTON_SUBTEXT   = "Realm Census"; 
-	CENSUSPlus_BUTTON_TIP       = "Hier klicken um Census+ anzuzeigen oder zu verstecken."; 
-	CENSUSPlus_HELP             = " Benutze /censusplus um die Census+ Oberfläche zu öffnen."; 
-
-	CENSUSPlus_MSG1             = " Geladen - mit /censusplus or /census+ wird das Hauptfenster geöffnet"; 
-	CENSUSPlus_MSG2             = "Mit /censusdate kann das aktuelle Datum im Format MM-DD-YYYY gesetzt werden, z.B. 12-25-2004"; 
-
-	CENSUSPlus_UPLOAD           = "Lade deine CensusPlus Daten bei www.WarcraftRealms.com hoch!"; 
-	CENSUSPlus_SETTINGDATE      = "Datum wird gesetzt => "; 
-	CENSUSPlus_PAUSE            = "Pause"; 
-	CENSUSPlus_UNPAUSE          = "Weiter"; 
-	CENSUSPlus_STOP             = "Stop"; 
-
-	CENSUSPlus_TAKECENSUS       = "Zähle alle aktiven \nSpieler deiner Fraktion \nauf diesem Server."; 
-	CENSUSPlus_PURGEDATABASE    = "Lösche die Datenbank."; 
-	CENSUSPlus_PAUSECENSUS      = "Pausiere die laufende Zählung"; 
-	CENSUSPlus_STOPCENSUS       = "Stoppe die laufende Zählung"; 
-
-	CENSUSPlus_PURGEMSG         = "Charakterdatenbank für Server %s und Fraktion %s gelöscht."; 
-	CENSUSPlus_ISINPROGRESS     = "Es läuft schon eine Zählung, versuch es später nochmal"; 
-	CENSUSPlus_TAKINGONLINE     = "Zählung der gerade aktiven Charaktere..."; 
-	CENSUSPlus_PLZUPDATEDATE    = "Bitte benutze /censusdate um das aktuelle Datum zu setzen, damit die Auswertung genauer wird. (Format: /censusdate MM-DD-YYYY, z.B. /censusdate 12-25-2004"; 
-	CENSUSPlus_NOCENSUS         = "Es läuft gerade keine Zählung"; 
-	CENSUSPlus_FINISHED         = "Zählung beendet. %s neue Charactere gefunden und %s aktualisiert."; 
-	CENSUSPlus_TOOMANY          = "FEHLER: Zu viele passende Charaktere: %s"; 
-	CENSUSPlus_WAITING          = "Warte, um /who zu senden..."; 
-	CENSUSPlus_SENDING          = "Sende /who %s"; 
-	CENSUSPlus_PROCESSING       = "Verarbeite %s Charaktere."; 
-
-	CENSUSPlus_REALMNAME        = "Server: %s"; 
-	CENSUSPlus_REALMUNKNOWN     = "Server: Unbekannt"; 
-	CENSUSPlus_FACTION          = "Fraktion: %s"; 
-	CENSUSPlus_FACTIONUNKNOWN   = "Fraktion: Unbekannt"; 
-	CENSUSPlus_TOTALCHAR        = "Gesamte Charaktere: %d"; 
-	CENSUSPlus_TOTALCHAR_0      = "Gesamte Charaktere: 0"; 
-	CENSUSPlus_AUTOCLOSEWHO     = "Schließe Who automatisch"; 
-	CENSUSPlus_SHOWMINI         = "Mini-Button beim Start anzeigen"; 
-	CENSUSPlus_UNGUILDED        = "(Gildenlos)"; 
-	CENSUSPlus_TAKE             = "Zählen"; 
-	CENSUSPlus_TOPGUILD         = "Top Gilden nach XP"; 
-	CENSUSPlus_RACE             = "Rassen"; 
-	CENSUSPlus_CLASS            = "Klassen"; 
-	CENSUSPlus_LEVEL            = "Level"; 
-	CENSUSPlus_PURGE            = "Löschen"; 
-
-	CENSUSPlus_MAXIMIZE         = "Maximiere das CensusPlus Fenster"; 
-	CENSUSPlus_MINIMIZE         = "Minimiere das CensusPlus Fenster"; 
-	CENSUSPlus_BUTTON_MINIMIZE  = "Minimieren"; 
-
-	CENSUSPlus_HORDE            = "Horde"; 
-	CENSUSPlus_ALLIANCE         = "Alliance"; 
-
-	CENSUSPlus_DRUID            = "Druide";
-	CENSUSPlusFemale["Druidin"] = "Druide";
-	CENSUSPlus_HUNTER           = "Jäger";
-	CENSUSPlusFemale["Jägerin"] = "Jäger";
-	CENSUSPlus_MAGE             = "Magier";
-	CENSUSPlusFemale["Magierin"] = "Magier";
-	CENSUSPlus_PRIEST           = "Priester";
-	CENSUSPlusFemale["Priesterin"] = "Priester";
-	CENSUSPlus_ROGUE            = "Schurke";
-	CENSUSPlusFemale["Schurkin"] = "Schurke";
-	CENSUSPlus_WARLOCK          = "Hexenmeister";
-	CENSUSPlusFemale["Hexenmeisterin"] = "Hexenmeister";
-	CENSUSPlus_WARRIOR          = "Krieger";
-	CENSUSPlusFemale["Kriegerin"] = "Krieger";
-	CENSUSPlus_SHAMAN           = "Schamane";
-	CENSUSPlusFemale["Schamanin"] = "Schamane";
-	CENSUSPlus_PALADIN          = "Paladin"; 
-	CENSUSPlus_DEATHKNIGHT		= "Todesritter";		
-
-	CENSUSPlus_DWARF            = "Zwerg"; 
-	CENSUSPlus_GNOME            = "Gnom"; 
-	CENSUSPlus_HUMAN            = "Mensch"; 
-	CENSUSPlus_NIGHTELF         = "Nachtelf"; 
-    CENSUSPlusFemale["Nachtelfe"]  = "Nachtelf"; 	
-	CENSUSPlus_ORC              = "Orc"; 
-	CENSUSPlus_TAUREN           = "Tauren"; 
-	CENSUSPlus_TROLL            = "Troll"; 
-	CENSUSPlus_UNDEAD           = "Untoter";   
-    CENSUSPlusFemale["Untote"]  = "Untoter"; 	
-	CENSUSPlus_DRAENEI          = "Draenei";
-	CENSUSPlus_BLOODELF         = "Blutelf";
-    CENSUSPlusFemale["Blutelfe"]  = "Blutelf"; 	
-	
-	CENSUSPlus_WarsongGulch     = "Kriegshymnenschlucht";  
-	CENSUSPlus_AlteracValley    = "Alteractal";
-	CENSUSPlus_ArathiBasin		= "Arathibecken";
-	CENSUSPlus_EyeOfTheStorm    = "Auge des Sturms";
-
-	CENSUSPLUS_US_LOCALE= "Auswählen, wenn du auf US-Servern spielst"; 
-	CENSUSPLUS_EU_LOCALE= "Auswählen, wenn du auf EURO-Servern spielst"; 
-	CENSUSPLUS_LOCALE_SELECT= "Wähle, ob du auf US oder EURO-Servern spielst";
-	
-	CENSUSPlus_BUTTON_OPTIONS   = "Optionen";
-	CENSUSPlus_OPTIONS_HEADER   = "Census+ Optionen";
-	CENSUSPlus_ISINBG	    = "Du befindest dich momentan auf einem Schlachtfeld und daher kann Census+ keine Abfrage duchführen.";
-	CENSUS_OPTIONS_BUTPOS	    = "Button Position";
-	CENSUS_OPTIONS_BUTSHOW	    = "Minimap-Button";
-	CENSUS_OPTIONS_AUTOSTART    = "Autom. Starten";
-	CENSUS_OPTIONS_VERBOSE      = "Verbose";
-	CENSUS_OPTIONS_AUTOCENSUS   = "Autom. Zählen";
-	CENSUS_OPTIONS_THISPROFILE  = "Profil nur diesen Charakter";
-	CENSUS_OPTIONS_EXIT	    = "Schließen";
-
-	CENSUS_BUTTON_TOOLTIP	    = "CensusPlus öffnen";
-
-	CENSUS_LEVEL_NO_GUILD = "(.+): Stufe (%d+) (.+) (.+) - (.+)";
-	CENSUS_LEVEL_W_GUILD  = "(.+): Stufe (%d+) (.+) (.+) <(.+)> - (.+)";
-	
-elseif ( GetLocale() == "esES" ) then
-	--  Thanks to NeKRoMaNT  EU-Zul'jin   < contacto@nekromant.com> for the Spanish Translation
-	CENSUSPlus_BUTTON_TEXT      = "Census+";
-	CENSUSPlus_BUTTON_SUBTEXT   = "Estadísticas Servidor";
-	CENSUSPlus_BUTTON_TIP       = "Pulsa aquí para mostrar u ocultar Census+.";
-	CENSUSPlus_HELP             = " Usa /censusplus para abrir y cerrar la interfaz Census+.";
-
-	CENSUSPlus_MSG1             = " operativo - Escribe /censusplus o /census+ para abrir la ventana principal";
-
-	CENSUSPlus_UPLOAD           = "¡Asegúrate de enviar tus datos a www.WarcraftRealms.com!";
-	CENSUSPlus_PAUSE            = "Pausa";
-	CENSUSPlus_UNPAUSE          = "Continuar";
-	CENSUSPlus_STOP             = "Detener";
-	CENSUSPlus_PRUNE            = "Resetear";
-
-	CENSUSPlus_TAKECENSUS       = "Realizar un censo de jugadores \nconectados en este servidor \ny en esta facción";
-	CENSUSPlus_PURGEDATABASE    = "Purgar la base de datos.";
-	CENSUSPlus_PAUSECENSUS      = "Pausar el censo actual";
-	CENSUSPlus_UNPAUSECENSUS    = "Continuar el censo actual";
-	CENSUSPlus_STOPCENSUS       = "Detener el censo actual";
-	CENSUSPlus_PRUNECENSUS      = "Optimiza la base de datos borrando personajes sin censar en los últimos 30 días";
-
-	CENSUSPlus_PURGEMSG         = "Base de datos de personajes purgada.";
-	CENSUSPlus_ISINPROGRESS     = "Censo en progreso, vuelve a intentarlo mas tarde";
-	CENSUSPlus_TAKINGONLINE     = "Realizando censo de personajes conectados...";
-	CENSUSPlus_NOCENSUS         = "No hay ningún censo activo";
-	CENSUSPlus_FINISHED         = "Se ha terminado de recoger datos. Encontrados %s nuevos personajes y %s actualizados. Duración %s.";
-	CENSUSPlus_TOOMANY          = "AVISO: Demasiadas coincidencias: %s";
-	CENSUSPlus_WAITING          = "Esperando a enviar petición /quien...";
-	CENSUSPlus_SENDING          = "Enviando /quien %s";
-	CENSUSPlus_PROCESSING       = "Procesando %s personajes.";
-
-	CENSUSPlus_REALMNAME        = "Servidor: %s";
-	CENSUSPlus_REALMUNKNOWN     = "ServidorReino: Desconocido";
-	CENSUSPlus_FACTION          = "Facción: %s";
-	CENSUSPlus_FACTIONUNKNOWN   = "Facción: Desconocida";
-	CENSUSPlus_LOCALE           = "Región : %s";
-	CENSUSPlus_LOCALEUNKNOWN    = "Región : Desconocida";
-	CENSUSPlus_TOTALCHAR        = "Personajes Totales: %d";
-	CENSUSPlus_TOTALCHAR_0      = "Personajes Totales: 0";
-	CENSUSPlus_AUTOCLOSEWHO     = "Cerrar Quien Automático";
-	CENSUSPlus_SHOWMINI         = "Minimizado al inicio";
-	CENSUSPlus_UNGUILDED        = "(Sin Hermandad)";
-	CENSUSPlus_TAKE             = "Comenzar";
-	CENSUSPlus_TOPGUILD         = "Clanes por Experiencia";
-	CENSUSPlus_RACE             = "Razas";
-	CENSUSPlus_CLASS            = "Clases";
-	CENSUSPlus_LEVEL            = "Niveles";
-	CENSUSPlus_PURGE            = "Purgar";
-	CENSUSPlus_MAXXED           = "MAXXED!";
-
-	CENSUSPlus_MAXIMIZE         = "Maximizar la ventana de CensusPlus";
-	CENSUSPlus_MINIMIZE         = "Minimizar la ventana de CensusPlus";
-	CENSUSPlus_BUTTON_MINIMIZE  = "Minimizar";
-
-	CENSUSPlus_HORDE            = "Horde";
-	CENSUSPlus_ALLIANCE         = "Alliance";
-
-	CENSUSPlus_DRUID            = "Druida";
-	CENSUSPlus_HUNTER           = "Cazador";
-	CENSUSPlus_MAGE             = "Mago";
-	CENSUSPlus_PRIEST           = "Sacerdote";
-	CENSUSPlus_ROGUE            = "Pícaro";
-	CENSUSPlus_WARLOCK          = "Brujo";
-	CENSUSPlus_WARRIOR          = "Guerrero";
-	CENSUSPlus_SHAMAN           = "Chamán";
-	CENSUSPlus_PALADIN          = "Paladín";
-	CENSUSPlus_DEATHKNIGHT		= "Caballero de la Muerte";			
-
-	CENSUSPlus_DWARF            = "Enano";
-	CENSUSPlus_GNOME            = "Gnomo";
-	CENSUSPlus_HUMAN            = "Humano";
-	CENSUSPlus_NIGHTELF         = "Elfo de la noche";
-	CENSUSPlus_ORC              = "Orco";
-	CENSUSPlus_TAUREN           = "Tauren";
-	CENSUSPlus_TROLL            = "Trol";
-	CENSUSPlus_UNDEAD           = "No-muerto";
-	CENSUSPlus_DRAENEI          = "Draenei";
-	CENSUSPlus_BLOODELF         = "Elfo de sangre";
-	
-   CENSUSPlus_DRUID            = "Druida";
-   CENSUSPlus_HUNTER           = "Cazador";
-   CENSUSPlusFemale["Cazadora"] = "Cazador"; 
-   CENSUSPlus_MAGE             = "Mago"; 
-   CENSUSPlusFemale["Maga"] = "Mago"; 
-   CENSUSPlus_PRIEST           = "Sacerdote"; 
-   CENSUSPlusFemale["Sacerdotisa"] = "Sacerdote"; 
-   CENSUSPlus_ROGUE            = "Pícaro"; 
-   CENSUSPlusFemale["Pícara"] = "Pícaro"; 
-   CENSUSPlus_WARLOCK          = "Brujo"; 
-   CENSUSPlusFemale["Bruja"] = "Brujo"; 
-   CENSUSPlus_WARRIOR          = "Guerrero"; 
-   CENSUSPlusFemale["Guerrera"] = "Guerrero"; 
-   CENSUSPlus_SHAMAN           = "Chamán";
-   CENSUSPlus_PALADIN          = "Paladín";
-
-   CENSUSPlus_DWARF            = "Enano"; 
-   CENSUSPlusFemale["Enana"] = "Enano"; 
-   CENSUSPlus_GNOME            = "Gnomo"; 
-   CENSUSPlusFemale["Gnoma"] = "Gnomo"; 
-   CENSUSPlus_HUMAN            = "Humano"; 
-   CENSUSPlusFemale["Humana"] = "Humano"; 
-   CENSUSPlus_NIGHTELF         = "Elfo de la noche"; 
-   CENSUSPlusFemale["Elfa de la noche"] = "Elfo de la noche"; 
-   CENSUSPlus_ORC              = "Orco";
-   CENSUSPlus_TAUREN           = "Tauren"; 
-   CENSUSPlus_TROLL            = "Trol";
-   CENSUSPlus_UNDEAD           = "No-muerto"; 
-   CENSUSPlusFemale["No-muerta"] = "No-muerto"; 
-   CENSUSPlus_DRAENEI          = "Draenei";
-   CENSUSPlus_BLOODELF         = "Elfo de sangre";
-   CENSUSPlusFemale["Elfa de sangre"] = "Elfo de sangre"; 
-   
- 
-
-	CENSUSPlus_WarsongGulch     = "Garganta Grito de Guerra"; 
-	CENSUSPlus_AlteracValley    = "Valle de Alterac";
-	CENSUSPlus_ArathiBasin      = "Cuenca de Arathi";
-	CENSUSPlus_EyeOfTheStorm    = "Ojo de la Tormenta";
-	
-	CENSUSPlus_BUTTON_OPTIONS   = "Opciones";
-	CENSUSPlus_OPTIONS_HEADER   = "Opciones Census+";
-	CENSUS_OPTIONS_BUTPOS      = "Posición de botón";
-	CENSUS_OPTIONS_BUTSHOW      = "Mostrar botón";
-
-	CENSUSPlus_BUTTON_CHARACTERS = "Mostrar personajes";
-	CENSUSPlus_Characters      = "Personajes";
-
-	CENSUS_BUTTON_TOOLTIP      = "Abrir CensusPlus";
-
-	CENSUS_LEVEL_NO_GUILD = "(.+): Nivel (%d+) (.+) (.+) - (.+)";
-	CENSUS_LEVEL_W_GUILD  = "(.+): Nivel (%d+) (.+) (.+) <(.+)> - (.+)";
-
-	CENSUSPlus_CANCEL         = "Cancelar"; 
-elseif ( GetLocale() == "koKR" ) then
+CENSUSPLUS_PURGE_LOCAL_CONFIRM = "Are you sure you wish to PURGE your local database?";
+end
+--]]
+--[[ obsolete
+els.eif ( GetLocale() == "koKR" ) th.en
   -- This is Korean Locale, Translated by crezol --
 
 CENSUSPlusFemale = { };
 
-CENSUSPlus_BUTTON_TEXT      = "센서스+";
-CENSUSPlus_BUTTON_SUBTEXT   = "서버 센서스";
-CENSUSPlus_BUTTON_TIP       = "센서스+ 를 보이거나 숨기려면 클릭하십시오.";
-CENSUSPlus_HELP             = " /censusplus 를 사용해 센서스+ UI 를 열거나 닫을 수 있습니다.";
+CENSUSPLUS_TEXT      = "센서스+";
+-- CENSUSPlus_BUTTON_SUBTEXT   = "서버 센서스";
+-- CENSUSPlus_BUTTON_TIP       = "센서스+ 를 보이거나 숨기려면 클릭하십시오.";
+-- CENSUSPLUS_HELP             = " /censusplus 를 사용해 센서스+ UI 를 열거나 닫을 수 있습니다.";
 
-CENSUSPlus_MSG1             = "센서스+ 로드됨 - /censusplus 나 /census+ 를 입력해 메인 창을 띄울 수 있습니다.";
-CENSUSPlus_MSG2             = "/censusdate 를 사용해 오늘의 날짜를 설정하세요.(형식: MM-DD-YYYY, 예. 12-25-2004)";
+CENSUSPLUS_MSG1             = "센서스+ 로드됨 - /censusplus 나 /census+ 를 입력해 메인 창을 띄울 수 있습니다.";
+-- CENSUSPlus_MSG2             = "/censusdate 를 사용해 오늘의 날짜를 설정하세요.(형식: MM-DD-YYYY, 예. 12-25-2004)";
 
-CENSUSPlus_UPLOAD           = "www.WarcraftRealms.com 에서 센서스+ 업데이트를 확인하세요!";
+CENSUSPLUS_UPLOAD           = "www.WarcraftRealms.com 에서 센서스+ 업데이트를 확인하세요!";
 CENSUSPlus_SETTINGDATE      = "날짜 변경 => ";
-CENSUSPlus_PAUSE            = "일시중지";
-CENSUSPlus_UNPAUSE          = "계속";
-CENSUSPlus_STOP             = "중지";
-CENSUSPlus_PRUNE			= "간략화";
+CENSUSPLUS_PAUSE            = "일시중지";
+CENSUSPLUS_UNPAUSE          = "계속";
+CENSUSPLUS_STOP             = "중지";
+CENSUSPLUS_PRUNE			= "간략화";
 
-CENSUSPlus_TAKECENSUS       = "현재 이 서버와 이 진영에 속한 \n플레이어를 센서스로 가져옵니다.";
-CENSUSPlus_PURGEDATABASE    = "모든 데이터를 소거합니다.";
-CENSUSPlus_PAUSECENSUS      = "현재 센서스를 일시중지 합니다.";
-CENSUSPlus_UNPAUSECENSUS    = "일시중지된 센서스를 계속 진행합니다.";
-CENSUSPlus_STOPCENSUS       = "활동중인 센서스+를 중지합니다.";
-CENSUSPlus_PRUNECENSUS		= "30일동안 검색되지 않은 플레이어를 \n데이터베이스에서 제거해 간략화 합니다.";
+CENSUSPLUS_TAKECENSUS       = "현재 이 서버와 이 진영에 속한 \n플레이어를 센서스로 가져옵니다.";
+CENSUSPLUS_PURGEDATABASE    = "모든 데이터를 소거합니다.";
+CENSUSPLUS_PAUSECENSUS      = "현재 센서스를 일시중지 합니다.";
+CENSUSPLUS_UNPAUSECENSUS    = "일시중지된 센서스를 계속 진행합니다.";
+CENSUSPLUS_STOPCENSUS       = "활동중인 센서스+를 중지합니다.";
+CENSUSPLUS_PRUNECENSUS		= "30일동안 검색되지 않은 플레이어를 \n데이터베이스에서 제거해 간략화 합니다.";
 
-CENSUSPlus_PRUNEINFO		= "%d 케릭터 간략화됨.";
+CENSUSPLUS_PRUNEINFO		= "%d 케릭터 간략화됨.";
 
-CENSUSPlus_PURGEMSG         = "케릭터 데이터베이스가 소거되었습니다.";
-CENSUSPlus_ISINPROGRESS     = "센서스+가 진행중입니다, 나중에 다시 시도하십시오.";
-CENSUSPlus_TAKINGONLINE     = "온라인 상태의 케릭터를 센서스로 가져오는 중입니다...";
+CENSUSPLUS_PURGEMSG         = "케릭터 데이터베이스가 소거되었습니다.";
+CENSUSPLUS_ISINPROGRESS     = "센서스+가 진행중입니다, 나중에 다시 시도하십시오.";
+CENSUSPLUS_TAKINGONLINE     = "온라인 상태의 케릭터를 센서스로 가져오는 중입니다...";
 CENSUSPlus_PLZUPDATEDATE    = "좀더 정확한 데이터를 얻기 위해 /censusdate 를 사용해 오늘 날짜를 수정하십시오. (형식 /censusdate MM-DD-YYYY, 예, /censusdate 12-25-2004)";
-CENSUSPlus_NOCENSUS         = "센서스가 현재 진행중이 아닙니다.";
-CENSUSPlus_FINISHED         = "데이터 수집 완료. %s 의 새 케릭터가 검색되어 총 %s 케릭터를 확인했습니다. 소요 시간 :%s ";
-CENSUSPlus_TOOMANY          = "경고: 너무 많은 케릭터 일치: %s";
-CENSUSPlus_WAITING          = "누구 명령어를 보내기 위해 기다리는 중...";
-CENSUSPlus_SENDING          = "검색중 : /누구 ";
-CENSUSPlus_PROCESSING       = "%s 케릭터를 수집함.";
+CENSUSPLUS_NOCENSUS         = "센서스가 현재 진행중이 아닙니다.";
+CENSUSPLUS_FINISHED         = "데이터 수집 완료. %s 의 새 케릭터가 검색되어 총 %s 케릭터를 확인했습니다. 소요 시간 :%s ";
+CENSUSPLUS_TOOMANY          = "경고: 너무 많은 케릭터 일치: %s";
+CENSUSPLUS_WAITING          = "누구 명령어를 보내기 위해 기다리는 중...";
+CENSUSPLUS_SENDING          = "검색중 : /누구 ";
+CENSUSPLUS_PROCESSING       = "%s 케릭터를 수집함.";
 
-CENSUSPlus_REALMNAME        = "서버: %s";
-CENSUSPlus_REALMUNKNOWN     = "서버: 알수없음";
-CENSUSPlus_FACTION          = "진영: %s";
-CENSUSPlus_FACTIONUNKNOWN   = "진영: 알수없음";
-CENSUSPlus_LOCALE           = "Locale : %s";
-CENSUSPlus_LOCALEUNKNOWN    = "Locale : 알수없음";
-CENSUSPlus_TOTALCHAR        = "모든 케릭터: %d";
-CENSUSPlus_TOTALCHAR_0      = "모든 케릭터: 0";
-CENSUSPlus_TOTALCHARXP      = "XP 지수: %d";
-CENSUSPlus_TOTALCHARXP_0    = "XP 지수: 0";
-CENSUSPlus_SCAN_PROGRESS    = "검색 진행중: %d 개의 질의 대기중 - %s";
-CENSUSPlus_SCAN_PROGRESS_0  = "진행중인 검색이 없습니다.";
-CENSUSPlus_AUTOCLOSEWHO     = "누구 창 자동으로 닫기";
+CENSUSPLUS_REALMNAME        = "서버: %s";
+CENSUSPLUS_REALMUNKNOWN     = "서버: 알수없음";
+CENSUSPLUS_CONNECTED		= "연결된 서버: %s";
+CENSUSPLUS_FACTION          = "진영: %s";
+CENSUSPLUS_FACTIONUNKNOWN   = "진영: 알수없음";
+CENSUSPLUS_LOCALE           = "Locale : %s";
+CENSUSPLUS_LOCALEUNKNOWN    = "Locale : 알수없음";
+CENSUSPLUS_TOTALCHAR        = "모든 케릭터: %d";
+CENSUSPLUS_TOTALCHAR_0      = "모든 케릭터: 0";
+CENSUSPLUS_TOTALCHARXP      = "XP 지수: %d";
+CENSUSPLUS_TOTALCHARXP_0    = "XP 지수: 0";
+CENSUSPLUS_SCAN_PROGRESS    = "검색 진행중: %d 개의 질의 대기중 - %s";
+CENSUSPLUS_SCAN_PROGRESS_0  = "진행중인 검색이 없습니다.";
+CENSUSPLUS_AUTOCLOSEWHO     = "누구 창 자동으로 닫기";
 CENSUSPlus_SHOWMINI         = "시작시 최소화 보기";
-CENSUSPlus_UNGUILDED        = "(길드없음)";
-CENSUSPlus_TAKE             = "가져오기";
-CENSUSPlus_TOPGUILD         = "XP 에 의한 길드 순위";
-CENSUSPlus_RACE             = "종족";
-CENSUSPlus_CLASS            = "직업";
-CENSUSPlus_LEVEL            = "레벨";
-CENSUSPlus_PURGE            = "소거";
-CENSUSPlus_MAXXED			= "MAXXED!";
+CENSUSPLUS_UNGUILDED        = "(길드없음)";
+CENSUSPLUS_TAKE             = "가져오기";
+CENSUSPLUS_TOPGUILD         = "XP 에 의한 길드 순위";
+CENSUSPLUS_RACE             = "종족";
+CENSUSPLUS_CLASS            = "직업";
+CENSUSPLUS_LEVEL            = "레벨";
+CENSUSPLUS_PURGE            = "소거";
+CENSUSPLUS_MAXXED			= "MAXXED!";
 
 CENSUSPlus_MAXIMIZE         = "센서스+ 창 최대화";
 CENSUSPlus_MINIMIZE         = "센서스+ 창 최소화";
 CENSUSPlus_BUTTON_MINIMIZE  = "최소화";
 
-CENSUSPlus_DRUID            = "드루이드";       
-CENSUSPlus_HUNTER           = "사냥꾼";         
-CENSUSPlus_MAGE             = "마법사";         
-CENSUSPlus_PRIEST           = "사제";           
-CENSUSPlus_ROGUE            = "도적";           
-CENSUSPlus_WARLOCK          = "흑마법사";       
-CENSUSPlus_WARRIOR          = "전사";           
-CENSUSPlus_SHAMAN           = "주술사";         
-CENSUSPlus_PALADIN          = "성기사";         
-CENSUSPlus_DEATHKNIGHT		= "죽음의 기사";      
+CENSUSPLUS_DRUID            = "드루이드";       
+CENSUSPLUS_HUNTER           = "사냥꾼";         
+CENSUSPLUS_MAGE             = "마법사";         
+CENSUSPLUS_PRIEST           = "사제";           
+CENSUSPLUS_ROGUE            = "도적";           
+CENSUSPLUS_WARLOCK          = "흑마법사";       
+CENSUSPLUS_WARRIOR          = "전사";           
+CENSUSPLUS_SHAMAN           = "주술사";         
+CENSUSPLUS_PALADIN          = "성기사";         
+CENSUSPLUS_DEATHKNIGHT		= "죽음의 기사";      
+CENSUSPLUS_MONK             = "수도사";
                                                 
-CENSUSPlus_DWARF            = "드워프";         
-CENSUSPlus_GNOME            = "노움";           
-CENSUSPlus_HUMAN            = "인간";           
-CENSUSPlus_NIGHTELF         = "나이트 엘프";    
-CENSUSPlus_ORC              = "오크";           
-CENSUSPlus_TAUREN           = "타우렌";         
-CENSUSPlus_TROLL            = "트롤";           
-CENSUSPlus_UNDEAD           = "언데드";         
-CENSUSPlus_DRAENEI          = "드레나이";       
-CENSUSPlus_BLOODELF         = "블러드 엘프";    
+CENSUSPLUS_DWARF            = "드워프";         
+CENSUSPLUS_GNOME            = "노움";           
+CENSUSPLUS_HUMAN            = "인간";           
+CENSUSPLUS_NIGHTELF         = "나이트 엘프";    
+CENSUSPLUS_ORC              = "오크";           
+CENSUSPLUS_TAUREN           = "타우렌";         
+CENSUSPLUS_TROLL            = "트롤";           
+CENSUSPLUS_UNDEAD           = "언데드";         
+CENSUSPLUS_DRAENEI          = "드레나이";       
+CENSUSPLUS_BLOODELF         = "블러드 엘프";
+CENSUSPLUS_APANDAREN        = "Pandaren";
+CENSUSPLUS_HPANDAREN        = "Pandaren";    
                                                 
-CENSUSPlus_WarsongGulch     = "전쟁노래 협곡";  
-CENSUSPlus_AlteracValley    = "알터렉 계곡";    
-CENSUSPlus_ArathiBasin		= "아라시 분지";      
-CENSUSPlus_EyeOfTheStorm    = "폭풍의 눈";      
 
 CENSUSPLUS_US_LOCALE		= "Select if you play on US Servers";
 CENSUSPLUS_EU_LOCALE		= "Select if you play on EURO Servers";
 CENSUSPLUS_LOCALE_SELECT	= "Select if you play on US or EURO servers";
 
-CENSUSPlus_BUTTON_OPTIONS	= "설정";
-CENSUSPlus_OPTIONS_HEADER	= "센서스+ 설정";
-CENSUSPlus_ISINBG			= "현재 전장에 있기 때문에 센서스가 작동하지 않습니다.";
+CENSUSPLUS_BUTTON_OPTIONS	= "설정";
+CENSUSPLUS_OPTIONS_HEADER	= "센서스+ 설정";
+CENSUSPLUS_ISINBG			= "현재 전장에 있기 때문에 센서스가 작동하지 않습니다.";
 CENSUS_OPTIONS_BUTPOS		= "버튼 위치";
 CENSUS_OPTIONS_BUTSHOW      = "미니맵 버튼 보이기";
 CENSUS_OPTIONS_AUTOCENSUS   = "자동-센서스";
@@ -626,24 +906,16 @@ CENSUS_OPTIONS_SOUND_ON_COMPLETE = "종료시 소리 재생";
 CENSUS_OPTIONS_LOG_BARS		= "로그마틱 레벨 그래프";
 
 CENSUSPlus_AUTOSTART_TOOLTIP = "자동으로 센서스+ 활성화";
-CENSUSPlus_VERBOSE_TOOLTIP  = "스팸 메시지를 멈추려면 해제하세요!";
+CENSUSPLUS_VERBOSE_TOOLTIP  = "스팸 메시지를 멈추려면 해제하세요!";
 CENSUSPlus_AUTOCENSUS_TOOLTIP = "플레이 시 자동으로 센서스+ 검색 시작";
 CENSUSPlus_THISPROFILE_TOOLTIP = "WarcraftRealms.com 에 업로드 하기 위해 이 케릭터의 프로필 데이터를 모읍니다.";
 
-CENSUSPlus_BUTTON_CHARACTERS = "케릭터 보기";
-CENSUSPlus_Characters		= "케릭터";
+CENSUSPLUS_BUTTON_CHARACTERS = "케릭터 보기";
+CENSUSPLUS_CHARACTERS		= "케릭터";
 
 CENSUS_BUTTON_TOOLTIP		= "센서스+ 열기";
 
 
---|cff979797[11:19:12]|r|c00000000|r |cffd8d8d8[|r|Hplayer:Rollee:93|h|cffd8d83f1|r:|cfffff468Rollee|r|h|cffd8d8d8]|r: Level 1 Troll Rogue - Durotar
---|Hplayer:Rollee|h[Rollee]|h: Level 1 Troll Rogue - Durotar
-CENSUS_SINGLE_MATCH_PATTERN = "(.+)%: (%a+) (%d+) (.+) %- (.+)";
-
-CENSUS_LEVEL_NO_GUILD = "%[(.+)%: 레벨 (%d+) (%a+) (%a+) %- (.+)";
-CENSUS_LEVEL_W_GUILD  = "%[(.+)%: 레벨 (%d+) (%a+) (%a+) %<(.+)%> %- (.+)";
-CENSUS_LEVEL_W_GUILD_2  = "%[(.+)%: 레벨 (%d+) (%a+) (%a+) (%a+) %<(.+)%> %- (.+)";
-CENSUS_LEVEL_NO_GUILD_2  = "%[(.+)%: 레벨 (%d+) (%a+) (%a+) (%a+) %- (.+)";
 
 CENSUSPlus_CANCEL			= "취소";
 
@@ -651,12 +923,14 @@ CENSUSPlus_OVERRIDE			 = "센서스가 작업중입니다, 우선적으로 해�
 CENSUSPlus_OVERRIDE_COMPLETE = "우선 시행 완료, 센서스 검색을 재개합니다.";
 CENSUSPlus_OVERRIDE_COMPLETE_BUT_PAUSED = "우선 시행 완료, 센서스 일시중지됨.";
 
-CENSUSPlus_PURGE_LOCAL_CONFIRM = "정말로 로컬 데이터베이스의 모든 자료를 소거하겠습니까?";
+CENSUSPLUS_PURGE_LOCAL_CONFIRM = "정말로 로컬 데이터베이스의 모든 자료를 소거하겠습니까?";
 CENSUSPlus_OVERRIDE_COMPLET_PAUSED = "우선 시행이 완료되었지만 센서스가 일시중지 되었습니다. 계속 버튼을 클릭하세요.";
 
 CENSUSPlus_YES			= "예";
 CENSUSPlus_NO			= "아니오";
 CENSUSPlus_CONTINUE		= "계속";
-	
+
 end
 
+]]
+-- print("English localization loaded")

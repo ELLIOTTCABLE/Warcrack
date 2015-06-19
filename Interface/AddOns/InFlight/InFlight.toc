@@ -1,0 +1,17 @@
+## Interface: 60000
+## Title: InFlight
+## Notes: Statusbar timer for your flightpaths.
+## Author: TotalPackage
+## Version: 6.0.001
+
+## SavedVariables: InFlightVars, InFlightDB
+## SavedVariablesPerCharacter: InFlightCharDB
+## Dependencies: InFlight_Load
+## OptionalDeps: LibSharedMedia-3.0
+
+## LoadOnDemand: 1
+
+embeds.xml
+
+InFlight.lua
+Defaults.lua

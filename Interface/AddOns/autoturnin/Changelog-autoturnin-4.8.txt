@@ -1,0 +1,13 @@
+tag 4.8
+ab823d1c510bf88150eea9a756c342ae8b1ca647
+Alex Shubert <shubert@animatron.com>
+2015-03-21 20:46:31 +0200
+
+4.8
+
+
+--------------------
+
+Alex Shubert:
+	- unregister hook
+	- watch frame track turned off. Getting annoyed by ppls who can't read

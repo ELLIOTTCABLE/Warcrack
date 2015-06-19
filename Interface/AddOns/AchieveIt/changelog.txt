@@ -1,0 +1,70 @@
+===v1.3===
+* Update for patch 6.0 and Warlords of Draenor with new categories and updated old categories!
+
+===v1.2.10===
+* Fix for 5.4.1 UpdateMicroButtons taint issue
+
+===v1.2.9===
+* Fixed bug causing Icecrown Citadel achievements to be shown when using the locate button in Ulduar
+
+===v1.2.8===
+* Fixed locale typo
+
+===v1.2.7===
+* Update for Patch 5.4
+* [category] Added Exploration -> Pandaria -> Timeless Isle category
+* [category] Added Dungeons & Raids -> Pandaria Raid -> Siege of Orgrimmar category
+* [category] Removed Quests -> Pandaria -> Darkspear Uprising category
+
+===v1.2.6===
+* [category] Added Guild Achievements -> Rewards category
+
+===v1.2.5===
+* [locale] Updated translations for new scenarios
+
+===v1.2.4===
+* Update for Patch 5.3
+* [category] Added Quests -> Pandaria -> Darkspear Uprising category
+* [category] Added new achievement to Quests -> Pandaria -> The Black Prince category
+* [category] Added Scenarios -> Dark Heart of Pandaria category
+* [category] Added Scenarios -> Battle on the High Seas category
+* [category] Added Scenarios -> Blood in the Snow category
+* [category] Added Scenarios -> Secrets of Ragefire category
+* [category] Added new achievements to Scenarios -> Crypt of Forgotten Kings category
+* [category] Added new achievements to Scenarios -> A Brewing Storm category
+
+===v1.2.3===
+* Enabled Dagger in the Dark and A Little Patience scenario categories to be viewable by all factions
+
+===v1.2.2===
+* [interface] The Locate Category button is moved to a different position if ElvUI is detected
+
+===v1.2.1===
+* [category] Added Professions -> Archaeology category
+
+===v1.2===
+* Optimisations reducing addon file size by 80% and memory usage by up to 40%. Woo!
+
+===v1.1.3===
+* [locale] Updated translations - thanks to gOOvER (deDE), dartraiden (ruRU), hyoga2002 (zhCN), BNSSNB (zhTW)
+
+===v1.1.2===
+* Update for Patch 5.2
+* [category] Added Dungeons & Raids -> Pandaria Raid -> Throne of Thunder category
+* [category] Added Quests -> Pandaria -> Isle of Thunder category
+* [category] Added new achievements to the Rewards category
+* [category] Added new achievements to Dungeons & Raids -> Pandaria Raid -> World Bosses category
+* [locale] Updated translations - thanks to gOOvER (deDE), dartraiden (ruRU), hyoga2002 (zhCN), BNSSNB (zhTW)
+
+===v1.1.1===
+* [bugfix] Fixed bug causing the Locate button to sometimes not scroll to the located category
+
+===v1.1===
+* [feature] Added the "Locate Category" button. This button will automatically open the achievement category based on your current location.
+* [bugfix] Fixed bug preventing the recent achievements from being clickable
+
+===v1.0.1===
+* [category] Added Dungeons & Raids -> Pandaria Raid -> World Bosses category
+
+===v1.0===
+* Initial release

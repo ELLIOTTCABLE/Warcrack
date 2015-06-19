@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+
+	<Script file="General.lua" />
+
+    <Script file="Quests_Cataclysm.lua" />
+	<Script file="Quests_Pandaria.lua" />
+	<Script file="Quests_Draenor.lua" />
+
+    <Script file="Exploration_Pandaria.lua" />
+
+    <Script file="DungeonsRaids_Classic.lua" />
+    <Script file="DungeonsRaids_BurningCrusade.lua" />
+    <Script file="DungeonsRaids_LichKingDungeon.lua" />
+    <Script file="DungeonsRaids_LichKingRaid.lua" />
+        <Script file="DungeonsRaids_LichKingRaid_Naxxramas.lua" />
+        <Script file="DungeonsRaids_LichKingRaid_ObsidianSanctum.lua" />
+        <Script file="DungeonsRaids_LichKingRaid_EyeOfEternity.lua" />
+        <Script file="DungeonsRaids_LichKingRaid_OnyxiasLair.lua" />
+        <Script file="DungeonsRaids_LichKingRaid_VaultOfArchavon.lua" />
+        <Script file="DungeonsRaids_LichKingRaid_Ulduar.lua" />
+        <Script file="DungeonsRaids_LichKingRaid_TrialOfTheCrusader.lua" />
+        <Script file="DungeonsRaids_LichKingRaid_IcecrownCitadel.lua" />
+        <Script file="DungeonsRaids_LichKingRaid_RubySanctum.lua" />
+    <Script file="DungeonsRaids_CataclysmDungeon.lua" />
+    <Script file="DungeonsRaids_CataclysmRaid.lua" />
+    <Script file="DungeonsRaids_PandariaDungeon.lua" />
+    <Script file="DungeonsRaids_PandariaRaid.lua" />
+	<Script file="DungeonsRaids_DraenorDungeon.lua" />
+	<Script file="DungeonsRaids_DraenorRaid.lua" />
+    <Script file="DungeonsRaids_DungeonChallenges.lua" />
+
+    <Script file="Professions_Archaeology.lua" />
+
+	<Script file="Scenarios.lua" />
+
+	<!--<Script file="Legacy.lua" />-->
+
+    <Script file="Rewards.lua" />
+
+    <Script file="PvP.lua" />
+
+    <Script file="Guild_Rewards.lua" />
+
+</Ui>

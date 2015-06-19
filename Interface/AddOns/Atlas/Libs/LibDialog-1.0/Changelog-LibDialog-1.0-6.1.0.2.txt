@@ -1,0 +1,8 @@
+2015-02-25  James D. Callahan III  <jcallahan@curse.com>
+
+[c412b20f9e2b] [6.1.0.2]
+* LibDialog-1.0.lua:
+
+Added checks for nil delegates in _Dialog_OnShow(), in which case we bail, and in _Dialog_OnUpdate(), in which case the dialog's timer still occurs but no delegate actions (such as on_cancel or on_update) will fire.
+
+

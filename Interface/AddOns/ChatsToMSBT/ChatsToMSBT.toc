@@ -1,0 +1,13 @@
+## Interface: 60000
+## Title: Chats To MSBT
+## Version: 2014-11-10
+## Notes: Displays Selected incoming channel messages in MSBT's notification or user selected frame
+## Author: Bill Lafreniere
+## Dependencies: MikScrollingBattleText
+## OptionalDeps: BillsUtils
+## SavedVariables: C2MSBT_Settings
+## SavedVariablesPerCharacter: C2MSBT_SettingsPC
+
+BULoader.lua
+ChatsToMSBT.lua
+Config.lua

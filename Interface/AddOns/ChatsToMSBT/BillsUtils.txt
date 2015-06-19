@@ -1,0 +1,161 @@
+Bill's Utils 
+Doc Ver 3/1/2013
+
+Bill's Utils is a library of functions that allows you to do some complex tasks with a bit of ease.
+Check out Achievement Sounds and my other Addons to get real world usages of the library or look
+below on what the library does and a general how to.
+
+Just load BULoader.lua in your toc before your addon files and then all you have to do is make a local
+variable to reference the function(s) you want to use and the update function to update the used functions
+to to a higher version if an updated Bill's Utils is loaded after your addon loads. This helps reduce the
+memory used when multiple versions of the library are used as you dereference the out of date functions so
+they can be garbage collected by WoW.
+
+Something like the following will work fine in your addon
+
+-- Bill's Utils
+local Wait = BillsUtils.Wait
+local ChkBoxSave = BillsUtils.ChkBoxSave
+local SliderSave = BillsUtils.SliderSave
+local SliderMW = BillsUtils.SliderMW
+local ChkBox = BillsUtils.ChkBox 
+local CheckClick = BillsUtils.CheckClick
+local Slider = BillsUtils.Slider
+local SliderEditBox = BillsUtils.SliderEditBox
+local EditBox = BillsUtils.EditBox
+
+BillsUtils.Locals[#BillsUtils.Locals +1] = function ()
+	Wait = BillsUtils.Wait
+	ChkBoxSave = BillsUtils.ChkBoxSave
+	SliderSave = BillsUtils.SliderSave
+	SliderMW = BillsUtils.SliderMW
+	ChkBox = BillsUtils.ChkBox
+	CheckClick = BillsUtils.CheckClick
+	Slider = BillsUtils.Slider
+	SliderEditBox = BillsUtils.SliderEditBox
+	EditBox = BillsUtils.EditBox
+end
+
+
+No changes to BULoader.lua are required.
+
+
+generic value names are as follows:
+	Table = a table of stored values
+	Key = a variable in the table
+	Value = a passed amount from something like a commancd line
+	Min, Max = range values
+	Last = Item to anchor the newly created object
+	Prefix = Part of an objects name Prefix..Name
+	Name = The Objects name
+	Click = OnClick Handler
+	TextTable = Table containing Text description of opbect
+	TTKey = Key containing the text for the object
+	Panel = Frame the item belongs to (or the table that the item is part of)
+	Box = Boxes name in text  Panel["Box"]
+	Parent = Parent of the object
+
+	
+The functions and usage of each are as follows: 
+
+Wait = function(delay, func, ...)
+	will wait delay seconds then call func with the args of ...
+		
+addOptionMt = function(options, defaults)
+	will add meta table data to tables and nestled tables in the "option" table with the "defaults" table
+	you must construct the nestled tables in options table and defaults before calling the function
+	
+StatColor = function(stat)
+	will return a colored text depending on value of passed stat
+	true / false will return a green [on] / red [off]
+	0 will return a red (DISABLED)
+	a number > 0 and <= 60 will return a green [##] second(s)
+
+CCC = function(class)
+	Class Color Code
+	will return the text color code for the passed class (class passed must be all caps)
+	like HUNTER, DEATHKNIGHT, MAGE etc...
+	and returns something like the following "|cFF69CCF0" for MAGE
+	or "|cFFFF7D0A" for DRUID
+
+SJprint = function(...)
+	will join a list of comma seperated items by a space and print them to your chat log window
+	
+LinkedSort = function( main, linked )
+	will sort 2 tables by main while keeping linked in the same relative order so main[x] and linked[x] will both be at
+	the same index
+
+FLCap = function ( string )
+	returns the passed string with the first character capitalized
+
+OptSaveTF = function( Table, Key, Value)
+	will save a command line arg of on/true/yes as true and off/false/no as false value
+	Table[Key] is the way the variable is accessed and value is a string of on/off
+
+OptSaveVal = function( Table, Key, Value, Min, Max)
+	will save a passed value in range of Min/Max to Table[Key]
+
+
+ChkBox = function( Last, Prefix, Name, Parent, Click, TextTable, TextName )
+	returns a handle to a check box it is located below last 
+	it is named prefix..name   the parent frame id parent Click is the onclick function
+	TextTable, TextName points to the text to have at the right of the button
+
+CheckClick = function()
+	just plays a sound when you click a button
+
+ChkBoxSave = function( Panel, Box, Table, Key)
+	will check to see if check box Panel[Box] is checked and if Table[Key] is the same value   if not it
+	changes the value of the saved variable to match as a true/fasle value	
+
+Slider = function( Last , Prefix, Name, Parent, SliderMW , TextTable, min, max, step )
+	returns a horizontal slider
+
+SliderEditBox = function( Slider , Prefix, Name, Parent )
+	returns an editbox attached to above slider
+
+SliderSave = function( Panel, Slider, Table, Key)
+	checks value of Panel[Slider] against Table[Key] and saves the value if different
+
+SliderMW = function(self, delta)
+	enables mouse wheel functions for sliders
+
+EditBox = function( Last, Prefix, Name, Parent, Table, "Key", TextTable, "TTKey" )
+	Returns a handle for an editbox
+	Table is unused
+	If "TTKey" is not passed then "Key" is used as the index to TextTable
+
+EventToggle = function( Frame, Table, Key, Event, Enable )
+	Toggles a registered event on or off
+	it checks the Frame if Event is registered and if Enable is false it deregisteres Event
+	if Table[Key] = true it registers Event
+	if Table[Key] = false it unregisters Event
+	if type(Table) ~= "table" it uses the value of Key to decide to register/unregister Event
+
+SameFaction = function( GUID )
+	returns true if the checked guid is the same faction as the player
+
+FactionByGUID = function( GUID )
+	returns the faction of the passed player character GUID
+	
+IsPvPZone = function()
+	returns true if the player is in a battleground/ arena or an active pvp zone like WG / TB
+
+GenderWord = function( unit, maleword, GUID)
+	returns gender specific word based on unit and maleword
+	passed maleWord		unknown return	male return	female return
+		"his" 		"their"		"his" 		"her"
+		"him"		"them"  	"him" 		"her"
+		"himself"	"themself"	"himself" 	"herself"
+		"he"		"it" 		"he" 		"she"
+		"man"		"it"		"man" 		"woman" 
+		"male"		"it" 		"male" 		"female"
+		"his'"		"its"		"his"		"hers"
+	If "unit" is unknown and GUID is passed and has been seen it will choose gender by GUID
+	unknown genders return "it" words
+	
+
+-- Slash Command
+	/billsutils
+		returns version and loaded by info useful if you have any problems to know which addon 
+		loaded the library and list of addons using the library

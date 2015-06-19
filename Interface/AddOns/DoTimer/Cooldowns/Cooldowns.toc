@@ -1,4 +1,0 @@
-## Interface: 30200
-## Title: Cooldowns
-## RequiredDeps: DoTimer
-main.xml

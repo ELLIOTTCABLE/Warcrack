@@ -1,0 +1,24 @@
+## Interface: 60000
+## Title: Ellipsis (|cff67b1e9K|cff4779ceith|cff67b1e9M|cff4779ceod|r)
+## Notes: A full-featured, multi-target Aura (DoTs and HoTs) timer and Cooldown tracker.
+## Author: Kith (Kithulhu)
+## Version: 3.0.9
+## SavedVariables: EllipsisDB
+## OptionalDeps: Ace3, LibSharedMedia-3.0, LibSink-2.0
+## X-Embeds: Ace3, LibSharedMedia-3.0, LibSink-2.0
+## X-Category: Interface Enhancements
+
+embeds.xml 
+
+Locales\Local_enUS.lua
+Locales\Local_deDE.lua
+Locales\Local_frFR.lua
+Locales\Local_zhCN.lua
+Locales\Local_zhTW.lua
+
+Core.lua
+ClassData.lua
+Config.lua
+GUI.lua
+Cooldowns.lua
+AuraHandler.lua

@@ -1,0 +1,29 @@
+------------------------------------------------------------------------
+r186 | elkano | 2014-11-01 18:48:34 +0000 (Sat, 01 Nov 2014) | 2 lines
+Changed paths:
+   M /trunk/SharedMedia.lua
+   M /trunk/SharedMedia.toc
+
+- reverted last commit
+- some small changes
+------------------------------------------------------------------------
+r185 | ukoterpuh | 2014-11-01 10:53:21 +0000 (Sat, 01 Nov 2014) | 1 line
+Changed paths:
+   M /trunk/SharedMedia.lua
+   M /trunk/SharedMedia.toc
+
+Updated for WoD
+------------------------------------------------------------------------
+r184 | elkano | 2012-09-07 08:45:26 +0000 (Fri, 07 Sep 2012) | 3 lines
+Changed paths:
+   M /trunk/SharedMedia.lua
+   A /trunk/fonts/CelestiaMediumRedux1.55.ttf
+   A /trunk/fonts/font info and licenses/WenQuanYi Zen Hei - COPYING.txt
+   A /trunk/fonts/font info and licenses/WenQuanYi Zen Hei - README.txt
+   A /trunk/fonts/font info and licenses/other info.txt
+   A /trunk/fonts/wqy-zenhei.ttf
+
+two new fonts added:
+- Celestia (Medium) Redux
+- WenQuanYi Zen Hei (supports koKR, ruRU, zhCN, zhTW and western)
+------------------------------------------------------------------------

@@ -1,0 +1,9 @@
+Celestia (Medium) Redux
+	license: Public Domain
+	source: http://www.mattyhex.net/CMR/
+	version: 1.55
+
+WenQuanYi Zen Hei
+	license: GPL v2 (with font embedding exception)
+	source: http://wqy.sourceforge.net/en/
+	version: 0.9.45

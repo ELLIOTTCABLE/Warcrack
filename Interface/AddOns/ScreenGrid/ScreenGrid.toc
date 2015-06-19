@@ -1,0 +1,6 @@
+## Interface: 60100
+## Title: ScreenGrid
+## Version: 1.0
+## Author: HiroYakamura
+## Notes: Variable Grid Overlay for Addon alignment - Type /sgrid for usage
+ScreenGrid.lua

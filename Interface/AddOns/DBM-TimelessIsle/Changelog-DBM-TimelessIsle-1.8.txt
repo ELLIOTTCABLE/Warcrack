@@ -1,0 +1,19 @@
+------------------------------------------------------------------------
+r28 | mysticalos | 2015-06-03 04:59:17 +0000 (Wed, 03 Jun 2015) | 1 line
+Changed paths:
+   A /tags/1.8 (from /trunk:27)
+
+Tagging as 1.8
+------------------------------------------------------------------------
+r27 | mysticalos | 2015-06-03 04:56:34 +0000 (Wed, 03 Jun 2015) | 1 line
+Changed paths:
+   M /trunk/IsleTimeless.lua
+
+Kill off per boss "SpeedKillTimer"
+------------------------------------------------------------------------
+r25 | mysticalos | 2015-05-17 01:01:22 +0000 (Sun, 17 May 2015) | 1 line
+Changed paths:
+   M /trunk/IsleTimeless.lua
+
+Fix bug with option default generation and newer cores
+------------------------------------------------------------------------

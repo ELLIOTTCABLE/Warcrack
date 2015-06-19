@@ -1,0 +1,10 @@
+## Interface: 60100
+## Title:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff0055ffLoot Reminder|r
+## Notes: Reports current loot setting when executing the pull command.
+## Version: 1.1
+## Author: Warmexx [Neighbours]
+## RequiredDeps: DBM-Core
+## X-Donate: PayPal:warmexx AT wow-neighbours DOT com
+## X-Website: http://www.wow-neighbours.com/
+
+DBM-LootReminder.lua

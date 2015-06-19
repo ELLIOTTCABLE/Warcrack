@@ -1,0 +1,26 @@
+------------------------------------------------------------------------
+r169 | zensunim | 2015-04-25 10:40:10 +0000 (Sat, 25 Apr 2015) | 3 lines
+Changed paths:
+   A /tags/4.36.1 (from /trunk:168)
+
+4.36.1
+- Added WoD spells for Darkmoon Faire
+- Added WoD spells for Blackrock Foundry
+------------------------------------------------------------------------
+r168 | zensunim | 2015-04-25 10:39:32 +0000 (Sat, 25 Apr 2015) | 1 line
+Changed paths:
+   M /trunk/GTFO.lua
+   M /trunk/GTFO.toc
+   M /trunk/GTFO_Fail_WOD.lua
+   M /trunk/GTFO_Ignore.lua
+   M /trunk/GTFO_Spells_Special.lua
+   M /trunk/GTFO_Spells_WOD.lua
+
+Prepping for 4.36.1 release
+------------------------------------------------------------------------
+r167 | zensunim | 2015-03-12 03:39:54 +0000 (Thu, 12 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/GTFO_Spells_WOD.lua
+
+Demoted Councilor Magknor's alert to low alert
+------------------------------------------------------------------------

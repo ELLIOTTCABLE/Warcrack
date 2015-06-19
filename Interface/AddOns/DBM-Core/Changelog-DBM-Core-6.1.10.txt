@@ -1,0 +1,62 @@
+tag 6.1.10
+78a1dbef5eece0517f5d18dacdea2a9a93f2dd4b
+subversion <svn@deadlybossmods.com>
+2015-06-10 19:41:37 +0200
+
+Tagging as 6.1.10
+
+
+--------------------
+
+subversion:
+	- increment version number to 6.1.10
+	- Omega via svn r13867: updated whats new
+	- Omega via svn r13866: Fix bug
+	- Omega via svn r13865: Speed up blade dash warning by CHAT_MSG_MONSTER_YELL when possible. Yell always has the correct targetname in it and comes 1 to 1.5 seconds earlier than boss target scanning. Scanning still a backup for unlocalized locals
+	- Omega via svn r13864: Added last garrison boss, Gaur. Polished off all garrison bosses with voice support
+	- Omega via svn r13863: More tweaks
+	- Omega via svn r13862: Apparently blizzard blocks access to interface meta data for no fucking reason. So it has to be duplicated into another field
+	- Omega via svn r13861: More fixes to force disable. it?\226?\128?\153s apparent that the previous force disable wasn?\226?\128?\153t FULLY disabling, leaving some functionality in mod. This was not intended. Disabled is disabled.
+	- Omega via svn r13860: ##Refactor out of date/disable code some. *Now auto disables on major patch if at least 2 players send a newer version notice *Now runs on PTR builds that aren?\226?\128?\153t test builds (release candidates), Unless out of date. *Added a reminder to login and DBM options show if DBM is disabled in options (possibly by a previous force disable) so users who do update after a force disable aren?\226?\128?\153t left confused when it still doesn?\226?\128?\153t work.
+	- Omega via svn r13859: adjust boatReturnWarning
+	- Omega via svn r13858: Added filter option to suppress interrupt warning entirely if it?\226?\128?\153s not your assignment (your name isn?\226?\128?\153t in the note)
+	- ultrashining via svn r13857: zhTW update
+	- Omega via svn r13856: Thought I fixed this ages ago. heat should be 2 stacks not 3
+	- Omega via svn r13855: Update kormrok timers for normals slower pace
+	- Omega via svn r13854: add another vehicle to normal
+	- Omega via svn r13853: Change vehicle timers for normal assault Disable berserk on iron reaver, it?\226?\128?\153s not 10 minutes on normal. it?\226?\128?\153s at least 10:30 maybe more.
+	- Omega via svn r13852: tweak
+	- Omega via svn r13851: Better yell for artillery
+	- Omega via svn r13850: attempt to fix building attacks not working
+	- Omega via svn r13849: Forgot this
+	- nbluewiz via svn r13848: # koKR update.
+	- Omega via svn r13847: *Added Goggnathog mod
+	- Omega via svn r13846: Tweaks to mass rez stuff
+	- Omega via svn r13845: Slightly improve wording on another option.
+	- Omega via svn r13844: Option text fix
+	- Omega via svn r13843: Kill SpeedKillTimer. Per mod options make no sense and only add user confusion. It has a global enable/disable, that?\226?\128?\153s all it needs.
+	- Omega via svn r13842: Update global timer disable to disable more things like LFG/CM/etc timers. Add another global disable to disable all user timers such as break, pull, custom Rearranged some stuff to make more sense. Add individual options for LFG timers as well Changed respawn timer to be in proper place and be an enable instead of a disable.
+	- Omega via svn r13841: CN Update Hellfire Assault Voice update
+	- Omega via svn r13840: Refactored note sharing. No longer forces popup, now shows a clickable link in chat to open it if you choose to. As such, no longer blocked by default.
+	- Omega via svn r13839: move notes editor frame to core, so it works even if GUI isn?\226?\128?\153t loaded yet (such as a note being shared to a user who has never typed /dbm that session.
+	- Omega via svn r13838: Temp fix, to fix an error Going to refactor later so note editor is in core and not dependent on GUI being loaded when a note is shared.
+	- Omega via svn r13837: Block sharing in combat Improve not loaded message
+	- Omega via svn r13836: Prevent note loss/hijacking of popup by share feature,  if you?\226?\128?\153re editing a note.
+	- Omega via svn r13835: Notes should now include spell names
+	- Omega via svn r13834: Fix bug
+	- Omega via svn r13833: Add a little bit of antispam protection
+	- Omega via svn r13832: #DBM Notes Update *Fixed a bug where note editor was wasting memory by keeping mod table in memory even after note editor was closed. *Added ability to cancel note editor without saving changes (Cancel Button) *Added ability to share notes with group (disabled in LFR, LFG and BGs) *Because shared notes open a popup, Note sharing is BLOCKED by default and has to be unblocked by user before they can accept shared notes from others
+	(None of this is tested yet, but it will should work, probably, maybe :) )
+	- Omega via svn r13831: #Hellfire Assault Update Completely refactored vehicle timers a bit on hellfire assault. Added mythic vehicle timers, split by side. Add LFR spellid for gorefiends voidzone-less version of debuff
+	- Omega via svn r13830: Spam reduction. If target scan successfully warns chains on you during cast, don?\226?\128?\153t give 2nd warning on debuff apply.
+	- Omega via svn r13829: #hellfire Assault Update Removed icon setting on add (no longer possible) Removed adds timers (no longer possible) Removed leap spell (no longer exists?) Fixed missing warning for transporter vehicle Fixed axe to use new debuff ID thats no longer hidden from combat log Mythic vehicle timers for first 10 vehicles, beyond that need longer logs Fixes for boss leaving to better detect it if boss unit ID vanishes before before boss leaving event
+	- Omega via svn r13828: #Socrethar Update Orb targets now show in combat log, removed target scanning and did proper debuff tracking Added warnings/timers for mythic abilities/add Fixed phase detection. old ID no longer present #Fixed lua error in archimonde
+	- Omega via svn r13827: #Council Update Fix tank debuff to only warn when it?\226?\128?\153s actually on tanks. Ignore it during fel rages Fixed first count timer for rage
+	- Omega via svn r13826: #Kilrogg update Fix bug where add timers never worked because I forgot to register an event Fixed heart seeker targeting. Blizzard gave it a brand new debuff ID. Added more combat start timers Changed some warnings and timers to count warnings to better support note assignments
+	- Omega via svn r13825: #Gorefiend update Fix bug where hud still showed for 2/3 twisted fate targets when in stomach Fixed bug where crushing shadows timer showed up incorrectly as twisted fate timer Improved accuracy of actual twisted fate timers Fixed bug where shadow of death warning wasn?\226?\128?\153t giving player names, only count. Shared fate is now a count warning/timer
+	- Omega via svn r13824: Mythic archimond updates
+	- TOM_RUS via svn r13823: ruRU update
+	- Omega via svn r13822: CN update
+	- nbluewiz via svn r13821: # koKR update.
+	- nbluewiz via svn r13820: # koKR update.
+	- tandanu via svn r13819: increment version number

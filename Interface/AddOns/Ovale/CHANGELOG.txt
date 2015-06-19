@@ -1,0 +1,7 @@
+Ovale Spell Priority 6.1.2
+==========================
+
+Changes from version 6.1.1:
+---------------------------
+
+-   Hunter: Fix spell ID of Kill Shot after gaining Enhanced Kill Shot perk.

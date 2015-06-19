@@ -1,0 +1,13 @@
+tag 1.7.4
+dbd90100fd0860279506184ff6aac368ba9253d1
+Steffen Buehl <sb@sbuehl.com>
+2015-05-14 17:27:43 +0200
+
+tagging as 1.7.4
+
+
+--------------------
+
+Steffen Buehl:
+	- change garrison loot detection to check lootSource = 10 (LOOT_SOURCE_GARRISON_CACHE from AlertFrames) instead of checking for resource loot + cache proximity
+	- sorting from 1 to 11

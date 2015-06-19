@@ -1,0 +1,16 @@
+## Interface: 60100
+## Title: Scrap Broker
+## Notes: A DataBroker launcher for Scrap
+## Author: Jaliborc (João Cardoso)
+## X-Category: Inventory
+## X-License: GNU General Public License Version 3
+## OptionalDeps: LibStub, CallbackHandler-1.0, LibDataBroker-1.1
+## Dependencies: Scrap_Merchant
+## Version: 10
+
+..\Scrap\Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+Localization.lua
+Scrap_Broker.lua

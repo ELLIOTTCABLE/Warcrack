@@ -1,0 +1,12 @@
+## Interface: 60000
+## Title: LibTime-1.0
+## Notes: A little library around date, time and GetGameTime and more...
+## Author: Hizuro@Der Mithrilorden.EU
+## Version: 1.0 r1
+## OptionalDeps: LibStub
+## X-Curse-Packaged-Version: v2.11-Release
+## X-Curse-Project-Name: Broker Everything
+## X-Curse-Project-ID: broker-everything
+## X-Curse-Repository-ID: wow/broker-everything/mainline
+
+LibTime-1.0.xml

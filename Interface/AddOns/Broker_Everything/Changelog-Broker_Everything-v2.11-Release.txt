@@ -1,0 +1,81 @@
+tag v2.11-Release
+39a08a81e1f31fa72789253345df2f91fe50767c
+Hizuro <hizuro@gmx.net>
+2015-03-08 06:14:25 +0100
+
+Tagging as v2.11-Release
+
+
+--------------------
+
+Hizuro:
+	- module mail: debug print removed
+	- module gps: fixed missing option panel module header
+	- core: fixed missing clickOptions for disabled modules without futher options
+	- module speed: added tooltip with informations about learned riding skill and flight licences
+	- update toc file
+	- module guild: changed color
+	- module guild: add option to display count of mobile chatter in broker button
+	- changed library loading
+	- toc file update
+	- module mail: some changes
+	- module garrison: some changes
+	- added quality color for legendary follower to module followers
+	- added free worker slot check in module garrison
+	- changed cooldown type of some secrets in module professions
+	- fixed remove NewFeatureIcon in module nameplates
+	- fixed wrong item id for cracked goren egg in suprise module
+	- fixed error on click fishing in profession menu
+	- fixed rare nil error message in module garrison
+	- added average ItemLevel to module equipment
+	- fixed maxTooltipHeight for LibQTip tooltip usage
+	- remove under_construction folder from repository
+	- renamed slider description key 'pat' into 'format' in some modules
+	- fixed problem with slider and improved the creation in option panel
+	- fixed missing 'forced closing tooltip' to show static popups for click options 'save/update set' and 'delete set'
+	- added default text element to module LibDatabroker registration table
+	- fixed DurationOrExpireDate function
+	- fixed problem with option slider
+	- fixed problem in xp module
+	- changed two function calls to prevent taint frames (i hope...)
+	- removed deprecated event GUILD_XP_UPDATE
+	- renamed folder 'under construction' into 'under_construction' and added it to pkgmeta file's ignore section
+	- fixed LibSharedMedia-3.0 include path
+	- fixed problem in gps.lua
+	- - initial commit
+	- core: added new clickOptions system
+	- core: added new option panel
+	- core: changed event and update handling.
+	- core: fix problem with resetAllSavedVariables function reported by Ztrust (curse)
+	- bags: changed to use new clickOptions system
+	- calendar: changed to use new clickOptions system
+	- clock: changed to use new clickOptions system
+	- currency: changed to use new clickOptions system
+	- equipment: added list of equipped item and enchantment check.
+	- equipment: changed to use new clickOptions system
+	- follower: added item level to list sorting
+	- follower: added option to hide disabled follower in tooltip
+	- follower: added option to hide working follower in tooltip
+	- follower: added option to use background colored by status instead splitted table
+	- follower: fixed missing "Use prefix" handling
+	- friends: changed to use new clickOptions system
+	- game menu: fix hide section 3 option
+	- garrison: fixed missing "Use prefix" handling
+	- garrison: added achievement und blueprints level3 check
+	- gps: added missing teleport and portal spell id's for horde mages.
+	- gps: changed to use new clickOptions system
+	- gps: fixed "Use Prefix" functionality
+	- guild: added secondary tooltip to display optional zone, notes, officier notes and professions of a single guild member
+	- guild: changed to make guild member notes display choosable
+	- guild: changed to make guild member rank display choosable
+	- guild: changed to make guild member zone display choosable
+	- guild: changed to use new clickOptions system
+	- memory: lock update routine on startup and unlock it 15 seconds after player has entered the world.
+	- missions: fixed missing "Use prefix" handling
+	- modules: fix some descriptions
+	- questlog: added display how much group member on same quest
+	- questlog: added display names of group members there are on same quest by holding shift key
+	- volume: changed to use new clickOptions system
+	- xp: added broker text if player has reached the max level
+	- xp: added new selectable broker text "Percent + Resting"
+	- xp: added resting xp to twink list

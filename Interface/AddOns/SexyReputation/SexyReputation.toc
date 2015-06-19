@@ -1,0 +1,22 @@
+## Interface: 60000
+## X-Compatible-With: 60000
+## Title: Sexy Reputations
+## Notes: A fancy LDB reputation display, show faction reputation and reputation change history
+## Author: NeoTron
+## Version: 1.0.42
+## X-Category: Tooltip
+## X-eMail: neotron@gmail.com
+## OptionalDeps: Ace3, LibDatabroker-1.1, LibMagicUtil-1.0, LibQTip-1.0, LibDataBroker-1.1, LibDropdown-1.0
+## SavedVariables: SexyRepDB
+## X-Curse-Packaged-Version: 1.0.43
+## X-Curse-Project-Name: Sexy Reputation
+## X-Curse-Project-ID: sexyreputation
+## X-Curse-Repository-ID: wow/sexyreputation/mainline
+
+# Library files
+embeds.xml
+Locales.xml
+SexyReputation.lua
+Config.lua
+
+

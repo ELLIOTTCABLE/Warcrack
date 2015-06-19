@@ -1,0 +1,129 @@
+[I]By Myrilandell of Lothar[/I]
+
+QuestSpamFilter was chosen as the July 11 [url=http://www.wowinterface.com/forums/forumdisplay.php?f=79]"Pick of the Week"[/url] on [url=http://www.wowinterface.com/]WoWInterface[/url]! This is a huge honor, thank you!
+
+QuestSpamFilter is an addon that consolidates the "quest sharing" information from 20 lines of quest sharing spam into condensed summaries. In other words, QuestSpamFilter turns this
+[color=#FFFF00]Sharing quest with Person1...
+Person2 has completed that quest.
+Person3 is already on that quest.
+Person4 is not eligible for that quest.
+Person5's quest log is full.
+Person6 is already on that quest.
+Sharing quest with Person7...
+Person8 is already on that quest.
+Person9 has completed that quest.[/color]
+
+into this
+[color=#FFFF00]2 Completed:  Person2, Person9
+1 Not Eligible:  Person4
+1 Questlog Full:  Person5
+3 Already On:  Person3, Person6, Person8
+2 Sharing ...:  Person1, Person7[/color]
+
+QuestSpamFilter is localized for all languages (English (enUS), British English (enGB), Spanish (esES), Latin American Spanish (esMX), German (deDE), French (frFR), Russian (ruRU), Chinese (zhCN), Traditional Chinese (zhTW), and Korean (koKR)), though some are better than others, due to feedback :). If your localization isn't perfect, give me a better translation (located in qsf_translations.lua).
+
+
+
+
+
+[B]XX[/B]
+[LIST]
+[*] 
+[/LIST]
+
+
+
+[B]12[/B]
+[LIST]
+[*] Fixed an issue where the code checking for false positives was unnecessarily inefficient.
+[*] Separated the translations into their own file, so users can more easily make and share changes for their language.
+[/LIST]
+
+
+
+[B]11[/B]
+[LIST]
+[*] Updated ToC for beta. Otherwise QSF seems to work just fine.
+[*] Fixed a bug where the initial state was not "single line".
+[/LIST]
+
+
+
+[B]10[/B]
+[LIST]
+[*] Added Global Strings which could be incorrectly filtered by QuestSpamFilter. This should fix the filtered "X Busy: [i]Player[/i] right now." message gotten when a player is busy and you try to trade with them.
+[/LIST]
+
+
+
+[B]9[/B]
+[LIST]
+[*] Fixed the interface number in the toc file, it was incorrectly 30500 (should be 30300)
+[*] Fixed a missed special character in the frFR "Questlog Full" title. Thanks oXid_FoX!
+[*] Fixed a bug introduced in v8 where I'd undone stuff when creating strings for matching. This only affected non-english localizations.
+[/LIST]
+
+
+
+[B]8[/B]
+[LIST]
+[*] Updated French translations for "Questlog Full", "Already On", and "Too Far Away". Thanks oXid_FoX!
+[*] Moved locale-specific stuff to a new file: qsf_translations.lua. This should make it easier for people to find and provide better localizations.
+[*] Encoded special characters (such as à, è, ì, ò, ù) using Lua escape sequences. That's a fancy way of saying "They should work now".  Thanks to oXid_FoX for pointing this out.
+[*] Changed the code to makeFragments a bit, shouldn't change anything.
+[*] Fixed a potential bug with the "Colorize" option, where non-English clients would have incorrect output.
+[*] Changed the code wiping the tables a bit, shouldn't change anything.
+[/LIST]
+
+
+
+[B]7[/B]
+[LIST]
+[*] Fixed the ugly code from v2.
+[*] Fixed an improperly-matching pattern in German.
+[/LIST]
+
+
+
+[B]6[/B]
+[LIST]
+[*] Localization! The patterns I am using are the Global Strings in World of Warcraft, so I need feedback on how well this works, if it does at all (for your localization). Works fine for English and German (rather, "it *seems* to work now" :P).
+[/LIST]
+
+
+
+[B]5[/B]
+[LIST]
+[*] Added the option to color player names in the summaries based on their class.
+[/LIST]
+
+
+
+[B]4[/B]
+[LIST]
+[*] Added a GUI.
+[*] Added the option to add yourself to the "Already On" table. This way, if you're the kind of person that thinks, "There's 7 people in the raid, but I only shared it with 6 people ... ?", then this is the option for you! 
+[*] Added the option to make the name lists begin on the same line as the consolidated title. I didn't expect to like this option nearly as much as I do. It is now the default display option.
+[*] Added the option to change the result consolidation pause duration.
+[/LIST]
+
+
+
+[B]3[/B]
+[LIST]
+[*] Removed a debugging printout which (left in) defeated the point of the mod, or caused errors. 
+[/LIST]
+
+
+
+[B]2[/B]
+[LIST]
+[*] Fixed a bug where everything was broken. Apparently the "." character is a wildcard, so I was removing all but 2 letters in people's names. This is now fixed in an ugly but (most important) working manner.
+[/LIST]
+
+
+
+[B]1[/B]
+[LIST]
+[*] Initial Release.
+[/LIST]

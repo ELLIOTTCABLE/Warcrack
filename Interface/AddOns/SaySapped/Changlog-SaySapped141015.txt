@@ -1,0 +1,13 @@
+2014-10-15: updated toc for 6.0
+2013-10-01: updated toc for 5.4
+2013-05-22: updated toc for 5.3
+2012-10-01: updated toc, removed select
+2012-05-01: updated toc, used select; Happy Loyalty Day!
+2011-07-01: updated for 4.2
+2011-04-26: updated for 4.1
+2010-10-30: updated for 4.0
+2009-12-25: updated toc, minor code revision; Merry Christmas!
+2009-08-06: updated toc
+2009-05-10: updated toc, Alert when Sap is reapplied before fading
+2008-12-19: updated toc, Use spellID
+2008-07-23: Initial public release

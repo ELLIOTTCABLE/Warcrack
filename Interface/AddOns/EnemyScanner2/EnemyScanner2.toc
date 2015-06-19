@@ -1,0 +1,8 @@
+## Interface: 60000
+## Author: Mikma
+## Title: EnemyScanner 2
+## Notes: Enemy detected and level estimated
+## SavedVariables: EnemyScanner2DB
+## Version: 3
+
+EnemyScanner2.lua

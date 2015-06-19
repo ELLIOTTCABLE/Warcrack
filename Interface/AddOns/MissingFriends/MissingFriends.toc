@@ -1,7 +1,0 @@
-## Interface: 40000
-## Version: 10.11.13
-## Title: MissingFriends
-## Author: Aezay (Earthen Ring EU)
-## Notes: Notifies you of friends who no longer exists
-## SavedVariablesPerCharacter: MissingFriends_List, MissingFriends_OldFriends
-core.lua

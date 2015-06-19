@@ -1,0 +1,9 @@
+## Interface: 60100
+## Title: Marking|cff69ccf0Bar |cffffffff v2.2.1
+## Notes: Quickly and easily add raid icons and world flairs.
+## Author: Vilandra-Blade's Edge US (maintained by Kvee-Magtheridon EU)
+## Dependencies: 
+## Version: 2.2.1
+## SavedVariablesPerCharacter: MBDB, MBCtrlDB, MBFlaresDB
+## SavedVariables: MBGLOBAL
+MarkingBar.lua

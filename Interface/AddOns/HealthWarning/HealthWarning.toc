@@ -1,0 +1,10 @@
+## Interface: 60100
+## Title: HealthWarning
+
+## Version: 1.14
+## Author: Szandos
+## Notes: Warns you when you get low on health
+## SavedVariables: HealthWarningDB
+
+HealthWarning.lua
+

@@ -1,0 +1,12 @@
+tag 6.1-9
+e79a4b1ad3a73cd3986134509bee2a3b5556cb39
+Xuerian <sky.shell@gmail.com>
+2015-05-12 22:42:11 -0400
+
+Frame stacking fix
+
+
+--------------------
+
+Xuerian:
+	- Revert bad stacking behavior

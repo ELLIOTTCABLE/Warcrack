@@ -29,6 +29,11 @@ do
 
 	local function SetContainerSpell(self, i, spellid, class, active)
 		local sname, _, sicon = GetSpellInfo(spellid)
+		if sicon == nil then
+			sname = "bad spellid"
+			sicon = "bad spellid"
+		end
+
 		self.spell_containers[i].spellid = spellid
 		self.spell_containers[i].label:SetText(string.format(" |T%s:20|t |cFF%02x%02x%02x%s|r", sicon, RAID_CLASS_COLORS[class].r * 0xff, RAID_CLASS_COLORS[class].g * 0xff, RAID_CLASS_COLORS[class].b * 0xff, sname))
 		
@@ -65,7 +70,7 @@ do
 		local self = frame.obj.obj
 		local spellid = frame.obj.spellid
 		local i = GetSpellPriority(self, spellid)
-		
+
 		if i then
 			table.remove(self.active_spellids, i)
 			self.inactive_spellids[spellid] = i
@@ -81,7 +86,7 @@ do
 		end
 		
 		UpdateSpells(self)
-		GridStatusTankCooldown:UpdateAllUnits()		
+		GridStatusTankCooldown:UpdateAllUnits()
 	end
 	
 	local function UpButton_Click(frame)
@@ -127,7 +132,7 @@ do
 	local function LabelFrame_OnEnter(frame)
 		-- HACK: replaces tooltips of some spells for other more descriptive spellids..
 		local spellfilters = {
-			[63087] = 63086 -- Raptor Strike => Glyph of Raptor Strike
+			-- [63087] = 63086 -- Raptor Strike => Glyph of Raptor Strike
 		}
 		GameTooltip:SetOwner(frame, "ANCHOR_NONE")
 		GameTooltip:SetPoint("BOTTOMLEFT", frame, "BOTTOMRIGHT")

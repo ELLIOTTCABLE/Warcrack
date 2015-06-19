@@ -4,69 +4,94 @@
 GridStatusTankCooldown = Grid:GetModule("GridStatus"):NewModule("GridStatusTankCooldown")
 GridStatusTankCooldown.menuName = "Tanking cooldowns"
 
-tankingbuffs = {
+local tankingbuffs = {
 	["DEATHKNIGHT"] = {
-		48707,	-- Anti-Magic Shell
-		50461,	-- Anti-Magic Zone
-        42650,  -- Army of the Dead
-		49222,	-- Bone Shield
-        49028,  -- Dancing Rune Weapon
-		48792,	-- Icebound Fortitude
-		55233,	-- Vampiric Blood
+		48707, -- Anti-Magic Shell
+		50461, -- Anti-Magic Zone
+		42650, -- Army of the Dead
+		77535, -- Blood Shield		
+		49222, -- Bone Shield
+		49028, -- Dancing Rune Weapon
+		48792, -- Icebound Fortitude
+		55233, -- Vampiric Blood
 		105588, -- Vampiric Brood (tier bonus)
 	},
 	["DRUID"] = {
-		22812,	-- Barkskin
-		22842,	-- Frenzied Regeneration
-		61336,	-- Survival Instincts
+		22812,  -- Barkskin
+		124769, -- Glyph of Frenzied Regeneration
+		102342, -- Ironbark
 		105737, -- Mass Regeneration (tier bonus)
+		132402, -- Savage Defense
+		61336,  -- Survival Instincts
 	},
-    ["HUNTER"] = {
-        19263,  -- Deterrence
-        63087,  -- Glyph of Raptor Strike
+	["HUNTER"] = {
+		19263,  -- Deterrence
+		63087,  -- Glyph of Raptor Strike
 	},
 	["MAGE"] = {
-		45438,	-- Ice Block
-        543,    -- Mage Ward
-        11426,  -- Ice Barrier
+		45438,  -- Ice Block
+		11426,  -- Ice Barrier
+		1463,   -- Incanter's Ward
+		115610, -- Temporal Shield
+	},
+	["MONK"] = {
+		115213, -- Avert Harm
+		122278, -- Dampen Harm
+		122783, -- Diffuse Magic
+		115308, -- Elusive Brew
+		115203, -- Fortifying Brew
+		115295, -- Guard
+		116849, -- Life Cocoon
+		115176, -- Zen Meditation
 	},
 	["PALADIN"] = {
-		31850,	-- Ardent Defender
-		70940,	-- Divine Guardian
-		498,	-- Divine Protection
-		642,	-- Divine Shield
-		86659,	-- Guardian of Ancient Kings
-		1022,	-- Hand of Protection
-		6940,	-- Hand of Sacrifice
+		31850,  -- Ardent Defender
+		31821,  -- Devotion Aura
+		498,    -- Divine Protection
+		642,    -- Divine Shield
+		86659,  -- Guardian of Ancient Kings
+		1022,   -- Hand of Protection
+		114039, -- Hand of Purity
+		6940,   -- Hand of Sacrifice
 		20925,  -- Holy Shield
+		132403, -- Shield of the Righteous
 	},
 	["PRIEST"] = {
-		47585,	-- Dispersion
-		47788,	-- Guardian Spirit
-		33206,	-- Pain Suppression
-		81782,	-- Power Word: Barrier
+		47585,  -- Dispersion
+		47788,  -- Guardian Spirit
+		33206,  -- Pain Suppression
+		81782,  -- Power Word: Barrier
 	},
 	["ROGUE"] = {
-		31224,	-- Cloak of Shadows
-		1966,	-- Feint
+		31224,  -- Cloak of Shadows
+		5277,   -- Evasion
+		1966,   -- Feint
+		76577,  -- Smoke Bomb
 	},
 	["SHAMAN"] = {
-        55277,  -- Glyphed Stoneclaw Totem
-		30823,	-- Shamanistic Rage
-        98008,  -- Spirit Link Totem
+		108271, -- Astral Shift
+		30823,  -- Shamanistic Rage
+		98008,  -- Spirit Link Totem
+		114893, -- Stone Bulwark Totem
 	},
-    ["WARLOCK"] = {
-        6229,  	-- Shadow Ward
-        91711,  -- Nether Ward
+	["WARLOCK"] = {
+		110913, -- Dark Bargain        
+		108359, -- Dark Regeneration
+		91711,  -- Nether Ward
+		108416, -- Sacrificial Pact
+		6229,   -- Shadow Ward
+		104773, -- Unending Resolve
 	},
 	["WARRIOR"] = {
-		12975,	-- Last Stand
-		97463,	-- Rallying Cry
+		118038, -- Die by the Sword
+		12975,  -- Last Stand
+		97463,  -- Rallying Cry
 		46947,  -- Safeguard
-		2565,	-- Shield Block
-		871,	-- Shield Wall
-		97954,	-- Spell Block (Shield Mastery proc)
+		112048, -- Shield Barrier		
+		2565,   -- Shield Block
 		105914, -- Shield Fortress (tier bonus)
+		871,    -- Shield Wall
+		114030, -- Vigilance
 	}
 }
 
@@ -90,7 +115,7 @@ GridStatusTankCooldown.defaultDB = {
 		priority = 99,
 		range = false,
 		showtextas = "caster",
-		active_spellids = { -- default spells
+		active_spellids =  { -- default spells
 			31850,	-- Ardent Defender
 			86659,	-- Guardian of Ancient Kings
 			47788,	-- Guardian Spirit
@@ -99,6 +124,7 @@ GridStatusTankCooldown.defaultDB = {
 			33206,	-- Pain Suppression
 			871,	-- Shield Wall
 			61336,	-- Survival Instincts
+			115203, -- Fortifying Brew
 		},
 		inactive_spellids = { -- used to remember priority of disabled spells
 		}
@@ -196,7 +222,7 @@ function GridStatusTankCooldown:OnStatusDisable(status)
 	if status == "alert_tankcd" then
 		self:UnregisterEvent("UNIT_AURA")
 		self:UnregisterEvent("Grid_UnitJoined")
-        
+
 		--self:CancelScheduledEvent("GridStatusTankCooldown:UpdateAllUnits")
 		self.core:SendStatusLostAllUnits("alert_tankcd")
 	end

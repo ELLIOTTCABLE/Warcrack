@@ -1,0 +1,16 @@
+## Interface: 60100
+## Title: Grid SmoothHealth
+## Notes: Smoothly animates health bars on Grid.
+## Dependencies: Grid
+## OptionalDeps: LibStub, LibSmoothStatusBar-1.0
+## X-Curse-Packaged-Version: 6.0.3.1740
+## X-Curse-Project-Name: Grid SmoothHealth
+## X-Curse-Project-ID: grid-smoothhealth
+## X-Curse-Repository-ID: wow/grid-smoothhealth/mainline
+
+#@no-lib-strip@
+LibStub\LibStub.lua
+LibSmoothStatusBar-1.0\LibSmoothStatusBar-1.0.lua
+#@end-no-lib-strip@
+
+Grid_SmoothHealth.lua

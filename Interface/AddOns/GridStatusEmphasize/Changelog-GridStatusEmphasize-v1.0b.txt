@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r29 | slaren | 2012-10-18 10:37:33 +0000 (Thu, 18 Oct 2012) | 1 line
+Changed paths:
+   A /tags/v1.0b (from /trunk:28)
+
+Tagging as v1.0b
+------------------------------------------------------------------------
+r28 | slaren | 2012-10-18 10:36:14 +0000 (Thu, 18 Oct 2012) | 2 lines
+Changed paths:
+   M /trunk/GridStatusEmphasize.lua
+
+- Fixed problem added in recent versions of Grid where there options will fail to load
+
+------------------------------------------------------------------------

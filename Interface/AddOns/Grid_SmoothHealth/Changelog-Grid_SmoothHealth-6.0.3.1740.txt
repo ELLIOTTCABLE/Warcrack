@@ -1,0 +1,12 @@
+tag 6.0.3.1740
+c85ff08aca993e753295a891de75cde80e5fe66e
+galedric <g@ledric.me>
+2015-04-24 19:08:23 +0200
+
+Tagging as 6.0.3.1740
+
+
+--------------------
+
+galedric:
+	- Fix for 6.1

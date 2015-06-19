@@ -1,0 +1,12 @@
+## Interface: 60000
+## Title: GridAlternativeLayouts |r[|cffcc1111Uko|r]
+## Dependencies: Grid
+## X-Curse-Packaged-Version: 0.1
+## X-Curse-Project-Name: Grid Alternative Layouts
+## X-Curse-Project-ID: grid-alternative-layouts
+## X-Curse-Repository-ID: wow/grid-alternative-layouts/mainline
+## X-Curse-Packaged-Version: 0.1
+## X-Curse-Project-Name: Grid Alternative Layouts
+## X-Curse-Project-ID: grid-alternative-layouts
+## X-Curse-Repository-ID: wow/grid-alternative-layouts/mainline
+code.lua

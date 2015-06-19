@@ -1,0 +1,21 @@
+﻿## Interface: 50001
+## Title: GridStatusEmphasize
+## Notes: Grid module to emphasize units based on some configured conditions
+## Dependencies: Grid
+## OptionalDeps: BigWigs, Grid_QuickHealth
+## Author: Slaren
+## Version: v1.0b
+## Grid Author: Pastamancer & Maia
+## X-GridStatusModule: GridStatusEmphasize
+## X-Curse-Packaged-Version: v1.0b
+## X-Curse-Project-Name: GridStatusEmphasize
+## X-Curse-Project-ID: gridstatusemphasize
+## X-Curse-Repository-ID: wow/gridstatusemphasize/mainline
+
+GridStatusEmphasize.lua
+Mode.lua
+
+Modules\Auras.lua
+Modules\BigWigs.lua
+Modules\Health.lua
+Modules\RaidTargetIcons.lua

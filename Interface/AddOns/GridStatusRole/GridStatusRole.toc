@@ -1,0 +1,26 @@
+## Interface: 60100
+## Title: GridStatusRole
+## Notes: Adds talent specialization role status to Grid.
+## Author: Greltok
+## Version: 1.8.4
+## Grid Author: Pastamancer & Maia
+## X-Website: http://wowace.com/wiki/Grid
+## X-Category: UnitFrame
+## X-Embeds: LibGroupInSpecT-1.1
+## X-GridStatusModule: GridStatusRole
+## Dependencies: Grid
+## OptionalDeps: LibGroupInSpecT-1.1
+## X-Curse-Packaged-Version: 1.8.4
+## X-Curse-Project-Name: GridStatusRole
+## X-Curse-Project-ID: gridstatusrole
+## X-Curse-Repository-ID: wow/gridstatusrole/mainline
+
+#@no-lib-strip@
+libs\LibGroupInSpecT-1.1\LibGroupInSpecT-1.1.lua
+#@end-no-lib-strip@
+
+GridStatusRoleLocale-koKR.lua
+GridStatusRoleLocale-ruRU.lua
+GridStatusRoleLocale-zhCN.lua
+GridStatusRoleLocale-zhTW.lua
+GridStatusRole.lua

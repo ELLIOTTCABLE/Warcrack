@@ -1,21 +1,30 @@
-## Interface: 40300
-## Version: 4.3.0.15
-
-## Title: GridStatus Heal Trace
-## Notes: Shows in Grid who was healed by your multi-target heals.
-## Notes-esES: Muestra en Grid que fue sanada por tus hechizos de curaci�n de objetivos m�ltiples.
-## Notes-esMX: Muestra en Grid que fue sanada por tus hechizos de curaci�n de objetivos m�ltiples.
-## Notes-ptBR: Mostra no Grid que foi curado por seu feiti�os de cura de m�ltiplos alvos.
-## Author: Akkorian, Phanx
-## X-Email: addons@phanx.net
-## X-Copyright: Copyright � 2010�2011 Akkorian
-## X-License: Some rights reserved. See LICENSE.txt for details.
-## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, ptBR, koKR, ruRU, zhCN, zhTW
-## X-Localizations: enUS, esES, esMX, ptBR
-## X-Website: http://www.wowinterface.com/downloads/info16608-GridStatusHealTrace.html
+## Interface: 60100
+## Version: 6.1.0.19
+## X-Curse-Packaged-Version: 6.1.0.19
+## X-Curse-Project-Name: GridStatusHealTrace
 ## X-Curse-Project-ID: gridstatushealtrace
-## X-WoWI: 16608
+## X-Curse-Repository-ID: wow/gridstatushealtrace/mainline
+
+## Title: GridStatusHealTrace
+## Notes: Shows in Grid who was healed by your multi-target heals.
+## Notes-deDE: Zeigt auf Grid, wer durch deine Heilungzauber mehrerer Ziele geheilt wurde.
+## Notes-esES: Muestra en Grid que fue sanada por tus hechizos de curación de múltiples objetivos.
+## Notes-esMX: Muestra en Grid que fue sanada por sus hechizos de curación de múltiples objetivos.
+## Notes-frFR: Affiche sur Grid à ceux qui vie rendus par vos sorts de soins de multiples cibles.
+## Notes-itIT: Mostra su Grid che è stato curato dalle tue incantesimi curative di multipli obiettivi.
+## Notes-ptBR: Mostra no Grid que foi curado por seu feitiços de cura de múltiplos alvos.
+## Notes-ruRU: Показывает в Grid, кто был вылечен Вашими АОЕ-заклинаниями.
+## Notes-koKR: 당신의 다중 대상에 대한 치유를 표시합니다.
+## Notes-zhCN: 在Grid里显示你的群体治疗法术的治疗目标。
+## Notes-zhTW: 在Grid中顯示群體治療法術的目標。
+
+## Author: Phanx
+## X-Email: addons@phanx.net
+## X-Credits: Originally written by Akkorian.
+## X-Copyright: Copyright (c) 2010-2015 Akkorian, Phanx. All rights reserved.
+## X-Website: https://github.com/Phanx/GridStatusHealTrace
 
 ## Dependencies: Grid
 
+Localization.lua
 GridStatusHealTrace.lua

@@ -1,0 +1,12 @@
+tag 1.2
+9962df2b149e80c869da7827477fb89446592a63
+Mithorium <morodan@curseforge.com>
+2014-11-26 23:34:19 -0500
+
+tagging as v1.2
+
+
+--------------------
+
+Mithorium:
+	- Register PLAYER_ENTERING_WORLD

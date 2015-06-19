@@ -1,0 +1,34 @@
+------------------------------------------------------------------------
+r120 | julith | 2014-11-02 11:31:10 +0000 (Sun, 02 Nov 2014) | 1 line
+Changed paths:
+   A /tags/v1.1b (from /trunk:119)
+
+Tagging as v1.1b
+------------------------------------------------------------------------
+r119 | julith | 2014-10-21 06:21:05 +0000 (Tue, 21 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/GridManaBar.lua
+   M /trunk/GridManaBars.toc
+
+GridManaBar: Temporarily fixed hiding of other indicators when manabar is hidden
+------------------------------------------------------------------------
+r117 | julith | 2014-10-19 08:38:24 +0000 (Sun, 19 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/GridManaBar.lua
+
+GridManaBar: fixed layering for center icon
+------------------------------------------------------------------------
+r116 | julith | 2014-10-19 08:31:42 +0000 (Sun, 19 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/GridManaBar.lua
+   M /trunk/GridManaBars.toc
+
+GridManaBar: temporarily fixed layering problem by going back to raping grid and all its indicators...
+------------------------------------------------------------------------
+r115 | julith | 2014-10-18 10:19:12 +0000 (Sat, 18 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/GridManaBar.lua
+   M /trunk/GridManaBars.toc
+
+GridManaBars: Updated for Grids new Indicator API
+------------------------------------------------------------------------

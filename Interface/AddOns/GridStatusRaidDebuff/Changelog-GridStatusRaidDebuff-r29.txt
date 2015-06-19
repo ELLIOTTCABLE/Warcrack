@@ -1,0 +1,43 @@
+------------------------------------------------------------------------
+r29 | stassart | 2015-03-05 21:13:07 +0000 (Thu, 05 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+BUGFIX: Fixed bug introduced in previous r28 for Ticket #6.  GridStatusRaidDebuff would sometimes remove other debuffs from showing if a player had a player cast debuff with the same name as a zone debuff.
+------------------------------------------------------------------------
+r28 | stassart | 2015-03-04 08:19:14 +0000 (Wed, 04 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/GridStatusRaidDebuff.toc
+
+BUGFIX: Fixed ticket #6: Exhaustion. Should actually be fixed now.  Before this addon only checked if debuffs were cast by enemies when detecting.  Now it also checks to make sure the debuff was not cast by a player before displaying.
+------------------------------------------------------------------------
+r27 | stassart | 2015-03-02 05:16:04 +0000 (Mon, 02 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Renamed UpdateAllUnit to UpdateAllUnits so that it is called by Grid on module reset.
+------------------------------------------------------------------------
+r26 | stassart | 2015-03-02 05:00:09 +0000 (Mon, 02 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Test fix for exhaustion bug. Ticket #6. Also switched from deprecated IsGUIDInRaid to non-deprecated IsGUIDInGroup.
+------------------------------------------------------------------------
+r25 | stassart | 2015-03-01 00:30:58 +0000 (Sun, 01 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/GridStatusRaidDebuff.toc
+
+Updated TOC for 6.1.
+------------------------------------------------------------------------
+r24 | stassart | 2014-11-03 06:33:33 +0000 (Mon, 03 Nov 2014) | 6 lines
+Changed paths:
+   M /trunk/Core.lua
+
+BUGFIX: Fixed two issues in Ticket #5:
+Issue 1) Import debuff doesn't work if there are currently no detected debuffs
+for that zone.
+Issue 2) Under some conditions the detected debuffs were being placed in the wrong zone, usually the zone you were joining the instance from.
+
+
+------------------------------------------------------------------------

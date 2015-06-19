@@ -1,0 +1,20 @@
+------------------------------------------------------------------------
+r78 | julith | 2014-11-16 10:26:43 +0000 (Sun, 16 Nov 2014) | 1 line
+Changed paths:
+   A /tags/v1.31 (from /trunk:77)
+
+Tagging as v1.31
+------------------------------------------------------------------------
+r77 | julith | 2014-11-16 10:25:19 +0000 (Sun, 16 Nov 2014) | 1 line
+Changed paths:
+   M /trunk/GridPipe.lua
+
+GridStatusControlPipes: fixed error when pipe is removed
+------------------------------------------------------------------------
+r76 | julith | 2014-11-16 10:18:17 +0000 (Sun, 16 Nov 2014) | 1 line
+Changed paths:
+   M /trunk/GridPipe.lua
+   M /trunk/GridStatusControlPipes.toc
+
+GridStatusControlPipes: Updated for new Grid Indicator API
+------------------------------------------------------------------------

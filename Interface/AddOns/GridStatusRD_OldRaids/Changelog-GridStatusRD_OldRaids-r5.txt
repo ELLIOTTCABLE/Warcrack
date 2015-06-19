@@ -1,0 +1,56 @@
+------------------------------------------------------------------------
+r5 | stassart | 2015-03-08 08:57:40 +0000 (Sun, 08 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/EyeEternity.lua
+
+Updated Eye of Eternity debuff flag.
+------------------------------------------------------------------------
+r4 | stassart | 2015-03-08 08:42:24 +0000 (Sun, 08 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/BlackTemple.lua
+   M /trunk/GridStatusRD_OldRaids.toc
+   A /trunk/TempestKeep.lua
+
+Added missing debuffs for Tempest Keep (The Eye).
+------------------------------------------------------------------------
+r3 | stassart | 2015-03-08 07:49:26 +0000 (Sun, 08 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/BlackTemple.lua
+
+Updated missing Black Temple debuffs.
+------------------------------------------------------------------------
+r2 | stassart | 2015-03-08 00:11:30 +0000 (Sun, 08 Mar 2015) | 5 lines
+Changed paths:
+   A /trunk/.pkgmeta
+   A /trunk/Archavon.lua
+   A /trunk/BlackTemple.lua
+   A /trunk/CheckCompat.lua
+   A /trunk/Eye.lua
+   A /trunk/EyeEternity.lua
+   A /trunk/GridStatusRD_OldRaids.toc
+   A /trunk/Hyjal.lua
+   A /trunk/IcecrownCitadel.lua
+   A /trunk/Karazhan.lua
+   A /trunk/Naxxramas.lua
+   A /trunk/Obsidian.lua
+   A /trunk/RubySanctum.lua
+   A /trunk/Serpent.lua
+   A /trunk/Sunwell.lua
+   A /trunk/TrialCrusader.lua
+   A /trunk/Ulduar.lua
+   A /trunk/info.txt
+
+Initial version.
+Based on GridStatusRD_BC and GridStatusRD_WotLK (public domain license).
+Vault of Archavon spell IDs updated for WoD.
+
+
+------------------------------------------------------------------------
+r1 | svn | 2015-03-07 23:57:34 +0000 (Sat, 07 Mar 2015) | 1 line
+Changed paths:
+   A /branches
+   A /tags
+   A /trunk
+
+gridstatusrd_oldraids/mainline: Initial Import
+------------------------------------------------------------------------

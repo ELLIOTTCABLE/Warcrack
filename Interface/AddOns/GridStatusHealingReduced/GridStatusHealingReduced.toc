@@ -1,18 +1,25 @@
-﻿## Interface: 40300
-## Version: 4.3.4.71
+﻿## Interface: 60100
+## Version: 6.1.0.38
+## X-Curse-Packaged-Version: 6.1.0.38
+## X-Curse-Project-Name: GridStatusHealingReduced
+## X-Curse-Project-ID: gridstatushealingreduced
+## X-Curse-Repository-ID: wow/gridstatushealingreduced/mainline
 
-## Title: GridStatus Healing Reduced
+## Title: GridStatusHealingReduced
 ## Notes: Grid plugin to show debuffs which reduce or prevent healing received.
+## Notes-deDE: Zeigt auf Grid die Schwächungszauber, die die erhaltene Heilung verringern oder verhindern.
+## Notes-esES: Mostrar en Grid los perjuicios que reducen o impiden la sanación recibida.
+## Notes-esMX: Mostrar en Grid los perjuicios que reducen o impiden la sanación recibida.
+## Notes-frFR: Afficher sur Grid les affaiblissements qui diminuent ou empêchent les soins reçus.
+## Notes-itIT: Mostrare su Grid le penalità che riducono o impediscono la cura ricevuta.
+## Notes-ptBR: Mostrar no Grid as penalidades que impedem ou reduzem a cura recebida.
+
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright © 2008–2012 Phanx.
-## X-License: Some rights reserved. See LICENSE.txt for details.
-## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW
-## X-Localizations: enUS, deDE, esES, esMX, frFR, ptBR, ruRU, koKR, zhCN, zhTW
-## X-Website: http://www.wowinterface.com/downloads/info7364-GridStatusHealingReduced.html
-## X-Curse-Project-ID: gridstatushealingreduced
-## X-WoWI-ID: 7364
+## X-Copyright: Copyright (c) 2007-2015 Phanx. All rights reserved.
+## X-Website: https://github.com/Phanx/GridStatusHealingReduced
 
 ## Dependencies: Grid
 
+Data.lua
 Core.lua

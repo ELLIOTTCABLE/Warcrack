@@ -1,0 +1,15 @@
+﻿## Interface: 60000
+## Title: GridIndicatorsDynamic
+## Notes: Additional indicators for Grid
+## Dependencies: Grid
+## Author: Vincent
+## Version: v6.0.3.8
+## X-Curse-Packaged-Version: v6.0.3.8
+## X-Curse-Project-Name: GridIndicatorsDynamic
+## X-Curse-Project-ID: gridindicatorsdynamic
+## X-Curse-Repository-ID: wow/gridindicatorsdynamic/mainline
+
+Options.lua
+Texts.lua
+Icons.lua
+Box.lua

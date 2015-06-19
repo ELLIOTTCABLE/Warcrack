@@ -528,7 +528,7 @@ end
 function PlayerGuard.prototype:IsOpen(guid, ...)
     --print("is open "..tostring(guid).." vs player: "..tostring(self.PlayerGUID))
     assert(guid)
-    return self.db.PlayerOnly == (playerGUID == guid)
+    return self.db.PlayerOnly == (UnitGUID("player") == guid)
     --[[
 	if (not guid) then
 		return true

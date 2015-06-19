@@ -302,8 +302,10 @@ function GridPipe:Init(db, options)
     end
 end
 
-local function GridFrameSetIndicator(frame, indicator, color, text, value, maxValue, texture, start, duration, stack, ...)
-	if GridPipe:IsPipe(indicator) then
+local function GridFrameSetIndicator(indicatorTbl, color, text, value, maxValue, texture, start, duration, stack, ...)
+	local indicator = indicatorTbl.__id
+    local frame = indicatorTbl.__owner
+    if GridPipe:IsPipe(indicator) then
         local unitid = frame and SecureButton_GetModifiedUnit(frame)
         if not unitid then return end
         local guid = UnitGUID(unitid)
@@ -313,7 +315,9 @@ local function GridFrameSetIndicator(frame, indicator, color, text, value, maxVa
     end
 end
 
-local function GridFrameClearIndicator(frame, indicator)
+local function GridFrameClearIndicator(indicatorTbl)
+    local indicator = indicatorTbl.__id
+    local frame = indicatorTbl.__owner
     if GridPipe:IsPipe(indicator) then
         local unitid = frame and SecureButton_GetModifiedUnit(frame)
         if not unitid then return end
@@ -327,8 +331,8 @@ end
 function GridPipe.status:OnInitialize()
     self.super.OnInitialize(self)
     
-    hooksecurefunc(GridFrame.prototype, "SetIndicator", GridFrameSetIndicator)
-    hooksecurefunc(GridFrame.prototype, "ClearIndicator", GridFrameClearIndicator)
+    --hooksecurefunc(GridFrame.prototype, "SetIndicator", GridFrameSetIndicator)
+    --hooksecurefunc(GridFrame.prototype, "ClearIndicator", GridFrameClearIndicator)
 end
 
 function GridPipe.UpdatePipes()
@@ -466,8 +470,9 @@ function GridPipe:CreatePipe(name)
     local pipe = GridPipe:new(name, self.status.db.profile[statusName], options, statusName)
     self.pipes[name] = pipe
 
-    local indicators = GridFrame.prototype.indicators
-    table.insert(indicators, { type = "pipe_"..name,    order = 15,  name = name })
+    GridFrame:RegisterIndicator("pipe_"..name, name, nil, nil, GridFrameSetIndicator, GridFrameClearIndicator)
+    --local indicators = GridFrame.prototype.indicators
+    --table.insert(indicators, { type = "pipe_"..name,    order = 15,  name = name })
 
     self.status:RegisterStatus(statusName,name,options, false)
 
@@ -502,10 +507,12 @@ function GridPipe:DeletePipe(name)
         self.status.db.profile["status_pipe_"..name] = nil
         self.status:UnregisterStatus("status_pipe_"..name)
 
+        --[[
         for i, data in ipairs(GridFrame.prototype.indicators) do
             tremove(GridFrame.prototype.indicators, i)
             break
         end
+        ]]
 
         self.options.args[name] = nil
     end

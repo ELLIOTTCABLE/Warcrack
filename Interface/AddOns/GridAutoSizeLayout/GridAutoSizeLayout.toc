@@ -1,0 +1,18 @@
+﻿## Interface: 60000
+## Title: GridAutoSizeLayout
+## Notes: Auto sizes frame layout depending on group/raid size
+## Author: Mithorium, Morodan of Khadgar-US
+## Dependencies: Grid
+## LastUpdate: 2013-10-31
+## Version-Major: 1.1
+## X-Curse-Packaged-Version: 1.2
+## X-Curse-Project-Name: GridAutoSizeLayout
+## X-Curse-Project-ID: gridautosizelayout
+## X-Curse-Repository-ID: wow/gridautosizelayout/mainline
+
+locale-enUS.lua
+locale-deDE.lua
+locale-itIT.lua
+locale-koKR.lua
+
+GridAutoSizeLayout.lua

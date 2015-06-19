@@ -1,0 +1,13 @@
+## Interface: 50400
+## Title: GridStatusIncomingRes
+## Notes: Adds a status for when a unit is being resurrected.
+## Author: Neb
+## Version: 1.3
+## X-GridStatusModule: GridStatusIncomingRes
+## Dependencies: Grid
+## X-Curse-Packaged-Version: 1.3
+## X-Curse-Project-Name: GridStatusIncomingRes
+## X-Curse-Project-ID: gridstatusincomingres
+## X-Curse-Repository-ID: wow/gridstatusincomingres/mainline
+
+GridStatusIncomingRes.lua

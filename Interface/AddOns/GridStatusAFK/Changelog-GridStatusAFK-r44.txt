@@ -1,0 +1,21 @@
+------------------------------------------------------------------------
+r44 | mikk | 2014-10-15 02:33:40 +0000 (Wed, 15 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/GridStatusAFK.lua
+   M /trunk/GridStatusAFK.toc
+
+Fixed an oops in OnReset which may or may not have mattered but hey
+------------------------------------------------------------------------
+r43 | mikk | 2014-10-15 02:27:10 +0000 (Wed, 15 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/GridStatusAFK.toc
+
+TOC 60000
+------------------------------------------------------------------------
+r42 | greltok | 2010-10-17 09:22:26 +0000 (Sun, 17 Oct 2010) | 1 line
+Changed paths:
+   M /trunk/GridStatusAFK.lua
+   M /trunk/GridStatusAFK.toc
+
+Updated for Ace3 Grid.
+------------------------------------------------------------------------

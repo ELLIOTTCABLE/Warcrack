@@ -1,0 +1,12 @@
+tag v1.2.4
+fb16b70f945bfe22488978d1ce4cde963913f3e8
+Rhoda Baker <rhoda.baker@gmail.com>
+2014-10-16 20:51:47 -0400
+
+Tagged as v1.2.4
+
+
+--------------------
+
+Rhoda Baker:
+	- Updated to 6.0.2

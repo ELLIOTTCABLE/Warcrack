@@ -1,8 +1,0 @@
-## Interface: 40300
-## Title: GridStatusFastHealth
-## Notes: Adds faster health update options.
-## Author: Suicidal Katt
-## Version: 1.1
-## Dependencies: Grid
-
-GridStatusFastHealth.lua

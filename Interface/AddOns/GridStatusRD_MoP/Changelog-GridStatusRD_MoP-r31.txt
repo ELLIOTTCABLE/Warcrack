@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r31 | stassart | 2015-03-01 00:32:07 +0000 (Sun, 01 Mar 2015) | 1 line
+Changed paths:
+   M /trunk/GridStatusRD_MoP.toc
+
+Updated TOC for 6.1.
+------------------------------------------------------------------------
+r30 | stassart | 2014-10-31 09:33:06 +0000 (Fri, 31 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/SiegeofOrgrimmar.lua
+   M /trunk/ThroneofThunder.lua
+
+Added a ton of missing debuffs for Throne of Thunder and Siege of Orgrimmar; mostly trash debuffs.
+------------------------------------------------------------------------

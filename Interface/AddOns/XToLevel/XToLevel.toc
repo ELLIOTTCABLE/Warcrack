@@ -1,0 +1,38 @@
+## Interface: 60100
+## Title: XToLevel
+## Author: Atli Jonsson
+## Version: 6.1.0_41
+## Notes: Shows mobs, quests, dungeons and battles needed until you reach your next level.
+## eMail: atli.j@advefir.com
+## URL: http://wow.curseforge.com/addons/xto-level/
+## X-Compatible-With: 60100
+## X-Since-Interface: 40100
+## X-Category: Quest
+## OptionalDeps: LibStub,CallbackHandler-1.0,LibDataBroker-1.1,AceTimer-3.0,AceConfig-3.0,AceGUI-3.0,AceDB-3.0,AceDBOptions-3.0
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: XToLevelDB
+## SavedVariablesPerCharacter: sConfig,sData
+## X-Curse-Packaged-Version: 6.1.0_41
+## X-Curse-Project-Name: XToLevel
+## X-Curse-Project-ID: xto-level
+## X-Curse-Repository-ID: wow/xto-level/mainline
+
+embeds.xml
+
+locale\locale.xml
+
+Main.lua
+Tables.lua
+Libs.lua
+Config.lua
+
+objects\Messages.lua
+objects\LDB.lua
+objects\Tooltip.lua
+objects\Average.lua
+objects\Player.lua
+
+frames\GlobalTemplates.xml
+frames\AverageFrame_Classic.xml
+frames\AverageFrame_Blocky.xml

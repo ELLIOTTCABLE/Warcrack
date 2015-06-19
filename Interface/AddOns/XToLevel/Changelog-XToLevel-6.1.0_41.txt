@@ -1,0 +1,12 @@
+tag 6.1.0_41
+1912eab4d66645f3140710f6537e19b694f0d886
+Atli Jonsson <atli.j@advefir.com>
+2015-02-25 10:50:45 +0000
+
+Updates TOC interface version for path 6.1
+
+
+--------------------
+
+Atli Jonsson:
+	- Updates TOC interface version for patch 6.1

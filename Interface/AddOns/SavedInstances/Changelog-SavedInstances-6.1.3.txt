@@ -1,0 +1,71 @@
+------------------------------------------------------------------------
+r432 | oscarucb | 2015-03-20 22:52:33 +0000 (Fri, 20 Mar 2015) | 1 line
+Changed paths:
+   A /tags/6.1.3 (from /trunk:431)
+
+Tagging as 6.1.3
+------------------------------------------------------------------------
+r431 | oscarucb | 2015-03-20 21:26:50 +0000 (Fri, 20 Mar 2015) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+add tracking for garrison world boss loot added in 6.1
+
+------------------------------------------------------------------------
+r430 | oscarucb | 2015-03-15 21:39:07 +0000 (Sun, 15 Mar 2015) | 3 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+factor currency update
+Hook CURRENCY_DISPLAY_UPDATE to catch currency updates near logout that might otherwise get missed
+
+------------------------------------------------------------------------
+r429 | oscarucb | 2015-03-11 16:12:54 +0000 (Wed, 11 Mar 2015) | 7 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+Add support for boss kill display in BC and vanilla raids
+
+A Blizzard bug introduced in 5.0 broke their lockout tooltips for these old
+raids, but starting in 6.1 we finally have enough information to show the
+lockout boss kill state for these raids in the addon.
+
+
+------------------------------------------------------------------------
+r427 | oscarucb | 2015-03-05 02:26:06 +0000 (Thu, 05 Mar 2015) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+add Transmute: Savage Blood
+
+------------------------------------------------------------------------
+r425 | oscarucb | 2015-03-01 05:41:02 +0000 (Sun, 01 Mar 2015) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+add platinum garrison defender
+
+------------------------------------------------------------------------
+r424 | oscarucb | 2015-02-28 20:01:40 +0000 (Sat, 28 Feb 2015) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix currency incorrectly displaying as zero for other characters
+
+------------------------------------------------------------------------
+r422 | oscarucb | 2015-02-26 11:10:40 +0000 (Thu, 26 Feb 2015) | 3 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+   M /trunk/SavedInstances.toc
+
+fix ticket 188: lua error on killing Drov
+toc bump
+
+------------------------------------------------------------------------
+r420 | oscarucb | 2015-02-20 18:48:27 +0000 (Fri, 20 Feb 2015) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix LFR: Blackrock Foundry boss display
+
+------------------------------------------------------------------------

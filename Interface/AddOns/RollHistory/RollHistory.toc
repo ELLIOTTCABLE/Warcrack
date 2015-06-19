@@ -1,0 +1,13 @@
+﻿## Interface: 60000
+## Title: RollHistory
+## Notes: Enhances the default roll frames with more information from the built-in loot history feature.
+## Author: Vladinator
+## Version: 6.0.0.20141129
+## DefaultState: enabled
+## SavedVariables: 
+## X-Curse-Packaged-Version: v6.0.0.20141129
+## X-Curse-Project-Name: RollHistory
+## X-Curse-Project-ID: rollhistory
+## X-Curse-Repository-ID: wow/rollhistory/mainline
+
+core.lua

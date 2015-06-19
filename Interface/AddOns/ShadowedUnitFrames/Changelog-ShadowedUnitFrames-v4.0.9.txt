@@ -1,0 +1,28 @@
+tag v4.0.9
+0440d4fdc490ccd75f8a91140a9341212e27b489
+Shadowed <shadowed.wow@gmail.com>
+2015-01-09 16:01:53 -0800
+
+Tagging as release v4.0.9
+
+
+--------------------
+
+Shadowed:
+	- One last Combo Points bug fix
+	- Fixed an error on Chi points
+	- Typo
+	- Redo the Eclipse Bar to add a highlight based on where you are, and fixed the arrow going outside of the unit frame
+	- Redo the combo points module, should fix random bugs when using Chi, Holy Power, Shadow Orbs, Soul Shards, Aura Points and Combo Points
+	- Debug code is bad
+	- Only hide pet frames if we have a vehicle UI (Tries to fix Mount-in-Training not showing)
+	- Yet another attempt at fixing Blizzards insane crash bug
+	- Stripped out split frame group hiding as it doesn't work
+	- Fixed split headers not hiding when toggling them off
+	- Fixed split raid frames being scattered on UI Reload
+	- Make sure we default x/y for combo points too
+	- Trying a fix for the combo point crash bug
+	- Fixed combo point config due to target -> player move
+	- Trying a fix for Holy Power
+	- Added default aura indicators
+	- Hide Arena prep frames when arena frames are hidden

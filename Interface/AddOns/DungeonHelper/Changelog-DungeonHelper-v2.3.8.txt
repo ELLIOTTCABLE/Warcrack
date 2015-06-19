@@ -1,0 +1,15 @@
+------------------------------------------------------------------------
+r100 | yess | 2015-01-01 22:12:59 +0000 (Thu, 01 Jan 2015) | 1 line
+Changed paths:
+   A /tags/v2.3.8 (from /trunk:99)
+
+Tagging as v2.3.8
+------------------------------------------------------------------------
+r99 | yess | 2014-12-31 02:12:20 +0000 (Wed, 31 Dec 2014) | 2 lines
+Changed paths:
+   M /trunk/DungeonHelper.lua
+   M /trunk/DungeonHelper.toc
+
+.)Fix LibCandyBar path.
+.)Fix Call to Arms for WoD.
+------------------------------------------------------------------------

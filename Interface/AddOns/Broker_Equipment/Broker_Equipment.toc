@@ -1,0 +1,17 @@
+## Interface: 60000
+## Author: p3lim
+## Version: 60000.25-Release
+## Title: Broker Equipment
+## Notes: LDB Equipment Manager plug-in
+## X-Curse-Packaged-Version: 60000.25-Release
+## X-Curse-Project-Name: Broker_Equipment
+## X-Curse-Project-ID: broker_equipment
+## X-Curse-Repository-ID: wow/broker_equipment/mainline
+
+## OptionalDeps: LibStub, CallbackHandler-1.0, LibDataBroker-1.1
+
+embeds\LibStub\LibStub.lua
+embeds\CallbackHandler\CallbackHandler-1.0.lua
+embeds\LibDataBroker\LibDataBroker-1.1.lua
+
+Broker_Equipment.lua

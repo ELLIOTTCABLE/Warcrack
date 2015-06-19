@@ -1,0 +1,18 @@
+------------------------------------------------------------------------
+r43 | papsol | 2014-02-20 22:04:58 +0000 (Thu, 20 Feb 2014) | 4 lines
+Changed paths:
+   A /tags/Release 1.4.4 (from /trunk:42)
+
+Tagging as Release 1.4.4
+
+## updated BNGetFriendInfoByID call to include the new isBattleTagPresence variable
+
+------------------------------------------------------------------------
+r42 | papsol | 2014-02-20 22:04:24 +0000 (Thu, 20 Feb 2014) | 2 lines
+Changed paths:
+   M /trunk/Glamour.lua
+   M /trunk/Glamour.toc
+
+## updated BNGetFriendInfoByID call to include the new isBattleTagPresence variable
+
+------------------------------------------------------------------------

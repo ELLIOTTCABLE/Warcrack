@@ -1,0 +1,549 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+<Script file="Glamour.lua"/>
+
+	<Frame name="Glamour" parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				Glamour_OnLoad(self);	
+			</OnLoad>
+
+			<OnEvent>
+				Glamour_OnEvent(self, event, ...);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+
+<Frame name="GlamourAnchor" enableMouse="true" movable="true" hidden="true">
+ <Scripts>
+ <OnMouseDown>
+  if button == "LeftButton" and not self.isMoving then
+   self:StartMoving();
+   self.isMoving = true;
+  end
+  if button == "RightButton" and not self.isMoving then
+   self:Hide();
+  end
+ </OnMouseDown>
+ <OnMouseUp>
+  if button == "LeftButton" and self.isMoving then
+   self:StopMovingOrSizing();
+   self.isMoving = false;
+  end
+ </OnMouseUp>
+ <!--  
+ <OnHide>
+  if ( this.isMoving ) then
+   this:StopMovingOrSizing();
+   this.isMoving = false;
+  end
+ </OnHide>	
+ -->
+ </Scripts>
+ <!-- Tags below add a visual element to the frame. -->
+ <Layers>
+  <Layer level="ARTWORK">
+   <Texture setAllPoints="true">
+    <Color r="0.7" g="0.7" b="0.7" a="0.8" />
+   </Texture>
+  		<FontString name="GlamourAnchorTitle" inherits="GameFontNormal" text="Glamour Anchor" parent="GlamourAnchor">
+			<Anchors>
+				<Anchor point="TOP" relativeto="GlamourAnchor">
+				</Anchor>
+			</Anchors>
+		</FontString>
+  		<FontString name="GlamourAnchorText1" inherits="GameFontBlackTiny" text="left-click to drag." parent="GlamourAnchorTitle">
+			<Anchors>
+				<Anchor point="BOTTOM" relativeto="GlamourAnchorTitle">
+					<Offset y="-8"/>
+				</Anchor>
+			</Anchors>
+		</FontString>
+  		<FontString name="GlamourAnchorText2" inherits="GameFontBlackTiny" text="right-click to hide." parent="GlamourAnchorTitle">
+			<Anchors>
+				<Anchor point="BOTTOM" relativeto="GlamourAnchorTitle">
+					<Offset y="-18"/>
+				</Anchor>
+			</Anchors>
+		</FontString>
+  </Layer>
+ </Layers>
+ <Size x="140" y="32" />
+ <Anchors><Anchor point="CENTER" relativeTo="UIParent"/></Anchors>
+</Frame>
+	
+
+<Button name="GlamourAlertFrameTemplate" hidden="true" frameStrata="TOOLTIP" virtual="true" inherits="AlertFrameTemplate">
+	<Size>
+		<AbsDimension x="300" y="88"/>
+	</Size>
+	<Anchors>
+		<Anchor point="CENTER" relativePoint="BOTTOM" relativeTo="GlamourAnchor">
+			<Offset>
+				<AbsDimension x="0" y="-128"/>
+			</Offset>
+		</Anchor>
+	</Anchors>
+	<Animations>
+		<AnimationGroup name="$parentAnimIn" parentKey="animIn">
+			<Alpha change="-1" duration="0" order="1"/>
+			<Alpha change="1" duration="0.2" order="2"/>
+		</AnimationGroup>
+		<AnimationGroup name="$parentWaitAndAnimOut" parentKey="waitAndAnimOut">
+			<Alpha startDelay="6.05" change="-1" duration="1.5" parentKey="animOut">
+				<Scripts>
+					<OnFinished>
+						self:GetRegionParent():Hide();
+					</OnFinished>
+				</Scripts>
+			</Alpha>
+		</AnimationGroup>
+	</Animations>
+	<Layers>
+		<Layer level="BACKGROUND">
+			<Texture name="$parentBackground" file="Interface\AchievementFrame\UI-Achievement-Alert-Background">
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+					<Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+				<TexCoords left="0" right=".605" top="0" bottom=".703"/>
+			</Texture>
+			<FontString name="$parentUnlocked" inherits="GameFontBlackTiny" text="" parentKey="unlocked">
+				<Size x="200" y="12"/>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset x="7" y="-23"/>
+					</Anchor>
+				</Anchors>
+			</FontString>
+			<FontString name="$parentName" inherits="GameFontHighlight" text="For the Alliance!">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset x="72" y="36"/>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset x="-60" y="36"/>
+					</Anchor>
+				</Anchors>
+				<Size x="240" y="16"/>
+			</FontString>
+			<FontString name="$parentGuildName" inherits="GameFontNormal" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="50" y="-10"/>
+					</Anchor>
+					<Anchor point="TOPRIGHT">
+						<Offset x="-50" y="-10"/>
+					</Anchor>
+				</Anchors>
+				<Size x="0" y="16"/>
+			</FontString>
+		</Layer>
+		<Layer level="BACKGROUND" textureSubLevel="1">
+			<Texture name="$parentGuildBanner" file="Interface\AchievementFrame\UI-Achievement-Guild" hidden="true">
+				<Size x="64" y="64"/>
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="-13" y="-29"/>
+				</Anchors>
+				<TexCoords left="0.76171875" right="0.88671875" top="0.00195313" bottom="0.12695313"/>	
+			</Texture>
+		</Layer>
+		<Layer level="BORDER">
+			<Texture name="$parentGuildBorder" file="Interface\AchievementFrame\UI-Achievement-Guild" hidden="true">
+				<Size x="64" y="64"/>
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="-13" y="-29"/>
+				</Anchors>
+				<TexCoords left="0.63281250" right="0.75781250" top="0.00195313" bottom="0.12695313"/>
+			</Texture>
+		</Layer>
+		<Layer level="OVERLAY">
+			<Texture name="$parentGlow" file="Interface\AchievementFrame\UI-Achievement-Alert-Glow" alphaMode="ADD" alpha="0" parentKey="glow">
+				<Size>
+					<AbsDimension x="400" y="171"/>
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset x="0" y="0"/>
+					</Anchor>
+				</Anchors>
+				<Animations>
+					<AnimationGroup name="$parentAnimIn" parentKey="animIn">
+						<Alpha change="1" duration="0.2" order="1"/>
+						<Alpha change="-1" duration="0.5" order="2"/>
+					</AnimationGroup>
+				</Animations>
+				<TexCoords left="0" right="0.78125" top="0" bottom="0.66796875"/>
+			</Texture>
+			<Texture name="$parentShine" file="Interface\AchievementFrame\UI-Achievement-Alert-Glow" alphaMode="ADD" alpha="0" parentKey="shine">
+				<Size>
+					<AbsDimension x="67" y="72"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset x="0" y="8"/>
+					</Anchor>
+				</Anchors>
+				<Animations>
+					<AnimationGroup name="$parentAnimIn" parentKey="animIn">
+						<Alpha change="1" duration="0.2" order="1"/>
+						<Translation offsetX="240" offsetY="0" duration="0.85" order="2"/>
+						<Alpha startDelay="0.35" change="-1" duration="0.5" order="2"/>
+					</AnimationGroup>
+				</Animations>
+				<TexCoords left="0.78125" right="0.912109375" top="0" bottom="0.28125"/>
+			</Texture>
+		</Layer>		
+	</Layers>
+	<Frames>
+		<Frame name="$parentIcon">
+			<Size>
+				<AbsDimension x="124" y="124"/>
+			</Size>
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="-26" y="16"/>
+					</Offset>
+				</Anchor>
+			</Anchors>		
+			<Layers>
+				<Layer level="BORDER">
+					<Texture name="$parentBling" file="Interface\AchievementFrame\UI-Achievement-Bling" hidden="true">
+						<Anchors>
+							<Anchor point="CENTER">
+								<Offset>
+									<AbsDimension x="-1" y="1"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="116" y="116"/>
+						</Size>
+					</Texture>
+				</Layer>
+				<Layer level="ARTWORK">
+					<Texture name="$parentTextureBG">
+						<Color r="0" g="0" b="0" a=".8"/>
+						<Anchors>
+							<Anchor point="CENTER">
+								<Offset>
+									<AbsDimension x="0" y="3"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="50" y="50"/>
+						</Size>
+					</Texture>
+					<Texture name="$parentTexture">
+						<Anchors>
+							<Anchor point="CENTER">
+								<Offset>
+									<AbsDimension x="0" y="3"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="50" y="50"/>
+						</Size>
+					</Texture>
+				</Layer>
+				<Layer level="OVERLAY">
+					<Texture name="$parentOverlay" file="Interface\AchievementFrame\UI-Achievement-IconFrame">
+						<Anchors>
+							<Anchor point="CENTER">
+								<Offset>
+									<AbsDimension x="-1" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="72" y="72"/>
+						</Size>
+						<TexCoords left="0" right="0.5625" top="0" bottom="0.5625"/>
+					</Texture>
+					<FontString name="$parentNameTop" inherits="GameFontHighlight" text="" parentKey="nametop">
+						<Anchors>
+							<Anchor point="TOP" RelativeTo="$ParentOverlay" RelativePoint="TOP">
+								<Offset x="0" y="-6"/>
+							</Anchor>
+						</Anchors>
+						<Size x="44" y="16"/>
+					</FontString>
+					<FontString name="$parentNameBottom" inherits="GameFontHighlight" text="" parentKey="namebottom">
+						<Anchors>
+							<Anchor point="BOTTOM" RelativeTo="$ParentOverlay" RelativePoint="BOTTOM">
+								<Offset x="0" y="6"/>
+							</Anchor>
+						</Anchors>
+						<Size x="44" y="16"/>
+					</FontString>
+				</Layer>
+			</Layers>
+		</Frame>
+		<Frame name="$parentShield">
+			<Size>
+				<AbsDimension x="64" y="64"/>
+			</Size>
+			<Anchors>
+				<Anchor point="TOPRIGHT">
+					<Offset>
+						<AbsDimension x="-10" y="-13"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer level="BACKGROUND">
+					<Texture name="$parentIcon" file="Interface\AchievementFrame\UI-Achievement-Shields">
+						<Size>
+							<AbsDimension x="52" y="48"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPRIGHT">
+								<Offset>
+									<AbsDimension x="1" y="-6"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<TexCoords left="0" right=".5" top="0" bottom=".45"/>
+					</Texture>
+				</Layer>
+				<Layer level="OVERLAY">
+					<FontString name="$parentPoints" inherits="GameFontNormal">
+						<Anchors>
+							<Anchor point="CENTER">
+								<Offset>
+									<AbsDimension x="7" y="2"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="64" y="64"/>
+						</Size>
+					</FontString>
+				</Layer>
+			</Layers>				
+			<Scripts>
+				<OnLoad>
+					GlamourAchievementShield_OnLoad(self);
+				</OnLoad>
+			</Scripts>
+		</Frame>
+	</Frames>
+	<Scripts>
+		<OnMouseDown>
+			GlamourAlertFrame_OnClick(self, button, down);
+		</OnMouseDown>
+		<OnHide function="GlamourAlertFrame_OnHide"/>
+	</Scripts>
+</Button> 	
+
+	<Frame name="GlamourGUIFrame">
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Head" inherits="GameFontNormalLarge" text="Glamour">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="15" y="-15" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<CheckButton name="$parent_BLIZ_AchAlert" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_Head">
+						<Offset>
+							<AbsDimension x="25" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+				<Scripts>
+					<OnClick> GlamourGUIFrame_RELOADCHECK:SetChecked(); </OnClick>
+				</Scripts>
+			</CheckButton>
+
+			<CheckButton name="$parent_BLIZ_DCAlert" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent_BLIZ_AchAlert">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+			</CheckButton>
+
+			<CheckButton name="$parent_BLIZ_GCAlert" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent_BLIZ_DCAlert">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+			</CheckButton>
+
+			<CheckButton name="$parent_BLIZ_BNToast" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent_BLIZ_GCAlert">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+			</CheckButton>
+
+			<CheckButton name="$parent_BLIZ_BNToast_Scale" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent_BLIZ_BNToast">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+			</CheckButton>
+
+			<CheckButton name="$parent_RevOrder" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent_BLIZ_BNToast_Scale">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+				<Scripts>
+					<OnClick> GlamourGUIFrame_RELOADCHECK:SetChecked(); </OnClick>
+				</Scripts>
+			</CheckButton>
+
+			<Button name="$parent_BUTTON0" inherits="OptionsButtonTemplate" text="Show Anchor">
+				<Size>
+					<AbsDimension x="150" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent_RevOrder">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+				<Scripts>
+					<OnClick> GlamourAnchor:Show(); </OnClick>
+				</Scripts>
+			</Button>
+
+			<CheckButton name="$parent_RELOADCHECK" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent_BUTTON0">
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>      
+			</CheckButton>
+
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				GlamourPanel_OnLoad(self);
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+<frame name="lootanchor" enablemouse="true" movable="true" hidden="true">
+ <scripts>
+ <onmousedown>
+  if button == "leftbutton" and not self.ismoving then
+   self:startmoving();
+   self.ismoving = true;
+  end
+  if button == "rightbutton" and not self.ismoving then
+   self:hide();
+  end
+ </onmousedown>
+ <onmouseup>
+  if button == "leftbutton" and self.ismoving then
+   self:stopmovingorsizing();
+   self.ismoving = false;
+  end
+ </onmouseup>
+ <!--  
+ <onhide>
+  if ( this.ismoving ) then
+   this:stopmovingorsizing();
+   this.ismoving = false;
+  end
+ </onhide>	
+ -->
+ </scripts>
+ <!-- tags below add a visual element to the frame. -->
+ <layers>
+  <layer level="artwork">
+   <texture setallpoints="true">
+    <color r="0.7" g="0.7" b="0.7" a="0.8" />
+   </texture>
+  		<fontstring name="lootanchortitle" inherits="gamefontnormal" text="loot anchor" parent="lootanchor">
+			<anchors>
+				<anchor point="top" relativeto="lootanchor">
+				</anchor>
+			</anchors>
+		</fontstring>
+  		<fontstring name="lootanchortext1" inherits="gamefontblacktiny" text="left-click to drag." parent="lootanchortitle">
+			<anchors>
+				<anchor point="bottom" relativeto="lootanchortitle">
+					<offset y="-8"/>
+				</anchor>
+			</anchors>
+		</fontstring>
+  		<fontstring name="lootanchortext2" inherits="gamefontblacktiny" text="right-click to hide." parent="lootanchortitle">
+			<anchors>
+				<anchor point="bottom" relativeto="lootanchortitle">
+					<offset y="-18"/>
+				</anchor>
+			</anchors>
+		</fontstring>
+  </layer>
+ </layers>
+ <size x="100" y="32" />
+ <anchors><anchor point="center" relativeto="uiparent"/></anchors>
+</frame>
+
+
+</Ui>
+

@@ -1,0 +1,14 @@
+﻿## Interface: 60000
+## X-Compatible-With: 50400
+## Title: Masque Skinner: ShadowedUF
+## Version: 1.5.2
+## Author: Cybeloras of Detheroc/Mal'Ganis
+## Notes: Skins ShadowedUnitFrames' aura frames with Masque
+## RequiredDeps: ShadowedUnitFrames, Masque
+## X-Child-Of: ShadowedUnitFrames
+## X-Curse-Packaged-Version: 1.5.2
+## X-Curse-Project-Name: Masque Skinner: ShadowedUF
+## X-Curse-Project-ID: shadoweduf-facade
+## X-Curse-Repository-ID: wow/shadoweduf-facade/mainline
+
+ShadowedUFFacade.lua

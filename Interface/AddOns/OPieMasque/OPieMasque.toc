@@ -1,0 +1,23 @@
+## Interface: 60100
+## Version: 6.1.0.10
+## X-Curse-Packaged-Version: 6.1.0.10
+## X-Curse-Project-Name: OPie Masque
+## X-Curse-Project-ID: opie-masque
+## X-Curse-Repository-ID: wow/opie-masque/mainline
+
+## Title: OPie Masque
+## Notes: Adds Masque skinning support to OPie.
+## Notes-deDE: Ermöglicht die Verwendung der Masque-Skins auf Opie.
+## Notes-esES: Capacita a Masque a cambiar la apariencia de OPie.
+## Notes-esMX: Capacita a Masque a cambiar la apariencia de OPie.
+## Notes-frFR: Accorde à Masque à modifier l'apparence du OPie.
+## Notes-ptBR: Capacita a Masque a alterar a aparência de Opie.
+
+## Author: Phanx
+## X-Email: addons@phanx.net
+## X-Copyright: Copyright (c) 2013-2015 Phanx. All rights reserved.
+## X-Website: https://github.com/Phanx/OPieMasque
+
+## Dependencies: Masque, OPie
+
+Addon.lua

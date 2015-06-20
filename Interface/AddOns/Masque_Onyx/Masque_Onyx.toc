@@ -1,0 +1,16 @@
+## Interface: 60100
+## Title: Masque: |cffff8000Onyx|r
+## Version: 6.1.0
+## Author: StormFX
+## Notes: Onyx skins for Masque.
+## Notes-zhTW: Masque的Onyx皮膚。
+## Dependencies: Masque
+## X-Website: http://www.wowace.com/projects/masque_onyx
+## X-Category: Interface Enhancements
+## X-WoWI-ID: 8900
+## X-Curse-Packaged-Version: v6.1.0
+## X-Curse-Project-Name: Masque: Onyx
+## X-Curse-Project-ID: masque_onyx
+## X-Curse-Repository-ID: wow/masque_onyx/mainline
+
+Onyx.lua

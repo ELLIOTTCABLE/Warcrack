@@ -1,0 +1,8 @@
+2015-02-24  Goldpaw  <Goldpaw>
+
+[07eca1661b36] [Release-r2]
+* Masque_Goldpaw.toc:
+
+- bumped the toc version to 6.1.0
+
+

@@ -1,0 +1,8 @@
+## Interface: 60000
+## Title: Masque: |cff4169E1Clean Icons|r
+## Version: 1.4
+## Notes: Masque skin that lets you truely love your Clean Icons.
+## Author: Suicidal Katt
+## Dependencies: Masque
+
+Layout.lua

@@ -1,0 +1,19 @@
+﻿## Interface: 60000
+## Title: Masque: |c0099ff00Imoen|r
+## Version: 1.0.1
+## Author: ImoenDK
+## Notes: Imoen is a skin for Masque
+## Notes-ruRU: Imoen
+## Dependencies: Masque
+## X-Category: Interface Enhancements
+## X-Credits: imoen
+## X-Curse-Packaged-Version: 1
+## X-Curse-Project-Name: Masque: Imoen
+## X-Curse-Project-ID: masque_imoen
+## X-Curse-Repository-ID: wow/masque_imoen/mainline
+## X-Curse-Packaged-Version: release
+## X-Curse-Project-Name: Masque: imoen
+## X-Curse-Project-ID: masque-imoen
+## X-Curse-Repository-ID: wow/masque-imoen/mainline
+
+masque_imoen.lua
